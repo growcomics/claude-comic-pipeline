@@ -12,6 +12,7 @@ The pipeline runs end-to-end: prose script → shotlist → references → train
 | `skills/script-breakdown/` | Convert a prose script into a per-panel `shotlist.json` (camera, action, dialogue, captions, SFX) |
 | `skills/soul-training/` | Validate reference coverage, curate a training set, train a Higgsfield Soul, smoke-test, register the Soul ID in the shotlist |
 | `skills/style-lock/` | Distill style refs into a project-wide mandatory prompt prefix/suffix, lock model + parameters, write `style.md` |
+| `skills/stylization/` | Optional image-to-image pass to convert photoreal panels into target comic art style while preserving character identity and composition |
 | `skills/continuity-check/` | Cross-panel audit (wardrobe / prop / location / time-of-day) against the shotlist; reports drift before page assembly |
 | `skills/page-composer/` | Assemble approved panels into pages with gutters, balloons, captions, SFX; export PDF |
 | `commands/build-comic.md` | `/build-comic` orchestrator — detects project state in cwd, runs the next stage, pauses at budget gates |
@@ -28,6 +29,8 @@ script → script-breakdown → shotlist.json
                      style-lock ──► style.md
                             │
               (panel generation via Higgsfield) ──► pages/panels/
+                            │
+            stylization (optional) ──► panels re-styled in place; originals in _pre-style/
                             │
               continuity-check ──► continuity-report.md
                             │
@@ -77,6 +80,8 @@ Or invoke individual skills by description match — e.g. asking *"break down th
 
 ## Hard rules baked in
 
+- **Higgsfield MCP is the primary infrastructure.** Soul training, panel generation, and stylization all run through it. Browser-driven `reference-gathering` is optional — the orchestrator never blocks on it.
+- **No AI-bootstrapped references without explicit user opt-in.** `soul-training` runs heuristics on the reference folder (file mtimes, filename patterns, missing EXIF). If they trip, it stops and surfaces a warning rather than silently training on synthetic refs.
 - `shotlist.json` is canonical. Every stage either writes to it or reads from it.
 - `style-lock`'s prompt prefix/suffix goes on **every** panel prompt — no exceptions.
 - `soul-training` requires a smoke-test render before a Soul is considered shipped.

@@ -36,6 +36,37 @@ A Soul trained on a one-angle pool fails on the missing angles. Before training,
 
 **Run a coverage check** by `Read`-ing every JPG in the folder and tagging it against this matrix. Output a one-table report. If a row is empty under "Minimum", send the user back to `reference-gathering` with the specific gap — don't train on a thin set.
 
+## Mandatory: verify references are real photos, not AI-generated bootstraps
+
+**This is the most important pre-training check.** If the reference set was bootstrapped via text-to-image (e.g. Higgsfield's `nano_banana_flash`, Stable Diffusion, etc.), the resulting Soul anchors to a fictional non-canonical character — not the subject the user thinks they're training. Identity stays consistent across panels, but it's anchored to nothing real. The user usually doesn't realize this until panels are generated.
+
+**Detection heuristics — run all four before starting training:**
+
+```bash
+# 1. All files written within the same hour (real refs accumulate over time)
+find references/<slug>/ -name '*.png' -o -name '*.jpg' | xargs -I{} stat -f '%m %N' {} | sort -u | awk '{print int($1/3600)}' | sort -u | wc -l
+# returns 1  -> all in same hour, probably AI-generated
+
+# 2. Filename patterns matching generator output
+ls references/<slug>/ | grep -E '^(hf_|sdxl_|<slug>-[0-9]{2,3}\.png$)' | wc -l
+
+# 3. Missing EXIF (real photos almost always have camera metadata)
+for f in references/<slug>/*.png; do exiftool -Make -Model "$f" 2>/dev/null; done | grep -c 'Camera Make'
+
+# 4. Visual: read 2–3 refs and look for tells (perfect centering, suspiciously even lighting, generator watermarks like "MD JS233034")
+```
+
+**Required behavior:**
+
+1. Run the heuristics on the reference folder before any upload or training call.
+2. If two or more heuristics trip, **stop and surface a warning** to the user:
+   > "These references look AI-generated. Soul training will produce a Soul anchored to a fictional consistent character, not the canonical subject you may have in mind. The Soul will hold identity across panels but the identity itself will not match real-world reference material. Continue anyway? (yes / no)"
+3. Only proceed on **explicit user confirmation**. Default is to stop.
+4. Log the heuristic results and the user's decision in `_training-set.md` so the choice is auditable later.
+5. If the user confirms, append a clear note to the trained Soul's entry in `cast.md`: `(refs: AI-bootstrapped — fictional likeness, not canonical)`.
+
+This rule exists because a previous run trained Souls on AI-bootstrapped Chun-Li refs. Identity was consistent across panels, but the Soul anchored to a generic "Asian woman with buns and qipao" rather than the actual character. The output read as "an AI-imagined Chun-Li," not Chun-Li.
+
 ## Workflow
 
 ### 1. Pick characters
@@ -100,6 +131,7 @@ Update `shotlist.json` in place: write the new `soul_id` into the matching `cast
 
 ## Hard rules
 
+- **No AI-bootstrapped references without an explicit user opt-in.** Run the AI-bootstrap heuristics before training. If two or more trip, stop and ask the user — don't silently train on synthetic refs. See "Mandatory: verify references are real photos" above.
 - **Never train on uncurated references.** A 30-image dump always contains rejects; the Soul will pick up the worst patterns.
 - **One Soul per outfit when outfits change drastically.** Training one Soul on "leather jacket" and "ballroom gown" produces a confused Soul that swaps wardrobe randomly. Train two and switch by panel.
 - **Don't proceed past a failed smoke test.** A bad Soul propagates errors through every panel. Cheaper to retrain now than to regenerate the whole chapter.

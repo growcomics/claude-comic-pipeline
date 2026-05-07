@@ -7,7 +7,7 @@ Argument: `$ARGUMENTS`
 - **empty** → status mode: print the state table, recommend the next stage, ask before doing anything.
 - **`auto`** → walk forward stage by stage until human input is required (ambiguous script, missing refs, smoke-test failure, continuity errors, before generation, before regeneration). Pause and ask between stages that cost money or time.
 - **`status`** → print the state table only; no recommendation, no actions.
-- **a stage name** (`script` | `references` | `souls` | `style` | `generation` | `continuity` | `pages` | `pdf`) → jump to that stage's skill, regardless of detected state. Useful for re-runs.
+- **a stage name** (`script` | `references` | `souls` | `style` | `generation` | `stylize` | `continuity` | `pages` | `pdf`) → jump to that stage's skill, regardless of detected state. Useful for re-runs.
 
 ## Project state detection
 
@@ -20,6 +20,7 @@ Inspect the cwd for these artifacts. Build the state table from what you find. *
 | 3. Soul training | every `cast[].soul_id` is non-null in shotlist.json | `soul-training` |
 | 4. Style lock | `style.md` exists at project root | `style-lock` |
 | 5. Generation | every `panel_id` in shotlist.json has a matching `pages/panels/<panel_id>.png` | hand off to `anthropic-skills:comic-production` |
+| 5b. Stylization (optional) | each panel has been through stylization (per `pages/panels/_index.md` styled flag) and originals are preserved at `pages/panels/_pre-style/` | `stylization` — only when the base generator produces the wrong style |
 | 6. Continuity check | `continuity-report.md` exists and is newer than the panels folder | `continuity-check` |
 | 7. Composition | every page in shotlist.json has a matching `pages/page-NN.png` | `page-composer` |
 | Done | all of the above + user confirms shipping | offer PDF export, cover, next chapter |
@@ -72,12 +73,15 @@ Mapping:
 - `souls` → `soul-training` skill
 - `style` → `style-lock` skill
 - `generation` → `anthropic-skills:comic-production` skill
+- `stylize` → `stylization` skill (optional — image-to-image art-style conversion)
 - `continuity` → `continuity-check` skill
 - `pages` → `page-composer` skill
 - `pdf` → `page-composer` skill with PDF export
 
 ## Hard rules
 
+- **Higgsfield MCP is the primary infrastructure.** All Soul training, panel generation, and stylization run through Higgsfield. Never block the pipeline on browser-driven `reference-gathering` — if reference photos aren't already on disk in `references/<slug>/`, pause and ask the user to provide them rather than launching browser automation.
+- **No AI-bootstrapped references without explicit user opt-in.** If reference photos look AI-generated (heuristics: all created in same hour, generator-style filenames, missing EXIF), `soul-training` must surface a warning and require confirmation before training. Silent fallback to text-to-image-bootstrapped references is forbidden — it produces Souls anchored to fictional non-canonical characters.
 - **Never run two stages in parallel.** Each stage's output feeds the next; parallel runs corrupt state.
 - **Always pause before budget-heavy stages.** Soul training and panel generation cost real money/time. Show the count and ask before proceeding, even in `auto` mode.
 - **Never auto-regenerate panels flagged by continuity-check.** Surface the report and let the user choose which panels to redo.
@@ -95,6 +99,7 @@ Mapping:
 | 3 | soul-training | references/, shotlist | soul_ids back into shotlist, cast.md |
 | 4 | style-lock | references/_style/ | style.md |
 | 5 | comic-production | shotlist, style.md | pages/panels/\<panel_id\>.png |
+| 5b | stylization (optional) | panels, style.md | re-styled panels in place; originals to pages/panels/_pre-style/ |
 | 6 | continuity-check | shotlist, panels/ | continuity-report.md |
 | 7 | page-composer | shotlist, panels, style.md | pages/page-NN.png, optional PDF |
 
