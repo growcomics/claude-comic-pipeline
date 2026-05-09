@@ -1,11 +1,18 @@
 ---
 name: style-lock
-description: Lock a single visual style across an entire comic project — distill style references into a mandatory prompt prefix and suffix, pick the model and parameters, define the color palette and line weight, and write a project-level style guide that every generated panel must follow. Use when the user wants a consistent look across pages, define the style of a comic, prevent style drift between panels, build a style guide, lock model parameters, or pick a model for the project. Trigger phrases include "lock the style", "style guide for the comic", "consistent look", "style across panels", "no style drift", "pick the model", "match the style of X".
+description: Lock a single visual style across an entire comic project — pick a preset (default photoreal-DAZ3D), copy its template into a project-level style.md, and enforce mandatory prompt prefix/suffix/negative on every panel. Use when the user wants a consistent look across pages, define the style of a comic, prevent style drift between panels, build a style guide, lock model parameters, or pick a model for the project. Trigger phrases include "lock the style", "style guide for the comic", "consistent look", "style across panels", "no style drift", "pick the model", "match the style of X".
 ---
 
 # Style Lock
 
-Lock a project's visual style up front and enforce it on every panel prompt. Without this, generated panels drift across pages — different line weights, different palettes, different rendering — even when the same Soul is used. `style-lock` produces a `style.md` that the generator and `page-composer` both read.
+Lock a project's visual style up front and enforce it on every panel prompt.
+Without this, generated panels drift across pages — different line weights,
+different palettes, different rendering — even when the same Soul is used.
+
+`style-lock` produces a `style.md` at project root that the generator and
+`page-composer` both read. The starting point is a **preset** in
+`styles/<slug>/preset.md`. The default preset is **`photoreal-daz3d`** — the
+DAZ3D Iray "3D Muscle Comics" house style used by Bay Watch / Lana & Lacy.
 
 ## When this skill is the right tool
 
@@ -15,98 +22,123 @@ Lock a project's visual style up front and enforce it on every panel prompt. Wit
 - "Match the style of [reference comic / artist]"
 - Mid-project rescue: pages 1–4 look fine, pages 5–8 drifted
 
-If a `style.md` already exists, this skill updates it; it doesn't overwrite without explicit confirmation. If only one or two panels drifted, that's a generation-prompt bug, not a style-lock issue — fix the prompt, don't relock.
+If a `style.md` already exists, this skill updates it; it doesn't overwrite
+without explicit confirmation. If only one or two panels drifted, that's a
+generation-prompt bug, not a style-lock issue — fix the prompt, don't relock.
+
+## Default preset
+
+**`styles/photoreal-daz3d/preset.md`** — photorealistic DAZ3D Iray render,
+3D Muscle Comics house style, 3:4 portrait, Nano Banana 2 Pro, golden-hour
+outdoor lighting, no ink lines, no baked text. This is the default for any
+new comic project unless the user explicitly asks for a different aesthetic.
+
+The previous ink-line example template now lives at
+`styles/ink-line/preset.md` as a secondary preset for stylized projects.
+
+See `styles/README.md` for the full preset list, the folder shape, and how
+to add a new preset (one folder, one `preset.md`, one row in the table — no
+SKILL.md edits required).
 
 ## Output: `style.md` at project root
 
-```markdown
-# Style Lock — <project>
+Every preset's `preset.md` contains a self-contained **Template** block.
+Copy that block verbatim into `style.md` at the project root, fill the
+placeholders (`<project>`, `<date>`, character energy-color rules, suit /
+wardrobe state by chapter, sample-shot reference page), and lock the file.
 
-Locked <date>. Every panel prompt must include the prefix and suffix below verbatim.
+The template's required sections:
 
-## Model
-- Name: <higgsfield-model-id>
-- CFG / guidance: 6.5
-- Sampler: <sampler>
-- Seed strategy: per-panel deterministic seed = hash(panel_id)
-- Resolution: 1536×1024 (landscape standard) | 1024×1536 (tall) | 2048×2048 (splash)
+- **Model** — name, aspect, resolution, batch, seed strategy
+- **Mandatory prompt prefix / suffix / negative** — appended verbatim to
+  every panel prompt; the negative is load-bearing
+- **Project-specific hard rules** — character energy colors, suit state by
+  chapter, scale tiers
+- **Lettering** — font, balloon stroke, caption tint, SFX styling (read by
+  `page-composer`; never baked into the generated image)
+- **Banned** — explicit list of looks the project must not produce
+- **Style sample reference** — the locked-in test image for drift checks
 
-## Mandatory prompt prefix
-> dynamic comic panel, heavy 2pt outer line with medium interior detail, cel-shaded with hard 35° shadows, modern indie comic aesthetic
-
-## Mandatory prompt suffix
-> directional key light from upper-left, no rim light, 35mm lens equivalent, no painterly softness
-
-## Mandatory negative prompt
-> photoreal skin texture, instagram filter, watermark, text artifacts, deformed hands, extra fingers, cropped face, 3D render, DAZ artifacts, stock-flash lighting
-
-## Color palette
-- Hex: #1a1a2e, #f5deb3, #c44536, #2e8b57, #f0f0f0
-- Rule: max 4 dominant hues per panel; cool palette for night scenes, warm for action
-
-## Line weight
-- Outer silhouette: heavy (2pt equivalent)
-- Interior detail: medium (1pt)
-- Background: light (0.5pt)
-
-## Rendering
-- Cel-shaded, minimal gradients
-- Hard shadows at 35° from upper-left
-- No painterly softness, no airbrush
-
-## Lettering hints (read by page-composer)
-- Font: WildWords-Bold (./assets/fonts/WildWords-Bold.ttf)
-- Balloon stroke: 2px black, white fill
-- Caption: yellow tint #FFF4B8
-- SFX: black with 2px red drop shadow
-
-## Banned
-- Photoreal skin pores
-- 3D render look (DAZ artifacts)
-- Stock-art front-flash lighting
-- Anime-style giant eyes (unless this is an anime project)
-
-## Sample shot
-- Reference panel: pages/_style-sample.png
-- Re-test prompt: "<character> standing in <location>, neutral pose, full prefix and suffix"
-- Drift check: re-run weekly or every 10 panels; compare to baseline
-```
+For Bay Watch / Lana & Lacy, the `lana-lacey-skill` repo's
+`series-profile.md` §2 ships a pre-filled version of the photoreal-DAZ3D
+template with energy colors and suit-state rules already populated — copy
+that block instead of filling the template by hand.
 
 ## Workflow
 
-### 1. Gather style refs
+### 1. Pick the preset
 
-If style refs aren't already in `references/_style/`, delegate to `reference-gathering`: *"mood-board, 12 images, [genre + era + artist] aesthetic"*. Don't proceed without 5+ style refs — single-image style anchors don't generalize.
+Default to **`photoreal-daz3d`**. Only deviate when the user explicitly asks
+for a different aesthetic ("ink-line indie look", "watercolor", "manga
+screentone", etc.). For deviations:
 
-### 2. Distill the style
+1. Check `styles/` for an existing preset that fits.
+2. If none fits, follow `styles/README.md` to add a new preset folder
+   *before* writing `style.md`. The preset is the durable artifact; the
+   project's `style.md` is just an instantiation.
 
-Read all style refs. Write a 5–10 attribute distillation. Be **specific**. Vague descriptions ("modern", "dynamic") produce drift; specific ones ("heavy 2pt outer line, no rim light, 35° hard shadows from upper-left") hold.
+### 2. Gather style refs (only when distilling a new preset)
+
+This step is for *new presets*, not for projects using an existing preset.
+If you're starting a Bay Watch chapter using `photoreal-daz3d`, skip to
+step 3.
+
+If style refs aren't already in `references/_style/`, delegate to
+`reference-gathering`: *"mood-board, 12 images, [genre + era + artist]
+aesthetic"*. Don't proceed without 5+ style refs — single-image style
+anchors don't generalize.
+
+Read all style refs. Write a 5–10 attribute distillation. Be **specific**.
+Vague descriptions ("modern", "dynamic") produce drift; specific ones
+("heavy 2pt outer line, no rim light, 35° hard shadows from upper-left")
+hold.
 
 Attributes to capture:
 
-- Line weight (outer vs interior, in approximate point sizes)
+- Line weight (outer vs interior, in approximate point sizes) — or, for
+  photoreal presets, render engine / skin micro-detail level
 - Color approach (palette breadth, saturation, dominant hues)
 - Lighting (key light direction, hardness, presence/absence of rim)
-- Rendering (cel-shade / painterly / inked / screentone / mixed)
-- Era/genre cue (90s manga, 70s underground, modern indie, retro Eurocomic, etc.)
-- Forbidden traits (photoreal, 3D, stock-flash, anime-eyes if not anime)
+- Rendering (cel-shade / painterly / inked / screentone / photoreal-3D /
+  mixed)
+- Era/genre cue (90s manga, 70s underground, modern indie, retro
+  Eurocomic, photoreal-3D, etc.)
+- Forbidden traits (photoreal-vs-illustrated, 3D-vs-2D, stock-flash,
+  anime-eyes if not anime)
 
-### 3. Pick the model
+Save the new preset to `styles/<slug>/preset.md` and update the table in
+`styles/README.md`.
 
-Use `hf__models_explore` to see available models. Choose by:
+### 3. Copy the preset's template into `style.md`
 
-- Genre fit — some models are tuned for stylized output, others for photoreal; pick the one whose default look is closest to your distillation
-- Aspect ratio support — must handle 1.5:1 landscape for standard panels
-- Soul compatibility — the model must accept the Soul IDs you trained (or will train)
+Open the chosen preset (e.g. `styles/photoreal-daz3d/preset.md`). Copy the
+**Template** block into `style.md` at the project root. Fill:
 
-Lock the model name and parameters in `style.md`. **Don't change the model mid-project** — model swaps cause maximum drift.
+- `<project>` (chapter / book name)
+- `<date>` (lock-in date)
+- Character energy-color rules (project-specific hard rules — never blanks)
+- Suit / wardrobe state by chapter
+- Sample-shot reference page (a known-good panel from this project, or the
+  preset's bundled `sample.png` if no project panel exists yet)
+
+Lock the file.
 
 ### 4. Test on a known shot
 
-Pick a representative panel from `shotlist.json` (a character + a location, preferably with a Soul already trained). Generate it with full prefix + suffix + negative. `Read` the result.
+Pick a representative panel from `shotlist.json` (a character + a location,
+preferably with a Soul already trained and reference images attached).
+Generate it with the full prefix + suffix + negative from `style.md`. `Read`
+the result.
 
-- If it matches the style refs and looks like the character: lock the parameters; save as `pages/_style-sample.png` for later drift checks.
-- If it drifts: tighten the prefix/suffix wording, retry. Most drift comes from vague style descriptors that the model under-weights. Strong cues ("heavy 2pt outer line") survive better than weak ones ("bold lines").
+- If it matches the preset's aesthetic and looks like the character: lock
+  the parameters; save as `pages/_style-sample.png` for later drift checks.
+- If it drifts: tighten the prefix/suffix wording in `style.md` and retry.
+  Most drift comes from vague style descriptors that the model under-weights.
+  Strong cues ("DAZ3D Iray photorealistic render", "heavy 2pt outer line")
+  survive better than weak ones ("photoreal", "bold lines").
+- **Likeness drift, not style drift?** That is almost always missing
+  reference-image attachment, not a style-lock problem. See "Reference
+  attachment is the primary identity lever" below.
 
 ### 5. Wire into generation
 
@@ -117,33 +149,81 @@ Generation must:
 3. Append the suffix verbatim
 4. Pass the negative prompt
 5. Use the locked model + parameters
+6. Attach the canonical face/hair reference image and the closest canonical
+   full-body shot for any recurring character in the panel (this is a
+   pipeline contract, not a style-lock contract — but the panel-prompt
+   builder must enforce it for the locked style to actually hold likeness)
 
-Document this contract in `style.md` so it survives handoffs to other workflows or re-runs.
+Document this contract in `style.md` so it survives handoffs to other
+workflows or re-runs.
+
+## Reference attachment is the primary identity lever
+
+Empirically (GROA-2 audit, 2026-05-09), reference-image attachment — not
+Higgsfield Souls — is what carries character likeness through the locked
+style. Souls are a safety net. If the panel-prompt builder skips ref
+attachment, even a perfectly locked photoreal style produces a generic-face
+render that *looks* on-style but isn't the right character.
+
+Treat ref attachment as a hard requirement of the photoreal preset, not as
+optional polish. The `photoreal-daz3d/preset.md` file calls this out
+explicitly; carry the same rule forward into any new preset that involves
+recurring characters.
 
 ## Drift detection
 
-Re-run the sample shot every ~10 panels generated, or any time the user notices "this page looks off". Compare to `_style-sample.png`. If the new render diverges in line weight, palette, or lighting:
+Re-run the sample shot every ~10 panels generated, or any time the user
+notices "this page looks off". Compare to `_style-sample.png`. If the new
+render diverges in line weight / palette / lighting / skin texture:
 
-- **Sample also drifted** → the model was bumped (provider change), or parameters changed. Investigate root cause.
-- **Sample is fine, only page 7 drifted** → the prompt skipped the prefix/suffix, or the panel-prompt builder has a bug.
+- **Sample also drifted** → the model was bumped (provider change), or
+  parameters changed. Investigate root cause.
+- **Sample is fine, only page 7 drifted** → the prompt skipped the
+  prefix/suffix, dropped the ref attachment, or the panel-prompt builder
+  has a bug.
 
 Fix the root cause; don't paper over by tweaking prompts panel-by-panel.
 
 ## Hard rules
 
-- **Lock once, change deliberately.** Mid-project parameter changes invalidate every previous panel's continuity.
-- **Prefix and suffix go on every panel — no exceptions.** "Quick test" panels still need them or they'll look wrong sitting next to locked panels.
-- **No "match this random image" without distillation.** Pinning aesthetic to a single image works for one panel, not 50.
-- **The negative prompt is load-bearing.** Don't drop it for terseness — banning photoreal skin and stock-flash is what keeps the generator from defaulting to ad-stock aesthetics.
-- **One style.md per chapter at most.** If chapter 4 needs a different style for a flashback, write `style-flashback.md` and tag those panels — don't rewrite `style.md`.
+- **Default to `photoreal-daz3d`.** Only deviate when the user explicitly
+  asks for a different aesthetic, and document the choice in `style.md`.
+- **Lock once, change deliberately.** Mid-project parameter changes
+  invalidate every previous panel's continuity.
+- **Prefix and suffix go on every panel — no exceptions.** "Quick test"
+  panels still need them or they'll look wrong sitting next to locked
+  panels.
+- **No "match this random image" without distillation.** Pinning aesthetic
+  to a single image works for one panel, not 50. Build a preset first.
+- **The negative prompt is load-bearing.** Don't drop it for terseness —
+  banning the wrong aesthetic (cartoon for photoreal, photoreal for
+  ink-line) is what keeps the generator from defaulting to its training-set
+  average.
+- **One `style.md` per chapter at most.** If chapter 4 needs a different
+  style for a flashback, tag those panels with `"style": "<slug>"` in
+  `shotlist.json` — don't rewrite `style.md`.
+- **Adding a preset is a single-folder operation.** Create
+  `styles/<slug>/preset.md` and add a row to `styles/README.md`. Do not edit
+  `SKILL.md` to add presets.
 
 ## Common asks
 
-- "Match [artist]'s style" — gather 8–12 of that artist's panels via `reference-gathering`, distill, test. Note: if the artist is alive and copyrighted, the user is responsible for the licensing call; flag it.
-- "Different style for the flashback pages" — write `style-flashback.md` and add `"style": "flashback"` to those panels in `shotlist.json`.
-- "Style drifted on page 7" — run the sample-shot drift check first to localize the problem (model vs. prompt vs. parameters).
-- "I don't have refs, just a vibe" — push back; gather 5+ refs first. A vibe-only style spec drifts within 3 panels.
+- **"Match [artist]'s style"** — gather 8–12 of that artist's panels via
+  `reference-gathering`, distill into a new preset under `styles/<slug>/`,
+  test. Note: if the artist is alive and copyrighted, the user is
+  responsible for the licensing call; flag it.
+- **"Different style for the flashback pages"** — tag those panels with
+  `"style": "ink-line"` (or whichever preset slug fits) in `shotlist.json`.
+  Don't fork `style.md`.
+- **"Style drifted on page 7"** — run the sample-shot drift check first to
+  localize the problem (model vs. prompt vs. parameters vs. missing ref
+  attachment).
+- **"I don't have refs, just a vibe"** — push back; if a new preset is
+  needed, gather 5+ style refs first. A vibe-only preset drifts within
+  3 panels. If the existing default preset fits, use it.
 
 ## Hand-off
 
-After `style.md` is locked, generation can begin. `page-composer` will also read this file for font/balloon/caption/SFX styling — those keys live under "Lettering hints".
+After `style.md` is locked, generation can begin. `page-composer` will also
+read this file for font/balloon/caption/SFX styling — those keys live under
+"Lettering" in the preset template.
