@@ -117,14 +117,43 @@ These rules are non-negotiable. Every stage must respect them. Several encode le
 - **"Start a new chapter"** → run from `script` stage in a new project subdirectory
 - **"Re-letter the pages"** → `pages` (composition only; doesn't touch panels)
 
+## Status surfacing (mandatory after every stage)
+
+After each stage completes — in any mode (status, auto, or direct) — invoke the `comic-status-board` skill to refresh project status artifacts at the project root, then **read them back and display them inline in the chat response**. Files live on disk for persistence; the chat is the user's primary surface. Never end a stage without surfacing what changed.
+
+| Stage just completed | Invoke `comic-status-board` to produce | Surface in chat |
+|---|---|---|
+| Script breakdown | `STATUS.md` | Stages summary + 1–2 sentence shotlist overview (page count, cast, locations) |
+| References (each new ref) | `STATUS.md` | The References section of STATUS.md |
+| References (stage end) | `STATUS.md` + `STATUS-references-board.png` | Stages summary + references-board image (use `Read` tool on the PNG so it shows inline) |
+| Generation (each accepted panel) | `STATUS.md` | One-line status update referencing the panel, its accepted version, and attempt count |
+| Generation (stage end) | `STATUS.md` + `STATUS-generation-board.png` | Stages summary + generation-board image inline |
+| Continuity | `STATUS.md` (continuity report is its own file) | Stages summary + top 5 continuity issues if any |
+| Composition (stage end) | `STATUS.md` + `STATUS-composition-board.png` | Stages summary + composition-board image inline |
+| Posting | `STATUS.md` | Final stages summary + per-platform upload checklist |
+
+**To invoke** (from the project root):
+
+```bash
+python ~/.claude/skills/comic-status-board/scripts/generate_status.py .
+python ~/.claude/skills/comic-status-board/scripts/generate_composite.py . --mode references
+python ~/.claude/skills/comic-status-board/scripts/generate_composite.py . --mode generation
+python ~/.claude/skills/comic-status-board/scripts/generate_composite.py . --mode composition
+```
+
+(Or `Skill` invoke the `comic-status-board` skill, which handles selection.)
+
+**Hard rule**: composite images at the project root are not optional decorations — they're the at-a-glance view of the comic's state at stage boundaries. Always generate them at their trigger moment and always surface the actual image in the chat (don't just mention that the file exists).
+
 ## End-of-stage report
 
 After each stage runs (in any mode), report:
 - What the stage did (one line)
 - What artifacts were written
+- **The status artifacts that were just refreshed** (STATUS.md, any composite PNGs), surfaced inline in the response per the table above
 - The next pending stage and how to invoke it
 
-Keep these reports short. The user can `/build-comic status` any time for the full table.
+Keep these reports short, but always include the status surface — the user shouldn't have to ask "where are we?" after every stage. The status view is part of the report.
 
 ## What changed from prior versions (May 2026)
 
