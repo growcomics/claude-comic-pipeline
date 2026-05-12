@@ -211,16 +211,40 @@ def pick_location_anchor(root: Path, location_slug: str, accepted_history: list[
 
 
 def find_lineup(root: Path, tier: int | None) -> Path | None:
-    """Pick the appropriate lineup file based on the tier. The skill's assets/
-    folder is at the user's ~/.claude/skills/comic-production/assets/."""
+    """Resolve the muscle-size lineup ref. Tries, in order:
+
+    1. Project-local override:  <root>/references/style/muscle-size-lineup.png
+       (or *-4-9.png for tier >= 7) — lets a project ship a custom lineup.
+    2. Repo-bundled assets:     <pipeline>/skills/comic-production/assets/...
+       (resolved relative to this script — works wherever the repo is cloned).
+    3. User-installed skill:    ~/.claude/skills/comic-production/assets/...
+    4. Plugin-installed skill:  ~/Library/Application Support/Claude/.../skills/
+       comic-production/assets/...  (best-effort glob).
+
+    Returns None only if every candidate is missing. When the caller gets
+    None for a tier > 1 panel, that's a HARD bug — the prompt must not
+    reference a lineup that isn't attached.
+    """
     if tier is None:
         return None
-    skill_root = Path.home() / ".claude" / "skills" / "comic-production" / "assets"
-    if tier <= 6:
-        p = skill_root / "muscle-size-lineup.png"
-    else:
-        p = skill_root / "muscle-size-lineup-4-9.png"
-    return p if p.exists() else None
+    filename = "muscle-size-lineup-4-9.png" if tier >= 7 else "muscle-size-lineup.png"
+
+    candidates: list[Path] = [
+        root / "references" / "style" / filename,
+        Path(__file__).resolve().parent.parent / "assets" / filename,
+        Path.home() / ".claude" / "skills" / "comic-production" / "assets" / filename,
+    ]
+    # Best-effort: plugin-installed location (path is non-deterministic)
+    plugin_root = Path.home() / "Library" / "Application Support" / "Claude" / "local-agent-mode-sessions"
+    if plugin_root.exists():
+        for match in plugin_root.rglob(f"comic-production/assets/{filename}"):
+            candidates.append(match)
+            break
+
+    for p in candidates:
+        if p.exists():
+            return p
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -229,7 +253,8 @@ def find_lineup(root: Path, tier: int | None) -> Path | None:
 
 def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    stage_change: bool, env_ref: Path | None,
-                   env_anchor_from: dict | None = None) -> str:
+                   env_anchor_from: dict | None = None,
+                   lineup_attached: bool = False) -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
 
     The body describes only what is *new* in this panel (camera, action,
@@ -305,18 +330,31 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if time_of_day:
         parts.append(f"Momentary lighting state: {time_of_day}.")
 
-    # 6. Size tier — applied via the lineup ref when stage_change, or by name
+    # 6. Size tier — only reference the lineup if it's actually attached.
+    # When it's not attached, instruct the model verbally + by the prior panel
+    # ref (state anchor). Never reference a ref that's not in the attachment
+    # list — that's a hard bug per L10 (prompts must not invoke phantom refs).
     if tier is not None:
-        if stage_change:
+        if stage_change and lineup_attached:
             parts.append(
                 f"Size tier: {tier}. Match the muscle proportions, breast "
                 f"proportions, and waist of figure {tier} in the attached "
                 f"muscle-size lineup reference."
             )
+        elif stage_change:
+            # Stage change but lineup not available — verbal only
+            parts.append(
+                f"Size tier: {tier} (NEW tier — grown from prior panel). "
+                f"Render visible muscle growth: broader shoulders, larger "
+                f"defined biceps, fuller chest, ridged abdominal muscle "
+                f"definition, stronger quads. Build is unmistakably more "
+                f"muscular than the body baseline reference."
+            )
         else:
             parts.append(
-                f"Size tier: {tier}. Carry forward the build from the prior "
-                f"accepted panel (no growth in this panel; size is unchanged)."
+                f"Size tier: {tier} (unchanged from prior panel). Carry "
+                f"forward the build from the attached state anchor exactly. "
+                f"No growth in this panel."
             )
 
     # 7. Environment — env-chaining-aware language
@@ -476,8 +514,14 @@ def build_plan(root: Path) -> dict:
                               f"subsequent panels will chain off its image instead",
                 })
 
-    # Lineup ref (only on stage-change panels)
+    # Lineup ref (only on stage-change panels). The lineup is critical when
+    # the tier jumps — without it, the model interpolates muscle growth from
+    # text descriptions alone and produces inconsistent builds across the
+    # tier transition. find_lineup() now searches multiple paths; if it
+    # still returns None for a stage-change panel, surface that loudly so
+    # the agent can fix the asset location before generating.
     tier = next_panel.get("muscle_size_tier")
+    lineup_attached = False
     if stage_change and tier is not None:
         lineup = find_lineup(root, tier)
         if lineup:
@@ -485,12 +529,27 @@ def build_plan(root: Path) -> dict:
                 "kind": "lineup",
                 "tier": tier,
                 "path": str(lineup),
-                "reason": f"stage-change panel (tier={tier}) — attach lineup per L5",
+                "reason": f"STAGE-CHANGE panel (tier={tier}) — lineup ref MUST be "
+                          f"attached so the model has a visual target for the new "
+                          f"size, not just verbal instructions. Per L5.",
+            })
+            lineup_attached = True
+        else:
+            refs_to_attach.append({
+                "kind": "MISSING_lineup",
+                "tier": tier,
+                "path": None,
+                "reason": f"STAGE-CHANGE panel (tier={tier}) but lineup file NOT FOUND on disk. "
+                          f"Tried: project references/style/, repo assets/, ~/.claude/skills/.../assets/. "
+                          f"Drop a muscle-size-lineup.png (tiers 1-6) or muscle-size-lineup-4-9.png (tiers 7+) "
+                          f"into one of those locations before generating. Falling back to verbal-only "
+                          f"growth instructions, which is significantly less reliable for size consistency.",
             })
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
     prompt = compose_prompt(next_panel, shotlist, anchor, stage_change, env_ref,
-                            env_anchor_from=env_anchor_from)
+                            env_anchor_from=env_anchor_from,
+                            lineup_attached=lineup_attached)
 
     return {
         "project_root": str(root),
