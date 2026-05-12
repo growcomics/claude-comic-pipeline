@@ -178,15 +178,35 @@ def find_face_card(root: Path, char_slug: str) -> Path | None:
 
 
 def find_env_ref(root: Path, location_slug: str) -> Path | None:
+    """Fallback DAZ source ref. Prefer pick_location_anchor() which implements
+    L10 env chaining (use the first accepted panel in this location instead)."""
     loc_dir = root / "references" / "locations" / location_slug
     src = loc_dir / "_source.jpg"
     if src.exists():
         return src
-    # Fallback: first image
     if loc_dir.is_dir():
         for p in sorted(loc_dir.iterdir()):
             if p.suffix.lower() in {".png", ".jpg", ".jpeg"} and not p.name.startswith("_"):
                 return p
+    return None
+
+
+def pick_location_anchor(root: Path, location_slug: str, accepted_history: list[dict]) -> dict | None:
+    """L10 env chaining: the first accepted panel in this location is the
+    canonical visual anchor for the location. Returns that history item, or
+    None if no accepted panel yet exists for this location.
+
+    When this returns a result, callers should attach that panel's image as
+    the env reference *instead of* `_source.jpg`. The DAZ source did its job
+    on the first panel; afterward, your real chamber image is the better
+    anchor than a stand-in render.
+    """
+    if not location_slug:
+        return None
+    for item in accepted_history:
+        if (item["panel"].get("location") or "") == location_slug:
+            if item["status"].get("image"):
+                return item
     return None
 
 
@@ -208,10 +228,23 @@ def find_lineup(root: Path, tier: int | None) -> Path | None:
 
 
 def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
-                   stage_change: bool, env_ref: Path | None) -> str:
-    """Compose a starter prompt for this panel. Concatenates fragments per the
-    template in `references/shotlist-driven-flow.md`. Single-line output (Flow
-    treats `\\n` as submit, so use period-separated sentences)."""
+                   stage_change: bool, env_ref: Path | None,
+                   env_anchor_from: dict | None = None) -> str:
+    """Compose a starter prompt for this panel — L10 delta-only skeleton.
+
+    The body describes only what is *new* in this panel (camera, action,
+    expression, lighting state change, costume state change). Constants
+    (character identity, costume design, location architecture) are
+    delegated to the attached references via an explicit render directive.
+
+    `env_anchor_from`: when L10 env chaining promoted a prior accepted panel
+    to env anchor (instead of `_source.jpg`), this is that history item.
+    The prompt language adapts so the model knows it's chaining off the
+    actual chamber image rather than a stand-in DAZ render.
+
+    Single-line output (Flow treats `\\n` as submit; use period-separated
+    sentences within one continuous string).
+    """
 
     camera = (panel.get("camera") or "").split(",")[0].strip()
     action = (panel.get("action") or "").strip()
@@ -222,7 +255,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 
     parts: list[str] = []
 
-    # 1. Positive CGI anchor (L7-compliant: positive vocabulary, single closing negation)
+    # 1. Render anchor (positive CGI vocabulary, L7-compliant)
     parts.append(
         "DAZ Studio Iray render of a real 3D scene. Ray-traced subsurface "
         "scattering on skin, specular highlights catching warm rim light, "
@@ -230,7 +263,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "8K texture detail, shallow depth of field with photographic bokeh."
     )
 
-    # 2. Camera fragment (skeleton — see cinematic-framing.md for the full library)
+    # 2. Camera fragment
     cam_fragments = {
         "ecu-face": "Extreme close-up on the face, framed eyes-to-chin. 85mm lens equivalent, shallow depth of field, background blurred to soft bokeh.",
         "ecu-region": "Extreme close-up framed on the focal body region, macro 100mm lens equivalent, hyperdetailed texture, background completely defocused.",
@@ -251,55 +284,82 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     parts.append(cam_fragments.get(camera,
         f"Camera: {camera or 'eye-level medium shot'}."))
 
-    # 3. Character + action
+    # 3. Subjects (name only — identity comes from attached face cards)
     if chars:
-        char_str = ", ".join(chars)
-        parts.append(f"Subjects: {char_str}.")
+        parts.append(f"Subjects: {', '.join(chars)}.")
+
+    # 4. DELTA — action / pose / expression. Wrapped with a sanitization
+    #    directive so the model knows: even if the action text mentions
+    #    things that look like constants (clothing, wall types, etc.),
+    #    those are *cues for the action context only*, not redescriptions.
     if action:
-        parts.append(action.rstrip(".") + ".")
-
-    # 4. Size language
-    if tier is not None:
+        action_clean = action.rstrip(".")
         parts.append(
-            f"Subject at SIZE {tier} from the muscle-size scale. "
-            f"Match the muscle proportions, breast proportions, and waist of "
-            f"figure {tier} in the lineup reference image."
+            f"DELTA — action only: {action_clean}. (Any mention of clothing, "
+            "architecture, or character features in the delta is contextual "
+            "shorthand; the visual identity of those things comes from the "
+            "attached references.)"
         )
 
-    # 5. Environment
-    if env_ref:
-        parts.append(
-            f"ENVIRONMENT: {location_slug or 'the scene'}. Use the attached "
-            f"environment reference image for the scene STYLE — the Iray render "
-            f"quality, lighting, scale, depth, and atmosphere. Replace the "
-            f"reference's content with the {location_slug or 'target scene'} as "
-            f"described."
-        )
-    elif location_slug:
-        # Fall back to shotlist's location description if available
-        loc_desc = ""
-        for loc in shotlist.get("locations", []):
-            if loc.get("id") == location_slug:
-                loc_desc = loc.get("description", "")
-                break
-        if loc_desc:
-            parts.append(f"ENVIRONMENT: {location_slug} — {loc_desc}.")
-
-    # 6. Lighting
+    # 5. Lighting state CHANGE only (not the location's baseline lighting)
     if time_of_day:
-        parts.append(f"Lighting: {time_of_day} mood.")
+        parts.append(f"Momentary lighting state: {time_of_day}.")
 
-    # 7. Chain state carry-forward (anchor info)
+    # 6. Size tier — applied via the lineup ref when stage_change, or by name
+    if tier is not None:
+        if stage_change:
+            parts.append(
+                f"Size tier: {tier}. Match the muscle proportions, breast "
+                f"proportions, and waist of figure {tier} in the attached "
+                f"muscle-size lineup reference."
+            )
+        else:
+            parts.append(
+                f"Size tier: {tier}. Carry forward the build from the prior "
+                f"accepted panel (no growth in this panel; size is unchanged)."
+            )
+
+    # 7. Environment — env-chaining-aware language
+    if env_ref:
+        if env_anchor_from:
+            parts.append(
+                f"Location: {location_slug}. The attached environment "
+                f"reference IS this location — it's the accepted establishing "
+                f"shot from panel `{env_anchor_from['panel'].get('panel_id')}`. "
+                "Render the same architecture, the same wall layout, the same "
+                "equipment placement, the same scale, the same depth. The "
+                "delta describes ONLY what is happening in this panel; the "
+                "location itself is fixed by this reference."
+            )
+        else:
+            parts.append(
+                f"Location: {location_slug}. The attached environment reference "
+                "establishes the location's render style — Iray quality, "
+                "lighting setup, scale, depth, atmosphere. Use it as the visual "
+                "anchor for the location's architecture. Do not reinterpret."
+            )
+
+    # 8. State anchor — prior panel for costume/hair/body/damage continuity
     if anchor:
         anchor_view = anchor["panel"].get("camera", "?")
         parts.append(
             f"State anchor: prior panel `{anchor['panel'].get('panel_id', '?')}` "
-            f"({anchor_view}) is attached as a reference — preserve costume "
-            f"state, hair state, body size, and any cumulative damage from that "
-            f"panel exactly."
+            f"({anchor_view}) is attached as a reference. Preserve costume "
+            "state, hair state, body size, and any cumulative damage from "
+            "that panel exactly. Costume tears never regress across panels."
         )
 
-    # 8. Mandatory rules (L7-compliant — no speech bubble or SFX text)
+    # 9. Render directive — THE LOAD-BEARING L10 SENTENCE
+    parts.append(
+        "RENDER DIRECTIVE: render the attached references exactly as shown. "
+        "Do not reinterpret character appearance, costume design, or location "
+        "architecture from the prompt text. Those are FIXED by the references. "
+        "The prompt describes only what is new in this panel — camera, action, "
+        "expression, momentary lighting state, momentary costume state change. "
+        "References override prompt text on all visual identity."
+    )
+
+    # 10. Mandatory rules (L7-compliant — no rendered lettering)
     parts.append(
         "Mandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); "
         "skin has subtle healthy sheen, not oiled or wet; vivid expressive face "
@@ -310,7 +370,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "page-composer."
     )
 
-    # 9. Closing CGI anchor
+    # 11. Closing CGI anchor
     parts.append("Photographic CGI render, NOT illustrated.")
 
     return " ".join(parts)
@@ -386,18 +446,35 @@ def build_plan(root: Path) -> dict:
                 "reason": f"canonical face anchor for {slug}",
             })
 
-    # Env ref
+    # Env ref — L10 env chaining: prefer first accepted panel in this location
+    # over `_source.jpg`. The DAZ render is a stand-in; the accepted panel is
+    # the real location.
     env_ref = None
+    env_anchor_from = None
     loc_slug = next_panel.get("location")
     if loc_slug:
-        env_ref = find_env_ref(root, loc_slug)
-        if env_ref:
+        env_anchor_from = pick_location_anchor(root, loc_slug, accepted_history)
+        if env_anchor_from:
+            env_ref = env_anchor_from["status"]["image"]
             refs_to_attach.append({
-                "kind": "env_ref",
+                "kind": "env_anchor",
                 "location": loc_slug,
+                "from_panel": env_anchor_from["panel"].get("panel_id"),
                 "path": str(env_ref.relative_to(root)),
-                "reason": f"hero location env ref (DAZ3D-scene-ref trick)",
+                "reason": f"L10 env chaining — accepted establishing shot for `{loc_slug}` "
+                          f"from panel `{env_anchor_from['panel'].get('panel_id')}`",
             })
+        else:
+            env_ref = find_env_ref(root, loc_slug)
+            if env_ref:
+                refs_to_attach.append({
+                    "kind": "env_ref",
+                    "location": loc_slug,
+                    "path": str(env_ref.relative_to(root)),
+                    "reason": f"DAZ3D source ref for `{loc_slug}` — first appearance "
+                              f"of this location; once this panel is accepted, "
+                              f"subsequent panels will chain off its image instead",
+                })
 
     # Lineup ref (only on stage-change panels)
     tier = next_panel.get("muscle_size_tier")
@@ -412,7 +489,8 @@ def build_plan(root: Path) -> dict:
             })
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
-    prompt = compose_prompt(next_panel, shotlist, anchor, stage_change, env_ref)
+    prompt = compose_prompt(next_panel, shotlist, anchor, stage_change, env_ref,
+                            env_anchor_from=env_anchor_from)
 
     return {
         "project_root": str(root),

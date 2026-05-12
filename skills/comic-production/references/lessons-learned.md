@@ -391,6 +391,73 @@ The discipline: **no `generate_image` call for a chained panel without the prior
 
 ---
 
+## L10 — References are the truth, prompts are deltas
+
+**Symptom**: The same location renders as visibly different rooms across panels of the same scene. The same character drifts in costume detail, hair length, facial proportions across the issue even though face cards are attached. Bigger picture: anything the prompt re-describes — character appearance, costume design, location architecture — comes out *slightly different each time*, because the model is interpolating between the text it reads and the references it sees attached.
+
+Confirmed in production: Supergirl issue #1 panels 02 vs 05 — same location (`lex-lab-redsun`), DAZ env ref attached in both cases, but the prompt phrasing differed ("industrial chamber with computer banks" vs "chamber bathed in red flood with pipes") and the model produced two visibly different rooms.
+
+**Root cause**: When the prompt and the reference both describe the same thing, the model treats them as two competing signals and interpolates. Text is unambiguous; refs are interpretive. So when the prompt says "Lex is bald, mid-40s, sharp-featured" *and* the face card is attached, the text wins on details where the two disagree — and the disagreement is invisible until you compare panels side by side.
+
+This compounds with paraphrasing: every panel's prompt is composed at runtime, and each panel describes the same constants differently ("industrial chamber" / "underground lab" / "warehouse-aesthetic interior"). Each paraphrase gives the model a fresh interpretation of constant data, and the constant drifts.
+
+**Fix**: Adopt a delta-only prompt skeleton.
+
+The prompt body should describe only what is *new* in this panel:
+- Camera (distance, angle, lens)
+- Action (pose, gesture, expression)
+- Lighting state *change* (the change from baseline, not the baseline itself)
+- Costume state *change* (the new tear / new damage, not the costume design)
+- Size tier (only if changed)
+
+Everything *constant* lives in the attached references:
+- Character identity → face card
+- Character body baseline → body baseline
+- Costume design → body baseline + cumulative state from prior accepted panel
+- Location architecture → env reference (DAZ `_source.jpg` for the first panel; the first **accepted** panel in that location for every panel after — see env chaining below)
+
+Add a literal "render directive" sentence to every prompt:
+
+> *Render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text — those are fixed by the references. The delta describes only what is new in this panel: camera, action, expression, momentary lighting state, momentary costume change.*
+
+This sentence is load-bearing. It tells the model the priority: refs > text on visual identity.
+
+**Env chaining (a corollary of L10 applied to environments)**:
+
+The DAZ3D `_source.jpg` is a *starting* env reference. The first time a hero location appears in a panel, attach `_source.jpg` and instruct the model to use it for "scene style, lighting setup, scale, depth, render quality." Once that first panel is accepted, **it becomes the location's canonical anchor**. Every subsequent panel in that location attaches the accepted panel's PNG as the env reference, not `_source.jpg`.
+
+Why: the accepted panel is more specific (it shows your exact chamber, not a stand-in throne room), and the model can carry forward your actual architecture rather than re-interpolating between a stand-in scene and prose descriptions.
+
+The runtime composer (`next_panel.py`) implements this by checking accepted_history for any prior panel in the same location and preferring its image to `_source.jpg`.
+
+**Don't redescribe in shotlist `action` either**:
+
+The `action` field is where description bleed sneaks in. Resist writing:
+
+> "Wide establishing of the underground lab. Supergirl chained in the center of the chamber, hands and ankles cuffed. Lex stands at his terminal mid-distance camera-right, suit immaculate."
+
+The bolded parts re-describe constants that are already in refs:
+- "underground lab" → in env ref
+- "Lex's suit" → in Lex's body baseline
+- "Supergirl chained" → if cuffs are a recurring prop, ref them; otherwise mention them as a *delta*
+
+Better `action`:
+> "Wide establishing camera. Kara at center, restrained. Lex at his terminal mid-distance camera-right, hands behind his back, watching her with anticipation."
+
+Camera, action, pose, expression. No architecture, no costume design, no character features. The composer adds those via refs.
+
+**Where this rule applies**:
+- Every per-panel prompt in shotlist-driven Flow production
+- Every Higgsfield panel prompt the runner composes
+- Every reference doc that gives prompt skeletons (cinematic-framing, multi-character-variation, etc.)
+
+**Where this rule does NOT apply**:
+- The shotlist's top-level `cast[]`, `locations[]`, `props[]` description fields. Those are *documentation* and *generation instructions for the reference itself* (used when generating face cards, env refs from scratch). They're correctly redundant with refs because they explain *what the ref should depict*. They should never be pasted into a per-panel prompt.
+
+**Detection / linting hint**: a composed panel prompt that mentions costume colors, hair colors, building materials, wall types, ceiling height, or character age is probably violating L10. The runtime composer should suppress these terms when refs are attached; the SKILL's QA pass should flag them.
+
+---
+
 ## How to add a lesson
 
 When you observe a new failure mode that recurs, append a new entry following the structure above:

@@ -91,15 +91,31 @@ Keep the same render style: photographic CGI render, ray-traced lighting, physic
 [mandatory rules block, ending in "Photographic CGI render, NOT illustrated."]
 ```
 
-### 4. Reuse across the comic
+### 4. Establish-then-chain (L10 env chaining)
 
-Use the same `_source.jpg` reference on every panel set in that location. The location stays visually consistent — same lighting, same scale, same render character — across the entire comic, instead of the model re-inventing it each time.
+**Don't reuse `_source.jpg` on every panel.** That was the old approach, and it produces drift: the model interpolates between the DAZ stand-in render and the per-panel prompt's location description, and you get visibly different rooms across panels in the same location. (Confirmed in Supergirl issue #1 — panels 02 and 05 both used `lex-lab-redsun/_source.jpg` but rendered as obviously different chambers.)
 
-For *variation within* the location (different angles, time-of-day shifts), pair the location ref with verbal instructions for the change:
+**Instead, chain off the first accepted shot of the location.** The pattern:
 
-> "Same Bison's Lair location as the attached reference, but now lit only by the emergency red strobes — the overhead spotlights are off. The Shadaloo emblem visible on the floor in red emergency lighting."
+1. **First panel in this location**: attach `_source.jpg` as the env ref. Prompt instructs the model to use it for scene style (Iray quality, lighting setup, scale, depth, atmosphere). Once this panel is accepted, it becomes the canonical visual for the location.
+2. **Every subsequent panel in this location**: attach the *accepted* panel's PNG as the env ref, **not** `_source.jpg`. The prompt language changes too — instead of "use the reference for style, replace content", it says "the attached env reference IS this location; render the same architecture, same equipment placement, same scale; the delta describes only what's happening in this panel."
+3. **The first accepted panel's `_source.jpg` is retired** for this location for the duration of the issue. (Optional: keep it filed in `references/locations/<slug>/_source.jpg` for future issues that re-establish the location.)
+
+Why this works: the accepted panel is *your* chamber, not a stand-in. The DAZ ref has done its job — anchoring the render style on the first generation. After that, your real chamber image gives the model a far more specific architectural anchor and forecloses interpolation.
+
+The runtime composer in `next_panel.py` implements this via `pick_location_anchor()` — it walks `accepted_history` for any prior panel in the same location and prefers its image to `_source.jpg`.
+
+For *variation within* the location (different angles, time-of-day shifts), pair the location ref with delta-only instructions for the change:
+
+> "The attached env reference IS the location. The delta: now bathed in emergency red strobes. Overhead spotlights are off. Architecture, layout, scale, and material identity unchanged from the reference."
 
 The lighting changes; the location identity holds.
+
+#### When NOT to chain
+
+- **First panel in the location** — there's nothing accepted yet to chain off. Use `_source.jpg`.
+- **Major lighting state shift where the chamber should look transformed** (e.g. dormant → fully active red flood). You may still want to chain off the accepted shot for architecture, but explicitly call out the lighting change so the model doesn't anchor too strongly on the prior lighting.
+- **Different room in the same location complex** (e.g. corridor vs control room within Lexcorp). Treat these as distinct locations with distinct `_source.jpg` refs — chaining within each.
 
 ---
 
@@ -175,7 +191,8 @@ references/
 
 1. **At script-breakdown / location mapping**: identify hero locations that will appear in multiple panels. For each, search for a DAZ3D scene reference matching the vibe.
 2. **At reference-gathering**: save each to `references/locations/<slug>/_source.jpg` with provenance.
-3. **At prompt-writing**: attach the location's `_source.jpg` to every panel set in that location. Use the env-anchor language pattern above.
-4. **At QA**: check that the location reads consistently across panels (lighting, scale, material). If a panel drifted, regenerate with the env ref re-attached.
+3. **At prompt-writing — first panel in the location**: attach `_source.jpg` as the env ref. Use the env-anchor language pattern for the *establishing* case.
+4. **At prompt-writing — every subsequent panel in the same location**: chain off the first accepted panel's PNG (not `_source.jpg`). Use the env-chaining language pattern. `next_panel.py` does this automatically via `pick_location_anchor()`.
+5. **At QA**: check that the location reads consistently across panels. If a panel drifted despite chaining, regenerate with the accepted-establishing-shot anchor re-attached and the delta-only prompt enforced.
 
-This guide pairs with `reference-gathering`'s default workflow for character refs. Both produce `_provenance.md` so the source of every reference is auditable.
+This guide pairs with `reference-gathering`'s default workflow for character refs. Both produce `_provenance.md` so the source of every reference is auditable. The env-chaining pattern is a corollary of L10 (refs are truth, prompts are deltas) applied to environments.
