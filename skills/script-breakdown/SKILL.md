@@ -35,16 +35,24 @@ Write both:
     {
       "id": "lara",
       "name": "Lara",
-      "ref_folder": "references/lara/",
+      "ref_folder": "references/characters/lara/",
       "soul_id": null,
       "wardrobe": "leather adventurer's jacket, brown trousers, sword belt"
     }
   ],
   "props": [
-    {"id": "altar-stone", "description": "rune-carved stone altar, glowing faintly blue"}
+    {
+      "id": "altar-stone",
+      "description": "rune-carved stone altar, glowing faintly blue",
+      "ref_folder": "references/props/altar-stone/"
+    }
   ],
   "locations": [
-    {"id": "forest-clearing", "description": "ring of pines around a moss-covered altar"}
+    {
+      "id": "forest-clearing",
+      "description": "ring of pines around a moss-covered altar",
+      "ref_folder": "references/locations/forest-clearing/"
+    }
   ],
   "pages": [
     {
@@ -79,6 +87,9 @@ Field rules:
 - `size`: `splash` = whole page; `wide` = full row; `tall` = full column; `standard` = grid cell.
 - `dialogue.type`: one of `balloon` (spoken), `thought` (internal), `whisper` (dashed border), `shout` (jagged), `caption` (rectangular box, narration), `off-panel` (from outside the panel).
 - `continuity_refs`: panel_ids this panel must match for wardrobe/prop/time-of-day continuity. Usually points back to the scene's establishing panel.
+- `cast[].ref_folder` / `props[].ref_folder` / `locations[].ref_folder`: relative paths from the project root to the reference-gathering folder for that subject. Use the typed-bucket convention from `reference-gathering`: `references/characters/<id>/`, `references/props/<id>/`, `references/locations/<id>/`. **Required** for hero subjects (named characters, recurring props, locations appearing in 2+ panels). **Optional** for one-off backgrounds or single-appearance props — omit the field entirely rather than setting it to a folder that won't be populated.
+- `locations[].ref_folder` for CGI comic projects should contain a `_source.jpg` (DAZ3D-scene-reference render) per `comic-production`'s `references/environment-references.md` — this is what generation attaches as an environment ref via `medias[]`.
+- `camera`: a distance + angle pair using the categories defined in `comic-production`'s `references/cinematic-framing.md` (e.g., `"low-angle-front, three-quarter"`, `"ecu-face"`, `"wide-establish"`). Run the variety check (≥5 distance + ≥4 angle categories, ≤3 panels at the same combo, ≥1 ECU and ≥1 wide-establish/splash per 10-panel sequence) during validation.
 
 ## Workflow
 
@@ -88,12 +99,23 @@ Read the script or beat sheet. If pasted inline, work from that. If a path was g
 
 ### 2. Identify the cast, props, and locations
 
-First pass: extract every named character (speakers + referenced), every recurring prop, every location. For each cast entry:
+First pass: extract every named character (speakers + referenced), every recurring prop, every location.
 
+For each **cast** entry:
 - Slugify the name as `id` (`lara`, `night-king`, `thug-a`)
-- If `references/<slug>/` exists in the working directory, set `ref_folder`
-- Leave `soul_id: null` — `soul-training` fills it later
+- Set `ref_folder` to `references/characters/<id>/`. If that folder already exists in the working directory, `reference-gathering` will write into it next; if not, gathering will create it.
+- Leave `soul_id: null` — `soul-training` fills it later (when that stage runs)
 - Capture wardrobe in one line; this is the wardrobe baseline that `continuity-check` audits against
+
+For each **prop** entry:
+- Slugify the name as `id` (`altar-stone`, `lara-sword`, `signal-flare`)
+- One-line `description`
+- Set `ref_folder` to `references/props/<id>/` for recurring or signature props. **Omit the field entirely** for one-off / disposable props — don't set an empty folder path.
+
+For each **location** entry:
+- Slugify the name as `id` (`forest-clearing`, `bisons-lair`, `chinese-alley`)
+- One-line `description` (furniture, props, lighting, colors, time-of-day baseline)
+- Set `ref_folder` to `references/locations/<id>/` for hero locations. For CGI comic projects, this folder should contain a `_source.jpg` (DAZ3D-scene-reference render) per `comic-production`'s `references/environment-references.md`. For one-off or generic outdoor settings, omit the field.
 
 ### 3. Sequence pages, then panels
 
@@ -109,10 +131,11 @@ Per page, plan **3–6 panels** as the workhorse rhythm. Use 1 (splash), 2 (huge
 
 Fill every required field. **Don't leave fields blank.** A missing `camera` becomes a generic shot at generation time; a missing `time_of_day` causes lighting drift across pages.
 
+- **Camera** is a distance + angle pair (plus an optional composition modifier) drawn from the categories in `comic-production`'s `references/cinematic-framing.md` — e.g., `"low-angle-front, three-quarter"`, `"ecu-face"`, `"wide-establish, dutch"`. Vary the camera deliberately across the sequence using one of the rhythm patterns (pull-in, pull-out, alternating field, orbit). Don't default every panel to medium-eye-level-front — that produces a camera-static comic regardless of how good the action is.
 - **Action** is one or two short sentences in present tense. Describe what's seen, not what's felt.
-- **Dialogue** stays under 25 words per balloon. Split long speeches into multiple balloons; `page-composer` chains them.
-- **SFX** go on the panel they sound on, not the next.
-- **Captions** carry narration or time-jump cues ("Three days later.").
+- **Dialogue** stays under 25 words per balloon. Split long speeches into multiple balloons; `page-composer` chains them. Dialogue lines live in the shotlist as data — generation never renders speech bubbles into the image (see L7 Case B in `comic-production`'s `references/lessons-learned.md`; that's what causes 2D drift in CGI panels).
+- **SFX** go on the panel they sound on, not the next. SFX is also data in the shotlist — `page-composer` letters it on top of the clean render. **Never write SFX text into the panel's generation prompt** — same L7 Case B failure mode. If a dramatic splash needs an in-render SFX cue, render it as a physical scene object (extruded chrome letters in the scene), per the `environment-references.md` / `cinematic-framing.md` guidance.
+- **Captions** carry narration or time-jump cues ("Three days later."). Lettered by `page-composer`, never baked into the generation.
 - **continuity_refs** chains a panel to the scene's establishing panel — this is what makes wardrobe drift detectable later.
 
 ### 5. Validate
@@ -121,6 +144,10 @@ Before saving:
 
 - Every named character in dialogue or action appears in `cast`.
 - Every panel has at least: `characters` (or empty for setting-only), `location`, `camera`, `action`.
+- Every panel's `location` exists in `locations[]`.
+- Every panel's referenced props (if any) exist in `props[]`.
+- Hero subjects (named characters, recurring props, hero locations) have a `ref_folder` set. The folder doesn't need to be populated yet — `reference-gathering` runs next — but the path must be recorded so downstream coverage checks have something to verify.
+- **Camera variety check** (see `comic-production`'s `references/cinematic-framing.md`): for any 10-panel sequence, the panel `camera` values must include ≥5 distinct distance categories, ≥4 distinct angle categories, ≤3 panels at the same distance × angle combo, ≥1 ECU (face or region) and ≥1 wide-establish or splash. Document an intentional violation in the project notes (e.g., a sustained intimate dialogue beat that legitimately holds on mcu — still flag it explicitly).
 - Page numbers are contiguous starting at 1.
 - Total panel count roughly matches pages × 4 (sanity check, not a rule).
 - No dialogue balloon exceeds 25 words.
@@ -148,9 +175,9 @@ Write `./shotlist.json` and `./shotlist.md` at the project root. Report panel an
 
 After `shotlist.json` is written:
 
-- `reference-gathering` reads `cast[].ref_folder` to know where new refs go
-- `soul-training` consumes `cast[]` and writes `soul_id` back into this same file
+- `reference-gathering` reads `cast[].ref_folder`, `props[].ref_folder`, and `locations[].ref_folder` to know where new refs go (one folder per subject, typed buckets: `characters/`, `props/`, `locations/`)
+- `soul-training` (when that stage runs) consumes `cast[]` and writes `soul_id` back into this same file
 - `style-lock` writes `style.md` separately, referenced at generation time
-- Generation reads each panel's prompt fields plus `style.md`'s prefix/suffix
+- Generation reads each panel's prompt fields plus `style.md`'s prefix/suffix; attaches `medias[]` references from `cast[].ref_folder` (character anchors), `locations[].ref_folder` (environment anchor — for hero locations using the DAZ3D-scene-reference trick from `comic-production`'s `references/environment-references.md`), and `props[].ref_folder` (when the panel calls for a recurring prop)
 - `continuity-check` audits every panel against this shotlist
-- `page-composer` reads `pages[]` for layout, `dialogue` for balloons, `sfx` for placement
+- `page-composer` reads `pages[]` for layout, `dialogue` for balloons, `captions` for caption boxes, `sfx` for SFX placement — **all lettering happens here, never in the generation prompt** (per L7 Case B in `comic-production`'s lessons-learned, baked-in lettering causes 2D drift in CGI panels)

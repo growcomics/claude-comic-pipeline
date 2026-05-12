@@ -20,8 +20,15 @@ If the user is describing a comic project end-to-end (script → panels), the co
 
 Unless the user overrides:
 
-1. **Save location**: `./references/<subject-slug>/` in the current working directory
-   - One folder per distinct subject (character, place, product). Slugify names: `pamela-anderson-baywatch-era`, `huntington-beach-pier`, `1995-baywatch-lifeguard-tower`.
+1. **Save location**: `./references/<bucket>/<subject-slug>/` in the current working directory. `<bucket>` is one of:
+   - `characters/` — people (real or fictional), costumed characters, animals-as-characters
+   - `locations/` — settings, scenes, architectural environments
+   - `props/` — recurring objects (weapons, vehicles, signature items)
+   - `style/` — mood boards, aesthetic references not tied to a specific subject
+   
+   One folder per distinct subject within its bucket. Slugify names: `characters/pamela-anderson-baywatch-era/`, `locations/huntington-beach-pier/`, `props/lara-sword/`, `style/1990s-action-aesthetic/`.
+   
+   *Backward compat*: existing projects with flat `./references/<slug>/` layouts still work — the skill won't auto-migrate. Use typed buckets for new projects. When a shotlist exists with `ref_folder` paths, those win — write to whatever path is specified.
 2. **Frame count**: 5 verified images per subject, varied (different angles, expressions, lighting, wardrobe). "Verified" means each saved image has been visually inspected and confirmed to actually show the target subject.
 3. **Provenance**: every folder gets a `_provenance.md` logging source URL, capture timestamp, (for video) seek-time, and a one-line QA note per kept image.
 4. **Contact sheet**: at the end of a gathering pass, build `references/<subject-slug>/_contact-sheet.md` with thumbnails inline, and report back to the user with the list so they can thumbs-up or request a re-pull.
@@ -152,6 +159,27 @@ Use the `mcp__Claude_in_Chrome__*` tools (DOM-aware, much faster than computer-u
 4. **On the source page**, either right-click-save the full-res image (via Chrome MCP) or `screenshot` the relevant region if the image is embedded.
 5. **Verify the subject**. Quick sanity check: does the image actually show the thing you searched for? Mis-attribution on Google Images is common, especially for "[place] [year]" queries.
 6. **Log provenance** with source page URL (not the Google search URL), site name, and any visible photographer credit.
+
+### Gathering refs for locations and environments (CGI comic projects)
+
+For CGI / 3D-rendered comic projects (those using the `comic-production` skill), location refs benefit from a specific technique beyond standard photo gathering: the **DAZ3D-scene-reference trick** — source an existing DAZ3D-rendered scene with the right lighting/scale/render style, save it as `_source.jpg`, and use it as an environment reference image in the panel prompt with instructions to transform its content to your target location. The model anchors to the render's technical style (Iray lighting, photoreal materials, scale, depth) and substitutes the content.
+
+Full workflow lives in the `comic-production` skill's `references/environment-references.md`. Brief summary for the gathering step:
+
+1. **Slug into `references/locations/<location-slug>/`** per the typed-bucket convention above.
+2. **Search DAZ3D gallery, Renderosity, Renderhub, ArtStation** with queries like `daz3d scene "<location keyword>"`, `daz studio iray render <keyword>`, `site:daz3d.com gallery <keyword>`. **Avoid Pinterest** — re-uploads and AI-generated mis-labels are common there and defeat the trick (the technique only works if the source is a genuine DAZ3D / Iray render).
+3. **Save the chosen render as `_source.jpg`** in the location folder. Note source URL, original creator, and your QA note in `_provenance.md` per the standard convention.
+4. **Optionally gather standard photo references** alongside, saved as `<slug>-NN.jpg`, for the writer/director to understand the real-world feel of the scene (color palette, scale, mood). These are for human consumption; only `_source.jpg` is the file the model will see.
+
+**When NOT to use this trick**:
+- Generic exteriors the model handles well without anchoring (forest clearings, generic streets, beaches at sunset).
+- Non-CGI projects (illustrated comics, 2D animation references) — fall back to standard photo gathering.
+
+### Gathering refs for props
+
+For recurring objects (weapons, vehicles, signature items, distinctive accessories), use the standard Google Images / YouTube workflow with the `props/` bucket: `references/props/<prop-slug>/`. Google Images is usually the right source — product photos for licensed objects, gallery shots for custom designs. YouTube can help for items shown in motion (a specific sword from a fight scene, a vehicle mid-chase).
+
+2–3 clear views is usually sufficient (front, 3/4, detail) — 5 images is overkill for most props. Note in `_provenance.md` whether the prop is a real-world object (licensable) or a fictional design (one-off illustration / 3D model).
 
 ### 5. Build the contact sheet
 

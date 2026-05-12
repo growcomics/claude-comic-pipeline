@@ -1,0 +1,24 @@
+{
+  "_instructions": "Visual quality benchmark images on Higgsfield. These are NOT input references for generation — they define the minimum quality bar. When evaluating generated output, compare against these standards. When writing prompts, use the descriptions here to inform the level of detail expected.",
+
+  "standards": {
+    "large_breasts_minimum": {
+      "label": "Large Breasts — Minimum Size Standard",
+      "note": "If breasts in a generated panel are smaller than this, they do not qualify as 'large.' Use this as the floor, not the ceiling.",
+      "asset_id": "3f999dff-6146-4a1a-84e2-5ab8d255dfa1",
+      "url": "https://higgsfield.ai/asset/all/3f999dff-6146-4a1a-84e2-5ab8d255dfa1"
+    },
+    "detailed_veiny_bicep": {
+      "label": "Bicep Detail — Gold Standard",
+      "note": "This is the target quality for bicep closeups and flex panels. Note the vein definition, muscle fiber visibility, and skin sheen. Bicep panels should aim for this level of anatomical detail.",
+      "asset_id": "be4eef6d-6d40-4ccf-8afe-55f91a0b9ec4",
+      "url": "https://higgsfield.ai/asset/all/be4eef6d-6d40-4ccf-8afe-55f91a0b9ec4"
+    },
+    "abs_closeup": {
+      "label": "Abs Closeup — Gold Standard",
+      "note": "This is the target quality for abs/torso closeup panels. Note the definition between each ab segment, the skin texture, and the lighting.",
+      "asset_id": "754800d0-e7b4-4ae0-9941-5af8f69cc385",
+      "url": "https://higgsfield.ai/asset/all/754800d0-e7b4-4ae0-9941-5af8f69cc385"
+    }
+  }
+}

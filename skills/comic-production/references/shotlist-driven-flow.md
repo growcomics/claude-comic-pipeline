@@ -1,0 +1,260 @@
+# Shotlist-Driven Generation on Google Labs Flow
+
+The deterministic, iterative way to run a multi-panel chain on Flow when a `shotlist.json` exists. Replaces the hand-driven mode (every panel = manual UI clicking + manual prompt typing) with a per-panel automated loop that **still preserves the iterative "see prior, retry until good, then chain" rhythm**.
+
+## Design principle (non-negotiable)
+
+The shotlist is **structural data, not pre-composed prompts**. Prompts are composed at runtime, after the prior panel has been observed. The chain advances only when the human accepts a rendered panel. Retries are unlimited and free (Flow Pro), and they do not move the chain.
+
+Three things are decoupled:
+- **Shotlist** = long-lived plan, updateable mid-run
+- **Composed prompt** = regenerated each attempt based on currently observed state
+- **Chain advancement** = only on human "accept"
+
+Read alongside:
+- `flow-workflow.md` — the underlying Flow UI mechanics (asset picker, settings popup, 3-dots menu, etc.)
+- `prompt-templates.md` — the fragment library (style prefix, environment descriptions, character-size language)
+- `cinematic-framing.md` — camera categories, prompt fragments per category, rhythm patterns
+- `multi-character-variation.md` — anti-uniformity rules and the mandatory POSE VARIATION block
+- `posing-and-expressions.md` — facial-acting mechanics
+- `environment-references.md` — the DAZ3D-scene-ref trick (env attachment per panel)
+- `lessons-learned.md` — especially **L1.5** (view-aware chaining), **L5** (lineup ref only on stage changes), **L7 Case B** (no baked-in lettering), **L9** (job_id capture discipline)
+
+---
+
+## Inputs
+
+- **`shotlist.json`** at project root, produced by `script-breakdown`. Per panel:
+  - `panel_id`, `page_number`, `size` (panel size: splash/wide/tall/standard — different from muscle size)
+  - `characters[]` (slugs into `cast[]`)
+  - `location` (slug into `locations[]`)
+  - `time_of_day`, `weather`
+  - `camera` (distance + angle + optional modifier, per `cinematic-framing.md`)
+  - `action` (one or two short sentences, present tense, what's seen)
+  - `dialogue[]`, `captions[]`, `sfx[]` (**data only — NEVER baked into the generation prompt** per L7 Case B; consumed later by `page-composer`)
+  - `continuity_refs[]` (panel_ids this panel inherits state from — e.g., scene's establishing panel)
+  - `muscle_size_tier` (1–6, where applicable for transformation arcs)
+- **Reference cards already built and uploaded in Flow** (per `flow-workflow.md`):
+  - `cast[].ref_folder` populated with a face card per character
+  - `locations[].ref_folder` populated with `_source.jpg` per hero location (per `environment-references.md`)
+  - `muscle-size-lineup.png` and/or `muscle-size-lineup-4-9.png` uploaded as assets
+- **Chain log** at `<project>/job_ids.md` (or equivalent) — accepted-panel record. Initially has the baseline body ref and face card IDs.
+
+## Outputs
+
+- `<project>/pages/panels/<panel_id>.png` — one image per accepted panel
+- Updated `<project>/job_ids.md` — accepted-panel chain log
+- All unused variants archived in Flow at end of run
+
+---
+
+## Defaults on Flow
+
+- **Count = x4 always.** Flow Pro is free; running x4 every panel gives Claude four variants to pick the best from at zero marginal cost. Cleanup happens at end of run via archiving (see "End-of-run cleanup" below).
+- **Aspect ratio** derived from `camera` and panel `size`:
+
+  | camera category | shotlist `size` | Flow aspect |
+  |---|---|---|
+  | `ecu-face`, `ecu-region` | any | **1:1** |
+  | `front-full`, `3q-full`, `back-full`, `low-angle-front`, `low-angle-back`, `profile` | standard | **3:4** |
+  | `wide-establish`, `splash` (front-facing) | any | **16:9** |
+  | tall vertical | tall | **9:16** |
+  | medium / mcu / cowboy (waist-up) | standard | **4:3** |
+  | splash (portrait composition) | splash | **3:4** |
+
+  The Flow settings popup resets `count` to x4 every time it reopens — that's the default we want. Aspect persists across submissions until changed. Always confirm both before submitting.
+
+- **No baked lettering.** Dialogue, captions, and SFX are data in the shotlist; they are NEVER written into the generation prompt. The render must be clean (L7 Case B). Lettering happens in `page-composer`.
+
+---
+
+## The per-panel loop
+
+For each panel N in shotlist order:
+
+### 1. Pick the state anchor (view-aware, per L1.5)
+
+- Tag panel N's view category from its `camera` field.
+- Walk backwards through accepted panels (N−1, N−2, …) and stop at the most recent one whose view is in the compatibility set for N's view. Compatibility table is in `lessons-learned.md` L1.5.
+- If no prior accepted panel is compatible, fall back to the canonical character ref that matches the target view (e.g., back ref for a `back-full`), plus verbal state carry-forward in the prompt.
+- For `ecu-face` panels: the face card alone is the canonical anchor (no body ref needed).
+
+### 2. Identify the refs to attach
+
+Order them in this priority (Flow accepts multiple — attach all that apply):
+
+1. **State anchor** (from step 1) — adds to prompt via 3-dots → "Add to Prompt"
+2. **Face card** — `cast[N's primary character].ref_folder/face-card.png` (canonical portrait) — attach via `+` picker, search "beauty" or character name
+3. **Environment ref** — `locations[N's location].ref_folder/_source.jpg` — only if the location is a "hero location" with a `_source.jpg` saved (per `environment-references.md`)
+4. **Muscle-size lineup** — **only on stage-change panels** (per L5). A panel is "stage-change" if `muscle_size_tier` is different from the prior accepted panel's tier. Attach `muscle-size-lineup.png` (sizes 1–6) or `muscle-size-lineup-4-9.png` (sizes 4–9) depending on which range applies. **Never attach both lineups** — overlapping size numbers confuse the model.
+5. **Specialized prop refs** — `props[id].ref_folder/_source.jpg` if the panel references a hero prop with a ref folder
+
+### 3. Compose the prompt at runtime
+
+Build the single-line prompt (no `\n` — Flow treats newlines as submit) by concatenating these fragments in order:
+
+```
+[1. positive CGI anchor]
+[2. camera fragment from cinematic-framing.md per panel's `camera` value]
+[3. character description with size language]
+[4. action sentence from shotlist's `action` field, in present tense]
+[5. environment description — minimal if env ref is attached; richer if not]
+[6. lighting fragment matching scene's time_of_day]
+[7. observed state carry-forward — see "state observation" below]
+[8. mandatory rules block — the VALID portion (no speech-bubble lines)]
+[9. closing CGI anchor: "Photographic CGI render, NOT illustrated."]
+```
+
+**Fragment sources**:
+- Positive CGI anchor: `prompt-templates.md` "Style Prefix" (use the newer positive-anchoring vocabulary from L7 Case B worked example, not the stacked-negation version)
+- Camera fragment: `cinematic-framing.md` "Prompt fragments per category"
+- Character description: per character's `cast[].wardrobe` + current size description per `prompt-templates.md` "Character Size Reference Language"
+- Action: verbatim from `shotlist.json` `action`
+- Environment: `prompt-templates.md` "Environment Description Examples" (templates per location type) or `locations[id].description` from shotlist
+- Lighting: derived from `time_of_day` + scene mood
+- Rules block: `prompt-templates.md` "Mandatory Rules Block" with the **deprecated speech-bubble/dialogue lines removed**
+- Closing anchor: `Photographic CGI render, NOT illustrated.`
+
+**State observation** (the critical iterative step): before composing the prompt, look at the prior accepted panel's actual rendered output via the Flow gallery thumbnail (or `Read` the saved PNG). Note:
+- Cumulative costume damage (tear locations, intactness)
+- Hair state (buns intact, ribbons loose, hair down, etc.)
+- Body position relative to environment (where she stands in the alley, etc.)
+- Any continuity detail that the shotlist doesn't pre-specify
+
+Carry this forward verbally: *"By this panel her qipao has cumulative tears at: shoulder seam (from prior), side slits (from prior). One ribbon already loose. Body at size 5."*
+
+This is the iteration loop the user identified — you can only compose a strong panel N prompt after seeing what panel N−1 actually rendered.
+
+**Multi-character panels**: also paste the POSE VARIATION block from `multi-character-variation.md`.
+
+**Never write lettering into the prompt.** No `Comic SFX:` lines. No `speech bubble containing:` lines. No `caption:` lines. The render is clean.
+
+### 4. Drive Flow UI (per `flow-workflow.md` mechanics)
+
+In one `browser_batch` where possible:
+1. Hover the state anchor in the gallery → click 3-dots → click "Add to Prompt"
+2. Click `+` (asset picker) → search field → type "beauty" (or character name) → click the face card
+3. If env ref needed: click `+` again → search "_source" or location name → click env ref
+4. If lineup needed: click `+` again → search "muscle" or "lineup" → click the lineup
+5. Click settings pill → confirm aspect (from step 2 in defaults) → confirm count=x4 → press Escape
+6. Click prompt input → type the composed single-line prompt
+7. Click submit arrow
+
+### 5. Wait + collect variants
+
+Per `flow-workflow.md`: ~22 seconds wall-clock for x1 or x4 (Flow parallelizes). Chain `wait 10 → wait 10 → wait 5 → screenshot`.
+
+### 6. Claude picks the best variant (this is Claude's job, not the user's)
+
+Default behavior: **Claude evaluates the 4 variants and selects the best one without asking the user**, per the autonomous-production memory.
+
+Evaluation criteria, in order:
+
+1. **No 2D / illustration drift** — must be photoreal CGI (if any variant drifted, reject it; if all 4 drifted, that's a prompt issue → retry with stronger CGI anchoring)
+2. **Face matches canonical face card** — the character must look like the same person across the chain
+3. **View / pose matches the requested category** — if Claude asked for `low-angle-front` but a variant rendered `eye-level`, reject that variant
+4. **Costume continuity** — fabric state evolves monotonically from the prior accepted panel (per L1 — torn seams don't heal)
+5. **Size continuity** — muscle/breast size is at or above the prior tier (per the "muscles never revert" rule)
+6. **Anatomy clean** — exactly two arms, two legs, no extra/missing limbs
+7. **No baked-in lettering** — no speech bubbles, SFX text, caption boxes in the render. (Should be ruled out by prompt design, but check.)
+8. **Expressive face** — vivid, readable expression that fits the action beat
+9. **Composition quality** — readable silhouette, focal point clear
+
+If two variants tie on these, pick the one with the most direct face visibility (per `flow-workflow.md` face-card guidance).
+
+If **zero variants** pass the threshold: go to step 7 with "retry" automatically (don't ask the user).
+
+### 7. Checkpoint — present the chosen variant
+
+Show the chosen variant to the user with one-line reasoning ("V3 — cleanest face, costume continuity matches prior, no anatomy issues"). The user can:
+
+- **Accept** (default; usually just continue without explicit OK) → variant becomes chain anchor for subsequent panels. Save to disk as `pages/panels/<panel_id>.png`. Log to `job_ids.md`.
+- **Retry** → resubmit the same prompt (optionally with a tweak the user dictates), back to step 5. Retries don't move the chain.
+- **Try a different variant** → from the 4, the user picks one Claude didn't pick. Same accept behavior.
+- **Modify** → user edits the shotlist entry (camera, size, action, etc.), then back to step 3.
+- **Skip** → advance without a new anchor (rare; falls back to last view-compatible accepted panel for downstream chaining).
+
+If the user is silent and the variant is clean, advance to panel N+1 (continue mode).
+
+### 8. Advance to N+1
+
+Update the chain log:
+- `job_ids.md` adds an entry for panel N with the chosen variant's auto-title and a saved path
+- The other 3 variants are remembered for end-of-run archive cleanup
+
+Loop back to step 1 for panel N+1.
+
+---
+
+## Default user-interaction mode: "narrate, don't ask"
+
+Per the `autonomous_production_picks` memory, Claude should drive through the panels narrating progress, not asking permission per panel. Specifically:
+
+- After each panel: post a one-line status ("Panel 3 done — V2 picked, looks clean, advancing to Panel 4")
+- Only stop and ask when something genuinely needs judgment:
+  - Content policy refusal (Flow's safety filter triggered)
+  - All 4 variants fail the same way (prompt likely wrong, not a roll-of-the-dice)
+  - A panel takes 3+ retries to land — surface for user direction
+  - The shotlist's `action` is ambiguous or the camera doesn't have a sensible reading
+  - Stage-change panels where the model didn't escalate size despite the lineup ref
+
+The user can interject at any time — they don't have to wait for Claude to ask. A `pause` or `stop` interjection halts the loop after the current panel completes.
+
+---
+
+## When to break the loop and ask the user
+
+- **Content policy refusal**: Flow's safety filter triggered. Don't auto-retry with the same prompt. Ask before adjusting language. See `flow-workflow.md` "Content Policy Quirks" — the most common cause is celebrity names + body description; the second most common is heavy cleavage + "glistening/wet" stacked with size language.
+- **3+ retries on one panel**: surface for user direction. Either the prompt fragment library has a bug, or the shotlist entry is wrong, or the chain anchor is incompatible with the target view in a way that needs a story-level decision.
+- **All 4 variants drift to 2D illustration**: the prompt almost certainly has L7-violating content (some lettering instruction slipped through). Ask the user to confirm the prompt before continuing.
+- **Variant has anatomy issue and so do 2+ of the others**: model is having an off run; brief pause + retry usually fixes; surface only if pattern continues.
+
+---
+
+## End-of-run cleanup
+
+After the user marks the comic complete (or the last panel is accepted):
+
+1. **Inventory accepted panels** by reading `job_ids.md` — these are the keepers.
+2. **For each accepted panel**: its 3 unused sibling variants need archiving. Identify them via the picker (search by panel's auto-title — Flow auto-titles each variant from the first ~40 chars of the prompt, so sibling variants share the title).
+3. **Archive unused variants**: hover each → click 3-dots → click "Archive". Don't delete — archive is reversible.
+4. **Keep these without archiving**:
+   - Baseline body ref (4 variants, first one accepted is the canonical body — keep all 4 or archive 3 unused; user's call)
+   - Face card (same: keep all 4 or archive 3 unused)
+   - Env refs and lineup uploads (always keep)
+   - All accepted panels
+5. **Verify the final folder** at `<project>/pages/panels/` has one PNG per accepted panel, named per `panel_id`.
+
+If Flow's project becomes heavy with 25+ active generations and the page slows, archive in batches as you go (every 10 panels) rather than waiting until the end. (We hit a frozen-page bug on the Chun-Li v2 run; archiving prevents accumulation.)
+
+---
+
+## Higgsfield equivalent (briefly)
+
+If the project is using Higgsfield instead of Flow, this whole document is replaced by the existing `runner.py` workflow in the comic-production skill, plus a thin translator that converts `shotlist.json` to `panels.json`. The per-panel iterative loop is the same; the UI driving is replaced by the Python runner reading `panels.json` and the runner already captures job IDs into `state.json`. Variant selection is different on Higgsfield because each `panels.json` entry produces one image, not four — so the variant-pick step doesn't apply; retries are explicit re-runs with `--start N`.
+
+That translator is a separate piece of work; see `build-comic.md` for the orchestrator that routes to either platform.
+
+---
+
+## Quick reference: per-panel actions in order
+
+```
+1. Read shotlist[N], identify view category, time_of_day, location
+2. Walk backwards through accepted panels for view-compatible state anchor
+3. Observe prior accepted panel's actual output (cumulative damage, hair state, etc.)
+4. Compose prompt at runtime:
+   - positive CGI anchor + camera fragment + character + action + env + lighting
+     + observed state carry-forward + valid rules block + closing "Photographic CGI render, NOT illustrated"
+   - NO speech bubbles, NO SFX text, NO captions, NO action lines
+5. Attach refs (state anchor → face card → env ref [if hero location] → lineup [if stage change])
+6. Set aspect (from table above), count = x4
+7. Click submit, wait ~22s
+8. Claude evaluates 4 variants and picks the best one (criteria above)
+9. Post one-line status to user: "Panel N done — V[X] picked, [one-line reason], advancing"
+10. Save chosen variant to pages/panels/<panel_id>.png, log to job_ids.md
+11. Advance to N+1
+12. At end of comic: archive unused variants
+```
+
+If the user interjects, pause after the current panel completes and follow their direction.
