@@ -17,8 +17,8 @@ Inspect the cwd for these artifacts. Build the state table from what you find. *
 |---|---|---|
 | 1. Script breakdown | `shotlist.json` exists at project root | `script-breakdown` |
 | 2. References | every hero subject in `shotlist.json` (every `cast[]`, every `props[]` with a `ref_folder`, every `locations[]` with a `ref_folder`) points to a non-empty folder under the typed buckets (`references/characters/<id>/`, `references/props/<id>/`, `references/locations/<id>/`). For CGI comics, every hero `locations[]` folder also contains a `_source.jpg`. | `reference-gathering` |
-| 3. Generation | every `panel_id` in `shotlist.json` has a matching `pages/panels/<panel_id>.png` | hand off to `comic-production` — for **Flow**, follow `references/shotlist-driven-flow.md` (deterministic per-panel loop, x4 default, Claude picks variant, per-panel accept/retry/modify checkpoint); for **Higgsfield**, translate shotlist → `panels.json` and run `runner.py` |
-| 4. Continuity check | `continuity-report.md` exists and is newer than the panels folder | `continuity-check` |
+| 3. Generation | every `panel_id` in `shotlist.json` has a matching `pages/panels/<panel_id>.png` | hand off to `comic-production` — for **Flow**, follow `references/shotlist-driven-flow.md` (deterministic per-panel loop, x4 default, Claude picks variant, per-panel accept/retry/modify checkpoint); for **Higgsfield**, translate shotlist → `panels.json` and run `runner.py`. **Act-boundary continuity gate**: at the end of every act (see *Act boundaries* below), run the rules continuity audit, surface findings inline, and pause for user sign-off before continuing to the next act. |
+| 4. Continuity check | `continuity-vision-report.md` exists and is newer than the panels folder | `continuity-check` (full-issue vision audit; rules audit has already run at each act boundary during stage 3) |
 | 5. Composition | every page in `shotlist.json` has a matching `pages/page-NN.png` | `page-composer` |
 | 6. Posting | `posting/posted.json` exists (or the user has marked posting as manual) | manual today; stub for future automation |
 | Done | all of the above + user confirms shipping | offer PDF export, cover, next chapter |
@@ -52,10 +52,38 @@ Stage              | Status   | Notes
 3. Walk stages in order, invoking the matching skill for each pending stage.
 4. **Pause and confirm before any of these:**
    - **Stage 3 (Generation)** — show panel count, platform (Higgsfield or Flow), and rough cost/time estimate; ask to proceed
+   - **At every act boundary inside Stage 3** — run the rules continuity audit, surface findings inline, ask the user whether to fix flagged panels or continue (see *Act boundaries* below)
    - **Any regeneration** — never auto-regenerate; surface the continuity report and ask which panels to redo
    - **Stage 6 (Posting)** — never auto-post; show the per-platform caption draft and ask the user to upload
 5. After each skill returns, re-detect state and continue.
 6. Stop on first error or first human-needed decision; report what's left.
+
+### Act boundaries
+
+The continuity check should run **early and often**, not just once at the end. Production failures compound — a costume drift on page 13 silently propagates through pages 14–22 if no one looks until the whole issue is done.
+
+**Resolving act ranges**, in priority order:
+
+1. `acts` field at the top level of `shotlist.json`, if present:
+   ```json
+   "acts": [
+     {"name": "Act I", "pages": [1, 7]},
+     {"name": "Act II", "pages": [8, 22]},
+     {"name": "Act III", "pages": [23, 30]}
+   ]
+   ```
+2. If absent, fall back to a checkpoint every 8 pages (so a 30-page comic gets gates after pages 8, 16, 24, and at the end).
+
+**At each boundary:**
+
+1. Run the rules audit: `python skills/continuity-check/scripts/rules_audit.py --project . --pages <act-range>`
+2. Surface the findings inline (top 5 HARD + counts).
+3. If there are HARD findings, **pause** and ask whether to:
+   - Fix the flagged panels before continuing
+   - Skip and continue (user accepts the drift, e.g. it's an intentional `continuity_break`)
+   - Run the full vision audit on this act for closer inspection
+4. If clean, surface "Act N continuity gate clean" and continue.
+5. After the *final* act, the full-issue vision audit becomes part of stage 4 — by then the rules pass has already swept everything, so the vision pass focuses on pixel-level drift the rules can't see.
 
 ### Direct stage mode (named stage)
 
@@ -92,6 +120,7 @@ These rules are non-negotiable. Every stage must respect them. Several encode le
 - **Never run two stages in parallel.** Each stage's output feeds the next; parallel runs corrupt state.
 - **Always pause before budget-heavy stages.** Generation costs real money/time. Show the panel count and ask before proceeding, even in `auto` mode.
 - **Never auto-regenerate panels flagged by continuity-check.** Surface the report and let the user choose which panels to redo.
+- **Run the rules audit at every act boundary, not just at end of issue.** Drift compounds — catching a costume regression after Act I is cheap; catching it after all 30 pages are generated is expensive. The rules audit is free and fast (no API calls); there's no excuse to skip it mid-run.
 - **Detect inconsistency before acting.** If `shotlist.json` was edited after panels exist, or panels exist for panel_ids no longer in the shotlist, flag the inconsistency and ask before proceeding — don't try to "reconcile" silently.
 - **Don't fabricate progress.** If you can't find an artifact, mark it pending. Don't claim a stage is done because "probably".
 - **Stop on partial completeness.** If the references stage is partial (some hero subjects have refs, some don't), pause and surface the gaps before generation — the generation stage will produce inconsistent results on missing-ref subjects.
@@ -104,7 +133,8 @@ These rules are non-negotiable. Every stage must respect them. Several encode le
 | 1 | `script-breakdown` | source script | `shotlist.json`, `shotlist.md` |
 | 2 | `reference-gathering` | `cast[]` / `props[]` / `locations[]` slugs in shotlist | `references/<bucket>/<slug>/` with `_provenance.md` and (for locations) `_source.jpg` |
 | 3 | `comic-production` | shotlist, references, env refs, lineup refs | `pages/panels/<panel_id>.png` |
-| 4 | `continuity-check` | shotlist, panels/ | `continuity-report.md` |
+| 3.5 | `continuity-check` (rules, per-act) | shotlist, panels/ | stdout findings + optional `continuity-rules-act-N.md` |
+| 4 | `continuity-check` (vision, full-issue) | shotlist, panels/, character refs | `continuity-vision-report.md` |
 | 5 | `page-composer` | shotlist, panels, dialogue/captions/sfx arrays, style block | `pages/page-NN.png`, optional PDF |
 | 6 | (manual posting) | pages, captions | `posting/posted.json` (log of URLs posted to each platform) |
 

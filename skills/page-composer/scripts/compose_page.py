@@ -43,13 +43,34 @@ PAGE_W, PAGE_H = 2048, 3072
 PAGE_MARGIN = 40
 GUTTER = 20
 
-FONT_DIALOG_DEFAULT = "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf"
-FONT_SFX_DEFAULT = "/System/Library/Fonts/Supplemental/Impact.ttf"
-FONT_CAPTION_DEFAULT = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+# Font resolution: env var > repo-bundled font > macOS system font > Pillow default.
+# Bundled fonts live next to this script under ../fonts/ and ship with the repo
+# so output is identical across machines. See ../fonts/README.md for licensing.
 
-FONT_DIALOG = os.environ.get("COMIC_FONT_DIALOG", FONT_DIALOG_DEFAULT)
-FONT_SFX = os.environ.get("COMIC_FONT_SFX", FONT_SFX_DEFAULT)
-FONT_CAPTION = os.environ.get("COMIC_FONT_CAPTION", FONT_CAPTION_DEFAULT)
+_FONTS_DIR = (Path(__file__).resolve().parent.parent / "fonts")
+_BUNDLED_DIALOG = _FONTS_DIR / "ComicNeue-Bold.ttf"
+_BUNDLED_SFX = _FONTS_DIR / "Bangers-Regular.ttf"
+_BUNDLED_CAPTION = _FONTS_DIR / "ComicNeue-Bold.ttf"
+
+_SYSTEM_DIALOG = "/System/Library/Fonts/Supplemental/Comic Sans MS Bold.ttf"
+_SYSTEM_SFX = "/System/Library/Fonts/Supplemental/Impact.ttf"
+_SYSTEM_CAPTION = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+
+
+def _resolve_font(env_var: str, bundled: Path, system: str) -> str:
+    override = os.environ.get(env_var)
+    if override and Path(override).exists():
+        return override
+    if bundled.exists():
+        return str(bundled)
+    if Path(system).exists():
+        return system
+    return ""  # Pillow load_default fallback handled in load_font()
+
+
+FONT_DIALOG = _resolve_font("COMIC_FONT_DIALOG", _BUNDLED_DIALOG, _SYSTEM_DIALOG)
+FONT_SFX = _resolve_font("COMIC_FONT_SFX", _BUNDLED_SFX, _SYSTEM_SFX)
+FONT_CAPTION = _resolve_font("COMIC_FONT_CAPTION", _BUNDLED_CAPTION, _SYSTEM_CAPTION)
 
 CAPTION_FILL = (255, 244, 184)
 CAPTION_STROKE = (0, 0, 0)
