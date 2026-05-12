@@ -68,6 +68,35 @@ Read alongside:
 
 ---
 
+## The helper script — `scripts/next_panel.py`
+
+This script does the deterministic part of the per-panel loop for you. It reads the shotlist + the on-disk accepted-panel history, runs the view-aware chaining logic from L1.5, picks the right refs to attach, maps the camera category to the Flow aspect ratio, and emits a starter plan with a composed prompt. You then drive Flow's UI with that plan.
+
+```bash
+python ~/.claude/skills/comic-production/scripts/next_panel.py <project_root>
+```
+
+Output is human-readable text. Add `--as-json` for machine-readable JSON.
+
+What it handles for you:
+- Identifying the next pending panel (first shotlist entry without an `_accepted.txt` marker or flat-layout file at `pages/panels/<panel_id>.png`)
+- Walking accepted history backwards to find the most recent view-compatible state anchor (per L1.5's compatibility table)
+- Detecting stage-change panels (when `muscle_size_tier` differs from the prior accepted panel's tier) and attaching the lineup ref per **L5**
+- Mapping the panel's camera category to the Flow aspect ratio
+- Resolving each character's face card path and each hero location's `_source.jpg`
+- Composing a starter prompt that's L7-compliant: positive CGI anchor up front, no baked-in lettering, single closing `Photographic CGI render, NOT illustrated.` negation
+- Including a state-anchor reference to the chosen prior panel in the prompt so chain continuity is explicit
+
+What stays as Claude's work:
+- Driving the Flow UI (clicks, picker, settings popup, submit) per the per-panel loop below
+- Observing the prior accepted panel and tweaking the prompt for state carry-forward observations (cumulative damage, hair state) the script can't infer from the shotlist alone
+- Picking among the 4 variants per the criteria below
+- Deciding retry vs accept at the per-panel checkpoint
+
+Use the script's output as the starting point. Read it, observe the prior panel's actual rendered output, then refine the prompt with any state-carry-forward language and submit.
+
+---
+
 ## The per-panel loop
 
 For each panel N in shotlist order:

@@ -89,7 +89,7 @@ def enumerate_panels(root: Path) -> list[dict]:
 
         versions = sorted(
             p for p in panel_dir.iterdir()
-            if p.suffix.lower() in {".png", ".jpg"}
+            if p.suffix.lower() in {".png", ".jpg", ".jpeg"}
             and p.stem.startswith("v") and p.stem[1:].isdigit()
         )
         if not versions:
@@ -129,9 +129,27 @@ def detect_stages(root: Path, shotlist: dict | None,
 
     # 1. Script breakdown
     if shotlist:
-        page_count = shotlist.get("page_count", "?")
+        # Derive page_count: prefer explicit field, fall back to len(pages)
+        page_count = shotlist.get("page_count")
+        if page_count is None:
+            page_count = len(shotlist.get("pages", [])) or "?"
         cast_count = len(shotlist.get("cast", []))
         loc_count = len(shotlist.get("locations", []))
+        # If top-level cast/locations missing, derive uniques from panels
+        if not cast_count or not loc_count:
+            seen_chars: set[str] = set()
+            seen_locs: set[str] = set()
+            for page in shotlist.get("pages", []):
+                for panel in page.get("panels", []):
+                    for c in panel.get("characters", []):
+                        seen_chars.add(c)
+                    loc = panel.get("location")
+                    if loc:
+                        seen_locs.add(loc)
+            if not cast_count and seen_chars:
+                cast_count = len(seen_chars)
+            if not loc_count and seen_locs:
+                loc_count = len(seen_locs)
         stages.append({
             "name": "Script breakdown",
             "status": "done",
@@ -204,19 +222,29 @@ def detect_stages(root: Path, shotlist: dict | None,
     if pages_dir.exists():
         composed = sorted(p for p in pages_dir.iterdir() if p.is_file()
                           and p.stem.startswith("page-") and p.suffix.lower() == ".png")
-    expected_pages = shotlist.get("page_count", 0) or 0
+    expected_pages = shotlist.get("page_count")
+    if expected_pages is None:
+        expected_pages = len(shotlist.get("pages", []))
     if expected_pages == 0:
-        comp_status = "pending"
+        if len(composed) > 0:
+            comp_status = "in_progress"
+            comp_notes = f"{len(composed)} pages composed (expected count unknown)"
+        else:
+            comp_status = "pending"
+            comp_notes = "-"
     elif len(composed) >= expected_pages:
         comp_status = "done"
+        comp_notes = f"{len(composed)}/{expected_pages} pages composed"
     elif len(composed) > 0:
         comp_status = "partial"
+        comp_notes = f"{len(composed)}/{expected_pages} pages composed"
     else:
         comp_status = "pending"
+        comp_notes = "-"
     stages.append({
         "name": "Composition",
         "status": comp_status,
-        "notes": f"{len(composed)}/{expected_pages} pages composed",
+        "notes": comp_notes,
     })
 
     # 6. Posting
