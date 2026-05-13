@@ -89,13 +89,30 @@ def iter_panels(shotlist: dict):
 
 
 def panel_status(root: Path, panel: dict) -> dict:
-    """Determine whether a panel has been generated/accepted, and how."""
+    """Determine whether a panel has been generated/accepted, and how.
+
+    Recognized accepted-state conventions (in priority order):
+      1. `<panel_id>/_accepted.txt` whose contents name the accepted variant
+         (e.g. "v1") + `<panel_id>/v1.png`.
+      2. `<panel_id>/v*_accepted.png` — the accepted variant carries the
+         `_accepted` suffix on its filename. Matches rules_audit + compose_page.
+      3. Flat fallback: `<panel_id>.png` directly under `pages/panels/`.
+
+    A folder with `v*.png` variants but no accepted marker is "in_progress".
+    """
     panel_id = panel.get("panel_id") or panel.get("name") or "<unknown>"
     panels_root = root / "pages" / "panels"
 
-    # Folder layout: pages/panels/<panel_id>/v*.png + _accepted.txt
+    # Folder naming conventions (try both): exact panel_id, or "panel-<id>".
+    # rules_audit + compose_page use the "panel-<id>" form; some older
+    # projects use the bare panel_id form.
     folder = panels_root / panel_id
+    if not folder.is_dir():
+        prefixed = panels_root / f"panel-{panel_id}"
+        if prefixed.is_dir():
+            folder = prefixed
     if folder.is_dir():
+        # Convention 1: explicit _accepted.txt
         accepted_marker = folder / "_accepted.txt"
         if accepted_marker.exists():
             label = accepted_marker.read_text().strip()
@@ -103,7 +120,12 @@ def panel_status(root: Path, panel: dict) -> dict:
             if cand.exists():
                 return {"state": "accepted", "image": cand, "label": label}
             return {"state": "accepted", "image": None, "label": label}
-        # Folder exists but no _accepted yet — has variants pending
+        # Convention 2: v*_accepted.png suffix
+        accepted_suffix = sorted(folder.glob("v*_accepted.png"))
+        if accepted_suffix:
+            picked = accepted_suffix[-1]  # most recent variant
+            return {"state": "accepted", "image": picked, "label": picked.stem}
+        # Otherwise: folder has variants but no accepted marker → in_progress
         variants = sorted(p for p in folder.iterdir()
                           if p.suffix.lower() in {".png", ".jpg", ".jpeg"}
                           and p.stem.startswith("v"))
@@ -111,7 +133,7 @@ def panel_status(root: Path, panel: dict) -> dict:
             return {"state": "in_progress", "image": None, "label": None,
                     "pending_variants": len(variants)}
 
-    # Flat layout fallback: pages/panels/<panel_id>.png
+    # Flat fallback
     for suffix in (".png", ".jpg", ".jpeg"):
         flat = panels_root / f"{panel_id}{suffix}"
         if flat.exists():
@@ -408,14 +430,26 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 
         if lineup_attached:
             parts.append(
-                f"Size tier: {tier}. Match the EXACT silhouette of figure "
-                f"{tier} in the attached muscle-size lineup reference: "
-                f"{silhouette_desc}. Render the silhouette TO MATCH the "
-                "lineup figure — do not approximate to a smaller realistic "
-                "build. The lineup figure's silhouette is the target; the "
-                "body baseline ref provides identity, the lineup provides "
-                "size. NOT realistic fitness, NOT athletic — cartoony FMG, "
-                "comic-book proportions."
+                f"Size tier: {tier}. The attached muscle-size lineup "
+                "reference is a PROPORTION reference ONLY — use figure "
+                f"{tier} from the lineup to determine ONLY: (a) the size, "
+                "mass, and definition of the muscle groups — shoulders, "
+                "deltoids, biceps, triceps, chest, lats, abdominal "
+                "definition, quadriceps, hamstrings, calves; (b) the size, "
+                "fullness, and shape of the breasts; (c) the overall body "
+                f"mass and frame width. Target silhouette dimensions for "
+                f"tier {tier}: {silhouette_desc}. Do NOT borrow from the "
+                "lineup: face, hair, skin tone, clothing, costume, pose, "
+                "facial expression, lighting, setting, background, or any "
+                "visual element other than the muscle and breast "
+                "proportions themselves. The character's identity, hair, "
+                "face, costume, pose, and setting are specified in the "
+                "prompt and the other attached reference images. Render "
+                "the muscle and breast proportions TO MATCH figure "
+                f"{tier} in the lineup exactly — do not approximate to "
+                "smaller realistic-fitness proportions. NOT realistic "
+                "fitness, NOT athletic — cartoony FMG, comic-book "
+                "proportions."
             )
         elif stage_change:
             # Stage change but lineup not available — verbal only with strong
