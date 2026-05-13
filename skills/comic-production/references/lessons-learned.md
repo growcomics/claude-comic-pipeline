@@ -458,6 +458,47 @@ Camera, action, pose, expression. No architecture, no costume design, no charact
 
 ---
 
+## L11 — Cartoony FMG proportions need explicit anchoring or the model regresses to realistic fitness
+
+**Symptom**: Generated characters are visibly *smaller* than their declared tier. A tier-4 panel that should show cartoony hyper-FMG proportions (shoulders 2× normal width, massive biceps, ridged abs, sculpted quads — i.e. the silhouette of figure 4 in `assets/muscle-size-lineup.png`) renders instead as a fitness-magazine athletic build — closer to tier 2 or 3. Drift compounds: a panel that under-renders the tier on the stage-change shot anchors every carryover panel after it at the smaller build.
+
+Confirmed in production:
+- April-claudemade: peak panels rendered visibly smaller than the hand-made comparison comic and noticeably smaller than the user's target aesthetic.
+- Supergirl panel 13 (tier-4-tears): the lineup ref wasn't attached at all due to the `find_lineup` path bug (fixed earlier; see commit `0b963c6`), so the model rendered tier 4 from verbal cues alone and produced an undersized build.
+
+**Root cause**: Two failures stacking.
+
+1. **Lineup ref not attached** (or attached on too few panels). The L5 heuristic ("lineup only on stage-change") was inherited from the Higgsfield era where every ref attachment cost money. On Flow refs are free; the lineup belongs on every panel where the body is the focal subject, not just transitions.
+2. **Size language too gentle.** "Match the muscle proportions of figure N" reads to the model as "render a muscular character" and the model commits to its prior of plausible-fitness anatomy. The lineup image shows comic-book proportions but the prompt's mild vocabulary doesn't commit to that aesthetic, so the model interpolates between the lineup (cartoony) and its default (realistic), landing on a realistic-fitness build.
+
+The model has a strong prior toward realistic anatomy. Without aggressive vocabulary it pulls back toward that prior every time.
+
+**Fix**: Two parts.
+
+**Attachment rule (replaces L5)**: Attach the muscle-size lineup ref on **stage-change panels AND on every full-body camera panel of the arc character**. Full-body cameras: `front-full`, `3q-full`, `side-full`, `back-full`, `low-angle-front`, `low-angle-back`, `splash`. ECU-face / ECU-region / mcu / medium skip the lineup (size isn't the focal element there). `next_panel.py`'s `should_attach_lineup()` enforces this.
+
+**Vocabulary upgrade**: The size-tier block of the composed prompt must include:
+
+1. A style anchor sentence BEFORE the action delta: *"Style anchor for the body: cartoony hyper-FMG comic-book proportions, NOT realistic fitness modelling. Exaggerated comic musculature where the silhouette is the storytelling element."*
+2. A tier-specific silhouette descriptor with explicit dimensional anchors (e.g. tier 4: *"shoulders 2x normal width with clear deltoid mass, large defined biceps and triceps, full powerful chest, ridged abdominal definition, strong sculpted quads"*).
+3. A "match the silhouette, don't approximate" directive: *"Render the silhouette TO MATCH the lineup figure — do not approximate to a smaller realistic build."*
+4. An explicit negation of the model's default: *"NOT realistic fitness, NOT athletic — cartoony FMG, comic-book proportions."*
+
+See `peak-body-scale.md` for the full tier-by-tier silhouette catalog and worked examples of vocabulary that survives the model's prior.
+
+**Where this rule applies**:
+- Every transformation-comic project (any project whose shotlist has a `muscle_size_tier` field on its panels).
+- Every full-body panel of any arc character at tier ≥ 2.
+
+**Where this rule does NOT apply**:
+- Tier 1 panels (realistic baseline — the cartoony anchor would hurt).
+- Non-transformation comics where size isn't a story element.
+- ECU-face / ECU-region panels (size isn't the focal element).
+
+**Detection / linting hint**: When reviewing accepted panels against their declared tier, compare side-by-side with the figure of the same tier in the lineup. If the silhouette is visibly smaller than the lineup figure (especially shoulder width and overall mass), the panel undershot. Common at tier 4 specifically (the threshold between realistic and cartoony — the model crosses tier 3 fine and commits to tier 5+ readily, but tier 4 is where the prior fights hardest).
+
+---
+
 ## How to add a lesson
 
 When you observe a new failure mode that recurs, append a new entry following the structure above:

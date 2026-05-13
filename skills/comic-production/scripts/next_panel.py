@@ -158,6 +158,32 @@ def is_stage_change(panel: dict, accepted_history: list[dict]) -> bool:
     return True
 
 
+# Cameras where the body is the focal subject — attach the lineup ref on these
+# even when the tier hasn't changed, so the silhouette stays anchored across the
+# scene (per L11). ECU-face / mcu / ecu-region don't qualify (size isn't the
+# focal element at that framing).
+FULL_BODY_CAMERAS = {
+    "front-full", "3q-full", "side-full", "back-full",
+    "low-angle-front", "low-angle-back", "splash",
+}
+
+
+def should_attach_lineup(panel: dict, stage_change: bool) -> bool:
+    """L11 attachment rule: attach the muscle-size lineup on stage-change panels
+    AND on every full-body panel of the arc character.
+
+    The older rule (L5: stage-change only) was a cost-cutting heuristic from the
+    Higgsfield era. On Flow refs are free; the silhouette consistency from
+    attaching on full-body shots far outweighs any composition-influence risk.
+    """
+    if panel.get("muscle_size_tier") is None:
+        return False
+    if stage_change:
+        return True
+    camera = (panel.get("camera") or "").split(",")[0].strip()
+    return camera in FULL_BODY_CAMERAS
+
+
 # ---------------------------------------------------------------------------
 # Ref discovery
 
@@ -313,6 +339,17 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if chars:
         parts.append(f"Subjects: {', '.join(chars)}.")
 
+    # 3a. Cartoony FMG style anchor — per L11. Slot it before the action delta
+    # so the model commits to the proportional aesthetic before reading the
+    # action content. Only emit when tier >= 2 (tier 1 is the realistic baseline
+    # where the cartoony anchor would actively hurt).
+    if tier is not None and isinstance(tier, (int, float)) and tier >= 2:
+        parts.append(
+            "Style anchor for the body: cartoony hyper-FMG comic-book "
+            "proportions, NOT realistic fitness modelling. Exaggerated comic "
+            "musculature where the silhouette is the storytelling element."
+        )
+
     # 4. DELTA — action / pose / expression. Wrapped with a sanitization
     #    directive so the model knows: even if the action text mentions
     #    things that look like constants (clothing, wall types, etc.),
@@ -330,31 +367,71 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if time_of_day:
         parts.append(f"Momentary lighting state: {time_of_day}.")
 
-    # 6. Size tier — only reference the lineup if it's actually attached.
-    # When it's not attached, instruct the model verbally + by the prior panel
-    # ref (state anchor). Never reference a ref that's not in the attachment
-    # list — that's a hard bug per L10 (prompts must not invoke phantom refs).
+    # 6. Size tier — aggressive silhouette directive per L11. The earlier
+    # phrasing ("match the muscle proportions of figure N") was too gentle and
+    # the model regressed to realistic-fitness builds. New phrasing scales
+    # vocabulary with tier and explicitly tells the model NOT to approximate
+    # toward a smaller realistic build.
     if tier is not None:
-        if stage_change and lineup_attached:
+        # Build a tier-specific silhouette descriptor. Numbers are deliberately
+        # aggressive — they describe the silhouette of the corresponding lineup
+        # figure, not realistic anatomy.
+        silhouette_by_tier = {
+            1: ("baseline athletic — slim, healthy, no exaggerated muscle"),
+            2: ("visibly developed — defined shoulders, hint of bicep mass, "
+                "tighter midsection"),
+            3: ("clearly muscular — broad shoulders, defined biceps and chest, "
+                "visible abs"),
+            4: ("cartoony hyper-FMG threshold — shoulders 2x normal width with "
+                "clear deltoid mass, large defined biceps and triceps, full "
+                "powerful chest, ridged abdominal definition across the midriff, "
+                "strong sculpted quads, sculpted hips"),
+            5: ("massive cartoony FMG — shoulders 2.5x normal width, huge "
+                "sculpted biceps, deep powerful chest, blocky abdominal "
+                "definition, powerful quads"),
+            6: ("peak cartoony FMG — shoulders 3x normal width, full "
+                "hyper-muscular silhouette dominating the frame, every muscle "
+                "group visibly developed"),
+            7: ("beyond peak — proportions exaggerated past realism, "
+                "frame-filling cartoony FMG silhouette, biceps approach waist "
+                "width"),
+            8: ("super-peak cartoony FMG — shoulders dwarf the head, biceps "
+                "wider than the waist, pure comic-fantasy proportions"),
+            9: ("maximum cartoony FMG — pure FMG-comic exaggeration, near-"
+                "silhouette dominance over the entire frame"),
+        }
+        try:
+            t_int = int(tier)
+        except (TypeError, ValueError):
+            t_int = None
+        silhouette_desc = silhouette_by_tier.get(t_int, f"tier {tier} cartoony FMG silhouette")
+
+        if lineup_attached:
             parts.append(
-                f"Size tier: {tier}. Match the muscle proportions, breast "
-                f"proportions, and waist of figure {tier} in the attached "
-                f"muscle-size lineup reference."
+                f"Size tier: {tier}. Match the EXACT silhouette of figure "
+                f"{tier} in the attached muscle-size lineup reference: "
+                f"{silhouette_desc}. Render the silhouette TO MATCH the "
+                "lineup figure — do not approximate to a smaller realistic "
+                "build. The lineup figure's silhouette is the target; the "
+                "body baseline ref provides identity, the lineup provides "
+                "size. NOT realistic fitness, NOT athletic — cartoony FMG, "
+                "comic-book proportions."
             )
         elif stage_change:
-            # Stage change but lineup not available — verbal only
+            # Stage change but lineup not available — verbal only with strong
+            # vocabulary. Significantly less reliable than lineup-attached.
             parts.append(
                 f"Size tier: {tier} (NEW tier — grown from prior panel). "
-                f"Render visible muscle growth: broader shoulders, larger "
-                f"defined biceps, fuller chest, ridged abdominal muscle "
-                f"definition, stronger quads. Build is unmistakably more "
-                f"muscular than the body baseline reference."
+                f"Cartoony FMG silhouette: {silhouette_desc}. Render the build "
+                "unmistakably larger than the body baseline reference. NOT "
+                "realistic fitness — cartoony comic-book proportions."
             )
         else:
             parts.append(
                 f"Size tier: {tier} (unchanged from prior panel). Carry "
-                f"forward the build from the attached state anchor exactly. "
-                f"No growth in this panel."
+                "forward the build from the attached state anchor exactly. "
+                "No growth in this panel. Preserve the cartoony FMG silhouette "
+                "from the prior accepted panel."
             )
 
     # 7. Environment — env-chaining-aware language
@@ -514,24 +591,27 @@ def build_plan(root: Path) -> dict:
                               f"subsequent panels will chain off its image instead",
                 })
 
-    # Lineup ref (only on stage-change panels). The lineup is critical when
-    # the tier jumps — without it, the model interpolates muscle growth from
-    # text descriptions alone and produces inconsistent builds across the
-    # tier transition. find_lineup() now searches multiple paths; if it
-    # still returns None for a stage-change panel, surface that loudly so
-    # the agent can fix the asset location before generating.
+    # Lineup ref attachment per L11 (broader than L5): attach on stage-change
+    # AND on every full-body camera panel of the arc character. Reason: the
+    # body is the focal subject on full-body shots and the silhouette needs
+    # the lineup anchor or the model regresses to realistic-fitness builds.
+    # find_lineup() searches multiple paths; if it returns None when we should
+    # attach, surface that loudly so the agent can fix the asset location
+    # before generating.
     tier = next_panel.get("muscle_size_tier")
     lineup_attached = False
-    if stage_change and tier is not None:
+    if should_attach_lineup(next_panel, stage_change):
+        camera_first = (next_panel.get("camera") or "").split(",")[0].strip()
+        reason_label = "STAGE-CHANGE" if stage_change else f"FULL-BODY camera ({camera_first})"
         lineup = find_lineup(root, tier)
         if lineup:
             refs_to_attach.append({
                 "kind": "lineup",
                 "tier": tier,
                 "path": str(lineup),
-                "reason": f"STAGE-CHANGE panel (tier={tier}) — lineup ref MUST be "
-                          f"attached so the model has a visual target for the new "
-                          f"size, not just verbal instructions. Per L5.",
+                "reason": f"{reason_label} panel (tier={tier}) — lineup ref MUST be "
+                          f"attached so the model has a visual silhouette target. "
+                          f"Per L11 (cartoony FMG proportions need explicit anchoring).",
             })
             lineup_attached = True
         else:
@@ -539,11 +619,11 @@ def build_plan(root: Path) -> dict:
                 "kind": "MISSING_lineup",
                 "tier": tier,
                 "path": None,
-                "reason": f"STAGE-CHANGE panel (tier={tier}) but lineup file NOT FOUND on disk. "
+                "reason": f"{reason_label} panel (tier={tier}) but lineup file NOT FOUND on disk. "
                           f"Tried: project references/style/, repo assets/, ~/.claude/skills/.../assets/. "
                           f"Drop a muscle-size-lineup.png (tiers 1-6) or muscle-size-lineup-4-9.png (tiers 7+) "
                           f"into one of those locations before generating. Falling back to verbal-only "
-                          f"growth instructions, which is significantly less reliable for size consistency.",
+                          f"silhouette instructions, which is significantly less reliable.",
             })
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
