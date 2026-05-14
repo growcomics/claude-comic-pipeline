@@ -1,0 +1,14 @@
+{
+  "project": "no-location-strategy",
+  "version": 1,
+  "page_count": 4,
+  "style": "photoreal-daz3d",
+  "cast": [{"id": "lara", "name": "Lara", "wardrobe": "leather jacket"}],
+  "locations": [{"id": "tavern", "description": "candlelit tavern"}],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["lara"], "location": "tavern", "camera": "mcu, eye-level", "action": "Lara enters", "costume_state": "intact"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["lara"], "location": "tavern", "camera": "medium, three-quarter", "action": "Lara sits", "costume_state": "intact"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["lara"], "location": "tavern", "camera": "ecu-face, profile", "action": "Lara reads", "costume_state": "intact"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["lara"], "location": "tavern", "camera": "full, low-angle-front", "action": "Lara leaves", "costume_state": "intact"}]}
+  ]
+}

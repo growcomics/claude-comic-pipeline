@@ -1,0 +1,32 @@
+{
+  "project": "april-claudemade-shape",
+  "version": 1,
+  "page_count": 9,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {"flavor": "body-region-progression", "start_tier": 3, "end_tier": 5},
+  "arc_character": "april",
+  "cast": [
+    {"id": "april", "name": "April", "wardrobe": "yellow jumpsuit, white belt — torn during mutagen transformation, costume tearing as growth advances"}
+  ],
+  "locations": [
+    {"id": "alley", "description": "back alley with news van"}
+  ],
+  "transformation_scenes": [
+    {
+      "name": "april_mutagen_dip",
+      "pages": [1, 9]
+    }
+  ],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April standing in alley with microphone", "costume_state": "intact"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April surprised gesture", "costume_state": "intact"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["april"], "location": "alley", "camera": "ecu-face, eye-level", "action": "April close-up with tear", "costume_state": "intact"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April flexing", "costume_state": "torn"}]},
+    {"page_number": 5, "panels": [{"panel_id": "p05-01", "characters": ["april"], "location": "alley", "camera": "ecu-region, eye-level", "action": "April bicep close-up", "costume_state": "torn"}]},
+    {"page_number": 6, "panels": [{"panel_id": "p06-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April running", "costume_state": "torn"}]},
+    {"page_number": 7, "panels": [{"panel_id": "p07-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April hero pose", "costume_state": "torn"}]},
+    {"page_number": 8, "panels": [{"panel_id": "p08-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April hands on hips", "costume_state": "torn"}]},
+    {"page_number": 9, "panels": [{"panel_id": "p09-01", "characters": ["april"], "location": "alley", "camera": "full, eye-level", "action": "April flexing", "costume_state": "torn"}]}
+  ]
+}

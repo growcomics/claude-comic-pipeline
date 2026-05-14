@@ -1,0 +1,17 @@
+{
+  "project": "non-transformation-tight-comic",
+  "version": 1,
+  "page_count": 6,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "cast": [{"id": "lara", "name": "Lara", "wardrobe": "leather jacket, trousers"}],
+  "locations": [{"id": "altar-clearing", "description": "moss altar in pine clearing"}],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["lara"], "location": "altar-clearing", "camera": "wide-establish, eye-level", "action": "Lara steps into the clearing", "costume_state": "intact"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["lara"], "location": "altar-clearing", "camera": "medium, low-angle-front", "action": "Lara approaches the altar", "costume_state": "intact"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["lara"], "location": "altar-clearing", "camera": "ecu-face, three-quarter", "action": "Lara's eyes go wide", "costume_state": "intact"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["lara"], "location": "altar-clearing", "camera": "ecu-region, dutch", "action": "Hand grips the sword hilt", "costume_state": "intact"}]},
+    {"page_number": 5, "panels": [{"panel_id": "p05-01", "characters": ["lara"], "location": "altar-clearing", "camera": "full, three-quarter", "action": "Lara draws and steps back", "costume_state": "intact"}]},
+    {"page_number": 6, "panels": [{"panel_id": "p06-01", "characters": ["lara"], "location": "altar-clearing", "camera": "splash, low-angle-front", "action": "The altar lights up", "costume_state": "intact"}]}
+  ]
+}

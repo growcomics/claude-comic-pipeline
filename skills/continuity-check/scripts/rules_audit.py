@@ -78,6 +78,71 @@ CARRYOVER_PATTERNS = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# Camera framing categories (mirror comic-production/references/cinematic-framing.md)
+#
+# Used by check_camera_variety. The variety check is the spec's "for any
+# 10-panel sequence" rule encoded as a deterministic gate. Failure modes the
+# pipeline has hit in production (Chun-Li growth: ~6/10 panels at medium-front;
+# April-claudemade: 7/9 panels at full-eye-level) are exactly what this catches.
+
+CAMERA_DISTANCES = [
+    "ecu-face", "ecu-region", "mcu", "medium", "cowboy",
+    "full", "wide-establish", "splash",
+]
+
+CAMERA_ANGLES = [
+    "eye-level", "low-angle-front", "low-angle-back", "high-angle",
+    "worms-eye", "birds-eye", "dutch", "over-shoulder", "profile",
+    "three-quarter",
+]
+
+ECU_DISTANCES = {"ecu-face", "ecu-region"}
+WIDE_DISTANCES = {"wide-establish", "splash"}
+
+
+def parse_camera(s: str) -> tuple[str | None, str | None]:
+    """Extract (distance, angle) tokens from a camera string.
+
+    The shotlist camera field is freeform but conventionally a comma- or
+    space-separated list of category names plus optional modifier
+    ("low-angle-front, three-quarter", "ecu-face", "wide-establish, dutch").
+    We pick the first matching distance and first matching angle.
+    """
+    if not s:
+        return (None, None)
+    s_lower = s.lower()
+    distance = next((d for d in CAMERA_DISTANCES if d in s_lower), None)
+    angle = next((a for a in CAMERA_ANGLES if a in s_lower), None)
+    return (distance, angle)
+
+
+# ---------------------------------------------------------------------------
+# Transformation beats (the April-claudemade failure mode)
+#
+# When the shotlist declares a `transformation_scenes` block, each scene must
+# decompose into body-region beats per the lesson doc: the April-claudemade
+# version jumped from "intact" to "fully transformed" with zero body-region
+# beats between, producing 9 alley pose shots instead of a transformation
+# sequence. The default required structure mirrors the hand-made target.
+
+BODY_REGION_BEATS = {
+    "chest", "hips", "rear", "arms", "abs", "legs",
+    "back", "shoulders", "suit_fail", "whole_body",
+}
+
+SETUP_BEATS = {"consider", "decide", "trigger", "first_sensation"}
+RESOLUTION_BEATS = {"reveal", "aftermath"}
+
+ALL_TRANSFORMATION_BEATS = BODY_REGION_BEATS | SETUP_BEATS | RESOLUTION_BEATS
+
+DEFAULT_TRANSFORMATION_REQUIREMENTS = {
+    "min_setup_beats": 1,         # at least one of {consider, decide, trigger, first_sensation}
+    "min_body_region_beats": 3,   # at least 3 distinct body-region beats
+    "min_reveal_beats": 1,        # at least one of {reveal, aftermath}
+}
+
+
 def classify_costume_damage(state: str) -> int:
     """Return damage rank 0..4, or -1 if the string is unclassifiable / carryover.
 
@@ -243,6 +308,303 @@ def _summarize(text: str, max_len: int = 80) -> str:
     return text if len(text) <= max_len else text[:max_len - 1] + "…"
 
 
+# ---------------------------------------------------------------------------
+# Camera variety check
+
+def check_camera_variety(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    """Enforce the cinematic-framing.md variety rule on the panel sequence.
+
+    The spec calls for 10-panel windows; we apply the rule on the full
+    filtered set scaled proportionally. A sequence shorter than 4 panels
+    is exempt (not enough material to demand variety).
+    """
+    panels: list[tuple[int, str, str]] = []
+    for page in shotlist.get("pages", []):
+        n = page.get("page_number")
+        if pages_filter is not None and n not in pages_filter:
+            continue
+        for p in page.get("panels", []):
+            panels.append((n, p.get("panel_id", f"page-{n}"), p.get("camera", "") or ""))
+
+    N = len(panels)
+    if N < 4:
+        return []
+
+    parsed = [(n, pid, parse_camera(cam)) for n, pid, cam in panels]
+    distances_present = {d for _, _, (d, _) in parsed if d}
+    angles_present = {a for _, _, (_, a) in parsed if a}
+
+    # Threshold: spec is 5 distance / 4 angle per 10 panels. For shorter
+    # sequences scale down proportionally; for longer sequences keep the
+    # baseline (don't ratchet up — we only have 8 distance categories total,
+    # and tight intimate scenes legitimately use a narrow register).
+    if N >= 10:
+        min_distance, min_angle = 5, 4
+    else:
+        min_distance = max(2, round(5 * N / 10))
+        min_angle = max(2, round(4 * N / 10))
+
+    out: list[Finding] = []
+
+    # Variety floors are SOFT — tight transformation scenes legitimately use a
+    # narrow distance/angle register and the spec acknowledges this. Use them
+    # as hints, not gates.
+    if len(distances_present) < min_distance:
+        out.append(Finding(
+            None, None, "camera_variety", SEVERITY_SOFT,
+            f"Only {len(distances_present)} distinct distance categories across {N} panels (target ≥{min_distance}). Present: {sorted(distances_present) or '∅'}",
+            "Vary camera distance: see cinematic-framing.md (ecu-face, ecu-region, mcu, medium, cowboy, full, wide-establish, splash). Tight intimate scenes may legitimately violate this.",
+        ))
+
+    if len(angles_present) < min_angle:
+        out.append(Finding(
+            None, None, "camera_variety", SEVERITY_SOFT,
+            f"Only {len(angles_present)} distinct angle categories across {N} panels (target ≥{min_angle}). Present: {sorted(angles_present) or '∅'}",
+            "Vary camera angle: see cinematic-framing.md. Sustained-intensity scenes (long dialogue, single confrontation) may legitimately violate this.",
+        ))
+
+    # ≤3 panels at the same (distance, angle) combo. This is HARD: even tight
+    # scenes shouldn't repeat the *exact same shot* more than 3 times — that's
+    # the April-claudemade failure mode (7 of 9 panels at full/eye-level) and
+    # the Chun-Li failure mode (6 of 10 at medium/front). It produces a
+    # camera-static comic regardless of artistic intent.
+    combo_counts: dict[tuple[str | None, str | None], list[tuple[int, str]]] = {}
+    for n, pid, (d, a) in parsed:
+        if d is None and a is None:
+            continue
+        combo_counts.setdefault((d, a), []).append((n, pid))
+
+    for (d, a), instances in combo_counts.items():
+        if len(instances) > 3:
+            sample = ", ".join(f"p{n}/{pid}" for n, pid in instances[:5])
+            if len(instances) > 5:
+                sample += f", +{len(instances) - 5} more"
+            out.append(Finding(
+                None, None, "camera_variety", SEVERITY_HARD,
+                f"{len(instances)} panels at the same camera combo ({d or '?'}, {a or '?'}) — limit is 3 per 10-panel window. Panels: {sample}",
+                "Re-assign cameras for some of these — no single (distance, angle) pair should dominate the sequence",
+            ))
+
+    # ≥1 ECU and ≥1 wide/splash per 10-panel sequence. SOFT severity: the
+    # spec acknowledges that intimate or sustained-scale scenes can legitimately
+    # stay in one register. Hand-made transformation sequences often skip the
+    # wide-establish (the action is all in close-ups by design). Flag for review,
+    # not for hard failure.
+    if N >= 6:
+        ecu_count = sum(1 for _, _, (d, _) in parsed if d in ECU_DISTANCES)
+        if ecu_count == 0:
+            out.append(Finding(
+                None, None, "camera_variety", SEVERITY_SOFT,
+                f"No ECU (ecu-face or ecu-region) panels across {N}-panel sequence — emotional/detail beats normally need at least one close-up",
+                "If intentional (sustained wide framing), ignore. Otherwise add an ecu-face panel on a dialogue climax or an ecu-region panel on a detail beat",
+            ))
+
+        wide_count = sum(1 for _, _, (d, _) in parsed if d in WIDE_DISTANCES)
+        if wide_count == 0:
+            out.append(Finding(
+                None, None, "camera_variety", SEVERITY_SOFT,
+                f"No wide-establish or splash panels across {N}-panel sequence — scale/locator shots normally appear at least once",
+                "If intentional (sustained-intimacy scene that legitimately stays close), ignore. Otherwise add a wide-establish at scene open or a splash at the climax",
+            ))
+
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Transformation beats check
+#
+# A "transformation scene" is a stretch of pages declared in shotlist.json's
+# top-level `transformation_scenes` array. Each scene must decompose into
+# beats covering setup → body regions → reveal. This is the rule whose
+# absence produced the April-claudemade failure (zero body-region beats; a
+# 9-page transformation comic with no transformation event shown).
+
+def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    scenes = shotlist.get("transformation_scenes") or []
+    if not scenes:
+        return []
+
+    # Index panels by page for cheap range lookups.
+    panels_by_page: dict[int, list[dict]] = {}
+    for page in shotlist.get("pages", []):
+        panels_by_page[page.get("page_number")] = page.get("panels", [])
+
+    out: list[Finding] = []
+
+    for scene in scenes:
+        name = scene.get("name") or "<unnamed>"
+        pages = scene.get("pages")
+        if not (isinstance(pages, list) and len(pages) == 2):
+            out.append(Finding(
+                None, None, "transformation_beats", SEVERITY_HARD,
+                f"transformation_scene '{name}' has no valid `pages: [start, end]` range",
+                "Add `pages: [N, M]` to the scene entry in shotlist.json",
+            ))
+            continue
+        start, end = pages
+        scene_pages = set(range(start, end + 1))
+        if pages_filter is not None and not (scene_pages & pages_filter):
+            continue  # scene out of the filter window, skip
+
+        # Gather all panels in scene range with a declared transformation_beat.
+        beats_present: dict[str, list[str]] = {}  # beat -> [panel_ids]
+        all_panel_ids_in_scene: list[str] = []
+        unknown_beats: list[tuple[str, str]] = []
+        for pg in scene_pages:
+            for panel in panels_by_page.get(pg, []):
+                pid = panel.get("panel_id") or f"page-{pg}"
+                all_panel_ids_in_scene.append(pid)
+                beat = panel.get("transformation_beat")
+                if not beat:
+                    continue
+                if beat not in ALL_TRANSFORMATION_BEATS:
+                    unknown_beats.append((pid, beat))
+                    continue
+                beats_present.setdefault(beat, []).append(pid)
+
+        # Resolve requirements (scene-level overrides default).
+        reqs = {**DEFAULT_TRANSFORMATION_REQUIREMENTS, **(scene.get("requirements") or {})}
+        required_body_regions = scene.get("required_body_regions")  # optional explicit list
+
+        # Check 1: setup beat present
+        setup_count = sum(len(beats_present.get(b, [])) for b in SETUP_BEATS)
+        if setup_count < reqs["min_setup_beats"]:
+            out.append(Finding(
+                None, None, "transformation_beats", SEVERITY_HARD,
+                f"transformation_scene '{name}' (pages {start}-{end}) has no setup beat "
+                f"(need ≥{reqs['min_setup_beats']} of {{consider, decide, trigger, first_sensation}}). "
+                f"Panels in scene: {len(all_panel_ids_in_scene)}",
+                "Add a panel with `transformation_beat: 'trigger'` or 'first_sensation' showing the inciting moment",
+            ))
+
+        # Check 2: body-region beats
+        body_region_beats_present = [b for b in beats_present if b in BODY_REGION_BEATS]
+        if required_body_regions:
+            missing = [b for b in required_body_regions if b not in beats_present]
+            if missing:
+                out.append(Finding(
+                    None, None, "transformation_beats", SEVERITY_HARD,
+                    f"transformation_scene '{name}' is missing required body-region beats: {missing}. "
+                    f"Present: {sorted(body_region_beats_present) or '∅'}",
+                    f"Add panels with `transformation_beat` set to each of: {missing}",
+                ))
+        else:
+            if len(body_region_beats_present) < reqs["min_body_region_beats"]:
+                out.append(Finding(
+                    None, None, "transformation_beats", SEVERITY_HARD,
+                    f"transformation_scene '{name}' has only {len(body_region_beats_present)} body-region beat(s); "
+                    f"need ≥{reqs['min_body_region_beats']} distinct from {{chest, hips, rear, arms, abs, legs, back, shoulders, suit_fail, whole_body}}. "
+                    f"Present: {sorted(body_region_beats_present) or '∅'}",
+                    "Decompose the transformation into per-region beats (e.g., chest, hips, arms) — see comic-production/references/three-panel-scenes.md",
+                ))
+
+        # Check 3: reveal beat present
+        reveal_count = sum(len(beats_present.get(b, [])) for b in RESOLUTION_BEATS)
+        if reveal_count < reqs["min_reveal_beats"]:
+            out.append(Finding(
+                None, None, "transformation_beats", SEVERITY_HARD,
+                f"transformation_scene '{name}' has no reveal/aftermath beat "
+                f"(need ≥{reqs['min_reveal_beats']} of {{reveal, aftermath}}). "
+                f"Without a reveal the transformation has no payoff",
+                "Add a panel with `transformation_beat: 'reveal'` — typically full-body, close to camera, the triumph shot",
+            ))
+
+        # Soft: surface unknown beat names so typos don't silently slip past.
+        for pid, beat in unknown_beats:
+            out.append(Finding(
+                None, pid, "transformation_beats", SEVERITY_SOFT,
+                f"unknown transformation_beat '{beat}'. Allowed: {sorted(ALL_TRANSFORMATION_BEATS)}",
+                "Fix the typo or extend the allowed-beats set in rules_audit.py",
+            ))
+
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Required-metadata check — the Step 0 questionnaire enforcement
+#
+# Three fields must be present at the top of shotlist.json. Each maps to a
+# high-stakes decision the model has latitude on but downstream generation
+# can't recover from if guessed silently. The lesson driving this: a v2 April
+# transformation run defaulted to 2D illustration when 3D CGI was wanted —
+# nothing had asked or required a choice, so the model picked.
+
+LOCATION_STRATEGY_VALUES = {"single", "multi", "per-scene"}
+TRANSFORMATION_FLAVOR_VALUES = {"body-region-progression", "single-axis", "other"}
+
+
+def check_required_metadata(project: Path, shotlist: dict) -> list[Finding]:
+    out: list[Finding] = []
+
+    # 1. style — must be set, must point to an existing style-lock preset.
+    style = shotlist.get("style")
+    if not style:
+        out.append(Finding(
+            None, None, "required_metadata", SEVERITY_HARD,
+            "shotlist.json missing top-level `style` field — every comic must lock a style preset (the Step 0 questionnaire decides this)",
+            "Pick a preset slug from skills/style-lock/styles/ (default: 'photoreal-daz3d') and add it as a top-level field in shotlist.json. See script-breakdown SKILL.md § Workflow Step 0.",
+        ))
+    else:
+        # Verify the preset exists on disk. Use the pipeline-repo location, not
+        # the project's relative path — style-lock presets live with the pipeline.
+        # We search a couple of likely locations to be robust to where the
+        # pipeline is checked out.
+        candidates = [
+            Path.home() / ".claude" / "skills" / "style-lock" / "styles" / style,
+            Path.home() / "Documents" / "claude-comic-pipeline" / "skills" / "style-lock" / "styles" / style,
+        ]
+        if not any(p.exists() for p in candidates):
+            out.append(Finding(
+                None, None, "required_metadata", SEVERITY_SOFT,
+                f"shotlist.json `style: '{style}'` does not match any preset under skills/style-lock/styles/. Available slugs are folder names there.",
+                "Either fix the typo, or add a new preset by creating skills/style-lock/styles/<slug>/preset.md and updating styles/README.md",
+            ))
+
+    # 2. location_strategy — required.
+    loc_strategy = shotlist.get("location_strategy")
+    if not loc_strategy:
+        out.append(Finding(
+            None, None, "required_metadata", SEVERITY_HARD,
+            "shotlist.json missing top-level `location_strategy` field — chapter must declare whether locations are single / multi / per-scene",
+            "Add `location_strategy: 'single' | 'multi' | 'per-scene'` at the top of shotlist.json (the Step 0 questionnaire's Q2).",
+        ))
+    elif loc_strategy not in LOCATION_STRATEGY_VALUES:
+        out.append(Finding(
+            None, None, "required_metadata", SEVERITY_HARD,
+            f"shotlist.json `location_strategy: '{loc_strategy}'` is not a valid value — must be one of {sorted(LOCATION_STRATEGY_VALUES)}",
+            "Fix the value to match the allowed set.",
+        ))
+
+    # 3. transformation_metadata — required IF transformation_scenes is non-empty.
+    if shotlist.get("transformation_scenes"):
+        tmeta = shotlist.get("transformation_metadata") or {}
+        flavor = tmeta.get("flavor")
+        start_tier = tmeta.get("start_tier")
+        end_tier = tmeta.get("end_tier")
+
+        if not flavor:
+            out.append(Finding(
+                None, None, "required_metadata", SEVERITY_HARD,
+                "transformation_scenes declared but `transformation_metadata.flavor` is missing — the model needs this to pick prompt templates and lessons",
+                "Add `transformation_metadata: {flavor, start_tier, end_tier}` at the top of shotlist.json. Flavor values: body-region-progression / single-axis / other.",
+            ))
+        elif flavor not in TRANSFORMATION_FLAVOR_VALUES:
+            out.append(Finding(
+                None, None, "required_metadata", SEVERITY_HARD,
+                f"transformation_metadata.flavor '{flavor}' is not a valid value — must be one of {sorted(TRANSFORMATION_FLAVOR_VALUES)}",
+                "Fix the value to match the allowed set.",
+            ))
+
+        if start_tier is None or end_tier is None:
+            out.append(Finding(
+                None, None, "required_metadata", SEVERITY_HARD,
+                "transformation_scenes declared but `transformation_metadata.start_tier`/`end_tier` missing — needed for L5 lineup-ref attachment and L8 cumulative-state handling",
+                "Add numeric start_tier and end_tier values (typically 1-6 from the size lineup).",
+            ))
+
+    return out
+
+
 def _has_lineup_ref(project: Path) -> bool:
     style = project / "references" / "style"
     if not style.exists():
@@ -332,7 +694,13 @@ def main():
         shotlist = json.load(f)
 
     pages_filter = resolve_pages_arg(args.pages)
-    findings = check_references(project, shotlist) + check_pages(project, shotlist, pages_filter)
+    findings = (
+        check_required_metadata(project, shotlist)
+        + check_references(project, shotlist)
+        + check_pages(project, shotlist, pages_filter)
+        + check_camera_variety(shotlist, pages_filter)
+        + check_transformation_beats(shotlist, pages_filter)
+    )
 
     if args.json:
         payload = {"project": str(project), "findings": [asdict(f) for f in findings]}

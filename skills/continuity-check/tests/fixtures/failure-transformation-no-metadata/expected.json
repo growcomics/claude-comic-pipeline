@@ -1,0 +1,9 @@
+{
+  "description": "Shotlist declares transformation_scenes but omits transformation_metadata. Tests that Step 0 Q3a/Q3b enforcement fires when a transformation is declared without flavor/baseline.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "required_metadata", "message_contains": "transformation_metadata.flavor"},
+    {"category": "required_metadata", "message_contains": "start_tier"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats"]
+}

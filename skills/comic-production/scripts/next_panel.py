@@ -189,6 +189,55 @@ FULL_BODY_CAMERAS = {
     "low-angle-front", "low-angle-back", "splash",
 }
 
+# Cameras that are TOO wide for an on-screen speaker to be the focal point.
+# Used by L12: panels with on-screen dialogue + a wide camera produce comics
+# where the reader can't tell who's talking. See lessons-learned L12 for the
+# full diagnosis and the table of acceptable vs marginal vs wrong cameras.
+WIDE_CAMERAS_FOR_DIALOGUE = {"wide-establish", "splash"}
+
+# Dialogue bubble types that imply an ON-SCREEN speaker (whose face must be
+# the focal point). Caption and off-panel don't tie to a visible character so
+# camera distance is independent of them.
+ON_SCREEN_DIALOGUE_TYPES = {"balloon", "thought", "whisper", "shout"}
+
+
+def detect_dialogue_camera_conflict(panel: dict) -> tuple[bool, list[str]]:
+    """L12 detection: returns (conflict_present, list_of_on_screen_speakers).
+
+    Conflict = the panel has on-screen dialogue (balloon/thought/whisper/shout)
+    AND the camera distance is wide (wide-establish or splash). At that framing
+    the speaker won't be the focal point and the page reads as broken.
+    """
+    camera = (panel.get("camera") or "").split(",")[0].strip()
+    if camera not in WIDE_CAMERAS_FOR_DIALOGUE:
+        return (False, [])
+    speakers: list[str] = []
+    for d in panel.get("dialogue", []) or []:
+        if d.get("type", "balloon") in ON_SCREEN_DIALOGUE_TYPES:
+            spk = d.get("speaker", "")
+            if spk and spk not in speakers:
+                speakers.append(spk)
+    return (bool(speakers), speakers)
+
+
+def detect_multi_speaker_crowding(panel: dict) -> tuple[bool, int, int]:
+    """L13 detection: returns (split_recommended, n_lines, n_speakers).
+
+    Recommends splitting into per-speaker panels when there are ≥3 dialogue
+    entries from ≥2 distinct on-screen speakers. Captions and off-panel
+    dialogue don't count toward this threshold.
+    """
+    n_lines = 0
+    speakers: set[str] = set()
+    for d in panel.get("dialogue", []) or []:
+        if d.get("type", "balloon") not in ON_SCREEN_DIALOGUE_TYPES:
+            continue
+        n_lines += 1
+        spk = d.get("speaker", "")
+        if spk:
+            speakers.add(spk)
+    return (n_lines >= 3 and len(speakers) >= 2, n_lines, len(speakers))
+
 
 def should_attach_lineup(panel: dict, stage_change: bool) -> bool:
     """L11 attachment rule: attach the muscle-size lineup on stage-change panels
@@ -498,14 +547,19 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
             "that panel exactly. Costume tears never regress across panels."
         )
 
-    # 9. Render directive — THE LOAD-BEARING L10 SENTENCE
+    # 9. Render directive — THE LOAD-BEARING L10 SENTENCE (with the L10
+    # refinement: explicit identity-vs-pose line so the model knows which
+    # side of the boundary the prompt's pose/expression description lives on)
     parts.append(
         "RENDER DIRECTIVE: render the attached references exactly as shown. "
         "Do not reinterpret character appearance, costume design, or location "
-        "architecture from the prompt text. Those are FIXED by the references. "
-        "The prompt describes only what is new in this panel — camera, action, "
-        "expression, momentary lighting state, momentary costume state change. "
-        "References override prompt text on all visual identity."
+        "architecture from the prompt text — those are FIXED by the "
+        "references. The prompt's job is the opposite: it specifies what "
+        "is new in this panel — camera, pose, gesture, facial expression, "
+        "action, momentary lighting state, momentary costume state change. "
+        "Refs carry identity and constants; prompt carries pose and "
+        "deltas. References override prompt text on visual identity; "
+        "prompt overrides references on pose and action."
     )
 
     # 10. Mandatory rules (L7-compliant — no rendered lettering)
@@ -659,6 +713,40 @@ def build_plan(root: Path) -> dict:
                           f"into one of those locations before generating. Falling back to verbal-only "
                           f"silhouette instructions, which is significantly less reliable.",
             })
+
+    # L12 + L13: surface shotlist-shape warnings at planning time so the agent
+    # driving generation can fix the shotlist or override before paying for an
+    # output that's broken-by-design. These warnings live alongside MISSING_*
+    # entries in refs_to_attach so the build-comic HALT rule catches them.
+    conflict, speakers = detect_dialogue_camera_conflict(next_panel)
+    if conflict:
+        refs_to_attach.append({
+            "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
+            "speakers": speakers,
+            "camera": target_view,
+            "reason": (
+                f"L12 violation: panel has on-screen dialogue from {speakers} but "
+                f"camera is `{target_view}` (too wide for the speaker to be the focal "
+                "point). Either tighten the camera (mcu / medium / cowboy / ecu-face) "
+                "or convert the dialogue to a caption / off-panel type. Rendering "
+                "at the current camera will produce a panel where the reader can't "
+                "tell who's talking."
+            ),
+        })
+    split_needed, n_lines, n_speakers = detect_multi_speaker_crowding(next_panel)
+    if split_needed:
+        refs_to_attach.append({
+            "kind": "WARNING_MULTI_SPEAKER_CROWDING",
+            "n_lines": n_lines,
+            "n_speakers": n_speakers,
+            "reason": (
+                f"L13 violation: panel has {n_lines} on-screen dialogue lines from "
+                f"{n_speakers} distinct speakers. Rendering all of them in one image "
+                "produces a cramped sitcom-freeze-frame. Split this beat into "
+                f"{n_lines} per-speaker panels in the shotlist; each new panel "
+                "frames the speaker who's talking on it."
+            ),
+        })
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
     prompt = compose_prompt(next_panel, shotlist, anchor, stage_change, env_ref,

@@ -499,6 +499,117 @@ See `peak-body-scale.md` for the full tier-by-tier silhouette catalog and worked
 
 ---
 
+## L10 refinement — Identity-vs-pose: drawing the line where deltas legitimately describe
+
+Reviewing a Higgsfield-generated She-Hulk splash, the user marked two adjacent prompt fragments with opposite verdicts:
+
+- *"Wardrobe: red top remnants tied across her chest, dark fabric skirt-remnants over her hips (NOT pants)"* → **"this text is completely unnecessary."** Costume design is a constant — it's in the ref. Redescribing it is L10 violation.
+- *"Pose: full hero roaring stance, arms partly raised at sides, fists clenched, mouth wide open in a powerful triumphant roar showing teeth, body coiled with energy."* → **"this pose prompt is needed, because the ref image doesn't have this pose, and that's the way to change her pose."**
+
+So the L10 line isn't "describe nothing." It's:
+
+| Goes in the **reference** | Goes in the **prompt delta** |
+|---|---|
+| Character identity (face, hair baseline) | Camera (distance, angle, lens) |
+| Costume design (colors, cut, accessories) | Pose / gesture / stance |
+| Body baseline proportions | Facial expression |
+| Location architecture | Action (what's happening) |
+| Lighting baseline / motivation | Momentary lighting state (eg "now bathed in red") |
+| Static props (chair shape, banner) | Momentary costume state CHANGE (eg "new tear at shoulder") |
+| Recurring SFX placement intent | Eye-line / gaze direction |
+
+The render directive in `compose_prompt()` already says "Do not reinterpret character appearance, costume design, or location architecture from the prompt text." This addendum adds the *positive* side: **pose, action, expression, momentary lighting state, and momentary costume state change MUST be in the prompt** — refs can't carry per-panel beats, so the prompt is the only place to put them. A shotlist `action` field that describes the pose and expression is doing the right thing; an `action` field that describes the suit and the wall material is leaking constants into the delta.
+
+This refinement does not change `next_panel.py`'s composer logic — the current skeleton already puts pose/action/expression in the DELTA section. What changes is the **authoring guidance**: when reviewing a shotlist or a generation prompt, scan for description bleed using the table above. Anything in the left column should be in refs, not text.
+
+---
+
+## L12 — Dialogue panels need close framing
+
+**Symptom**: Comic pages where one character speaks 30 words of dialogue at wide-establish distance. The speaker's face is unreadable; the reader can't tell who's talking; the page reads like a script with art, not a comic. Confirmed by reviewer note on Supergirl issue #1: *"It doesn't zoom in when the person's talking to a tight shot."*
+
+**Root cause**: The shotlist `camera` field is authored independently of `dialogue[]`. A scene can carry "establish the lab" intent (wide camera) and "Lex monologues at his terminal" intent (long dialogue line) on the *same panel*. The composer doesn't notice the conflict; the model renders the wide shot faithfully; the dialogue gets bubble-attached on top of a small speaker who's not the focal point.
+
+**Fix**: Hard rule — if a panel has on-screen dialogue (`type` in `balloon` / `thought` / `whisper` / `shout`), the camera must be close enough that the speaker is the focal point. Acceptable: `ecu-face`, `mcu`, `medium`, `cowboy`. Marginal: `3q-full` if there's a single short line. Wrong: `wide-establish`, `splash` (unless the dialogue is `caption` or `off-panel` — narration/off-screen voice doesn't compete with camera distance for focal point).
+
+Implementation paths (cheapest first):
+
+1. **`next_panel.py` planning-time warning**: when `compose_prompt` sees on-screen dialogue + wide camera, surface a `WARNING_DIALOGUE_CAMERA_CONFLICT` entry in the plan and ask the user to either tighten the camera or convert the dialogue to a caption.
+2. **`rules_audit.py` script-breakdown gate**: HARD finding for shotlist panels with wide camera + on-screen dialogue. Blocks at script-breakdown time before generation cost is spent.
+3. **Composer auto-tighten** (riskier): override the camera to `mcu` when conflict detected. Loses authoring intent; only safe if the user opts in.
+4. **PreToolUse hook on `generate_image`** (per the other guy's research on Claude Code hooks): hard enforcement at the call site. Strongest but requires the hook infrastructure.
+
+**Where this rule applies**:
+- Every panel of every comic. Universal.
+
+**Where this rule does NOT apply**:
+- Caption boxes (narration). Wide establishing shot with "TWO HOURS LATER" caption is canonical.
+- Off-panel dialogue (`type: off-panel`). The speaker isn't on-screen so the camera distance is independent of the dialogue.
+
+---
+
+## L13 — Multi-speaker beats split into per-speaker panels
+
+**Symptom**: One panel renders three or four characters in a cramped lineup, each with a balloon. The page looks like a sitcom freeze-frame; reading order is ambiguous; no individual character is the focal point. Confirmed by reviewer note: *"If we feed in a comic that has four different dialogue lines on one image, instead of that it shows several different people individually with their dialog line."*
+
+**Root cause**: The shotlist treats "scene with N speakers" as one panel because the *action beat* is one continuous exchange. That conflation produces visually-broken comics. A two-character argument with eight back-and-forth lines is NOT one panel — it's six to eight panels.
+
+**Fix**: At script-breakdown time, detect any panel with **≥3 dialogue entries from ≥2 distinct speakers** (excluding captions and off-panel). Surface as a HARD finding with the suggestion: split into one panel per beat, with each panel framing the speaker who's talking on it. Reading order follows the page's panel order; the visual rhythm of cutting between speakers carries the conversation.
+
+Threshold tunings:
+- 1 dialogue entry, 1 speaker → fine, single panel
+- 2 dialogue entries, 1 speaker → fine (one speaker says two things), single panel works
+- 2 dialogue entries, 2 speakers → marginal, prefer 2 panels but can keep as 1 (back-and-forth at close framing)
+- ≥3 entries, ≥2 speakers → split
+
+**Implementation**: `rules_audit.py` gate at script-breakdown time. Also surface in `next_panel.py` planning output. Hooks layer if/when built.
+
+**Where this rule applies**:
+- Dialogue-heavy scenes (interrogation, argument, council meeting, exposition).
+
+**Where this rule does NOT apply**:
+- Crowd shouts / chorus (one collective beat across many speakers).
+- Caption-only beats (narration over a scene where multiple characters are physically present but not speaking).
+- Splash pages whose explicit intent is to show the cast together (cover, opening lineup, finale). These are visual showcases, not conversational beats.
+
+---
+
+## L14 — Multi-view location references for shot-reverse-shot scenes
+
+**Symptom**: A two-character dialogue scene reads as if the characters are in two different rooms because every panel uses the same establishing-shot anchor (per L10 env chaining) and the model can't reconstruct a coherent reverse angle from one A-side reference. The user wants to cut between facing Lex (camera looks east) and facing Kara (camera looks west) — but our env anchor is only the eastern view, so reverse-angle panels lose the location identity. Confirmed by reviewer note: *"We'll have to build up more references that show the character's face and also show a 360 view of the scene. This way when two people are talking, the camera can face both directions of the people."*
+
+**Root cause**: L10 env chaining assumes one canonical view per location. That works for sustained-POV scenes (the supergirl chamber establishing shot reused across all act II panels). It breaks for shot-reverse-shot because the canonical view is by definition a *single direction*, and reversing the camera produces a scene the env anchor doesn't depict.
+
+**Fix**: Hero locations that host shot-reverse-shot scenes should carry **multiple env references**, keyed by camera direction:
+
+```
+references/locations/lex-lab-redsun/
+  _source.jpg              # default establishing (DAZ stand-in)
+  _source-reverse.jpg      # 180° opposite angle
+  _source-overhead.jpg     # optional, high-angle / bird's-eye
+  _provenance.md
+```
+
+`pick_location_anchor` in `next_panel.py` extends to:
+
+1. If the panel's camera direction is compatible with the most recently accepted shot in this location → use that accepted shot (current behavior).
+2. If the camera direction is the **reverse** of the most recent accepted shot, walk `accepted_history` backwards for any prior reverse-angle shot in this location and use it.
+3. If no reverse-angle accepted shot exists yet, fall back to `_source-reverse.jpg` if present.
+4. If neither exists, fall back to `_source.jpg` with a `WARNING_REVERSE_VIEW_MISSING` note in the plan.
+
+Detecting "reverse" from camera string: when the panel's camera contains directional cues (e.g. `over-shoulder Lex looking at Kara` vs the prior accepted's `over-shoulder Kara looking at Lex`), or when the angle flips between `front-full` (one character) and `back-full` (same character, reverse perspective).
+
+Authoring guidance: when a shotlist has a multi-page dialogue scene with on-screen speakers, the **first establishing shot** locks the A-side, the **first reverse-angle shot** locks the B-side, and subsequent panels in that scene chain off whichever side matches their direction.
+
+**Where this rule applies**:
+- Scenes with ≥2 panels showing facing characters from different sides (interview, interrogation, argument, ritual exchange).
+
+**Where this rule does NOT apply**:
+- Single-direction scenes (the supergirl chamber transformation — every panel faces the platform).
+- Splash pages and establishing wides that are visually self-sufficient.
+
+---
+
 ## How to add a lesson
 
 When you observe a new failure mode that recurs, append a new entry following the structure above:

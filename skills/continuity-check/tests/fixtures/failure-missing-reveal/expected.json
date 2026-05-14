@@ -1,0 +1,12 @@
+{
+  "description": "Transformation has setup (trigger, first_sensation) + 3 body-region beats (chest, arms, abs) but no reveal. Tests that the reveal check fires independently of the other two transformation_beats checks.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "transformation_beats", "message_contains": "no reveal"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety"],
+  "expect_no_hard_with_message": [
+    {"category": "transformation_beats", "message_contains": "no setup beat"},
+    {"category": "transformation_beats", "message_contains": "body-region beat"}
+  ]
+}

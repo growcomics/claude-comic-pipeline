@@ -1,0 +1,8 @@
+{
+  "description": "Shotlist omits `location_strategy`. Step 0 questionnaire Q2 enforcement.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "required_metadata", "message_contains": "missing top-level `location_strategy`"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats"]
+}

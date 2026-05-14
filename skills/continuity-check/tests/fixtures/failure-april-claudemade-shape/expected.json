@@ -1,0 +1,11 @@
+{
+  "description": "Reproduces the April-claudemade failure shape: 9 alley pose shots, no transformation event, no body-region beats, no reveal. Must HARD-fail on camera same-combo overuse + missing setup/body-regions/reveal beats.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "camera_variety", "message_contains": "same camera combo"},
+    {"category": "transformation_beats", "message_contains": "no setup beat"},
+    {"category": "transformation_beats", "message_contains": "body-region beat"},
+    {"category": "transformation_beats", "message_contains": "no reveal"}
+  ],
+  "expect_no_hard_in_categories": []
+}

@@ -1,0 +1,10 @@
+{
+  "description": "Transformation declares required_body_regions: [chest, hips, rear, arms, abs] but the shotlist only delivers chest, arms, abs. Tests that the required-body-regions explicit-list override fires HARD on the missing ones (hips, rear).",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "transformation_beats", "message_contains": "missing required body-region beats"},
+    {"category": "transformation_beats", "message_contains": "hips"},
+    {"category": "transformation_beats", "message_contains": "rear"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety"]
+}

@@ -31,6 +31,13 @@ Write both:
   "project": "lara-and-the-altar",
   "version": 1,
   "page_count": 12,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {
+    "flavor": "body-region-progression",
+    "start_tier": 3,
+    "end_tier": 5
+  },
   "cast": [
     {
       "id": "lara",
@@ -54,6 +61,13 @@ Write both:
       "ref_folder": "references/locations/forest-clearing/"
     }
   ],
+  "transformation_scenes": [
+    {
+      "name": "april_mutagen_dip",
+      "pages": [1, 13],
+      "required_body_regions": ["chest", "hips", "suit_fail", "arms", "abs"]
+    }
+  ],
   "pages": [
     {
       "page_number": 1,
@@ -65,7 +79,7 @@ Write both:
           "location": "forest-clearing",
           "time_of_day": "dawn",
           "weather": "mist",
-          "camera": "low angle, three-quarter",
+          "camera": "low-angle-front, three-quarter",
           "action": "Lara steps into the clearing, sword hand twitching.",
           "dialogue": [
             {"character": "lara", "text": "What is this place?", "type": "balloon"}
@@ -73,7 +87,8 @@ Write both:
           "captions": ["Day one of the long road home."],
           "sfx": [{"text": "CRUNCH", "source": "footstep on twigs"}],
           "notes": "First reveal of the altar — keep it foreboding, not hostile.",
-          "continuity_refs": []
+          "continuity_refs": [],
+          "transformation_beat": null
         }
       ]
     }
@@ -90,8 +105,63 @@ Field rules:
 - `cast[].ref_folder` / `props[].ref_folder` / `locations[].ref_folder`: relative paths from the project root to the reference-gathering folder for that subject. Use the typed-bucket convention from `reference-gathering`: `references/characters/<id>/`, `references/props/<id>/`, `references/locations/<id>/`. **Required** for hero subjects (named characters, recurring props, locations appearing in 2+ panels). **Optional** for one-off backgrounds or single-appearance props — omit the field entirely rather than setting it to a folder that won't be populated.
 - `locations[].ref_folder` for CGI comic projects should contain a `_source.jpg` (DAZ3D-scene-reference render) per `comic-production`'s `references/environment-references.md` — this is what generation attaches as an environment ref via `medias[]`.
 - `camera`: a distance + angle pair using the categories defined in `comic-production`'s `references/cinematic-framing.md` (e.g., `"low-angle-front, three-quarter"`, `"ecu-face"`, `"wide-establish"`). Run the variety check (≥5 distance + ≥4 angle categories, ≤3 panels at the same combo, ≥1 ECU and ≥1 wide-establish/splash per 10-panel sequence) during validation.
+- `transformation_beat`: optional. Set on panels that are part of a transformation scene. Allowed values: setup beats (`consider`, `decide`, `trigger`, `first_sensation`), body-region beats (`chest`, `hips`, `rear`, `arms`, `abs`, `legs`, `back`, `shoulders`, `suit_fail`, `whole_body`), or resolution beats (`reveal`, `aftermath`). Used by `rules_audit.py` to verify a transformation scene decomposes into body-region beats rather than skipping from "before" to "after". See "Transformation decomposition" below.
+- `transformation_scenes` (top-level, optional): array of scene declarations. Each entry: `{name, pages: [start, end], required_body_regions?: [...], requirements?: {min_setup_beats, min_body_region_beats, min_reveal_beats}}`. Triggers the transformation-beats check at validation time. Use this whenever the script contains a multi-page transformation (FMG, growth arc, mutation, dress-up sequence, charge-up). See "Transformation decomposition" below.
+- `style` (top-level, **required**): slug of the visual style preset to lock for the project. Must match a folder name under `skills/style-lock/styles/` (e.g. `photoreal-daz3d`, `ink-line`). Decided via the Step 0 questionnaire — never picked silently by the model. The May 2026 lesson driving this: an earlier April-transformation run defaulted to 2D illustration when 3D CGI was wanted; nothing had asked or required a choice. `rules_audit.py` HARD-fails if missing.
+- `location_strategy` (top-level, **required**): one of `single` (one chapter location locked everywhere), `multi` (multiple locations, each locked per scene), or `per-scene` (confirm each detected location individually). Determines how the location-lock invariant is enforced downstream. Decided via the Step 0 questionnaire.
+- `transformation_metadata` (top-level, **required when `transformation_scenes` is non-empty**): object with `{flavor: "body-region-progression" | "single-axis" | "other", start_tier: number, end_tier: number}`. Captures the high-stakes transformation choices that the model would otherwise default silently. Decided via the Step 0 questionnaire.
 
 ## Workflow
+
+### 0. Project setup questionnaire (BEFORE reading the source)
+
+**Run this FIRST, before parsing the script.** The model has latitude on a few high-stakes decisions that downstream generation cannot recover from if guessed wrong (style being the canonical example — wrong style means *every* generated panel is wrong and the budget is burnt). Each request begins by polling the user with a tight multiple-choice questionnaire, capturing the answers, and writing them into the shotlist's top-level metadata.
+
+Present this block verbatim (drop sections that don't apply once you've read the script — but Q1 and Q2 always apply, even before reading):
+
+```
+== Project setup ==
+
+Q1. Visual style?
+   a) photoreal-daz3d — DAZ3D Iray photorealistic 3D render (default;
+      matches Bay Watch / Lana & Lacy / hand-made April aesthetic)
+   b) ink-line — modern indie / Eurocomic ink-line, cel-shaded
+   c) other — specify a slug from skills/style-lock/styles/
+
+Q2. Location strategy?
+   a) single — one chapter location, locked everywhere (default)
+   b) multi — multiple locations, each locked per scene
+   c) per-scene — confirm each detected location individually before lock
+
+Q3. Is this a transformation comic?
+   a) yes — declare transformation_scenes; body-region beats required
+   b) no — standard comic; transformation gates skip
+   c) partial — some scenes transform, others don't
+
+(only if Q3 = a or c)
+
+Q3a. Transformation flavor?
+   a) body-region-progression — chest → hips → arms → abs etc.
+   b) single-axis — single-feature growth (muscle only / size only)
+   c) other — describe in source script
+
+Q3b. Character baseline → endpoint? (size tiers 1-6 from the lineup ref)
+   Format: "<start>→<end>" — examples: "3→5", "1→6", "custom"
+
+Reply with your choices, e.g.: 1=a, 2=a, 3=a, 3a=a, 3b=3→5
+Or say "default" to take all defaults (italicized above).
+```
+
+After the user replies, capture the answers into shotlist.json as top-level fields:
+- `style`: the slug from Q1
+- `location_strategy`: the value from Q2 (`single` / `multi` / `per-scene`)
+- `transformation_metadata`: if Q3 is `yes` or `partial`, set `{flavor: ..., start_tier: ..., end_tier: ...}` from Q3a/Q3b; if Q3 is `no`, omit this field
+
+If the user says "default", take all the (a) options: `style=photoreal-daz3d`, `location_strategy=single`, no transformation (set `transformation_metadata` only if the source script obviously demands it; flag this for confirmation at the end).
+
+**Don't infer past the questionnaire.** If the user gave partial answers, ask the missing ones — don't fill them with defaults silently. Polling is the entire point of this step.
+
+**Don't repeat this on re-runs.** If a `shotlist.json` already exists with all three fields populated, skip the questionnaire (and acknowledge that you read the prior choices). If the user wants to change a choice, they'll tell you.
 
 ### 1. Read the source
 
@@ -138,6 +208,43 @@ Fill every required field. **Don't leave fields blank.** A missing `camera` beco
 - **Captions** carry narration or time-jump cues ("Three days later."). Lettered by `page-composer`, never baked into the generation.
 - **continuity_refs** chains a panel to the scene's establishing panel — this is what makes wardrobe drift detectable later.
 
+### 4.5. Transformation decomposition (when the script has a transformation)
+
+If the source script contains a multi-page transformation — FMG, growth arc, mutation, dress-up, charge-up, expansion sequence — **do not skip from "before" to "after"**. This is the single most-confirmed failure mode of the generation pipeline: a 9-page transformation comic in which the transformation event itself never happens on the page. The hand-made vs Claude-made April comparison (May 2026, `~/Downloads/april-lessons.md`) is the canonical example.
+
+**The unifying principle:** during a transformation, visual weight migrates through the body. Each body region gets its own beat with its own crop. The reveal pulls back but stays close enough for the figure to carry the panel.
+
+**Decomposition steps:**
+
+1. Declare a `transformation_scenes` entry at the top of the shotlist with the page range and (optionally) the specific body regions you'll cover.
+
+2. For each transformation, plan beats in roughly this order:
+
+   | Beat                | Typical framing                  | Typical SFX            | Aspect    |
+   |---------------------|----------------------------------|------------------------|-----------|
+   | `consider`          | mcu + canister/trigger object    | —                      | portrait  |
+   | `decide`            | medium                           | —                      | portrait  |
+   | `trigger`           | medium, low-angle-front          | SPLOOSH / CRACK / SNAP | portrait  |
+   | `first_sensation`   | medium                           | THROB… THROB…          | portrait  |
+   | `chest`             | chest crop (mcu or ecu-region)   | CRRIREEAK + THROB      | landscape |
+   | `hips`              | hip crop, rear or three-quarter  | STRRRETCH              | portrait  |
+   | `rear`              | rear three-quarter               | —                      | portrait  |
+   | `suit_fail`         | rear or side three-quarter       | RRRRIP! / SNAP!        | portrait  |
+   | `arms`              | arm close-up (ecu-region)        | RRRRIP + THROB + PULSE | portrait  |
+   | `abs`               | torso crop (ecu-region or mcu)   | CRUNCH + RRRRIP        | landscape |
+   | `legs`              | leg/thigh crop                   | STRRRETCH              | portrait  |
+   | `reveal`            | full body, **close to camera**   | —                      | portrait  |
+
+3. **Not every transformation needs every beat** — pick the body regions that the script's transformation actually affects. A muscle-only transformation might use {arms, chest, abs, suit_fail, reveal}. A whole-body expansion might use {chest, hips, rear, suit_fail, reveal}. The rule is: cover the regions that change, give each its own panel, and end on a close reveal.
+
+4. **Aspect ratio per beat, not per chapter.** Chest expansion → landscape (chest reads across the page). Full-body reveal → portrait (figure fills vertically). ECU body part → portrait. This is set per-panel via `size` and per-prompt at generation time.
+
+5. **Crop migrates through the body.** Successive beats should crop into the region being transformed. Don't pull back to full body until the reveal — and even then, frame close enough that the figure carries the panel.
+
+6. **The reveal closes the loop.** A transformation scene without a reveal beat has no payoff. The reveal is always full-body but tight, typically with a dialogue line ("Look at me!" / equivalent).
+
+**Validation enforces this.** The `rules_audit.py` `check_transformation_beats` test will HARD-fail the shotlist if a declared `transformation_scenes` entry is missing setup, body-region beats (≥3 by default, or the explicit `required_body_regions` list), or a reveal. Don't skip the decomposition and try to ship a transformation as two panels — the gate will reject it before generation.
+
 ### 5. Validate
 
 Before saving:
@@ -151,10 +258,21 @@ Before saving:
 - Page numbers are contiguous starting at 1.
 - Total panel count roughly matches pages × 4 (sanity check, not a rule).
 - No dialogue balloon exceeds 25 words.
+- **Transformation-beats check** (when `transformation_scenes` is declared): each scene must include ≥1 setup beat, ≥3 distinct body-region beats (or all of `required_body_regions` if explicitly listed), and ≥1 reveal beat. The gate that enforces this is `rules_audit.py` — see the script-level enforcement below.
+
+**Script-level enforcement.** After writing `shotlist.json`, run the rules audit on the new file:
+
+```sh
+python skills/continuity-check/scripts/rules_audit.py --project .
+```
+
+The audit will return HARD findings for camera same-combo overuse (>3 panels at the same distance × angle combo) and for any transformation scene missing setup, body-region beats, or a reveal. If HARD findings exist, surface them inline and revise the shotlist *before* moving to references/generation. Soft findings (variety floor, missing ECU/wide) are hints — review them with the user but don't auto-block.
+
+This pre-generation gate is the cheapest place to catch the failure: re-planning the shotlist costs nothing; regenerating panels after they've been produced wastes the API budget.
 
 ### 6. Save
 
-Write `./shotlist.json` and `./shotlist.md` at the project root. Report panel and page counts back to the user with one or two notable decisions ("treated p7 as a splash for the altar reveal — flag if you want it broken into 3 panels"). Don't auto-iterate; wait for direction.
+Write `./shotlist.json` and `./shotlist.md` at the project root. Run the rules audit (above). Report panel and page counts back to the user with one or two notable decisions ("treated p7 as a splash for the altar reveal — flag if you want it broken into 3 panels"). If the audit returned HARD findings, also report those and pause for direction. Don't auto-iterate; wait for direction.
 
 ## Hard rules
 

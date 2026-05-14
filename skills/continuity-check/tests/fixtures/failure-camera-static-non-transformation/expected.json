@@ -1,0 +1,8 @@
+{
+  "description": "8 panels all at (medium, eye-level), no transformation declared. Tests that camera same-combo HARD fires even without a transformation scene — the static-camera failure mode is independent of transformations.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "camera_variety", "message_contains": "same camera combo"}
+  ],
+  "expect_no_hard_in_categories": ["transformation_beats"]
+}

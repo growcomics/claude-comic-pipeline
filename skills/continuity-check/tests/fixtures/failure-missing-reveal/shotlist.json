@@ -1,0 +1,20 @@
+{
+  "project": "missing-reveal",
+  "version": 1,
+  "page_count": 6,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {"flavor": "body-region-progression", "start_tier": 3, "end_tier": 5},
+  "arc_character": "april",
+  "cast": [{"id": "april", "name": "April", "wardrobe": "yellow jumpsuit, tears as muscle grows"}],
+  "locations": [{"id": "april-lab", "description": "underground lab"}],
+  "transformation_scenes": [{"name": "muscle_growth", "pages": [1, 6]}],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["april"], "location": "april-lab", "camera": "mcu, three-quarter", "action": "April with canister", "costume_state": "intact", "transformation_beat": "trigger"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["april"], "location": "april-lab", "camera": "medium, low-angle-front", "action": "First sensation", "costume_state": "tight", "transformation_beat": "first_sensation"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, three-quarter", "action": "Chest expanding", "costume_state": "tight", "transformation_beat": "chest"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, low-angle-front", "action": "Arm growing", "costume_state": "damaged", "transformation_beat": "arms"}]},
+    {"page_number": 5, "panels": [{"panel_id": "p05-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, eye-level", "action": "Abs forming", "costume_state": "damaged", "transformation_beat": "abs"}]},
+    {"page_number": 6, "panels": [{"panel_id": "p06-01", "characters": ["april"], "location": "april-lab", "camera": "full, three-quarter", "action": "April stands looking down at herself", "costume_state": "damaged"}]}
+  ]
+}

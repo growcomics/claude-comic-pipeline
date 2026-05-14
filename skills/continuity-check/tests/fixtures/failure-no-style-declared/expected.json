@@ -1,0 +1,8 @@
+{
+  "description": "Shotlist omits the top-level `style` field. This is exactly the v2-April failure mode (pipeline picked 2D when 3D was wanted). Must HARD-fail on required_metadata so the Step 0 questionnaire is enforced.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [
+    {"category": "required_metadata", "message_contains": "missing top-level `style`"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats"]
+}

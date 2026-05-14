@@ -1,0 +1,6 @@
+{
+  "description": "Short non-transformation comic with deliberately varied cameras. Should produce zero HARD findings — confirms the transformation_beats check doesn't fire when no transformation_scenes are declared.",
+  "ignore_categories": ["asset"],
+  "expect_hard": [],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats", "required_metadata"]
+}

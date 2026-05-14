@@ -1,0 +1,37 @@
+{
+  "project": "april-handmade-shape",
+  "version": 1,
+  "page_count": 13,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {"flavor": "body-region-progression", "start_tier": 3, "end_tier": 5},
+  "arc_character": "april",
+  "cast": [
+    {"id": "april", "name": "April", "wardrobe": "yellow jumpsuit with utility belt — tears progressively during mutagen transformation"}
+  ],
+  "locations": [
+    {"id": "april-lab", "description": "underground lab with shelves of green mutagen vials, fluorescent strip light, concrete walls"}
+  ],
+  "transformation_scenes": [
+    {
+      "name": "april_mutagen_dip",
+      "pages": [1, 13],
+      "required_body_regions": ["chest", "hips", "suit_fail", "arms", "abs"]
+    }
+  ],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["april"], "location": "april-lab", "camera": "mcu, eye-level", "action": "April examines mutagen canister", "costume_state": "intact", "transformation_beat": "consider"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["april"], "location": "april-lab", "camera": "medium, three-quarter", "action": "April commits", "costume_state": "intact", "transformation_beat": "decide"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["april"], "location": "april-lab", "camera": "mcu, profile", "action": "April imagines transformation", "costume_state": "intact"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["april"], "location": "april-lab", "camera": "medium, low-angle-front", "action": "Screw it I'm doing this", "costume_state": "intact", "transformation_beat": "decide"}]},
+    {"page_number": 5, "panels": [{"panel_id": "p05-01", "characters": ["april"], "location": "april-lab", "camera": "mcu, low-angle-front", "action": "April pours mutagen on herself SPLOOSH", "costume_state": "tight", "transformation_beat": "trigger"}]},
+    {"page_number": 6, "panels": [{"panel_id": "p06-01", "characters": ["april"], "location": "april-lab", "camera": "medium, eye-level", "action": "Something is happening", "costume_state": "tight", "transformation_beat": "first_sensation"}]},
+    {"page_number": 7, "panels": [{"panel_id": "p07-01", "characters": ["april"], "location": "april-lab", "camera": "mcu, low-angle-front", "action": "Chest expanding CRRIREEAK", "costume_state": "tight", "transformation_beat": "chest"}]},
+    {"page_number": 8, "panels": [{"panel_id": "p08-01", "characters": ["april"], "location": "april-lab", "camera": "medium, three-quarter", "action": "Hips expanding STRRRETCH", "costume_state": "tight", "transformation_beat": "hips"}]},
+    {"page_number": 9, "panels": [{"panel_id": "p09-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, three-quarter", "action": "Suit ripping at the back RRRRIP SNAP", "costume_state": "damaged", "transformation_beat": "suit_fail"}]},
+    {"page_number": 10, "panels": [{"panel_id": "p10-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, three-quarter", "action": "Arm growing RRRRIP THROB PULSE", "costume_state": "damaged", "transformation_beat": "arms"}]},
+    {"page_number": 11, "panels": [{"panel_id": "p11-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, low-angle-front", "action": "Bicep grows further", "costume_state": "damaged", "transformation_beat": "arms"}]},
+    {"page_number": 12, "panels": [{"panel_id": "p12-01", "characters": ["april"], "location": "april-lab", "camera": "ecu-region, eye-level", "action": "Abs forming CRUNCH RRRRIP", "costume_state": "damaged", "transformation_beat": "abs"}]},
+    {"page_number": 13, "panels": [{"panel_id": "p13-01", "characters": ["april"], "location": "april-lab", "camera": "full, low-angle-front", "action": "April fully transformed double-bicep pose", "costume_state": "damaged", "transformation_beat": "reveal"}]}
+  ]
+}

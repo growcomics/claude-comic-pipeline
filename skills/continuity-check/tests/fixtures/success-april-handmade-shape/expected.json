@@ -1,0 +1,6 @@
+{
+  "description": "Models the hand-made April: 13-panel transformation in one lab with body-region beats and a reveal. Must pass with zero HARD findings (asset findings ignored because the fixture has no real images).",
+  "ignore_categories": ["asset"],
+  "expect_hard": [],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats", "required_metadata"]
+}
