@@ -21,6 +21,10 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L14 | Multi-view location references for shot-reverse-shot | Single env anchor breaks when the camera reverses; pack multiple env refs per location |
 | L19 | Bake lettering into the CGI render | Reverses L7. SFX / speech bubbles / captions render inside the image as physical scene objects |
 | L20 | Camera distance bias for transformation comics | Default to MCU or closer; reserve full-body for the reveal. Mean ≤ 3.0, ≥30% in middle distances |
+| L21 | Suppress in-scene rendering of reference images | Face card / lineup refs occasionally render as physical scene objects; exclusion clause required in every prompt that attaches a ref |
+| L22 | Hair state must be explicit in every face-visible panel | Twin buns + ribbons (or loose) drift across panels when inherited only from state anchor; name the hair state per panel |
+| L23 | When env ref is dropped, add a dense verbal env anchor | Stage-change full-body panels drop env ref to fit the 3-ref ceiling; without 5+ named location elements in the prompt the background goes to a grey void |
+| L24 | Suppress anachronistic accessories explicitly | Models hallucinate watches, bracelets, jewelry on the wrists/neck/ears; suppress by name when those body parts may be in frame |
 
 Other lessons (L2, L3, L4, L5, L6, L7, L8) are platform-specific, situational, or historical. L7 in particular is superseded by L19 — read L7 for the diagnosis, L19 for the current rule. L4 was undeprecated when L19 reversed L7.
 
@@ -701,6 +705,80 @@ The transformation event never *happens* on the AI version's page because the ca
 **Where this rule does NOT apply**:
 - Dialogue-heavy scenes — L12 already covers close framing for dialogue.
 - World-building / establishing scenes — wide-establish is the right tool there.
+
+---
+
+## L21 — Suppress in-scene rendering of reference images
+
+**Symptom**: A panel renders the attached face-card (or lineup) reference as a literal physical scene object — a tiny photo stuck to fabric, a badge on a wall, a poster in the background. The reference image leaks *into* the scene instead of just guiding identity.
+
+**Root cause**: nano_banana_flash (and likely other reference-aware models) sometimes treats a `role: image` ref as scene content rather than guidance. The failure mode is rare per-panel but recurring across long chapters; it shows up in ECU and macro framings most often because the model has more "blank canvas" to fill and reaches for the most salient image it has — which is the attached ref.
+
+**Worked example**: chun-li-ascension v2 p05 (arms beat, ecu-region on right shoulder). Three refs attached: face card + env anchor + state anchor. The face card rendered as a small photo tucked into the torn sleeve seam. The body of the panel is otherwise correct; the artifact is a tiny but unmistakable second face inside the scene.
+
+**Fix**: Every panel prompt that attaches a face card or lineup ref must include an explicit exclusion clause near the closing negation block:
+
+> *"DO NOT render any reference image as a physical photo, badge, poster, or scene object. References are for identity and proportion guidance only and must NOT appear inside the rendered scene."*
+
+Bake into the canonical `compose_prompt()` template, gated on `medias[].role == "image"`. Not per-panel — the failure rate is low enough that per-panel detection is hopeless, but the suppression clause is cheap.
+
+**Enforced today by**: nothing yet — this is a prompt-architecture rule. `compose_prompt()` in `next_panel.py` should append the exclusion clause whenever any `medias[]` entry is attached. Logged as a follow-up.
+
+---
+
+## L22 — Hair state must be explicit in every face-visible panel
+
+**Symptom**: Hair accessories drift across panels even when the state anchor shows the canonical look. Twin buns become a single decorative updo. Red ribbons become dark grey clips, or vanish entirely. A character whose silhouette is partly defined by their hair (Chun Li's twin buns + ribbons, Princess Leia's side buns, Sailor Moon's odango) loses her silhouette mid-chapter.
+
+**Root cause**: The model treats hair as low-priority detail when reading a state-anchor reference. Composition, costume damage, and body proportion get carried forward reliably; small head accessories get dropped, swapped, or generically "improved" toward whatever the model's prior says is more attractive. State-anchor inheritance is not load-bearing enough on its own.
+
+**Worked example**: chun-li-ascension v2 — p04 (chest beat, MCU) rendered Chun Li with a single decorative updo and a hair ornament instead of twin buns. p06 (tier 4 whole_body) rendered a single bun at the back of the head. p03 ribbons drifted from canonical red to neutral dark grey. All three panels described hair only implicitly via the state anchor; no panel prompt named twin buns or ribbon colour.
+
+**Fix**: Every prompt for a panel whose camera framing includes the head must include an explicit hair line. The line is determined by the panel's `hair_state`, derived from `muscle_size_tier` + `transformation_beat`:
+
+- **Pre-suit-fail** (tiers 1–4, beats before `suit_fail`): *"Hair: twin buns held with bright red ribbons in the canonical position, both buns clearly visible on top of the head."*
+- **Suit-fail panel itself**: *"Hair: twin buns starting to shake loose, red ribbons working free, strands escaping."*
+- **Post-suit-fail** (tier ≥ 5, beats after `suit_fail`): *"Hair: fully loose, long dark hair falling around her shoulders, no buns, no ribbons."*
+
+Bake the derivation into `compose_prompt()`. The hair line goes into the subject section alongside the silhouette anchor, NOT the costume section (a different visual axis).
+
+**Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` needs a `hair_state` field on each panel's planner output, derived from tier + beat.
+
+---
+
+## L23 — When env ref is dropped, add a dense verbal env anchor
+
+**Symptom**: A full-body stage-change panel renders against a neutral grey or blurry studio void background instead of the chapter's hero location. Every other panel in the chapter shows the dojo / alley / lab cleanly; this one panel reads as if the character is floating in product-photography limbo. Location continuity breaks at the most narratively important panel.
+
+**Root cause**: Stage-change panels need the lineup ref attached for proportion guidance (L11). Combined with face card + state anchor, that's already 3 refs — at the model's effective ceiling (4 refs cause hangs, per established lore). The env anchor gets dropped to make room. With no env ref AND only a generic location mention in the prompt ("training hall"), the model produces a void background because it has no concrete material to ground the environment.
+
+**Worked example**: chun-li-ascension v2 p06 (3q-full, tier 4 whole_body, stage-change to tier 4). Refs were face + state-anchor + lineup. Env ref dropped. Prompt said *"environment: polished dark-wood floor and dojo background"* — too vague. Result: hyper-FMG Chun Li against a grey blurry void. Every other panel in the chapter (env ref attached) rendered the dojo cleanly with paper lanterns, painted screens, latticed windows.
+
+**Fix**: When `compose_prompt()` decides to drop the env ref to fit the 3-ref ceiling, it must include a dense verbal env anchor naming **5+ specific location elements with concrete adjectives** in the prompt body. The location entry in `shotlist.json` already carries this description; just inject it verbatim.
+
+Example fallback line for `chun-li-dojo`:
+
+> *"Background: polished dark-wood floor planks beneath her feet, red paper lanterns hanging from the rafters, painted screen panels with traditional motifs along the side walls, tall latticed bamboo-and-paper windows on the left wall, a wooden rack of practice weapons against the back wall. Late-afternoon golden bars of light raking across the floor from the windows."*
+
+**Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` should detect when env ref is being dropped and auto-inject the full `locations[].description` into the prompt body. Today it relies on the panel author to remember.
+
+---
+
+## L24 — Suppress anachronistic accessories explicitly
+
+**Symptom**: A character shows up wearing a modern wristwatch, bracelet, ring, or earring that has no canonical basis. The character is otherwise correct — costume, hair, identity, pose all match — but a small modern accessory has been added unprompted.
+
+**Root cause**: The model has a strong prior toward "young woman in studio render" carrying everyday-modern accessories. Wrists, ears, neck, and ring fingers are hot spots; the model fills them with watches, hoops, thin bracelets, dainty necklaces, etc., even when the reference shows nothing. Identity refs constrain the face but not the periphery.
+
+**Worked example**: chun-li-ascension v2 p02 (MCU, tier 1). Canonical Chun Li wears white spiked wristbands and no other jewelry. Render added a dark wristwatch on her right wrist. The wristband was correct; the watch was hallucinated alongside it.
+
+**Fix**: For every panel where wrists, hands, neck, ears, or fingers may be in frame, include an accessory suppression line. Both ends of the inventory — what IS canonical AND what is NOT:
+
+> *"Accessories: white spiked wristbands ONLY (canonical). NO watches, NO bracelets, NO modern jewelry. No earrings, no necklaces, no rings."*
+
+The negation list is the load-bearing part — naming what to exclude is what suppresses the prior. Listing only the canonical accessories doesn't work; the model treats canonical-list as "things that must be present" without inferring "and nothing else."
+
+**Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` should derive a per-character accessory inventory from the `cast[]` entry and inject both the canonical list and a negation list when relevant body parts may be in frame.
 
 ---
 
