@@ -1,15 +1,23 @@
 # Prompt Templates
 ## Reusable Prompt Fragments for Higgsfield Comic Production
 
-> **STATUS: PARTIALLY DEPRECATED — read before using.** Last reviewed 2026-05-11.
+> **STATUS: Active — updated for L19.** Last reviewed 2026-05-13.
 >
-> Three sections in this file pre-date the discovery of **L7 Case B** in `lessons-learned.md` (lettering and SFX baked into the generation prompt cause 2D illustration drift in CGI panels — confirmed in the Chun-Li growth series). The following sections in THIS file conflict with that rule and are **DEPRECATED for any CGI / photoreal pipeline** (i.e., when `page-composer` will letter the panel post-render):
+> Per **L19** in `lessons-learned.md` (which reverses L7 Case B's "never bake lettering" prescription), speech bubbles, captions, and SFX text are baked **directly into the generation prompt** for CGI / photoreal panels — not deferred to `page-composer` overlays. L7 Case B's diagnosis still holds (comic-coded vocab pulls CGI prompts toward 2D illustration training data); the fix changed. The L19 fix is aggressive anchoring at both ends of the prompt:
 >
-> - **Mandatory Rules Block** — the *speech bubble* and *dialogue* lines are obsolete (see L4 and L7 Case B). Specifically: drop "Speech bubbles show exactly the correct character speaking their correct line" and "Every speech bubble contains a unique line" from the rules block. The muscle-color / breast-persistence / clothing / expressive-faces / no-camera-eye-contact / anatomy / muscle-continuity rules are all still valid.
-> - **Action Lines and SFX — MANDATORY FOR ALL GROWTH PANELS** — the whole section is now wrong. Comic-style SFX text ("RRRRIP!", "CRACK!", "THROB") baked into the generation prompt is exactly what causes L7 Case B 2D drift. SFX/action lines belong in `page-composer` post-render. If a dramatic splash genuinely needs in-render SFX, render it as a **physical scene object** (3D-extruded letters in the scene with real shadows) per the "After (held photoreal CGI)" example in L7 Case B's worked example.
-> - **Dialogue Formatting** — obsolete. Speech bubbles, thought bubbles, and captions are NOT written into the generation prompt. They live in `shotlist.json`'s `dialogue[]` / `captions[]` arrays and are placed as vector overlays by `page-composer`.
+> 1. **Open every CGI prompt with concrete render-engine vocabulary** — *"Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering on skin, physically-based rendering, 8K texture detail, photographic CGI."*
+> 2. **Render lettering as physical 3D scene objects** — SFX as 3D-extruded chrome / stone / energy letter sculptures with real ray-traced shadows; speech bubbles as photoreal semi-translucent 3D panels floating in space with tails pointing at speakers; captions as in-scene plaques.
+> 3. **Close every prompt with the negation block** — *"NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render."*
 >
-> **What's still useful below**: Style Prefix (note: also see the newer CGI vocabulary in `cinematic-framing.md` and `environment-references.md` for chained sequential comics), Shot Types, Transformation Scene Templates Panels A–E (but drop the "Action Lines and SFX" appendage), Background Character Reactions, Environment Description Examples, Character Size Reference Language, Prompt Modifications That Help.
+> Without both ends of that anchor, baked lettering still drifts to 2D. With it, the model holds photoreal CGI while rendering the comic elements as part of the scene.
+>
+> Section-by-section status (in this file):
+>
+> - **Mandatory Rules Block** — *active*. All ten rules apply, including the speech-bubble and dialogue lines. Bubbles are baked, so per-speaker attribution and per-bubble-unique-line discipline are back to mattering.
+> - **Action Lines and SFX** — *active, but the rendering language was rewritten*. SFX text IS baked into the prompt, but rendered as 3D-extruded letter sculptures with real ray-traced shadows — not flat 2D burst lettering or "action lines radiating outward." See the section below for the L19-conformant phrasing.
+> - **Dialogue Formatting** — *active*. Speech bubbles, thought bubbles, and caption boxes are written into the generation prompt as physical 3D scene objects (per L19), with bubble shape, position, tail direction, and per-speaker attribution per **L4**'s rules. The `dialogue[]` / `captions[]` arrays in `shotlist.json` remain the source of truth for *what is said*; the prompt is where you describe *how the bubble renders in the photoreal scene*.
+>
+> See the **Master CGI prompt template** in `CHANGELOG.md`'s 2026-05-13 entry for the canonical skeleton (opening render-engine anchor → camera → subject + tier silhouette → action delta → wardrobe delta → baked SFX as physical object → baked bubble as physical object → environment delta → closing negation block) and the rule-to-section mapping.
 
 Copy and paste these directly into panel prompts. Do not rewrite from memory — the exact wording has been tested and refined. Seemingly minor word changes (e.g., "glistening" vs "shiny") can meaningfully affect output quality because the model latches onto specific vocabulary.
 
@@ -29,7 +37,7 @@ Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an
 
 ## Mandatory Rules Block
 
-> ⚠️ **PARTIALLY DEPRECATED.** Per L4 and L7 Case B, the speech-bubble and dialogue lines below must NOT be included in any prompt where `page-composer` is doing the lettering. The other rules in this block (muscle color, breast persistence, clothing, expressive faces, no-camera-eye-contact, anatomy, muscle/breast continuity) are still valid. When pasting this block, edit out the obsolete lines first.
+> **Active — all ten rules.** Per **L19**, lettering is baked into the CGI render (paired with aggressive anchoring vocabulary to prevent 2D drift), so the speech-bubble and dialogue lines below apply alongside the rest of the block. The block was partially deprecated under L7 Case B's older "never bake lettering" rule; that prescription has been reversed. Paste the full block — and pair it with the L19 opening render-engine anchor and closing `NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render.` negation block (see the file header above and the Master CGI prompt template in `CHANGELOG.md` 2026-05-13).
 
 Paste this at the end of every panel prompt. Every rule, every time. The model has no memory between generations — it treats each panel as a fresh request. Rules from a previous panel's prompt do not carry forward.
 
@@ -42,8 +50,8 @@ Why each rule exists:
 - **Muscles = breasts**: The model won't add both unless told. Every time.
 - **Breast persistence**: The model reverts breasts to the base reference size unless explicitly told they've grown AND told they must not shrink. This is stated twice (growth rule + revert rule) because a single mention is often ignored.
 - **Clothing**: Prevents nudity while allowing dramatic clothing destruction.
-- **Dialogue attribution** *(⚠️ deprecated per L7 Case B — lettering goes to `page-composer`)*: The model decides bubble placement based on character positioning. Without explicit attribution, bubbles end up above the wrong character.
-- **No repeated dialogue** *(⚠️ deprecated per L7 Case B)*: Without this, characters echo each other or repeat lines across panels.
+- **Dialogue attribution** *(active per L19 — lettering is baked into the render)*: The model decides bubble placement based on character positioning. Without explicit attribution, bubbles end up above the wrong character. See L4 for the full bubble-shape / position / tail-direction rules.
+- **No repeated dialogue** *(active per L19)*: Without this, characters echo each other or repeat lines across panels.
 - **Expressive faces**: The model defaults to neutral/blank expressions. This is one of the biggest quality killers — lifeless faces break immersion no matter how good the rest of the panel is.
 - **No camera eye contact**: Characters looking at the viewer breaks the fourth wall and feels awkward in narrative panels.
 - **Anatomy (arms AND legs)**: Prevents extra limbs. The model generates extra legs more often than extra arms, so both must be specified explicitly. "No extra limbs" alone is not sufficient — the model needs the exact count stated.
@@ -123,27 +131,18 @@ Full body shot — [CHARACTER NAME] standing with hands on hips or arms raised i
 
 ### Action Lines and SFX — MANDATORY FOR ALL GROWTH PANELS
 
-> ⚠️ **DEPRECATED** — this entire section is now obsolete per L7 Case B in `lessons-learned.md`.
->
-> Comic-style SFX text ("RRRRIP!", "CRACK!", "THROB") and "action lines radiating outward" baked into the generation prompt are exactly what causes 2D illustration drift in CGI panels. Confirmed failure mode in the Chun-Li growth series panels 3/4/5.
->
-> The correct workflow is:
-> 1. **Render clean, lettering-free panels** with the visual storytelling cues coming from physical scene elements only (sweat, fabric strain, dust, motion blur, particle effects baked into the lit scene — described in non-comic-coded language).
-> 2. **Add SFX and action lines as vector overlays in `page-composer`** post-render. This is also where speech bubbles, captions, and dialogue go.
-> 3. **If a dramatic splash truly needs in-render SFX** (rare), render it as a **physical scene object**: *"In the scene, the SFX word 'BWOOM' appears as a 3D-extruded chrome letter sculpture sitting in the scene as a physical object, casting a real ray-traced shadow on the ground and catching the same warm rim light as the rest of the render."* — see L7 Case B's worked example.
->
-> The text below is preserved for historical reference only. Do NOT paste it into prompts.
+> **Active — rendering language updated for L19.** SFX text IS baked into the generation prompt, but rendered as **3D-extruded letter sculptures** (chrome, stone, energy) with real ray-traced shadows and the same scene lighting as the rest of the render — never as flat 2D comic-burst text or radiating action lines. The old "RRRRIP! as red/yellow burst text" / "action lines radiating outward" phrasing pulled the CGI render toward 2D illustration (the L7 Case B failure mode confirmed in the Chun-Li growth series panels 3/4/5); the physical-scene-object framing holds CGI while still delivering the SFX punch. This section's prompt block is the L19-conformant version. Pair it with the L19 opening render-engine anchor and closing `NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render.` negation block — see the file header.
 
-**CRITICAL: Action lines and SFX text MUST be included in EVERY panel where growth or transformation is occurring. These are NOT optional. They are NOT a nice-to-have. Skipping them makes growth panels look static and lifeless. Include this block in every growth panel — no exceptions.**
+**CRITICAL: In-scene SFX MUST be included in EVERY panel where growth or transformation is occurring. These are NOT optional. They are NOT a nice-to-have. Skipping them makes growth panels look static and lifeless. Include this block in every growth panel — no exceptions.**
 
-Transformation scenes must include visual storytelling cues that help the reader's eye focus on what's changing. Without these, panels feel static even when dramatic growth is happening.
+Transformation scenes must include visual storytelling cues that help the reader's eye focus on what's changing. Without these, panels feel static even when dramatic growth is happening. Render those cues as physical scene elements, not as 2D overlays.
 
 Include this in EVERY transformation/growth prompt — paste it directly, do not summarize or skip:
 ```
-Action lines radiating outward from the growing [body part], emphasizing the explosive expansion. SFX text like "RRRRIP!" near tearing fabric, "CRACK!" for seams splitting, "THROB" or "PULSE" near swelling muscles. These visual effects draw the reader's eye to the focal point of the transformation.
+In-scene SFX: the words "RRRRIP" (positioned near the tearing fabric), "CRACK" (positioned where seams are splitting), and "THROB" or "PULSE" (positioned near swelling muscles) appear as 3D-extruded chrome letter sculptures sitting in the scene as physical objects. Each casts a real ray-traced shadow on the nearest surface and catches the same warm rim light as the rest of the render. Motion in the scene is told through physical cues — sweat beading and flying, fabric fibers tearing, fine dust kicked up by the expansion, subtle motion blur on the growing region — NOT through 2D action-line overlays.
 ```
 
-When to include action lines and SFX:
+When to include in-scene SFX:
 - Any panel where muscles are growing: **YES, ALWAYS**
 - Any panel where clothes are tearing: **YES, ALWAYS**
 - Any panel where breasts are swelling: **YES, ALWAYS**
@@ -154,9 +153,9 @@ When to include action lines and SFX:
 
 ## Dialogue Formatting
 
-> ⚠️ **DEPRECATED** — speech bubbles, thought bubbles, and caption boxes are NOT written into the generation prompt per L4 (deprecated) and L7 Case B in `lessons-learned.md`. They live in `shotlist.json`'s `dialogue[]` and `captions[]` arrays and are placed by `page-composer` as vector overlays. The text below is preserved for historical reference only.
+> **Active — applies whenever you bake a bubble (the default for CGI panels per L19).** Speech bubbles, thought bubbles, and caption boxes are written into the generation prompt as **physical 3D scene objects** — photoreal semi-translucent floating panels with extruded text and tails pointing at speakers — not as flat 2D comic overlays. Pair every baked bubble with **L4**'s positioning rules: bubble shape (`white speech bubble` / `jagged-edged for yelling` / `wavering broken-edged for weak voice` / `rectangular yellow caption box for narration`), position in frame, tail direction, exact text in quotes, and per-speaker attribution. The `dialogue[]` / `captions[]` arrays in `shotlist.json` remain the source of truth for *what is said*; this section describes *how the bubble renders in the photoreal scene*. The short-form shorthand below still composes correctly, but for CGI panels prefer the long-form phrasing (it survives the model's "speech bubble → comic illustration" association better).
 
-Always write dialogue in this format inside prompts:
+Short form (legacy shorthand — readable, but the model often renders this as a flat 2D bubble):
 
 ```
 Comic speech bubble — JILL: "Exact line of dialogue here."
@@ -165,7 +164,13 @@ Comic thought bubble — ROCHELLE'S THOUGHTS: "Her internal monologue here."
 Comic text box: "Narration or scene setting text here."
 ```
 
-For multi-character panels, list each line separately. Be explicit about which character is on which side of the frame and who is speaking — this directly affects where the model places the speech bubbles.
+Long form (CGI / L19 — bakes the bubble as a physical 3D object so it holds the photoreal register):
+
+```
+In-scene speech bubble: a photoreal semi-translucent white 3D panel with rounded edges and an extruded tail, floating in the [upper-left / upper-right / lower-left / lower-right] of the frame. Slightly glossy surface with subtle subsurface scattering. The tail extends [direction], pointing to [SPEAKER]'s mouth. Black extruded sans-serif text on the surface reads exactly: "[DIALOGUE]". A physical object in 3D space, casting a real shadow on [background surface].
+```
+
+For multi-character panels, list each bubble separately. Be explicit about which character is on which side of the frame and who is speaking — this directly affects where the model places the speech bubbles. Per **L4**, also vary bubble shape to match the line (jagged for yells, wavering for weak voices, rectangular yellow caption box for narration), and give each tail an explicit direction so attribution is unambiguous.
 
 ---
 

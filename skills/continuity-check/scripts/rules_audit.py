@@ -91,6 +91,37 @@ CAMERA_DISTANCES = [
     "full", "wide-establish", "splash",
 ]
 
+# Numeric distance scores for the L20 chapter-aggregate gate. Scale matches
+# camera-distance-analysis/README.md (0 ecu-face → 6 wide-establish). `splash`
+# is treated as 5 — it's a full-body close-framed reveal, not a wider category.
+DISTANCE_SCORE = {
+    "ecu-face": 0,
+    "ecu-region": 1,
+    "mcu": 2,
+    "medium": 3,
+    "cowboy": 4,
+    "full": 5,
+    "wide-establish": 6,
+    "splash": 5,
+}
+MIDDLE_DISTANCES = {"mcu", "medium", "cowboy"}
+
+# L20 chapter-aggregate thresholds. Derived from the hand-made April benchmark
+# (mean 2.4) vs the AI-generated failure (mean 4.1).
+MEAN_DISTANCE_MAX = 3.0
+MIDDLE_DISTANCE_MIN_FRAC = 0.30
+MEAN_DISTANCE_MIN_PANELS = 6  # below this, the chapter is too short to compute meaningfully
+
+# Per-beat default distance ceilings per script-breakdown SKILL.md § Step 4.5.
+# Used by check_camera_distance_bias: SOFT finding when a panel's beat is set,
+# beat != reveal, and panel distance score > beat's ceiling.
+PER_BEAT_TIGHTNESS = {
+    "consider": 3, "decide": 4, "trigger": 4, "first_sensation": 4,
+    "chest": 3, "hips": 3, "rear": 4, "suit_fail": 4,
+    "arms": 2, "abs": 2, "legs": 2, "shoulders": 3, "back": 3,
+    "whole_body": 5, "reveal": 6, "aftermath": 4,
+}
+
 CAMERA_ANGLES = [
     "eye-level", "low-angle-front", "low-angle-back", "high-angle",
     "worms-eye", "birds-eye", "dutch", "over-shoulder", "profile",
@@ -419,6 +450,80 @@ def check_camera_variety(shotlist: dict, pages_filter: set[int] | None) -> list[
 # absence produced the April-claudemade failure (zero body-region beats; a
 # 9-page transformation comic with no transformation event shown).
 
+def check_camera_distance_bias(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    """L20 camera-distance bias gate. Enforces chapter-aggregate distribution:
+
+    - HARD: mean camera distance must be ≤ 3.0 (medium or closer).
+    - HARD: ≥ 30% of panels must sit in {mcu, medium, cowboy} (the missing-middle test).
+    - SOFT per-beat: non-`reveal` transformation beats shot at distances wider
+      than their per-beat ceiling (see PER_BEAT_TIGHTNESS).
+
+    Empirical basis: hand-made April mean 2.4, AI April 4.1 with zero middle
+    distances. See camera-distance-analysis/README.md and lessons-learned L20.
+    """
+    panels: list[tuple[int, str, str, str | None]] = []
+    for page in shotlist.get("pages", []):
+        n = page.get("page_number")
+        if pages_filter is not None and n not in pages_filter:
+            continue
+        for p in page.get("panels", []):
+            panels.append((n, p.get("panel_id", f"page-{n}"),
+                           p.get("camera", "") or "",
+                           p.get("transformation_beat")))
+
+    if len(panels) < MEAN_DISTANCE_MIN_PANELS:
+        return []
+
+    parsed = [(n, pid, parse_camera(cam)[0], beat) for n, pid, cam, beat in panels]
+    scored = [(n, pid, d, beat, DISTANCE_SCORE.get(d)) for n, pid, d, beat in parsed]
+    scored_with_value = [s for s in scored if s[4] is not None]
+
+    out: list[Finding] = []
+    if not scored_with_value:
+        return out
+
+    N = len(scored_with_value)
+    mean_distance = sum(s[4] for s in scored_with_value) / N
+    middle_count = sum(1 for s in scored_with_value if s[2] in MIDDLE_DISTANCES)
+    middle_frac = middle_count / N
+
+    if mean_distance > MEAN_DISTANCE_MAX:
+        out.append(Finding(
+            None, None, "camera_distance_bias", SEVERITY_HARD,
+            f"Chapter mean camera distance is {mean_distance:.1f} (target ≤ {MEAN_DISTANCE_MAX:.1f}; hand-made April benchmark is 2.4). "
+            "The chapter sits too far from its subjects — body-region beats won't read at this framing.",
+            "Per L20: default transformation beats to MCU or closer; reserve `full`/`wide-establish` for the reveal beat. "
+            "See script-breakdown SKILL.md § Step 4.5 for the per-beat table.",
+        ))
+
+    if middle_frac < MIDDLE_DISTANCE_MIN_FRAC:
+        out.append(Finding(
+            None, None, "camera_distance_bias", SEVERITY_HARD,
+            f"Only {middle_count}/{N} panels ({middle_frac*100:.0f}%) sit in the middle distances "
+            f"{{mcu, medium, cowboy}} — target ≥ {MIDDLE_DISTANCE_MIN_FRAC*100:.0f}%. "
+            f"This is the 'missing middle' failure shape (AI-generated April had 0% here; hand-made April 60%).",
+            "Re-assign cameras on some panels to MCU / medium / cowboy. "
+            "ECU and full-body panels can coexist with middle distances; what breaks the chapter is having NONE in the middle.",
+        ))
+
+    for n, pid, dist, beat, score in scored_with_value:
+        if beat is None or beat == "reveal":
+            continue
+        beat_max = PER_BEAT_TIGHTNESS.get(beat)
+        if beat_max is None:
+            continue
+        if score > beat_max:
+            out.append(Finding(
+                n, pid, "camera_distance_bias", SEVERITY_SOFT,
+                f"Beat `{beat}` shot at `{dist}` (distance score {score}); typical default for this beat is ≤ {beat_max}. "
+                "Per L20: body-region beats need the region to dominate the frame.",
+                "Consider tightening to MCU or ecu-region. See script-breakdown SKILL.md § Step 4.5 for the per-beat table. "
+                "If this framing is intentional (e.g. the beat doubles as an establishing shot), accept this finding.",
+            ))
+
+    return out
+
+
 def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
     scenes = shotlist.get("transformation_scenes") or []
     if not scenes:
@@ -699,6 +804,7 @@ def main():
         + check_references(project, shotlist)
         + check_pages(project, shotlist, pages_filter)
         + check_camera_variety(shotlist, pages_filter)
+        + check_camera_distance_bias(shotlist, pages_filter)
         + check_transformation_beats(shotlist, pages_filter)
     )
 

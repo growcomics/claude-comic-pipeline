@@ -2,6 +2,30 @@
 
 Hard-won lessons from production. Each lesson is a real failure mode observed in output, the root cause, and the fix. Read this when something looks wrong, before you assume the prompt was the problem.
 
+L-numbers are chronological, not priority. A lesson's importance comes from being cited in `build-comic.md` hard rules, not from its position here. **Load-bearing index below — read these first if you're skimming.**
+
+---
+
+## Load-bearing index (the rules that govern most of the pipeline)
+
+| L | Title | What it governs |
+|---|---|---|
+| L1 | Progressive sequences must be chained, never parallelized | State continuity across multi-panel transformations |
+| L1.5 | Chain view-aware, not blindly to N−1 | Which prior panel becomes the state anchor |
+| L9 | Capture every panel's job_id before submitting the next | Chain integrity (no silent breaks) |
+| L10 | References are the truth, prompts are deltas | **The most important architectural rule** — what the prompt may describe vs what refs carry |
+| L10 refinement | Identity-vs-pose distinction | Refs carry identity / costume / location / lighting baseline; prompt carries camera / pose / expression / action / momentary state |
+| L11 | Cartoony FMG proportions need explicit anchoring | Body silhouette doesn't regress to realistic fitness on tier ≥ 2 |
+| L12 | Dialogue panels need close framing | On-screen dialogue + wide camera = unreadable; close framing mandatory |
+| L13 | Multi-speaker beats split into per-speaker panels | ≥3 lines from ≥2 speakers must be split before generation |
+| L14 | Multi-view location references for shot-reverse-shot | Single env anchor breaks when the camera reverses; pack multiple env refs per location |
+| L19 | Bake lettering into the CGI render | Reverses L7. SFX / speech bubbles / captions render inside the image as physical scene objects |
+| L20 | Camera distance bias for transformation comics | Default to MCU or closer; reserve full-body for the reveal. Mean ≤ 3.0, ≥30% in middle distances |
+
+Other lessons (L2, L3, L4, L5, L6, L7, L8) are platform-specific, situational, or historical. L7 in particular is superseded by L19 — read L7 for the diagnosis, L19 for the current rule. L4 was undeprecated when L19 reversed L7.
+
+When in doubt: read `build-comic.md`'s hard rules section, which is the active enforced subset.
+
 ---
 
 ## L1 — Progressive sequences must be chained, never parallelized
@@ -641,6 +665,42 @@ The opening anchors the photoreal target; the closing tells the model what to av
 **Where this rule does NOT apply**:
 - Projects that explicitly opt for vector lettering in post (rare).
 - Genuinely 2D-illustrated comics where illustration IS the goal.
+
+---
+
+## L20 — Camera distance bias for transformation comics
+
+**Symptom**: A transformation comic doesn't read as a transformation. The reader sees "April is now buff" or "she has bigger muscles" but doesn't *feel* the chest expanding, the bicep growing, the suit straining. The body-region changes happen on the page but they read as before/after states rather than as the change in motion.
+
+**Root cause**: The camera was too far. When a body-region beat (chest, hips, arms, abs) is shot at full-body distance, the changing region is small in frame and competes with the whole figure for the reader's attention. The eye doesn't lock onto the change. By contrast, MCU and ecu-region framings put the changing region in the center of the panel, dominant, with nowhere else for the eye to go.
+
+**Empirical confirmation** (May 2026 measurement, [`camera-distance-analysis/`](./camera-distance-analysis/)):
+
+- Hand-made April (15 pages): mean camera distance **2.4** (between MCU and medium). 73% of panels at MCU or closer. Only 1 full-body shot in the entire comic — the page-13 reveal.
+- AI-generated April (9 pages): mean camera distance **4.1** (between cowboy and full body). 78% of panels at full body or wider. Bimodal distribution: full-body promo poses + extreme close-ups, with **zero panels in the middle distances** (MCU / medium / cowboy).
+
+The transformation event never *happens* on the AI version's page because the camera is too far to show it.
+
+**Fix**:
+
+1. Default body-region transformation beats to MCU or ecu-region. The per-beat table in [`../../script-breakdown/SKILL.md`](../../../script-breakdown/SKILL.md) § Workflow Step 4.5 maps each `transformation_beat` value to its default distance.
+2. Reserve `full` for the `reveal` beat. A transformation chapter should have at most 1–2 full-body shots — the climax. Everywhere else, get close.
+3. Aim for a chapter-aggregate mean distance ≤ 3.0 (medium or closer). The hand-made target is 2.4.
+4. Watch the distribution, not just the mean. A bimodal "extreme close-up + full-body" distribution with nothing in the middle is broken even if the mean is fine on paper. At least 30% of panels should sit in {MCU, medium, cowboy}.
+
+**Enforced today by**:
+- `rules_audit.py` `check_camera_distance_bias` — HARD if chapter mean distance > 3.0; HARD if middle-distance fraction < 30%; SOFT per-beat finding when a non-`reveal` transformation beat is shot at `full` or wider.
+- `rules_audit.py` `check_camera_variety` — HARD on any single `(distance, angle)` combo appearing in >3 panels. This catches the worst case (the AI April had 7 panels at `(full, eye-level)`).
+- `next_panel.py` — emits `WARNING_CAMERA_TOO_FAR_FOR_BEAT` at planning time when the panel's beat default is tighter than its declared camera.
+- Per-beat distance defaults in script-breakdown's Step 4.5 table.
+
+**Where this rule applies**:
+- Transformation comics (FMG, growth, mutation, dress-up, charge-up, expansion). The whole genre lives on body-region changes; distance bias is the whole game.
+- Likely also applies to fight / action chapters (impact reads at close framing). Not yet confirmed in production.
+
+**Where this rule does NOT apply**:
+- Dialogue-heavy scenes — L12 already covers close framing for dialogue.
+- World-building / establishing scenes — wide-establish is the right tool there.
 
 ---
 

@@ -220,6 +220,38 @@ def detect_dialogue_camera_conflict(panel: dict) -> tuple[bool, list[str]]:
     return (bool(speakers), speakers)
 
 
+# L20 per-beat distance ceilings — mirror of rules_audit.py PER_BEAT_TIGHTNESS.
+# Kept in sync manually; both encode "transformation beats default to MCU or
+# closer; reveal is the only beat that legitimately uses full+."
+_DISTANCE_SCORE = {
+    "ecu-face": 0, "ecu-region": 1, "mcu": 2, "medium": 3,
+    "cowboy": 4, "full": 5, "wide-establish": 6, "splash": 5,
+}
+_PER_BEAT_TIGHTNESS = {
+    "consider": 3, "decide": 4, "trigger": 4, "first_sensation": 4,
+    "chest": 3, "hips": 3, "rear": 4, "suit_fail": 4,
+    "arms": 2, "abs": 2, "legs": 2, "shoulders": 3, "back": 3,
+    "whole_body": 5, "reveal": 6, "aftermath": 4,
+}
+
+
+def detect_camera_too_far_for_beat(panel: dict) -> tuple[bool, str | None, int | None, int | None]:
+    """L20 detection: returns (overshoot, beat, distance_score, beat_max).
+
+    Fires when a panel has a `transformation_beat` set (not `reveal`) AND its
+    camera distance is wider than the beat's typical ceiling.
+    """
+    beat = panel.get("transformation_beat")
+    if not beat or beat == "reveal":
+        return (False, None, None, None)
+    camera = (panel.get("camera") or "").split(",")[0].strip()
+    score = _DISTANCE_SCORE.get(camera)
+    beat_max = _PER_BEAT_TIGHTNESS.get(beat)
+    if score is None or beat_max is None:
+        return (False, beat, score, beat_max)
+    return (score > beat_max, beat, score, beat_max)
+
+
 def detect_multi_speaker_crowding(panel: dict) -> tuple[bool, int, int]:
     """L13 detection: returns (split_recommended, n_lines, n_speakers).
 
@@ -745,6 +777,26 @@ def build_plan(root: Path) -> dict:
                 "produces a cramped sitcom-freeze-frame. Split this beat into "
                 f"{n_lines} per-speaker panels in the shotlist; each new panel "
                 "frames the speaker who's talking on it."
+            ),
+        })
+
+    too_far, beat, dscore, beat_max = detect_camera_too_far_for_beat(next_panel)
+    if too_far:
+        refs_to_attach.append({
+            "kind": "WARNING_CAMERA_TOO_FAR_FOR_BEAT",
+            "beat": beat,
+            "camera": target_view,
+            "distance_score": dscore,
+            "beat_max_score": beat_max,
+            "reason": (
+                f"L20 overshoot: beat `{beat}` is shot at `{target_view}` "
+                f"(distance score {dscore}); typical ceiling for this beat is {beat_max}. "
+                "Body-region transformation beats need the region to dominate the frame; "
+                "full-body framings make the change small and the panel reads as "
+                "before/after rather than the change happening now. Tighten the camera "
+                "(MCU or ecu-region) or accept the finding if this beat doubles as an "
+                "establishing shot. See script-breakdown SKILL.md § Step 4.5 and "
+                "camera-distance-analysis/README.md."
             ),
         })
 
