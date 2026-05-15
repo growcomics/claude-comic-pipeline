@@ -1,0 +1,27 @@
+{
+  "cast": [{"id": "ella", "sex": "f"}],
+  "locations": [{"id": "dojo", "description": "wooden dojo with sliding doors"}],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "wide-establish",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "enters the dojo",
+          "muscle_size_tier": 1
+        },
+        {
+          "panel_id": "p2",
+          "camera": "medium",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "removes her gi top",
+          "muscle_size_tier": 1
+        }
+      ]
+    }
+  ]
+}

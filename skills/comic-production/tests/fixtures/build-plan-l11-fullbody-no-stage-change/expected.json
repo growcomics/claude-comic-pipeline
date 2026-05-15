@@ -1,0 +1,14 @@
+{
+  "description": "Regression for the deprecated L5 (stage-change-only) lineup-attach path. p1 accepted at tier 3; p2 pending at tier 3 (NO stage change), full-body 3q camera. L11 says: lineup MUST still attach because the body is the focal subject on full-body shots. p2's location has no env ref so the 3-ref ceiling does not fire.",
+  "expect_panel_id": "p2",
+  "expect_stage_change": false,
+  "expect_aspect": "3:4",
+  "expect_ref_kinds_in_order": ["state_anchor", "face_card", "lineup"],
+  "expect_ref_kinds_present": ["lineup"],
+  "expect_ref_kinds_absent": ["MISSING_lineup", "env_ref", "env_anchor"],
+  "expect_prompt_contains": [
+    "Size tier: 3",
+    "muscle-size lineup reference is a PROPORTION reference ONLY",
+    "State anchor: prior panel `p1`"
+  ]
+}

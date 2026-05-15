@@ -1,0 +1,19 @@
+{
+  "cast": [{"id": "ella", "sex": "f"}],
+  "locations": [],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "3q-full",
+          "characters": ["ella"],
+          "location": null,
+          "action": "stands fully transformed, peak silhouette",
+          "muscle_size_tier": 5
+        }
+      ]
+    }
+  ]
+}

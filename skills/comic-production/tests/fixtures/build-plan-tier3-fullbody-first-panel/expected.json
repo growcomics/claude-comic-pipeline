@@ -1,0 +1,23 @@
+{
+  "description": "First pending panel, tier 3, 3q-full. Empty accepted history. Face card + env source + lineup attached. Stage-change is true (no prior tier).",
+  "expect_panel_id": "p1",
+  "expect_stage_change": true,
+  "expect_aspect": "3:4",
+  "expect_ref_kinds_in_order": ["face_card", "env_ref", "lineup"],
+  "expect_prompt_contains": [
+    "DAZ Studio Iray render",
+    "Mandatory:",
+    "Subjects: ella.",
+    "Style anchor for the body: cartoony hyper-FMG",
+    "Size tier: 3.",
+    "muscle-size lineup",
+    "DO NOT render any reference image as a physical scene object",
+    "RENDER DIRECTIVE:",
+    "Photographic CGI render, NOT illustrated."
+  ],
+  "expect_prompt_not_contains": [
+    "Female anatomy anchor:",
+    "Hair state:",
+    "Background (no env ref attached this panel"
+  ]
+}

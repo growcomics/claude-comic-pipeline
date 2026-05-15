@@ -1,0 +1,30 @@
+{
+  "cast": [{"id": "ella", "sex": "f"}],
+  "locations": [
+    {"id": "hallway", "description": "narrow corridor"},
+    {"id": "courtyard", "description": "stone courtyard"}
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "3q-full",
+          "characters": ["ella"],
+          "location": "hallway",
+          "action": "walks toward the door",
+          "muscle_size_tier": 3
+        },
+        {
+          "panel_id": "p2",
+          "camera": "3q-full",
+          "characters": ["ella"],
+          "location": "courtyard",
+          "action": "steps into the open air",
+          "muscle_size_tier": 3
+        }
+      ]
+    }
+  ]
+}

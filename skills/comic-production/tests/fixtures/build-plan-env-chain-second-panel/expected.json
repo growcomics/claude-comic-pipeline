@@ -1,0 +1,15 @@
+{
+  "description": "L10 env chaining: p1 accepted at dojo (no _source.jpg on disk) → p2 pending at same location. pick_location_anchor() must pick p1's accepted PNG as the env anchor, NOT fall back to find_env_ref(). Prompt should describe the env as the accepted establishing shot from p1.",
+  "expect_panel_id": "p2",
+  "expect_aspect": "1:1",
+  "expect_ref_kinds_in_order": ["note", "face_card", "env_anchor"],
+  "expect_ref_kinds_present": ["env_anchor"],
+  "expect_ref_kinds_absent": ["env_ref"],
+  "expect_prompt_contains": [
+    "The attached environment reference IS this location",
+    "accepted establishing shot from panel `p1`"
+  ],
+  "expect_prompt_not_contains": [
+    "establishes the location's render style"
+  ]
+}

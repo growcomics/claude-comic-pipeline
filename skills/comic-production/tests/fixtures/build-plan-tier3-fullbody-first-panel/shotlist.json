@@ -1,0 +1,21 @@
+{
+  "cast": [{"id": "ella", "sex": "f"}],
+  "locations": [
+    {"id": "dojo", "description": "wooden dojo with cypress floor, sliding paper doors, hanging scrolls, weapon rack"}
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "3q-full",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "plants both feet, fists raised in fighting stance",
+          "muscle_size_tier": 3
+        }
+      ]
+    }
+  ]
+}

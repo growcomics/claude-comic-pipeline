@@ -1,0 +1,25 @@
+{
+  "description": "p1 accepted, p2 pending. Same location + view-compatible prior → state_anchor + env_anchor would attach. Two characters → two face cards. Tier 3 full-body → lineup attaches via L11 (no stage change). Total = 5 refs → env must be dropped to fit the 3-ref ceiling, and the prompt should carry the L23 dense env anchor instead.",
+  "expect_panel_id": "p2",
+  "expect_stage_change": false,
+  "expect_aspect": "3:4",
+  "expect_ref_kinds_in_order": [
+    "state_anchor",
+    "face_card",
+    "face_card",
+    "env_anchor_dropped_for_ceiling",
+    "lineup"
+  ],
+  "expect_prompt_contains": [
+    "Background (no env ref attached this panel",
+    "wooden dojo hall with cypress floorboards",
+    "State anchor: prior panel `p1`",
+    "Size tier: 3",
+    "muscle-size lineup reference is a PROPORTION reference ONLY",
+    "DO NOT render any reference image as a physical scene object"
+  ],
+  "expect_prompt_not_contains": [
+    "The attached environment reference IS this location",
+    "Location: dojo. The attached environment reference"
+  ]
+}

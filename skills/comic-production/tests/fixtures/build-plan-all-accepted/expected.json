@@ -1,0 +1,4 @@
+{
+  "description": "Every panel has v*_accepted.png on disk. build_plan should return next_panel=null.",
+  "expect_no_pending_panels": true
+}

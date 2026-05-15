@@ -1,0 +1,27 @@
+{
+  "cast": [{"id": "ella", "sex": "f"}],
+  "locations": [{"id": "dojo", "description": "wooden dojo"}],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "wide-establish",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "stands at the door",
+          "muscle_size_tier": 1
+        },
+        {
+          "panel_id": "p2",
+          "camera": "ecu-face",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "narrows her eyes",
+          "muscle_size_tier": 1
+        }
+      ]
+    }
+  ]
+}

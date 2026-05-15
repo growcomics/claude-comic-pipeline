@@ -1,0 +1,10 @@
+{
+  "description": "tier 5 exceeds grok_image ceiling (3). build_plan should emit a WARNING_MODEL_MUSCULARITY_CEILING ref entry so the production driver knows to route this panel away from Grok.",
+  "expect_panel_id": "p1",
+  "expect_ref_kinds_present": ["WARNING_MODEL_MUSCULARITY_CEILING", "face_card", "lineup"],
+  "expect_prompt_contains": [
+    "Size tier: 5",
+    "massive cartoony FMG",
+    "Style anchor for the body: cartoony hyper-FMG"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "cast": [
+    {"id": "ella", "sex": "f"},
+    {"id": "kira", "sex": "f"}
+  ],
+  "locations": [
+    {"id": "dojo", "description": "wooden dojo hall with cypress floorboards, paper sliding doors, weapon rack along the far wall, late-afternoon amber light through rice paper"}
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p1",
+          "camera": "3q-full",
+          "characters": ["ella"],
+          "location": "dojo",
+          "action": "enters and locks the door behind her",
+          "muscle_size_tier": 3
+        },
+        {
+          "panel_id": "p2",
+          "camera": "3q-full",
+          "characters": ["ella", "kira"],
+          "location": "dojo",
+          "action": "faces kira across the floor",
+          "muscle_size_tier": 3
+        }
+      ]
+    }
+  ]
+}
