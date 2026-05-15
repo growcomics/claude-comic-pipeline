@@ -377,13 +377,191 @@ def find_lineup(root: Path, tier: int | None) -> Path | None:
 
 
 # ---------------------------------------------------------------------------
+# Prompt-injection helpers for L21–L24 and the new May-14-validation findings.
+#
+# These were authoring-time rules until 2026-05-14, when the chun-li-grok-
+# validation run produced empirical evidence that compose_prompt needs to
+# emit them automatically. See CHANGELOG 2026-05-14 entries for the failure
+# cases each one fixes.
+
+# L21 — every prompt that attaches any ref must include this clause near the
+# render directive. Models occasionally render an attached face card / lineup
+# / state-anchor as a physical scene object (a photo, badge, poster, or
+# watermark-style number floating in the corner). Empirically validated on
+# Grok p6 v2 where the lineup's "1" label rendered into the panel as a
+# watermark; removing it via the v3 prompt suppressed it.
+L21_REF_EXCLUSION = (
+    "DO NOT render any reference image as a physical scene object — "
+    "no inset photos, no watermarks, no figure numbers, no badges. "
+    "References are for identity, proportion, location, and state guidance "
+    "only and must NOT appear inside the rendered scene."
+)
+
+
+# L22 — hair state per panel. Read explicitly from `panel.hair_state`. Do NOT
+# auto-derive from tier + transformation_beat: the May 14 lesson
+# `feedback_dont_invent_state_changes` says a tier bump alone is NOT consent
+# to escalate to hair-down / suit_fail. The shotlist author owns this field;
+# the composer's job is only to surface it as a named, anchored line.
+def _hair_state_line(panel: dict) -> str | None:
+    hs = panel.get("hair_state")
+    if not hs or not isinstance(hs, str) or not hs.strip():
+        return None
+    return f"Hair state: {hs.strip()}."
+
+
+# L23 — when the env ref is dropped (3-ref ceiling forces face + state anchor
+# + lineup with no room for env), inject 5+ named location elements verbally
+# so the background doesn't collapse to a grey void. Pulls from the
+# shotlist's locations[].description, which should already be detailed.
+# Empirically validated on Grok p4/p6: env dropped, the dense verbal anchor
+# held the dojo cleanly.
+def _env_dense_anchor(shotlist: dict, location_slug: str) -> str | None:
+    if not location_slug:
+        return None
+    locs = shotlist.get("locations", []) or []
+    for loc in locs:
+        if loc.get("id") == location_slug:
+            desc = (loc.get("description") or "").strip()
+            if desc:
+                return (
+                    f"Background (no env ref attached this panel — render "
+                    f"from this dense anchor instead): {desc}"
+                )
+    return None
+
+
+# L24 — accessories: canonical inventory + enumerated negation. The negation
+# is the load-bearing part: models hallucinate dark studded cuffs / watches /
+# tactical gloves when only "no jewelry" is forbidden. The negation list must
+# enumerate the substitutes models actually produce.
+#
+# Per-character accessories live on shotlist.cast[i].accessories as:
+#   { "canonical": "white spiked wristbands on both wrists",
+#     "negation": ["watches", "bracelets", "dark cuffs",
+#                  "leather cuffs", "studded gloves", "smartwatches"] }
+#
+# Cameras where wrists / neck / ears / fingers may be in frame — i.e. where
+# the model has room to hallucinate. ECU-region on an arm is included
+# because the wrist is usually at the bottom of frame.
+L24_CAMERAS = {
+    "ecu-face", "ecu-region", "mcu", "medium", "cowboy",
+    "front-full", "3q-full", "back-full", "side-full", "profile",
+    "low-angle-front", "low-angle-back", "high-angle",
+    "wide-establish", "splash",
+}
+
+
+def _l24_accessory_line(panel: dict, cast_lookup: dict) -> str | None:
+    camera = (panel.get("camera") or "").split(",")[0].strip()
+    if camera not in L24_CAMERAS:
+        return None
+    chars = panel.get("characters", []) or []
+    if not chars:
+        return None
+    pieces: list[str] = []
+    for char_id in chars:
+        char = cast_lookup.get(char_id)
+        if not char:
+            continue
+        acc = char.get("accessories")
+        if not acc:
+            continue
+        canonical = (acc.get("canonical") or "").strip()
+        negation = acc.get("negation") or []
+        if not canonical and not negation:
+            continue
+        if canonical:
+            pieces.append(f"Accessories ({char_id}): {canonical} — canonical, ONLY these.")
+        if negation:
+            neg_terms = ", ".join(f"NO {n}" for n in negation)
+            pieces.append(neg_terms + ", no anachronistic accessories.")
+    if not pieces:
+        return None
+    return " ".join(pieces)
+
+
+# New (May 14): female-anatomy anchoring on body-region ECUs at tier >= 2.
+# Body-region ECUs on a female muscular character drift to male anatomy
+# (square pectorals, no breast contour) when the face is off-frame. Caught
+# critically on chun-li-grok-validation p5 (tier 5 abs ECU rendered male).
+# Inject an explicit female-anatomy line when:
+#   - camera is a body-region close-up (ecu-region)
+#   - tier >= 2 (heavy muscle ECUs are the failure surface)
+#   - arc character is female (heuristic: cast[].pronoun in {"she","her"}
+#     or sex == "f"; falls back to True if undeclared, since FMG comics are
+#     overwhelmingly female-coded)
+def _arc_character_is_female(panel: dict, cast_lookup: dict) -> bool:
+    chars = panel.get("characters", []) or []
+    if not chars:
+        return False
+    char = cast_lookup.get(chars[0])
+    if not char:
+        return False
+    sex = (char.get("sex") or "").lower()
+    if sex in ("f", "female"):
+        return True
+    if sex in ("m", "male"):
+        return False
+    pronoun = (char.get("pronoun") or "").lower()
+    if pronoun in ("she", "she/her", "her"):
+        return True
+    if pronoun in ("he", "he/him", "him"):
+        return False
+    # Default for FMG / transformation comics is female arc character.
+    return True
+
+
+FEMALE_ANATOMY_ANCHOR = (
+    "Female anatomy anchor: the body is unambiguously FEMALE despite the "
+    "hyper-developed muscle. Feminine bone structure, visible breast "
+    "contour where the chest is in or near frame, feminine waist taper "
+    "above the hips, smaller hands and wrists than a male equivalent, "
+    "soft feminine collarbone line. NOT a male body — no square male "
+    "pectorals, no flat-plane male upper chest."
+)
+
+
+def _female_anatomy_anchor_needed(panel: dict, cast_lookup: dict) -> bool:
+    camera = (panel.get("camera") or "").split(",")[0].strip()
+    if camera != "ecu-region":
+        return False
+    tier = panel.get("muscle_size_tier")
+    if tier is None:
+        return False
+    try:
+        if int(tier) < 2:
+            return False
+    except (TypeError, ValueError):
+        return False
+    return _arc_character_is_female(panel, cast_lookup)
+
+
+# Per-model muscularity ceilings (May 14 finding). Some models refuse to
+# render extreme female muscle silhouettes regardless of prompt — Grok
+# Imagine demonstrably caps around tier 2-3 on female anatomy.
+# Used by build_plan to emit a routing-recommendation WARNING; compose_prompt
+# does not change behavior based on the model (it doesn't know it).
+MODEL_MUSCULARITY_CEILING: dict[str, int] = {
+    "grok_image": 3,
+    # Add other models here as ceilings are empirically established.
+}
+
+
+def _cast_lookup(shotlist: dict) -> dict:
+    """Build a {char_id: char_dict} map from shotlist.cast[]."""
+    return {c.get("id"): c for c in (shotlist.get("cast") or []) if c.get("id")}
+
+
+# ---------------------------------------------------------------------------
 # Prompt composer
 
 
 def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    stage_change: bool, env_ref: Path | None,
                    env_anchor_from: dict | None = None,
-                   lineup_attached: bool = False) -> str:
+                   lineup_attached: bool = False,
+                   env_dropped: bool = False) -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
 
     The body describes only what is *new* in this panel (camera, action,
@@ -406,6 +584,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     chars = panel.get("characters") or []
     tier = panel.get("muscle_size_tier")
     time_of_day = panel.get("time_of_day") or ""
+    cast_lookup = _cast_lookup(shotlist)
 
     parts: list[str] = []
 
@@ -442,7 +621,27 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if chars:
         parts.append(f"Subjects: {', '.join(chars)}.")
 
-    # 3a. Cartoony FMG style anchor — per L11. Slot it before the action delta
+    # 3a. Hair state (L22) — only when explicitly set on the panel. The
+    # composer does NOT auto-derive from tier + beat (see memory
+    # `feedback_dont_invent_state_changes`); shotlist author owns this.
+    hair_line = _hair_state_line(panel)
+    if hair_line:
+        parts.append(hair_line)
+
+    # 3b. Accessories canonical + enumerated negation (L24). Reads per-character
+    # `accessories` block from cast[]. The negation list is the load-bearing
+    # part — naming what to exclude suppresses the model's prior.
+    acc_line = _l24_accessory_line(panel, cast_lookup)
+    if acc_line:
+        parts.append(acc_line)
+
+    # 3c. Female-anatomy anchor on body-region ECUs at tier >= 2 (May 14
+    # finding from chun-li-grok-validation p5). Pure body-region crops on
+    # heavy-muscle ECUs regress to male anatomy when face is off-frame.
+    if _female_anatomy_anchor_needed(panel, cast_lookup):
+        parts.append(FEMALE_ANATOMY_ANCHOR)
+
+    # 3d. Cartoony FMG style anchor — per L11. Slot it before the action delta
     # so the model commits to the proportional aesthetic before reading the
     # action content. Only emit when tier >= 2 (tier 1 is the realistic baseline
     # where the cartoony anchor would actively hurt).
@@ -549,7 +748,11 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "from the prior accepted panel."
             )
 
-    # 7. Environment — env-chaining-aware language
+    # 7. Environment — env-chaining-aware language. Three cases:
+    #   - env_ref attached + env_anchor_from set: chain off prior accepted panel
+    #   - env_ref attached + no anchor: first appearance, attach _source.jpg
+    #   - env_ref None + env_dropped=True: 3-ref ceiling forced drop, inject
+    #     L23 dense verbal anchor from shotlist.locations[].description
     if env_ref:
         if env_anchor_from:
             parts.append(
@@ -568,6 +771,13 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "lighting setup, scale, depth, atmosphere. Use it as the visual "
                 "anchor for the location's architecture. Do not reinterpret."
             )
+    elif env_dropped and location_slug:
+        # L23 fallback: env ref was dropped to fit the 3-ref ceiling.
+        # Inject the dense verbal anchor from locations[].description so the
+        # background doesn't collapse to a grey void.
+        dense = _env_dense_anchor(shotlist, location_slug)
+        if dense:
+            parts.append(dense)
 
     # 8. State anchor — prior panel for costume/hair/body/damage continuity
     if anchor:
@@ -593,6 +803,13 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "deltas. References override prompt text on visual identity; "
         "prompt overrides references on pose and action."
     )
+
+    # 9a. L21 ref-exclusion — emit whenever any ref is attached. Empirically
+    # validated on Grok p6 v2 (the lineup's "1" label rendered as a watermark);
+    # cheap, low-risk, recommended on every multi-ref panel.
+    any_ref_attached = bool(env_ref) or bool(anchor) or bool(lineup_attached)
+    if any_ref_attached:
+        parts.append(L21_REF_EXCLUSION)
 
     # 10. Mandatory rules (L7-compliant — no rendered lettering)
     parts.append(
@@ -801,9 +1018,72 @@ def build_plan(root: Path) -> dict:
         })
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
-    prompt = compose_prompt(next_panel, shotlist, anchor, stage_change, env_ref,
-                            env_anchor_from=env_anchor_from,
-                            lineup_attached=lineup_attached)
+
+    # L23 enforcement: count attached refs against the model's 3-ref ceiling.
+    # If we'd exceed it, drop env (most recoverable via the dense verbal anchor
+    # in the prompt). Count: face card(s) per character + state_anchor + lineup
+    # + env. Stage-change full-body panels typically have face + state-anchor +
+    # lineup at minimum, which already hits 3.
+    n_face_cards = sum(1 for r in refs_to_attach if r.get("kind") == "face_card")
+    n_state_anchor = 1 if (anchor and anchor["status"].get("image")) else 0
+    n_lineup = 1 if lineup_attached else 0
+    n_env = 1 if env_ref else 0
+    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env
+
+    env_dropped_for_ceiling = False
+    composer_env_ref: Path | None = env_ref
+    composer_env_anchor_from = env_anchor_from
+    if total_refs > 3 and env_ref:
+        env_dropped_for_ceiling = True
+        composer_env_ref = None
+        composer_env_anchor_from = None
+        # Mark the env entry in refs_to_attach as "dropped for ceiling" so the
+        # production driver knows the prompt has the verbal anchor instead.
+        for r in refs_to_attach:
+            if r.get("kind") in ("env_ref", "env_anchor"):
+                r["kind"] = f"{r['kind']}_dropped_for_ceiling"
+                r["reason"] = (
+                    "DROPPED to fit the 3-ref ceiling — prompt instead "
+                    "carries a dense verbal env anchor (L23). Do NOT attach "
+                    "this ref at submit time; use the verbal anchor in the "
+                    "composed prompt as the location signal."
+                )
+                break
+
+    # Per-model muscularity ceiling check (May 14 finding). build_plan does
+    # not know which model the production driver will use, so this is a hint
+    # rather than an enforcement: surface a WARNING when the panel's tier
+    # exceeds any known ceiling. The driver picks the model.
+    if tier is not None:
+        try:
+            t_int = int(tier)
+        except (TypeError, ValueError):
+            t_int = None
+        if t_int is not None:
+            for model_id, ceiling in MODEL_MUSCULARITY_CEILING.items():
+                if t_int > ceiling:
+                    refs_to_attach.append({
+                        "kind": "WARNING_MODEL_MUSCULARITY_CEILING",
+                        "model": model_id,
+                        "tier": t_int,
+                        "ceiling": ceiling,
+                        "reason": (
+                            f"Tier {t_int} exceeds the observed muscularity "
+                            f"ceiling for model `{model_id}` (≈ tier {ceiling} "
+                            "on female anatomy). If using this model, expect "
+                            "the silhouette to regress toward fitness-model "
+                            "build regardless of prompt or lineup ref. "
+                            "Recommend routing to nano_banana_flash or "
+                            "nano_banana_2 for this panel. See chun-li-grok-"
+                            "validation/ for empirical evidence."
+                        ),
+                    })
+
+    prompt = compose_prompt(next_panel, shotlist, anchor, stage_change,
+                            composer_env_ref,
+                            env_anchor_from=composer_env_anchor_from,
+                            lineup_attached=lineup_attached,
+                            env_dropped=env_dropped_for_ceiling)
 
     return {
         "project_root": str(root),
