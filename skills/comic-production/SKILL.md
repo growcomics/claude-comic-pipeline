@@ -297,9 +297,13 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
 
    For the full posing guide and lineup templates, see `references/posing-and-expressions.md`.
 6. Dialogue (exact speech bubble text with character attribution)
-7. Mandatory rules block — before starting any comic, present the full rules list to the user and ask which ones to drop or modify for this project. Do not skip this step. Copy the final agreed-upon block verbatim into every panel prompt.
+7. Mandatory rules block — read which rules apply from `production-config.json` at the project root if it exists. Compose the block from rules 1–10 minus any not in `mandatory_rules.active`, plus any `mandatory_rules.extra_lines`. Check `mandatory_rules.allow_baked_lettering` — when true, opt into L19 baked-lettering composition (physical-scene-object SFX + photoreal 3D speech panels with the L19 anchoring suffix); when false (default), strip all bubbles/SFX/captions from the generation prompt per L7 Case B. Copy the resulting block verbatim into every panel prompt.
 
-   **Pre-production rules review** — present this at project start:
+   The pipeline supports five transformation types via the config's `transformation_type` field. Each has its own default rule set. The `production-briefing` skill writes the right defaults at project setup; this skill just reads them.
+
+   If no config exists (legacy projects), fall back to pre-2026-05-13 behavior: present the full rules list at project start and ask which to drop. The ask happens ONCE per project, not per panel.
+
+   **The 10 rules** — same as before, transformation-type-agnostic. The transformation type only determines which are default-ON; the rules themselves don't change.
 
    | # | Rule | Why it exists |
    |---|---|---|
@@ -314,12 +318,35 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
    | 9 | Correct human anatomy — exactly two arms per person, no extra limbs | Model occasionally generates extra limbs |
    | 10 | Once a character has grown muscles they stay at that size or larger in all subsequent panels — muscles never revert | Model reverts characters to reference image size without this |
 
-   Ask the user: *"These are the default mandatory rules for every panel. Are there any you want to remove or modify for this comic?"*
+   **Per-transformation-type defaults** (written automatically by `production-briefing` based on `transformation_type`):
 
-   Common reasons to modify:
-   - Rule 3 (muscles = breasts): drop if the story has male characters or non-transformation arcs
+   | Type | Active rules | Why these defaults |
+   |---|---|---|
+   | `fmg` | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (all) | The historical default. The whole rule set was authored for FMG. |
+   | `be` | 2, 4, 5, 6, 7, 8, 9 | Rule 1 (muscle skin tone) is N/A — no muscle growth. Rule 3 (muscle=breasts) is redundant — this IS the breast arc. Rule 10 (muscles never revert) is N/A — BE has its own monotonicity (in `extra_lines`). |
+   | `glute` | 2, 4, 5, 6, 7, 8, 9 | Same reasoning as BE. Glute-specific monotonicity goes in `extra_lines`. |
+   | `mmg` | 1, 2, 4, 5, 6, 7, 8, 9, 10 | Rule 3 OFF — male characters, no breasts. All other rules apply identically. |
+   | `mixed` | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (all) | Multi-arc — every rule may apply on some panel. Manual emphasis via `extra_lines`. |
+
+   **Recommended `extra_lines` per type** — these aren't rules from the table above; they're project-specific addendums the briefing appends to the rules block:
+
+   - **FMG**: usually none. The rule table itself is FMG-tuned.
+   - **BE**: monotonic breast size, hourglass silhouette, round shape, seam-tearing clothing. See `production-briefing/SKILL.md` for the canonical BE extras.
+   - **Glute**: monotonic glute size, hourglass silhouette, rounded shape, balanced thighs, seam-tearing wardrobe.
+   - **MMG**: male anatomy throughout, pectorals (not breasts), V-taper, masculine facial structure, body-hair continuity.
+   - **Mixed**: which arcs apply to which characters, growth order, current-active-stage lineup convention.
+
+   **L19 baked-lettering opt-in.** When `mandatory_rules.allow_baked_lettering` is true:
+   - Append the L19 opening anchor to the prompt: *"Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering on skin, physically-based rendering, 8K texture detail. Photographic CGI."*
+   - Compose SFX as physical scene objects ("the word 'KRRRK' rendered as a 3D-extruded chrome letter sculpture, positioned upper-left of frame; real ray-traced shadows on the surface beneath; catches the same key light as the scene").
+   - Compose speech bubbles as photoreal semi-translucent 3D panels ("a photoreal semi-translucent white 3D panel with rounded edges and an extruded tail, floating in the upper-right; tail extends down-left, pointing to the speaker; black extruded sans-serif text on the surface reads exactly: 'LINE'").
+   - Append the L19 closing negation: *"NOT a comic, NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art. Photographic CGI render."*
+   - When false (default), pass the clean panel to `page-composer` for vector lettering per L7 Case B canonical. **Default is false** because the L19 reversal is still experimental and the failure mode on weaker models is silent 2D drift.
+
+   **Common one-off drops** (overrides on top of the type default):
+   - Rule 3 (muscles = breasts): drop for any male-only comic regardless of type
    - Rule 8 (no camera eye contact): drop for cover panels or direct-address moments
-   - Rule 10 (no reversion): drop if the story includes a de-transformation arc
+   - Rule 10 (no reversion): drop if the story includes an intentional de-transformation arc
 
 **Reference images and multiple characters**:
 - Every character who appears in a panel should have their own `ref_id` and `ref_url`. Add them as an array in the panel definition when multiple characters are present.

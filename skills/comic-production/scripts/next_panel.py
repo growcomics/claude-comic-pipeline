@@ -339,11 +339,34 @@ def pick_location_anchor(root: Path, location_slug: str, accepted_history: list[
     return None
 
 
-def find_lineup(root: Path, tier: int | None) -> Path | None:
-    """Resolve the muscle-size lineup ref. Tries, in order:
+def _read_production_config(root: Path) -> dict | None:
+    """Read production-config.json at project root. Returns None if missing
+    or malformed (caller falls back to FMG defaults). UTF-8 explicit for
+    Windows safety.
 
-    1. Project-local override:  <root>/references/style/muscle-size-lineup.png
-       (or *-4-9.png for tier >= 7) — lets a project ship a custom lineup.
+    Restored from pre-v4 local; required by autopilot + production-briefing
+    flow so non-FMG transformation types (BE / glute / MMG) can ship a
+    custom lineup filename via `lineup_files.tier_low / tier_high`.
+    """
+    cfg_path = root / "production-config.json"
+    if not cfg_path.is_file():
+        return None
+    try:
+        return json.loads(cfg_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def find_lineup(root: Path, tier: int | None) -> Path | None:
+    """Resolve the size-anchor lineup ref. Filenames come from
+    production-config.json's `lineup_files` block when present; falls back to
+    the FMG defaults (`muscle-size-lineup.png` / `muscle-size-lineup-4-9.png`)
+    when the config is missing.
+
+    Tries, in order:
+
+    1. Project-local override:  <root>/references/style/<filename>
+       (lets a project ship a custom lineup).
     2. Repo-bundled assets:     <pipeline>/skills/comic-production/assets/...
        (resolved relative to this script — works wherever the repo is cloned).
     3. User-installed skill:    ~/.claude/skills/comic-production/assets/...
@@ -356,7 +379,19 @@ def find_lineup(root: Path, tier: int | None) -> Path | None:
     """
     if tier is None:
         return None
-    filename = "muscle-size-lineup-4-9.png" if tier >= 7 else "muscle-size-lineup.png"
+
+    cfg = _read_production_config(root)
+    lineup_cfg = (cfg or {}).get("lineup_files", {})
+    tier_low_name = lineup_cfg.get("tier_low", "muscle-size-lineup.png")
+    tier_high_name = lineup_cfg.get("tier_high", "muscle-size-lineup-4-9.png")
+    active_range = lineup_cfg.get("active_range", "auto")
+
+    if active_range == "low":
+        filename = tier_low_name
+    elif active_range == "high":
+        filename = tier_high_name
+    else:  # auto
+        filename = tier_high_name if tier >= 7 else tier_low_name
 
     candidates: list[Path] = [
         root / "references" / "style" / filename,

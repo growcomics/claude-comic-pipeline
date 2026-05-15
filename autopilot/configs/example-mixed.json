@@ -1,0 +1,73 @@
+{
+  "version": 2,
+  "project": {
+    "name": "expanda-full-arc",
+    "root": "/Users/jay/Desktop/claude/expanda-full-arc",
+    "brand": "GrowGetterComics"
+  },
+  "transformation_type": "mixed",
+  "transformation_subtype": null,
+  "lineup_files": {
+    "tier_low": "muscle-size-lineup.png",
+    "tier_high": "muscle-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "platform": "higgsfield",
+  "script_source": {
+    "type": "path",
+    "value": "./script.md"
+  },
+  "mandatory_rules": {
+    "active": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "extra_lines": [
+      "Multi-arc comic — characters may go through BE, glute, and FMG progressions in sequence per the script.",
+      "Growth order is breasts → glutes → muscles (per posing-and-expressions.md).",
+      "Each completed arc stays at its peak: once breasts grow they stay; once glutes grow they stay; once muscles grow they stay.",
+      "When multiple arcs run simultaneously on the same character, the panel's primary lineup ref is the one for the CURRENTLY ACTIVE growth stage; the other arcs are described verbally in the prompt only."
+    ]
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": true
+  },
+  "higgsfield": {
+    "folder_id": "REPLACE_WITH_HIGGSFIELD_FOLDER_ID",
+    "default_ref_type": "nano_banana_2_job"
+  },
+  "generation": {
+    "max_panels": null,
+    "max_retries_per_panel": 3,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["breasts", "glutes", "muscles"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "halt-on-hard",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "halt",
+    "missing_ref_guardrail": "halt",
+    "posting": "never"
+  },
+  "continuity": {
+    "vision_audit_scope": "full-issue",
+    "arc_character": null,
+    "monotonic_attribute": "muscle_size_tier"
+  },
+  "page_composer": {
+    "mode": "auto",
+    "export_pdf": true,
+    "page_size_px": {"width": 2048, "height": 3072}
+  },
+  "status_board": {
+    "surface_inline": true,
+    "checkpoint_modes": ["references", "generation", "composition"]
+  },
+  "halt_conditions": {
+    "content_policy_refusal": true,
+    "missing_ref_guardrail": true,
+    "environmental_failure": true,
+    "script_ambiguity": true
+  }
+}

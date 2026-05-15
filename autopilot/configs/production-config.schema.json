@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "production-config",
+  "description": "One-time pre-flight decisions for a comic project run end-to-end by /build-comic autopilot. Written by the production-briefing skill at <project>/production-config.json. Consumed by build-comic.md (autopilot mode), comic-production SKILL.md (rules block), shotlist-driven-flow.md (per-panel loop), continuity-check SKILL.md (regen policy), and optionally next_panel.py (--config).",
+  "type": "object",
+  "required": ["project", "transformation_type", "platform", "mandatory_rules", "policies"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["name", "root"],
+      "properties": {
+        "name": {"type": "string", "description": "Display name, e.g. 'devotion-2'"},
+        "root": {"type": "string", "description": "Absolute path to project root, e.g. /Users/jay/Desktop/claude/devotion-2"},
+        "brand": {"type": "string", "enum": ["GrowGetterComics", "BloomBeautyComics", "MaxxMuscleComics", "3DMuscleComics", "MuscleGrowthAI", "other"], "description": "Optional — which brand the comic belongs to. Used by status board for color theming. Conventionally tied to transformation_type but not required to be: GrowGetter=fmg, Bloom=be|glute, MaxxMuscle=mmg, 3DMC=fmg|mmg|mixed."}
+      }
+    },
+    "transformation_type": {
+      "type": "string",
+      "enum": ["fmg", "be", "glute", "mmg", "mixed"],
+      "description": "Primary transformation arc. Drives rule-block defaults, lineup-file selection, prompt-template emphasis. fmg = Female Muscle Growth (default for GrowGetter). be = Breast Expansion (default for Bloom Beauty BE arcs). glute = Glute / butt expansion (default for Bloom Beauty glute arcs). mmg = Male Muscle Growth (default for MaxxMuscle, male 3DMC). mixed = multi-arc (e.g. BE + glute + FMG over the same comic) — uses all rules, manual per-panel emphasis."
+    },
+    "transformation_subtype": {
+      "type": ["string", "null"],
+      "default": null,
+      "description": "Optional. Free-form qualifier for narrower control: 'be-hyperbreast', 'glute-hyperbutt', 'fmg-hyperreal', 'mmg-bodybuilder', 'mmg-superhero'. Surfaces in prompt-template hints. null = use the type's standard template."
+    },
+    "lineup_files": {
+      "type": "object",
+      "description": "Which numbered-size lineup PNGs to use for visual size anchoring. next_panel.py's find_lineup() searches these filenames under project-local references/style/, repo-bundled assets/, ~/.claude/skills/comic-production/assets/. Defaults map to the FMG lineups bundled with the repo; override for other transformation types by creating the file in references/style/ of the project.",
+      "properties": {
+        "tier_low": {"type": "string", "default": "muscle-size-lineup.png", "description": "Lineup file for tiers 1-6 of the active transformation. FMG default: muscle-size-lineup.png. BE: drop in breast-size-lineup.png. Glute: glute-size-lineup.png. MMG: male-muscle-lineup.png."},
+        "tier_high": {"type": "string", "default": "muscle-size-lineup-4-9.png", "description": "Lineup file for tiers 4-9 (hypermuscular range). Optional — only needed if your story tiers cross 6."},
+        "active_range": {"type": "string", "enum": ["low", "high", "auto"], "default": "auto", "description": "auto = next_panel.py picks based on the panel's tier value. low = always use tier_low. high = always use tier_high."}
+      }
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["higgsfield", "flow", "hybrid"],
+      "description": "higgsfield = paid+scriptable runner. flow = free on Pro, browser-driven via Chrome MCP. hybrid = explore in Flow then port to Higgsfield."
+    },
+    "script_source": {
+      "type": "object",
+      "properties": {
+        "type": {"type": "string", "enum": ["path", "inline", "existing-shotlist"]},
+        "value": {"type": "string", "description": "Filesystem path for path/existing-shotlist, raw prose for inline"}
+      }
+    },
+    "mandatory_rules": {
+      "type": "object",
+      "required": ["active"],
+      "description": "Which rules from comic-production/SKILL.md lines 303-316 are baked into every panel prompt. Defaults vary by transformation_type — see briefing skill's per-type defaults table.",
+      "properties": {
+        "active": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1, "maximum": 10},
+          "description": "Rule numbers that are ON. Per-type defaults: fmg=[1..10]. be=[2,4,5,6,7,8,9] + extra BE growth-non-regression line. glute=[2,4,5,6,7,8,9] + extra glute growth-non-regression line. mmg=[1,2,4,5,6,7,8,9,10] (drop 3 since male, no breasts). mixed=[1..10]."
+        },
+        "extra_lines": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Project-specific addendums. Per-type recommended additions: BE → 'Breast size monotonic across panels — once larger, never smaller'. Glute → 'Glute size and hip-to-waist ratio monotonic — once curvier, never narrower'. MMG → 'Male anatomy throughout — never feminize the silhouette during growth'. Mixed → state which arcs apply to which characters."
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "properties": {
+        "policy": {"type": "string", "enum": ["refresh-always", "skip-if-populated", "rebuild"], "default": "skip-if-populated"},
+        "min_frames_per_character": {"type": "integer", "default": 5, "minimum": 3},
+        "require_source_jpg_for_locations": {"type": "boolean", "default": true, "description": "Hero locations need _source.jpg per environment-references.md"}
+      }
+    },
+    "higgsfield": {
+      "type": "object",
+      "description": "Higgsfield-specific settings, ignored when platform=flow",
+      "properties": {
+        "folder_id": {"type": "string", "description": "Higgsfield folder ID for this project"},
+        "default_ref_type": {"type": "string", "enum": ["nano_banana_2_job", "nano_banana_flash_job"], "default": "nano_banana_2_job"},
+        "use_unlim_override": {"type": ["boolean", "null"], "default": null, "description": "Leave null — runner derives from ref_type automatically"}
+      }
+    },
+    "flow": {
+      "type": "object",
+      "description": "Flow-specific settings, ignored when platform=higgsfield",
+      "properties": {
+        "default_count": {"type": "integer", "enum": [1, 2, 3, 4], "default": 4, "description": "x4 is recommended on Pro/Pro Ultra — free per gen"},
+        "aspect_override": {"type": ["string", "null"], "enum": ["1:1", "3:4", "4:3", "9:16", "16:9", null], "default": null, "description": "null = derive per panel from camera category"}
+      }
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "max_panels": {"type": ["integer", "null"], "default": null, "description": "Hard cap on panel count; halt if shotlist exceeds. null = no cap."},
+        "max_retries_per_panel": {"type": "integer", "default": 3, "minimum": 1, "description": "After this many bad rolls in a row on one panel → halt."},
+        "on_all_bad": {"type": "string", "enum": ["halt", "retry-with-cgi-anchor-boost", "skip-with-flag"], "default": "retry-with-cgi-anchor-boost", "description": "What to do when all variants in a batch fail QA."},
+        "pick_variant": {"type": "string", "enum": ["claude", "user"], "default": "claude", "description": "claude = autonomous per shotlist-driven-flow.md step 6. user = adds per-panel gate."},
+        "growth_sequence_order": {"type": "array", "items": {"type": "string", "enum": ["breasts", "glutes", "muscles", "height", "veins"]}, "description": "For mixed/multi-stage transformations, the order of progression per posing-and-expressions.md. Default for fmg=['breasts','glutes','muscles']. Default for be=['breasts']. Default for glute=['glutes']. Default for mmg=['muscles']."}
+      }
+    },
+    "policies": {
+      "type": "object",
+      "description": "How autopilot handles each previously-interactive gate.",
+      "properties": {
+        "stage3_gate": {"type": "string", "enum": ["auto", "halt"], "default": "auto"},
+        "act_boundary_audit": {"type": "string", "enum": ["always-halt", "halt-on-hard", "halt-on-hard-or-soft", "log-only"], "default": "halt-on-hard"},
+        "regeneration": {"type": "string", "enum": ["never", "batch-end", "auto-on-hard", "halt-on-hard"], "default": "batch-end"},
+        "content_policy_refusal": {"type": "string", "enum": ["halt"], "default": "halt"},
+        "missing_ref_guardrail": {"type": "string", "enum": ["halt"], "default": "halt"},
+        "posting": {"type": "string", "enum": ["never"], "default": "never"}
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "properties": {
+        "vision_audit_scope": {"type": "string", "enum": ["full-issue", "skip", "act-only"], "default": "full-issue"},
+        "arc_character": {"type": ["string", "null"], "default": null, "description": "Slug of the character whose tier should be checked for monotonic non-regression. null = auto-infer from shotlist."},
+        "monotonic_attribute": {"type": "string", "enum": ["muscle_size_tier", "breast_size_tier", "glute_size_tier", "auto"], "default": "auto", "description": "Which numeric field rules_audit.py enforces non-regression on. auto = derive from transformation_type: fmg/mmg/mixed→muscle_size_tier, be→breast_size_tier, glute→glute_size_tier."}
+      }
+    },
+    "page_composer": {
+      "type": "object",
+      "properties": {
+        "mode": {"type": "string", "enum": ["single-image", "multi-panel", "auto"], "default": "auto"},
+        "export_pdf": {"type": "boolean", "default": true},
+        "page_size_px": {"type": "object", "properties": {"width": {"type": "integer", "default": 2048}, "height": {"type": "integer", "default": 3072}}}
+      }
+    },
+    "status_board": {
+      "type": "object",
+      "properties": {
+        "surface_inline": {"type": "boolean", "default": true},
+        "checkpoint_modes": {"type": "array", "items": {"type": "string", "enum": ["references", "generation", "composition"]}, "default": ["references", "generation", "composition"]}
+      }
+    },
+    "halt_conditions": {
+      "type": "object",
+      "description": "The ONLY conditions autopilot is permitted to halt on (besides successful completion). All four are required-on; listed here for transparency.",
+      "properties": {
+        "content_policy_refusal": {"type": "boolean", "default": true},
+        "missing_ref_guardrail": {"type": "boolean", "default": true},
+        "environmental_failure": {"type": "boolean", "default": true},
+        "script_ambiguity": {"type": "boolean", "default": true}
+      }
+    },
+    "version": {"type": "integer", "default": 2, "description": "Schema version. Bumped to 2 on 2026-05-13 to add transformation_type, transformation_subtype, lineup_files, continuity.monotonic_attribute, generation.growth_sequence_order. v1 configs are forward-compatible — missing fields default to FMG behavior."}
+  }
+}

@@ -231,12 +231,51 @@ The user can interject at any time — they don't have to wait for Claude to ask
 
 ---
 
-## When to break the loop and ask the user
+## When to break the loop
 
-- **Content policy refusal**: Flow's safety filter triggered. Don't auto-retry with the same prompt. Ask before adjusting language. See `flow-workflow.md` "Content Policy Quirks" — the most common cause is celebrity names + body description; the second most common is heavy cleavage + "glistening/wet" stacked with size language.
-- **3+ retries on one panel**: surface for user direction. Either the prompt fragment library has a bug, or the shotlist entry is wrong, or the chain anchor is incompatible with the target view in a way that needs a story-level decision.
-- **All 4 variants drift to 2D illustration**: the prompt almost certainly has L7-violating content (some lettering instruction slipped through). Ask the user to confirm the prompt before continuing.
-- **Variant has anatomy issue and so do 2+ of the others**: model is having an off run; brief pause + retry usually fixes; surface only if pattern continues.
+Behavior depends on whether `production-config.json` exists at project root.
+
+**Without config** (legacy / `auto` mode): break and ask the user on the conditions below. This is the pre-2026-05-13 behavior.
+
+**With config** (autopilot mode): each condition has a policy default; autopilot consults the config and either continues or halts cleanly. Halt = write reason to `<project>/.autopilot-halt-reason` and stop. The Stop hook respects the halt-reason file and allows the stop.
+
+### Conditions
+
+- **Content policy refusal** (Flow's safety filter triggered).
+  - Config policy: not configurable — always halts. This is one of the approved halt conditions.
+  - Recovery: surface the refused prompt to the user with `flow-workflow.md` "Content Policy Quirks" guidance. Most common cause: celebrity names + body description (drop the celebrity name; face card carries likeness). Second most common: heavy cleavage + "glistening/wet" stacked with size language.
+
+- **`WARNING_DIALOGUE_CAMERA_CONFLICT` (L12) raised by `next_panel.py`**.
+  - Trigger: on-screen dialogue paired with wide-establish or far camera. Reader can't tell who's talking.
+  - Config policy: not configurable — always halts.
+  - Recovery: edit the panel's `camera` in the shotlist to a close framing (`ecu-face` / `mcu` / `medium` / `cowboy`). Re-run autopilot.
+
+- **`WARNING_MULTI_SPEAKER_CROWDING` (L13) raised by `next_panel.py`**.
+  - Trigger: a panel has ≥3 dialogue lines from ≥2 distinct on-screen speakers.
+  - Config policy: not configurable — always halts.
+  - Recovery: split the panel into per-speaker beats in the shotlist. Re-run autopilot.
+
+- **Max retries on one panel exceeded**.
+  - Threshold: `generation.max_retries_per_panel` from config (default 3 when no config).
+  - Config policy: halt cleanly when exceeded — counts as a script-ambiguity halt (the shotlist entry is producing unrecoverable variants).
+  - Recovery: the user inspects the panel in the project's panel folder, edits the shotlist entry (camera, action, characters), and reruns.
+
+- **All variants fail QA** (e.g. all 4 drift to 2D illustration, or all 4 have anatomy issues).
+  - Config policy: read `generation.on_all_bad` (default `retry-with-cgi-anchor-boost`).
+    - `halt` → write reason, stop cleanly.
+    - `retry-with-cgi-anchor-boost` → resubmit ONCE with a strengthened CGI anchor prefix prepended to the prompt: "PHOTOGRAPHIC CGI render, photoreal 3D, NOT illustrated, NOT cel-shaded, NOT 2D. Octane-style materials, ray-traced lighting." This consumes one of the `max_retries_per_panel` budget. If still all-bad after the retry, halt.
+    - `skip-with-flag` → save the best of the bad variants as `pages/panels/<panel_id>/v1.png` with `_accepted.txt` noting the flag, log to `continuity-vision-report.md`'s suggested-actions list for end-of-run human review, advance to next panel.
+
+- **Stage-change panels where the model didn't escalate size despite the lineup ref**.
+  - Detection: the panel's `muscle_size_tier` is N+1 but the rendered body looks closer to tier N. This is the L11 cartoony-FMG regression.
+  - Config policy: read `generation.on_size_regression` (default `retry-with-aggressive-anchor`).
+    - `halt` → write reason, stop cleanly. User decides whether to retry manually or accept the underescalated render.
+    - `retry-with-aggressive-anchor` → resubmit ONCE with the aggressive silhouette anchor prepended (`compose_prompt`'s tier-N silhouette block from `next_panel.py`). Consumes one retry budget. If still underescalated, halt.
+
+- **Anatomy issue across multiple sibling variants** (extra limbs, weird hands, fused fingers on 2+ of the 4 variants).
+  - Config policy: read `generation.on_anatomy_failures` (default `pick-best-and-flag`).
+    - `pick-best-and-flag` → accept the least-bad variant, save with `_anatomy_flag.txt` noting which body part needs touch-up, advance.
+    - `halt` → stop and surface.
 
 ---
 

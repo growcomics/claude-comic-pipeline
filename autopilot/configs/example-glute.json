@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "project": {
+    "name": "lunar-legacy-issue-2",
+    "root": "/Users/jay/Desktop/claude/lunar-legacy-issue-2",
+    "brand": "BloomBeautyComics"
+  },
+  "transformation_type": "glute",
+  "transformation_subtype": "glute-hyperbutt",
+  "lineup_files": {
+    "tier_low": "glute-size-lineup.png",
+    "tier_high": "glute-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "platform": "flow",
+  "script_source": {
+    "type": "path",
+    "value": "./script.md"
+  },
+  "mandatory_rules": {
+    "active": [2, 4, 5, 6, 7, 8, 9],
+    "extra_lines": [
+      "Glute size and hip-to-waist ratio monotonic across panels — once curvier, never narrower.",
+      "Hourglass silhouette emphasized: narrow waist, broad hips, prominent rear regardless of camera angle.",
+      "Glute shape rounded and full (not flat, not square); side-profile shows clear curve.",
+      "Thigh-to-glute proportion balanced — thighs scale with glutes, not dramatically thinner.",
+      "Wardrobe stretches at the seat and waistband first; tearing always along the seam."
+    ]
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": true
+  },
+  "flow": {
+    "default_count": 4,
+    "aspect_override": null
+  },
+  "generation": {
+    "max_panels": null,
+    "max_retries_per_panel": 3,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["glutes"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "halt-on-hard",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "halt",
+    "missing_ref_guardrail": "halt",
+    "posting": "never"
+  },
+  "continuity": {
+    "vision_audit_scope": "full-issue",
+    "arc_character": null,
+    "monotonic_attribute": "glute_size_tier"
+  },
+  "page_composer": {
+    "mode": "auto",
+    "export_pdf": true,
+    "page_size_px": {"width": 2048, "height": 3072}
+  },
+  "status_board": {
+    "surface_inline": true,
+    "checkpoint_modes": ["references", "generation", "composition"]
+  },
+  "halt_conditions": {
+    "content_policy_refusal": true,
+    "missing_ref_guardrail": true,
+    "environmental_failure": true,
+    "script_ambiguity": true
+  }
+}
