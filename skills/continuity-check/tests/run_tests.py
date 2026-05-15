@@ -64,7 +64,7 @@ class FixtureResult:
 def run_audit(project_dir: Path) -> list[dict]:
     """Invoke rules_audit.py --json and return the findings list."""
     result = subprocess.run(
-        ["python3", str(RULES_AUDIT), "--project", str(project_dir), "--json"],
+        [sys.executable, str(RULES_AUDIT), "--project", str(project_dir), "--json"],
         capture_output=True,
         text=True,
     )
