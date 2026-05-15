@@ -1,0 +1,22 @@
+# Comic pipeline v4 runner dependencies.
+#
+# Install:
+#   pip install -r requirements.txt
+#   playwright install chromium  # only needed if using flow_runner
+#
+# Notes:
+#   - playwright is only needed for flow_runner.py (Google Flow UI driver).
+#     If you only use Higgsfield, skip the `playwright install chromium` step.
+#   - anthropic is only needed for variant_picker.py with strategy=claude_api.
+#     If you use the heuristic or first strategies, skip it. The default is
+#     claude_api, so most users want it.
+#   - requests is only needed for higgsfield_runner.py mode=api. The
+#     external_script mode invokes the user's existing runner.py and doesn't
+#     need requests directly.
+#   - Pillow is optional but recommended for future variant validation
+#     (image dimension checks, format conversions).
+
+playwright>=1.43.0
+anthropic>=0.40.0
+requests>=2.31.0
+Pillow>=10.0.0
