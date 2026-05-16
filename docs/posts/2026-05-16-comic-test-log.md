@@ -88,9 +88,101 @@ What's notable: **L17 + L21 + L22 + L24 + L23 + L20 all delivered consistently**
 
 ---
 
-## Test 2 — coming next
+## Test 2 — 15-panel Chun Li Ascension (2026-05-16)
 
-15-page FMG transformation comic. Same character (Chun Li, refs reused), expanded story arc with more body-region beats and more camera variety. Will publish here once generated and audited.
+**Project:** `chunli-ascension-15p-2026-05-16/` · **Model:** `nano_banana_flash` · **Resolution:** 1k · **Cost:** 19 generation submissions (15 successful + 4 retries: p02 generic-fail, p07/p10/p11 NSFW) ≈ 28.5 credits + 1 vision-audit subagent call ≈ **~$6 total**.
+
+### The 15 panels
+
+![Test 2 grid — 15 panels, 5x3](./assets/comic-test-log/test-02-15panel/grid.png)
+
+Story arc: Chun Li in her training dojo, full transformation from tier 1 (meditation baseline) through tier 6 (peak hyper-FMG reveal) across 15 panels. More body-region beats than Test 1 (chest, arms, back, hips, legs, abs, whole_body), more camera variety (medium / ecu-face / cowboy / mcu / ecu-region / back-full / splash / low-angle-front).
+
+| # | Camera | Tier | Beat | # | Camera | Tier | Beat | # | Camera | Tier | Beat |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| p01 | medium | 1 | consider | p06 | ecu-face | 2 | first_sensation | p11 | ecu-region | 4 | legs |
+| p02 | ecu-face | 1 | trigger | p07 | ecu-region | 3 | arms | p12 | ecu-region | 5 | abs |
+| p03 | cowboy | 1 | decide | p08 | back-full | 3 | back | p13 | cowboy | 5 | whole_body |
+| p04 | medium | 1 | first_sensation | p09 | mcu | 4 | hips | p14 | splash | 6 | whole_body |
+| p05 | mcu | 2 | chest | p10 | cowboy | 4 | first_sensation | p15 | low-angle-front | 6 | reveal |
+
+### The shotlist gate caught two architectural issues *before* any panel was generated
+
+`rules_audit.py` on the first draft of the shotlist flagged:
+
+1. **5 panels at the same (ecu-region, ?) camera combo** — limit is 3 per 10-panel window. The shotlist had too many body-region ECUs back-to-back.
+2. **Chapter mean camera distance 2.6** (transformation comics target ≤ 2.5). The shotlist sat just barely on the wrong side of L20's strengthened threshold.
+
+Both are HARD findings under the L20-strengthened rules. **I fixed the shotlist before submitting anything to the model** — p05 (chest) and p09 (hips) converted to mcu, p10 (face reaction) converted to cowboy, p03 and p13 converted from 3q-full to cowboy. After two iterations the audit went clean. **Zero API spend wasted on bad shotlists** — the architecture's pre-render gates earned their keep before a single generation submitted.
+
+### The Higgsfield NSFW filter event count: 3 + 1 generic fail
+
+p02 failed (generic error, not nsfw); p07 (tier 3 bicep ECU), p10 (tier 4 face/torso cowboy), p11 (tier 4 quad ECU) all returned `status: nsfw`. Per L2 retry policy: all 4 retried with the same prompt; all 4 passed on the first retry. **L2's "retry the same prompt before reframing" policy continues to be the right move.** Filter variance is real; reframing should only happen after 4 retries.
+
+### Architecture's findings
+
+**Pre-render (deterministic, free):** 15 `checks.json` ledgers written. 12 L1.5 view-aware-chaining fallbacks (the cowboy / mcu / ecu-region / 3q-full / ecu-face / back-full / splash transitions don't have compatible priors in the legacy table — informational, expected). Everything else clean.
+
+**Post-render (phase 5 vision audits via subagent with per-rule `vision_rubric`):** **132 rubric checks. 123 pass, 9 fail. All 9 fails were L11 silhouette regression.**
+
+The 9 L11 fails, ordered by panel:
+
+| Panel | Tier | What the rubric saw |
+|---|---|---|
+| p05 | 2 (chest) | PARTIAL — biceps/delts hit tier 2/3 but chest mass undersells the silhouette change. Arms more developed than torso. |
+| p08 | 3 (back) | PARTIAL — back lats and traps clearly muscular but read tier 2/3, not the V-taper of lineup figure 3. |
+| p09 | 4 (hips) | Pec/delts inflated but shoulders not 2x. Closer to tier 3/3.5. **Hips not visibly widened despite the 'hips' beat** — beat mismatch + silhouette under-shoot. |
+| p10 | 4 (reaction) | Silhouette reads low tier 3 / fitness-model. Minimal increase from the p03 (tier 1) baseline. Clear regression to realism. |
+| p11 | 4 (legs) | PARTIAL — quad muscular but reads more tier 3 in mass than tier 4. Cropping makes scale hard to verify. |
+| p12 | 5 (abs) | 8-pack defined but compact, fitness-model density. NOT tier 5 hyper-scale. Regression. |
+| p13 | 5 (whole_body) | Shoulders nowhere near 2.5x, arms broad but not "massive". Significant regression. |
+| p14 | 6 (splash) | Silhouette reads tier 3/4 fitness-bodybuilder, NOT the cartoony hyper-FMG of lineup figure 6. **Same failure mode as Test 1 p1-06.** |
+| p15 | 6 (reveal) | Same regression as p14. Athletic-bodybuilder level, far from lineup #6. |
+
+**Everything else held cleanly across all 15 panels:**
+
+- **L17 canonical character** — every panel. Twin buns + red ribbons + blue cheongsam with gold trim + white tights + brown boots + spiked wristbands. Even in the back-full shot (p08), the canonical buns + ribbons render correctly from behind.
+- **L21 ref-as-prop suppression** — every panel.
+- **L22 hair state** — every panel with head in frame. No single-bun drift, no ribbon-color drift.
+- **L24 anachronistic accessories** — every panel. Zero watch/ring/bracelet substitutes.
+- **L23 background renders dojo** — every panel. No grey-void collapses.
+- **L20 body-region framing** — p07 / p11 / p12 (the 3 ECU body-region beats) all fill 70%+, head/feet cropped OUT.
+- **L18 anatomy coherence, L15 vogue face, L10 RENDER DIRECTIVE, female_anatomy** — every applicable panel.
+
+### Defects summary
+
+| Rule | Count | Class |
+|---|---|---|
+| `L1.5` | 12 | architectural fallback (view-aware-chaining table doesn't cover mcu/cowboy/ecu-region/3q-full transitions) — informational |
+| `L11` | 9 | silhouette regression at tier 2–6 — **actionable** |
+
+### My read (Test 2)
+
+The architecture is doing exactly what it's supposed to do: catching the same failure mode reliably and surfacing it in a structured form across runs. **L11 silhouette regression is now a 12-occurrence pattern across two tests** (3 in Test 1 + 9 in Test 2), all in the tier ≥ 4 range with partials starting at tier 2. The signal is real and reproducible.
+
+What's notable:
+
+1. **Pre-render gates earned their cost.** Two shotlist HARDs caught before any API spend; that's the whole point of the deterministic pre-render layer. I'd burned ~10 credits on Test 1 generating panels that came out with the L11 silhouette regression visible; on Test 2 I caught the *structural* problems in the shotlist and only paid for the *render* problem.
+
+2. **L2 retry policy keeps proving itself.** 3 NSFW filter events on the first pass; 3 cleared on first retry. The discipline of "retry up to 4× before reframing" is right; reflexive reframing wastes effort.
+
+3. **L11 is now a load-bearing single-rule failure mode.** The same module, same vocabulary, same lineup attachment — and the same tier-4-and-above silhouette regression every time. The fix is upstream: either over-spec the silhouette vocabulary harder (per the `feedback_chest_oversize_compensate` memory), or accept that nano_banana_flash has a tier ceiling and route tier ≥ 5 work to a different model (gpt_image_2 was stronger on tier 4 silhouette per the May-13 A/B test, though it has stricter NSFW for body-region ECUs).
+
+4. **The discovery process is starting to work.** Across two runs the same rule fails in the same place. With 5 more test runs of similar scope the defects.jsonl would surface "L11 fails consistently at tier ≥ 4" as a project-wide pattern automatically. That's the discovery payoff.
+
+### User review (pending)
+
+*Reserved for the user's review notes. Send back any corrections, missed defects, or different priority calls and I'll fold them in.*
+
+### Alignment diff (pending)
+
+*Will populate once the user's review lands. Tracking specifically: did I overcall any panel as clean that the user marks as drift? Did I miss a failure mode? Where do my priorities diverge from the user's?*
+
+---
+
+## Test 3+ — TBD
+
+Next test deferred until the user's reviews of Test 1 and Test 2 land. The alignment diff between my read and theirs becomes the calibration target — what should the next test stress?
 
 ---
 
