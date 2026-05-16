@@ -735,6 +735,137 @@ def _pose_anatomy_anchor() -> str:
 
 
 # ---------------------------------------------------------------------------
+# Phase 1 of the checks-and-balances refactor — per-rule trace.
+#
+# See docs/checks-and-balances-design.md for the full design. Phase 1's scope
+# is "ledger emit-only": compose_prompt's STRING OUTPUT is byte-identical to
+# the legacy path, but it now also populates a trace dict recording which L-
+# rules fired and what each contributed. The trace gets serialized to
+# pages/panels/panel-<id>/checks.json by checks_ledger.write_checks_ledger.
+#
+# Phase 2+ will move each entry below into its own per-rule module under
+# skills/comic-production/rules/. For phase 1 we keep the registry inline.
+
+PHASE_1_RULE_REGISTRY: dict[str, dict] = {
+    # Active in compose_prompt — these get real pre_render statuses
+    "L10":            {"title": "References are the truth, prompts are deltas", "slot": "11_render_directive", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_silhouette"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L20":            {"title": "Camera distance bias (in-prompt directive)", "slot": "2_camera_strengthening", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L21":            {"title": "Suppress in-scene rendering of reference images", "slot": "12_ref_safety", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L22":            {"title": "Hair state must be explicit in every face-visible panel", "slot": "4_subject_state", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L23":            {"title": "When env ref is dropped, add dense verbal env anchor", "slot": "9_environment", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L24":            {"title": "Suppress anachronistic accessories explicitly", "slot": "4_subject_state", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "female_anatomy": {"title": "Female anatomy anchor on body-region ECUs (May 14 lesson)", "slot": "4_subject_state", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    # Active in build_plan
+    "L1.5":           {"title": "Chain view-aware, not blindly to N-1", "slot": "10_state_anchor", "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L12":            {"title": "Dialogue panels need close framing", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L13":            {"title": "Multi-speaker beats split into per-speaker panels", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L20_chapter":    {"title": "L20 chapter-aggregate / per-beat overshoot", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L28":            {"title": "Reference completeness is mandatory", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
+    # Deferred — known to phase 1, tracked in a later phase
+    "L1":             {"title": "Progressive sequences must be chained", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "runner concern (post-render deterministic) — phase 4+"},
+    "L9":             {"title": "Capture every panel's job_id before submitting the next", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "runner concern (post-render deterministic) — phase 4+"},
+    "L14":            {"title": "Multi-view location references for shot-reverse-shot", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "gated upstream in reference-gathering"},
+    "L16":            {"title": "Multi-angle character reference packs", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "gated upstream in reference-gathering"},
+    "L19":            {"title": "Bake lettering into the CGI render", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "opt-in via mandatory_rules.allow_baked_lettering — phase 2+"},
+    "L25":            {"title": "Body-region reveals are sticky", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
+    "L26":            {"title": "Costume identity must be canonical across panels", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
+    "L27":            {"title": "Skin sheen and texture continuity", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
+    # Historical / superseded / infrastructure — not modeled as live rules
+    "L2":             {"title": "Higgsfield safety filter rejections", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "platform-runtime — will track as 'refused' status in phase 4"},
+    "L3":             {"title": "Use png not webp", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "infrastructure exemption"},
+    "L4":             {"title": "Speech bubble positioning", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "active only when L19 baked-lettering is opt-in"},
+    "L5":             {"title": "Lineup ref attach pattern (superseded by L11)", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "superseded by L11"},
+    "L6":             {"title": "The display widget shows only the latest result", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "infrastructure exemption"},
+    "L7":             {"title": "Comic-coded vocab pulls toward 2D (superseded by L19)", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "superseded by L19"},
+    "L8":             {"title": "Cumulative state in multi-beat growth comics", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "covered by L1 + L25 + L26 + L27"},
+}
+
+TRACE_SCHEMA_VERSION = 1
+
+
+def _init_trace(transformation_type: str = "fmg") -> dict:
+    """Return a fresh trace dict pre-populated with every rule in the registry.
+
+    Untracked rules get a stable {applied: false, reason: <phase1_reason>} row
+    so the ledger renders a complete grid. Tracked rules start as
+    {applied: false, reason: "not yet recorded"} and get overwritten by
+    compose_prompt / build_plan as they actually evaluate.
+    """
+    trace: dict = {}
+    for rule_id, spec in PHASE_1_RULE_REGISTRY.items():
+        applic = spec.get("applicable_transformations", ["*"])
+        applicable_here = ("*" in applic) or (transformation_type in applic)
+        if not spec.get("phase1_tracked"):
+            trace[rule_id] = {
+                "applied": False,
+                "slot": spec.get("slot"),
+                "applicable_transformations": applic,
+                "reason": spec.get("phase1_reason", "deferred"),
+            }
+        elif not applicable_here:
+            trace[rule_id] = {
+                "applied": False,
+                "slot": spec.get("slot"),
+                "applicable_transformations": applic,
+                "reason": f"n/a — applicable_transformations={applic} but project transformation_type='{transformation_type}'",
+            }
+        else:
+            trace[rule_id] = {
+                "applied": False,
+                "slot": spec.get("slot"),
+                "applicable_transformations": applic,
+                "reason": "not yet evaluated",
+            }
+    return trace
+
+
+def _record_applied(trace: dict | None, rule_id: str, *,
+                    contribution: str | None = None,
+                    pre_render_status: str = "pass",
+                    pre_render_reason: str | None = None,
+                    post_render_status: str = "pending",
+                    post_render_reason: str | None = None) -> None:
+    """Record an applied rule in the trace. No-op when trace is None."""
+    if trace is None or rule_id not in trace:
+        return
+    entry = trace[rule_id]
+    entry["applied"] = True
+    if contribution is not None:
+        entry["compose_contribution"] = contribution
+    entry["pre_render"] = {"status": pre_render_status, "reason": pre_render_reason}
+    entry["post_render"] = {"status": post_render_status, "reason": post_render_reason}
+    entry.pop("reason", None)
+
+
+def _record_skipped(trace: dict | None, rule_id: str, reason: str) -> None:
+    """Record a rule that was evaluated and intentionally not applied."""
+    if trace is None or rule_id not in trace:
+        return
+    entry = trace[rule_id]
+    entry["applied"] = False
+    entry["reason"] = f"skipped — {reason}"
+
+
+def _record_failed(trace: dict | None, rule_id: str, *,
+                   pre_render_reason: str,
+                   contribution: str | None = None) -> None:
+    """Record a rule whose pre_render verification failed."""
+    if trace is None or rule_id not in trace:
+        return
+    entry = trace[rule_id]
+    entry["applied"] = True
+    if contribution is not None:
+        entry["compose_contribution"] = contribution
+    entry["pre_render"] = {"status": "fail", "reason": pre_render_reason}
+    entry["post_render"] = {"status": "blocked", "reason": "pre_render failed"}
+    entry.pop("reason", None)
+
+
+# ---------------------------------------------------------------------------
 # Prompt composer
 
 
@@ -742,7 +873,8 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    stage_change: bool, env_ref: Path | None,
                    env_anchor_from: dict | None = None,
                    lineup_attached: bool = False,
-                   env_dropped: bool = False) -> str:
+                   env_dropped: bool = False,
+                   _trace: dict | None = None) -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
 
     The body describes only what is *new* in this panel (camera, action,
@@ -805,6 +937,12 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     body_region_directive = _body_region_camera_directive(panel)
     if body_region_directive:
         parts.append(body_region_directive)
+        _record_applied(_trace, "L20", contribution=body_region_directive,
+                        pre_render_reason=f"transformation_beat={panel.get('transformation_beat')} — body-region directive injected")
+    else:
+        beat = panel.get("transformation_beat")
+        _record_skipped(_trace, "L20",
+                        f"no body-region transformation_beat (got {beat!r})")
 
     # 3. Subjects (name only — identity comes from attached face cards)
     if chars:
@@ -815,12 +953,22 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     canonical_line = _canonical_character_directive(panel, cast_lookup)
     if canonical_line:
         parts.append(canonical_line)
+        _record_applied(_trace, "L17", contribution=canonical_line,
+                        pre_render_reason="cast[].canonical=true with canonical_anchor text")
+    else:
+        _record_skipped(_trace, "L17",
+                        "no character with cast[].canonical=true in panel")
 
     # 3.1 L15 female beauty anchor — vogue-cover quality for any female cast
     # member in the panel. Suppressible per character via cast[].glamour_anchor: false.
     beauty_line = _female_beauty_anchor_line(panel, cast_lookup)
     if beauty_line:
         parts.append(beauty_line)
+        _record_applied(_trace, "L15", contribution=beauty_line,
+                        pre_render_reason="female cast member detected, glamour anchor injected")
+    else:
+        _record_skipped(_trace, "L15",
+                        "no female cast member in panel (or glamour_anchor=false)")
 
     # 3a. Hair state (L22) — only when explicitly set on the panel. The
     # composer does NOT auto-derive from tier + beat (see memory
@@ -828,6 +976,11 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     hair_line = _hair_state_line(panel)
     if hair_line:
         parts.append(hair_line)
+        _record_applied(_trace, "L22", contribution=hair_line,
+                        pre_render_reason="panel.hair_state explicitly set")
+    else:
+        _record_skipped(_trace, "L22",
+                        "panel.hair_state not set (shotlist author owns this field)")
 
     # 3b. Accessories canonical + enumerated negation (L24). Reads per-character
     # `accessories` block from cast[]. The negation list is the load-bearing
@@ -835,23 +988,39 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     acc_line = _l24_accessory_line(panel, cast_lookup)
     if acc_line:
         parts.append(acc_line)
+        _record_applied(_trace, "L24", contribution=acc_line,
+                        pre_render_reason=f"camera={camera!r} may include wrists/neck/etc and cast has accessories block")
+    else:
+        _record_skipped(_trace, "L24",
+                        "no cast[].accessories block, or camera does not include wrists/neck/etc in frame")
 
     # 3c. Female-anatomy anchor on body-region ECUs at tier >= 2 (May 14
     # finding from chun-li-grok-validation p5). Pure body-region crops on
     # heavy-muscle ECUs regress to male anatomy when face is off-frame.
     if _female_anatomy_anchor_needed(panel, cast_lookup):
         parts.append(FEMALE_ANATOMY_ANCHOR)
+        _record_applied(_trace, "female_anatomy",
+                        contribution=FEMALE_ANATOMY_ANCHOR,
+                        pre_render_reason=f"camera=ecu-region tier>=2 female cast (tier={tier})")
+    else:
+        _record_skipped(_trace, "female_anatomy",
+                        f"not a body-region ECU tier>=2 with female cast (camera={camera!r}, tier={tier})")
 
     # 3d. Cartoony FMG style anchor — per L11. Slot it before the action delta
     # so the model commits to the proportional aesthetic before reading the
     # action content. Only emit when tier >= 2 (tier 1 is the realistic baseline
     # where the cartoony anchor would actively hurt).
+    _l11_style_anchor_applied = False
     if tier is not None and isinstance(tier, (int, float)) and tier >= 2:
-        parts.append(
+        l11_style_line = (
             "Style anchor for the body: cartoony hyper-FMG comic-book "
             "proportions, NOT realistic fitness modelling. Exaggerated comic "
             "musculature where the silhouette is the storytelling element."
         )
+        parts.append(l11_style_line)
+        _l11_style_anchor_applied = True
+        _record_applied(_trace, "L11", contribution=l11_style_line,
+                        pre_render_reason=f"tier={tier} >= 2 — style anchor at slot 5_style_anchor")
 
     # 4. DELTA — action / pose / expression. Wrapped with a sanitization
     #    directive so the model knows: even if the action text mentions
@@ -910,7 +1079,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         silhouette_desc = silhouette_by_tier.get(t_int, f"tier {tier} cartoony FMG silhouette")
 
         if lineup_attached:
-            parts.append(
+            l11_tier_line = (
                 f"Size tier: {tier}. The attached muscle-size lineup "
                 "reference is a PROPORTION reference ONLY — use figure "
                 f"{tier} from the lineup to determine ONLY: (a) the size, "
@@ -932,22 +1101,49 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "fitness, NOT athletic — cartoony FMG, comic-book "
                 "proportions."
             )
+            parts.append(l11_tier_line)
+            _record_applied(_trace, "L11",
+                            contribution=l11_tier_line,
+                            pre_render_status="pass",
+                            pre_render_reason=f"tier={tier}, lineup attached at generation — slot 8_tier_silhouette (lineup-attached path)")
         elif stage_change:
             # Stage change but lineup not available — verbal only with strong
             # vocabulary. Significantly less reliable than lineup-attached.
-            parts.append(
+            l11_tier_line = (
                 f"Size tier: {tier} (NEW tier — grown from prior panel). "
                 f"Cartoony FMG silhouette: {silhouette_desc}. Render the build "
                 "unmistakably larger than the body baseline reference. NOT "
                 "realistic fitness — cartoony comic-book proportions."
             )
+            parts.append(l11_tier_line)
+            _record_applied(_trace, "L11",
+                            contribution=l11_tier_line,
+                            pre_render_status="fail",
+                            pre_render_reason=f"tier={tier} stage-change but lineup NOT attached — falling back to verbal-only (significantly less reliable per L11)")
         else:
-            parts.append(
+            l11_tier_line = (
                 f"Size tier: {tier} (unchanged from prior panel). Carry "
                 "forward the build from the attached state anchor exactly. "
                 "No growth in this panel. Preserve the cartoony FMG silhouette "
                 "from the prior accepted panel."
             )
+            parts.append(l11_tier_line)
+            if not _l11_style_anchor_applied:
+                # tier=1: no style anchor was emitted, and the tier line is a
+                # neutral carry-forward. Don't claim L11 was "applied" with a
+                # contribution — but record that the carry-forward fired.
+                _record_applied(_trace, "L11",
+                                contribution=l11_tier_line,
+                                pre_render_status="skipped",
+                                pre_render_reason=f"tier={tier} unchanged carry-forward; style anchor not needed at tier 1")
+            else:
+                _record_applied(_trace, "L11",
+                                contribution=l11_tier_line,
+                                pre_render_status="pass",
+                                pre_render_reason=f"tier={tier} unchanged carry-forward; style anchor already emitted at slot 5")
+    else:
+        _record_skipped(_trace, "L11",
+                        "panel.muscle_size_tier is null — non-arc panel")
 
     # 7. Environment — env-chaining-aware language. Three cases:
     #   - env_ref attached + env_anchor_from set: chain off prior accepted panel
@@ -956,7 +1152,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     #     L23 dense verbal anchor from shotlist.locations[].description
     if env_ref:
         if env_anchor_from:
-            parts.append(
+            env_line = (
                 f"Location: {location_slug}. The attached environment "
                 f"reference IS this location — it's the accepted establishing "
                 f"shot from panel `{env_anchor_from['panel'].get('panel_id')}`. "
@@ -965,13 +1161,17 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "delta describes ONLY what is happening in this panel; the "
                 "location itself is fixed by this reference."
             )
+            parts.append(env_line)
         else:
-            parts.append(
+            env_line = (
                 f"Location: {location_slug}. The attached environment reference "
                 "establishes the location's render style — Iray quality, "
                 "lighting setup, scale, depth, atmosphere. Use it as the visual "
                 "anchor for the location's architecture. Do not reinterpret."
             )
+            parts.append(env_line)
+        _record_skipped(_trace, "L23",
+                        f"env ref attached (location={location_slug!r}) — dense verbal anchor not needed")
     elif env_dropped and location_slug:
         # L23 fallback: env ref was dropped to fit the 3-ref ceiling.
         # Inject the dense verbal anchor from locations[].description so the
@@ -979,21 +1179,35 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         dense = _env_dense_anchor(shotlist, location_slug)
         if dense:
             parts.append(dense)
+            _record_applied(_trace, "L23", contribution=dense,
+                            pre_render_reason=f"env ref dropped for 3-ref ceiling, location={location_slug!r} — dense verbal anchor injected")
+        else:
+            _record_failed(_trace, "L23",
+                           pre_render_reason=f"env ref dropped but location {location_slug!r} has no description in shotlist.locations[]")
+    else:
+        _record_skipped(_trace, "L23",
+                        f"no env_ref to drop (location={location_slug!r}, env_dropped={env_dropped})")
 
     # 8. State anchor — prior panel for costume/hair/body/damage continuity
     if anchor:
+        anchor_panel_id = anchor["panel"].get("panel_id", "?")
         anchor_view = anchor["panel"].get("camera", "?")
-        parts.append(
-            f"State anchor: prior panel `{anchor['panel'].get('panel_id', '?')}` "
+        anchor_line = (
+            f"State anchor: prior panel `{anchor_panel_id}` "
             f"({anchor_view}) is attached as a reference. Preserve costume "
             "state, hair state, body size, and any cumulative damage from "
             "that panel exactly. Costume tears never regress across panels."
         )
+        parts.append(anchor_line)
+        _record_applied(_trace, "L1.5", contribution=anchor_line,
+                        pre_render_reason=f"view-aware chain found compatible prior panel `{anchor_panel_id}` (view={anchor_view!r}) for target view {camera!r}")
+    # Note: L1.5 with no anchor is recorded by build_plan with reason text
+    # explaining why (ecu-face, no compatible prior, etc.)
 
     # 9. Render directive — THE LOAD-BEARING L10 SENTENCE (with the L10
     # refinement: explicit identity-vs-pose line so the model knows which
     # side of the boundary the prompt's pose/expression description lives on)
-    parts.append(
+    l10_directive = (
         "RENDER DIRECTIVE: render the attached references exactly as shown. "
         "Do not reinterpret character appearance, costume design, or location "
         "architecture from the prompt text — those are FIXED by the "
@@ -1004,6 +1218,9 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "deltas. References override prompt text on visual identity; "
         "prompt overrides references on pose and action."
     )
+    parts.append(l10_directive)
+    _record_applied(_trace, "L10", contribution=l10_directive,
+                    pre_render_reason="render directive always emitted (slot 11_render_directive)")
 
     # 9a. L21 ref-exclusion — emit whenever any ref is attached. Empirically
     # validated on Grok p6 v2 (the lineup's "1" label rendered as a watermark);
@@ -1011,9 +1228,17 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     any_ref_attached = bool(env_ref) or bool(anchor) or bool(lineup_attached)
     if any_ref_attached:
         parts.append(L21_REF_EXCLUSION)
+        _record_applied(_trace, "L21", contribution=L21_REF_EXCLUSION,
+                        pre_render_reason=f"at least one ref attached (env={bool(env_ref)}, anchor={bool(anchor)}, lineup={lineup_attached})")
+    else:
+        _record_skipped(_trace, "L21",
+                        "no refs attached — ref-exclusion clause unnecessary")
 
     # 9b. L18 pose anatomy anchor — universal soft guardrail. Always emit.
-    parts.append(_pose_anatomy_anchor())
+    l18_line = _pose_anatomy_anchor()
+    parts.append(l18_line)
+    _record_applied(_trace, "L18", contribution=l18_line,
+                    pre_render_reason="universal soft guardrail — always emitted")
 
     # 10. Mandatory rules (L7-compliant — no rendered lettering)
     parts.append(
@@ -1036,7 +1261,15 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 # Main
 
 
-def build_plan(root: Path) -> dict:
+def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
+    """Build a per-panel plan.
+
+    When `target_panel_id` is None (default), composes for the next pending
+    panel — the historical behavior. When set, composes for that specific
+    panel using only the accepted history that exists for panels BEFORE it
+    in story order. Used by `write_ledger.py` to emit retroactive ledgers
+    for already-accepted panels.
+    """
     shotlist = read_shotlist(root)
     if shotlist is None:
         return {"error": "No shotlist.json at project root", "project_root": str(root)}
@@ -1046,14 +1279,36 @@ def build_plan(root: Path) -> dict:
     next_panel = None
     next_page = None
 
-    for page_num, panel in iter_panels(shotlist):
-        status = panel_status(root, panel)
-        if status["state"] == "accepted":
-            accepted_history.append({"panel": panel, "page_number": page_num, "status": status})
-        elif next_panel is None:
-            next_panel = panel
-            next_page = page_num
-            # Don't break — we still want full history for context
+    if target_panel_id is None:
+        # Legacy path: find the first pending panel; accepted_history is
+        # everything accepted in story order.
+        for page_num, panel in iter_panels(shotlist):
+            status = panel_status(root, panel)
+            if status["state"] == "accepted":
+                accepted_history.append({"panel": panel, "page_number": page_num, "status": status})
+            elif next_panel is None:
+                next_panel = panel
+                next_page = page_num
+                # Don't break — we still want full history for context
+    else:
+        # Targeted path: find the specific panel; accepted_history is
+        # everything accepted BEFORE it in story order (irrespective of
+        # whether the target itself is accepted).
+        for page_num, panel in iter_panels(shotlist):
+            if (panel.get("panel_id") or panel.get("name")) == target_panel_id:
+                next_panel = panel
+                next_page = page_num
+                break
+            status = panel_status(root, panel)
+            if status["state"] == "accepted":
+                accepted_history.append({"panel": panel, "page_number": page_num, "status": status})
+        if next_panel is None:
+            return {
+                "project_root": str(root),
+                "next_panel": None,
+                "message": f"target_panel_id={target_panel_id!r} not found in shotlist.json",
+                "accepted_count": len(accepted_history),
+            }
 
     if next_panel is None:
         return {
@@ -1068,6 +1323,13 @@ def build_plan(root: Path) -> dict:
     anchor = pick_chain_anchor(root, target_view, accepted_history)
     stage_change = is_stage_change(next_panel, accepted_history)
 
+    # Phase 1 trace — populated by compose_prompt's helper sites plus the
+    # build-plan-level findings below. Transformation type read from
+    # production-config.json (defaults to "fmg" for legacy projects).
+    transformation_type = ((_read_production_config(root) or {})
+                           .get("transformation_type") or "fmg")
+    trace = _init_trace(transformation_type)
+
     refs_to_attach: list[dict] = []
     if anchor and anchor["status"].get("image"):
         refs_to_attach.append({
@@ -1076,6 +1338,7 @@ def build_plan(root: Path) -> dict:
             "path": str(anchor["status"]["image"].relative_to(root)),
             "reason": f"view-compatible prior ({anchor['panel'].get('camera')}) for target view ({target_view})",
         })
+        # L1.5 applied case is recorded by compose_prompt's state-anchor block
     elif target_view == "ecu-face":
         refs_to_attach.append({
             "kind": "note",
@@ -1083,6 +1346,8 @@ def build_plan(root: Path) -> dict:
             "path": None,
             "reason": "ecu-face: use face card alone as canonical anchor (no state anchor needed per L1.5 Rule #9)",
         })
+        _record_skipped(trace, "L1.5",
+                        "ecu-face: face card alone serves as the canonical anchor (L1.5 Rule #9)")
     elif not anchor and accepted_history:
         refs_to_attach.append({
             "kind": "note",
@@ -1090,6 +1355,12 @@ def build_plan(root: Path) -> dict:
             "path": None,
             "reason": f"no view-compatible prior found for target view ({target_view}); fall back to canonical view-matched character ref + verbal state carry-forward",
         })
+        _record_failed(trace, "L1.5",
+                       pre_render_reason=f"no view-compatible prior in accepted_history for target view {target_view!r} — falling back to canonical ref + verbal state carry-forward")
+    else:
+        # First panel in the chain (no accepted_history yet)
+        _record_skipped(trace, "L1.5",
+                        "first panel in chain — no prior accepted panel exists yet")
 
     # Face card(s)
     for slug in next_panel.get("characters", []) or []:
@@ -1155,17 +1426,28 @@ def build_plan(root: Path) -> dict:
                           f"Per L11 (cartoony FMG proportions need explicit anchoring).",
             })
             lineup_attached = True
+            _record_applied(trace, "L28",
+                            pre_render_reason=f"required lineup ref present on disk: {lineup}")
         else:
+            missing_reason = (
+                f"{reason_label} panel (tier={tier}) but lineup file NOT FOUND on disk. "
+                f"Tried: project references/style/, repo assets/, ~/.claude/skills/.../assets/. "
+                f"Drop a muscle-size-lineup.png (tiers 1-6) or muscle-size-lineup-4-9.png (tiers 7+) "
+                f"into one of those locations before generating. Falling back to verbal-only "
+                f"silhouette instructions, which is significantly less reliable."
+            )
             refs_to_attach.append({
                 "kind": "MISSING_lineup",
                 "tier": tier,
                 "path": None,
-                "reason": f"{reason_label} panel (tier={tier}) but lineup file NOT FOUND on disk. "
-                          f"Tried: project references/style/, repo assets/, ~/.claude/skills/.../assets/. "
-                          f"Drop a muscle-size-lineup.png (tiers 1-6) or muscle-size-lineup-4-9.png (tiers 7+) "
-                          f"into one of those locations before generating. Falling back to verbal-only "
-                          f"silhouette instructions, which is significantly less reliable.",
+                "reason": missing_reason,
             })
+            # L28-style hard failure: a declared/required ref isn't on disk.
+            _record_failed(trace, "L28",
+                           pre_render_reason=f"MISSING_lineup: {missing_reason}")
+    else:
+        _record_skipped(trace, "L28",
+                        "no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)")
 
     # L12 + L13: surface shotlist-shape warnings at planning time so the agent
     # driving generation can fix the shotlist or override before paying for an
@@ -1173,53 +1455,69 @@ def build_plan(root: Path) -> dict:
     # entries in refs_to_attach so the build-comic HALT rule catches them.
     conflict, speakers = detect_dialogue_camera_conflict(next_panel)
     if conflict:
+        l12_reason = (
+            f"L12 violation: panel has on-screen dialogue from {speakers} but "
+            f"camera is `{target_view}` (too wide for the speaker to be the focal "
+            "point). Either tighten the camera (mcu / medium / cowboy / ecu-face) "
+            "or convert the dialogue to a caption / off-panel type. Rendering "
+            "at the current camera will produce a panel where the reader can't "
+            "tell who's talking."
+        )
         refs_to_attach.append({
             "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
             "speakers": speakers,
             "camera": target_view,
-            "reason": (
-                f"L12 violation: panel has on-screen dialogue from {speakers} but "
-                f"camera is `{target_view}` (too wide for the speaker to be the focal "
-                "point). Either tighten the camera (mcu / medium / cowboy / ecu-face) "
-                "or convert the dialogue to a caption / off-panel type. Rendering "
-                "at the current camera will produce a panel where the reader can't "
-                "tell who's talking."
-            ),
+            "reason": l12_reason,
         })
+        _record_failed(trace, "L12", pre_render_reason=l12_reason)
+    else:
+        _record_skipped(trace, "L12",
+                        "no dialogue/camera conflict — either no on-screen dialogue or camera is close enough")
     split_needed, n_lines, n_speakers = detect_multi_speaker_crowding(next_panel)
     if split_needed:
+        l13_reason = (
+            f"L13 violation: panel has {n_lines} on-screen dialogue lines from "
+            f"{n_speakers} distinct speakers. Rendering all of them in one image "
+            "produces a cramped sitcom-freeze-frame. Split this beat into "
+            f"{n_lines} per-speaker panels in the shotlist; each new panel "
+            "frames the speaker who's talking on it."
+        )
         refs_to_attach.append({
             "kind": "WARNING_MULTI_SPEAKER_CROWDING",
             "n_lines": n_lines,
             "n_speakers": n_speakers,
-            "reason": (
-                f"L13 violation: panel has {n_lines} on-screen dialogue lines from "
-                f"{n_speakers} distinct speakers. Rendering all of them in one image "
-                "produces a cramped sitcom-freeze-frame. Split this beat into "
-                f"{n_lines} per-speaker panels in the shotlist; each new panel "
-                "frames the speaker who's talking on it."
-            ),
+            "reason": l13_reason,
         })
+        _record_failed(trace, "L13", pre_render_reason=l13_reason)
+    else:
+        _record_skipped(trace, "L13",
+                        f"single-speaker (or zero-speaker) panel — n_lines={n_lines}, n_speakers={n_speakers}")
 
     too_far, beat, dscore, beat_max = detect_camera_too_far_for_beat(next_panel)
     if too_far:
+        l20_chapter_reason = (
+            f"L20 overshoot: beat `{beat}` is shot at `{target_view}` "
+            f"(distance score {dscore}); typical ceiling for this beat is {beat_max}. "
+            "Body-region transformation beats need the region to dominate the frame; "
+            "full-body framings make the change small and the panel reads as "
+            "before/after rather than the change happening now. Tighten the camera "
+            "(MCU or ecu-region) or accept the finding if this beat doubles as an "
+            "establishing shot. See script-breakdown SKILL.md § Step 4.5 and "
+            "camera-distance-analysis/README.md."
+        )
         refs_to_attach.append({
             "kind": "WARNING_CAMERA_TOO_FAR_FOR_BEAT",
             "beat": beat,
             "camera": target_view,
             "distance_score": dscore,
             "beat_max_score": beat_max,
-            "reason": (
-                f"L20 overshoot: beat `{beat}` is shot at `{target_view}` "
-                f"(distance score {dscore}); typical ceiling for this beat is {beat_max}. "
-                "Body-region transformation beats need the region to dominate the frame; "
-                "full-body framings make the change small and the panel reads as "
-                "before/after rather than the change happening now. Tighten the camera "
-                "(MCU or ecu-region) or accept the finding if this beat doubles as an "
-                "establishing shot. See script-breakdown SKILL.md § Step 4.5 and "
-                "camera-distance-analysis/README.md."
-            ),
+            "reason": l20_chapter_reason,
         })
+        _record_failed(trace, "L20_chapter",
+                       pre_render_reason=l20_chapter_reason)
+    else:
+        _record_skipped(trace, "L20_chapter",
+                        f"camera {target_view!r} within beat ceiling for beat={beat!r}")
 
     aspect = ASPECT_FOR_CAMERA.get(target_view, "3:4")
 
@@ -1287,7 +1585,8 @@ def build_plan(root: Path) -> dict:
                             composer_env_ref,
                             env_anchor_from=composer_env_anchor_from,
                             lineup_attached=lineup_attached,
-                            env_dropped=env_dropped_for_ceiling)
+                            env_dropped=env_dropped_for_ceiling,
+                            _trace=trace)
 
     return {
         "project_root": str(root),
@@ -1308,6 +1607,8 @@ def build_plan(root: Path) -> dict:
         "stage_change": stage_change,
         "composed_prompt": prompt,
         "anchor_panel_id": anchor["panel"].get("panel_id") if anchor else None,
+        "transformation_type": transformation_type,
+        "_trace": trace,
     }
 
 

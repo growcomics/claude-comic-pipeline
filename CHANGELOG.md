@@ -10,6 +10,26 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (later — phase 1 of checks-and-balances)
+
+### Added
+
+- **Phase 1 of the checks-and-balances refactor landed — ledger emit-only.** Design at [`docs/checks-and-balances-design.md`](docs/checks-and-balances-design.md). Three changes ship together:
+  - **`compose_prompt` is now trace-aware.** New optional `_trace: dict | None = None` parameter (default None → fully backwards compatible). When supplied, every helper call site (`_body_region_camera_directive` for L20, `_canonical_character_directive` for L17, `_female_beauty_anchor_line` for L15, `_hair_state_line` for L22, `_l24_accessory_line` for L24, `_female_anatomy_anchor_needed` / `FEMALE_ANATOMY_ANCHOR`, the cartoony FMG style anchor for L11 slot 5, the tier-silhouette block for L11 slot 8, the env handling for L10/L23, the state anchor for L1.5, the RENDER DIRECTIVE for L10, the L21_REF_EXCLUSION clause, the `_pose_anatomy_anchor` for L18) records its per-rule application into the trace dict with `compose_contribution` + `pre_render` + `post_render` fields. **Prompt output is byte-identical** to the legacy path — golden-output tests pass against `comic-april-mutagen-v2` and `moving-experience-v2`.
+  - **`build_plan` writes the build-plan-level findings into the trace** for L1.5 (anchor pick), L12 (dialogue/camera conflict), L13 (multi-speaker crowding), L20_chapter (per-beat overshoot), L28 (lineup-required ref present or MISSING). Adds `target_panel_id` parameter so `write_ledger.py` can plan retroactively for any accepted panel using only the history that existed before it.
+  - **New `PHASE_1_RULE_REGISTRY`** (inline in `next_panel.py`) holds 31 entries: 16 actively tracked rules (L10, L11, L15, L17, L18, L20, L21, L22, L23, L24, female_anatomy, L1.5, L12, L13, L20_chapter, L28) plus 8 deferred (L1, L9, L14, L16, L19, L25, L26, L27 — each with a `phase1_reason` explaining what phase will activate them) plus 7 historical / infrastructure (L2-L8 except L4, with reasons). Each rule declares `applicable_transformations` (e.g. `["fmg"]` for L11/L15/female_anatomy, `["*"]` for L10/L18/L20/L21). The registry is consulted by `_init_trace(transformation_type)` which reads `production-config.json -> transformation_type` (defaults to `"fmg"` for legacy projects). Phase 2 moves each entry to its own per-rule module under `skills/comic-production/rules/`.
+- **`skills/comic-production/scripts/checks_ledger.py` (new file).** Library exposing `write_checks_ledger(project_root, plan, accepted_variant_label, composed_at)` which serializes the trace to `pages/panels/panel-<id>/checks.json` per the schema in the design doc (`schema_version=1`, `panel_id`, `page_number`, `transformation_type`, `shotlist_snapshot_sha`, `composed_at`, `composed_prompt`, `accepted_variant_label`, `rules` dict), and `append_defects(project_root, plan, ts)` which appends one JSONL row per `pre_render.status="fail"` or `post_render.status="fail"` entry to `<project>/defects.jsonl`. Also exports `write_ledger_and_defects()` as a combined convenience.
+- **`skills/comic-production/scripts/write_ledger.py` (new file).** CLI that walks every accepted panel in a project and emits a ledger for each by calling `build_plan(root, target_panel_id=pid)` with the accepted history reconstructed for that panel's compose-time. Supports `--dry-run` (print summary without writing), `--verbose` (one line per panel), and `--panel-id` (target a single panel). Detects the accepted-variant label from `_accepted.txt` or `v*_accepted.png` suffix. Used for retroactive auditing of comics that shipped before the ledger existed, and for bootstrapping `defects.jsonl` from historical data.
+- **Smoke-tested against two historical comics.** `comic-april-mutagen-v2` (14 panels): wrote 14 ledgers, appended 15 defect rows, applied counts 6-9 of 31 rules per panel. `moving-experience-v2` (26 panels): wrote 26 ledgers, applied counts 5-9 of 31 rules per panel. Defects log captures real findings — L1.5 view-aware-chaining failures where no compatible prior exists, L20_chapter overshoot on `comic-april-mutagen-v2` p04-01 ("decide" beat shot at `full`, ceiling is 4, score 5). These are pre-existing shotlist quality signals that the legacy `rules_audit.py` already caught at shotlist time; phase 1 makes them visible per-panel in the ledger and queryable across the defects log.
+
+### Notes
+
+- **No behavior change at generation time.** `compose_prompt` returns the same string with or without `_trace` supplied; the runner pipeline is unchanged. Phase 1 is observability-only.
+- **Phase 2** (extract L21 as the first standalone rule module + build the registry abstraction) is the next deliverable. Pending sign-off.
+- **Proposed comic-test gate at end of phase 1:** none — phase 1 is observability-only and the golden test already confirmed byte-identical prompt output. Test gates start at phase 3 (end of rule-module migration) per the design doc's migration plan.
+
+---
+
 ## 2026-05-16
 
 ### Added
