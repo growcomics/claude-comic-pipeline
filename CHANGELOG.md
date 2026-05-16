@@ -1,5 +1,7 @@
 # Changelog
 
+![CHANGELOG — the canonical source for what changed and why. Timeline: May 9 → May 16](./docs/changelog-assets/00-changelog-cover.png)
+
 All notable changes to the `claude-comic-pipeline` are tracked here.
 
 This file is the **canonical source for what changed and why**. Any session (human or agent) editing this repo must append an entry here when it lands a meaningful change. Trivial cleanups can be skipped; anything that touches behavior, prompt architecture, the build-comic workflow, or a published reference doc must be logged.
@@ -11,6 +13,8 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 ---
 
 ## 2026-05-16 (pipeline-wide "silhouette" → "muscular build" PURGE, user-directed)
+
+![Pipeline-wide vocabulary purge — "silhouette" replaced with "muscular build" / "3D muscle volume" across 22 files. The lineup is a 3D body chart, not an outline reference](./skills/comic-production/references/the-rules-explained-graphics/03-silhouette-ladder.png)
 
 ### Changed
 
@@ -46,6 +50,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 
 ## 2026-05-16 (phases 5/6/7 of checks-and-balances — vision rubrics + retry + discovery)
 
+![Phases 5/6/7 — vision rubrics dispatch fresh subagents per rule, retry CLI dispatches per-rule strategies, defects discovery groups failures by rule / panel / day](./docs/posts/assets/2026-05-16-checks-and-balances/06-defects-discovery.png)
+
 ### Added
 
 - **Phase 5 (vision rubrics) landed.** Every rule module that has a meaningful post-render visual check now declares a `vision_rubric` class attribute — a short prompt designed to be sent to a fresh vision-capable subagent alongside the rendered panel image and the canonical refs. 10 rules ship rubrics: L10 (refs vs rendered identity), L11 (silhouette vs lineup figure), L15 (vogue-cover face quality), L17 (canonical character fidelity), L18 (anatomy coherence + limb count), L20 (region-fill 70%+ vs declared body-region beat), L21 (no ref-as-prop renderings), L22 (hair state matches declared), L23 (background renders the named location vs grey void), L24 (no anachronistic accessories), female_anatomy (body reads as female on hyper-muscular ECUs). L23 and L24 also get rubrics even though their primary verification is at compose time — the rubric covers the post-render confirmation. `Rule.vision_rubric` defaults to None in the base class for rules that don't need vision verification (e.g. L1.5, L12, L13, L28 — all deterministic at planning time).
@@ -61,6 +67,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 ---
 
 ## 2026-05-16 (phase 3b of checks-and-balances — all rules migrated)
+
+![Phase 3b — L11 migrated as the last (and only multi-slot) rule. compose_prompt is now PURELY a registry walker for all 11 active rules](./docs/posts/assets/2026-05-16-checks-and-balances/01-monolith-vs-modules.png)
 
 ### Added
 
@@ -86,6 +94,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 ---
 
 ## 2026-05-16 (phase 3a of checks-and-balances)
+
+![Phase 3a — 9 more rules migrated. compose_prompt becomes a registry walker for L18, L10, L20, L22, L23, L24, L15, L17, female_anatomy](./docs/posts/assets/2026-05-16-checks-and-balances/05-migration-phases.png)
 
 ### Added
 
@@ -119,6 +129,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 
 ## 2026-05-16 (even later — phase 2 of checks-and-balances)
 
+![Phase 2 — rules/ package introduced; L21 extracted as the first per-rule module; compose_prompt routes through the registry](./docs/posts/assets/2026-05-16-checks-and-balances/01-monolith-vs-modules.png)
+
 ### Added
 
 - **Phase 2 of the checks-and-balances refactor landed — `rules/` package + L21 extracted as the first per-rule module.** The infrastructure that phase 3+ will lean on. Three new files under `skills/comic-production/rules/`:
@@ -145,6 +157,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 
 ## 2026-05-16 (later — phase 1 of checks-and-balances)
 
+![Phase 1 — per-panel checks.json ledger written alongside v*.png variants. Schema tracks every rule's compose_contribution + pre_render + post_render states](./docs/posts/assets/2026-05-16-checks-and-balances/02-ledger-schema.png)
+
 ### Added
 
 - **Phase 1 of the checks-and-balances refactor landed — ledger emit-only.** Design at [`docs/checks-and-balances-design.md`](docs/checks-and-balances-design.md). Three changes ship together:
@@ -165,6 +179,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 
 ## 2026-05-16
 
+![Checks-and-balances design — the master architecture for per-rule modules + per-panel ledgers + retry strategies](./docs/posts/assets/2026-05-16-checks-and-balances/00-cover.png)
+
 ### Added
 
 - **Checks-and-balances rule architecture design doc landed.** Full design at [`docs/checks-and-balances-design.md`](docs/checks-and-balances-design.md). Companion blog article with 7 infographics at [`docs/posts/2026-05-16-checks-and-balances.md`](docs/posts/2026-05-16-checks-and-balances.md). Diagnosis: every L-rule's enforcement lives inside `compose_prompt()` in `next_panel.py` (290+ lines, no per-rule attribution after composition) and `rules_audit.py` (flat findings list, never sees rendered pixels). No per-panel per-rule ledger anywhere. No retry-per-rule. Result: individual rules silently get ignored, the agent driving generation can't reliably know which rules fired, the user can't see per-panel pass/fail markers, and there's no clean retry mechanism. Proposed architecture: (1) rule-as-module refactor — each L-rule becomes a discrete module with `id` / `title` / `slot` / `applicable_transformations` / `should_apply` / `compose_contribution` / `verify_pre_render` / `verify_post_render` / `retry_strategy`; a registry walks 16 named composition slots and concatenates per-slot contributions. (2) Per-panel `checks.json` ledger written alongside `v*.png` variants — tracks every rule (applied, skipped, n/a, refused) including `compose_contribution` text and both verification statuses. Tracks only the accepted variant. (3) Three verification classes: pre-render deterministic (today's `rules_audit.py`), post-render deterministic (state-file inspection — L1 prior-ref attached, L9 job_id captured), post-render vision-based (fresh subagent per rule, single-purpose rubric — L11, L17, L20, L18, L21, L22, L25). (4) Per-rule `retry_strategy()` with six kinds: auto_resubmit_with_stronger_contribution / auto_resubmit_with_corrected_refs / auto_resubmit_with_different_face_card / shotlist_edit_required / ref_generation_required / accept_and_log. (5) Project-level `defects.jsonl` append-only log for pattern mining across runs ("which rules fail most this chapter," "which rules fail across multiple chapters," "did a recent rule change correlate with more failures"). (6) `verify_panel.py` CLI for retroactive re-verification of accepted panels without regeneration. Genre/niche extensibility: every rule declares `applicable_transformations`, defaults to FMG; adding BE / glute / MMG / mixed later = new modules, not surgery on existing ones. Ratified answers to 6 open questions captured in the design doc § 6. Migration plan: 8 phases, golden-output tests every phase, comic-test gates at end of phases 1, 3, 5. v1 = phases 1+2 (ledger emit-only + L21 extracted as the first rule module). GUI deferred — the per-panel ledger schema is the design contract.
@@ -179,6 +195,8 @@ The architecture caught the L11 failure mode reliably across two test runs — b
 ## v5 — 2026-05-14 (evening sync)
 
 This release lands the autopilot mode, the production-briefing skill, the runner infrastructure, and a Windows-compat fix. Backward compatible: existing modes (`status`, `auto`, named stage) work exactly as before. FMG-only behavior is preserved when no `production-config.json` exists.
+
+![v5 autopilot — stages 1-5 run end-to-end driven by production-config.json. Halts only on approved hard conditions](./docs/changelog-assets/may14-v5-autopilot.png)
 
 Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git push --force-with-lease origin main` (or use GitHub's "Revert" UI on each commit). Local backup also lives at `Desktop\Claude\comic pipeline.local-original\` on the original author's machine.
 
@@ -237,6 +255,12 @@ Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git 
 
 ## 2026-05-14
 
+The biggest single day of pipeline work. Three batches in chronological order: morning Grok validation + L21–L24 auto-injection landed; evening L28 reference completeness manifest; late-evening L15–L18 promoted to canonical + L20 strengthened. Plus the v5 autopilot release.
+
+![L15-L18 promoted from proposed to canonical — 4 new auto-injecting rules in compose_prompt](./docs/changelog-assets/may14-L15-L18-promotion.png)
+
+![L20 strengthening — mean threshold tightened to 2.5 for transformation comics, body-region beats at full+ promoted to HARD findings, in-prompt EXTREME CLOSE-UP directive prepended](./docs/changelog-assets/may14-L20-strengthening.png)
+
 ### Added (late evening — L15-L18 promotion + L20 strengthening)
 - **L15, L16, L17, L18 promoted from proposed to canonical.** All four lessons (female beauty anchor, multi-angle ref pack, canonical character anchor, pose anatomy coherence) were in the article's "proposed but not yet enforced" section. They're now full lessons in `lessons-learned.md` with diagnosis + enforcement, plus auto-injection in `next_panel.py` `compose_prompt`. Load-bearing index updated.
 - **L15 — Female characters must read as beautiful** (canonical). `_female_beauty_anchor_line()` auto-injects the vogue-cover glamour anchor on every panel where any female cast member is present. Detection heuristic: `cast[].sex in {"f","female"}` or `cast[].pronoun in {"she","her","her/hers","she/her"}`; default-assumes female when unset. Suppressible per character via `cast[].glamour_anchor: false`.
@@ -292,6 +316,10 @@ Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git 
 ---
 
 ## 2026-05-13
+
+![Master CGI prompt template — 9-slot canonical skeleton validated via A/B test on Nano Banana 2 vs GPT Image 2](./docs/changelog-assets/may13-master-template.png)
+
+The big day — CHANGELOG itself launches, L20 camera distance lands with the April benchmark data, L12/L13/L14 cluster (dialogue close-framing / multi-speaker split / multi-view env refs), L19 reverses L7's "never bake lettering" rule, master CGI prompt template + 3-way model comparison blog post.
 
 ### Added
 - **`CHANGELOG.md`** (this file) at repo root. From now on, every session that lands a meaningful change must append an entry here. See the header for the convention.
@@ -377,6 +405,8 @@ Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git 
 
 ## 2026-05-12
 
+![L11 cartoony FMG proportions — tier 1 through tier 6 silhouette ladder, the lineup as a muscular-build target](./skills/comic-production/references/the-rules-explained-graphics/03-silhouette-ladder.png)
+
 ### Added
 - **L11 — Cartoony FMG proportions need explicit anchoring or the model regresses to realistic fitness** (`78815c5`, `7905431`). New lesson + supporting reference doc at `skills/comic-production/references/peak-body-scale.md`. Diagnosed from the April-claudemade and Supergirl runs: generated tier-4+ panels were visibly *smaller* than declared because (1) the lineup ref was attached on too few panels, and (2) prompt vocabulary like "match the muscle proportions of figure N" was too gentle, letting the model regress to its realistic-fitness prior. Two-part fix:
   - **Attachment rule broadened (replaces L5)**: `should_attach_lineup()` in `next_panel.py` now returns True on **stage-change OR full-body camera** (`front-full`, `3q-full`, `side-full`, `back-full`, `low-angle-front`, `low-angle-back`, `splash`). ECU and mcu skip. On Flow refs are free; the silhouette consistency gain outweighs slight composition risk.
@@ -402,6 +432,8 @@ Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git 
 
 ## 2026-05-11
 
+![Post-L7 pipeline rewrite — souls / style / stylize stages dropped; comic-status-board, page-composer, continuity-check, bundled fonts added](./docs/changelog-assets/may11-post-L7-rewrite.png)
+
 ### Added
 - **L10 — References are the truth, prompts are deltas** (`1202441`). Major prompt-architecture change. Diagnosed from Supergirl panels 02 vs 05 (same `lex-lab-redsun` location, env ref attached, but rendered as visibly different chambers). Root cause: per-panel prompts re-described constants (character features, location architecture, costume design) that were already encoded in attached references. Model treated text and refs as competing signals and interpolated.
   
@@ -421,6 +453,8 @@ Rollback tag: `v4` (= commit `533ec3d`). To revert: `git reset --hard v4 && git 
 ---
 
 ## 2026-05-09
+
+![Style-lock becomes a preset library — not a pipeline stage. photoreal-DAZ3D is the default preset](./docs/changelog-assets/may9-style-lock.png)
 
 ### Added
 - **`style-lock` as preset library** (`d2497c0`). `photoreal-DAZ3D` as the default preset; extensible `styles/` folder. Style-lock survives the post-L7 rewrite as a reference library for shotlist authoring, not a pipeline stage that produces `style.md`.
