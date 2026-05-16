@@ -30,9 +30,15 @@ Almost every rule below tells you something specific to do — or specifically *
 
 **L1 — Generate transformation panels in order, not in parallel.** Image generation has no memory between calls. If you submit panels T1 through T10 in parallel, every panel sees the same baseline and the model independently re-derives state from the prompt. You'll get clothing tears that come and go, muscle size that flickers up and down, hair that re-pins itself between frames. The fix is to generate panels sequentially and pass each completed panel as a reference to the next one. The new panel can *see* the prior one and carry forward its state.
 
+![Parallel generation produces inconsistent panels; chained generation preserves continuity](./the-rules-explained-graphics/09-L1-chained-vs-parallel.png)
+
 **L1.5 — Pick the right prior panel to chain from.** Naïve "always chain to panel N-1" breaks when the views change. If panel 7 is a back shot and panel 8 wants a face close-up, panel 7 isn't a useful reference — the face wasn't even in the frame. Walk backwards through the chain and pick the most recent panel whose camera *category* is compatible with the new one. Front-facing chains to front-facing; back to back; face ECU only chains to other panels where the face was visible.
 
+![Chain view-aware: skip incompatible neighbors and chain to the last compatible view](./the-rules-explained-graphics/10-L1-5-view-aware-chaining.png)
+
 **L9 — Always capture each panel's job ID before submitting the next.** This is plumbing: if you forget to write down the previous panel's ID, the chain silently breaks. The new panel falls back to "no prior reference" and you get a state regression you might not notice for several panels. The fix is to enforce ID capture in the runner — no panel goes out without its predecessor's ID locked in.
+
+![Captured job_id feeds the next panel; missing capture silently breaks the chain](./the-rules-explained-graphics/18-L9-job-id-capture.png)
 
 ---
 
@@ -50,6 +56,8 @@ The fix is to commit hard to a division of labor:
 If your prompt re-describes things that are already in the refs ("she wears a blue cheongsam with gold trim"), you're fighting your own references. Stop. The model already knows what the cheongsam looks like — it's in the body baseline. Tell it what's *new this panel*: she throws a high kick, she shouts, the kryptonite cuff falls.
 
 **L10 refinement — Identity vs pose.** The L10 rule does *not* say "describe nothing." It says "describe only what's not in the refs." Pose is in the prompt because no single reference shows every pose. Same for expression, gesture, momentary lighting. A shotlist that says "Chun Li in a hero stance, fists clenched, mouth wide open in a roar" is correct: the pose is new this panel. A shotlist that says "Chun Li wearing her blue cheongsam, white tights, brown boots, twin hair buns" is wrong: all of that is in the body baseline ref. Refs override prompt text on visual identity; prompt overrides refs on pose and action.
+
+![Identity vs pose: refs win on visual identity, prompt wins on pose and action](./the-rules-explained-graphics/19-L10-refinement-identity-vs-pose.png)
 
 ---
 
@@ -105,6 +113,8 @@ Both ends are load-bearing. Without the opening anchor the lettering drifts to 2
 
 **L4 — Speech bubble positioning and tail direction.** L4 was originally deprecated under L7 ("we don't bake bubbles anyway"). When L19 reversed L7, L4 came back to active. If you bake bubbles into the render, you have to tell the model where each bubble goes (upper-left, upper-right), which direction its tail points (toward the speaker's mouth), what shape it is (round, jagged for shouting, dashed for whispering, cloud-shaped for thoughts), and exactly what text it contains in quotes. Vague "she says something" prompts produce vague bubbles.
 
+![Speech bubble anatomy: position, shape, tail, text + attribution](./the-rules-explained-graphics/13-L4-bubble-positioning.png)
+
 ---
 
 ## Environments and locations
@@ -112,6 +122,8 @@ Both ends are load-bearing. Without the opening anchor the lettering drifts to 2
 **L14 — Multi-view location references for shot-reverse-shot.** L10's "refs are truth" rule, applied to locations, means the first time a location appears, you attach a reference image of it. Every subsequent panel in that location attaches the *first accepted panel's image* as the location anchor — the model carries forward the actual chamber you established, not a generic interpretation. That works for sustained-POV scenes (a transformation chamber shot from one consistent angle).
 
 It breaks for dialogue scenes that need shot-reverse-shot — facing one character, then facing the other. A single canonical anchor only shows one direction of the room. The reverse shot has nothing to lock to and the model invents a different room. Fix: hero locations that host shot-reverse-shot should carry multiple env references (`_source.jpg`, `_source-reverse.jpg`), and the chaining picks the side that matches the panel's camera direction. Authoring guidance for now; multi-view automation logged as a follow-up.
+
+![Multi-view env refs: A-side and B-side anchors, picked by panel camera direction](./the-rules-explained-graphics/20-L14-multi-view-env-refs.png)
 
 ---
 
@@ -123,11 +135,19 @@ These four landed on the same day, all from one Chun Li comic post-mortem. They 
 
 **L21 — Suppress in-scene rendering of reference images.** Occasionally the model takes a reference image you attached (a face card, a size lineup) and renders it as a literal physical object *inside* the scene — a tiny photo stuck to fabric, a badge, a poster on the wall. Caught on a Chun Li ECU where the face card came through as a small photo tucked into her torn sleeve seam. Fix: every panel prompt that attaches any reference image includes the explicit clause *"DO NOT render any reference image as a physical photo, badge, poster, or scene object."* The pipeline auto-injects this now.
 
+![Ref-as-prop: face card rendered as a badge stuck to a sleeve](./the-rules-explained-graphics/21-L21-ref-as-prop.png)
+
 **L22 — Name the hair state explicitly in every face-visible panel.** When you rely on the prior-panel reference alone to carry hair state, accessories drift. Twin buns become one bun. Red ribbons turn grey. Hair length jumps. The fix is to name the hair state in every prompt where the head is in frame — derived from the transformation beat: pre-suit-fail keeps twin buns + ribbons; during suit-fail the buns shake loose; post-suit-fail the hair is fully loose, ribbons gone. Explicit beats implicit every time.
+
+![Hair drift across panels: twin buns become a single updo](./the-rules-explained-graphics/22-L22-hair-drift.png)
 
 **L23 — Inject a verbal location anchor when the env ref gets dropped.** Image generators have a budget on how many reference images you can attach per call. On a stage-change full-body panel — where you need the face card, the prior panel as state anchor, AND the size lineup — you blow the budget and the env ref gets dropped. Without an explicit verbal anchor in the prompt, the background collapses to a grey/blurry studio void. Caught on a Chun Li panel that rendered against a grey nothing while every other panel showed her clean dojo. Fix: when the env ref is dropped, inject five or more named location elements with concrete adjectives into the prompt body — "empty training dojo, wooden floorboards worn from sparring, paper sliding doors stained gold by late-afternoon light, calligraphy scrolls on the back wall, two paper lanterns hanging from exposed beams."
 
+![Env void vs verbal anchor injected: grey nothing vs detailed dojo](./the-rules-explained-graphics/23-L23-env-void.png)
+
 **L24 — Suppress anachronistic accessories explicitly.** Image models hallucinate modern accessories on characters — wristwatches, bracelets, rings, earrings, necklaces — even when the canonical character wears none. Wrists, necks, ears, and ring fingers are hotspots. Caught on a panel where Chun Li had a digital wristwatch alongside her canonical spiked wristband. Fix: when those body parts may be in frame, include both a canonical-inventory line ("white spiked wristbands on both wrists") AND an explicit negation list ("no wristwatch, no bracelets, no rings, no earrings, no necklace"). The negation is the load-bearing part.
+
+![Wristwatch hallucination next to canonical spiked wristband](./the-rules-explained-graphics/24-L24-wristwatch.png)
 
 ---
 
@@ -137,9 +157,15 @@ These three are about continuity of detail across the issue.
 
 **L25 — Body-region reveals are sticky. Once exposed, must stay exposed.** A body region (the abs, a shoulder) gets clearly revealed in one panel — say, a blouse riding up during transformation. Then a later panel in the same costume state shows the blouse mysteriously covering the abs again. The transformation's climax gets undone. Fix: when a region has been revealed, the costume_state for every subsequent panel must explicitly note "abs still exposed" — don't just say "blouse tied at chest" and trust the model to remember.
 
+![Sticky reveal: abs revealed in P3 stays revealed in P4, but P5 wrongly re-covers](./the-rules-explained-graphics/25-L25-sticky-reveals.png)
+
 **L26 — Costume identity must be canonical across panels, not generated fresh.** "White top tied at chest" can become a bandeau wrap in one panel and a knotted button-up collared blouse in the next — both valid interpretations of the same prompt, but they're entirely different *garments*. Fix: be specific about the garment family (bandeau wrap vs. knotted t-shirt vs. button-up) and carry the specific phrasing through every panel. The body baseline ref helps, but the prompt has to commit.
 
+![Three different garment families all valid as "tied at chest" — pick one canonical](./the-rules-explained-graphics/26-L26-canonical-costume.png)
+
 **L27 — Skin sheen and texture continuity.** "Ray-traced subsurface scattering, physically-based rendering" gives the model latitude on how oily versus matte the skin looks. Across multiple panels the specular response drifts — one panel shows bodybuilder-competition shine, the next shows natural matte skin. On hyper-muscular silhouettes the highlight surface area is bigger, so the drift is more visible. Fix: lock the skin treatment in the prompt — "natural matte skin with subtle subsurface scattering, not oiled or wet."
+
+![Oiled bodybuilder shine vs natural matte: lock one in the prompt and carry it](./the-rules-explained-graphics/27-L27-skin-sheen.png)
 
 ---
 
@@ -158,12 +184,29 @@ These three are about continuity of detail across the issue.
 
 A few rules from the early days that are either superseded, specialized, or quiet plumbing. Listed for completeness.
 
-- **L2** — Higgsfield's safety filter sometimes rejected maximum-size FMG splash panels. Worked around by softening prompt language at peak tier.
-- **L3** — Always use the `.png` result URL, never the `_min.webp`. The webp is a thumbnail; chaining off it destroys quality.
-- **L5** — Originally said "attach the lineup ref only on stage-change panels." Superseded by L11, which broadens the attachment rule to every full-body panel.
-- **L6** — The MCU's `job_display` tool only returns the latest result, not the full history. If you need older results, don't rely on the display widget.
-- **L7** — See above. Diagnosed the 2D-drift failure; prescription reversed by L19.
-- **L8** — Cumulative state in multi-beat growth comics (costume tearing, muscle size, hair coming loose). The principle is right; L1 + L25 + L26 + L27 are the active rules covering it now.
+**L2 — Higgsfield's safety filter sometimes rejects FMG splash panels.** Mostly fires on the combination of maximum-size body + aggressive prompt language + tight framing. The job returns with `status: "nsfw"` instead of `completed` — no image, but the job_id is still issued (which can silently corrupt a chain if you don't check the status). Workaround: soften prompt language at peak tier, or reroll with subtly different vocabulary.
+
+![Higgsfield safety filter: approved vs blocked paths](./the-rules-explained-graphics/11-L2-safety-filter.png)
+
+**L3 — Always use the `.png` result URL, never the `_min.webp`.** Every Higgsfield generation returns two URLs: the full-resolution `.png` and a small `_min.webp` thumbnail meant for UI previews. Chaining a panel off the thumbnail destroys quality across the chain. Use the raw png.
+
+![Use the .png, not the _min.webp](./the-rules-explained-graphics/12-L3-png-vs-webp.png)
+
+**L5 — Originally said "attach the lineup ref only on stage-change panels." Superseded by L11.** The old rule was a cost-cutting heuristic from the Higgsfield era when every reference attachment cost money. On Flow refs are free, and L11 broadens the attachment rule to every full-body panel — the silhouette consistency gain far outweighs the slight composition-influence risk.
+
+![L5 attached lineup only on stage-changes; L11 attaches on every full-body panel](./the-rules-explained-graphics/14-L5-lineup-attach-pattern.png)
+
+**L6 — The `job_display` widget shows only the latest result, not full history.** If you need older results, query directly via the API; the display widget is a UI convenience, not a source of truth. Quiet plumbing rule — not failure-prone but worth knowing.
+
+![Display widget shows only the latest result, not history](./the-rules-explained-graphics/15-L6-display-widget.png)
+
+**L7 — Comic-coded vocabulary in a CGI prompt pulls toward 2D illustration.** Diagnosed the failure; the prescription (defer all lettering to vector overlays) was reversed by L19. L19 keeps lettering baked in but counters the 2D pull with aggressive render-engine anchoring on both ends of the prompt. The diagnosis still holds — L19 just changed the fix.
+
+![Comic-coded prompt drifts to 2D; CGI-anchored prompt holds photoreal](./the-rules-explained-graphics/16-L7-2d-drift.png)
+
+**L8 — Cumulative state in multi-beat growth comics.** Costume tearing, muscle size, hair coming loose — once a state change happens it accumulates forward only. Don't let panel N+1 undo panel N. The principle is right; the active rules covering it now are L1 (chain sequentially), L25 (sticky reveals), L26 (canonical costume), L27 (skin sheen).
+
+![Cumulative state: state accumulates forward only, never backtracks](./the-rules-explained-graphics/17-L8-cumulative-state.png)
 
 ---
 
