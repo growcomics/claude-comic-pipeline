@@ -23,6 +23,15 @@ import json
 import sys
 from pathlib import Path
 
+# Per-rule registry (phase 2 of the checks-and-balances refactor). The rules/
+# package lives at skills/comic-production/rules/, parallel to scripts/. Add
+# the comic-production directory to sys.path so the import works regardless
+# of where this file is invoked from.
+_COMIC_PRODUCTION_DIR = Path(__file__).resolve().parent.parent
+if str(_COMIC_PRODUCTION_DIR) not in sys.path:
+    sys.path.insert(0, str(_COMIC_PRODUCTION_DIR))
+from rules._registry import get_rule  # noqa: E402
+
 
 # ---------------------------------------------------------------------------
 # View-aware chaining (L1.5)
@@ -874,7 +883,8 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    env_anchor_from: dict | None = None,
                    lineup_attached: bool = False,
                    env_dropped: bool = False,
-                   _trace: dict | None = None) -> str:
+                   _trace: dict | None = None,
+                   transformation_type: str = "fmg") -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
 
     The body describes only what is *new* in this panel (camera, action,
@@ -1222,17 +1232,30 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _record_applied(_trace, "L10", contribution=l10_directive,
                     pre_render_reason="render directive always emitted (slot 11_render_directive)")
 
-    # 9a. L21 ref-exclusion — emit whenever any ref is attached. Empirically
-    # validated on Grok p6 v2 (the lineup's "1" label rendered as a watermark);
-    # cheap, low-risk, recommended on every multi-ref panel.
-    any_ref_attached = bool(env_ref) or bool(anchor) or bool(lineup_attached)
-    if any_ref_attached:
-        parts.append(L21_REF_EXCLUSION)
-        _record_applied(_trace, "L21", contribution=L21_REF_EXCLUSION,
-                        pre_render_reason=f"at least one ref attached (env={bool(env_ref)}, anchor={bool(anchor)}, lineup={lineup_attached})")
-    else:
-        _record_skipped(_trace, "L21",
-                        "no refs attached — ref-exclusion clause unnecessary")
+    # 9a. L21 ref-exclusion — PHASE 2 of the checks-and-balances refactor:
+    # L21 is now the first rule routed through the per-rule registry. See
+    # skills/comic-production/rules/l21_ref_safety.py and the design doc at
+    # docs/checks-and-balances-design.md. Every other rule on this function
+    # still routes through the legacy inline helpers above — phase 3 migrates
+    # them one at a time with byte-identical golden-output tests at each step.
+    _l21 = get_rule("L21")
+    if _l21 is not None and _l21.applies_to_transformation(transformation_type):
+        _l21_ctx = {
+            "env_ref": env_ref,
+            "anchor": anchor,
+            "lineup_attached": lineup_attached,
+        }
+        _l21_contribution = _l21.compose_contribution(panel, _l21_ctx, "12_ref_safety")
+        _l21_verif = _l21.verify_pre_render(panel, _l21_ctx)
+        if _l21_contribution is not None:
+            parts.append(_l21_contribution)
+            _record_applied(_trace, "L21",
+                            contribution=_l21_contribution,
+                            pre_render_status=_l21_verif.status,
+                            pre_render_reason=_l21_verif.reason)
+        else:
+            _record_skipped(_trace, "L21",
+                            _l21_verif.reason or "L21 did not apply")
 
     # 9b. L18 pose anatomy anchor — universal soft guardrail. Always emit.
     l18_line = _pose_anatomy_anchor()
@@ -1586,7 +1609,8 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             env_anchor_from=composer_env_anchor_from,
                             lineup_attached=lineup_attached,
                             env_dropped=env_dropped_for_ceiling,
-                            _trace=trace)
+                            _trace=trace,
+                            transformation_type=transformation_type)
 
     return {
         "project_root": str(root),

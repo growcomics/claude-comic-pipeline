@@ -10,6 +10,32 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (even later — phase 2 of checks-and-balances)
+
+### Added
+
+- **Phase 2 of the checks-and-balances refactor landed — `rules/` package + L21 extracted as the first per-rule module.** The infrastructure that phase 3+ will lean on. Three new files under `skills/comic-production/rules/`:
+  - **`_base.py`** — `Rule` base class with class attributes `id`, `title`, `slot`, `severity`, `applicable_transformations` and methods `should_apply`, `compose_contribution`, `verify_pre_render`, `verify_post_render`, `retry_strategy`. Also `Verification` dataclass with strict `status` enum (`pass | fail | pending | skipped | blocked | n/a | refused`) and validation in `__post_init__`. Helper `Rule.applies_to_transformation(t)` for genre dispatch; `Rule.slots()` normalizes single-slot vs multi-slot rules to a tuple.
+  - **`_registry.py`** — `RULES: dict[str, Rule]` keyed by rule id; `get_rule(id)`, `iter_rules()`, `iter_rules_for_slot(slot)`. Phase 2 ships only `L21()`; phase 3 grows this list one rule at a time.
+  - **`l21_ref_safety.py`** — first migrated rule. `slot="12_ref_safety"`, `applicable_transformations=("*",)`. Implements `should_apply` (returns True iff any of env_ref / anchor / lineup_attached is truthy), `compose_contribution` (returns the L21 exclusion clause when applicable), `verify_pre_render` (returns a `Verification` with the same reason text format the legacy inline path used), and `retry_strategy` (returns `auto_resubmit_with_stronger_contribution` keyed to the substitute the model rendered — phase 5 vision verification will populate `failure.evidence.substitute_rendered`).
+  - **`README.md`** — explains the per-rule module convention, the registry, the genre-extensibility hook, and the per-rule migration tracker (L21 ✓ phase 2; L18/L20/L15/L17/L22/L23/L24/L11/L10/female_anatomy TODO in phase 3).
+- **`next_panel.compose_prompt` now routes L21 through the registry.** Inline L21 site at the old line ~1238 replaced with a registry-driven call: look up `get_rule("L21")`, check `applies_to_transformation(transformation_type)`, build a minimal `ctx` dict (env_ref / anchor / lineup_attached), call `compose_contribution(panel, ctx, "12_ref_safety")` and `verify_pre_render(panel, ctx)`, append to `parts` if non-None, write to the trace via the existing `_record_applied` / `_record_skipped` helpers using the Verification's status + reason. `compose_prompt` gains a `transformation_type: str = "fmg"` parameter (defaults to "fmg" so legacy callers continue to work); `build_plan` passes `transformation_type=transformation_type` explicitly.
+- **The `L21_REF_EXCLUSION` constant remains defined in `next_panel.py` for backwards compatibility** (any external script that imports it continues to work); the canonical copy now lives in `rules/l21_ref_safety.py`. Phase 3+ cleanup may remove the legacy constant once we confirm nothing external depends on it.
+- **Genre extensibility is now operational.** `Rule.applies_to_transformation(transformation_type)` is the single dispatch point: rules with `applicable_transformations=("*",)` apply to every project, rules with `("fmg",)` skip on non-FMG projects. Phase 3 rules can ship as `("fmg",)`-only modules; future BE/glute/MMG variants land as parallel modules (e.g. `l11_mmg_silhouette.py`) without modifying the FMG modules.
+
+### Verified
+
+- **Golden-output test still passes.** `composed_prompt` is byte-identical against `comic-april-mutagen-v2` and `moving-experience-v2` between the phase 1 build (HEAD before phase 2) and the phase 2 build. The diff target was `_trace.L21` specifically — its compose_contribution + slot + applicable_transformations + pre_render + post_render entries are byte-identical between the inline path and the registry path.
+- **`write_ledger.py` smoke-tested on the april project.** `panel-p07-01/checks.json` shows `L21.pre_render.reason = "at least one ref attached (env=True, anchor=False, lineup=True)"` matching the phase 1 format exactly. Slot recorded as `"12_ref_safety"`. Applicable_transformations recorded as `["*"]`.
+- **L21 unit-tested standalone** (no panel data needed): `should_apply` returns False for empty ctx and True for a ctx with any ref; `compose_contribution` returns None when not applicable and the L21_REF_EXCLUSION string when applicable; `verify_pre_render` returns `Verification(status="pass", reason=...)` or `Verification(status="skipped", reason=...)` matching the legacy reason text. `applies_to_transformation("fmg") == applies_to_transformation("mmg") == True` (rule is universal).
+
+### Notes
+
+- **Phase 3** (migrate L18 next — always-emit, smallest after L21 — then L20, L15, L17, L22, L23, L24, L11, L10, female_anatomy) is the next deliverable. Each rule lands as one commit with a golden-output test against the historical corpus.
+- **No comic API spend in phase 2.** Phase 2 is structural; the golden-output test on existing data confirmed byte-identical prompt output without any new generation.
+
+---
+
 ## 2026-05-16 (later — phase 1 of checks-and-balances)
 
 ### Added
