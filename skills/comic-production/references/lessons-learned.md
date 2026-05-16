@@ -21,6 +21,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L14 | Multi-view location references for shot-reverse-shot | Single env anchor breaks when the camera reverses; pack multiple env refs per location |
 | L19 | Bake lettering into the CGI render | Reverses L7. SFX / speech bubbles / captions render inside the image as physical scene objects |
 | L20 | Camera distance bias for transformation comics | Default to MCU or closer; reserve full-body for the reveal. Mean ≤ 3.0, ≥30% in middle distances |
+| L28 | Reference completeness is mandatory, not optional | `references_required.json` manifest derived at script-breakdown; gated by `rules_audit`. Body-tier refs MUST attach the muscle-size lineup at generation time. |
 | L21 | Suppress in-scene rendering of reference images | Face card / lineup refs occasionally render as physical scene objects; exclusion clause required in every prompt that attaches a ref |
 | L22 | Hair state must be explicit in every face-visible panel | Twin buns + ribbons (or loose) drift across panels when inherited only from state anchor; name the hair state per panel |
 | L23 | When env ref is dropped, add a dense verbal env anchor | Stage-change full-body panels drop env ref to fit the 3-ref ceiling; without 5+ named location elements in the prompt the background goes to a grey void |
@@ -782,18 +783,6 @@ The negation list is the load-bearing part — naming what to exclude is what su
 
 ---
 
-## How to add a lesson
-
-When you observe a new failure mode that recurs, append a new entry following the structure above:
-- **Symptom** (what the output looks like)
-- **Root cause** (the mechanism)
-- **Fix** (the concrete prompt or workflow change)
-- Optional: worked example, prompt fragments that reliably work
-
-Keep entries punchy. If a lesson grows past ~150 lines it probably wants its own dedicated reference file.
-
----
-
 ## L25 — Body-region reveals are sticky: once exposed, must stay exposed
 
 **Symptom**: A body region is shown clearly in one panel (e.g., Susan's hyper-developed abs in p3-04 ecu-region with blouse riding up) and then becomes covered/hidden in subsequent post-reveal panels where the same region is in frame (e.g., p3-06 cowboy flex with a long knotted blouse that drops past the abs). Reader experiences this as a continuity break — the reveal is undone visually.
@@ -834,3 +823,97 @@ Allowable per-panel variation: lighting conditions (warm afternoon sun vs cool i
 
 **Where this applies**: Any hyper-muscular character render. The bigger the silhouette, the more aggressive the skin specular drift becomes, and the more explicit the sheen-control vocabulary needs to be.
 
+---
+
+## L28 — Reference completeness is mandatory, not optional
+
+**Symptom**: Most generated comics ship with too few reference images. A typical project has face-card + body-baseline (tier 1) per character + one `_source.jpg` per location. That's it. The per-panel prompts then carry detail that should be in refs — peak-tier body proportions, specific facial expressions, reverse-angle establishing shots, lighting state variants, costume damage states. Result: every L10 failure mode (drift across panels, descriptions fighting refs, model interpolation) compounds because there aren't enough refs to anchor the work.
+
+Concrete observations from production:
+- Tier-5 panels render visibly smaller than tier 5 should be, because the character's specific identity-at-tier-5 was never pre-rendered. The model interpolates between "her at tier 1" and "generic figure at tier 5 in lineup."
+- Shot-reverse-shot dialogue scenes have the camera flip 180° between two characters but only one env anchor exists. The reverse-angle panel invents a different room (L14 documents this; ref completeness enforces it).
+- Lighting transitions (dormant chamber → red wash → post-destruction sparks) all drive off one `_source.jpg`; lighting state lives entirely in the prompt, which is L10 violation in disguise.
+- Expression beats ("Lex terrified," "Kara determined") have no canonical ref. Each panel invents the emotion fresh; emotion drifts across the issue.
+
+**Root cause**: Image generation defaults to "minimize reference gathering, do the work in the prompt." The `reference-gathering` skill exists but isn't enforced by `build-comic` — Stage 2's gate today only checks that ref folders exist and contain at least one image. AI agents (and tired humans) hit that minimum gate and move on. The refs that ARE generated are typically baseline only; everything beyond baseline gets pushed to per-panel prompts.
+
+**Fix**: Manifest every required ref at script-breakdown time; gate generation until the manifest is satisfied; enforce in `rules_audit.py`.
+
+### v1 mandatory ref categories
+
+Every comic project must have these refs on disk before stage 3 generation can start:
+
+**Per character** (in `cast[]`):
+- `face-card.png` — canonical neutral expression
+- `body-tier{N}.png` — one per distinct `muscle_size_tier` value appearing in the shotlist. Minimum: tier 1 (baseline). For a transformation comic going 1→6: tier 1, tier 3, tier 5 (or 6) at minimum.
+
+**Per location** (in `locations[]`):
+- `_source.jpg` — establishing reference (DAZ stand-in for first panel; can be replaced by an accepted establishing panel after first generation per L10 env chaining).
+- `_source-reverse.jpg` — required when ANY panel in the shotlist contains a camera direction suggesting shot-reverse-shot. Per L14.
+
+### Hard rule: body-tier refs MUST be generated WITH the muscle-size lineup attached
+
+This is the critical sub-rule of L28. When generating `body-tier3.png` or `body-tier5.png` for a character, the `references_required.json` walker MUST attach `muscle-size-lineup.png` (or `muscle-size-lineup-4-9.png` for tier ≥ 7) as a reference image during generation. Without the lineup attached:
+- The model generates "this character, somewhat muscular" using its plausible-fitness prior, NOT the cartoony hyper-FMG silhouette the tier number is supposed to represent.
+- All downstream panels that chain off this tier ref inherit the realistic-fitness drift.
+- Every panel's per-panel lineup attachment then has to *correct* the character's own ref, which is the wrong direction of the workflow.
+
+The lineup attachment at ref-generation time is what makes a tier-5 character ref actually look like tier 5. Per L11 + L11 surgical scoping: the lineup is a PROPORTION reference ONLY. Use it to fix muscle mass and frame width during the tier-N body ref generation; do NOT borrow hair, costume, face, or pose from the lineup figure (the character ref provides identity; the lineup provides scale).
+
+### Manifest schema
+
+`references_required.json` lives at project root next to `shotlist.json`. Schema (v1):
+
+```json
+{
+  "characters": {
+    "<char_id>": {
+      "face_card": "references/characters/<char_id>/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/<char_id>/body-tier1.png", "lineup_required": false},
+        {"tier": 3, "path": "references/characters/<char_id>/body-tier3.png", "lineup_required": true},
+        {"tier": 5, "path": "references/characters/<char_id>/body-tier5.png", "lineup_required": true}
+      ]
+    }
+  },
+  "locations": {
+    "<loc_id>": {
+      "establishing": "references/locations/<loc_id>/_source.jpg",
+      "views": [
+        {"name": "reverse", "path": "references/locations/<loc_id>/_source-reverse.jpg", "required_when": "shot-reverse-shot detected"}
+      ]
+    }
+  }
+}
+```
+
+`script-breakdown` emits this manifest at the same time as `shotlist.json`. `reference-gathering` walks it. `rules_audit.check_reference_completeness()` HARD-fails for any missing file.
+
+### Enforcement
+
+1. **`script-breakdown`** — at the end of the workflow, derives `references_required.json` from the shotlist (distinct `muscle_size_tier` values per character, shot-reverse-shot detection per location).
+2. **`reference-gathering`** — reads `references_required.json` at start; walks every missing item. For each `body_tier` ref where `lineup_required: true`, attaches the muscle-size-lineup PNG during generation. Does not exit until every file in the manifest exists on disk.
+3. **`rules_audit.py` `check_reference_completeness()`** — HARD finding for every file listed in `references_required.json` that isn't on disk. Replaces the looser "ref folder exists" check.
+4. **`build-comic` Stage 2 gate** — Stage 2 cannot close (i.e., Stage 3 cannot start) until `check_reference_completeness()` is clean. No more "good enough" partial ref sets.
+
+### Future expansion (v2)
+
+Not in v1 but logged for v2:
+- Per-character **expression refs** (one per distinct emotional beat in the shotlist — "neutral", "terrified", "determined", etc.)
+- Per-character **pose refs** (one per distinct action pose category — "hands-on-hips", "double-bicep-flex", "fighting-stance")
+- Per-location **lighting-state refs** (one per distinct named lighting state — "dormant", "red-wash", "post-destruction")
+- Per-prop **state refs** for props that visibly transform across the issue (red-sun emitter pristine / sparking / ruined; kryptonite cuffs intact / cracking / shattered)
+
+These extend the manifest schema additively. v2 raises ref count per comic from ~12 to ~30. v1 raises it from ~3 to ~12.
+
+### Where this applies
+
+Every comic project, regardless of platform (Flow or Higgsfield). The cost is real on Higgsfield (one paid generation per ref). On Flow it's free. Either way: refs are cheaper than wrong renders.
+
+### Where this does NOT apply
+
+Quick one-off panels that aren't part of a multi-panel comic. Standalone illustrations with a single hero shot don't need a body-tier manifest.
+
+---
+
+## How to add a lesson

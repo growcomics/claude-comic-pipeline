@@ -274,6 +274,60 @@ This pre-generation gate is the cheapest place to catch the failure: re-planning
 
 Write `./shotlist.json` and `./shotlist.md` at the project root. Run the rules audit (above). Report panel and page counts back to the user with one or two notable decisions ("treated p7 as a splash for the altar reveal — flag if you want it broken into 3 panels"). If the audit returned HARD findings, also report those and pause for direction. Don't auto-iterate; wait for direction.
 
+### 7. Emit `references_required.json` (L28 — manifest for reference-gathering)
+
+Per **L28** in `comic-production/references/lessons-learned.md`, every comic project must have a complete reference manifest that the `reference-gathering` skill walks. Derive the manifest from the shotlist and write it at project root.
+
+**Per character in `cast[]`:**
+
+- `face_card`: `references/characters/<char_id>/face-card.png`
+- `body_tiers`: one entry per distinct `muscle_size_tier` value appearing in any panel's `characters[]` involving this character. Each entry:
+  - `tier`: the numeric tier
+  - `path`: `references/characters/<char_id>/body-tier{N}.png`
+  - `lineup_required`: `false` if `tier == 1`, `true` if `tier >= 2`. **This is the L28 hard rule — tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image at generation time.**
+
+If a character has no `muscle_size_tier` values in the shotlist (non-transformation comic), emit only `face_card` for that character.
+
+**Per location in `locations[]`:**
+
+- `establishing`: `references/locations/<loc_id>/_source.jpg`
+- `views`: derived from camera direction analysis. For v1: detect shot-reverse-shot patterns. If any two adjacent panels in the same location have cameras with opposing directional cues (e.g. `over-shoulder Lex` followed by `over-shoulder Kara`; or `front` followed by `back-full` of the same scene), add `{"name": "reverse", "path": "references/locations/<loc_id>/_source-reverse.jpg"}`. Otherwise leave `views` empty.
+
+**Per prop in `props[]`** (v1): emit only an `establishing` entry. Prop-state refs are v2.
+
+**Schema example:**
+
+```json
+{
+  "version": 1,
+  "generated_from_shotlist": true,
+  "characters": {
+    "chunli": {
+      "face_card": "references/characters/chunli/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/chunli/body-tier1.png", "lineup_required": false},
+        {"tier": 3, "path": "references/characters/chunli/body-tier3.png", "lineup_required": true},
+        {"tier": 5, "path": "references/characters/chunli/body-tier5.png", "lineup_required": true}
+      ]
+    }
+  },
+  "locations": {
+    "lex-lab-redsun": {
+      "establishing": "references/locations/lex-lab-redsun/_source.jpg",
+      "views": [
+        {"name": "reverse", "path": "references/locations/lex-lab-redsun/_source-reverse.jpg"}
+      ]
+    }
+  }
+}
+```
+
+Save to `./references_required.json` at project root, next to `shotlist.json`. After saving, the next stage (`reference-gathering`) reads this manifest and walks every missing file. **Stage 2 will not close until `rules_audit.py` `check_reference_completeness()` reports clean.**
+
+### Coda
+
+When the user re-runs `script-breakdown` on a project that already has `references_required.json`: regenerate the manifest. The shotlist is the source of truth; the manifest is derived. If the shotlist changed (different tiers, new locations, new shot-reverse-shot scenes), the manifest must regenerate to match. `reference-gathering` will then walk it and produce any missing refs.
+
 ## Hard rules
 
 - **Don't fabricate dialogue.** If the script doesn't give a line, leave dialogue empty for that panel — let `action` carry it.

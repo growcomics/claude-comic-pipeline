@@ -638,6 +638,103 @@ LOCATION_STRATEGY_VALUES = {"single", "multi", "per-scene"}
 TRANSFORMATION_FLAVOR_VALUES = {"body-region-progression", "single-axis", "other"}
 
 
+def check_reference_completeness(project: Path, shotlist: dict) -> list[Finding]:
+    """L28 reference completeness gate. Reads `references_required.json` at
+    project root and HARD-fails for every declared file that isn't on disk.
+
+    The manifest is emitted by `script-breakdown` (see its SKILL.md § Step 7)
+    and walked by `reference-gathering` (see its manifest-driven mode). This
+    check is the gate between stage 2 (references) and stage 3 (generation):
+    until every declared ref exists on disk, the comic cannot progress to
+    generation.
+
+    Body-tier refs with `lineup_required: true` are flagged separately if
+    they exist but were generated without the lineup attached — there's no
+    way to verify lineup-attached-at-generation-time after the fact, so this
+    is checked via the per-file `_provenance.md` if present (SOFT). The
+    primary HARD check is just "is the file there or not."
+    """
+    out: list[Finding] = []
+    manifest_path = project / "references_required.json"
+
+    # If the manifest doesn't exist at all, that's a hard finding — it means
+    # script-breakdown didn't emit it, and the project can't progress.
+    if not manifest_path.exists():
+        # Check whether this looks like a comic project (has shotlist with cast)
+        if shotlist.get("cast"):
+            out.append(Finding(
+                None, None, "reference_completeness", SEVERITY_HARD,
+                "references_required.json is missing at project root. The reference manifest is required per L28 and is emitted by `script-breakdown` § Step 7.",
+                "Re-run script-breakdown to generate the manifest, then run reference-gathering in manifest-driven mode.",
+            ))
+        return out
+
+    try:
+        manifest = json.loads(manifest_path.read_text())
+    except json.JSONDecodeError as e:
+        out.append(Finding(
+            None, None, "reference_completeness", SEVERITY_HARD,
+            f"references_required.json failed to parse: {e}",
+            "Fix the JSON syntax. If it's deeply corrupted, re-run script-breakdown to regenerate.",
+        ))
+        return out
+
+    # Walk characters
+    for char_id, char_spec in (manifest.get("characters") or {}).items():
+        # face_card
+        face_card = char_spec.get("face_card")
+        if face_card and not (project / face_card).exists():
+            out.append(Finding(
+                None, None, "reference_completeness", SEVERITY_HARD,
+                f"Missing required reference: {face_card} (face card for character `{char_id}`)",
+                "Run reference-gathering in manifest-driven mode to generate this ref. See L28 + reference-gathering SKILL.md.",
+            ))
+
+        # body_tiers
+        for tier_entry in (char_spec.get("body_tiers") or []):
+            tier = tier_entry.get("tier")
+            path = tier_entry.get("path")
+            lineup_required = tier_entry.get("lineup_required", False)
+            if path and not (project / path).exists():
+                lineup_note = " — and MUST attach the muscle-size lineup PNG at generation time (L28 + L11)" if lineup_required else ""
+                out.append(Finding(
+                    None, None, "reference_completeness", SEVERITY_HARD,
+                    f"Missing required reference: {path} (body-tier {tier} for `{char_id}`)" + lineup_note,
+                    "Run reference-gathering in manifest-driven mode. The skill knows the lineup-attach hard rule for tier >= 2 body refs.",
+                ))
+
+    # Walk locations
+    for loc_id, loc_spec in (manifest.get("locations") or {}).items():
+        establishing = loc_spec.get("establishing")
+        if establishing and not (project / establishing).exists():
+            out.append(Finding(
+                None, None, "reference_completeness", SEVERITY_HARD,
+                f"Missing required reference: {establishing} (establishing shot for location `{loc_id}`)",
+                "Run reference-gathering. Source a DAZ3D-style render or generate via the comic-production model.",
+            ))
+        for view_entry in (loc_spec.get("views") or []):
+            view_name = view_entry.get("name")
+            path = view_entry.get("path")
+            if path and not (project / path).exists():
+                out.append(Finding(
+                    None, None, "reference_completeness", SEVERITY_HARD,
+                    f"Missing required reference: {path} (view `{view_name}` for location `{loc_id}`)",
+                    f"Run reference-gathering. This view is required per L14 (multi-view env refs for shot-reverse-shot).",
+                ))
+
+    # Walk props (v1: establishing only)
+    for prop_id, prop_spec in (manifest.get("props") or {}).items():
+        establishing = prop_spec.get("establishing") if isinstance(prop_spec, dict) else None
+        if establishing and not (project / establishing).exists():
+            out.append(Finding(
+                None, None, "reference_completeness", SEVERITY_HARD,
+                f"Missing required reference: {establishing} (establishing shot for prop `{prop_id}`)",
+                "Run reference-gathering.",
+            ))
+
+    return out
+
+
 def check_required_metadata(project: Path, shotlist: dict) -> list[Finding]:
     out: list[Finding] = []
 
@@ -802,6 +899,7 @@ def main():
     findings = (
         check_required_metadata(project, shotlist)
         + check_references(project, shotlist)
+        + check_reference_completeness(project, shotlist)
         + check_pages(project, shotlist, pages_filter)
         + check_camera_variety(shotlist, pages_filter)
         + check_camera_distance_bias(shotlist, pages_filter)

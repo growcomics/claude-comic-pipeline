@@ -16,6 +16,107 @@ Build a structured `references/` folder of high-quality visual references for an
 
 If the user is describing a comic project end-to-end (script → panels), the comic-production skill drives the workflow — this skill handles only the reference-gathering subtask within it.
 
+## Two operating modes
+
+This skill runs in one of two modes depending on what it finds at the project root:
+
+1. **Manifest-driven mode** (preferred — for comic projects, enforces L28). Triggered when `references_required.json` exists at project root. The skill reads the manifest and walks every missing item deterministically until the manifest is satisfied. Hard requirements apply (see L28 section below). `rules_audit.py` `check_reference_completeness()` is the gate.
+2. **Freeform mode** (legacy / non-comic). No manifest at project root. The skill works from the user's natural-language request and the defaults below. Used for mood-boards, one-off character sheets, illustration references.
+
+If you're handed a project with `shotlist.json` but no `references_required.json`, the manifest hasn't been generated yet — fall back to running `script-breakdown` (or its emit-manifest subroutine) first, then return to this skill. Do not attempt freeform mode on a comic project; you'll under-gather and stage 2 will reject.
+
+---
+
+## Manifest-driven mode (L28 — for comic projects)
+
+Per **L28** in `comic-production/references/lessons-learned.md`, every comic project must have a complete set of references on disk before stage 3 generation can start. The manifest `references_required.json` (emitted by `script-breakdown` at project root) names every required file. This skill walks the manifest and produces every missing file.
+
+### Schema reminder
+
+```json
+{
+  "characters": {
+    "<char_id>": {
+      "face_card": "references/characters/<char_id>/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/<char_id>/body-tier1.png", "lineup_required": false},
+        {"tier": 3, "path": "references/characters/<char_id>/body-tier3.png", "lineup_required": true},
+        {"tier": 5, "path": "references/characters/<char_id>/body-tier5.png", "lineup_required": true}
+      ]
+    }
+  },
+  "locations": {
+    "<loc_id>": {
+      "establishing": "references/locations/<loc_id>/_source.jpg",
+      "views": [
+        {"name": "reverse", "path": "references/locations/<loc_id>/_source-reverse.jpg"}
+      ]
+    }
+  }
+}
+```
+
+### Walker workflow
+
+For each character in the manifest:
+
+1. **`face_card`** — if missing on disk, generate it. Use the Higgsfield MCP (`generate_image` with `nano_banana_2`) or Flow, depending on the project's `production-config.json` platform setting. Prompt is the character's canonical face description from `cast[].wardrobe` + a neutral expression anchor. Aspect 1:1. Save to the declared path.
+
+2. **Each `body_tiers` entry**:
+   - Check if the file exists. If yes, skip.
+   - If `tier == 1` (baseline), generate from the character's wardrobe description + a hands-at-sides front-full pose. Aspect 3:4. **No lineup ref attached** at tier 1 (the character's natural baseline build is the target).
+   - If `tier ≥ 2`: **HARD REQUIREMENT — attach the muscle-size lineup PNG as a reference image during generation**. Use `muscle-size-lineup.png` for tiers 1–6 or `muscle-size-lineup-4-9.png` for tiers ≥ 7. The lineup is a PROPORTION reference ONLY (per L11 surgical scoping): the prompt must explicitly tell the model "use figure N from the lineup ONLY for muscle mass and frame width; do NOT borrow face, hair, costume, or pose from the lineup; identity comes from the character's wardrobe description + the face card."
+   - Compose the prompt with:
+     - Render anchor (DAZ3D Iray, photoreal CGI, etc.)
+     - Camera: front-full, eye-level, 28mm equivalent
+     - Subject: the character's name + cartoony hyper-FMG style anchor for tier ≥ 2 (per L11)
+     - The tier-specific silhouette descriptor (per L11's `silhouette_by_tier` table)
+     - Costume: the character's canonical wardrobe (the BASELINE costume, NOT the torn-up version — the tier ref is the body, not the damage state)
+     - Lineup instruction: "Match the EXACT silhouette of figure {tier} in the attached lineup reference ONLY for muscle mass, breast size, and frame width."
+     - Closing CGI anchor.
+   - Generate at x4 on Flow (free), pick the best, save to the declared path. On Higgsfield: count=1, accept the result.
+
+3. **Failures**:
+   - If the model refuses (NSFW filter, content policy) on a high-tier body ref: retry with softer language. If still rejected, surface to the user — they may need to soften the project's silhouette target or accept a lower tier reference.
+   - If the result looks like realistic-fitness instead of cartoony-FMG: the lineup attachment failed. Re-check that the lineup PNG was actually in the medias list at submission time. Retry with more aggressive vocabulary (per L11).
+
+For each location in the manifest:
+
+1. **`establishing`** — if missing, source a DAZ3D-style render (see "Gathering refs for locations and environments" below) OR generate one via the comic-production model with the location description from `locations[].description`. Save to declared path.
+2. **Each `views` entry**:
+   - For `name: "reverse"` — generate or source a 180°-opposite-angle reference of the same location. This is the L14 multi-view rule made concrete.
+   - For other named views (low-angle, high-angle, detail): generate with the appropriate camera anchor.
+
+### Required output
+
+After every file in the manifest exists on disk, write `references/_completeness.md`:
+
+```markdown
+# Reference completeness report
+
+Manifest: references_required.json
+Status: COMPLETE
+Files generated this session: N
+Files already on disk: M
+
+## Per-character
+- chunli: face_card ✓, body-tier1 ✓, body-tier3 ✓ (lineup attached), body-tier5 ✓ (lineup attached)
+
+## Per-location
+- lex-lab-redsun: establishing ✓, _source-reverse ✓
+```
+
+Then exit. `rules_audit.py` `check_reference_completeness()` will pass and stage 2 closes.
+
+### Hard rules for manifest-driven mode
+
+- **Never skip the body-tier lineup attachment.** Tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image. The whole point of L28 is that the character's identity-at-tier-N must be pre-rendered with proper silhouette anchoring, not invented per-panel.
+- **Don't economize.** If the manifest says 5 refs and 3 are on disk, generate the other 2. Don't decide on the fly that 3 is "enough." `rules_audit` will HARD-fail on missing files anyway.
+- **Provenance still applies.** Even for AI-generated refs (not gathered from external sources), write a `_provenance.md` entry: prompt used, model, timestamp, lineup attached y/n. Future audits depend on knowing how each ref was made.
+- **Do NOT modify `references_required.json`.** That file is the source of truth from script-breakdown. If the manifest is wrong, regenerate it at the script-breakdown stage; don't edit it from here.
+
+---
+
 ## Default behavior
 
 Unless the user overrides:

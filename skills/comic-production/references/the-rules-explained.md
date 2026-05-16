@@ -57,6 +57,7 @@ The lessons are in numeric order below. L-numbers are chronological (when we lea
 - [L25 — Body-region reveals are sticky](#l25--body-region-reveals-are-sticky)
 - [L26 — Costume identity must be canonical across panels](#l26--costume-identity-must-be-canonical-across-panels)
 - [L27 — Skin sheen and texture continuity](#l27--skin-sheen-and-texture-continuity)
+- [L28 — Reference completeness is mandatory](#l28--reference-completeness-is-mandatory)
 - [Lessons proposed but not yet enforced (L15–L18)](#lessons-proposed-but-not-yet-enforced)
 
 ---
@@ -287,6 +288,20 @@ A body region (the abs, a shoulder) gets clearly revealed in one panel — say, 
 ![Oiled bodybuilder shine vs natural matte: lock one in the prompt and carry it](./the-rules-explained-graphics/27-L27-skin-sheen.png)
 
 "Ray-traced subsurface scattering, physically-based rendering" gives the model latitude on how oily versus matte the skin looks. Across multiple panels the specular response drifts — one panel shows bodybuilder-competition shine, the next shows natural matte skin. On hyper-muscular silhouettes the highlight surface area is bigger, so the drift is more visible. Fix: lock the skin treatment in the prompt — "natural matte skin with subtle subsurface scattering, not oiled or wet."
+
+---
+
+## L28 — Reference completeness is mandatory
+
+![Reference manifest gates stage 2: every declared file must exist on disk before generation can start](./the-rules-explained-graphics/28-L28-reference-completeness.png)
+
+Most generated comics ship with too few reference images. The typical project has a face card and one body baseline per character, one `_source.jpg` per location, and nothing else. The per-panel prompts then carry detail that *should* be in refs — peak-tier body proportions, reverse-angle establishing shots, specific facial expressions, lighting state variants. Every L10 failure mode (drift across panels, descriptions fighting refs, model interpolation) compounds because there aren't enough refs to anchor the work.
+
+The fix is structural: a manifest file (`references_required.json`) is generated at script-breakdown time, listing every required ref derived from the shotlist. `reference-gathering` walks the manifest and generates every missing file. `rules_audit.py` HARD-fails if any declared ref is absent. Stage 2 cannot close until the manifest is satisfied.
+
+**The critical sub-rule**: body-tier refs at tier ≥ 2 MUST be generated with the muscle-size lineup PNG attached as a reference image *during their own generation*. Without the lineup attachment at ref-generation time, the model produces "this character, somewhat muscular" using its plausible-fitness prior — NOT the cartoony hyper-FMG silhouette the tier number is supposed to represent. Every downstream panel then inherits realistic-fitness drift from a wrong body-tier anchor. The lineup attachment at ref-generation is what makes the character's identity-at-tier-N actually look like tier N. Per L11 surgical scoping: the lineup is a *proportion-only* reference — use it for muscle mass and frame width during the body-tier ref generation; identity (face, hair, costume) comes from the character's wardrobe description and face card.
+
+This is v1. Future work (v2) adds per-character expression refs, pose refs, per-location lighting-state refs, and per-prop state refs to the manifest.
 
 ---
 
