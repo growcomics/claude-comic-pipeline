@@ -791,3 +791,46 @@ When you observe a new failure mode that recurs, append a new entry following th
 - Optional: worked example, prompt fragments that reliably work
 
 Keep entries punchy. If a lesson grows past ~150 lines it probably wants its own dedicated reference file.
+
+---
+
+## L25 — Body-region reveals are sticky: once exposed, must stay exposed
+
+**Symptom**: A body region is shown clearly in one panel (e.g., Susan's hyper-developed abs in p3-04 ecu-region with blouse riding up) and then becomes covered/hidden in subsequent post-reveal panels where the same region is in frame (e.g., p3-06 cowboy flex with a long knotted blouse that drops past the abs). Reader experiences this as a continuity break — the reveal is undone visually.
+
+**Root cause**: Each panel's costume_state is generated independently. The transformation arc properly decomposes body-region beats (per L20), but post-reveal panels then receive prompts like "white blouse remnants tied across her chest" which the model interprets as a full-coverage knot dropping past the midriff. The exposure that was the climax of the transformation gets undone in the next panel.
+
+**Fix**: After any body-region beat that exposes a region, every subsequent post-reveal panel whose camera includes that region must include an explicit costume directive that PRESERVES the exposure. For abs specifically: not "knotted blouse" but "knotted blouse CROPPED above the abs, full hyper-muscular abdomen visible between the knot and the skirt waistband."
+
+For Susan in this comic: canonical post-transformation costume is "knotted button-up blouse cropped at the ribcage, full ribbed abdominal definition visible between knot and skirt remnants, dark grey skirt remnants riding low on the hips with torn fluttering edges, barefoot." This phrasing replaces any vague "blouse tied at chest" wording in post-p3-04 panels.
+
+**Where this applies**: Any transformation comic where a body region is decomposed as its own beat. The reveal must carry forward; the climax cannot be visually retracted.
+
+---
+
+## L26 — Costume identity must be canonical across panels, not generated fresh
+
+**Symptom**: Same character renders with materially different garment TYPES across adjacent panels — e.g., p4-01 shows Susan in a strapless bandeau-tied white wrap; p4-02 shows her in a sleeveless knotted button-up shirt with collar visible. Both are "tied at chest" but they're entirely different garment families (strapless wrap vs collared blouse). Reader experiences this as costume drift even though identity (face, body, hair) holds.
+
+**Root cause**: When the prompt's costume description is generic ("white top tied at chest"), the model improvises the garment type each generation. Bandeau wrap, knotted t-shirt, and knotted button-up blouse are all valid reads of "tied at chest."
+
+**Fix**: Costume description in every panel must specify the GARMENT FAMILY explicitly. For this comic: "knotted **button-up collared sleeveless blouse** with the front tied in a knot at the sternum, original white blouse fabric with visible buttons, collar visible at the neck." NOT just "tied chest cover" or "white top tied."
+
+If the costume is a destroyed/remnant version of an earlier intact garment, name the intact garment + the destruction state: "remnants of the original white collared button-up blouse, sleeves torn off at the shoulders, front torn open and tied in a knot at the sternum, collar still visible at the neck."
+
+**Where this applies**: Any post-transformation / post-damage chapter where the costume is a "remnant" rather than a clean canonical outfit. The remnant form must itself be canonical and described identically in every prompt.
+
+---
+
+## L27 — Skin sheen / texture continuity across panels
+
+**Symptom**: Same character's skin renders with materially different surface treatment across adjacent panels — e.g., p4-02 shows oiled bodybuilder-competition shine with strong specular highlights on biceps/shoulders; p4-01 (immediately preceding) shows natural matte skin with subtle subsurface scattering. The character is the same; the skin "material" looks different.
+
+**Root cause**: "Ray-traced subsurface scattering, physically-based rendering" in the prompt gives the model latitude on how oily/sweaty/matte the skin appears. The model varies the specular response per generation. On hyper-muscular silhouettes, this drift is especially visible because the highlights track the muscle topography (more muscle = more highlight surface area).
+
+**Fix**: Skin texture/sheen must be named explicitly with a consistent vocabulary across every panel of the character. For this comic: "natural healthy matte skin with subtle subsurface scattering, NOT oiled, NOT wet, NOT bodybuilder competition shine, NOT inflamed." 
+
+Allowable per-panel variation: lighting conditions (warm afternoon sun vs cool indoor north light), exertion sweat (post-flex panels may have light forehead/temple sheen). NOT allowable: bodybuilder-grease-and-oil look that travels with the muscle topography.
+
+**Where this applies**: Any hyper-muscular character render. The bigger the silhouette, the more aggressive the skin specular drift becomes, and the more explicit the sheen-control vocabulary needs to be.
+
