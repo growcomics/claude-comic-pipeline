@@ -874,6 +874,40 @@ def _record_failed(trace: dict | None, rule_id: str, *,
     entry.pop("reason", None)
 
 
+def _apply_rule_at_slot(rule_id: str, slot: str, panel: dict, ctx: dict,
+                        parts: list, trace: dict | None,
+                        transformation_type: str) -> str | None:
+    """Phase 3 registry-driven helper: look up the rule, check it applies
+    to the transformation type, call compose_contribution + verify_pre_render,
+    append to parts and record to trace.
+
+    Returns the contribution string (or None if not emitted).
+
+    This is the shared dispatch used by every migrated rule in phase 3a.
+    Phase 3b extends it to multi-slot rules (L11).
+    """
+    rule = get_rule(rule_id)
+    if rule is None or not rule.applies_to_transformation(transformation_type):
+        return None
+    contribution = rule.compose_contribution(panel, ctx, slot)
+    verif = rule.verify_pre_render(panel, ctx)
+    if contribution is not None:
+        parts.append(contribution)
+        _record_applied(trace, rule_id,
+                        contribution=contribution,
+                        pre_render_status=verif.status,
+                        pre_render_reason=verif.reason)
+        return contribution
+    # No contribution at this slot. Record per verification status.
+    if verif.status == "fail":
+        _record_failed(trace, rule_id,
+                       pre_render_reason=verif.reason or "")
+    else:
+        _record_skipped(trace, rule_id,
+                        verif.reason or f"{rule_id} did not apply")
+    return None
+
+
 # ---------------------------------------------------------------------------
 # Prompt composer
 
@@ -909,6 +943,22 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     time_of_day = panel.get("time_of_day") or ""
     cast_lookup = _cast_lookup(shotlist)
 
+    # Shared ctx dict for rule modules (phase 3a). Every rule reads what it
+    # needs from this dict; extra keys are ignored.
+    ctx = {
+        "env_ref": env_ref,
+        "anchor": anchor,
+        "env_anchor_from": env_anchor_from,
+        "lineup_attached": lineup_attached,
+        "env_dropped": env_dropped,
+        "stage_change": stage_change,
+        "shotlist": shotlist,
+        "cast_lookup": cast_lookup,
+        "camera": camera,
+        "location_slug": location_slug,
+        "transformation_type": transformation_type,
+    }
+
     parts: list[str] = []
 
     # 1. Render anchor (positive CGI vocabulary, L7-compliant)
@@ -940,81 +990,44 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     parts.append(cam_fragments.get(camera,
         f"Camera: {camera or 'eye-level medium shot'}."))
 
-    # 2a. L20 strengthening — aggressive body-region camera directive for any
-    # panel with a body-region transformation beat. Slots right after the
-    # base camera fragment so the model commits to ECU framing BEFORE the
-    # action content has a chance to soften it.
-    body_region_directive = _body_region_camera_directive(panel)
-    if body_region_directive:
-        parts.append(body_region_directive)
-        _record_applied(_trace, "L20", contribution=body_region_directive,
-                        pre_render_reason=f"transformation_beat={panel.get('transformation_beat')} — body-region directive injected")
-    else:
-        beat = panel.get("transformation_beat")
-        _record_skipped(_trace, "L20",
-                        f"no body-region transformation_beat (got {beat!r})")
+    # 2a. L20 strengthening — slot 2_camera_strengthening. Body-region camera
+    # directive for any panel with a body-region transformation beat. Slots
+    # right after the base camera fragment so the model commits to ECU
+    # framing BEFORE the action content has a chance to soften it.
+    # PHASE 3A — routed through rules._registry.
+    _apply_rule_at_slot("L20", "2_camera_strengthening",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 3. Subjects (name only — identity comes from attached face cards)
     if chars:
         parts.append(f"Subjects: {', '.join(chars)}.")
 
-    # 3.0 L17 canonical character anchor — render IP characters as fans
-    # recognize them. Drawn from cast[].canonical_anchor strings.
-    canonical_line = _canonical_character_directive(panel, cast_lookup)
-    if canonical_line:
-        parts.append(canonical_line)
-        _record_applied(_trace, "L17", contribution=canonical_line,
-                        pre_render_reason="cast[].canonical=true with canonical_anchor text")
-    else:
-        _record_skipped(_trace, "L17",
-                        "no character with cast[].canonical=true in panel")
+    # 3.0 L17 canonical character anchor — slot 3_subject_identity, first.
+    # PHASE 3A — routed through rules._registry.
+    _apply_rule_at_slot("L17", "3_subject_identity",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 3.1 L15 female beauty anchor — vogue-cover quality for any female cast
-    # member in the panel. Suppressible per character via cast[].glamour_anchor: false.
-    beauty_line = _female_beauty_anchor_line(panel, cast_lookup)
-    if beauty_line:
-        parts.append(beauty_line)
-        _record_applied(_trace, "L15", contribution=beauty_line,
-                        pre_render_reason="female cast member detected, glamour anchor injected")
-    else:
-        _record_skipped(_trace, "L15",
-                        "no female cast member in panel (or glamour_anchor=false)")
+    # 3.1 L15 female beauty anchor — slot 3_subject_identity, second.
+    # PHASE 3A — routed through rules._registry. FMG-only.
+    _apply_rule_at_slot("L15", "3_subject_identity",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 3a. Hair state (L22) — only when explicitly set on the panel. The
-    # composer does NOT auto-derive from tier + beat (see memory
-    # `feedback_dont_invent_state_changes`); shotlist author owns this.
-    hair_line = _hair_state_line(panel)
-    if hair_line:
-        parts.append(hair_line)
-        _record_applied(_trace, "L22", contribution=hair_line,
-                        pre_render_reason="panel.hair_state explicitly set")
-    else:
-        _record_skipped(_trace, "L22",
-                        "panel.hair_state not set (shotlist author owns this field)")
+    # 3a. L22 hair state — slot 4_subject_state, first.
+    # PHASE 3A — routed through rules._registry. Reads panel.hair_state;
+    # does NOT auto-derive from tier + beat (memory:
+    # `feedback_dont_invent_state_changes` — shotlist author owns it).
+    _apply_rule_at_slot("L22", "4_subject_state",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 3b. Accessories canonical + enumerated negation (L24). Reads per-character
-    # `accessories` block from cast[]. The negation list is the load-bearing
-    # part — naming what to exclude suppresses the model's prior.
-    acc_line = _l24_accessory_line(panel, cast_lookup)
-    if acc_line:
-        parts.append(acc_line)
-        _record_applied(_trace, "L24", contribution=acc_line,
-                        pre_render_reason=f"camera={camera!r} may include wrists/neck/etc and cast has accessories block")
-    else:
-        _record_skipped(_trace, "L24",
-                        "no cast[].accessories block, or camera does not include wrists/neck/etc in frame")
+    # 3b. L24 accessory canonical + enumerated negation — slot 4_subject_state, second.
+    # PHASE 3A — routed through rules._registry.
+    _apply_rule_at_slot("L24", "4_subject_state",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 3c. Female-anatomy anchor on body-region ECUs at tier >= 2 (May 14
-    # finding from chun-li-grok-validation p5). Pure body-region crops on
-    # heavy-muscle ECUs regress to male anatomy when face is off-frame.
-    if _female_anatomy_anchor_needed(panel, cast_lookup):
-        parts.append(FEMALE_ANATOMY_ANCHOR)
-        _record_applied(_trace, "female_anatomy",
-                        contribution=FEMALE_ANATOMY_ANCHOR,
-                        pre_render_reason=f"camera=ecu-region tier>=2 female cast (tier={tier})")
-    else:
-        _record_skipped(_trace, "female_anatomy",
-                        f"not a body-region ECU tier>=2 with female cast (camera={camera!r}, tier={tier})")
+    # 3c. female_anatomy anchor on body-region ECUs at tier >= 2 — slot 4_subject_state, third.
+    # PHASE 3A — routed through rules._registry. FMG-only.
+    _apply_rule_at_slot("female_anatomy", "4_subject_state",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 3d. Cartoony FMG style anchor — per L11. Slot it before the action delta
     # so the model commits to the proportional aesthetic before reading the
@@ -1155,11 +1168,12 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         _record_skipped(_trace, "L11",
                         "panel.muscle_size_tier is null — non-arc panel")
 
-    # 7. Environment — env-chaining-aware language. Three cases:
-    #   - env_ref attached + env_anchor_from set: chain off prior accepted panel
-    #   - env_ref attached + no anchor: first appearance, attach _source.jpg
-    #   - env_ref None + env_dropped=True: 3-ref ceiling forced drop, inject
-    #     L23 dense verbal anchor from shotlist.locations[].description
+    # 7. Environment — slot 9_environment. Two pieces:
+    #   - env-chaining or first-env language (composer logic, when env_ref attached)
+    #   - L23 dense verbal anchor (rule module, when env_dropped)
+    # The composer emits the env line first when env_ref is attached; then
+    # L23's `_apply_rule_at_slot` runs and either emits the dense anchor
+    # (env_dropped case) or records skipped (env_ref attached / no env case).
     if env_ref:
         if env_anchor_from:
             env_line = (
@@ -1180,23 +1194,12 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "anchor for the location's architecture. Do not reinterpret."
             )
             parts.append(env_line)
-        _record_skipped(_trace, "L23",
-                        f"env ref attached (location={location_slug!r}) — dense verbal anchor not needed")
-    elif env_dropped and location_slug:
-        # L23 fallback: env ref was dropped to fit the 3-ref ceiling.
-        # Inject the dense verbal anchor from locations[].description so the
-        # background doesn't collapse to a grey void.
-        dense = _env_dense_anchor(shotlist, location_slug)
-        if dense:
-            parts.append(dense)
-            _record_applied(_trace, "L23", contribution=dense,
-                            pre_render_reason=f"env ref dropped for 3-ref ceiling, location={location_slug!r} — dense verbal anchor injected")
-        else:
-            _record_failed(_trace, "L23",
-                           pre_render_reason=f"env ref dropped but location {location_slug!r} has no description in shotlist.locations[]")
-    else:
-        _record_skipped(_trace, "L23",
-                        f"no env_ref to drop (location={location_slug!r}, env_dropped={env_dropped})")
+    # L23 dense verbal anchor — PHASE 3A — routed through rules._registry.
+    # Records skipped when env_ref attached or no env; records applied (and
+    # emits the dense anchor) when env_dropped + location has a description;
+    # records fail when env_dropped + no description.
+    _apply_rule_at_slot("L23", "9_environment",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 8. State anchor — prior panel for costume/hair/body/damage continuity
     if anchor:
@@ -1214,54 +1217,21 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     # Note: L1.5 with no anchor is recorded by build_plan with reason text
     # explaining why (ecu-face, no compatible prior, etc.)
 
-    # 9. Render directive — THE LOAD-BEARING L10 SENTENCE (with the L10
-    # refinement: explicit identity-vs-pose line so the model knows which
-    # side of the boundary the prompt's pose/expression description lives on)
-    l10_directive = (
-        "RENDER DIRECTIVE: render the attached references exactly as shown. "
-        "Do not reinterpret character appearance, costume design, or location "
-        "architecture from the prompt text — those are FIXED by the "
-        "references. The prompt's job is the opposite: it specifies what "
-        "is new in this panel — camera, pose, gesture, facial expression, "
-        "action, momentary lighting state, momentary costume state change. "
-        "Refs carry identity and constants; prompt carries pose and "
-        "deltas. References override prompt text on visual identity; "
-        "prompt overrides references on pose and action."
-    )
-    parts.append(l10_directive)
-    _record_applied(_trace, "L10", contribution=l10_directive,
-                    pre_render_reason="render directive always emitted (slot 11_render_directive)")
+    # 9. L10 render directive — slot 11_render_directive. THE LOAD-BEARING L10
+    # SENTENCE. PHASE 3A — routed through rules._registry.
+    _apply_rule_at_slot("L10", "11_render_directive",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 9a. L21 ref-exclusion — PHASE 2 of the checks-and-balances refactor:
-    # L21 is now the first rule routed through the per-rule registry. See
-    # skills/comic-production/rules/l21_ref_safety.py and the design doc at
-    # docs/checks-and-balances-design.md. Every other rule on this function
-    # still routes through the legacy inline helpers above — phase 3 migrates
-    # them one at a time with byte-identical golden-output tests at each step.
-    _l21 = get_rule("L21")
-    if _l21 is not None and _l21.applies_to_transformation(transformation_type):
-        _l21_ctx = {
-            "env_ref": env_ref,
-            "anchor": anchor,
-            "lineup_attached": lineup_attached,
-        }
-        _l21_contribution = _l21.compose_contribution(panel, _l21_ctx, "12_ref_safety")
-        _l21_verif = _l21.verify_pre_render(panel, _l21_ctx)
-        if _l21_contribution is not None:
-            parts.append(_l21_contribution)
-            _record_applied(_trace, "L21",
-                            contribution=_l21_contribution,
-                            pre_render_status=_l21_verif.status,
-                            pre_render_reason=_l21_verif.reason)
-        else:
-            _record_skipped(_trace, "L21",
-                            _l21_verif.reason or "L21 did not apply")
+    # 9a. L21 ref-exclusion — slot 12_ref_safety. PHASE 2/3 — routed through
+    # rules._registry. Re-using the shared ctx (the standalone L21 ctx is no
+    # longer needed; L21 reads env_ref / anchor / lineup_attached from ctx).
+    _apply_rule_at_slot("L21", "12_ref_safety",
+                        panel, ctx, parts, _trace, transformation_type)
 
-    # 9b. L18 pose anatomy anchor — universal soft guardrail. Always emit.
-    l18_line = _pose_anatomy_anchor()
-    parts.append(l18_line)
-    _record_applied(_trace, "L18", contribution=l18_line,
-                    pre_render_reason="universal soft guardrail — always emitted")
+    # 9b. L18 pose anatomy coherence — slot 13_anatomy_guardrail. Universal
+    # soft guardrail. PHASE 3A — routed through rules._registry.
+    _apply_rule_at_slot("L18", "13_anatomy_guardrail",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 10. Mandatory rules (L7-compliant — no rendered lettering)
     parts.append(

@@ -10,6 +10,38 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (phase 3a of checks-and-balances)
+
+### Added
+
+- **Phase 3a — 9 more rules migrated to per-rule modules.** Joining L21 (phase 2), the registry now contains 10 rule instances:
+  - **`rules/l18_anatomy.py`** — L18. Slot `13_anatomy_guardrail`. Always-emit universal soft guardrail.
+  - **`rules/l10_render_directive.py`** — L10. Slot `11_render_directive`. The load-bearing RENDER DIRECTIVE sentence. Always emit.
+  - **`rules/l20_camera.py`** — L20 (in-prompt directive only). Slot `2_camera_strengthening`. Body-region camera directive fires on `panel.transformation_beat in BODY_REGION_BEATS`. Chapter-aggregate L20 check still lives in build_plan as `L20_chapter`; phase 4 will migrate the rules_audit.py-style checks.
+  - **`rules/l22_hair_state.py`** — L22. Slot `4_subject_state`. Reads `panel.hair_state`; does NOT auto-derive from tier + beat per memory `feedback_dont_invent_state_changes`.
+  - **`rules/l23_env_anchor.py`** — L23. Slot `9_environment`. Fires when env_ref is None AND env_dropped AND location_slug is set. Returns `Verification(status="fail")` when the location has no description in shotlist.
+  - **`rules/l24_accessory.py`** — L24. Slot `4_subject_state`. Reads `cast[].accessories.canonical` + `.negation` list. The enumerated negation is the load-bearing part.
+  - **`rules/l15_glamour.py`** — L15. Slot `3_subject_identity`. `applicable_transformations=("fmg",)`. Detection heuristic on cast entries (sex, pronoun) with FMG-default-true.
+  - **`rules/l17_canonical.py`** — L17. Slot `3_subject_identity`. Reads `cast[].canonical=true` + `canonical_anchor` text.
+  - **`rules/female_anatomy.py`** — Female anatomy anchor (May-14 finding from chun-li-grok-validation p5). Slot `4_subject_state`. `applicable_transformations=("fmg",)`. Fires on camera=ecu-region + tier>=2 + female arc character.
+- **`_apply_rule_at_slot(rule_id, slot, panel, ctx, parts, trace, transformation_type)` helper** in `next_panel.py`. The shared dispatch: look up rule, check `applies_to_transformation`, call `compose_contribution(panel, ctx, slot)` and `verify_pre_render(panel, ctx)`, append to `parts` and record to trace via `_record_applied` / `_record_failed` / `_record_skipped` (dispatched on `verif.status`). Returns the contribution or None.
+- **Shared `ctx` dict built once at the top of `compose_prompt`** containing env_ref / anchor / env_anchor_from / lineup_attached / env_dropped / stage_change / shotlist / cast_lookup / camera / location_slug / transformation_type. Every rule reads what it needs; extra keys are ignored.
+- **9 inline rule sites in `compose_prompt` replaced** by `_apply_rule_at_slot` calls. The L21 site (migrated in phase 2 with its own ctx) was also refactored to use the shared ctx. The legacy helper functions (`_body_region_camera_directive`, `_canonical_character_directive`, `_female_beauty_anchor_line`, `_hair_state_line`, `_l24_accessory_line`, `_female_anatomy_anchor_needed`, `_env_dense_anchor`, `_pose_anatomy_anchor`, `_female_focal_in_panel`, plus `L21_REF_EXCLUSION` / `FEMALE_ANATOMY_ANCHOR` constants) remain in `next_panel.py` for backwards compatibility — external scripts may still import them. Phase 3 cleanup will prune them in a follow-up once nothing external depends on them.
+
+### Verified
+
+- **Walk-test passed across 41 panels.** Iterated every panel in `comic-april-mutagen-v2` (15 panels) and `moving-experience-v2` (26 panels) via `build_plan(root, target_panel_id=pid)`, comparing `composed_prompt` between the phase 1 build (HEAD before phase 3a) and the phase 3a build. All 41 panels byte-identical.
+- **Smoke-tested `write_ledger.py`** on `comic-april-mutagen-v2` panel p07-01: trace shows all 10 migrated rules with sensible applied/skipped statuses and reason text matching the legacy format exactly. L20 fires on the chest beat with "transformation_beat=chest — body-region directive injected". L21 fires with "at least one ref attached (env=True, anchor=False, lineup=True)". female_anatomy fires with "camera=ecu-region tier>=2 female cast (tier=2)".
+
+### Notes
+
+- **Composer logic stays inline.** The env-chaining / first-env-appearance language (when env_ref is attached) is composer text, not part of any L-rule, so it stays in compose_prompt unchanged. L23's rule module handles only the dense-verbal-anchor (env_dropped) case and the trace recording for all three branches.
+- **L1.5 stays in compose_prompt + build_plan** for now. The state-anchor line emission is composer logic; the L1.5 trace recording lives in both compose_prompt (when anchor is found) and build_plan (no-anchor cases). Phase 3 cleanup or phase 4 may extract this into a Rule module if useful.
+- **Phase 3b** (L11 — only multi-slot rule, two slots, FMG-only, biggest) is the next deliverable. After it lands, `compose_prompt` becomes purely a registry walker for the rule-specific contributions; the legacy helpers are eligible for removal.
+- **No comic API spend.** Phase 3a is structural; the walk-test on existing data confirmed byte-identical prompt output without any new generation.
+
+---
+
 ## 2026-05-16 (even later — phase 2 of checks-and-balances)
 
 ### Added

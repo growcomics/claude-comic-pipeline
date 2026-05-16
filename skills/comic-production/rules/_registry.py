@@ -17,12 +17,31 @@ from __future__ import annotations
 
 from ._base import Rule
 from .l21_ref_safety import L21
+from .l18_anatomy import L18
+from .l10_render_directive import L10
+from .l20_camera import L20
+from .l22_hair_state import L22
+from .l23_env_anchor import L23
+from .l24_accessory import L24
+from .l15_glamour import L15
+from .l17_canonical import L17
+from .female_anatomy import FemaleAnatomy
 
 
-# Phase 2: only L21 is migrated. Every other rule still routes through the
-# legacy helpers in next_panel.compose_prompt. Phase 3 grows this list.
+# Phase 3a — all single-slot rules migrated. Phase 3b adds L11 (the only
+# multi-slot rule). After phase 3b, compose_prompt is purely a registry
+# walker and the legacy inline helpers in next_panel.py are removed.
 RULE_INSTANCES: list[Rule] = [
     L21(),
+    L18(),
+    L10(),
+    L20(),
+    L22(),
+    L23(),
+    L24(),
+    L15(),
+    L17(),
+    FemaleAnatomy(),
 ]
 
 
