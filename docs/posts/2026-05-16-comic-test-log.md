@@ -170,13 +170,65 @@ What's notable:
 
 4. **The discovery process is starting to work.** Across two runs the same rule fails in the same place. With 5 more test runs of similar scope the defects.jsonl would surface "L11 fails consistently at tier ≥ 4" as a project-wide pattern automatically. That's the discovery payoff.
 
-### User review (pending)
+### User review #1 — the lettering miss (2026-05-16)
 
-*Reserved for the user's review notes. Send back any corrections, missed defects, or different priority calls and I'll fold them in.*
+> *"there was no comic text, SFX of action lines, why is that?"*
 
-### Alignment diff (pending)
+**Caught the miss directly.** Two failures stacked on top of each other:
 
-*Will populate once the user's review lands. Tracking specifically: did I overcall any panel as clean that the user marks as drift? Did I miss a failure mode? Where do my priorities diverge from the user's?*
+1. **Authorship miss.** I wrote a 15-panel transformation shotlist with **zero** `dialogue[]` entries. No SFX, no speech, no thoughts, no captions. The story arc was visible but un-vocalized — half a comic.
+2. **Pipeline miss.** Even if the shotlist had dialogue, the L7 Case B default ends every prompt with *"NO speech bubbles, NO SFX text, NO captions, NO action lines in the render — all lettering is added in post by page-composer"*. **I never ran page-composer either**, so the panels were unlettered both as authored AND as a pipeline output.
+
+What makes this worse: the existing feedback memory `feedback_bake_dialogue` literally says *"never ship a comic with zero lettering and tell the user it'll happen later."* I did exactly the thing the memory said not to do. Hard calibration failure — exactly what the running diff is meant to surface, and it caught it on the first user review.
+
+**Fix:**
+1. Added `dialogue[]` to 5 narrative-key panels of Test 2: p02 thought balloon "Something... awakens.", p07 SFX "FWOOMP!", p08 SFX "RRRIP!", p13 speech "I'm stronger than I've ever been...", p15 hero speech "Now I'm ready."
+2. Flipped `production-config.json -> mandatory_rules.allow_baked_lettering = true`.
+3. Re-rendered those 5 panels with **L19 baked-lettering vocabulary**: open with the photoreal CGI render-engine anchor, render lettering as physical 3D scene objects (chrome-extruded SFX, semi-translucent 3D speech panels with real shadows), close with the explicit "NOT a comic, NOT an illustration" negation block.
+4. Memory updated with the verified L19 prompt pattern so future test runs don't repeat this miss.
+
+**Cost of the fix:** 6 generations (5 panels + 1 NSFW retry on p07 — L2 retry policy worked again on first retry). ~$1.50.
+
+### Test 2 — lettered (before / after)
+
+Top row = original clean panels. Bottom row = re-rendered with L19 baked lettering.
+
+![Test 2 lettered before/after](./assets/comic-test-log/test-02-15panel/lettered-before-after.png)
+
+The L19 pattern hit all 5/5 panels on first or second try:
+
+- **p02 thought balloon** ("Something... awakens.") — photoreal cloud-shaped balloon with proper scalloped edges and the trail of small bubbles pointing toward Chun Li's head as the tail. Black extruded sans-serif text legible.
+- **p07 SFX** ("FWOOMP!") — 3D-extruded chrome lettering canted at an angle in the upper-left, ray-traced shadows on the bicep, warm rim-light catching the metal. Reads as a real sculptural object in the scene, not a 2D sticker.
+- **p08 SFX** ("RRRIP!") — chrome 3D letters running diagonally along the tearing back seam, the letters following the line of the rip. The L19 "physical scene object" framing held.
+- **p13 speech bubble** ("I'm stronger than I've ever been...") — semi-translucent 3D speech panel with rounded edges, extruded tail pointing toward her mouth, real shadow on the dojo wall behind. Text crisp and correctly transcribed.
+- **p15 hero speech** ("Now I'm ready.") — same shape and quality as p13, tail aimed at Chun Li in the hero pose.
+
+### Test 2 updated grid (with lettered panels)
+
+![Test 2 full 15-panel grid with lettering on 5 key beats](./assets/comic-test-log/test-02-15panel/grid-lettered.png)
+
+### What this changed in my read
+
+Two structural updates:
+
+1. **The L19 pattern works on nano_banana_flash for both SFX (chrome 3D letters) and speech bubbles (semi-translucent 3D panels with tails).** This was previously logged as "open question on whether the photoreal 3D speech bubble vocabulary survives the model's comic-bubble training association." On this run, it did — both SFX and speech bubbles rendered as physical scene objects, not as flat 2D comic-style stickers. The opening render-engine anchor + closing "NOT a comic" negation block are doing the load-bearing work the L19 lesson predicted.
+
+2. **L19 doesn't seem to interact badly with the other rules.** L17 canonical character held (twin buns + ribbons + cheongsam + wristbands all present even on the lettered panels). L20 body-region ECU framing held on p07 (bicep filled 70%+ with the chrome SFX in the upper-left of the frame, not competing with the bicep). The same NSFW filter event repeated on p07 first try — L2 retry policy cleared it on the first retry. **L11 silhouette regression is still present** on the lettered panels at tier 5 (p13) and tier 6 (p15) — same as the un-lettered versions; lettering didn't fix or worsen the silhouette issue. They're independent.
+
+### Alignment diff #1 (after user review)
+
+| Dimension | My read | User's read | Diff |
+|---|---|---|---|
+| Lettering | Treated as "page-composer's job, deferred" | "Why is there no text?" — should be in-image, baked | **Major miss on my part.** Memory existed for this exact failure mode; I didn't follow it. Now fixed in shotlist authoring + L19 pattern + production-config default. |
+
+Specific calibration takeaways for Test 3+:
+- **Default test-comic shotlists to include dialogue / SFX / captions on enough panels to read as a comic** (rule of thumb: ≥ 1 lettering element per body-region beat, ≥ 1 narration / caption per act, ≥ 1 thought or speech balloon per face panel).
+- **Default `mandatory_rules.allow_baked_lettering = true` for any test comic.** The clean-panel default exists for vector-overlay workflows; test runs aren't that.
+- **The L19 vocabulary verified to work on nano_banana_flash.** Going forward, no excuse for un-lettered panels.
+
+### User review #2+ (pending)
+
+*Still reserved for additional review notes — silhouette priority, anything I missed on the canon details, what to prioritize for Test 3, etc.*
 
 ---
 
