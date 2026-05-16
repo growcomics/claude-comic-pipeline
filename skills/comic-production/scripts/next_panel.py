@@ -190,7 +190,7 @@ def is_stage_change(panel: dict, accepted_history: list[dict]) -> bool:
 
 
 # Cameras where the body is the focal subject — attach the lineup ref on these
-# even when the tier hasn't changed, so the silhouette stays anchored across the
+# even when the tier hasn't changed, so the muscular build stays anchored across the
 # scene (per L11). ECU-face / mcu / ecu-region don't qualify (size isn't the
 # focal element at that framing).
 FULL_BODY_CAMERAS = {
@@ -285,7 +285,7 @@ def should_attach_lineup(panel: dict, stage_change: bool) -> bool:
     AND on every full-body panel of the arc character.
 
     The older rule (L5: stage-change only) was a cost-cutting heuristic from the
-    Higgsfield era. On Flow refs are free; the silhouette consistency from
+    Higgsfield era. On Flow refs are free; the muscular-build consistency from
     attaching on full-body shots far outweighs any composition-influence risk.
     """
     if panel.get("muscle_size_tier") is None:
@@ -582,7 +582,7 @@ def _female_anatomy_anchor_needed(panel: dict, cast_lookup: dict) -> bool:
 
 
 # Per-model muscularity ceilings (May 14 finding). Some models refuse to
-# render extreme female muscle silhouettes regardless of prompt — Grok
+# render extreme female muscle builds regardless of prompt — Grok
 # Imagine demonstrably caps around tier 2-3 on female anatomy.
 # Used by build_plan to emit a routing-recommendation WARNING; compose_prompt
 # does not change behavior based on the model (it doesn't know it).
@@ -758,7 +758,7 @@ def _pose_anatomy_anchor() -> str:
 PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     # Active in compose_prompt — these get real pre_render statuses
     "L10":            {"title": "References are the truth, prompts are deltas", "slot": "11_render_directive", "applicable_transformations": ["*"], "phase1_tracked": True},
-    "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_silhouette"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_build"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1058,13 +1058,13 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if time_of_day:
         parts.append(f"Momentary lighting state: {time_of_day}.")
 
-    # 6. L11 tier silhouette — slot 8_tier_silhouette. The biggest single
+    # 6. L11 tier muscular-build — slot 8_tier_build. The biggest single
     # contribution in compose_prompt; varies by (lineup_attached, stage_change,
     # tier). PHASE 3B — routed through rules._registry. FMG-only; non-FMG
     # projects skip via applicable_transformations and the tier line is
     # absent for non-FMG arc characters (a known gap until the BE/MMG/glute
     # variants are written).
-    _apply_rule_at_slot("L11", "8_tier_silhouette",
+    _apply_rule_at_slot("L11", "8_tier_build",
                         panel, ctx, parts, _trace, transformation_type)
 
     # 7. Environment — slot 9_environment. Two pieces:
@@ -1297,7 +1297,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
 
     # Lineup ref attachment per L11 (broader than L5): attach on stage-change
     # AND on every full-body camera panel of the arc character. Reason: the
-    # body is the focal subject on full-body shots and the silhouette needs
+    # body is the focal subject on full-body shots and the muscular build needs
     # the lineup anchor or the model regresses to realistic-fitness builds.
     # find_lineup() searches multiple paths; if it returns None when we should
     # attach, surface that loudly so the agent can fix the asset location
@@ -1314,7 +1314,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                 "tier": tier,
                 "path": str(lineup),
                 "reason": f"{reason_label} panel (tier={tier}) — lineup ref MUST be "
-                          f"attached so the model has a visual silhouette target. "
+                          f"attached so the model has a 3D muscular-build target. "
                           f"Per L11 (cartoony FMG proportions need explicit anchoring).",
             })
             lineup_attached = True
@@ -1326,7 +1326,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                 f"Tried: project references/style/, repo assets/, ~/.claude/skills/.../assets/. "
                 f"Drop a muscle-size-lineup.png (tiers 1-6) or muscle-size-lineup-4-9.png (tiers 7+) "
                 f"into one of those locations before generating. Falling back to verbal-only "
-                f"silhouette instructions, which is significantly less reliable."
+                f"muscular-build instructions, which is significantly less reliable."
             )
             refs_to_attach.append({
                 "kind": "MISSING_lineup",
@@ -1465,7 +1465,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             f"Tier {t_int} exceeds the observed muscularity "
                             f"ceiling for model `{model_id}` (≈ tier {ceiling} "
                             "on female anatomy). If using this model, expect "
-                            "the silhouette to regress toward fitness-model "
+                            "the muscular build to regress toward fitness-model "
                             "build regardless of prompt or lineup ref. "
                             "Recommend routing to nano_banana_flash or "
                             "nano_banana_2 for this panel. See chun-li-grok-"

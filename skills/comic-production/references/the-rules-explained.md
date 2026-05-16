@@ -109,7 +109,7 @@ L4 was originally deprecated under L7 ("we don't bake bubbles anyway"). When L19
 
 ![L5 attached lineup only on stage-changes; L11 attaches on every full-body panel](./the-rules-explained-graphics/14-L5-lineup-attach-pattern.png)
 
-The old rule was a cost-cutting heuristic from the Higgsfield era when every reference attachment cost money. On Flow refs are free, and **L11** broadens the attachment rule to every full-body panel — the silhouette consistency gain far outweighs the slight composition-influence risk. L5 is here for historical record; the active rule is L11.
+The old rule was a cost-cutting heuristic from the Higgsfield era when every reference attachment cost money. On Flow refs are free, and **L11** broadens the attachment rule to every full-body panel — the muscular-build consistency gain far outweighs the slight composition-influence risk. L5 is here for historical record; the active rule is L11.
 
 ---
 
@@ -170,13 +170,23 @@ The L10 rule does *not* say "describe nothing." It says "describe only what's no
 
 ## L11 — Cartoony muscle proportions need explicit anchoring
 
-![Six tier silhouettes from athletic to heroically muscular](./the-rules-explained-graphics/03-silhouette-ladder.png)
+![The actual muscle-size lineup — six 3D-rendered figures, progressive muscle development from tier 1 to tier 6](../assets/muscle-size-lineup.png)
 
-Transformation comics live on size escalation: she gets bigger across the issue. The AI's default is "plausible fitness model" — a real human at the gym. That's not the genre. The genre is comic-book proportions: shoulders 2-3x normal width, biceps with their own gravitational field. Without aggressive prompt vocabulary AND an attached *size lineup* reference, the model regresses to realistic and you end up with a tier-4 panel that looks like tier 2.
+**This is the actual reference the L11 prompt attaches.** Six 3D-rendered figures showing progressive muscle development — visible deltoids, biceps, chest, abs, quads, frame width. It's a body chart with rendered musculature. It is **NOT a silhouette** (a flat outline shape). That distinction is load-bearing — see the "Important: the silhouette purge" note at the end of this section.
 
-The fix is two-part. First, attach the lineup ref on every panel where the body is the focal subject (full-body shots and stage-change panels). Second, tell the model — in the prompt — exactly which figure on the lineup to match, what specifically about that figure to match (muscle mass, breast size, frame width), and what to *not* borrow from it (face, clothing, pose). Then add the explicit negation: "NOT realistic fitness, NOT athletic — cartoony FMG, comic-book proportions."
+Transformation comics live on size escalation: she gets bigger across the issue. The AI's default is "plausible fitness model" — a real human at the gym. That's not the genre. The genre is comic-book proportions: deltoids 2-3x normal mass, biceps with their own gravitational field, chest depth, abdominal definition carved in 3D. Without aggressive prompt vocabulary that points at **muscle volume and definition** — AND an attached *muscle-size lineup* reference — the model regresses to realistic and you end up with a tier-4 panel that looks like tier 2.
 
-Tier 4 is the friction zone. Tier 3 and below the model handles fine. Tier 5 and above is so exaggerated that the lineup carries it naturally. Tier 4 is where the model fights hardest — that's where the vocabulary has to be most aggressive.
+The fix is two-part. First, attach the lineup ref on every panel where the body is the focal subject (full-body shots and stage-change panels). Second, tell the model — in the prompt — exactly which figure on the lineup to match, what specifically about that figure to match (the 3D muscle MASS and DEFINITION: deltoid mass, bicep peak, chest depth, abdominal definition, quad mass, frame width), and what to *not* borrow from it (face, clothing, pose). Then add the explicit negation: "NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale — cartoony FMG with HEAVY 3D muscle mass."
+
+Tier 4 is the friction zone. Tier 3 and below the model handles fine. Tier 5 and above is so visibly exaggerated that the lineup carries it naturally — *when the prompt vocabulary points at muscle volume, not at outline shape*. Tier 4 is where the model fights hardest.
+
+### Important: the "silhouette" purge (2026-05-16)
+
+Up through 2026-05-15 the L11 prompt module (and most of the pipeline's L11 references) used the word **"silhouette"** to describe what the lineup was showing. That word was load-bearing in the wrong direction: nano_banana_flash interpreted it as *outline shape*, which is exactly what the lineup is NOT. Every tier ≥ 4 panel rendered with the "silhouette" vocabulary regressed toward fitness-model proportions with the right outline width but missing muscle mass.
+
+The fix landed during the running [comic-test-log thread](../../../docs/posts/2026-05-16-comic-test-log.md). User review #2 caught it directly: *"there was a reference chart for sizes that has muscle that are 3d, of a certain shape, not a silhouette."* The L11 module's vocabulary was rewritten to point at **muscular build** / **3D muscle volume** / **muscle mass and definition**, with explicit framing that the lineup is a 3D body chart, not an outline reference. Validated on the worst L11 fails of Test 2 (tier 5 + tier 6 panels) — same character, same lineup attached, same camera, only the vocabulary changed, and the muscle mass landed visibly closer to the lineup figure.
+
+The legacy graphic at `the-rules-explained-graphics/03-silhouette-ladder.png` is preserved as historical record of the old framing; the actual lineup PNG at the top of this section (and embedded in `peak-body-scale.md` and `lessons-learned.md` L11) is the canonical reference.
 
 ---
 
@@ -255,7 +265,7 @@ Enforced by `next_panel.py` `_canonical_character_directive()` which reads `cast
 
 ![Impossible twist (torso facing one way, legs another) vs coherent pose (all body parts aligned)](./the-rules-explained-graphics/18-L18-pose-anatomy.png)
 
-Panels sometimes render with anatomically impossible body geometry. Torso facing one direction, hips facing another. Abs visible but feet pointing 90° off from the abs' direction. Arms in front of the body but shoulders behind. Reader doesn't always consciously notice but the panel feels "off" — the body doesn't read as one continuous figure. Worse on hyper-muscular silhouettes (the more anatomy detail, the more places to drift).
+Panels sometimes render with anatomically impossible body geometry. Torso facing one direction, hips facing another. Abs visible but feet pointing 90° off from the abs' direction. Arms in front of the body but shoulders behind. Reader doesn't always consciously notice but the panel feels "off" — the body doesn't read as one continuous figure. Worse on hyper-muscular builds (the more anatomy detail, the more places to drift).
 
 The fix is a mandatory render line at the end of every panel prompt: *"Anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible."*
 
@@ -353,7 +363,7 @@ A body region (the abs, a shoulder) gets clearly revealed in one panel — say, 
 
 ![Oiled bodybuilder shine vs natural matte: lock one in the prompt and carry it](./the-rules-explained-graphics/27-L27-skin-sheen.png)
 
-"Ray-traced subsurface scattering, physically-based rendering" gives the model latitude on how oily versus matte the skin looks. Across multiple panels the specular response drifts — one panel shows bodybuilder-competition shine, the next shows natural matte skin. On hyper-muscular silhouettes the highlight surface area is bigger, so the drift is more visible. Fix: lock the skin treatment in the prompt — "natural matte skin with subtle subsurface scattering, not oiled or wet."
+"Ray-traced subsurface scattering, physically-based rendering" gives the model latitude on how oily versus matte the skin looks. Across multiple panels the specular response drifts — one panel shows bodybuilder-competition shine, the next shows natural matte skin. On hyper-muscular builds the highlight surface area is bigger, so the drift is more visible. Fix: lock the skin treatment in the prompt — "natural matte skin with subtle subsurface scattering, not oiled or wet."
 
 ---
 
@@ -365,7 +375,7 @@ Most generated comics ship with too few reference images. The typical project ha
 
 The fix is structural: a manifest file (`references_required.json`) is generated at script-breakdown time, listing every required ref derived from the shotlist. `reference-gathering` walks the manifest and generates every missing file. `rules_audit.py` HARD-fails if any declared ref is absent. Stage 2 cannot close until the manifest is satisfied.
 
-**The critical sub-rule**: body-tier refs at tier ≥ 2 MUST be generated with the muscle-size lineup PNG attached as a reference image *during their own generation*. Without the lineup attachment at ref-generation time, the model produces "this character, somewhat muscular" using its plausible-fitness prior — NOT the cartoony hyper-FMG silhouette the tier number is supposed to represent. Every downstream panel then inherits realistic-fitness drift from a wrong body-tier anchor. The lineup attachment at ref-generation is what makes the character's identity-at-tier-N actually look like tier N. Per L11 surgical scoping: the lineup is a *proportion-only* reference — use it for muscle mass and frame width during the body-tier ref generation; identity (face, hair, costume) comes from the character's wardrobe description and face card.
+**The critical sub-rule**: body-tier refs at tier ≥ 2 MUST be generated with the muscle-size lineup PNG attached as a reference image *during their own generation*. Without the lineup attachment at ref-generation time, the model produces "this character, somewhat muscular" using its plausible-fitness prior — NOT the cartoony hyper-FMG muscular build the tier number is supposed to represent. Every downstream panel then inherits realistic-fitness drift from a wrong body-tier anchor. The lineup attachment at ref-generation is what makes the character's identity-at-tier-N actually look like tier N. Per L11 surgical scoping: the lineup is a *muscle-mass-only* reference (a 3D body chart, NOT an outline reference) — use it for muscle mass and frame width during the body-tier ref generation; identity (face, hair, costume) comes from the character's wardrobe description and face card.
 
 This is v1. Future work (v2) adds per-character expression refs, pose refs, per-location lighting-state refs, and per-prop state refs to the manifest.
 

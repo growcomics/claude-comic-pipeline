@@ -200,7 +200,7 @@ Mention the lens equivalent in the prompt and the model adjusts depth, distortio
 
 - **Repeated identical framing.** Never shoot four consecutive panels at medium-eye-level-front. Pick any other category for at least one of them.
 - **Random framing.** Variety with no rhythm is noise. Pick a pattern (1–4 above) before assigning per-panel cameras.
-- **Cinematic variety without view-aware chaining.** If you're varying shots, you're also changing views — recheck L1.5's chaining compatibility. A worm's-eye following a profile chain breaks the silhouette anchor; chain to a view-compatible prior or fall back to the canonical character ref + verbal state carry-forward.
+- **Cinematic variety without view-aware chaining.** If you're varying shots, you're also changing views — recheck L1.5's chaining compatibility. A worm's-eye following a profile chain breaks the state-anchor view compatibility; chain to a view-compatible prior or fall back to the canonical character ref + verbal state carry-forward.
 - **Action lines in the prompt as overlays.** Motion blur, speed lines, action streaks should be requested as **physical scene elements** (dust kicked up, fabric mid-motion, sweat trailing, hair blown back) — never as overlay graphics. Per L7 Case B, overlay-style action lines drift toward 2D illustration.
 
 ---

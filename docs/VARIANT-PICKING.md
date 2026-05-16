@@ -33,7 +33,7 @@ response = anthropic.Anthropic().messages.create(
 The system prompt encodes the 6 criteria in strict priority order, with a transformation-type-specific section for criterion #5 (reference adherence). The picker reads `production-config.json -> transformation_type` and injects the matching block:
 
 - `fmg`: muscle size matches lineup tier, natural skin tone, breasts scale with muscle
-- `be`: breast size matches tier, hourglass silhouette, round shape, cleavage at tier 2+
+- `be`: breast size matches tier, hourglass figure, round shape, cleavage at tier 2+
 - `glute`: hip-to-waist ratio matches tier, rounded full glute, thigh proportion balanced
 - `mmg`: muscle size matches lineup tier, **male anatomy only — no breasts, no hourglass**
 - `mixed`: identify active growth stage for this panel, evaluate against that stage's tier

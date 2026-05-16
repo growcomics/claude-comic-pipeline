@@ -15,7 +15,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L9 | Capture every panel's job_id before submitting the next | Chain integrity (no silent breaks) |
 | L10 | References are the truth, prompts are deltas | **The most important architectural rule** — what the prompt may describe vs what refs carry |
 | L10 refinement | Identity-vs-pose distinction | Refs carry identity / costume / location / lighting baseline; prompt carries camera / pose / expression / action / momentary state |
-| L11 | Cartoony FMG proportions need explicit anchoring | Body silhouette doesn't regress to realistic fitness on tier ≥ 2 |
+| L11 | Cartoony FMG proportions need explicit anchoring | Muscular build doesn't regress to realistic fitness on tier ≥ 2 |
 | L12 | Dialogue panels need close framing | On-screen dialogue + wide camera = unreadable; close framing mandatory |
 | L13 | Multi-speaker beats split into per-speaker panels | ≥3 lines from ≥2 speakers must be split before generation |
 | L14 | Multi-view location references for shot-reverse-shot | Single env anchor breaks when the camera reverses; pack multiple env refs per location |
@@ -99,11 +99,11 @@ results = parallel([
 ## L1.5 — Chain view-aware, not blindly to N−1
 
 **Symptom** (the second-order failure after L1 is fixed): chaining is on, panels are generated sequentially, but specific transitions in the sequence still produce visibly worse output than their neighbors. Common cases:
-- A front-view panel following a back-view panel: the front face/body looks subtly off-axis, like the model is fighting between "show the front" and "match the silhouette in the reference"
+- A front-view panel following a back-view panel: the front face/body looks subtly off-axis, like the model is fighting between "show the front" and "match the body framing in the reference"
 - A face ECU following a panel where the face was off-camera: facial features come out homogenized or drift away from the canonical look
 - A wide body shot following an arm ECU: the body proportions feel reconstructed rather than continuous, because the prior reference only showed an arm
 
-**Root cause**: The prior-panel ref carries two distinct things — *state* (body size, clothing damage, hair, aura) and *view* (camera angle, framing, body orientation). State is durable and what you want to preserve. View is situational. If the new panel's view doesn't match the prior, the model still tries to honor the silhouette of the reference, which actively interferes with the target composition.
+**Root cause**: The prior-panel ref carries two distinct things — *state* (body size, clothing damage, hair, aura) and *view* (camera angle, framing, body orientation). State is durable and what you want to preserve. View is situational. If the new panel's view doesn't match the prior, the model still tries to honor the body framing of the reference, which actively interferes with the target composition.
 
 **Fix**: Don't always chain to T_{N−1}. Walk backwards through the prior panels and pick the most recent one whose *view category* is compatible with the new panel. That becomes the state anchor. If no compatible prior exists, fall back to the canonical character ref that matches the target view (e.g., back ref for a back panel) + a verbal state carry-forward in the prompt.
 
@@ -493,31 +493,38 @@ Camera, action, pose, expression. No architecture, no costume design, no charact
 
 ## L11 — Cartoony FMG proportions need explicit anchoring or the model regresses to realistic fitness
 
-**Symptom**: Generated characters are visibly *smaller* than their declared tier. A tier-4 panel that should show cartoony hyper-FMG proportions (shoulders 2× normal width, massive biceps, ridged abs, sculpted quads — i.e. the silhouette of figure 4 in `assets/muscle-size-lineup.png`) renders instead as a fitness-magazine athletic build — closer to tier 2 or 3. Drift compounds: a panel that under-renders the tier on the stage-change shot anchors every carryover panel after it at the smaller build.
+![Muscle-size lineup — six 3D-rendered figures, tier 1 through tier 6](../assets/muscle-size-lineup.png)
+
+**Important framing (purged 2026-05-16):** The lineup attached to L11 panels is a **3D body chart with six figures showing progressive muscle development** — visible deltoids, biceps, chest depth, abdominal definition, frame width. It is NOT a silhouette. The word "silhouette" was used heavily across the pipeline pre-2026-05-16 and was load-bearing in the WRONG direction: it caused nano_banana_flash to read the reference as "match the outline shape," skipping the muscle volume. Use "muscular build" / "3D muscle volume" / "muscle mass and definition" throughout.
+
+**Symptom**: Generated characters are visibly *smaller* than their declared tier. A tier-4 panel that should show cartoony hyper-FMG proportions (deltoids 2× normal mass, massive biceps, ridged abs, sculpted quads — i.e. the muscular build of figure 4 in `assets/muscle-size-lineup.png`) renders instead as a fitness-magazine athletic build — closer to tier 2 or 3. Drift compounds: a panel that under-renders the tier on the stage-change shot anchors every carryover panel after it at the smaller build.
 
 Confirmed in production:
 - April-claudemade: peak panels rendered visibly smaller than the hand-made comparison comic and noticeably smaller than the user's target aesthetic.
 - Supergirl panel 13 (tier-4-tears): the lineup ref wasn't attached at all due to the `find_lineup` path bug (fixed earlier; see commit `0b963c6`), so the model rendered tier 4 from verbal cues alone and produced an undersized build.
+- 2026-05-16 comic-test-log: even with the lineup attached, tiers 4-6 still regressed because the prompt language used "match the silhouette" — model interpreted as outline-only and skipped muscle volume. Validated by re-rendering p13/p14/p15 of Test 2 with corrected vocabulary; muscle mass landed visibly closer to the lineup figure.
 
-**Root cause**: Two failures stacking.
+**Root cause**: Three failures, the third uncovered 2026-05-16.
 
 1. **Lineup ref not attached** (or attached on too few panels). The L5 heuristic ("lineup only on stage-change") was inherited from the Higgsfield era where every ref attachment cost money. On Flow refs are free; the lineup belongs on every panel where the body is the focal subject, not just transitions.
-2. **Size language too gentle.** "Match the muscle proportions of figure N" reads to the model as "render a muscular character" and the model commits to its prior of plausible-fitness anatomy. The lineup image shows comic-book proportions but the prompt's mild vocabulary doesn't commit to that aesthetic, so the model interpolates between the lineup (cartoony) and its default (realistic), landing on a realistic-fitness build.
+2. **Size language too gentle.** "Match the muscle proportions of figure N" reads to the model as "render a muscular character" and the model commits to its prior of plausible-fitness anatomy. The lineup shows comic-book proportions but the prompt's mild vocabulary doesn't commit to that aesthetic, so the model interpolates and lands on a realistic-fitness build.
+3. **Wrong noun pointing at the reference.** "Match the silhouette of figure N" tells the model to match the OUTLINE — which it does, getting the shoulder width roughly right while skipping the actual 3D muscle volume. The lineup is a body chart with rendered musculature; the prompt must say so explicitly.
 
-The model has a strong prior toward realistic anatomy. Without aggressive vocabulary it pulls back toward that prior every time.
+The model has a strong prior toward realistic anatomy. Without aggressive vocabulary that points at *muscle mass and 3D volume*, it pulls back toward that prior every time.
 
-**Fix**: Two parts.
+**Fix**: Three parts.
 
 **Attachment rule (replaces L5)**: Attach the muscle-size lineup ref on **stage-change panels AND on every full-body camera panel of the arc character**. Full-body cameras: `front-full`, `3q-full`, `side-full`, `back-full`, `low-angle-front`, `low-angle-back`, `splash`. ECU-face / ECU-region / mcu / medium skip the lineup (size isn't the focal element there). `next_panel.py`'s `should_attach_lineup()` enforces this.
 
-**Vocabulary upgrade**: The size-tier block of the composed prompt must include:
+**Vocabulary upgrade (2026-05-16 corrected)**: The muscular-build block of the composed prompt must include:
 
-1. A style anchor sentence BEFORE the action delta: *"Style anchor for the body: cartoony hyper-FMG comic-book proportions, NOT realistic fitness modelling. Exaggerated comic musculature where the silhouette is the storytelling element."*
-2. A tier-specific silhouette descriptor with explicit dimensional anchors (e.g. tier 4: *"shoulders 2x normal width with clear deltoid mass, large defined biceps and triceps, full powerful chest, ridged abdominal definition, strong sculpted quads"*).
-3. A "match the silhouette, don't approximate" directive: *"Render the silhouette TO MATCH the lineup figure — do not approximate to a smaller realistic build."*
-4. An explicit negation of the model's default: *"NOT realistic fitness, NOT athletic — cartoony FMG, comic-book proportions."*
+1. A style anchor sentence BEFORE the action delta: *"Style anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume, NOT realistic fitness modelling, NOT a fitness-model build at wider scale. The lineup is a 3D body chart with visible musculature; the storytelling element is the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads), not the outline width."*
+2. An explicit re-framing of what the lineup is: *"The attached muscle-size lineup is a 3D BODY CHART with six figures showing progressive muscle development. It is a MUSCULAR-BUILD reference ONLY (NOT an outline reference)."*
+3. A tier-specific muscular-build descriptor with explicit muscle-group anchors (e.g. tier 4: *"deltoids 2× normal MASS with clear striation, biceps with visible peaks and triceps mass, full powerful chest pushing fabric, ridged 6-pack abdominal definition, strong sculpted quads, hip flare. THICK 3D muscle volume, not just a wider outline"*).
+4. A "match the muscle volume, not the outline" directive: *"CRITICAL: match the visible 3D MUSCLE VOLUME and DEFINITION of figure N, not just the outline width — render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure N shows."*
+5. An explicit negation of the model's default: *"NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale — cartoony FMG, comic-book proportions with HEAVY 3D muscle mass."*
 
-See `peak-body-scale.md` for the full tier-by-tier silhouette catalog and worked examples of vocabulary that survives the model's prior.
+See `peak-body-scale.md` for the full tier-by-tier muscular-build catalog and worked examples of vocabulary that survives the model's prior.
 
 **Where this rule applies**:
 - Every transformation-comic project (any project whose shotlist has a `muscle_size_tier` field on its panels).
@@ -528,7 +535,7 @@ See `peak-body-scale.md` for the full tier-by-tier silhouette catalog and worked
 - Non-transformation comics where size isn't a story element.
 - ECU-face / ECU-region panels (size isn't the focal element).
 
-**Detection / linting hint**: When reviewing accepted panels against their declared tier, compare side-by-side with the figure of the same tier in the lineup. If the silhouette is visibly smaller than the lineup figure (especially shoulder width and overall mass), the panel undershot. Common at tier 4 specifically (the threshold between realistic and cartoony — the model crosses tier 3 fine and commits to tier 5+ readily, but tier 4 is where the prior fights hardest).
+**Detection / linting hint**: When reviewing accepted panels against their declared tier, compare side-by-side with the figure of the same tier in the lineup. **Compare 3D muscle volume specifically — deltoid mass, bicep peak and thickness, chest depth, abdominal definition, lat width, quad mass — not just shoulder/frame outline width.** If the rendered body has the right outline width but lacks the muscle MASS the lineup figure shows, that's the documented "silhouette regression" failure mode and you need to re-render with the corrected muscular-build vocabulary. Common at tier 4-6.
 
 ---
 
@@ -735,7 +742,7 @@ That's 8 refs per arc character (face + tier-1 baseline + N tier refs + 5 view r
 
 **Symptom**: A panel renders the character with anatomically impossible body geometry. Torso facing one direction, hips facing another. Abs visible but feet pointing 90° off from the abs' direction. Arms in front of the body but shoulders behind. Reader doesn't always consciously notice but the panel feels "off" — the body doesn't read as one continuous figure.
 
-**Root cause**: Image models can struggle with whole-body consistency when the prompt describes a complex pose. Each body region gets generated correctly in isolation, but the spatial relationships between regions (which way the torso faces vs. which way the legs face) don't always cohere. Worse on hyper-muscular silhouettes (the more anatomy detail, the more places to drift).
+**Root cause**: Image models can struggle with whole-body consistency when the prompt describes a complex pose. Each body region gets generated correctly in isolation, but the spatial relationships between regions (which way the torso faces vs. which way the legs face) don't always cohere. Worse on hyper-muscular builds (the more anatomy detail, the more places to drift).
 
 **Fix**: A mandatory render line at the end of every panel prompt (right before the closing render directive):
 
@@ -853,7 +860,7 @@ Bake into the canonical `compose_prompt()` template, gated on `medias[].role == 
 
 ## L22 — Hair state must be explicit in every face-visible panel
 
-**Symptom**: Hair accessories drift across panels even when the state anchor shows the canonical look. Twin buns become a single decorative updo. Red ribbons become dark grey clips, or vanish entirely. A character whose silhouette is partly defined by their hair (Chun Li's twin buns + ribbons, Princess Leia's side buns, Sailor Moon's odango) loses her silhouette mid-chapter.
+**Symptom**: Hair accessories drift across panels even when the state anchor shows the canonical look. Twin buns become a single decorative updo. Red ribbons become dark grey clips, or vanish entirely. A character whose recognizable look is partly defined by their hair (Chun Li's twin buns + ribbons, Princess Leia's side buns, Sailor Moon's odango) loses that distinctive look mid-chapter.
 
 **Root cause**: The model treats hair as low-priority detail when reading a state-anchor reference. Composition, costume damage, and body proportion get carried forward reliably; small head accessories get dropped, swapped, or generically "improved" toward whatever the model's prior says is more attractive. State-anchor inheritance is not load-bearing enough on its own.
 
@@ -865,7 +872,7 @@ Bake into the canonical `compose_prompt()` template, gated on `medias[].role == 
 - **Suit-fail panel itself**: *"Hair: twin buns starting to shake loose, red ribbons working free, strands escaping."*
 - **Post-suit-fail** (tier ≥ 5, beats after `suit_fail`): *"Hair: fully loose, long dark hair falling around her shoulders, no buns, no ribbons."*
 
-Bake the derivation into `compose_prompt()`. The hair line goes into the subject section alongside the silhouette anchor, NOT the costume section (a different visual axis).
+Bake the derivation into `compose_prompt()`. The hair line goes into the subject section alongside the muscular-build anchor, NOT the costume section (a different visual axis).
 
 **Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` needs a `hair_state` field on each panel's planner output, derived from tier + beat.
 
@@ -939,13 +946,13 @@ If the costume is a destroyed/remnant version of an earlier intact garment, name
 
 **Symptom**: Same character's skin renders with materially different surface treatment across adjacent panels — e.g., p4-02 shows oiled bodybuilder-competition shine with strong specular highlights on biceps/shoulders; p4-01 (immediately preceding) shows natural matte skin with subtle subsurface scattering. The character is the same; the skin "material" looks different.
 
-**Root cause**: "Ray-traced subsurface scattering, physically-based rendering" in the prompt gives the model latitude on how oily/sweaty/matte the skin appears. The model varies the specular response per generation. On hyper-muscular silhouettes, this drift is especially visible because the highlights track the muscle topography (more muscle = more highlight surface area).
+**Root cause**: "Ray-traced subsurface scattering, physically-based rendering" in the prompt gives the model latitude on how oily/sweaty/matte the skin appears. The model varies the specular response per generation. On hyper-muscular builds, this drift is especially visible because the highlights track the muscle topography (more muscle = more highlight surface area).
 
 **Fix**: Skin texture/sheen must be named explicitly with a consistent vocabulary across every panel of the character. For this comic: "natural healthy matte skin with subtle subsurface scattering, NOT oiled, NOT wet, NOT bodybuilder competition shine, NOT inflamed." 
 
 Allowable per-panel variation: lighting conditions (warm afternoon sun vs cool indoor north light), exertion sweat (post-flex panels may have light forehead/temple sheen). NOT allowable: bodybuilder-grease-and-oil look that travels with the muscle topography.
 
-**Where this applies**: Any hyper-muscular character render. The bigger the silhouette, the more aggressive the skin specular drift becomes, and the more explicit the sheen-control vocabulary needs to be.
+**Where this applies**: Any hyper-muscular character render. The bigger the build, the more aggressive the skin specular drift becomes, and the more explicit the sheen-control vocabulary needs to be.
 
 ---
 
@@ -978,7 +985,7 @@ Every comic project must have these refs on disk before stage 3 generation can s
 ### Hard rule: body-tier refs MUST be generated WITH the muscle-size lineup attached
 
 This is the critical sub-rule of L28. When generating `body-tier3.png` or `body-tier5.png` for a character, the `references_required.json` walker MUST attach `muscle-size-lineup.png` (or `muscle-size-lineup-4-9.png` for tier ≥ 7) as a reference image during generation. Without the lineup attached:
-- The model generates "this character, somewhat muscular" using its plausible-fitness prior, NOT the cartoony hyper-FMG silhouette the tier number is supposed to represent.
+- The model generates "this character, somewhat muscular" using its plausible-fitness prior, NOT the cartoony hyper-FMG muscular build the tier number is supposed to represent.
 - All downstream panels that chain off this tier ref inherit the realistic-fitness drift.
 - Every panel's per-panel lineup attachment then has to *correct* the character's own ref, which is the wrong direction of the workflow.
 

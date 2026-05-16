@@ -177,15 +177,15 @@ Stages 5 and 8 below show the rule in action — you can't always pull from N−
 | 1 | `3q-full` baseline | 3:4 | base prompt only (no prior) | Generate x4, pick the cleanest variant |
 | 2 | `3q-full` | 3:4 | Stage 1 + face card | Standard N−1 chain ✓ |
 | 3 | `ecu-region` (bicep) | 1:1 | Stage 2 + face card | Bicep visible in Stage 2 → compatible |
-| 4 | medium / waist-up | 3:4 | Stage 2 + face card | Stage 3 is ECU, no body silhouette → walk back to Stage 2 |
-| 5 | `3q-full` pull-back | 3:4 | **Stage 2** + face card (NOT Stage 4) | Stage 4 is waist-up → no leg silhouette. Pulling Stage 4 will drop the legs/boots in the next gen. Walk back to Stage 2. |
+| 4 | medium / waist-up | 3:4 | Stage 2 + face card | Stage 3 is ECU, no body in frame → walk back to Stage 2 |
+| 5 | `3q-full` pull-back | 3:4 | **Stage 2** + face card (NOT Stage 4) | Stage 4 is waist-up → no legs in frame. Pulling Stage 4 will drop the legs/boots in the next gen. Walk back to Stage 2. |
 | 6 | `low-angle-front` | 3:4 | Stage 5 + face card | Compatible (low-angle-front is in 3q-full's compatibility set) |
 | 7 | `ecu-face` | 1:1 | **face card alone** | The portrait IS the canonical anchor for ecu-face |
-| 8 | `3q-full` | 3:4 | **Stage 6** + face card (NOT Stage 7) | Stage 7 is face ECU → no body silhouette. Walk back to Stage 6. |
+| 8 | `3q-full` | 3:4 | **Stage 6** + face card (NOT Stage 7) | Stage 7 is face ECU → no body in frame. Walk back to Stage 6. |
 | 9 | `wide-establish` | 16:9 | Stage 8 + face card | Wide-establish front-facing is compatible with 3q-full |
 | 10 | `splash` low-angle | 3:4 | Stage 9 + face card | Compatible |
 
-**Production lesson burned into this skill from real failure:** in an actual run, Stage 5 was naively chained from Stage 4 (the waist-up shot). The model dropped the leotard bottom and boots because Stage 4 had no leg silhouette to anchor them. The correct anchor is Stage 2 (last full body). If you forget and the costume regresses, two options: (a) re-roll Stage 5 with the correct anchor, or (b) re-cast the regression as "the costume tore from the growth" and continue forward — the FMG genre supports this narratively.
+**Production lesson burned into this skill from real failure:** in an actual run, Stage 5 was naively chained from Stage 4 (the waist-up shot). The model dropped the leotard bottom and boots because Stage 4 had no legs in frame to anchor them. The correct anchor is Stage 2 (last full body). If you forget and the costume regresses, two options: (a) re-roll Stage 5 with the correct anchor, or (b) re-cast the regression as "the costume tore from the growth" and continue forward — the FMG genre supports this narratively.
 
 ---
 
@@ -328,7 +328,7 @@ These are session-burned and worth preserving:
 
 1. **Drop celebrity names from prompts that include body description.** First learned during the Olivia-Munn-Psylocke chain. The face ref carries the likeness; the name in the prompt only adds policy risk. *(See Content Policy Quirks above.)*
 
-2. **View-aware chaining is real and visible.** Stage 5 of the Psylocke chain naively pulled from Stage 4 (waist-up); the leotard bottom dropped because there was no leg silhouette to anchor. The fix is the SKILL.md compatibility table — walk backward to the last view-compatible stage, not the literal N−1.
+2. **View-aware chaining is real and visible.** Stage 5 of the Psylocke chain naively pulled from Stage 4 (waist-up); the leotard bottom dropped because there was no legs in frame to anchor. The fix is the SKILL.md compatibility table — walk backward to the last view-compatible stage, not the literal N−1.
 
 3. **The picker is your friend for face-ref re-attachment.** Across a 10-stage chain you'll attach the face card 9 times. The `+` picker → search field is the fastest path; auto-titles make the face card searchable as "Olivia Munn as Psylocke portrait" or whatever you titled it.
 

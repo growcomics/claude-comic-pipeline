@@ -187,7 +187,7 @@ Evaluation criteria, in order:
 6. **Anatomy clean** — exactly two arms, two legs, no extra/missing limbs
 7. **No baked-in lettering** — no speech bubbles, SFX text, caption boxes in the render. (Should be ruled out by prompt design, but check.)
 8. **Expressive face** — vivid, readable expression that fits the action beat
-9. **Composition quality** — readable silhouette, focal point clear
+9. **Composition quality** — readable body framing, focal point clear
 
 If two variants tie on these, pick the one with the most direct face visibility (per `flow-workflow.md` face-card guidance).
 
@@ -270,7 +270,7 @@ Behavior depends on whether `production-config.json` exists at project root.
   - Detection: the panel's `muscle_size_tier` is N+1 but the rendered body looks closer to tier N. This is the L11 cartoony-FMG regression.
   - Config policy: read `generation.on_size_regression` (default `retry-with-aggressive-anchor`).
     - `halt` → write reason, stop cleanly. User decides whether to retry manually or accept the underescalated render.
-    - `retry-with-aggressive-anchor` → resubmit ONCE with the aggressive silhouette anchor prepended (`compose_prompt`'s tier-N silhouette block from `next_panel.py`). Consumes one retry budget. If still underescalated, halt.
+    - `retry-with-aggressive-anchor` → resubmit ONCE with the aggressive muscular-build anchor prepended (`compose_prompt`'s tier-N muscular-build block from `next_panel.py`, slot `8_tier_build`). Consumes one retry budget. If still underescalated, halt.
 
 - **Anatomy issue across multiple sibling variants** (extra limbs, weird hands, fused fingers on 2+ of the 4 variants).
   - Config policy: read `generation.on_anatomy_failures` (default `pick-best-and-flag`).

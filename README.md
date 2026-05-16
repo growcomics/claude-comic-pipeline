@@ -80,7 +80,7 @@ The skill auto-invokes when `/build-comic autopilot` finds no config at project 
 | `mmg` | 1, 2, 4, 5, 6, 7, 8, 9, 10 | Rule 3 off (no breasts). All other rules apply. |
 | `mixed` | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (all) | Multi-arc — every rule may apply on some panel. |
 
-Plus per-type `extra_lines` for monotonic-size language, hourglass silhouette, V-taper, body-hair continuity, etc.
+Plus per-type `extra_lines` for monotonic-size language, hourglass figure, V-taper, body-hair continuity, etc.
 
 ### Configurable lineup files
 
@@ -181,7 +181,7 @@ For vision-grade variant picking (better than the heuristic fallback), export an
 export ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-When unset, `variant_picker.py` falls back to the heuristic strategy (largest body silhouette wins) and prints a one-line warning per panel.
+When unset, `variant_picker.py` falls back to the heuristic strategy (largest body build wins) and prints a one-line warning per panel.
 
 ## Usage
 

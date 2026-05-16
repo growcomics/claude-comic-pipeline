@@ -183,7 +183,7 @@ POSE VARIATION RULES (MANDATORY):
 
 After every multi-character panel generates, check:
 
-- [ ] Can you tell the characters apart by pose alone (silhouette test)?
+- [ ] Can you tell the characters apart by pose alone (figure test — distinct body shapes)?
 - [ ] Are any two characters in the same arm position? → **REJECT, re-prompt**
 - [ ] Are any two characters at the same body angle? → **REJECT, re-prompt**
 - [ ] Are all characters in a straight line at the same depth? → **REJECT, re-prompt**

@@ -243,7 +243,7 @@ def _build_system_prompt(transformation_type: str) -> str:
         "be": (
             "5. Reference adherence — characters match face card. "
             "For BE: breast size matches the tier for this panel. "
-            "Hourglass silhouette maintained. Round (not teardrop) shape. "
+            "Hourglass figure maintained. Round (not teardrop) shape. "
             "Cleavage readable at tier 2+. No reversion across the chain."
         ),
         "glute": (

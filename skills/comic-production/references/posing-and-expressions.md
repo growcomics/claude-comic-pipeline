@@ -132,7 +132,7 @@ THIRD WOMAN:
 Torso angled forward enough to emphasize projection and size while the face
 remains clearly visible. Shoulders slightly drawn back as the upper body adjusts
 to the forward pull. One or both arms frame the upper torso. The chest dominates
-the silhouette. She presents as the most theatrically committed to the display.
+the figure. She presents as the most theatrically committed to the display.
 Facial expression: wide-eyed, delighted, astonished, and thrilled. Big open
 smile, eyes widened in bright amazement, brows raised, a face that says she is
 both shocked and delighted. Vibrant, animated, almost glowing with joyful

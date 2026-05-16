@@ -17,7 +17,7 @@
 > - **Action Lines and SFX** — *active, but the rendering language was rewritten*. SFX text IS baked into the prompt, but rendered as 3D-extruded letter sculptures with real ray-traced shadows — not flat 2D burst lettering or "action lines radiating outward." See the section below for the L19-conformant phrasing.
 > - **Dialogue Formatting** — *active*. Speech bubbles, thought bubbles, and caption boxes are written into the generation prompt as physical 3D scene objects (per L19), with bubble shape, position, tail direction, and per-speaker attribution per **L4**'s rules. The `dialogue[]` / `captions[]` arrays in `shotlist.json` remain the source of truth for *what is said*; the prompt is where you describe *how the bubble renders in the photoreal scene*.
 >
-> See the **Master CGI prompt template** in `CHANGELOG.md`'s 2026-05-13 entry for the canonical skeleton (opening render-engine anchor → camera → subject + tier silhouette → action delta → wardrobe delta → baked SFX as physical object → baked bubble as physical object → environment delta → closing negation block) and the rule-to-section mapping.
+> See the **Master CGI prompt template** in `CHANGELOG.md`'s 2026-05-13 entry for the canonical skeleton (opening render-engine anchor → camera → subject + tier muscular build → action delta → wardrobe delta → baked SFX as physical object → baked bubble as physical object → environment delta → closing negation block) and the rule-to-section mapping.
 
 Copy and paste these directly into panel prompts. Do not rewrite from memory — the exact wording has been tested and refined. Seemingly minor word changes (e.g., "glistening" vs "shiny") can meaningfully affect output quality because the model latches onto specific vocabulary.
 

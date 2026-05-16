@@ -99,7 +99,7 @@ This checklist catches the most common and damaging issues. Run through it for e
 - [ ] **Two legs per character**: No third or fourth legs (the model generates extra legs more often than extra arms; check both).
 - [ ] **Proportions correct**: Limbs are proportional, hands are correctly formed, faces have normal proportions.
 - [ ] **Character positioning logical**: People are standing/sitting in physically plausible positions. No impossible body angles or floating limbs.
-- [ ] **FMG anatomy rules followed** (when applicable): See `fmg-anatomy-guide.md` — hourglass silhouette preserved, small head/hands/feet, round (not teardrop) breasts, pillowy (not blocky) abs, asymmetric leg contours, no drumstick forearms.
+- [ ] **FMG anatomy rules followed** (when applicable): See `fmg-anatomy-guide.md` — hourglass figure preserved, small head/hands/feet, round (not teardrop) breasts, pillowy (not blocky) abs, asymmetric leg contours, no drumstick forearms.
 
 ---
 

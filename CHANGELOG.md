@@ -10,6 +10,40 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (pipeline-wide "silhouette" → "muscular build" PURGE, user-directed)
+
+### Changed
+
+- **Pipeline-wide vocabulary purge: "silhouette" → "muscular build" / "3D muscle volume" / "muscular figure".** Triggered by [user review #2 of the comic-test-log](docs/posts/2026-05-16-comic-test-log.md): *"there was a reference chart for sizes that has muscle that are 3d, of a certain shape, not a silhouette."* The single load-bearing noun pointing at the L11 muscle-size lineup was telling nano_banana_flash to *"match the outline shape"* — the exact opposite of what the lineup actually shows (a 3D body chart with rendered musculature). Every tier ≥ 4 panel rendered with the legacy vocabulary regressed toward fitness-model proportions with the right outline width but missing muscle MASS. Diagnosed across Test 1 + Test 2 of the comic-test-log thread; validated on p13/p14/p15 of Test 2 (same character, same lineup attached, same camera — only the prompt vocabulary changed and muscle mass landed visibly closer to the lineup figure).
+- **22 files swept.** Every load-bearing pipeline doc + module purged. Files touched:
+  - **Rule module renamed**: `rules/l11_silhouette.py` → `rules/l11_muscular_build.py` (git mv). Slot renamed `8_tier_silhouette` → `8_tier_build`. Per-tier descriptors rewritten with **muscle-mass and definition** language (delts, biceps, chest depth, striation, vascularity, abdominal definition). Style anchor reframed: *"the lineup attached is a 3D body chart with visible musculature; the storytelling element is the muscle MASS and DEFINITION, not the outline width."* Vision rubric rewritten to compare 3D muscle volume. Retry strategy escalates muscle-mass language, not silhouette language. Legacy `_silhouette_desc = _build_desc` alias preserved for backwards compat. Registry import + RULE_INSTANCES updated.
+  - **Composer**: `scripts/next_panel.py` — 8 occurrences in slot comments + reason strings rewritten. Slot constant `8_tier_silhouette` → `8_tier_build`.
+  - **Reference docs (canonical)**: `peak-body-scale.md` — full rewrite with the lineup PNG embedded inline at the top + per-tier muscular-build descriptors + "the wrong way / the right way" examples + history section documenting the purge. `lessons-learned.md` L11 section — lineup PNG embedded + three root causes (third = vocabulary diagnosis) + five-part vocabulary upgrade + "Important framing (purged 2026-05-16)" callout. Surgical edits to L1.5, L18, L22, L27, L28 ("hyper-muscular silhouettes" → "hyper-muscular builds"). `the-rules-explained.md` L11 section — lineup PNG embedded + "the silhouette purge" subsection.
+  - **Skills**: `comic-production/SKILL.md` (6 edits), `production-briefing/SKILL.md` (4 edits), `reference-gathering/SKILL.md` (lineup instruction rewritten with *"3D BODY CHART...NOT a silhouette / outline reference"*).
+  - **Other references**: `fmg-anatomy-guide.md` (5 edits incl. §6 header "Silhouette Rules" → "Proportion Rules"), `shotlist-driven-flow.md`, `qa-checklist.md`, `prompt-templates.md`, `posing-and-expressions.md`, `multi-character-variation.md`, `cinematic-framing.md`, `camera-distance-analysis/README.md`, `flow-workflow.md` (`replace_all` "no body silhouette" → "no body in frame", "no leg silhouette" → "no legs in frame").
+  - **Runners + commands**: `runners/variant_picker.py`, `commands/build-comic.md`.
+  - **Top-level**: `README.md`, `docs/VARIANT-PICKING.md`.
+  - **Migration tracker**: `rules/README.md` updated with new filename + slot name + purge note.
+- **Lineup PNG now embedded inline** in three load-bearing docs so the canonical reference is always visible alongside the rule that cites it: `peak-body-scale.md` (top of doc), `lessons-learned.md` (L11 section), `the-rules-explained.md` (L11 section). All three embeds use `../../assets/muscle-size-lineup.png` (already in the repo, used during chunli FMG runs).
+
+### Preserved (intentional)
+
+- **Legitimate cinematography term retained**: `cinematic-framing.md` keeps `silhouette` as a compositional modifier (backlit subject, features dark) — a real film vocabulary item, distinct from the body-reference miscue.
+- **Legitimate art term retained**: `style-lock/styles/ink-line/preset.md` keeps *"Outer silhouette: heavy (2pt equivalent)"* — ink line weight terminology.
+- **Vocabulary-to-avoid callouts retained**: `peak-body-scale.md` deliberately mentions the legacy word in its "wrong way" + history sections so readers know what NOT to use.
+- **Historical changelog entries retained**: prior CHANGELOG entries that used "silhouette" stay verbatim. History is not rewritten.
+
+### Why
+
+The architecture caught the L11 failure mode reliably across two test runs — but couldn't fix it from inside L11 because the rule itself was built around the wrong noun. The pre-render gate fired the right warnings; the post-render checks flagged the right regressions; the retry strategy escalated correctly. What was broken was the actual word the model was reading. This is an architectural takeaway worth recording: **load-bearing vocabulary at the rule-content level can override any amount of gating and retry-strategy work above it.** When a check reliably fires but the fix doesn't land, look at the words pointing at the reference, not the gating logic.
+
+### Verified
+
+- Registry import path works post-rename (`from .l11_muscular_build import L11` resolves cleanly; `RULE_INSTANCES` walks all 11 rules in order).
+- Final audit grep shows 17 silhouette occurrences remain — all categorized as cinematography (1 doc), ink-line art (1 doc), purge documentation (3 docs), or historical changelog. Zero remaining in pipeline-active rule modules, composer, skill instructions, prompt templates, QA checklists, or audit tools.
+
+---
+
 ## 2026-05-16 (phases 5/6/7 of checks-and-balances — vision rubrics + retry + discovery)
 
 ### Added

@@ -70,9 +70,9 @@ For each character in the manifest:
      - Render anchor (DAZ3D Iray, photoreal CGI, etc.)
      - Camera: front-full, eye-level, 28mm equivalent
      - Subject: the character's name + cartoony hyper-FMG style anchor for tier ≥ 2 (per L11)
-     - The tier-specific silhouette descriptor (per L11's `silhouette_by_tier` table)
+     - The tier-specific **muscular-build** descriptor (per L11's `_BUILD_BY_TIER` table in `rules/l11_muscular_build.py`)
      - Costume: the character's canonical wardrobe (the BASELINE costume, NOT the torn-up version — the tier ref is the body, not the damage state)
-     - Lineup instruction: "Match the EXACT silhouette of figure {tier} in the attached lineup reference ONLY for muscle mass, breast size, and frame width."
+     - Lineup instruction: "The attached muscle-size lineup is a 3D BODY CHART showing six figures with progressive muscle development — NOT a silhouette / outline reference. Match the 3D MUSCLE VOLUME and DEFINITION of figure {tier} ONLY for muscle mass, breast size, and frame width."
      - Closing CGI anchor.
    - Generate at x4 on Flow (free), pick the best, save to the declared path. On Higgsfield: count=1, accept the result.
 
@@ -89,7 +89,7 @@ For each character in the manifest:
    - Save to the declared path. Aspect 3:4 for body views, 1:1 for ECU-region.
 
 4. **Failures**:
-   - If the model refuses (NSFW filter, content policy) on a high-tier body ref: retry with softer language. If still rejected, surface to the user — they may need to soften the project's silhouette target or accept a lower tier reference.
+   - If the model refuses (NSFW filter, content policy) on a high-tier body ref: retry with softer language. If still rejected, surface to the user — they may need to soften the project's muscular-build target or accept a lower tier reference.
    - If the result looks like realistic-fitness instead of cartoony-FMG: the lineup attachment failed. Re-check that the lineup PNG was actually in the medias list at submission time. Retry with more aggressive vocabulary (per L11).
 
 For each location in the manifest:
@@ -122,7 +122,7 @@ Then exit. `rules_audit.py` `check_reference_completeness()` will pass and stage
 
 ### Hard rules for manifest-driven mode
 
-- **Never skip the body-tier lineup attachment.** Tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image. The whole point of L28 is that the character's identity-at-tier-N must be pre-rendered with proper silhouette anchoring, not invented per-panel.
+- **Never skip the body-tier lineup attachment.** Tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image. The whole point of L28 is that the character's identity-at-tier-N must be pre-rendered with proper muscular-build anchoring (the lineup is a 3D body chart showing muscle mass and definition, NOT an outline reference), not invented per-panel.
 - **Don't economize.** If the manifest says 5 refs and 3 are on disk, generate the other 2. Don't decide on the fly that 3 is "enough." `rules_audit` will HARD-fail on missing files anyway.
 - **Provenance still applies.** Even for AI-generated refs (not gathered from external sources), write a `_provenance.md` entry: prompt used, model, timestamp, lineup attached y/n. Future audits depend on knowing how each ref was made.
 - **Do NOT modify `references_required.json`.** That file is the source of truth from script-breakdown. If the manifest is wrong, regenerate it at the script-breakdown stage; don't edit it from here.

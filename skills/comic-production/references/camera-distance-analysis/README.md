@@ -17,7 +17,7 @@ That's a ~1.7-step gap on a 0–6 scale. The hand-made comic is meaningfully clo
 
 When the camera is at MCU or closer during a transformation beat, the body region that's transforming **dominates the panel** — the chest fills the frame during chest expansion, the bicep fills the frame during arm growth. The reader's eye has nowhere else to go. When the camera is at full body for the same beat, the changing region is small in frame and the panel reads as *"April is now buff"* instead of *"April's chest is expanding right now."* You see the result; you don't feel the event.
 
-The hand-made comic reserves its single full-body shot for the page-13 reveal — by then the transformation is done and the figure carries the panel as a complete silhouette. Reveal is the right place to pull back. Everywhere else, get close.
+The hand-made comic reserves its single full-body shot for the page-13 reveal — by then the transformation is done and the figure carries the panel as a complete muscular build. Reveal is the right place to pull back. Everywhere else, get close.
 
 ## The data, in detail
 

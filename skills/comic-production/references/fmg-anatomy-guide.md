@@ -2,24 +2,24 @@
 
 This file distills the FMG Anatomy Guide (General) into prompt-friendly language for Nano Banana panel prompts. Use it when describing character physiques, poses, and muscle detail in `panels.json`.
 
-The core philosophy: **exaggerated muscles, anatomically accurate placement, feminine silhouette always preserved.**
+The core philosophy: **exaggerated muscles, anatomically accurate placement, feminine figure always preserved.**
 
 ---
 
-## 1. Overall Silhouette
+## 1. Overall Figure / Shape
 
 ### DO
 - Maintain an **hourglass figure** at every muscle size — shoulders and hips should be roughly equal width, with a visible waist taper between them
 - Use **curves for every contour** — round, flowing lines define the entire body shape
-- Keep the silhouette **balanced front-to-back**: large breasts in front, large glutes behind, creating a dramatic S-curve in side profile
+- Keep the figure **balanced front-to-back**: large breasts in front, large glutes behind, creating a dramatic S-curve in side profile
 
 ### DON'T
-- Never let the silhouette become a **reverse triangle** (shoulders much wider than hips) — that reads as masculine
+- Never let the figure become a **reverse triangle** (shoulders much wider than hips) — that reads as masculine
 - Never use **triangular or angular shapes** for the body outline — hard edges and sharp angles kill the feminine read
 - Never flatten the waist — even at extreme muscle sizes, the waist must taper inward
 
 ### Prompt language
-> "hourglass silhouette, equal shoulder-to-hip ratio, flowing curved contours, dramatic waist taper"
+> "hourglass figure, equal shoulder-to-hip ratio, flowing curved contours, dramatic waist taper"
 
 ---
 
@@ -135,7 +135,7 @@ Key muscle groups in the torso: sternocleidomastoid (neck), trapezius, deltoid, 
 ### Lats
 - Hinting at lat spread behind the torso gives a **more balanced, powerful look**
 - Without lats hinted, the upper body can feel top-heavy or unanchored
-- With lats, the silhouette widens slightly at the ribcage, creating better flow from shoulders → waist → hips
+- With lats, the figure widens slightly at the ribcage, creating better flow from shoulders → waist → hips
 
 ### Ab Shape Flow
 - **Avoid symmetry** — stiff, perfectly mirrored abs feel lifeless
@@ -154,7 +154,7 @@ Key muscle groups in the torso: sternocleidomastoid (neck), trapezius, deltoid, 
 >
 > "top-lit abs with highlights on the upper surface of each segment and shadows underneath, matching the overhead lighting on the breasts, firm and defined not flabby"
 >
-> "abs with slight asymmetry following the body's natural curve, hinted lat spread giving a balanced powerful silhouette, detailed thoracic obliques with simpler flank pads"
+> "abs with slight asymmetry following the body's natural curve, hinted lat spread giving a balanced powerful figure, detailed thoracic obliques with simpler flank pads"
 
 ### QA Checklist — Abs-Specific Failures
 Use this when reviewing generated output. These are the most common abs errors:
@@ -174,7 +174,7 @@ Use this when reviewing generated output. These are the most common abs errors:
 
 ## 6. Butt / Glutes
 
-### Silhouette Rules
+### Proportion Rules
 - **Reverse triangle (shoulders wider than butt) = masculine** — AVOID
 - **Hourglass (shoulders equal to butt)** = ideal FMG proportions
 - **Triangle (butt wider than shoulders) = extra feminine** — also acceptable, even desirable
@@ -219,7 +219,7 @@ Use this block as a mental checklist when writing any FMG character description 
 
 | Body Area | Key Rule | Anti-Pattern to Avoid |
 |---|---|---|
-| Overall silhouette | Hourglass, all curves, no angles | Reverse triangle, angular shapes |
+| Overall figure | Hourglass, all curves, no angles | Reverse triangle, angular shapes |
 | Head/hands/feet | Stay small and feminine | Enlarging proportionally with muscles |
 | Biceps/triceps | Massive, always visible, distinct shapes | Blended blob, only visible when flexed |
 | Forearms | Flowing contour, short wrist | Drumstick shape, long wrist |
@@ -230,7 +230,7 @@ Use this block as a mental checklist when writing any FMG character description 
 | Abs — lower | Taper and recede into pelvis, smaller than upper abs | Abrupt termination, same size as upper abs |
 | Abs — 3/4 view | Follow the same angle as the torso | Facing straight-on when body is turned |
 | Obliques/waist | Thoracic portion (upper) more detailed, flank pad (lower) simpler | Detail priority inverted, or obliques omitted entirely |
-| Lats | Hinted for balanced silhouette | Omitted (top-heavy look) |
+| Lats | Hinted for balanced figure | Omitted (top-heavy look) |
 | Butt | Equal to or wider than shoulders | Narrower than shoulders (masculine) |
 | Butt + breasts | Proportionally balanced | One much larger than the other |
 | Legs | Asymmetric inner/outer contours | Symmetric drumstick shape |
@@ -243,7 +243,7 @@ Use this block as a mental checklist when writing any FMG character description 
 Drop this into any panel prompt where an FMG character is described at full muscle size:
 
 ```
-[Character Name] has an hourglass silhouette with massively exaggerated muscles
+[Character Name] has an hourglass figure with massively exaggerated muscles
 but a small feminine head, delicate hands, and compact feet. Enormous round biceps
 and thick triceps are clearly separated and visible even at rest. Forearms taper
 with flowing muscular contours to short feminine wrists. Large perfectly round

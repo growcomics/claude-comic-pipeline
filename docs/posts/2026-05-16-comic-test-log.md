@@ -287,6 +287,20 @@ Specific calibration takeaways for Test 3+:
 - **Anchor on muscle MASS, DEFINITION, STRIATION, VASCULARITY** — physical properties of the rendered muscle volume — not on outline dimensions or "tier N silhouette."
 - This is the second concrete calibration delta. The thread is producing its intended signal.
 
+### Alignment diff #2 — pipeline purge LANDED
+
+Following user review #2 the next directive was: *"I need you to update the relevant github docs as well to make sure we are showing that image, and that its always there and this silhouette is PURGED."* That's now done in one atomic sweep:
+
+- **Rule module renamed**: `rules/l11_silhouette.py` → `rules/l11_muscular_build.py`. Slot renamed `8_tier_silhouette` → `8_tier_build`. Per-tier descriptors, style anchor, vision rubric, retry strategy all rewritten around **muscle mass / definition / 3D volume**.
+- **Lineup PNG now embedded inline** in three load-bearing docs so the canonical reference is always visible alongside the rule that cites it:
+  - [`peak-body-scale.md`](../../skills/comic-production/references/peak-body-scale.md) — at the top of the doc, with the explicit framing *"The lineup is a 3D body chart with six figures showing progressive muscle development … It is NOT a silhouette reference."*
+  - [`lessons-learned.md` L11 section](../../skills/comic-production/references/lessons-learned.md) — embedded with the "Important framing (purged 2026-05-16)" callout.
+  - [`the-rules-explained.md` L11 section](../../skills/comic-production/references/the-rules-explained.md) — embedded with the "the silhouette purge" subsection explaining the history.
+- **22 files swept end-to-end**: rule module, composer, all skill instructions, all reference docs, runners, top-level README, the variant-picker docs. See the [2026-05-16 PURGE CHANGELOG entry](../../CHANGELOG.md) for the complete file list.
+- **Final audit**: 17 silhouette occurrences remain repo-wide — every one categorized as legitimate (cinematography modifier, ink-line weight, vocabulary-to-avoid callout, or historical changelog). Zero pipeline-active rule modules, composer paths, skill instructions, prompt templates, or audit tools still use the word.
+
+**Architectural takeaway** that goes back into the design playbook: *load-bearing vocabulary at the rule-content level can override any amount of gating and retry-strategy work above it. When a check reliably fires but the fix doesn't land, look at the words pointing at the reference, not the gating logic.* This is L11's diagnosis distilled into a transferable rule.
+
 ### User review #3+ (pending)
 
 *Continuing to reserve space. The thread accumulates each diff — over time the calibration should approach alignment with how the user actually evaluates the panels.*

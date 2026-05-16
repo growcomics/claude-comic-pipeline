@@ -280,7 +280,7 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
 1. Style prefix (always first — copy verbatim from prompt-templates.md)
 2. Shot type (wide, medium, close-up, extreme closeup)
 3. Environment description (paste from your location constants)
-4. Character description — list each character separately, in order of visual prominence. For each: name, current physical state, clothing. If a character appears in the panel but has no `ref_id`, note them anyway in the prompt — the runner will flag the missing ref. **For FMG characters**, use the body-region language from `references/fmg-anatomy-guide.md` — it provides DO/DON'T rules, anti-pattern avoidance (drumstick forearms, blocky abs, reverse-triangle silhouettes), and a full template fragment for high muscle sizes. At minimum, every FMG character description should specify: hourglass silhouette, small head/hands/feet, round (not teardrop) breasts, pillowy (not blocky) abs, and asymmetric leg contours.
+4. Character description — list each character separately, in order of visual prominence. For each: name, current physical state, clothing. If a character appears in the panel but has no `ref_id`, note them anyway in the prompt — the runner will flag the missing ref. **For FMG characters**, use the body-region language from `references/fmg-anatomy-guide.md` — it provides DO/DON'T rules, anti-pattern avoidance (drumstick forearms, blocky abs, reverse-triangle figures), and a full template fragment for high muscle sizes. At minimum, every FMG character description should specify: hourglass figure, small head/hands/feet, round (not teardrop) breasts, pillowy (not blocky) abs, and asymmetric leg contours.
 5. Action and emotion — describe what is physically happening, then describe every character's face in mechanical terms. Do not use emotion names alone. Specify: eyelid position, brow angle, cheek lift, mouth shape, mouth openness, and head tilt. Each character in the panel must have a distinct emotional beat — no repeated expressions, no neutral faces.
 
    Quick reference:
@@ -331,8 +331,8 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
    **Recommended `extra_lines` per type** — these aren't rules from the table above; they're project-specific addendums the briefing appends to the rules block:
 
    - **FMG**: usually none. The rule table itself is FMG-tuned.
-   - **BE**: monotonic breast size, hourglass silhouette, round shape, seam-tearing clothing. See `production-briefing/SKILL.md` for the canonical BE extras.
-   - **Glute**: monotonic glute size, hourglass silhouette, rounded shape, balanced thighs, seam-tearing wardrobe.
+   - **BE**: monotonic breast size, hourglass figure, round shape, seam-tearing clothing. See `production-briefing/SKILL.md` for the canonical BE extras.
+   - **Glute**: monotonic glute size, hourglass figure, rounded shape, balanced thighs, seam-tearing wardrobe.
    - **MMG**: male anatomy throughout, pectorals (not breasts), V-taper, masculine facial structure, body-hair continuity.
    - **Mixed**: which arcs apply to which characters, growth order, current-active-stage lineup convention.
 
@@ -368,9 +368,9 @@ Always also pass the canonical portrait/face ref alongside the prior-panel ref. 
 
 The prior-panel ref carries forward two things:
 - **State** — body size, clothing damage, hair, aura intensity. Durable, what you want to preserve.
-- **View/silhouette** — camera angle, framing, body orientation. Situational, only useful if the new panel shares it.
+- **View / body framing** — camera angle, framing, body orientation. Situational, only useful if the new panel shares it.
 
-If the new panel is a *different view* than the prior, the prior-panel ref's silhouette becomes a liability — the model partially obeys the silhouette and you get a malformed composite. Front view trying to inherit a back view's outline. Face ECU trying to derive eyes from a panel where the face was off-screen. The result is worse than not chaining at all.
+If the new panel is a *different view* than the prior, the prior-panel ref's body framing becomes a liability — the model partially obeys the prior framing and you get a malformed composite. Front view trying to inherit a back view's body. Face ECU trying to derive eyes from a panel where the face was off-screen. The result is worse than not chaining at all.
 
 **Rule**: tag each panel with a view category. When chaining, scan back through prior panels and pick the most recent one whose view is *compatible*. That's your state anchor — not blindly N−1.
 
@@ -400,13 +400,13 @@ If the new panel is a *different view* than the prior, the prior-panel ref's sil
 |---|---|---|---|
 | T1 | front-full | base refs | base refs |
 | T2 | ecu-region (arm) | T1 ✓ | T1 ✓ (T1 shows the arm clearly) |
-| T3 | front-full | T2 ✗ (arm only — body silhouette absent) | **T1** + portrait + verbal state from T2 |
+| T3 | front-full | T2 ✗ (arm only — body view absent) | **T1** + portrait + verbal state from T2 |
 | T4 | front-full | T3 ✓ | T3 ✓ |
 | T5 | front-full | T4 ✓ | T4 ✓ |
 | T6 | low-angle-front | T5 ✓ | T5 ✓ |
 | T7 | back-full | T6 ✗ (front view) | **canonical back ref** + portrait + verbal state from T6 |
 | T8 | ecu-face | T7 ✗ (face not visible from behind) | **portrait** + verbal state from T6 (last front-facing) |
-| T9 | front-full | T8 ✗ (face only — body silhouette absent) | **T6** (last front-full body) + portrait + verbal state from T7-T8 |
+| T9 | front-full | T8 ✗ (face only — body view absent) | **T6** (last front-full body) + portrait + verbal state from T7-T8 |
 | T10 | splash (front) | T9 ✓ | T9 ✓ |
 
 The naive chain produces visible drift at T3, T7, T8, T9. The view-aware chain preserves continuity throughout.
@@ -555,7 +555,7 @@ my-comic-project/
 6. **Mandatory rules block in every prompt** — copy from prompt-templates.md. Omitting it produces red skin, repeated dialogue, wrong bubble placement.
 7. **Use the muscle size lineup image for body size control** — never rely on text descriptions alone. Attach `assets/muscle-size-lineup.png` (sizes 1–6) as a reference and specify the size number in the prompt. For hypermuscular arcs reaching size 7+, switch to `assets/muscle-size-lineup-4-9.png`. Never attach both lineups to the same panel — the overlapping 4/5/6 numbering confuses the model. The model matches against the numbered figure visually. *(Flow mechanic: upload the lineup PNG once via `+` → "Upload image" — it then appears in the asset picker for re-use across all subsequent stages.)* See "Muscle Size Control" section above.
 8. **Chain progressive sequences sequentially — never parallelize a transformation, growth, dressing, or charge-up arc.** Each panel must reference a prior panel's job ID (plus the canonical face anchor). Parallel generation with only the baseline ref produces non-monotonic state: garment tears revert, body size shrinks back, hair re-pins. Wait for each panel to complete before submitting the next. *(Flow mechanic: 3-dots → "Add to Prompt" on the prior gen + `+` picker for the face card. Submit, wait for the result, then attach the new prior gen for the next stage.)* See the "Transformation scenes" paragraph in Phase 3 above and `references/lessons-learned.md` for the full mechanism and a worked example.
-9. **Chain view-aware, not blindly to N−1.** When the new panel's view differs from the prior panel's (e.g., front view following a back view, or a face ECU following a back-body shot), the prior-panel ref's silhouette becomes a liability — the model partially obeys it and you get a malformed composite. Tag each panel with a view category, walk backwards from the current panel, and pick the most recent panel whose view is in the *compatibility set* for the target view. If none qualifies, fall back to the canonical view-matched character ref + verbal state carry-forward in the prompt. See "View-aware chaining" in Phase 3 for the compatibility table and decision algorithm. *(Flow mechanic: see `flow-workflow.md` "View-Aware Chaining in Flow" — same logic, walked manually through the gallery via 3-dots / `+` picker.)*
+9. **Chain view-aware, not blindly to N−1.** When the new panel's view differs from the prior panel's (e.g., front view following a back view, or a face ECU following a back-body shot), the prior-panel ref's body framing becomes a liability — the model partially obeys it and you get a malformed composite. Tag each panel with a view category, walk backwards from the current panel, and pick the most recent panel whose view is in the *compatibility set* for the target view. If none qualifies, fall back to the canonical view-matched character ref + verbal state carry-forward in the prompt. See "View-aware chaining" in Phase 3 for the compatibility table and decision algorithm. *(Flow mechanic: see `flow-workflow.md` "View-Aware Chaining in Flow" — same logic, walked manually through the gallery via 3-dots / `+` picker.)*
 
 ### Content policy *(Flow-specific addition)*
 

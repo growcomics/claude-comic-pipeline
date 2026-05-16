@@ -6,18 +6,18 @@ The only multi-slot rule in the registry. L11 contributes at two slots:
     tier >= 2. (Tier 1 is the realistic baseline where the anchor would
     actively hurt.)
 
-  - `8_tier_silhouette` — tier-specific block whose content depends on
+  - `8_tier_build` — tier-specific block whose content depends on
     whether the lineup ref was attached, whether this is a stage-change
     panel, or whether it's an unchanged carry-forward.
 
 Phase 3b ships as FMG-only (`applicable_transformations=("fmg",)`). A
 future MMG / BE / glute variant lives in a sibling module
-(`l11_mmg_silhouette.py` etc) — DON'T add genre-conditionals here.
+(`l11_mmg_muscular_build.py` etc) — DON'T add genre-conditionals here.
 
 See:
   - skills/comic-production/references/lessons-learned.md § L11
   - skills/comic-production/references/the-rules-explained.md § L11
-  - skills/comic-production/references/peak-body-scale.md (tier silhouettes)
+  - skills/comic-production/references/peak-body-scale.md (tier muscular builds)
 """
 
 from __future__ import annotations
@@ -107,7 +107,7 @@ def _tier_is_at_least_2(tier) -> bool:
 class L11(Rule):
     id = "L11"
     title = "Cartoony FMG proportions need explicit anchoring"
-    slot = ("5_style_anchor", "8_tier_silhouette")
+    slot = ("5_style_anchor", "8_tier_build")
     severity = "hard"
     applicable_transformations = ("fmg",)
     vision_rubric = (
@@ -149,7 +149,7 @@ class L11(Rule):
                 return L11_STYLE_ANCHOR
             return None
 
-        if slot == "8_tier_silhouette":
+        if slot == "8_tier_build":
             build = _build_desc(tier)
             lineup_attached = ctx.get("lineup_attached", False)
             stage_change = ctx.get("stage_change", False)
@@ -228,14 +228,14 @@ class L11(Rule):
                 reason=f"tier={tier} < 2 — style anchor would hurt at realistic baseline",
             )
 
-        if slot == "8_tier_silhouette":
+        if slot == "8_tier_build":
             lineup_attached = ctx.get("lineup_attached", False)
             stage_change = ctx.get("stage_change", False)
             if lineup_attached:
                 return Verification(
                     status=STATUS_PASS,
                     reason=(f"tier={tier}, lineup attached at generation — "
-                            "slot 8_tier_silhouette (lineup-attached path)"),
+                            "slot 8_tier_build (lineup-attached path)"),
                 )
             if stage_change:
                 return Verification(
@@ -279,7 +279,7 @@ class L11(Rule):
                 "rule_id": self.id,
                 "strengthening": (
                     "attach the muscle-size lineup PNG as a reference at "
-                    "generation time; verbal-only silhouette directives are "
+                    "generation time; verbal-only muscular-build directives are "
                     "significantly less reliable per L11"
                 ),
             }

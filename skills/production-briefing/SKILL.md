@@ -52,22 +52,22 @@ The 10 mandatory rules (from `comic-production/SKILL.md`):
 
 **BE default**: rules 2, 4, 5, 6, 7, 8, 9 ON. Rules 1, 3, 10 OFF (they're FMG-specific). Recommended `extra_lines`:
 - "Breast size monotonic across panels — once larger, never smaller, no reversion across the full chain."
-- "Hourglass silhouette maintained throughout — small waist, broad hips, regardless of breast tier."
+- "Hourglass figure maintained throughout — small waist, broad hips, regardless of breast tier."
 - "Cleavage visible at tier 2+ — neckline appropriate to the scene, but cleavage always readable."
 - "Round (not teardrop) breast shape; symmetric; no veining unless explicitly noted at tier 5+."
 - "When a clothing item strains or splits, it splits along the seam, never magically vanishes."
 
 **Glute default**: rules 2, 4, 5, 6, 7, 8, 9 ON. Rules 1, 3, 10 OFF. Recommended `extra_lines`:
 - "Glute size and hip-to-waist ratio monotonic across panels — once curvier, never narrower."
-- "Hourglass silhouette emphasized: narrow waist, broad hips, prominent rear regardless of camera angle."
+- "Hourglass figure emphasized: narrow waist, broad hips, prominent rear regardless of camera angle."
 - "Glute shape rounded and full (not flat, not square); side-profile shows clear curve."
 - "Thigh-to-glute proportion balanced — thighs scale with glutes, not dramatically thinner."
 - "Wardrobe stretches at the seat and waistband first; tearing always along the seam."
 
 **MMG default**: rules 1, 2, 4, 5, 6, 7, 8, 9, 10 ON. Rule 3 OFF (no breasts on male characters). Recommended `extra_lines`:
-- "Male anatomy throughout — never feminize the silhouette during growth. No breasts, no hourglass waist."
+- "Male anatomy throughout — never feminize the figure during growth. No breasts, no hourglass waist."
 - "Pectoral muscles, not chest curves — pec separation visible, square chest geometry, clear sternum line."
-- "Broad shoulders, narrow hips — V-taper silhouette emphasized at tier 3+."
+- "Broad shoulders, narrow hips — V-taper build emphasized at tier 3+."
 - "Facial structure stays masculine through growth (strong jaw, brow ridge); no softening."
 - "Body hair appropriate to the character — once established, maintained across the chain."
 

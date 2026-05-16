@@ -20,7 +20,7 @@ All active L-rules are migrated to per-rule modules. Every rule contribution to 
 | `l15_glamour.py` | L15 — Female beauty anchor | phase 3a | Slot `3_subject_identity`. `applicable_transformations=("fmg",)`. |
 | `l17_canonical.py` | L17 — Canonical character | phase 3a | Slot `3_subject_identity`. Reads `cast[].canonical_anchor`. |
 | `female_anatomy.py` | Female anatomy anchor (May-14 finding) | phase 3a | Slot `4_subject_state`. `applicable_transformations=("fmg",)`. Body-region ECU at tier≥2. |
-| `l11_silhouette.py` | L11 — Cartoony FMG anchoring | phase 3b | **Only multi-slot rule.** Slots `5_style_anchor` + `8_tier_silhouette`. `applicable_transformations=("fmg",)`. Tier-specific block depends on `lineup_attached` / `stage_change`. |
+| `l11_muscular_build.py` | L11 — Cartoony FMG anchoring | phase 3b (file renamed 2026-05-16 silhouette purge) | **Only multi-slot rule.** Slots `5_style_anchor` + `8_tier_build`. `applicable_transformations=("fmg",)`. Tier-specific block depends on `lineup_attached` / `stage_change`. Module + slot were originally named with "silhouette" — purged 2026-05-16 because the word was a load-bearing miscue (model interpreted as outline-only, skipped muscle volume). Now uses "muscular build" / "3D muscle volume" vocabulary throughout. |
 
 Multi-slot rules: the helper `next_panel._apply_rule_at_slot` injects `_active_slot` into ctx so `verify_pre_render` can branch per slot. Compose-side ordering: `compose_prompt` issues two explicit `_apply_rule_at_slot` calls for L11 (one per slot) at the right places in the function.
 
