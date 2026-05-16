@@ -29,6 +29,16 @@ class L18(Rule):
     slot = "13_anatomy_guardrail"
     severity = "soft"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel and check the anatomy. Count: how "
+        "many arms? How many legs? How many heads? Are torso, hips, and feet "
+        "facing the same direction (or is there an impossible twist)? Do "
+        "limbs attach naturally to the body? If the chest is visible, are "
+        "both shoulders visible? If legs are visible, are both hips visible? "
+        "PASS if anatomy is coherent (correct limb count, consistent facing, "
+        "natural attachment). FAIL with a specific description if any of "
+        "these check fail."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         return True  # universal soft guardrail

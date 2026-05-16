@@ -25,6 +25,17 @@ class L23(Rule):
     slot = "9_environment"
     severity = "soft"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel. The shotlist declares a specific "
+        "location (e.g. 'training dojo with wooden floorboards, paper "
+        "sliding doors, calligraphy scrolls'). Does the rendered background "
+        "actually depict the named location with the named elements? Or did "
+        "the background collapse to a grey/blurry void, or render a generic "
+        "interior unrelated to the named location? PASS if the named "
+        "location elements are visible in the background. FAIL with a "
+        "description if the background is a void or invented a different "
+        "setting."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         env_dropped = ctx.get("env_dropped", False)

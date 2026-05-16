@@ -22,6 +22,17 @@ class L22(Rule):
     slot = "4_subject_state"
     severity = "soft"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel and check the character's hair. "
+        "The shotlist explicitly declares panel.hair_state (e.g. 'twin buns "
+        "with red ribbons'). Does the rendered hair match the declared state "
+        "exactly? Compare: number of buns (twin vs single), accessory "
+        "presence + color (red ribbons vs grey vs absent), overall length "
+        "and style. PASS if the rendered hair matches the declared state. "
+        "FAIL with a description of the drift (e.g. 'rendered as single bun "
+        "where shotlist declares twin', 'ribbons rendered grey instead of "
+        "red')."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         hs = panel.get("hair_state")

@@ -43,6 +43,17 @@ class L20(Rule):
     slot = "2_camera_strengthening"
     severity = "hard"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel. The shotlist declares a body-"
+        "region transformation beat (e.g. chest / arms / abs / hips) which "
+        "requires an extreme close-up where the named region fills 70%+ of "
+        "the frame and the head and feet are cropped OUT. Does the rendered "
+        "framing match? Estimate what fraction of the frame is occupied by "
+        "the body region. Are the head and feet cropped out? Is this an "
+        "ECU/macro framing, or did the camera pull back to medium/full body? "
+        "PASS if the region dominates 70%+ and the head/feet are cropped. "
+        "FAIL with the actual estimated region-fill percentage if too wide."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         beat = panel.get("transformation_beat")

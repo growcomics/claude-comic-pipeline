@@ -10,6 +10,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (phases 5/6/7 of checks-and-balances — vision rubrics + retry + discovery)
+
+### Added
+
+- **Phase 5 (vision rubrics) landed.** Every rule module that has a meaningful post-render visual check now declares a `vision_rubric` class attribute — a short prompt designed to be sent to a fresh vision-capable subagent alongside the rendered panel image and the canonical refs. 10 rules ship rubrics: L10 (refs vs rendered identity), L11 (silhouette vs lineup figure), L15 (vogue-cover face quality), L17 (canonical character fidelity), L18 (anatomy coherence + limb count), L20 (region-fill 70%+ vs declared body-region beat), L21 (no ref-as-prop renderings), L22 (hair state matches declared), L23 (background renders the named location vs grey void), L24 (no anachronistic accessories), female_anatomy (body reads as female on hyper-muscular ECUs). L23 and L24 also get rubrics even though their primary verification is at compose time — the rubric covers the post-render confirmation. `Rule.vision_rubric` defaults to None in the base class for rules that don't need vision verification (e.g. L1.5, L12, L13, L28 — all deterministic at planning time).
+- **Phase 6 (retry CLI) landed.** New `skills/comic-production/scripts/retry_panel.py <project> <panel_id>`. Reads the panel's `checks.json`, finds rules with pre_render or post_render status=fail, dispatches each to its module's `retry_strategy(panel, ctx, failure)` and prints the recommended action. Markdown by default, `--json` for machine consumption, `--rule LXX` to scope to one rule. Rules without a registry module (L1.5, L20_chapter — both still in build_plan) report `kind=rule_not_in_registry` cleanly. Does NOT auto-execute regenerations; that's the runner's job in phase 8+.
+- **Phase 7 (defects discovery CLI) landed.** New `skills/comic-production/scripts/discover_defects.py <project>`. Reads `<project>/defects.jsonl` and emits a summary report. `--by rule` (default) groups failures by rule_id and lists the top 3 reason texts per top-3 rule. `--by panel` groups by panel. `--by ts` groups by day for "did a recent rule change correlate with more failures" timeline tracking. `--by rule_verification` splits pre_render vs post_render failures per rule. `--rule LXX` drills into one rule and lists every defect row for it. `--json` for machine output. Smoke-tested on `comic-april-mutagen-v2`: 21 total defect rows, L1.5 (18×) and L20_chapter (3×) lead the chapter; top L1.5 reason is "no view-compatible prior in accepted_history for target view 'ecu-region'" (7×).
+- **Phase 7 (standalone verify-only CLI) landed.** New `skills/comic-production/scripts/verify_panel.py <project> <panel_id>`. Re-runs build_plan for the specific panel (using `target_panel_id`), writes the ledger via `write_checks_ledger`, appends defects, and prints the trace summary + the per-rule vision rubrics (with `--vision-rubrics`). Used for retroactive auditing when a rule's verification changes, or as the upstream feed to a vision-audit orchestrator (see phase 8: the orchestrator agent uses these rubrics to dispatch one fresh subagent per applicable vision-bearing rule, sending it the rendered image + canonical refs, and writes the result back into `post_render.status / .reason`).
+
+### Notes
+
+- **Phase 4 (rules_audit.py migration) deferred.** The current `rules_audit.py` already produces every gate finding the pipeline needs (camera variety, distance bias, transformation beats, reference completeness, costume damage non-regression). Phase 4 was the cosmetic refactor that turns it into a registry walker; the work is logged as a follow-up commit and doesn't block phase 5/6/7 or the first end-to-end comic test.
+- **Vision audit dispatch is orchestrator-side, not script-side.** The design doc calls for "a fresh subagent per panel per rule with a single-purpose rubric." That model is best executed by an orchestrator agent (Claude Code, autopilot runner, or a future GUI). Phase 5 ships the rubrics and the verify_panel.py surface; the actual subagent dispatch happens during the comic run (see next entry).
+
+---
+
 ## 2026-05-16 (phase 3b of checks-and-balances — all rules migrated)
 
 ### Added

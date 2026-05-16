@@ -42,6 +42,18 @@ class L17(Rule):
     slot = "3_subject_identity"
     severity = "hard"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel. The panel features an IP / "
+        "canonical character (e.g. Chun Li from Street Fighter, Supergirl, "
+        "April O'Neil, Lex Luthor). Compare the rendered character to the "
+        "canonical published version: are the load-bearing canonical details "
+        "correct (Chun Li: ox-horn hair buns + blue cheongsam + white spiked "
+        "wristbands; Supergirl: blue suit + red cape + S-shield)? Or did the "
+        "model drift toward a generic AI interpretation (loose flowing hair, "
+        "wrong garment, missing accessories)? PASS if the character is "
+        "recognizable as the canonical version. FAIL with a description of "
+        "the specific canon details that drifted."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         cast_lookup = ctx.get("cast_lookup") or {}

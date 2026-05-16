@@ -63,6 +63,15 @@ class L24(Rule):
     slot = "4_subject_state"
     severity = "soft"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel and check the character's wrists, "
+        "neck, ears, and fingers (whichever are visible in the frame). Are "
+        "there any anachronistic accessories — wristwatches, smartwatches, "
+        "bracelets, rings, earrings, necklaces, dark studded cuffs, leather "
+        "cuffs, tactical gloves — that the canonical character should NOT be "
+        "wearing? PASS if no anachronistic accessories appear. FAIL with a "
+        "description of the substitute and the body part it appeared on."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         camera = ctx.get("camera") or ""

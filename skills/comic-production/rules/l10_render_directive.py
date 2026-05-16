@@ -36,6 +36,17 @@ class L10(Rule):
     slot = "11_render_directive"
     severity = "hard"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel and compare it to the attached "
+        "reference images. Does the rendered character match the face card "
+        "(same face, same canonical features)? Does the costume match the "
+        "body baseline (same garment, same colors, same accessories)? If a "
+        "location ref is attached, does the rendered background match it "
+        "(same architecture, same lighting baseline)? PASS if visual "
+        "identity matches the refs. FAIL with a specific description of the "
+        "drift (e.g. 'face is different from face card', 'costume color "
+        "shifted from red to maroon', 'background invented a different room')."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         return True  # render directive always emitted

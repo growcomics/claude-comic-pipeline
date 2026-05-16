@@ -31,6 +31,17 @@ class L21(Rule):
     slot = "12_ref_safety"
     severity = "soft"
     applicable_transformations = ("*",)
+    vision_rubric = (
+        "Look at this rendered comic panel. Does the panel contain any element "
+        "that appears to be a reference image rendered as a physical scene "
+        "object — a tiny inset photo, a badge, a poster on a wall, a "
+        "watermark-style figure number or label floating in the corner, a "
+        "patch with a face on it, or any visible '1' / '2' / 'figure N' text "
+        "where there shouldn't be one? Be specific about what you spot and "
+        "where in the frame (corner, sleeve, wall, etc). PASS if no such "
+        "element appears; FAIL with a description of the substitute and its "
+        "location if one does."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         """Fire whenever at least one ref is attached to the panel."""

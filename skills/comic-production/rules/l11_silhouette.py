@@ -79,6 +79,21 @@ class L11(Rule):
     slot = ("5_style_anchor", "8_tier_silhouette")
     severity = "hard"
     applicable_transformations = ("fmg",)
+    vision_rubric = (
+        "Look at this rendered comic panel. The panel's shotlist declares a "
+        "specific muscle_size_tier and the attached muscle-size lineup PNG "
+        "shows the target silhouette dimensions for that tier. Does the "
+        "rendered character's silhouette match the lineup figure for the "
+        "declared tier? Compare: shoulder width (multiple of head width), "
+        "bicep mass, chest depth, abdominal definition, quad mass, frame "
+        "width. Does the rendered body look 'cartoony hyper-FMG' (the tier "
+        "lineup target) or did it regress to realistic fitness modelling "
+        "(athletic but not exaggerated)? PASS if the silhouette matches the "
+        "lineup figure proportions. FAIL with a specific description of the "
+        "regression (e.g. 'rendered as athletic — shoulders too narrow, "
+        "biceps undersized for tier 4'). Critical at tier 4 (the friction "
+        "zone)."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         # L11 applies when tier is set. Per-slot specifics decide what

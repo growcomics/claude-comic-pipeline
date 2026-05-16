@@ -59,6 +59,15 @@ class L15(Rule):
     slot = "3_subject_identity"
     severity = "soft"
     applicable_transformations = ("fmg",)
+    vision_rubric = (
+        "Look at this rendered comic panel where a female character is in "
+        "frame. Does the face read as vogue-cover / magazine-cover quality "
+        "— sculpted cheekbones, refined jawline, expressive eyes with depth, "
+        "striking beauty? Or does it look like a generic AI-generated "
+        "face (plain features, flat eyes, average-looking)? PASS if the face "
+        "reads as 'commands attention, magazine-cover finish'. FAIL with a "
+        "description if the face reads as generic/plain/AI-flat."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         cast_lookup = ctx.get("cast_lookup") or {}

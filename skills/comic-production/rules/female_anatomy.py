@@ -75,6 +75,18 @@ class FemaleAnatomy(Rule):
     slot = "4_subject_state"
     severity = "hard"
     applicable_transformations = ("fmg",)
+    vision_rubric = (
+        "Look at this rendered comic panel — it's a body-region ECU (e.g. "
+        "chest, abs, arms) at high muscle tier (tier >= 2) where the "
+        "character should be unambiguously female despite the hyper-developed "
+        "muscle. Does the rendered body read as FEMALE? Check: visible "
+        "breast contour (when chest is in or near frame), feminine collarbone, "
+        "feminine waist taper above the hips, smaller hands and wrists than "
+        "a male equivalent, soft feminine bone structure. Or did the body "
+        "regress to male anatomy — square male pectorals, flat-plane upper "
+        "chest, masculine collarbone? PASS if the body unambiguously reads "
+        "female. FAIL with a description if the body reads as male/masculinized."
+    )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
         camera = ctx.get("camera") or ""

@@ -67,6 +67,13 @@ class Rule:
       applicable_transformations  — tuple of transformation types this rule
                                     fires on. ("*",) = all. ("fmg",) =
                                     FMG-only.
+      vision_rubric               — None when the rule has no post-render
+                                    visual check, OR a short rubric string
+                                    that a vision subagent uses to verify
+                                    the rendered panel. The verify-panel-
+                                    vision CLI dispatches per-rule subagents
+                                    with this rubric + the accepted variant
+                                    image + the canonical refs.
 
     Methods (override in subclass):
       should_apply           — does this rule fire on this panel?
@@ -88,6 +95,7 @@ class Rule:
     slot: str | tuple[str, ...] = ""
     severity: str = "hard"
     applicable_transformations: tuple[str, ...] = ("*",)
+    vision_rubric: str | None = None
 
     # ---- composition ------------------------------------------------------
 
