@@ -10,6 +10,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16
+
+### Added
+
+- **Checks-and-balances rule architecture design doc landed.** Full design at [`docs/checks-and-balances-design.md`](docs/checks-and-balances-design.md). Companion blog article with 7 infographics at [`docs/posts/2026-05-16-checks-and-balances.md`](docs/posts/2026-05-16-checks-and-balances.md). Diagnosis: every L-rule's enforcement lives inside `compose_prompt()` in `next_panel.py` (290+ lines, no per-rule attribution after composition) and `rules_audit.py` (flat findings list, never sees rendered pixels). No per-panel per-rule ledger anywhere. No retry-per-rule. Result: individual rules silently get ignored, the agent driving generation can't reliably know which rules fired, the user can't see per-panel pass/fail markers, and there's no clean retry mechanism. Proposed architecture: (1) rule-as-module refactor — each L-rule becomes a discrete module with `id` / `title` / `slot` / `applicable_transformations` / `should_apply` / `compose_contribution` / `verify_pre_render` / `verify_post_render` / `retry_strategy`; a registry walks 16 named composition slots and concatenates per-slot contributions. (2) Per-panel `checks.json` ledger written alongside `v*.png` variants — tracks every rule (applied, skipped, n/a, refused) including `compose_contribution` text and both verification statuses. Tracks only the accepted variant. (3) Three verification classes: pre-render deterministic (today's `rules_audit.py`), post-render deterministic (state-file inspection — L1 prior-ref attached, L9 job_id captured), post-render vision-based (fresh subagent per rule, single-purpose rubric — L11, L17, L20, L18, L21, L22, L25). (4) Per-rule `retry_strategy()` with six kinds: auto_resubmit_with_stronger_contribution / auto_resubmit_with_corrected_refs / auto_resubmit_with_different_face_card / shotlist_edit_required / ref_generation_required / accept_and_log. (5) Project-level `defects.jsonl` append-only log for pattern mining across runs ("which rules fail most this chapter," "which rules fail across multiple chapters," "did a recent rule change correlate with more failures"). (6) `verify_panel.py` CLI for retroactive re-verification of accepted panels without regeneration. Genre/niche extensibility: every rule declares `applicable_transformations`, defaults to FMG; adding BE / glute / MMG / mixed later = new modules, not surgery on existing ones. Ratified answers to 6 open questions captured in the design doc § 6. Migration plan: 8 phases, golden-output tests every phase, comic-test gates at end of phases 1, 3, 5. v1 = phases 1+2 (ledger emit-only + L21 extracted as the first rule module). GUI deferred — the per-panel ledger schema is the design contract.
+- **7 new graphics** under `docs/posts/assets/2026-05-16-checks-and-balances/` (gpt_image_2 low quality, 1k): `00-cover.png` (balance scale title card), `01-monolith-vs-modules.png` (before/after architecture), `02-ledger-schema.png` (checks.json visualization), `03-verification-classes.png` (three columns: pre-render deterministic / post-render deterministic / vision-based), `04-retry-strategies.png` (6-branch decision tree), `05-migration-phases.png` (8-phase timeline with test points), `06-defects-discovery.png` (jsonl → discovery layer).
+
+### Notes
+
+- No code shipped this entry — design + docs only. Implementation begins with phase 1 (`write_checks_ledger` as a side output of the current `compose_prompt`) pending sign-off.
+
+---
+
 ## v5 — 2026-05-14 (evening sync)
 
 This release lands the autopilot mode, the production-briefing skill, the runner infrastructure, and a Windows-compat fix. Backward compatible: existing modes (`status`, `auto`, named stage) work exactly as before. FMG-only behavior is preserved when no `production-config.json` exists.
