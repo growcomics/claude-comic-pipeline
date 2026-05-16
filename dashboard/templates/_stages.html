@@ -1,0 +1,23 @@
+<div class="widget-head">
+  <h2>Stages</h2>
+  <span class="stamp muted">{{ now }}</span>
+</div>
+<table class="stages">
+  <thead>
+    <tr><th>#</th><th>Stage</th><th>Status</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    {% for s in stages %}
+    <tr class="stage-row state-{{ s.status }}">
+      <td class="num">{{ loop.index }}</td>
+      <td class="stage-name">{{ s.name }}</td>
+      <td class="stage-status">
+        <span class="badge badge-{{ s.status }}">
+          {{ icons.get(s.status, '·') }} {{ s.status.replace('_', ' ') }}
+        </span>
+      </td>
+      <td class="stage-notes muted">{{ s.notes }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

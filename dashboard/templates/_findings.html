@@ -1,0 +1,47 @@
+<div class="widget-head">
+  <h2>Rules audit
+    <span class="muted">·
+      <span class="badge badge-hard">{{ grouped.counts.get('hard', 0) }} hard</span>
+      <span class="badge badge-soft">{{ grouped.counts.get('soft', 0) }} soft</span>
+      <span class="badge badge-info">{{ grouped.counts.get('info', 0) }} info</span>
+    </span>
+  </h2>
+  <span class="stamp muted">{{ now }}</span>
+</div>
+
+{% if grouped.error %}
+  <p class="error">rules_audit error: {{ grouped.error }}</p>
+{% endif %}
+
+{% if grouped.total == 0 and not grouped.error %}
+  <p class="empty">✓ Clean. No rules-audit findings.</p>
+{% else %}
+  {% for sev, label in [('hard', '🛑 Hard'), ('soft', '⚠ Soft'), ('info', 'ℹ Info')] %}
+    {% set items = grouped.groups.get(sev, []) %}
+    {% if items %}
+      <section class="findings-group findings-{{ sev }}">
+        <h3>{{ label }} <span class="muted">· {{ items|length }}</span></h3>
+        <ul>
+          {% for f in items %}
+            <li>
+              <details>
+                <summary>
+                  <code class="loc">
+                    {%- if f.page is not none -%}p{{ '%02d'|format(f.page) }}{%- endif -%}
+                    {%- if f.panel_id %} · {{ f.panel_id }}{%- endif -%}
+                    {%- if f.page is none and not f.panel_id -%}project{%- endif -%}
+                  </code>
+                  <span class="category">{{ f.category }}</span>
+                  {{ f.message }}
+                </summary>
+                {% if f.suggestion %}
+                  <p class="suggestion"><strong>fix:</strong> {{ f.suggestion }}</p>
+                {% endif %}
+              </details>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  {% endfor %}
+{% endif %}
