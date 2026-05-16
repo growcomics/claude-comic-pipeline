@@ -226,9 +226,70 @@ Specific calibration takeaways for Test 3+:
 - **Default `mandatory_rules.allow_baked_lettering = true` for any test comic.** The clean-panel default exists for vector-overlay workflows; test runs aren't that.
 - **The L19 vocabulary verified to work on nano_banana_flash.** Going forward, no excuse for un-lettered panels.
 
-### User review #2+ (pending)
+### User review #2 — the "silhouette" vocabulary diagnosis (2026-05-16)
 
-*Still reserved for additional review notes — silhouette priority, anything I missed on the canon details, what to prioritize for Test 3, etc.*
+> *"tell me about the silhouette — from what I know, there was a reference chart for sizes that has muscle that are 3d, of a certain shape, not a silhouette"*
+
+This is the kind of catch the running thread exists for. **The lineup isn't a silhouette — it's a 3D body chart with six rendered figures showing progressive muscle development.** Visible deltoids, biceps, chest depth, abdominal definition, frame width — all explicit on the reference.
+
+`nano_banana_flash` reading the prompt *"render the silhouette to match figure N"* interprets it as *"match the outline shape, ignore the muscle volume"*. The model has gotten the outline width roughly right (broader shoulders, slightly wider waist) — and skipped the actual muscle MASS the reference is showing. That's why every L11 fail in Test 1 and Test 2 read as *"athletic bodybuilder at wider proportions"* instead of cartoony FMG: **the word "silhouette" was telling the model to match the silhouette, not the musculature.**
+
+171 occurrences of "silhouette" across the pipeline. The word was load-bearing in the wrong direction across the whole architecture.
+
+**The fix:**
+
+1. **L11 module vocabulary updated.** [`rules/l11_silhouette.py`](../../skills/comic-production/rules/l11_silhouette.py):
+   - Per-tier descriptors rewritten with **muscle-mass and definition** language (delts, biceps, chest depth, striation, vascularity, abdominal definition) instead of "silhouette dimensions."
+   - Style anchor reframed: *"the lineup attached is a 3D body chart with visible musculature; the storytelling element is the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads), not the outline width."*
+   - Tier-silhouette block (slot 8) opens with an explicit re-framing: *"The attached muscle-size lineup is a 3D BODY CHART with six figures showing progressive muscle development … It is a MUSCULAR-BUILD reference ONLY (NOT an outline reference)."*
+   - Closing line escalates: *"NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale — cartoony FMG with HEAVY 3D muscle mass."*
+   - Vision rubric rewritten to ask the verifier to compare **3D muscle volume**, not outline width. New language: *"a fitness-model body at wider proportions is NOT a tier 5/6 match — the muscle VOLUME must actually be heavy and defined."*
+   - Retry strategy escalation updated to escalate muscle mass language, not silhouette language.
+
+2. **Validation: re-rendered p13 (tier 5 cowboy), p14 (tier 6 splash), p15 (tier 6 hero) with the new vocabulary** while keeping the L19 baked lettering from yesterday's fix.
+
+### Before / after
+
+Top row = v1 (legacy "silhouette" vocabulary, the originals from the Test 2 first pass). Bottom row = v3 (new "muscular build" vocabulary, same panels, same lineup attached).
+
+![Silhouette vs muscular-build vocabulary — 3 worst L11 fails re-rendered](./assets/comic-test-log/test-02-15panel/muscular-build-before-after.png)
+
+What changed in the v3 row:
+
+- **p13 (cowboy, tier 5):** v1 read as "muscular but compact" — biceps mid-range, chest defined but thin, deltoids broader than baseline but not heavy. v3 shows visibly **heavier deltoid mass with clear separation from the bicep**, bicep volume thicker, chest depth more pronounced through the cheongsam, the body reads as a tier-5 muscular build instead of a fitness model in a tight dress. Speech bubble (L19) still renders cleanly alongside the heavier build — the two anchors don't conflict.
+- **p14 (splash, tier 6):** the biggest delta. v1 was the worst regression — read closer to tier 3-4 fitness-bodybuilder. v3 shows **deltoid mass dwarfing the head outline, bicep volume with real peak, full chest depth, abdominal contour visible through the cheongsam**. The body now reads as a cartoony hyper-muscular figure, not a wider fitness model. This is the panel that proves the vocabulary fix works — same character, same lineup attached, same camera, only the prompt vocab changed.
+- **p15 (low-angle hero, tier 6):** v3 lands the **thick 3D muscle volume** the vocab was missing. Arms thicker, deltoids visibly heavier, chest deeper. The cheongsam now fits over a heavier body. Speech bubble (L19) intact.
+
+**Cost of the fix:** 3 generations, no NSFW retries. ~$0.75.
+
+### What this means for the architecture
+
+This is the single most useful diff the running thread has produced. **The word "silhouette" — used 171 times across the pipeline — was actively miscommunicating the lineup reference's purpose to the model.** Every L11 failure mode across Test 1 and Test 2 traces to this single vocabulary error. The fix is a one-line conceptual change ("muscular build" not "silhouette") that fans out into the L11 module's compose templates, the vision rubric, and the retry strategy.
+
+**Architectural takeaway:** Even with strict pre-render gates, lineup attachment, and aggressive negation ("NOT realistic fitness, NOT athletic"), if the load-bearing noun pointing at the reference is wrong, every downstream check inherits the misinterpretation. The architecture caught the failure mode reliably across two tests — but couldn't fix it from inside L11 because the rule itself was built around the wrong word.
+
+**Next moves (Test 3+ on this thread):**
+
+1. Propagate the vocabulary fix into `peak-body-scale.md` and `lessons-learned.md` (the two reference docs that L11 cites).
+2. Re-render the remaining L11 failures (p05 tier 2, p08 tier 3, p09 tier 4, p10 tier 4, p11 tier 4, p12 tier 5) with the new vocab to validate the diagnosis holds across the full tier range.
+3. Save the diagnosis as a feedback memory so the lesson sticks across future sessions.
+
+### Alignment diff #2 (after user review #2)
+
+| Dimension | My read (pre-review) | User's read | Diff |
+|---|---|---|---|
+| Lineup reference | "Silhouette dimensions" (outline shape) | "3D muscle chart with visible musculature" (volume + definition) | **Major architectural miss.** I called it "silhouette" 171 times across the pipeline; the user pointed out the actual nature of the chart in one sentence. The model was getting the right outline width and missing the muscle volume because the prompt language pointed at outline shape. Fix lands one-shot when the vocabulary moves from "silhouette" → "muscular build / 3D muscle volume." Verified on p13/p14/p15. |
+
+Specific calibration takeaways for Test 3+:
+
+- **Never use "silhouette" when the reference shows musculature.** The word is a load-bearing miscue.
+- **When a reference is a body chart, name it explicitly in the prompt** — *"3D body chart with visible muscle development"* — so the model knows what to compare against.
+- **Anchor on muscle MASS, DEFINITION, STRIATION, VASCULARITY** — physical properties of the rendered muscle volume — not on outline dimensions or "tier N silhouette."
+- This is the second concrete calibration delta. The thread is producing its intended signal.
+
+### User review #3+ (pending)
+
+*Continuing to reserve space. The thread accumulates each diff — over time the calibration should approach alignment with how the user actually evaluates the panels.*
 
 ---
 
