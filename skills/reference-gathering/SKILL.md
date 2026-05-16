@@ -76,7 +76,19 @@ For each character in the manifest:
      - Closing CGI anchor.
    - Generate at x4 on Flow (free), pick the best, save to the declared path. On Higgsfield: count=1, accept the result.
 
-3. **Failures**:
+3. **Each `views` entry** (per **L16** — multi-angle character reference packs):
+   - Check if the file exists. If yes, skip.
+   - Generate at the named camera angle using the body-baseline costume + the character's canonical wardrobe + the face card as a ref (for identity).
+   - Camera mapping:
+     - `3q-full` → "three-quarter view at 45 degrees, full body, 35mm equivalent, eye-level"
+     - `profile` → "pure profile view, camera perpendicular to subject's facing direction, 50mm equivalent, full body"
+     - `back-full` → "back-full view, 28mm equivalent, subject's back as the focal point, full body"
+     - `low-angle-front` → "low angle from hip height tilted up, subject towers, foreshortened legs in foreground, 24mm equivalent for slight wide-angle distortion, full body"
+     - `ecu-region` → "macro 100mm lens equivalent, hyperdetailed texture on the torso/midsection, abdomen and chest filling the frame, background completely defocused"
+   - **Lineup attached** (`lineup_required: true`) follows the same L28 rule as body-tier refs. For v1, views are baseline-tier (lineup not required). v2 may add tier-N views with lineup attached.
+   - Save to the declared path. Aspect 3:4 for body views, 1:1 for ECU-region.
+
+4. **Failures**:
    - If the model refuses (NSFW filter, content policy) on a high-tier body ref: retry with softer language. If still rejected, surface to the user — they may need to soften the project's silhouette target or accept a lower tier reference.
    - If the result looks like realistic-fitness instead of cartoony-FMG: the lineup attachment failed. Re-check that the lineup PNG was actually in the medias list at submission time. Retry with more aggressive vocabulary (per L11).
 

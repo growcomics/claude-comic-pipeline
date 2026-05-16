@@ -48,8 +48,12 @@ The lessons are in numeric order below. L-numbers are chronological (when we lea
 - [L12 — Dialogue panels need close framing](#l12--dialogue-panels-need-close-framing)
 - [L13 — Split multi-speaker beats into multiple panels](#l13--split-multi-speaker-beats-into-multiple-panels)
 - [L14 — Multi-view location references for shot-reverse-shot](#l14--multi-view-location-references-for-shot-reverse-shot)
+- [L15 — Female characters must read as beautiful](#l15--female-characters-must-read-as-beautiful)
+- [L16 — Multi-angle character reference packs](#l16--multi-angle-character-reference-packs)
+- [L17 — Known/canonical characters can't drift in appearance](#l17--knowncanonical-characters-cant-drift-in-appearance)
+- [L18 — Pose anatomy coherence](#l18--pose-anatomy-coherence)
 - [L19 — Bake lettering into the render (with anchoring on both ends)](#l19--bake-lettering-into-the-render-with-anchoring-on-both-ends)
-- [L20 — Camera distance bias for transformation comics](#l20--camera-distance-bias-for-transformation-comics)
+- [L20 — Camera distance bias for transformation comics](#l20--camera-distance-bias-for-transformation-comics) *(strengthened May 2026)*
 - [L21 — Suppress in-scene rendering of reference images](#l21--suppress-in-scene-rendering-of-reference-images)
 - [L22 — Hair state must be explicit in every face-visible panel](#l22--hair-state-must-be-explicit-in-every-face-visible-panel)
 - [L23 — Inject a verbal location anchor when the env ref is dropped](#l23--inject-a-verbal-location-anchor-when-the-env-ref-is-dropped)
@@ -58,7 +62,6 @@ The lessons are in numeric order below. L-numbers are chronological (when we lea
 - [L26 — Costume identity must be canonical across panels](#l26--costume-identity-must-be-canonical-across-panels)
 - [L27 — Skin sheen and texture continuity](#l27--skin-sheen-and-texture-continuity)
 - [L28 — Reference completeness is mandatory](#l28--reference-completeness-is-mandatory)
-- [Lessons proposed but not yet enforced (L15–L18)](#lessons-proposed-but-not-yet-enforced)
 
 ---
 
@@ -203,6 +206,63 @@ It breaks for dialogue scenes that need shot-reverse-shot — facing one charact
 
 ---
 
+## L15 — Female characters must read as beautiful
+
+![Default plain face vs glamour-anchored vogue-cover face — same character, very different result](./the-rules-explained-graphics/15-L15-female-beauty.png)
+
+Female cast members render at "default attractiveness" by default — pleasant but unremarkable. Average faces, flat eyes, unsculpted features. The character reads as "AI-generated woman" rather than "the kind of face that commands attention." Caught on the Supergirl issue #1 face card v1 (which we re-rolled with vogue-cover language and got dramatically better results — that re-roll prompt is the canonical glamour-anchor vocabulary).
+
+The fix is a mandatory glamour anchor on every prompt where a female cast member is the focal subject. Required vocabulary: vogue-cover face quality, sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, polished glamour-photography finish, magazine-cover quality, strikingly beautiful.
+
+Enforced by `next_panel.py` `_female_beauty_anchor_line()` which auto-injects the anchor when any cast member with `sex: "f"` or `pronoun: "she/her"` is in the panel. Suppressible per character via `cast[].glamour_anchor: false` when "plain" or "average-looking" is an intentional story choice.
+
+---
+
+## L16 — Multi-angle character reference packs
+
+![Six panels of the same character at different angles: front, 3q, profile, back, low-angle, ECU-region](./the-rules-explained-graphics/16-L16-multi-angle-ref-pack.png)
+
+A face card and one body baseline isn't enough. Costume details drift between panels because no ref shows the back, the profile, the 3/4 view, or the low-angle hero shot. The collar sits a different way in the back-shot than in the front. Boots are knee-high in one panel and ankle-high in another. Each panel's render plausibly matches "the character" but the *specific details* of her costume aren't pinned because no single reference shows them from that angle.
+
+The L28 manifest now requires, for every arc character (anyone with `body_tiers` in the manifest), 5 additional view refs at the baseline tier:
+
+- `view-3q-full.png` (three-quarter angle)
+- `view-profile.png` (pure profile)
+- `view-back-full.png` (back-full)
+- `view-low-angle-front.png` (hero-shot anchor for splashes / reveals)
+- `view-ecu-region.png` (mid-region / chest crop, anchors body-region ECU panels)
+
+That's 8 refs per arc character (face + tier-1 baseline + N tier refs + 5 view refs). `script-breakdown` Step 7 emits the `views[]` block; `reference-gathering` walks it; `rules_audit.check_reference_completeness` HARD-fails for any missing view ref. v1 generates views at the baseline tier only; v2 may add tier-N views with the lineup attached.
+
+---
+
+## L17 — Known/canonical characters can't drift in appearance
+
+![Drifted version (wrong hair, wrong costume) vs canonical version (matches canon details)](./the-rules-explained-graphics/17-L17-canonical-character.png)
+
+Iconic IP characters (Chun Li, Lex Luthor, Supergirl, April O'Neil) render with materially wrong canon details. Chun Li with loose flowing hair instead of ox-horn buns. Lex looking like a generic suit-and-tie villain rather than recognizably Lex. April with the wrong jumpsuit cut. The model has a learned representation of these characters but treats the name as a soft hint, not a hard anchor. Without explicit "canonical version" framing, the model interpolates between its training prior, the wardrobe description, and the attached refs — landing somewhere that loosely satisfies all three rather than rigorously matching canon.
+
+The fix is two-part:
+
+1. **Source canon refs**, not generic AI portraits. When the cast entry has `canonical: true`, `reference-gathering` prefers search queries like "Chun Li Street Fighter official art" over generic "Chun Li."
+2. **Every prompt names the canon explicitly + a negation of generic interpretation**: *"render the canonical version of Chun Li — the Street Fighter Chun Li with ox-horn hair buns and blue cheongsam, NOT a generic Asian martial artist."* Naming both canon AND the negation is load-bearing.
+
+Enforced by `next_panel.py` `_canonical_character_directive()` which reads `cast[].canonical_anchor` text and prepends a directive on every prompt where the canonical character appears.
+
+---
+
+## L18 — Pose anatomy coherence
+
+![Impossible twist (torso facing one way, legs another) vs coherent pose (all body parts aligned)](./the-rules-explained-graphics/18-L18-pose-anatomy.png)
+
+Panels sometimes render with anatomically impossible body geometry. Torso facing one direction, hips facing another. Abs visible but feet pointing 90° off from the abs' direction. Arms in front of the body but shoulders behind. Reader doesn't always consciously notice but the panel feels "off" — the body doesn't read as one continuous figure. Worse on hyper-muscular silhouettes (the more anatomy detail, the more places to drift).
+
+The fix is a mandatory render line at the end of every panel prompt: *"Anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible."*
+
+Soft guardrail — doesn't catch every case, but reduces frequency. Cheap (~30 tokens) and stacks well with the other mandatory rules. Auto-injected by `next_panel.py` `_pose_anatomy_anchor()` on every panel. Always fires.
+
+---
+
 ## L19 — Bake lettering into the render (with anchoring on both ends)
 
 ![Sticker overlay vs baked-in 3D-extruded chrome SFX](./the-rules-explained-graphics/06-baked-lettering.png)
@@ -227,7 +287,13 @@ This one came from a direct measurement. We scored every panel of a hand-made Ap
 
 The AI version's transformation event never *happened* on the page. Chest growth shot at full-body framing reads as "before/after" — you see the result, you don't feel the change. At MCU framing the chest fills the panel and the reader has nowhere else to look. The body region that's transforming has to dominate the frame.
 
-The rule: chapter mean ≤ 3.0, at least 30% of panels in the middle distances (MCU/medium/cowboy), full-body reserved for the climax. The pipeline enforces all three automatically as hard gates at the shotlist stage — before any generation cost is paid.
+**Strengthened May 2026** after the rule kept getting ignored even when the shotlist passed the gate. Three changes:
+
+1. **Tighter chapter mean for transformation comics**: ≤ **2.5** (was 3.0), matching the hand-made April benchmark of 2.4.
+2. **Body-region beats at full or wider are now HARD findings** (promoted from SOFT). `chest`, `hips`, `rear`, `arms`, `abs`, `legs`, `suit_fail` beats CANNOT be shot full-body — that's the failure shape this rule exists to prevent. If your shotlist puts a chest beat at full, the audit refuses to advance.
+3. **Aggressive in-prompt camera directive**: `next_panel.py` `_body_region_camera_directive()` prepends to body-region beats: *"EXTREME CLOSE-UP on the [region] filling 70%+ of the frame. Macro 100mm lens equivalent, shallow depth-of-field, background completely defocused. The [region] DOMINATES the panel — head and feet cropped OUT of frame. This is a body-region ECU, NOT a full-body shot."* The "DOMINATES" + "cropped OUT" language is load-bearing.
+
+The strengthening was driven by observing that the shotlist-time gates passed (the camera string said `mcu`) but rendered output was still materially wider than declared. Two causes: models interpret camera vocabulary generously when prompt language is soft, and SOFT warnings get ignored by autopilot. Tightening the thresholds and promoting overshoot to HARD closes that gap.
 
 ---
 
@@ -305,16 +371,11 @@ This is v1. Future work (v2) adds per-character expression refs, pose refs, per-
 
 ---
 
-## Lessons proposed but not yet enforced
+## Bonus: anti-hallucination overview
 
-> **Note**: these are in the user's running feedback list. They're real observations from comic reviews but they haven't been written up as canonical lessons in `lessons-learned.md` yet, and they're not enforced by the pipeline. Listed here for transparency.
+L21 through L24 share a shape — the model invents something specific that wasn't in your prompt or your refs. This collage shows all four in one frame:
 
-- **L15 (proposed) — Female characters must read as beautiful.** Add a mandatory glamour anchor to every prompt for any female cast member — vogue-cover face quality, expressive eyes, sculpted features. The same vocabulary we used for the Supergirl face-card re-roll.
-- **L16 (proposed) — Multi-angle character reference packs.** A face card and one body baseline isn't enough. Costume details drift between panels because no ref shows the back, profile, or 3/4 view. Required set per character: face card + front-full + 3q-full + profile + back + low-angle + ECU-region.
-- **L17 (proposed) — Known/canonical characters can't drift in appearance.** Chun Li, Lex Luthor, Supergirl, April O'Neil have canonical looks. Hair, costume cut, proportions must match canon. Practical fix: source refs from canon material and include an explicit "this is the canonical version of X" line in every prompt.
-- **L18 (proposed) — Pose anatomy coherence.** Mandatory render line: limbs and torso face the same direction; no impossible twists between hips and torso; abs and feet point the same way. Soft guardrail — won't fix every case but reduces frequency.
-
-The bonus anti-hallucination collage that combines L21–L24 in one image lives alongside the individual L21–L24 graphics: ![Anti-hallucination overview: L21-L24 in one frame](./the-rules-explained-graphics/07-anti-hallucination.png)
+![Anti-hallucination overview: L21-L24 in one frame](./the-rules-explained-graphics/07-anti-hallucination.png)
 
 ---
 

@@ -108,9 +108,23 @@ MIDDLE_DISTANCES = {"mcu", "medium", "cowboy"}
 
 # L20 chapter-aggregate thresholds. Derived from the hand-made April benchmark
 # (mean 2.4) vs the AI-generated failure (mean 4.1).
-MEAN_DISTANCE_MAX = 3.0
+#
+# Post-May-2026 strengthening: transformation comics get a tighter threshold
+# (2.5 vs 3.0) because the failure mode is more sensitive in that genre. The
+# hand-made April benchmark is 2.4; staying at 2.5 keeps us close to it.
+# Non-transformation comics keep the 3.0 default.
+MEAN_DISTANCE_MAX = 3.0                       # default for non-transformation
+MEAN_DISTANCE_MAX_TRANSFORMATION = 2.5        # tighter for transformation_scenes
 MIDDLE_DISTANCE_MIN_FRAC = 0.30
 MEAN_DISTANCE_MIN_PANELS = 6  # below this, the chapter is too short to compute meaningfully
+
+# Body-region transformation beats — when shot at full or wider, render as
+# before/after rather than the change happening now. HARD finding (post-May
+# 2026 strengthening — was SOFT). These are the beats that ABSOLUTELY require
+# close framing to read as transformation events.
+BODY_REGION_BEATS_FOR_HARD_CEILING = {
+    "chest", "hips", "rear", "arms", "abs", "legs", "suit_fail",
+}
 
 # Per-beat default distance ceilings per script-breakdown SKILL.md § Step 4.5.
 # Used by check_camera_distance_bias: SOFT finding when a panel's beat is set,
@@ -487,11 +501,17 @@ def check_camera_distance_bias(shotlist: dict, pages_filter: set[int] | None) ->
     middle_count = sum(1 for s in scored_with_value if s[2] in MIDDLE_DISTANCES)
     middle_frac = middle_count / N
 
-    if mean_distance > MEAN_DISTANCE_MAX:
+    # L20 post-strengthening: tighter mean threshold for transformation comics.
+    is_transformation = bool(shotlist.get("transformation_scenes"))
+    mean_threshold = MEAN_DISTANCE_MAX_TRANSFORMATION if is_transformation else MEAN_DISTANCE_MAX
+
+    if mean_distance > mean_threshold:
         out.append(Finding(
             None, None, "camera_distance_bias", SEVERITY_HARD,
-            f"Chapter mean camera distance is {mean_distance:.1f} (target ≤ {MEAN_DISTANCE_MAX:.1f}; hand-made April benchmark is 2.4). "
-            "The chapter sits too far from its subjects — body-region beats won't read at this framing.",
+            f"Chapter mean camera distance is {mean_distance:.1f} (target ≤ {mean_threshold:.1f}"
+            + (" for transformation comics" if is_transformation else "")
+            + f"; hand-made April benchmark is 2.4). "
+              "The chapter sits too far from its subjects — body-region beats won't read at this framing.",
             "Per L20: default transformation beats to MCU or closer; reserve `full`/`wide-establish` for the reveal beat. "
             "See script-breakdown SKILL.md § Step 4.5 for the per-beat table.",
         ))
@@ -513,11 +533,22 @@ def check_camera_distance_bias(shotlist: dict, pages_filter: set[int] | None) ->
         if beat_max is None:
             continue
         if score > beat_max:
+            # L20 post-strengthening: body-region beats shot at full+ are HARD,
+            # not SOFT. These are the cases where the failure shape is most
+            # severe — the transformation event itself doesn't happen on page.
+            is_body_region = beat in BODY_REGION_BEATS_FOR_HARD_CEILING
+            shot_at_full_or_wider = score >= 5  # full=5, wide-establish=6, splash=5
+            severity = SEVERITY_HARD if (is_body_region and shot_at_full_or_wider) else SEVERITY_SOFT
+            msg = (
+                f"Beat `{beat}` shot at `{dist}` (distance score {score}); typical ceiling for this beat is ≤ {beat_max}. "
+                + ("Body-region beats CANNOT be shot at full or wider — that's the failure shape L20 exists to prevent. "
+                   if severity == SEVERITY_HARD else
+                   "Per L20: body-region beats need the region to dominate the frame.")
+            )
             out.append(Finding(
-                n, pid, "camera_distance_bias", SEVERITY_SOFT,
-                f"Beat `{beat}` shot at `{dist}` (distance score {score}); typical default for this beat is ≤ {beat_max}. "
-                "Per L20: body-region beats need the region to dominate the frame.",
-                "Consider tightening to MCU or ecu-region. See script-breakdown SKILL.md § Step 4.5 for the per-beat table. "
+                n, pid, "camera_distance_bias", severity,
+                msg,
+                "Tighten to MCU or ecu-region. See script-breakdown SKILL.md § Step 4.5 for the per-beat table. "
                 "If this framing is intentional (e.g. the beat doubles as an establishing shot), accept this finding.",
             ))
 
@@ -701,6 +732,19 @@ def check_reference_completeness(project: Path, shotlist: dict) -> list[Finding]
                     None, None, "reference_completeness", SEVERITY_HARD,
                     f"Missing required reference: {path} (body-tier {tier} for `{char_id}`)" + lineup_note,
                     "Run reference-gathering in manifest-driven mode. The skill knows the lineup-attach hard rule for tier >= 2 body refs.",
+                ))
+
+        # views (L16 — multi-angle character reference packs)
+        for view_entry in (char_spec.get("views") or []):
+            view_name = view_entry.get("name")
+            path = view_entry.get("path")
+            lineup_required = view_entry.get("lineup_required", False)
+            if path and not (project / path).exists():
+                lineup_note = " — and MUST attach the muscle-size lineup PNG at generation time" if lineup_required else ""
+                out.append(Finding(
+                    None, None, "reference_completeness", SEVERITY_HARD,
+                    f"Missing required reference: {path} (view `{view_name}` for `{char_id}`) — per L16 multi-angle ref pack" + lineup_note,
+                    "Run reference-gathering in manifest-driven mode. Generates the view ref at the named camera angle.",
                 ))
 
     # Walk locations

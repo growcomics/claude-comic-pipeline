@@ -19,6 +19,10 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L12 | Dialogue panels need close framing | On-screen dialogue + wide camera = unreadable; close framing mandatory |
 | L13 | Multi-speaker beats split into per-speaker panels | ≥3 lines from ≥2 speakers must be split before generation |
 | L14 | Multi-view location references for shot-reverse-shot | Single env anchor breaks when the camera reverses; pack multiple env refs per location |
+| L15 | Female characters must read as beautiful | Mandatory glamour anchor on every prompt with a female cast member |
+| L16 | Multi-angle character reference packs | Arc characters need 5 view refs at baseline tier (3q, profile, back, low-angle, ECU-region) on top of face_card + body_tiers |
+| L17 | Known/canonical characters can't drift | IP characters need canon-sourced refs + explicit "canonical version of X" anchor per prompt |
+| L18 | Pose anatomy coherence | Mandatory render line: torso, hips, abs, feet all face the same direction; no impossible twists |
 | L19 | Bake lettering into the CGI render | Reverses L7. SFX / speech bubbles / captions render inside the image as physical scene objects |
 | L20 | Camera distance bias for transformation comics | Default to MCU or closer; reserve full-body for the reveal. Mean ≤ 3.0, ≥30% in middle distances |
 | L28 | Reference completeness is mandatory, not optional | `references_required.json` manifest derived at script-breakdown; gated by `rules_audit`. Body-tier refs MUST attach the muscle-size lineup at generation time. |
@@ -639,6 +643,117 @@ Authoring guidance: when a shotlist has a multi-page dialogue scene with on-scre
 
 ---
 
+## L15 — Female characters must read as beautiful/attractive
+
+**Symptom**: Generated panels of female cast members render at "default attractiveness" — pleasant-looking but unremarkable. Faces are average, eyes are flat, features are unsculpted. The character reads as "AI-generated woman" rather than "the kind of face that commands attention." Caught on the Supergirl issue #1 face card v1 (which we re-rolled with vogue-cover language and got dramatically better results — that re-roll prompt is the canonical glamour-anchor vocabulary).
+
+**Root cause**: Image generators have an implicit "default beauty" prior — neither plain nor striking. Without explicit vocabulary pushing toward magazine-cover quality, every female character lands in that flat middle. The model is happy to produce striking faces when prompted; it just doesn't do so by default.
+
+**Fix**: Every prompt for any female cast member includes a glamour-anchor block, both at face-card generation time and on every per-panel generation that has the character in frame. Required vocabulary:
+- "Vogue-cover face quality"
+- "Sculpted cheekbones, refined jawline"
+- "Expressive eyes, long natural lashes, depth and emotion in the gaze"
+- "Polished glamour-photography finish, magazine-cover quality"
+- "Strikingly beautiful — the kind of face that commands attention"
+
+Same set of phrases used for the Supergirl face-card re-roll (May 2026). Worked first-try.
+
+**Enforced by**:
+- **At face-card generation** (in `reference-gathering` manifest-driven mode): the glamour-anchor block is prepended to the prompt body for any character with `sex: "f"` or `pronoun in {"she", "her"}` in `cast[]`.
+- **At per-panel generation** (in `next_panel.py` `compose_prompt`): a `_female_beauty_anchor()` helper auto-injects a condensed glamour line (1-2 sentences) for any panel where a female cast member is the focal subject. Detection heuristic: `cast[<char>].sex == "f"` or `cast[<char>].pronoun in {"she", "her", "her/hers"}` (default true if unset).
+
+**Where this rule applies**:
+- All female cast members across all comic genres. Not gender-coded — male cast can have analogous "striking features" anchors when desired — but the default for female characters is the glamour anchor.
+
+**Where this rule does NOT apply**:
+- Background extras / unnamed crowd. Glamour-anchoring background characters wastes prompt tokens and competes with the focal subject.
+- Characters where "plain" or "average-looking" is an intentional story choice. Override via a `glamour_anchor: false` flag on the cast entry.
+
+---
+
+## L16 — Multi-angle character reference packs
+
+**Symptom**: Costume details drift between panels. The collar sits a different way in the back-shot than in the front. The boots are knee-high in one panel and ankle-high in another. The hair has texture in 3/4 view but is flat in profile. Each panel's render plausibly matches "the character" but the *specific details* of her costume aren't pinned because no single reference shows them from that angle.
+
+**Root cause**: The L28 v1 manifest requires `face_card` + `body_tier1` (front view) + tier-N body refs (also front view by default). Every reference shows the character from the front. When a panel needs a 3/4 view or a back shot, the model extrapolates costume details the front-baseline doesn't show — and extrapolation produces drift.
+
+**Fix**: Extend the L28 manifest schema with a `views[]` block per character. The minimum required set for any arc character:
+
+- `face_card` (existing)
+- `body_tier1` (front-full, the existing baseline)
+- `body_tier_N` for each declared peak tier (with lineup attached at gen time per L28)
+- `view_3q_full` (three-quarter angle, baseline tier)
+- `view_profile` (pure profile, baseline tier)
+- `view_back_full` (back-full, baseline tier)
+- `view_low_angle_front` (hero-shot anchor for splashes / reveals)
+- `view_ecu_region` (mid-region / chest crop, baseline tier — anchors body-region ECU panels)
+
+That's 8 refs per arc character (face + tier-1 baseline + N tier refs + 5 view refs). For a non-arc cast member: face_card only. So a 2-character comic with 1 arc character: ~10 character refs, plus locations.
+
+**Enforced by**:
+- `script-breakdown` Step 7 (manifest emit): for any character with `body_tiers` in the manifest (i.e. arc characters), auto-add the `views[]` block with the 5 required views at the baseline tier.
+- `reference-gathering` manifest-driven mode walks the views and generates each missing ref using the appropriate camera anchor.
+- `rules_audit.py` `check_reference_completeness()` HARD-fails for any declared view ref not on disk (same gate as body-tier refs).
+
+**v1 limitations**: Views are generated only at the baseline tier (tier 1). Higher-tier views (e.g. body-tier5 in profile) are v2 — wait until v1 shows whether the baseline views are sufficient anchors.
+
+**Where this rule applies**:
+- Every arc character in a comic with body-region beats or multi-angle scene work.
+
+**Where this rule does NOT apply**:
+- Background extras / unnamed cast.
+- One-off appearances (a character on screen for only 1-2 panels).
+
+---
+
+## L17 — Known/canonical characters can't drift in appearance
+
+**Symptom**: Iconic IP characters (Chun Li, Lex Luthor, Supergirl, April O'Neil) render with materially wrong canon details. Chun Li with loose flowing hair instead of ox-horn buns. Lex looking like a generic suit-and-tie villain rather than recognizably Lex. April with the wrong jumpsuit cut. The character is "in the same family" as canon but a fan would not recognize them at a glance.
+
+**Root cause**: The model has a learned representation of these characters but treats the name as a soft hint rather than a hard anchor. Without explicit "canonical version" framing, the model interpolates between its training prior, the wardrobe description, and the attached refs — and lands somewhere that loosely satisfies all three rather than rigorously matching canon.
+
+**Fix**: Two-part.
+
+1. **Source canon refs.** For the face card and body baseline, prefer images sourced from canon material (Street Fighter promo art for Chun Li; DC official art for Supergirl; TMNT 1987-2012 era art for April; etc.) — NOT generic AI-generated portraits. The reference itself must be canonical. This is a `reference-gathering`-stage rule: when the cast entry has `canonical: true`, prefer the search query "<character name> <franchise> official art" over "<character name>".
+2. **Every prompt includes an explicit canonical-anchor line.** Vocabulary: *"Render the canonical version of [Character Name] — the Street Fighter Chun Li with her iconic ox-horn hair buns and blue cheongsam, NOT a generic Asian martial artist."* Naming both the canon AND the negation. Without the negation the model may still drift toward generic.
+
+**Enforced by**:
+- `script-breakdown`: cast entries can include `canonical: true` (default false for original characters; explicit true for IP).
+- `reference-gathering` manifest-driven mode: when generating face cards for canonical characters, prefers canon-sourced reference images as the seed.
+- `next_panel.py` `compose_prompt`: a `_canonical_character_directive()` helper auto-injects the canonical-anchor line per character in the panel, derived from the cast entry's `canonical_anchor` text (e.g. for Chun Li: `"the Street Fighter Chun Li — ox-horn hair buns, blue cheongsam with gold trim, white tights, brown thigh-high boots, white spiked wristbands"`).
+
+**Where this rule applies**:
+- All IP / fan-fiction characters where reader recognition matters.
+
+**Where this rule does NOT apply**:
+- Original characters (no canon to anchor against; the cast entry's wardrobe IS the canon).
+- Background extras / unnamed cast.
+
+---
+
+## L18 — Pose anatomy coherence
+
+**Symptom**: A panel renders the character with anatomically impossible body geometry. Torso facing one direction, hips facing another. Abs visible but feet pointing 90° off from the abs' direction. Arms in front of the body but shoulders behind. Reader doesn't always consciously notice but the panel feels "off" — the body doesn't read as one continuous figure.
+
+**Root cause**: Image models can struggle with whole-body consistency when the prompt describes a complex pose. Each body region gets generated correctly in isolation, but the spatial relationships between regions (which way the torso faces vs. which way the legs face) don't always cohere. Worse on hyper-muscular silhouettes (the more anatomy detail, the more places to drift).
+
+**Fix**: A mandatory render line at the end of every panel prompt (right before the closing render directive):
+
+> *"Anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible."*
+
+This is a soft guardrail — it doesn't catch every case, but it reduces frequency. It's cheap (~30 tokens) and stacks well with the other mandatory rules block.
+
+**Enforced by**:
+- `next_panel.py` `compose_prompt`: `_pose_anatomy_anchor()` helper auto-injects the anatomy-coherence line on every panel prompt. No conditions — always fires.
+
+**Where this rule applies**:
+- Every panel. Universal soft guardrail.
+
+**Where this rule does NOT apply**:
+- N/A. Universal.
+
+---
+
 ## L19 — Bake lettering into the CGI render (reverses L7 Case B's "never bake" rule)
 
 **Symptom**: The L7 Case B workflow deferred all lettering — speech bubbles, captions, SFX — to `page-composer`, which applied vector overlays on top of clean CGI renders. The result reads as "CGI panel + sticker overlay" — lettering looks pasted on rather than part of the rendered scene. The desired output is a single cohesive rendered comic page where the lettering is part of the photoreal world.
@@ -693,11 +808,19 @@ The transformation event never *happens* on the AI version's page because the ca
 3. Aim for a chapter-aggregate mean distance ≤ 3.0 (medium or closer). The hand-made target is 2.4.
 4. Watch the distribution, not just the mean. A bimodal "extreme close-up + full-body" distribution with nothing in the middle is broken even if the mean is fine on paper. At least 30% of panels should sit in {MCU, medium, cowboy}.
 
-**Enforced today by**:
-- `rules_audit.py` `check_camera_distance_bias` — HARD if chapter mean distance > 3.0; HARD if middle-distance fraction < 30%; SOFT per-beat finding when a non-`reveal` transformation beat is shot at `full` or wider.
-- `rules_audit.py` `check_camera_variety` — HARD on any single `(distance, angle)` combo appearing in >3 panels. This catches the worst case (the AI April had 7 panels at `(full, eye-level)`).
-- `next_panel.py` — emits `WARNING_CAMERA_TOO_FAR_FOR_BEAT` at planning time when the panel's beat default is tighter than its declared camera.
+**Enforced today by** (post-strengthening, May 2026):
+- `rules_audit.py` `check_camera_distance_bias`:
+  - **HARD** if chapter mean distance > **2.5** when `transformation_scenes` is declared (was 3.0; tightened to match the hand-made April benchmark of 2.4).
+  - **HARD** if chapter mean distance > 3.0 for non-transformation comics.
+  - **HARD** if middle-distance fraction < 30%.
+  - **HARD (promoted from SOFT)** when a non-`reveal` body-region transformation beat (`chest` / `hips` / `rear` / `arms` / `abs` / `legs` / `suit_fail`) is shot at `full` or wider. Body-region beats CANNOT be full-body framings — that's the failure shape this rule exists to prevent.
+- `rules_audit.py` `check_camera_variety` — HARD on any single `(distance, angle)` combo appearing in >3 panels.
+- `next_panel.py` `compose_prompt`:
+  - Emits `WARNING_CAMERA_TOO_FAR_FOR_BEAT` at planning time.
+  - **NEW**: prepends an aggressive `_body_region_camera_directive()` to the prompt body for any panel with a body-region transformation beat. The directive says: *"EXTREME CLOSE-UP on the [body region] filling 70%+ of the frame. Macro 100mm lens equivalent, shallow depth-of-field, background completely defocused. The [body region] DOMINATES the panel — head and feet cropped OUT of frame. This is a body-region ECU, NOT a full-body shot."* The "DOMINATES" + "cropped OUT" language is load-bearing — without it the model defaults to "show the whole figure with the region visible."
 - Per-beat distance defaults in script-breakdown's Step 4.5 table.
+
+**Why the strengthening**: shotlist-time gates pass (the camera string says `mcu`), but rendered output is still materially wider than declared. Two causes: (a) the model interprets camera vocabulary generously when the prompt language is soft, and (b) SOFT per-beat warnings get ignored by the production driver. Tightening the thresholds and promoting body-region overshoot to HARD closes (b); the new aggressive in-prompt directive closes (a).
 
 **Where this rule applies**:
 - Transformation comics (FMG, growth, mutation, dress-up, charge-up, expansion). The whole genre lives on body-region changes; distance bias is the whole game.
@@ -706,6 +829,7 @@ The transformation event never *happens* on the AI version's page because the ca
 **Where this rule does NOT apply**:
 - Dialogue-heavy scenes — L12 already covers close framing for dialogue.
 - World-building / establishing scenes — wide-establish is the right tool there.
+- The `reveal` beat — full-body is the canonical framing for the triumphant reveal.
 
 ---
 

@@ -589,6 +589,152 @@ def _cast_lookup(shotlist: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# L20 strengthening — aggressive body-region camera directive
+#
+# When a panel's transformation_beat is a body-region beat (chest, hips, etc),
+# the model needs explicit ECU-dominance vocabulary to actually shoot tight.
+# Soft "ecu-region" or "mcu" labels get interpreted generously. The
+# "DOMINATES" + "cropped OUT" phrasing is load-bearing.
+
+_BODY_REGION_BEAT_TO_REGION = {
+    "chest": "chest",
+    "hips": "hips and waist",
+    "rear": "rear and lower-back",
+    "arms": "arms (biceps, shoulders, triceps)",
+    "abs": "abdomen and midsection",
+    "legs": "legs (quadriceps, hamstrings)",
+    "back": "upper back and shoulders",
+    "shoulders": "shoulders and deltoids",
+    "suit_fail": "the tearing fabric over the body region in transition",
+}
+
+
+def _body_region_camera_directive(panel: dict) -> str | None:
+    """L20 strengthening: aggressive ECU vocabulary for body-region beats.
+
+    Returns the directive string or None if the panel isn't a body-region beat.
+    Prepended near the camera fragment in compose_prompt so the model commits
+    to tight framing BEFORE reading the action content.
+    """
+    beat = panel.get("transformation_beat")
+    if not beat:
+        return None
+    region = _BODY_REGION_BEAT_TO_REGION.get(beat)
+    if not region:
+        return None
+    return (
+        f"L20 framing directive: EXTREME CLOSE-UP on the {region} filling "
+        "70%+ of the frame. Macro 100mm lens equivalent, shallow depth-of-field, "
+        f"background completely defocused. The {region} DOMINATES the panel — "
+        "head and feet cropped OUT of frame. This is a body-region ECU, NOT a "
+        "full-body shot. Do not pull back."
+    )
+
+
+# ---------------------------------------------------------------------------
+# L15 — Female beauty anchor (mandatory glamour vocabulary)
+#
+# Inject on any panel where a female cast member is the focal subject. The
+# heuristic matches a character if cast[].sex in {"f","female"} or
+# cast[].pronoun in {"she","her","her/hers","she/her"}. Default: assume
+# female unless cast entry explicitly marks otherwise. Override on a per-
+# character basis via `glamour_anchor: false` on the cast entry.
+
+_FEMALE_BEAUTY_ANCHOR = (
+    "L15 glamour anchor: render any female character in this panel with "
+    "vogue-cover face quality — sculpted cheekbones, refined jawline, "
+    "expressive eyes with long natural lashes and depth in the gaze, "
+    "magazine-cover finish. Strikingly beautiful — the kind of face that "
+    "commands attention. NOT plain, NOT generic-AI-face."
+)
+
+
+def _female_focal_in_panel(panel: dict, cast_lookup: dict) -> bool:
+    """Returns True if any female cast member is in the panel and not
+    suppressed via cast[].glamour_anchor: false."""
+    for char_id in (panel.get("characters") or []):
+        entry = cast_lookup.get(char_id) or {}
+        if entry.get("glamour_anchor") is False:
+            continue  # explicit opt-out
+        sex = (entry.get("sex") or "").lower()
+        pronoun = (entry.get("pronoun") or "").lower()
+        if sex in {"f", "female", "woman"} or pronoun in {"she", "her", "her/hers", "she/her"}:
+            return True
+        # If sex and pronoun unset, default-assume female (most comics this
+        # pipeline ships are FMG-heavy). Override via explicit `sex: "m"` or
+        # `glamour_anchor: false` on the cast entry.
+        if not sex and not pronoun and entry.get("glamour_anchor") is not False:
+            return True
+    return False
+
+
+def _female_beauty_anchor_line(panel: dict, cast_lookup: dict) -> str | None:
+    """L15: returns the glamour anchor when a female cast member is in the
+    panel, else None."""
+    if _female_focal_in_panel(panel, cast_lookup):
+        return _FEMALE_BEAUTY_ANCHOR
+    return None
+
+
+# ---------------------------------------------------------------------------
+# L17 — Canonical character anchor
+#
+# For IP/known characters (Chun Li, Lex, Supergirl, April O'Neil), the prompt
+# must explicitly name "the canonical version of X" + a description of the
+# canon details + a negation of generic interpretation. Cast entries opt in
+# via `canonical: true` and provide a `canonical_anchor` text string.
+
+def _canonical_character_directive(panel: dict, cast_lookup: dict) -> str | None:
+    """L17: returns a canonical-anchor line for any IP character in the panel,
+    or None if no character has `canonical: true`.
+
+    The cast entry format:
+        {
+          "id": "chunli",
+          "canonical": true,
+          "canonical_anchor": "the Street Fighter Chun Li — ox-horn hair buns,
+                               blue cheongsam with gold trim, white tights,
+                               brown thigh-high boots, white spiked wristbands"
+        }
+    """
+    anchors = []
+    for char_id in (panel.get("characters") or []):
+        entry = cast_lookup.get(char_id) or {}
+        if not entry.get("canonical"):
+            continue
+        anchor_text = entry.get("canonical_anchor") or ""
+        if anchor_text:
+            anchors.append(f"{char_id}: {anchor_text}")
+        else:
+            # Cast says canonical but no anchor text provided — fallback to
+            # a generic negation that's still useful.
+            anchors.append(f"{char_id}: render the canonical published version, NOT a generic interpretation")
+    if not anchors:
+        return None
+    return (
+        "L17 canonical anchor: render the canonical published versions of these "
+        "IP characters EXACTLY as fans recognize them. " + " ".join(anchors)
+        + ". Do not drift toward generic AI interpretations."
+    )
+
+
+# ---------------------------------------------------------------------------
+# L18 — Pose anatomy coherence (universal soft guardrail)
+
+_POSE_ANATOMY_ANCHOR = (
+    "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same "
+    "direction. No impossible twists between hips and torso. All limbs attach "
+    "naturally to the body. Both shoulders visible if the chest is visible; "
+    "both hips visible if the legs are visible."
+)
+
+
+def _pose_anatomy_anchor() -> str:
+    """L18: always-emit anatomy coherence line. Cheap soft guardrail."""
+    return _POSE_ANATOMY_ANCHOR
+
+
+# ---------------------------------------------------------------------------
 # Prompt composer
 
 
@@ -652,9 +798,29 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     parts.append(cam_fragments.get(camera,
         f"Camera: {camera or 'eye-level medium shot'}."))
 
+    # 2a. L20 strengthening — aggressive body-region camera directive for any
+    # panel with a body-region transformation beat. Slots right after the
+    # base camera fragment so the model commits to ECU framing BEFORE the
+    # action content has a chance to soften it.
+    body_region_directive = _body_region_camera_directive(panel)
+    if body_region_directive:
+        parts.append(body_region_directive)
+
     # 3. Subjects (name only — identity comes from attached face cards)
     if chars:
         parts.append(f"Subjects: {', '.join(chars)}.")
+
+    # 3.0 L17 canonical character anchor — render IP characters as fans
+    # recognize them. Drawn from cast[].canonical_anchor strings.
+    canonical_line = _canonical_character_directive(panel, cast_lookup)
+    if canonical_line:
+        parts.append(canonical_line)
+
+    # 3.1 L15 female beauty anchor — vogue-cover quality for any female cast
+    # member in the panel. Suppressible per character via cast[].glamour_anchor: false.
+    beauty_line = _female_beauty_anchor_line(panel, cast_lookup)
+    if beauty_line:
+        parts.append(beauty_line)
 
     # 3a. Hair state (L22) — only when explicitly set on the panel. The
     # composer does NOT auto-derive from tier + beat (see memory
@@ -845,6 +1011,9 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     any_ref_attached = bool(env_ref) or bool(anchor) or bool(lineup_attached)
     if any_ref_attached:
         parts.append(L21_REF_EXCLUSION)
+
+    # 9b. L18 pose anatomy anchor — universal soft guardrail. Always emit.
+    parts.append(_pose_anatomy_anchor())
 
     # 10. Mandatory rules (L7-compliant — no rendered lettering)
     parts.append(

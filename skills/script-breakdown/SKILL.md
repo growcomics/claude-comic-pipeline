@@ -285,6 +285,14 @@ Per **L28** in `comic-production/references/lessons-learned.md`, every comic pro
   - `tier`: the numeric tier
   - `path`: `references/characters/<char_id>/body-tier{N}.png`
   - `lineup_required`: `false` if `tier == 1`, `true` if `tier >= 2`. **This is the L28 hard rule — tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image at generation time.**
+- `views` (NEW per **L16** — multi-angle character reference packs): for any character with `body_tiers` (i.e. arc characters), emit a `views` array with these 5 entries at the baseline tier:
+  - `{"name": "3q-full", "tier": 1, "path": "references/characters/<char_id>/view-3q-full.png", "lineup_required": false}`
+  - `{"name": "profile", "tier": 1, "path": "references/characters/<char_id>/view-profile.png", "lineup_required": false}`
+  - `{"name": "back-full", "tier": 1, "path": "references/characters/<char_id>/view-back-full.png", "lineup_required": false}`
+  - `{"name": "low-angle-front", "tier": 1, "path": "references/characters/<char_id>/view-low-angle-front.png", "lineup_required": false}`
+  - `{"name": "ecu-region", "tier": 1, "path": "references/characters/<char_id>/view-ecu-region.png", "lineup_required": false}`
+
+  Non-arc characters (no `body_tiers`) skip the `views` block — face_card only.
 
 If a character has no `muscle_size_tier` values in the shotlist (non-transformation comic), emit only `face_card` for that character.
 
@@ -308,6 +316,13 @@ If a character has no `muscle_size_tier` values in the shotlist (non-transformat
         {"tier": 1, "path": "references/characters/chunli/body-tier1.png", "lineup_required": false},
         {"tier": 3, "path": "references/characters/chunli/body-tier3.png", "lineup_required": true},
         {"tier": 5, "path": "references/characters/chunli/body-tier5.png", "lineup_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 1, "path": "references/characters/chunli/view-3q-full.png", "lineup_required": false},
+        {"name": "profile", "tier": 1, "path": "references/characters/chunli/view-profile.png", "lineup_required": false},
+        {"name": "back-full", "tier": 1, "path": "references/characters/chunli/view-back-full.png", "lineup_required": false},
+        {"name": "low-angle-front", "tier": 1, "path": "references/characters/chunli/view-low-angle-front.png", "lineup_required": false},
+        {"name": "ecu-region", "tier": 1, "path": "references/characters/chunli/view-ecu-region.png", "lineup_required": false}
       ]
     }
   },
