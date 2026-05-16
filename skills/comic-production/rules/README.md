@@ -6,21 +6,25 @@ See [`docs/checks-and-balances-design.md`](../../../docs/checks-and-balances-des
 
 ## Status
 
-| File | Rule | Phase migrated | Notes |
-|---|---|---|---|
-| `l21_ref_safety.py` | L21 — Suppress in-scene rendering of refs | **phase 2** | First migrated. Single slot (`12_ref_safety`). |
-| (TODO) `l18_anatomy.py` | L18 — Pose anatomy coherence | phase 3 | Always-emit. Universal soft guardrail. |
-| (TODO) `l20_camera.py` | L20 — Camera distance bias | phase 3 | Two-piece: in-prompt directive + chapter-aggregate check. |
-| (TODO) `l15_glamour.py` | L15 — Female beauty anchor | phase 3 | `applicable_transformations=("fmg",)`. |
-| (TODO) `l17_canonical.py` | L17 — Canonical character | phase 3 | Reads `cast[].canonical_anchor`. |
-| (TODO) `l22_hair_state.py` | L22 — Hair state explicit | phase 3 | Reads `panel.hair_state`. |
-| (TODO) `l23_env_anchor.py` | L23 — Verbal env anchor when ref dropped | phase 3 | Fires when env_dropped=True. |
-| (TODO) `l24_accessory.py` | L24 — Suppress anachronistic accessories | phase 3 | Reads `cast[].accessories`. |
-| (TODO) `l11_silhouette.py` | L11 — Cartoony FMG anchoring | phase 3 | Two slots: style anchor + tier silhouette. FMG-only initially. |
-| (TODO) `l10_render_directive.py` | L10 — Refs are truth, prompts are deltas | phase 3 | The load-bearing render directive. Always emit. |
-| (TODO) `female_anatomy.py` | Female anatomy anchor (May-14 finding) | phase 3 | FMG-only. Body-region ECU at tier≥2. |
+All active L-rules are migrated to per-rule modules. Every rule contribution to `compose_prompt` now flows through `_registry.RULES`.
 
-Phase 4 adds pre-render verification (migrating `rules_audit.py` checks into rule modules). Phase 5 adds post-render vision verification. Phase 6 adds retry strategies.
+| File | Rule | Phase | Notes |
+|---|---|---|---|
+| `l21_ref_safety.py` | L21 — Suppress in-scene rendering of refs | phase 2 | Slot `12_ref_safety`. Universal. |
+| `l18_anatomy.py` | L18 — Pose anatomy coherence | phase 3a | Slot `13_anatomy_guardrail`. Always-emit universal soft guardrail. |
+| `l10_render_directive.py` | L10 — Refs are truth, prompts are deltas | phase 3a | Slot `11_render_directive`. Always-emit. The load-bearing render directive. |
+| `l20_camera.py` | L20 — Camera distance bias (in-prompt directive) | phase 3a | Slot `2_camera_strengthening`. Body-region beats. Chapter-aggregate L20 check still lives in build_plan as `L20_chapter`; phase 4 migrates that. |
+| `l22_hair_state.py` | L22 — Hair state explicit | phase 3a | Slot `4_subject_state`. Reads `panel.hair_state`. |
+| `l23_env_anchor.py` | L23 — Verbal env anchor when env_ref dropped | phase 3a | Slot `9_environment`. Fires when env_ref=None + env_dropped + location_slug set. |
+| `l24_accessory.py` | L24 — Suppress anachronistic accessories | phase 3a | Slot `4_subject_state`. Reads `cast[].accessories`. |
+| `l15_glamour.py` | L15 — Female beauty anchor | phase 3a | Slot `3_subject_identity`. `applicable_transformations=("fmg",)`. |
+| `l17_canonical.py` | L17 — Canonical character | phase 3a | Slot `3_subject_identity`. Reads `cast[].canonical_anchor`. |
+| `female_anatomy.py` | Female anatomy anchor (May-14 finding) | phase 3a | Slot `4_subject_state`. `applicable_transformations=("fmg",)`. Body-region ECU at tier≥2. |
+| `l11_silhouette.py` | L11 — Cartoony FMG anchoring | phase 3b | **Only multi-slot rule.** Slots `5_style_anchor` + `8_tier_silhouette`. `applicable_transformations=("fmg",)`. Tier-specific block depends on `lineup_attached` / `stage_change`. |
+
+Multi-slot rules: the helper `next_panel._apply_rule_at_slot` injects `_active_slot` into ctx so `verify_pre_render` can branch per slot. Compose-side ordering: `compose_prompt` issues two explicit `_apply_rule_at_slot` calls for L11 (one per slot) at the right places in the function.
+
+Phase 4 adds pre-render verification (migrating `rules_audit.py` checks into rule modules — moves `L20_chapter`, `L13`, `L12`, `L28`, etc.). Phase 5 adds post-render vision verification. Phase 6 adds retry strategies.
 
 ## Adding a new rule
 

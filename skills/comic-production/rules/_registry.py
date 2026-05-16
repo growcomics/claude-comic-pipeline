@@ -26,11 +26,13 @@ from .l24_accessory import L24
 from .l15_glamour import L15
 from .l17_canonical import L17
 from .female_anatomy import FemaleAnatomy
+from .l11_silhouette import L11
 
 
-# Phase 3a — all single-slot rules migrated. Phase 3b adds L11 (the only
-# multi-slot rule). After phase 3b, compose_prompt is purely a registry
-# walker and the legacy inline helpers in next_panel.py are removed.
+# Phase 3b — every active L-rule migrated to its own module. compose_prompt
+# now routes ALL rule contributions through this registry. The legacy
+# inline helpers in next_panel.py are dead code (left in place for
+# backwards compat; phase 3 cleanup will prune them).
 RULE_INSTANCES: list[Rule] = [
     L21(),
     L18(),
@@ -42,6 +44,7 @@ RULE_INSTANCES: list[Rule] = [
     L15(),
     L17(),
     FemaleAnatomy(),
+    L11(),
 ]
 
 

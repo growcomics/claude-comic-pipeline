@@ -10,6 +10,31 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (phase 3b of checks-and-balances — all rules migrated)
+
+### Added
+
+- **Phase 3b — L11 migrated as the final per-rule module.** The only multi-slot rule in the pipeline (slots `5_style_anchor` + `8_tier_silhouette`). All 11 active rules now route through `rules._registry`. `compose_prompt` no longer inlines any rule contribution.
+  - **`rules/l11_silhouette.py`** — multi-slot rule, `applicable_transformations=("fmg",)`. `compose_contribution` dispatches by slot: returns the cartoony-FMG style anchor at slot 5 when `tier >= 2`; returns one of three tier-silhouette blocks at slot 8 depending on `lineup_attached` / `stage_change` / unchanged-carry-forward. The `_SILHOUETTE_BY_TIER` dict (tiers 1-9 with explicit dimensional anchors) moves into the module. `verify_pre_render` reads `ctx["_active_slot"]` to branch per slot — returns PASS at slot 5 when tier≥2 (or SKIPPED at tier<2), and PASS / FAIL / SKIPPED at slot 8 depending on the path. `retry_strategy` returns one of three escalations: (a) reattach lineup when dropped at compose time, (b) recommend model swap at tier≥7 (Grok ceiling territory), (c) strengthen silhouette vocabulary otherwise.
+- **`_apply_rule_at_slot` extended to inject `_active_slot` into ctx.** The helper builds `ctx_with_slot = {**ctx, "_active_slot": slot}` and passes that to `rule.compose_contribution` and `rule.verify_pre_render`. Single-slot rules ignore the extra key; multi-slot L11 reads it to dispatch.
+- **`_registry.RULE_INSTANCES` now contains all 11 active rules** in slot order: L21, L18, L10, L20, L22, L23, L24, L15, L17, FemaleAnatomy, L11.
+- **`rules/README.md` migration tracker updated** — every row shows the phase it landed in. No more TODO rows.
+- **L11's two inline sites in `compose_prompt`** (the slot-5 style anchor block and the ~100-line slot-8 tier-silhouette block) replaced by two `_apply_rule_at_slot` calls. The legacy `_l11_style_anchor_applied` flag is gone — the rule module derives "was the style anchor emitted?" from `tier >= 2` directly without inter-slot state.
+
+### Verified
+
+- **Walk-test 41/41 byte-identical.** `composed_prompt` matches between phase 1 (HEAD at commit `7c4a342`) and phase 3b across every panel in `comic-april-mutagen-v2` (15 panels) and `moving-experience-v2` (26 panels), including tier-1 panels (where slot 5 skips and slot 8 emits the lineup-attached block at tier 1) and tier-6 panels (where slot 5 emits the style anchor and slot 8 emits the full lineup-attached block at the friction-zone silhouette).
+- **`write_ledger.py` smoke-tested on tier-2 and tier-1 panels.** Tier-2 panel p07-01 ledger shows `L11.applied=true`, `slot=["5_style_anchor","8_tier_silhouette"]`, `pre_render.reason="tier=2, lineup attached at generation — slot 8_tier_silhouette (lineup-attached path)"`. Tier-1 panel p01-01 ledger shows `L11.applied=true`, `pre_render.reason="tier=1, lineup attached at generation — slot 8_tier_silhouette (lineup-attached path)"`. Both formats byte-identical to phase 1's legacy inline-recorded entries.
+
+### Notes
+
+- **`compose_prompt` is now a registry walker.** Every rule contribution flows through `_apply_rule_at_slot`. The remaining inline logic in `compose_prompt` is composer text (render anchor, camera fragment, subjects line, action delta, lighting, env-chaining or first-env line when env_ref is attached, state-anchor line, mandatory rules block, closing CGI anchor) — none of it is rule contribution.
+- **Legacy helpers in `next_panel.py` are dead code** (`L21_REF_EXCLUSION`, `FEMALE_ANATOMY_ANCHOR`, `_body_region_camera_directive`, `_canonical_character_directive`, `_female_beauty_anchor_line`, `_hair_state_line`, `_l24_accessory_line`, `_female_anatomy_anchor_needed`, `_env_dense_anchor`, `_pose_anatomy_anchor`, `_female_focal_in_panel`, plus inline tier silhouette dict). They remain in place for backwards compat. A follow-up cleanup commit will prune them once we confirm nothing external imports them — keeping them now de-risks phase 3b's "phase 3 is complete" claim.
+- **Phase 4** (migrate `rules_audit.py` checks into rule modules — `L20_chapter`, `L13`, `L12`, `L28`, `check_camera_variety`, `check_transformation_beats`) is the next deliverable. With phase 3 done, every active L-rule has a home; phase 4 fills in the pre-render verifications that don't currently live in the modules.
+- **No comic API spend in phase 3b.** Walk-test on existing data confirmed byte-identical prompt output without any new generation.
+
+---
+
 ## 2026-05-16 (phase 3a of checks-and-balances)
 
 ### Added

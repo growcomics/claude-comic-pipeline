@@ -883,14 +883,19 @@ def _apply_rule_at_slot(rule_id: str, slot: str, panel: dict, ctx: dict,
 
     Returns the contribution string (or None if not emitted).
 
-    This is the shared dispatch used by every migrated rule in phase 3a.
-    Phase 3b extends it to multi-slot rules (L11).
+    Multi-slot rules (currently only L11) read the active slot from
+    ctx["_active_slot"] which this helper injects. Existing single-slot
+    rules ignore the extra key.
     """
     rule = get_rule(rule_id)
     if rule is None or not rule.applies_to_transformation(transformation_type):
         return None
-    contribution = rule.compose_contribution(panel, ctx, slot)
-    verif = rule.verify_pre_render(panel, ctx)
+    # Inject _active_slot so multi-slot rules can branch in verify_pre_render
+    # without changing the Rule base class signature.
+    ctx_with_slot = dict(ctx)
+    ctx_with_slot["_active_slot"] = slot
+    contribution = rule.compose_contribution(panel, ctx_with_slot, slot)
+    verif = rule.verify_pre_render(panel, ctx_with_slot)
     if contribution is not None:
         parts.append(contribution)
         _record_applied(trace, rule_id,
@@ -1029,21 +1034,12 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _apply_rule_at_slot("female_anatomy", "4_subject_state",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 3d. Cartoony FMG style anchor — per L11. Slot it before the action delta
-    # so the model commits to the proportional aesthetic before reading the
-    # action content. Only emit when tier >= 2 (tier 1 is the realistic baseline
-    # where the cartoony anchor would actively hurt).
-    _l11_style_anchor_applied = False
-    if tier is not None and isinstance(tier, (int, float)) and tier >= 2:
-        l11_style_line = (
-            "Style anchor for the body: cartoony hyper-FMG comic-book "
-            "proportions, NOT realistic fitness modelling. Exaggerated comic "
-            "musculature where the silhouette is the storytelling element."
-        )
-        parts.append(l11_style_line)
-        _l11_style_anchor_applied = True
-        _record_applied(_trace, "L11", contribution=l11_style_line,
-                        pre_render_reason=f"tier={tier} >= 2 — style anchor at slot 5_style_anchor")
+    # 3d. L11 style anchor — slot 5_style_anchor. Fires when tier >= 2.
+    # Slots before the action delta so the model commits to the proportional
+    # aesthetic before reading action content. PHASE 3B — routed through
+    # rules._registry. FMG-only.
+    _apply_rule_at_slot("L11", "5_style_anchor",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 4. DELTA — action / pose / expression. Wrapped with a sanitization
     #    directive so the model knows: even if the action text mentions
@@ -1062,111 +1058,14 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     if time_of_day:
         parts.append(f"Momentary lighting state: {time_of_day}.")
 
-    # 6. Size tier — aggressive silhouette directive per L11. The earlier
-    # phrasing ("match the muscle proportions of figure N") was too gentle and
-    # the model regressed to realistic-fitness builds. New phrasing scales
-    # vocabulary with tier and explicitly tells the model NOT to approximate
-    # toward a smaller realistic build.
-    if tier is not None:
-        # Build a tier-specific silhouette descriptor. Numbers are deliberately
-        # aggressive — they describe the silhouette of the corresponding lineup
-        # figure, not realistic anatomy.
-        silhouette_by_tier = {
-            1: ("baseline athletic — slim, healthy, no exaggerated muscle"),
-            2: ("visibly developed — defined shoulders, hint of bicep mass, "
-                "tighter midsection"),
-            3: ("clearly muscular — broad shoulders, defined biceps and chest, "
-                "visible abs"),
-            4: ("cartoony hyper-FMG threshold — shoulders 2x normal width with "
-                "clear deltoid mass, large defined biceps and triceps, full "
-                "powerful chest, ridged abdominal definition across the midriff, "
-                "strong sculpted quads, sculpted hips"),
-            5: ("massive cartoony FMG — shoulders 2.5x normal width, huge "
-                "sculpted biceps, deep powerful chest, blocky abdominal "
-                "definition, powerful quads"),
-            6: ("peak cartoony FMG — shoulders 3x normal width, full "
-                "hyper-muscular silhouette dominating the frame, every muscle "
-                "group visibly developed"),
-            7: ("beyond peak — proportions exaggerated past realism, "
-                "frame-filling cartoony FMG silhouette, biceps approach waist "
-                "width"),
-            8: ("super-peak cartoony FMG — shoulders dwarf the head, biceps "
-                "wider than the waist, pure comic-fantasy proportions"),
-            9: ("maximum cartoony FMG — pure FMG-comic exaggeration, near-"
-                "silhouette dominance over the entire frame"),
-        }
-        try:
-            t_int = int(tier)
-        except (TypeError, ValueError):
-            t_int = None
-        silhouette_desc = silhouette_by_tier.get(t_int, f"tier {tier} cartoony FMG silhouette")
-
-        if lineup_attached:
-            l11_tier_line = (
-                f"Size tier: {tier}. The attached muscle-size lineup "
-                "reference is a PROPORTION reference ONLY — use figure "
-                f"{tier} from the lineup to determine ONLY: (a) the size, "
-                "mass, and definition of the muscle groups — shoulders, "
-                "deltoids, biceps, triceps, chest, lats, abdominal "
-                "definition, quadriceps, hamstrings, calves; (b) the size, "
-                "fullness, and shape of the breasts; (c) the overall body "
-                f"mass and frame width. Target silhouette dimensions for "
-                f"tier {tier}: {silhouette_desc}. Do NOT borrow from the "
-                "lineup: face, hair, skin tone, clothing, costume, pose, "
-                "facial expression, lighting, setting, background, or any "
-                "visual element other than the muscle and breast "
-                "proportions themselves. The character's identity, hair, "
-                "face, costume, pose, and setting are specified in the "
-                "prompt and the other attached reference images. Render "
-                "the muscle and breast proportions TO MATCH figure "
-                f"{tier} in the lineup exactly — do not approximate to "
-                "smaller realistic-fitness proportions. NOT realistic "
-                "fitness, NOT athletic — cartoony FMG, comic-book "
-                "proportions."
-            )
-            parts.append(l11_tier_line)
-            _record_applied(_trace, "L11",
-                            contribution=l11_tier_line,
-                            pre_render_status="pass",
-                            pre_render_reason=f"tier={tier}, lineup attached at generation — slot 8_tier_silhouette (lineup-attached path)")
-        elif stage_change:
-            # Stage change but lineup not available — verbal only with strong
-            # vocabulary. Significantly less reliable than lineup-attached.
-            l11_tier_line = (
-                f"Size tier: {tier} (NEW tier — grown from prior panel). "
-                f"Cartoony FMG silhouette: {silhouette_desc}. Render the build "
-                "unmistakably larger than the body baseline reference. NOT "
-                "realistic fitness — cartoony comic-book proportions."
-            )
-            parts.append(l11_tier_line)
-            _record_applied(_trace, "L11",
-                            contribution=l11_tier_line,
-                            pre_render_status="fail",
-                            pre_render_reason=f"tier={tier} stage-change but lineup NOT attached — falling back to verbal-only (significantly less reliable per L11)")
-        else:
-            l11_tier_line = (
-                f"Size tier: {tier} (unchanged from prior panel). Carry "
-                "forward the build from the attached state anchor exactly. "
-                "No growth in this panel. Preserve the cartoony FMG silhouette "
-                "from the prior accepted panel."
-            )
-            parts.append(l11_tier_line)
-            if not _l11_style_anchor_applied:
-                # tier=1: no style anchor was emitted, and the tier line is a
-                # neutral carry-forward. Don't claim L11 was "applied" with a
-                # contribution — but record that the carry-forward fired.
-                _record_applied(_trace, "L11",
-                                contribution=l11_tier_line,
-                                pre_render_status="skipped",
-                                pre_render_reason=f"tier={tier} unchanged carry-forward; style anchor not needed at tier 1")
-            else:
-                _record_applied(_trace, "L11",
-                                contribution=l11_tier_line,
-                                pre_render_status="pass",
-                                pre_render_reason=f"tier={tier} unchanged carry-forward; style anchor already emitted at slot 5")
-    else:
-        _record_skipped(_trace, "L11",
-                        "panel.muscle_size_tier is null — non-arc panel")
+    # 6. L11 tier silhouette — slot 8_tier_silhouette. The biggest single
+    # contribution in compose_prompt; varies by (lineup_attached, stage_change,
+    # tier). PHASE 3B — routed through rules._registry. FMG-only; non-FMG
+    # projects skip via applicable_transformations and the tier line is
+    # absent for non-FMG arc characters (a known gap until the BE/MMG/glute
+    # variants are written).
+    _apply_rule_at_slot("L11", "8_tier_silhouette",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 7. Environment — slot 9_environment. Two pieces:
     #   - env-chaining or first-env language (composer logic, when env_ref attached)
