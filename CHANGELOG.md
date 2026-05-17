@@ -12,6 +12,30 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (Mira panel-render validation — L30/L31/L32 confirmed end-to-end + 3 canonical-cast promotions)
+
+### Added
+
+- **Mira panel-render validation log** at [`docs/posts/2026-05-16-mira-panel-validation.md`](./docs/posts/2026-05-16-mira-panel-validation.md) — 24 Higgsfield gens (8 per tier) of a synthetic Mira panel through the full L30/L31/L32 ref stack. All 23 successful candidates archived at [`docs/posts/2026-05-16-mira-panel-validation/{tier-7,tier-8,tier-9}/`](./docs/posts/2026-05-16-mira-panel-validation/). First **panel-render** validation of the per-tier rules (previous L30/L31/L32 work only validated the reinforcement *sheets*, not the panel-render path).
+- **Canonical-cast Mira tier-7/8/9 promotions**: [`canonical-cast/mira/body-tier{7,8,9}.png`](./skills/comic-production/references/canonical-cast/mira/) ingested + documented in [canonical-cast README](./skills/comic-production/references/canonical-cast/README.md). Same images mirrored to [`growcomics-references/series/characters/mira/`](/Users/mattmenashe/Documents/growcomics-references/series/characters/mira/) with `_provenance.md`. Mira tier-7/8/9 form a coherent growth sequence (same identity + costume + pose across all three) — chain off as a sequential tier ladder.
+- **4 picks validate end-to-end**: tier 7 = `6959196c`, tier 8 = `d5fa091e`, tier 9 = `2e735ea5` (user-confirmed across all three matching my recommendations).
+
+### Findings
+
+- **L30/L31/L32 produce tier-N panel output reliably**: 23/23 successful candidates land at their declared tier with the L11 surgical-scoping intact. Zero leakage from reinforcement sheets' clothing/hair/face/background into the rendered panels.
+- **NSFW upload filter is non-deterministic**: same shape of content (anatomical detail sheets with breast-volume zoom) was blocked at upload during the L29 run but cleared cleanly for tier-7/8/9 this run. Don't treat NSFW upload blocks as permanent — retry on a later session.
+- **4-ref stack works at all peak tiers**: face + lineup + 2 reinforcement = 4 attached refs. Higgsfield nano_banana_flash handled this consistently across 24 gens. The "3-ref ceiling" in L23 is per-model and may be softer than originally documented — worth re-examining.
+
+### Validation milestone
+
+- **Peak-tier reinforcement series (L29/L30/L31/L32) is now end-to-end validated**: not just the sheets, not just the prompt-assembly, but the actual rendered panel output. The architecture is ready for production use on FMG comics escalating to tier 6/7/8/9.
+
+### Credit cost
+
+- ~72 credits for the 24-gen batch + a few credits for the 7 ref uploads (which don't burn generation credits).
+
+---
+
 ## 2026-05-16 (L32 — tier-9 reinforcement refs ingested + rule wired, completes the peak-tier series)
 
 ### Added
