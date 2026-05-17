@@ -58,7 +58,7 @@ Variance across the 8 is in *setting* (dojo interior, courtyard, palace square, 
 | 07 | `81291709` | [gen-07-81291709.png](./2026-05-16-l29-validation-assets/gen-07-81291709.png) | Strong | Urban background, heavy musculature |
 | 08 | `5f9a0608` | [gen-08-5f9a0608.png](./2026-05-16-l29-validation-assets/gen-08-5f9a0608.png) | Strong | Night palace background, well-balanced |
 
-**Best of 8 (user-confirmed)**: **gen-05 (`a3949787`)** — the user reviewed all 8 and picked gen-05 as overall best (overrides my initial recommendations of gen-03 for peak tier-6 read + gen-01 for cleanest composition). gen-05 balances strong tier-6 proportions, full bust scale, clean Chun Li face, and a courtyard background — the all-around winner.
+**Best of 8 (user-confirmed)**: **gen-05 (`a3949787`)** — the user reviewed all 8 and picked gen-05 as overall best (overrides my initial recommendations of gen-03 for peak tier-6 read + gen-01 for cleanest composition). gen-05 balances strong tier-6 proportions, full bust scale, clean Chun Li face, and a courtyard background — the all-around winner. **Promoted to canonical-cast**: now lives at [`skills/comic-production/references/canonical-cast/chunli/body-tier6.png`](../../skills/comic-production/references/canonical-cast/chunli/body-tier6.png) for reuse across projects (see [canonical-cast README](../../skills/comic-production/references/canonical-cast/README.md) for the provenance bar that justifies promotion).
 
 ### Finding 3 — Surgical scoping holds; zero reference leakage
 
