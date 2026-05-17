@@ -1266,4 +1266,28 @@ Tier 1-7 panels (handled by lineup / L29 / L30). Tier 9 panels (out of calibrati
 
 ---
 
+## L32 — Tier-9 needs dedicated proportion reinforcement refs (completes the peak-tier series)
+
+**Symptom + root cause + fix**: Identical pattern to L29/L30/L31 — multi-figure lineup-4-9 chart averages tier-9 toward middle, dedicated tier-9 reinforcement sheets isolate the maximum proportions.
+
+**User-directed pick**: 16 candidates generated 2026-05-16 evening. User reviewed, picked Sheet A candidate `bc2bac33` (my A-02), and ran it through Grok image-edit with prompt "Make the breasts bigger, change nothing else." The resulting Grok-edited composite (`4b290bcc-b8fe-4daa-bf1b-50c4009226b2`) became the canonical tier-9 reference. User explicitly assigned the same edited composite to both `tier-9-full-body.png` and `tier-9-anatomical-detail.png` file slots — intentional, since the composite already contains both full-body and detail-inset views. Credit cost: ~50 + a few credits for the Grok edit.
+
+**Implementation**: Sibling module `rules/l32_tier9_reinforcement.py`. Same slot, same surgical-scoping pattern, same all-or-nothing attachment, same HARD audit gate. Trigger: `panel.muscle_size_tier == 9`.
+
+**The peak-tier reinforcement series is now complete**: L29 (tier 6) + L30 (tier 7) + L31 (tier 8) + L32 (tier 9). Multi-figure lineup interpolation failure blocked at every peak tier.
+
+### Operator-in-the-loop lesson
+
+The tier-9 pick is a precedent worth naming: when 16 generated candidates don't have the exact attribute the user wants (here: bigger bust at tier 9), the right move is user-directed editing of a base pick rather than another round of regeneration. Grok image-edit on top of a nano_banana_flash composite produced the canonical asset in a single iteration. Future tier expansions should accept this pattern as legitimate output.
+
+### Where this applies
+
+FMG comics at tier 9. The peak-tier series stops here — there's no tier 10 in `_BUILD_BY_TIER`.
+
+### Where this does NOT apply
+
+Tier 1-8 panels (handled by lineup / L29 / L30 / L31). Non-FMG transformations.
+
+---
+
 ## How to add a lesson

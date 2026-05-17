@@ -341,6 +341,19 @@ def should_attach_tier8_reinforcement(panel: dict) -> bool:
         return False
 
 
+def should_attach_tier9_reinforcement(panel: dict) -> bool:
+    """L32 attachment rule: sibling of L31 at `muscle_size_tier == 9`.
+
+    Tier 9 ("maximum cartoony FMG") caps the peak-tier reinforcement
+    series. Same failure mode and fix as L29/L30/L31.
+    """
+    tier = panel.get("muscle_size_tier")
+    try:
+        return int(tier) == 9
+    except (TypeError, ValueError):
+        return False
+
+
 # ---------------------------------------------------------------------------
 # Ref discovery
 
@@ -486,6 +499,16 @@ TIER8_REINFORCEMENT_FILENAMES = (
     "tier-8-anatomical-detail.png",
 )
 
+# L32 — tier-9 reinforcement refs. Note: both files are intentionally
+# the same composite image (user-directed Grok edit of A-02 candidate
+# with bigger bust). The composite already contains both full-body and
+# detail-zoom panels, so the dual-attach pattern still gives the model
+# two ref slots pointing at calibrated tier-9 proportions.
+TIER9_REINFORCEMENT_FILENAMES = (
+    "tier-9-full-body.png",
+    "tier-9-anatomical-detail.png",
+)
+
 
 def _find_peak_reinforcement_refs(root: Path, tier: int) -> list[Path]:
     """Shared resolver for any peak-tier reinforcement ref pair. Returns
@@ -577,6 +600,11 @@ def find_tier7_reinforcement_refs(root: Path) -> list[Path]:
 def find_tier8_reinforcement_refs(root: Path) -> list[Path]:
     """L31 sibling of find_tier7_reinforcement_refs. Tier-8 pair."""
     return _find_peak_reinforcement_refs(root, 8)
+
+
+def find_tier9_reinforcement_refs(root: Path) -> list[Path]:
+    """L32 sibling. Tier-9 pair (both files are the same composite image)."""
+    return _find_peak_reinforcement_refs(root, 9)
 
 
 # ---------------------------------------------------------------------------
@@ -1069,6 +1097,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L29":            {"title": "Tier-6 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L30":            {"title": "Tier-7 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L31":            {"title": "Tier-8 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L32":            {"title": "Tier-9 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1235,6 +1264,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    tier6_refs_attached: bool = False,
                    tier7_refs_attached: bool = False,
                    tier8_refs_attached: bool = False,
+                   tier9_refs_attached: bool = False,
                    _trace: dict | None = None,
                    transformation_type: str = "fmg") -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
@@ -1271,6 +1301,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "tier6_refs_attached": tier6_refs_attached,
         "tier7_refs_attached": tier7_refs_attached,
         "tier8_refs_attached": tier8_refs_attached,
+        "tier9_refs_attached": tier9_refs_attached,
         "env_dropped": env_dropped,
         "stage_change": stage_change,
         "shotlist": shotlist,
@@ -1403,6 +1434,10 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 
     # 6c. L31 tier-8 reinforcement — same slot, sibling of L29/L30.
     _apply_rule_at_slot("L31", "8b_tier_reinforcement",
+                        panel, ctx, parts, _trace, transformation_type)
+
+    # 6d. L32 tier-9 reinforcement — same slot, sibling of L29/L30/L31.
+    _apply_rule_at_slot("L32", "8b_tier_reinforcement",
                         panel, ctx, parts, _trace, transformation_type)
 
     # 7. Environment — slot 9_environment. Two pieces:
@@ -1807,6 +1842,42 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                 "reason": missing_t8_reason,
             })
 
+    # L32 — tier-9 reinforcement refs. Same pattern as L29/L30/L31 at
+    # `panel.muscle_size_tier == 9`. Both files are intentionally the
+    # same composite image (user-directed Grok edit); the dual attach
+    # still gives the model two ref slots pointing at calibrated
+    # tier-9 proportions.
+    tier9_refs_attached = False
+    if should_attach_tier9_reinforcement(next_panel):
+        tier9_refs = find_tier9_reinforcement_refs(root)
+        if len(tier9_refs) == len(TIER9_REINFORCEMENT_FILENAMES):
+            for ref_path in tier9_refs:
+                refs_to_attach.append({
+                    "kind": "tier9_reinforcement",
+                    "tier": 9,
+                    "path": str(ref_path),
+                    "reason": (
+                        f"TIER-9 panel — `{ref_path.name}` MUST be attached "
+                        "alongside the muscle-size lineup-4-9. Per L32 "
+                        "(tier-9 needs dedicated proportion reinforcement)."
+                    ),
+                })
+            tier9_refs_attached = True
+        else:
+            missing_t9_reason = (
+                "TIER-9 panel but one or both tier-9 reinforcement PNGs NOT "
+                "FOUND on disk. Drop both "
+                f"{', '.join(TIER9_REINFORCEMENT_FILENAMES)} into "
+                "skills/comic-production/references/peak-body-scale/tier-9/ "
+                "(or project references/style/) before generating. Per L32."
+            )
+            refs_to_attach.append({
+                "kind": "MISSING_tier9_reinforcement",
+                "tier": 9,
+                "path": None,
+                "reason": missing_t9_reason,
+            })
+
     # L12 + L13: surface shotlist-shape warnings at planning time so the agent
     # driving generation can fix the shotlist or override before paying for an
     # output that's broken-by-design. These warnings live alongside MISSING_*
@@ -1891,7 +1962,8 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
     n_tier6 = sum(1 for r in refs_to_attach if r.get("kind") == "tier6_reinforcement")
     n_tier7 = sum(1 for r in refs_to_attach if r.get("kind") == "tier7_reinforcement")
     n_tier8 = sum(1 for r in refs_to_attach if r.get("kind") == "tier8_reinforcement")
-    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6 + n_tier7 + n_tier8
+    n_tier9 = sum(1 for r in refs_to_attach if r.get("kind") == "tier9_reinforcement")
+    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6 + n_tier7 + n_tier8 + n_tier9
 
     env_dropped_for_ceiling = False
     composer_env_ref: Path | None = env_ref
@@ -1950,6 +2022,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             tier6_refs_attached=tier6_refs_attached,
                             tier7_refs_attached=tier7_refs_attached,
                             tier8_refs_attached=tier8_refs_attached,
+                            tier9_refs_attached=tier9_refs_attached,
                             _trace=trace,
                             transformation_type=transformation_type)
 

@@ -128,6 +128,25 @@ Sibling L32 module. Same recipe; will execute next.
 
 ---
 
+## Tier-9 reinforcement refs (L32, added 2026-05-16 evening — completes the peak-tier series)
+
+Tier 9 caps the peak-tier reinforcement series. The user generated 16 candidates (8 Sheet A + 8 Sheet B) on the standard recipe but, after reviewing, took Sheet A candidate `bc2bac33` and ran it through Grok image-edit with "Make the breasts bigger, change nothing else" — the resulting composite (`4b290bcc`) became the canonical tier-9 reference. Both file slots (`tier-9-full-body.png` and `tier-9-anatomical-detail.png`) are intentionally the same image; the composite already includes both full-body views AND detail-zoom insets, so two file slots pointing at the same calibrated image is the correct outcome.
+
+| File | Source |
+|---|---|
+| `peak-body-scale/tier-9/tier-9-full-body.png` | User-directed Grok edit of A-02 (`4b290bcc`) — bigger bust applied |
+| `peak-body-scale/tier-9/tier-9-anatomical-detail.png` | Same as full-body (intentional — composite includes detail insets) |
+
+### Attachment + audit gates
+
+Same shape as L29/L30/L31. `should_attach_tier9_reinforcement()` fires at `muscle_size_tier == 9`; `find_tier9_reinforcement_refs()` uses the shared `_find_peak_reinforcement_refs(root, 9)` helper. HARD audit gate.
+
+### The peak-tier series is complete
+
+Tier 6 (L29) + tier 7 (L30) + tier 8 (L31) + tier 9 (L32) all ship dedicated reinforcement sheets calibrated for each tier. Multi-figure lineup interpolation failure is now blocked at every peak tier.
+
+---
+
 ## What the tiers mean
 
 Each tier is a **muscular-build target** — what muscle mass, definition, and frame width does figure N show? Reading the lineup left-to-right:

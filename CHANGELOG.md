@@ -12,6 +12,25 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L32 — tier-9 reinforcement refs ingested + rule wired, completes the peak-tier series)
+
+### Added
+
+- **L32 rule module** at [`skills/comic-production/rules/l32_tier9_reinforcement.py`](./skills/comic-production/rules/l32_tier9_reinforcement.py) — sibling of L29/L30/L31, fires at `panel.muscle_size_tier == 9`. Caps the peak-tier reinforcement series.
+- **Tier-9 anatomical reference sheets** at [`skills/comic-production/references/peak-body-scale/tier-9/`](./skills/comic-production/references/peak-body-scale/tier-9/) — both file slots point to the same image: a user-directed Grok image-edit of my A-02 candidate (`bc2bac33`) with the prompt "Make the breasts bigger, change nothing else." The resulting composite (`4b290bcc`) already contains both full-body views and detail-zoom insets, so using one image for both slots is intentional and matches the L32 doc. 16 candidates generated (8 A + 8 B, all 16 successful — clean run with 0 NSFW and 0 platform-failures), all 16 archived at [`docs/posts/2026-05-16-tier-9-candidates/`](./docs/posts/2026-05-16-tier-9-candidates/). Credit cost: ~50 + a few Grok credits for the bust edit.
+- **Helpers + wiring**: `find_tier9_reinforcement_refs()`, `should_attach_tier9_reinforcement()`, ctx flag `tier9_refs_attached`, slot dispatch after L29/L30/L31. `_has_tier9_reinforcement_refs()` audit helper + per-panel HARD gate.
+- **Docs**: tier-9 section in [`peak-body-scale.md`](./skills/comic-production/references/peak-body-scale.md) noting the peak-tier series is now complete; L32 lesson in [`lessons-learned.md`](./skills/comic-production/references/lessons-learned.md) including a new "operator-in-the-loop lesson" naming the user-directed-Grok-edit pattern as legitimate output when 16 generated candidates don't have the exact attribute the user wants.
+
+### Validation
+
+- End-to-end smoke test against a synthetic tier-9 Mira panel: both PNGs attached, L32 directive renders, trace shows `L32.pre_render.status="pass"`.
+
+### Milestone
+
+- **Peak-tier reinforcement series is complete**: L29 (tier 6) + L30 (tier 7) + L31 (tier 8) + L32 (tier 9) all ship dedicated reinforcement sheets. Multi-figure lineup interpolation failure mode blocked at every peak tier.
+
+---
+
 ## 2026-05-16 (L31 — tier-8 reinforcement refs ingested + rule wired)
 
 ### Added

@@ -379,6 +379,17 @@ def check_pages(project: Path, shotlist: dict, pages_filter: set[int] | None) ->
                     "Per L31.",
                 ))
 
+            # 5d. L32 — same gate at tier 9.
+            if tier_int == 9 and not _has_tier9_reinforcement_refs(project):
+                out.append(Finding(
+                    n, pid, "tier9_reinforcement", SEVERITY_HARD,
+                    "Panel declares muscle_size_tier == 9 but the L32 reinforcement PNGs are NOT findable on disk. "
+                    "Both tier-9-full-body.png and tier-9-anatomical-detail.png are required (both are the same "
+                    "composite per the user-directed Grok edit, but both file slots must exist).",
+                    "Ship the tier-9 reinforcement PNGs to skills/comic-production/references/peak-body-scale/tier-9/ "
+                    "before rendering this panel. Per L32.",
+                ))
+
             # 6. Characters all declared in cast[]
             for ch in chars:
                 if cast_ids and ch not in cast_ids:
@@ -971,6 +982,10 @@ def _has_tier7_reinforcement_refs(project: Path) -> bool:
 
 def _has_tier8_reinforcement_refs(project: Path) -> bool:
     return _has_peak_reinforcement_refs(project, 8)
+
+
+def _has_tier9_reinforcement_refs(project: Path) -> bool:
+    return _has_peak_reinforcement_refs(project, 9)
 
 
 def _infer_arc_character(shotlist: dict) -> str | None:
