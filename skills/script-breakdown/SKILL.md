@@ -285,6 +285,7 @@ Per **L28** in `comic-production/references/lessons-learned.md`, every comic pro
   - `tier`: the numeric tier
   - `path`: `references/characters/<char_id>/body-tier{N}.png`
   - `lineup_required`: `false` if `tier == 1`, `true` if `tier >= 2`. **This is the L28 hard rule — tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image at generation time.**
+  - `tier6_reinforcement_required`: `true` when `tier == 6`, otherwise omit (or `false`). **This is the L29 hard rule** — tier-6 body refs AND every shotlist panel at `muscle_size_tier == 6` MUST attach the two dedicated tier-6 reinforcement PNGs at generation time, IN ADDITION TO the muscle-size lineup. The reinforcement PNGs are repo-bundled at `skills/comic-production/references/peak-body-scale/tier-6/` — they are NOT character-specific generated assets and do NOT go through the `reference-gathering` generation flow; the manifest just flags that the panel-level renderer must attach them.
 - `views` (NEW per **L16** — multi-angle character reference packs): for any character with `body_tiers` (i.e. arc characters), emit a `views` array with these 5 entries at the baseline tier:
   - `{"name": "3q-full", "tier": 1, "path": "references/characters/<char_id>/view-3q-full.png", "lineup_required": false}`
   - `{"name": "profile", "tier": 1, "path": "references/characters/<char_id>/view-profile.png", "lineup_required": false}`
@@ -315,7 +316,8 @@ If a character has no `muscle_size_tier` values in the shotlist (non-transformat
       "body_tiers": [
         {"tier": 1, "path": "references/characters/chunli/body-tier1.png", "lineup_required": false},
         {"tier": 3, "path": "references/characters/chunli/body-tier3.png", "lineup_required": true},
-        {"tier": 5, "path": "references/characters/chunli/body-tier5.png", "lineup_required": true}
+        {"tier": 5, "path": "references/characters/chunli/body-tier5.png", "lineup_required": true},
+        {"tier": 6, "path": "references/characters/chunli/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
       ],
       "views": [
         {"name": "3q-full", "tier": 1, "path": "references/characters/chunli/view-3q-full.png", "lineup_required": false},

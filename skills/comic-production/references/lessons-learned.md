@@ -525,7 +525,7 @@ Camera, action, pose, expression. No architecture, no costume design, no charact
 
 ![Muscle-size lineup — six 3D-rendered figures, tier 1 through tier 6](../assets/muscle-size-lineup.png)
 
-**Important framing (purged 2026-05-16):** The lineup attached to L11 panels is a **3D body chart with six figures showing progressive muscle development** — visible deltoids, biceps, chest depth, abdominal definition, frame width. It is NOT a silhouette. The word "silhouette" was used heavily across the pipeline pre-2026-05-16 and was load-bearing in the WRONG direction: it caused nano_banana_flash to read the reference as "match the outline shape," skipping the muscle volume. Use "muscular build" / "3D muscle volume" / "muscle mass and definition" throughout.
+**Important framing (purged 2026-05-16):** The lineup attached to L11 panels is a **3D body chart with six figures showing TWO progressively-scaled proportion attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest depth, abdominal definition, frame width), AND (2) breast scale (size, fullness, forward projection)**. Figure 6 has visibly larger and more forward-projected breasts than figure 1 in addition to larger muscle mass. The lineup is NOT a silhouette (outline) reference, NOT a face / hair / costume reference. The word "silhouette" was used heavily across the pipeline pre-2026-05-16 and was load-bearing in the WRONG direction: it caused nano_banana_flash to read the reference as "match the outline shape," skipping the muscle volume. Use "muscular build" / "3D muscle volume" / "muscle mass and definition" throughout, AND explicit "breast SIZE / FULLNESS / forward PROJECTION" language to anchor the second proportion attribute.
 
 **Symptom**: Generated characters are visibly *smaller* than their declared tier. A tier-4 panel that should show cartoony hyper-FMG proportions (deltoids 2× normal mass, massive biceps, ridged abs, sculpted quads — i.e. the muscular build of figure 4 in `assets/muscle-size-lineup.png`) renders instead as a fitness-magazine athletic build — closer to tier 2 or 3. Drift compounds: a panel that under-renders the tier on the stage-change shot anchors every carryover panel after it at the smaller build.
 
@@ -534,13 +534,14 @@ Confirmed in production:
 - Supergirl panel 13 (tier-4-tears): the lineup ref wasn't attached at all due to the `find_lineup` path bug (fixed earlier; see commit `0b963c6`), so the model rendered tier 4 from verbal cues alone and produced an undersized build.
 - 2026-05-16 comic-test-log: even with the lineup attached, tiers 4-6 still regressed because the prompt language used "match the silhouette" — model interpreted as outline-only and skipped muscle volume. Validated by re-rendering p13/p14/p15 of Test 2 with corrected vocabulary; muscle mass landed visibly closer to the lineup figure.
 
-**Root cause**: Three failures, the third uncovered 2026-05-16.
+**Root cause**: Four failures — the third uncovered 2026-05-16 (morning), the fourth uncovered 2026-05-16 (afternoon).
 
 1. **Lineup ref not attached** (or attached on too few panels). The L5 heuristic ("lineup only on stage-change") was inherited from the Higgsfield era where every ref attachment cost money. On Flow refs are free; the lineup belongs on every panel where the body is the focal subject, not just transitions.
 2. **Size language too gentle.** "Match the muscle proportions of figure N" reads to the model as "render a muscular character" and the model commits to its prior of plausible-fitness anatomy. The lineup shows comic-book proportions but the prompt's mild vocabulary doesn't commit to that aesthetic, so the model interpolates and lands on a realistic-fitness build.
 3. **Wrong noun pointing at the reference.** "Match the silhouette of figure N" tells the model to match the OUTLINE — which it does, getting the shoulder width roughly right while skipping the actual 3D muscle volume. The lineup is a body chart with rendered musculature; the prompt must say so explicitly.
+4. **Breast scale not anchored as a load-bearing attribute.** The lineup conveys TWO proportion attributes — muscle scale AND breast scale — but the pre-2026-05-16-afternoon vocabulary called out only muscle with caps-lock and "do not regress" framing. Breasts were mentioned as a passing list item ("the size, fullness, and shape of the breasts") with no CRITICAL marker, no anti-regression guard, no style-anchor mention. Result: nano_banana_2 reliably matched muscle scale at tier 4-6 but defaulted to average / conservative breast scale even when the user's explicit prompt asked for tier-6 breast size matching figure 6. The same surgical-scoping pattern that fixed muscle (root cause #3) needed to be applied independently to breasts.
 
-The model has a strong prior toward realistic anatomy. Without aggressive vocabulary that points at *muscle mass and 3D volume*, it pulls back toward that prior every time.
+The model has a strong prior toward realistic anatomy AND a strong prior toward average / conservative breast scale. Without aggressive vocabulary that points at *muscle mass and 3D volume* AND *breast size / fullness / forward projection* — each as a first-class anchor with caps-lock framing and "do not regress" guards — the model pulls back toward those priors every time.
 
 **Fix**: Three parts.
 
@@ -548,11 +549,33 @@ The model has a strong prior toward realistic anatomy. Without aggressive vocabu
 
 **Vocabulary upgrade (2026-05-16 corrected)**: The muscular-build block of the composed prompt must include:
 
-1. A style anchor sentence BEFORE the action delta: *"Style anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume, NOT realistic fitness modelling, NOT a fitness-model build at wider scale. The lineup is a 3D body chart with visible musculature; the storytelling element is the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads), not the outline width."*
-2. An explicit re-framing of what the lineup is: *"The attached muscle-size lineup is a 3D BODY CHART with six figures showing progressive muscle development. It is a MUSCULAR-BUILD reference ONLY (NOT an outline reference)."*
+1. A style anchor sentence BEFORE the action delta: *"Style anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume AND tier-scaled breast proportions, NOT realistic fitness modelling, NOT a fitness-model build at wider scale, NOT a smaller-breasted body grafted onto bigger muscles. The lineup is a 3D body chart that scales TWO attributes per tier: visible musculature AND breast size / fullness / forward projection."*
+2. An explicit re-framing of what the lineup is: *"The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled proportion attributes per tier: muscle mass / definition AND breast scale. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference)."*
 3. A tier-specific muscular-build descriptor with explicit muscle-group anchors (e.g. tier 4: *"deltoids 2× normal MASS with clear striation, biceps with visible peaks and triceps mass, full powerful chest pushing fabric, ridged 6-pack abdominal definition, strong sculpted quads, hip flare. THICK 3D muscle volume, not just a wider outline"*).
-4. A "match the muscle volume, not the outline" directive: *"CRITICAL: match the visible 3D MUSCLE VOLUME and DEFINITION of figure N, not just the outline width — render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure N shows."*
-5. An explicit negation of the model's default: *"NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale — cartoony FMG, comic-book proportions with HEAVY 3D muscle mass."*
+4. A **CRITICAL — MUSCLE** directive: *"CRITICAL — MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure N, not just the outline width — render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure N shows."*
+5. A **CRITICAL — BREASTS** directive (added 2026-05-16 afternoon, Alignment Diff #3): *"CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure N EXACTLY. The lineup scales breasts proportionally to muscle tier — render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure N shows. At tier N the breast scale should read as a DRAMATIC enhancement over figure 1's baseline."*
+6. An **over-spec compensation** clause folded in after the v1→v2 iteration: *"OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt — render the breasts SLIGHTLY LARGER than figure N shows so that after the model's downward bias the final rendered scale lands AT figure N's level."* (Per `feedback_chest_oversize_compensate.md` memory.) Without this, v1 vocabulary landed at ~tier 4-5 breast scale on a tier 6 body.
+7. A **costume-accommodates anchor** folded in after v1→v2: *"The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) — NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume."* Critical for traditional / modest-coded garments (qipao, kimono, robe, business attire) where the model has a "this garment = modest profile" prior that overrides the breast-scale anchor.
+8. The anti-regression guards: *"Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier N muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought."*
+9. An explicit negation of the model's defaults: *"NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest — cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates."*
+
+**What the lineup conveys (the load-bearing attributes):**
+
+- Muscle MASS and DEFINITION — anchored since the silhouette purge (root cause #3 fix).
+- Frame width / shoulder-to-waist ratio — anchored alongside muscle.
+- Breast SIZE — anchored as of Alignment Diff #3 (root cause #4 fix).
+- Breast FULLNESS — anchored as of Alignment Diff #3.
+- Breast PROJECTION (how far the breasts project forward from the chest) — anchored as of Alignment Diff #3.
+
+**What the lineup does NOT convey (do-NOT-borrow):** face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images.
+
+**Vocabulary that works (for breast scale, added 2026-05-16 afternoon):**
+
+- "CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure N"
+- "Render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure N shows"
+- "Do NOT default to average / conservative breast size"
+- "Do NOT render tier N muscle mass with breasts shrunk to tier 2 or 3 size"
+- "Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought"
 
 See `peak-body-scale.md` for the full tier-by-tier muscular-build catalog and worked examples of vocabulary that survives the model's prior.
 
@@ -565,7 +588,12 @@ See `peak-body-scale.md` for the full tier-by-tier muscular-build catalog and wo
 - Non-transformation comics where size isn't a story element.
 - ECU-face / ECU-region panels (size isn't the focal element).
 
-**Detection / linting hint**: When reviewing accepted panels against their declared tier, compare side-by-side with the figure of the same tier in the lineup. **Compare 3D muscle volume specifically — deltoid mass, bicep peak and thickness, chest depth, abdominal definition, lat width, quad mass — not just shoulder/frame outline width.** If the rendered body has the right outline width but lacks the muscle MASS the lineup figure shows, that's the documented "silhouette regression" failure mode and you need to re-render with the corrected muscular-build vocabulary. Common at tier 4-6.
+**Detection / linting hint**: When reviewing accepted panels against their declared tier, compare side-by-side with the figure of the same tier in the lineup along **both** load-bearing attributes:
+
+1. **Muscle:** Compare 3D muscle volume specifically — deltoid mass, bicep peak and thickness, chest depth, abdominal definition, lat width, quad mass — not just shoulder/frame outline width. If the rendered body has the right outline width but lacks the muscle MASS the lineup figure shows, that's the documented "silhouette regression" failure mode and you need to re-render with the corrected muscular-build vocabulary.
+2. **Breasts:** Compare breast size, fullness, and forward projection. If the rendered body has the right muscle mass for tier N but the breasts read closer to figure 2-3's breast scale than to figure N's, that's the documented "breast-scale regression" failure mode uncovered 2026-05-16 (afternoon). Re-render with the **CRITICAL — BREASTS** directive in the prompt.
+
+Both regressions are common at tier 4-6.
 
 ---
 
@@ -1148,6 +1176,50 @@ Every comic project, regardless of platform (Flow or Higgsfield). The cost is re
 ### Where this does NOT apply
 
 Quick one-off panels that aren't part of a multi-panel comic. Standalone illustrations with a single hero shot don't need a body-tier manifest.
+
+---
+
+## L29 — Tier-6 needs dedicated proportion reinforcement refs (the lineup interpolates the peak figure downward)
+
+**Symptom**: Tier-6 panels consistently under-render. The shotlist declares `muscle_size_tier: 6`, the `muscle-size-lineup.png` is attached, the L11 directive says "match figure 6," and the rendered body lands at tier 4-5 proportions instead — deltoid mass smaller than figure 6 shows, bust volume conservative, frame width closer to figure 4. Observed across multiple Higgsfield runs at 2026-05-16; not a vocabulary regression (L11's surgical-scoping language is correct) but a *reference-strength* regression.
+
+**Root cause**: The lineup is a multi-figure chart — six figures side-by-side, each at a different tier. When the model is asked to anchor to "figure 6," it sees five other figures next to figure 6 and averages across them. The peak figure ends up rendered as roughly the average of figures 4-6 rather than figure 6 alone. The closer the peak figure sits to the rest of the chart visually (six bodies in similar poses with progressive scaling), the stronger the averaging pull. Single-figure refs don't have this problem — but the lineup's whole *point* is showing the tier *progression*, so it can't be split into per-tier sheets without losing tier context.
+
+**Fix**: Keep the lineup attached — it carries tier context. Additionally attach two dedicated tier-6 reference sheets that isolate the peak proportions as their own anchor. Both PNGs together: an annotated full-body reference (front + rear with proportion stats, biceps profile, chest / thoracic detail, waist narrowness, leg musculature) and a close-up anatomical detail sheet (biceps anatomy, breast volume / shape, waistline metrics, full rear view + posterior musculature). The reinforcement sheets sit ALONGSIDE the lineup at submit time. The lineup says "tier 6 is the right step on the ladder"; the reinforcement sheets say "this is what step 6 actually looks like, in detail."
+
+The reinforcement PNGs live at `skills/comic-production/references/peak-body-scale/tier-6/` — repo-bundled, NOT character-specific. They are not generated by `reference-gathering`; the manifest just flags that the panel-level renderer must attach them.
+
+### The L29 directive (slot `8b_tier_reinforcement`)
+
+L29 inherits the L11 surgical-scoping pattern. The directive emitted alongside the lineup directive says:
+
+> TIER-6 PROPORTION REINFORCEMENT: Two additional reference images attached showing canonical tier-6 muscle proportions. Match the bust volume and forward projection, deltoid mass, pectoral development, lat spread, oblique definition, bicep peak / thickness, and quad size shown in these references — and **over-render**: the model normalizes off-distribution features toward average, so target the SAME or LARGER scale than the reinforcement refs show, never smaller. **PROPORTION REFERENCE ONLY** — do NOT adopt the clothing, hair, hairstyle, hair color, skin tone, face, pose, lighting, background, or setting from these references. Do NOT render the reference images as physical scene objects (no inset photos, no annotated overlays, no figure labels, no proportion stats text floating in the frame). Borrow scale and mass only.
+
+The do-NOT-borrow list is identical in shape to the L11 list. Single-figure refs leak harder than multi-figure charts (one body shown means one body's hair / pose / lighting / shorts is the implicit "what the reference looks like"), so the surgical scoping has to be at least as strict.
+
+### Over-spec is intentional (`feedback_chest_oversize_compensate`)
+
+The directive explicitly tells the model to render LARGER than the reinforcement refs show. Reason: the model normalizes off-distribution features toward the population average, so prompting for parity-with-ref tends to land below parity. Over-spec corrects the normalization bias.
+
+### Hard rules
+
+- **Strict tier-6 trigger.** L29 fires only when `panel.muscle_size_tier == 6`. Tiers 7-9 are beyond peak and the anatomical detail in the reinforcement sheets is calibrated specifically for the figure-6 figure; applying them at tier 7+ would *under-anchor*. Future expansion: sibling rule modules with tier-7/8/9 reinforcement sheets.
+- **Both refs together, never one alone.** The full-body sheet and the anatomical-detail sheet anchor different attributes (overall proportions vs. specific muscle group / bust detail). Splitting them defeats the dual-anchor purpose. `find_tier6_reinforcement_refs()` returns an empty list if either is missing — all-or-nothing.
+- **Reinforcement, not replacement.** The muscle-size lineup STILL attaches at tier 6. Without it, the model loses tier context (figure 6 relative to figures 1-5). The reinforcement refs supplement, never substitute.
+- **Repo-bundled, not character-specific.** The reinforcement PNGs ship with the pipeline. `reference-gathering` does NOT generate them; they exist as canonical assets like the lineup. Project-local overrides at `references/style/` are honored if a project wants custom tier-6 anchors.
+- **Audit gate is HARD.** `rules_audit.py` HARD-fails when any panel has `muscle_size_tier == 6` and the reinforcement PNGs aren't findable on disk via the canonical search order. This blocks the render plan; it doesn't just warn. Reason: tier-6 lineup-only fallback has a known regression that the reinforcement refs exist to fix.
+
+### Ref-ceiling implication
+
+The platform 3-ref soft ceiling (see L23) gets stressed at tier 6: face card + lineup + 2 reinforcement refs = 4 even before state-anchor or env. The existing env-drop logic at `>3 refs` still fires (env drops first, recovered via L23 verbal anchor); state-anchor and lineup and reinforcement all survive. The actual model behavior at 4-5 attached refs is platform-specific — Higgsfield + nano_banana handles 4 reliably; Flow's behavior is empirically less consistent. Watch for it.
+
+### Where this applies
+
+FMG comics at tier 6. Non-FMG transformations (BE, glute, MMG) don't have tier-6 reinforcement sheets yet — that's a sibling module when those genres need it.
+
+### Where this does NOT apply
+
+Tier 1-5 panels (no under-rendering signal at those tiers; lineup alone is adequate). Tier 7-9 panels (out of calibration range for these specific reinforcement sheets). Non-FMG transformations.
 
 ---
 

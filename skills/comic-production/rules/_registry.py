@@ -27,6 +27,7 @@ from .l15_glamour import L15
 from .l17_canonical import L17
 from .female_anatomy import FemaleAnatomy
 from .l11_muscular_build import L11
+from .l29_tier6_reinforcement import L29
 
 
 # Phase 3b — every active L-rule migrated to its own module. compose_prompt
@@ -45,6 +46,7 @@ RULE_INSTANCES: list[Rule] = [
     L17(),
     FemaleAnatomy(),
     L11(),
+    L29(),
 ]
 
 

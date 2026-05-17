@@ -338,6 +338,25 @@ def check_pages(project: Path, shotlist: dict, pages_filter: set[int] | None) ->
                                        f"muscle_size_tier '{tier}' is not numeric",
                                        "Use numeric tiers (e.g. 1, 2, 2.5) for monotonic checking"))
 
+            # 5a. L29 — every tier-6 panel must have the repo-bundled
+            # tier-6 reinforcement PNGs findable on disk. HARD: blocks the
+            # render plan, not just warns. The lineup alone interpolates
+            # tier-6 downward, so a tier-6 panel without the reinforcement
+            # refs is rendering with known-broken anchoring.
+            try:
+                tier_int = int(tier) if tier is not None else None
+            except (TypeError, ValueError):
+                tier_int = None
+            if tier_int == 6 and not _has_tier6_reinforcement_refs(project):
+                out.append(Finding(
+                    n, pid, "tier6_reinforcement", SEVERITY_HARD,
+                    "Panel declares muscle_size_tier == 6 but the L29 reinforcement PNGs are NOT findable on disk. "
+                    "Both tier-6-full-body.png and tier-6-anatomical-detail.png are required.",
+                    "Ship the tier-6 reinforcement PNGs to skills/comic-production/references/peak-body-scale/tier-6/ "
+                    "(or drop project-local overrides at references/style/) before rendering this panel. "
+                    "Tier-6 lineup-only fallback under-renders consistently — see L29.",
+                ))
+
             # 6. Characters all declared in cast[]
             for ch in chars:
                 if cast_ids and ch not in cast_ids:
@@ -726,12 +745,31 @@ def check_reference_completeness(project: Path, shotlist: dict) -> list[Finding]
             tier = tier_entry.get("tier")
             path = tier_entry.get("path")
             lineup_required = tier_entry.get("lineup_required", False)
+            tier6_reinforcement_required = tier_entry.get("tier6_reinforcement_required", False)
             if path and not (project / path).exists():
                 lineup_note = " — and MUST attach the muscle-size lineup PNG at generation time (L28 + L11)" if lineup_required else ""
+                tier6_note = (
+                    " — and MUST additionally attach BOTH tier-6 reinforcement PNGs from "
+                    "skills/comic-production/references/peak-body-scale/tier-6/ (L29)"
+                ) if tier6_reinforcement_required else ""
                 out.append(Finding(
                     None, None, "reference_completeness", SEVERITY_HARD,
-                    f"Missing required reference: {path} (body-tier {tier} for `{char_id}`)" + lineup_note,
-                    "Run reference-gathering in manifest-driven mode. The skill knows the lineup-attach hard rule for tier >= 2 body refs.",
+                    f"Missing required reference: {path} (body-tier {tier} for `{char_id}`)" + lineup_note + tier6_note,
+                    "Run reference-gathering in manifest-driven mode. The skill knows the lineup-attach hard rule for tier >= 2 body refs and the L29 tier-6 reinforcement rule.",
+                ))
+            # L29: tier-6 panels (or tier-6 body refs flagged via the new
+            # field) need the repo-bundled reinforcement PNGs accessible.
+            # The manifest declares the requirement; here we verify the
+            # PNGs are findable on disk via the same search order
+            # next_panel.find_tier6_reinforcement_refs uses.
+            if tier6_reinforcement_required and not _has_tier6_reinforcement_refs(project):
+                out.append(Finding(
+                    None, None, "reference_completeness", SEVERITY_HARD,
+                    f"Tier-6 body-ref entry for `{char_id}` requires the L29 reinforcement PNGs but they are NOT findable on disk. "
+                    "Expected both `tier-6-full-body.png` and `tier-6-anatomical-detail.png` at "
+                    "project `references/style/`, or repo-bundled `skills/comic-production/references/peak-body-scale/tier-6/`, "
+                    "or `~/.claude/skills/comic-production/references/peak-body-scale/tier-6/`.",
+                    "Ship the tier-6 reinforcement PNGs into the canonical repo path (or drop project-local overrides at references/style/) before generation.",
                 ))
 
         # views (L16 — multi-angle character reference packs)
@@ -856,6 +894,42 @@ def _has_lineup_ref(project: Path) -> bool:
     if not style.exists():
         return False
     return any(style.glob("*lineup*"))
+
+
+# L29 — tier-6 reinforcement refs are repo-bundled. The search order mirrors
+# `next_panel.find_tier6_reinforcement_refs`: project-local override first,
+# then repo-bundled path under the pipeline checkout, then user-installed
+# skill path. Both PNGs (`tier-6-full-body.png` + `tier-6-anatomical-detail.png`)
+# must be findable.
+_TIER6_REINFORCEMENT_FILES = (
+    "tier-6-full-body.png",
+    "tier-6-anatomical-detail.png",
+)
+
+
+def _has_tier6_reinforcement_refs(project: Path) -> bool:
+    pipeline_candidates: list[Path] = [
+        # Documents-pipeline checkout
+        Path.home() / "Documents" / "claude-comic-pipeline" / "skills"
+        / "comic-production" / "references" / "peak-body-scale" / "tier-6",
+        # User-installed skill
+        Path.home() / ".claude" / "skills" / "comic-production"
+        / "references" / "peak-body-scale" / "tier-6",
+    ]
+    # Project-local override
+    project_override = project / "references" / "style"
+    for filename in _TIER6_REINFORCEMENT_FILES:
+        found = False
+        if (project_override / filename).exists():
+            found = True
+        else:
+            for d in pipeline_candidates:
+                if (d / filename).exists():
+                    found = True
+                    break
+        if not found:
+            return False
+    return True
 
 
 def _infer_arc_character(shotlist: dict) -> str | None:

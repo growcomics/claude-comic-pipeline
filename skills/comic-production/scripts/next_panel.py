@@ -296,6 +296,26 @@ def should_attach_lineup(panel: dict, stage_change: bool) -> bool:
     return camera in FULL_BODY_CAMERAS
 
 
+def should_attach_tier6_reinforcement(panel: dict) -> bool:
+    """L29 attachment rule: attach BOTH tier-6 reinforcement PNGs whenever
+    `panel.muscle_size_tier == 6`.
+
+    Strict tier-6 trigger. Tiers 7-9 are beyond peak and the calibrated
+    reinforcement sheets exist only for the peak-1-6 figure; future
+    expansion may add tier-7/8/9 sheets but they would live in sibling
+    directories and have their own attachment helpers.
+
+    Fires in addition to (NOT instead of) the lineup. Both refs attach
+    together — splitting them defeats the dual-anchor purpose (full-body
+    overview + anatomical detail).
+    """
+    tier = panel.get("muscle_size_tier")
+    try:
+        return int(tier) == 6
+    except (TypeError, ValueError):
+        return False
+
+
 # ---------------------------------------------------------------------------
 # Ref discovery
 
@@ -418,6 +438,61 @@ def find_lineup(root: Path, tier: int | None) -> Path | None:
         if p.exists():
             return p
     return None
+
+
+# L29 — tier-6 reinforcement refs. Repo-bundled under
+# skills/comic-production/references/peak-body-scale/tier-6/. Project-local
+# overrides are honored at references/style/ so a project can ship custom
+# tier-6 anchors (the same override pattern the lineup uses).
+TIER6_REINFORCEMENT_FILENAMES = (
+    "tier-6-full-body.png",
+    "tier-6-anatomical-detail.png",
+)
+
+
+def find_tier6_reinforcement_refs(root: Path) -> list[Path]:
+    """Resolve the two tier-6 reinforcement PNGs. Returns a list of paths in
+    canonical order (full-body first, anatomical-detail second). Returns an
+    EMPTY list when either file is missing — callers MUST handle this as a
+    HARD failure for tier-6 panels because L29 verbal-only fallback at tier
+    6 is significantly weaker than the multi-figure lineup interpolation
+    failure mode it exists to fix.
+
+    Search order per file:
+
+    1. Project-local override:  <root>/references/style/<filename>
+    2. Repo-bundled refs:       <pipeline>/skills/comic-production/
+                                references/peak-body-scale/tier-6/<filename>
+    3. User-installed skill:    ~/.claude/skills/comic-production/
+                                references/peak-body-scale/tier-6/<filename>
+    4. Plugin-installed skill:  ~/Library/Application Support/Claude/.../
+                                skills/comic-production/references/peak-
+                                body-scale/tier-6/<filename> (best-effort glob)
+    """
+    resolved: list[Path] = []
+    pipeline_root = (Path(__file__).resolve().parent.parent
+                     / "references" / "peak-body-scale" / "tier-6")
+    user_root = (Path.home() / ".claude" / "skills" / "comic-production"
+                 / "references" / "peak-body-scale" / "tier-6")
+    plugin_root = Path.home() / "Library" / "Application Support" / "Claude" / "local-agent-mode-sessions"
+
+    for filename in TIER6_REINFORCEMENT_FILENAMES:
+        candidates: list[Path] = [
+            root / "references" / "style" / filename,
+            pipeline_root / filename,
+            user_root / filename,
+        ]
+        if plugin_root.exists():
+            for match in plugin_root.rglob(
+                f"comic-production/references/peak-body-scale/tier-6/{filename}"
+            ):
+                candidates.append(match)
+                break
+        found = next((p for p in candidates if p.exists()), None)
+        if found is None:
+            return []  # All-or-nothing — partial refs would mis-anchor.
+        resolved.append(found)
+    return resolved
 
 
 # ---------------------------------------------------------------------------
@@ -907,6 +982,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     # Active in compose_prompt — these get real pre_render statuses
     "L10":            {"title": "References are the truth, prompts are deltas", "slot": "11_render_directive", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_build"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L29":            {"title": "Tier-6 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1070,6 +1146,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    env_anchor_from: dict | None = None,
                    lineup_attached: bool = False,
                    env_dropped: bool = False,
+                   tier6_refs_attached: bool = False,
                    _trace: dict | None = None,
                    transformation_type: str = "fmg") -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
@@ -1103,6 +1180,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "anchor": anchor,
         "env_anchor_from": env_anchor_from,
         "lineup_attached": lineup_attached,
+        "tier6_refs_attached": tier6_refs_attached,
         "env_dropped": env_dropped,
         "stage_change": stage_change,
         "shotlist": shotlist,
@@ -1215,6 +1293,16 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _apply_rule_at_slot("L11", "8_tier_build",
                         panel, ctx, parts, _trace, transformation_type)
 
+    # 6a. L29 tier-6 reinforcement — slot 8b_tier_reinforcement. Fires only
+    # when panel.muscle_size_tier == 6 AND both tier-6 reinforcement PNGs
+    # were attached at generation time (build_plan sets
+    # ctx['tier6_refs_attached']). Sits immediately after L11's lineup
+    # directive so the surgical-scoping language for the reinforcement
+    # refs is co-located with the lineup language and the model reads
+    # them as a paired anchor.
+    _apply_rule_at_slot("L29", "8b_tier_reinforcement",
+                        panel, ctx, parts, _trace, transformation_type)
+
     # 7. Environment — slot 9_environment. Two pieces:
     #   - env-chaining or first-env language (composer logic, when env_ref attached)
     #   - L23 dense verbal anchor (rule module, when env_dropped)
@@ -1294,9 +1382,9 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     # dialogue, captions, or SFX. The 2D-flat scope is named explicitly so
     # the comic-coded vocabulary does NOT pull bodies/scene to 2D (the L7
     # Case B failure mode this block is designed to defuse).
-    if (next_panel.get("dialogue") or next_panel.get("captions")
-            or next_panel.get("sfx")):
-        parts.append(_l19_lettering_block(next_panel))
+    if (panel.get("dialogue") or panel.get("captions")
+            or panel.get("sfx")):
+        parts.append(_l19_lettering_block(panel))
 
     # 11. Closing CGI anchor — explicitly scopes the negation to bodies/skin
     # so the bubble graphics are not implicated by "NOT illustrated."
@@ -1502,6 +1590,47 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
         _record_skipped(trace, "L28",
                         "no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)")
 
+    # L29 — tier-6 reinforcement refs. Attaches BOTH dedicated tier-6
+    # anatomical PNGs (peak-body-scale/tier-6/) on top of the lineup
+    # whenever `panel.muscle_size_tier == 6`. The lineup interpolates the
+    # tier-6 figure downward against the other five figures on the chart;
+    # the reinforcement refs isolate tier-6 proportions as their own
+    # dedicated anchor. See L29 (`rules/l29_tier6_reinforcement.py`).
+    tier6_refs_attached = False
+    if should_attach_tier6_reinforcement(next_panel):
+        tier6_refs = find_tier6_reinforcement_refs(root)
+        if len(tier6_refs) == len(TIER6_REINFORCEMENT_FILENAMES):
+            for ref_path in tier6_refs:
+                refs_to_attach.append({
+                    "kind": "tier6_reinforcement",
+                    "tier": 6,
+                    "path": str(ref_path),
+                    "reason": (
+                        f"TIER-6 panel — `{ref_path.name}` MUST be attached "
+                        "alongside the muscle-size lineup. The lineup alone "
+                        "interpolates tier-6 downward; the dedicated tier-6 "
+                        "reinforcement sheets isolate the peak proportions. "
+                        "Per L29 (tier-6 needs dedicated proportion reinforcement)."
+                    ),
+                })
+            tier6_refs_attached = True
+        else:
+            missing_t6_reason = (
+                "TIER-6 panel but one or both tier-6 reinforcement PNGs NOT "
+                "FOUND on disk. Tried: project references/style/, repo "
+                "skills/comic-production/references/peak-body-scale/tier-6/, "
+                "~/.claude/skills/.../peak-body-scale/tier-6/. Drop both "
+                f"{', '.join(TIER6_REINFORCEMENT_FILENAMES)} into one of "
+                "those locations before generating. Falling back to lineup-"
+                "only is significantly less reliable at tier 6 (per L29)."
+            )
+            refs_to_attach.append({
+                "kind": "MISSING_tier6_reinforcement",
+                "tier": 6,
+                "path": None,
+                "reason": missing_t6_reason,
+            })
+
     # L12 + L13: surface shotlist-shape warnings at planning time so the agent
     # driving generation can fix the shotlist or override before paying for an
     # output that's broken-by-design. These warnings live alongside MISSING_*
@@ -1583,7 +1712,8 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
     n_state_anchor = 1 if (anchor and anchor["status"].get("image")) else 0
     n_lineup = 1 if lineup_attached else 0
     n_env = 1 if env_ref else 0
-    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env
+    n_tier6 = sum(1 for r in refs_to_attach if r.get("kind") == "tier6_reinforcement")
+    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6
 
     env_dropped_for_ceiling = False
     composer_env_ref: Path | None = env_ref
@@ -1639,6 +1769,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             env_anchor_from=composer_env_anchor_from,
                             lineup_attached=lineup_attached,
                             env_dropped=env_dropped_for_ceiling,
+                            tier6_refs_attached=tier6_refs_attached,
                             _trace=trace,
                             transformation_type=transformation_type)
 

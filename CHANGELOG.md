@@ -12,6 +12,38 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L29 — tier-6 reinforcement refs auto-attach + tier-6 anatomical detail sheets ingested)
+
+### Added
+
+- **L29 rule module** at [`skills/comic-production/rules/l29_tier6_reinforcement.py`](./skills/comic-production/rules/l29_tier6_reinforcement.py) — every panel at `muscle_size_tier == 6` now auto-attaches two dedicated tier-6 reinforcement reference PNGs alongside the muscle-size lineup. The lineup interpolates the peak figure downward against the other five figures on the chart (rendered tier-6 bodies land at tier 4-5 proportions); the reinforcement sheets isolate tier-6 proportions as their own dedicated anchor. Slot `8b_tier_reinforcement`, immediately after L11's `8_tier_build`. FMG-only. Severity HARD. Inherits the L11 surgical-scoping pattern verbatim (PROPORTION REFERENCE ONLY — do NOT borrow clothing / hair / face / pose / lighting / background from the reinforcement refs) and explicitly tells the model to **over-render** the proportions (target SAME or LARGER scale than the refs show, per `feedback_chest_oversize_compensate` — the model normalizes off-distribution features toward average, so prompting for parity tends to land below parity).
+
+- **Tier-6 anatomical reference sheets** at [`skills/comic-production/references/peak-body-scale/tier-6/`](./skills/comic-production/references/peak-body-scale/tier-6/) — `tier-6-full-body.png` (front + rear refs with annotated proportion stats, biceps profile, chest / thoracic detail, waist narrowness, leg musculature) and `tier-6-anatomical-detail.png` (close-up sheet for biceps anatomy, breast volume / shape, waistline metrics, full rear view + posterior musculature). Repo-bundled — NOT character-specific generated assets. `reference-gathering` does NOT generate them; the panel-level renderer attaches them at submit time via the new `find_tier6_reinforcement_refs()` resolver.
+
+- **`find_tier6_reinforcement_refs(root)` and `should_attach_tier6_reinforcement(panel)`** helpers in `next_panel.py`. Resolver search order mirrors `find_lineup`: project-local override at `references/style/` → repo-bundled `peak-body-scale/tier-6/` → user-installed skill → plugin-installed skill. All-or-nothing semantics (both PNGs must resolve, or the resolver returns `[]` — partial refs would mis-anchor).
+
+- **`build_plan` ref-attachment block** in `next_panel.py` attaches both reinforcement PNGs after the L11 lineup-attach block when `panel.muscle_size_tier == 6`. Emits `MISSING_tier6_reinforcement` ref entries when the PNGs aren't findable on disk. The ref-ceiling counter (`total_refs`) now includes the tier-6 PNGs so the existing env-drop logic still resolves correctly.
+
+- **L29 ctx flag (`tier6_refs_attached`)** wired through `compose_prompt` so the L29 rule's verbal directive only emits when the refs actually attached at generation time. Verbal-only fallback at tier 6 is significantly weaker than lineup-only — that's the exact failure mode the rule exists to fix — so the pre_render verification surfaces missing refs as a HARD fail, not a silent fallback.
+
+- **Manifest schema extension** in [`skills/script-breakdown/SKILL.md`](./skills/script-breakdown/SKILL.md) and [`skills/reference-gathering/SKILL.md`](./skills/reference-gathering/SKILL.md): `body_tiers[].tier6_reinforcement_required` flag, present and `true` when the entry is at tier 6. The reference-gathering walker recognizes that these refs are repo-bundled and skips the generation flow — it just attaches them at panel-render time.
+
+- **HARD audit gates** in [`skills/continuity-check/scripts/rules_audit.py`](./skills/continuity-check/scripts/rules_audit.py): (1) `check_reference_completeness` walks the new manifest field and HARD-fails when a tier-6 body-tier entry requires reinforcement refs that aren't findable on disk; (2) `check_pages` HARD-fails per-panel when any panel has `muscle_size_tier == 6` and the reinforcement PNGs aren't findable via the canonical search order. Both block the render plan, not just warn. The `_has_tier6_reinforcement_refs(project)` helper mirrors the same search order the runtime resolver uses.
+
+- **Docs**: new section in [`references/peak-body-scale.md`](./skills/comic-production/references/peak-body-scale.md) explaining the tier-6 reinforcement workflow, the surgical-scoping language, and the audit gate; new **L29** lesson in [`references/lessons-learned.md`](./skills/comic-production/references/lessons-learned.md) capturing the failure mode (multi-figure lineup interpolates tier-6 downward), the fix (lineup + isolated tier-6 anatomical sheets), and the hard rules (strict tier-6 trigger, both refs together, reinforcement-not-replacement, repo-bundled, HARD audit gate); plain-English summary in [`references/the-rules-explained.md`](./skills/comic-production/references/the-rules-explained.md).
+
+### Fixed
+
+- **`compose_prompt` NameError on the L19 lettering block** in `next_panel.py` — pre-existing regression from the earlier 2026-05-16 L19 rewrite (commit `6c3d101`) referenced `next_panel` inside `compose_prompt` where the local parameter is `panel`. The compose path errored on every panel regardless of dialogue content. Fixed inline so the L29 wiring could be validated end-to-end.
+
+### Validation
+
+- End-to-end validation against a synthetic tier-6 panel: prompt assembly attaches both reinforcement PNGs (`tier-6-full-body.png` + `tier-6-anatomical-detail.png`), keeps the muscle-size lineup attached alongside (not replaced), emits the L29 directive ("TIER-6 PROPORTION REINFORCEMENT…") into the composed prompt at slot `8b_tier_reinforcement`, and records `L29.pre_render.status="pass"` in the trace.
+- Audit-gate validation: with both PNGs on disk → 0 L29 findings (gate passes); with one PNG moved aside → 1 HARD L29 finding per tier-6 panel (gate blocks). Negative-path also verified.
+- No visual validation run — would burn Higgsfield credits without strong signal at this stage. Per user instruction, surface the prompt-assembly proof and let the user decide whether to spend on a render.
+
+---
+
 ## 2026-05-16 (L19 rewrite — flat 2D comic-style lettering with scope-bounded overlay)
 
 ### Changed

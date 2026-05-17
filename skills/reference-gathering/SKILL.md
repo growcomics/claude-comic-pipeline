@@ -41,7 +41,8 @@ Per **L28** in `comic-production/references/lessons-learned.md`, every comic pro
       "body_tiers": [
         {"tier": 1, "path": "references/characters/<char_id>/body-tier1.png", "lineup_required": false},
         {"tier": 3, "path": "references/characters/<char_id>/body-tier3.png", "lineup_required": true},
-        {"tier": 5, "path": "references/characters/<char_id>/body-tier5.png", "lineup_required": true}
+        {"tier": 5, "path": "references/characters/<char_id>/body-tier5.png", "lineup_required": true},
+        {"tier": 6, "path": "references/characters/<char_id>/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
       ]
     }
   },
@@ -65,14 +66,15 @@ For each character in the manifest:
 2. **Each `body_tiers` entry**:
    - Check if the file exists. If yes, skip.
    - If `tier == 1` (baseline), generate from the character's wardrobe description + a hands-at-sides front-full pose. Aspect 3:4. **No lineup ref attached** at tier 1 (the character's natural baseline build is the target).
-   - If `tier ≥ 2`: **HARD REQUIREMENT — attach the muscle-size lineup PNG as a reference image during generation**. Use `muscle-size-lineup.png` for tiers 1–6 or `muscle-size-lineup-4-9.png` for tiers ≥ 7. The lineup is a PROPORTION reference ONLY (per L11 surgical scoping): the prompt must explicitly tell the model "use figure N from the lineup ONLY for muscle mass and frame width; do NOT borrow face, hair, costume, or pose from the lineup; identity comes from the character's wardrobe description + the face card."
+   - If `tier ≥ 2`: **HARD REQUIREMENT — attach the muscle-size lineup PNG as a reference image during generation**. Use `muscle-size-lineup.png` for tiers 1–6 or `muscle-size-lineup-4-9.png` for tiers ≥ 7. The lineup is a PROPORTION reference ONLY (per L11 surgical scoping): the prompt must explicitly tell the model "use figure N from the lineup ONLY for (a) muscle mass and frame width AND (b) breast SIZE / FULLNESS / forward PROJECTION; do NOT borrow face, hair, costume, or pose from the lineup; identity comes from the character's wardrobe description + the face card." Breast scale is a LOAD-BEARING attribute the lineup conveys alongside muscle scale — figure 6 has visibly larger and more forward-projected breasts than figure 1 — so the body-tier ref generation must anchor both attributes, not just muscle.
+   - If `tier == 6` AND the entry also has `tier6_reinforcement_required: true`: **L29 HARD REQUIREMENT — additionally attach BOTH tier-6 reinforcement PNGs** from `skills/comic-production/references/peak-body-scale/tier-6/` (`tier-6-full-body.png` + `tier-6-anatomical-detail.png`) alongside the muscle-size lineup. These are repo-bundled assets — NOT character-specific generated refs — so this skill does NOT generate them; it just attaches them at submit time. Resolve their paths via the same search order the comic-production code uses (project `references/style/` override first, then the repo-bundled `peak-body-scale/tier-6/` directory). The reinforcement refs sit ALONGSIDE the lineup, not in place of it; the surgical-scoping language for tier-6 reinforcement is in L29 (see `comic-production/rules/l29_tier6_reinforcement.py`'s `L29_DIRECTIVE`).
    - Compose the prompt with:
      - Render anchor (DAZ3D Iray, photoreal CGI, etc.)
      - Camera: front-full, eye-level, 28mm equivalent
      - Subject: the character's name + cartoony hyper-FMG style anchor for tier ≥ 2 (per L11)
      - The tier-specific **muscular-build** descriptor (per L11's `_BUILD_BY_TIER` table in `rules/l11_muscular_build.py`)
      - Costume: the character's canonical wardrobe (the BASELINE costume, NOT the torn-up version — the tier ref is the body, not the damage state)
-     - Lineup instruction: "The attached muscle-size lineup is a 3D BODY CHART showing six figures with progressive muscle development — NOT a silhouette / outline reference. Match the 3D MUSCLE VOLUME and DEFINITION of figure {tier} ONLY for muscle mass, breast size, and frame width."
+     - Lineup instruction: "The attached muscle-size lineup is a 3D BODY CHART showing six figures with TWO progressively-scaled proportion attributes per tier: muscle scale AND breast scale — NOT a silhouette / outline reference, NOT a face / hair / costume reference. CRITICAL — MUSCLE: match the 3D MUSCLE VOLUME and DEFINITION of figure {tier}. CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure {tier} EXACTLY — do NOT default to average / conservative breast size; do NOT render tier {tier} muscle mass with breasts shrunk to tier 2 or 3 size. The lineup scales both attributes per tier; render both at figure {tier}'s level. Use the lineup ONLY for these two proportion attributes plus frame width."
      - Closing CGI anchor.
    - Generate at x4 on Flow (free), pick the best, save to the declared path. On Higgsfield: count=1, accept the result.
 
@@ -122,7 +124,8 @@ Then exit. `rules_audit.py` `check_reference_completeness()` will pass and stage
 
 ### Hard rules for manifest-driven mode
 
-- **Never skip the body-tier lineup attachment.** Tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image. The whole point of L28 is that the character's identity-at-tier-N must be pre-rendered with proper muscular-build anchoring (the lineup is a 3D body chart showing muscle mass and definition, NOT an outline reference), not invented per-panel.
+- **Never skip the body-tier lineup attachment.** Tier ≥ 2 body refs MUST be generated with the muscle-size lineup PNG attached as a reference image. The whole point of L28 is that the character's identity-at-tier-N must be pre-rendered with proper proportion anchoring along BOTH attributes the lineup conveys (muscle mass / definition AND breast size / fullness / projection — the lineup is a 3D body chart showing both, NOT an outline reference, NOT a face/hair/costume reference), not invented per-panel.
+- **Never skip the tier-6 reinforcement attachment.** Tier-6 body refs (and every shotlist panel at `muscle_size_tier == 6`) MUST additionally attach the two repo-bundled tier-6 reinforcement PNGs from `skills/comic-production/references/peak-body-scale/tier-6/`. The reinforcement PNGs are NOT character-specific — they isolate canonical tier-6 anatomical proportions as a dedicated anchor against the multi-figure lineup's tendency to interpolate the tier-6 figure downward. Per L29.
 - **Don't economize.** If the manifest says 5 refs and 3 are on disk, generate the other 2. Don't decide on the fly that 3 is "enough." `rules_audit` will HARD-fail on missing files anyway.
 - **Provenance still applies.** Even for AI-generated refs (not gathered from external sources), write a `_provenance.md` entry: prompt used, model, timestamp, lineup attached y/n. Future audits depend on knowing how each ref was made.
 - **Do NOT modify `references_required.json`.** That file is the source of truth from script-breakdown. If the manifest is wrong, regenerate it at the script-breakdown stage; don't edit it from here.
