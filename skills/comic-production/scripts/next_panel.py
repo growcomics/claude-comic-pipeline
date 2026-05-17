@@ -525,6 +525,154 @@ def _l24_accessory_line(panel: dict, cast_lookup: dict) -> str | None:
     return " ".join(pieces)
 
 
+# L19 — bake 2D comic-style lettering into the CGI render, with the 2D scope
+# named explicitly so the comic-coded vocabulary does NOT pull bodies/scene
+# to 2D illustration (the L7 Case B failure mode).
+#
+# Earlier L19 phrasing rendered lettering as "physical 3D scene objects"
+# (chrome-extruded SFX, semi-translucent photoreal speech panels). That held
+# CGI but produced literal-3D bubbles that don't match classic comic-book
+# lettering. May 16 rewrite: bubbles render as flat 2D vector graphics
+# overlaid on the photoreal scene, with the 2D scope bounded to lettering
+# only and the photoreal scope explicitly reaffirmed.
+#
+# Test render confirming the new vocabulary: job 607cf047-23d2-453e (May 16,
+# 2026). Two-character dialogue panel, nano_banana_flash, 1k, count=1. Result:
+# classic white-oval bubbles with bold black outlines + yellow caption box +
+# photoreal CGI bodies and dojo environment; no 2D drift on the non-lettering
+# content.
+
+_BUBBLE_STYLE_BY_TYPE = {
+    "balloon": (
+        "classic comic-book speech balloon — clean white rounded oval shape "
+        "with a bold 3-4 pixel solid black outline"
+    ),
+    "thought": (
+        "classic comic-book thought bubble — clean white cloud-shaped "
+        "outline with a bold 3-4 pixel solid black border, small "
+        "cloud-bubble trail of three round dots leading to the thinker"
+    ),
+    "whisper": (
+        "classic comic-book whisper bubble — clean white rounded oval "
+        "shape with a thin DASHED black outline (broken/dashed border, "
+        "not solid), denoting a quiet voice"
+    ),
+    "shout": (
+        "classic comic-book shout balloon — white JAGGED-EDGED starburst "
+        "shape with a bold solid black outline (spiky/zig-zag border, "
+        "not smooth), denoting yelling"
+    ),
+    "off-panel": (
+        "classic comic-book speech balloon — clean white rounded oval "
+        "shape with a bold solid black outline, drawn at the edge of "
+        "the frame with its tail pointing OFF the panel (speaker is "
+        "off-screen, not visible in this frame)"
+    ),
+}
+
+_BUBBLE_FONT = (
+    "bold black sans-serif comic display font ALL CAPS text inside "
+    "(Bangers-style lettering, no shading, no extrusion)"
+)
+
+
+def _l19_lettering_block(panel: dict) -> str:
+    """L19 — render dialogue, captions, and SFX as flat 2D comic-book
+    lettering composited onto the photoreal CGI scene.
+
+    The 2D scope is bounded explicitly to the bubble / caption / SFX
+    graphics. The rest of the panel (bodies, costumes, environment) stays
+    photoreal CGI. This defuses L7 Case B's 2D-drift failure mode.
+    """
+    parts: list[str] = []
+
+    # Header: name the scope of the 2D style up front.
+    parts.append(
+        "LETTERING — classic comic-book lettering composited onto the "
+        "photoreal CGI scene. The 2D comic styling applies ONLY to the "
+        "bubble / caption / SFX graphics. Everything else in the panel "
+        "(bodies, costumes, skin, hair, environment, props, lighting) "
+        "remains photoreal DAZ3D CGI with ray-traced subsurface scattering "
+        "and physically-based rendering. The bubbles are flat 2D vector "
+        "graphics overlaid on the 3D scene; they do NOT turn the scene 2D."
+    )
+
+    # Dialogue bubbles.
+    for i, d in enumerate(panel.get("dialogue", []) or []):
+        bubble_type = (d.get("type") or "balloon").strip()
+        speaker = (d.get("speaker") or "").strip()
+        text = (d.get("text") or "").strip().replace('"', "'")
+        if not text:
+            continue
+        shape = _BUBBLE_STYLE_BY_TYPE.get(bubble_type,
+                                          _BUBBLE_STYLE_BY_TYPE["balloon"])
+        # Tail / attribution. For caption / off-panel handle separately.
+        if bubble_type == "off-panel":
+            attribution = (
+                f"tail pointing OFF the edge of the frame (speaker `{speaker}` "
+                f"is off-screen)"
+            ) if speaker else "tail pointing OFF the edge of the frame"
+        elif bubble_type == "thought":
+            attribution = (
+                f"cloud-bubble trail of three round dots leading to "
+                f"`{speaker}`"
+            ) if speaker else "cloud-bubble trail of three round dots"
+        else:
+            attribution = (
+                f"short triangular black-outlined tail pointing directly to "
+                f"`{speaker}`'s mouth"
+            ) if speaker else "short triangular black-outlined tail"
+
+        parts.append(
+            f"Bubble {i + 1}: {shape}, positioned over `{speaker}`'s side "
+            f"of the frame so the tail attribution is unambiguous; "
+            f"{attribution}. {_BUBBLE_FONT} reads exactly: \"{text}\". "
+            f"Flat 2D vector graphic — NO 3D shading, NO bevel/extrusion, "
+            f"NO translucency, NO chrome, NO drop shadow onto the scene."
+        )
+
+    # Captions.
+    for i, c in enumerate(panel.get("captions", []) or []):
+        text = (c.get("text") or "").strip().replace('"', "'")
+        if not text:
+            continue
+        parts.append(
+            f"Caption box {i + 1}: classic comic-book caption — yellow "
+            f"rounded-corner rectangle with a bold 3-4 pixel solid black "
+            f"outline, positioned at the bottom edge of the panel. "
+            f"{_BUBBLE_FONT} reads exactly: \"{text}\". Flat 2D vector "
+            f"graphic — NO 3D shading, NO bevel, NO drop shadow on the scene."
+        )
+
+    # SFX (sound effects).
+    for i, s in enumerate(panel.get("sfx", []) or []):
+        text = (s.get("text") or "").strip().replace('"', "'")
+        if not text:
+            continue
+        scale = (s.get("scale") or "medium").strip()
+        size_word = {"small": "small", "medium": "bold", "large": "huge"}.get(
+            scale, "bold")
+        parts.append(
+            f"SFX {i + 1}: the word \"{text}\" rendered as {size_word} "
+            f"flat 2D comic-book lettering overlaid on the scene — bold "
+            f"black or yellow comic display font ALL CAPS, with a solid "
+            f"black outline. Flat 2D vector lettering only — NO 3D "
+            f"extrusion, NO chrome letter sculptures, NO ray-traced "
+            f"shadows on the scene. The SFX is part of the comic-lettering "
+            f"overlay layer, not the photoreal layer."
+        )
+
+    # Closing scope reaffirmation.
+    parts.append(
+        "The lettering layer is composited ON TOP of the photoreal CGI "
+        "render — like a comic letterer added bubbles and captions directly "
+        "onto a photograph. The bodies and scene stay photoreal CGI; only "
+        "the bubble / caption / SFX graphics are flat 2D overlay."
+    )
+
+    return " ".join(parts)
+
+
 # New (May 14): female-anatomy anchoring on body-region ECUs at tier >= 2.
 # Body-region ECUs on a female muscular character drift to male anatomy
 # (square pectorals, no breast contour) when the face is off-frame. Caught
@@ -779,14 +927,14 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L9":             {"title": "Capture every panel's job_id before submitting the next", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "runner concern (post-render deterministic) — phase 4+"},
     "L14":            {"title": "Multi-view location references for shot-reverse-shot", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "gated upstream in reference-gathering"},
     "L16":            {"title": "Multi-angle character reference packs", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "gated upstream in reference-gathering"},
-    "L19":            {"title": "Bake lettering into the CGI render", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "opt-in via mandatory_rules.allow_baked_lettering — phase 2+"},
+    "L19":            {"title": "Bake 2D comic-style lettering with scope-bounded overlay", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx — emission verified, no separate trace slot"},
     "L25":            {"title": "Body-region reveals are sticky", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
     "L26":            {"title": "Costume identity must be canonical across panels", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
     "L27":            {"title": "Skin sheen and texture continuity", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "authoring-guidance only — not auto-injected — phase 3"},
     # Historical / superseded / infrastructure — not modeled as live rules
     "L2":             {"title": "Higgsfield safety filter rejections", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "platform-runtime — will track as 'refused' status in phase 4"},
     "L3":             {"title": "Use png not webp", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "infrastructure exemption"},
-    "L4":             {"title": "Speech bubble positioning", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "active only when L19 baked-lettering is opt-in"},
+    "L4":             {"title": "Speech bubble positioning", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"},
     "L5":             {"title": "Lineup ref attach pattern (superseded by L11)", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "superseded by L11"},
     "L6":             {"title": "The display widget shows only the latest result", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "infrastructure exemption"},
     "L7":             {"title": "Comic-coded vocab pulls toward 2D (superseded by L19)", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "superseded by L19"},
@@ -1132,19 +1280,32 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _apply_rule_at_slot("L18", "13_anatomy_guardrail",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 10. Mandatory rules (L7-compliant — no rendered lettering)
+    # 10. Mandatory rules (L19 — bake 2D comic-style lettering as a scoped
+    # overlay; everything else stays photoreal CGI)
     parts.append(
         "Mandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); "
         "skin has subtle healthy sheen, not oiled or wet; vivid expressive face "
         "(not neutral or blank); correct human anatomy with exactly two arms "
         "and exactly two legs; once a character has grown to a size they stay "
-        "at that size or larger; NO speech bubbles, NO SFX text, NO captions, "
-        "NO action lines in the render — all lettering is added in post by "
-        "page-composer."
+        "at that size or larger."
     )
 
-    # 11. Closing CGI anchor
-    parts.append("Photographic CGI render, NOT illustrated.")
+    # 10a. L19 lettering block — only emitted when the panel has any
+    # dialogue, captions, or SFX. The 2D-flat scope is named explicitly so
+    # the comic-coded vocabulary does NOT pull bodies/scene to 2D (the L7
+    # Case B failure mode this block is designed to defuse).
+    if (next_panel.get("dialogue") or next_panel.get("captions")
+            or next_panel.get("sfx")):
+        parts.append(_l19_lettering_block(next_panel))
+
+    # 11. Closing CGI anchor — explicitly scopes the negation to bodies/skin
+    # so the bubble graphics are not implicated by "NOT illustrated."
+    parts.append(
+        "Photographic CGI render on the bodies, costumes, skin, hair, "
+        "environment, and lighting; NOT a 2D illustration on the bodies, "
+        "NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics "
+        "are flat 2D comic-book overlay."
+    )
 
     return " ".join(parts)
 

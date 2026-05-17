@@ -297,7 +297,7 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
 
    For the full posing guide and lineup templates, see `references/posing-and-expressions.md`.
 6. Dialogue (exact speech bubble text with character attribution)
-7. Mandatory rules block — read which rules apply from `production-config.json` at the project root if it exists. Compose the block from rules 1–10 minus any not in `mandatory_rules.active`, plus any `mandatory_rules.extra_lines`. Check `mandatory_rules.allow_baked_lettering` — when true, opt into L19 baked-lettering composition (physical-scene-object SFX + photoreal 3D speech panels with the L19 anchoring suffix); when false (default), strip all bubbles/SFX/captions from the generation prompt per L7 Case B. Copy the resulting block verbatim into every panel prompt.
+7. Mandatory rules block — read which rules apply from `production-config.json` at the project root if it exists. Compose the block from rules 1–10 minus any not in `mandatory_rules.active`, plus any `mandatory_rules.extra_lines`. **L19 baked-lettering is default-on** (May 16, 2026 rewrite): the composer emits flat 2D comic-style speech bubbles, yellow caption rectangles, and 2D SFX text whenever the panel has `dialogue[]` / `captions[]` / `sfx[]`. To opt out and route lettering through `page-composer` instead, set `mandatory_rules.skip_baked_lettering=true` in `production-config.json`. Copy the resulting block verbatim into every panel prompt.
 
    The pipeline supports five transformation types via the config's `transformation_type` field. Each has its own default rule set. The `production-briefing` skill writes the right defaults at project setup; this skill just reads them.
 
@@ -336,12 +336,16 @@ See `scripts/panels_template.json` for a complete example. See `references/promp
    - **MMG**: male anatomy throughout, pectorals (not breasts), V-taper, masculine facial structure, body-hair continuity.
    - **Mixed**: which arcs apply to which characters, growth order, current-active-stage lineup convention.
 
-   **L19 baked-lettering opt-in.** When `mandatory_rules.allow_baked_lettering` is true:
+   **L19 baked-lettering — DEFAULT ON (May 16, 2026 rewrite).** Whenever a panel has `dialogue[]` / `captions[]` / `sfx[]` content in the shotlist, `next_panel.py` `_l19_lettering_block()` auto-emits a scope-bounded lettering block:
    - Append the L19 opening anchor to the prompt: *"Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering on skin, physically-based rendering, 8K texture detail. Photographic CGI."*
-   - Compose SFX as physical scene objects ("the word 'KRRRK' rendered as a 3D-extruded chrome letter sculpture, positioned upper-left of frame; real ray-traced shadows on the surface beneath; catches the same key light as the scene").
-   - Compose speech bubbles as photoreal semi-translucent 3D panels ("a photoreal semi-translucent white 3D panel with rounded edges and an extruded tail, floating in the upper-right; tail extends down-left, pointing to the speaker; black extruded sans-serif text on the surface reads exactly: 'LINE'").
-   - Append the L19 closing negation: *"NOT a comic, NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art. Photographic CGI render."*
-   - When false (default), pass the clean panel to `page-composer` for vector lettering per L7 Case B canonical. **Default is false** because the L19 reversal is still experimental and the failure mode on weaker models is silent 2D drift.
+   - Emit a scope-bounded lettering header naming that the 2D style applies ONLY to the bubble/caption/SFX graphics; bodies, costumes, skin, hair, environment, and lighting remain photoreal DAZ3D CGI.
+   - Compose speech bubbles as flat 2D comic-book overlay graphics — clean white rounded ovals with bold 3-4 pixel solid black outlines, bold black sans-serif comic display font ALL CAPS text (Bangers-style), short triangular black-outlined tails pointing to the speaker's mouth. **No 3D shading, no bevel/extrusion, no translucency, no chrome, no drop shadow onto the scene.** Bubble shape varies per `dialogue[].type` — `balloon` = rounded oval; `thought` = cloud with trail; `whisper` = dashed-outline oval; `shout` = jagged starburst; `off-panel` = tail off-frame.
+   - Compose caption boxes as yellow rounded-corner rectangles with bold black outlines, comic-display-font ALL CAPS text, positioned at the bottom edge.
+   - Compose SFX as flat 2D comic-book lettering — bold black or yellow comic display font ALL CAPS, solid black outline. **No 3D extrusion, no chrome letter sculptures, no ray-traced shadows on the scene.**
+   - Append the closing scope-bounded negation: *"Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay."*
+   - To opt out (e.g. dialogue tweaks expected; prefer vector lettering for editability), set `mandatory_rules.skip_baked_lettering=true` in `production-config.json`. The composer strips the L19 block and `page-composer` adds vector overlays in post.
+
+   **Why default on, not opt-in**: the May 16 rewrite addresses the original opt-in caveat. The 2026-05-13 L19 prescription (physical 3D scene objects) was opt-in because the failure mode on weaker models was silent 2D drift. The 2026-05-16 rewrite explicitly bounds the 2D scope to lettering only and reaffirms photoreal CGI for the bodies/scene by name, defusing that failure mode. Test render `607cf047-23d2-453e` validated the vocabulary holds first-shot on `nano_banana_flash`.
 
    **Common one-off drops** (overrides on top of the type default):
    - Rule 3 (muscles = breasts): drop for any male-only comic regardless of type

@@ -12,6 +12,35 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L19 rewrite — flat 2D comic-style lettering with scope-bounded overlay)
+
+### Changed
+
+- **L19 lettering vocabulary rewritten** from "physical 3D scene objects" (chrome-extruded SFX, semi-translucent photoreal floating speech panels — the 2026-05-13 prescription) to **flat 2D comic-book overlay graphics** — clean white rounded ovals with bold 3-4 pixel solid black outlines, comic display font ALL CAPS text (Bangers-style), short triangular black-outlined tails to speakers; yellow rounded-rectangle captions with black outlines; flat 2D comic-style ALL CAPS SFX text with solid black outline. **The 2D scope is explicitly bounded** to the bubble / caption / SFX graphics only — the bodies, costumes, skin, hair, and environment stay photoreal CGI. The bounded scope is the key insight that defuses **L7 Case B**'s failure mode: L7 Case B's diagnosis (comic-coded vocab in CGI prompts pulls the whole panel toward 2D illustration) was correct, but the original avoidance fix ("never bake lettering") produced sticker-on-top look, and the 2026-05-13 L19 fix ("bake as 3D scene objects") produced literal-3D bubbles that don't match classic comic-book lettering. The May 16 rewrite names the scope of the 2D style explicitly so the comic style stays restricted to lettering only. **Why this works**: L7 Case B failed because comic-coded vocab was *ambient* (no scope, model applied it everywhere); the May 16 fix names the scope and reaffirms photoreal CGI for the bodies/scene by name. The closing negation is also scope-bounded: *"Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay."*
+
+- **L19 promoted from opt-in to default-on.** The pre-rewrite L19 was gated behind `mandatory_rules.allow_baked_lettering` (default `false`) because the failure mode on weaker models was silent 2D drift. With the May 16 vocabulary explicitly bounding the 2D scope, that failure mode is defused; L19 is now unconditional whenever a panel has `dialogue[]` / `captions[]` / `sfx[]` content. New opt-out flag: `mandatory_rules.skip_baked_lettering=true` (for projects that prefer vector lettering in post for editability — routes through `page-composer` instead).
+
+### Added
+
+- **`_l19_lettering_block(panel)` in `next_panel.py`** auto-emits the scope-bounded lettering block from `panel.dialogue[]` / `panel.captions[]` / `panel.sfx[]`. Bubble shape is selected per `dialogue[].type` per **L4**: `balloon` = rounded oval; `thought` = cloud with trail of three dots; `whisper` = rounded oval with DASHED outline; `shout` = JAGGED-edged starburst; `off-panel` = tail pointing off-frame. Tail attribution names the speaker explicitly (per L4). Caption boxes emit yellow rounded rectangles with black outlines. SFX emits flat 2D comic-style ALL CAPS lettering per `sfx[].scale` (small/medium/large → small/bold/huge). All bubble/caption/SFX fragments include explicit "NO 3D shading, NO bevel, NO chrome, NO drop shadow on the scene" negations so the 2D-flat register is unambiguous.
+
+- **L4 is now implemented inside the L19 block.** The composer reads `dialogue[].type` per entry and emits the right bubble shape, names the speaker's side of the frame, points the tail at the named speaker, and quotes the exact text. L4 is no longer something to hand-author per panel — populate the shotlist and the bubble shape, position, and tail attribution emit automatically.
+
+### Validation
+
+- **Test render `607cf047-23d2-453e`** (2026-05-16, `nano_banana_flash`, 1k, count=1): two-character dialogue panel (Chun-Li + Bison in a sunlit dojo) with one balloon per speaker + one yellow caption box. **First-shot pass**: both bubbles rendered as clean white rounded ovals with bold black outlines and comic display font ALL CAPS text; caption rendered as yellow rectangle with black outline; bodies, costumes, and dojo environment held photoreal CGI register — no 2D drift on the non-lettering content. The critical L7 Case B test (does the body/scene drift to 2D under heavy lettering vocabulary?) passed without iteration on the very first prompt. URL: <https://d8j0ntlcm91z4.cloudfront.net/user_38dQE0shW4jVTzDWBhTkhQAKP4d/hf_20260517_002437_607cf047-23d2-453e-bc81-a59a139fcb75.png>
+
+### Files changed
+
+- `skills/comic-production/scripts/next_panel.py` — replaced the L7-compliant "no rendered lettering" mandatory block with the L19 scope-bounded lettering block (auto-emitted on panels with dialogue/captions/SFX). Added `_l19_lettering_block()` helper + `_BUBBLE_STYLE_BY_TYPE` table + `_BUBBLE_FONT` constant. Updated rules-registry entries for L19 (now "auto-injected by compose_prompt") and L4 ("applied inside L19 lettering block"). Updated closing negation to be scope-bounded ("Photographic CGI render on the bodies… ONLY the bubble/caption/SFX are flat 2D").
+- `skills/comic-production/references/lessons-learned.md` — rewrote L19 in place with the May 16 vocabulary, three-prescription history, validation test, and worked example. Updated L4's status note to reference the auto-emission. Updated L7 Case B's "Fix" block and "After" worked example to show the new flat-2D-overlay phrasing instead of chrome-extruded letters.
+- `skills/comic-production/references/prompt-templates.md` — rewrote the L19 header, the Action Lines / SFX section, and the Dialogue Formatting section. New per-dialogue-type bubble-shape table. Marked the legacy short-form shorthand as DO NOT USE for CGI panels (it doesn't bound the 2D scope).
+- `skills/comic-production/references/the-rules-explained.md` — rewrote the L19 section with the three-iteration history and the bounded-scope explanation. Updated the L4 section to note that L4 is now implemented inside the L19 block. Updated the L7 section to summarize the three prescriptions.
+- `commands/build-comic.md` — flipped the hard rule from "No baked-in lettering in the render" to "Bake 2D comic-style lettering with scope-bounded overlay (L19)" with the auto-emission + opt-out flag.
+- `skills/comic-production/SKILL.md` — flipped the L19 opt-in block to the default-on phrasing. Updated the mandatory-rules-block step (Step 7) to reflect the default-on behavior. Replaced the per-dialogue-style description (physical 3D scene objects) with the new flat 2D overlay graphics description + the per-bubble-shape table.
+
+---
+
 ## 2026-05-16 (pipeline-wide "silhouette" → "muscular build" PURGE, user-directed)
 
 ![Pipeline-wide vocabulary purge — "silhouette" replaced with "muscular build" / "3D muscle volume" across 22 files. The lineup is a 3D body chart, not an outline reference](./skills/comic-production/references/the-rules-explained-graphics/03-silhouette-ladder.png)

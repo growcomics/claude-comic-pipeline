@@ -23,7 +23,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L16 | Multi-angle character reference packs | Arc characters need 5 view refs at baseline tier (3q, profile, back, low-angle, ECU-region) on top of face_card + body_tiers |
 | L17 | Known/canonical characters can't drift | IP characters need canon-sourced refs + explicit "canonical version of X" anchor per prompt |
 | L18 | Pose anatomy coherence | Mandatory render line: torso, hips, abs, feet all face the same direction; no impossible twists |
-| L19 | Bake lettering into the CGI render | Reverses L7. SFX / speech bubbles / captions render inside the image as physical scene objects |
+| L19 | Bake 2D comic-style lettering with scope-bounded overlay | Reverses L7. Speech bubbles / captions / SFX render as flat 2D comic-book graphics composited onto the photoreal CGI scene — 2D scope explicitly bounded to lettering only |
 | L20 | Camera distance bias for transformation comics | Default to MCU or closer; reserve full-body for the reveal. Mean ≤ 3.0, ≥30% in middle distances |
 | L28 | Reference completeness is mandatory, not optional | `references_required.json` manifest derived at script-breakdown; gated by `rules_audit`. Body-tier refs MUST attach the muscle-size lineup at generation time. |
 | L21 | Suppress in-scene rendering of reference images | Face card / lineup refs occasionally render as physical scene objects; exclusion clause required in every prompt that attaches a ref |
@@ -185,17 +185,23 @@ The retry typically passes with the same character size and body intent — only
 
 ## L4 — Speech bubbles need explicit positioning and tail direction
 
-> **Status: Active.** Per L19, lettering IS baked into the CGI render (paired with aggressive CGI anchoring vocabulary to prevent 2D drift). L4's positioning, tail-direction, and attribution guidance applies whenever you bake a bubble — which is now the default for CGI comic production.
+> **Status: Active.** Per L19, classic 2D comic-book lettering is baked into the CGI render (the 2D style is scope-bounded to bubble/caption/SFX graphics only). L4's positioning, tail-direction, and attribution guidance is implemented inside the L19 lettering block — bubble shape per dialogue type, tail attribution per speaker, exact text per quote.
 
 **Symptom**: Speech bubbles appear in random locations, sometimes overlapping faces or important visual content. Tails point at the wrong character. Multiple characters' bubbles get merged or attributed wrong.
 
-**Fix**: In the prompt, specify:
-- Bubble shape ("white speech bubble", "jagged-edged white speech bubble for yelling", "rectangular yellow caption box for narration", "wavering broken-edged outline for weak voice")
-- Position ("upper-left of frame", "upper-right with a tail pointing toward Bison's mouth")
-- Exact text in quotes
-- Character attribution ("contains the line for Chun-Li:", "for Bison:")
+**Fix**: In the prompt, specify (and `next_panel.py` `_l19_lettering_block()` auto-emits all of these):
+- **Bubble shape per dialogue type**:
+  - `balloon` → clean white rounded oval with a bold 3-4 pixel solid black outline
+  - `thought` → clean white cloud-shaped outline with a small cloud-bubble trail of three round dots leading to the thinker
+  - `whisper` → clean white rounded oval with a thin DASHED black outline (broken/dashed, not solid)
+  - `shout` → white JAGGED-EDGED starburst shape with a bold solid black outline (spiky/zig-zag, not smooth)
+  - `off-panel` → standard speech-balloon shape but drawn at the edge of the frame, tail pointing OFF the panel
+  - `caption` → yellow rounded-corner rectangle with a bold 3-4 pixel black outline (separate field — `captions[]`, not `dialogue[]`)
+- **Position** — name the side of the frame the speaker is on so attribution is unambiguous
+- **Exact text in quotes** — bold black sans-serif comic display font (Bangers-style), ALL CAPS
+- **Per-speaker attribution** — "tail pointing directly to `chunli`'s mouth", "trail leading to `mai`"
 
-For panels with multiple speakers, place each bubble's position explicitly and describe the tail direction for each — don't leave attribution implicit.
+For panels with multiple speakers, the lettering block emits one bubble fragment per dialogue entry in order, each with explicit position and tail direction.
 
 ---
 
@@ -266,16 +272,33 @@ borders. Each frame is a fully photoreal CGI render in the same style.
 
 **Root cause**: Same as Case A — comic-coded vocabulary pulls the model toward illustration training data. SFX text overlays and speech bubbles are illustration conventions; asking the model to render them *inside* the CGI image creates style tension, and the lettering cue often wins. The bigger the lettering presence in the prompt, the harder the pull. Panels with heavy SFX + speech bubble + caption drift hardest; panels with no in-prompt lettering hold CGI.
 
-**Fix — the rule (revised per L19)**: **Bake lettering into the prompt, but pair it with aggressive CGI anchoring.** Open with concrete render-engine vocabulary (*"Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering, physically-based rendering, 8K texture detail"*) and close with explicit negation (*"NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render."*). Without that anchoring, baked lettering still drifts to 2D; with it, the model holds photoreal CGI while rendering the comic elements.
+**Fix — the rule (revised per L19, May 16 2026)**: **Bake the lettering into the prompt, but scope-bound the 2D style explicitly to the bubble / caption / SFX graphics only — and explicitly reaffirm photoreal CGI for everything else.** L7 Case B's failure mode was that comic-coded vocabulary in the prompt was *ambient* — it had no scope, so the model applied "comic-style" to the whole image. The fix names the scope: 2D applies to lettering graphics, photoreal CGI to bodies / costumes / skin / hair / environment / lighting.
 
-Render lettering as **physical scene objects**, not 2D overlays:
+Render lettering as **flat 2D vector graphics composited onto the photoreal scene**, NOT as 3D scene objects (the original 2026-05-13 L19 prescription) and NOT as a general "comic-style" pull:
 ```
-"In the scene, the SFX word 'BWOOM' appears as a 3D-extruded chrome letter sculpture sitting in the scene as a physical object, casting a real ray-traced shadow on the ground and catching the same warm rim light as the rest of the render. The speech bubble is a photoreal semi-translucent 3D surface with extruded text, floating in 3D space, tail pointing to the speaker. NOT a comic, NOT an illustration. Photographic CGI render."
+LETTERING — classic comic-book lettering composited onto the photoreal
+CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX
+graphics. Everything else in the panel (bodies, costumes, skin, hair,
+environment, props, lighting) remains photoreal DAZ3D CGI. The bubbles
+are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn
+the scene 2D.
+
+[per-bubble fragments — white rounded oval with bold black outline,
+comic display font ALL CAPS, tail to speaker, no 3D shading no chrome
+no drop shadow]
+
+[caption — yellow rectangle with black outline, comic font]
+
+[SFX — flat 2D comic lettering, no 3D extrusion no chrome]
+
+Photographic CGI render on the bodies, costumes, skin, hair, environment;
+NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the
+bubble / caption / SFX graphics are flat 2D comic-book overlay.
 ```
 
 Same trick used in Case A's triptych fix.
 
-**Historical note**: L7 Case B previously prescribed *never* baking lettering, deferring all of it to `page-composer` vector overlays. That was avoidance, not control. The diagnosis (comic vocab pulls CGI toward 2D) still holds; the prescription changed in L19.
+**Historical note**: L7 Case B has had three prescriptions across the project's life — (a) **never bake lettering, defer to `page-composer`** (the original 2026 era rule, "avoidance"); (b) **bake AND render as 3D scene objects** (L19 introduced 2026-05-13, "control by reframing as photoreal 3D"); (c) **bake as flat 2D overlay AND name the scope** (L19 rewritten 2026-05-16, the current rule, "control by bounding the scope"). The diagnosis has been stable across all three iterations — comic-coded vocab in a CGI prompt pulls the model toward illustration. Only the fix has evolved.
 
 **Confirmed in production**: Chun-Li growth series — panels 3 (first surge), 4 (bicep close-up), and 5 (full body reveal) all drifted to 2D illustration while panels 1, 2, and 6–10 held photoreal CGI. The three drifted panels had prompted comic SFX text ("RRRIP", "KRRK", "BWOOM", "KRRSH") and inline speech bubbles ("a white speech bubble containing the line: '...'") in the prompt. The non-drifted panels did not. Removing the lettering from those prompts and letting `page-composer` handle dialogue/SFX in post would have held the photoreal style.
 
@@ -289,16 +312,23 @@ Speech bubble in lower right: white bubble with tail pointing to Chun-Li's mouth
 [mandatory rules block]
 ```
 
-After (holds photoreal CGI with baked lettering, per L19):
+After (holds photoreal CGI with baked 2D-flat lettering, per L19 May 16):
 ```
 Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering on skin, physically-based rendering, 8K texture detail, photographic CGI.
-[CGI render description...]
-SFX: "RRRIP" and "KRRK" rendered as 3D-extruded chrome letter sculptures near the tearing seams, casting real ray-traced shadows, catching the same warm rim light as the rest of the scene.
-Speech bubble in lower right: photoreal semi-translucent 3D panel with extruded text, floating in space, tail pointing to Chun-Li's mouth, containing the line: "Muscles swelling… clothes getting tight… a rush of strength! What is this?!"
-NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render.
+[CGI render description: Chun-Li mid-surge, qipao stretched at the chest with the first seam beginning to split…]
+
+LETTERING — classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D.
+
+SFX 1: the word "RRRIP" rendered as bold flat 2D comic-book lettering overlaid on the scene near the tearing chest seam — bold black comic display font ALL CAPS with a solid black outline. Flat 2D vector lettering only — NO 3D extrusion, NO chrome, NO ray-traced shadows on the scene.
+
+SFX 2: the word "KRRK" rendered as the same flat 2D comic-book lettering style near the splitting shoulder seam.
+
+Bubble 1: classic comic-book speech balloon — clean white rounded oval with a bold 3-4 pixel solid black outline, positioned lower-right of frame; short triangular black-outlined tail pointing to Chun-Li's mouth. Bold black sans-serif comic display font ALL CAPS text inside reads exactly: "MUSCLES SWELLING… CLOTHES GETTING TIGHT… A RUSH OF STRENGTH! WHAT IS THIS?!" Flat 2D vector graphic — NO 3D shading, NO bevel, NO chrome, NO drop shadow on the scene.
+
+Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.
 ```
 
-The dialogue stays in `shotlist.json`'s `dialogue[]` array as the source of truth, but the render bakes it in directly — single cohesive image, no overlay layer.
+The dialogue stays in `shotlist.json`'s `dialogue[]` array as the source of truth, but the render bakes it in directly as 2D-flat overlay graphics — single cohesive image, lettering visually integrated.
 
 ---
 
@@ -761,37 +791,111 @@ This is a soft guardrail — it doesn't catch every case, but it reduces frequen
 
 ---
 
-## L19 — Bake lettering into the CGI render (reverses L7 Case B's "never bake" rule)
+## L19 — Bake 2D comic-style lettering, scoped explicitly to the lettering only
 
-**Symptom**: The L7 Case B workflow deferred all lettering — speech bubbles, captions, SFX — to `page-composer`, which applied vector overlays on top of clean CGI renders. The result reads as "CGI panel + sticker overlay" — lettering looks pasted on rather than part of the rendered scene. The desired output is a single cohesive rendered comic page where the lettering is part of the photoreal world.
+> **Status: Active. Replaced "physical 3D scene objects" prescription on 2026-05-16.** L19's original (2026-05-13) fix rendered lettering as literal 3D scene objects — chrome-extruded SFX, photoreal semi-translucent floating speech panels. That held photoreal CGI on the bodies but produced 3D bubbles that don't match classic comic-book lettering. The user's target is **flat 2D comic-book bubble graphics composited directly into the render** — clean white ovals, bold black outlines, comic display font, yellow caption rectangles. This section is the May 16 rewrite; the older "physical 3D scene objects" wording is in CHANGELOG 2026-05-13.
 
-**Root cause**: L7 Case B over-corrected on a real observation (comic-coded vocab in lettering prompts pulls CGI toward illustration training data). Its prescribed fix — never bake lettering — was avoidance, not control. The right fix is to bake the lettering AND aggressively counter the illustration pull at the prompt level.
+**Symptom (original)**: The pre-L19 L7 Case B workflow deferred all lettering — speech bubbles, captions, SFX — to `page-composer`, which applied vector overlays on top of clean CGI renders. The result reads as "CGI panel + sticker overlay" — lettering looks pasted on, with no visual integration. The desired output is a single cohesive rendered comic page where the lettering is part of the panel.
 
-**Fix**:
+**Symptom (May 16 update)**: The original L19 fix solved the integration problem but produced lettering in the wrong visual register — 3D bubbles. Classic comic-book lettering is 2D flat overlay graphics on the scene, not literal 3D objects. The challenge is to bake the lettering at the right visual register **without** re-triggering the L7 Case B failure mode (comic-coded vocabulary pulling the entire panel toward 2D illustration training data).
+
+**Root cause**: L7 Case B's diagnosis was right — comic-coded vocabulary in a CGI prompt is a strong signal that pulls the model toward illustration. Two ways to address it:
+
+1. **Avoidance** (the pre-L19 strategy) — strip all comic vocab from the prompt, defer lettering to vector overlay. Works, but produces sticker-on-top look.
+2. **Scope-bounded control** (this rewrite) — keep the lettering in the prompt but **name the scope of the 2D style explicitly**: the 2D applies to the bubble / caption / SFX graphics ONLY; everything else in the panel remains photoreal CGI.
+
+L7 Case B failed because "comic-style" in the prompt was ambient — it had no scope, so the model applied it everywhere. The May 16 vocabulary fixes this by naming what stays photoreal alongside what becomes 2D.
+
+**Fix (current — May 16, 2026)**:
 
 1. **Open every CGI panel prompt with concrete render-engine vocabulary**:
    > *"Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering on skin, physically-based rendering, 8K texture detail, photographic CGI."*
-2. **Bake all lettering directly into the prompt** — speech bubbles (per L4 positioning rules), SFX, captions.
-3. **Render lettering as physical scene objects**, not 2D overlays:
-   - SFX words → 3D-extruded chrome / stone / energy letter sculptures with real ray-traced shadows, catching scene rim light
-   - Speech bubbles → photoreal semi-translucent 3D panels floating in space, tails pointing at speakers
-   - Caption boxes → in-scene plaques or rendered textured panels with extruded text
-4. **Close every prompt with explicit negation**:
-   > *"NOT a comic, NOT an illustration, NOT anime, NOT 2D drawn art. Photographic CGI render."*
 
-The opening anchors the photoreal target; the closing tells the model what to avoid. Both are needed — neither alone holds.
+2. **Inject a scope-bounded lettering block whenever the panel has dialogue, captions, or SFX**:
+   > *"LETTERING — classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D."*
+
+3. **Describe bubbles as flat 2D vector graphics**, NOT 3D scene objects:
+   - **Speech bubbles** → classic comic-book speech balloons — clean white rounded oval shapes with bold 3-4 pixel solid black outlines, bold black sans-serif comic display font (Bangers-style) ALL CAPS text inside, short triangular black-outlined tail pointing to the speaker's mouth. **NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene.**
+   - **Caption boxes** → yellow rounded-corner rectangles with bold 3-4 pixel black outlines, bold comic display font ALL CAPS text inside, sitting at the bottom edge of the panel.
+   - **SFX** → bold black or yellow comic display font ALL CAPS text overlaid on the scene with a solid black outline. **Flat 2D vector lettering only — NO 3D extrusion, NO chrome letter sculptures, NO ray-traced shadows on the scene.**
+   - **Per L4**: bubble shape varies by dialogue type — `balloon` = rounded oval, `thought` = cloud with trail of dots, `whisper` = rounded oval with DASHED outline, `shout` = JAGGED-EDGED starburst, `off-panel` = tail pointing off-frame.
+
+4. **Close every prompt with scope-bounded negation**:
+   > *"Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay."*
+
+The opening anchors the photoreal target. The middle block bounds the 2D scope to lettering only. The closing reaffirms the photoreal scope with the negation. **All three pieces are load-bearing — none alone holds.**
+
+**Test render validating the new vocabulary**: job [`607cf047-23d2-453e`](https://d8j0ntlcm91z4.cloudfront.net/user_38dQE0shW4jVTzDWBhTkhQAKP4d/hf_20260517_002437_607cf047-23d2-453e-bc81-a59a139fcb75.png) (2026-05-16, nano_banana_flash, 1k, count=1). Two-character dialogue panel (Chun-Li + Bison in a sunlit dojo) with one balloon per speaker + one yellow caption box. Result:
+
+- ✅ Both speech bubbles rendered as clean white rounded ovals with bold black outlines and comic display font ALL CAPS text.
+- ✅ Yellow caption rectangle with black outline, comic font reading "THE DOJO. SUNSET."
+- ✅ Bodies + costumes + dojo environment held photoreal CGI register — no 2D drift, no cartoon shading, no illustration look on the non-lettering content.
+- ✅ Tail attribution clear (right bubble's tail points to Bison).
+
+The critical test (does the body/scene drift to 2D under heavy lettering vocabulary?) **passed on first attempt** with this vocabulary.
+
+**Worked example — full panel prompt (the 2026-05-16 test)**:
+
+```
+Hyperrealistic DAZ3D Studio 3D CGI render, ray-traced subsurface scattering
+on skin, physically-based rendering, 8K texture detail, photographic CGI.
+Medium shot, eye-level, ~50mm lens.
+
+[scene description: Chun-Li left, Bison right, three-quarter, dialogue
+beat in a sunlit dojo with wooden floorboards and paper sliding doors
+stained warm gold by late-afternoon light.]
+
+LETTERING — classic comic-book lettering composited onto the photoreal
+CGI scene. The 2D comic styling applies ONLY to the bubble / caption /
+SFX graphics. Everything else in the panel (bodies, costumes, skin, hair,
+environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced
+subsurface scattering and physically-based rendering. The bubbles are
+flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the
+scene 2D.
+
+Bubble 1: classic comic-book speech balloon — clean white rounded oval
+shape with a bold 3-4 pixel solid black outline, positioned upper-left
+over Chun-Li's side of the frame; short triangular black-outlined tail
+pointing directly to Chun-Li's mouth. Bold black sans-serif comic display
+font ALL CAPS text inside reads exactly: "I'M HERE TO FINISH WHAT WE
+STARTED." Flat 2D vector graphic — NO 3D shading, NO bevel, NO chrome,
+NO drop shadow on the scene.
+
+Bubble 2: same flat 2D comic-bubble style, upper-right, tail pointing
+down-left to Bison's mouth. Reads exactly: "I WAS HOPING YOU'D SAY THAT."
+
+Caption box: yellow rounded-corner rectangle with a bold 3-4 pixel black
+outline, bottom of the panel. Bold black ALL CAPS comic display font
+reads exactly: "THE DOJO. SUNSET."
+
+[mandatory rules + L21 ref-exclusion + L18 anatomy coherence]
+
+Photographic CGI render on the bodies, costumes, skin, hair, environment,
+and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded
+skin. Only the bubble / caption / SFX graphics are flat 2D comic-book
+overlay.
+```
+
+**Why the scope-bounded vocabulary defuses L7 Case B**:
+
+- **The 2D scope is explicitly bounded** to three named overlay objects (bubble / caption / SFX) — not a general "comic style" applied to the whole image. The previous L7 Case B failure was that comic-coded vocab had no scope and bled across.
+- **The photoreal scope is explicitly reaffirmed** in the same block: bodies, costumes, skin, hair, environment, props, lighting. Naming what stays photoreal is load-bearing — the negation block at the end is no longer the only guard.
+- **The metaphor is "letterer added them in post on top of a photograph"** — a real-world workflow the model has seen, telling it: the bubbles are an *overlay layer*, not a style applied globally.
+- **Closing negation is scope-bounded too**: "NOT a 2D illustration on the **bodies**, NOT cartoon-shaded **skin**." Sharper than the older "NOT illustrated" which was ambiguous about what was being negated.
+
+**Auto-emission**: `next_panel.py` `_l19_lettering_block()` auto-emits the block on every panel with a non-empty `dialogue`, `captions`, or `sfx` array. Bubble shape varies per `type` (balloon / thought / whisper / shout / off-panel) per L4. Tail attribution names the speaker explicitly per L4. No opt-in flag — this is the default behavior. The older `mandatory_rules.allow_baked_lettering` config opt-in (from the 2026-05-13 introduction) is retired; lettering bake is now unconditional.
 
 **Relationship to other lessons**:
-- **Reverses L7 Case B's prescription.** The diagnosis (comic vocab pulls toward 2D) still applies, but the fix is now "bake AND anchor," not "never bake."
-- **Restores L4 to active status.** Bubble shape, position, tail direction, and per-speaker attribution all matter again because bubbles are in the render.
-- **Open question**: whether `page-composer` survives as an optional fallback for projects that prefer vector lettering (legibility, edit-ability), or gets retired entirely. Decide per-project.
+- **Reverses L7 Case B's prescription.** The diagnosis (comic vocab pulls toward 2D) still applies; the new fix is "bake AND scope-bound," not "never bake" (pre-2026-05-13) or "bake AND render as 3D objects" (2026-05-13 to 2026-05-16).
+- **L4 — Speech bubble positioning** is implemented inside the L19 lettering block. Bubble shape per dialogue type, tail per speaker, per-speaker text.
+- **`page-composer` still exists** as the vector-overlay path for projects that prefer post-render vector lettering (legibility, edit-ability, dialogue tweaks without re-rendering). L19 is the default in-render bake; page-composer is opt-in.
 
 **Where this rule applies**:
-- All CGI comic production where the user wants a single cohesive rendered look (the current default).
+- All CGI comic production. Default behavior — auto-injected by `compose_prompt()`.
 
 **Where this rule does NOT apply**:
-- Projects that explicitly opt for vector lettering in post (rare).
-- Genuinely 2D-illustrated comics where illustration IS the goal.
+- Genuinely 2D-illustrated comics where illustration IS the goal. The whole point of L7's diagnosis is that the model defaults toward illustration; don't fight it if illustration is the goal.
+- Projects that explicitly route lettering through `page-composer` for editability reasons (set `mandatory_rules.skip_baked_lettering=true` in `production-config.json` — opt-out, not opt-in).
 
 ---
 
