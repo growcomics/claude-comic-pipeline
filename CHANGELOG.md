@@ -12,6 +12,25 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L31 — tier-8 reinforcement refs ingested + rule wired)
+
+### Added
+
+- **L31 rule module** at [`skills/comic-production/rules/l31_tier8_reinforcement.py`](./skills/comic-production/rules/l31_tier8_reinforcement.py) — sibling of L29/L30, fires at `panel.muscle_size_tier == 8`. Same slot (`8b_tier_reinforcement`), same surgical-scoping pattern, same all-or-nothing attachment.
+- **Tier-8 anatomical reference sheets** at [`skills/comic-production/references/peak-body-scale/tier-8/`](./skills/comic-production/references/peak-body-scale/tier-8/) — Sheet A pick `7c0d52dd` (most explicit labels: DELTOIDS Massive 3x, MAXIMAL Quad Volume, Bicep Profile, Waist Narrowness, Leg Musculature) and Sheet B pick `6072b6d6` (best dimensional callouts: VANISHINGLY NARROW WAIST, Tier 8 breast detail — larger fuller more projected). Generated 2026-05-16 evening using Mira as source character + tier-6-full-body.png as STYLE anchor; prompt instructs "render TWO TIERS bigger than reference #2 (tier-6 baseline)." 16 gens, 14 successful (1 NSFW filtered, 1 platform-failed). 12 unsuccessful + non-picked candidates archived at [`docs/posts/2026-05-16-tier-8-candidates/`](./docs/posts/2026-05-16-tier-8-candidates/). Credit cost: ~50.
+- **Helpers + wiring**: `find_tier8_reinforcement_refs()` and `should_attach_tier8_reinforcement()` (uses the shared `_find_peak_reinforcement_refs(root, 8)` helper that's now factored across L29/L30/L31), ctx flag `tier8_refs_attached`, slot dispatch at `8b_tier_reinforcement` after L29/L30. `_has_tier8_reinforcement_refs()` audit helper + per-panel HARD gate in `rules_audit.py`.
+- **Docs**: tier-8 section in [`peak-body-scale.md`](./skills/comic-production/references/peak-body-scale.md); L31 lesson in [`lessons-learned.md`](./skills/comic-production/references/lessons-learned.md).
+
+### Validation
+
+- End-to-end smoke test against a synthetic tier-8 Mira panel: both PNGs attached, L31 directive renders into the composed prompt, trace shows `L31.pre_render.status="pass"`.
+
+### Fixed (post-commit)
+
+- CHANGELOG entry for L31 was missed during the `fe098d0` commit due to a linter-induced file-modification race; added in a follow-up doc commit.
+
+---
+
 ## 2026-05-16 (L30 — tier-7 reinforcement refs ingested + rule wired)
 
 ### Added
