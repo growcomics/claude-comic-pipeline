@@ -368,6 +368,17 @@ def check_pages(project: Path, shotlist: dict, pages_filter: set[int] | None) ->
                     "Tier-7 lineup-only fallback inherits the same failure mode as tier-6 — see L30.",
                 ))
 
+            # 5c. L31 — same gate at tier 8.
+            if tier_int == 8 and not _has_tier8_reinforcement_refs(project):
+                out.append(Finding(
+                    n, pid, "tier8_reinforcement", SEVERITY_HARD,
+                    "Panel declares muscle_size_tier == 8 but the L31 reinforcement PNGs are NOT findable on disk. "
+                    "Both tier-8-full-body.png and tier-8-anatomical-detail.png are required.",
+                    "Ship the tier-8 reinforcement PNGs to skills/comic-production/references/peak-body-scale/tier-8/ "
+                    "(or drop project-local overrides at references/style/) before rendering this panel. "
+                    "Per L31.",
+                ))
+
             # 6. Characters all declared in cast[]
             for ch in chars:
                 if cast_ids and ch not in cast_ids:
@@ -956,6 +967,10 @@ def _has_tier6_reinforcement_refs(project: Path) -> bool:
 
 def _has_tier7_reinforcement_refs(project: Path) -> bool:
     return _has_peak_reinforcement_refs(project, 7)
+
+
+def _has_tier8_reinforcement_refs(project: Path) -> bool:
+    return _has_peak_reinforcement_refs(project, 8)
 
 
 def _infer_arc_character(shotlist: dict) -> str | None:

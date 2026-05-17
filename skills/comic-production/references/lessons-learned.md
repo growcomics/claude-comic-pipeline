@@ -1250,4 +1250,20 @@ Tier 1-6 panels (lineup alone handles 1-5; L29 handles tier 6). Tier 8-9 panels 
 
 ---
 
+## L31 — Tier-8 needs dedicated proportion reinforcement refs (sibling of L29/L30)
+
+**Symptom + root cause + fix**: Identical pattern to L29 (tier 6) and L30 (tier 7) — the `muscle-size-lineup-4-9.png` chart averages tier 8 toward middle of the chart, dedicated tier-8 reinforcement sheets isolate the super-peak proportions. Generated 2026-05-16 evening using Mira as source character; user picked Sheet A `7c0d52dd` (most explicit labels — DELTOIDS Massive 3x, MAXIMAL Quad Volume) and Sheet B `6072b6d6` (dimensional callouts: VANISHINGLY NARROW WAIST, Tier 8 breast detail). 16 gens submitted, 14 successful (1 NSFW, 1 platform-failed). Credit cost: ~50.
+
+**Implementation**: Sibling module `rules/l31_tier8_reinforcement.py`. Same slot, same surgical-scoping pattern, same all-or-nothing attachment, same HARD audit gate. Trigger: `panel.muscle_size_tier == 8`. Mutually exclusive with L29/L30.
+
+### Where this applies
+
+FMG comics at tier 8. Tier 9 will follow as L32.
+
+### Where this does NOT apply
+
+Tier 1-7 panels (handled by lineup / L29 / L30). Tier 9 panels (out of calibration range — L32 will ship). Non-FMG transformations.
+
+---
+
 ## How to add a lesson

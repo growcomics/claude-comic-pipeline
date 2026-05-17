@@ -107,6 +107,27 @@ Same pattern — sibling rule modules (L31 tier-8, L32 tier-9) with dedicated re
 
 ---
 
+## Tier-8 reinforcement refs (L31, added 2026-05-16 evening)
+
+Same multi-figure interpolation failure at tier 8. L31 fixes it the same way L29/L30 fixed tier 6/7 — keep the lineup attached, additionally attach two dedicated tier-8 reference sheets.
+
+| File | What it shows | Role |
+|---|---|---|
+| `peak-body-scale/tier-8/tier-8-full-body.png` | Front + rear full-body with annotated proportion stats: DELTOIDS Massive 3x, MAXIMAL Quad Volume, Bicep Profile, Waist Narrowness, Leg Musculature | Super-peak proportions anchor |
+| `peak-body-scale/tier-8/tier-8-anatomical-detail.png` | Close-up sheet with VANISHINGLY NARROW WAIST callout, Tier 8 breast detail (larger, fuller, more projected), bicep close-up, full rear posterior detail | Detail anchor with extreme proportion callouts |
+
+Generation procedure mirrors tier 7. 16 gens (8 per sheet) on `nano_banana_flash` 1k with Mira as identity anchor and tier-6-full-body sheet as STYLE anchor; prompt instructs "render TWO TIERS bigger than reference #2 (tier-6 baseline)." User picked Sheet A `7c0d52dd`, Sheet B `6072b6d6` from 14 successful candidates (1 NSFW filtered, 1 platform-failed). Credit cost: ~50.
+
+### Attachment + audit gates
+
+Same shape as L29/L30: `should_attach_tier8_reinforcement()` fires at `muscle_size_tier == 8`, `find_tier8_reinforcement_refs()` resolves via the shared `_find_peak_reinforcement_refs(root, 8)` helper, HARD audit gate in `rules_audit.py`.
+
+### Open question for tier 9
+
+Sibling L32 module. Same recipe; will execute next.
+
+---
+
 ## What the tiers mean
 
 Each tier is a **muscular-build target** — what muscle mass, definition, and frame width does figure N show? Reading the lineup left-to-right:

@@ -327,6 +327,20 @@ def should_attach_tier7_reinforcement(panel: dict) -> bool:
         return False
 
 
+def should_attach_tier8_reinforcement(panel: dict) -> bool:
+    """L31 attachment rule: sibling of L30 at `muscle_size_tier == 8`.
+
+    Tier 8 ("super-peak cartoony FMG") inherits the same multi-figure
+    interpolation failure mode L29/L30 fix at tier 6/7. Dedicated tier-8
+    sheets isolate the super-peak proportions.
+    """
+    tier = panel.get("muscle_size_tier")
+    try:
+        return int(tier) == 8
+    except (TypeError, ValueError):
+        return False
+
+
 # ---------------------------------------------------------------------------
 # Ref discovery
 
@@ -466,6 +480,12 @@ TIER7_REINFORCEMENT_FILENAMES = (
     "tier-7-anatomical-detail.png",
 )
 
+# L31 — tier-8 reinforcement refs. Sibling pattern to TIER6_*/TIER7_*.
+TIER8_REINFORCEMENT_FILENAMES = (
+    "tier-8-full-body.png",
+    "tier-8-anatomical-detail.png",
+)
+
 
 def _find_peak_reinforcement_refs(root: Path, tier: int) -> list[Path]:
     """Shared resolver for any peak-tier reinforcement ref pair. Returns
@@ -552,6 +572,11 @@ def find_tier7_reinforcement_refs(root: Path) -> list[Path]:
     reinforcement pair from project override → repo-bundled →
     user-installed → plugin-installed paths."""
     return _find_peak_reinforcement_refs(root, 7)
+
+
+def find_tier8_reinforcement_refs(root: Path) -> list[Path]:
+    """L31 sibling of find_tier7_reinforcement_refs. Tier-8 pair."""
+    return _find_peak_reinforcement_refs(root, 8)
 
 
 # ---------------------------------------------------------------------------
@@ -1043,6 +1068,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_build"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L29":            {"title": "Tier-6 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L30":            {"title": "Tier-7 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L31":            {"title": "Tier-8 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1208,6 +1234,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    env_dropped: bool = False,
                    tier6_refs_attached: bool = False,
                    tier7_refs_attached: bool = False,
+                   tier8_refs_attached: bool = False,
                    _trace: dict | None = None,
                    transformation_type: str = "fmg") -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
@@ -1243,6 +1270,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "lineup_attached": lineup_attached,
         "tier6_refs_attached": tier6_refs_attached,
         "tier7_refs_attached": tier7_refs_attached,
+        "tier8_refs_attached": tier8_refs_attached,
         "env_dropped": env_dropped,
         "stage_change": stage_change,
         "shotlist": shotlist,
@@ -1371,6 +1399,10 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     # registry order — only one of L29/L30 fires per panel since the
     # tier match conditions are mutually exclusive.
     _apply_rule_at_slot("L30", "8b_tier_reinforcement",
+                        panel, ctx, parts, _trace, transformation_type)
+
+    # 6c. L31 tier-8 reinforcement — same slot, sibling of L29/L30.
+    _apply_rule_at_slot("L31", "8b_tier_reinforcement",
                         panel, ctx, parts, _trace, transformation_type)
 
     # 7. Environment — slot 9_environment. Two pieces:
@@ -1742,6 +1774,39 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                 "reason": missing_t7_reason,
             })
 
+    # L31 — tier-8 reinforcement refs. Same pattern as L29/L30 at
+    # `panel.muscle_size_tier == 8`.
+    tier8_refs_attached = False
+    if should_attach_tier8_reinforcement(next_panel):
+        tier8_refs = find_tier8_reinforcement_refs(root)
+        if len(tier8_refs) == len(TIER8_REINFORCEMENT_FILENAMES):
+            for ref_path in tier8_refs:
+                refs_to_attach.append({
+                    "kind": "tier8_reinforcement",
+                    "tier": 8,
+                    "path": str(ref_path),
+                    "reason": (
+                        f"TIER-8 panel — `{ref_path.name}` MUST be attached "
+                        "alongside the muscle-size lineup-4-9. Per L31 "
+                        "(tier-8 needs dedicated proportion reinforcement)."
+                    ),
+                })
+            tier8_refs_attached = True
+        else:
+            missing_t8_reason = (
+                "TIER-8 panel but one or both tier-8 reinforcement PNGs NOT "
+                "FOUND on disk. Drop both "
+                f"{', '.join(TIER8_REINFORCEMENT_FILENAMES)} into "
+                "skills/comic-production/references/peak-body-scale/tier-8/ "
+                "(or project references/style/) before generating. Per L31."
+            )
+            refs_to_attach.append({
+                "kind": "MISSING_tier8_reinforcement",
+                "tier": 8,
+                "path": None,
+                "reason": missing_t8_reason,
+            })
+
     # L12 + L13: surface shotlist-shape warnings at planning time so the agent
     # driving generation can fix the shotlist or override before paying for an
     # output that's broken-by-design. These warnings live alongside MISSING_*
@@ -1825,7 +1890,8 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
     n_env = 1 if env_ref else 0
     n_tier6 = sum(1 for r in refs_to_attach if r.get("kind") == "tier6_reinforcement")
     n_tier7 = sum(1 for r in refs_to_attach if r.get("kind") == "tier7_reinforcement")
-    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6 + n_tier7
+    n_tier8 = sum(1 for r in refs_to_attach if r.get("kind") == "tier8_reinforcement")
+    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6 + n_tier7 + n_tier8
 
     env_dropped_for_ceiling = False
     composer_env_ref: Path | None = env_ref
@@ -1883,6 +1949,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             env_dropped=env_dropped_for_ceiling,
                             tier6_refs_attached=tier6_refs_attached,
                             tier7_refs_attached=tier7_refs_attached,
+                            tier8_refs_attached=tier8_refs_attached,
                             _trace=trace,
                             transformation_type=transformation_type)
 
