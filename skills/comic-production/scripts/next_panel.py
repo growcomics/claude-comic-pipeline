@@ -300,18 +300,29 @@ def should_attach_tier6_reinforcement(panel: dict) -> bool:
     """L29 attachment rule: attach BOTH tier-6 reinforcement PNGs whenever
     `panel.muscle_size_tier == 6`.
 
-    Strict tier-6 trigger. Tiers 7-9 are beyond peak and the calibrated
-    reinforcement sheets exist only for the peak-1-6 figure; future
-    expansion may add tier-7/8/9 sheets but they would live in sibling
-    directories and have their own attachment helpers.
-
-    Fires in addition to (NOT instead of) the lineup. Both refs attach
-    together — splitting them defeats the dual-anchor purpose (full-body
-    overview + anatomical detail).
+    Strict tier-6 trigger. Fires in addition to (NOT instead of) the
+    lineup. Both refs attach together — splitting them defeats the dual-
+    anchor purpose (full-body overview + anatomical detail).
     """
     tier = panel.get("muscle_size_tier")
     try:
         return int(tier) == 6
+    except (TypeError, ValueError):
+        return False
+
+
+def should_attach_tier7_reinforcement(panel: dict) -> bool:
+    """L30 attachment rule: same shape as L29 but at `muscle_size_tier == 7`.
+
+    Tier 7 ("beyond peak") needs its own dedicated reinforcement sheets
+    because the multi-figure muscle-size-lineup-4-9.png chart averages
+    its tier-7 figure toward the middle of the chart (tiers 5-6); the
+    dedicated tier-7 sheets isolate the beyond-peak proportions as their
+    own anchor.
+    """
+    tier = panel.get("muscle_size_tier")
+    try:
+        return int(tier) == 7
     except (TypeError, ValueError):
         return False
 
@@ -449,6 +460,47 @@ TIER6_REINFORCEMENT_FILENAMES = (
     "tier-6-anatomical-detail.png",
 )
 
+# L30 — tier-7 reinforcement refs. Sibling pattern to TIER6_*.
+TIER7_REINFORCEMENT_FILENAMES = (
+    "tier-7-full-body.png",
+    "tier-7-anatomical-detail.png",
+)
+
+
+def _find_peak_reinforcement_refs(root: Path, tier: int) -> list[Path]:
+    """Shared resolver for any peak-tier reinforcement ref pair. Returns
+    paths in canonical order (full-body first, anatomical-detail second),
+    or an empty list if either file is missing (all-or-nothing — partial
+    refs would mis-anchor)."""
+    filenames = (f"tier-{tier}-full-body.png",
+                 f"tier-{tier}-anatomical-detail.png")
+    tier_subdir = f"tier-{tier}"
+
+    pipeline_root = (Path(__file__).resolve().parent.parent
+                     / "references" / "peak-body-scale" / tier_subdir)
+    user_root = (Path.home() / ".claude" / "skills" / "comic-production"
+                 / "references" / "peak-body-scale" / tier_subdir)
+    plugin_root = Path.home() / "Library" / "Application Support" / "Claude" / "local-agent-mode-sessions"
+
+    resolved: list[Path] = []
+    for filename in filenames:
+        candidates: list[Path] = [
+            root / "references" / "style" / filename,
+            pipeline_root / filename,
+            user_root / filename,
+        ]
+        if plugin_root.exists():
+            for match in plugin_root.rglob(
+                f"comic-production/references/peak-body-scale/{tier_subdir}/{filename}"
+            ):
+                candidates.append(match)
+                break
+        found = next((p for p in candidates if p.exists()), None)
+        if found is None:
+            return []
+        resolved.append(found)
+    return resolved
+
 
 def find_tier6_reinforcement_refs(root: Path) -> list[Path]:
     """Resolve the two tier-6 reinforcement PNGs. Returns a list of paths in
@@ -493,6 +545,13 @@ def find_tier6_reinforcement_refs(root: Path) -> list[Path]:
             return []  # All-or-nothing — partial refs would mis-anchor.
         resolved.append(found)
     return resolved
+
+
+def find_tier7_reinforcement_refs(root: Path) -> list[Path]:
+    """L30 sibling of find_tier6_reinforcement_refs. Resolves the tier-7
+    reinforcement pair from project override → repo-bundled →
+    user-installed → plugin-installed paths."""
+    return _find_peak_reinforcement_refs(root, 7)
 
 
 # ---------------------------------------------------------------------------
@@ -983,6 +1042,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L10":            {"title": "References are the truth, prompts are deltas", "slot": "11_render_directive", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L11":            {"title": "Cartoony FMG proportions need explicit anchoring", "slot": ["5_style_anchor", "8_tier_build"], "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L29":            {"title": "Tier-6 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L30":            {"title": "Tier-7 needs dedicated proportion reinforcement refs", "slot": "8b_tier_reinforcement", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L15":            {"title": "Female characters must read as beautiful", "slot": "3_subject_identity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     "L17":            {"title": "Known/canonical characters can't drift", "slot": "3_subject_identity", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L18":            {"title": "Pose anatomy coherence", "slot": "13_anatomy_guardrail", "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1147,6 +1207,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                    lineup_attached: bool = False,
                    env_dropped: bool = False,
                    tier6_refs_attached: bool = False,
+                   tier7_refs_attached: bool = False,
                    _trace: dict | None = None,
                    transformation_type: str = "fmg") -> str:
     """Compose a starter prompt for this panel — L10 delta-only skeleton.
@@ -1181,6 +1242,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "env_anchor_from": env_anchor_from,
         "lineup_attached": lineup_attached,
         "tier6_refs_attached": tier6_refs_attached,
+        "tier7_refs_attached": tier7_refs_attached,
         "env_dropped": env_dropped,
         "stage_change": stage_change,
         "shotlist": shotlist,
@@ -1301,6 +1363,14 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     # refs is co-located with the lineup language and the model reads
     # them as a paired anchor.
     _apply_rule_at_slot("L29", "8b_tier_reinforcement",
+                        panel, ctx, parts, _trace, transformation_type)
+
+    # 6b. L30 tier-7 reinforcement — slot 8b_tier_reinforcement, sibling
+    # of L29. Fires at panel.muscle_size_tier == 7 with both tier-7 refs
+    # attached. Same slot as L29; multiple rules share the slot in
+    # registry order — only one of L29/L30 fires per panel since the
+    # tier match conditions are mutually exclusive.
+    _apply_rule_at_slot("L30", "8b_tier_reinforcement",
                         panel, ctx, parts, _trace, transformation_type)
 
     # 7. Environment — slot 9_environment. Two pieces:
@@ -1631,6 +1701,47 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                 "reason": missing_t6_reason,
             })
 
+    # L30 — tier-7 reinforcement refs. Same pattern as L29 but for
+    # `panel.muscle_size_tier == 7`. The tier-4-to-9 lineup chart
+    # interpolates the tier-7 figure toward the middle of the chart
+    # (tiers 5-6); the dedicated tier-7 reinforcement sheets isolate
+    # the beyond-peak proportions. See L30
+    # (`rules/l30_tier7_reinforcement.py`).
+    tier7_refs_attached = False
+    if should_attach_tier7_reinforcement(next_panel):
+        tier7_refs = find_tier7_reinforcement_refs(root)
+        if len(tier7_refs) == len(TIER7_REINFORCEMENT_FILENAMES):
+            for ref_path in tier7_refs:
+                refs_to_attach.append({
+                    "kind": "tier7_reinforcement",
+                    "tier": 7,
+                    "path": str(ref_path),
+                    "reason": (
+                        f"TIER-7 panel — `{ref_path.name}` MUST be attached "
+                        "alongside the muscle-size lineup-4-9. The lineup "
+                        "alone interpolates tier-7 toward the chart's "
+                        "middle; the dedicated tier-7 reinforcement sheets "
+                        "isolate the beyond-peak proportions. Per L30."
+                    ),
+                })
+            tier7_refs_attached = True
+        else:
+            missing_t7_reason = (
+                "TIER-7 panel but one or both tier-7 reinforcement PNGs NOT "
+                "FOUND on disk. Tried: project references/style/, repo "
+                "skills/comic-production/references/peak-body-scale/tier-7/, "
+                "~/.claude/skills/.../peak-body-scale/tier-7/. Drop both "
+                f"{', '.join(TIER7_REINFORCEMENT_FILENAMES)} into one of "
+                "those locations before generating. Falling back to lineup-"
+                "only is significantly less reliable at tier 7 (per L30)."
+            )
+            refs_to_attach.append({
+                "kind": "MISSING_tier7_reinforcement",
+                "tier": 7,
+                "path": None,
+                "reason": missing_t7_reason,
+            })
+
     # L12 + L13: surface shotlist-shape warnings at planning time so the agent
     # driving generation can fix the shotlist or override before paying for an
     # output that's broken-by-design. These warnings live alongside MISSING_*
@@ -1713,7 +1824,8 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
     n_lineup = 1 if lineup_attached else 0
     n_env = 1 if env_ref else 0
     n_tier6 = sum(1 for r in refs_to_attach if r.get("kind") == "tier6_reinforcement")
-    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6
+    n_tier7 = sum(1 for r in refs_to_attach if r.get("kind") == "tier7_reinforcement")
+    total_refs = n_face_cards + n_state_anchor + n_lineup + n_env + n_tier6 + n_tier7
 
     env_dropped_for_ceiling = False
     composer_env_ref: Path | None = env_ref
@@ -1770,6 +1882,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
                             lineup_attached=lineup_attached,
                             env_dropped=env_dropped_for_ceiling,
                             tier6_refs_attached=tier6_refs_attached,
+                            tier7_refs_attached=tier7_refs_attached,
                             _trace=trace,
                             transformation_type=transformation_type)
 

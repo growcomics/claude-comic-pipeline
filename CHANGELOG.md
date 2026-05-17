@@ -12,6 +12,26 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L30 — tier-7 reinforcement refs ingested + rule wired)
+
+### Added
+
+- **L30 rule module** at [`skills/comic-production/rules/l30_tier7_reinforcement.py`](./skills/comic-production/rules/l30_tier7_reinforcement.py) — sibling of L29, fires at `panel.muscle_size_tier == 7`. Same slot (`8b_tier_reinforcement`), same surgical-scoping pattern (PROPORTION REFERENCE ONLY do-NOT-borrow list), same over-spec compensation, same all-or-nothing attachment. Multiple rules can share a slot in registry order; L29 and L30 are mutually exclusive on tier conditions so only one fires per panel.
+
+- **Tier-7 anatomical reference sheets** at [`skills/comic-production/references/peak-body-scale/tier-7/`](./skills/comic-production/references/peak-body-scale/tier-7/) — `tier-7-full-body.png` (Sheet A pick `fb14428d`, front + rear with proportion stat callouts + 4 detail insets) and `tier-7-anatomical-detail.png` (Sheet B pick `3beb5bbd`, 4-panel close-up sheet with dimensional callouts on waist narrowness). Generated 2026-05-16 evening using Mira as source character and the prompt recipe in the tier-7/8/9 plan doc; user manually picked 1 of 8 candidates per sheet (per the locked-in decision favoring manual review on canonical-asset picks). 16 gens submitted, 11 successful, 2 NSFW filtered at gen time, 3 platform-failed. Credit cost: ~50. All 11 candidates archived at [`docs/posts/2026-05-16-tier-7-candidates/`](./docs/posts/2026-05-16-tier-7-candidates/).
+
+- **L30 helpers + ref-attachment block** in `next_panel.py`: `find_tier7_reinforcement_refs()` (parameterized internally via the new `_find_peak_reinforcement_refs(root, tier)` helper that's shared between L29 and L30), `should_attach_tier7_reinforcement()`, ctx flag `tier7_refs_attached`, slot dispatch at `8b_tier_reinforcement` right after L29. The ref-ceiling counter now also includes `tier7_reinforcement` entries.
+
+- **HARD audit gates for tier 7** in `rules_audit.py`: `_has_tier7_reinforcement_refs()` (parameterized internally via the new `_has_peak_reinforcement_refs(project, tier)` helper), per-panel check that HARD-fails when a tier-7 panel exists but the reinforcement PNGs aren't findable. Same shape as the tier-6 gate.
+
+- **Docs**: new tier-7 reinforcement section in [`references/peak-body-scale.md`](./skills/comic-production/references/peak-body-scale.md); new **L30** lesson in [`references/lessons-learned.md`](./skills/comic-production/references/lessons-learned.md) capturing the failure mode (multi-figure lineup-4-9 chart interpolates tier-7 toward middle) and the fix (same shape as L29).
+
+### Validation
+
+- End-to-end smoke test against a synthetic tier-7 Mira panel: both PNGs attached, L30 directive renders into the composed prompt, trace shows `L30.pre_render.status="pass"`. Tier-7 build verification on real renders not yet done (the user-pick batch confirmed the SHEETS render at tier-7 proportions in 11/11 successful gens; panel-render validation comes in the next iteration).
+
+---
+
 ## 2026-05-16 (L29 validation — 8 Higgsfield credit-burns confirm tier-6 lands at parity)
 
 ### Added

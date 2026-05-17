@@ -84,9 +84,26 @@ Per the `feedback_chest_oversize_compensate` lesson, the model normalizes off-di
 
 `rules_audit.py` HARD-fails when any panel has `muscle_size_tier == 6` and the reinforcement PNGs aren't findable on disk via the canonical search order. This blocks the render plan; it doesn't just warn. Reason: tier-6 lineup-only fallback has a known regression that the reinforcement refs exist to fix, so rendering tier-6 without them ships a known failure.
 
-### Open question for future tiers
+---
 
-Tiers 7-9 (the `muscle-size-lineup-4-9.png` range) likely have the same under-rendering problem, but at scales that may push past what the model can do at all. L29 ships tier-6-only; tier-7/8/9 reinforcement refs would live in sibling directories (`peak-body-scale/tier-7/` etc.) and have their own rule modules. Empirical pass needed before extending.
+## Tier-7 reinforcement refs (L30, added 2026-05-16 evening)
+
+The same multi-figure interpolation failure exists at tier 7 on the `muscle-size-lineup-4-9.png` chart. L30 fixes it the same way L29 fixed tier 6: keep the lineup attached, additionally attach two dedicated tier-7 reference sheets generated 2026-05-16 evening using Mira as the source character.
+
+| File | What it shows | Role |
+|---|---|---|
+| `peak-body-scale/tier-7/tier-7-full-body.png` | Front + rear full-body refs with annotated proportion stats (TIER 7 / REAR VIEW headers, biceps profile, chest / thoracic detail, waist narrowness, leg musculature) | Beyond-peak proportions and frame-width anchor |
+| `peak-body-scale/tier-7/tier-7-anatomical-detail.png` | Close-up anatomical detail sheet — biceps anatomy, breast volume / shape, waistline metrics with dimensional callouts, full rear view + posterior musculature | Detail anchor for the muscle groups the lineup-4-9 chart can't isolate |
+
+Generation procedure: 16 Higgsfield gens (8 per sheet) using `nano_banana_flash` 1k with Mira's character ref as identity anchor and the tier-6-full-body sheet as STYLE anchor (per L11 surgical scoping — borrow style only, never proportions). User picked 1 of 8 per sheet manually. Picks: Sheet A `fb14428d`, Sheet B `3beb5bbd`. Yield was 11/16 successful (2 NSFW filtered at gen time, 3 platform-failed). 5 unsuccessful gens are documented in [`docs/posts/2026-05-16-tier-7-candidates/`](../../../docs/posts/2026-05-16-tier-7-candidates/) for reference. Credit cost: ~50.
+
+### Attachment + audit gates
+
+Mirror L29 exactly: `should_attach_tier7_reinforcement()` fires at `muscle_size_tier == 7`, `find_tier7_reinforcement_refs()` resolves via project override → repo-bundled → user-installed → plugin-installed paths, `rules_audit.py` HARD-fails on missing PNGs at the per-panel and manifest-level gates.
+
+### Open question for future tiers (8, 9)
+
+Same pattern — sibling rule modules (L31 tier-8, L32 tier-9) with dedicated reference sheets. Generation batches in flight using the same Mira source character + recipe. Empirical validation per tier before declaring each one shipped.
 
 ---
 

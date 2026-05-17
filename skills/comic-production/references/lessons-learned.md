@@ -1224,7 +1224,29 @@ FMG comics at tier 6. Non-FMG transformations (BE, glute, MMG) don't have tier-6
 
 ### Where this does NOT apply
 
-Tier 1-5 panels (no under-rendering signal at those tiers; lineup alone is adequate). Tier 7-9 panels (out of calibration range for these specific reinforcement sheets). Non-FMG transformations.
+Tier 1-5 panels (no under-rendering signal at those tiers; lineup alone is adequate). Tier 7-9 panels (out of calibration range for these specific reinforcement sheets — they have their own sibling rules: L30 for tier 7, future L31/L32 for tier 8/9). Non-FMG transformations.
+
+---
+
+## L30 — Tier-7 needs dedicated proportion reinforcement refs (sibling of L29 on the tier-4-to-9 chart)
+
+**Symptom**: Same as L29 but one tier up. The `muscle-size-lineup-4-9.png` chart shows six figures (tiers 4-9), and the model averages across them when asked to anchor to figure 7 (tier 7). The rendered tier-7 body lands closer to tier 5-6 interpolation. Beyond-peak proportions never read as beyond-peak.
+
+**Root cause**: Identical to L29 — multi-figure chart, averaging-toward-middle bias.
+
+**Fix**: Identical to L29 — keep the lineup attached (tier context), additionally attach two dedicated tier-7 reference sheets isolating the beyond-peak proportions. The sheets were generated 2026-05-16 evening using Mira as the source character and the prompt recipe in [`docs/posts/2026-05-16-tier-7-8-9-reinforcement-plan.md`](../../../docs/posts/2026-05-16-tier-7-8-9-reinforcement-plan.md). User picked 1 of 8 candidates per sheet.
+
+**Implementation**: Sibling module `rules/l30_tier7_reinforcement.py`. Same slot as L29 (`8b_tier_reinforcement`), same surgical-scoping language, same over-spec compensation, same all-or-nothing attachment, same HARD audit gate. Trigger: `panel.muscle_size_tier == 7`. Only one of L29/L30 fires per panel since the tier conditions are mutually exclusive.
+
+**Hard rules**: same as L29 — strict tier trigger, both refs together, reinforcement-not-replacement, repo-bundled, HARD audit gate.
+
+### Where this applies
+
+FMG comics at tier 7. Sibling rules for tier 8 and tier 9 will follow the same shape when those tiers ship reinforcement sheets.
+
+### Where this does NOT apply
+
+Tier 1-6 panels (lineup alone handles 1-5; L29 handles tier 6). Tier 8-9 panels (out of calibration range for tier-7 sheets — those tiers get their own dedicated sheets). Non-FMG transformations.
 
 ---
 

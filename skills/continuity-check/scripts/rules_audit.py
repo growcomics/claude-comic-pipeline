@@ -357,6 +357,17 @@ def check_pages(project: Path, shotlist: dict, pages_filter: set[int] | None) ->
                     "Tier-6 lineup-only fallback under-renders consistently — see L29.",
                 ))
 
+            # 5b. L30 — same gate at tier 7.
+            if tier_int == 7 and not _has_tier7_reinforcement_refs(project):
+                out.append(Finding(
+                    n, pid, "tier7_reinforcement", SEVERITY_HARD,
+                    "Panel declares muscle_size_tier == 7 but the L30 reinforcement PNGs are NOT findable on disk. "
+                    "Both tier-7-full-body.png and tier-7-anatomical-detail.png are required.",
+                    "Ship the tier-7 reinforcement PNGs to skills/comic-production/references/peak-body-scale/tier-7/ "
+                    "(or drop project-local overrides at references/style/) before rendering this panel. "
+                    "Tier-7 lineup-only fallback inherits the same failure mode as tier-6 — see L30.",
+                ))
+
             # 6. Characters all declared in cast[]
             for ch in chars:
                 if cast_ids and ch not in cast_ids:
@@ -906,19 +917,26 @@ _TIER6_REINFORCEMENT_FILES = (
     "tier-6-anatomical-detail.png",
 )
 
+_TIER7_REINFORCEMENT_FILES = (
+    "tier-7-full-body.png",
+    "tier-7-anatomical-detail.png",
+)
 
-def _has_tier6_reinforcement_refs(project: Path) -> bool:
+
+def _has_peak_reinforcement_refs(project: Path, tier: int) -> bool:
+    """Shared helper for any peak-tier reinforcement ref check. Mirrors
+    next_panel._find_peak_reinforcement_refs search order."""
+    filenames = (f"tier-{tier}-full-body.png",
+                 f"tier-{tier}-anatomical-detail.png")
+    tier_subdir = f"tier-{tier}"
     pipeline_candidates: list[Path] = [
-        # Documents-pipeline checkout
         Path.home() / "Documents" / "claude-comic-pipeline" / "skills"
-        / "comic-production" / "references" / "peak-body-scale" / "tier-6",
-        # User-installed skill
+        / "comic-production" / "references" / "peak-body-scale" / tier_subdir,
         Path.home() / ".claude" / "skills" / "comic-production"
-        / "references" / "peak-body-scale" / "tier-6",
+        / "references" / "peak-body-scale" / tier_subdir,
     ]
-    # Project-local override
     project_override = project / "references" / "style"
-    for filename in _TIER6_REINFORCEMENT_FILES:
+    for filename in filenames:
         found = False
         if (project_override / filename).exists():
             found = True
@@ -930,6 +948,14 @@ def _has_tier6_reinforcement_refs(project: Path) -> bool:
         if not found:
             return False
     return True
+
+
+def _has_tier6_reinforcement_refs(project: Path) -> bool:
+    return _has_peak_reinforcement_refs(project, 6)
+
+
+def _has_tier7_reinforcement_refs(project: Path) -> bool:
+    return _has_peak_reinforcement_refs(project, 7)
 
 
 def _infer_arc_character(shotlist: dict) -> str | None:
