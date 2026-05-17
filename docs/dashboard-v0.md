@@ -85,11 +85,16 @@ Each row is expandable for the full message + suggestion. Click filters by page/
 
 Three pieces, all already paid for or free:
 
-### 1. Shared Dropbox folder
-All comic projects live in **one shared Dropbox folder** (or iCloud Drive / Google Drive — whichever you already use). Each contributor's machine has it synced. The Mac mini also has it synced. Edit a file on one device → propagates everywhere within seconds. No new infrastructure to set up.
+### 1. Shared Google Drive folder
+All comic projects live in **one shared Google Drive folder** synced to every contributor's machine via the "Google Drive for desktop" app. The Mac mini has it synced too. Edit a file on one device → propagates everywhere within seconds. No new infrastructure to set up.
+
+Two requirements:
+
+- **Mirror mode, not Stream.** Drive preferences → Google Drive → "Mirror files." Every file lives on local disk on each machine. Stream mode would force on-demand cloud downloads mid-generation, which stalls panel renders.
+- **Code stays in git, outputs live in Drive.** The repo (`~/Documents/claude-comic-pipeline/`) is a regular local git clone on each machine — never inside the sync folder, because `.git/` churn breaks cloud sync. Project outputs (refs, panels, lettered pages) live in the Drive folder, exposed to the repo via a symlink: `~/Documents/claude-comic-pipeline/projects/` → `~/Library/CloudStorage/GoogleDrive-<account>/My Drive/claude-comic-projects/`. The dashboard reads from that symlinked path; both machines see the same files; commits never accidentally include synced output.
 
 ### 2. Mac mini (always-on)
-The dashboard service (FastAPI in Python) runs on your Mac mini as a `launchd` background service. Survives reboots. Reads project state from the synced Dropbox folder. No data leaves the mini.
+The dashboard service (FastAPI in Python) runs on your Mac mini as a `launchd` background service. Survives reboots. Reads project state from the synced Google Drive folder (via the `projects/` symlink). No data leaves the mini.
 
 ### 3. Tailscale VPN
 Free for up to 3 users. Zero-config: install the Tailscale app on each device, log in with the same account, and every device gets a private hostname like `comics.your-tailnet.ts.net`. Open that URL in a browser → instant dashboard. No port forwarding, no router config, no domain, no public exposure.
@@ -180,8 +185,9 @@ It is **not** a skill (skills are invoked by Claude agents; this is a long-runni
 
 ## Open questions for you
 
-1. **Confirm v0 scope.** Three widgets, multi-project tabs, read-only, Mac mini + Dropbox + Tailscale. Anything to cut? Anything to add?
-2. **Pick the shared file space.** Dropbox? iCloud Drive? Google Drive? Pick whichever you already pay for and use the most. We'll standardize on it.
-3. **Pick the access route.** Tailscale (recommended) or Cloudflare Tunnel — see *How it's hosted* above.
+1. **Confirm v0 scope.** Three widgets, multi-project tabs, read-only, Mac mini + Google Drive + Tailscale. Anything to cut? Anything to add?
+2. **Pick the access route.** Tailscale (recommended) or Cloudflare Tunnel — see *How it's hosted* above.
 
-Once those three are locked, the next session is a clean implementation run with no design discussion — roughly half a day of focused work, after which you and your colleague have a live dashboard at `https://comics.your-tailnet.ts.net`.
+(Resolved: shared file space is **Google Drive**, mirror mode, with the `projects/` symlink pattern described above.)
+
+Once those two are locked, the next session is a clean implementation run with no design discussion — roughly half a day of focused work, after which you and your colleague have a live dashboard at `https://comics.your-tailnet.ts.net`.
