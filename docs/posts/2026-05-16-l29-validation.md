@@ -53,12 +53,12 @@ Variance across the 8 is in *setting* (dojo interior, courtyard, palace square, 
 | 02 | `904da3fd` | [gen-02-904da3fd.png](./2026-05-16-l29-validation-assets/gen-02-904da3fd.png) | Strong | Courtyard, slightly less extreme proportions |
 | 03 | `d14fd76e` | [gen-03-d14fd76e.png](./2026-05-16-l29-validation-assets/gen-03-d14fd76e.png) | **Peak** | Most cartoony — biggest arms, deepest cleavage, broadest chest. **Best raw tier-6 read** |
 | 04 | `45c5cebd` | [gen-04-45c5cebd.png](./2026-05-16-l29-validation-assets/gen-04-45c5cebd.png) | Strong | Courtyard, balanced |
-| 05 | `a3949787` | [gen-05-a3949787.png](./2026-05-16-l29-validation-assets/gen-05-a3949787.png) | Strong | Courtyard, very similar to 04 |
+| 05 | `a3949787` | [gen-05-a3949787.png](./2026-05-16-l29-validation-assets/gen-05-a3949787.png) | **Strong — USER PICK** | Courtyard, balanced muscle + bust + face. **User confirmed best of 8** (overrides my initial gen-03 / gen-01 picks) |
 | 06 | `63ecf9ff` | [gen-06-63ecf9ff.png](./2026-05-16-l29-validation-assets/gen-06-63ecf9ff.png) | Strong | Action pose, central temple background, bust slightly smaller |
 | 07 | `81291709` | [gen-07-81291709.png](./2026-05-16-l29-validation-assets/gen-07-81291709.png) | Strong | Urban background, heavy musculature |
 | 08 | `5f9a0608` | [gen-08-5f9a0608.png](./2026-05-16-l29-validation-assets/gen-08-5f9a0608.png) | Strong | Night palace background, well-balanced |
 
-**Best of 8**: gen-03 for peak tier-6 read; gen-01 for cleanest overall composition.
+**Best of 8 (user-confirmed)**: **gen-05 (`a3949787`)** — the user reviewed all 8 and picked gen-05 as overall best (overrides my initial recommendations of gen-03 for peak tier-6 read + gen-01 for cleanest composition). gen-05 balances strong tier-6 proportions, full bust scale, clean Chun Li face, and a courtyard background — the all-around winner.
 
 ### Finding 3 — Surgical scoping holds; zero reference leakage
 
