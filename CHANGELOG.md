@@ -12,6 +12,24 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-16 (L29 validation — 8 Higgsfield credit-burns confirm tier-6 lands at parity)
+
+### Added
+
+- **Validation log + 8 generation assets** at [`docs/posts/2026-05-16-l29-validation.md`](./docs/posts/2026-05-16-l29-validation.md) and [`docs/posts/2026-05-16-l29-validation-assets/`](./docs/posts/2026-05-16-l29-validation-assets/). 8 nano_banana_flash 1k 3:4 generations of a synthetic tier-6 Chun Li panel with the L29 reference stack attached (face + lineup + tier-6-full-body). All 8 land at tier-6 proportions (deltoid mass dwarfing head, biceps approaching waist width, sculpted abs, broad lats, large forward-projected bust). Zero reference leakage — costume / hair / face / background all stayed on-prompt; no inset photos or annotated-overlay watermarks rendered. Credit cost: 27.
+
+- **Tier-7/8/9 reinforcement-ref generation plan** at [`docs/posts/2026-05-16-tier-7-8-9-reinforcement-plan.md`](./docs/posts/2026-05-16-tier-7-8-9-reinforcement-plan.md). Codifies the user-specified prompt recipe (sheet + biceps zoom + breast zoom + waist zoom + rear view) × 8 generations per prompt × 3 tiers = 120 candidates, picks composited into two PNGs per tier mirroring the tier-6 file shape, wired through sibling L30/L31/L32 modules. 5 open decisions for the user to answer before generation can start.
+
+### Finding
+
+- **Higgsfield NSFW upload filter blocks `tier-6-anatomical-detail.png`** at `media_confirm` (close-up biceps + breast volume + waist + posterior detail). The full-body reinforcement sheet uploaded cleanly. Local pipeline and Flow are unaffected — the file is fine; only Higgsfield's API rejected the upload. Mitigation options (re-export, crop, platform-flag) documented in the validation log under Finding 1. Validation proceeded with single-ref reinforcement (face + lineup + tier-6-full-body); the 4-ref full-L29 stack remains untested on Higgsfield but the 3-ref result is already strongly positive.
+
+### Changed
+
+- **Memory rule added**: `feedback_validate_with_credits` — any rendering-path pipeline change needs real Higgsfield gens (4-8 minimum) before "done"; results land in git, not just chat. User-directed today after asking whether one-off validation was worth the credits ("always worth many credit burns to check, remember that, and store the results in github").
+
+---
+
 ## 2026-05-16 (L11 breast-scale anchoring — Alignment Diff #3, user-directed)
 
 ![Alignment Diff #3 — breast scale promoted to a first-class load-bearing attribute of the L11 lineup, parallel to muscle scale. Pre-fix vocabulary mentioned breasts as a passing list item; post-fix vocabulary uses parallel CRITICAL — MUSCLE and CRITICAL — BREASTS blocks with over-spec compensation and costume-accommodates anchoring](./skills/comic-production/assets/muscle-size-lineup.png)
