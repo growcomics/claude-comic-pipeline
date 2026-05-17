@@ -37,6 +37,41 @@ from ._base import Rule, Verification, STATUS_PASS, STATUS_FAIL, STATUS_SKIPPED
 # as "match the OUTLINE shape" and skipping the visible 3D muscle volume.
 # Tier 4-6 panels in Test 1 and Test 2 both rendered as "wider fitness
 # model" instead of cartoony FMG because of this exact word choice.
+#
+# 2026-05-16 vocabulary correction (Alignment Diff #3): added explicit
+# breast-scale anchoring with parallel "CRITICAL — BREASTS:" framing.
+# Pre-correction the lineup-attached path mentioned breasts as a passing
+# list item ("(b) the size, fullness, and shape of the breasts") but only
+# muscle had the CAPS-LOCK / "do not regress" guards. Result: nano_banana_2
+# reliably matched muscle scale but defaulted to average / conservative
+# breast scale even when the user's explicit prompt asked for tier-6
+# breast size to match figure 6. Fix: promote breast scale to a first-
+# class anchor using the same surgical-scoping pattern that fixed muscle
+# — explicit "match figure N's breasts" + "do NOT regress to a smaller
+# tier's breast proportions" + style-anchor mention + stage-change
+# verbal-fallback mention + vision-rubric verification.
+#
+# 2026-05-16 v1→v2 iteration: v1 vocabulary landed close but breasts still
+# undershot at tier 6 on nano_banana_flash. Four additions folded in from
+# the v2 validation render that resolved the regression:
+#   1. Over-spec compensation — explicitly tells the model that nano_banana
+#      normalizes off-distribution features toward an average prior, and
+#      instructs it to render SLIGHTLY LARGER than the lineup figure shows
+#      so the downward bias lands at parity (per `feedback_chest_oversize_
+#      compensate` memory).
+#   2. Costume-accommodates anchor — the costume must accommodate the
+#      breast scale (pushed forward, stretched, fitted around the volume);
+#      NOT the breasts shrunk to fit the costume's modest silhouette.
+#      Critical for traditional / modest-coded garments (qipao, kimono,
+#      robe, business attire) where the model has a "this garment =
+#      modest profile" prior that overrides the breast scale.
+#   3. Anti-flattening negation — NO flattening, NO modest profile, NO
+#      conservative coverage minimizing the breast contour.
+#   4. Dramatic-enhancement framing — "at tier N the breast scale should
+#      read as a DRAMATIC enhancement over figure 1's baseline."
+# Validated on Chun Li tier 6 with blue qipao costume; v1 landed at ~tier
+# 4-5 breast scale, v2 landed at ~tier 6+ (over-spec compensation
+# intentional).
 _BUILD_BY_TIER = {
     1: "baseline athletic — slim, healthy, no developed muscle mass",
     2: ("visibly developed — defined deltoid mass beginning to show, "
@@ -78,11 +113,19 @@ _SILHOUETTE_BY_TIER = _BUILD_BY_TIER
 
 L11_STYLE_ANCHOR = (
     "Style anchor for the body: cartoony hyper-FMG comic-book proportions "
-    "with HEAVY 3D muscle volume — NOT realistic fitness modelling, NOT a "
-    "fitness-model build at wider scale. The lineup attached is a 3D body "
-    "chart with visible musculature; the storytelling element is the muscle "
-    "MASS and DEFINITION (delts, biceps, chest, abs, quads), not the outline "
-    "width. Render thick, defined, comic-exaggerated muscle volume."
+    "with HEAVY 3D muscle volume AND tier-scaled breast proportions — NOT "
+    "realistic fitness modelling, NOT a fitness-model build at wider scale, "
+    "NOT a smaller-breasted body grafted onto bigger muscles, NOT a modest "
+    "costume silhouette flattening the chest. The lineup attached is a 3D "
+    "body chart that scales TWO attributes per tier: visible musculature AND "
+    "breast size / fullness / forward projection. The storytelling elements "
+    "are the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads) "
+    "AND the breast SIZE, FULLNESS, and forward PROJECTION — not the outline "
+    "width, not a default-conservative breast size, not a costume that "
+    "flattens the breast contour. The costume must ACCOMMODATE the breast "
+    "scale (pushed forward, stretched, fitted around the volume), not the "
+    "other way around. Render thick, defined, comic-exaggerated muscle "
+    "volume with proportionally matched breast scale."
 )
 
 
@@ -113,23 +156,39 @@ class L11(Rule):
     vision_rubric = (
         "Look at this rendered comic panel. The panel's shotlist declares a "
         "specific muscle_size_tier and the attached muscle-size lineup is a "
-        "3D body chart with six figures showing progressive muscle "
-        "development (delts, biceps, chest, abs, quads, frame width). Does "
-        "the rendered character's muscular build match the lineup figure for "
-        "the declared tier? Compare specifically the 3D MUSCLE VOLUME, not "
-        "just the outline width: deltoid mass and separation, bicep peak and "
-        "thickness, chest depth, abdominal definition (visible 6-pack or 8-"
-        "pack), lat width, quad mass, frame width relative to head. Does the "
-        "rendered body look 'cartoony hyper-FMG' (thick 3D muscle mass like "
-        "the lineup target) or did it regress to realistic fitness modelling "
-        "(athletic but thin musculature with the right outline width)? "
-        "Critical distinction: a fitness-model body at wider proportions is "
-        "NOT a tier 5/6 match — the muscle VOLUME must actually be heavy and "
-        "defined. PASS if muscle mass and definition match the lineup figure. "
-        "FAIL with a specific description of the regression (e.g. 'shoulders "
-        "are wider but deltoid mass undersized — looks like a fitness model "
-        "at tier 3 proportions, not the heavy muscle volume of lineup figure "
-        "6'). Critical at tier 4 (the friction zone) and tier 5-6 (peak)."
+        "3D body chart with six figures showing TWO progressively-scaled "
+        "attributes per tier: (1) muscle mass / definition, and (2) breast "
+        "size / fullness / forward projection. Verify BOTH attributes match "
+        "the lineup figure for the declared tier.\n\n"
+        "MUSCLE: Does the rendered character's muscular build match the "
+        "lineup figure for the declared tier? Compare the 3D MUSCLE VOLUME "
+        "specifically, not just the outline width: deltoid mass and "
+        "separation, bicep peak and thickness, chest depth, abdominal "
+        "definition (visible 6-pack or 8-pack), lat width, quad mass, "
+        "frame width relative to head.\n\n"
+        "BREASTS: Does the rendered character's breast size, fullness, and "
+        "forward projection match the lineup figure for the declared tier? "
+        "The lineup scales breasts proportionally to muscle tier — figure "
+        "6's breasts are visibly larger, fuller, and more forward-projected "
+        "than figure 1's. Common regression: the body lands at tier N "
+        "muscle mass but the breasts render at tier 2-3 size (model "
+        "defaults to average / conservative breast scale even when the "
+        "lineup shows otherwise).\n\n"
+        "Does the rendered body look 'cartoony hyper-FMG' (thick 3D muscle "
+        "mass AND tier-matched breast scale, like the lineup target) or "
+        "did it regress — either to realistic fitness modelling (thin "
+        "musculature with the right outline width) OR to a smaller-"
+        "breasted body with bigger muscles (muscle landed but breasts "
+        "undershot)? Critical distinction: a fitness-model body at wider "
+        "proportions with conservative breasts is NOT a tier 5/6 match — "
+        "both muscle VOLUME and breast PROPORTIONS must actually be heavy "
+        "and tier-scaled. PASS only if BOTH attributes match the lineup "
+        "figure. FAIL with a specific description of which attribute "
+        "regressed and how (e.g. 'muscle mass matches figure 6 but breasts "
+        "rendered at tier 2-3 size — undershot the lineup's breast scale' "
+        "or 'shoulders are wider but deltoid mass undersized — looks like "
+        "a fitness model at tier 3 proportions'). Critical at tier 4 (the "
+        "friction zone) and tier 5-6 (peak)."
     )
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
@@ -156,43 +215,87 @@ class L11(Rule):
             if lineup_attached:
                 return (
                     f"Size tier: {tier}. The attached muscle-size lineup is "
-                    "a 3D BODY CHART with six figures showing progressive "
-                    "muscle development — visible deltoids, biceps, chest, "
-                    "abdominal definition, quad mass, frame width. It is a "
-                    "MUSCULAR-BUILD reference ONLY (NOT an outline reference) "
-                    f"— use figure {tier} from the lineup to determine ONLY: "
+                    "a 3D BODY CHART with six figures showing TWO "
+                    "progressively-scaled attributes per tier: (1) muscle "
+                    "mass / definition (visible deltoids, biceps, chest, "
+                    "abdominal definition, quad mass, frame width) AND (2) "
+                    "breast scale (size, fullness, forward projection). Both "
+                    "attributes scale per tier — figure 6 has visibly larger "
+                    "and more forward-projected breasts than figure 1 IN "
+                    "ADDITION TO larger muscle mass. It is a PROPORTION "
+                    "reference ONLY (NOT an outline reference, NOT a face / "
+                    "hair / costume reference) — use figure "
+                    f"{tier} from the lineup to determine ONLY: "
                     "(a) the size, mass, and definition of the muscle groups "
                     "— shoulders, deltoids, biceps, triceps, chest, lats, "
                     "abdominal definition, quadriceps, hamstrings, calves; "
-                    "(b) the size, fullness, and shape of the breasts; (c) "
-                    "the overall body mass and frame width. Target muscular "
-                    f"build for tier {tier}: {build}. CRITICAL: match the "
-                    f"visible 3D MUSCLE VOLUME and DEFINITION of figure "
-                    f"{tier}, not just the outline width — render the body "
-                    f"with the same thick muscle mass, the same striation, "
-                    f"the same chest depth, the same arm thickness that "
-                    f"figure {tier} shows. Do NOT borrow from the lineup: "
-                    "face, hair, skin tone, clothing, costume, pose, facial "
-                    "expression, lighting, setting, background, or any visual "
-                    "element other than the muscle and breast proportions "
-                    "themselves. The character's identity, hair, face, "
-                    "costume, pose, and setting are specified in the prompt "
-                    "and the other attached reference images. Render the "
-                    f"muscular build and breast proportions TO MATCH figure "
-                    f"{tier} in the lineup exactly — do not approximate to "
-                    "smaller realistic-fitness proportions. NOT realistic "
-                    "fitness, NOT athletic, NOT a fitness model at wider "
-                    "scale — cartoony FMG, comic-book proportions with HEAVY "
-                    "3D muscle mass."
+                    "(b) the SIZE, FULLNESS, and forward PROJECTION of the "
+                    "breasts; (c) the overall body mass and frame width. "
+                    f"Target muscular build for tier {tier}: {build}. "
+                    f"CRITICAL — MUSCLE: match the visible 3D MUSCLE VOLUME "
+                    f"and DEFINITION of figure {tier}, not just the outline "
+                    "width — render the body with the same thick muscle "
+                    "mass, the same striation, the same chest depth, the "
+                    f"same arm thickness that figure {tier} shows. "
+                    f"CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, "
+                    f"and forward PROJECTION of figure {tier} EXACTLY. The "
+                    "lineup scales breasts proportionally to muscle tier — "
+                    "render the breasts at the SAME visible volume, the "
+                    "SAME fullness, and the SAME forward projection that "
+                    f"figure {tier} shows. At tier {tier} the breast scale "
+                    "should read as a DRAMATIC enhancement over figure 1's "
+                    "baseline; the lineup scales breast volume substantially "
+                    "across tiers and the rendered output must reflect that. "
+                    "OVER-SPEC COMPENSATION: nano_banana models normalize "
+                    "breast scale DOWN toward an average prior even when "
+                    "explicit anchoring is in the prompt — render the "
+                    f"breasts SLIGHTLY LARGER than figure {tier} shows so "
+                    "that after the model's downward bias the final rendered "
+                    f"scale lands AT figure {tier}'s level. The costume "
+                    "must ACCOMMODATE the breast scale (pushed forward, "
+                    "stretched, fitted around the volume) — NOT flatten or "
+                    "compress the breasts; NO modest profile, NO conservative "
+                    "coverage minimizing the breast contour, NO costume drape "
+                    "that hides the breast volume. Do NOT default to average "
+                    "/ conservative breast size; do NOT regress to a smaller "
+                    "tier's breast proportions; do NOT render the body at "
+                    f"tier {tier} muscle mass with breasts shrunk to tier "
+                    "2 or 3 size. Breast scale is a LOAD-BEARING attribute "
+                    "of the lineup, not an afterthought. Do NOT borrow from "
+                    "the lineup: face, hair, skin tone, clothing, costume, "
+                    "pose, facial expression, lighting, setting, background, "
+                    "or any visual element other than the muscle and breast "
+                    "proportions themselves. The character's identity, "
+                    "hair, face, costume, pose, and setting are specified "
+                    "in the prompt and the other attached reference images. "
+                    "Render the muscular build AND the breast proportions "
+                    f"TO MATCH figure {tier} in the lineup exactly — do not "
+                    "approximate either to smaller realistic-fitness "
+                    "proportions. NOT realistic fitness, NOT athletic, NOT "
+                    "a fitness model at wider scale, NOT bigger muscles "
+                    "with conservative breasts, NOT a modest costume "
+                    "silhouette flattening the chest — cartoony FMG, "
+                    "comic-book proportions with HEAVY 3D muscle mass AND "
+                    "lineup-matched (or slightly over-spec'd) breast scale "
+                    "that the costume accommodates."
                 )
             if stage_change:
                 return (
                     f"Size tier: {tier} (NEW tier — grown from prior panel). "
                     f"Cartoony FMG muscular build: {build}. Render the muscle "
                     "MASS and DEFINITION (delts, biceps, chest, abs, quads) "
+                    "AND the breast SIZE, FULLNESS, and forward PROJECTION "
                     "unmistakably larger than the body baseline reference — "
-                    "thick 3D muscle volume, not just a wider outline. NOT "
-                    "realistic fitness — cartoony comic-book proportions."
+                    "thick 3D muscle volume with tier-scaled breast "
+                    "proportions, not just a wider outline, NOT bigger "
+                    "muscles with conservative breasts, NOT a modest costume "
+                    "silhouette flattening the chest. Over-spec the breast "
+                    "scale slightly so the model's downward-bias normalization "
+                    "lands at the new tier's level rather than below it; the "
+                    "costume must accommodate the breast scale, not the other "
+                    "way around. NOT realistic fitness — cartoony comic-book "
+                    "proportions with both muscle mass AND breast scale "
+                    "escalated to the new tier."
                 )
             return (
                 f"Size tier: {tier} (unchanged from prior panel). Carry "
@@ -302,13 +405,30 @@ class L11(Rule):
             "kind": "auto_resubmit_with_stronger_contribution",
             "rule_id": self.id,
             "strengthening": (
-                "escalate the muscular-build vocabulary one notch: "
-                "'deltoids 3x normal MASS (not just 3x outline width) with "
-                "visible striation, biceps thick and peaked, chest deep with "
-                "clear separation, abdominal definition carved in 3D, every "
-                "muscle group hyper-defined with heavy 3D volume. The "
-                "lineup figure shows the MUSCLE MASS to match, not just the "
-                "outline. NOT athletic, NOT a fitness model at wider scale "
-                "— comic-book exaggerated muscle volume.'"
+                "escalate BOTH the muscular-build and breast-scale "
+                "vocabulary one notch with explicit over-spec "
+                "compensation: 'deltoids 3x normal MASS (not just 3x "
+                "outline width) with visible striation, biceps thick and "
+                "peaked, chest deep with clear separation, abdominal "
+                "definition carved in 3D, every muscle group hyper-"
+                "defined with heavy 3D volume. Breasts: massive, "
+                "voluminous, dramatically forward-projecting at the "
+                "lineup figure's tier size — render SLIGHTLY LARGER than "
+                "the lineup figure shows so the model's downward-bias "
+                "normalization lands at parity (nano_banana models scale "
+                "off-distribution features toward an average prior; "
+                "over-spec compensates). The costume must accommodate the "
+                "breast scale — pushed forward, stretched, fitted around "
+                "the volume; NO flattening, NO modest profile, NO "
+                "conservative coverage. If the body landed at the right "
+                "muscle tier but breasts shrunk to tier 2-3, the prompt "
+                "is missing the CRITICAL — BREASTS guard AND the over-"
+                "spec compensation. The lineup figure shows BOTH the "
+                "MUSCLE MASS and the BREAST SCALE to match. NOT athletic, "
+                "NOT a fitness model at wider scale, NOT bigger muscles "
+                "with conservative breasts, NOT a modest costume "
+                "silhouette flattening the chest — comic-book exaggerated "
+                "muscle volume with proportionally matched (or slightly "
+                "over-spec'd) breast scale.'"
             ),
         }

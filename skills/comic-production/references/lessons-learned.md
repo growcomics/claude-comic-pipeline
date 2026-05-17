@@ -569,13 +569,18 @@ The model has a strong prior toward realistic anatomy AND a strong prior toward 
 
 **What the lineup does NOT convey (do-NOT-borrow):** face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images.
 
-**Vocabulary that works (for breast scale, added 2026-05-16 afternoon):**
+**Vocabulary that works (for breast scale, added 2026-05-16 afternoon, expanded after v1→v2 iteration):**
 
 - "CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure N"
 - "Render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure N shows"
+- "At tier N the breast scale should read as a DRAMATIC enhancement over figure 1's baseline"
+- "OVER-SPEC COMPENSATION: render the breasts SLIGHTLY LARGER than figure N shows so the model's downward bias lands at parity"
+- "The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume), not flatten or compress the breasts"
+- "NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume"
 - "Do NOT default to average / conservative breast size"
 - "Do NOT render tier N muscle mass with breasts shrunk to tier 2 or 3 size"
 - "Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought"
+- "NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest"
 
 See `peak-body-scale.md` for the full tier-by-tier muscular-build catalog and worked examples of vocabulary that survives the model's prior.
 
