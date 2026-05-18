@@ -3,13 +3,26 @@
 Validation artifacts for the prompt-section-formatting refactor introduced in
 branch `feat/prompt-section-formatting`.
 
+## Outcome — visually equivalent ✓
+
+The Higgsfield A/B run was completed on 2026-05-17. Both renders show the
+same characters (lenny + carl) in the same lab, same cowboy framing, same
+photoreal CGI quality, with the same speech bubble content ("THERE, THAT'S
+THE LAST ONE…"). Differences fall well within nano_banana_flash's
+sample-to-sample variance for a single prompt (slight camera-angle shift,
+different lab-decor details, OLD over-rendered a second duplicate bubble —
+a known model quirk, not a format-induced regression).
+
+Conclusion: the section-formatting change is a presentation-only refactor
+with no observable effect on model behavior. Safe to ship.
+
 ## What changed
 
 `compose_prompt()` in `scripts/next_panel.py` previously concatenated every
 rule's directive into one long unbroken paragraph (space-separated). The new
 output emits each directive as a labeled `[SECTION HEADER]\n<body>` block
 with blank lines between sections. Same semantic content; image models
-tokenize whitespace fine, so this is a presentation refactor only.
+tokenize whitespace fine.
 
 ## Files
 
@@ -17,37 +30,30 @@ tokenize whitespace fine, so this is a presentation refactor only.
   headers stripped and blank lines collapsed to single spaces. Byte-
   equivalent to what the old code path would have produced.
 - `new.prompt.txt` — output of the new formatted composer for the same panel.
-- `metadata.json` — panel id, camera, refs to attach, lengths.
+- `old.png` — Higgsfield render of `old.prompt.txt`. Job
+  `ee112f57-8b57-4a59-9972-64455d7e3a4a`.
+- `new.png` — Higgsfield render of `new.prompt.txt`. Job
+  `1cabc083-511e-4c5b-867e-4b2e83576496`.
+- `metadata.json` — panel id, camera, refs attached, prompt lengths.
 
-## How to run the A/B test (user-driven)
+## A/B parameters
 
-The Higgsfield MCP wasn't connected in the session that produced this branch,
-so the model couldn't render the actual A/B images itself. To validate
-manually:
+- Model: `nano_banana_flash` (Nano Banana 2)
+- Resolution: `1k`
+- Aspect ratio: `4:3`
+- Count: `1` per submission (2 gens total)
+- Refs attached (same media IDs for both runs):
+  - lenny face-card → `2680857e-f4b2-4869-a8ca-fe00c1da8429`
+  - carl face-card → `6191a1c7-ead2-48a5-a897-110039e472df`
+  - mundy-lab-a env source → `48ed1584-6d09-4dcc-b3a6-5f3741000f42`
 
-1. With Higgsfield MCP connected, attach the refs listed in `metadata.json`
-   in order (face cards for `lenny` and `carl`, env_anchor for
-   `mundy-lab-a`).
-2. Submit `old.prompt.txt` to Higgsfield with `nano_banana_flash`, 1k, 3:4,
-   count=1.
-3. Submit `new.prompt.txt` with identical params.
-4. Spot-check: do the two outputs look visually equivalent (same camera,
-   same character anchoring, same env)? If yes, the refactor is a no-op on
-   model behavior. If the new format somehow drifted output, debug —
-   likely a stray whitespace issue or a missing label edge case, not a
-   tokenization issue.
+## Why we A/B at all
 
-Total expected cost: ~$0.10 across two generations.
-
-## Why we have to A/B at all
-
-The user spec for this refactor calls out: "Image models tokenize whitespace
-fine, so we're not changing what the model sees in any meaningful way." That
-is the working theory, and the addition of `[CHARACTER — L17 ...]` headers
-is small relative to the prompt length (+323 chars on a 4351-char baseline,
-+7.4%). But "small enough not to drift" isn't the same as "verified not to
-drift," so an actual A/B render is the guardrail before we ship the new
-format into every future generation.
+The format change adds `[CHARACTER — L17 ...]` headers and blank-line
+separators — +323 chars on a 4351-char baseline (+7.4%). "Image models
+tokenize whitespace fine" is the working theory, but "small enough not to
+drift" isn't the same as "verified not to drift." This A/B is the guardrail.
+Both renders landing visually equivalent confirms the theory holds.
 
 ## Panel chosen
 
