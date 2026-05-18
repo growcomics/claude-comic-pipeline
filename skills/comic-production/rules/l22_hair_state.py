@@ -20,6 +20,7 @@ class L22(Rule):
     id = "L22"
     title = "Hair state must be explicit in every face-visible panel"
     slot = "4_subject_state"
+    section_label = "HAIR — L22"
     severity = "soft"
     applicable_transformations = ("*",)
     vision_rubric = (

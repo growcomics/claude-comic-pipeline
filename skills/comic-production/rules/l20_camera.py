@@ -41,6 +41,7 @@ class L20(Rule):
     id = "L20"
     title = "Camera distance bias (in-prompt directive)"
     slot = "2_camera_strengthening"
+    section_label = "CAMERA — L20 distance bias"
     severity = "hard"
     applicable_transformations = ("*",)
     vision_rubric = (

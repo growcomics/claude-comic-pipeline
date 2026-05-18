@@ -1,0 +1,27 @@
+{
+  "panel_id": "p01-01",
+  "page": 1,
+  "camera": "cowboy, low-angle-back",
+  "characters": [
+    "lenny",
+    "carl"
+  ],
+  "location": "mundy-lab-a",
+  "aspect": "4:3",
+  "old_prompt_length_chars": 4351,
+  "new_prompt_length_chars": 4674,
+  "refs_to_attach_in_order": [
+    {
+      "kind": "face_card",
+      "path": "references/characters/lenny/face-card.png"
+    },
+    {
+      "kind": "face_card",
+      "path": "references/characters/carl/face-card.png"
+    },
+    {
+      "kind": "env_ref",
+      "path": "references/locations/mundy-lab-a/_source.jpg"
+    }
+  ]
+}

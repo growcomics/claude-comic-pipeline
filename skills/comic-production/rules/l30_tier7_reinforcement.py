@@ -69,6 +69,7 @@ class L30(Rule):
     id = "L30"
     title = "Tier-7 needs dedicated proportion reinforcement refs"
     slot = "8b_tier_reinforcement"
+    section_label = "TIER-7 REINFORCEMENT — L30"
     severity = "hard"
     applicable_transformations = ("fmg",)
     vision_rubric = (

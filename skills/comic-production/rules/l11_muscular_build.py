@@ -151,6 +151,10 @@ class L11(Rule):
     id = "L11"
     title = "Cartoony FMG proportions need explicit anchoring"
     slot = ("5_style_anchor", "8_tier_build")
+    section_label = {
+        "5_style_anchor": "STYLE — L11 cartoony FMG anchor",
+        "8_tier_build": "LINEUP PROPORTIONS — L11 surgical scope",
+    }
     severity = "hard"
     applicable_transformations = ("fmg",)
     vision_rubric = (

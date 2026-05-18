@@ -27,6 +27,7 @@ class L18(Rule):
     id = "L18"
     title = "Pose anatomy coherence"
     slot = "13_anatomy_guardrail"
+    section_label = "POSE & ANATOMY — L18"
     severity = "soft"
     applicable_transformations = ("*",)
     vision_rubric = (

@@ -34,6 +34,7 @@ class L10(Rule):
     id = "L10"
     title = "References are the truth, prompts are deltas"
     slot = "11_render_directive"
+    section_label = "RENDER DIRECTIVE — L10"
     severity = "hard"
     applicable_transformations = ("*",)
     vision_rubric = (

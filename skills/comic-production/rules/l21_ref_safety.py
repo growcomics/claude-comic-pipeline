@@ -29,6 +29,7 @@ class L21(Rule):
     id = "L21"
     title = "Suppress in-scene rendering of reference images"
     slot = "12_ref_safety"
+    section_label = "REF SAFETY — L21 no-render-as-prop"
     severity = "soft"
     applicable_transformations = ("*",)
     vision_rubric = (

@@ -59,6 +59,7 @@ class L32(Rule):
     id = "L32"
     title = "Tier-9 needs dedicated proportion reinforcement refs"
     slot = "8b_tier_reinforcement"
+    section_label = "TIER-9 REINFORCEMENT — L32"
     severity = "hard"
     applicable_transformations = ("fmg",)
     vision_rubric = (

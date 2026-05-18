@@ -61,6 +61,7 @@ class L24(Rule):
     id = "L24"
     title = "Suppress anachronistic accessories explicitly"
     slot = "4_subject_state"
+    section_label = "ACCESSORIES — L24"
     severity = "soft"
     applicable_transformations = ("*",)
     vision_rubric = (

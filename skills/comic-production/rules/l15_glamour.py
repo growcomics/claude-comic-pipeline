@@ -57,6 +57,7 @@ class L15(Rule):
     id = "L15"
     title = "Female characters must read as beautiful"
     slot = "3_subject_identity"
+    section_label = "BEAUTY ANCHOR — L15"
     severity = "soft"
     applicable_transformations = ("fmg",)
     vision_rubric = (

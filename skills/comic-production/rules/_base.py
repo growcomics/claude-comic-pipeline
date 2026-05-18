@@ -97,6 +97,13 @@ class Rule:
     applicable_transformations: tuple[str, ...] = ("*",)
     vision_rubric: str | None = None
 
+    # section_label drives the human-readable section header in the formatted
+    # prompt output (see compose_prompt in next_panel.py). Set this to a short
+    # bracketable phrase like "CHARACTER — L17 canonical anchor". For multi-
+    # slot rules (currently only L11), set this to a dict keyed by slot name.
+    # If left blank the helper falls back to the rule id.
+    section_label: str | dict[str, str] = ""
+
     # ---- composition ------------------------------------------------------
 
     def should_apply(self, panel: dict, ctx: dict) -> bool:
@@ -107,6 +114,18 @@ class Rule:
         or None if it doesn't contribute there.
         """
         return None
+
+    def section_label_for(self, slot: str) -> str:
+        """Resolve the human-readable section label for the given slot.
+
+        Single-slot rules just return their string `section_label`. Multi-
+        slot rules (L11) override `section_label` to a dict and this method
+        picks the entry for the active slot.
+        """
+        label = self.section_label
+        if isinstance(label, dict):
+            return label.get(slot) or self.id
+        return label or self.id
 
     # ---- verification -----------------------------------------------------
 

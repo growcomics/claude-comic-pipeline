@@ -12,6 +12,37 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-17 (compose_prompt section-formatting — labeled `[SECTION]` headers instead of one unbroken paragraph)
+
+### Changed
+
+- **`compose_prompt()` output is now human-scannable** ([skills/comic-production/scripts/next_panel.py](./skills/comic-production/scripts/next_panel.py)). Previously every directive — render anchor, camera, subjects, L11/L15/L17/L18/L20/L21/L22/L23/L24/female-anatomy/L29-32/L10, action delta, env line, state anchor, mandatory rules, L19 lettering, closing anchor — was concatenated into one space-joined paragraph. When a generation went wrong it was impossible to scan the prompt and tell which directive misfired. The new output emits each directive as a labeled section:
+
+  ```
+  [CHARACTER — L17 canonical anchor]
+  L17 canonical anchor: render the canonical published versions...
+
+  [POSE & ANATOMY — L18]
+  L18 anatomy coherence: torso, hips, abdomen, and feet all face...
+  ```
+
+  Sections are separated by blank lines and joined with `"\n\n".join(...)`. Same semantic content; image models tokenize whitespace fine, so this is a presentation refactor only. Flow runner already flattens newlines to spaces in `_set_prompt()` (Flow's text area treats `\n` as submit), so Flow submissions still receive the single-line concatenation; the Higgsfield API accepts multi-line strings directly.
+
+### Added
+
+- **`section_label` attribute on the `Rule` base class** ([rules/_base.py](./skills/comic-production/rules/_base.py)) — a short bracketable phrase like `"CHARACTER — L17 canonical anchor"` that drives the section header. Multi-slot rules (currently only L11) declare a dict keyed by slot name; single-slot rules use a string. A `section_label_for(slot)` resolver method handles both shapes, with a fallback to `rule.id` when unset.
+- **`section_label` set on every rule module**: L10, L11 (per-slot), L15, L17, L18, L20, L21, L22, L23, L24, L29, L30, L31, L32, FemaleAnatomy.
+- **`_format_section(label, body)` helper** in `next_panel.py` — wraps a prompt fragment in `[LABEL]\n<body>`. Defensively skips empty/whitespace-only bodies so optional sections (LIGHTING STATE, ACTION DELTA, STATE ANCHOR — L1.5, etc.) don't emit empty headers.
+- **A/B test artifacts** at [skills/comic-production/references/prompt-format-ab-test/](./skills/comic-production/references/prompt-format-ab-test/) — `old.prompt.txt`, `new.prompt.txt`, `metadata.json`, and a README explaining how to validate the format change with a single Higgsfield render pair (~$0.10 of credits). Generations weren't run from this session because the Higgsfield MCP wasn't connected; the prompts are saved so the user can confirm visual equivalence manually before merging.
+
+### Notes
+
+- The `_trace` ledger still records the unwrapped directive in `compose_contribution` so the ledger schema is unchanged.
+- The composer's rule iteration order is unchanged — section headers do not reorder anything.
+- Existing `panels.json` payloads in the wild from old runs are untouched — only newly-generated prompts use the new format.
+
+---
+
 ## 2026-05-16 (Mira panel-render validation — L30/L31/L32 confirmed end-to-end + 3 canonical-cast promotions)
 
 ### Added

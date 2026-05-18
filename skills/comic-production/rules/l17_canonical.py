@@ -40,6 +40,7 @@ class L17(Rule):
     id = "L17"
     title = "Known/canonical characters can't drift"
     slot = "3_subject_identity"
+    section_label = "CHARACTER — L17 canonical anchor"
     severity = "hard"
     applicable_transformations = ("*",)
     vision_rubric = (

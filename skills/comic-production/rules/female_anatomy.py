@@ -73,6 +73,7 @@ class FemaleAnatomy(Rule):
     id = "female_anatomy"
     title = "Female anatomy anchor on body-region ECUs (May 14 lesson)"
     slot = "4_subject_state"
+    section_label = "FEMALE ANATOMY"
     severity = "hard"
     applicable_transformations = ("fmg",)
     vision_rubric = (

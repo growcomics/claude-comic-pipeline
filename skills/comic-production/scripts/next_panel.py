@@ -1213,14 +1213,31 @@ def _record_failed(trace: dict | None, rule_id: str, *,
     entry.pop("reason", None)
 
 
+def _format_section(label: str, body: str) -> str:
+    """Wrap a prompt fragment in a `[LABEL]\\n<body>` section for the
+    human-readable formatted prompt output.
+
+    Trims whitespace from the body but preserves internal line breaks so a
+    directive that already has structure stays structured. Skips entirely
+    when the body is empty/whitespace-only — callers should not pass empty
+    bodies but this is a defensive guard.
+    """
+    body_stripped = (body or "").strip()
+    if not body_stripped:
+        return ""
+    return f"[{label}]\n{body_stripped}"
+
+
 def _apply_rule_at_slot(rule_id: str, slot: str, panel: dict, ctx: dict,
                         parts: list, trace: dict | None,
                         transformation_type: str) -> str | None:
     """Phase 3 registry-driven helper: look up the rule, check it applies
     to the transformation type, call compose_contribution + verify_pre_render,
-    append to parts and record to trace.
+    append to parts (wrapped in a labeled section) and record to trace.
 
-    Returns the contribution string (or None if not emitted).
+    Returns the contribution string unwrapped (or None if not emitted). The
+    trace records the unwrapped contribution so the ledger schema is
+    unchanged.
 
     Multi-slot rules (currently only L11) read the active slot from
     ctx["_active_slot"] which this helper injects. Existing single-slot
@@ -1236,7 +1253,10 @@ def _apply_rule_at_slot(rule_id: str, slot: str, panel: dict, ctx: dict,
     contribution = rule.compose_contribution(panel, ctx_with_slot, slot)
     verif = rule.verify_pre_render(panel, ctx_with_slot)
     if contribution is not None:
-        parts.append(contribution)
+        label = rule.section_label_for(slot)
+        section = _format_section(label, contribution)
+        if section:
+            parts.append(section)
         _record_applied(trace, rule_id,
                         contribution=contribution,
                         pre_render_status=verif.status,
@@ -1279,8 +1299,13 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     The prompt language adapts so the model knows it's chaining off the
     actual chamber image rather than a stand-in DAZ render.
 
-    Single-line output (Flow treats `\\n` as submit; use period-separated
-    sentences within one continuous string).
+    Output is formatted as labeled sections separated by blank lines so the
+    prompt is human-scannable when inspecting a panel that misfired. Image
+    models (Nano Banana 2 / GPT Image 2) tokenize whitespace, so line breaks
+    do not change semantics vs. the prior single-line concatenation. The
+    Flow runner already flattens newlines to spaces before pasting (Flow's
+    text area treats `\\n` as submit); the Higgsfield API accepts multi-
+    line strings directly.
     """
 
     camera = (panel.get("camera") or "").split(",")[0].strip()
@@ -1314,12 +1339,13 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     parts: list[str] = []
 
     # 1. Render anchor (positive CGI vocabulary, L7-compliant)
-    parts.append(
+    parts.append(_format_section(
+        "RENDER STYLE — Iray photoreal",
         "DAZ Studio Iray render of a real 3D scene. Ray-traced subsurface "
         "scattering on skin, specular highlights catching warm rim light, "
         "physically-accurate fabric weave with visible thread detail, "
         "8K texture detail, shallow depth of field with photographic bokeh."
-    )
+    ))
 
     # 2. Camera fragment
     cam_fragments = {
@@ -1339,8 +1365,10 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
         "wide-establish": "Wide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.",
         "splash": "Splash composition — single dramatic image, subject the focal point filling the panel, cinematic full-bleed framing.",
     }
-    parts.append(cam_fragments.get(camera,
-        f"Camera: {camera or 'eye-level medium shot'}."))
+    parts.append(_format_section(
+        "CAMERA — base framing",
+        cam_fragments.get(camera, f"Camera: {camera or 'eye-level medium shot'}.")
+    ))
 
     # 2a. L20 strengthening — slot 2_camera_strengthening. Body-region camera
     # directive for any panel with a body-region transformation beat. Slots
@@ -1352,7 +1380,10 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 
     # 3. Subjects (name only — identity comes from attached face cards)
     if chars:
-        parts.append(f"Subjects: {', '.join(chars)}.")
+        parts.append(_format_section(
+            "SUBJECTS",
+            f"Subjects: {', '.join(chars)}."
+        ))
 
     # 3.0 L17 canonical character anchor — slot 3_subject_identity, first.
     # PHASE 3A — routed through rules._registry.
@@ -1394,16 +1425,20 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     #    those are *cues for the action context only*, not redescriptions.
     if action:
         action_clean = action.rstrip(".")
-        parts.append(
+        parts.append(_format_section(
+            "ACTION DELTA",
             f"DELTA — action only: {action_clean}. (Any mention of clothing, "
             "architecture, or character features in the delta is contextual "
             "shorthand; the visual identity of those things comes from the "
             "attached references.)"
-        )
+        ))
 
     # 5. Lighting state CHANGE only (not the location's baseline lighting)
     if time_of_day:
-        parts.append(f"Momentary lighting state: {time_of_day}.")
+        parts.append(_format_section(
+            "LIGHTING STATE",
+            f"Momentary lighting state: {time_of_day}."
+        ))
 
     # 6. L11 tier muscular-build — slot 8_tier_build. The biggest single
     # contribution in compose_prompt; varies by (lineup_attached, stage_change,
@@ -1457,7 +1492,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "delta describes ONLY what is happening in this panel; the "
                 "location itself is fixed by this reference."
             )
-            parts.append(env_line)
+            parts.append(_format_section("ENVIRONMENT — ref anchor", env_line))
         else:
             env_line = (
                 f"Location: {location_slug}. The attached environment reference "
@@ -1465,7 +1500,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
                 "lighting setup, scale, depth, atmosphere. Use it as the visual "
                 "anchor for the location's architecture. Do not reinterpret."
             )
-            parts.append(env_line)
+            parts.append(_format_section("ENVIRONMENT — ref anchor", env_line))
     # L23 dense verbal anchor — PHASE 3A — routed through rules._registry.
     # Records skipped when env_ref attached or no env; records applied (and
     # emits the dense anchor) when env_dropped + location has a description;
@@ -1483,7 +1518,7 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
             "state, hair state, body size, and any cumulative damage from "
             "that panel exactly. Costume tears never regress across panels."
         )
-        parts.append(anchor_line)
+        parts.append(_format_section("STATE ANCHOR — L1.5", anchor_line))
         _record_applied(_trace, "L1.5", contribution=anchor_line,
                         pre_render_reason=f"view-aware chain found compatible prior panel `{anchor_panel_id}` (view={anchor_view!r}) for target view {camera!r}")
     # Note: L1.5 with no anchor is recorded by build_plan with reason text
@@ -1507,13 +1542,14 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
 
     # 10. Mandatory rules (L19 — bake 2D comic-style lettering as a scoped
     # overlay; everything else stays photoreal CGI)
-    parts.append(
+    parts.append(_format_section(
+        "MANDATORY ANCHORS",
         "Mandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); "
         "skin has subtle healthy sheen, not oiled or wet; vivid expressive face "
         "(not neutral or blank); correct human anatomy with exactly two arms "
         "and exactly two legs; once a character has grown to a size they stay "
         "at that size or larger."
-    )
+    ))
 
     # 10a. L19 lettering block — only emitted when the panel has any
     # dialogue, captions, or SFX. The 2D-flat scope is named explicitly so
@@ -1521,18 +1557,25 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     # Case B failure mode this block is designed to defuse).
     if (panel.get("dialogue") or panel.get("captions")
             or panel.get("sfx")):
-        parts.append(_l19_lettering_block(panel))
+        parts.append(_format_section(
+            "LETTERING — L19 2D overlay",
+            _l19_lettering_block(panel)
+        ))
 
     # 11. Closing CGI anchor — explicitly scopes the negation to bodies/skin
     # so the bubble graphics are not implicated by "NOT illustrated."
-    parts.append(
+    parts.append(_format_section(
+        "CLOSING ANCHOR — CGI scope",
         "Photographic CGI render on the bodies, costumes, skin, hair, "
         "environment, and lighting; NOT a 2D illustration on the bodies, "
         "NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics "
         "are flat 2D comic-book overlay."
-    )
+    ))
 
-    return " ".join(parts)
+    # Drop any empty sections (defensive — _format_section returns "" for
+    # whitespace-only bodies). Join with blank-line separators so each
+    # section is visually distinct in the rendered prompt.
+    return "\n\n".join(p for p in parts if p)
 
 
 # ---------------------------------------------------------------------------

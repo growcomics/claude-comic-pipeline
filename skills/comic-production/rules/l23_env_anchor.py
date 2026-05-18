@@ -23,6 +23,7 @@ class L23(Rule):
     id = "L23"
     title = "When env ref is dropped, add a dense verbal env anchor"
     slot = "9_environment"
+    section_label = "ENVIRONMENT — L23 verbal anchor"
     severity = "soft"
     applicable_transformations = ("*",)
     vision_rubric = (
