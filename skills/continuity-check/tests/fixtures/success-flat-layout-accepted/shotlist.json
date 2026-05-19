@@ -1,0 +1,38 @@
+{
+  "project": "flat-layout-accepted",
+  "version": 1,
+  "page_count": 1,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "cast": [
+    {"id": "alice", "name": "Alice", "wardrobe": "young woman, mid-20s, cream sweater, dark jeans"}
+  ],
+  "locations": [
+    {"id": "classroom", "description": "empty classroom, late afternoon light"}
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "wide",
+          "characters": ["alice"],
+          "location": "classroom",
+          "camera": "wide establishing",
+          "action": "Alice enters the classroom.",
+          "costume_state": "intact"
+        },
+        {
+          "panel_id": "p01-02",
+          "size": "medium",
+          "characters": ["alice"],
+          "location": "classroom",
+          "camera": "medium two-shot",
+          "action": "Alice sits at her desk.",
+          "costume_state": "intact"
+        }
+      ]
+    }
+  ]
+}
