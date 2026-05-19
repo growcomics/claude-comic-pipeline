@@ -37,6 +37,9 @@ import generate_status as status_lib  # noqa: E402
 RULES_AUDIT_SCRIPT = (
     PIPELINE_ROOT / "skills" / "continuity-check" / "scripts" / "rules_audit.py"
 )
+NEXT_PANEL_SCRIPT = (
+    PIPELINE_ROOT / "skills" / "comic-production" / "scripts" / "next_panel.py"
+)
 
 CONFIG_PATH = Path(
     os.environ.get(
@@ -216,6 +219,36 @@ def run_rules_audit(root: Path) -> dict:
         return {"error": f"could not parse rules_audit output: {exc}", "findings": []}
 
 
+def run_next_panel(root: Path) -> dict:
+    """Shell out to next_panel.py --as-json. Returns parsed payload or error info.
+
+    Result shape:
+      - pending:  {next_panel: {...}, accepted_count, remaining_count,
+                   refs_to_attach_in_order: [...], composed_prompt, ...}
+      - all done: {next_panel: null, message, accepted_count}
+      - error:    {error: "..."}
+    """
+    if not NEXT_PANEL_SCRIPT.exists():
+        return {"error": f"next_panel.py not found at {NEXT_PANEL_SCRIPT}"}
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(NEXT_PANEL_SCRIPT), "--as-json", str(root)],
+            capture_output=True,
+            text=True,
+            timeout=20,
+        )
+    except subprocess.TimeoutExpired:
+        return {"error": "next_panel.py timed out after 20s"}
+    if proc.returncode != 0:
+        return {
+            "error": f"next_panel exited {proc.returncode}: {proc.stderr.strip()[:400]}",
+        }
+    try:
+        return json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:
+        return {"error": f"could not parse next_panel output: {exc}"}
+
+
 def group_findings(payload: dict) -> dict:
     findings = payload.get("findings", [])
     groups: dict[str, list[dict]] = {"hard": [], "soft": [], "info": []}
@@ -330,6 +363,21 @@ def widget_panel_versions(request: Request, project: str, folder: str) -> HTMLRe
         request,
         "_panel_versions.html",
         {"project": project, "panel": match},
+    )
+
+
+@app.get("/widgets/next-panel", response_class=HTMLResponse)
+def widget_next_panel(request: Request, project: str) -> HTMLResponse:
+    root = resolve_project(project)
+    payload = run_next_panel(root)
+    return templates.TemplateResponse(
+        request,
+        "_next_panel.html",
+        {
+            "project": project,
+            "payload": payload,
+            "now": datetime.now(timezone.utc).strftime("%H:%M:%S UTC"),
+        },
     )
 
 

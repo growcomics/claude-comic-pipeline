@@ -35,6 +35,13 @@
     <div class="widget-skeleton">Loading stages…</div>
   </section>
 
+  <section class="widget widget-next-panel"
+           hx-get="/widgets/next-panel?project={{ active_slug }}"
+           hx-trigger="load, every 15s"
+           hx-swap="innerHTML">
+    <div class="widget-skeleton">Loading next panel…</div>
+  </section>
+
   <section class="widget widget-panels"
            hx-get="/widgets/panels?project={{ active_slug }}"
            hx-trigger="load, every 10s"
