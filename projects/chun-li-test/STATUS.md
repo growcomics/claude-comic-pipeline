@@ -1,10 +1,10 @@
 # chun-li-test
-_Last updated: 2026-05-22 02:25 UTC_
+_Last updated: 2026-05-22 02:42 UTC_
 
 ## Stages
 - ✅ **Script breakdown** — shotlist.json — 10 pages, 1 cast, 1 locations
 - ✅ **References** — 1/1 characters, 1/1 locations, 0/0 props
-- ⏳ **Generation** — 0/10 panels accepted
+- 🔄 **Generation** — 1/10 panels accepted
 - ⏳ **Continuity** — -
 - ⏳ **Composition** — -
 - ⏳ **Posting** — -
@@ -20,7 +20,10 @@ _Last updated: 2026-05-22 02:25 UTC_
   ![_source](references/locations/bisons-lair/_source.jpg)
 
 ## Generation Progress
-_No panels generated yet._
+
+### ✅ p10-01 — accepted **v1 (flat layout)** (1 attempt)
+- `p10-01`
+  ![v1 (flat layout)](pages/panels/p10-01.jpg)
 
 ## Composition
 _No pages composed yet._

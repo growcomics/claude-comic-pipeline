@@ -4,6 +4,36 @@
 
 All notable changes to the `claude-comic-pipeline` are tracked here.
 
+---
+
+## 2026-05-21 (chun-li-test — solo FMG transformation arc, Phase 0–2 complete, Phase 3 partial)
+
+### Added
+
+- **New project: `chun-li-test`** ([projects/chun-li-test/](./projects/chun-li-test/)). 10-panel solo Chun Li FMG arc, tier 2→7, single location (Bison's lair), Psycho Power surge as transformation trigger, splash-heavy camera (panels 1/7/10), curiosity→awe→empowerment tone curve, full L19 baked dialogue (speech bubbles + caption boxes rendered in-panel). Production-briefing skill collected the brief through structured AskUserQuestion polls per `feedback_poll_on_high_stakes` memory.
+
+- **Stage 1 — Script breakdown.** [shotlist.json](./projects/chun-li-test/shotlist.json) + [shotlist.md](./projects/chun-li-test/shotlist.md). Camera variety check PASS: 8 distinct distance categories × 6 angle categories, 3 ECU panels, 4 splash/wide-establish panels, max 2 same-combo. Tier curve `[2, 2, 3, 4, 5, 6, 7, 7, 7, 7]`. Splash beats: p01 (entrance), p07 (first tier-7 reveal in new outfit), p10 (final hero stance).
+
+- **Stage 2 — Reference assets.** Five generated refs via Google Labs Flow (Nano Banana 2, x4 per submit, free Pro account):
+  - `references/characters/chun-li/face-card.jpg` — canonical SF2 Chun Li portrait, twin buns + red ribbons, blue qipao + gold trim, vogue-cover glamour beauty per `project_chun_li_beauty` memory
+  - `references/characters/chun-li/multi-angle-tier-4.jpg` — 4-angle view pack at tier-4 baseline
+  - `references/characters/chun-li/new-outfit-tier-7.jpg` — costume turnaround for the new peak-form bodysuit (cobalt blue + gold)
+  - `references/style/muscle-size-lineup.jpg` — 6-figure tier progression in classic SF2 qipao
+  - `references/locations/bisons-lair/_source.jpg` — purple Psycho Power cathedral env ref (per L23 verbal anchor + ref attachment)
+
+- **Stage 3 — Panel generation, partial.** All 10 panel prompts submitted to Flow at 3:4 vertical (panel 1 at 16:9 splash). All 40 variants rendered in Flow project. Panel 10 downloaded as [pages/panels/p10-01.jpg](./projects/chun-li-test/pages/panels/p10-01.jpg) — final hero splash with baked dialogue "Spinning Bird Kick is just the warm-up now." + captions "For my father." / "For everyone he hurt." Remaining 9 panels live in the Flow project at `https://labs.google/fx/tools/flow/project/38e749d3-03c4-4dfc-a355-13e1f0324328` (Matt PRO account), pending download.
+
+### Changed
+
+- **Platform pivot mid-run.** Started Higgsfield (per existing project convention) but the MCP wasn't connected in this Claude Code session. Switched to Flow via Chrome MCP per user direction. Recorded the pivot in [production-config.json](./projects/chun-li-test/production-config.json) `flow.note_orphaned_macmini_project` field — first attempt was on macmini Chrome (growcomics account, project `e7bc1497-...`) but bridge-to-laptop-filesystem mismatch forced a second pivot to laptop Chrome (Matt PRO account, project `38e749d3-...`).
+
+### Known issues / Next steps
+
+- Stage 3 download incomplete (9/10 panels live in Flow, need to be saved to `pages/panels/p0N-01.jpg`). The next session should resume from there — `/build-comic autopilot` will detect 1 panel present + 9 missing and walk the remaining downloads, then Stage 4 (continuity audit via subagent per `feedback_audit_via_subagent`), Stage 5 (page-composer + PDF), Stage 6 (commit + push final).
+- For panels 7-10 (new peak outfit): prompt-only canonical anchoring may have drifted. Re-render with `new-outfit-tier-7.jpg` attached as a reference if the downloaded panels show the classic qipao instead of the new bodysuit.
+
+
+
 This file is the **canonical source for what changed and why**. Any session (human or agent) editing this repo must append an entry here when it lands a meaningful change. Trivial cleanups can be skipped; anything that touches behavior, prompt architecture, the build-comic workflow, or a published reference doc must be logged.
 
 Format: each entry is dated (YYYY-MM-DD), grouped in reverse-chronological order. Entries cite the relevant commit hash(es) and explain the *why* — what failure mode prompted the change, what the new behavior is, where readers can dig deeper.
