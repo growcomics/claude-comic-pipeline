@@ -49,10 +49,20 @@ The original task spec requested model gens (Higgsfield or GPT Image 2) for the 
 
 - **Platform pivot mid-run.** Started Higgsfield (per existing project convention) but the MCP wasn't connected in this Claude Code session. Switched to Flow via Chrome MCP per user direction. Recorded the pivot in [production-config.json](./projects/chun-li-test/production-config.json) `flow.note_orphaned_macmini_project` field — first attempt was on macmini Chrome (growcomics account, project `e7bc1497-...`) but bridge-to-laptop-filesystem mismatch forced a second pivot to laptop Chrome (Matt PRO account, project `38e749d3-...`).
 
-### Known issues / Next steps
+### Stage 3-5 COMPLETE (regenerated via Higgsfield MCP after it became available mid-session)
 
-- Stage 3 download incomplete (9/10 panels live in Flow, need to be saved to `pages/panels/p0N-01.jpg`). The next session should resume from there — `/build-comic autopilot` will detect 1 panel present + 9 missing and walk the remaining downloads, then Stage 4 (continuity audit via subagent per `feedback_audit_via_subagent`), Stage 5 (page-composer + PDF), Stage 6 (commit + push final).
-- For panels 7-10 (new peak outfit): prompt-only canonical anchoring may have drifted. Re-render with `new-outfit-tier-7.jpg` attached as a reference if the downloaded panels show the classic qipao instead of the new bodysuit.
+- **Pivot 2: Higgsfield MCP regeneration.** Once the Higgsfield MCP tools loaded mid-session, scrapped the Flow approach and re-ran panels 1-9 via `nano_banana_pro` at 1k 3:4 with face card + env ref attached as `medias[].role=image`. All 9 jobs submitted in parallel and completed in ~60s. Note: `nano_banana_flash` model was retired (`feedback_higgsfield_model_flash` memory is now stale — current options are `nano_banana_pro`, `soul_2`, `gpt_image_2`).
+
+- **Stage 4 — Continuity audit.** Fresh subagent spawned with `qa-checklist.md` + `cinematic-framing.md` passed verbatim per `feedback_audit_use_canonical_rubric` and `feedback_audit_via_subagent`. Verdict: SOFT-FAIL with one HARD finding (p10 outfit drift — rendered qipao/bodysuit hybrid). Camera variety PASS (7 distance × 4+ angle, 3 ECU, 4 splash/wide, max 2 same-combo). Tier monotonic PASS. L19 baked dialogue PASS on all 10. Report at [continuity-report.md](./projects/chun-li-test/continuity-report.md).
+
+- **p10 regenerated with all 3 refs.** Uploaded `new-outfit-tier-7.jpg` to Higgsfield, regenerated p10 with face card + env + new-outfit refs all attached and explicit negative-anchor prompts ('NO qipao, NO long skirt, NO side slits, NO sash drape'). Output now reads as pure cobalt-blue + gold sleeveless bodysuit per the locked design.
+
+- **Stage 5 — PDF composition.** Skipped page-composer's lettering pass (L19 baked-lettering mode — text already in panels per the `lettering_style` config field). Combined 10 panels into [final/chun-li-test.pdf](./projects/chun-li-test/final/chun-li-test.pdf) via Pillow at 300dpi.
+
+### Memory updates triggered by this run
+
+- `feedback_higgsfield_model_flash` is stale — Higgsfield retired `nano_banana_flash`. Current default for character + reference generation: `nano_banana_pro`.
+- `feedback_higgsfield_mcp` confirmed correct (MCP direct API, no browser) once tools loaded — but the MCP may not be available in every Claude Code session at startup; check the tool list before assuming.
 
 
 
