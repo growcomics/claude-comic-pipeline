@@ -8,23 +8,84 @@ All notable changes to the `claude-comic-pipeline` are tracked here.
 
 ## 2026-05-21 (L33 — body-region focus panels need calibrated 2D action-line + SFX overlay)
 
-### Added
+![L33 calibration matrix — 13 variants across action-line density and SFX text size, plus three combined sweet-spot candidates, applied to a source bicep flex from a Flow project](./skills/comic-production/references/sfx-calibration/contact-sheet.png)
 
-- **New lesson L33** ([lessons-learned.md § L33](./skills/comic-production/references/lessons-learned.md)) — body-region focus panels (bicep flex, chest peak, abs hardening, glute flex, quad pump) on photoreal CGI render flat without a comic-genre overlay. L33 adds a calibrated 2D vector overlay (radial action lines + SFX word) on top of the photoreal body region, layered on top of L20 (ECU framing) and L19 (lettering).
+### TL;DR
 
-- **Empirical calibration matrix** ([skills/comic-production/references/sfx-calibration/](./skills/comic-production/references/sfx-calibration/)) — 13-variant programmatic PIL matrix on the user's Rogue bicep-flex source (1200x896, pulled from `labs.google/fx/tools/flow/project/f66c66c5-.../edit/01d2f684-...`). Variants isolated two axes (action-line density A0..A4, SFX-text size B0..B4) plus three combined sweet-spot candidates (C1..C3). User reviewed all 13 inline at full resolution and picked **A2 + B2** for baseline (tier 1-5), **A3 + B2** for tier 6+ (action lines escalate one step, SFX held constant — calibration showed bumping both crowded the photoreal tone). Body-region scope: bicep / chest / abs / glutes / quads. Out-of-scope: face ECUs, full-body shots, and L20 body-region beats not covered by the calibration (hips / shoulders / back / suit_fail).
+Body-region ECUs (bicep / chest / abs / glute / quad flex) on photoreal CGI read flat without a comic-genre overlay. L33 adds a scope-bounded 2D vector layer — radial action lines + a single SFX word — composited ON TOP of the photoreal body, calibrated empirically across 13 variants. **User pick: A2 lines + B2 SFX baseline (tiers 1-5); A3 lines + B2 SFX at tier 6+.** Layered on top of L20 (ECU framing) and L19 (lettering) without conflict.
 
-- **Rule module `rules/l33_body_region_sfx.py`** registered in [_registry.py](./skills/comic-production/rules/_registry.py) at slot `11_render_directive`, severity `soft`. Fires when `panel.transformation_beat` is one of `{arms, chest, abs, rear, legs}` OR when `panel.body_region_focus=true` is set explicitly. Reads `panel.muscle_size_tier` and bumps the action-lines line one level at tier 6+. Per-panel overrides via `action_lines_level` / `sfx_level` / `sfx_word` (auto / off / subtle / medium / heavy). Per-region SFX word defaults: FLEX for arm/abs/glute/quad, POMF for chest beats (FMG-genre convention).
+### Source bicep used for calibration
 
+Pulled from the user's Flow project at `labs.google/fx/tools/flow/project/f66c66c5-.../edit/01d2f684-...` via Chrome MCP + canvas-extract → data-URL download. 1200x896 photoreal CGI render of Rogue mid-flex.
+
+![Source bicep — Rogue mid-flex, photoreal CGI, existing speech bubble retained for context](./skills/comic-production/references/sfx-calibration/source-bicep.png)
+
+### Axis A — action lines only (no SFX)
+
+Five intensity levels from off to overdone. Each variant uses the same source bicep; only the radial-burst parameters change (line count, thickness range, opacity, chromatic-aberration accent at the heavy tier).
+
+| A0 — off (control) | A1 — subtle (5 thin grey lines) |
+| --- | --- |
+| ![A0 — control / baseline photoreal](./skills/comic-production/references/sfx-calibration/variants/A0.png) | ![A1 — subtle action lines, 4-6 thin radial strokes, low contrast](./skills/comic-production/references/sfx-calibration/variants/A1.png) |
+
+| A2 — medium (11 mixed) ✅ baseline pick | A3 — heavy (22 + chromatic) ✅ tier-6+ pick |
+| --- | --- |
+| ![A2 — medium action lines, 10-12 mixed-thickness radial strokes, WINNING BASELINE](./skills/comic-production/references/sfx-calibration/variants/A2.png) | ![A3 — heavy action lines, 18-25 dense strokes with cyan/magenta chromatic accent, WINNING TIER-6-PLUS](./skills/comic-production/references/sfx-calibration/variants/A3.png) |
+
+| A4 — overdone (38 chaotic) | |
+| --- | --- |
+| ![A4 — overdone, 30+ chaotic lines, multiple overlapping impact bursts](./skills/comic-production/references/sfx-calibration/variants/A4.png) | *A4 is the floor anchor — illustrates what "too much" looks like; the rule never escalates to this level.* |
+
+### Axis B — SFX text only (no action lines)
+
+Same source bicep; only the SFX-text parameters change (word, font size as % of frame height, position, fill, outline, rotation).
+
+| B0 — off (control) | B1 — subtle (\*flex\* lowercase) |
+| --- | --- |
+| ![B0 — control / baseline photoreal](./skills/comic-production/references/sfx-calibration/variants/B0.png) | ![B1 — subtle SFX text, small lowercase italic in corner](./skills/comic-production/references/sfx-calibration/variants/B1.png) |
+
+| B2 — medium FLEX 15% ✅ pick (all tiers) | B3 — heavy FLEX 32% |
+| --- | --- |
+| ![B2 — medium SFX, yellow FLEX 15% frame height with thick black outline and slight tilt, WINNING PICK](./skills/comic-production/references/sfx-calibration/variants/B2.png) | ![B3 — heavy SFX, large FLEX 32% frame height with red outline](./skills/comic-production/references/sfx-calibration/variants/B3.png) |
+
+| B4 — overdone (stacked FLEX! POMF! GRRRR!) | |
+| --- | --- |
+| ![B4 — overdone, multiple stacked SFX words dominating the panel](./skills/comic-production/references/sfx-calibration/variants/B4.png) | *B4 is the floor anchor — illustrates what "too much" looks like; the rule never escalates to this level.* |
+
+### Axis C — combined sweet-spot candidates
+
+Three combinations bracketed the recommendation: subtle/subtle, medium/medium, and heavy-lines/medium-SFX.
+
+| C1 — A1+B1 (subtle both) | C2 — A2+B2 ✅ baseline | C3 — A3+B2 ✅ tier-6+ |
+| --- | --- | --- |
+| ![C1 — subtle action lines + subtle SFX, almost editorial](./skills/comic-production/references/sfx-calibration/variants/C1.png) | ![C2 — medium action lines + medium SFX, WINNING BASELINE COMBO](./skills/comic-production/references/sfx-calibration/variants/C2.png) | ![C3 — heavy action lines + medium SFX, WINNING TIER-6-PLUS COMBO](./skills/comic-production/references/sfx-calibration/variants/C3.png) |
+
+### Final calibration
+
+| Panel type | Action lines | SFX text | Combined preview |
+| --- | --- | --- | --- |
+| Baseline (tier 1-5) | **A2** — 10-12 mixed-thickness radial strokes, white with light edge glow | **B2** — single SFX word at ~15% frame height, classic comic-burst lettering (yellow fill, thick black outline, slight tilt, drop shadow), placed behind/beside the body region | ![C2 baseline preview](./skills/comic-production/references/sfx-calibration/variants/C2.png) |
+| Peak tier (6+) | **A3** — 18-25 dense strokes with slight chromatic-aberration accent (cyan/magenta fringing on outer edges) | **B2** — held constant (calibration showed bumping both axes at peak crowded the photoreal tone) | ![C3 tier-6+ preview](./skills/comic-production/references/sfx-calibration/variants/C3.png) |
+
+Body-region scope: bicep / chest / abs / glutes / quads. **Out-of-scope**: face ECUs, full-body shots, and L20 body-region beats not covered by the calibration (hips / shoulders / back / suit_fail). Per-region default SFX word: `FLEX` for arm/abs/glute/quad; `POMF` for chest beats (FMG-genre convention — avoids generic action SFX like BAM/POW which read as superhero combat).
+
+### Demo on an existing production panel
+
+Applied to `ultra-gal-origin/p05-04` (arms beat, tier 2 — baseline rule). Side-by-side shows the original photoreal bicep flex (left) vs the L33-applied version (right) plus the exact prompt fragment the rendering model would receive at the bottom.
+
+![L33 demo on ultra-gal-origin/p05-04 — side-by-side of original vs L33-applied, with the L33 prompt fragment that the rendering model would receive printed underneath](./skills/comic-production/references/sfx-calibration/demo-l33-side-by-side.png)
+
+### What was added
+
+- **New lesson L33** ([lessons-learned.md § L33](./skills/comic-production/references/lessons-learned.md)) — full failure-mode write-up + the calibration story + scope + relationship to L20 / L19.
+- **Rule module** [`rules/l33_body_region_sfx.py`](./skills/comic-production/rules/l33_body_region_sfx.py) — registered in [_registry.py](./skills/comic-production/rules/_registry.py) at slot `11_render_directive`, severity `soft`. Fires when `panel.transformation_beat ∈ {arms, chest, abs, rear, legs}` OR when `panel.body_region_focus=true` is set explicitly. Reads `panel.muscle_size_tier` and bumps the action-lines line one level at tier 6+. Per-panel overrides via `action_lines_level` / `sfx_level` / `sfx_word` (auto / off / subtle / medium / heavy). Verified at import: baseline emits A2+B2 (FLEX for arms, POMF for chest), peak tier emits A3+B2 with "peak-tier escalation" label, out-of-scope beats emit None.
 - **Manifest schema fields** documented in [script-breakdown/SKILL.md](./skills/script-breakdown/SKILL.md): `body_region_focus`, `body_region_part`, `action_lines_level`, `sfx_level`, `sfx_word` — all optional, `auto` default.
-
 - **Plain-English explainer** in [the-rules-explained.md § L33](./skills/comic-production/references/the-rules-explained.md) with embedded contact-sheet image. Index updated; "Last updated" bumped to 2026-05-21.
-
-- **Demo on existing panel** ([sfx-calibration/demo-l33-side-by-side.png](./skills/comic-production/references/sfx-calibration/demo-l33-side-by-side.png)) — applied to `ultra-gal-origin/p05-04` (arms beat, tier 2 = baseline). Side-by-side shows original vs L33-applied plus the exact prompt fragment the rendering model would receive. Rendered via the PIL stand-in (no model gen) for the demo image.
+- **Calibration artifacts** under [`sfx-calibration/`](./skills/comic-production/references/sfx-calibration/): the source bicep, all 13 variant PNGs in `variants/`, the contact sheet, [`generate_matrix.py`](./skills/comic-production/references/sfx-calibration/generate_matrix.py) (regenerates the matrix programmatically), [`demo_l33.py`](./skills/comic-production/references/sfx-calibration/demo_l33.py) (regenerates the demo), and [`flow-driving-checklist.md`](./skills/comic-production/references/sfx-calibration/flow-driving-checklist.md) (per-variant prompts for optional manual real-model validation).
 
 ### Generation-path note (per `feedback_validate_with_credits` memory)
 
-The original task spec requested model gens (Higgsfield or GPT Image 2) for the 13-variant matrix. The image-generation MCP was not connected in this Claude Code session, and Flow's Slate.js editor rejected both `document.execCommand`, synthetic InputEvent / ClipboardEvent / beforeinput dispatch, direct Slate `editor.apply` with `editor.onChange`, and the form's `onSubmit` invoked through the React-fiber props — Slate-React requires trusted browser events that Chrome MCP cannot synthesize, and computer-use cannot type into Chrome (tier-"read"). The matrix was generated programmatically with PIL instead. The chosen levels (A2/A3/B2) still translate to verbal prompt instructions the rendering model receives — see [sfx-calibration/flow-driving-checklist.md](./skills/comic-production/references/sfx-calibration/flow-driving-checklist.md) for the per-variant prompts if a real-model fidelity pass is wanted later. **Recommend: a follow-up session with the Higgsfield MCP connected should run 3-5 panels (the demo p05-04 plus one tier-6+ chest panel and one tier-7+ arms panel) through the new L33 directive end-to-end and commit the model-rendered outputs as the credit-burn validation per the memory.**
+The original task spec requested model gens (Higgsfield or GPT Image 2) for the 13-variant matrix. The image-generation MCP was not connected when the matrix was generated, and Flow's Slate.js editor rejected every scripted-input vector tried (`document.execCommand`, synthetic `InputEvent` / `ClipboardEvent` / `beforeinput` dispatch, direct Slate `editor.apply` with `editor.onChange`, and the form's `onSubmit` invoked through the React-fiber props) — Slate-React requires trusted browser events that Chrome MCP cannot synthesize, and computer-use cannot type into Chrome (tier-"read"). The matrix was generated programmatically with PIL instead, deterministic and parameter-controlled per axis. The chosen levels (A2/A3/B2) still translate to verbal prompt instructions the rendering model receives — see [`flow-driving-checklist.md`](./skills/comic-production/references/sfx-calibration/flow-driving-checklist.md) for the per-variant prompts. **Follow-up recommended**: with Higgsfield MCP now connected (`mcp__c26fa20c-...__generate_image`), a follow-up session should run 3-5 panels through L33 end-to-end (the demo p05-04 plus one tier-6+ chest panel and one tier-7+ arms panel) and commit the model-rendered outputs as the credit-burn validation per the memory.
 
 ---
 
