@@ -1,0 +1,153 @@
+{
+  "version": 3,
+  "project": {
+    "name": "chun-li-test",
+    "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test",
+    "brand": "GrowGetterComics",
+    "character_ref": "references/characters/chun-li/face-card.png"
+  },
+  "transformation_type": "fmg",
+  "transformation_subtype": "fmg-solo-tier2-to-tier7-chun-li",
+  "lineup_files": {
+    "tier_low": "muscle-size-lineup.png",
+    "tier_high": "muscle-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "platform": "flow",
+  "script_source": {
+    "type": "preset",
+    "value": "Solo Chun Li FMG transformation arc, 10 panels total (one panel per page), tier 2 → tier 7. Setting: Bison's lair / villain chamber, ambient Psycho Power surge as transformation trigger (no physical artifact, no machinery clamping — purely energy-driven, she absorbs Psycho Power through fighting-stance willpower). Baseline costume: canonical SF2 blue silk qipao with gold trim, white thigh-highs, brown spiked gauntlets, twin buns with red ribbons (L22 canonical, held intact across all 10 panels). Outfit fate: qipao strains and tears at non-coverage seams through tier 5; tier 6 introduces materialization of new peak-form outfit (sleek hero-fit appropriate to her transformed form, fan-service-friendly silhouette, L29-compliant coverage); tiers 7 panels render in the new outfit. Tone curve: curiosity → awe → empowerment (panels 1-2 baseline curiosity at the ambient Psycho Power; panels 3-5 dawning awe as her body changes; panels 6-7 delight + growing confidence; panels 8-10 commanding, triumphant, signature hero presence). Dialogue mode: FULL — speech bubbles + internal-thought captions baked into every panel per L19 (Chun Li actually speaks at Bison via defiance and self-realization, plus internal captions reading her transformation). Camera distribution: splash-heavy — 3 of 10 panels are full-page splash beats (panel 1 establishing wide of the chamber + Chun Li entering, panel 7 first full reveal at tier 7 with new outfit, panel 10 final hero-stance triumph). Remaining 7 panels mix MCU/ECU-face/full-body/region-ECU per L20 distribution. Photoreal CGI / DAZ3D render style throughout — only the lettering layer (speech bubbles, captions, SFX) is 2D per L19. Always-clothed (L33) coverage maintained at every tier including the tier 7 peak.",
+    "page_count": 10,
+    "panels_per_page": 1
+  },
+  "mandatory_rules": {
+    "active": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "extra_lines": [
+      "CLOTHING (L33 always-clothed, project-wide HARD): Chun Li remains fully clothed at all times. No nudity, no exposed nipples or genitals, no see-through fabric. Garments may strain, stretch, tear at non-coverage seams, or partially shred, but always preserve full coverage of breasts, groin, and buttocks. This applies to every panel including the tier-7 peak panels (8-10) and the new-outfit reveal (panels 6-7).",
+      "NO BACKGROUND EXTRAS (cast_size = 1): Every panel contains ONLY Chun Li. No bystanders, no helpers, no other people, no animals, no holographic figures. Bison himself does NOT appear in frame — his presence is implied through the chamber setting and ambient Psycho Power energy only. Camera framing should crop tightly enough that no off-cast figures appear in deep background.",
+      "CHUN LI CANONICAL ANCHOR (L17): Every face-visible panel must depict Chun Li with her exact canonical SF2 face — twin buns with red ribbons, large expressive brown eyes, defined cheekbones, fair complexion, beautiful Asian features. Zero face drift across the 10 panels. She is recognizable as Chun Li from Street Fighter II in every frame.",
+      "BEAUTY ANCHORING (per user directive, project_chun_li_beauty memory): Chun Li renders as strikingly beautiful in every panel — vogue-cover glamour, symmetric features, clear skin with subsurface scattering, expressive eyes, glamour lighting on the face. Muscle scale at tier 7 does NOT degrade facial beauty — tier 7 face is as beautiful as tier 2 face. Apply explicit beauty descriptors to every face-visible panel ('strikingly beautiful', 'vogue-cover glamour Asian beauty', 'defined cheekbones', 'flawless skin').",
+      "L21 REFERENCE EXCLUSION: Attached face card / body-tier lineup / multi-angle pack / tier-reinforcement refs are guidance ONLY. Never render them as physical scene objects (no inset photos, no badges, no posters, no annotated overlays, no proportion-stat text floating in frame, no progress bars, no holographic comparison panels).",
+      "L22 HAIR STATE EXPLICIT: Every panel where Chun Li's head is in frame must explicitly name the hair state: 'twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette'. Hair stays bound throughout all 10 panels — ribbons do not loosen, buns do not release. This is the canonical Chun Li silhouette and must be readable in every frame.",
+      "L23 ENVIRONMENT VERBAL ANCHOR (Bison's lair specifics): When the env ref is dropped due to the 3-ref ceiling, the location must be verbally anchored with 5+ named elements: dark stone-block walls, glowing purple Psycho Power energy ambient in the air, scattered Shadaloo machinery silhouettes in deep background, low-angle dramatic crimson + violet rim lighting, polished obsidian floor reflecting the energy, oppressive cathedral-scale chamber proportions.",
+      "L24 ACCESSORY SUPPRESSION: Brown spiked leather gauntlets are CANONICAL to Chun Li and appear at every panel where wrists are in frame at tiers 2-5; at tier 6-7 in the new outfit, the gauntlets may be redesigned or absent per the new costume. Suppress hallucinated watches / rings / earrings / modern jewelry / necklaces — if wrists, neck, ears, or fingers are visible in frame, explicitly name the suppression ('no watch, no modern jewelry, no rings, no earrings').",
+      "L25 BODY-REGION REVEAL STICKINESS: Once a body region (chest, abs, glutes, lats, biceps) is revealed in a panel, every subsequent post-reveal panel whose camera includes that region must include explicit costume directives that PRESERVE the exposure level. Tier escalation increases muscle/bust mass, never resets coverage.",
+      "L29 TIER REINFORCEMENT (auto-attach, tier-6 and tier-7): Tier-6 panel (panel 6) auto-attaches the canonical reinforcement ref from skills/comic-production/references/peak-body-scale/tier-6/. Tier-7 panels (7-10) auto-attach the tier-7 reinforcement ref. Render to match or exceed the figure-scale shown in those refs AND over-spec further (see CHEST OVERSIZE rule).",
+      "PHOTOREAL CGI RENDER ONLY: All bodies, costumes, skin, hair, Bison's-lair environment, lighting render as photoreal DAZ3D / Iray-style CGI with ray-traced subsurface scattering, physically-based materials, 8K texture detail. The Psycho Power energy renders as volumetric purple-violet glow with bloom. The 2D scope is strictly the speech-bubble / caption / SFX lettering overlays per L19. NEVER 2D illustration on bodies. NEVER cartoon-shaded skin. NEVER comic-page line-art on Chun Li.",
+      "CHEST OVERSIZE COMPENSATION (per feedback_chest_oversize_compensate memory): At every tier 3 onward, prompt for chest size LARGER than what the lineup figure shows for that tier — the model normalizes off-distribution features toward average, so oversize on the prompt side lands at parity in the output. Bust scales with muscle at every tier (not just one or the other) — tier 7 Chun Li has both massively developed muscle AND oversized bust per the lineup.",
+      "AUTONOMOUS VARIANT SELECTION (per feedback_autonomous_production_picks memory): Pick winning variants without asking the user mid-run (generation.pick_variant = 'claude'). Surface only locked outputs and HARD-fail retries. The user already approved 'autopilot' at the briefing boundary.",
+      "BAKE DIALOGUE + SPEECH BUBBLES IN-PANEL (L19, dialogue_mode=full): Captions (yellow rounded-rectangle internal-thought boxes) AND speech bubbles (classic white ellipses with tail) are rendered IN-IMAGE during generation. Chun Li speaks defiance and self-realization at Bison's absent presence + internal-thought captions read her transformation. No post-process lettering pass. Every panel carries at least one line of text.",
+      "PSYCHO POWER VISUAL ANCHOR (project-specific): Ambient Psycho Power energy is the transformation engine. Render it as volumetric purple-violet glow filling the chamber, with brighter wisps and tendrils drifting toward Chun Li's body. At tiers 4+, the Psycho Power visibly enters her — purple energy traceries on her skin, glowing eyes (subtle at first, intense at tier 7), faint aura around her form. By tier 7, she has fully absorbed and tamed the Psycho Power — it no longer overwhelms her, she commands it.",
+      "NEW PEAK OUTFIT MATERIALIZATION (project-specific, panels 6-7): At tier 6 (panel 6), the canonical SF2 qipao tears apart in a burst of Psycho Power energy, and a new sleeker peak-form outfit materializes around her body — design brief: form-fitting bodysuit in Chun Li's signature blue and gold palette, peak-form-friendly silhouette (high leg cuts, displayed musculature where coverage permits), the new gauntlets re-form on her wrists, twin buns + red ribbons remain intact. By panel 7 the new outfit is fully materialized and renders as a solid physical costume for the remaining panels (7-10). L33 coverage held at all times — bust, groin, glutes covered.",
+      "SPLASH-HEAVY COMPOSITION (project-specific): Panels 1, 7, and 10 are designated full-page splash beats. Panel 1 = wide establishing of Bison's chamber with Chun Li entering / striking opening pose, low-angle dramatic. Panel 7 = first full-body reveal of tier-7 Chun Li in the new outfit, hero-stance, mid-chamber, Psycho Power swirling. Panel 10 = final hero splash, full-body fighting stance triumphant, Chun Li commanding the chamber. Remaining panels (2-6, 8, 9) use varied MCU/ECU/full-body framing per L20 distribution."
+    ],
+    "allow_baked_lettering": true
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": false
+  },
+  "flow": {
+    "project_url": "https://labs.google/fx/tools/flow/project/38e749d3-03c4-4dfc-a355-13e1f0324328",
+    "project_tab_id": 1212627619,
+    "browser_device_id": "6b35bfe8-66a7-44c7-8ca2-191cf22b7b87",
+    "browser_name": "laptop",
+    "google_account": "Matt (PRO) on laptop Chrome",
+    "default_model": "Nano Banana 2",
+    "default_count": "x4",
+    "default_aspect": "3:4",
+    "state_file": "flow-state.json",
+    "note_orphaned_macmini_project": "Earlier project e7bc1497-622b-422c-85dc-a10d674f7128 on growcomics account (macmini Chrome) was abandoned due to filesystem-bridge mismatch. Reuse if needed but live work is on this Matt-account project."
+  },
+  "generation": {
+    "max_panels": 10,
+    "max_retries_per_panel": 4,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["breasts", "muscles"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "halt-on-hard",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "halt",
+    "missing_ref_guardrail": "halt",
+    "posting": "never"
+  },
+  "continuity": {
+    "vision_audit_scope": "full-issue",
+    "arc_character": "chun-li",
+    "monotonic_attribute": "muscle_size_tier"
+  },
+  "page_composer": {
+    "mode": "auto",
+    "export_pdf": true,
+    "page_size_px": {
+      "width": 2048,
+      "height": 3072
+    }
+  },
+  "status_board": {
+    "surface_inline": true,
+    "checkpoint_modes": ["references", "generation", "composition"]
+  },
+  "halt_conditions": {
+    "content_policy_refusal": true,
+    "missing_ref_guardrail": true,
+    "environmental_failure": true,
+    "script_ambiguity": true
+  },
+  "script_breakdown": {
+    "style_preset": "photoreal-daz3d",
+    "location_strategy": "single",
+    "transformation_metadata": {
+      "flavor": "single-axis-fmg-with-psycho-power-trigger",
+      "start_tier": 2,
+      "end_tier": 7,
+      "trigger_description": "ambient Psycho Power surge in Bison's lair — Chun Li absorbs the energy through fighting-stance willpower, no physical artifact, no machinery, no serum injection"
+    }
+  },
+  "project_specific": {
+    "always_clothed": true,
+    "cast_size": 1,
+    "render_style": "photoreal CGI / DAZ3D",
+    "lettering_style": "classic 2D speech bubbles (white ellipse with tail) + yellow rounded-rectangle internal-thought caption boxes, overlaid on photoreal CGI panels per L19 (allow_baked_lettering=true). Every panel carries at least one line of text — speech and/or caption.",
+    "tone": "curiosity → awe → empowerment",
+    "tone_directive": "Panels 1-2 baseline curiosity at the ambient Psycho Power filling the chamber, Chun Li alert and questioning. Panels 3-5 dawning awe as her body begins to change, expression softening from controlled-warrior to wonder. Panels 6-7 delight and growing confidence as she absorbs and tames the power, new outfit materializing. Panels 8-10 commanding, triumphant, peak-empowered — she now COMMANDS the Psycho Power, signature Chun Li hero presence.",
+    "dialogue_mode": "full",
+    "character_ip": "Chun Li (Street Fighter II / Capcom) — canonical SF2 design, twin buns + red ribbons, classic blue qipao baseline. Fan production / non-commercial creative exercise.",
+    "tier_curve": [2, 2, 3, 4, 5, 6, 7, 7, 7, 7],
+    "splash_panels": [1, 7, 10],
+    "transformation_trigger": "Psycho Power surge ambient — Chun Li enters Bison's lair, the chamber fills with volumetric purple-violet Psycho Power energy, she takes a defiant fighting stance and through sheer willpower absorbs the Psycho Power, channeling it into her own form. No physical artifact, no machinery clamping, no serum — purely energy-driven absorption via martial-arts discipline.",
+    "costume": {
+      "chun-li": {
+        "palette": "Chun Li blue (cobalt) + gold trim + brown leather + white + red ribbon accents",
+        "palette_description": "Baseline (panels 1-5): canonical SF2 cobalt-blue silk qipao with gold trim, gold-trimmed lapel, side slits, white thigh-high boots/stockings, brown spiked leather gauntlets on both wrists, white leather sash belt, twin buns secured with red silk ribbons. Tier escalation (panels 3-5): qipao progressively snug across bust and biceps, fabric strain visible at deltoid and bust seams, first small tears at non-coverage points (sleeve cap, side hem under arm), gauntlet straps creak. Tier 6 (panel 6): qipao tears apart in a burst of Psycho Power energy, new outfit materializes around her body. Tier 7 (panels 7-10): new peak-form outfit — form-fitting blue-and-gold bodysuit with high leg cuts and exposed thigh definition, new sleek metallic gauntlets reformed on wrists, gold trim continues the SF2 visual signature, twin buns + red ribbons intact, white accents preserved. L33 coverage held — bust, groin, glutes fully covered at all tiers.",
+        "tier_state_progression": {
+          "tier_2_p1_p2": "Intact canonical SF2 blue qipao, gauntlets, thigh-highs, twin buns + red ribbons. Pristine.",
+          "tier_3_p3": "Slightly snug. Fabric tight across the chest and biceps. No tears yet. Bust visibly fuller, biceps defined.",
+          "tier_4_p4": "Seam strain visible at deltoids and bust line. First small tears at non-coverage seams (sleeve cap, side hem). Bust noticeably larger, arms developed. Coverage 100% preserved.",
+          "tier_5_p5": "Fabric pulled taut, multiple tears at non-coverage seams. Sleeves split at the cap. Side seams beginning to give. Significantly enlarged bust + muscle. Coverage 100% preserved.",
+          "tier_6_p6": "MATERIALIZATION BEAT — the qipao tears apart in a burst of Psycho Power energy, fragments dissolving into purple light, NEW peak-form outfit forming around her body mid-frame. Render as a single panel showing both states bleeding into each other — partial qipao remains visible dissolving, new outfit partially materialized. Tier-6 reinforcement ref auto-attached.",
+          "tier_7_p7_p10": "Fully materialized new peak-form outfit: form-fitting cobalt-blue and gold bodysuit, high leg cuts revealing developed thighs, sleek metallic gauntlets, gold accents, white sash detail, twin buns + red ribbons intact. Tier-7 reinforcement ref auto-attached on every panel."
+        },
+        "design_notes": "The new peak-form outfit (panel 6+ materialization, panels 7-10 worn) needs Phase 2 to generate a costume-turnaround ref for it. Without this, panels 7-10 will drift on costume design. Generate the turnaround once and attach to every tier-7 panel as a costume ref."
+      }
+    },
+    "cast": [
+      {
+        "slug": "chun-li",
+        "name": "Chun Li",
+        "ip_note": "Street Fighter II (Capcom) — canonical SF2 design. Fan-production / non-commercial creative exercise.",
+        "tiers": [2, 3, 4, 5, 6, 7],
+        "view_pack_tier": 4,
+        "wardrobe": "Baseline: classic SF2 blue silk qipao with gold trim, white thigh-highs, brown spiked gauntlets, white sash, twin buns with red silk ribbons. Tier 6+: new peak-form outfit (see costume.chun-li.tier_state_progression for the materialization beat and the new outfit description).",
+        "ref_folder": "references/characters/chun-li/"
+      }
+    ],
+    "page_count": 10,
+    "panels_per_page": 1,
+    "estimated_panel_count": 10
+  }
+}
