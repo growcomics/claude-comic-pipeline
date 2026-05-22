@@ -1290,4 +1290,61 @@ Tier 1-8 panels (handled by lineup / L29 / L30 / L31). Non-FMG transformations.
 
 ---
 
+## L33 — Body-region focus panels need calibrated 2D action-line + SFX overlay
+
+**Symptom**: Photoreal CGI extreme-close-ups on a body region (bicep flex, chest peak, abs hardening, glute flex, quad pump) read flat — the photographic register strips the comic-genre energy that the equivalent 2D-illustrated panel would carry. Without the genre signal, peak transformation beats look like fitness photography rather than comic-book moments. The opposite failure mode (overdone radial bursts + dominating SFX text) breaks the photoreal tone and pulls the panel toward illustration.
+
+**Root cause**: L20 forces the ECU framing on body-region panels, and L19 bakes lettering as a flat 2D overlay on photoreal CGI — but there is no rule that adds the SFX-overlay treatment (radial action lines + SFX word) that the FMG genre relies on for peak beats. Without a calibrated rule, the prompts either omit the overlay (panel feels flat) or stuff it in ad-hoc (panel feels overcooked or breaks photoreal).
+
+**Calibration ran 2026-05-17**: 13-variant programmatic PIL matrix on the Rogue bicep-flex source (`skills/comic-production/references/sfx-calibration/source-bicep.png`, 1200x896, pulled from the user's Flow project). The matrix isolated two axes — action-line density (A0..A4) and SFX-text size (B0..B4) — plus three combined sweet-spot candidates (C1/C2/C3). Generation path note: the original spec requested Higgsfield / GPT Image 2 model gens, but no image-generation MCP was connected in this session and Flow's Slate.js editor rejected scripted prompt input, so the matrix was generated programmatically. The chosen levels still translate to verbal prompt instructions for the rendering model — see `flow-driving-checklist.md` for the per-variant prompts if real-model fidelity validation is wanted later.
+
+**User picked (after reviewing all 13 variants inline at full resolution)**:
+
+| Axis | Baseline (tier 1-5) | Tier 6+ |
+| --- | --- | --- |
+| Action lines | **A2** — medium (10-12 mixed-thickness radial strokes) | **A3** — heavy (18-25 dense + chromatic-aberration accent) |
+| SFX text | **B2** — medium FLEX-style word, ~15% frame height, behind body region, classic comic-burst lettering (yellow fill / black outline / slight tilt / drop shadow) | **B2** — held constant (calibration showed bumping both axes crowded photoreal) |
+| Scope | bicep / chest / abs / glutes / quads. Face ECUs and full-body shots OUT of scope. | same |
+
+**Fix**: New rule module `rules/l33_body_region_sfx.py` at slot `11_render_directive`. Fires when `transformation_beat` is one of `{arms, chest, abs, rear, legs}` OR when `body_region_focus=true` is set explicitly on a panel. Reads `panel.muscle_size_tier` and bumps the action-lines line one level when tier >= 6. The prompt fragment names the overlay scope explicitly (matches L19's lettering metaphor): action lines + SFX sit as a 2D vector overlay ON TOP of the photoreal body region; only the overlay graphics are 2D, everything else stays photoreal CGI.
+
+**SFX vocabulary**: Per-region defaults in the rule module — `FLEX` for arm/abs/glute/quad beats, `POMF` for chest beats (per FMG-genre convention; avoid generic action SFX like BAM/POW that read as superhero combat). Override per panel with `sfx_word`.
+
+**Per-panel overrides** (manifest schema in `skills/script-breakdown/SKILL.md`):
+
+```json
+{
+  "body_region_focus": true,
+  "body_region_part": "bicep" | "chest" | "abs" | "glutes" | "quads",
+  "sfx_level": "auto" | "off" | "subtle" | "medium" | "heavy",
+  "action_lines_level": "auto" | "off" | "subtle" | "medium" | "heavy",
+  "sfx_word": "FLEX"
+}
+```
+
+`"auto"` is the default — the rule consults the calibrated baseline + tier escalation. Explicit values override.
+
+### Where this rule applies
+
+- Panels with `transformation_beat in {arms, chest, abs, rear, legs}` — automatic.
+- Panels with `body_region_focus=true` explicitly set, regardless of transformation_beat. Supports flex-pose panels that aren't a named transformation beat.
+- All transformation types (`("*",)`) — the SFX-overlay treatment is FMG-coded but reads correctly on muscle-growth and on muscle-display poses in any genre with peak-flex beats.
+
+### Where this rule does NOT apply
+
+- Face ECUs (`ecu-face` framing) — different overlay register, will need a separate rule if face-ECU SFX is ever wanted.
+- Full-body or medium-shot panels with body-region transformation beats — L20 forces the ECU, so panels that genuinely cover a body region will trip L33. Panels that legitimately want a full-body view should not declare a body-region transformation_beat.
+- `transformation_beat in {hips, shoulders, back, suit_fail}` — out of calibration scope (these are L20 body-region beats but the user explicitly excluded them from L33). They can opt in per panel by setting `body_region_focus=true` and `body_region_part=...`.
+
+### Layering on top of L20 and L19
+
+L33 is **additive** to L20 and L19, not a replacement:
+- L20 (slot `2_camera_strengthening`) forces the ECU framing.
+- L19 (auto-injected) bakes flat 2D lettering when the panel has dialogue/captions/sfx.
+- L33 (slot `11_render_directive`) adds the action-line + SFX-word overlay specifically for body-region focus panels.
+
+All three can fire on the same panel without conflict — the overlay scopes are named explicitly in each, and the photoreal-CGI scope is reaffirmed by both L19 and L33's closing negations.
+
+---
+
 ## How to add a lesson

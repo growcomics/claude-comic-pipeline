@@ -6,6 +6,28 @@ All notable changes to the `claude-comic-pipeline` are tracked here.
 
 ---
 
+## 2026-05-21 (L33 — body-region focus panels need calibrated 2D action-line + SFX overlay)
+
+### Added
+
+- **New lesson L33** ([lessons-learned.md § L33](./skills/comic-production/references/lessons-learned.md)) — body-region focus panels (bicep flex, chest peak, abs hardening, glute flex, quad pump) on photoreal CGI render flat without a comic-genre overlay. L33 adds a calibrated 2D vector overlay (radial action lines + SFX word) on top of the photoreal body region, layered on top of L20 (ECU framing) and L19 (lettering).
+
+- **Empirical calibration matrix** ([skills/comic-production/references/sfx-calibration/](./skills/comic-production/references/sfx-calibration/)) — 13-variant programmatic PIL matrix on the user's Rogue bicep-flex source (1200x896, pulled from `labs.google/fx/tools/flow/project/f66c66c5-.../edit/01d2f684-...`). Variants isolated two axes (action-line density A0..A4, SFX-text size B0..B4) plus three combined sweet-spot candidates (C1..C3). User reviewed all 13 inline at full resolution and picked **A2 + B2** for baseline (tier 1-5), **A3 + B2** for tier 6+ (action lines escalate one step, SFX held constant — calibration showed bumping both crowded the photoreal tone). Body-region scope: bicep / chest / abs / glutes / quads. Out-of-scope: face ECUs, full-body shots, and L20 body-region beats not covered by the calibration (hips / shoulders / back / suit_fail).
+
+- **Rule module `rules/l33_body_region_sfx.py`** registered in [_registry.py](./skills/comic-production/rules/_registry.py) at slot `11_render_directive`, severity `soft`. Fires when `panel.transformation_beat` is one of `{arms, chest, abs, rear, legs}` OR when `panel.body_region_focus=true` is set explicitly. Reads `panel.muscle_size_tier` and bumps the action-lines line one level at tier 6+. Per-panel overrides via `action_lines_level` / `sfx_level` / `sfx_word` (auto / off / subtle / medium / heavy). Per-region SFX word defaults: FLEX for arm/abs/glute/quad, POMF for chest beats (FMG-genre convention).
+
+- **Manifest schema fields** documented in [script-breakdown/SKILL.md](./skills/script-breakdown/SKILL.md): `body_region_focus`, `body_region_part`, `action_lines_level`, `sfx_level`, `sfx_word` — all optional, `auto` default.
+
+- **Plain-English explainer** in [the-rules-explained.md § L33](./skills/comic-production/references/the-rules-explained.md) with embedded contact-sheet image. Index updated; "Last updated" bumped to 2026-05-21.
+
+- **Demo on existing panel** ([sfx-calibration/demo-l33-side-by-side.png](./skills/comic-production/references/sfx-calibration/demo-l33-side-by-side.png)) — applied to `ultra-gal-origin/p05-04` (arms beat, tier 2 = baseline). Side-by-side shows original vs L33-applied plus the exact prompt fragment the rendering model would receive. Rendered via the PIL stand-in (no model gen) for the demo image.
+
+### Generation-path note (per `feedback_validate_with_credits` memory)
+
+The original task spec requested model gens (Higgsfield or GPT Image 2) for the 13-variant matrix. The image-generation MCP was not connected in this Claude Code session, and Flow's Slate.js editor rejected both `document.execCommand`, synthetic InputEvent / ClipboardEvent / beforeinput dispatch, direct Slate `editor.apply` with `editor.onChange`, and the form's `onSubmit` invoked through the React-fiber props — Slate-React requires trusted browser events that Chrome MCP cannot synthesize, and computer-use cannot type into Chrome (tier-"read"). The matrix was generated programmatically with PIL instead. The chosen levels (A2/A3/B2) still translate to verbal prompt instructions the rendering model receives — see [sfx-calibration/flow-driving-checklist.md](./skills/comic-production/references/sfx-calibration/flow-driving-checklist.md) for the per-variant prompts if a real-model fidelity pass is wanted later. **Recommend: a follow-up session with the Higgsfield MCP connected should run 3-5 panels (the demo p05-04 plus one tier-6+ chest panel and one tier-7+ arms panel) through the new L33 directive end-to-end and commit the model-rendered outputs as the credit-burn validation per the memory.**
+
+---
+
 ## 2026-05-21 (chun-li-test — solo FMG transformation arc, Phase 0–2 complete, Phase 3 partial)
 
 ### Added

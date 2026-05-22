@@ -1,6 +1,6 @@
 # The Rules, Explained
 
-*Last updated: 2026-05-14*
+*Last updated: 2026-05-21*
 
 If you've ever tried generating a comic with AI, you've probably noticed the same things go wrong every time. The character's hair changes between panels. Their costume drifts a little each page. A wide establishing shot has dialogue floating over a tiny figure no one can read. A "transformation" jumps from "before" to "after" with nothing in between.
 
@@ -62,6 +62,8 @@ The lessons are in numeric order below. L-numbers are chronological (when we lea
 - [L26 — Costume identity must be canonical across panels](#l26--costume-identity-must-be-canonical-across-panels)
 - [L27 — Skin sheen and texture continuity](#l27--skin-sheen-and-texture-continuity)
 - [L28 — Reference completeness is mandatory](#l28--reference-completeness-is-mandatory)
+- [L29 — Tier-6 needs dedicated proportion reinforcement refs](#l29--tier-6-needs-dedicated-proportion-reinforcement-refs)
+- [L33 — Body-region focus panels need calibrated action lines + SFX overlay](#l33--body-region-focus-panels-need-calibrated-action-lines--sfx-overlay) *(calibrated May 2026)*
 
 ---
 
@@ -404,6 +406,26 @@ The fix is reinforcement, not replacement: keep the lineup attached (it carries 
 These PNGs are repo-bundled at `skills/comic-production/references/peak-body-scale/tier-6/`. They're not character-specific generated assets — they ship with the pipeline. Every panel at `muscle_size_tier == 6` auto-attaches both alongside the lineup. The L11 surgical-scoping language extends verbatim — the reinforcement refs are PROPORTION-ONLY, never a clothing / hair / face / pose / lighting / background source — and the directive explicitly tells the model to **over-render** (target the SAME or LARGER scale than the reinforcement refs show), since the model normalizes off-distribution features toward average and asking for parity tends to land below parity.
 
 L29 is FMG-only and strictly tier 6. Tiers 7-9 are beyond peak; the anatomical detail in these reference sheets is calibrated specifically for figure 6, so applying them at higher tiers would under-anchor. Tier-7/8/9 reinforcement sheets are a future expansion that would live in sibling directories with their own rule modules. `rules_audit.py` HARD-fails when a tier-6 panel exists but the reinforcement PNGs aren't findable on disk — blocks the render plan, doesn't just warn.
+
+---
+
+## L33 — Body-region focus panels need calibrated action lines + SFX overlay
+
+![SFX calibration matrix — 13 variants across action-line density and SFX text size, plus three combined sweet-spot candidates, applied to a source bicep flex from a Flow project](./sfx-calibration/contact-sheet.png)
+
+When a panel zooms in on a body region during a transformation arc — a bicep at full flex, a chest peak, abs hardening, a glute flex, a quad pump — the photoreal CGI render reads flat without comic-genre energy on top. The equivalent 2D-illustrated comic panel carries radial action lines bursting from the focal point and a bold SFX word in classic comic-burst lettering. Photoreal CGI gives you the muscle and skin and lighting; it does not give you that genre signal. Without the overlay, peak transformation beats read more like fitness photography than like comic-book moments.
+
+The opposite mistake is overdoing it. Too many lines or an SFX word that dominates the frame breaks the photoreal tone and pulls the panel toward 2D illustration — the exact failure mode L19 was built to prevent on lettering. So the rule needed calibration: what's the right density of action lines, the right size of SFX text?
+
+The matrix above is the calibration. Thirteen variants on a single source bicep — five action-line densities from off to overdone, five SFX text sizes from off to overdone, plus three combined sweet-spot candidates. The user reviewed all thirteen and picked **A2 + B2** for baseline panels (tiers 1-5): medium-density radial action lines (10-12 mixed-thickness strokes from the body-region focal point), plus a single SFX word at about 15% of the frame height in classic comic-burst lettering (yellow fill, thick black outline, slight tilt, drop shadow), placed behind or beside the body region.
+
+For peak-tier panels (tier 6+), the rule bumps the action lines up one step — A3 (heavy, 18-25 dense strokes with a slight chromatic-aberration accent) — while holding the SFX at B2. The calibration showed that bumping both axes at peak crowded the photoreal tone; bumping lines only escalates without overcooking.
+
+Scope: bicep / arm, chest, abs, glute / rear, quad / leg. Face ECUs and full-body shots are out of scope. The rule fires on any panel with `transformation_beat` in `{arms, chest, abs, rear, legs}`, or on any panel that opts in explicitly with `body_region_focus=true`.
+
+L33 layers on top of L20 (which forces the ECU framing) and L19 (which bakes the lettering as a flat 2D overlay). All three describe their overlay scope explicitly — the 2D action lines and SFX word sit ON TOP of the photoreal body region; the muscle, skin, costume, and lighting stay photoreal CGI. Naming the scope is what stops L7 Case B from re-triggering: comic vocabulary in the prompt only pulls the panel toward 2D when its scope is ambient. Bounding the 2D scope to three named overlay objects (action lines, SFX word, lettering) lets the photoreal stay photoreal.
+
+The calibration matrix, per-variant PNGs, and a checklist for running real-model Flow gens of any single variant live in `references/sfx-calibration/`. Re-running the matrix is `python3 generate_matrix.py` from that directory.
 
 ---
 
