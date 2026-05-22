@@ -11,10 +11,12 @@ Audit a batch of generated panels against the shotlist before lettering. Distinc
 
 Run modes in this order:
 
-1. **Rules-based** (`scripts/rules_audit.py`) — deterministic, instant, free. Catches the things a Python script can verify from `shotlist.json` and the file layout alone.
-2. **Vision-based** — Claude (the agent) reads each panel image with the Read tool and compares it against the shotlist's intent + the previous panel. Catches pixel-level drift the rules audit can't see.
+1. **Rules-based** (`scripts/rules_audit.py`) — deterministic, instant, free. Catches the things a Python script can verify from `shotlist.json` and the file layout alone. The report stamps whether the vision pass has run, so a "0 hard" verdict can't be misread as a clean render.
+2. **Vision-based** — either `scripts/vision_audit.py` (scripted, ~$0.015/panel, three structured checks per panel) or agent-driven (open-ended judgment). Catches pixel-level drift the rules audit can't see, including the L25 framing/wardrobe class.
 
 Rules-first because it's fast and surfaces structural problems (missing assets, regressions) that would otherwise make the vision pass waste tokens.
+
+Both modes ultimately produce the same kind of report. The rules-audit report at `<project>/continuity-rules-report.md` and the vision-audit report at `<project>/continuity-vision-report.md` are read together — neither is sufficient alone.
 
 ## When this skill is the right tool
 
@@ -42,17 +44,28 @@ What it checks:
 - **Field hygiene** — `costume_state` present per panel (SOFT). Characters in `panel.characters[]` declared in `cast[]` (SOFT).
 - **Camera variety** — parses each panel's `camera` field against the categories in `comic-production/references/cinematic-framing.md`. HARD if any single (distance, angle) combo appears in >3 panels (the April-claudemade and Chun-Li failure mode — 7+ panels at the same shot signature). SOFT for distance-variety or angle-variety floors (≥5 / ≥4 per 10-panel sequence; intimate scenes legitimately violate this). SOFT for "no ECU" or "no wide-establish/splash" across a sequence ≥6 panels.
 - **Body-region ECU frame-lockdown** — for any panel where `camera` parses as `ecu-region` and `costume_state` contains a bare-body-part claim ("bare", "exposed", "uncovered") and the named character's `cast[].wardrobe` mentions a torso garment (apron/dress/robe/shirt/cloak/armor/etc.), HARD if none of the panel's `notes`/`action`/`costume_state` includes a frame-lockdown clause naming what's OUT of frame. This is the L25 gate (lessons-learned.md L25) — flash variants widen `ecu-region` to a torso shot and omit the wardrobe; the lockdown clause prevents the widening drift. Set `continuity_break: true` to override.
+- **Silent model downgrade** — reads `RUN_STATE.json`'s `model_actually_used` field. When Higgsfield silently downgraded the requested model to a flash variant (e.g. `nano_banana_2` → `nano_banana_flash`), emits one project-level HARD finding plus per-panel INFO findings listing every `ecu-region`/`ecu-face` panel of always-clothed characters (the L25 at-risk shape). Autopilot should treat the HARD as a signal to run the vision audit before accepting the batch. No-op when RUN_STATE.json is absent or the served model matches the requested one.
 - **Transformation beats** — only fires when shotlist declares `transformation_scenes[]`. For each scene, HARD if no setup beat (`consider`/`decide`/`trigger`/`first_sensation`), HARD if fewer than 3 distinct body-region beats (`chest`/`hips`/`rear`/`arms`/`abs`/`legs`/`back`/`shoulders`/`suit_fail`/`whole_body`) or any explicitly listed `required_body_regions` are missing, HARD if no reveal beat (`reveal`/`aftermath`). SOFT for unknown `transformation_beat` values (typo guard). This is the gate whose absence produced the April-claudemade failure (9 alley pose shots, zero body-region beats); the check now blocks that shape at script-breakdown time.
 
 Exit codes: `0` clean, `1` hard errors present, `2` script error.
 
 The script writes nothing by default — use `--out path/to/report.md` to save, or `--json` for machine-readable output piped into another tool.
 
-## Mode 2 — Vision audit (agent-driven)
+## Mode 2 — Vision audit
 
-The rules audit can't see pixels. For costume drift between visually-similar tear states, face identity drift, prop disappearance, or wrong lighting — Claude has to look.
+The rules audit can't see pixels. For costume drift between visually-similar tear states, face identity drift, prop disappearance, wrong lighting, or framing/wardrobe drift on body-region ECU panels — pixels have to be inspected.
 
-This is a workflow, not a script. Follow it in order when asked to run the vision audit:
+Two ways to run it:
+
+**2a. Scripted** (`scripts/vision_audit.py`) — runnable, deterministic, reportable. Uses the Anthropic Messages API with each panel's image to classify three things per panel: (1) does the rendered framing match the requested camera distance, (2) are wardrobe items declared in `cast[].wardrobe` visible where the body extends beyond the requested crop, (3) does the visible character count match `panel.characters`. Writes findings to `continuity-vision-report.md` at the project root in the same shape as the rules audit. Cost: ~$0.015 per panel on `claude-opus-4-7`. Requires `ANTHROPIC_API_KEY` and `pip install anthropic`.
+
+```sh
+python skills/continuity-check/scripts/vision_audit.py --project /path/to/project [--pages 1-7] [--panels p04-04,p05-03] [--image-override p04-04=path/to/swap.png]
+```
+
+The `--image-override` flag accepts `panel_id=path` and is repeatable — use it to vision-audit a backup image (e.g. `p04-04.v1.original.png`) without renaming the accepted file. Findings carry the same `hard`/`soft`/`info` severities as the rules audit. Exit code 1 on any HARD.
+
+**2b. Agent-driven** — Claude (the agent) reads each panel image with the Read tool and walks the rubric manually. Use this when you need open-ended judgment beyond the script's three checks (face identity drift across the chain, prop continuity across pages, lighting consistency within a scene). Follow the steps in order:
 
 ### 2.1 Establish baselines
 
@@ -127,6 +140,16 @@ Audited <date>. <N> panels across <M> pages. <X> hard, <Y> soft, <Z> info.
 - Regenerate p22
 - Re-chain p25 with FC-only attachment
 ```
+
+### 2.5b Autopilot integration
+
+When `production-config.json` is present, autopilot reads `policies.vision_audit` to decide when to invoke `scripts/vision_audit.py`:
+
+- `never` — legacy behavior, vision audit runs only when the user/agent invokes it manually.
+- `at-batch-end` (default) — after generation completes (end of stage 4), before page-composer. Findings flow into `policies.regeneration` exactly like the rules audit's HARD findings do.
+- `at-accept` — per-panel vision check at the moment a panel is accepted by the variant picker. Strongest gate: an L25 widening drift gets caught before it's saved as v1, and the per-panel retry budget (`generation.max_retries_per_panel`) applies. Most expensive (~$0.015 × panel count, paid even on clean panels).
+
+The script is invoked the same way in all three cases — autopilot just chooses when. Findings are appended to `continuity-vision-report.md` so the audit trail accumulates across `at-accept` invocations.
 
 ### 2.6 Hand back
 

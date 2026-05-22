@@ -104,6 +104,7 @@
         "stage3_gate": {"type": "string", "enum": ["auto", "halt"], "default": "auto"},
         "act_boundary_audit": {"type": "string", "enum": ["always-halt", "halt-on-hard", "halt-on-hard-or-soft", "log-only"], "default": "halt-on-hard"},
         "regeneration": {"type": "string", "enum": ["never", "batch-end", "auto-on-hard", "halt-on-hard"], "default": "batch-end"},
+        "vision_audit": {"type": "string", "enum": ["never", "at-batch-end", "at-accept"], "default": "at-batch-end", "description": "When to invoke skills/continuity-check/scripts/vision_audit.py. `at-batch-end` runs the audit after generation completes, before page-composer — HARD findings flow into the regeneration policy. `at-accept` runs the vision check per panel as it's accepted (stronger, ~$0.015/panel, prevents L25-class drift from being baked into v1). `never` keeps the legacy agent-driven workflow."},
         "content_policy_refusal": {"type": "string", "enum": ["halt"], "default": "halt"},
         "missing_ref_guardrail": {"type": "string", "enum": ["halt"], "default": "halt"},
         "posting": {"type": "string", "enum": ["never"], "default": "never"}

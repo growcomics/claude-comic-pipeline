@@ -10,6 +10,49 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-21 — Close the five detection-layer gaps that let p04-04 through
+
+Follow-up to the earlier L25 entry below. The L25 fix added a deterministic rule for the *shotlist authoring* trap but the broader question — why did **no system** catch the bad render — exposed five distinct detection layers, each of which was either text-only, advisory, or unrun. This entry adds the missing layers so a future failure in this class can't reach v1-accept silently.
+
+### Added
+
+- **`vision_audit.py` script** at `skills/continuity-check/scripts/vision_audit.py` — turns Mode 2 from an agent-driven workflow into a runnable script. Uses the Anthropic Messages API (`claude-opus-4-7` by default, configurable via `CLAUDE_VISION_AUDIT_MODEL`) with each accepted panel image and asks Claude to classify three things per panel: (1) framing match against the requested `camera` distance category, (2) wardrobe visibility for items declared in `cast[].wardrobe` (only when framing widened beyond the requested ECU), (3) character count vs `panel.characters`. Emits `hard`/`soft`/`info` findings in the same shape as `rules_audit.py`, writes to `continuity-vision-report.md`, exits 1 on any HARD. Cost: ~$0.015 per panel; ~$0.45 for a 30-panel issue. Supports `--pages`, `--panels`, and a repeatable `--image-override panel_id=path` flag for vision-auditing backup images without renaming the accepted file. Requires `ANTHROPIC_API_KEY` and the `anthropic` SDK (already a project dependency via `runners/requirements.txt`).
+
+- **`check_model_downgrade` rule** in `rules_audit.py` — reads `RUN_STATE.json`'s `model_actually_used` field and emits one project-level HARD finding plus per-panel INFO findings when the served model differs from the requested one (specifically when flash variants are served). Lists every `ecu-region` / `ecu-face` panel of always-clothed characters (the L25 at-risk shape) so the user has a targeted vision-audit checklist. No-op when RUN_STATE.json is absent or the served model matches the request. Validated on bryn-anvil-of-ages: surfaces the `nano_banana_2 → nano_banana_flash` downgrade as 1 HARD + 7 INFO panels.
+
+- **`policies.vision_audit` flag** in `autopilot/configs/production-config.schema.json` — three values: `never` (legacy), `at-batch-end` (default, runs vision_audit after generation completes; findings flow into `policies.regeneration`), `at-accept` (per-panel check at variant-pick time, strongest gate, paid per panel). Documented integration in `skills/continuity-check/SKILL.md` § 2.5b.
+
+### Changed
+
+- **`format_findings_md` in `rules_audit.py`** — the rules-audit report now includes a one-line vision-audit status stamp directly under the finding counts. When `<project>/continuity-vision-report.md` is absent: *"Vision audit: not yet run — deterministic checks only verify the shotlist text, NOT the rendered pixels."* with the command to run. When present: *"Vision audit: complete (last run YYYY-MM-DD HH:MM)"*. Closes the misread-as-clean failure: a "0 hard" verdict from rules-audit alone is no longer ambiguous about *what* was verified.
+
+- **`skills/continuity-check/SKILL.md`** — Mode 2 split into 2a (scripted) and 2b (agent-driven), with the script invocation, the cost note, and the `--image-override` usage. Two-mode intro updated to clarify that the rules-audit report and vision-audit report are read together and neither is sufficient alone. New § 2.5b documents the `policies.vision_audit` autopilot integration. The rules-audit summary lists the new `Body-region ECU frame-lockdown` and `Silent model downgrade` rules.
+
+### Why each layer existed
+
+1. **`rules_audit.py` reads text, not pixels.** Every shotlist field for p04-04 was textually correct. The new vision_audit.py is the pixel-level equivalent of the same rubric structure.
+
+2. **Mode 2 was a workflow, not a script.** Required a human/agent to invoke. The new script makes Mode 2 a single command that can be wired into autopilot.
+
+3. **Per-panel QA isn't a continuity check.** `policies.vision_audit=at-accept` turns vision_audit into a per-panel gate the variant picker calls before saving v1.
+
+4. **Silent model downgrade went unobserved.** The new `check_model_downgrade` rule reads `RUN_STATE.json`'s `model_actually_used` field that already existed but had no consumer.
+
+5. **"0 HARD" read as a clean verdict.** The new status stamp distinguishes "0 HARD (deterministic only)" from "0 HARD (deterministic + vision-audited)".
+
+### Validated
+
+- `rules_audit.py` on bryn-anvil-of-ages now emits 2 HARD (p05-03 frame-lockdown + project-level model-downgrade summary) + 7 INFO at-risk panels + the deterministic-only status stamp. The earlier project-cleanly-passing audit cannot recur.
+- `vision_audit.py` pipeline validated end-to-end via synthetic mock verdicts: a "wider + missing wardrobe" verdict on the original p04-04 yields 2 HARD findings (framing + wardrobe); the regen's "ok + n_a_cropped" verdict yields 0 HARD. The rubric prompt composes the canonical `cast[].wardrobe` text verbatim per the no-paraphrase rule.
+
+### Known follow-ups
+
+- **Autopilot wire-up.** The new `policies.vision_audit` schema flag and the script both exist, but the autopilot's stage-4 → stage-5 transition and the variant picker's accept gate are not yet edited to invoke vision_audit.py based on the policy value. Today the user (or build-comic.md) invokes the script manually per § 2a. Wire-up belongs in a separate atomic commit on `commands/build-comic.md` + `runners/runner_core.py`.
+
+- **Identity-drift check.** vision_audit covers framing, wardrobe, character count. Face-identity drift across the chain (the classic ECU-Soul-drift case) is still in the agent-driven Mode 2b. Adding a fourth check that compares the rendered face against `references/characters/<id>/face-card.png` is a natural extension.
+
+---
+
 ## 2026-05-21 — L25 frame-lockdown audit gap
 
 Closes a vision-gap class of failure: the deterministic continuity audit cannot see rendered pixels, so a panel that locked at v1 with the wrong framing + missing wardrobe passed cleanly. Empirical source: bryn-anvil-of-ages p04-04. Requested camera was `ecu-region` of a bicep+forearm; Higgsfield silently downgraded `nano_banana_2` → `nano_banana_flash`, which widened to a chin-to-boots side-profile body shot and omitted the apron + shift dress across the visible torso. Rules audit emitted 0 HARD because every shotlist text field was textually present and correct. The vision audit pass is documented as agent-driven and was not invoked at panel-accept.

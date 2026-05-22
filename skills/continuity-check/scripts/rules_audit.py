@@ -642,6 +642,93 @@ def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) ->
 
 
 # ---------------------------------------------------------------------------
+# Model-downgrade detection (L25 corollary)
+#
+# Higgsfield occasionally serves a flash variant when a Pro variant was
+# requested (silent downgrade). RUN_STATE.json records this in the
+# `model_actually_used` field. Flash is the documented source of L25
+# body-region ECU widening drift. When a downgrade is detected AND the
+# project has at-risk panels (ecu-region of always-clothed characters),
+# escalate to HARD so the autopilot triggers a vision check or regen.
+
+FLASH_DOWNGRADE_TOKENS = ("flash", "silent downgrade")
+
+
+def check_model_downgrade(project: Path, shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    """Read RUN_STATE.json and flag silent model downgrades + at-risk panels.
+
+    Project-level HARD finding announces the downgrade. Per-panel INFO findings
+    list the ecu-region panels of always-clothed characters (the L25 at-risk
+    shape). The autopilot should treat the HARD finding as a signal to run the
+    vision audit before accepting the batch.
+    """
+    run_state_path = project / "RUN_STATE.json"
+    if not run_state_path.exists():
+        return []
+    try:
+        run_state = json.loads(run_state_path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return []
+
+    actual = (run_state.get("model_actually_used") or "").lower()
+    requested = (run_state.get("model_requested") or "").lower()
+
+    if not actual:
+        return []
+    downgraded = any(tok in actual for tok in FLASH_DOWNGRADE_TOKENS) and requested != actual
+    if not downgraded:
+        return []
+
+    cast_by_id = {c.get("id"): c for c in shotlist.get("cast", [])}
+    at_risk: list[tuple[int, str, str, list[str]]] = []
+    for page in shotlist.get("pages", []):
+        n = page.get("page_number")
+        if pages_filter is not None and n not in pages_filter:
+            continue
+        for panel in page.get("panels", []):
+            distance, _ = parse_camera(panel.get("camera", "") or "")
+            if distance not in {"ecu-region", "ecu-face"}:
+                continue
+            chars = panel.get("characters", []) or []
+            torso_chars = [
+                ch for ch in chars
+                if _has_torso_garment(cast_by_id.get(ch, {}).get("wardrobe", ""))
+            ]
+            if not torso_chars:
+                continue
+            pid = panel.get("panel_id") or f"page-{n}"
+            at_risk.append((n, pid, distance, torso_chars))
+
+    if not at_risk:
+        # Downgrade happened but no at-risk panels — record as INFO only.
+        return [Finding(
+            None, None, "model_downgrade", SEVERITY_INFO,
+            f"RUN_STATE.json records silent model downgrade ({requested or '?'} → {actual}). "
+            "No ecu-region panels of always-clothed characters in this project — L25 widening drift unlikely.",
+            "No action required.",
+        )]
+
+    findings: list[Finding] = [
+        Finding(
+            None, None, "model_downgrade", SEVERITY_HARD,
+            f"RUN_STATE.json records silent model downgrade ({requested or '?'} → {actual}). "
+            f"Flash variants are the documented source of L25 body-region ECU widening drift "
+            f"(lessons-learned.md L25). {len(at_risk)} at-risk panel(s) in this project.",
+            "Run `vision_audit.py` to verify rendered framing + wardrobe coverage on at-risk panels, "
+            "or regen the at-risk panels on `nano_banana_pro` with frame-lockdown clauses. "
+            "Set `policies.vision_audit` to `at-batch-end` in production-config.json to auto-invoke.",
+        )
+    ]
+    for n, pid, distance, torso_chars in at_risk:
+        findings.append(Finding(
+            n, pid, "model_downgrade", SEVERITY_INFO,
+            f"`{distance}` panel of {torso_chars} rendered on a flash variant — known L25 widening-drift target.",
+            "Vision-verify with `vision_audit.py --pages " + str(n) + "` or regen on Pro with a lockdown clause.",
+        ))
+    return findings
+
+
+# ---------------------------------------------------------------------------
 # L25 — Body-region ECU panels need explicit frame-lockdown
 #
 # A panel declared as camera=ecu-region with a costume_state that names body
@@ -870,6 +957,30 @@ def _infer_arc_character(shotlist: dict) -> str | None:
 # ---------------------------------------------------------------------------
 # Reporting
 
+def _vision_audit_status(project: Path) -> str:
+    """Return a one-line stamp indicating whether the vision audit has run.
+
+    Without this stamp, "0 HARD" on the deterministic report reads as a clean
+    verdict when it only ever verified the shotlist text. The stamp forces the
+    reader to recognize which pass produced the finding count.
+    """
+    vision_report = project / "continuity-vision-report.md"
+    if vision_report.exists():
+        try:
+            mtime = vision_report.stat().st_mtime
+            import time as _time
+            stamp = _time.strftime("%Y-%m-%d %H:%M", _time.localtime(mtime))
+            return f"Vision audit: **complete** (see `continuity-vision-report.md`, last run {stamp})"
+        except OSError:
+            return "Vision audit: **complete** (see `continuity-vision-report.md`)"
+    return (
+        "Vision audit: **not yet run** — deterministic checks only verify the "
+        "shotlist text, NOT the rendered pixels. Run "
+        "`python skills/continuity-check/scripts/vision_audit.py --project <path>` "
+        "to verify framing + wardrobe coverage per panel."
+    )
+
+
 def format_findings_md(project: Path, findings: list[Finding], shotlist: dict) -> str:
     hard = sum(1 for f in findings if f.severity == SEVERITY_HARD)
     soft = sum(1 for f in findings if f.severity == SEVERITY_SOFT)
@@ -881,6 +992,8 @@ def format_findings_md(project: Path, findings: list[Finding], shotlist: dict) -
         f"Project: `{project}`",
         f"Pages: {len(shotlist.get('pages', []))}",
         f"Findings: **{hard} hard**, {soft} soft, {info} info",
+        "",
+        _vision_audit_status(project),
         "",
     ]
     if not findings:
@@ -948,6 +1061,7 @@ def main():
         + check_camera_distance_bias(shotlist, pages_filter)
         + check_transformation_beats(shotlist, pages_filter)
         + check_body_region_ecu_coverage(shotlist, pages_filter)
+        + check_model_downgrade(project, shotlist, pages_filter)
     )
 
     if args.json:
