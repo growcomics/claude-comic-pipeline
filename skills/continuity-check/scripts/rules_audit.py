@@ -642,6 +642,131 @@ def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) ->
 
 
 # ---------------------------------------------------------------------------
+# L25 — Body-region ECU panels need explicit frame-lockdown
+#
+# A panel declared as camera=ecu-region with a costume_state that names body
+# parts as bare ("bicep/forearm bare above the glove cuff") will render wider
+# than ECU on Higgsfield flash variants — flash interprets ecu-region loosely
+# and outputs a body-region torso shot. At the wider crop, the rest of the
+# wardrobe is absent because the model overgeneralizes "bicep/forearm bare"
+# to "everything visible is bare," beating the wardrobe ref attached as image-1.
+#
+# Empirical: bryn-anvil-of-ages p04-04 (job 1f019570... on nano_banana_flash).
+# Detected by visual inspection only — rules audit emitted 0 HARD pre-fix.
+#
+# Detection (all conditions, deterministic on shotlist text):
+#   - parse_camera(camera)[0] == "ecu-region"
+#   - costume_state contains a bare-body-part claim (regex below)
+#   - the panel's character has a torso garment in cast[].wardrobe
+#   - none of notes/action/costume_state contains a frame-lockdown clause
+#
+# Emits HARD. The user must add a lockdown clause (or tighten to ecu-face for
+# face-only ECUs, or widen the camera to mcu+ with explicit garment language).
+
+BARE_BODY_PATTERNS = [
+    r"\bbare\b",
+    r"\bexposed\b",
+    r"\buncovered\b",
+]
+
+TORSO_GARMENT_TOKENS = [
+    "apron", "dress", "shift", "robe", "cloak", "shirt", "tunic",
+    "blouse", "armor", "armour", "jacket", "vest", "corset",
+    "bodice", "kimono", "kurta", "sari", "qipao", "cheongsam",
+    "uniform", "jumpsuit", "leotard", "bodysuit", "gi",
+]
+
+FRAME_LOCKDOWN_PATTERNS = [
+    r"out of frame",
+    r"out-of-frame",
+    r"cropped out",
+    r"frame contains only",
+    r"frame shows only",
+    r"frame is.*(only|just)",
+    r"tight crop",
+    r"tight ecu crop",
+    r"rest covered",
+    r"remains covered",
+    r"rest of (the )?(torso|body|wardrobe).*(covered|in (the )?frame|visible)",
+]
+
+
+def _has_bare_body_claim(costume_state: str) -> bool:
+    if not costume_state:
+        return False
+    s = costume_state.lower()
+    return any(re.search(p, s) for p in BARE_BODY_PATTERNS)
+
+
+def _has_torso_garment(wardrobe: str) -> bool:
+    if not wardrobe:
+        return False
+    s = wardrobe.lower()
+    return any(t in s for t in TORSO_GARMENT_TOKENS)
+
+
+def _has_frame_lockdown(text: str) -> bool:
+    if not text:
+        return False
+    s = text.lower()
+    return any(re.search(p, s) for p in FRAME_LOCKDOWN_PATTERNS)
+
+
+def check_body_region_ecu_coverage(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    """L25 — Flag body-region ECU panels lacking a defensive frame-lockdown clause.
+
+    See lessons-learned.md L25 for the failure mode and the worked example
+    (bryn-anvil-of-ages p04-04). Fires HARD: prevents accept until either a
+    lockdown clause is added to notes/action/costume_state, the camera is
+    widened to mcu+ (where garment description carries its own weight), or
+    `continuity_break: true` is set to override.
+    """
+    cast_by_id = {c.get("id"): c for c in shotlist.get("cast", [])}
+    out: list[Finding] = []
+
+    for page in shotlist.get("pages", []):
+        n = page.get("page_number")
+        if pages_filter is not None and n not in pages_filter:
+            continue
+        for panel in page.get("panels", []):
+            if panel.get("continuity_break"):
+                continue
+            cam = panel.get("camera", "") or ""
+            distance, _ = parse_camera(cam)
+            if distance != "ecu-region":
+                continue
+            cs = panel.get("costume_state", "") or ""
+            if not _has_bare_body_claim(cs):
+                continue
+            chars = panel.get("characters", []) or []
+            torso_chars = [
+                ch for ch in chars
+                if _has_torso_garment(cast_by_id.get(ch, {}).get("wardrobe", ""))
+            ]
+            if not torso_chars:
+                continue
+            combined = " ".join(filter(None, [
+                cs,
+                panel.get("action", "") or "",
+                panel.get("notes", "") or "",
+            ]))
+            if _has_frame_lockdown(combined):
+                continue
+            pid = panel.get("panel_id") or f"page-{n}"
+            out.append(Finding(
+                n, pid, "frame_lockdown", SEVERITY_HARD,
+                f"ecu-region panel with bare-body costume_state for {torso_chars} (torso-garment wardrobe) "
+                f"lacks a frame-lockdown clause — flash widens this shape to a body-region torso shot and "
+                f"omits the wardrobe (lessons-learned.md L25). Costume state: '{_summarize(cs)}'.",
+                "Add a lockdown clause to `notes` or `action` naming what's OUT of frame "
+                "(e.g. 'TIGHT CROP — torso/chest/shoulder OUT OF FRAME, frame contains only the bicep and forearm'). "
+                "Or tighten to `ecu-face` if the face is the subject. Or widen to `mcu+` and "
+                "describe the visible wardrobe explicitly. Set `continuity_break: true` to override.",
+            ))
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Required-metadata check — the Step 0 questionnaire enforcement
 #
 # Three fields must be present at the top of shotlist.json. Each maps to a
@@ -822,6 +947,7 @@ def main():
         + check_camera_variety(shotlist, pages_filter)
         + check_camera_distance_bias(shotlist, pages_filter)
         + check_transformation_beats(shotlist, pages_filter)
+        + check_body_region_ecu_coverage(shotlist, pages_filter)
     )
 
     if args.json:

@@ -25,6 +25,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L22 | Hair state must be explicit in every face-visible panel | Twin buns + ribbons (or loose) drift across panels when inherited only from state anchor; name the hair state per panel |
 | L23 | When env ref is dropped, add a dense verbal env anchor | Stage-change full-body panels drop env ref to fit the 3-ref ceiling; without 5+ named location elements in the prompt the background goes to a grey void |
 | L24 | Suppress anachronistic accessories explicitly | Models hallucinate watches, bracelets, jewelry on the wrists/neck/ears; suppress by name when those body parts may be in frame |
+| L25 | Body-region ECU panels need explicit frame-lockdown | Model widens past `ecu-region` to a torso shot and omits the rest of the wardrobe; partial-bare costume_state is read as "everything bare" at the wider crop |
 
 Other lessons (L2, L3, L4, L5, L6, L7, L8) are platform-specific, situational, or historical. L7 in particular is superseded by L19 — read L7 for the diagnosis, L19 for the current rule. L4 was undeprecated when L19 reversed L7.
 
@@ -779,6 +780,39 @@ Example fallback line for `chun-li-dojo`:
 The negation list is the load-bearing part — naming what to exclude is what suppresses the prior. Listing only the canonical accessories doesn't work; the model treats canonical-list as "things that must be present" without inferring "and nothing else."
 
 **Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` should derive a per-character accessory inventory from the `cast[]` entry and inject both the canonical list and a negation list when relevant body parts may be in frame.
+
+---
+
+## L25 — Body-region ECU panels need explicit frame-lockdown
+
+**Symptom**: A panel declared as `camera: ecu-region` (single body part — bicep, hand, eye) with a `costume_state` that names specific body parts as bare ("bicep/forearm bare above the glove cuff", "shoulders bare", "abs exposed") renders as a wider body-region shot — chin to hip, or shoulder to waist — and the rest of the wardrobe is absent from the visible area. For an `always_clothed` character whose canonical wardrobe mandates broad coverage (apron, robe, dress, armor), the result reads as fully unclothed across the torso.
+
+**Worked example**: bryn-anvil-of-ages p04-04. Shotlist: `camera: "ecu-region, three-quarter"`, `action: "ECU of Bryn's flexed bicep and forearm... The split-fingered glove visible at the bottom of the frame"`, `costume_state: "T5 — bicep/forearm bare above the glove cuff"`. Bryn's cast wardrobe mandates a leather work apron with "full chest-to-knee coverage, leather flexing with her, full coverage maintained" at T5. The prompt textually included the wardrobe and a `costume design strictly per wardrobe sheet image 1` negative lock. Higgsfield job `1f019570-…` on `nano_banana_flash` (silent downgrade from `nano_banana_2`) rendered a side-profile body-region shot from chin to boots, fully bare across the torso, apron and shift dress absent. Continuity rules audit emitted 0 HARD findings — every text field was textually present and correct.
+
+**Root cause**: Two stacked failure modes.
+
+1. **Flash widens body-region ECUs.** The category `ecu-region` is meant to be a single body part dominating the frame. `nano_banana_flash` interprets this loosely and frequently outputs a body-region shot (a region of the body, not a single part) — e.g., asked for a bicep ECU it produces an arm + torso + hip shot. Pro is tighter; flash is the documented offender.
+2. **Partial-bare costume_state is overgeneralized.** A `costume_state` that says "bicep/forearm bare" tells the model what's bare but does not assert what's covered. At ECU framing this is harmless (the rest is out of frame anyway). At the widened framing flash produces, the model has no negative anchor for the now-visible torso and defaults to "the body part the costume_state mentioned was bare, so all visible skin is bare." The wardrobe attached as image-1 loses to the more recent textual signal.
+
+**Fix**: Three layers, applied in order of cost.
+
+1. **Pre-flight (audit)**: `rules_audit.py` flags HARD any panel where (a) parsed camera distance is `ecu-region`, (b) `costume_state` contains a bare-body-part claim, (c) the character's `cast[].wardrobe` text mentions a torso garment (apron / dress / robe / shirt / cloak / armor), AND (d) none of `notes` / `action` / `costume_state` contain a frame-lockdown clause. The user must add a lockdown clause before generation. See `check_body_region_ecu_coverage` in `skills/continuity-check/scripts/rules_audit.py`.
+
+2. **Prompt-time (frame-lockdown clause)**: Inject explicit framing language that names what's IN the frame and what's OUT of the frame. The "out of frame" language is the load-bearing part — naming what's cropped is what suppresses the widening drift. Example for the bryn p04-04 case:
+
+   > *"TIGHT ECU CROP — frame contains ONLY Bryn's flexed bicep and forearm. Upper arm, elbow, forearm, and the top of the glove cuff at the bottom edge are ALL that is visible. The torso, chest, shoulder, back, and head are OUT OF FRAME, cropped out beyond the frame boundaries."*
+
+   And in NEGATIVE LOCKS:
+
+   > *"NO torso visible, NO chest visible, NO shoulder line, NO back visible — the frame is a tight bicep+forearm ECU and nothing else."*
+
+3. **Post-render (vision audit)**: For `ecu-region` panels that pass pre-flight and generation, the vision-audit workflow in `continuity-check` SKILL.md § 2.2 now checks two things explicitly: did the rendered framing match the requested camera distance (compare to `cinematic-framing.md` distance categories), and if the framing widened, are wardrobe items declared in `cast[].wardrobe` visible in the wider crop. HARD on a no/no.
+
+**Why the existing checks miss this**: `check_pages`'s costume-damage rule reads `costume_state` text for damage rank keywords — it never compares against `cast[].wardrobe`. `check_camera_variety` and `check_camera_distance_bias` parse the shotlist `camera` field but never verify the rendered output's framing. The rules audit is text-text comparison; the vision-audit pass is documented as agent-driven and is not invoked by the autopilot's panel-accept gate. Result: at v1 accept, no automated check looks at pixels.
+
+**Generation-platform note**: For Higgsfield, prefer `nano_banana_pro` over `nano_banana_flash` for `ecu-region` panels of always-clothed characters. Flash silently downgrades and is the empirical source of every body-region widening drift observed in bryn-anvil-of-ages. RUN_STATE.json should log `model_actually_used` so the audit can correlate. If flash is unavoidable, the frame-lockdown clause is mandatory.
+
+**Enforced today by**: `check_body_region_ecu_coverage` in `rules_audit.py` (HARD), plus the vision-audit rubric extension in `continuity-check` SKILL.md § 2.2. Prompt-builder injection of the lockdown clause is a follow-up — today the user authors it into `notes` and the audit verifies presence.
 
 ---
 

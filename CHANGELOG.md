@@ -10,6 +10,32 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-21 — L25 frame-lockdown audit gap
+
+Closes a vision-gap class of failure: the deterministic continuity audit cannot see rendered pixels, so a panel that locked at v1 with the wrong framing + missing wardrobe passed cleanly. Empirical source: bryn-anvil-of-ages p04-04. Requested camera was `ecu-region` of a bicep+forearm; Higgsfield silently downgraded `nano_banana_2` → `nano_banana_flash`, which widened to a chin-to-boots side-profile body shot and omitted the apron + shift dress across the visible torso. Rules audit emitted 0 HARD because every shotlist text field was textually present and correct. The vision audit pass is documented as agent-driven and was not invoked at panel-accept.
+
+### Added
+
+- **L25 lesson** in `skills/comic-production/references/lessons-learned.md` — "Body-region ECU panels need explicit frame-lockdown." Documents the failure mode (flash widens `ecu-region` to a body-region torso shot; partial-bare costume_state is overgeneralized at the wider crop and beats the wardrobe ref attached as image-1), the three-layer fix (pre-flight audit, prompt frame-lockdown clause, post-render vision check), the worked example with the bryn-anvil-of-ages p04-04 job IDs, and the platform note flagging `nano_banana_flash` as the empirical source of the drift.
+
+- **`check_body_region_ecu_coverage` rule** in `skills/continuity-check/scripts/rules_audit.py` — HARD severity. Fires deterministically on shotlist text when (a) parsed camera distance is `ecu-region`, (b) `costume_state` contains a bare-body-part claim ("bare" / "exposed" / "uncovered"), (c) the panel's character has a torso garment in `cast[].wardrobe` (apron / dress / robe / shirt / cloak / armor / etc.), and (d) none of `notes` / `action` / `costume_state` contain a frame-lockdown clause naming what's out of frame. User remediates by adding a lockdown clause, tightening to `ecu-face`, widening to `mcu+` with explicit garment language, or setting `continuity_break: true`.
+
+- **Vision audit § 2.2 extension** in `skills/continuity-check/SKILL.md` — for `ecu-region` panels, the vision pass now explicitly checks whether the rendered framing matches the requested camera distance and, if widened, whether `cast[].wardrobe` items are visible in the now-visible crop. HARD on widened + wardrobe absent.
+
+### Fixed
+
+- **bryn-anvil-of-ages p04-04** — regenerated on `nano_banana_flash` (the same silent-downgrade target that produced the original drift) using a prompt strengthened with the L25 frame-lockdown clause ("torso, chest, shoulder, back, neck, head are OUT OF FRAME"). Original v1 job: `1f019570-8825-41ef-b3ca-58baae1494c7`. Remediated v2 job: `5b47ccd5-57d5-4bbc-a15c-7f9370914f49`. Original preserved at `pages/panels/p04-04.v1.original.png` for the audit trail. Shotlist `notes` + `costume_state` updated to include the lockdown clause so the new audit recognizes the panel as remediated.
+
+### Known follow-ups
+
+- **bryn-anvil-of-ages p05-03** — same shotlist pattern (`ecu-region` + bare-arm costume_state + apron-mandated character + no lockdown clause) so the new rule fires HARD. Visual inspection shows p05-03 actually rendered correctly — the apron and dress are visible on the right edge of the frame. This is the "got lucky" case. Out of scope for this commit; user should either add a lockdown clause to p05-03 prophylactically or set `continuity_break: true` to silence the audit.
+
+- **Prompt-builder injection** of the L25 lockdown clause when the rule's conditions are met is a follow-up. Today the user authors the clause into `notes` and the audit verifies presence.
+
+- **Vision-audit-as-script** (vs. agent-driven workflow) is the larger structural fix that would close the broader gap class. Out of scope for this commit; documented in L25 as the third fix layer.
+
+---
+
 ## v5 — 2026-05-14 (evening sync)
 
 This release lands the autopilot mode, the production-briefing skill, the runner infrastructure, and a Windows-compat fix. Backward compatible: existing modes (`status`, `auto`, named stage) work exactly as before. FMG-only behavior is preserved when no `production-config.json` exists.
