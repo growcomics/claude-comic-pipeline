@@ -35,6 +35,7 @@ import argparse
 import json
 import re
 import sys
+import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
@@ -654,6 +655,50 @@ def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) ->
 FLASH_DOWNGRADE_TOKENS = ("flash", "silent downgrade")
 
 
+def _vision_audit_clean(project: Path) -> bool:
+    """True iff a `continuity-vision-report.md` exists, is newer than the
+    `RUN_STATE.json` it would have audited, contains no HARD findings, and
+    every panel image is older than the report (no panels regenerated since
+    the audit). Used by `check_model_downgrade` to demote its summary from
+    HARD to INFO once the user has vision-audited the project clean — a
+    historical downgrade should not gate forever.
+    """
+    report = project / "continuity-vision-report.md"
+    if not report.exists():
+        return False
+    try:
+        report_mtime = report.stat().st_mtime
+    except OSError:
+        return False
+
+    rs = project / "RUN_STATE.json"
+    if rs.exists():
+        try:
+            if report_mtime < rs.stat().st_mtime:
+                return False  # RUN_STATE newer than the report → audit is stale
+        except OSError:
+            return False
+
+    panels_dir = project / "pages" / "panels"
+    if panels_dir.exists():
+        for p in panels_dir.rglob("*"):
+            if p.suffix.lower() not in (".png", ".jpg", ".jpeg"):
+                continue
+            if ".v" in p.stem:  # ignore backup variants like p04-04.v1.original
+                continue
+            try:
+                if p.stat().st_mtime > report_mtime:
+                    return False
+            except OSError:
+                continue
+
+    try:
+        text = report.read_text()
+    except OSError:
+        return False
+    return "## HARD" not in text
+
+
 def check_model_downgrade(project: Path, shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
     """Read RUN_STATE.json and flag silent model downgrades + at-risk panels.
 
@@ -708,16 +753,27 @@ def check_model_downgrade(project: Path, shotlist: dict, pages_filter: set[int] 
             "No action required.",
         )]
 
-    findings: list[Finding] = [
-        Finding(
-            None, None, "model_downgrade", SEVERITY_HARD,
-            f"RUN_STATE.json records silent model downgrade ({requested or '?'} → {actual}). "
-            f"Flash variants are the documented source of L25 body-region ECU widening drift "
-            f"(lessons-learned.md L25). {len(at_risk)} at-risk panel(s) in this project.",
+    cleared = _vision_audit_clean(project)
+    summary_severity = SEVERITY_INFO if cleared else SEVERITY_HARD
+    summary_message = (
+        f"RUN_STATE.json records silent model downgrade ({requested or '?'} → {actual}). "
+        f"Flash variants are the documented source of L25 body-region ECU widening drift "
+        f"(lessons-learned.md L25). {len(at_risk)} at-risk panel(s) in this project."
+    )
+    if cleared:
+        summary_message += " Vision audit clean — recorded for the audit trail only, no action needed."
+        summary_suggestion = (
+            "No action — the at-risk panels have been vision-verified clean. To re-gate as HARD, "
+            "delete `continuity-vision-report.md` or regenerate any panel (which invalidates the audit)."
+        )
+    else:
+        summary_suggestion = (
             "Run `vision_audit.py` to verify rendered framing + wardrobe coverage on at-risk panels, "
             "or regen the at-risk panels on `nano_banana_pro` with frame-lockdown clauses. "
-            "Set `policies.vision_audit` to `at-batch-end` in production-config.json to auto-invoke.",
+            "Set `policies.vision_audit` to `at-batch-end` in production-config.json to auto-invoke."
         )
+    findings: list[Finding] = [
+        Finding(None, None, "model_downgrade", summary_severity, summary_message, summary_suggestion)
     ]
     for n, pid, distance, torso_chars in at_risk:
         findings.append(Finding(
@@ -962,23 +1018,50 @@ def _vision_audit_status(project: Path) -> str:
 
     Without this stamp, "0 HARD" on the deterministic report reads as a clean
     verdict when it only ever verified the shotlist text. The stamp forces the
-    reader to recognize which pass produced the finding count.
+    reader to recognize which pass produced the finding count, AND whether
+    the vision audit's findings are still current — a stale report (panels
+    regenerated after the audit) is the same blind spot as never having run it.
     """
     vision_report = project / "continuity-vision-report.md"
-    if vision_report.exists():
-        try:
-            mtime = vision_report.stat().st_mtime
-            import time as _time
-            stamp = _time.strftime("%Y-%m-%d %H:%M", _time.localtime(mtime))
-            return f"Vision audit: **complete** (see `continuity-vision-report.md`, last run {stamp})"
-        except OSError:
-            return "Vision audit: **complete** (see `continuity-vision-report.md`)"
-    return (
-        "Vision audit: **not yet run** — deterministic checks only verify the "
-        "shotlist text, NOT the rendered pixels. Run "
-        "`python skills/continuity-check/scripts/vision_audit.py --project <path>` "
-        "to verify framing + wardrobe coverage per panel."
-    )
+    if not vision_report.exists():
+        return (
+            "Vision audit: **not yet run** — deterministic checks only verify the "
+            "shotlist text, NOT the rendered pixels. Run "
+            "`python skills/continuity-check/scripts/vision_audit.py --project <path>` "
+            "to verify framing + wardrobe coverage per panel."
+        )
+
+    try:
+        report_mtime = vision_report.stat().st_mtime
+        stamp = time.strftime("%Y-%m-%d %H:%M", time.localtime(report_mtime))
+    except OSError:
+        return "Vision audit: **complete** (see `continuity-vision-report.md`)"
+
+    panels_dir = project / "pages" / "panels"
+    stale_panels: list[str] = []
+    if panels_dir.exists():
+        for p in panels_dir.rglob("*"):
+            if p.suffix.lower() not in (".png", ".jpg", ".jpeg"):
+                continue
+            if ".v" in p.stem:  # ignore backup variants like p04-04.v1.original
+                continue
+            try:
+                if p.stat().st_mtime > report_mtime:
+                    stale_panels.append(p.name)
+            except OSError:
+                continue
+
+    if stale_panels:
+        sample = ", ".join(sorted(stale_panels)[:5])
+        if len(stale_panels) > 5:
+            sample += f", +{len(stale_panels) - 5} more"
+        return (
+            f"Vision audit: **STALE** — last run {stamp}, but {len(stale_panels)} panel "
+            f"image(s) modified since then ({sample}). Re-run "
+            "`vision_audit.py` to refresh — the deterministic-only verdict is no "
+            "longer backed by a pixel-level pass."
+        )
+    return f"Vision audit: **complete** (see `continuity-vision-report.md`, last run {stamp})"
 
 
 def format_findings_md(project: Path, findings: list[Finding], shotlist: dict) -> str:

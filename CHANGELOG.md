@@ -10,6 +10,34 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-22 — Re-run safety: demote historical downgrades + stale-stamp the vision audit
+
+Follow-up to yesterday's five-layer fix. Two design flaws surfaced in the re-run risk analysis: (1) `check_model_downgrade` fires HARD on a historical fact — once flash was served, the rule blocks the project forever even after the user vision-audits everything clean; (2) the "Vision audit: complete" stamp checked file *presence*, not *recency* — a vision report that was made stale by a regeneration still read as a clean verdict. Both close the same loop: the audit needs to know not just "did the vision pass run" but "does its verdict still apply to the current pixels."
+
+### Changed
+
+- **`check_model_downgrade` now demotes to INFO when the vision audit is clean.** New helper `_vision_audit_clean(project)` returns true iff `continuity-vision-report.md` exists, has no HARD findings, is newer than `RUN_STATE.json`, AND every panel image (excluding `.vN.*` backup variants) is older than the report. When clean, the project-level summary is demoted from HARD to INFO with the explanatory note "Vision audit clean — recorded for the audit trail only, no action needed." If anything invalidates the audit — regenerating a panel, deleting the vision report, RUN_STATE updated, or a new HARD vision finding — the rule re-gates back to HARD on the next run. Per-panel INFO findings remain as the audit-trail breadcrumb in both cases.
+
+- **`_vision_audit_status` (the report stamp) now reports staleness.** Compares the vision-report mtime against every panel image's mtime; if any panel (excluding `.vN.*` backups) is newer than the report, the stamp reads "**STALE** — last run YYYY-MM-DD HH:MM, but N panel image(s) modified since then (panel_a.png, panel_b.png, +N more). Re-run vision_audit.py to refresh — the deterministic-only verdict is no longer backed by a pixel-level pass." Closes the regression where a vision audit, then a regen, then a rules-audit re-run would falsely show "Vision audit: complete."
+
+- **Hoisted `import time` to module top.** The previous inline `import time as _time` worked but was non-idiomatic; the helper functions now share a single top-level import.
+
+### Validated
+
+End-to-end smoke test on bryn-anvil-of-ages cycles through all three states:
+- **No vision report present** → 2 HARD (p05-03 lockdown + model_downgrade summary), stamp "not yet run".
+- **Synthetic clean vision report newer than RUN_STATE + all panels** → 1 HARD (p05-03 only; model_downgrade demoted to INFO with the verified-clean note), stamp "complete (last run …)".
+- **Touch a panel after the report** → 2 HARD again (downgrade re-gated), stamp "STALE — 1 panel image(s) modified since then (p04-04.png)".
+
+The cycle confirms the demotion is genuinely reversible: it never silences the downgrade permanently — only as long as the vision audit covers the current pixels.
+
+### Notes
+
+- The `.vN.*` exclusion in both helpers ignores backup naming conventions like `p04-04.v1.original.png` and `p04-04.v2.regen.png`. Other projects with different backup conventions may need the pattern adjusted.
+- Skim the "Vision audit:" line in any rules-audit report before reading the finding counts — the counts mean different things depending on what the stamp says.
+
+---
+
 ## 2026-05-21 — Close the five detection-layer gaps that let p04-04 through
 
 Follow-up to the earlier L25 entry below. The L25 fix added a deterministic rule for the *shotlist authoring* trap but the broader question — why did **no system** catch the bad render — exposed five distinct detection layers, each of which was either text-only, advisory, or unrun. This entry adds the missing layers so a future failure in this class can't reach v1-accept silently.
