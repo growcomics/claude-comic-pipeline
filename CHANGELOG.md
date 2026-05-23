@@ -12,6 +12,48 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-23 (Experiment 05 — Defects-identification skill)
+
+Builds the labeled-data foundation Experiment 02 explicitly asked for in its recommendation: a structured defect taxonomy, a labeled corpus, and a vision-model detection rubric. Branch: `experiment/05-defects-skill`. **Experiment ships a dataset + taxonomy + rubric + per-category ship-recommendation — does NOT fine-tune a model and does NOT wire into the autopilot.** The complementary unified-ship task with Experiment 02 is the next step after `composite.*` panels are hand-labeled.
+
+### Added
+
+- **[docs/experiments/05-defects-skill/](docs/experiments/05-defects-skill/)** — full experiment artifacts:
+  - `raw-defects.md` — 57 defect observations harvested from 5 sources (ultra-gal-origin pages 01-07 audit, ultra-gal-origin ref-sheets QA, chun-li-test continuity report, Magnamus Discord defect-class patterns per notebooklm-brief, MEMORY/CHANGELOG-derived rule classes).
+  - `taxonomy-v1.md` — 38 leaves across 7 top-level buckets (`composite`, `character`, `background`, `camera`, `lettering`, `transformation`, `prompt_artifact`, `ref_sheet`). Forward-compatible mapping from Experiment 02's 10 flat categories — every Exp 02 category traces forward; no labels are dropped.
+  - `labeled-defects.json` — 36 labeled entries: 20 ultra-gal panels (inherited from Exp 02 + refined with v1 sub-categories), 10 chun-li-test panels (labels-only; PNGs in Flow cloud), 6 ref-sheet assets. Multi-labeler structure (`labels_by_labeler`) ready for a Magnamus-direct labeling pass.
+  - `detection-rubric-v1.md` — vision-model prompt combining Exp 02 v3 (face-cards-as-side-by-side) and v5 (confidence-semantics anchoring) patterns. Story-panel mode + ref-sheet mode. Avoids v4's "lower the floor" instruction which Exp 02 showed backfires.
+  - `metrics-v1.md` + `runs/holdout-rescoring-{v3,v5}.json` — per-category recall/precision on a 4-panel (20%) holdout. Re-scoring of Exp 02's existing predictions against the refined taxonomy; honest caveat that the model was tuned on these panels — chun-li-test panels are the genuine cross-project held-out test once their PNGs are pulled down.
+  - `recommendation.md` — ship-tier per category (HARD / SOFT / don't-ship-yet), prioritized next-step list (5-10 composite panels, pull chun-li PNGs, Magnamus-direct labeling, prior-panel rubric plumbing).
+  - `README.md` — folder orientation.
+- **[skills/defect-detection/SKILL.md](skills/defect-detection/SKILL.md)** — intent-only skeleton. Real implementation is a separate task once Exp 02 + Exp 05 align on a shared rubric (per the brief).
+
+### Findings
+
+- 57 raw defect observations collected from 5 sources. Source mix: Matt-mapped-from-audit (44), Matt-direct (8), Magnamus-discord-pattern (5).
+- 38 taxonomy leaves vs Exp 02's 10 — 12 leaves are genuinely new (camera, background, transformation, prompt_artifact sub-categories, all ref_sheet leaves). 26 leaves have ZERO labeled examples (concentrated in `composite.*`, `prompt_artifact.*`, `background.*`).
+- 36 labeled entries: 20 by Matt-mapped-from-audit (ultra-gal panels, PNGs on disk), 10 by Matt-mapped-from-audit (chun-li panels, labels-only), 6 by Matt-mapped-from-audit (ref sheets). No panels with both a Magnamus-direct AND Matt-direct label — disagreement is unmeasured this iteration; the `labels_by_labeler` JSON shape is built for a future Magnamus pass.
+- Held-out re-scoring: `character.hair_color_drift` hit 100% recall + 100% precision (2/2) on v5 — Exp 02's full-set precision of 38% is the more honest plan-around number. `character.count_mismatch_missing` and `character.hair_color_drift_across_sequence` remain at 0% recall.
+- Categories ship-ready as automated HARD checks: `character.costume_color_drift`, `character.costume_garment_missing`, `lettering.typo_or_doubled_word`, `lettering.duplicate_bubble`. Six more ship as SOFT warnings; the rest need more labels OR plumbing changes (prior-panel attachment).
+
+### Coordination with Experiment 02
+
+- Same JSON shape (`labeled-set-v1.json` → `labeled-defects.json`) so the two sets can be merged into one corpus in a follow-up task.
+- All Exp 02 labels preserved verbatim under `exp_02_categories` field — re-scoring stays honest.
+- Held-out partition picked AFTER Exp 02 froze iterations; same 4 panels Exp 02 used in its v3/v5 runs, scored against the refined taxonomy.
+
+### Next
+
+- **Prioritized follow-ups** (per `recommendation.md`):
+  1. Hand-label 5-10 `composite.*` panels (Exp 02's unchanged blocker).
+  2. Pull the chun-li-test panel PNGs down and run rubric_v1 on the 10 labels already captured — this becomes the real cross-project held-out test.
+  3. Have Magnamus hand-label the same 20 ultra-gal panels as a blind independent labeler. Surface disagreement panels.
+  4. Wire `prior_panel_image` into the rubric call to unblock the sequence-level categories.
+  5. Build the deterministic shotlist-cast-size check (Exp 02's suggested pivot for `count_mismatch_*`).
+- **Unified-ship task** after steps 1-3 land: spawn a single follow-up that merges the Exp 02 + Exp 05 + new labels into one corpus, runs rubric_v1 against the merged set, and produces a single ship-or-iterate decision.
+
+---
+
 ## 2026-05-22 (Experiment 02 — Vision-audit pilot)
 
 Falsifiable test of whether a holistic vision-audit pass can catch the visual defects the deterministic text-based checks miss (composite mismatches, hair/costume drift, etc.). Branch: `experiment/02-vision-audit-pilot`. **Experiment ships an audit script + a labeled set + 5 rubric iterations + a recommendation — does NOT wire into the autopilot.** Wiring decision is deferred to a separate task per the experiment spec.

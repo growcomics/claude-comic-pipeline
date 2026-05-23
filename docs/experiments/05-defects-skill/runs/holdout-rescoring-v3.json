@@ -1,0 +1,76 @@
+{
+  "run_tag": "holdout-rescoring-v3",
+  "scoring_basis": "Re-score docs/experiments/02-vision-audit-pilot/runs/raw-predictions-v3.jsonl predictions against docs/experiments/05-defects-skill/labeled-defects.json refined v1 taxonomy, restricted to the 4 holdout panels.",
+  "model_prediction_source": "Claude Code sub-agents loading panel + face cards + rubric_v3.md via Read tool — same as Exp 02's v3 run.",
+  "honesty_caveat": "The v3 rubric was tuned by Exp 02 on the FULL 20-panel set including these 4 holdout panels. So this measurement is NOT a clean held-out test of model capability — it's a re-scoring of previously-tuned predictions against a refined taxonomy. The metric to read is: *given the model has seen these panels during tuning, does the refined taxonomy still produce the same per-category verdict?* A genuine held-out test requires a fresh labeled set from outside Exp 02's tuning loop (the chun-li-test panels would be the natural choice once their PNGs are pulled down).",
+  "rubric_used_for_scoring": "detection-rubric-v1.md taxonomy (38 leaves), forward-mapped from rubric_v3.md outputs (10 flat categories).",
+  "holdout_panel_ids_used": ["ug-p05-02", "ug-p06-03", "ug-p06-04", "ug-p07-01"],
+  "forward_mapping_applied": {
+    "hair_discontinuity": "character.hair_color_drift (primary leaf)",
+    "costume_discontinuity": "character.costume_color_drift OR character.costume_garment_missing (default: costume_color_drift)",
+    "character_count_error": "character.count_mismatch_missing OR _partial (default: _missing)",
+    "character_identity_swap": "character.identity_swap",
+    "lettering_error": "lettering.typo_or_doubled_word OR lettering.duplicate_bubble (default chosen by note text)",
+    "empty_speech_bubble": "lettering.empty_bubble OR lettering.bubble_tail_wrong_speaker",
+    "composite_mismatch": "composite.lighting_mismatch (default)",
+    "scale_error": "background.extra_at_wrong_scale OR character.scale_normalization_drift",
+    "tier_visualization_mismatch": "transformation.tier_mismatch (default)",
+    "prompt_bloat_artifact": "prompt_artifact.style_drift_2d (default)"
+  },
+  "per_panel": [
+    {
+      "panel_id": "ug-p05-02",
+      "label": "BAD",
+      "labeled_defects": ["character.count_mismatch_missing"],
+      "v3_predictions_med_or_high": [],
+      "outcome_per_labeled_defect": [
+        {"category": "character.count_mismatch_missing", "verdict": "FN", "reason": "v3 predicted character_count_error: false confidence: high — missed the defect"}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p06-03",
+      "label": "GOOD",
+      "labeled_defects": [],
+      "v3_predictions_med_or_high": [],
+      "outcome_per_labeled_defect": [
+        {"category": "<none>", "verdict": "TN", "reason": "v3 flagged nothing at MED+HIGH on a GOOD panel — true negative across all categories"}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p06-04",
+      "label": "BAD",
+      "labeled_defects": ["character.hair_color_drift"],
+      "v3_predictions_med_or_high": ["hair_discontinuity (medium)"],
+      "outcome_per_labeled_defect": [
+        {"category": "character.hair_color_drift", "verdict": "TP", "reason": "v3 flagged hair_discontinuity at medium; forward-mapped to character.hair_color_drift"}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p07-01",
+      "label": "BAD",
+      "labeled_defects": ["character.hair_color_drift", "character.hair_color_drift_across_sequence"],
+      "v3_predictions_med_or_high": [],
+      "outcome_per_labeled_defect": [
+        {"category": "character.hair_color_drift", "verdict": "FN", "reason": "v3 predicted hair_discontinuity: false; missed"},
+        {"category": "character.hair_color_drift_across_sequence", "verdict": "FN", "reason": "rubric_v3 has no sequence-level category and was not given a prior_panel_image attachment"}
+      ],
+      "false_positive_categories": []
+    }
+  ],
+  "per_category_holdout_metrics": {
+    "character.hair_color_drift": {"tp": 1, "fp": 0, "fn": 1, "tn": 2, "recall": 0.50, "precision": 1.00, "support_bad": 2},
+    "character.hair_color_drift_across_sequence": {"tp": 0, "fp": 0, "fn": 1, "tn": 3, "recall": 0.00, "precision": null, "support_bad": 1},
+    "character.count_mismatch_missing": {"tp": 0, "fp": 0, "fn": 1, "tn": 3, "recall": 0.00, "precision": null, "support_bad": 1}
+  },
+  "per_category_categories_not_measured_in_holdout": [
+    "composite.*", "character.costume_color_drift", "character.costume_garment_missing",
+    "character.costume_design_drift", "character.costume_state_drift_in_scene",
+    "character.identity_swap", "character.count_mismatch_partial",
+    "lettering.*", "transformation.*", "prompt_artifact.*", "background.*",
+    "camera.*", "ref_sheet.*", "character.face_*", "character.gaze_misdirected",
+    "character.prop_assignment_wrong", "character.coverage_risk"
+  ]
+}

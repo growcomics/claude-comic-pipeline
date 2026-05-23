@@ -1,0 +1,56 @@
+{
+  "run_tag": "holdout-rescoring-v5",
+  "scoring_basis": "Re-score docs/experiments/02-vision-audit-pilot/runs/raw-predictions-v5.jsonl predictions against docs/experiments/05-defects-skill/labeled-defects.json refined v1 taxonomy, restricted to the 4 holdout panels.",
+  "model_prediction_source": "Claude Code sub-agents loading panel + face cards + rubric_v5.md via Read tool — same as Exp 02's v5 run.",
+  "honesty_caveat": "Same as v3 — the v5 rubric was tuned on the full 20-panel set including these 4 holdout panels. This is a re-scoring of previously-tuned predictions against a refined taxonomy, not a clean cross-validated held-out test.",
+  "rubric_used_for_scoring": "detection-rubric-v1.md taxonomy, forward-mapped from rubric_v5.md outputs.",
+  "holdout_panel_ids_used": ["ug-p05-02", "ug-p06-03", "ug-p06-04", "ug-p07-01"],
+  "per_panel": [
+    {
+      "panel_id": "ug-p05-02",
+      "label": "BAD",
+      "labeled_defects": ["character.count_mismatch_missing"],
+      "v5_predictions_med_or_high": [],
+      "outcome_per_labeled_defect": [
+        {"category": "character.count_mismatch_missing", "verdict": "FN", "reason": "v5 predicted character_count_error: false confidence: high — missed"}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p06-03",
+      "label": "GOOD",
+      "labeled_defects": [],
+      "v5_predictions_med_or_high": [],
+      "outcome_per_labeled_defect": [
+        {"category": "<none>", "verdict": "TN", "reason": "v5 flagged nothing at MED+HIGH on this GOOD panel (per holdout-set re-inspection of raw-predictions-v5.jsonl). Note: Exp 02 reported a hair FP for v5 on p05-03 — not on p06-03 which is in this holdout."}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p06-04",
+      "label": "BAD",
+      "labeled_defects": ["character.hair_color_drift"],
+      "v5_predictions_med_or_high": ["hair_discontinuity (medium)"],
+      "outcome_per_labeled_defect": [
+        {"category": "character.hair_color_drift", "verdict": "TP"}
+      ],
+      "false_positive_categories": []
+    },
+    {
+      "panel_id": "ug-p07-01",
+      "label": "BAD",
+      "labeled_defects": ["character.hair_color_drift", "character.hair_color_drift_across_sequence"],
+      "v5_predictions_med_or_high": ["hair_discontinuity (medium)"],
+      "outcome_per_labeled_defect": [
+        {"category": "character.hair_color_drift", "verdict": "TP"},
+        {"category": "character.hair_color_drift_across_sequence", "verdict": "FN", "reason": "v5 has no sequence-level category and was not given prior_panel_image"}
+      ],
+      "false_positive_categories": []
+    }
+  ],
+  "per_category_holdout_metrics": {
+    "character.hair_color_drift": {"tp": 2, "fp": 0, "fn": 0, "tn": 2, "recall": 1.00, "precision": 1.00, "support_bad": 2},
+    "character.hair_color_drift_across_sequence": {"tp": 0, "fp": 0, "fn": 1, "tn": 3, "recall": 0.00, "precision": null, "support_bad": 1},
+    "character.count_mismatch_missing": {"tp": 0, "fp": 0, "fn": 1, "tn": 3, "recall": 0.00, "precision": null, "support_bad": 1}
+  }
+}

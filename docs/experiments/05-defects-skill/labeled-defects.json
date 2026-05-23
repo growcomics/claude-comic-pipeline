@@ -1,0 +1,506 @@
+{
+  "experiment": "05-defects-skill",
+  "labeled_set_version": "v1",
+  "labeled_at": "2026-05-23",
+  "label_source_note": "Labels for the 20 ultra-gal-origin panels are inherited from experiment/02-vision-audit-pilot labeled-set-v1.json and refined with v1 taxonomy sub-categories drawn from projects/ultra-gal-origin/audits/pages-01-07-audit-2026-05-16.md (Matt-validated). Labels for the 10 chun-li-test panels are mapped from projects/chun-li-test/continuity-report.md (Matt-validated, 2026-05-22). Labels for the 6 ref-sheet assets are mapped from projects/ultra-gal-origin/audits/ref-sheets-qa-2026-05-17.md (Matt-validated). Where both Magnamus-discord-pattern and Matt-audit-mapped labels exist for the same panel, both are captured with `labeler` distinguishing the source — no averaging.",
+  "label_source_provenance": {
+    "matt-mapped-from-audit": "Defect extracted from a per-project audit doc authored by a Comic-production QA subagent and committed by Matt without modification. Same provenance Exp 02 used.",
+    "matt-direct": "Defect Matt called out in his own voice (e.g., the 'USER-FLAGGED' tag on p03-01) or codified into a project rule (L21-L24, L33).",
+    "magnamus-discord-pattern": "Defect class Magnamus has surfaced repeatedly in Discord notes per docs/experiments/02-vision-audit-pilot/notebooklm-brief.md. Pattern-level, not panel-specific — used to validate that the taxonomy covers a class even when no labeled-set panel exhibits it.",
+    "exp-02-inherited": "Label originally appears in docs/experiments/02-vision-audit-pilot/labeled-set-v1.json. The original Exp 02 labels were derived from the same matt-mapped-from-audit source; this provenance tag is kept so re-scoring of Exp 02 predictions against this labeled set is honest about the chain of custody."
+  },
+  "taxonomy_version": "taxonomy-v1.md",
+  "split": {
+    "train_panel_ids": [
+      "ug-p01-02", "ug-p01-03", "ug-p02-01", "ug-p02-02", "ug-p02-03", "ug-p02-04",
+      "ug-p03-04", "ug-p04-01", "ug-p04-02", "ug-p04-03", "ug-p04-04", "ug-p05-01",
+      "ug-p05-03", "ug-p05-04", "ug-p06-01", "ug-p06-02"
+    ],
+    "holdout_panel_ids": [
+      "ug-p05-02", "ug-p06-03", "ug-p06-04", "ug-p07-01"
+    ],
+    "holdout_size": 4,
+    "holdout_fraction": 0.20,
+    "holdout_selection_method": "Stratified to include at least one BAD and one GOOD; spans hair (p06-04, p07-01), character_count (p05-02), and a GOOD (p06-03). Held out BEFORE any rubric tuning happens against this labeled set. Exp 02's iterations v1-v5 WERE tuned on the full 20-panel set, so when we re-score Exp 02 predictions on this holdout, those predictions are NOT model-free — we are measuring how a previously-tuned model output scores against the refined taxonomy. We document this explicitly in metrics-v1.md."
+  },
+  "future_expansion_set": {
+    "note": "These 10 chun-li-test panels and 6 ref-sheet assets are recorded as labels-only entries because the panel PNGs are not in this checkout (chun-li-test panels live in the user's Flow cloud project; ref-sheets are auditable files but distinct from story panels). They are NOT in the training/holdout split for this experiment. They become measurable once the PNGs are pulled down OR when ref-sheet support lands in the audit pipeline.",
+    "chun_li_panels": ["cl-p01-01", "cl-p02-01", "cl-p03-01", "cl-p04-01", "cl-p05-01", "cl-p06-01", "cl-p07-01", "cl-p08-01", "cl-p09-01", "cl-p10-01"],
+    "ref_sheet_assets": ["rs-ultragal-tier4", "rs-mundy-tier2", "rs-mundy-tier3", "rs-heather-tier3", "rs-domina-tier4", "rs-heather-tier2"]
+  },
+  "labels": [
+    {
+      "panel_id": "ug-p01-02",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p01-02/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p01-03",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p01-03/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["lettering.typo_or_doubled_word", "lettering.bubble_tail_wrong_speaker"],
+      "labels_by_labeler": [
+        {"category": "lettering.typo_or_doubled_word", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: 'MA'AM, MAAM' typo (doubled word, second missing apostrophe)"},
+        {"category": "lettering.bubble_tail_wrong_speaker", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: speech bubble tail points to BLONDE Carl when script attributes line to dark-haired Lenny"}
+      ],
+      "exp_02_categories": ["empty_speech_bubble", "lettering_error"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p02-01",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p02-01/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p02-02",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p02-02/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.identity_swap", "lettering.duplicate_bubble"],
+      "labels_by_labeler": [
+        {"category": "character.identity_swap", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Lenny replaced with Carl (blonde instead of dark-haired)"},
+        {"category": "lettering.duplicate_bubble", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: duplicate 'REALLY? WHAT DO YOU DO?' bubble (two identical)"}
+      ],
+      "exp_02_categories": ["character_identity_swap", "lettering_error"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p02-03",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p02-03/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.costume_garment_missing"],
+      "labels_by_labeler": [
+        {"category": "character.costume_garment_missing", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Lenny missing his blue overalls — wearing just a plain tee"}
+      ],
+      "exp_02_categories": ["costume_discontinuity"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p02-04",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p02-04/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.hair_color_drift"],
+      "labels_by_labeler": [
+        {"category": "character.hair_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "audit: Mundy hair tone subtle lightening (drift from canonical dark brown)"}
+      ],
+      "exp_02_categories": ["hair_discontinuity"],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "ug-p03-04",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p03-04/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p04-01",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p04-01/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["lettering.duplicate_bubble"],
+      "labels_by_labeler": [
+        {"category": "lettering.duplicate_bubble", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: duplicate 'OH.' bubble on Heather (two identical bubbles)"}
+      ],
+      "exp_02_categories": ["lettering_error"],
+      "severity": "nitpick"
+    },
+    {
+      "panel_id": "ug-p04-02",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p04-02/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p04-03",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p04-03/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p04-04",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p04-04/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.costume_color_drift"],
+      "labels_by_labeler": [
+        {"category": "character.costume_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Heather wearing NAVY crewneck when canonical body-tier2 is GREEN. First panel of an in-scene drift sequence."}
+      ],
+      "exp_02_categories": ["costume_discontinuity"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p05-01",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p05-01/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.costume_color_drift", "character.costume_state_drift_in_scene"],
+      "labels_by_labeler": [
+        {"category": "character.costume_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Heather wearing NAVY when canonical is GREEN (continuation of p04-04 drift)"},
+        {"category": "character.costume_state_drift_in_scene", "labeler": "matt-mapped-from-audit", "confidence": 0.9, "note": "audit: green→navy→navy→green flip-flop across p04-04/p05-01/p05-03"}
+      ],
+      "exp_02_categories": ["costume_discontinuity"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p05-02",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p05-02/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.count_mismatch_missing"],
+      "labels_by_labeler": [
+        {"category": "character.count_mismatch_missing", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: only Mundy's back visible — Heather entirely missing from frame. Should be 2, shows 1."}
+      ],
+      "exp_02_categories": ["character_count_error"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p05-03",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p05-03/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "audit: green wardrobe rendering is canonical-correct here"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p05-04",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p05-04/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.count_mismatch_partial"],
+      "labels_by_labeler": [
+        {"category": "character.count_mismatch_partial", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Heather's mirroring arm in BG is missing — only one arm visible where there should be two characters"}
+      ],
+      "exp_02_categories": ["character_count_error"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p06-01",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p06-01/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p06-02",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p06-02/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.costume_garment_missing"],
+      "labels_by_labeler": [
+        {"category": "character.costume_garment_missing", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "audit: Mundy's white lab coat possibly missing or cropped (canonical Mundy wears lab coat over blouse)"}
+      ],
+      "exp_02_categories": ["costume_discontinuity"],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "ug-p06-03",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p06-03/v1_accepted.png",
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "exp-02-inherited", "note": "not flagged in audit"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "ug-p06-04",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p06-04/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.hair_color_drift"],
+      "labels_by_labeler": [
+        {"category": "character.hair_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Heather hair drifted from canonical auburn-red toward strawberry-blonde"}
+      ],
+      "exp_02_categories": ["hair_discontinuity"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "ug-p07-01",
+      "panel_path": "projects/ultra-gal-origin/pages/panels/p07-01/v1_accepted.png",
+      "label": "BAD",
+      "defects": ["character.hair_color_drift", "character.hair_color_drift_across_sequence"],
+      "labels_by_labeler": [
+        {"category": "character.hair_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "audit: Heather's auburn-red drift continues into strawberry-blonde at climactic super-form reveal"},
+        {"category": "character.hair_color_drift_across_sequence", "labeler": "matt-mapped-from-audit", "confidence": 0.9, "note": "Audit Character-drift hotspot table: Heather hair auburn-red → strawberry-blonde across p06-04 + p07-01"}
+      ],
+      "exp_02_categories": ["hair_discontinuity"],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "cl-p01-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p01-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "matt-mapped-from-audit", "note": "continuity-report 2026-05-22: tier 2 splash, face anchor, hair, body tier, coverage, env, dialogue all PASS — pristine"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "cl-p02-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p02-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["character.face_drift_subtle"],
+      "labels_by_labeler": [
+        {"category": "character.face_drift_subtle", "labeler": "matt-mapped-from-audit", "confidence": 0.4, "note": "continuity-report: face reads as Chun Li but slightly sharper jaw / less glamour-soft than face-card; still recognizable — SOFT finding"}
+      ],
+      "severity": "nitpick"
+    },
+    {
+      "panel_id": "cl-p03-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p03-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["transformation.state_overdelivered"],
+      "labels_by_labeler": [
+        {"category": "transformation.state_overdelivered", "labeler": "matt-mapped-from-audit", "confidence": 0.8, "note": "continuity-report: irises clearly glowing purple at tier 3; shotlist said 'subtle purple shimmer' — output overshot to tier-6/7 intensity. SOFT drift"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "cl-p04-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p04-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["transformation.state_underdelivered"],
+      "labels_by_labeler": [
+        {"category": "transformation.state_underdelivered", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "continuity-report: shotlist asked 'first small tears at sleeve caps and side seams'; output shows fabric pulled tight but minimal visible tearing. SOFT under-render"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "cl-p05-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p05-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "matt-mapped-from-audit", "note": "continuity-report: tier-5 mass + costume tear + env + dialogue all PASS"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "cl-p06-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p06-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "matt-mapped-from-audit", "note": "continuity-report: tier-6 mid-pivot, full bodysuit emerging, all PASS"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "cl-p07-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p07-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["camera.angle_underdelivered"],
+      "labels_by_labeler": [
+        {"category": "camera.angle_underdelivered", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "continuity-report: shotlist asks 'low-angle hero-stance'; output reads closer to eye-level / slight-low. SOFT"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "cl-p08-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p08-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["character.costume_design_drift"],
+      "labels_by_labeler": [
+        {"category": "character.costume_design_drift", "labeler": "matt-mapped-from-audit", "confidence": 0.6, "note": "continuity-report: ECU collar reads as classic SF2 blue qipao with gold trim — NOT the cobalt-blue bodysuit V-neck from new-outfit-tier-7 ref. SOFT — HARD if read at full size"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "cl-p09-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p09-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "matt-mapped-from-audit", "note": "continuity-report: tier-7 profile, peak outfit, env all PASS"}
+      ],
+      "severity": null
+    },
+    {
+      "panel_id": "cl-p10-01",
+      "panel_path": "projects/chun-li-test/pages/panels/p10-01/v1_accepted.png",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["character.costume_design_drift", "character.costume_state_drift_in_scene"],
+      "labels_by_labeler": [
+        {"category": "character.costume_design_drift", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "continuity-report HARD: tier-7 peak splash renders a hybrid — cobalt+gold sleeveless top + white sash + flowing blue side-slit skirt drape — closer to multi-angle-tier-4 alt fanwork qipao than pure cobalt bodysuit"},
+        {"category": "character.costume_state_drift_in_scene", "labeler": "matt-mapped-from-audit", "confidence": 0.9, "note": "p10 splash contradicts p07 + p09 outfit lock — introduces a second design at the FINAL splash"}
+      ],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "rs-ultragal-tier4",
+      "asset_path": "(ref sheet UUID ee2f38e4 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["ref_sheet.costume_garment_short_vs_canonical_long", "ref_sheet.internal_inconsistency"],
+      "labels_by_labeler": [
+        {"category": "ref_sheet.costume_garment_short_vs_canonical_long", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "ref-sheets-qa CRITICAL: white top has SHORT sleeves stopping at deltoid; canonical Ultra-Gal tier-5 has FULL-LENGTH long sleeves"},
+        {"category": "ref_sheet.internal_inconsistency", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "ref-sheets-qa: panel 1 short sleeves, panel 5 long sleeves — sheet internally self-inconsistent"}
+      ],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "rs-mundy-tier2",
+      "asset_path": "(ref sheet UUID dbca5675 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["ref_sheet.costume_state_wrong"],
+      "labels_by_labeler": [
+        {"category": "ref_sheet.costume_state_wrong", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "ref-sheets-qa CRITICAL: lab coat rendered CLOSED/buttoned in 3 of 4 coat-visible panels; canonical body-tier2 shows coat WORN OPEN"}
+      ],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "rs-mundy-tier3",
+      "asset_path": "(ref sheet UUID 90ee6b45 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["ref_sheet.costume_garment_missing", "ref_sheet.internal_inconsistency", "ref_sheet.transformation_state_underdelivered", "ref_sheet.tier_differentiation_weak"],
+      "labels_by_labeler": [
+        {"category": "ref_sheet.costume_garment_missing", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "ref-sheets-qa: lab coat ENTIRELY MISSING from rear view"},
+        {"category": "ref_sheet.internal_inconsistency", "labeler": "matt-mapped-from-audit", "confidence": 1.0, "note": "panel 1 coat OPEN, panel 2 coat CLOSED, panel 3 coat MISSING"},
+        {"category": "ref_sheet.transformation_state_underdelivered", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "panel 6 strain intent under-delivered"},
+        {"category": "ref_sheet.tier_differentiation_weak", "labeler": "matt-mapped-from-audit", "confidence": 0.6, "note": "tier-2 → tier-3 differentiation weak in front-facing views"}
+      ],
+      "severity": "blocking"
+    },
+    {
+      "panel_id": "rs-heather-tier3",
+      "asset_path": "(ref sheet UUID ee042246 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["ref_sheet.pose_intent_ignored", "character.coverage_risk"],
+      "labels_by_labeler": [
+        {"category": "ref_sheet.pose_intent_ignored", "labeler": "matt-mapped-from-audit", "confidence": 0.9, "note": "rendered as aggressive double-bicep flex; prompt asked neutral half-flex"},
+        {"category": "character.coverage_risk", "labeler": "matt-mapped-from-audit", "confidence": 0.6, "note": "sweater hem possibly hiked up over enlarged torso (borderline L33)"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "rs-domina-tier4",
+      "asset_path": "(ref sheet UUID 15ae9d15 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "BAD",
+      "defects": ["character.costume_color_drift"],
+      "labels_by_labeler": [
+        {"category": "character.costume_color_drift", "labeler": "matt-mapped-from-audit", "confidence": 0.7, "note": "lower-body palette drift: green extends above-knee like leggings; canonical Domina has blue pointed-toe boots ending mid-thigh-to-knee"}
+      ],
+      "severity": "cosmetic"
+    },
+    {
+      "panel_id": "rs-heather-tier2",
+      "asset_path": "(ref sheet UUID e31aa183 — see ref-sheets-qa-2026-05-17.md)",
+      "asset_type": "ref_sheet",
+      "panel_pngs_available_locally": false,
+      "label": "GOOD",
+      "defects": [],
+      "labels_by_labeler": [
+        {"category": null, "labeler": "matt-mapped-from-audit", "note": "ref-sheets-qa: PASS — approved as canonical anchor"}
+      ],
+      "severity": null
+    }
+  ],
+  "split_summary": {
+    "ultra_gal_panels_train_count": 16,
+    "ultra_gal_panels_holdout_count": 4,
+    "ultra_gal_total": 20,
+    "chun_li_panels_count": 10,
+    "ref_sheet_assets_count": 6,
+    "grand_total_labeled_entries": 36
+  },
+  "category_support_in_labeled_set": {
+    "character.hair_color_drift": 3,
+    "character.hair_color_drift_across_sequence": 1,
+    "character.costume_color_drift": 3,
+    "character.costume_garment_missing": 3,
+    "character.costume_design_drift": 2,
+    "character.costume_state_drift_in_scene": 3,
+    "character.identity_swap": 1,
+    "character.count_mismatch_missing": 1,
+    "character.count_mismatch_partial": 1,
+    "character.coverage_risk": 1,
+    "character.face_drift_subtle": 1,
+    "camera.angle_underdelivered": 1,
+    "transformation.state_underdelivered": 1,
+    "transformation.state_overdelivered": 1,
+    "lettering.typo_or_doubled_word": 1,
+    "lettering.duplicate_bubble": 2,
+    "lettering.bubble_tail_wrong_speaker": 1,
+    "ref_sheet.costume_garment_missing": 1,
+    "ref_sheet.costume_garment_short_vs_canonical_long": 1,
+    "ref_sheet.costume_state_wrong": 1,
+    "ref_sheet.internal_inconsistency": 2,
+    "ref_sheet.pose_intent_ignored": 1,
+    "ref_sheet.transformation_state_underdelivered": 1,
+    "ref_sheet.tier_differentiation_weak": 1
+  },
+  "coverage_gaps_vs_taxonomy": {
+    "still_zero_examples_in_labeled_set": [
+      "composite.lighting_mismatch",
+      "composite.shadow_mismatch",
+      "composite.color_temperature_mismatch",
+      "composite.scale_compositing_artifact",
+      "character.hair_state_drift",
+      "character.face_identity_drift",
+      "background.extra_at_wrong_scale",
+      "background.unsanctioned_extra",
+      "background.environment_drift",
+      "background.named_element_dropped",
+      "camera.distance_underdelivered",
+      "camera.intent_ignored_systemic",
+      "transformation.tier_mismatch",
+      "lettering.empty_bubble",
+      "lettering.sfx_inappropriate_for_genre",
+      "prompt_artifact.style_drift_2d",
+      "prompt_artifact.ref_rendered_in_scene",
+      "prompt_artifact.anachronistic_accessory",
+      "prompt_artifact.directive_collision_visible"
+    ],
+    "note": "All four composite.* leaves remain unmeasured — same gap Exp 02 flagged as the biggest blocker to shipping. The taxonomy now NAMES these classes correctly even when the labeled set has zero examples, which is itself progress: the rubric can ask the model about them and we can begin to accumulate positives in production."
+  },
+  "labeler_disagreement_summary": {
+    "panels_with_both_magnamus_and_matt_labels_present": 0,
+    "panels_where_labelers_disagreed": 0,
+    "note_on_disagreement": "In this checkout there is no Magnamus-direct panel-level label list — Magnamus's input is captured as defect-CLASS patterns (Source 4 in raw-defects.md), not panel-by-panel verdicts. The 5 Magnamus pattern entries therefore inform the taxonomy but cannot be compared per-panel against Matt's labels. The labeled-set structure leaves room for Magnamus-direct labels to be added as a new labeler row per panel (the `labels_by_labeler` array is multi-entry by design) — a future hand-labeling pass by Magnamus is the right unlock here. The recommendation file flags this."
+  },
+  "methodology_notes": [
+    "All Exp 02 labels are preserved verbatim under the `exp_02_categories` field on each ultra-gal panel. The forward mapping from Exp 02 categories to v1 sub-categories is in taxonomy-v1.md.",
+    "Confidence values reflect the audit doc's language: a flatly-stated defect (e.g., 'duplicate \"OH.\" bubble') gets 1.0; a hedged note (e.g., 'possibly missing or cropped') gets 0.6-0.7; a SOFT continuity finding gets 0.4-0.7 per the report's own classification.",
+    "Same-panel multi-defect labels are listed explicitly rather than collapsed — p10-01 carries both `character.costume_design_drift` AND `character.costume_state_drift_in_scene` because the audit doc notes both.",
+    "Future labelers can add their entries by appending to `labels_by_labeler` without modifying existing entries — this is how Magnamus-direct labels would be incorporated in a follow-up."
+  ]
+}
