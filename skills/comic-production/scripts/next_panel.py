@@ -168,6 +168,13 @@ _VIEW_ALIASES = {
     "mcu": "mcu",
     "medium": "medium",
     "medium two-shot": "medium",
+    "medium-wide": "medium-wide",
+    "medium close-up": "mcu",
+    "medium shot": "medium",
+    "close-up": "mcu",
+    "extreme close-up": "ecu-region",
+    "full body": "front-full",
+    "wide establishing": "wide-establish",
     "low-angle": "low-angle-front",
     "low-angle-front": "low-angle-front",
     "low-angle-back": "low-angle-back",
@@ -262,7 +269,7 @@ def detect_dialogue_camera_conflict(panel: dict) -> tuple[bool, list[str]]:
     speakers: list[str] = []
     for d in panel.get("dialogue", []) or []:
         if d.get("type", "balloon") in ON_SCREEN_DIALOGUE_TYPES:
-            spk = d.get("speaker", "")
+            spk = d.get("speaker") or d.get("character") or ""
             if spk and spk not in speakers:
                 speakers.append(spk)
     return (bool(speakers), speakers)
@@ -313,7 +320,7 @@ def detect_multi_speaker_crowding(panel: dict) -> tuple[bool, int, int]:
         if d.get("type", "balloon") not in ON_SCREEN_DIALOGUE_TYPES:
             continue
         n_lines += 1
-        spk = d.get("speaker", "")
+        spk = d.get("speaker") or d.get("character") or ""
         if spk:
             speakers.add(spk)
     return (n_lines >= 3 and len(speakers) >= 2, n_lines, len(speakers))
@@ -826,7 +833,7 @@ def _l19_lettering_block(panel: dict) -> str:
     # Dialogue bubbles.
     for i, d in enumerate(panel.get("dialogue", []) or []):
         bubble_type = (d.get("type") or "balloon").strip()
-        speaker = (d.get("speaker") or "").strip()
+        speaker = (d.get("speaker") or d.get("character") or "").strip()
         text = (d.get("text") or "").strip().replace('"', "'")
         if not text:
             continue

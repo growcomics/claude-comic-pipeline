@@ -1,0 +1,1308 @@
+{
+  "project": "chun-li-test",
+  "version": 1,
+  "page_count": 30,
+  "panels_per_page": 1,
+  "estimated_panel_count": 30,
+  "style_preset": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {
+    "flavor": "single-axis-fmg-with-psycho-power-trigger",
+    "start_tier": 2,
+    "end_tier": 7,
+    "tier_curve_per_panel": [
+      2,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "splash_panels": [
+      "p01-01",
+      "p07-01",
+      "p10-01",
+      "p11-01",
+      "p18-01",
+      "p23-01",
+      "p25-01",
+      "p28-01",
+      "p30-01"
+    ],
+    "trigger_description": "Ambient Psycho Power surge in Bison's lair \u2014 Chun Li absorbs the energy through fighting-stance willpower. No physical artifact, no machinery, no serum.",
+    "bison_tier_curve_per_panel": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8,
+      8
+    ]
+  },
+  "cast": [
+    {
+      "id": "chun-li",
+      "name": "Chun Li",
+      "ref_folder": "references/characters/chun-li/",
+      "soul_id": null,
+      "wardrobe": "Baseline (tiers 2-5): canonical SF2 cobalt-blue silk qipao with gold trim, gold-trimmed lapel, side slits, white thigh-high boots/stockings, brown spiked leather gauntlets on both wrists, white leather sash belt, twin buns secured with red silk ribbons. Tier 6: qipao tearing apart in burst of Psycho Power, new peak outfit materializing. Tiers 7: new peak-form outfit \u2014 form-fitting cobalt-blue and gold bodysuit, high leg cuts revealing developed thighs, sleek metallic gauntlets, white sash detail, twin buns + red ribbons intact. L33 coverage held \u2014 bust, groin, glutes fully covered at all tiers.",
+      "ip_note": "Street Fighter II (Capcom) \u2014 canonical SF2 design. Fan-production / non-commercial creative exercise."
+    },
+    {
+      "id": "bison",
+      "name": "M. Bison",
+      "ref_folder": "references/characters/bison/",
+      "soul_id": null,
+      "wardrobe": "Baseline (p11-p22): canonical SF2 dictator uniform \u2014 high-collared red tunic with gold buttons, white epaulettes with gold trim, black leather gloves, wide white leather belt with gold buckle, red military trousors, tall black leather boots with white spats, long flowing red military cape, red peaked military officer cap with silver Shadaloo skull-and-wings insignia, short cropped dark hair, black goatee, glowing pale-violet eyes. Final form (p23-p30): TRANSFORMED hypermuscular berserker \u2014 same uniform now bursting at the seams, sleeves torn open from swollen biceps, tunic split across the chest, gold buttons popping, white epaulettes barely hanging on, cape billowing saturated with violet energy, pure white glowing eyes (sclera fully white-overflow), thick violet vein traceries across the skin, body glowing from within, surrounded by heavy volumetric violet Psycho Power aura.",
+      "ip_note": "Street Fighter II (Capcom) \u2014 canonical SF2 design. Fan-production / non-commercial creative exercise."
+    }
+  ],
+  "props": [],
+  "locations": [
+    {
+      "id": "bisons-lair",
+      "description": "Bison's villain chamber: dark stone-block walls, glowing purple-violet Psycho Power energy ambient in the air, scattered Shadaloo machinery silhouettes in deep background, low-angle dramatic crimson + violet rim lighting, polished obsidian floor reflecting the energy, oppressive cathedral-scale chamber proportions. Volumetric purple-violet glow, ray-traced subsurface scattering, physically-based materials.",
+      "ref_folder": "references/locations/bisons-lair/"
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "splash",
+          "tier": 2,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior, no diurnal cue",
+          "weather": "n/a (interior)",
+          "camera": "wide-establish, low-angle, three-quarter",
+          "action": "Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Wide low-angle hero shot establishing the cathedral-scale chamber.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier 2 baseline. Canonical SF2 cobalt-blue silk qipao with gold trim, side slits, white thigh-highs, brown spiked leather gauntlets on both wrists, white sash. Pristine.",
+          "psycho_power_state": "Ambient purple-violet glow filling the chamber. No traceries on her skin yet. Eyes normal brown.",
+          "expression": "Defiant, alert, brow set, eyes scanning. Strikingly beautiful \u2014 vogue-cover glamour Asian features, defined cheekbones, flawless skin.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "BISON! Show yourself!",
+              "type": "shout"
+            }
+          ],
+          "captions": [
+            "I can feel his Psycho Power... everywhere."
+          ],
+          "sfx": [],
+          "notes": "SPLASH 1/3. Establishes the chamber + Chun Li's entrance. Wide low-angle hero shot \u2014 drama-first. Beauty anchor active. L23 verbal anchor: dark stone walls, purple Psycho Power, Shadaloo machinery silhouettes, crimson + violet rim lighting, polished obsidian floor.",
+          "continuity_refs": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "size": "standard",
+          "tier": 2,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium, three-quarter, eye-level",
+          "action": "Medium three-quarter view of Chun Li, fighting stance lowered slightly, head turned as she scans the chamber. Purple Psycho Power tendrils beginning to drift toward her body, attracted to her ki.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier 2 baseline qipao, intact. Same as p01-01.",
+          "psycho_power_state": "Tendrils of purple Psycho Power energy reaching toward her like fingers. Not yet contacting her body.",
+          "expression": "Curiosity deepening, alert, beautiful \u2014 defined cheekbones, slightly parted lips.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Wait... it's... reacting to me.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "His power knows I'm here."
+          ],
+          "sfx": [],
+          "notes": "Tier 2 baseline still. Camera variety: medium three-quarter eye-level. Beauty anchor active. L22: hair state named.",
+          "continuity_refs": [
+            "p01-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "size": "standard",
+          "tier": 3,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-face, low-angle",
+          "action": "Extreme close-up of Chun Li's face. Her brown eyes widen as the first wave of Psycho Power surges into her body \u2014 a subtle purple shimmer crosses her irises. Lips parted in shock-becoming-awe.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette, framing her face",
+          "costume_state": "Tier 3 \u2014 neckline of the qipao visible at the bottom of frame, fabric tight across the upper chest.",
+          "psycho_power_state": "Purple shimmer entering her irises. First contact. Faint purple traceries beginning on her temples.",
+          "expression": "Eyes wide with dawning awe, mouth parted, beautiful Chun Li face anchored \u2014 flawless skin, glamour lighting, vogue-cover glamour.",
+          "dialogue": [],
+          "captions": [
+            "I feel... stronger.",
+            "My body \u2014 it's changing."
+          ],
+          "sfx": [],
+          "notes": "Tier 3 first growth beat. ECU-face for the awe-onset moment. Beauty + L17 canonical anchor critical here. L22 hair state. L24: no earrings, no modern jewelry (ears in frame).",
+          "continuity_refs": [
+            "p01-01",
+            "p02-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "size": "standard",
+          "tier": 4,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "three-quarter, full-body, slight-low-angle",
+          "action": "Three-quarter full-body of Chun Li. Qipao fabric visibly strains across her bust and biceps \u2014 first small tears at sleeve caps and side seams. Bust noticeably fuller, arms developed. She looks down at her own hands, flexing.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier 4 \u2014 seam strain at deltoids and bust line. First small tears at non-coverage seams (sleeve cap, side hem under arm). Coverage 100% preserved per L33.",
+          "psycho_power_state": "Purple traceries on her forearms and visible upper-arm skin. Faint aura building around her form. Eyes still mostly brown with subtle purple flecks.",
+          "expression": "Wonder, focused, slight smile of realization, beautiful \u2014 defined cheekbones, glamour lighting.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Yes... I can feel it growing.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "Bison thought he could control this. He was wrong."
+          ],
+          "sfx": [],
+          "notes": "Tier 4 \u2014 visible bust + muscle growth. Three-quarter full-body, slight low-angle. L33 coverage preserved. Chest oversize compensation per memory: prompt for LARGER than tier-4 figure shows. L24: brown spiked gauntlets canonical on wrists.",
+          "continuity_refs": [
+            "p01-01",
+            "p03-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "size": "standard",
+          "tier": 5,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-region, profile, dramatic side-lighting",
+          "action": "Extreme close-up of her torso/chest at tier 5. Qipao fabric tearing along the side seam mid-rip, developed lats and obliques visible through tears, bust significantly enlarged straining the fabric. Purple Psycho Power glow on her skin. Side-lit dramatic profile.",
+          "hair_state": "twin buns + red ribbons (head partially in frame at top \u2014 buns silhouette visible)",
+          "costume_state": "Tier 5 \u2014 fabric pulled taut, multiple tears at non-coverage seams. Sleeves split at the cap. Side seams beginning to give mid-rip. Coverage 100% preserved per L33 \u2014 bust covered, groin out of frame.",
+          "psycho_power_state": "Purple traceries clearly visible across her skin, glowing. Aura more pronounced.",
+          "expression": "Not in primary frame (region ECU), but visible profile chin/jaw line \u2014 beautiful, jaw set, empowered.",
+          "dialogue": [],
+          "captions": [
+            "The fabric can't contain me anymore."
+          ],
+          "sfx": [
+            {
+              "text": "RRIIIPPP",
+              "source": "qipao seam tearing"
+            }
+          ],
+          "notes": "Tier 5 \u2014 body-region ECU showing tear in progress. SFX baked in-image per L19 (allow_baked_lettering=true). L25 body-region reveal stickiness applies. Chest oversize compensation.",
+          "continuity_refs": [
+            "p01-01",
+            "p04-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "size": "wide",
+          "tier": 6,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "mcu, three-quarter, slight-low-angle",
+          "action": "MCU body \u2014 the qipao tears apart in a burst of Psycho Power energy, fragments dissolving into purple light. The new peak-form bodysuit (cobalt blue with gold trim) materializes around her body mid-frame. Both states visible \u2014 partial qipao remains dissolving into purple light, new outfit partially solidified. Tier 6 muscle + bust mass visible.",
+          "hair_state": "twin buns secured with red silk ribbons, intact through the burst, classic SF2 silhouette",
+          "costume_state": "TIER 6 MATERIALIZATION BEAT. Original qipao fragments dissolving into purple-violet Psycho Power energy. New peak-form bodysuit \u2014 cobalt blue + gold, high leg cuts, sleek metallic gauntlets reforming on wrists \u2014 materializing solid where the old outfit dissolves. Coverage held throughout the transition per L33.",
+          "psycho_power_state": "PEAK BURST \u2014 volumetric purple-violet energy surrounding her body, traceries on all visible skin, eyes glowing intense purple. Aura at maximum visual intensity for this beat.",
+          "expression": "Triumphant, lips parted in a victorious shout, beautiful \u2014 vogue-cover glamour even at peak energy intensity.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "A new form... for a new power!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "FOOSH",
+              "source": "Psycho Power burst transforming the costume"
+            }
+          ],
+          "notes": "TIER 6 PIVOT BEAT \u2014 costume transformation. Tier-6 reinforcement ref auto-attaches (L29). New outfit design must be locked at ref-gathering stage via a costume turnaround. SFX baked per L19. Camera mcu three-quarter, slight low-angle. Chest oversize critical here \u2014 tier 6 should read AS tier 7 in raw output.",
+          "continuity_refs": [
+            "p01-01",
+            "p04-01",
+            "p05-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07-01",
+          "size": "splash",
+          "tier": 7,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, three-quarter, low-angle, hero-stance",
+          "action": "FULL-PAGE SPLASH. Chun Li in her new peak-form outfit \u2014 fully materialized \u2014 striking a hero stance mid-chamber. One hand at hip, one extended in beckoning fighting guard. Psycho Power swirling around her as a tamed purple aura. Tier 7 peak muscle + bust mass. Cathedral chamber framing her dramatically.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "TIER 7 \u2014 new peak-form outfit fully solid: cobalt-blue and gold form-fitting bodysuit, high leg cuts revealing developed thighs, sleek metallic gauntlets, gold accents, white sash detail. L33 coverage \u2014 bust, groin, glutes fully covered. The new outfit signature of her transformed form.",
+          "psycho_power_state": "Tamed purple aura \u2014 visible but controlled. She COMMANDS it now. Eyes still subtly glowing purple but back to readable Chun Li expression.",
+          "expression": "Triumphant smirk, confident, dominant, beautiful \u2014 vogue-cover glamour Asian beauty, glamour lighting on the face, defined cheekbones.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Bison... you've made me STRONGER than you could have imagined.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "His power. Now mine."
+          ],
+          "sfx": [],
+          "notes": "SPLASH 2/3 \u2014 first full-body reveal of tier-7 Chun Li in new outfit. Tier-7 reinforcement ref auto-attaches (L30). Beauty anchor critical. Camera variety: full-body three-quarter low-angle hero shot.",
+          "continuity_refs": [
+            "p01-01",
+            "p06-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08-01",
+          "size": "standard",
+          "tier": 7,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-face, eye-level",
+          "action": "Extreme close-up of beautiful tier-7 Chun Li's face. Glowing subtle purple in her eyes from the tamed Psycho Power. A smirk of triumph. Twin buns + red ribbons frame her face. Glamour lighting.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette, framing her face",
+          "costume_state": "Tier 7 new outfit \u2014 visible at the bottom of frame (collar / shoulder of the bodysuit).",
+          "psycho_power_state": "Subtle purple glow in her irises, controlled. Faint aura at the edges of frame.",
+          "expression": "Triumphant smirk, dominant, commanding, strikingly beautiful \u2014 vogue-cover glamour, defined cheekbones, flawless skin, glamour lighting.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "I'm coming for you.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "I tamed the power that broke armies. Bison's reign is over."
+          ],
+          "sfx": [],
+          "notes": "Tier 7 face-anchor beat. Beauty maximum here. L17 canonical Chun Li face. L22 hair. L24: no earrings, no modern jewelry. ECU-face for the dominance beat.",
+          "continuity_refs": [
+            "p01-01",
+            "p07-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09-01",
+          "size": "tall",
+          "tier": 7,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, profile-walking, eye-level-to-slight-low",
+          "action": "Tier-7 Chun Li walking toward the chamber exit at the right side of frame, profile view, peak form rendered. Psycho Power swirling behind her in trails, the chamber receding. Her stride confident and purposeful.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier 7 new peak-form outfit, profile view \u2014 bodysuit form-fitting against her developed musculature, high leg cuts visible from the side. L33 coverage held.",
+          "psycho_power_state": "Aura behind her, trailing like a comet tail. She is moving with intent.",
+          "expression": "Side profile \u2014 set jaw, eyes forward, confident. Beautiful side profile, defined cheekbones.",
+          "dialogue": [],
+          "captions": [
+            "The Lightning Kick will be the LAST thing he sees."
+          ],
+          "sfx": [],
+          "notes": "Tier 7 \u2014 full-body profile walking pose. Camera variety: profile angle (only profile in the sequence). L23 environment anchor if env ref dropped: Shadaloo chamber receding, polished obsidian floor, purple energy ambient.",
+          "continuity_refs": [
+            "p01-01",
+            "p07-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10-01",
+          "size": "splash",
+          "tier": 7,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, low-angle, hero-stance, slight-three-quarter",
+          "action": "FINAL FULL-PAGE SPLASH. Chun Li in classic fighting stance \u2014 signature Chun Li hero pose, body coiled with potential energy, fists raised. Low-angle dramatic hero shot. Psycho Power tamed as a faint purple aura around her form. She looks forward, past camera, toward Bison's direction.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier 7 new peak-form outfit, full body shown \u2014 signature SF2-color palette (cobalt blue + gold), sleek metallic gauntlets, white sash, high leg cuts. L33 coverage held.",
+          "psycho_power_state": "Faint controlled purple aura. She owns it now.",
+          "expression": "Determined, focused, beautiful \u2014 defined cheekbones, eyes locked forward, signature Chun Li hero presence.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Spinning Bird Kick is just the warm-up now.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "For my father.",
+            "For everyone he hurt."
+          ],
+          "sfx": [],
+          "notes": "SPLASH 3/3 \u2014 final hero splash. Tier-7 reinforcement ref attached. Camera variety: full-body low-angle hero shot (similar to p07 but more battle-ready stance). Beauty maximum. The 'For my father' caption ties Chun Li's canonical motivation (her father killed by Bison) to the empowerment beat.",
+          "continuity_refs": [
+            "p01-01",
+            "p07-01",
+            "p09-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "panels": [
+        {
+          "panel_id": "p11-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide-establish, low-angle, three-quarter",
+          "action": "SPLASH 4/9. The chamber's far end. M. Bison emerges from the shadowed throne \u2014 silhouetted against violet ambient Psycho Power, cape billowing behind him, arms slowly uncrossing. He steps down from the obsidian dais, a confident smug smirk on his face. Looks past camera toward Chun Li (off-frame).",
+          "hair_state": "n/a (Chun Li off-frame); Bison wears his red peaked military cap with silver Shadaloo skull insignia",
+          "costume_state": "Bison in pristine canonical SF2 dictator uniform \u2014 red high-collared tunic with gold buttons, white epaulettes, black leather gloves, white belt with gold buckle, red trousors, tall black boots with white spats, long flowing red cape. Cap on head.",
+          "psycho_power_state": "Faint violet aura around Bison's silhouette, ambient violet energy filling the chamber",
+          "expression": "Smug, confident smirk, eyes faintly glowing violet, head slightly tilted in arrogance",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "So... the little dragon has finally come to claim her father's debt.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "He was always coming.",
+            "I have been waiting."
+          ],
+          "sfx": [],
+          "notes": "SPLASH 4/9 \u2014 Bison reveal. Wide low-angle establishing the throne backdrop and Bison's entrance. First Bison appearance in the comic. Use Bison canonical ref + throne scene ref.",
+          "continuity_refs": [
+            "p10-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "panels": [
+        {
+          "panel_id": "p12-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-face, eye-level",
+          "action": "ECU on Bison's face. His glowing pale-violet eyes locked on the camera (substituting for Chun Li's perspective). Smirking with absolute confidence. The brim of his red cap shadows his upper face dramatically.",
+          "hair_state": "Bison's red peaked military cap with silver Shadaloo skull insignia, casting a deep shadow across his eyes",
+          "costume_state": "Red high-collar of his tunic visible at frame bottom, gold trim catching the light. White epaulette edge in lower-left corner.",
+          "psycho_power_state": "Eyes glowing pale-violet with visible Psycho Power, faint violet wisps drifting past his face",
+          "expression": "Slow predatory smirk, lips pulled back to show teeth slightly, one eyebrow raised in mocking amusement, eyes burning violet",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "You THINK you've tasted my power, child?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "ECU Bison face. Camera variety: ECU-face shift to Bison after the splash. Use Bison canonical ref.",
+          "continuity_refs": [
+            "p11-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "panels": [
+        {
+          "panel_id": "p13-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li",
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium two-shot, three-quarter, eye-level",
+          "action": "Medium two-shot of both fighters across the chamber. Chun Li (right of frame, foreground) in her tier-7 bodysuit, fists raised in ready guard, looking left at Bison. Bison (left of frame, mid-ground) standing with arms slowly lowering from cross, cape billowing behind. Both in profile-three-quarter view facing each other. Volumetric violet Psycho Power energy between them.",
+          "hair_state": "Chun Li: twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette; Bison: red peaked military cap with silver Shadaloo skull insignia",
+          "costume_state": "Chun Li: tier-7 peak-form cobalt-blue and gold bodysuit, sleek silver-and-gold metallic gauntlets, white sash, high leg cuts; Bison: pristine canonical SF2 dictator uniform with cape",
+          "psycho_power_state": "Violet ambient energy filling the air between them, both auras visible",
+          "expression": "Chun Li: narrowed eyes, jaw set, defiant readiness; Bison: smirking with arrogant amusement, eyes glowing pale-violet",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "I tasted ENOUGH. Show me the rest.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "First two-shot. Per L24 multi-character: distinct pose, distinct expression for each. POSE VARIATION: Chun Li forward-leaning ready guard vs Bison straight-spine arms-relaxed. Use Chun Li ref + Bison canonical ref.",
+          "continuity_refs": [
+            "p10-01",
+            "p11-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "panels": [
+        {
+          "panel_id": "p14-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-face, slight-low-angle",
+          "action": "ECU Chun Li's face. Eyes narrowed in fierce concentration, brow drawn together in determination, jaw set hard, lips pulled back in a faint rallying smirk. Twin buns + red ribbons frame her face. Subtle violet glow in her irises showing her absorbed Psycho Power.",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette, framing her face",
+          "costume_state": "Cobalt-blue tier-7 bodysuit collar visible at frame bottom, gold trim catching glamour light. Gauntlet edge in lower corner.",
+          "psycho_power_state": "Subtle violet glow in irises, controlled and tame \u2014 she owns this power",
+          "expression": "Eyes narrowed, brows drawn together, jaw set hard, lips pulled back in fierce rallying grin. Strikingly beautiful, vogue-cover glamour, glamour rim-light on the cheekbones.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "For my father, Bison.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "I have waited my whole life for this."
+          ],
+          "sfx": [],
+          "notes": "ECU Chun Li, fierce-intensity beat. Beauty anchor critical. Use Chun Li ref only. Camera variety: another ECU-face (counterpoint to p12's ECU on Bison).",
+          "continuity_refs": [
+            "p10-01",
+            "p13-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 15,
+      "panels": [
+        {
+          "panel_id": "p15-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li",
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide, slight-low-angle, profile-cross-shot",
+          "action": "Wide chamber two-shot. Both fighters facing each other across the obsidian floor \u2014 Chun Li (left of frame, slightly closer) in tier-7 fighting stance, Bison (right of frame, on the dais step) with cape thrown back. Their two violet auras meet in the middle of the chamber, swirling together into a column of energy. Obsidian floor reflects both figures.",
+          "hair_state": "Chun Li: twin buns + red silk ribbons; Bison: red peaked cap with silver Shadaloo skull insignia",
+          "costume_state": "Chun Li: tier-7 cobalt-blue/gold bodysuit, silver gauntlets, white sash, high leg cuts; Bison: pristine red Shadaloo dictator uniform with cape billowing back",
+          "psycho_power_state": "Both auras visibly clashing in the chamber center, violet energy swirling between them",
+          "expression": "Chun Li: locked-in fighting focus, slight smirk; Bison: smug grin, arms outstretched in a casual taunt-invitation, eyes glowing pale-violet",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "Then COME and take it.",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "VWOOOSH"
+          ],
+          "notes": "Wide two-shot with energy column between. POSE VARIATION mandatory \u2014 Chun Li coiled forward-lean guard vs Bison expansive open-arms taunt. Use both refs + throne scene ref. Camera variety: wide profile-cross.",
+          "continuity_refs": [
+            "p11-01",
+            "p13-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 16,
+      "panels": [
+        {
+          "panel_id": "p16-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium, three-quarter, slight-low-angle",
+          "action": "Bison launches into his signature Psycho Crusher attack \u2014 his entire body becomes a streaking violet-saturated projectile, arms locked forward in a flying-tackle stance, cape blasted straight back behind him by his own momentum. Frozen mid-leap. Floor cracking from the launch force.",
+          "hair_state": "red peaked military cap held tight to head by motion, silver Shadaloo skull insignia visible",
+          "costume_state": "Pristine canonical SF2 dictator uniform \u2014 red tunic with gold buttons, white epaulettes, black gloves, white belt, red trousors, black boots with white spats, cape rocketing straight back from speed",
+          "psycho_power_state": "WHOLE BODY enveloped in volumetric violet Psycho Power energy cone, his form becoming a violet streaking missile, traceries on all visible skin",
+          "expression": "Snarl of focused aggression, teeth bared, eyes burning intense violet",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "PSYCHO CRUSHER!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "FOOOOM"
+          ],
+          "notes": "Bison's signature attack. Camera variety: medium dynamic action. Use Bison canonical ref. Motion blur on cape and floor cracks.",
+          "continuity_refs": [
+            "p15-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 17,
+      "panels": [
+        {
+          "panel_id": "p17-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, low-angle, dynamic",
+          "action": "Chun Li launches into her signature Spinning Bird Kick to intercept \u2014 upside down in mid-air, body horizontal, both legs extended in a horizontal spread spinning around her vertical-stack center axis, arms held out for balance, twin buns flying. Motion blur on her legs as they spin.",
+          "hair_state": "twin buns secured with red silk ribbons, ribbons trailing behind in motion",
+          "costume_state": "Tier-7 cobalt-blue and gold bodysuit, sleek silver gauntlets, white sash. High leg cuts show developed thigh musculature mid-spin. L33 coverage held.",
+          "psycho_power_state": "Faint violet aura streaming off her body as she spins, eyes glowing subtly",
+          "expression": "Focused fierce determination, eyes locked on target (Bison off-frame), teeth bared in a rallying shout",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "SPINNING BIRD KICK!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "WHIRRRRR"
+          ],
+          "notes": "Chun Li's signature counter. Full-body action. Camera variety: low-angle dynamic. Use Chun Li ref. Motion blur on legs.",
+          "continuity_refs": [
+            "p10-01",
+            "p16-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 18,
+      "panels": [
+        {
+          "panel_id": "p18-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li",
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide splash, dynamic, slight-low-angle",
+          "action": "SPLASH 5/9. MID-AIR COLLISION. Chun Li's Spinning Bird Kick connects with Bison's Psycho Crusher charge in mid-air \u2014 massive volumetric violet+gold energy explosion at the contact point, debris and Psycho Power tendrils blasting outward in all directions. Chun Li's spinning legs hit Bison's shoulder/torso, both bodies frozen at the moment of impact. Floor below cracking from the shockwave.",
+          "hair_state": "Chun Li: twin buns + red silk ribbons blowing back from blast; Bison: cap askew on his head from impact",
+          "costume_state": "Chun Li: tier-7 bodysuit, motion-blurred legs spinning into Bison's torso; Bison: red dictator uniform mid-Psycho-Crusher, cape twisted from collision force",
+          "psycho_power_state": "MASSIVE BURST of violet+gold Psycho Power energy at contact point, bloom radiating outward, energy tendrils whipping through the air, the chamber lit ferociously by the blast",
+          "expression": "Chun Li: focused fierce grimace mid-shout; Bison: eyes wide in shock, mouth open in a surprised grunt",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            "KRAKABOOM"
+          ],
+          "notes": "SPLASH 5/9 \u2014 collision climax. Use both refs + throne scene ref. Wide splash camera with dynamic motion. POSE VARIATION inherent in the action \u2014 Chun Li horizontal-spin vs Bison forward-charge.",
+          "continuity_refs": [
+            "p16-01",
+            "p17-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 19,
+      "panels": [
+        {
+          "panel_id": "p19-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li",
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide, eye-level",
+          "action": "Aftermath landing. Chun Li (right of frame) lands solid on the obsidian floor in a perfect fighting stance, untouched. Bison (left of frame) staggers back several steps, one hand to his shoulder where the kick connected, his cap askew, cape rumpled, dust kicked up around his boots. Both faces visible, Chun Li in profile looking right at him, Bison facing camera with rage building.",
+          "hair_state": "Chun Li: twin buns + red ribbons, intact; Bison: cap visibly askew on head, silver skull insignia tilted",
+          "costume_state": "Chun Li: tier-7 bodysuit intact, perfect; Bison: red dictator uniform with tunic now scuffed at the shoulder where the kick landed, cape rumpled, one boot askew",
+          "psycho_power_state": "Both auras dimmed after the burst, just lingering violet wisps",
+          "expression": "Chun Li: calm focused smirk, eyes locked on Bison; Bison: jaw set hard in suppressed rage, eyes blazing violet brighter than before, brows drawn together",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Was that ALL of you?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Aftermath two-shot. POSE VARIATION mandatory \u2014 Chun Li grounded balanced vs Bison off-balance staggered back. Use both refs.",
+          "continuity_refs": [
+            "p18-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 20,
+      "panels": [
+        {
+          "panel_id": "p20-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-face, slight-low-angle",
+          "action": "ECU Bison's face cracking with rage. The smirk is GONE. His brow pulled down hard, jaw clenched, teeth bared in a snarl, lips pulled back. Eyes burning more intense violet than ever, sclera starting to glow. Cap brim shadowing the upper face dramatically, violet light leaking from his eyes washing the lower face.",
+          "hair_state": "red peaked military cap, slightly askew from the prior impact, silver Shadaloo skull insignia visible",
+          "costume_state": "High red collar visible at frame bottom, scuffed at the shoulder from impact",
+          "psycho_power_state": "Eyes burning intense violet, sclera starting to overflow with white-violet light, violet vein traceries beginning to appear at his temples",
+          "expression": "Snarl of pure rage, teeth fully bared, brow pulled down hard, jaw clenched, eyes wide and burning violet \u2014 the mask of arrogance is shattered",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "IMPOSSIBLE.",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Bison's rage ECU. Mechanical facial description from posing-and-expressions.md. Camera variety: ECU-face counter to p14. Use Bison canonical ref.",
+          "continuity_refs": [
+            "p19-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 21,
+      "panels": [
+        {
+          "panel_id": "p21-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 4,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, three-quarter, slight-low-angle",
+          "action": "Bison's transformation begins. He throws his arms outward and his head back in a power-up pose, his entire body starting to swell with muscle mass \u2014 shoulders widening, biceps inflating, chest deepening, his red Shadaloo uniform beginning to strain at the seams. Violet Psycho Power erupts from his body in a column upward toward the chamber ceiling. Cape blasted straight back.",
+          "hair_state": "red peaked military cap held tight to head by erupting energy",
+          "costume_state": "Red Shadaloo dictator uniform STRAINING at the seams \u2014 fabric pulled tight across the now-larger chest, sleeves snug across the swelling biceps, gold buttons beginning to pop loose. Tier-4 mid-transformation state.",
+          "psycho_power_state": "MASSIVE COLUMN of violet Psycho Power energy erupting from his body upward, traceries appearing across all visible skin, eyes blazing intense violet-white",
+          "expression": "Snarl of effort and triumph, mouth open in a power-up shout, teeth bared, eyes blazing",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "YOU FORCE MY HAND, CHILD!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "KRRRRR"
+          ],
+          "notes": "Bison's transformation begin beat. Tier 1 \u2192 tier 4 escalation start. Use Bison canonical ref. Lineup ref for body scaling (referencing muscle-size-lineup but for the male villain).",
+          "continuity_refs": [
+            "p20-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 22,
+      "panels": [
+        {
+          "panel_id": "p22-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 6,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "ecu-region (torso/chest), profile, dramatic-side-lighting",
+          "action": "ECU torso/chest of Bison mid-transformation. His red Shadaloo tunic visibly bursting open across the chest \u2014 gold buttons popping off mid-air, fabric tearing apart along seam lines, swollen chest muscles pushing through the splitting cloth. Violet vein traceries glowing across the exposed chest skin. White belt creaking against the expanding torso.",
+          "hair_state": "n/a (head out of frame)",
+          "costume_state": "Red Shadaloo tunic mid-burst \u2014 gold buttons frozen mid-pop, fabric splitting along chest seams, sleeves torn, exposed chest skin visible (still coverage-compliant \u2014 chest is not nudity area for male), white epaulette torn off one shoulder",
+          "psycho_power_state": "Bright violet vein traceries on the exposed chest skin, body glowing from within with violet light",
+          "expression": "n/a (face out of frame)",
+          "dialogue": [],
+          "captions": [
+            "The seal he placed on himself.",
+            "He's BREAKING IT."
+          ],
+          "sfx": [
+            "RRIIIPPP"
+          ],
+          "notes": "ECU-region body beat. Camera variety: ECU-region (third ECU-region in the issue, balancing the ECU-region p05). Use Bison canonical ref.",
+          "continuity_refs": [
+            "p21-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 23,
+      "panels": [
+        {
+          "panel_id": "p23-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide splash, low-angle, three-quarter, hero-stance",
+          "action": "SPLASH 6/9 \u2014 BISON FINAL FORM REVEAL. Full-body wide low-angle of M. Bison transformed into his Psycho Power saturated berserker form. Hypermuscular bodybuilder proportions, his red Shadaloo uniform now in shreds across the chest and arms but cape and pants and cap intact. Standing in a power-up dictator stance, arms slightly bent palms forward, towering presence. Heavy volumetric violet Psycho Power aura billowing around him like flame, energy flaring upward.",
+          "hair_state": "red peaked military cap still on head, silver Shadaloo skull insignia faintly glowing",
+          "costume_state": "Red Shadaloo uniform TRANSFORMED state \u2014 tunic split across the chest and shoulders showing hypermuscular torso, sleeves torn open from massive biceps, white epaulettes mostly gone, belt still buckled, red trousors split at the thighs, black boots and white spats intact, red cape billowing behind saturated with violet energy",
+          "psycho_power_state": "FULL PEAK violet aura, body glowing from within, thick violet vein traceries across all visible skin, eyes pure white-glowing (sclera-overflow, no iris)",
+          "expression": "Snarl of rage and triumph, teeth bared, brow set hard, white-glowing eyes locked forward",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "BEHOLD MY TRUE FORM!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "FOOSH"
+          ],
+          "notes": "SPLASH 6/9 \u2014 Bison final form reveal. First appearance of Bison transformed. Use Bison FINAL FORM ref (the new one) + throne scene ref.",
+          "continuity_refs": [
+            "p21-01",
+            "p22-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 24,
+      "panels": [
+        {
+          "panel_id": "p24-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium, three-quarter, slight-low-angle",
+          "action": "Chun Li unfazed. Medium three-quarter view of her in tier-7 fighting stance, one hand on hip, the other in casual guard position. She regards Bison's final form with a confident smirk, head tilted slightly. Tamed violet aura around her body, in perfect contrast to Bison's chaotic eruption (off-frame to her right).",
+          "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
+          "costume_state": "Tier-7 cobalt-blue and gold bodysuit, sleek silver gauntlets, white sash, high leg cuts revealing developed thighs. L33 coverage held.",
+          "psycho_power_state": "Calm controlled violet aura, eyes subtly glowing violet, in stark contrast to Bison's chaotic eruption",
+          "expression": "Cool confident smirk, eyes nearly closed in smug satisfaction, head tilted, one corner of the mouth raised higher than the other",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "Show off.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "I felt his TRUE form coming a mile away.",
+            "I'm ready."
+          ],
+          "sfx": [],
+          "notes": "Chun Li contrast reaction. Camera variety: medium three-quarter. Use Chun Li ref. Smug-satisfaction face from posing-and-expressions.md.",
+          "continuity_refs": [
+            "p10-01",
+            "p23-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 25,
+      "panels": [
+        {
+          "panel_id": "p25-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide splash, low-angle, hero-stance",
+          "action": "SPLASH 7/9 \u2014 Chun Li counter-flex. Full-body wide low-angle of Chun Li in a triumphant power-up double-bicep-flex pose, both arms raised showing developed biceps + shoulders, head tilted back in a triumphant rallying shout, twin buns flying back, body coiled with tier-7 musculature. Her own violet Psycho Power aura erupts around her in a column upward, matching Bison's transformation energy \u2014 a peer-power statement.",
+          "hair_state": "twin buns secured with red silk ribbons, ribbons trailing behind from the energy surge",
+          "costume_state": "Tier-7 cobalt-blue and gold bodysuit fitted across her flexed muscles, silver-and-gold gauntlets gleaming, white sash, high leg cuts showing the muscular columns of her thighs. L33 coverage held.",
+          "psycho_power_state": "MASSIVE violet Psycho Power aura erupting from her body in a column upward, matching Bison's energy in intensity, traceries on her skin, eyes blazing violet",
+          "expression": "Triumphant rallying shout, head tipped back, mouth open in a battle cry, eyes blazing, brows drawn together in fierce intensity. Strikingly beautiful \u2014 vogue-cover glamour even mid-shout.",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "YOU AREN'T THE ONLY ONE WITH A TRUE FORM!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "FOOSH"
+          ],
+          "notes": "SPLASH 7/9 \u2014 Chun Li counter-flex. Mirror to Bison's transformation splash. Use Chun Li ref + lineup ref (muscle-size-lineup tier 6 for flex pose anchor).",
+          "continuity_refs": [
+            "p10-01",
+            "p23-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 26,
+      "panels": [
+        {
+          "panel_id": "p26-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "full-body, dynamic action, three-quarter, slight-low-angle",
+          "action": "Chun Li launches her signature Lightning Kick combo \u2014 standing on one leg with the other extended in a blurred multi-image afterimage chain (5+ kick-images overlaid showing the speed), her body braced against the floor for the rapid kicks. Motion blur on the kicking leg, twin buns flying. Violet aura around her body.",
+          "hair_state": "twin buns secured with red silk ribbons, ribbons trailing from kick motion",
+          "costume_state": "Tier-7 cobalt-blue and gold bodysuit, silver gauntlets, white sash, high leg cuts. L33 coverage held.",
+          "psycho_power_state": "Violet aura around her body, eyes glowing subtly violet, traceries on the kicking leg",
+          "expression": "Fierce focused intensity, mouth open in a rallying battle shout, eyes locked on Bison off-frame",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "HYAH HYAH HYAH HYAH HYAH!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "BAM BAM BAM"
+          ],
+          "notes": "Chun Li's signature Hundred Lightning Kicks. Camera variety: full-body dynamic three-quarter. Use Chun Li ref. Motion-blur kick chain.",
+          "continuity_refs": [
+            "p25-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 27,
+      "panels": [
+        {
+          "panel_id": "p27-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium, three-quarter, slight-low-angle",
+          "action": "Bison takes the Lightning Kick chain impact. His hypermuscular body rocked back, head snapped sideways from impact, multiple visible bruise/impact-marks across his exposed chest and shoulders, cape flapping from the force, his cap knocked askew. Violet energy bleeding out of his body from the cracks. Mouth open in a pained grunt.",
+          "hair_state": "red peaked military cap knocked askew on his head, brim tilted",
+          "costume_state": "Red Shadaloo uniform in tatters (post-transformation state), tunic shredded across the chest, white belt loose, cape flapping wildly",
+          "psycho_power_state": "Violet energy bleeding OUT of his body through visible cracks in his Psycho Power aura, eyes still white-glowing but flickering",
+          "expression": "Pained grunt, mouth open, head snapped sideways from impact, brows pulled together, jaw clenched",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "HRAGH!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "KRACK"
+          ],
+          "notes": "Bison absorbing impact. Use Bison FINAL FORM ref. Camera variety: medium three-quarter dynamic damage.",
+          "continuity_refs": [
+            "p23-01",
+            "p26-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 28,
+      "panels": [
+        {
+          "panel_id": "p28-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 8,
+          "characters": [
+            "chun-li"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide splash, dynamic action, slight-low-angle",
+          "action": "SPLASH 8/9 \u2014 Chun Li launches the finishing Spinning Bird Kick. Upside down in mid-air, body fully inverted, both legs extended horizontal-spread spinning around her vertical-stack center axis at impossible speed \u2014 the spinning legs are a near-solid disc of motion blur. Twin buns flying, arms held out for balance, her body wreathed in a vortex of violet Psycho Power energy spiraling with the spin.",
+          "hair_state": "twin buns + red silk ribbons trailing wildly from the spin",
+          "costume_state": "Tier-7 cobalt-blue and gold bodysuit, silver-and-gold gauntlets, white sash, high leg cuts. L33 coverage held.",
+          "psycho_power_state": "VORTEX of violet Psycho Power energy spiraling with her body, eyes blazing violet, traceries on her body",
+          "expression": "Fierce rallying battle cry, head inverted with hair flowing down, mouth open in a shout, eyes locked on target",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "SPINNING BIRD KICK!!!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            "WHIRRRRR"
+          ],
+          "notes": "SPLASH 8/9 \u2014 finishing move. Use Chun Li ref. Dynamic upside-down spinning action.",
+          "continuity_refs": [
+            "p17-01",
+            "p25-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 29,
+      "panels": [
+        {
+          "panel_id": "p29-01",
+          "size": "standard",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "medium, eye-level, three-quarter",
+          "action": "Bison defeated. Reverted from his final form back to his baseline (tier-1) state, kneeling on one knee on the cracked obsidian floor, one hand braced on the ground, head bowed. His red cap fallen off and lying on the floor beside him, the silver Shadaloo skull insignia gleaming. Cape pooled around him in defeat. His Psycho Power broken \u2014 just faint wisps of violet drifting away from his body.",
+          "hair_state": "no cap (cap fallen on floor beside him), short cropped dark hair messy from defeat, neatly trimmed black goatee",
+          "costume_state": "Baseline tier-1 red Shadaloo dictator uniform (reverted) \u2014 tunic intact but disheveled, white epaulettes rumpled, cape pooled on the floor around him, white belt slightly loose, black boots dusty",
+          "psycho_power_state": "Psycho Power BROKEN \u2014 just faint dying violet wisps drifting from his body, no aura, eyes their normal pale-violet (no glow)",
+          "expression": "Defeated head-bowed exhaustion, eyes downcast, mouth slack open in a defeated pant, brow drawn together in shock and disbelief",
+          "dialogue": [
+            {
+              "character": "bison",
+              "text": "I... I cannot...",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Bison defeat shot. Use Bison canonical ref. Camera variety: medium eye-level defeat pose.",
+          "continuity_refs": [
+            "p11-01",
+            "p28-01"
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 30,
+      "panels": [
+        {
+          "panel_id": "p30-01",
+          "size": "splash",
+          "tier": 7,
+          "bison_tier": 1,
+          "characters": [
+            "chun-li",
+            "bison"
+          ],
+          "location": "bisons-lair",
+          "time_of_day": "interior",
+          "weather": "n/a",
+          "camera": "wide splash, low-angle, hero-stance",
+          "action": "FINAL SPLASH 9/9. Chun Li stands tall over Bison's defeated kneeling form. Low-angle wide hero shot \u2014 Chun Li (right of frame foreground) in her tier-7 hero stance, hands on hips, head held high, triumphant smile, twin buns + red ribbons proud. Bison (left of frame mid-ground) kneeling defeated, cape pooled around him, cap on the floor. Behind them the obsidian throne and Shadaloo banners. Chun Li's violet aura tamed and crowning her like a halo. The chamber is dawning with the first violet-touched morning light through high arched windows behind her.",
+          "hair_state": "Chun Li: twin buns secured with red silk ribbons, proudly framing her triumphant face; Bison: no cap, dark hair messy",
+          "costume_state": "Chun Li: tier-7 cobalt-blue and gold bodysuit, silver-and-gold gauntlets, white sash, high leg cuts \u2014 IMMACULATE despite the fight; Bison: rumpled baseline red Shadaloo uniform, cape pooled in defeat",
+          "psycho_power_state": "Chun Li's tamed violet aura crowning her like a halo; Bison's Psycho Power completely broken, no aura",
+          "expression": "Chun Li: triumphant proud smile, chin slightly raised, lips closed in a satisfied victorious smile, eyes alert and bright, head held high \u2014 strikingly beautiful, vogue-cover glamour, defined cheekbones, glamour rim-light; Bison: defeated head-bowed exhaustion, downcast eyes, slack mouth",
+          "dialogue": [
+            {
+              "character": "chun-li",
+              "text": "For my father.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "His reign of shadow is OVER.",
+            "Today, Shadaloo falls."
+          ],
+          "sfx": [],
+          "notes": "FINAL SPLASH 9/9 \u2014 Chun Li victorious. Mirror image to p10's solo hero-stance splash, now with the defeated villain in frame. Use both refs + throne scene ref. POSE VARIATION mandatory \u2014 Chun Li tall vs Bison kneeling. Beauty maximum.",
+          "continuity_refs": [
+            "p10-01",
+            "p29-01"
+          ]
+        }
+      ]
+    }
+  ],
+  "camera_variety_check": {
+    "distance_categories_used": [
+      "wide-establish",
+      "medium",
+      "ecu-face",
+      "three-quarter-full",
+      "ecu-region",
+      "mcu",
+      "full-body",
+      "tall-full-body-profile"
+    ],
+    "distance_distinct_count": 8,
+    "angle_categories_used": [
+      "low-angle",
+      "eye-level",
+      "slight-low-angle",
+      "profile",
+      "three-quarter",
+      "hero-stance"
+    ],
+    "angle_distinct_count": 6,
+    "ecu_panels": [
+      "p03-01",
+      "p05-01",
+      "p08-01",
+      "p12-01",
+      "p14-01",
+      "p20-01",
+      "p22-01"
+    ],
+    "splash_or_wide_establish_panels": [
+      "p01-01",
+      "p06-01",
+      "p07-01",
+      "p10-01",
+      "p11-01",
+      "p18-01",
+      "p23-01",
+      "p25-01",
+      "p28-01",
+      "p30-01"
+    ],
+    "same_combo_max": 2,
+    "check_result": "PASS (30-panel expansion) \u2014 8+ distance categories, 6+ angle categories, 7 ECU panels, 10 splash/wide panels, multi-character two-shots p13/p15/p18/p19/p30. POSE VARIATION rule active on all two-shots."
+  },
+  "rules_active": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "allow_baked_lettering": true,
+  "lettering_directive": "All speech bubbles (white ellipse with tail), captions (yellow rounded-rectangle internal-thought boxes), and SFX baked into the panel image at generation time per L19. Page-composer applies layout but does NOT re-letter \u2014 text is already in the panel."
+}
