@@ -12,6 +12,31 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-23 (Overnight sample runs — 3 autonomous FMG comic attempts)
+
+Branch: `feat/overnight-samples-2026-05-23`. User briefed an overnight autonomous run for three sample FMG comics on Google Flow (free tier, browser-driven via Chrome MCP) — Yuna Hoshino (Japanese astronaut, tier 2→6, ISS cupola), Beatrix Sterling (British librarian, tier 2→5, Victorian library), Amaka Okafor (Nigerian dancer, tier 2→8, dance studio). Every decision pre-baked in the brief (character design, location, transformation trigger, tier curve, dialogue captions, tone, autopilot variant picks). Goal: user wakes to 3 completed comics; no AskUserQuestion calls.
+
+### Added
+
+- **projects/sample-01-yuna-cosmic-ascension/** — Japanese astronaut, tier 2→6, ISS observation cupola, 10-panel arc with awe-and-wonder tone and captions baked into panels 4/7/10. 5 of 10 panels generated to disk (panels 1-5); 39 Flow variants harvested to `flow-harvest/` for morning review; draft 5-page PDF at `final/comic.pdf`. Face card + ISS env ref locked.
+- **projects/sample-02-beatrix-library-awakening/** — British librarian, tier 2→5, Victorian library. Scaffolding + production-config + shotlist + references_required + panel-prompts all written. **No images generated** (Flow rate-limited the account after Sample 1's panel burst). Resume recipe in `final/README.md`.
+- **projects/sample-03-amaka-titan-spirit/** — Nigerian dancer, tier 2→8 (exercises tier-6/7/8 reinforcement refs). Scaffolding + configs + shotlist + panel-prompts written. **No images generated.** Resume recipe in `final/README.md`.
+- **projects/OVERNIGHT-REPORT-2026-05-23.md** — single-glance morning report for the user, with status of each sample, things to review, lessons learned for the brief, and recommended next actions.
+
+### Findings
+
+- **Flow free-tier rate limit kicks in after ~6 rapid submissions** and persists 1-2+ minutes — and is account-wide, not per-project. Sample 1's burst submission of panels 1-7 in quick succession triggered the limit; subsequent Sample 2 attempts in a fresh project still hit the throttle. Implication for memory `feedback_flow_parallel_gens.md`: parallel queueing works up to ~6 concurrent; beyond that, single-panel cadence with 30-60s waits between submits is required, particularly on free tier.
+- **Captions render reliably in-image via prompt instruction.** Yuna panel 4 successfully baked a yellow rounded-rectangle caption box with the line "The energy... it's becoming me." via prompt-only instruction (no post-process lettering pass). Validates the L19 in-image lettering recipe for the FMG-FlowSlow path.
+- **Asset picker is multi-select.** Cmd-click selects multiple items in Flow's `+` asset picker; "Add to Prompt" attaches them all simultaneously. Solves the per-panel ref-attachment pain point.
+- **JS canvas + browser-download is the cleanest export pipeline.** `canvas.drawImage(img); canvas.toDataURL('image/jpeg', 0.92); link.click()` extracts Flow images to the user's Downloads folder. Worked in batches of 10; 42 at once timed out the JS executor at 45s.
+
+### Cost
+
+- $0 (Flow free tier).
+- ~60 min runtime in the overnight session.
+
+---
+
 ## 2026-05-23 (Experiment 05 — Defects-identification skill)
 
 Builds the labeled-data foundation Experiment 02 explicitly asked for in its recommendation: a structured defect taxonomy, a labeled corpus, and a vision-model detection rubric. Branch: `experiment/05-defects-skill`. **Experiment ships a dataset + taxonomy + rubric + per-category ship-recommendation — does NOT fine-tune a model and does NOT wire into the autopilot.** The complementary unified-ship task with Experiment 02 is the next step after `composite.*` panels are hand-labeled.
