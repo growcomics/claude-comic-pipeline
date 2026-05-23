@@ -12,6 +12,48 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-22 (Experiment 03 — Multi-pass build-up workflow)
+
+Scaffolds and partially executes a falsifiable A/B test of the user's articulated intuition (Discord, May 2026): *"Sometimes in order to make a good image, you have to pre-render a few images before because it's just way too much to ask in one shot."* The hypothesis: complex composite panels (multiple characters, FG/BG depth, lighting integration) produce better results when generated in ingredient passes and composited, vs. one-shotting. Experiment branch: `experiment/03-multipass-buildup`. **No pipeline behavior shipped in this branch** — the experiment ships a test infrastructure, a single smoke-test datapoint, and a runbook for completing the remaining 4 panels.
+
+### Added
+
+- **[docs/experiments/03-multipass-buildup/](docs/experiments/03-multipass-buildup/)** — experiment artifacts:
+  - `test-panels.md` — 5 candidate panels selected from `ultra-gal-origin`'s QA audit ([pages-01-07-audit-2026-05-16.md](projects/ultra-gal-origin/audits/pages-01-07-audit-2026-05-16.md)), each chosen for a distinct composite-failure category (cast-count drop, FG/BG integration, identity confusion, object-binding error, wide-establish collapse).
+  - `workflow.md` — the multi-pass recipe under test: decompose → ingredient pass per element → composite pass with ingredient refs attached. Includes both the theory of why it should work and the counter-theory of how it could fail.
+  - `recipes.md` — per-panel control prompts AND per-ingredient + composite prompts for all 5 candidate panels. Ready to execute.
+  - `runbook.md` — step-by-step Flow UI runbook for executing panels 2-5 (panel 1 was executed during the experiment-author session).
+  - `ab-ratings.md` — blind rating template (X/Y labels with reveal section at the bottom). Per-rater rows for Matt and Magnamus. Includes an explicitly-marked AI prelim assessment on the executed panel.
+  - `decision.md` — provisional read pending the rating round; a heuristic-based opt-in proposal for `composition_mode: "build_up"` IF the rating round confirms wins.
+  - `outputs/README.md` — Flow project URL where the actual gens live (image-export from Flow was blocked by CSP/auth; gallery URL is the canonical artifact location).
+
+### Findings (preliminary — 1 of 5 panels executed)
+
+- **Smoke test:** `p05-02` (two characters mid-growth, low-angle-back). 5 Flow submits = 19 generations (one variant NSFW-filtered). Free tier, $0.
+- **Cast-count failure mode was NOT reproducible** with Nano Banana Pro on Flow — both variants rendered both characters in 4/4 panels. The audit's "currently only Mundy's back visible" complaint is generator-version-specific, not an inherent one-shot failure.
+- **Multi-pass shows a clear win on camera/composition adherence:** 4/4 multi-pass variants matched the prompted low-angle-back camera vs 2/4 for one-shot. Same for lab BG consistency (pre-rendered scene plate anchored all 4 composite variants to the same environment).
+- **Multi-pass produces less variance within the 4-up** — same lighting, same camera, same BG. Useful for production where you want predictability; less useful for picker-style exploration.
+- **Hypothesis status:** not confirmed, not refuted. Strongest tests (identity confusion on `p02-02`, object-binding on `p03-03`) haven't run yet.
+
+### Cost
+
+- **$0** this run (Flow free tier, Nano Banana Pro).
+- Estimated cost to complete remaining 4 panels: ~$0 on Flow; ~$2-3 if re-run via Higgsfield MCP for cleaner ref handling.
+
+### Recommendation (provisional)
+
+- **Do not ship the `composition_mode: "build_up"` flag yet.** Wait for the remaining 4 panels to be executed per `runbook.md` and rated by both Matt and Magnamus.
+- If the rating round shows multi-pass winning on identity-confusion + object-binding categories but tying on simple composites: ship as a **per-panel opt-in flag** with heuristics for when to enable it (≥3 named characters, explicit prop-binding, two visually similar characters). The shotlist author (script-breakdown skill) would set the flag at authoring time.
+- If the rating round shows ties or losses across the board: ship nothing; document the negative result; treat multi-pass as a manual escape hatch for individual hard panels.
+
+### Notes
+
+- **Flow UI is the rate-limiting bottleneck.** Multi-ref attachment through Chrome MCP took ~3-5 picker round-trips per gen — that's why only 1 of 5 panels was executed in the authoring session rather than the planned 5. Higgsfield MCP would be ~10x faster for this experiment (memory: `feedback_higgsfield_mcp.md`). The runbook documents the Flow workflow regardless, since that's what was used for the smoke test.
+- **Renamed refs** were staged at `/tmp/exp03-refs/` because Flow's asset picker can't distinguish duplicate basenames (`face-card.png` × 4 characters). Any future multi-character experiment on Flow needs this pre-rename step.
+- **No image-export from Flow** was possible — image URLs are auth-gated and CORS/CSP blocked the in-page canvas-capture path. The Flow project URL itself is the canonical artifact location; export tooling is out of scope.
+
+---
+
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
 
 A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).
