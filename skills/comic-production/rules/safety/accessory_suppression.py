@@ -1,26 +1,20 @@
 """L24 — Suppress anachronistic accessories explicitly.
 
-Models hallucinate modern accessories (wristwatches, bracelets, rings,
-earrings, necklaces) on characters even when the canonical character wears
-none. Wrists, neck, ears, and ring fingers are hotspots.
+Negation-only safety rule. Reads per-character `cast[].accessories` and
+emits a "NO watch, NO ring, NO earrings..." line when wrist/neck/ear
+visibility is in frame.
 
-Reads per-character `cast[].accessories` block with `canonical` text and a
-`negation` list. The negation list is the load-bearing part — enumerating
-the substitutes the model actually produces suppresses the prior.
-
-See:
-  - skills/comic-production/references/lessons-learned.md § L24
-  - skills/comic-production/references/the-rules-explained.md § L24
+Moved from rules/l24_accessory.py in the 2026-05-23 refs-are-truth refactor.
+Behavior unchanged.
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS, STATUS_SKIPPED
+from .._base import (
+    Rule, Verification, STATUS_PASS, STATUS_SKIPPED, CATEGORY_SAFETY,
+)
 
 
-# Cameras where wrists / neck / ears / fingers may be in frame — i.e. where
-# the model has room to hallucinate. ECU-region on an arm is included
-# because the wrist is usually at the bottom of frame.
 _L24_CAMERAS = {
     "ecu-face", "ecu-region", "mcu", "medium", "cowboy",
     "front-full", "3q-full", "back-full", "side-full", "profile",
@@ -64,6 +58,7 @@ class L24(Rule):
     section_label = "ACCESSORIES — L24"
     severity = "soft"
     applicable_transformations = ("*",)
+    category = CATEGORY_SAFETY
     vision_rubric = (
         "Look at this rendered comic panel and check the character's wrists, "
         "neck, ears, and fingers (whichever are visible in the frame). Are "

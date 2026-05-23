@@ -1,0 +1,44 @@
+[RENDER STYLE — Iray photoreal]
+DAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.
+
+[CAMERA — base framing]
+Wide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.
+
+[SUBJECTS]
+Subjects: chun-li.
+
+[HAIR — L22]
+Hair state: twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette.
+
+[STYLE — L11 body-tier anchor]
+Body style: match the attached body-tier reference exactly — cartoony hyper-FMG proportions per the ref, not a realistic fitness build.
+
+[ACTION DELTA]
+DELTA — action only: Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Wide low-angle hero shot establishing the cathedral-scale chamber. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)
+
+[LIGHTING STATE]
+Momentary lighting state: interior, no diurnal cue.
+
+[BODY TIER — L11 match-the-ref]
+Body proportions: match figure 2 of the attached muscle-size lineup exactly — both the muscle mass AND the breast scale. Borrow proportions only; do not borrow face, hair, costume, or pose from the lineup.
+
+[ENVIRONMENT — match the ref]
+Location: bisons-lair. Match the attached environment reference for architecture, lighting baseline, scale, and depth. Do not reinterpret the location.
+
+[RENDER DIRECTIVE — L10]
+Match the attached references exactly for identity, costume, and location. The prompt above describes only what is NEW in this panel (camera, pose, action, momentary state); identity is fixed by the refs.
+
+[REF SAFETY — L21 no-render-as-prop]
+DO NOT render any reference image as a physical scene object — no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.
+
+[POSE & ANATOMY — L18]
+L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.
+
+[MANDATORY ANCHORS]
+Mood: vivid expressive face (not neutral or blank). Continuity: once a character has grown to a size they stay at that size or larger.
+
+[LETTERING — L19 2D overlay]
+LETTERING — classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book shout balloon — white JAGGED-EDGED starburst shape with a bold solid black outline (spiky/zig-zag border, not smooth), denoting yelling, positioned over `chun-li`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `chun-li`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: "BISON! Show yourself!". Flat 2D vector graphic — NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. Caption box 1: classic comic-book caption — yellow rounded-corner rectangle with a bold 3-4 pixel solid black outline, positioned at the bottom edge of the panel. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: "I can feel his Psycho Power... everywhere.". Flat 2D vector graphic — NO 3D shading, NO bevel, NO drop shadow on the scene. The lettering layer is composited ON TOP of the photoreal CGI render — like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.
+
+[CLOSING ANCHOR — CGI scope]
+Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.

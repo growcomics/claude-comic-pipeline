@@ -1435,37 +1435,36 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
             f"Subjects: {', '.join(chars)}."
         ))
 
-    # 3.0 L17 canonical character anchor — slot 3_subject_identity, first.
-    # PHASE 3A — routed through rules._registry.
+    # 3.0 L17 — match canonical face card. POST-REFACTOR (2026-05-23):
+    # was a multi-line appearance directive, now emits one-line
+    # "match the attached canonical face card" when the character is
+    # canonical. Source of truth for canon is the face card, not prose.
     _apply_rule_at_slot("L17", "3_subject_identity",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 3.1 L15 female beauty anchor — slot 3_subject_identity, second.
-    # PHASE 3A — routed through rules._registry. FMG-only.
-    _apply_rule_at_slot("L15", "3_subject_identity",
-                        panel, ctx, parts, _trace, transformation_type)
+    # POST-REFACTOR: L15 (female beauty anchor) DELETED — beauty is in
+    # the face card asset. Regenerate the face card if a character
+    # reads as not-beautiful; do not paraphrase beauty into the prompt.
 
-    # 3a. L22 hair state — slot 4_subject_state, first.
-    # PHASE 3A — routed through rules._registry. Reads panel.hair_state;
-    # does NOT auto-derive from tier + beat (memory:
-    # `feedback_dont_invent_state_changes` — shotlist author owns it).
+    # 3a. L22 hair state — slot 4_subject_state, first. STATE delta
+    # (action-class), not appearance. Hair STYLE is in the face card;
+    # hair STATE is per-panel (up/down, wet/dry, intact/loose).
     _apply_rule_at_slot("L22", "4_subject_state",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 3b. L24 accessory canonical + enumerated negation — slot 4_subject_state, second.
-    # PHASE 3A — routed through rules._registry.
+    # 3b. L24 accessory canonical + enumerated negation — slot 4_subject_state.
+    # Negation-safety. Compliant.
     _apply_rule_at_slot("L24", "4_subject_state",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 3c. female_anatomy anchor on body-region ECUs at tier >= 2 — slot 4_subject_state, third.
-    # PHASE 3A — routed through rules._registry. FMG-only.
-    _apply_rule_at_slot("female_anatomy", "4_subject_state",
-                        panel, ctx, parts, _trace, transformation_type)
+    # POST-REFACTOR: female_anatomy DELETED — face card + body-tier
+    # reinforcement refs carry female-ness; the prose anchor was a
+    # band-aid replaced by stronger refs.
 
-    # 3d. L11 style anchor — slot 5_style_anchor. Fires when tier >= 2.
-    # Slots before the action delta so the model commits to the proportional
-    # aesthetic before reading action content. PHASE 3B — routed through
-    # rules._registry. FMG-only.
+    # 3d. L11 — match body-tier reference. POST-REFACTOR: was the L11
+    # STYLE prose (~600 chars); now one-line "match the attached body-
+    # tier reference" directive. Slots before the action delta so the
+    # model commits to the body anchor before reading action content.
     _apply_rule_at_slot("L11", "5_style_anchor",
                         panel, ctx, parts, _trace, transformation_type)
 
@@ -1525,54 +1524,22 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _apply_rule_at_slot("L32", "8b_tier_reinforcement",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 7. Environment — slot 9_environment. Two pieces:
-    #   - env-chaining or first-env language (composer logic, when env_ref attached)
-    #   - L23 dense verbal anchor (rule module, when env_dropped)
-    # The composer emits the env line first when env_ref is attached; then
-    # L23's `_apply_rule_at_slot` runs and either emits the dense anchor
-    # (env_dropped case) or records skipped (env_ref attached / no env case).
-    if env_ref:
-        if env_anchor_from:
-            env_line = (
-                f"Location: {location_slug}. The attached environment "
-                f"reference IS this location — it's the accepted establishing "
-                f"shot from panel `{env_anchor_from['panel'].get('panel_id')}`. "
-                "Render the same architecture, the same wall layout, the same "
-                "equipment placement, the same scale, the same depth. The "
-                "delta describes ONLY what is happening in this panel; the "
-                "location itself is fixed by this reference."
-            )
-            parts.append(_format_section("ENVIRONMENT — ref anchor", env_line))
-        else:
-            env_line = (
-                f"Location: {location_slug}. The attached environment reference "
-                "establishes the location's render style — Iray quality, "
-                "lighting setup, scale, depth, atmosphere. Use it as the visual "
-                "anchor for the location's architecture. Do not reinterpret."
-            )
-            parts.append(_format_section("ENVIRONMENT — ref anchor", env_line))
-    # L23 dense verbal anchor — PHASE 3A — routed through rules._registry.
-    # Records skipped when env_ref attached or no env; records applied (and
-    # emits the dense anchor) when env_dropped + location has a description;
-    # records fail when env_dropped + no description.
+    # 7. Environment — POST-REFACTOR (2026-05-23). Two slots:
+    #   - 9_environment_match: MatchEnv emits the one-line match-the-
+    #     attached-env-ref directive (was inline ENVIRONMENT prose).
+    #   - 9_environment: L23 emits the dense verbal fallback ONLY when
+    #     env_ref had to be dropped (3-ref ceiling).
+    _apply_rule_at_slot("MATCH_ENV", "9_environment_match",
+                        panel, ctx, parts, _trace, transformation_type)
     _apply_rule_at_slot("L23", "9_environment",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 8. State anchor — prior panel for costume/hair/body/damage continuity
-    if anchor:
-        anchor_panel_id = anchor["panel"].get("panel_id", "?")
-        anchor_view = anchor["panel"].get("camera", "?")
-        anchor_line = (
-            f"State anchor: prior panel `{anchor_panel_id}` "
-            f"({anchor_view}) is attached as a reference. Preserve costume "
-            "state, hair state, body size, and any cumulative damage from "
-            "that panel exactly. Costume tears never regress across panels."
-        )
-        parts.append(_format_section("STATE ANCHOR — L1.5", anchor_line))
-        _record_applied(_trace, "L1.5", contribution=anchor_line,
-                        pre_render_reason=f"view-aware chain found compatible prior panel `{anchor_panel_id}` (view={anchor_view!r}) for target view {camera!r}")
-    # Note: L1.5 with no anchor is recorded by build_plan with reason text
-    # explaining why (ecu-face, no compatible prior, etc.)
+    # 8. State anchor — POST-REFACTOR: routed through L1 (the new
+    # match/match_prior_panel.py rule). Was inline STATE ANCHOR — L1.5
+    # prose. The selection of WHICH prior panel happens in build_plan;
+    # the match directive emission happens here.
+    _apply_rule_at_slot("L1", "10_state_anchor",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 9. L10 render directive — slot 11_render_directive. THE LOAD-BEARING L10
     # SENTENCE. PHASE 3A — routed through rules._registry.
@@ -1590,14 +1557,17 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
     _apply_rule_at_slot("L18", "13_anatomy_guardrail",
                         panel, ctx, parts, _trace, transformation_type)
 
-    # 10. Mandatory rules (L19 — bake 2D comic-style lettering as a scoped
-    # overlay; everything else stays photoreal CGI)
+    # 10. Mandatory anchors — POST-REFACTOR (2026-05-23):
+    # Stripped appearance bits ("muscles natural healthy skin tone",
+    # "skin subtle healthy sheen") — those come from the body-tier ref
+    # and the face card per L10. "vivid expressive face" stays as a
+    # MOOD directive (action-class). Anatomy moves out (L18 covers it
+    # at slot 13_anatomy_guardrail). Size-monotonicity stays because
+    # it's a state-continuity rule, not an appearance description.
     parts.append(_format_section(
         "MANDATORY ANCHORS",
-        "Mandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); "
-        "skin has subtle healthy sheen, not oiled or wet; vivid expressive face "
-        "(not neutral or blank); correct human anatomy with exactly two arms "
-        "and exactly two legs; once a character has grown to a size they stay "
+        "Mood: vivid expressive face (not neutral or blank). "
+        "Continuity: once a character has grown to a size they stay "
         "at that size or larger."
     ))
 

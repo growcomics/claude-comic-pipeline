@@ -485,7 +485,10 @@ def run(opts: RunOptions) -> RunnerState:
                 ps.concerns = pick.concerns + ["all_bad=true, skipped per policy"]
                 ps.completed_at = _now_iso()
                 save_state(pr, state)
-                _commit_accepted(pr, panel_id, result.variant_paths, pick.picked)
+                _commit_accepted(
+                    pr, panel_id, result.variant_paths, pick.picked,
+                    plan=plan, pick=pick,
+                )
                 log_status(f"Panel {panel_id} — skipped with flag")
                 continue
 
@@ -499,7 +502,10 @@ def run(opts: RunOptions) -> RunnerState:
         ps.concerns = pick.concerns
         ps.completed_at = _now_iso()
         save_state(pr, state)
-        _commit_accepted(pr, panel_id, result.variant_paths, pick.picked)
+        _commit_accepted(
+            pr, panel_id, result.variant_paths, pick.picked,
+            plan=plan, pick=pick,
+        )
 
         log_status(
             f"Panel {panel_id} done — picked V{pick.picked} ({pick.strategy_used})"
@@ -518,6 +524,8 @@ def _commit_accepted(
     panel_id: str,
     variant_paths: list[Path],
     picked_idx: int,
+    plan: dict | None = None,
+    pick: object | None = None,
 ) -> None:
     """Copy the picked variant to the canonical accepted location:
     pages/panels/<panel_id>.png — where next_panel.py expects to find it.
@@ -526,6 +534,22 @@ def _commit_accepted(
     folder-based acceptance check recognizes the panel as done. Without this
     marker, next_panel.py sees v*.png variants in the folder, classifies the
     panel as in_progress, and the runner loops re-generating it forever.
+
+    POST-REFACTOR (2026-05-23, refs-are-truth):
+    When `plan` is provided, also writes per-panel diagnostic files:
+      - prompt.txt           — the exact composed prompt used at generation
+      - attached_refs.json   — the refs that were attached (kind / path / reason)
+      - panel-plan.json      — the full plan dict (composed prompt, refs,
+                               rule trace, transformation context)
+
+    Without these files, future drift cannot be diagnosed because the
+    record of what the model was told is lost. The Yuna project shipped
+    without them — see docs/refactor/yuna-prompt-exhibit.md for the
+    motivating failure mode.
+
+    When `pick` is provided, writes pick metadata into panel-plan.json
+    under "variant_pick" — captures the picker's reason, strategy, and
+    concerns alongside the chosen variant index.
     """
     src = variant_paths[picked_idx - 1]
     dst = project_root / "pages" / "panels" / f"{panel_id}.png"
@@ -535,6 +559,31 @@ def _commit_accepted(
     folder = project_root / "pages" / "panels" / panel_id
     folder.mkdir(parents=True, exist_ok=True)
     (folder / "_accepted.txt").write_text(f"v{picked_idx}")
+
+    if plan is not None:
+        composed = plan.get("composed_prompt") or ""
+        if composed:
+            (folder / "prompt.txt").write_text(composed)
+
+        refs = plan.get("refs_to_attach_in_order") or []
+        (folder / "attached_refs.json").write_text(
+            json.dumps(refs, indent=2, default=str)
+        )
+
+        plan_record = dict(plan)
+        plan_record["accepted_variant"] = picked_idx
+        if pick is not None:
+            plan_record["variant_pick"] = {
+                "picked": getattr(pick, "picked", picked_idx),
+                "reason": getattr(pick, "reason", None),
+                "strategy_used": getattr(pick, "strategy_used", None),
+                "concerns": list(getattr(pick, "concerns", []) or []),
+                "all_bad": getattr(pick, "all_bad", False),
+                "api_cost_usd": getattr(pick, "api_cost_usd", None),
+            }
+        (folder / "panel-plan.json").write_text(
+            json.dumps(plan_record, indent=2, default=str)
+        )
 
 
 def log_status(msg: str) -> None:

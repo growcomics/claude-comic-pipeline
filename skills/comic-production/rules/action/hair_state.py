@@ -1,19 +1,25 @@
-"""L22 — Hair state must be explicit in every face-visible panel.
+"""L22 — Hair state per panel (state delta, not appearance).
 
-Reads `panel.hair_state` from the shotlist. The composer does NOT auto-
-derive hair state from tier + transformation_beat — that's the May 14
-"don't invent transformation state changes" lesson. Shotlist author owns
-the field; this rule just surfaces it as a named, anchored prompt line.
+Hair STYLE (Chun Li's twin buns, ribbon design, length, color) is part
+of the character's identity and belongs in the face card. Hair STATE
+(up/down, wet/dry, intact/coming-loose, bound/released) is a per-panel
+delta that the shotlist author owns.
+
+Reads panel.hair_state and surfaces it as a named, anchored prompt line.
+Reclassified as ACTION (state delta) in the 2026-05-23 refs-are-truth
+refactor — the rule is fine as-is, but it lives in the action category
+because it describes a momentary state, not character appearance.
 
 See:
   - skills/comic-production/references/lessons-learned.md § L22
-  - skills/comic-production/references/the-rules-explained.md § L22
   - memory: feedback_dont_invent_state_changes
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS, STATUS_SKIPPED
+from .._base import (
+    Rule, Verification, STATUS_PASS, STATUS_SKIPPED, CATEGORY_ACTION,
+)
 
 
 class L22(Rule):
@@ -23,6 +29,7 @@ class L22(Rule):
     section_label = "HAIR — L22"
     severity = "soft"
     applicable_transformations = ("*",)
+    category = CATEGORY_ACTION
     vision_rubric = (
         "Look at this rendered comic panel and check the character's hair. "
         "The shotlist explicitly declares panel.hair_state (e.g. 'twin buns "
@@ -59,9 +66,6 @@ class L22(Rule):
         )
 
     def retry_strategy(self, panel: dict, ctx: dict, failure: dict) -> dict:
-        # When post-render vision spots hair drift (twin buns became a single
-        # bun, ribbons turned grey, hair length jumped), strengthen the line
-        # with concrete anchors (color, count, length).
         return {
             "kind": "auto_resubmit_with_stronger_contribution",
             "rule_id": self.id,

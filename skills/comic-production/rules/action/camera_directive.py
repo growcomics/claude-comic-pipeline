@@ -1,29 +1,20 @@
 """L20 — Camera distance bias (in-prompt directive piece).
 
-This module owns the in-prompt body-region camera directive: when a panel
-has a body-region `transformation_beat` (chest / hips / rear / arms / abs /
-legs / shoulders / back / suit_fail), inject aggressive ECU vocabulary so
-the model commits to tight framing before reading the action content.
+Action-only rule. Emits an aggressive ECU vocabulary directive when a
+panel has a body-region transformation_beat, so the model commits to
+tight framing before reading the action content.
 
-The chapter-aggregate L20 check (mean distance, per-beat overshoot) lives in
-build_plan as `L20_chapter` and stays there for phase 3. Phase 4 migrates
-the rules_audit.py-style checks into rule modules; until then the two halves
-of L20 live in two places.
-
-See:
-  - skills/comic-production/references/lessons-learned.md § L20
-  - skills/comic-production/references/the-rules-explained.md § L20 (strengthened May 2026)
-  - skills/comic-production/references/camera-distance-analysis/README.md
+Moved from rules/l20_camera.py in the 2026-05-23 refs-are-truth refactor.
+Behavior unchanged.
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS, STATUS_SKIPPED
+from .._base import (
+    Rule, Verification, STATUS_PASS, STATUS_SKIPPED, CATEGORY_ACTION,
+)
 
 
-# Mirror of next_panel._BODY_REGION_BEAT_TO_REGION. The two must stay in sync
-# until phase 3 cleanup removes the legacy copy; for now this module is the
-# canonical source.
 _BODY_REGION_BEAT_TO_REGION = {
     "chest": "chest",
     "hips": "hips and waist",
@@ -44,6 +35,7 @@ class L20(Rule):
     section_label = "CAMERA — L20 distance bias"
     severity = "hard"
     applicable_transformations = ("*",)
+    category = CATEGORY_ACTION
     vision_rubric = (
         "Look at this rendered comic panel. The shotlist declares a body-"
         "region transformation beat (e.g. chest / arms / abs / hips) which "
@@ -90,8 +82,6 @@ class L20(Rule):
         )
 
     def retry_strategy(self, panel: dict, ctx: dict, failure: dict) -> dict:
-        # If post-render vision (phase 5) shows the framing is too wide,
-        # escalate the DOMINATES language one more notch.
         return {
             "kind": "auto_resubmit_with_stronger_contribution",
             "rule_id": self.id,

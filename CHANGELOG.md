@@ -12,6 +12,238 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-23 (MAJOR REFACTOR — rules emit action only, refs carry appearance)
+
+The biggest architectural change to the rule system since the original
+checks-and-balances phases. L10 ("references are the truth, prompts
+are deltas") was a doc principle but not enforced in code. The rule
+registry's `directive()` methods emitted walls of appearance prose —
+telling the model in 1,000+ words per panel what the character looks
+like instead of pointing at the attached reference images and saying
+"match these."
+
+User's words at the kickoff: *"our prompts need to be guiding the
+comic by indicating what the character is supposed to be doing, not
+what they look like... ever. What they look like is determined by the
+reference."*
+
+The Yuna astronaut comic (`projects/sample-01-yuna-cosmic-ascension/`)
+was the proof: 5 panels shipped overnight with visible character
+drift, AND the project shipped without any `prompt.txt` /
+`attached_refs.json` files because the persistence pathway never
+wrote them — so the drift couldn't be diagnosed after the fact. Both
+problems are fixed in this refactor.
+
+Branch: `refactor/refs-are-truth-prompts-are-action`. PR not opened —
+the user reviews the validation A/B in `docs/refactor/validation/`
+before merging.
+
+### Why
+
+Pre-refactor evidence (`docs/refactor/yuna-prompt-exhibit.md`): the
+chun-li-test `p06-01` peak-conditions prompt was **11,509 chars /
+1,770 words / 53 lines**. About **73% of the words (~1,283) described
+the character's appearance** — tier-6 muscle volume, breast scale,
+vogue-cover face quality, canonical Chun Li identity, hair style. All
+of that is in the attached references (face card, body-tier lineup,
+tier-6 reinforcement PNGs, prior panel). The prompt was redundantly
+re-describing the refs to the model, every panel.
+
+Post-refactor: same panel, same conditions, **5,114 chars / 787 words
+/ 50 lines** — **55.6% reduction**. Every word that remains is either
+describing what the character is DOING in this panel (action,
+camera, lighting, state delta), pointing at an attached ref to MATCH,
+describing what NOT to render (negation safety), or describing the
+lettering overlay layer. That's L10 enforced in code.
+
+### Changed
+
+- **`skills/comic-production/rules/` restructured into four
+  categories** — `attach/` (reference-attaching, no text emission),
+  `action/` (action / camera / lighting / state-delta text), `match/`
+  (one-line "match the attached <ref>" directives), `safety/`
+  (negation / "do not render X"). Every Rule subclass now declares
+  `category: str`. `_base.py` exposes `CATEGORY_ATTACH`,
+  `CATEGORY_ACTION`, `CATEGORY_MATCH`, `CATEGORY_SAFETY` constants and
+  the registry exposes `iter_rules_for_category()`.
+
+- **Appearance-emitting rules gutted to one-line match directives.**
+  L11 (cartoony FMG body anchor, was up to ~1900 chars per panel),
+  L17 (canonical character anchor, was variable per-character canon
+  prose), L10 (render directive, was a 300-char paragraph), and the
+  tier reinforcement L29/L30/L31/L32 text directives (each ~800
+  chars) all collapse into short directives in `match/match_body.py`
+  and `match/match_face_card.py` pointing at the attached refs. Rule
+  IDs preserved so audit ledgers remain interpretable.
+
+- **Rules MOVED to new module paths** (behavior unchanged):
+  - `l18_anatomy.py` → `safety/anatomy_coherence.py`
+  - `l20_camera.py` → `action/camera_directive.py`
+  - `l21_ref_safety.py` → `safety/ref_safety.py`
+  - `l22_hair_state.py` → `action/hair_state.py` (reclassified —
+    hair STATE is per-panel delta, action-class; hair STYLE is in
+    the face card)
+  - `l23_env_anchor.py` → `action/environment_directive.py`
+  - `l24_accessory.py` → `safety/accessory_suppression.py`
+
+- **Inline composer sections routed through the registry.** The
+  `STATE ANCHOR — L1.5` inline emission becomes `L1` in
+  `match/match_prior_panel.py` (slot `10_state_anchor`). The inline
+  `ENVIRONMENT — ref anchor` becomes `MATCH_ENV` in
+  `match/match_env.py` (slot `9_environment_match`, fires before L23
+  fallback).
+
+- **`MANDATORY ANCHORS` composer section gutted.** Stripped the
+  appearance bits ("muscles natural healthy skin tone", "skin has
+  subtle healthy sheen") — those come from the body-tier ref and the
+  face card per L10. Kept "vivid expressive face" as a MOOD directive
+  (action-class) and the size-monotonicity rule (state-continuity).
+
+### Added
+
+- **`skills/comic-production/rules/attach/`** — six new attach
+  modules formalizing the reference-attachment contract that lived
+  inline in `next_panel.build_plan()`:
+  - `attach/face_card.py` — face card per named character.
+  - `attach/body_tier.py` — body-tier lineup per
+    `panel.muscle_size_tier` (picks low/high lineup).
+  - `attach/tier_reinforcement.py` — consolidates L29-L32 attachment
+    (one module covering all four tiers).
+  - `attach/env_ref.py` — env ref per `panel.location`.
+  - `attach/prior_panel.py` — **NEW.** Formalizes L1 chaining as a
+    first-class attach rule. Picks the most recent accepted panel
+    with a state-carrying camera as the continuity anchor.
+  - `attach/internet_3d_base.py` — **NEW.** The internet→3D base ref
+    attachment described in the user's canonical workflow. Auto-
+    attaches `references/characters/<slug>/internet-3d-base.png`
+    when present; soft-warns when missing and points at the new
+    reference-acquisition skill.
+
+- **`skills/reference-acquisition/SKILL.md`** — new skill documenting
+  the internet-image → 3D base reference workflow. Used to bootstrap
+  new characters: download an internet image of the character, feed
+  it to Higgsfield Nano Banana 2 with a "render as photoreal 3D model,
+  A-pose, plain background" prompt, save the output as
+  `references/characters/<slug>/internet-3d-base.png`. From there the
+  comic pipeline picks it up automatically.
+
+- **`docs/refactor/rule-classification-before.md`** — audit table of
+  every pre-refactor rule and its L10 verdict (DELETE / REWRITE /
+  KEEP / MOVE / SPLIT).
+
+- **`docs/refactor/migration-plan.md`** — per-rule migration with old
+  path → new path, what changed in the directive, what didn't.
+
+- **`docs/refactor/yuna-prompt-exhibit.md`** — why this doc uses
+  chun-li-test (the Yuna project shipped without a shotlist, so it
+  can't be re-prompted), the BEFORE prompt stats, the projected and
+  realized AFTER stats, the section-by-section breakdown of where the
+  words went.
+
+- **`docs/refactor/validation/`** — the prompt-level A/B comparison:
+  the actual BEFORE prompt (11,509 chars), the actual AFTER prompt
+  (5,114 chars), and the same composer run at tier 2 and tier 7 for
+  cross-tier consistency. The image-level A/B requires the user to
+  burn Higgsfield credits and is deferred to a follow-up.
+
+### Removed
+
+- `skills/comic-production/rules/l10_render_directive.py` — replaced
+  by `match/match_face_card.py` (the `L10` class).
+- `skills/comic-production/rules/l11_muscular_build.py` — replaced
+  by `match/match_body.py` (the `L11` class).
+- `skills/comic-production/rules/l15_glamour.py` — **DELETED.**
+  Beauty is in the face card. If a character renders as not-beautiful,
+  regenerate the face card; do not paraphrase beauty into every panel
+  prompt.
+- `skills/comic-production/rules/l17_canonical.py` — replaced by
+  `match/match_face_card.py` (the `L17` class).
+- `skills/comic-production/rules/l18_anatomy.py` — moved to
+  `safety/anatomy_coherence.py`.
+- `skills/comic-production/rules/l20_camera.py` — moved to
+  `action/camera_directive.py`.
+- `skills/comic-production/rules/l21_ref_safety.py` — moved to
+  `safety/ref_safety.py`.
+- `skills/comic-production/rules/l22_hair_state.py` — moved to
+  `action/hair_state.py`.
+- `skills/comic-production/rules/l23_env_anchor.py` — moved to
+  `action/environment_directive.py`.
+- `skills/comic-production/rules/l24_accessory.py` — moved to
+  `safety/accessory_suppression.py`.
+- `skills/comic-production/rules/l29_tier6_reinforcement.py` — SPLIT.
+  Attach part → `attach/tier_reinforcement.py`; match directive →
+  `match/match_body.py` (`L29` class).
+- `skills/comic-production/rules/l30_tier7_reinforcement.py` — SPLIT
+  (same as L29).
+- `skills/comic-production/rules/l31_tier8_reinforcement.py` — SPLIT
+  (same as L29).
+- `skills/comic-production/rules/l32_tier9_reinforcement.py` — SPLIT
+  (same as L29).
+- `skills/comic-production/rules/female_anatomy.py` — **DELETED.**
+  Face-card + body-tier reinforcement refs carry female-ness now; the
+  prose anchor was a band-aid replaced by stronger refs.
+
+### Fixed
+
+- **`prompt.txt` / `attached_refs.json` / `panel-plan.json`
+  persistence** ([runners/runner_core.py:516](runners/runner_core.py)).
+  `_commit_accepted()` now writes three diagnostic files per accepted
+  panel: the exact composed prompt that was used, the list of
+  reference images attached (kind / path / reason), and the full plan
+  dict (composed prompt, refs, rule trace, variant pick metadata).
+  Without these files, future drift was undiagnosable — exactly the
+  Yuna project failure mode. Both `_commit_accepted` call sites in
+  the runner loop updated to pass `plan` + `pick` through.
+
+### Validation
+
+- chun-li-test p06-01 prompt re-rendered with new composer:
+  **11,509 → 5,114 chars (55.6% reduction)**,
+  **1,770 → 787 words (55.5% reduction)**.
+- chun-li-test p07-01 (tier 7): **5,015 chars / 772 words**.
+- chun-li-test p01-01 (tier 2): **4,640 chars / 709 words**.
+- AFTER prompt size is roughly constant across tiers (~5K chars)
+  because appearance-bloat scaling with tier is gone — every tier
+  just says "match the attached body-tier reference" and the
+  proportion truth lives in the attached PNG.
+- Existing test suite (`tests/test_flow_runner_mock.py`,
+  `tests/test_runner_loop.py`, `tests/test_variant_picker.py`)
+  passes unchanged.
+- The IMAGE-level A/B (re-rendering the panel via Higgsfield with old
+  vs new prompts to compare visual output) is deferred — Higgsfield
+  MCP wasn't connected for the refactor session. Per
+  `feedback_validate_with_credits` the user should burn 4-8
+  generations on each prompt before merging.
+
+### Backward compatibility
+
+- **Accepted panels stay as-is.** Already-rendered PNGs are not
+  retouched.
+- **Existing project configs parse unchanged.** No shotlist field is
+  renamed; no production-config key is moved.
+- **Re-running `next_panel.py` against any existing project produces
+  a DIFFERENT prompt.** This is the point of the refactor. If a
+  project is mid-flight and depends on getting the same prompt
+  structure on re-render, finish that project before merging this
+  refactor.
+- **Rule IDs unchanged.** `L21`, `L18`, etc. continue to identify the
+  same logical rule even though the module path moved. Audit ledgers
+  and `checks.json` files written by the old code remain
+  interpretable.
+
+### Open work deferred
+
+- The image-level Higgsfield A/B (user-driven, credits).
+- `safety/clothing_coverage.py` (L33 always-clothed) currently lives
+  per-project in `production-config.json` `mandatory_rules.extra_lines`;
+  promoting to a rule module is a separate refactor.
+- The L19 LETTERING block remains the largest single section in the
+  AFTER prompt (~300 words). It describes bubble/SFX structure (which
+  is action-class, not appearance), but could be slimmed in a future
+  pass that's out of scope for this branch.
+
+---
+
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
 
 A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).

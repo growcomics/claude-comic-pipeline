@@ -1,20 +1,19 @@
 """L21 — Suppress in-scene rendering of reference images.
 
-Lesson: every panel prompt that attaches at least one ref must include the
-exclusion clause forbidding the model from rendering the ref as a physical
-scene object (a small photo on a sleeve, a badge, a poster, a watermark-style
-figure number). Empirically validated on chun-li-grok-validation panel 6 v2,
-where the lineup figure's "1" label rendered as a watermark in the corner of
-the panel; the v3 with the exclusion clause cleared it.
+Negation-only safety rule. Tells the model NOT to render any attached
+reference image as a physical scene object (badge, watermark, inset
+photo, figure-number overlay).
 
-See:
-  - skills/comic-production/references/lessons-learned.md § L21
-  - skills/comic-production/references/the-rules-explained.md § L21
+Moved from rules/l21_ref_safety.py in the 2026-05-23 refs-are-truth
+refactor. Behavior unchanged — only the module path moved and the
+category attribute was added.
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS, STATUS_SKIPPED
+from .._base import (
+    Rule, Verification, STATUS_PASS, STATUS_SKIPPED, CATEGORY_SAFETY,
+)
 
 
 L21_REF_EXCLUSION = (
@@ -32,6 +31,7 @@ class L21(Rule):
     section_label = "REF SAFETY — L21 no-render-as-prop"
     severity = "soft"
     applicable_transformations = ("*",)
+    category = CATEGORY_SAFETY
     vision_rubric = (
         "Look at this rendered comic panel. Does the panel contain any element "
         "that appears to be a reference image rendered as a physical scene "
@@ -77,11 +77,6 @@ class L21(Rule):
         )
 
     def retry_strategy(self, panel: dict, ctx: dict, failure: dict) -> dict:
-        """When post-render vision spots a ref rendered as a scene object,
-        strengthen the negation list. The substitute the model produced
-        (watermark, badge, photo, poster, figure-number, holographic overlay)
-        gets added to the negation enumeration on retry.
-        """
         substitute = (failure.get("evidence") or {}).get("substitute_rendered")
         if substitute:
             strengthening = (

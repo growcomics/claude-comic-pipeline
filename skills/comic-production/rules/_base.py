@@ -28,6 +28,23 @@ VALID_STATUSES = {
 }
 
 
+# Category taxonomy added 2026-05-23 in the refs-are-truth refactor. Every
+# rule declares a category. The composer + audit tools group by these.
+#
+#   ATTACH — rule attaches a reference image; emits no prompt text.
+#   ACTION — rule emits action / camera / lighting / state-delta text.
+#   MATCH  — rule emits a short "match the attached <ref>" directive.
+#   SAFETY — rule emits negation / "do not render X" text.
+CATEGORY_ATTACH = "attach"
+CATEGORY_ACTION = "action"
+CATEGORY_MATCH = "match"
+CATEGORY_SAFETY = "safety"
+
+VALID_CATEGORIES = {
+    CATEGORY_ATTACH, CATEGORY_ACTION, CATEGORY_MATCH, CATEGORY_SAFETY,
+}
+
+
 @dataclass
 class Verification:
     """Return shape of verify_pre_render / verify_post_render.
@@ -96,6 +113,9 @@ class Rule:
     severity: str = "hard"
     applicable_transformations: tuple[str, ...] = ("*",)
     vision_rubric: str | None = None
+    # category — one of CATEGORY_ATTACH / CATEGORY_ACTION / CATEGORY_MATCH /
+    # CATEGORY_SAFETY. Set by every Rule subclass.
+    category: str = ""
 
     # section_label drives the human-readable section header in the formatted
     # prompt output (see compose_prompt in next_panel.py). Set this to a short
@@ -112,8 +132,29 @@ class Rule:
     def compose_contribution(self, panel: dict, ctx: dict, slot: str) -> str | None:
         """Return the prompt fragment this rule contributes at the given slot,
         or None if it doesn't contribute there.
+
+        ATTACH-category rules return None here and instead implement
+        attached_refs() — they contribute reference images, not text.
         """
         return None
+
+    def attached_refs(self, panel: dict, ctx: dict) -> list[dict]:
+        """Return the list of reference-image entries this rule attaches.
+
+        Each entry is a dict with at minimum:
+          {"kind": "<short_label>",
+           "path": "<repo-relative path or None>",
+           "reason": "<human explanation>"}
+
+        ACTION / MATCH / SAFETY rules return []. Only ATTACH rules
+        override this. The composer / build_plan consults this method when
+        building the refs_to_attach list for the panel.
+
+        Returning a "MISSING_*" kind signals that the rule WOULD have
+        attached a ref but the file is absent — surfaces as an audit
+        warning rather than a silent skip.
+        """
+        return []
 
     def section_label_for(self, slot: str) -> str:
         """Resolve the human-readable section label for the given slot.

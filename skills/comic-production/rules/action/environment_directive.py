@@ -1,22 +1,22 @@
 """L23 — When env ref is dropped, inject a dense verbal env anchor.
 
-Stage-change full-body panels need lineup ref attached (L11), which combined
-with face card + state anchor hits the 3-ref ceiling and forces the env ref
-to be dropped. Without explicit verbal env anchoring, the background
-collapses to a grey/blurry void. Caught on chun-li-ascension v2 p06.
+ACTION fallback. The preferred path is always to attach the env ref —
+this rule fires ONLY when the 3-ref ceiling forced env to be dropped.
+Without verbal anchoring, the background collapses to a void.
 
-Pulls the dense anchor from shotlist.locations[].description so the
-shotlist author can encode rich location detail once and have it surface
-automatically when needed.
+Pulls description from shotlist.locations[].description so the shotlist
+author encodes location detail once and it surfaces automatically.
 
-See:
-  - skills/comic-production/references/lessons-learned.md § L23
-  - skills/comic-production/references/the-rules-explained.md § L23
+Moved from rules/l23_env_anchor.py in the 2026-05-23 refs-are-truth
+refactor. Behavior unchanged.
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS, STATUS_SKIPPED, STATUS_FAIL
+from .._base import (
+    Rule, Verification, STATUS_PASS, STATUS_SKIPPED, STATUS_FAIL,
+    CATEGORY_ACTION,
+)
 
 
 class L23(Rule):
@@ -26,6 +26,7 @@ class L23(Rule):
     section_label = "ENVIRONMENT — L23 verbal anchor"
     severity = "soft"
     applicable_transformations = ("*",)
+    category = CATEGORY_ACTION
     vision_rubric = (
         "Look at this rendered comic panel. The shotlist declares a specific "
         "location (e.g. 'training dojo with wooden floorboards, paper "
@@ -76,8 +77,6 @@ class L23(Rule):
                 status=STATUS_SKIPPED,
                 reason=f"no env_ref to drop (location={location_slug!r}, env_dropped={env_dropped})",
             )
-        # env_dropped + location_slug set + env_ref None — should fire. Verify
-        # the location actually has a description on disk.
         shotlist = ctx.get("shotlist") or {}
         for loc in shotlist.get("locations", []) or []:
             if loc.get("id") == location_slug:
@@ -96,10 +95,6 @@ class L23(Rule):
         )
 
     def retry_strategy(self, panel: dict, ctx: dict, failure: dict) -> dict:
-        # If the background still collapses to a void on post-render vision,
-        # the location description in the shotlist is too thin. Surface that
-        # as a shotlist edit rather than a prompt strengthening — the rule's
-        # contribution is already maximally specific.
         return {
             "kind": "shotlist_edit_required",
             "rule_id": self.id,

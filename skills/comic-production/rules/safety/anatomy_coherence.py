@@ -1,18 +1,15 @@
 """L18 — Pose anatomy coherence.
 
-Universal soft guardrail. Mandatory render line at the end of every panel
-prompt: torso, hips, abdomen, and feet face the same direction; no impossible
-twists between hips and torso; all limbs attach naturally. Cheap (~30 tokens),
-auto-injected on every panel regardless of camera or beat.
+Universal soft guardrail. Negation-only safety rule. Auto-injected on
+every panel regardless of camera or beat.
 
-See:
-  - skills/comic-production/references/lessons-learned.md § L18
-  - skills/comic-production/references/the-rules-explained.md § L18
+Moved from rules/l18_anatomy.py in the 2026-05-23 refs-are-truth refactor.
+Behavior unchanged.
 """
 
 from __future__ import annotations
 
-from ._base import Rule, Verification, STATUS_PASS
+from .._base import Rule, Verification, STATUS_PASS, CATEGORY_SAFETY
 
 
 L18_ANATOMY_ANCHOR = (
@@ -30,6 +27,7 @@ class L18(Rule):
     section_label = "POSE & ANATOMY — L18"
     severity = "soft"
     applicable_transformations = ("*",)
+    category = CATEGORY_SAFETY
     vision_rubric = (
         "Look at this rendered comic panel and check the anatomy. Count: how "
         "many arms? How many legs? How many heads? Are torso, hips, and feet "
