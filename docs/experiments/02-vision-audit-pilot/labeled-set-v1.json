@@ -1,0 +1,75 @@
+{
+  "experiment": "02-vision-audit-pilot",
+  "labeled_set_version": "v1",
+  "labeled_at": "2026-05-22",
+  "labeled_by": "claude (cross-referenced against checked-in audit doc at projects/ultra-gal-origin/audits/pages-01-07-audit-2026-05-16.md)",
+  "label_source_note": "Ground-truth labels were derived from the human-validated QA audit document committed into the repo for pages 01-07 of ultra-gal-origin (the only project in this checkout with accepted panels + a per-panel audit). The audit doc was authored by a Comic-production QA subagent and reviewed by Matt before commit. Future iterations should incorporate independent labels from Matt and Magnamus directly (per Discord notes) to remove the LLM-in-the-loop bias.",
+  "defect_taxonomy": {
+    "composite_mismatch": "foreground/background lighting, shadows, or scale don't match (looks copy-pasted)",
+    "hair_discontinuity": "character's hair color, length, or style jumped vs canonical or vs adjacent panel",
+    "costume_discontinuity": "costume color, shape, or specific garment changed unexpectedly (e.g. green→navy crewneck, missing overalls, missing lab coat)",
+    "scale_error": "background extras or props at wrong scale relative to foreground subject",
+    "empty_speech_bubble": "speech bubble exists but tail points to wrong character, or bubble is empty",
+    "tier_visualization_mismatch": "transformation tier declared in shotlist (e.g. tier 7) but rendered closer to a lower tier (3-4)",
+    "prompt_bloat_artifact": "visible evidence the prompt had repeated/contradictory directives (e.g. baked-in 2D illustration drift)",
+    "lettering_error": "added category — typos in dialogue, duplicate bubbles, repeated identical lines (observed in audit doc)",
+    "character_count_error": "added category — declared cast count doesn't match panel (e.g. character missing from frame entirely)",
+    "character_identity_swap": "added category — wrong character occupies a scripted role (e.g. Lenny replaced by Carl)"
+  },
+  "category_priority": {
+    "high": ["composite_mismatch", "hair_discontinuity", "costume_discontinuity", "scale_error"],
+    "medium": ["empty_speech_bubble", "lettering_error", "character_count_error", "character_identity_swap"],
+    "low": ["tier_visualization_mismatch", "prompt_bloat_artifact"]
+  },
+  "added_categories_rationale": "lettering_error, character_count_error, and character_identity_swap were added because the audit doc surfaces them repeatedly and they're real defects Matt has flagged in production. Sticking strictly to the task's 7 categories would force these into ill-fitting buckets and weaken the experiment's measurement.",
+  "panels": [
+    {"path": "projects/ultra-gal-origin/pages/panels/p01-02/v1_accepted.png", "panel_id": "p01-02", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p01-03/v1_accepted.png", "panel_id": "p01-03", "label": "BAD", "defects": ["empty_speech_bubble", "lettering_error"], "note": "audit: 'MAAM' typo (duplicated word, second missing apostrophe) AND speech bubble tail points to BLONDE Carl when script attributes line to dark-haired Lenny"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p02-01/v1_accepted.png", "panel_id": "p02-01", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p02-02/v1_accepted.png", "panel_id": "p02-02", "label": "BAD", "defects": ["character_identity_swap", "lettering_error"], "note": "audit: Lenny replaced with Carl (blonde instead of dark-haired) AND duplicate 'REALLY? WHAT DO YOU DO?' bubble (two identical)"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p02-03/v1_accepted.png", "panel_id": "p02-03", "label": "BAD", "defects": ["costume_discontinuity"], "note": "audit: Lenny missing his blue overalls — wearing just a plain tee instead"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p02-04/v1_accepted.png", "panel_id": "p02-04", "label": "BAD", "defects": ["hair_discontinuity"], "note": "audit: Mundy hair tone subtle lightening (drift from canonical dark brown)"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p03-04/v1_accepted.png", "panel_id": "p03-04", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p04-01/v1_accepted.png", "panel_id": "p04-01", "label": "BAD", "defects": ["lettering_error"], "note": "audit: duplicate 'OH.' bubble on Heather (two identical bubbles)"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p04-02/v1_accepted.png", "panel_id": "p04-02", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p04-03/v1_accepted.png", "panel_id": "p04-03", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p04-04/v1_accepted.png", "panel_id": "p04-04", "label": "BAD", "defects": ["costume_discontinuity"], "note": "audit: Heather wearing NAVY crewneck when canonical body-tier2 is GREEN. Wardrobe flip-flops within scene."},
+    {"path": "projects/ultra-gal-origin/pages/panels/p05-01/v1_accepted.png", "panel_id": "p05-01", "label": "BAD", "defects": ["costume_discontinuity"], "note": "audit: Heather wearing NAVY when canonical is GREEN (continuation of p04-04 drift)"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p05-02/v1_accepted.png", "panel_id": "p05-02", "label": "BAD", "defects": ["character_count_error"], "note": "audit: only Mundy's back visible — Heather entirely missing from frame. Should be 2, shows 1."},
+    {"path": "projects/ultra-gal-origin/pages/panels/p05-03/v1_accepted.png", "panel_id": "p05-03", "label": "GOOD", "defects": [], "note": "audit: green wardrobe rendering is canonical-correct here"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p05-04/v1_accepted.png", "panel_id": "p05-04", "label": "BAD", "defects": ["character_count_error"], "note": "audit: Heather's mirroring arm in BG is missing — only one arm visible where there should be two characters"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p06-01/v1_accepted.png", "panel_id": "p06-01", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p06-02/v1_accepted.png", "panel_id": "p06-02", "label": "BAD", "defects": ["costume_discontinuity"], "note": "audit: Mundy's white lab coat possibly missing or cropped (canonical Mundy wears lab coat over blouse)"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p06-03/v1_accepted.png", "panel_id": "p06-03", "label": "GOOD", "defects": [], "note": "not flagged in audit"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p06-04/v1_accepted.png", "panel_id": "p06-04", "label": "BAD", "defects": ["hair_discontinuity"], "note": "audit: Heather hair drifted from canonical auburn-red toward strawberry-blonde"},
+    {"path": "projects/ultra-gal-origin/pages/panels/p07-01/v1_accepted.png", "panel_id": "p07-01", "label": "BAD", "defects": ["hair_discontinuity"], "note": "audit: Heather's auburn-red drift continues into strawberry-blonde territory; also p07-01 is the climactic super-form reveal so hair drift here is high-impact"}
+  ],
+  "split_summary": {
+    "total": 20,
+    "good": 8,
+    "bad": 12,
+    "by_defect_category": {
+      "composite_mismatch": 0,
+      "hair_discontinuity": 3,
+      "costume_discontinuity": 5,
+      "scale_error": 0,
+      "empty_speech_bubble": 1,
+      "tier_visualization_mismatch": 0,
+      "prompt_bloat_artifact": 0,
+      "lettering_error": 3,
+      "character_count_error": 2,
+      "character_identity_swap": 1
+    },
+    "coverage_gaps": [
+      "composite_mismatch: 0 examples in this set — cannot measure recall for this HIGH-priority category in v1. Future labeled sets should hand-pick panels exhibiting foreground/background light mismatch.",
+      "scale_error: 0 examples — same caveat (HIGH priority, can't measure).",
+      "tier_visualization_mismatch: 0 examples — would need to source from a chun-li-iron-discipline or emma-frost-ascension run with declared-vs-rendered tier mismatches.",
+      "prompt_bloat_artifact: 0 examples — would need a chun-li-test run with documented L7 Case B 2D drift."
+    ]
+  },
+  "methodology_notes": [
+    "The label source is a single human-validated audit doc; the same project was used for all 20 panels. This limits generalization. The recommendation will flag this as the primary thing to fix before shipping the audit pipeline-wide.",
+    "Per the spawn task: this is an experiment with an explicit stop condition (5 iterations or recall>=80% on HIGH categories). The narrow source means the v1 measurement only seriously stresses costume_discontinuity and hair_discontinuity.",
+    "The audit doc references canonical wardrobe/hair specs (e.g. Heather=GREEN crewneck, auburn-red hair). The vision audit will be given the cast description from shotlist.json so its judgements aren't unmoored from canonical."
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "per_category": {
+    "composite_mismatch": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20,
+      "recall": null,
+      "precision": null,
+      "support_bad": 0
+    },
+    "hair_discontinuity": {
+      "tp": 3,
+      "fp": 5,
+      "fn": 0,
+      "tn": 12,
+      "recall": 1.0,
+      "precision": 0.375,
+      "support_bad": 3
+    },
+    "costume_discontinuity": {
+      "tp": 3,
+      "fp": 4,
+      "fn": 1,
+      "tn": 12,
+      "recall": 0.75,
+      "precision": 0.42857142857142855,
+      "support_bad": 4
+    },
+    "scale_error": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20,
+      "recall": null,
+      "precision": null,
+      "support_bad": 0
+    },
+    "empty_speech_bubble": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tn": 19,
+      "recall": 0.0,
+      "precision": null,
+      "support_bad": 1
+    },
+    "tier_visualization_mismatch": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20,
+      "recall": null,
+      "precision": null,
+      "support_bad": 0
+    },
+    "prompt_bloat_artifact": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 20,
+      "recall": null,
+      "precision": null,
+      "support_bad": 0
+    },
+    "lettering_error": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 1,
+      "tn": 17,
+      "recall": 0.6666666666666666,
+      "precision": 1.0,
+      "support_bad": 3
+    },
+    "character_count_error": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "tn": 18,
+      "recall": 0.0,
+      "precision": null,
+      "support_bad": 2
+    },
+    "character_identity_swap": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tn": 19,
+      "recall": 0.0,
+      "precision": null,
+      "support_bad": 1
+    }
+  },
+  "overall": {
+    "good_panels": 8,
+    "bad_panels": 12,
+    "good_correctly_predicted_good": 4,
+    "bad_correctly_predicted_bad": 8,
+    "good_accuracy": 0.5,
+    "bad_accuracy": 0.6666666666666666,
+    "total_accuracy": 0.6
+  }
+}

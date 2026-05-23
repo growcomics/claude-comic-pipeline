@@ -12,6 +12,46 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-22 (Experiment 02 — Vision-audit pilot)
+
+Falsifiable test of whether a holistic vision-audit pass can catch the visual defects the deterministic text-based checks miss (composite mismatches, hair/costume drift, etc.). Branch: `experiment/02-vision-audit-pilot`. **Experiment ships an audit script + a labeled set + 5 rubric iterations + a recommendation — does NOT wire into the autopilot.** Wiring decision is deferred to a separate task per the experiment spec.
+
+### Added
+
+- **[skills/continuity-check/scripts/vision_audit.py](skills/continuity-check/scripts/vision_audit.py)** — minimum-viable holistic vision-audit runner. Loads a panel image + rubric, calls Claude vision, parses JSON verdicts, computes recall/precision per defect category. Three modes: live API, single-panel inspection, and `--score-from` (offline, against pre-computed predictions). Cost-conscious — defaults to `claude-sonnet-4-5`. NOT registered in the rules registry; complementary to the per-rule [audit_panels.py](skills/comic-production/scripts/audit_panels.py).
+- **[docs/experiments/02-vision-audit-pilot/](docs/experiments/02-vision-audit-pilot/)** — full experiment artifacts:
+  - `labeled-set-v1.json` — 20 panels from `ultra-gal-origin` pages 1-7 (8 GOOD / 12 BAD), labels mapped from the checked-in QA audit doc.
+  - `rubric_v1.md` ... `rubric_v5.md` — 5 tuning iterations. v1 minimum viable; v2 tightened detection language; v3 added canonical face cards as side-by-side refs (biggest single-iteration win); v4 lowered the hair-drift floor (backfired); v5 re-anchored confidence semantics (unlocked hair recall but precision crashed).
+  - `metrics-v1.md` ... `metrics-v5.md` + `runs/metrics-vN.json` — per-iteration recall/precision tables + per-panel detail.
+  - `runs/raw-predictions-vN.jsonl` — model verdicts per panel per iteration.
+  - `recommendation.md` — full one-page writeup.
+  - `README.md` — folder orientation + how to invoke the script.
+
+### Findings
+
+- 20 panels labeled (8 GOOD / 12 BAD), labels mapped from [the human-validated QA audit doc](projects/ultra-gal-origin/audits/pages-01-07-audit-2026-05-16.md).
+- **Best balanced run: v3** — 75% overall accuracy, 100% recall + 67% precision on `costume_discontinuity`, 33% recall on `hair_discontinuity`. Face-card-as-side-by-side-ref was the load-bearing addition.
+- **Best hair-recall run: v5** — 100% recall on `hair_discontinuity`, but precision 38% and total accuracy drops to 60%. Re-anchored confidence semantics is the key tweak.
+- **0% recall across all 5 iterations** on `character_count_error` (n=2) and `character_identity_swap` (n=1). Vision model doesn't count cast members reliably or notice Lenny↔Carl swaps even with explicit text descriptions.
+- **`lettering_error` is reliably caught** — 67-100% recall, 75-100% precision. Doubled words ("MAAM, MAAM"), duplicate bubbles, identical adjacent bubbles all detected.
+- **4 of the 10 defect categories had ZERO labeled examples** — `composite_mismatch` and `scale_error` (both HIGH priority), `tier_visualization_mismatch`, `prompt_bloat_artifact`. Cannot certify the audit on half the HIGH-priority list with this labeled set.
+
+### Stop condition
+
+NOT MET on any single iteration. No rubric simultaneously hit recall ≥ 80% on every HIGH category in one run.
+
+### Recommendation
+
+**Iterate, don't ship yet.** Specifically: collect 5-10 labeled examples each of `composite_mismatch` and `scale_error`; collect 20-30 mixed labels from 3+ other projects (`chun-li-test`, `emma-frost-ascension`, `bryn-anvil-of-ages`) to test cross-project generalization; have Matt or Magnamus hand-label, no LLM in the loop. Then re-run v3 and v5 on the combined set. If v3 hits ≥80% recall everywhere — ship v3 at MED+HIGH threshold. If only v5 does — surface the precision/recall tradeoff to Matt and let him pick the threshold per-category. See [`docs/experiments/02-vision-audit-pilot/recommendation.md`](docs/experiments/02-vision-audit-pilot/recommendation.md) for the full writeup.
+
+### Next
+
+- **If iterate (recommended):** spawn a follow-up task to collect the missing labeled examples (especially `composite_mismatch` + `scale_error`) and re-measure.
+- **If ship after iteration:** wire the audit into per-panel acceptance via a SEPARATE task, with config-flag opt-in mirroring the existing `policies.vision_audit` pattern (never / at-batch-end / at-accept). Don't auto-regen on detection — surface to the user first.
+- **Pivot worth considering:** for `character_count_error` and `character_identity_swap`, the vision model may not be the right tool — a deterministic "expected-cast vs detected-figures" check (with vision counting figures) plus separate face-card-anchored checks for swaps may outperform the holistic pass.
+
+---
+
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
 
 A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).
