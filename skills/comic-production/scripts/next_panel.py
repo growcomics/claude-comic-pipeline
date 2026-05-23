@@ -818,8 +818,11 @@ def _l19_lettering_block(panel: dict) -> str:
             f"NO translucency, NO chrome, NO drop shadow onto the scene."
         )
 
+    def _as_obj(x):
+        return {"text": x} if isinstance(x, str) else (x or {})
     # Captions.
     for i, c in enumerate(panel.get("captions", []) or []):
+        c = _as_obj(c)
         text = (c.get("text") or "").strip().replace('"', "'")
         if not text:
             continue
@@ -833,6 +836,7 @@ def _l19_lettering_block(panel: dict) -> str:
 
     # SFX (sound effects).
     for i, s in enumerate(panel.get("sfx", []) or []):
+        s = _as_obj(s)
         text = (s.get("text") or "").strip().replace('"', "'")
         if not text:
             continue
