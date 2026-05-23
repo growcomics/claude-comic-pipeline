@@ -252,8 +252,13 @@ lettering overlay layer. That's L10 enforced in code.
   prompt-bloat to ref-fix.
 - **NotebookLM notebook**: [Refs Are Truth: Enforcing L10 in AI Prompt Architectures](https://notebooklm.google.com/notebook/2e9449e5-27d3-4491-a3eb-ea389d97a7ff)
   — 7 sources uploaded (the blog post + the four refactor docs + the
-  BEFORE/AFTER prompts). Audio Overview and Infographic both triggered
-  in the Studio panel; both generate asynchronously over a few minutes.
+  BEFORE/AFTER prompts). NotebookLM auto-titled the notebook from the
+  source content. Two Studio artifacts generated:
+  - **Audio Overview** ("Replacing bloated AI prompts...") — AI
+    podcast walking through the refactor; ~1m to generate after
+    sources finished ingesting.
+  - **Infographic** ("L10 Prompt Optimization Efficiency Guide") —
+    visual summary of the L10 principle and the 55.6% reduction.
   Notebook is on the growcomics Google account; surface via Share
   button inside the notebook for external distribution.
 
