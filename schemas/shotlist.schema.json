@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/growcomics/claude-comic-pipeline/schemas/shotlist.schema.json",
+  "title": "shotlist.json",
+  "description": "Canonical contract emitted by the script-breakdown skill. The pipeline's central artifact — consumed by reference-gathering, comic-production, continuity-check, and page-composer. Schema codifies the same checks as skills/script-breakdown/scripts/validate_shotlist.py plus the field-shape contract the consumers actually use.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["project", "pages"],
+  "properties": {
+    "project": {"type": "string", "minLength": 1},
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Canonical current version is 1. Legacy projects may omit this; the validator reports it as a soft drift warning."
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Forward-looking alias for `version`."
+    },
+    "title": {"type": "string"},
+    "page_count": {"type": "integer", "minimum": 1},
+    "panels_per_page": {"type": "integer", "minimum": 1},
+    "estimated_panel_count": {"type": "integer", "minimum": 1},
+    "style_preset": {"type": "string"},
+    "style": {"type": "string"},
+    "style_prefix": {"type": "string"},
+    "location_strategy": {"type": "string"},
+    "arc_character": {"type": ["string", "null"]},
+    "transformation_metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "flavor": {"type": "string"},
+        "start_tier": {"type": "integer"},
+        "end_tier": {"type": "integer"},
+        "tier_curve_per_panel": {
+          "type": "array",
+          "items": {"type": ["integer", "null"]}
+        },
+        "splash_panels": {"type": "array"},
+        "trigger_description": {"type": "string"}
+      }
+    },
+    "cast": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "name"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "name": {"type": "string", "minLength": 1},
+          "ref_folder": {"type": "string"},
+          "wardrobe": {"type": "string"},
+          "tiers": {"type": "array", "items": {"type": "integer"}},
+          "soul_id": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "description": {"type": "string"},
+          "ref_folder": {"type": "string"}
+        }
+      }
+    },
+    "props": {"type": "array"},
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["page_number", "panels"],
+        "properties": {
+          "page_number": {"type": "integer", "minimum": 1},
+          "panels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "#/definitions/panel"}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "panel": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["panel_id", "camera"],
+      "properties": {
+        "panel_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique within the shotlist. validate_shotlist.py rejects duplicates."
+        },
+        "size": {"type": "string"},
+        "tier": {"type": ["integer", "null"]},
+        "muscle_size_tier": {"type": ["integer", "null"]},
+        "characters": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "location": {"type": "string"},
+        "time_of_day": {"type": "string"},
+        "weather": {"type": "string"},
+        "camera": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Head-token (first comma-clause, minus parenthetical) must be one of the KNOWN_VIEWS set defined in validate_shotlist.py: front-full, 3q-full, back-full, side-full, profile, low-angle-front, low-angle-back, high-angle, ecu-face, ecu-region, wide-establish, splash, medium, mcu, medium-wide (plus accepted aliases). Schema-level check is non-empty; the head-token enumeration is enforced by validate_shotlist.py."
+        },
+        "action": {"type": "string"},
+        "hair_state": {"type": "string"},
+        "costume_state": {"type": "string"},
+        "expression": {"type": "string"},
+        "dialogue": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/dialogue_line"}
+        },
+        "captions": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/text_or_obj"}
+        },
+        "sfx": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/text_or_obj"}
+        },
+        "notes": {"type": "string"},
+        "continuity_refs": {"type": "array"}
+      }
+    },
+    "dialogue_line": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["text"],
+      "properties": {
+        "text": {"type": "string"},
+        "type": {
+          "type": "string",
+          "enum": ["balloon", "thought", "whisper", "shout", "caption", "off-panel"]
+        },
+        "speaker": {"type": "string"},
+        "character": {
+          "type": "string",
+          "description": "Drift-tolerated alias for `speaker`. Either must be present for on-screen dialogue types (validated by validate_shotlist.py, not encoded as JSON Schema anyOf to keep the contract permissive)."
+        }
+      }
+    },
+    "text_or_obj": {
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object",
+          "required": ["text"],
+          "properties": {"text": {"type": "string"}},
+          "additionalProperties": true
+        }
+      ]
+    }
+  }
+}

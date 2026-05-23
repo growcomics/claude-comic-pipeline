@@ -1,0 +1,882 @@
+{
+  "schema_dir": "/Users/mattmenashe/Documents/claude-comic-pipeline/schemas",
+  "projects": [
+    {
+      "project": "chun-li-test",
+      "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test",
+      "summary": {
+        "pass": 3,
+        "fail": 0,
+        "missing": 3,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/production-config.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test/continuity-report.md",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "extracted 10 panel sections, verdict=SOFT-FAIL"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "rogue-transformation",
+      "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation",
+      "summary": {
+        "pass": 0,
+        "fail": 0,
+        "missing": 6,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/shotlist.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "shotlist.json absent — project may be pre-breakdown"
+          ]
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/rogue-transformation/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "solo-fmg-001",
+      "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001",
+      "summary": {
+        "pass": 2,
+        "fail": 0,
+        "missing": 4,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/production-config.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "ultra-gal-origin",
+      "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin",
+      "summary": {
+        "pass": 2,
+        "fail": 1,
+        "missing": 3,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/production-config.json",
+          "status": "fail",
+          "violations": [
+            "project.brand: '3DMuscleComics' is not one of ['GrowGetterComics', 'BloomBeautyComics', 'MaxxMuscleComics']",
+            "script_source.type: 'path' is not one of ['preset', 'text']"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/references_required.json",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "uses `version` (legacy dialect — should migrate to `schema_version`)"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "chunli-issue-1",
+      "root": "/Users/mattmenashe/Documents/chunli-issue-1",
+      "summary": {
+        "pass": 0,
+        "fail": 1,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "pages.0: 'panels' is a required property",
+            "pages.0.page_number: 0 is less than the minimum of 1",
+            "pages.1.panels.0: 'camera' is a required property",
+            "pages.2.panels.0: 'camera' is a required property",
+            "pages.3.panels.0: 'camera' is a required property",
+            "pages.4.panels.0: 'camera' is a required property",
+            "pages.5.panels.0: 'camera' is a required property",
+            "pages.6.panels.0: 'camera' is a required property",
+            "pages.7.panels.0: 'camera' is a required property",
+            "pages.8.panels.0: 'camera' is a required property",
+            "pages.9.panels.0: 'camera' is a required property",
+            "pages.10.panels.0: 'camera' is a required property",
+            "pages.11.panels.0: 'camera' is a required property",
+            "pages.12.panels.0: 'camera' is a required property",
+            "pages.13.panels.0: 'camera' is a required property",
+            "pages.14.panels.0: 'camera' is a required property",
+            "pages.15.panels.0: 'camera' is a required property",
+            "pages.16.panels.0: 'camera' is a required property",
+            "pages.16.panels.1: 'camera' is a required property",
+            "pages.17.panels.0: 'camera' is a required property",
+            "pages.18.panels.0: 'camera' is a required property",
+            "pages.19.panels.0: 'camera' is a required property",
+            "pages.20.panels.0: 'camera' is a required property"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/chunli-issue-1/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "chunli-ascension-15p-2026-05-16",
+      "root": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16",
+      "summary": {
+        "pass": 3,
+        "fail": 2,
+        "missing": 1,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/production-config.json",
+          "status": "fail",
+          "violations": [
+            "<root>: 'version' is a required property",
+            "<root>: 'script_source' is a required property"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "cast.0: 'name' is a required property",
+            "pages.6.panels.0.dialogue.0.type: 'sfx' is not one of ['balloon', 'thought', 'whisper', 'shout', 'caption', 'off-panel']",
+            "pages.7.panels.0.dialogue.0.type: 'sfx' is not one of ['balloon', 'thought', 'whisper', 'shout', 'caption', 'off-panel']"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/references_required.json",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "uses `schema_version` (canonical)"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/pages/panels",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "15/15 panel checks.json files pass"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/defects.jsonl",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "21 JSONL rows scanned"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "checks-balances-demo-2026-05-16",
+      "root": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16",
+      "summary": {
+        "pass": 3,
+        "fail": 2,
+        "missing": 1,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/production-config.json",
+          "status": "fail",
+          "violations": [
+            "<root>: 'version' is a required property",
+            "<root>: 'script_source' is a required property"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "cast.0: 'name' is a required property"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/references_required.json",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "uses `schema_version` (canonical)"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/pages/panels",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "6/6 panel checks.json files pass"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/defects.jsonl",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "7 JSONL rows scanned"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "comic-april-mutagen-v2",
+      "root": "/Users/mattmenashe/Documents/comic-april-mutagen-v2",
+      "summary": {
+        "pass": 2,
+        "fail": 1,
+        "missing": 3,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "pages.5.panels.0.muscle_size_tier: 1.2 is not of type 'integer', 'null'",
+            "pages.7.panels.0.muscle_size_tier: 2.5 is not of type 'integer', 'null'",
+            "pages.9.panels.0.muscle_size_tier: 3.5 is not of type 'integer', 'null'",
+            "pages.11.panels.0.muscle_size_tier: 4.5 is not of type 'integer', 'null'",
+            "pages.13.panels.0.muscle_size_tier: 5.5 is not of type 'integer', 'null'"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/pages/panels",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "14/14 panel checks.json files pass"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/defects.jsonl",
+          "status": "pass",
+          "violations": [],
+          "notes": [
+            "21 JSONL rows scanned"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/comic-april-mutagen-v2/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "mira-five-sips-groa34",
+      "root": "/Users/mattmenashe/Documents/mira-five-sips-groa34",
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/mira-five-sips-groa34/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "chun-li-ascension",
+      "root": "/Users/mattmenashe/Documents/chun-li-ascension",
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/chun-li-ascension/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "chunli-growth-series-v2",
+      "root": "/Users/mattmenashe/Documents/chunli-growth-series-v2",
+      "summary": {
+        "pass": 0,
+        "fail": 1,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "pages.0: 'panels' is a required property",
+            "pages.0.page_number: 0 is less than the minimum of 1"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/chunli-growth-series-v2/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "supergirl-muscular.archived-2026-05-12",
+      "root": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12",
+      "summary": {
+        "pass": 1,
+        "fail": 0,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/shotlist.json",
+          "status": "pass",
+          "violations": [],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    },
+    {
+      "project": "moving-experience-v2",
+      "root": "/Users/mattmenashe/Documents/moving-experience-v2",
+      "summary": {
+        "pass": 0,
+        "fail": 1,
+        "missing": 5,
+        "skip": 0
+      },
+      "artifacts": [
+        {
+          "artifact": "production-config",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/production-config.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "production-config.json absent — project may be pre-briefing"
+          ]
+        },
+        {
+          "artifact": "shotlist",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/shotlist.json",
+          "status": "fail",
+          "violations": [
+            "version: 'v2' is not of type 'integer'",
+            "pages.2.panels.0.muscle_size_tier: 1.5 is not of type 'integer', 'null'",
+            "pages.2.panels.3.muscle_size_tier: 3.5 is not of type 'integer', 'null'"
+          ],
+          "notes": []
+        },
+        {
+          "artifact": "references_required",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/references_required.json",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "references_required.json absent — projects without transformation_metadata legitimately skip this artifact"
+          ]
+        },
+        {
+          "artifact": "checks",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/pages/panels",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "no per-panel checks.json on disk — either pre-render or gitignored (pages/ is in .gitignore)"
+          ]
+        },
+        {
+          "artifact": "defects",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/defects.jsonl",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "defects.jsonl absent — either no defects logged or gitignored"
+          ]
+        },
+        {
+          "artifact": "continuity-report",
+          "path": "/Users/mattmenashe/Documents/moving-experience-v2/continuity-report.md",
+          "status": "missing",
+          "violations": [],
+          "notes": [
+            "continuity-report.md absent — pre-audit"
+          ]
+        }
+      ]
+    }
+  ],
+  "exit_code": 1
+}
