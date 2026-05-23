@@ -155,6 +155,47 @@ def panel_status(root: Path, panel: dict) -> dict:
 # View-aware anchor selection
 
 
+
+# --- view-vocabulary normalization (maps shotlist camera dialect -> VIEW_COMPATIBILITY keys) ---
+_VIEW_ALIASES = {
+    "full-body": "front-full",
+    "three-quarter": "3q-full",
+    "3q": "3q-full",
+    "wide splash": "splash",
+    "wide-splash": "splash",
+    "wide": "wide-establish",
+    "wide-establish": "wide-establish",
+    "mcu": "mcu",
+    "medium": "medium",
+    "medium two-shot": "medium",
+    "low-angle": "low-angle-front",
+    "low-angle-front": "low-angle-front",
+    "low-angle-back": "low-angle-back",
+    "high-angle": "high-angle",
+    "profile": "profile",
+    "side-full": "side-full",
+    "back-full": "back-full",
+    "front-full": "front-full",
+    "splash": "splash",
+    "ecu-face": "ecu-face",
+    "ecu-region": "ecu-region",
+}
+
+def _canon_view(raw: str) -> str:
+    """Map a compound shotlist camera string to a single VIEW_COMPATIBILITY key.
+    Tries each comma-token (longest first) against the alias table; returns the
+    first hit, else the bare first token."""
+    if not raw:
+        return ""
+    tokens = [t.strip().lower() for t in raw.split(",") if t.strip()]
+    # strip parentheticals like "ecu-region (torso/chest)"
+    tokens = [t.split("(")[0].strip() for t in tokens]
+    for tok in sorted(tokens, key=len, reverse=True):
+        if tok in _VIEW_ALIASES:
+            return _VIEW_ALIASES[tok]
+    return tokens[0] if tokens else ""
+# --- end view-vocabulary normalization ---
+
 def pick_chain_anchor(root: Path, target_view: str, accepted_history: list[dict]) -> dict | None:
     """Walk accepted_history backwards (most-recent-first) and return the most
     recent panel whose view is compatible with target_view. Returns the panel
@@ -167,9 +208,7 @@ def pick_chain_anchor(root: Path, target_view: str, accepted_history: list[dict]
     if not compatible:
         return None  # face card alone, or ECU-region needs special handling
     for item in reversed(accepted_history):
-        prior_view = item["panel"].get("camera") or item["panel"].get("view") or ""
-        # Normalize: handle "low-angle-front, three-quarter" → take first token
-        prior_view = prior_view.split(",")[0].strip()
+        prior_view = _canon_view(item["panel"].get("camera") or item["panel"].get("view") or "")
         if prior_view in compatible:
             return item
     return None
@@ -1644,7 +1683,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
         }
 
     # Resolve refs and anchor for the next panel
-    target_view = (next_panel.get("camera") or "").split(",")[0].strip()
+    target_view = _canon_view(next_panel.get("camera") or "")
     anchor = pick_chain_anchor(root, target_view, accepted_history)
     stage_change = is_stage_change(next_panel, accepted_history)
 
