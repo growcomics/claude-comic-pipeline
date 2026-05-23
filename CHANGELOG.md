@@ -19,6 +19,7 @@ Signal-gathering pass to confirm the same-day composition-layer + validator fixe
 ### Added
 
 - [`docs/experiments/01-generalization-smoke-test/`](docs/experiments/01-generalization-smoke-test/) containing `results-2026-05-22.md` (results table, per-failure diagnoses, recommended next fixes) and `raw-output.log` (per-project stdout/exit-code dump).
+- [`docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md`](docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md) — long-form postmortem of the schema-disagreement findings (the four field-level bugs + the container-shape next-frontier), framed around Magnamus's "layers using different vocabulary" diagnosis. Eight comic-style explainer graphics in [`docs/blog/assets/`](docs/blog/assets/) generated via Higgsfield Nano Banana Pro (1k, 16:9, 16 credits total): hero (vocabulary mismatch over shared blueprint), one per bug (empty speaker bubble, camera-vocab argument, caption AttributeError, stale Mac Mini), the three-pillar fix-pattern, the 15-project scoreboard, and the flat-vs-nested container-shape diagram. Hand-eye sanity check: Bug-4 (Mac Mini) has the style-block bleed-through as a literal caption (regen candidate); Bug-3 (caption-crash) error balloons have minor letter garble but readable.
 
 ### Findings
 
