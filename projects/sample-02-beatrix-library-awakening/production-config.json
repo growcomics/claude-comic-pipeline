@@ -1,0 +1,82 @@
+{
+  "version": 3,
+  "project": {
+    "name": "sample-02-beatrix-library-awakening",
+    "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/sample-02-beatrix-library-awakening",
+    "brand": "GrowGetterComics",
+    "character_ref": "references/characters/beatrix-sterling/face-card.png"
+  },
+  "transformation_type": "fmg",
+  "transformation_subtype": "fmg-solo-tier2-to-tier5-beatrix-arcane",
+  "lineup_files": {
+    "tier_low": "muscle-size-lineup.png",
+    "tier_high": "muscle-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "style": "photoreal-daz3d",
+  "platform": "flow",
+  "location_strategy": "single",
+  "cast_size": 1,
+  "page_count": 10,
+  "panels_per_page": 1,
+  "transformation_metadata": {
+    "flavor": "single-axis",
+    "start_tier": 2,
+    "end_tier": 5,
+    "trigger": "ancient-tome-glowing-rune-touch-transfer",
+    "tone_arc": "scholarly-realization"
+  },
+  "always_clothed": true,
+  "dialogue_mode": "minimal",
+  "rules_active": "all",
+  "autopilot_picks_variants": true,
+  "generation_backend": "flow",
+  "model_default": "nano_banana_pro",
+  "default_count": "x4",
+  "default_aspect": "3:4",
+  "mandatory_rules": {
+    "active": [1,2,3,4,5,6,7,8,9,10],
+    "extra_lines": [
+      "L33 ALWAYS-CLOTHED HARD: Beatrix stays fully clothed throughout. Cream high-collared blouse, long charcoal pencil skirt, low brown heels. Garments may strain, seams may pop open at the deltoids (panels 7+), top button may pop (panels 8+), skirt slit may widen showing quad flex (panel 9+), but breasts / groin / glutes remain fully covered at every tier.",
+      "L17 BEATRIX CANONICAL ANCHOR: Every face-visible panel shows Beatrix with auburn/copper hair (panels 1-3: tight low bun at nape; panels 4-6: bun loosening, wisps escaping; panels 7-10: hair fully down past shoulders), green eyes, fair skin with light freckles across cheekbones and nose, age 28, round wire-rim glasses ALWAYS present on her face across every panel (canonical — keep through transformation peak), strikingly beautiful, intelligent expression, English-rose complexion.",
+      "L21 REFERENCE EXCLUSION: Attached refs are guidance only — never as physical scene objects.",
+      "L22 HAIR STATE EXPLICIT: Every face-visible panel names the hair state per the panel-specific schedule above. Auburn/copper color throughout.",
+      "L23 ENV VERBAL ANCHOR (Victorian library): When env ref dropped: dusty Victorian university library, towering dark wooden bookshelves reaching ceiling, brass reading lamps with green glass shades, leather button-back chairs, stained glass arched windows casting amber afternoon light beams with floating dust motes, long oak reading table with scattered open leather books, antique globe in background.",
+      "L24 ACCESSORY SUPPRESSION: Round wire-rim glasses and antique brass watch-on-chain are CANONICAL and kept across panels. Suppress hallucinated modern jewelry / rings / earrings / smart-watches / necklaces.",
+      "L29 TIER REINFORCEMENT: Sample caps at tier 5 — no tier-6+ reinforcement refs needed. The tier-5 panels (9-10) match the body-tier lineup tier-5 figure.",
+      "PHOTOREAL CGI / DAZ3D STYLE: All renders photoreal DAZ3D / Iray with PBR materials, 8K textures. Glowing rune = warm gold-amber light with volumetric glow. 2D scope is captions only on panels 4, 7, 10.",
+      "BEAUTY ANCHORING: Beatrix renders strikingly beautiful — English-rose vogue-glamour beauty, freckles enhance not detract, intelligent expression.",
+      "CHEST OVERSIZE COMPENSATION: Tier 3 onward prompt for chest size LARGER than lineup. Bust scales with muscle.",
+      "AUTONOMOUS VARIANT SELECTION: Autopilot, no mid-run asks.",
+      "DIALOGUE MODE MINIMAL — captions on panels 4, 7, 10 only (L19 flat 2D overlay).",
+      "TONE — SCHOLARLY REALIZATION: Beatrix analyzes what is happening to her even as it happens. Expression arc: focused → puzzled → curious → fascinated → understanding → satisfied. Never afraid, never panicked. She is a scholar witnessing her own transformation as an experimental subject."
+    ],
+    "allow_baked_lettering": true
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": false
+  },
+  "flow": {
+    "default_model": "Nano Banana 2",
+    "default_count": "x4",
+    "default_aspect": "3:4",
+    "state_file": "flow-state.json"
+  },
+  "generation": {
+    "max_panels": 10,
+    "max_retries_per_panel": 4,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["breasts", "muscles"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "log-only-overnight",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "skip-after-4-retries",
+    "missing_ref_guardrail": "use-stand-in-and-log",
+    "posting": "never"
+  }
+}

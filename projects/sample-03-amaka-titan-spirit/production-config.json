@@ -1,0 +1,83 @@
+{
+  "version": 3,
+  "project": {
+    "name": "sample-03-amaka-titan-spirit",
+    "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/sample-03-amaka-titan-spirit",
+    "brand": "GrowGetterComics",
+    "character_ref": "references/characters/amaka-okafor/face-card.png"
+  },
+  "transformation_type": "fmg",
+  "transformation_subtype": "fmg-solo-tier2-to-tier8-amaka-spirit",
+  "lineup_files": {
+    "tier_low": "muscle-size-lineup.png",
+    "tier_high": "muscle-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "style": "photoreal-daz3d",
+  "platform": "flow",
+  "location_strategy": "single",
+  "cast_size": 1,
+  "page_count": 10,
+  "panels_per_page": 1,
+  "transformation_metadata": {
+    "flavor": "single-axis",
+    "start_tier": 2,
+    "end_tier": 8,
+    "trigger": "orisha-spirit-channeled-through-dance",
+    "tone_arc": "triumphant-spiritual"
+  },
+  "always_clothed": true,
+  "dialogue_mode": "minimal",
+  "rules_active": "all",
+  "autopilot_picks_variants": true,
+  "generation_backend": "flow",
+  "model_default": "nano_banana_pro",
+  "default_count": "x4",
+  "default_aspect": "3:4",
+  "mandatory_rules": {
+    "active": [1,2,3,4,5,6,7,8,9,10],
+    "extra_lines": [
+      "L33 ALWAYS-CLOTHED HARD: Amaka stays fully clothed. Black athletic crop top + black high-waist dance leggings (tiers 2-5) → traditional Nigerian-inspired warrior wear with gold trim crop + deep ochre wrap skirt + gold arm bands (tiers 6-8). Breasts, groin, glutes always covered. Garments may stretch but never expose.",
+      "L17 AMAKA CANONICAL ANCHOR: Every face-visible panel shows Amaka with long box braids reaching mid-back (golden-brown with a few amber-beaded accents at random braid tips), dark brown eyes, rich dark brown Nigerian skin, age 24, strikingly beautiful, vogue-cover glamour, elegant features, athletic-dancer build at baseline, full lips, clear skin. Braids are TIED BACK at baseline (panels 1-5); LOOSE AND FLOWING at peak (panels 6-10) with subtle golden glow at the braid tips.",
+      "L21 REFERENCE EXCLUSION: Attached refs are guidance only — never physical scene objects.",
+      "L22 HAIR STATE EXPLICIT: Every face-visible panel names braid state per schedule. Color: golden-brown box braids with amber bead accents (panels 1-5). From panel 6 add 'subtle golden-orisha glow at braid tips and along the length'.",
+      "L23 ENV VERBAL ANCHOR (dance studio): When env ref dropped: modern dance studio interior, full-wall mirrors along one wall, polished honey-wood sprung dance floor, white-painted ballet barre at hip height along the opposite wall, mid-afternoon natural light streaming through tall windows, water bottle and gray towel on the floor near the barre, white walls with one accent wall in burnt-sienna ochre, slim steel ceiling lights.",
+      "L24 ACCESSORY SUPPRESSION: Gold ankle bracelet on the LEFT ankle is CANONICAL — keep in every panel where the left ankle is in frame. Suppress hallucinated watches / rings / necklaces / earrings (orisha-given gold arm bands appear at tier 6 on both upper arms and are explicit, not suppressed).",
+      "L29 TIER REINFORCEMENT (tier-6, tier-7, AND tier-8 auto-attach): Panel 6 auto-attaches tier-6 reinforcement from skills/comic-production/references/peak-body-scale/tier-6/. Panel 8 auto-attaches tier-7 from peak-body-scale/tier-7/. Panels 9-10 auto-attach tier-8 from peak-body-scale/tier-8/. Render figure-scale at or above the ref.",
+      "PHOTOREAL CGI / DAZ3D STYLE: All renders photoreal DAZ3D / Iray with ray-traced subsurface scattering on the rich dark Nigerian skin, PBR materials, 8K textures. Orisha energy = volumetric warm gold-amber glow with bronze and copper highlights, ancestral aura, subtle floating golden particles. 2D scope is captions only on panels 4, 7, 10.",
+      "BEAUTY ANCHORING: Amaka renders strikingly beautiful — vogue-cover Nigerian beauty, elegant features, glamour lighting on the face, defined cheekbones, full lips, dark eyes with depth. Muscle scale at tier 8 does NOT degrade facial beauty — she remains stunningly beautiful at peak.",
+      "CHEST OVERSIZE COMPENSATION: Tier 3 onward prompt for chest size LARGER than the lineup. Bust scales with muscle through tier 8. Tier 8 Amaka has both massively developed muscle AND oversized bust per the lineup tier-8 figure.",
+      "AUTONOMOUS VARIANT SELECTION: Autopilot, no mid-run asks.",
+      "DIALOGUE MODE MINIMAL — captions on panels 4, 7, 10 only (L19 flat 2D overlay).",
+      "TONE — TRIUMPHANT SPIRITUAL: Amaka accepts and channels the orisha power. Expression arc: focused dance → listening → reverent recognition → empowered → commanding. She is the dance, the strength, the ancestor's vessel — never afraid, never overwhelmed.",
+      "ORISHA POWER VISUAL ANCHOR: Warm gold-amber ancestral aura grows panel by panel. Starts as subtle warmth in panel 2 (visible in eyes / breath). By panel 5 fills the space around her with floating golden particles. By panel 6 the warrior wear materializes in the gold glow. By panels 8-10 she radiates power like a young goddess — heavy volumetric gold-amber aura, ground beneath her feet glows faintly, braid tips trail golden light."
+    ],
+    "allow_baked_lettering": true
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": false
+  },
+  "flow": {
+    "default_model": "Nano Banana 2",
+    "default_count": "x4",
+    "default_aspect": "3:4",
+    "state_file": "flow-state.json"
+  },
+  "generation": {
+    "max_panels": 10,
+    "max_retries_per_panel": 4,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["breasts", "muscles"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "log-only-overnight",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "skip-after-4-retries",
+    "missing_ref_guardrail": "use-stand-in-and-log",
+    "posting": "never"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "project": "sample-03-amaka-titan-spirit",
+  "characters": {
+    "amaka-okafor": {
+      "slug": "amaka-okafor",
+      "tier_range": [2, 8],
+      "required_refs": [
+        {"type": "face-card", "filename": "face-card.png", "description": "3/4 portrait, neutral expression, photoreal DAZ3D CGI, head and shoulders, long golden-brown box braids reaching mid-back with a few amber-beaded accents at random braid tips (tied back in a single low ponytail at baseline), dark brown eyes, rich dark brown Nigerian skin, age 24, strikingly beautiful with elegant features and full lips, vogue-cover glamour lighting, neutral grey backdrop"},
+        {"type": "body-tier-lineup", "filename": "body-tier-lineup.png", "description": "Composite showing Amaka at tier 2, tier 4, tier 6, tier 7, and tier 8 side-by-side, full body fronts, photoreal DAZ3D CGI, with each tier matching the canonical lineup figure for that tier (tiers 2-5 in black dance wear, tiers 6-8 in gold-trim ochre warrior wear), neutral grey backdrop"},
+        {"type": "multi-angle-pack", "filename": "multi-angle-baseline.png", "description": "Tier-2 Amaka in black dance wear shown front / three-quarter / profile / back in a 2x2 grid composite, neutral grey backdrop, photoreal DAZ3D, braids tied back"},
+        {"type": "costume-turnaround-baseline", "filename": "costume-turnaround-baseline.png", "description": "Black athletic crop top + black high-waist dance leggings + barefoot + gold ankle bracelet on left ankle, shown front and back side-by-side on tier-2 Amaka, neutral grey backdrop, photoreal DAZ3D"},
+        {"type": "costume-turnaround-peak", "filename": "costume-turnaround-peak.png", "description": "Traditional Nigerian-inspired warrior wear — gold-trim crop top in deep ochre + deep ochre wrap skirt + gold arm bands on both upper arms + barefoot + gold ankle bracelet on left ankle, shown front and back side-by-side on tier-6 Amaka (mid-peak proportions for the turnaround), neutral grey backdrop, photoreal DAZ3D"}
+      ]
+    }
+  },
+  "locations": {
+    "dance-studio": {
+      "slug": "dance-studio",
+      "required_refs": [
+        {"type": "establishing-wide", "filename": "establishing-wide.png", "description": "Wide establishing shot of a modern dance studio interior — full-wall mirror along one wall, polished honey-wood sprung dance floor, white-painted ballet barre at hip height along the opposite wall, mid-afternoon natural light streaming through tall windows, water bottle and gray towel on the floor near the barre, white walls with one accent wall in burnt-sienna ochre, slim steel ceiling lights, no character in frame, photoreal CGI"}
+      ]
+    }
+  },
+  "tier_reinforcement_refs": [
+    {"tier": 6, "source_path": "skills/comic-production/references/peak-body-scale/tier-6/", "attach_on_panels": [6, 7]},
+    {"tier": 7, "source_path": "skills/comic-production/references/peak-body-scale/tier-7/", "attach_on_panels": [8]},
+    {"tier": 8, "source_path": "skills/comic-production/references/peak-body-scale/tier-8/", "attach_on_panels": [9, 10]}
+  ]
+}

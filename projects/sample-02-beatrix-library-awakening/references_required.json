@@ -1,0 +1,24 @@
+{
+  "project": "sample-02-beatrix-library-awakening",
+  "characters": {
+    "beatrix-sterling": {
+      "slug": "beatrix-sterling",
+      "tier_range": [2, 5],
+      "required_refs": [
+        {"type": "face-card", "filename": "face-card.png", "description": "3/4 portrait, neutral expression, photoreal DAZ3D CGI, head and shoulders, auburn copper hair pulled back in a tight low bun at the nape, round wire-rim glasses on her face, green eyes, fair English-rose complexion with light freckles across cheekbones and nose, strikingly beautiful, age 28, vogue-cover glamour lighting, neutral grey backdrop"},
+        {"type": "body-tier-lineup", "filename": "body-tier-lineup.png", "description": "Composite showing Beatrix at tier 2, tier 3, tier 4, and tier 5 side-by-side in her cream blouse + charcoal pencil skirt (tier 2 baseline) progressing to tier 5 with strained blouse + popped top button + skirt slit revealing flexed quad, full body fronts, photoreal DAZ3D CGI, neutral grey backdrop"},
+        {"type": "multi-angle-pack", "filename": "multi-angle-baseline.png", "description": "Tier-2 Beatrix shown front / three-quarter / profile / back in a 2x2 grid composite, neutral grey backdrop, photoreal DAZ3D, with bun and glasses intact"},
+        {"type": "costume-turnaround", "filename": "costume-turnaround.png", "description": "Cream high-collared blouse + long charcoal pencil skirt + low brown heels + brass watch-on-chain at lapel, shown front and back side-by-side on tier-2 Beatrix, neutral grey backdrop, photoreal DAZ3D"}
+      ]
+    }
+  },
+  "locations": {
+    "victorian-library": {
+      "slug": "victorian-library",
+      "required_refs": [
+        {"type": "establishing-wide", "filename": "establishing-wide.png", "description": "Wide establishing shot of a dusty Victorian university library interior — towering dark wooden bookshelves reaching ceiling, brass reading lamps with green glass shades, leather button-back chairs, stained glass arched windows casting amber afternoon light beams with floating dust motes, long oak reading table with scattered open leather books in the foreground, antique globe in background, no character in frame, photoreal CGI"}
+      ]
+    }
+  },
+  "tier_reinforcement_refs": []
+}

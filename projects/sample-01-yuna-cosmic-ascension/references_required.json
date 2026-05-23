@@ -1,0 +1,27 @@
+{
+  "project": "sample-01-yuna-cosmic-ascension",
+  "characters": {
+    "yuna-hoshino": {
+      "slug": "yuna-hoshino",
+      "tier_range": [2, 6],
+      "required_refs": [
+        {"type": "face-card", "filename": "face-card.png", "description": "3/4 portrait, neutral expression, photoreal DAZ3D CGI, head and shoulders, short cropped black hair just above the ears with fringe just above the eyebrows, brown eyes, fair-medium Japanese complexion, strikingly beautiful, age 32, vogue-cover glamour lighting, neutral grey backdrop"},
+        {"type": "body-tier-lineup", "filename": "body-tier-lineup.png", "description": "Composite showing Yuna at tier 2, tier 4, and tier 6 side-by-side in NASA flight suit (tiers 2 and 4) and cosmic peak bodysuit (tier 6), all body proportions matching the canonical lineup figure for those tiers, full body fronts in T-pose, photoreal DAZ3D CGI on a neutral grey backdrop"},
+        {"type": "multi-angle-pack", "filename": "multi-angle-baseline.png", "description": "Tier-2 Yuna in NASA flight suit shown front / three-quarter / profile / back in a 2x2 grid composite, neutral grey backdrop, photoreal DAZ3D"},
+        {"type": "costume-turnaround-baseline", "filename": "costume-turnaround-baseline.png", "description": "NASA/JAXA blue flight suit, zipped to collar, HOSHINO name tag visible on left chest, JAXA flag patch on right shoulder, shown front and back side-by-side, neutral grey backdrop, photoreal DAZ3D"},
+        {"type": "costume-turnaround-peak", "filename": "costume-turnaround-peak.png", "description": "Cosmic peak bodysuit — sleek iridescent black bodysuit with star-pattern energy lines, shown front and back side-by-side on tier-6 Yuna body, neutral grey backdrop, photoreal DAZ3D"}
+      ]
+    }
+  },
+  "locations": {
+    "iss-cupola": {
+      "slug": "iss-cupola",
+      "required_refs": [
+        {"type": "establishing-wide", "filename": "establishing-wide.png", "description": "Wide establishing shot of the International Space Station observation cupola interior — seven angled windows with Earth's curvature visible curving below, control panels with backlit indicators, padded handholds along the bulkhead, distant ISS modules visible through one window, deep-space blackness through the others, no character in frame, photoreal CGI"}
+      ]
+    }
+  },
+  "tier_reinforcement_refs": [
+    {"tier": 6, "source_path": "skills/comic-production/references/peak-body-scale/tier-6/", "attach_on_panels": [9, 10]}
+  ]
+}

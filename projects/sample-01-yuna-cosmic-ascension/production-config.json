@@ -1,0 +1,82 @@
+{
+  "version": 3,
+  "project": {
+    "name": "sample-01-yuna-cosmic-ascension",
+    "root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/sample-01-yuna-cosmic-ascension",
+    "brand": "GrowGetterComics",
+    "character_ref": "references/characters/yuna-hoshino/face-card.png"
+  },
+  "transformation_type": "fmg",
+  "transformation_subtype": "fmg-solo-tier2-to-tier6-yuna-cosmic",
+  "lineup_files": {
+    "tier_low": "muscle-size-lineup.png",
+    "tier_high": "muscle-size-lineup-4-9.png",
+    "active_range": "auto"
+  },
+  "style": "photoreal-daz3d",
+  "platform": "flow",
+  "location_strategy": "single",
+  "cast_size": 1,
+  "page_count": 10,
+  "panels_per_page": 1,
+  "transformation_metadata": {
+    "flavor": "single-axis",
+    "start_tier": 2,
+    "end_tier": 6,
+    "trigger": "cosmic-anomaly-energy-wash",
+    "tone_arc": "awe-and-wonder"
+  },
+  "always_clothed": true,
+  "dialogue_mode": "minimal",
+  "rules_active": "all",
+  "autopilot_picks_variants": true,
+  "generation_backend": "flow",
+  "model_default": "nano_banana_pro",
+  "default_count": "x4",
+  "default_aspect": "3:4",
+  "mandatory_rules": {
+    "active": [1,2,3,4,5,6,7,8,9,10],
+    "extra_lines": [
+      "L33 ALWAYS-CLOTHED HARD: Yuna stays fully clothed at every tier. No nudity. NASA flight suit (tiers 2-5) and cosmic peak bodysuit (tier 6) preserve full coverage of breasts / groin / glutes. Garments may strain and stress but never expose.",
+      "L17 YUNA CANONICAL ANCHOR: Every face-visible panel shows Yuna with short cropped black hair (NOT twin buns, NOT long hair — short crop length, fringe just above eyebrows), brown eyes, fair-to-medium Japanese complexion, age 32, strikingly beautiful, vogue-cover glamour, defined cheekbones, clear skin with subsurface scattering. Zero face drift across panels.",
+      "L21 REFERENCE EXCLUSION: Attached face card / body-tier lineup / multi-angle pack / env ref / tier-6 reinforcement are guidance only. Never render them as physical scene objects (no inset photos, no posters, no proportion stat overlays, no progress bars).",
+      "L22 HAIR STATE EXPLICIT: Every face-visible panel must explicitly name the hair: 'short cropped black hair, just-above-ear length, slightly tousled'. From tier 4 onward add: 'hair lifts subtly with cosmic energy currents'. No twin buns. No long hair. No ponytail.",
+      "L23 ENV VERBAL ANCHOR (ISS cupola): When env ref dropped, anchor with: International Space Station observation cupola, seven angled windows with Earth visible curving below, control panels with backlit indicators, floating clipboards and pens drifting in zero-g, padded handholds along the bulkhead, distant ISS modules through one window, deep-space blackness in the others.",
+      "L24 ACCESSORY SUPPRESSION: NASA mission patch (HOSHINO name tag, JAXA flag patch on shoulder) is canonical for tiers 2-5. At tier 6 the cosmic bodysuit is patch-free. Suppress hallucinated jewelry / watches / rings / earrings when wrists, neck, ears, or fingers are in frame.",
+      "L29 TIER REINFORCEMENT (tier-6 auto-attach): Panels 9-10 auto-attach the canonical tier-6 reinforcement ref from skills/comic-production/references/peak-body-scale/tier-6/. Render figure-scale at or above the ref.",
+      "PHOTOREAL CGI / DAZ3D STYLE: All bodies, costumes, skin, hair, ISS cupola, cosmic energy render as photoreal DAZ3D / Iray-style CGI with ray-traced subsurface scattering, PBR materials, 8K textures. Cosmic energy = volumetric iridescent purple-cyan-gold nebula glow with bloom and lens flares. 2D scope is the captions only (panels 4, 7, 10).",
+      "BEAUTY ANCHORING: Yuna renders strikingly beautiful in every panel — vogue-cover glamour Japanese beauty, symmetric features, glamour lighting on the face. Muscle scale at tier 6 does NOT degrade facial beauty.",
+      "CHEST OVERSIZE COMPENSATION: At every tier 3 onward, prompt for chest size LARGER than the lineup figure suggests for that tier. Bust scales WITH muscle at every tier (not just one or the other).",
+      "AUTONOMOUS VARIANT SELECTION (autopilot): Pick winning variants without asking. Surface only locked outputs and HARD-fail retries.",
+      "DIALOGUE MODE MINIMAL — captions appear ONLY on panels 4, 7, 10 as predefined internal-thought yellow rounded-rectangle caption boxes (L19 flat 2D overlay). Other 7 panels carry no text.",
+      "TONE — AWE AND WONDER: Yuna does not fear the transformation. Expressions across the arc move from focused → curious → amazed → reverent → triumphant. No fear, no panic, no resistance."
+    ],
+    "allow_baked_lettering": true
+  },
+  "references": {
+    "policy": "skip-if-populated",
+    "min_frames_per_character": 5,
+    "require_source_jpg_for_locations": false
+  },
+  "flow": {
+    "default_model": "Nano Banana 2",
+    "default_count": "x4",
+    "default_aspect": "3:4",
+    "state_file": "flow-state.json"
+  },
+  "generation": {
+    "max_panels": 10,
+    "max_retries_per_panel": 4,
+    "on_all_bad": "retry-with-cgi-anchor-boost",
+    "pick_variant": "claude",
+    "growth_sequence_order": ["breasts", "muscles"]
+  },
+  "policies": {
+    "stage3_gate": "auto",
+    "act_boundary_audit": "log-only-overnight",
+    "regeneration": "batch-end",
+    "content_policy_refusal": "skip-after-4-retries",
+    "missing_ref_guardrail": "use-stand-in-and-log",
+    "posting": "never"
+  }
+}
