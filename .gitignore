@@ -4,3 +4,8 @@ __pycache__/
 .venv/
 venv/
 .env
+
+projects/*/pages/
+projects/*/final/
+projects/*/defects.jsonl
+projects/*/*.pdf
