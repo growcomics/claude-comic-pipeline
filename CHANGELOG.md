@@ -12,6 +12,35 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
+
+A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).
+
+### Fixed
+
+- **Mac Mini was running months-old code on the wrong branch.** The working checkout sat on `feat/audit-vision-gap-l25`, which branched off before the entire checks-and-balances refactor (phases 1–7, the silhouette purge, L11 breast-scale, L19 rewrite, L29–L32). `next_panel.py` was the 1199-line pre-refactor monolith with no `rules/` package and none of the ledger scripts on disk. Result: anyone reasoning from this CHANGELOG (which describes `main`) was diagnosing a system that wasn't deployed. Recovered by pushing the unique L25 commits to the remote for safekeeping, then fast-forwarding to `origin/main` (`123edd6..c158dbc`, 30 commits). The machine now runs the current pipeline.
+- **`_l19_lettering_block` crashed on string-shaped captions/sfx** ([next_panel.py](skills/comic-production/scripts/next_panel.py), commit `a1b7e07`). The block called `.get("text")` on every caption/sfx entry, assuming dicts; real shotlists carry some entries as bare strings, so `compose_prompt` (and therefore `build_plan` and `write_ledger.py`) raised `AttributeError: 'str' object has no attribute 'get'` on any such panel. Fixed with an `_as_obj()` coerce at the top of the captions and sfx loops — a bare string becomes `{"text": <string>}`. Tolerant of old and new shotlist shapes; no data rewrite.
+- **L1.5 view-aware chaining failed on every panel due to a camera-vocabulary mismatch** ([next_panel.py](skills/comic-production/scripts/next_panel.py), folded into commit `961f9b5`). `pick_chain_anchor` keyed `VIEW_COMPATIBILITY` (`front-full`, `3q-full`, `splash`, …) with the first comma-token of the shotlist's `camera` field (`full-body`, `three-quarter`, `wide splash`, …) — two different vocabularies, so the lookup matched almost nothing and fell back to canonical-ref + verbal carry-forward every time (7/7 defects on chun-li-test). Added `_VIEW_ALIASES` + `_canon_view()` which normalizes a compound camera string to a single `VIEW_COMPATIBILITY` key (tries each comma-token longest-first, strips parentheticals), applied at both the `target_view` build site and the prior-read site. chun-li-test L1.5 defects 7→1 (remaining one is the `ecu-region` by-design empty-set fallback, not a bug).
+- **Speech-bubble attribution was blank on every dialogue panel** ([next_panel.py](skills/comic-production/scripts/next_panel.py), commit `961f9b5`). The L4 lettering block (line ~836) and the L12/L13 detection checks (lines ~272/~323) read `dialogue[].speaker`, but shotlists populate the field as `dialogue[].character`. Every bubble rendered `positioned over ''s side of the frame` with no speaker. Fixed all three sites to read `d.get("speaker") or d.get("character")`. Verified: p11-01 now composes `positioned over `bison`'s side`. Fixes attribution across all dialogue panels at once.
+
+### Added
+
+- **View aliases for compound framing names** ([next_panel.py](skills/comic-production/scripts/next_panel.py), commit `961f9b5`). `wide splash`/`full-body splash` → `splash`, `medium two-shot` → `medium`, `close-up on her face` → `mcu`, `medium-wide hero pose` → `medium-wide`, plus `medium-wide`/`mcu`/`medium`/`full body`/`wide establishing`/`extreme close-up` mappings folded into `_VIEW_ALIASES`. Clears the legitimate-but-unrecognized view tokens; deliberately does NOT alias prose-in-camera (those are malformed data, fixed at the source).
+- **Shotlist schema-validator** ([skills/script-breakdown/scripts/validate_shotlist.py](skills/script-breakdown/scripts/validate_shotlist.py), commit `961f9b5`). Enforces the contract the pipeline silently assumed: `camera` head-token must be a known view (flags prose belonging in `action` vs unknown tokens), `tier` must be int when present, on-screen dialogue must carry a speaker (`speaker` or `character`), warns on empty `characters`/missing `location`. Exit 1 rejects a bad shotlist. Intended as a write-time gate in `script-breakdown` and a warn-only preflight in `build_plan`. On first run it correctly flagged 4 prose-in-camera panels in chun-li-iron-discipline + the legitimate compound-token panels.
+- **Vision-audit dispatcher** ([skills/comic-production/scripts/audit_panels.py](skills/comic-production/scripts/audit_panels.py), uncommitted as of this entry). The missing post-render orchestration the design doc left "orchestrator-side": for each accepted panel it loads the rendered image + `checks.json`, runs each applicable rule's `vision_rubric` against the image + canonical refs via an isolated `_vision_judge()` backend, and writes the verdict to `rules[RULE].post_render.{status,reason}`; post-render fails roll into `defects.jsonl`. Report-only by default — never regenerates. Degrades to `--dry-run` automatically when `anthropic`/`ANTHROPIC_API_KEY` are absent. Phase 8 auto-regen intentionally NOT wired (spends credits unattended). Dry-run confirmed wired end-to-end on chun-li-test (10 panels).
+
+### Changed
+
+- **Stopped tracking generated project output** (commit `2150b6c`). `.gitignore` now excludes `projects/*/pages/`, `projects/*/final/`, `projects/*/defects.jsonl`, `projects/*/*.pdf`; the chun-li-test rendered panels/PDF/ledgers that were accidentally committed were untracked. Generated comics are output, not source.
+
+### Notes
+
+- **Root-cause framing for the boss-level question.** "Too strict / lacking / give up" was the wrong axis. 14 of 15 rules pass clean on real panels; the failures were all vocabulary/convention drift between layers (branch vs branch, caption shape, camera dialect, `character` vs `speaker`, prose-in-camera). The durable fix is the validator-as-write-gate + one shared schema, not rule count changes.
+- **Still pre-render only.** Everything fixed and verified this session is composition-layer (text). No rendered image has been verified yet — that requires running `audit_panels.py` live (after a small applicability-skip tightening so it doesn't fire every rule on every panel) with a human spot-checking the first verdicts.
+- **Open follow-ups:** tighten `audit_panels.py` to skip rules whose `pre_render` was skipped/n-a; run the audit live (one panel first); fix the 4 prose-in-camera panels + 1 too-wide L12 dialogue panel; wire `validate_shotlist.py` into `script-breakdown` as a hard gate; decide on auto-regen (phase 8).
+
+---
+
 ## 2026-05-17 (compose_prompt section-formatting — labeled `[SECTION]` headers instead of one unbroken paragraph)
 
 ### Changed
