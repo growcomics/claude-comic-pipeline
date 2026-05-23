@@ -250,13 +250,12 @@ lettering overlay layer. That's L10 enforced in code.
   restructure, the persistence-gap fix, the validation, the
   backward-compat statement, and the architectural shift from
   prompt-bloat to ref-fix.
-- **NotebookLM source bundle**: the refactor docs
-  (`docs/refactor/rule-classification-before.md`,
-  `docs/refactor/migration-plan.md`,
-  `docs/refactor/yuna-prompt-exhibit.md`,
-  `docs/refactor/validation/README.md`, the BEFORE/AFTER prompts, and
-  the blog post itself) packaged into a NotebookLM notebook with an
-  audio overview + infographic. Link captured below once generated.
+- **NotebookLM notebook**: [Refs Are Truth: Enforcing L10 in AI Prompt Architectures](https://notebooklm.google.com/notebook/2e9449e5-27d3-4491-a3eb-ea389d97a7ff)
+  — 7 sources uploaded (the blog post + the four refactor docs + the
+  BEFORE/AFTER prompts). Audio Overview and Infographic both triggered
+  in the Studio panel; both generate asynchronously over a few minutes.
+  Notebook is on the growcomics Google account; surface via Share
+  button inside the notebook for external distribution.
 
 ---
 
