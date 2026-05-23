@@ -242,6 +242,22 @@ lettering overlay layer. That's L10 enforced in code.
   is action-class, not appearance), but could be slimmed in a future
   pass that's out of scope for this branch.
 
+### Publishing
+
+- **Blog post**: [`docs/posts/2026-05-23-refs-are-truth.md`](docs/posts/2026-05-23-refs-are-truth.md) — narrative
+  walk-through of the refactor for the project's posts series: the
+  evidence (1,770 → 787 words), the principle, the four-category
+  restructure, the persistence-gap fix, the validation, the
+  backward-compat statement, and the architectural shift from
+  prompt-bloat to ref-fix.
+- **NotebookLM source bundle**: the refactor docs
+  (`docs/refactor/rule-classification-before.md`,
+  `docs/refactor/migration-plan.md`,
+  `docs/refactor/yuna-prompt-exhibit.md`,
+  `docs/refactor/validation/README.md`, the BEFORE/AFTER prompts, and
+  the blog post itself) packaged into a NotebookLM notebook with an
+  audio overview + infographic. Link captured below once generated.
+
 ---
 
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
