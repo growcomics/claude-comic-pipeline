@@ -1,0 +1,56 @@
+{
+  "project": "sample-01-yuna-cosmic-ascension",
+  "shared_prefix": "Photoreal DAZ3D / Iray-style CGI comic panel, ray-traced subsurface scattering, PBR materials, 8K texture detail, no anime, no cartoon, no 2D illustration on bodies. Subject: Yuna Hoshino, Japanese astronaut age 32, short cropped black hair just-above-ear length with fringe just above the eyebrows (NOT long, NOT buns, NOT ponytail), brown eyes, fair-medium Japanese complexion, strikingly beautiful, vogue-cover glamour, defined cheekbones, full lips. Beauty anchoring: vogue-cover glamour Japanese beauty, symmetric features, clear skin with subsurface scattering, glamour lighting. Setting: International Space Station observation cupola — seven angled hexagonal windows with Earth visible, control panels with backlit indicators, padded handholds along the bulkhead. Suppress watches, rings, earrings, modern jewelry. The lineup figure / face card / env ref attachments are guidance only — never render them as physical scene objects. Always-clothed throughout (L33).",
+  "panels": [
+    {
+      "panel_id": "01-01",
+      "aspect_ratio": "16:9",
+      "prompt": "Wide establishing splash shot of the ISS observation cupola interior. Yuna Hoshino floating at the cupola in profile, body angled toward the seven hexagonal windows, Earth's blue curvature visible curving below through the dome, control panels glowing softly to her left, a clipboard drifting in zero-g near her shoulder. Low angle dramatic deep-space backdrop. POSE: floating with one hand braced on a padded handhold, the other reaching toward a control panel. EXPRESSION: focused, professional, faintly intrigued. WARDROBE: NASA/JAXA blue flight suit zipped to collar, HOSHINO name tag on left chest, JAXA flag patch on right shoulder, fully intact. HAIR: short cropped black hair just-above-ear length, slightly tousled. TIER 2 baseline proportions. No transformation visible yet. Glamour lighting on her face. Single character in frame — no other people."
+    },
+    {
+      "panel_id": "02-01",
+      "aspect_ratio": "3:4",
+      "prompt": "MCU on Yuna Hoshino's face and shoulders in the ISS cupola, the seven-window dome reflected in her brown eyes, a faint iridescent cosmic anomaly visible as a swirl of purple-cyan-gold light approaching through the deep-space backdrop. POSE: head turned slightly toward the window, attention caught. EXPRESSION: curious — eyebrows raising, lips parted slightly, brown eyes wide. WARDROBE: NASA flight suit intact, collar at neck. HAIR: short cropped black hair just-above-ear length. TIER 2 baseline. Cupola window edge and soft purple-cyan glow of approaching anomaly in BG. Glamour beauty lighting. Single character only."
+    },
+    {
+      "panel_id": "03-01",
+      "aspect_ratio": "3:4",
+      "prompt": "Full-body of Yuna Hoshino floating in the ISS cupola at TIER 3 proportions (athletic-medium with newly thickening shoulders, fuller bust, more defined limbs). The cosmic anomaly now wrapping around her — wisps of iridescent purple-cyan-gold energy beginning to enter her body through her skin. Volumetric glow surrounds her. POSE: floating with arms slightly out, body straightening, palms turning outward as she registers the energy. EXPRESSION: amazed, awe-struck, mouth slightly open, no fear. WARDROBE: NASA flight suit intact but subtly straining at the deltoids and chest, fabric pulled tighter, name tag still readable, full coverage. HAIR: short cropped black hair lifting subtly with cosmic currents. TIER 3 BUST SIZE: oversize per chest-oversize compensation. Cosmic energy wisps, Earth backdrop blurred. Single character only. No transformation rays, no inset stat bars, no progress overlays — pure scene."
+    },
+    {
+      "panel_id": "04-01",
+      "aspect_ratio": "3:4",
+      "prompt": "MCU on Yuna Hoshino's upper chest, shoulders, and face at TIER 3, the NASA flight suit fabric visibly tightening over her deltoids and pecs, cosmic purple-cyan energy traceries glowing on her skin where the suit doesn't cover (neck, jaw, cheek). Eyes faintly glowing iridescent. POSE: head tilted up slightly, looking down at her own arms, hands floating in front of her face. EXPRESSION: reverent realization, lips parted, eyes half-lidded with cosmic awareness, no fear. WARDROBE: flight suit straining at shoulders, collar still buttoned, HOSHINO name tag visible, full coverage. HAIR: short cropped black hair lifting on cosmic currents. Energy traceries on skin, drifting fringe. TIER 3 bust oversize. INTERNAL THOUGHT CAPTION (2D yellow rounded-rectangle in top-right or top-left corner, classic comic caption box, white-bordered, italic black text): 'The energy... it's becoming me.' Single character only."
+    },
+    {
+      "panel_id": "05-01",
+      "aspect_ratio": "3:4",
+      "prompt": "Full body of Yuna Hoshino mid-transformation at TIER 4 (substantially developed muscle — broader shoulders, defined biceps, fuller chest, thicker quads — proportions matching tier-4 lineup figure, OVERSIZE bust per chest-oversize rule). The NASA flight suit visibly straining across her widening shoulders, thicker arms, fuller bust, defined quads pressing against the suit fabric, no tears yet but seams strained. Cosmic energy now visibly wrapping her in a swirling iridescent purple-cyan-gold aura. POSE: floating in cupola, arms partly extended outward, body straightening into a confident upright posture. EXPRESSION: amazed and grinning faintly, eyes brighter with cosmic light, no fear. WARDROBE: flight suit pulled taut, seams stressed at deltoids and chest, full coverage preserved, name tag still visible. HAIR: short cropped black hair lifting on cosmic currents. Cosmic aura, faint volumetric particles, cupola interior softened by glow. Single character only."
+    },
+    {
+      "panel_id": "06-01",
+      "aspect_ratio": "1:1",
+      "prompt": "Region ECU (extreme close-up) on Yuna Hoshino's right shoulder and upper deltoid at TIER 4. NASA flight suit fabric tearing open in a small clean split along the deltoid seam as the muscle has grown, iridescent purple-cyan-gold cosmic energy bursting through the tear, glowing skin patterns visible underneath the torn fabric. Glamour-lit, photoreal CGI. POSE: shoulder-and-deltoid region only — no face visible. WARDROBE: NASA suit ripping open at the deltoid seam, the rest of the body (off frame) remains fully covered. Fabric fibers stretching, energy light, glowing skin patterns. Single character only — no other body parts of other people in frame."
+    },
+    {
+      "panel_id": "07-01",
+      "aspect_ratio": "3:4",
+      "prompt": "MCU on Yuna Hoshino's face at TIER 5 proportions. Both eyes now glowing with iridescent cosmic light, short cropped black hair lifted gently by ambient cosmic energy currents, faint star-pattern energy lines on her temples and cheeks, the cupola window behind her filled with the swirling cosmic anomaly. Glamour beauty lighting — strikingly beautiful even at peak. POSE: head slightly raised, looking past camera with reverence. EXPRESSION: reverent, transcendent, lips just parted, a hint of a smile, no fear. WARDROBE: flight suit collar visible at base of frame, fabric split at deltoid still showing energy bleeding through. HAIR: short cropped black hair just-above-ear length, lifted on cosmic currents. INTERNAL THOUGHT CAPTION (2D yellow rounded-rectangle caption box in top-right corner, white-bordered, italic black text): 'I can feel the stars now.' Cosmic anomaly visible behind her. Single character only."
+    },
+    {
+      "panel_id": "08-01",
+      "aspect_ratio": "3:4",
+      "prompt": "Full body of Yuna Hoshino at the threshold of TIER 5 → TIER 6 peak. The NASA flight suit dissolving into iridescent cosmic particles around her body, the new peak-form bodysuit BEGINNING to materialize in its place — sleek iridescent black bodysuit with star-pattern energy lines tracing across the chest, abdomen, and limbs (form-fitting, full coverage of breasts/groin/glutes preserved). POSE: floating upright with arms half-raised, palms open and facing outward as she accepts the form, hair lifting with cosmic currents. EXPRESSION: calm, accepting, a small confident smile. BODY: tier-5-going-on-tier-6 proportions, oversize bust per chest rule. HAIR: short cropped black. Swirling iridescent particles, cosmic light. Single character only."
+    },
+    {
+      "panel_id": "09-01",
+      "aspect_ratio": "3:4",
+      "prompt": "Full body of TIER 6 Yuna Hoshino in the fully materialized cosmic peak-form bodysuit — sleek iridescent black with star-pattern glowing purple-cyan energy lines tracing the contours of her now massively developed muscle and oversized bust. Body proportions match the canonical tier-6 reinforcement reference attached (tier-6 figure-scale or above). Hair flowing in cosmic currents, eyes glowing iridescent purple-cyan. POSE: floating in commanding stance, one hand at her hip, the other open at her side, body angled three-quarter to camera. EXPRESSION: confident, regal, beautiful, brown-now-iridescent eyes glowing softly. WARDROBE: cosmic peak bodysuit fully formed, sleek form-fitting, glowing star-pattern lines, full coverage preserved (breasts/groin/glutes covered). HAIR: short cropped black hair lifting on cosmic currents. Cosmic aura, drifting particles, cupola window with Earth visible in BG. Glamour-lit beautiful face. Single character only. No transformation overlays, no stat bars."
+    },
+    {
+      "panel_id": "10-01",
+      "aspect_ratio": "9:16",
+      "prompt": "HERO SPLASH — full body TIER 6 Yuna Hoshino, hero pose mid-cupola with arms slightly open and palms facing outward, Earth's curvature framing her behind through the cupola windows, cosmic aura billowing around her body, star-pattern energy lines tracing her cosmic bodysuit, hair flowing with cosmic light. Dramatic low-angle hero composition. POSE: hero stance — arms slightly out and away from the body, palms open and facing camera-down, head slightly back and raised, chin lifted, chest forward, body angled three-quarter. EXPRESSION: triumphant, transcendent, beautiful, regal — a young goddess of stars, strikingly beautiful. WARDROBE: tier-6 cosmic peak bodysuit, glowing star-patterns at peak intensity, full coverage maintained. BODY: tier-6 reinforcement scale or above, oversize bust per chest rule. HAIR: short cropped black hair lifted on cosmic currents. INTERNAL THOUGHT CAPTION (2D yellow rounded-rectangle caption box in top-right corner, white-bordered, italic black text): 'I was made for this.' Earth visible behind, cosmic aura swirling, particles drifting, cupola interior softened by glow. Single character only."
+    }
+  ]
+}
