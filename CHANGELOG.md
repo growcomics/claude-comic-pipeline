@@ -12,6 +12,38 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-24 (Yuna re-run — refactor branch validation — pre-flight hard stop)
+
+### Validation attempt
+- Attempted A/B re-run of projects/sample-01-yuna-cosmic-ascension shotlist
+  on refactor/refs-are-truth-prompts-are-action.
+- Stopped at pre-flight. 0/10 panels attempted, 0 Higgsfield credits spent.
+
+### Findings
+- **Schema mismatch:** refactor deleted appearance-text fields from the
+  shotlist schema by design. Baseline's flat panels[] with
+  framing/wardrobe_state/pose/mood cannot be translated to refactor's
+  pages[].panels[] with categorical camera + short action + required
+  hair_state/characters[]/location without inventing values.
+- **Handoff bug:** baseline panel-prompts.json DOES exist at
+  projects/sample-01-yuna-cosmic-ascension/panel-prompts.json — handoff
+  claim that the original run didn't save prompts is wrong. Prompt-structure
+  A/B is recoverable without new generation.
+- **Tertiary handoff bugs:** panel folder structure (pages/page-NN/panels
+  vs flat pages/panels), retired model nano_banana_flash, 3 of 5 character
+  refs missing from baseline.
+
+### Recommendation
+- Path A (preferred): build an overnight→refactor shotlist migration tool
+  with explicit, user-reviewable field rules. Re-run on migrated shotlist.
+  ~$0.40 + tool authoring.
+- Path B (fallback): author fresh shotlist on refactor schema, regenerate
+  baseline + re-run. Cleaner but ~$0.80.
+
+### Artifacts
+- projects/sample-01-yuna-rerun/REFACTOR-VALIDATION-FAILURE.md — full
+  diagnosis, side-by-side schema delta, two fix-forward paths
+
 ## 2026-05-23 (MAJOR REFACTOR — rules emit action only, refs carry appearance)
 
 The biggest architectural change to the rule system since the original
