@@ -12,6 +12,31 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-24 (CLAUDE.md — repo source-of-truth rules for Claude Code sessions)
+
+### Added
+- `CLAUDE.md` at repo root. Auto-loads whenever Claude Code operates in this repo or any subdirectory.
+
+### Why
+Two recurring failure modes drove this:
+
+1. **Namespace conflict**: the published `anthropic-skills:comic-production` skill shadows the local `skills/comic-production/SKILL.md` in the harness's skill registry. Without an explicit rule, "make me a comic" could route to the older bundled version, missing every L-lesson, the rule registry, the tier reinforcement refs, the always-clothed flag, and the refs-are-truth refactor.
+2. **Stale-clone risk**: per the 2026-05-22 entry below, the Mac mini was running on `feat/audit-vision-gap-l25` for months instead of main. This alone explained most of the recent bad output. Without a fetch-and-verify discipline at session start, this can recur on any machine.
+
+### What CLAUDE.md enforces
+- ALWAYS use the local skill files; NEVER `anthropic-skills:*` versions.
+- Before any comic work: `git fetch --all --prune`, surface current branch + behind-count, `git pull --ff-only origin main` if on main and behind.
+- Generation defaults (Higgsfield MCP direct, nano_banana_flash, count=1, 1k, photoreal CGI, always_clothed, no background extras).
+- Refs-are-truth principle: appearance via attached references only; prompts describe action/camera/lighting.
+- Atomic dated CHANGELOG entries.
+- QA via fresh subagent with canonical rubric passed verbatim.
+
+### Companion
+- Memory note `feedback_comic_pipeline_source_of_truth.md` captures the rule for cross-session persistence (when sessions operate outside this repo and the user mentions comic work).
+- SessionStart hook in `~/.claude/settings.json` on both laptop and mini auto-runs `git fetch` + prints branch/behind/HEAD at session start, removing the first-prompt latency.
+
+---
+
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
 
 A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).
