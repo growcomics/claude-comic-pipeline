@@ -298,7 +298,7 @@ bubble / caption / SFX graphics are flat 2D comic-book overlay.
 
 Same trick used in Case A's triptych fix.
 
-**Historical note**: L7 Case B has had three prescriptions across the project's life — (a) **never bake lettering, defer to `page-composer`** (the original 2026 era rule, "avoidance"); (b) **bake AND render as 3D scene objects** (L19 introduced 2026-05-13, "control by reframing as photoreal 3D"); (c) **bake as flat 2D overlay AND name the scope** (L19 rewritten 2026-05-16, the current rule, "control by bounding the scope"). The diagnosis has been stable across all three iterations — comic-coded vocab in a CGI prompt pulls the model toward illustration. Only the fix has evolved.
+**Historical note**: L7 Case B has had three prescriptions across the project's life — (a) **never bake lettering, defer to `page-composer`** (the original 2026 era rule, "avoidance") — **retired**; (b) **bake AND render as 3D scene objects** (L19 introduced 2026-05-13, "control by reframing as photoreal 3D") — **retired**; (c) **bake as flat 2D overlay AND name the scope** (L19 rewritten 2026-05-16, **the current rule**, "control by bounding the scope"). The diagnosis has been stable across all three iterations — comic-coded vocab in a CGI prompt pulls the model toward illustration. The "never bake / defer to page-composer" approach (a) is no longer an option as of 2026-05-25 — the opt-out flag was removed. Lettering ALWAYS bakes at generation time now.
 
 **Confirmed in production**: Chun-Li growth series — panels 3 (first surge), 4 (bicep close-up), and 5 (full body reveal) all drifted to 2D illustration while panels 1, 2, and 6–10 held photoreal CGI. The three drifted panels had prompted comic SFX text ("RRRIP", "KRRK", "BWOOM", "KRRSH") and inline speech bubbles ("a white speech bubble containing the line: '...'") in the prompt. The non-drifted panels did not. Removing the lettering from those prompts and letting `page-composer` handle dialogue/SFX in post would have held the photoreal style.
 
@@ -916,19 +916,18 @@ overlay.
 - **The metaphor is "letterer added them in post on top of a photograph"** — a real-world workflow the model has seen, telling it: the bubbles are an *overlay layer*, not a style applied globally.
 - **Closing negation is scope-bounded too**: "NOT a 2D illustration on the **bodies**, NOT cartoon-shaded **skin**." Sharper than the older "NOT illustrated" which was ambiguous about what was being negated.
 
-**Auto-emission**: `next_panel.py` `_l19_lettering_block()` auto-emits the block on every panel with a non-empty `dialogue`, `captions`, or `sfx` array. Bubble shape varies per `type` (balloon / thought / whisper / shout / off-panel) per L4. Tail attribution names the speaker explicitly per L4. No opt-in flag — this is the default behavior. The older `mandatory_rules.allow_baked_lettering` config opt-in (from the 2026-05-13 introduction) is retired; lettering bake is now unconditional.
+**Auto-emission**: `next_panel.py` `_l19_lettering_block()` auto-emits the block on every panel with a non-empty `dialogue`, `captions`, or `sfx` array. Bubble shape varies per `type` (balloon / thought / whisper / shout / off-panel) per L4. Tail attribution names the speaker explicitly per L4. **Unconditional — no opt-in, no opt-out.** The earlier `mandatory_rules.allow_baked_lettering` opt-in flag (2026-05-13 introduction) and the `mandatory_rules.skip_baked_lettering` opt-out flag (May 16 transition) are BOTH retired as of 2026-05-25. There is only one path: lettering bakes at generation time. The `page-composer` skill no longer letters — it is layout + PDF compilation only.
 
 **Relationship to other lessons**:
-- **Reverses L7 Case B's prescription.** The diagnosis (comic vocab pulls toward 2D) still applies; the new fix is "bake AND scope-bound," not "never bake" (pre-2026-05-13) or "bake AND render as 3D objects" (2026-05-13 to 2026-05-16).
+- **Reverses L7 Case B's prescription.** The diagnosis (comic vocab pulls toward 2D) still applies; the fix is "bake AND scope-bound."  The older "never bake" and "bake as 3D objects" iterations are historical only — see L7 Case B's historical note.
 - **L4 — Speech bubble positioning** is implemented inside the L19 lettering block. Bubble shape per dialogue type, tail per speaker, per-speaker text.
-- **`page-composer` still exists** as the vector-overlay path for projects that prefer post-render vector lettering (legibility, edit-ability, dialogue tweaks without re-rendering). L19 is the default in-render bake; page-composer is opt-in.
+- **`page-composer` is layout + PDF only.** It assembles panels (which already contain baked lettering) into pages and optionally exports PDF. It does NOT add bubbles, captions, or SFX. The post-render vector-lettering path is retired.
 
 **Where this rule applies**:
-- All CGI comic production. Default behavior — auto-injected by `compose_prompt()`.
+- All CGI comic production. Unconditional — auto-injected by `compose_prompt()` whenever the panel has dialogue / captions / SFX content in the shotlist. Panels with empty arrays for all three skip the block (nothing to letter).
 
 **Where this rule does NOT apply**:
 - Genuinely 2D-illustrated comics where illustration IS the goal. The whole point of L7's diagnosis is that the model defaults toward illustration; don't fight it if illustration is the goal.
-- Projects that explicitly route lettering through `page-composer` for editability reasons (set `mandatory_rules.skip_baked_lettering=true` in `production-config.json` — opt-out, not opt-in).
 
 ---
 

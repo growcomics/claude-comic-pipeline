@@ -217,7 +217,6 @@ Before writing the file:
 - `platform` is one of higgsfield / flow / hybrid
 - If platform=higgsfield: folder_id is present (warn if empty)
 - `mandatory_rules.active` is a subset of {1..10}, post-applying any drops/adds
-- If `mandatory_rules.allow_baked_lettering=true`: surface a warning that this opts into L19 experimental territory and that the generation prompt will compose bubbles/SFX as physical scene objects instead of clean renders.
 - If script_source.type=path: the path resolves to a file
 - If `arc_character` is set and script_source = existing-shotlist: confirm it appears in cast[]
 - `max_retries_per_panel` ≥ 1
@@ -241,7 +240,7 @@ Config written: <project.root>/production-config.json
 
 Transformation type: <type>
 Rules block: <N>/10 rules active + <M> extra_lines
-Allow baked lettering: <yes/no>
+Lettering: baked at generation time (L19, unconditional)
 Lineup: <tier_low> (file <found / NOT FOUND — drop in references/style/ before generation>)
 Step 0:
   style_preset: <style>
@@ -276,7 +275,7 @@ Do NOT auto-invoke `/build-comic autopilot`. User may want to review.
 After writing `production-config.json`:
 
 1. `script-breakdown` reads `script_breakdown.style_preset` / `script_breakdown.location_strategy` / `script_breakdown.transformation_metadata` and writes them into shotlist.json's top-level fields. Skips the Step 0 questionnaire entirely when config is present.
-2. `comic-production` reads `mandatory_rules.active` + `mandatory_rules.extra_lines` + `mandatory_rules.allow_baked_lettering` at panel-prompt time
+2. `comic-production` reads `mandatory_rules.active` + `mandatory_rules.extra_lines` at panel-prompt time. Lettering is baked unconditionally when the panel has dialogue/captions/SFX (L19, no opt-out as of 2026-05-25).
 3. `next_panel.py` reads `lineup_files.tier_low` / `tier_high` (when `--config` flag is added) or uses the file under the per-type filename
 4. `/build-comic autopilot` reads `policies.*` at each previously-gated decision
 5. `continuity-check` reads `policies.regeneration`, `continuity.monotonic_attribute`, `continuity.arc_character`
@@ -289,8 +288,6 @@ After writing `production-config.json`:
 - **"Set up a male muscle growth comic"** → transformation_type=mmg, brand=MaxxMuscleComics, lineup=male-muscle-lineup.png, rules per MMG defaults. Confirm platform + script. Write.
 - **"Same as devotion-2 but different script"** → ask for the prior config path, read it, swap project + script_source, write to new path.
 - **"I want to keep per-panel gates"** → set `generation.pick_variant=user`. Autopilot still runs but pauses for variant pick per panel.
-- **"Try the L19 baked-lettering experiment"** → set `mandatory_rules.allow_baked_lettering=true`. comic-production will bake SFX + speech bubbles as physical scene objects per L19; expect higher 2D-drift risk on weaker models, mitigated by the L19 anchoring suffix.
-
 ## What this does NOT do
 
 - Doesn't start generation.

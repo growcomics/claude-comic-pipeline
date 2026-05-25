@@ -12,6 +12,37 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-25 (Lettering opt-out removed — bake is unconditional, page-composer no longer letters)
+
+### Changed
+- `skills/comic-production/references/lessons-learned.md` L19 — "Auto-emission" + "Where this rule does NOT apply" no longer mention the `mandatory_rules.skip_baked_lettering` opt-out. Lettering bakes ALWAYS when the panel has dialogue/captions/SFX.
+- `skills/comic-production/references/lessons-learned.md` L7 Case B — historical note marks options (a) "never bake" and (b) "3D scene objects" as retired. Only (c) "flat 2D scoped overlay" is current.
+- `skills/comic-production/SKILL.md` Step 7 — L19 is "unconditional" (was "default-on"). Removed the `skip_baked_lettering` instructions. Replaced the "why default on" paragraph with a "why unconditional" paragraph explaining the single-stage rationale.
+- `skills/production-briefing/SKILL.md` — removed the `allow_baked_lettering=true` warning, the `Allow baked lettering: <yes/no>` config-summary line, the `allow_baked_lettering` mention in the handoff list, and the "Try the L19 baked-lettering experiment" common-ask entry. Briefing no longer surfaces the opt-out as a choice.
+- `skills/page-composer/SKILL.md` — full rewrite. Description and trigger phrases now scope to layout + PDF only. Removed "letter the comic" / "add speech balloons" triggers. New "When this skill is NOT the right tool" section redirects re-lettering requests to regeneration. Documents that legacy projects with clean (unlettered) panels should regenerate on the current pipeline.
+- `commands/build-comic.md` — Generation-stage rules paragraph on L19 now states the opt-out is removed. `page-composer` reference clarified as layout + PDF only.
+- `README.md` — "Lettering policy is now configurable" line replaced with "Lettering is always baked at generation time (L19, unconditional)."
+
+### Why
+User observation: the pipeline still had a documented escape hatch where panels could be generated with empty bubbles and `page-composer` would add lettering as a post-render vector overlay. Even though the actual code in `_l19_lettering_block()` was already unconditional, the opt-out flag was still surfaced across five files (lessons-learned, comic-production SKILL.md, production-briefing SKILL.md, build-comic.md, README.md) plus the page-composer skill's role description. This created two real problems:
+
+1. The skill catalog and SKILL.md descriptions made "letter the comic" look like a valid post-render step. New sessions could route lettering-related intent to `page-composer` based on the trigger phrases, producing the "clean panel + sticker overlay" failure mode.
+2. The CHANGELOG and dashboard could show "panels generated" as a separate stage from "lettering done," creating ambiguity about what "comic done" means.
+
+Single-stage bake (text ships with the panel) is now the only path. Editability is traded for visual integration: if a bubble needs a fix, regenerate the panel with corrected `dialogue[]` in the shotlist — fast on `nano_banana_flash`/`nano_banana_pro`, no longer cheaper than re-rendering.
+
+### Removed
+- `mandatory_rules.skip_baked_lettering` opt-out flag — was documented in five files, never wired into `_l19_lettering_block()` in code (always unconditional there), now removed from the docs.
+- `mandatory_rules.allow_baked_lettering` opt-in flag — already retired May 16 when L19 became default-on; remaining references in production-briefing cleaned up.
+- `page-composer`'s lettering pass — code path remains in `compose_page.py` but is no longer invoked; new SKILL.md marks it deprecated. Vector-lettering capability can be restored as a separate `lettering-patch` skill if a future need surfaces.
+
+### Migration for in-flight projects
+Any `production-config.json` containing `skip_baked_lettering` or `allow_baked_lettering` keys: the keys are now ignored by `next_panel.py` (they always were — the code never read them). Safe to remove or leave; no behavior change either way.
+
+Any project that produced clean (unlettered) panels expecting `page-composer` to add bubbles: re-run generation on the current pipeline. The dialogue/caption/SFX arrays are already in the shotlist; the new pass bakes them in.
+
+---
+
 ## 2026-05-24 (CLAUDE.md — repo source-of-truth rules for Claude Code sessions)
 
 ### Added
