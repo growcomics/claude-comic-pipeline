@@ -17,7 +17,7 @@ The pipeline runs end-to-end: prose script → shotlist → references (typed bu
 | `skills/style-lock/` | Preset library of starter style templates (`photoreal-daz3d`, `ink-line`, …) that shotlist authors reference when authoring the shotlist's style block. Not a pipeline stage. |
 | `skills/comic-production/` | The production engine — Higgsfield runner OR Flow UI driver. Handles prompt composition, reference attachment, view-aware chaining, the per-panel iterative loop, and all the L1–L24 lessons learned from real production. |
 | `skills/continuity-check/` | Cross-panel audit (wardrobe / prop / location / time-of-day) against the shotlist; reports drift before page assembly. |
-| `skills/page-composer/` | Assemble approved panels into pages with gutters, balloons, captions, SFX; export PDF. All lettering happens here, never in the render prompt (when L19 baked-lettering is opt-out, which is the default). |
+| `skills/page-composer/` | Assemble approved panels into pages with gutters; export PDF. Layout-only as of 2026-05-25 — lettering is baked into the panel at generation time per L19 (unconditional). |
 | `skills/comic-status-board/` | Generate and surface in chat project status — `STATUS.md` plus three checkpoint composite PNGs (`STATUS-references-board.png`, `STATUS-generation-board.png`, `STATUS-composition-board.png`) at the project root. Auto-invoked at every stage boundary. |
 | `skills/production-briefing/` *(new in v5)* | One-shot pre-flight interview that collects every decision the rest of the pipeline would otherwise interrupt for. Writes `production-config.json` at the project root. Triggered by `/build-comic autopilot` when no config exists, or by phrases like "start a new comic project" / "configure autopilot". |
 | `commands/build-comic.md` | `/build-comic` orchestrator — detects project state in cwd, runs the next stage, pauses at budget gates, refreshes status after every stage. Now supports three operating modes (`status`, `auto`, `autopilot`). |
@@ -103,11 +103,55 @@ The Python runner stack that drives Flow and Higgsfield from the build-comic orc
 
 `skills/continuity-check/tests/run_tests.py` now uses `sys.executable` instead of a hardcoded `python3` subprocess invocation, so the 9-fixture test suite runs on Windows (where `python3` may not be on PATH).
 
+## What's new since v5 (May 2026 stabilization)
+
+Two weeks of bug-class fixes and infrastructure work landed after the v5 cut. The animating principle: **every pipeline layer should declare its contract, validate it at the seam, and leave a ledger of what fired.** Most production failures traced to layers using different names for the same data with nothing checking they agreed.
+
+### Per-rule architecture (checks-and-balances refactor, phases 1–7)
+
+Rules now live as separate modules under `skills/comic-production/rules/` — one file per L-lesson, each subclassing a `Rule` base class with `should_apply` / `compose_contribution` / `verify_pre_render` / `verify_post_render` / `retry_strategy` / `vision_rubric`. The composition layer (`next_panel.py`) iterates the registry and emits a `[SECTION]`-formatted prompt where each directive carries a header citing the rule it came from. Composes the same content as before; structured output makes misfires diagnosable.
+
+### Pre-generation gates (run before any panel is generated)
+
+Two gates fire when `script-breakdown` writes `shotlist.json`. Both must pass before stage 2.
+
+| Gate | Script | Catches |
+|---|---|---|
+| A — schema | `skills/script-breakdown/scripts/validate_shotlist.py` | prose in `camera`, unknown view tokens, non-int `tier`, on-screen dialogue missing `speaker`/`character` |
+| B — semantics | `skills/continuity-check/scripts/rules_audit.py` | camera same-combo overuse, transformation-beats coverage, required metadata, reference completeness |
+
+Re-planning the shotlist costs nothing; regenerating panels after they've shipped wastes the API budget. Both gates surface findings to the autopilot halt table.
+
+### Per-panel checks.json ledger
+
+Every accepted panel writes `pages/panels/panel-<id>/checks.json` — a complete record of which rules fired, what each contributed, and each rule's pre-render status. The ledger is the audit's input and the substrate for the upcoming auto-regen layer. `defects.jsonl` at the project root aggregates pre-render fails for the dashboard.
+
+### Post-render vision audit
+
+`skills/comic-production/scripts/audit_panels.py` walks accepted panels, finds every applicable rule that ships a `vision_rubric`, asks Claude vision to judge the rendered image against the rubric + canonical refs, and writes `post_render.{status,reason}` into checks.json. Failed rules roll into `defects.jsonl`. Report-only by default — never spends credits on auto-regen without explicit opt-in. Skip gate ensures only rules whose pre-render passed get audited (no API spend on already-known failures).
+
+### Peak-tier reinforcement refs (L29–L32)
+
+Tier 6 / 7 / 8 / 9 each have dedicated reinforcement PNGs at `skills/comic-production/references/peak-body-scale/tier-{6,7,8,9}/`, auto-attached to every panel rendered at that tier. Validated end-to-end on Mira and Chun-Li panel renders.
+
+### Lettering policy: unconditional bake (L19)
+
+`_l19_lettering_block()` is always-on whenever a panel has `dialogue` / `captions` / `sfx`. The `skip_baked_lettering` opt-out and `allow_baked_lettering` opt-in are both retired. `page-composer` is now strictly layout + PDF; it does not letter. Bubble fixes are panel regens, not vector overlays.
+
+### Repo source-of-truth rules + freshness discipline
+
+`CLAUDE.md` at the repo root auto-loads in any Claude Code session that operates here. Enforces: use the LOCAL skill files (never the published `anthropic-skills:comic-production` bundle, which is older), verify branch + behind-count at session start, atomic dated `CHANGELOG.md` entries on every change, never commit `projects/` content (gitignored, symlinks to Google Drive).
+
+Companion SessionStart hooks on workstations auto-run `git fetch` + print current branch / behind / HEAD so the first prompt is unblocked.
+
 ## How it fits together
 
 ```
 script ──► script-breakdown ──► shotlist.json
                                  │
+                                 ├─► validate_shotlist.py   (Gate A — schema)
+                                 └─► rules_audit.py         (Gate B — semantics)
+                                       │ both must pass before stage 2
             reference-gathering ──► references/characters/ , locations/ , props/ , style/
                                  │                                        │
                                  │                                        ▼
@@ -118,7 +162,12 @@ script ──► script-breakdown ──► shotlist.json
               comic-production ──► pages/panels/panel-NN-<slug>/
                                  │   ├── v1.png, v2.png, v3.png …
                                  │   ├── _accepted.txt
+                                 │   ├── checks.json           (per-rule ledger)
                                  │   └── (optional) vN.notes.md, prompt-vN.txt
+                                 │
+               audit_panels.py ──► reads checks.json + accepted image
+                                 │   ├─► post-render vision verdicts → checks.json
+                                 │   └─► fails roll into defects.jsonl
                                  │                                        │
                                  │                                        ▼
                                  │                              comic-status-board

@@ -12,6 +12,31 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-25 (README — reflect May 2026 stabilization work: gates, ledger, vision audit, peak-tier refs, unconditional lettering, source-of-truth rules)
+
+### Changed
+
+- **[README.md](README.md)** — added a "What's new since v5 (May 2026 stabilization)" section grouping the last two weeks of work into six themes: per-rule architecture (checks-and-balances refactor), pre-generation gates (validate_shotlist + rules_audit), per-panel checks.json ledger, post-render vision audit (audit_panels.py), peak-tier reinforcement refs (L29–L32), unconditional L19 lettering bake, and the repo source-of-truth rules in CLAUDE.md. Updated the "How it fits together" dataflow diagram to show the schema/semantics gates fanning out from script-breakdown, the per-panel checks.json under each panel folder, and audit_panels.py emitting post-render verdicts back into the ledger. Corrected the page-composer line in the skills table (was "all lettering happens here" — now "layout-only as of 2026-05-25"). No code changes; doc only.
+
+---
+
+## 2026-05-25 (view vocabulary extracted to a single shared JSON — closes the SYNC RULE follow-up from earlier today)
+
+### Changed
+
+- **View vocabulary now lives in one file: [skills/comic-production/data/view-vocabulary.json](skills/comic-production/data/view-vocabulary.json)**. Both [next_panel.py](skills/comic-production/scripts/next_panel.py) (`VIEW_COMPATIBILITY` + `_VIEW_ALIASES`, the runtime's L1.5 chaining inputs) and [validate_shotlist.py](skills/script-breakdown/scripts/validate_shotlist.py) (`KNOWN_VIEWS`, the schema gate's accept set) read this JSON at module load. `KNOWN_VIEWS` is derived as `compatibility.keys ∪ aliases.keys ∪ aliases.values` — the runtime guarantee the validator depends on. The `SYNC RULE` comment is gone; the two callers can no longer drift because there is only one table.
+
+### Added
+
+- **[tests/test_view_vocabulary.py](tests/test_view_vocabulary.py)** pins the JSON as the contract. Five tests: runtime tables match the JSON, validator's `KNOWN_VIEWS` matches the derived union, every alias target is a valid compatibility key or one of `{mcu, medium, medium-wide}`, `_canon_view` round-trips every alias key to its target, and every value in a `compatibility` set is itself a `compatibility` key. Any future drift between the two callers — or any malformed JSON — fails the suite. Verified locally: 30-panel chun-li-test shotlist still passes Gate A clean.
+
+### Notes
+
+- Cross-skill referencing: `validate_shotlist.py` reads a file owned by the comic-production skill. This is the only acceptable direction — the vocabulary is comic-production's responsibility; script-breakdown is a consumer of it. No Python imports cross the skill boundary, only a JSON read.
+- Closes the follow-up logged under [the prior 2026-05-25 entry](#2026-05-25-validate_shotlist-wired-into-script-breakdowns-as-a-schema-gate--closes-2026-05-22-follow-up-4): "The durable fix is to externalize the view vocabulary to one shared file both scripts read, instead of duplicating with a sync comment."
+
+---
+
 ## 2026-05-25 (validate_shotlist wired into script-breakdown as a schema gate — closes 2026-05-22 follow-up #4)
 
 ### Added
