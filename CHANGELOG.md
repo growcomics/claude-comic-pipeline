@@ -12,6 +12,23 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-25 (audit_panels.py applicability-skip gate — only audit pre-render-passed compositions)
+
+### Changed
+
+- **Vision-audit dispatcher now skips rules whose pre-render didn't pass** ([skills/comic-production/scripts/audit_panels.py](skills/comic-production/scripts/audit_panels.py)). The previous gate at line ~187 only filtered `pre_render.status in ("skipped", "n/a")`, but rules that never applied to a panel have no `pre_render` key at all (`_init_trace` writes `{applied: false, reason: ...}`), so `entry.get("pre_render", {}).get("status")` returned `None` and the rule was still audited. Result: every rule-with-rubric got a vision call on every panel regardless of whether it fired. New gate: `applied == True AND pre_render.status == "pass"`. Synthetic 6-rule fixture covering all four trace shapes (never-applied / runtime-skipped / pass / fail) confirms: 2 rules audited (only the passing ones), 13 skipped. Closes the first 2026-05-22 open follow-up.
+
+### Added
+
+- **`--show-skipped` flag** ([skills/comic-production/scripts/audit_panels.py](skills/comic-production/scripts/audit_panels.py)). Off by default — terse output prints one line per panel ("(N rule(s) skipped — pass --show-skipped to list)"). With the flag, every skipped rule shows its reason ("did not apply" / "pre_render=fail" / "not in ledger"), useful for first-run sanity-checking or diagnosing a registry/ledger mismatch.
+- **Summary line cites audit cost vs savings**. Dry-run: `N would-check (audit cost), M skipped (no signal)`. Live: adds the `skipped` count alongside pass/fail/pending so credit spend is legible.
+
+### Notes
+
+- Live audit (open follow-up #2) is now safe to run with confidence about what gets called — but still costs credits, so a one-panel `--panel` run first is the right next step.
+
+---
+
 ## 2026-05-25 (Lettering opt-out removed — bake is unconditional, page-composer no longer letters)
 
 ### Changed

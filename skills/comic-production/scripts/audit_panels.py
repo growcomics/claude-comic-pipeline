@@ -178,13 +178,24 @@ def audit_panel(project_root: Path, pid: str, rules, dry_run: bool):
     ledger = json.loads(ledger_path.read_text())
     refs = _canonical_refs(project_root)
     results = []
+    skipped = []  # (rid, why) — visible in --verbose / summary, not per-panel noise
 
     for rid, rubric in rules:
         entry = ledger.get("rules", {}).get(rid)
         if entry is None:
-            continue  # rule didn't apply to this panel at compose time
-        if entry.get("pre_render", {}).get("status") in ("skipped", "n/a"):
-            continue  # not applicable here
+            skipped.append((rid, "not in ledger"))
+            continue
+        # Vision-audit is a verifier of pre-render-PASSED compositions. If the
+        # rule didn't fire, or pre-render didn't pass, an image-side verdict
+        # adds no signal — and a live run wastes one API call per rule per
+        # panel. Only audit when applied=True AND pre_render.status == "pass".
+        if not entry.get("applied"):
+            skipped.append((rid, "did not apply"))
+            continue
+        pre_status = (entry.get("pre_render") or {}).get("status")
+        if pre_status != "pass":
+            skipped.append((rid, f"pre_render={pre_status or 'missing'}"))
+            continue
         if dry_run:
             results.append((rid, "would-check", rubric[:60]))
             continue
@@ -209,7 +220,8 @@ def audit_panel(project_root: Path, pid: str, rules, dry_run: bool):
                         "ts": ts, "panel_id": pid, "rule_id": rid,
                         "stage": "post_render", "reason": reason}) + "\n")
 
-    return {"panel": pid, "status": "audited", "image": str(image), "results": results}
+    return {"panel": pid, "status": "audited", "image": str(image),
+            "results": results, "skipped": skipped}
 
 
 def all_panels(project_root: Path) -> list[str]:
@@ -233,6 +245,8 @@ def main():
                     help="list what would be checked; no API calls")
     ap.add_argument("--emit-retry", action="store_true",
                     help="also print retry recommendations for fails (does not execute)")
+    ap.add_argument("--show-skipped", action="store_true",
+                    help="list every skipped rule per panel (off by default — usually noise)")
     args = ap.parse_args()
 
     root = Path(args.project_root).expanduser()
@@ -263,7 +277,7 @@ def main():
     print(f"rules with rubrics: {', '.join(r for r, _ in rules)}")
     print(f"mode: {'DRY-RUN (no API)' if dry else 'LIVE'} | panels: {len(pids)}\n")
 
-    n_fail = n_pass = n_pending = 0
+    n_fail = n_pass = n_pending = n_skipped = n_would_check = 0
     retry_lines = []
     for pid in pids:
         out = audit_panel(root, pid, rules, dry)
@@ -281,13 +295,26 @@ def main():
                 n_pass += 1
             elif status == "pending":
                 n_pending += 1
+            elif status == "would-check":
+                n_would_check += 1
+        panel_skipped = out.get("skipped", [])
+        n_skipped += len(panel_skipped)
+        if panel_skipped:
+            if args.show_skipped:
+                for rid, why in panel_skipped:
+                    print(f"   -- {rid:<14} skipped     {why}")
+            else:
+                print(f"   ({len(panel_skipped)} rule(s) skipped — pass --show-skipped to list)")
         print()
 
-    if not dry:
-        print(f"summary: {n_pass} pass, {n_fail} fail, {n_pending} pending")
-        if args.emit_retry and retry_lines:
-            print("\nretry recommendations (NOT executed):")
-            print("\n".join(retry_lines))
+    if dry:
+        print(f"DRY-RUN summary: {n_would_check} would-check (audit cost), "
+              f"{n_skipped} skipped (no signal)")
+    else:
+        print(f"summary: {n_pass} pass, {n_fail} fail, {n_pending} pending, {n_skipped} skipped")
+    if args.emit_retry and retry_lines and not dry:
+        print("\nretry recommendations (NOT executed):")
+        print("\n".join(retry_lines))
     return 0
 
 
