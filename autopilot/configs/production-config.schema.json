@@ -104,6 +104,15 @@
         "stage3_gate": {"type": "string", "enum": ["auto", "halt"], "default": "auto"},
         "act_boundary_audit": {"type": "string", "enum": ["always-halt", "halt-on-hard", "halt-on-hard-or-soft", "log-only"], "default": "halt-on-hard"},
         "regeneration": {"type": "string", "enum": ["never", "batch-end", "auto-on-hard", "halt-on-hard"], "default": "batch-end"},
+        "post_render_audit": {
+          "type": "object",
+          "description": "Vision-audit (audit_panels.py) regen behavior. Mirrors `regeneration` above but governs the per-panel vision rubric pass, not the cross-panel continuity audit. The audit itself is always report-only; this policy controls what happens to its findings.",
+          "properties": {
+            "mode": {"type": "string", "enum": ["never", "batch-end", "auto-on-hard", "halt-on-hard"], "default": "batch-end", "description": "never = log to defects.jsonl only, no regen-queue.md. batch-end = also write regen-queue.md at run end for human pickup (or for a runner to walk). auto-on-hard = same queue write today; a future runner integration will walk the queue automatically up to max_retries_per_panel (Phase 8 work — not yet wired in audit_panels.py itself). halt-on-hard = write the queue and exit 1 so an autopilot orchestrator can detect the halt without parsing stdout."},
+            "max_retries_per_panel": {"type": "integer", "minimum": 0, "maximum": 5, "default": 2, "description": "Per-panel retry ceiling for auto-on-hard mode. 0 disables retries even in auto-on-hard."},
+            "retry_strategy": {"type": "string", "enum": ["same-prompt-new-seed", "per-rule-corrections"], "default": "same-prompt-new-seed", "description": "same-prompt-new-seed = re-render with identical prompt, letting model variance produce a different result. per-rule-corrections = invoke each failed rule's retry_strategy() to derive a corrected prompt (Phase 8 work — not yet wired)."}
+          }
+        },
         "content_policy_refusal": {"type": "string", "enum": ["halt"], "default": "halt"},
         "missing_ref_guardrail": {"type": "string", "enum": ["halt"], "default": "halt"},
         "posting": {"type": "string", "enum": ["never"], "default": "never"}

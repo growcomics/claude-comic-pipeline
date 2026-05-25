@@ -12,6 +12,32 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-25 (post-render audit gets a policy — closes 2026-05-22 follow-up #5)
+
+### Added
+
+- **`policies.post_render_audit` block in [autopilot/configs/production-config.schema.json](autopilot/configs/production-config.schema.json)**. Mirrors the existing `policies.regeneration` (which governs continuity-check) but applies to the vision audit's per-rule findings. Three fields: `mode` (one of `never` / `batch-end` / `auto-on-hard` / `halt-on-hard`, default `batch-end`), `max_retries_per_panel` (0–5, default 2), and `retry_strategy` (`same-prompt-new-seed` default, with `per-rule-corrections` reserved for the still-unwired Phase 8). Policy was decided this session: batch-end as the default, 2 retries as the ceiling, same-prompt-new-seed as the strategy (per NSFW retry-policy memory — classifier-quirk failures often clear on retry).
+
+- **`--policy` flag in [audit_panels.py](skills/comic-production/scripts/audit_panels.py)** for one-off overrides without editing the config. Defaults read from `production-config.json` `policies.post_render_audit.mode`; falls back to `batch-end` when no config exists or the field is missing. Header line now cites the active policy + retry budget so the user can see what's wired before paying for API calls.
+
+- **`regen-queue.md` artifact**. When the audit finds post-render fails AND mode != `never`, a project-root markdown file lists each (panel_id, rule_id, reason, image_path) as a candidate for re-rendering. The audit never re-renders itself — execution is the runner's job (or yours via `retry_panel.py`). This is the durable artifact the policy modes hang off: `batch-end` emits it for human pickup, `auto-on-hard` emits it for runner pickup (no auto-walk yet — explicit Phase 8), `halt-on-hard` emits it AND exits 1 so an autopilot orchestrator can detect the halt without parsing stdout.
+
+### Verified
+
+Synthetic 2-panel fixture with `_vision_judge` monkey-patched to forge a deterministic failure pattern exercised all three relevant modes end-to-end:
+- `batch-end` (default): one failure → queue written with one row, exit 0
+- `halt-on-hard`: same input → queue written + exit 1, halt message
+- `never`: same input → no queue, exit 0
+
+Skip gate from earlier today still active: 27 of 30 rule slots correctly skipped across the two panels.
+
+### Notes
+
+- Auto-execution of the regen queue is deliberately NOT wired here. Turning it on touches the runner stack (flow_runner.py / higgsfield_runner.py) and is a separate, larger change. The current policy semantics let the user opt into the *intent* via config; the runner integration follows when ready.
+- `audit_panels.py` is still report-only by default. Adding `--policy never` reproduces the pre-this-change behavior exactly (modulo the new header line).
+
+---
+
 ## 2026-05-25 (README — reflect May 2026 stabilization work: gates, ledger, vision audit, peak-tier refs, unconditional lettering, source-of-truth rules)
 
 ### Changed
