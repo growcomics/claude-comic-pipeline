@@ -12,6 +12,23 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-25 (validate_shotlist wired into script-breakdown as a schema gate — closes 2026-05-22 follow-up #4)
+
+### Added
+
+- **Gate A (schema) added to script-breakdown's write-time enforcement** ([skills/script-breakdown/SKILL.md](skills/script-breakdown/SKILL.md) §5–6, [commands/build-comic.md](commands/build-comic.md) Stage 1 + script-breakdown rules). `validate_shotlist.py` now runs before `rules_audit.py` whenever a shotlist is written. Schema check first (prose in `camera`, unknown view tokens, non-int `tier`, on-screen dialogue missing `speaker`/`character`), semantic check second. Build-comic Stage 1 closes only when BOTH gates pass. A new "Stage 1 schema-gate fail" halt entry in the autopilot table surfaces the validator's ERRORS block to the user.
+
+### Fixed
+
+- **`KNOWN_VIEWS` in [validate_shotlist.py](skills/script-breakdown/scripts/validate_shotlist.py) was out of sync with `_VIEW_ALIASES` in `next_panel.py`**. The 2026-05-22 commit added `wide splash`, `medium two-shot`, `low-angle`, etc. to the runtime alias table but didn't propagate them to the validator — so the validator would have rejected real chun-li-test panels (6 false rejections confirmed against the live shotlist) if the gate had been wired earlier. Synced the set and added a `SYNC RULE` comment with the canonical file:line and a callout about the prior drift, so the next alias addition can't slip silently.
+
+### Notes
+
+- Verified the gate's actual behavior with two tests: chun-li-test's real 30-panel shotlist now passes clean (post-sync), and a synthetic 4-panel shotlist exercising all four bug classes triggers exit 1 with all three ERRORS + 2 WARNINGS reported correctly.
+- The durable fix is to externalize the view vocabulary to one shared file both scripts read, instead of duplicating with a sync comment. Tracked separately — not in scope for this change.
+
+---
+
 ## 2026-05-25 (audit_panels.py applicability-skip gate — only audit pre-render-passed compositions)
 
 ### Changed

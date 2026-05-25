@@ -15,16 +15,32 @@ import sys
 from pathlib import Path
 
 # Canonical view tokens. The HEAD token of `camera` (first comma-clause, minus
-# any parenthetical) must be one of these after lowercasing. Keep this set in
-# sync with VIEW_COMPATIBILITY keys + _VIEW_ALIASES in next_panel.py.
+# any parenthetical) must be one of these after lowercasing.
+#
+# SYNC RULE: this set MUST be the union of VIEW_COMPATIBILITY keys and
+# _VIEW_ALIASES keys in skills/comic-production/scripts/next_panel.py. If you
+# add a view alias there, add it here too — otherwise the validator will reject
+# camera tokens that the runtime would have handled correctly. The 2026-05-22
+# "wide splash" / "medium two-shot" aliases were added to the runtime without
+# updating this set, which would have produced false rejections on real
+# shotlists if this gate had been wired earlier.
 KNOWN_VIEWS = {
-    # VIEW_COMPATIBILITY keys
+    # VIEW_COMPATIBILITY keys (next_panel.py:42)
     "front-full", "3q-full", "back-full", "side-full", "profile",
     "low-angle-front", "low-angle-back", "high-angle", "ecu-face",
-    "ecu-region", "wide-establish", "splash", "medium", "mcu", "medium-wide",
-    # accepted alias spellings (normalized by _VIEW_ALIASES at runtime)
-    "full-body", "full body", "three-quarter", "close-up", "medium shot",
-    "medium close-up", "wide establishing", "wide", "extreme close-up",
+    "ecu-region", "wide-establish", "splash",
+    # extra normalized targets used by the runtime (mcu/medium/medium-wide are
+    # VIEW_COMPATIBILITY-adjacent — they are valid heads even though they
+    # don't carry their own VIEW_COMPATIBILITY entry)
+    "mcu", "medium", "medium-wide",
+    # _VIEW_ALIASES keys (next_panel.py:160) — every alias the runtime
+    # normalizes. Keep alphabetical within group for diff-ability.
+    "3q", "close-up", "extreme close-up",
+    "full body", "full-body",
+    "low-angle",
+    "medium close-up", "medium shot", "medium two-shot",
+    "three-quarter",
+    "wide", "wide establishing", "wide splash", "wide-splash",
 }
 
 ON_SCREEN_DIALOGUE = {"balloon", "thought", "whisper", "shout"}

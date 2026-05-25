@@ -260,7 +260,24 @@ Before saving:
 - No dialogue balloon exceeds 25 words.
 - **Transformation-beats check** (when `transformation_scenes` is declared): each scene must include ≥1 setup beat, ≥3 distinct body-region beats (or all of `required_body_regions` if explicitly listed), and ≥1 reveal beat. The gate that enforces this is `rules_audit.py` — see the script-level enforcement below.
 
-**Script-level enforcement.** After writing `shotlist.json`, run the rules audit on the new file:
+**Script-level enforcement.** After writing `shotlist.json`, run BOTH gates in order. The first is fast and structural; the second is semantic. If Gate A fails, fix the shotlist and re-run it before invoking Gate B — semantic checks against malformed data are noise.
+
+**Gate A — schema (fast, no I/O):**
+
+```sh
+python skills/script-breakdown/scripts/validate_shotlist.py .
+```
+
+Catches structural mistakes the runtime would silently mishandle:
+
+- prose in the `camera` field (the head token must be a known view tag — `front-full`, `mcu`, `splash`, etc. — not a sentence; move prose to `action`),
+- unknown view tokens (if the token is legitimate, add an alias to `_VIEW_ALIASES` in `skills/comic-production/scripts/next_panel.py` and to `KNOWN_VIEWS` in this validator; otherwise fix the shotlist),
+- non-int `tier` values,
+- on-screen dialogue (balloon/thought/whisper/shout) missing both `speaker` and `character` keys — without either, L4 attribution renders blank ("positioned over ''s side").
+
+Exit 1 = errors (shotlist rejected — fix and re-run); exit 0 = clean, warnings allowed. This gate is the cheapest place to catch the whole bug class that produced the 2026-05-22 composition-layer sweep.
+
+**Gate B — semantics:**
 
 ```sh
 python skills/continuity-check/scripts/rules_audit.py --project .
@@ -268,11 +285,11 @@ python skills/continuity-check/scripts/rules_audit.py --project .
 
 The audit will return HARD findings for camera same-combo overuse (>3 panels at the same distance × angle combo) and for any transformation scene missing setup, body-region beats, or a reveal. If HARD findings exist, surface them inline and revise the shotlist *before* moving to references/generation. Soft findings (variety floor, missing ECU/wide) are hints — review them with the user but don't auto-block.
 
-This pre-generation gate is the cheapest place to catch the failure: re-planning the shotlist costs nothing; regenerating panels after they've been produced wastes the API budget.
+Both gates run pre-generation. Re-planning the shotlist costs nothing; regenerating panels after they've been produced wastes the API budget.
 
 ### 6. Save
 
-Write `./shotlist.json` and `./shotlist.md` at the project root. Run the rules audit (above). Report panel and page counts back to the user with one or two notable decisions ("treated p7 as a splash for the altar reveal — flag if you want it broken into 3 panels"). If the audit returned HARD findings, also report those and pause for direction. Don't auto-iterate; wait for direction.
+Write `./shotlist.json` and `./shotlist.md` at the project root. Run both gates from Step 5 in order (Gate A schema, then Gate B semantics). Report panel and page counts back to the user with one or two notable decisions ("treated p7 as a splash for the altar reveal — flag if you want it broken into 3 panels"). If either gate returned HARD findings, also report those and pause for direction. Don't auto-iterate; wait for direction.
 
 ### 7. Emit `references_required.json` (L28 — manifest for reference-gathering)
 
