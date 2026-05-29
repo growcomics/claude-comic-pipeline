@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Grow Island Style — How It's Shot, and How to Shoot It</title>
+<style>
+  :root{ --bg:#0f1115; --panel:#171a21; --ink:#e9edf2; --muted:#9aa4b2; --accent:#ff8a3d; --accent2:#ffd23d; --line:#272c36; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:980px;margin:0 auto;padding:48px 22px 96px}
+  header.hero{padding:40px 0 8px;border-bottom:1px solid var(--line);margin-bottom:36px}
+  h1{font-size:38px;line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:18px;font-style:italic;margin:0}
+  .badge{display:inline-block;margin-top:16px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px}
+  h2{font-size:26px;margin:48px 0 14px;padding-top:18px;border-top:1px solid var(--line)}
+  h3{font-size:20px;margin:30px 0 10px;color:#fff}
+  p{margin:0 0 16px}
+  a{color:var(--accent)}
+  code{background:#000;padding:2px 6px;border-radius:5px;font-size:14px;color:var(--accent2)}
+  figure{margin:26px 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{padding:12px 16px;color:var(--muted);font-size:14.5px;line-height:1.5}
+  figcaption b{color:var(--ink)}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pair figure{margin:26px 0}
+  @media(max-width:680px){.pair{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:#10131a;color:#fff}
+  ol,ul{margin:0 0 16px;padding-left:22px}
+  li{margin:6px 0}
+  .note{background:#1a1410;border:1px solid #4a3417;border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;margin:20px 0;color:#f0d9c4;font-size:15px}
+  .check li{list-style:none;margin-left:-22px}
+  .check li::before{content:"☑ ";color:var(--accent2)}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>The “Grow Island” Style<br>— How It’s Shot, and How to Shoot It</h1>
+  <p class="sub">A production guide to a reality-TV-flavored photoreal comic style, reverse-engineered from the 63-page Grow Island pilot and rebuilt as a reusable preset.</p>
+  <span class="badge">All illustrations generated with GPT Image 2 &amp; Nano Banana 2 · 1K · 16:9</span>
+</header>
+
+<h2>What this style <em>is</em></h2>
+<p>Grow Island looks photoreal because the <b>render</b> is photoreal — the same DAZ3D-Iray CGI family as the default house style. What makes it a <em>distinct</em> style is everything wrapped around the render: how the page is built, how the camera behaves, how color and light are used, how dialogue is lettered, and how transformations are revealed.</p>
+<p>In one sentence: <b>one full-bleed widescreen cinematic still per page, warm tropical-resort palette, eye-level conversational framing, comic lettering baked into the image, and growth shown as before/after pose-reuse pairs.</b></p>
+<p>It ships as the <code>grow-island</code> preset in <code>style-lock/styles/grow-island/</code>. To use it, just put <code>grow-island style</code> in your build prompt.</p>
+
+<figure>
+  <img src="images/fig01-title-splash.png" alt="Title splash">
+  <figcaption><b>Fig. 1 — The chapter-title device.</b> A flat white knockout silhouette of a muscular woman in a double-biceps flex splits the <b>GROW ISLAND</b> logo, over a photoreal villa establishing shot, with a small black <b>DAY 1</b> time-tab. The figure and type are 2D overlays; the villa is photoreal CGI.</figcaption>
+</figure>
+
+<h2>How to make a comic in this style</h2>
+<ol>
+  <li><b>Lock the style.</b> Copy the Template block from <code>styles/grow-island/preset.md</code> into your project’s <code>style.md</code>. Fill the cast wardrobe-accent table (one hue per character), location constants, growth tiers. It hard-codes 16:9, one full-bleed splash per page, baked lettering, bokeh’d backgrounds.</li>
+  <li><b>Break down the script.</b> Run <code>script-breakdown</code> — one image per page, so each shotlist row = one prompt. Tag each with shot distance + camera angle and capture dialogue/SFX (they bake in).</li>
+  <li><b>Lock identity.</b> One face/hair ref + current-tier body ref per character. Keep the muscle-size lineup for tier changes.</li>
+  <li><b>Generate page-by-page.</b> Prompt = render prefix → shot/angle → environment → character (with wardrobe accent) → action + mechanical expression → baked lettering → suffix/negative. Chain progressive sequences view-aware (prior page job + face ref).</li>
+  <li><b>QA &amp; assemble.</b> <code>continuity-check</code> (monotonic size, stable accents, face identity), then <code>page-composer</code> for layout/PDF only — it doesn’t letter; text is already baked.</li>
+</ol>
+<div class="note"><b>Content-policy tip (learned producing this article):</b> on stricter classifiers (GPT Image 2), swimwear + body-emphasis framing trips the NSFW filter even for tasteful athletic content. Two figures here were rejected as swimsuit shots and passed instantly when reframed into athletic activewear. When a body-focused panel keeps getting blocked, add coverage and widen the frame — don’t burn identical retries.</div>
+
+<h2>The art direction, principle by principle</h2>
+
+<h3>Page construction — one cinematic still, never a grid</h3>
+<p>The defining structural trait: <b>every page is a single full-bleed image.</b> No multi-panel grids, no gutters — anywhere across all 63 source pages. The negative prompt bans <code>multi-panel grid</code> and <code>portrait aspect</code> because the base model defaults to taller framing and invents gutters otherwise.</p>
+<figure>
+  <img src="images/fig02-establishing-warm.png" alt="Establishing interior, warm">
+  <figcaption><b>Fig. 2 — Establishing shot, warm interior mode.</b> The open-plan tropical villa lounge — rattan, cream sofas, orange cushions, thatched beams, honey wood. Warm, soft, low-contrast. This is the home-base set.</figcaption>
+</figure>
+
+<h3>Shot-distance rhythm — distance tracks importance</h3>
+<p>The closer the camera, the more the beat is <em>about the body</em>. Dialogue lives at medium; the instant a body changes, the camera crops in tight on just that part.</p>
+<table>
+  <tr><th>Function</th><th>Distance</th><th>Subject fills</th></tr>
+  <tr><td>Dialogue / intro</td><td>Medium → medium-close</td><td>55–90% frame H</td></tr>
+  <tr><td>Scene-setting / ensemble</td><td>Wide / establishing</td><td>bodies 15–40% H</td></tr>
+  <tr><td>Growth beat</td><td>Extreme body-part crop (often faceless)</td><td>85–95% H</td></tr>
+  <tr><td>Transformation payoff</td><td>Full-body reveal</td><td>~70% H</td></tr>
+</table>
+<figure>
+  <img src="images/fig03-medium-dialogue.png" alt="Medium dialogue">
+  <figcaption><b>Fig. 3 — The workhorse:</b> a medium, eye-level dialogue shot. One subject dominant, background softened to bokeh, an expressive face turned <b>off-camera</b>, and a baked white all-caps speech bubble with a tail to the speaker’s mouth.</figcaption>
+</figure>
+<figure>
+  <img src="images/fig05-ensemble-wide.png" alt="Ensemble wide">
+  <figcaption><b>Fig. 4 — Ensemble wide.</b> Contestants in a loose line-up facing the host (grey suit, right). Note the deliberately <b>varied</b> poses and gazes — the anti-“police-lineup” rule — and the host’s bubble carrying the scene.</figcaption>
+</figure>
+
+<h3>Camera angle — eye-level is home base</h3>
+<p>The camera sits at eye level by default; that calm baseline is what makes a rare angle land. Angle changes are used <em>for meaning</em>: low-angle to monumentalize a growing or victorious figure, slight high-angle for intimacy, dramatic high/dutch for stair/transition beats, one bird’s-eye for an exterior finale.</p>
+<figure>
+  <img src="images/fig08-low-angle-hero.png" alt="Low-angle hero">
+  <figcaption><b>Fig. 5 — Low-angle “hero” framing</b> looking up at a triumphant flex against open sky. The worm’s-eye angle makes the figure monumental — reserved for victory/growth peaks. (Activewear; see the policy note.)</figcaption>
+</figure>
+
+<h3>Color &amp; lighting — two modes, one accent</h3>
+<p>A warm tropical-resort base (tans, cream, golden wood, bronze skin), switched between two lighting modes per scene, with <b>one high-chroma wardrobe accent per character</b> doing the work of legibility against the neutral set.</p>
+<figure>
+  <img src="images/fig07-cool-night.png" alt="Cool night mode">
+  <figcaption><b>Fig. 6 — Cool-night mode:</b> navy sky, dark teal water, charcoal architecture, low-key drama, warm key on the faces — pushed further with magenta/lime neon. The same world as Fig. 2, inverted in temperature.</figcaption>
+</figure>
+
+<h3>Faces &amp; gaze — expressive, and never at the camera</h3>
+<p>Close-ups carry strong, specific emotion. The hard rule: characters look <b>at each other or off-camera</b>, never at the viewer — with two exceptions: the host addressing the show, and the <b>confessional aside</b>.</p>
+<figure>
+  <img src="images/fig06-confessional.png" alt="Confessional">
+  <figcaption><b>Fig. 7 — The reality-TV confessional:</b> a single character against a plain flat wall, looking <b>directly into the lens</b> (the sanctioned fourth-wall break), with a bubble delivering the aside. Plain backdrop, no bokeh — the cue that says “interview,” not “scene.”</figcaption>
+</figure>
+
+<h3>Lettering — baked in, three registers</h3>
+<p>Lettering is part of the render, not a post step: <b>speech</b> (white oval bubbles, thin black outline, all-caps), <b>character-ID plates</b> (“NAME – ROLE”), and <b>title/time tabs</b> (“DAY 1”).</p>
+<figure>
+  <img src="images/fig04-id-plate.png" alt="ID plate">
+  <figcaption><b>Fig. 8 — The intro ID-plate convention:</b> a bottom-edge white rounded rectangle reading <b>“VIVIAN – FITNESS INFLUENCER.”</b> GPT Image 2’s text rendering keeps it crisp — a big reason this style bakes lettering rather than deferring it.</figcaption>
+</figure>
+<figure>
+  <img src="images/fig12-sfx-closeup.png" alt="SFX register">
+  <figcaption><b>Fig. 9 — SFX register:</b> a “GROW!” word in the signature orange→yellow gradient with black outline and drop shadow, placed against the muscle it describes. Non-verbal sounds (<em>GASP</em>, <em>PHEW</em>) instead go inside ordinary bubbles.</figcaption>
+</figure>
+
+<h3>The growth-reveal grammar — before/after pose-reuse pairs</h3>
+<p>The signature device. Transformations are <b>on-demand, body-part-at-a-time, and monotonic</b> (a grown body never shrinks back). Each beat is two consecutive pages that share an identical composition — a “before,” then an “after” with the localized size increase plus an adjacent SFX. The “after” is chained off the “before” job so pose, wardrobe, and face carry forward exactly.</p>
+<div class="pair">
+  <figure>
+    <img src="images/fig09-growth-before.png" alt="Growth before">
+    <figcaption><b>Fig. 10 — BEFORE.</b> Clean, neutral composition; arm raised presenting a modest bicep; a bubble naming the request (“BIGGER ARMS FIRST, PLEASE”). This frame anchors its pair.</figcaption>
+  </figure>
+  <figure>
+    <img src="images/fig10-growth-after.png" alt="Growth after">
+    <figcaption><b>Fig. 11 — AFTER,</b> generated by <b>chaining off Fig. 10’s job</b> — pose/wardrobe/face stay identical, only the bicep grows, and a “BOOM” SFX marks the change. This pairing keeps growth reading as continuous, not a jarring re-roll.</figcaption>
+  </figure>
+</div>
+<figure>
+  <img src="images/fig11-fullbody-reveal.png" alt="Full-body reveal">
+  <figcaption><b>Fig. 12 — The payoff:</b> a full-body reveal at standing distance with the background brought to full sharpness (reveals are the one place backgrounds resolve, vs. dialogue bokeh), capped with a “HOW DO I LOOK?” bubble. An arc always lands on a frame like this.</figcaption>
+</figure>
+
+<h2>Reproduction checklist</h2>
+<ul class="check">
+  <li>One full-bleed 16:9 image per page. No grids, no gutters.</li>
+  <li>Eye-level by default; angle changes only for meaning.</li>
+  <li>Distance tracks importance: medium for talk, tight crops for growth, full-body for reveals.</li>
+  <li>Warm-resort base + two lighting modes; one fixed wardrobe-accent hue per character.</li>
+  <li>Backgrounds softened on close/medium; sharp only on reveals.</li>
+  <li>Faces expressive, off-camera — except host + confessional.</li>
+  <li>Lettering baked in: white all-caps bubbles, NAME–ROLE plates, DAY/NIGHT tabs, orange→yellow gradient SFX.</li>
+  <li>Growth = before/after pose-reuse pairs, chained view-aware, monotonic, ending on a full-body reveal.</li>
+  <li>Healthy natural skin tone on muscle (never red/inflamed); wet glistening skin.</li>
+</ul>
+
+<footer>
+  Style preset: <code>style-lock/styles/grow-island/</code> · Deep study, story bible &amp; full audit: <code>notes.md</code> in that folder · Figures: GPT Image 2 &amp; Nano Banana 2, 1K, 16:9.
+</footer>
+
+</div>
+</body>
+</html>

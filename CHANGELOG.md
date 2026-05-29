@@ -26,6 +26,10 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **Quick-select trigger for non-default presets in [style-lock/SKILL.md](skills/style-lock/SKILL.md)** ("Pick the preset" → "Quick-select triggers"). A short signal anywhere in a build prompt selects a non-default preset and skips the distill-a-new-preset steps. Canonical signal: **`grow-island style`** (aliases `grow-island`, `GI style`, `#grow-island`, `style: grow-island`; case-insensitive substring match). Default remains `photoreal-daz3d` when no trigger is present. The trigger is also recorded in the preset header.
 
+- **Illustrated style article in [styles/grow-island/article/](skills/style-lock/styles/grow-island/article/)** — `article.html` (+ `article.md`) walks the style principle-by-principle with 12 worked figures, and `max-size-comparison.html` documents a GPT-Image-2-vs-Nano-Banana-2 max-size test. All 19 figures were generated for this article (GPT Image 2 + Nano Banana 2, 1K, 16:9) and live in `article/images/` (~43 MB — candidate for git-lfs/external hosting if repo size matters).
+
+- **Lesson [L33](skills/comic-production/references/lessons-learned.md) — GPT Image 2 vs Nano Banana 2 for extreme muscle size.** GPT renders the most exaggerated mass but its NSFW classifier blocks the most extreme hypermuscular + sports-bra prompts; **fuller coverage (full tee/zipped jacket + full-length pants) clears the filter and unlocks GPT's true ceiling** (the biggest results in the test). Nano Banana 2 (`nano_banana_pro` → `nano_banana_2`) is more photoreal and more permissive — the reliable choice for tier 7-9 production. Decision rule + reframe-don't-retry fix recorded.
+
 ### Notes
 
 - `grow-island` is `default: no`. The project default is unchanged (`photoreal-daz3d`). Pick it explicitly for reality-show / dating-competition formats and wide single-splash pages with baked dialogue.

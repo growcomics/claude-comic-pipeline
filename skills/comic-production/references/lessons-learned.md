@@ -1289,4 +1289,25 @@ Tier 1-8 panels (handled by lineup / L29 / L30 / L31). Non-FMG transformations.
 
 ---
 
+## L33 — GPT Image 2 vs Nano Banana 2 for extreme muscle size: bigger-look vs reliability
+
+**Context**: 2026-05-28, head-to-head test generating an "as big as possible" FMG transformation on both models, same face ref + same numbered muscle-size lineup ref (1-6 and 4-9 sheets), grow-island style, 1K/16:9.
+
+**Findings (counter-intuitive — name them so we stop re-litigating)**:
+- **GPT Image 2 (`gpt_image_2`) renders the most EXAGGERATED mass.** At an identical prompt its `size 6` result out-bulks Nano Banana 2's `size 9` — comic-book-huge. If you want one cartoonish hero splash, GPT punches bigger.
+- **But GPT's NSFW classifier is the real ceiling.** The `size 9` (4-9 hypermuscular lineup) prompt with a sports-bra + leggings came back **`nsfw`-rejected**. The same prompt rendered cleanly on Nano Banana 2.
+- **Nano Banana 2 (`nano_banana_pro`, resolves server-side to `nano_banana_2`) is more PHOTOREAL and more PERMISSIVE.** Muscle reads like a real IFBB pro, scales up believably with the lineup, and does not hit GPT's content wall at the extreme tiers.
+
+**Fix / decision rule**:
+- For **reliable extreme-size production** (tier 7-9, "as big as possible") use **Nano Banana 2** — it won't get blocked and stays anatomically grounded.
+- For a **single exaggerated/cartoonish hero beat**, GPT Image 2 can go bigger *if it clears the filter*.
+- When GPT rejects an extreme-size panel, the cheapest unblock is **more coverage, not identical retries**: swap sports-bra → full T-shirt/tank covering the midriff (or a zipped track jacket) + full-length leggings, and keep the body a smaller fraction of the frame (wider shot). Swimwear/sports-bra + body-emphasis is the reliable GPT trip; fuller athletic wear clears it. (Generalizes the classifier-aware-framing lesson to the hypermuscular case.)
+- Model lock still applies per project (don't mix GPT and NB2 within one chapter — GPT cartoonish vs NB2 photoreal muscle aesthetics).
+
+**Where this applies**: FMG/MMG peak-tier panels, any "maximum size" request, model selection at project setup.
+
+**Where this does NOT apply**: low/mid tiers (1-5) render fine on either model; non-transformation panels.
+
+---
+
 ## How to add a lesson

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Max-Size Test — GPT Image 2 vs Nano Banana 2</title>
+<style>
+  :root{ --bg:#0f1115; --panel:#171a21; --ink:#e9edf2; --muted:#9aa4b2; --accent:#ff8a3d; --accent2:#ffd23d; --line:#272c36; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:44px 22px 90px}
+  h1{font-size:32px;margin:0 0 6px}
+  .sub{color:var(--muted);font-style:italic;margin:0 0 28px}
+  h2{font-size:22px;margin:40px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+  p{margin:0 0 14px}
+  code{background:#000;padding:2px 6px;border-radius:5px;color:var(--accent2);font-size:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{padding:11px 14px;color:var(--muted);font-size:14px}
+  figcaption b{color:var(--ink)}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;margin-right:6px}
+  .gpt{background:#10212b;color:#7fd3ff;border:1px solid #1d4456}
+  .nb2{background:#221026;color:#ffa3f0;border:1px solid #4a1d52}
+  .verdict{background:#101a12;border:1px solid #1d4a2c;border-left:4px solid #44d27a;border-radius:10px;padding:16px 18px;margin:22px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:#10131a;color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Max-Size Test — GPT Image 2 vs Nano Banana 2</h1>
+<p class="sub">Same auburn growth-lead (face ref) + numbered muscle-size lineup ref, “as big as possible.” Grow-Island style, 1K, 16:9.</p>
+
+<div class="verdict">
+<b>Headline finding (honest, and counter-intuitive):</b> The assumption was that Nano Banana 2 goes bigger. In practice it’s split:
+<ul>
+<li><b>GPT Image 2 renders the most <em>exaggerated, cartoonish</em> mass</b> — its <code>size 6</code> result is visually larger / more comic-book-huge than NB2’s <code>size 9</code>.</li>
+<li><b>But GPT’s safety filter is the real ceiling:</b> the <code>size 9</code> hypermuscular prompt came back <b>NSFW-rejected</b> on GPT, while NB2 rendered it without complaint.</li>
+<li><b>Nano Banana 2 is more <em>photoreal / anatomically grounded</em></b> (reads like a real IFBB pro), scales up believably with the lineup, and is more permissive — so it’s the better choice when you need reliable extreme sizes that won’t get blocked.</li>
+</ul>
+So: <b>GPT = bigger-looking but hits a content wall at the extreme; NB2 = more realistic, no wall.</b> For “as big as possible” production without rejections, NB2 wins on reliability; for a single cartoonish hero beat, GPT can punch bigger if it passes the filter.
+<br><br><b>Update — the wall is clearable:</b> re-running GPT’s rejected <code>size 9</code> with <em>fuller coverage</em> (full T-shirt / zipped track jacket + full-length pants instead of a sports bra) <b>cleared the filter on the first try AND produced the single most massive result of the whole test</b> (see the last row). Confirms the fix: when GPT blocks an extreme-size panel, add coverage and widen the frame rather than retrying the same prompt. Logged as lesson <b>L33</b>.
+</div>
+
+<h2>Size 6 — head to head</h2>
+<div class="grid">
+  <figure>
+    <img src="images/max-gpt-size6-flex.png" alt="GPT size 6">
+    <figcaption><span class="tag gpt">GPT Image 2</span> <b>size 6, double-biceps.</b> Enormous, near-cartoonish mass — arms and quads dominate the frame. Crisp “MAXED OUT!” SFX. This is GPT’s safe ceiling (it passed the filter).</figcaption>
+  </figure>
+  <figure>
+    <img src="images/max-nb2-size6-flex.png" alt="NB2 size 6">
+    <figcaption><span class="tag nb2">Nano Banana 2</span> <b>size 6, double-biceps.</b> Strong but believable — a real-bodybuilder read, notably smaller/more grounded than GPT’s size 6 despite the identical prompt.</figcaption>
+  </figure>
+</div>
+
+<h2>Nano Banana 2 — pushed to the hypermuscular 4–9 lineup (size 9)</h2>
+<div class="grid">
+  <figure>
+    <img src="images/max-nb2-size9-flex.png" alt="NB2 size 9 flex">
+    <figcaption><span class="tag nb2">Nano Banana 2</span> <b>size 9, “TOO BIG!”</b> Bigger than NB2’s size 6, still photoreal. The 4–9 lineup pushes mass up reliably — and the classifier allowed it (GPT rejected the same prompt).</figcaption>
+  </figure>
+  <figure>
+    <img src="images/max-nb2-size9-fullbody.png" alt="NB2 size 9 full body">
+    <figcaption><span class="tag nb2">Nano Banana 2</span> <b>size 9, full-body.</b> Massive IFBB-scale physique at full standing distance, villa background sharp — the kind of reveal frame the style ends a growth arc on.</figcaption>
+  </figure>
+</div>
+
+<h2>GPT Image 2 — size 9, filter cleared with fuller coverage (the biggest of all)</h2>
+<p>The earlier GPT <code>size 9</code> with a sports bra was NSFW-rejected. Swapping to full coverage cleared it instantly — and GPT then rendered the most extreme mass in the entire test.</p>
+<div class="grid">
+  <figure>
+    <img src="images/max-gpt-size9-tshirt.png" alt="GPT size 9, T-shirt">
+    <figcaption><span class="tag gpt">GPT Image 2</span> <b>size 9, full T-shirt + track pants, “TOO BIG!”.</b> Cleared the filter; colossal comic-book mass that dwarfs everything NB2 produced. Coverage was the only blocker.</figcaption>
+  </figure>
+  <figure>
+    <img src="images/max-gpt-size9-jacket.png" alt="GPT size 9, jacket">
+    <figcaption><span class="tag gpt">GPT Image 2</span> <b>size 9, zipped track jacket, full-body.</b> Also cleared; absurd hypermuscular scale, fully covered and wholesome. This is GPT’s true ceiling once the classifier is satisfied.</figcaption>
+  </figure>
+</div>
+
+<h2>Bonus — low-angle hero (NB2, size 6)</h2>
+<div class="grid">
+  <figure>
+    <img src="images/max-nb2-size6-lowangle.png" alt="NB2 low angle">
+    <figcaption><span class="tag nb2">Nano Banana 2</span> <b>size 6, low-angle hero.</b> The monumentalizing worm’s-eye angle from the style guide, applied to a maxed physique against dusk sky.</figcaption>
+  </figure>
+</div>
+
+<table>
+  <tr><th>Dimension</th><th>GPT Image 2</th><th>Nano Banana 2</th></tr>
+  <tr><td>Raw exaggeration at same prompt</td><td><b>Bigger / cartoonish</b></td><td>More grounded</td></tr>
+  <tr><td>Photorealism of muscle</td><td>Stylized, comic-huge</td><td><b>Photoreal IFBB read</b></td></tr>
+  <tr><td>Absolute max size achievable</td><td><b>Biggest (size-9 w/ coverage)</b></td><td>Very big, photoreal</td></tr>
+  <tr><td>Extreme-size permissiveness</td><td>Blocks size-9 in sports bra; <b>clears with full coverage</b></td><td><b>Renders size-9 fine in either</b></td></tr>
+  <tr><td>Text/SFX rendering</td><td><b>Excellent</b></td><td>Good</td></tr>
+  <tr><td>Best for</td><td>Biggest cartoonish hero beat (with coverage)</td><td><b>Reliable extreme-size production</b></td></tr>
+</table>
+
+</div>
+</body>
+</html>
