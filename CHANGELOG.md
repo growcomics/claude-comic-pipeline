@@ -12,6 +12,25 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-05-28 (new `grow-island` style preset — reverse-engineered from the Grow Island pilot)
+
+### Added
+
+- **`grow-island` style preset in [skills/style-lock/styles/grow-island/](skills/style-lock/styles/grow-island/)** (`preset.md` + `notes.md`), plus a row in [styles/README.md](skills/style-lock/styles/README.md) so the skill auto-discovers it. Reverse-engineered from a full 63-page close read of the *Grow Island* pilot. The render is the same photoreal DAZ3D CGI as the default `photoreal-daz3d`, but the preset overrides **page construction, framing grammar, palette, lettering, and transformation technique**. Distinguishing traits, all observed across all 63 pages:
+  - **One full-bleed 16:9 landscape splash per page** — zero multi-panel grids, zero gutters anywhere. A page is one cinematic still, not a grid. Negative prompt bans `multi-panel grid` / `portrait aspect` because Nano Banana defaults to taller framing and invents gutters otherwise.
+  - **Eye-level conversational shot grammar** (medium/medium-close workhorse; wide for ensembles; extreme often-faceless body-part crops for growth beats; full-body only for reveals), backgrounds softened to bokeh so the figure is the sharpest element.
+  - **Warm tropical-resort palette, two lighting modes** (warm interior / cool night), one high-chroma wardrobe accent per character as identity.
+  - **Baked-in lettering** (per L19): white all-caps bubbles, "NAME – ROLE" ID plates, "DAY 1 / NIGHT 1" tabs, and signature orange→yellow gradient SFX with black outline + drop shadow placed beside the changing body part.
+  - **Before/after pose-reuse growth-reveal grammar** — each beat is two consecutive same-composition pages, the second with a localized size bump + adjacent SFX, chained view-aware per Key Rules #8/#9; monotonic, body-part-at-a-time.
+- **`notes.md`** in the same folder ships the deep visual study, a reverse-engineered story bible (premise, cast, locations, 3-act plot), and an 11-item continuity audit of the source pilot (identity-drift and naming items to lock before a sequel).
+
+### Notes
+
+- `grow-island` is `default: no`. The project default is unchanged (`photoreal-daz3d`). Pick it explicitly for reality-show / dating-competition formats and wide single-splash pages with baked dialogue.
+- This commit stages only the style-lock files; unrelated in-flight work in the working tree was deliberately left unstaged.
+
+---
+
 ## 2026-05-25 (post-render audit gets a policy — closes 2026-05-22 follow-up #5)
 
 ### Added

@@ -50,6 +50,7 @@ folder.
 |------|---------|-----------|--------------|
 | [`photoreal-daz3d`](photoreal-daz3d/preset.md) | **yes** | DAZ3D Iray photorealistic 3D, 3D Muscle Comics house style | Bay Watch / Lana & Lacy and any photoreal-3D comic |
 | [`ink-line`](ink-line/preset.md) | no | Modern indie / Eurocomic ink-line, cel-shaded, limited palette | Stylized illustrated projects, flashback chapters |
+| [`grow-island`](grow-island/preset.md) | no | Photoreal DAZ3D rendered as one full-bleed landscape "reality-TV cinematic still" per page, warm tropical palette, baked lettering + gradient SFX, before/after pose-reuse growth reveals | Reality-show / dating-competition formats; wide single-splash pages with baked dialogue; on-demand body-part-at-a-time transformation arcs |
 
 ## Switching the default
 
