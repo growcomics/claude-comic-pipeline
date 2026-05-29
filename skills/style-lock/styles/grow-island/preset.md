@@ -2,6 +2,7 @@
 
 Slug: `grow-island`
 Default: no
+Trigger: put **`grow-island style`** (or `grow-island` / `GI style` / `#grow-island` / `style: grow-island`) anywhere in a build prompt to select this preset. Case-insensitive substring match — see `SKILL.md` → "Quick-select triggers".
 Aesthetic: photoreal DAZ3D CGI rendered as a **reality-TV "cinematic still"** —
 one full-bleed landscape splash per page, warm tropical-resort palette,
 baked-in comic lettering (bubbles + ID caption plates + gradient SFX), and an

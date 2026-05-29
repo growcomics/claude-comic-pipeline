@@ -77,6 +77,26 @@ screentone", etc.). For deviations:
    *before* writing `style.md`. The preset is the durable artifact; the
    project's `style.md` is just an instantiation.
 
+#### Quick-select triggers (short signals in the build prompt)
+
+A user can opt into a non-default preset with a short token anywhere in the
+request — no need to describe the aesthetic. When you see one of these
+signals, select the mapped preset and skip the "distill a new preset" steps
+(2–3) entirely; the preset already exists. The default stays
+`photoreal-daz3d` unless a trigger is present.
+
+| If the prompt contains… | Select preset |
+|---|---|
+| `grow-island`, `grow island style`, `GI style`, `#grow-island`, `style: grow-island` | **`grow-island`** |
+| `ink-line`, `indie ink look`, `style: ink-line` | `ink-line` |
+| (nothing / `daz3d`, `photoreal`, `default`) | `photoreal-daz3d` |
+
+Matching is case-insensitive and substring-based. Recommended canonical
+signal to teach users: **just put `grow-island style` in the prompt** (e.g.
+"build chapter 2 in grow-island style"). For per-panel exceptions inside an
+otherwise-default book, tag the panel with `"style": "grow-island"` in
+`shotlist.json` instead of switching the whole project.
+
 ### 2. Gather style refs (only when distilling a new preset)
 
 This step is for *new presets*, not for projects using an existing preset.
