@@ -1,0 +1,53 @@
+{
+  "_comment": "Selector config for flow_runner.py. Each key is an ORDERED list of fallback strategies; the first that resolves wins. Strategy kinds: placeholder | role(+name, prefix (?i) for regex) | text | testid | css | xpath | enter. {ASPECT}/{COUNT} are substituted at runtime. This is the MACHINE-level default; a project can override any key in <project>/.flow/selectors.json (merged over these). Run `flow_runner.py <project> probe` to see which keys resolve against the live Flow DOM, then tune. Defaults derived from references/flow-workflow.md's documented UI — a STARTING POINT.",
+  "prompt_input": [
+    {"by": "placeholder", "value": "What do you want to create?"},
+    {"by": "role", "value": "textbox"},
+    {"by": "css", "value": "textarea"},
+    {"by": "css", "value": "div[contenteditable='true']"}
+  ],
+  "submit_button": [
+    {"by": "role", "value": "button", "name": "(?i)^(generate|create|submit|send)$"},
+    {"by": "css", "value": "button[aria-label*='enerate']"},
+    {"by": "css", "value": "button[type='submit']"},
+    {"by": "enter"}
+  ],
+  "settings_pill": [
+    {"by": "role", "value": "button", "name": "(?i)nano banana"},
+    {"by": "text", "value": "Nano Banana"},
+    {"by": "css", "value": "button:has-text('Nano Banana')"}
+  ],
+  "add_ref_button": [
+    {"by": "role", "value": "button", "name": "(?i)add|attach|reference|image"},
+    {"by": "css", "value": "button[aria-label*='dd']"}
+  ],
+  "upload_image": [
+    {"by": "text", "value": "Upload image"},
+    {"by": "role", "value": "button", "name": "(?i)upload"},
+    {"by": "role", "value": "menuitem", "name": "(?i)upload"}
+  ],
+  "file_input": [
+    {"by": "css", "value": "input[type='file']"}
+  ],
+  "aspect_option": [
+    {"by": "role", "value": "button", "name": "(?i)^{ASPECT}$"},
+    {"by": "text", "value": "{ASPECT}"}
+  ],
+  "count_option": [
+    {"by": "role", "value": "button", "name": "(?i)^{COUNT}$"},
+    {"by": "text", "value": "{COUNT}"}
+  ],
+  "result_images": [
+    {"by": "css", "value": "img[src*='googleusercontent']"},
+    {"by": "css", "value": "img[src^='blob:']"},
+    {"by": "css", "value": "[data-generation] img"}
+  ],
+  "progress_indicator": [
+    {"by": "text", "value": "%"},
+    {"by": "css", "value": "[role='progressbar']"}
+  ],
+  "attached_ref_thumb": [
+    {"by": "css", "value": "[data-ref-thumb]"},
+    {"by": "css", "value": ".prompt-bar img"}
+  ]
+}
