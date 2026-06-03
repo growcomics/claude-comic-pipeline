@@ -30,6 +30,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L22 | Hair state must be explicit in every face-visible panel | Twin buns + ribbons (or loose) drift across panels when inherited only from state anchor; name the hair state per panel |
 | L23 | When env ref is dropped, add a dense verbal env anchor | Stage-change full-body panels drop env ref to fit the 3-ref ceiling; without 5+ named location elements in the prompt the background goes to a grey void |
 | L24 | Suppress anachronistic accessories explicitly | Models hallucinate watches, bracelets, jewelry on the wrists/neck/ears; suppress by name when those body parts may be in frame |
+| L34 | Subject staging and compositional depth — break the camera plane | What L20 doesn't cover: where the SUBJECTS are arranged in the frame. Tension via diagonal intent, Z-depth via lead-foreground + secondary-deep-background, triangular grouping for 3+ characters, negative-space asymmetry for solo hero, FG occlusion for intimacy. Audited via `subject_staging` field on shotlist beats with 2+ named characters. |
 
 Other lessons (L2, L3, L4, L5, L6, L7, L8) are platform-specific, situational, or historical. L7 in particular is superseded by L19 — read L7 for the diagnosis, L19 for the current rule. L4 was undeprecated when L19 reversed L7.
 
@@ -1307,6 +1308,74 @@ Tier 1-8 panels (handled by lineup / L29 / L30 / L31). Non-FMG transformations.
 **Where this applies**: FMG/MMG peak-tier panels, any "maximum size" request, model selection at project setup.
 
 **Where this does NOT apply**: low/mid tiers (1-5) render fine on either model; non-transformation panels.
+
+---
+
+## L34 — Subject staging and compositional depth — break the camera plane
+
+**Status: Active.** New lesson 2026-05-25. Codifies a class of failure the existing camera-distance rules (L20) do not catch. Whiteboard sketches from the user (2026-05-25) showed three matched pairs that demonstrate the rule visually; the GOOD/BAD distinction in each pair is the same: the BAD version arranges figures parallel to the camera plane at equal scale; the GOOD version breaks that plane via diagonal intent, Z-depth, or scale variation.
+
+**Symptom**: A panel passes every existing rule — camera distance is correct (L20), variety is fine (`check_camera_variety`), the L19 lettering bakes properly, the cast is the right count — and still reads as visually dead. Two characters facing each other at medium distance with parallel shoulder lines read static. Three characters lined up across the frame at equal scale read as a yearbook photo. A lead character placed dead-center facing the camera reads flat. L20 strengthening (close, closer, ECU) made the *zoom* better but didn't address the **blocking**.
+
+**Root cause**: L20 governs where the camera *is*. It says nothing about where the subjects are arranged in the frame. A close-up of two boxers head-to-head can be tense (good) OR a close-up of two boxers staring past each other (dead). L20 wouldn't catch the difference. The pipeline had ~5 ad-hoc composition modifiers (`silhouette`, `reflection`, `foreground-element`, `negative-space`, `dynamic-symmetry`) listed in `cinematic-framing.md` but no rule citing them, no auto-injection, no audit gate — they were tags without enforcement.
+
+**The unified principle**: the camera plane is the enemy. Anything that puts the action on a flat plane parallel to the camera flattens the image. Three corollaries:
+
+1. **Tension between two characters comes from intent angles + proximity**, not distance. Heads leaning toward each other along a diagonal axis read as tense regardless of camera distance. Parallel postures with empty horizontal space between them read as dead regardless of how close the camera is.
+
+2. **Depth between characters comes from Z-axis staging**, not from selecting a specific camera angle. Lead character foreground left + secondary character through a doorway in the deep background creates dramatic dominance. Both characters on the same Z-plane reads as a yearbook photo even at the perfect L20 camera distance.
+
+3. **Triangular grouping for 3+ characters** (Renaissance pyramidal composition — Raphael, Leonardo) makes the lead unambiguously dominant. Equal-scale horizontal lineup with all heads at the same height makes them read as peers.
+
+Two single-subject corollaries also apply:
+
+4. **Negative-space asymmetry** — placing the lead in one third of the frame and dominating the rest with empty space (sky, void, ceiling) amplifies the subject's mass. Center-framed dead-center default reads as a passport photo.
+
+5. **Foreground occlusion** — shooting past an out-of-focus FG element (barbell, archway, weight rack, doorframe) creates layered depth and intimate-witness energy. Eliminates the "pasted on a backdrop" feel.
+
+**Genre tie-in (FMG specifically)**: All five corollaries amplify lead-character prominence — the focal subject in FMG comics is the body proportions (muscle + bust + glutes) of the lead. Tension blocking puts the lead foreground in confrontation panels; Z-depth keeps the lead foreground in reveal panels; triangular keeps the lead at apex in squad panels; negative-space gives the lead breathing room in hero panels; FG occlusion frames the lead like a target through environmental elements. **The principle isn't "fancy composition for art's sake" — it's "the lead's mass dominates by being staged closer + larger + more central by intent angle".**
+
+**Fix**: The shotlist gains a per-panel `subject_staging` field with one of:
+
+| Value | When to use | Auto-emitted directive (excerpt) |
+|---|---|---|
+| `tension-block` | 2-character confrontation, dialogue with conflict | "Both characters lean into each other along a diagonal axis from lower-X to upper-Y. Shoulders thrust toward the other figure; weight forward on lead foot. Intent angles point at the focal collision point." |
+| `depth-staged` | Lead + secondary (or background figures), reveal beats, dominance beats | "Lead character in foreground occupies ~50-60% of frame height; secondary character placed in mid-ground or deep background at materially smaller scale by perspective. Three distinct depth layers: FG / midground / BG." |
+| `triangular` | 3+ characters, squad / crew / group panels | "Lead at apex of compositional triangle (foreground, largest scale); supporting characters at lower base points at varied mid-depths and varied scales. Eye paths trace pyramid lines. No two figures at the same scale or Z-depth." |
+| `negative-space-asymmetric` | Solo hero shots, reveal beats, splash panels | "Lead subject occupies one third of the frame; the remaining two thirds dominated by negative space (sky / void / empty architecture). Asymmetric composition emphasizes mass by contrast." |
+| `foreground-occlusion` | Intimacy panels, voyeur-witness energy, lead through environmental element | "Camera shoots past an out-of-focus foreground element (barbell, archway, doorframe, weight rack) occupying the lower 20-25% of frame as a chunky bokeh element. Lead character sharp in midground framed by the FG element." |
+| `parallel-acceptable` | Escape hatch — when parallel IS the right choice (group reveal, lineup, formal portrait) | (no directive emitted) |
+
+The shotlist beat declares one value; `next_panel.py`'s `_l34_staging_directive()` auto-emits the corresponding directive when the panel has 2+ named characters (for `tension-block`, `depth-staged`, `triangular`) or camera_distance ≥ 2 (for the single-subject variants). The directive is appended after L20's body-region camera block, before the L19 lettering block.
+
+**Audit gate** (in `rules_audit.py` `check_subject_staging`):
+- **HARD** if `subject_staging` is missing on any panel with 2+ named characters at camera_distance ≥ 2 (medium or wider). At ECU/close-up the subject blocking is less load-bearing.
+- **SOFT** if `subject_staging: "parallel-acceptable"` appears > 2× in a single chapter. The escape hatch is for exceptional uses, not a default.
+- **SOFT** if every multi-character panel in the chapter declares the same `subject_staging` value (no variety).
+
+**Canonical reference figures**: `references/sketches/staging-examples/` contains 8 generated examples — three GOOD/BAD pairs plus two single-subject GOOD examples, all featuring an FMG-genre lead character ("Vera", peak tier 8). See files `01-tension-good.png` through `08-fg-occlusion-good.jpeg`. Generated 2026-05-25 via Higgsfield `nano_banana_pro` at 16:9 from the canonical staging prompts; these are the reference figures L34 cites.
+
+**Where this rule applies**:
+- All multi-character comic production. Auto-injected by `compose_prompt()` when the panel has the staging field set.
+- Solo-character hero shots and reveal beats — the single-subject corollaries (negative-space, FG occlusion) apply.
+
+**Where this rule does NOT apply**:
+- ECU panels (camera_distance ≤ 2). At close distances the subject blocking is dominated by the framing itself; staging language becomes redundant.
+- Body-region ECU beats (chest, bicep, abs, etc.). L20 governs these entirely.
+- Genuinely 2D-illustrated comics where the parallel-plane aesthetic IS the goal (e.g. flat ukiyo-e style).
+
+**Reading list** for the operator who wants to go deeper:
+- **Wally Wood — "22 Panels That Always Work"** (comic-specific blocking cheat sheet; panels 7-9 = tension, 11 = depth, 14-18 = triangular).
+- **Marcos Mateu-Mestre — Framed Ink (2010) + Framed Perspective (2016)** (the modern textbook for graphic-storytelling composition; Z-depth and contrast chapters apply directly).
+- **Will Eisner — Comics and Sequential Art (1985) + Graphic Storytelling and Visual Narrative (1996)** (stress lines, line of action, gesture across panels — Eisner originated the vocabulary L34 codifies).
+- **Joseph V. Mascelli — The Five C's of Cinematography (1965)** (composition chapter on actor placement; the source most later texts trace back to).
+- **Bruce Block — The Visual Story (2007)** (visual contrast as drama; chapter on Z-depth + linear contrast = direct L34 backing).
+- **Tony Zhou — Every Frame a Painting** YouTube episode "Akira Kurosawa — Composing Movement" (the single most concentrated demonstration of camera-plane-avoidance available).
+- **Iain McCaig — Visual Storytelling lectures (Schoolism / Brainstorm)** (contemporary concept-art treatment closest to our photoreal-CGI target medium).
+
+See `references/composition-reading-list.md` for the full annotated list.
+
+**Reverses**: nothing. L34 *extends* the existing camera-distance rules (L20) by addressing what they don't cover — subject blocking within the frame.
 
 ---
 

@@ -122,6 +122,39 @@ Skip gate from earlier today still active: 27 of 30 rule slots correctly skipped
 
 ---
 
+## 2026-05-25 (L34 — Subject staging and compositional depth)
+
+### Added
+- `lessons-learned.md` L34 — Subject staging and compositional depth — break the camera plane. New lesson codifying a class of failure L20 doesn't catch: subject blocking within the frame. Five active staging values + one escape hatch. Auto-injection via `_l34_staging_directive()` (proposed; codified in cinematic-framing.md), HARD audit gate via `check_subject_staging()`.
+- `lessons-learned.md` load-bearing index — L34 row added.
+- `cinematic-framing.md` § "Subject staging — L34" — new top-level section between view categories and prompt fragments. Five staging values documented (tension-block / depth-staged / triangular / negative-space-asymmetric / foreground-occlusion) plus the parallel-acceptable escape hatch.
+- `cinematic-framing.md` § "Subject staging fragments (L34)" — full prompt-fragment library for each staging value. These are what `next_panel.py` `_l34_staging_directive()` auto-emits.
+- `cinematic-framing.md` composition modifiers table cross-references — `foreground-element` and `negative-space` cite their L34 staging-aware variants.
+- `composition-reading-list.md` — new annotated source bibliography: Wally Wood (22 Panels), Mateu-Mestre (Framed Ink + Perspective), Eisner (Comics and Sequential Art + Graphic Storytelling), McCloud (Making Comics), Mascelli (Five C's), Bruce Block (The Visual Story), Sidney Lumet (Making Movies), Tony Zhou (Every Frame a Painting), StudioBinder, Loomis (Successful Drawing), Renaissance pyramidal composition lineage, Edgar Payne (Composition of Outdoor Painting), Iain McCaig (Visual Storytelling), Feng Zhu (FZD Design Cinema). Priority order included for new operators.
+- `references/sketches/staging-examples/` — 8 canonical reference images generated via Higgsfield `nano_banana_pro` at 16:9, ~$0.40 total: three GOOD/BAD pairs (`01-tension-good.png` / `02-static-bad.jpeg`, `03-zdepth-good.jpeg` / `04-flat-bad.jpeg`, `05-triangular-good.jpeg` / `06-lineup-bad.jpeg`) plus two single-subject GOOD examples (`07-negative-space-good.jpeg`, `08-fg-occlusion-good.jpeg`). All feature lead character "Vera" at peak FMG tier 8 (massive muscle, large bust, full glutes, narrow waist, beautiful sculpted face) so the FMG-genre payoff is visible in every demonstration.
+- `references/sketches/staging-examples/README.md` — per-image legend mapping file → staging value → lesson.
+- `rules_audit.py` `check_subject_staging()` — new HARD/SOFT audit. HARD when a panel with 2+ named characters at camera_distance ∈ {medium, cowboy, full, wide-establish, splash} doesn't declare `subject_staging`. HARD on unknown values. SOFT when `parallel-acceptable` is used > 2× per chapter (escape hatch should be exceptional). SOFT when every staged panel in the chapter declares the same staging value (no variety). Wired into `main()` alongside the existing camera checks.
+
+### Why
+User-provided whiteboard sketches (2026-05-25) showed three matched pairs demonstrating that the existing camera-distance rules (L20) don't catch a major class of failure: subject blocking. Sketches: boxers tension-vs-static, hallway depth-vs-flat, three-figure triangular-vs-parade. The GOOD version in each pair breaks the camera plane via diagonal intent, Z-depth, or scale variation; the BAD version arranges figures parallel to the camera plane at equal scale and reads dead despite identical camera distance/angle. L20 wouldn't catch the difference because L20 governs where the camera is, not where the subjects are.
+
+User validated FMG-genre application with 8 generated examples featuring a lead character at peak tier 8 (Vera). Each staging value amplifies lead-character prominence:
+- `tension-block` puts the lead foreground in confrontation panels
+- `depth-staged` puts the lead foreground (large) with secondary deep (small) in dominance panels
+- `triangular` puts the lead at apex (largest, foreground) in squad panels
+- `negative-space-asymmetric` gives the lead breathing room in hero panels
+- `foreground-occlusion` frames the lead through environmental elements
+
+User selected "Commit and codify L34 as planned" after reviewing all 8 examples.
+
+### Acknowledgments
+The principle isn't novel — it's well-trodden in cinematography, painting, and comics. L34 codifies what Wally Wood, Marcos Mateu-Mestre, Will Eisner, Joseph Mascelli, Bruce Block, Tony Zhou, and others have been teaching for decades. The contribution here is wiring it into the pipeline (shotlist field + auto-emitted prompt fragments + audit gate) and contextualizing it for the FMG genre.
+
+### Next
+- `_l34_staging_directive()` in `next_panel.py` is the next required code drop — currently the prompt fragments live in `cinematic-framing.md` and the audit gate exists, but the auto-injection helper is documented as proposed, not yet implemented. Operator-shipped (manual paste) until then; the gate will surface the missing field on every shotlist beat that needs it.
+
+---
+
 ## 2026-05-25 (Lettering opt-out removed — bake is unconditional, page-composer no longer letters)
 
 ### Changed

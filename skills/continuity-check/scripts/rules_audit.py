@@ -720,6 +720,96 @@ def check_transformation_beats(shotlist: dict, pages_filter: set[int] | None) ->
 LOCATION_STRATEGY_VALUES = {"single", "multi", "per-scene"}
 TRANSFORMATION_FLAVOR_VALUES = {"body-region-progression", "single-axis", "other"}
 
+# L34 — subject staging values recognized by the shotlist schema. Each multi-character
+# panel at camera_distance >= 2 (medium or wider) MUST declare one of these.
+SUBJECT_STAGING_VALUES = {
+    "tension-block",
+    "depth-staged",
+    "triangular",
+    "negative-space-asymmetric",
+    "foreground-occlusion",
+    "parallel-acceptable",
+}
+
+# Distance categories where staging matters most. ECU and tighter framings have
+# their composition dominated by the framing itself; staging language becomes
+# redundant.
+_STAGING_LOAD_BEARING_DISTANCES = {"medium", "cowboy", "full", "wide-establish", "splash"}
+
+
+def check_subject_staging(shotlist: dict, pages_filter: set[int] | None) -> list[Finding]:
+    """L34 — Subject staging and compositional depth.
+
+    HARD on any panel with 2+ named characters at camera_distance >= 2 (medium
+    or wider) that doesn't declare a `subject_staging` value. L20 governs the
+    camera position; L34 governs how the subjects are arranged in the frame.
+    Without an explicit staging value, multi-character panels default to flat
+    parade-formation blocking.
+
+    SOFT if `parallel-acceptable` appears >2x in the chapter (escape hatch
+    should be exceptional, not default). SOFT if every multi-character panel
+    declares the same staging value (no variety).
+    """
+    out: list[Finding] = []
+    staging_observed: list[tuple[int, str, str]] = []  # (page, panel_id, value)
+
+    for page in shotlist.get("pages", []):
+        page_no = page.get("page_number")
+        if pages_filter is not None and page_no not in pages_filter:
+            continue
+        for p in page.get("panels", []):
+            panel_id = p.get("panel_id", f"page-{page_no}")
+            cast = p.get("cast", []) or []
+            cast_size = len([c for c in cast if c])
+            camera = p.get("camera", "") or ""
+            distance, _ = parse_camera(camera)
+
+            staging = (p.get("subject_staging") or "").strip()
+
+            # Validate the value if set.
+            if staging and staging not in SUBJECT_STAGING_VALUES:
+                out.append(Finding(
+                    page_no, panel_id, "subject_staging", SEVERITY_HARD,
+                    f"Unknown subject_staging value: {staging!r}. Expected one of {sorted(SUBJECT_STAGING_VALUES)}.",
+                    "See cinematic-framing.md § Subject staging — L34. Pick the staging value that matches the beat, or use 'parallel-acceptable' as the escape hatch.",
+                ))
+                continue
+
+            # HARD gate for multi-character panels at medium-or-wider distance.
+            load_bearing = (
+                cast_size >= 2
+                and distance in _STAGING_LOAD_BEARING_DISTANCES
+            )
+            if load_bearing and not staging:
+                out.append(Finding(
+                    page_no, panel_id, "subject_staging", SEVERITY_HARD,
+                    f"Multi-character panel ({cast_size} cast members) at {distance!r} distance has no subject_staging declared.",
+                    "Declare subject_staging on the shotlist beat. See cinematic-framing.md § Subject staging — L34 for values: tension-block / depth-staged / triangular / negative-space-asymmetric / foreground-occlusion / parallel-acceptable. The five active values auto-inject prompt directives via next_panel.py _l34_staging_directive(); parallel-acceptable is the no-op escape hatch.",
+                ))
+            elif staging:
+                staging_observed.append((page_no, panel_id, staging))
+
+    # SOFT — parallel-acceptable abuse.
+    parallel_panels = [(n, pid) for n, pid, v in staging_observed if v == "parallel-acceptable"]
+    if len(parallel_panels) > 2:
+        out.append(Finding(
+            None, None, "subject_staging", SEVERITY_SOFT,
+            f"{len(parallel_panels)} panels declared subject_staging='parallel-acceptable' (target ≤2 per chapter). Escape hatch should be exceptional.",
+            f"Review these panels and reclassify where possible: {parallel_panels[:8]}",
+        ))
+
+    # SOFT — no variety (every declared staging is the same value).
+    distinct_staging_values = {v for _, _, v in staging_observed if v != "parallel-acceptable"}
+    if len(staging_observed) >= 4 and len(distinct_staging_values) == 1:
+        only = next(iter(distinct_staging_values))
+        out.append(Finding(
+            None, None, "subject_staging", SEVERITY_SOFT,
+            f"All {len(staging_observed)} staged panels use the same value: {only!r}.",
+            "Vary the staging across the chapter. Mix tension-block / depth-staged / triangular / negative-space-asymmetric / foreground-occlusion per the panel intent. See cinematic-framing.md § Subject staging.",
+        ))
+
+    return out
+
 
 def check_reference_completeness(project: Path, shotlist: dict) -> list[Finding]:
     """L28 reference completeness gate. Reads `references_required.json` at
@@ -1078,6 +1168,7 @@ def main():
         + check_camera_variety(shotlist, pages_filter)
         + check_camera_distance_bias(shotlist, pages_filter)
         + check_transformation_beats(shotlist, pages_filter)
+        + check_subject_staging(shotlist, pages_filter)
     )
 
     if args.json:

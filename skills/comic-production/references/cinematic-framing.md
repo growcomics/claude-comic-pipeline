@@ -54,9 +54,32 @@ Pairs with **L1.5** in `lessons-learned.md` (view-aware chaining). L1.5 tells yo
 |---|---|
 | `silhouette` | Subject backlit, features dark — for mystery, scale, or reveal-deferral |
 | `reflection` | Subject seen reflected in mirror, water, polished armor, screen |
-| `foreground-element` | Out-of-focus object frames the subject |
-| `negative-space` | Subject small in frame, large empty area dominates |
+| `foreground-element` | Out-of-focus object frames the subject (see also `foreground-occlusion` under Subject staging — they're the same principle; `foreground-occlusion` is the L34-cited name) |
+| `negative-space` | Subject small in frame, large empty area dominates (see also `negative-space-asymmetric` under Subject staging) |
 | `dynamic-symmetry` | Subject at intersection of diagonal compositional lines |
+
+---
+
+## Subject staging — L34
+
+What L20 doesn't cover: where the *subjects* are arranged in the frame. L20 sets the camera distance; this section governs subject blocking. The unified principle: **the camera plane is the enemy**. Anything that puts the action on a flat plane parallel to the camera flattens the image; anything that pushes the action off that plane (diagonal intent, Z-depth, varied scale, asymmetric placement, foreground occlusion) creates dynamism.
+
+Five staging values are recognized. Each shotlist beat with 2+ named characters at `camera_distance ≥ 2` (medium or wider) MUST declare one of these via the `subject_staging` field (HARD `rules_audit` gate). Solo-subject beats SHOULD declare one when the camera_distance is medium or wider.
+
+| Value | When to use | What it does |
+|---|---|---|
+| `tension-block` | 2-character confrontation, dialogue with conflict, rivalry beat | Diagonal intent between two figures; foreheads angled toward each other; the line connecting their heads forms the frame's main axis. Tension comes from intent angles + proximity, not from distance. |
+| `depth-staged` | Lead + secondary in same panel, post-transformation reveal, dominance beat | Lead character foreground (50-60% of frame height); secondary character mid-ground or deep background at materially smaller scale by perspective. Three distinct depth layers: FG / midground / BG. Used to establish the lead's dominance via scale contrast. |
+| `triangular` | 3+ characters, squad / crew / group panel | Lead at apex of compositional triangle (foreground, largest scale); supporting characters at lower base points at varied mid-depths and varied scales. Renaissance pyramidal composition (Raphael, Leonardo). Eye paths trace pyramid lines. **No two figures at the same scale or Z-depth.** |
+| `negative-space-asymmetric` | Solo hero shots, reveal beats, splash panels | Lead subject occupies one third of the frame; the remaining two thirds dominated by empty space (sky / void / empty architecture / single shaft of light). Asymmetric composition emphasizes the lead's mass by contrast. |
+| `foreground-occlusion` | Intimacy panels, voyeur-witness energy, lead seen through environmental element | Camera shoots past an out-of-focus FG element (barbell, archway, doorframe, weight rack) occupying the lower 20-25% of frame as a chunky bokeh element. Lead character sharp in midground framed by the FG element. |
+| `parallel-acceptable` | Escape hatch — group reveal, formal portrait, ceremonial lineup | No directive emitted. SOFT-warns if used > 2× in a chapter. Should be exceptional, not default. |
+
+**The principle's FMG payoff**: all five staging values amplify lead-character prominence — the focal subject in FMG comics is the lead's body proportions (muscle + bust + glutes). Tension blocking puts the lead foreground in confrontation panels; Z-depth keeps the lead foreground in reveal panels; triangular keeps the lead at apex in squad panels; negative-space gives the lead breathing room in hero panels; FG occlusion frames the lead like a target through environmental elements. **It's not "fancy composition" — it's "the lead dominates by being staged closer + larger + more central by intent angle."**
+
+**Canonical reference figures**: `sketches/staging-examples/` contains 8 generated examples — three GOOD/BAD pairs plus two single-subject GOOD examples, all featuring an FMG-genre lead character at peak tier 8. See files `01-tension-good.png` through `08-fg-occlusion-good.jpeg`. These are the reference figures L34 cites.
+
+See also: `composition-reading-list.md` for the annotated source reading (Wally Wood, Mateu-Mestre, Eisner, Mascelli, Block, Zhou, McCaig).
 
 ---
 
@@ -132,6 +155,25 @@ Drop these into the camera/shot section of a panel prompt. Combine distance × a
 
 **negative-space**:
 > "Subject small in frame, occupying only the lower-right quadrant. The upper three-quarters of the frame is empty [sky / void / vast architecture] — negative space dominates."
+
+### Subject staging fragments (L34)
+
+Emitted automatically by `next_panel.py` `_l34_staging_directive()` when the panel's `subject_staging` field is set. Operators can paste these manually as well.
+
+**tension-block** (2-character confrontation):
+> "TENSION BLOCKING: Both characters lean into each other along a diagonal axis from lower-left to upper-right. Foreheads nearly touching; shoulders thrust toward the other figure; weight forward on lead foot; bodies rotated three-quarter so the line connecting their heads forms the frame's main axis. They are visibly aimed at each other — intent angle is everything. Lead character occupies foreground / dominant focal position."
+
+**depth-staged** (lead + secondary, dominance beat):
+> "Z-DEPTH STAGING: Strong three-layer composition. LEAD character in the foreground at three-quarter angle, occupying ~50-60% of frame height — dominant focal subject. SECONDARY character placed deep in the background through architecture (doorway, corridor, archway) at materially smaller scale by perspective (~20-25% frame height). Clear perspective lines of the environment converging toward a vanishing point. Three distinct depth layers: foreground / midground / background, each with a different lighting tone."
+
+**triangular** (3+ characters, group panel):
+> "TRIANGULAR / PYRAMIDAL GROUPING: LEAD character at the APEX of a compositional triangle — foreground, largest scale in frame, three-quarter angle. Two supporting characters at the lower base points at varied mid-depths and varied scales. Eye paths trace pyramid lines from the apex down to each base point. NO two figures at the same scale or Z-depth. Lead's mass dominates by being closest + largest + most foreground."
+
+**negative-space-asymmetric** (solo hero, splash, reveal):
+> "NEGATIVE-SPACE DOMINANCE: Lead subject occupies only the lower-right (or lower-left) third of the frame. The upper two-thirds dominated by NEGATIVE SPACE — empty architecture / sky / void / single dramatic shaft of light catching dust motes. Asymmetric off-center composition; subject's mass amplified by contrast with the emptiness. Often combined with low-angle hero shot."
+
+**foreground-occlusion** (intimacy, voyeur, framed-through-environment):
+> "FOREGROUND-ELEMENT FRAMING: Camera shoots PAST an out-of-focus foreground element (barbell, weight rack, doorframe, archway, equipment bar) occupying the lower-left (or lower-right) 20-25% of the frame as a chunky dark bokeh shape. The LEAD character in sharp focus mid-ground, framed by the FG element. Creates layered depth and an intimate-witness energy — the viewer is positioned as an observer behind/through environmental architecture."
 
 ---
 
