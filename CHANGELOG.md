@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-06 (vendor the `comic-folder-organizer` skill into the repo)
+
+### Added
+
+- **[skills/comic-folder-organizer/](skills/comic-folder-organizer/)** — the folder-organizer skill (previously only living in the local `~/.claude/skills/` install with no git remote) is now vendored into the source-of-truth repo so it's available anywhere the repo is cloned. Ships `SKILL.md`, `defect-taxonomy.md` (Stage 11 Defect QA catalog), `story-gap-types.md` (Stage 12 Story Doctor taxonomy), `LESSONS_LEARNED.md`, and its own `CHANGELOG.md`. Joins the other comic skills already under `skills/`.
+
+---
+
 ## 2026-05-28 (new `grow-island` style preset — reverse-engineered from the Grow Island pilot)
 
 ### Added
