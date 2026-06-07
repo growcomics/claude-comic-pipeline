@@ -186,6 +186,7 @@ For each **location** entry:
 - Slugify the name as `id` (`forest-clearing`, `bisons-lair`, `chinese-alley`)
 - One-line `description` (furniture, props, lighting, colors, time-of-day baseline)
 - Set `ref_folder` to `references/locations/<id>/` for hero locations. For CGI comic projects, this folder should contain a `_source.jpg` (DAZ3D-scene-reference render) per `comic-production`'s `references/environment-references.md`. For one-off or generic outdoor settings, omit the field.
+- **City packs as ref source**: if the script's setting is a real city AND a `location-scout` city pack exists at `references/locations/<city-slug>/meta/locations.json`, you can declare `ref_folder` to point at a specific pack entry's `cgi_image` path (e.g. `references/locations/las-vegas/cgi/street-01-fremont-street.png`) instead of creating a per-project `_source.jpg`. The pack's CGI ref is already photoreal-CGI-styled and geographically anchored — `reference-gathering` walks `meta/locations.json` to resolve which pack entry to use. See the "Location packs from `location-scout`" section in `reference-gathering/SKILL.md`. Useful when multiple locations in the script share a city; the city pack is built once and reused across projects.
 
 ### 3. Sequence pages, then panels
 

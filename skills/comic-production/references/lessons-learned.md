@@ -1031,6 +1031,8 @@ Example fallback line for `chun-li-dojo`:
 
 **Enforced today by**: nothing yet. Logged as a follow-up: `compose_prompt()` should detect when env ref is being dropped and auto-inject the full `locations[].description` into the prompt body. Today it relies on the panel author to remember.
 
+**Addendum (2026-06-07) — city-scout pack preempts L23**: when a city-scout location pack exists for the project's setting (`skills/location-scout/SKILL.md`, output at `references/locations/<city-slug>/`), prefer attaching the pack's CGI ref over the verbal env anchor. The CGI ref is more specific than any verbal description — it's anchored to a real Google Maps capture of the city, not a paraphrase. The verbal anchor remains the fallback for panels that drop the env ref to fit the 3-ref ceiling. Match by location `type` + `tags` in the pack's `meta/locations.json` (e.g. shotlist location `intent: "downtown street with neon"` → pack entry with `type: street, tags: ["downtown", "neon"]`).
+
 ---
 
 ## L24 — Suppress anachronistic accessories explicitly

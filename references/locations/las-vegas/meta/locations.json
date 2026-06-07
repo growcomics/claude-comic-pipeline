@@ -1,0 +1,156 @@
+{
+  "city": "Las Vegas",
+  "city_slug": "las-vegas",
+  "scouted_at": "2026-06-07T22:54:19.745822+00:00",
+  "count": 8,
+  "locations": [
+    {
+      "id": "street-01-fremont-street",
+      "type": "street",
+      "name": "fremont-street",
+      "intent": "downtown pedestrian street with neon signage",
+      "google_maps_query": "Fremont Street Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/place/E+Fremont+St,+Las+Vegas,+NV/@36.17,-115.1424,17z",
+      "source_image": "source/street-01-fremont-street.jpg",
+      "cgi_image": "cgi/street-01-fremont-street.png",
+      "tags": [
+        "downtown",
+        "neon",
+        "pedestrian"
+      ],
+      "neighborhood": "Downtown"
+    },
+    {
+      "id": "street-02-bellagio-strip",
+      "type": "street",
+      "name": "bellagio-strip",
+      "intent": "iconic Las Vegas Strip hotel exterior with fountains at evening",
+      "google_maps_query": "Bellagio Hotel and Casino Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/search/Bellagio+Hotel+and+Casino+Las+Vegas/",
+      "source_image": "source/street-02-bellagio-strip.jpg",
+      "cgi_image": "cgi/street-02-bellagio-strip.png",
+      "tags": [
+        "strip",
+        "hotel",
+        "fountains",
+        "landmark",
+        "evening",
+        "iconic"
+      ],
+      "neighborhood": "Las Vegas Strip"
+    },
+    {
+      "id": "street-03-montelago-residential",
+      "type": "street",
+      "name": "montelago-residential",
+      "intent": "aerial view of Mediterranean-style resort village at Lake Las Vegas",
+      "google_maps_query": "MonteLago Village Lake Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/search/MonteLago+Village+Lake+Las+Vegas/",
+      "source_image": "source/street-03-montelago-residential.jpg",
+      "cgi_image": "cgi/street-03-montelago-residential.png",
+      "tags": [
+        "scenic",
+        "resort",
+        "mediterranean",
+        "aerial",
+        "lake",
+        "luxury"
+      ],
+      "neighborhood": "Lake Las Vegas"
+    },
+    {
+      "id": "restaurant-01-peppermill-diner",
+      "type": "restaurant",
+      "name": "peppermill-diner",
+      "intent": "iconic mid-century Las Vegas diner exterior at dusk, pyramid roof",
+      "google_maps_query": "Peppermill Restaurant and Fireside Lounge Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/search/Peppermill+Restaurant+and+Fireside+Lounge+Las+Vegas/",
+      "source_image": "source/restaurant-01-peppermill-diner.jpg",
+      "cgi_image": "cgi/restaurant-01-peppermill-diner.png",
+      "tags": [
+        "exterior",
+        "diner",
+        "mid-century",
+        "iconic",
+        "dusk",
+        "storefront"
+      ],
+      "neighborhood": "Las Vegas Strip"
+    },
+    {
+      "id": "restaurant-02-eiffel-tower-restaurant",
+      "type": "restaurant",
+      "name": "eiffel-tower-restaurant",
+      "intent": "open commercial restaurant kitchen interior, white subway tile and stainless steel",
+      "google_maps_query": "Eiffel Tower Restaurant Paris Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/place/Eiffel+Tower+Restaurant/@36.1124662,-115.1721916,17z",
+      "source_image": "source/restaurant-02-eiffel-tower-restaurant.jpg",
+      "cgi_image": "cgi/restaurant-02-eiffel-tower-restaurant.png",
+      "tags": [
+        "interior",
+        "kitchen",
+        "commercial",
+        "white-tile",
+        "stainless"
+      ],
+      "neighborhood": "Las Vegas Strip"
+    },
+    {
+      "id": "restaurant-03-heart-attack-grill",
+      "type": "restaurant",
+      "name": "heart-attack-grill",
+      "intent": "street-level corner exterior of downtown Las Vegas diner with neon signage at night",
+      "google_maps_query": "Heart Attack Grill Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/place/Heart+Attack+Grill/@36.169458,-115.1407514,17z",
+      "source_image": "source/restaurant-03-heart-attack-grill.jpg",
+      "cgi_image": "cgi/restaurant-03-heart-attack-grill.png",
+      "tags": [
+        "exterior",
+        "downtown",
+        "neon",
+        "corner",
+        "night",
+        "diner"
+      ],
+      "neighborhood": "Downtown Fremont"
+    },
+    {
+      "id": "landmark-01-welcome-to-las-vegas-sign",
+      "type": "landmark",
+      "name": "welcome-to-las-vegas-sign",
+      "intent": "iconic WELCOME TO FABULOUS LAS VEGAS NEVADA roadside sign at dusk with palm trees",
+      "google_maps_query": "Welcome to Fabulous Las Vegas Sign",
+      "google_maps_url": "https://www.google.com/maps/search/Welcome+to+Fabulous+Las+Vegas+Sign/",
+      "source_image": "source/landmark-01-welcome-to-las-vegas-sign.jpg",
+      "cgi_image": "cgi/landmark-01-welcome-to-las-vegas-sign.png",
+      "tags": [
+        "landmark",
+        "iconic",
+        "roadside-sign",
+        "dusk",
+        "palm-trees",
+        "tourist"
+      ],
+      "neighborhood": "South Las Vegas Boulevard"
+    },
+    {
+      "id": "specific-01-container-park-alley",
+      "type": "specific",
+      "name": "container-park-alley",
+      "intent": "downtown shipping-container retail courtyard with overhead signage and palm trees",
+      "google_maps_query": "Downtown Container Park Las Vegas",
+      "google_maps_url": "https://www.google.com/maps/place/Downtown+Container+Park/@36.1675601,-115.1384837,17z",
+      "source_image": "source/specific-01-container-park-alley.jpg",
+      "cgi_image": "cgi/specific-01-container-park-alley.png",
+      "tags": [
+        "downtown",
+        "container",
+        "retail",
+        "outdoor",
+        "industrial-chic",
+        "plaza"
+      ],
+      "neighborhood": "Downtown Fremont East"
+    }
+  ]
+}

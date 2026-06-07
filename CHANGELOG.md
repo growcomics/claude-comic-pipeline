@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-07 (new `location-scout` skill — city → reusable CGI background pack)
+
+### Added
+
+- **`skills/location-scout/` skill** (`SKILL.md` + `scripts/scout_city.py`, `scripts/maps_capture.py`, `scripts/cgi_convert.py`) — turns a city name into a reusable pack of 8–15 photoreal CGI background reference images. Drives Google Maps via the Chrome MCP to capture random street scenes / restaurants / landmarks / specific-utility shots (alleys, rooftops, parking), then converts each to photoreal DAZ3D / Iray CGI via Higgsfield Nano Banana Pro (default) or Google Flow Nano Banana 2. Output lives at `references/locations/<city-slug>/` with `source/`, `cgi/`, `meta/locations.json`, and a `README.md`. Pre-built city packs eliminate per-project manual screenshotting AND preempt L23's verbal env-anchor fallback for the panel — attaching the pack's CGI ref is more specific than any 5-element verbal description.
+
+- **Las Vegas validation pack at `references/locations/las-vegas/`** — 8 locations end-to-end: Fremont Street (downtown neon), Bellagio (Strip hotel + fountains), MonteLago Village (Lake Las Vegas resort aerial), Peppermill (iconic mid-century diner), Eiffel Tower Restaurant (open kitchen interior), Heart Attack Grill (downtown corner exterior at night), Welcome to Fabulous Las Vegas Sign (S. Las Vegas Blvd), Container Park (shipping-container retail courtyard). 8 source captures from Google Maps + 8 CGI conversions saved under `cgi/`. Built on Google Flow Nano Banana 2 because the wrong-account / out-of-credits state of the Higgsfield MCP this session forced a platform pivot. Cost: $0 (Flow Pro free tier).
+
+### Changed
+
+- **`skills/reference-gathering/SKILL.md`** — added a "Location packs from `location-scout`" section after the DAZ3D-scene-reference trick. The manifest walker can resolve a project's location intent → pack entry by `type` + `tags` lookup, copying the pack's `cgi/` ref into the project instead of generating from scratch.
+- **`skills/script-breakdown/SKILL.md`** — added a "City packs as ref source" bullet under the per-location entry rules: when the script's setting is a real city AND a pack exists at `references/locations/<city-slug>/meta/locations.json`, the location's `ref_folder` can point directly at the pack entry's `cgi_image` instead of declaring a per-project `_source.jpg`.
+- **`skills/comic-production/references/lessons-learned.md` L23 addendum** — when a city-scout pack exists for the project's setting, prefer attaching the pack's CGI ref over the verbal env anchor; verbal anchor stays as the fallback for projects with no pack.
+
+---
+
 ## 2026-06-06 (vendor the `comic-folder-organizer` skill into the repo)
 
 ### Added
