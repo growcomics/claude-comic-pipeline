@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-08 (Long Beach pack + v2 toned-down stylized-CGI prompt)
+
+### Added
+
+- **Long Beach validation pack at `references/locations/long-beach/`** — 10 locations: Pine Avenue (rendered as Terrace Theater area), 2nd Street Belmont Shore, Belmont Heights residential, Port of Long Beach container terminal, Hof's Hut diner, 555 East Steakhouse interior, Joe Jost's, Queen Mary, Aquarium of the Pacific, downtown Promenade. 10 source captures + 10 CGI conversions. Built on Google Flow Nano Banana Pro at 16:9, Pro plan, $0.
+
+### Changed
+
+- **`skills/location-scout/scripts/cgi_convert.py` `PROMPT_BODY` (v2 stylized-CGI prompt)** — replaced the Vegas v1 photoreal-anchored prompt with one that explicitly targets "default DAZ3D / Iray render look", "architectural visualization quality", "cleaner shaders / smoother surfaces / slightly simplified geometry", and "no photographic micro-detail (no skin pores, no dust speckles, no film grain) — keep it CG-clean". Triggered by the Vegas v1 pack coming back nearly indistinguishable from the source photographs — the model defaults to hyper-photoreal, which makes the CGI quality vanish and clashes with the photoreal-CGI character renders. The v2 prompt anchors back to a clearly-rendered look. Long Beach pack built with v2; Vegas v1 stays as the baseline for comparison. SKILL.md updated with the new prompt + a "why stylized instead of photoreal" note.
+
+### Notes
+
+- Naples Island and East Village Arts District searches returned 0 Maps photos and were substituted (Belmont Heights for street-03, The Promenade N for specific-01). Pine Avenue's source was a vertical Street View; the model rendered as a Terrace Theater–area downtown scene rather than the Pine Ave block — retagged honestly in `meta/locations.json`.
+
+---
+
 ## 2026-06-07 (new `location-scout` skill — city → reusable CGI background pack)
 
 ### Added

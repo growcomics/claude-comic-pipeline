@@ -42,19 +42,30 @@ from pathlib import Path
 
 # The canonical conversion prompt. Same body for every slot; the per-slot
 # `intent` is appended as a scene anchor.
+#
+# Style target: OBVIOUSLY CGI — the output should read as a stylized 3D
+# render, not a photograph. Think default DAZ3D Iray render, architectural
+# visualization, or video-game cinematic — the model defaults to hyper-photoreal
+# which makes the CGI quality vanish. We tone it down by removing
+# micro-detail anchors ("8K texture", "subsurface scattering") and adding
+# explicit "clearly rendered, not photographic" language. Comic background
+# refs benefit from this — a too-photoreal env ref clashes with the CGI
+# character render and breaks the look.
 PROMPT_BODY = (
-    "Convert this real-world photograph into a photoreal DAZ3D / Iray CGI "
-    "render of the same scene. Match the composition, architecture, lighting, "
-    "time of day, and color palette EXACTLY. Render every material as "
-    "physically-based shaders (PBR): asphalt, concrete, glass, neon tubes, "
-    "dirt, foliage, fabric, metal. 8K texture detail. Ray-traced subsurface "
-    "scattering on any visible skin. Photographic CGI. Do NOT change the "
-    "camera angle, framing, focal length, or perspective. Do NOT add or "
-    "remove buildings, signs, vehicles, props, or signage text. SAME scene, "
-    "SAME composition, CGI re-render. No people in frame — only the empty "
-    "location/setting. If any people appear in the source, render the same "
-    "scene without them. Remove Google Maps watermarks, Street View brand "
-    "stamps, and any UI overlays. Render in 1k photoreal CGI."
+    "Re-render this real-world photograph as a stylized 3D CGI scene — "
+    "default DAZ3D / Iray render look, architectural visualization quality, "
+    "video-game cinematic. It should clearly read as a 3D render, NOT a "
+    "photograph. Cleaner shaders, smoother surfaces, slightly simplified "
+    "geometry. Match the composition, architecture, lighting direction, "
+    "time of day, and overall color palette of the source. Do NOT match "
+    "photographic micro-detail (no skin pores, no dust speckles, no film "
+    "grain) — keep it CG-clean. Do NOT change the camera angle, framing, "
+    "focal length, or perspective. Do NOT add or remove buildings, signs, "
+    "vehicles, or signage text. SAME scene, SAME composition, CGI re-render. "
+    "No people in frame — only the empty location/setting. If any people "
+    "appear in the source, render the same scene without them. Remove "
+    "Google Maps watermarks, Street View brand stamps, and any UI overlays. "
+    "Render at 1k, stylized 3D CGI look."
 )
 
 # Aspect ratio per type — landscape for outdoor / street / landmark; 4:3 for
