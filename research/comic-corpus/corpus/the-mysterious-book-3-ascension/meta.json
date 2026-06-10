@@ -1,0 +1,15 @@
+{
+  "comic_id": "the-mysterious-book-3-ascension",
+  "title": "The Mysterious Book — Ch.3: Ascension",
+  "series": "The Mysterious Book",
+  "chapter": 3,
+  "source": "https://growgettercomics.com/the-mysterious-book-3-ascension-2/",
+  "publisher": "GrowGetter Comics",
+  "creators": {"art": "Boogie", "story": "Gribble", "confirmed": true, "note": "Confirmed on the P1 cover credits ('Art by Boogie / Story by Gribble'). The writer is credited 'Gribble' on the cover, not 'Cribble' as previously recorded — corrected."},
+  "page_count": 31,
+  "popularity": {"available": false, "note": "GrowGetter engagement is Patreon-gated; no public view/comment counts scraped"},
+  "ingested_at": "2026-06-09",
+  "analyzed_at": "2026-06-09",
+  "analysis_status": "done",
+  "rubric_version": "1.0"
+}

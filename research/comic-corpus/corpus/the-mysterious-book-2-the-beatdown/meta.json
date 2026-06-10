@@ -1,0 +1,14 @@
+{
+  "comic_id": "the-mysterious-book-2-the-beatdown",
+  "title": "The Mysterious Book — Ch.2: The Beatdown",
+  "series": "The Mysterious Book",
+  "chapter": 2,
+  "source": "https://growgettercomics.com/the-mysterious-book-2-the-beatdown/",
+  "publisher": "GrowGetter Comics",
+  "creators": {"art": "Boogie", "story": "Gribble", "confirmed": true, "note": "Confirmed on the cover credits page (page-01): 'Art by Boogie / Story by Gribble'. Task brief said 'Cribble' but the cover reads Gribble; subtitle on cover reads 'SUPER BEATDOWN'."},
+  "page_count": 29,
+  "popularity": {"available": false, "note": "GrowGetter engagement is Patreon-gated; no public view/comment counts scraped"},
+  "ingested_at": "2026-06-09",
+  "analysis_status": "done",
+  "rubric_version": "1.0"
+}

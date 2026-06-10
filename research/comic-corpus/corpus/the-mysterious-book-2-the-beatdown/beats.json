@@ -1,0 +1,408 @@
+{
+  "comic_id": "the-mysterious-book-2-the-beatdown",
+  "rubric_version": "1.0",
+  "analyzed_pages": 29,
+  "scores": {
+    "growth_density_score": 3,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "red super-team chases a fugitive (cont. from Ch.1) -> a blonde civilian powers up and muscle-grows, bursting her clothes and crushing a car -> she brawls the heroines but is overpowered -> the book unleashes a NEW green-suited blonde via tendril-growth who flies in and delivers the title beatdown, pummeling the red team into the rocks -> villains pin the heroes, recover the book, smirk (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Title card: green-suited blonde antagonist, glowing white eyes, fanged grin, fists clasped under a massive bust; ghostly green energy face behind her. Reads as menace, sells the villain. 'SUPER BEATDOWN' subtitle. Credits: Art by Boogie / Story by Gribble."}
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; strong character-forward cover, low-hero angle + scale-contrast, expressive antagonist face."
+    },
+    {
+      "page": 2,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["diagonal", "depth-fg-bg"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["VZZZTT"], "notes": "Red-suited heroines airborne, one fires an energy beam (VZZZTT) into an explosion; figures arranged on a raked diagonal across an interior."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["scale-contrast"], "expression": "shock", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Two heroines (afro woman + black-haired teammate) recoil from the blast, hovering."},
+        {"n": 3, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "diagonal"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Wide of rubble/fire and a figure's legs descending; transitional, faces hidden."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["OTS"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Black-haired heroine, arms crossed, confident half-smile."},
+        {"n": 5, "shot_distance": "MS", "angle": "eye", "staging": ["scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Afro 'captain' heroine holds the glowing magic book in a gauntleted fist; serious set jaw establishes the book as the MacGuffin."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; busy splash-style opener picking up mid-battle from Ch.1; good diagonals and depth, but several empty speech balloons and one flat transitional panel."
+    },
+    {
+      "page": 3,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "low", "staging": ["OTS", "scale-contrast", "depth-fg-bg"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Black-haired heroine flies toward a foreground heroine's shoulder; OTS depth, big-FG/smaller-BG scale contrast."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "foreshortening"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["CRAASSHH"], "notes": "Black-haired heroine bursts through a wall, fist forward (foreshortening); big yellow CRAASSHH starburst. Strong action beat."},
+        {"n": 3, "shot_distance": "WS", "angle": "low", "staging": ["foreshortening", "diagonal"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Flying-toward-camera hero pose, cape streaming, fist thrust forward over a rooftop horizon."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; flight-and-smash sequence; the CRAASSHH wall-burst (p3.2) is the page's anchor. Panel count effectively 3 large panels."
+    },
+    {
+      "page": 4,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 6,
+      "panels": [
+        {"n": 1, "shot_distance": "MLS", "angle": "low", "staging": ["low-hero", "depth-fg-bg"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "legs", "sfx": ["TMP"], "notes": "Low worm's-eye of a figure's lower body/sneakers stepping into a street; blue car in BG for scale. Faceless establishing of the blonde."},
+        {"n": 2, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "foreshortening", "scale-contrast"], "expression": "smug", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "chest", "sfx": [], "notes": "Already-growing blonde, huge bust straining an orange top, palm thrust toward camera (foreshortening); confident grin. First clear growth state."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg", "OTS"], "expression": "panic", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Interior of a car: civilians (a young man with a soda, others) react with alarm to the looming figure outside."},
+        {"n": 4, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast"], "expression": "panic", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Bespectacled male passenger yells/points, mouth wide; good fear read (reaction-intercut)."},
+        {"n": 5, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "diagonal"], "expression": "effort", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWIIIP", "KREEKK"], "notes": "Growing blonde flips the car (FWIIIP) onto its roof; the car tips on a diagonal."},
+        {"n": 6, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "diagonal"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "full", "sfx": ["SHCRAASH"], "notes": "Car crashes upside-down (big SHCRAASH banner); blonde stands over it. Demonstrates new strength = trigger payoff."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; GROWTH PAGE (trigger). Strong worm/low angles, car used as a size-comparison prop, civilian reaction-intercut. The growth itself is implied between panels rather than shown progressively here."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "CU", "angle": "low", "staging": ["low-hero"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "face", "sfx": [], "notes": "Blonde's face thrown back, open-mouthed delight as growth surges; speed-lines frame. Sells the pleasure of the transformation."},
+        {"n": 2, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "chest", "sfx": ["RIPPP", "BANG", "BULGE", "PUMP"], "notes": "ECU money-shot: bust swells and bursts the orange top, fabric tearing; multiple onomatopoeia (RIPPP/BULGE/PUMP) carry the sensation. Core growth-focus panel."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": [], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "abs", "sfx": ["RIPPP", "PUMP", "ASSSPPP"], "notes": "ECU on the torso/abs as the shirt shreds further down the body; tiny BUMP/PUMP markers dot the panel."},
+        {"n": 4, "shot_distance": "ECU", "angle": "eye", "staging": [], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "glutes", "sfx": ["RIPPP", "BUMP"], "notes": "ECU on shorts splitting over swelling glutes/thighs. Top-to-bottom ECU sweep of clothing destruction."}
+      ],
+      "page_notes": "distance_spread=2 (CU+ECU); flat_panel_count=0; GROWTH PAGE (mid) and the BEST growth page in the book — a 3-panel ECU progressive sweep (chest->abs->glutes) with relentless RIPPP/BULGE/PUMP SFX. This is the multi-panel-progressive + clothing-destruction + sfx-driven device stack the pipeline wants."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening", "low-hero"], "expression": "effort", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "arms", "sfx": ["GREEKK"], "notes": "Blonde rips a blue car door/panel overhead, arms flexed toward camera; metal groans (GREEKK)."},
+        {"n": 2, "shot_distance": "WS", "angle": "low", "staging": ["low-hero", "scale-contrast", "depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Full-body of the now-huge blonde in shredded orange top + torn shorts, street/buildings receding; establishes her new towering size against the city."},
+        {"n": 3, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "diagonal"], "expression": "effort", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["CRUUSHH"], "notes": "She hurls/crushes the car (CRUUSHH starburst) as a tiny civilian flees in the BG — scale-contrast of power."},
+        {"n": 4, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero"], "expression": "joy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "chest", "sfx": [], "notes": "Laughing, eyes-closed delight, chest filling frame; revels in the new body."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; GROWTH PAGE (mid) — aftermath-of-growth flexing + strength demo. Good low-hero/foreshortening and a fleeing-civilian scale gag."
+    },
+    {
+      "page": 7,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "diagonal", "scale-contrast"], "expression": "shock", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWT", "FWT"], "notes": "Big blonde in FG turns; afro heroine flies in from deep BG (strong perspective convergence). Two combatants now on screen."},
+        {"n": 2, "shot_distance": "MS", "angle": "low", "staging": ["diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Blonde snarls and points/threatens, raked diagonal squares off the confrontation. Strong angry face."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["foreshortening"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "legs", "sfx": ["TAP"], "notes": "Detail of a red boot landing (TAP) — a beat-of-quiet before the clash."},
+        {"n": 4, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Afro captain holds the book, jaw set, eyes hard."},
+        {"n": 5, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Tight on the blonde cracking her knuckles, smug anticipation. Nice menace close-up."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; confrontation set-up; excellent EWS-to-ECU range on one page (deep fly-in -> boot-tap detail -> dueling face CUs). Lots of empty balloons, though."
+    },
+    {
+      "page": 8,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "dutch", "staging": ["diagonal", "dutch", "foreshortening"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWHUMP", "ZZOOM"], "notes": "Mid-fight: blonde and a red heroine collide on a canted axis, a red boot/leg thrusts toward camera; FWHUMP + ZZOOM. Dynamic action."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening"], "expression": "shock", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["WHAAM"], "notes": "Blonde takes a hit, head snapping, mouth open (WHAAM)."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["OTS"], "expression": "rage", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Afro heroine, gauntlet glowing, presses the attack."},
+        {"n": 4, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "rage", "expression_intensity": 5, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "ECU of the afro heroine's face with glowing energy eyes — peak intensity, the page's best expression."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the fight ignites — dutch tilt + foreshortened limbs keep it kinetic; p8.4 glowing-eye ECU is a 5/5 expression."
+    },
+    {
+      "page": 9,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "high", "staging": ["foreshortening", "diagonal", "high-vuln"], "expression": "effort", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["VZZZHH"], "notes": "Afro heroine fires a point-blank energy blast (VZZZHH) into the blonde's midsection from above; raked composition."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero"], "expression": "rage", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Afro heroine tight, teeth bared, mid-effort."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "diagonal"], "expression": "strain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWOOSH"], "notes": "Grapple: the two clash chest-to-chest, the blonde absorbing the blast (FWOOSH)."},
+        {"n": 4, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "strain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["GRRR"], "notes": "Locked-up struggle, golden gauntlet between them."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; close-quarters energy brawl; high-then-low angle pairing gives the exchange momentum, though panels 3-4 read a little similarly."
+    },
+    {
+      "page": 10,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {"n": 1, "shot_distance": "CU", "angle": "eye", "staging": ["OTS"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Profile CU of the afro heroine, focused."},
+        {"n": 2, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "She glances back/decides, resting against a giant arm/bust in FG."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "shock", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "ECU of wide blue eyes (the blonde) with a thought-balloon — striking eyes-only panel, big emotional zoom."},
+        {"n": 4, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "diagonal"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["CRAASH", "WHOOMP"], "notes": "Afro heroine flies off over a suburban street, cape trailing; CRAASH/WHOOMP as something lands behind."},
+        {"n": 5, "shot_distance": "EWS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "none", "sfx": ["BAM", "CRASH", "KREEK", "BROOSH"], "notes": "Wide establishing of the neighborhood with a string of distant SFX — the fight has moved into a residential area."},
+        {"n": 6, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "panic", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["EEEAA"], "notes": "Bystanders scatter around smoking rubble; ground-level civilian POV."}
+      ],
+      "page_notes": "distance_spread=4 (CU/ECU/WS/EWS); flat_panel_count=0; the widest distance range in the book; the p10.3 eyes-only ECU is a great emotional punctuation. Relocates the action to the suburbs (new arena)."
+    },
+    {
+      "page": 11,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "ECU", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "joy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "chest", "sfx": [], "notes": "ECU of the blonde's grinning mouth above a straining chest — looming menace over the bystanders."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "panic", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Three civilians (afro man, blond man, brown-haired woman) react with alarm; varied frightened faces (reaction-intercut)."},
+        {"n": 3, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln", "diagonal"], "expression": "panic", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "High-angle of the civilians fleeing across rubble/lawns, made small (high-vuln). Foreground man's shocked face in corner."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; civilian-reaction interlude; the looming ECU + high-vuln crowd shot establish stakes/collateral. Mostly empty balloons (lettering not finalized)."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "back", "sfx": ["BUMP", "BULGE"], "notes": "Blonde braces against cracking ground; back/shoulders swelling further (BUMP/BULGE) — a second growth surge begins."},
+        {"n": 2, "shot_distance": "ECU", "angle": "low", "staging": ["scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "back", "sfx": ["RIPPP", "BULGE", "BUMP"], "notes": "ECU of the upper back/lat spread expanding, more RIPPP; muscle-growth detail."},
+        {"n": 3, "shot_distance": "ECU", "angle": "low", "staging": ["scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "glutes", "sfx": ["RIPPP", "BUMP"], "notes": "ECU of glutes bursting the last of the shorts (RIPPP). Continues the body-part ECU sweep from p5."}
+      ],
+      "page_notes": "distance_spread=2 (MCU+ECU); flat_panel_count=0; GROWTH PAGE (early/second surge); 3-panel ECU progressive (back->back->glutes) with clothing-destruction SFX — same strong device stack as p5, scaled up."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["low-hero", "scale-contrast", "diagonal"], "expression": "smug", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "FULL-PAGE SPLASH: the fully-grown blonde double-biceps flexes, radiating sunburst lines, torn orange bra + shredded black shorts, legs braced apart. The money-page full-body reveal of the transformation. Low-hero towering composition."}
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; GROWTH PAGE (peak) — the full-body-reveal splash. The pacing climax of the blonde's arc; bold low-hero splash sells maximum size."
+    },
+    {
+      "page": 14,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWOOSH"], "notes": "Afro heroine charges the giant blonde across a grassy field; huge FG hip vs small BG flyer (scale-contrast)."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["diagonal", "foreshortening"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["ZZOOM"], "notes": "Blonde lunges/punches toward camera (ZZOOM), hair flying, furious. Kinetic."},
+        {"n": 3, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "low-hero"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "arms", "sfx": ["WHAAM"], "notes": "Blonde throws a hammer-blow (WHAAM), arm thrust up/forward; teeth bared."},
+        {"n": 4, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["BUMP"], "notes": "Blonde mid-shout over the book on the ground; teammate's hand reaching in."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the brawl resumes post-splash; consistent rage faces (4/5) keep the fight emotionally hot. Good foreshortened punches."
+    },
+    {
+      "page": 15,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln", "diagonal"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHOOSH"], "notes": "High wide: afro heroine knocked back across rocks toward the giant blonde; depth + diagonal."},
+        {"n": 2, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Heroine recovers, holds the book/an item out; blonde looms over a boulder."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Black-haired teammate arrives, serious; book in frame."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "low-hero"], "expression": "rage", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["ZZOOM"], "notes": "Blonde charges again (ZZOOM)."},
+        {"n": 5, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "scale-contrast", "foreshortening"], "expression": "shock", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["ZWOOOSH"], "notes": "Two red heroines brace as the blonde's giant palm reaches toward camera (ZWOOOSH) — about to be grabbed."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the heroines start losing ground; the reaching-palm foreshortening (p15.5) sets up the capture. A couple of mid-shots read flat-adjacent but staging keeps depth."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "high", "staging": ["foreshortening", "scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "arms", "sfx": ["BUMP"], "notes": "A NEW transformation begins: a pale arm/hand in FG starts to swell (BUMP), bicep thickening; faceless intro of the green-suit character."},
+        {"n": 2, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "arms", "sfx": ["BULGE", "RIPPP"], "notes": "ECU-ish on the upper arm/shoulder ballooning, sleeve tearing (RIPPP)."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "chest", "sfx": ["RIPPP", "BUMP"], "notes": "ECU of chest/torso swelling and ripping an orange garment; orange hair tendrils in frame. Second progressive ECU growth scene starts."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; GROWTH PAGE (early) — kicks off the SECOND major transformation (the cover/green villain). Same body-part ECU + clothing-destruction approach; faces withheld to save the reveal."
+    },
+    {
+      "page": 17,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "ecstasy", "expression_intensity": 5, "growth_focus": true, "body_part_focus": "chest", "sfx": ["HNGGK", "MMMHHHM"], "notes": "Green-suit blonde, eyes shut, grimacing/moaning (HNGGK) as green tendrils wrap her swelling torso. Peak transformation-strain face — 5/5."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["scale-contrast", "diagonal"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "full", "sfx": ["HA HA", "BAAM", "FWOOMP"], "notes": "Laughing mid-growth (HA HA), tendrils coiling, fists clenched as she balloons larger."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["scale-contrast"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "full", "sfx": ["HA HA", "AHHNN", "FWOOMP"], "notes": "Continued growth, tendrils everywhere, blissful laughter. The 'magic tendril' device differentiates this TF from the blonde's organic one."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; GROWTH PAGE (mid) — the green villain's transformation peak; the strongest EXPRESSION growth page in the book (p17.1 = 5/5 ecstasy/strain). Tendril SFX (FWOOMP) + clothing rip carry it. Faces finally engaged here vs the dead-faced ECUs on p5/p12/p16."
+    },
+    {
+      "page": 18,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["low-hero", "depth-fg-bg", "foreshortening"], "expression": "neutral", "expression_intensity": null, "growth_focus": true, "body_part_focus": "back", "sfx": ["VZZZZA"], "notes": "FULL-PAGE SPLASH: the transformed green-suit villain rockets skyward on a beam of light (VZZZZA) out of a storm vortex, back to camera, fists clenched, rocky valley far below with the tiny book on the ground. Full-body reveal of the new powerhouse."}
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; GROWTH PAGE (peak) — second full-body-reveal splash; dramatic worm/low launch composition with deep BG. The transformed result before she joins the beatdown."
+    },
+    {
+      "page": 19,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "ECU of the green villain's furious snarling face — establishes her as the threat."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Two red heroines (afro + black-haired) chat confidently, unaware — dramatic irony before the ambush."},
+        {"n": 3, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "OTS"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Green villain descends between them, fanged grin, towering. Tension spike."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "diagonal"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["ZWOOSH"], "notes": "She lunges between the two heroines (ZWOOSH); they begin to turn."},
+        {"n": 5, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "scale-contrast"], "expression": "shock", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["ZWUUSH"], "notes": "She seizes the black-haired heroine; surprise registers. Beatdown begins."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the title beatdown opens with an ambush; ECU villain face + OTS staging build dread. Strong dramatic-irony beat (heroines smug, villain looming)."
+    },
+    {
+      "page": 20,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 2,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["foreshortening", "scale-contrast", "low-hero", "diagonal"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["KRRUGUSHHH"], "notes": "Green villain slams both heroines down into the rocks (huge KRRUGUSHHH banner); giant hands foreshortened toward camera. Big impact panel."},
+        {"n": 2, "shot_distance": "MS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln", "OTS"], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["GRAB"], "notes": "Afro heroine (FG, back to us) looks down at the black-haired teammate sprawled hurt in the rubble while the blonde lies defeated nearby. High angle = vulnerability."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; brutal two-panel beat; the KRRUGUSHHH slam is one of the book's best impact compositions (foreshortened giant hands + scale-contrast)."
+    },
+    {
+      "page": 21,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHUUMP"], "notes": "Green villain backhands/hurls the afro heroine (WHUUMP) across frame on a steep diagonal; motion lines."},
+        {"n": 2, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["VZZZZAA"], "notes": "Villain fires red heat-vision/energy (VZZZZAA) at a distant fleeing red heroine; explosion in BG. Strong depth."},
+        {"n": 3, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "pain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "High wide of the beaten heroines strewn on the rocks, the villain standing over them. Aftermath-of-beat tableau."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the villain dismantles the team; heat-vision panel (p21.2) uses deep BG well. Consistent high-vuln framing of the losing side."
+    },
+    {
+      "page": 22,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["foreshortening", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["SLAM", "WHAAM", "WHAAM", "WHAAM"], "notes": "Villain pile-drives a heroine into the rocks (SLAM) and rains repeated punches (WHAAM x3 stacked) — repetition SFX = relentless beating. Excellent escalation device."},
+        {"n": 2, "shot_distance": "CU", "angle": "low", "staging": ["scale-contrast"], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["WHUMP"], "notes": "CU of the afro heroine's face snapping from an impact (WHUMP)."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["scale-contrast"], "expression": "pain", "expression_intensity": 5, "growth_focus": false, "body_part_focus": "face", "sfx": ["BAAMM"], "notes": "ECU of the same face, eyes screwed shut, taking another hit (BAAMM) — 5/5 pain. Reaction-intercut selling the beatdown's brutality."},
+        {"n": 4, "shot_distance": "ECU", "angle": "eye", "staging": [], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Held ECU on the battered face. (Panels 2-4 form a tight pain-reaction zoom-in.)"}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the punishing core of 'The Beatdown'; the stacked WHAAM/WHAAM/WHAAM (p22.1) + CU->ECU pain zoom (p22.2-4) is the best SFX+reaction escalation in the book. p22.3 = 5/5 pain."
+    },
+    {
+      "page": 23,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "high", "staging": ["high-vuln", "OTS"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "glutes", "sfx": ["BUMP"], "notes": "Green villain's lower body straddling a downed heroine; top of a 3-beat progressive."},
+        {"n": 2, "shot_distance": "MCU", "angle": "high", "staging": ["high-vuln", "OTS"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "glutes", "sfx": [], "notes": "Same framing, villain shifting/rising — beat 2."},
+        {"n": 3, "shot_distance": "MCU", "angle": "high", "staging": ["high-vuln", "OTS"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Villain stands; pinned heroine below — beat 3. (3-panel near-identical strip; slight pacing drag.)"},
+        {"n": 4, "shot_distance": "WS", "angle": "low", "staging": ["foreshortening", "low-hero", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHACK"], "notes": "Big panel: villain stomps/axe-kicks the afro heroine into the ground (WHACK) on a dramatic diagonal, leg foreshortened. Recovers momentum."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the only real pacing stumble — p23.1-3 are three near-identical high-angle MCUs of the same pose (close to a flat repeat), redeemed by the dynamic WHACK stomp in p23.4."
+    },
+    {
+      "page": 24,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS", "scale-contrast"], "expression": "pain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Green villain grips the black-haired heroine's hair; OTS over the villain's shoulder."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "diagonal", "scale-contrast"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHUMP", "THWACK"], "notes": "Villain knees/strikes the heroine (WHUMP/THWACK), grinning cruelly. Domination beat."},
+        {"n": 3, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening", "low-hero", "scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "full", "sfx": ["BWAAM"], "notes": "Big impact (BWAAM) as she drives the heroine down; villain's torso fills frame, low-hero."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; one-sided punishment continues; the villain's smug 4/5 face (p24.2) keeps her menacing while the heroines stay on the defensive."
+    },
+    {
+      "page": 25,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["low-hero", "depth-fg-bg", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Villain towers over a kneeling heroine, the recovered powered-down blonde lying behind; rocky vista. Re-establishes the field."},
+        {"n": 2, "shot_distance": "CU", "angle": "eye", "staging": ["OTS"], "expression": "fear", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "CU of the green villain's profile, eyeing the next target."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "scale-contrast"], "expression": "pain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Black-haired heroine slumped against rocks, the blonde wounded with a glowing gauntlet nearby."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg", "diagonal"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["FWOOMP"], "notes": "Afro heroine scrambles up (FWOOMP) as the black-haired heroine grabs the BOOK off the ground — plot pivot, the heroes go for the artifact."},
+        {"n": 5, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Black-haired heroine clutches the open book — possible turn-of-the-tide setup for next chapter."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; brief regroup; the book changes hands (p25.4-5) — the only forward-plot movement in the back half. Keeps depth/scale, no flat panels."
+    },
+    {
+      "page": 26,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["THWACK"], "notes": "Villain charges/strikes (THWACK) across a wide rocky field; the two heroines scatter. Re-engages."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening", "low-hero"], "expression": "rage", "expression_intensity": 5, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Villain's face contorted in fury, fist toward camera — 5/5 rage."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast"], "expression": "fear", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Black-haired heroine gasps/looks up in fear, torn costume — strong vulnerable reaction (reaction-intercut)."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHUMP"], "notes": "Villain swats the afro heroine (WHUMP) down; arm foreshortened. Beatdown grinds on."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; villain/victim face intercut (p26.2 rage 5 vs p26.3 fear 4) is a textbook tension pairing worth stealing."
+    },
+    {
+      "page": 27,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening", "low-hero", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["BAAMM"], "notes": "Villain's huge thigh/hip smashes a heroine in FG (BAAMM); face snarling above."},
+        {"n": 2, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "diagonal"], "expression": "effort", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHACK"], "notes": "Villain delivers an axe-kick (WHACK), leg thrust toward camera; black-haired heroine reels."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Villain, mid-shout, fist cocked; about to land another."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["foreshortening", "OTS", "scale-contrast"], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHUMP"], "notes": "Heroine takes the blow (WHUMP), folding. Continuous one-sided pummeling."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; sustained kick/punch combo; foreshortened limbs on nearly every panel keep it dynamic, but by now the beats repeat (villain hits, hero reels) with little variation."
+    },
+    {
+      "page": 28,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "diagonal", "scale-contrast"], "expression": "rage", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": ["BAAMM"], "notes": "Villain hammers the black-haired heroine (BAAMM); whip of black hair across the diagonal."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["foreshortening", "diagonal", "scale-contrast"], "expression": "effort", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["WHACK"], "notes": "Spinning kick (WHACK), leg out to the side; heroine knocked aside."},
+        {"n": 3, "shot_distance": "CU", "angle": "eye", "staging": ["OTS"], "expression": "panic", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["GASP"], "notes": "Small inset CU of the afro heroine gasping (GASP) — reaction beat."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["foreshortening", "low-hero", "scale-contrast"], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "full", "sfx": [], "notes": "Villain hauls the afro heroine up by the head; total domination, low-hero."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the beating crescendos before the wrap; the GASP inset (p28.3) breaks the action rhythm nicely."
+    },
+    {
+      "page": 29,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {"n": 1, "shot_distance": "EWS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "pain", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["TMP"], "notes": "Wide aftermath: the three beaten heroines sprawled on the ground; boots/legs of the standing victors approach (TMP). Stakes-set wide."},
+        {"n": 2, "shot_distance": "ECU", "angle": "high", "staging": ["foreshortening", "scale-contrast"], "expression": "neutral", "expression_intensity": null, "growth_focus": false, "body_part_focus": "none", "sfx": ["BUMP"], "notes": "ECU of a gloved hand picking the magic BOOK up off the dirt — the prize is reclaimed by the villains."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["OTS"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Green-suit villain smirks, satisfied."},
+        {"n": 4, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "A SECOND blonde (lighter, smiling) — a partner/twin villain revealed, gloating."},
+        {"n": 5, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "full", "sfx": ["POP"], "notes": "One villain holds the book open, flexing; setting up the next power-up."},
+        {"n": 6, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Final panel: green villain's fanged grin (echoing the cover) — 'to be continued...' caption. Villain-victorious cliffhanger."}
+      ],
+      "page_notes": "distance_spread=3 (EWS/ECU/MCU); flat_panel_count=0; denouement/cliffhanger — villains win, reclaim the book, two of them gloat into a 'to be continued.' Ends on a pull-forward but the heroes simply lose, which is a downbeat hook."
+    }
+  ],
+  "scene_breakdown": [
+    {"scene": "ch1-carryover-battle", "pages": [2, 3], "type": "action", "escalation_devices": []},
+    {"scene": "transformation-1-blonde-civilian", "pages": [4, 5, 6, 12, 13], "type": "active-growth", "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "sfx-driven", "size-comparison", "full-body-reveal", "reaction-intercut"]},
+    {"scene": "blonde-vs-heroines-brawl", "pages": [7, 8, 9, 10, 11, 14, 15], "type": "action", "escalation_devices": ["reaction-intercut"]},
+    {"scene": "transformation-2-green-villain", "pages": [16, 17, 18], "type": "active-growth", "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "sfx-driven", "full-body-reveal", "zoom-escalation"]},
+    {"scene": "the-beatdown", "pages": [19, 20, 21, 22, 23, 24, 25, 26, 27, 28], "type": "action", "escalation_devices": ["reaction-intercut", "sfx-driven"]},
+    {"scene": "villains-victorious-cliffhanger", "pages": [29], "type": "denouement", "escalation_devices": []}
+  ],
+  "strengths": [
+    "P5 and P12 are the model growth pages: each is a 3-panel ECU progressive sweep down the body (chest->abs->glutes on P5; back->back->glutes on P12) with relentless RIPPP/BULGE/PUMP clothing-destruction SFX — exactly the multi-panel-progressive + sfx-driven device stack the pipeline wants more of.",
+    "P22 sells the title 'beatdown' through SFX repetition + a reaction zoom: stacked WHAAM/WHAAM/WHAAM (P22.1) over a pile-driver, then a CU->ECU pain pull-in on the heroine's face (P22.2-4, P22.3 = 5/5 pain). Onomatopoeia carries the violence with no dialogue needed.",
+    "Camera stays kinetic across the whole book — foreshortened fists/legs and low-hero towering angles on nearly every action page (e.g. P3.2 CRAASSHH wall-burst, P8.1 dutch-tilt collision, P20.1 KRRUGUSHHH foreshortened giant hands). flat_panel_count is effectively 0 across 29 pages.",
+    "Two full-page reveal splashes pace the transformations: P13 (blonde double-biceps sunburst flex) and P18 (green villain rocketing out of a storm vortex) — both bold low-hero/worm compositions that punctuate each power-up's climax.",
+    "Villain/victim expression intercutting builds tension: P26.2 (villain rage 5/5) cut against P26.3 (heroine fear 4/5), and the P8.4 glowing-eye rage ECU (5/5). When faces are engaged they genuinely carry the beat.",
+    "Wide distance range when it counts — P10 spans CU/ECU/WS/EWS on a single page (the eyes-only ECU at P10.3 is a great emotional punctuation), and the comic relocates arenas (city street -> suburbs -> rocky valley) to keep the fight visually fresh."
+  ],
+  "weaknesses": [
+    "ECU growth panels are frequently DEAD-FACED: the money-shots on P5.2-4, P12.2-3, and P16.1-3 crop the face out entirely or leave it blank, so the body grows but no one registers the sensation. P17 proves the fix — its 5/5 ecstasy/strain faces (P17.1) make that transformation hit far harder. The first TF should have engaged faces the way the second does.",
+    "The back third is a one-note pummel: P19-P28 is ten near-continuous pages of the green villain hitting the heroes with essentially zero reversal or tactical variation (villain strikes -> hero reels, repeat). It overstays the 'beatdown' premise and drains tension because the outcome never feels in doubt.",
+    "Lettering is unfinished — dozens of EMPTY speech balloons throughout (P2, P7, P10, P11, P15, P29 etc.). Story beats that should be spoken are blank, so the plot is legible only through action; a reader gets almost no character voice or motivation.",
+    "P23.1-3 are three near-identical high-angle MCUs of the same straddle pose — the closest the book comes to a flat repeat and a visible pacing stall (only rescued by the WHACK stomp in P23.4).",
+    "Story/structure is thin: it opens mid-fight from Ch.1 with no re-orientation, the two transformations aren't clearly motivated (who the blonde is, why the green villain appears), and it ends on a pure downbeat — the heroes just lose and the villains gloat — which is a weak, character-light hook compared to a tease-and-deliver structure.",
+    "Growth is bursty rather than slow-burn: two compressed transformation bursts (P4-6/P12-13 and P16-18) rather than a sustained build, and the entire back half (P19-29, 38% of the book) contains no growth at all, dragging the overall growth-page ratio down to ~28%."
+  ]
+}

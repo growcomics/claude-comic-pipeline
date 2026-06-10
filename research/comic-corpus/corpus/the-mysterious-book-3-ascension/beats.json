@@ -1,0 +1,1374 @@
+{
+  "comic_id": "the-mysterious-book-3-ascension",
+  "rubric_version": "1.0",
+  "analyzed_pages": 31,
+  "scores": {
+    "growth_density_score": 5,
+    "camera_dynamism_score": 3,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "heroine is already mid-transformation (boots/suit shredding) -> grows past house then city-block scale, wrecking street & onlookers, briefly crushing/embracing male partner -> levels city blocks (truck flees) -> magic book reappears and channels lightning, re-igniting growth -> dwarfs Earth, reaches the moon -> ascends into deep space -> ends godlike, plucking/crushing/consuming whole galaxies (open-ended, to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Title cover. Blonde heroine, glowing white eyes, smug grin, cradling Earth in her palm against a starfield. Logo 'THE MYSTERIOUS BOOK / Ascension'. Credits: Art by Boogie, Story by Gribble, GrowGetterComics.com. Scale-contrast (whole planet in hand) sets the chapter's cosmic-size promise."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; single-image cover, establishes godlike scale + creator credits."
+    },
+    {
+      "page": 2,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["CRACK", "CRACK", "CRUNCH", "CRRUNCH"],
+          "notes": "Wide letterboxed top strip: black boots/feet bursting apart on cracking rock, debris flying. Pure clothing/footwear-destruction money shot, no face. Sells growth via SFX + shattering boots."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["MMMMHHH"],
+          "notes": "Tight low-angle CU of heroine's grinning upturned face, eyes rolled up in pleasure. Face carries the growth ecstasy."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["RIPPP", "RIIPP", "FACOMP", "BUMP"],
+          "notes": "Black bodysuit tearing off swelling lats/shoulders; fist clenched. Clothing-destruction zoom on the back."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["diagonal", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIPPP", "FACOMP", "BMMP"],
+          "notes": "Wide bottom panel: suit shredding off the torso, breasts spilling free, head thrown back open-mouthed. Dialogue 'AHHN...' / 'OH YEAH'. Peak-pleasure face + clothing-destruction; the page's payoff beat."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; opening page drops us straight into active transformation. Strong clothing/footwear-destruction + sfx-driven growth, expressive faces."
+    },
+    {
+      "page": 3,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["scale-contrast", "diagonal", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-page montage: a vertical stack of four progressively LARGER/lighter versions of the figure rising through clouds (a dark small one at bottom up to a huge pale laughing one at top), yellow energy ribbons threading between. Dialogue 'HAHAHA...'. A single-page multi-panel-progressive growth ladder rendered as one composition; size-comparison against the prior selves."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; clever in-panel progressive-growth stack (4 escalating copies). Reads as the transformation's 'stages' montage."
+    },
+    {
+      "page": 4,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Splash: heroine restored to a white toga + gold belt, arms raised in a victory-V, towering above suburban rooftops with a radiant orange sunburst behind. Low-hero worm's-eye looking up the massive thighs. Establishes she is now bigger than houses; size-comparison to rooftops/trees."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; hero splash, full-body reveal of the new mid-stage scale against suburbia."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["diagonal", "depth-fg-bg", "low-hero"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KRAKASHH"],
+          "notes": "Heroine strides forward crushing a rock pile, suburban street receding behind. Big yellow 'KRAKASHH' SFX. Strong depth + diagonal stride."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["FWOOSH"],
+          "notes": "Tall right-hand panel: full standing figure hands-on-hips, chin up, looking down at the viewer. 'FWOOSH' rising energy. Confident posture."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["scale-contrast", "high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["GRAB", "KTHUNK"],
+          "notes": "Her huge hand grabs the roof of a red car (scale-contrast: hand vs car). No face. Sets up the car-crush gag."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["CRUUSH"],
+          "notes": "She crushes the car against her body, sly side-eye grin. 'CRUUSH' impact star. Playful destruction beat."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; good size-comparison via car-crush; strong sfx. Dialogue balloons are blank (lettering stripped/raw scans)."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BUDUMP"],
+          "notes": "Tall left panel: heroine flexing a bicep, chest swelling, sly grin. Radiating speed-lines. Heartbeat-style 'BUDUMP' growth pulse."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "determination",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Profile of her upper body facing off-panel figures; OTS toward small people at right edge. Transition to onlooker subplot."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Small bespectacled man (the partner) looks up between her giant gold-cuffed wrists; scale-contrast big-FG-body vs tiny man."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["high-vuln", "depth-fg-bg"],
+          "expression": "panic",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "High angle down on the man sprawled on the ground amid spilled groceries, looking up in alarm. High-vuln framing."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Her giant fingers reach down toward him. Tension beat. (Blank balloons.)"
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; introduces the small male partner for size-contrast and reaction-intercut. Good vulnerability/high-angle on the human."
+    },
+    {
+      "page": 7,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "CU of the grinning bespectacled man (now apparently delighted rather than scared)."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SNAP"],
+          "notes": "Heroine smiles and raises a finger ('SNAP'), toga still on, against blue sky. Conversational beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["scale-contrast", "high-vuln", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "High wide: her enormous backside fills frame while the tiny man stands far below on the ground. Strong scale-contrast."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "determination",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["ZZZRRMMM"],
+          "notes": "Heroine gestures, breast exposed as toga slips; energy hum 'ZZZRRMMM'."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Plain eye-level CU of the man gesturing as he talks. The one genuinely flat, static beat on the page."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "determination",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Small inset of the man at her feet, low angle. Dialogue page (balloons blank), pace slows for exposition."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1 (p5); the chapter's only real dialogue/buildup lull. No active growth here; banter between the giantess and partner."
+    },
+    {
+      "page": 8,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "The MALE partner has now ALSO grown huge and muscular, hands on hips, towering in clouds. Secondary transformation begins."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["GRASSH"],
+          "notes": "His shirt rips off ('GRASSH') as he and the heroine grapple/embrace; clothing-destruction on the male."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KKRUSH"],
+          "notes": "The two muscular bodies press together, 'KKRUSH'. Mutual-growth clinch."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Wide bottom: the pair embracing amid rubble/rooftops, her head thrown back 'AHHHN...'. Pleasure beat."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; pivot to a SECOND simultaneous transformation (the male partner). Clothing-destruction + sfx maintained."
+    },
+    {
+      "page": 9,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["diagonal", "depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["SCHLP", "MMMHHMM", "AHHHN"],
+          "notes": "High diagonal of the two huge bodies entangled in the rubble. Wet SFX. Action staged on a strong rake."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "CU of a startled onlooker (white man)."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "CU of a second startled onlooker (Black man). Reaction-intercut pair; both framed flat/level."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["diagonal", "depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["AHHHHH", "SCHLP"],
+          "notes": "Wide high diagonal: the giant couple sprawled across the wrecked street, a police cruiser arriving at frame edge."
+        },
+        {
+          "n": 5,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "panic",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Thin strip: police arriving with cars/cones. Subplot escalation (authorities respond)."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=2 (the two onlooker CUs are deliberately plain reaction beats); good reaction-intercut and arriving-police escalation."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["diagonal", "scale-contrast"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["MMMHHHH", "AHHHN"],
+          "notes": "High diagonal of the heroine's broad muscled back swelling, tiny partner clutched against her. Back-focus growth + scale."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["diagonal", "depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["AHHHHH"],
+          "notes": "Couple entwined across the rubble, police lights below. Sustained raked staging."
+        },
+        {
+          "n": 3,
+          "shot_distance": "EWS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Thin establishing strip: a line of police/barricades and squad cars way below the giants. Pulls back for scale."
+        }
+      ],
+      "page_notes": "distance_spread=3 (EWS/WS); flat_panel_count=0; uses an EWS to establish how small the authorities are. Panel 3 read as a single wide strip (merged sub-beats)."
+    },
+    {
+      "page": 11,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "panic",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": ["BUKA-BUKA-BUKA", "DAKA-DAKA"],
+          "notes": "Top-left: a cluster of armed police firing up at the giants (stylized gunfire SFX), her huge body looming. Authorities now attack."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["MMMHHH"],
+          "notes": "Tall right panel: heroine seen from below, back rippling, the tiny man on her shoulder. Bullets do nothing. Low-hero power framing."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["AHHHHH"],
+          "notes": "Couple embracing, heads back, against a purple energy field."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["high-vuln", "flat-level"],
+          "expression": "fear",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Two cops at right look up uneasily. Reaction beat; framed fairly flat/level."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; the 'bullets are useless' invulnerability beat. Stylized gunfire SFX add texture."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Heroine flexes a bicep by her face, huge breasts and abs foregrounded, tiny partner tucked at her chest. Bicep-flex money shot."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["FACOMP"],
+          "notes": "She throws both arms up, chest/abs surging ('FACOMP'). Double-bicep growth flex."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "High wide: the tiny dark silhouette of the man stands on rubble far below her towering body. Strong scale-contrast."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KRAKOOM"],
+          "notes": "She powers upward against a red field, big yellow 'KRAKOOM' lightning bolt. Re-ignition of growth; transitions to the city-leveling arc."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; back-to-back flex money shots + a scale-contrast wide. KRAKOOM bridges into the next escalation."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["SHRRR"],
+          "notes": "Narrow left ECU strip: a clenched fist/forearm, veins/striations popping ('SHRRR'). Detail growth-focus."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["SHRRR"],
+          "notes": "Heroine (toga re-formed) clenches both fists, gritted grin, pecs/arms flexing. Strain face sells the surge."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Big right-hand panel: she stands over a smoking trail of FLATTENED houses/rubble stretching to the horizon. City-destruction reveal; size-comparison against the leveled neighborhood."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["CLENCH"],
+          "notes": "Bottom row beat 1 of 3: she holds up a small object (a snapped wristband?), sly look. Near-identical framing to the next two."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Bottom row beat 2 of 3: same pose against orange burst, laughing. Repeats framing."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["CLENCH"],
+          "notes": "Bottom row beat 3 of 3: same pose, pink field. Three near-identical MCUs in a row = a flat triptych lull mid-page."
+        }
+      ],
+      "page_notes": "distance_spread=4 (ECU..WS); flat_panel_count=3 (the bottom triptych p4-6 repeats the same MCU pose). Top half is dynamic (ECU detail + city-destruction WS); bottom triptych is the page's weak, static stretch."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["HA HA HA HA HA", "KKRUSH", "CRASSH"],
+          "notes": "Big top panel: low worm's-eye looking up her enormous backside as she bursts up through a building/parking structure, tiny terrified man and pillars in FG. Cackling 'HAHAHAHA'. Bold scale + foreshortening; the page's standout."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["AHHH"],
+          "notes": "Right side: two bystanders (a man, a blonde woman) recoil in alarm. Reaction-intercut."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["THOOOM"],
+          "notes": "Bottom row 1/3: heroine throws a punch toward camera ('THOOOM'), fierce face. Foreshortened fist."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": ["BRAKOOM", "BRUGURSHH"],
+          "notes": "Bottom row 2/3: she smashes up through more structure, debris exploding ('BRAKOOM'). Destruction beat."
+        },
+        {
+          "n": 5,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["TADUUMM"],
+          "notes": "Bottom row 3/3: she rises triumphant from the wreckage in a cloud ('TADUUMM'). Bigger again."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; excellent escalation page: worm's-eye scale, foreshortened punch, three impact SFX, reaction-intercut. Strong sfx-driven destruction."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KATHOOM"],
+          "notes": "Top-left: heroine bursts through a rocky cliff/wall ('KATHOOM'). Now mountain-scale."
+        },
+        {
+          "n": 2,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "panic",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRUNCH", "VRRMM"],
+          "notes": "Top-right: a blue semi-truck flees down a road as her giant legs loom; driver leans out. Size-comparison vs a highway truck."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KRAKOOM", "BOOOM"],
+          "notes": "Mid strip: she stomps/blasts the road, fiery explosions ('KRAKOOM','BOOOM'). City-wrecking."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["TAGOOOM", "FWOOOSH"],
+          "notes": "Bottom-left: low-hero of her surging upward through smoke ('TAGOOOM'). Growing again."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KZZZTTT"],
+          "notes": "Bottom-right: CU of her gritted, strained face crackling with energy ('KZZZTTT'). Strain sells the surge."
+        }
+      ],
+      "page_notes": "distance_spread=4 (EWS..CU); flat_panel_count=0; relentless SFX wall (KATHOOM/KRAKOOM/BOOOM/TAGOOOM). Truck size-comparison is a clean gauge of her new scale. Panel 5 read as one beat (energy CU)."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KATHOOM", "KABLAM", "VRROOM"],
+          "notes": "Top: her arm/torso sweep across an entire downtown SKYLINE; police tape strung in FG. She now rivals skyscrapers; multiple destruction SFX. Big size-comparison to a city."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Mid strip: heroine reclines/gestures over the smoking city, cloud of dust. Gloating beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["ZA", "ZA", "ZA", "ZA"],
+          "notes": "Bottom-left: low-hero full figure crackling with yellow energy arcs ('ZA ZA ZA'), abs flexed. Electric power-up."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["ZA", "ZA", "ZA", "ZA"],
+          "notes": "Bottom-right: tighter, chest/torso surging with electricity, head back in bliss. Peak energy money shot."
+        }
+      ],
+      "page_notes": "distance_spread=3 (EWS/WS/MS); flat_panel_count=0; whole-skyline size-comparison + electric power-up. ZA-ZA energy SFX field is a nice growth texture."
+    },
+    {
+      "page": 17,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Small top-left inset: the male partner, now huge too, laughing/cheering. Reaction beat (mostly flat)."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "worm",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KABOOM"],
+          "notes": "Dominant splash: worm's-eye up the heroine standing astride/over a whole city grid that recedes far below, fists clenched, 'KABOOM'. Full-body reveal of her city-dwarfing peak scale. The page's showpiece."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1 (inset); the near-splash worm's-eye-over-the-city is one of the strongest scale compositions in the book."
+    },
+    {
+      "page": 18,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KATHOOM"],
+          "notes": "Top: the heroine (now reddish/auburn hair) hovers bicep-flexing above a vast canyon/rift, energy at her fist ('KATHOOM'). Earth-rending scale; full-body."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["FRVSHH", "FRVSHH", "FRVSHH"],
+          "notes": "Bottom: closer on her torso wreathed in lightning ('FRVSHH'), abs/quads flexed, blissful. The 'FRVSHH' energy field recurs as the cosmic-tier growth SFX."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; transition into the cosmic tier (hair shifts auburn, ground splits, lightning aura). Strong low-hero."
+    },
+    {
+      "page": 19,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["ZA", "ZA", "ZIIIGHHH", "FRVSHH"],
+          "notes": "Top: heroine laughing, torso crackling with energy, hand on her chest. Electric growth beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "awe",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["ZIIBSSSHH", "FRVSHH"],
+          "notes": "Bottom: she looks up wide-eyed at the floating MAGIC BOOK (gold cover, all-seeing-eye glyph) that has reappeared and is feeding her power. Re-introduces the title object as the engine of the ascension."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; pivotal reveal that the book itself is driving the growth. Awe face on the book is well-judged."
+    },
+    {
+      "page": 20,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["FRVSHH", "ZA", "ZA"],
+          "notes": "Top: she holds the tiny glowing book up beside her now-enormous chest, grinning. Scale-contrast (book vs body) shows how big she has become."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": ["KRZZT", "KRZZT", "KRZZT", "KRZZT"],
+          "notes": "Bottom: she clutches the book to herself, surrounded by blue lightning bolts ('KRZZT'), face fierce/glowing. Power channels at maximum."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the book-as-power-source channeling peak. KRZZT lightning ring is strong sfx-driven energy."
+    },
+    {
+      "page": 21,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["ZIIDSSSHH"],
+          "notes": "Left column 1/3: CU of her hand holding the glowing book over her breast. Detail beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["ZIIDSSSHH"],
+          "notes": "Left column 2/3: same framing, book now sparkling brighter. Near-identical repeat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["ZIIH"],
+          "notes": "Left column 3/3: the book now spent/closing, gold sparks rising. The 3-panel stack is a small progressive beat but uses identical framing (mild flat repeat)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Big right panel: full-figure low-hero of the heroine descending toward a crater on a mountain plateau, hair streaming, ripped/godlike. Full-body reveal of the post-book form. Inset bottom-right begins a tight eyes ECU."
+        }
+      ],
+      "page_notes": "distance_spread=2 (CU/WS); flat_panel_count=0 (the left triptych is a deliberate small progressive sequence on the book, not a conversation lull); strong full-body low-hero on the right."
+    },
+    {
+      "page": 22,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Top: ECU of her green eyes blazing, brow furrowed, hair whipping. Pure intensity close-up."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Bottom: low-angle CU, head thrown back, mouth wide in a scream/laugh against a radiant green burst, swelling chest below. Peak-intensity face; the emotional crescendo of the transformation."
+        }
+      ],
+      "page_notes": "distance_spread=2 (ECU/CU); flat_panel_count=0; an entire page devoted to FACE — eyes ECU then open-mouthed scream. Best expression-intensity beat in the book."
+    },
+    {
+      "page": 23,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg", "low-hero"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["CRUNCH", "CRUNCH", "CRUNCH"],
+          "notes": "Splash: the heroine, now COSMIC scale, floats in space punching/cracking a moon-like body, planet Earth huge behind her, debris ('CRUNCH'). She has outgrown the planet. Massive size-comparison (vs Earth & moon)."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the chapter's scale pivot to space. Earth-as-backdrop size-comparison is the single biggest 'how big is she now' gauge."
+    },
+    {
+      "page": 24,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Splash: rear three-quarter of the heroine flexing a back-double-bicep in deep space, a ringed planet/black-hole and nebula swirls around her. Back/glute money shot at cosmic scale; size-comparison vs a whole planet."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; full-body cosmic flex from behind. Establishes she now dwarfs planets."
+    },
+    {
+      "page": 25,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Splash: low-hero looking up her colossal body, a galaxy/portal glyph (now a different cosmic sigil) glowing at lower right, the Milky Way behind. Grinning down godlike. Full-body cosmic reveal."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; reinforces godlike scale; the magic glyph has evolved from book to cosmic seal."
+    },
+    {
+      "page": 26,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["foreshortening", "scale-contrast", "diagonal"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["KRRRA"],
+          "notes": "Splash: dramatic foreshortened high-angle down her crouched/curled cosmic body (back, glutes, soles toward camera) on a purple-lightning starfield. Pin-up-style scale composition; face hidden. 'KRRRA' crackle."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; pure splash spectacle; bold foreshortening but no readable face (intensity n/a)."
+    },
+    {
+      "page": 27,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Splash: the godlike heroine holds an entire PLANET/star aloft in one hand (purple-haloed orb), torso and abs fully cut, looking off with resolve. Echoes the cover. 'Holding a world in her hand' aftermath flex — growth itself has paused; she is now showing off cosmic power."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; aftermath/showcase splash. Growth has crested; this is the 'new god body' display. Counts as aftermath, not active growth."
+    },
+    {
+      "page": 28,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Splash: she cradles an entire spiral GALAXY between her hands at chest height, grinning down. Scale-contrast (a galaxy is now a handful). Showcase, not active growth."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; 'galaxy in her hands' display splash; the size kink taken to its cosmic limit."
+    },
+    {
+      "page": 29,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Main splash: full-figure, she holds a galaxy-filled object aloft like a trophy, flexing, laughing. Godlike display."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["MMMHHM"],
+          "notes": "Inset bottom-right: ECU of her open mouth/tongue as she licks/consumes the dripping galaxy-substance. Transgressive 'devouring a galaxy' beat; peak relish on the face."
+        }
+      ],
+      "page_notes": "distance_spread=2 (WS/ECU); flat_panel_count=0; cosmic display + a deliberately lurid galaxy-consumption inset. Strong face."
+    },
+    {
+      "page": 30,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["MMMHHMM", "HA HA"],
+          "notes": "Splash: she squeezes/crushes a galaxy orb against her body, head back, blissful, abs and quads fully defined. 'HA HA'. Continued cosmic-power indulgence."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; aftermath indulgence splash; growth static, power on display."
+    },
+    {
+      "page": 31,
+      "role": "cliffhanger",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["HNGGK", "AHHHN", "ZZZ"],
+          "notes": "Final splash: the heroine crushes a small bright galaxy/star in her fist against her abs, straining/blissed, hair streaming, large EMPTY black caption bar at top (where a closing line / 'to be continued' would sit). Open, unresolved ending — she is now an unstoppable cosmic being. 'HNGGK'."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; ends on an open cosmic-godhood note (blank closing caption = unresolved pull-forward, but no explicit hook text in this raw scan)."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "cover",
+      "pages": [1],
+      "type": "cover",
+      "escalation_devices": []
+    },
+    {
+      "scene": "transformation-1-suburban-rampage",
+      "pages": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "size-comparison", "reaction-intercut", "sfx-driven", "slow-burn", "full-body-reveal"]
+    },
+    {
+      "scene": "transformation-2-city-leveling",
+      "pages": [13, 14, 15, 16, 17],
+      "type": "active-growth",
+      "escalation_devices": ["size-comparison", "sfx-driven", "zoom-escalation", "full-body-reveal", "reaction-intercut"]
+    },
+    {
+      "scene": "transformation-3-book-channel-cosmic",
+      "pages": [18, 19, 20, 21, 22, 23, 24, 25, 26],
+      "type": "active-growth",
+      "escalation_devices": ["zoom-escalation", "size-comparison", "sfx-driven", "full-body-reveal", "slow-burn"]
+    },
+    {
+      "scene": "aftermath-cosmic-godhood",
+      "pages": [27, 28, 29, 30, 31],
+      "type": "aftermath",
+      "escalation_devices": ["size-comparison", "full-body-reveal"]
+    }
+  ],
+  "strengths": [
+    "Growth is the entire spine: 26/31 pages carry active or aftermath transformation content and the book opens already mid-change (P2 boots bursting) with no slow setup tax — exactly the growth-forward ratio the niche rewards.",
+    "Relentless, well-varied SFX do the heavy lifting for the growth SENSATION with almost no dialogue: P2 CRACK/RIPPP/FACOMP (clothing+body), P14 THOOOM/BRAKOOM/TADUUMM (impact), P15-16 KATHOOM/KRAKOOM/BOOOM/TAGOOOM (city-leveling), P18-20 FRVSHH/KRZZT (cosmic energy). The escalating SFX vocabulary is a steal-worthy template for sfx-driven growth.",
+    "Continuous size-comparison gauges keep the scale legible as it ramps: hand-vs-car (P5), body-vs-tiny-partner (P6,P12), body-vs-truck (P15), body-vs-skyline (P16-17), body-vs-Earth/moon (P23), body-vs-galaxy (P28-29). Each new ceiling is re-anchored against a fixed real-world reference.",
+    "P3 stacks four progressively larger copies of the figure into ONE composition (a single-page progressive-growth ladder) — an efficient way to show transformation 'stages' without spending four panels.",
+    "P22 spends a whole page on the FACE (eyes ECU -> open-mouthed scream on a green burst), and P2/P16/P18 throw the head back in growth-ecstasy — the climactic beats reliably get a high-intensity face rather than a dead one.",
+    "Bold scale staging on the showpieces: worm's-eye up the backside bursting through a parking structure (P14p1), worm's-eye standing over the whole city grid (P17p2), and the Earth-backdrop space splash (P23). These are the dynamic-camera wins to emulate.",
+    "Two simultaneous transformations (heroine + male partner, P8-12) add variety and a built-in reaction/scale partner without introducing background extras."
+  ],
+  "weaknesses": [
+    "Lettering is essentially absent from these scans — speech balloons are BLANK on nearly every dialogue beat (P5, P6, P7, P9, P12, P23-31 all have empty bubbles/captions). Story intent is unreadable; the chapter coasts almost entirely on spectacle, and the final page's closing caption bar is empty so there is no explicit cliffhanger TEXT.",
+    "The bottom triptych on P13 (panels 4-6) is three near-identical MCUs of the same pose against three colored backgrounds — a flat, static stretch that kills the page's momentum after a strong dynamic top half. Same mild repeat on P21's left column (three identical book CUs).",
+    "Camera defaults hard to low-hero/worm's-eye: it is used effectively but on virtually EVERY page, so the 'tower over the viewer' angle stops reading as special by the cosmic act. Almost no high/aerial coverage except the human-reaction beats (P6p4, P7p3).",
+    "The space-act splash run P23-31 is nine consecutive single-image splashes with no panel grid and no SFX-or-dialogue progression between most of them — spectacular but repetitive pacing; several (P24, P25, P26, P30) are interchangeable 'big body in space' pin-ups that don't advance any beat.",
+    "Story/structure is the weakest axis: there is no setup, no stakes, and no antagonist beyond token police who are dispatched off-handedly (P11); the 'plot' is pure escalation of size with the partner and onlookers as set-dressing. Engaging as a growth showcase, thin as a narrative.",
+    "Reaction/onlooker CUs are framed flat-level and static (P9p2-3 the two bystanders, P7p5, P11p4) — they do their job but are the least cinematic panels and could have been raked or scaled for tension."
+  ]
+}

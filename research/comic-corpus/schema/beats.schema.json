@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "comic-corpus/beats.schema.json",
+  "title": "Comic Corpus beats.json",
+  "description": "Machine-readable per-page/per-panel analysis of one comic, scored against analysis-rubric.md. Designed to be re-synthesized by a future model across the whole corpus without re-reading the pages.",
+  "type": "object",
+  "required": ["comic_id", "rubric_version", "analyzed_pages", "scores", "pages", "scene_breakdown"],
+  "additionalProperties": true,
+  "properties": {
+    "comic_id": {"type": "string"},
+    "rubric_version": {"type": "string"},
+    "analyzed_pages": {"type": "integer", "minimum": 0},
+    "narrative_arc": {"type": "string"},
+    "scores": {
+      "type": "object",
+      "required": ["growth_density_score", "camera_dynamism_score", "expression_intensity_score", "story_structure_score"],
+      "properties": {
+        "growth_density_score": {"type": "integer", "minimum": 0, "maximum": 5},
+        "camera_dynamism_score": {"type": "integer", "minimum": 0, "maximum": 5},
+        "expression_intensity_score": {"type": "integer", "minimum": 0, "maximum": 5},
+        "story_structure_score": {"type": "integer", "minimum": 0, "maximum": 5}
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["page", "role", "growth_state", "panels"],
+        "properties": {
+          "page": {"type": "integer", "minimum": 1},
+          "role": {"enum": ["cover", "setup", "buildup", "active-growth", "aftermath", "action", "dialogue", "denouement", "cliffhanger"]},
+          "growth_state": {"enum": ["none", "trigger", "early", "mid", "peak", "aftermath"]},
+          "panel_count": {"type": "integer", "minimum": 0},
+          "page_notes": {"type": "string"},
+          "panels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["n", "shot_distance", "angle", "staging"],
+              "properties": {
+                "n": {"type": "integer", "minimum": 1},
+                "shot_distance": {"enum": ["EWS", "WS", "MLS", "MS", "MCU", "CU", "ECU"]},
+                "angle": {"enum": ["eye", "low", "high", "dutch", "OTS", "aerial", "worm", "bird", "pov"]},
+                "staging": {
+                  "type": "array",
+                  "items": {"enum": ["flat-level", "diagonal", "depth-fg-bg", "scale-contrast", "OTS", "foreshortening", "dutch", "low-hero", "high-vuln"]}
+                },
+                "expression": {"type": "string"},
+                "expression_intensity": {"type": ["integer", "null"], "minimum": 0, "maximum": 5},
+                "growth_focus": {"type": "boolean"},
+                "body_part_focus": {"enum": ["arms", "back", "chest", "shoulders", "abs", "legs", "glutes", "full", "face", "none", null]},
+                "sfx": {"type": "array", "items": {"type": "string"}},
+                "notes": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "scene_breakdown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scene", "pages", "type"],
+        "properties": {
+          "scene": {"type": "string"},
+          "pages": {"type": "array", "items": {"type": "integer"}},
+          "type": {"type": "string"},
+          "escalation_devices": {
+            "type": "array",
+            "items": {"enum": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "size-comparison", "slow-burn", "reaction-intercut", "sfx-driven", "full-body-reveal"]}
+          }
+        }
+      }
+    },
+    "strengths": {"type": "array", "items": {"type": "string"}},
+    "weaknesses": {"type": "array", "items": {"type": "string"}}
+  }
+}

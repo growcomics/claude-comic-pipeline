@@ -1,0 +1,1533 @@
+{
+  "comic_id": "the-mysterious-book-1-the-opening",
+  "rubric_version": "1.0",
+  "analyzed_pages": 25,
+  "scores": {
+    "growth_density_score": 4,
+    "camera_dynamism_score": 3,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "five friends + a guy hang out -> a glowing magic book materializes -> each person reads it in turn and muscle-grows (round-robin) -> growth escalates to peak nudity/strain across a gym session -> scene resets to an apartment, more reading + arguing -> the book yields a golden gauntlet artifact -> two women power up in a glowing climax -> they emerge as caped red-and-white muscle-heroes and fly off (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg", "low-hero"],
+          "expression": "awe",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Title cover: three women reach up toward a glowing floating book; low angle, radiant FG book vs smaller bodies receding below. Title logo + 'Art by Boogie / Story by Cribble / GrowGetterComics.com'."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; strong reaching-upward composition, clear promise = the book causes something. No growth yet."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Establishing living room: bearded guy in FG left (larger), four women on the couch in BG. Good depth, lots of empty dialogue balloons."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Three women lean in, chatting; level eyeline, casual."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Trio seated, talking; flat row of heads."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Near-repeat of panel 3 from a hair-different angle; conversation, no camera movement."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=3; pure setup. Panels 2-4 are a flat-level conversation block with empty balloons (lettering stripped from source)."
+    },
+    {
+      "page": 3,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level", "scale-contrast"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SHIING!"],
+          "notes": "A bright light/portal blooms upper right (SHIING!), women turn toward it. The catalyst arrives."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "The glowing book has materialized standing on a surface, FG right; women recoil on couch BG."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "High wide of the group clustered, looking at the now-closed book on the floor across the room. Good use of high angle for the 'what is that' beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "fear",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Three women react, leaning together."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blonde CU holding the book, awed/curious. Nice push-in to close the page on the person who'll read first."
+        }
+      ],
+      "page_notes": "distance_spread=4 (MS/MLS/WS/CU); flat_panel_count=2; the trigger page. SHIING! sells the magical arrival; closing CU on the blonde sets up the first reader. Counts toward growth ratio (trigger)."
+    },
+    {
+      "page": 4,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "curiosity",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["Swipe!"],
+          "notes": "Book passed/grabbed across frame, motion arc + 'Swipe!'. Three women staged left-to-right at varied distances."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Black-haired woman in teal opens the book, reading aloud; standing, pleased."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Reader centered holding the open book toward camera, two friends framing her at smaller scale behind. Good big-FG / smaller-others staging."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Trio with the book between them, talking; flat row."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=2; buildup, the reading begins but no body change yet, so growth_state=none. Panel 3 is a clean scale-contrast composition worth noting."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KRETHUNK!"],
+          "notes": "Book slams open/down on table (KRETHUNK!), FG left; reaction in BG."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "First transformation onset: teal-hoodie woman tips head back, chest beginning to swell; low angle. Strong head-back ecstasy face sells the start."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "She throws arms up as chest/torso expands; two friends recoil at smaller scale, radiating motion lines. Good scale-contrast + onlooker reactions."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "She flexes a bicep; friend reacts on a diagonal axis across frame."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Lower body swells (glutes/thighs straining leggings); brunette friend reacts. Growth distributed across body parts panel-to-panel."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; FIRST transformation. KRETHUNK! triggers it, then four growth-focus panels rotate chest->arms->glutes with reaction-intercut. Radiant color-burst backgrounds amp energy. Good early-growth page."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KRETHUNK"],
+          "notes": "Head-back ecstasy, chest ballooning; low-hero angle, book glowing on table FG. Mid-growth heat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Grown woman double-biceps flex, grinning; friend reaches in at smaller scale. Money flex beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "She crouches/reaches toward a friend recoiling on the floor; diagonal action."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blonde reaction OTS the grown woman; the next-reader thread continues."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Grown woman hands/offers the glowing book up toward the blonde (FG), seen from a high 3/4. Book handoff = round-robin engine."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; mid-growth + the book begins its pass to the next reader. Consistent low-hero on the grower, scale-contrast against onlookers."
+    },
+    {
+      "page": 7,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SWPP!", "SWPP!"],
+          "notes": "Blonde CU shushing/smiling as she takes a turn; little swipe SFX."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIPPP!", "RIPPP!"],
+          "notes": "Blonde's torso erupts, shirt straining, RIPPP x2; arm thrust toward camera (foreshortening). First clothing-destruction beat. Strong."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Two friends react in FG, blonde growing in mid-ground; staggered scale."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "High 3/4 over the group huddled around the book; transitional."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "rage",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Grown blonde (now large) in red FG vs the others holding the book; size differential established."
+        }
+      ],
+      "page_notes": "distance_spread=3 (CU/MS/MLS); flat_panel_count=0; the RIPPP clothing-destruction debut (panel 2) is the page's best growth beat. Foreshortened reaching limb adds depth."
+    },
+    {
+      "page": 8,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["SWIPE!"],
+          "notes": "Book handed off again (SWIPE!) across the frame to the muscular blonde in red. Pass-the-book continues."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Two grown women face-to-face, big-FG head + smaller second; conversational but well-staged scale."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Blonde's chest now hugely strained in red (FG), others reading behind. Continued swell."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Three grown women walk toward a doorway in a hall; doorframe = size-comparison reference for how big they now are."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/MS/WS); flat_panel_count=0; transition page moving the group to a new location (gym). Panel 4's doorway gives a fixed size reference."
+    },
+    {
+      "page": 9,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Home-gym establishing: bearded guy FG left, grown women across the room, one curling a loaded barbell at right. Deep stage, varied sizes."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "OTS"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Guy + two women talking, book in view; the man is now visibly part of the group dynamic."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["GREEAGH"],
+          "notes": "Close on a woman curling the heavy bar, biceps straining (GREEAGH); effort registered. Best beat on the page."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "scale-contrast"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Lifter mid-curl while another reads at right; diagonal energy. Demonstrates the new strength."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; gym sequence showing off acquired strength. GREEAGH effort SFX + straining biceps are the growth content; otherwise more dialogue."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Bearded guy stands tall pointing at himself (low-hero), women seated reading at left smaller. He's about to take a turn."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Two women grin over the book; conversational."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIPPP"],
+          "notes": "The MAN now transforms: shirtless pec/torso swelling, RIPPP, woman reading beside him. Male grower introduced as a variant."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Grown shirtless man FG left, women holding book center, big-FG-head onlooker (afro woman) right. Three-depth scale staging."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; the male character also grows (RIPPP, panel 3). Round-robin now includes him. Good scale-contrast across depths."
+    },
+    {
+      "page": 11,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Lineup wide: women + now-huge shirtless man at right; bodies at markedly different scales. Roster check."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIPP"],
+          "notes": "Blonde grips her straining top (RIPP), grinning; friend bends/reacts on a diagonal behind."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "awe",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU on afro woman's awed eyes, low. Reaction-intercut close-up - rare ECU, good."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIIPPP!", "RIIPPP!"],
+          "notes": "Blonde's top bursts fully (RIIPPP x2), peak ecstasy face, low-hero with friend recoiling below. Clothing-destruction climax of this round; first full topless beat."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MS/ECU/MCU); flat_panel_count=0; escalation tightening. Panel 3 ECU + panel 4 burst are the page's heat; zoom pushes in as growth peaks."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Two peak-muscle women embrace/lean, massive; man's arm FG. Pile-up of grown bodies."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Bench-press station, the man spotting; grown women crowding. Busy, slightly hard to parse who's who."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "High 3/4 over a clustered group at peak size; the room is now full of muscle."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Blonde on the bench at peak, head back screaming with joy, towering chest in foreshortened low-hero. Climactic money panel."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; PEAK round-1 muscle. Panels are dense/crowded (clarity dips) but the low-hero closer (4) lands. Heavy nudity handled clinically here."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 7,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["HAH! HAH!"],
+          "notes": "Peak blonde laughing/panting, ripped abs + chest filling frame, low-hero. HAH HAH carries breath/sensation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["HA HA"],
+          "notes": "Tight on flexed arm/torso, barbell behind; the body is the subject now."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["KREEEEK"],
+          "notes": "ECU on straining muscle detail; KREEEEK = the creak of the bench/body under load. SFX carries sensation, no face."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "strain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["HNGGK"],
+          "notes": "The man grimacing/straining (HNGGK) as he holds/spots; effort registered on him."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blonde CU, head thrown back, mouth wide in ecstasy. Peak expression - this is the dead-face axis done RIGHT."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["CRASSHH"],
+          "notes": "CRASSHH - the bench/equipment shatters under her; arm thrust out, debris. SFX-driven structural payoff of the strain build."
+        },
+        {
+          "n": 7,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Three peak bodies in a row from behind/side, aftermath of the crash; sizes contrasted."
+        }
+      ],
+      "page_notes": "distance_spread=4 (MCU/CU/ECU/MS); flat_panel_count=0; THE BEST PAGE. A 7-panel SFX cascade HAH->KREEEEK->HNGGK->CRASSHH walks strain to structural failure with zero dialogue. Expressions peak (5s). Steal this page's sound design."
+    },
+    {
+      "page": 14,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Wreckage wide: two peak women standing over the destroyed bench + the man flattened on the floor. Aftermath staging with depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Blonde laughing, peak chest in low-hero; basking."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Full front double-biceps FLEX, symmetric hero pose. Full-body-reveal of this round's result. Iconic beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "High insert of a hand reaching for the book on the floor. Quiet beat resetting the device."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Peak women cradling more bodies, the man passed out; the book picked back up. Bridges to the next scene."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MCU/MS/CU); flat_panel_count=0; aftermath + the front double-biceps reveal (panel 3). Insert on the book (panel 4) is a clean device-reset cut."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast", "high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "New scene, apartment living room, high wide: three permanently-grown women lounging (green/orange/pink). Re-establish on a fresh day. Good deep stage."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Split staging: blonde (orange) holds the open book and reads it again, the afro woman gesturing/arguing at left. The book returns."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIPP"],
+          "notes": "Blonde's torso swells again (RIPP), arm thrown out; two others recoil at smaller scale. Round-2 onset."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; SCENE RESET + round-2 trigger. The book is read again, re-igniting growth on the established cast. Only 3 panels = brisk re-entry."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["FWOOMP!"],
+          "notes": "Blonde (orange) clutching swelling chest (FWOOMP!), low-hero, book in hand. Size-impact SFX debuts."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BAAAM!"],
+          "notes": "Chest pumps bigger (BAAAM!), grinning, book held out. Impact-SFX growth."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["high-vuln", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["BAAAM!"],
+          "notes": "High rear 3/4: glutes/thighs surge (BAAAM!). Lower-body growth gets its own impact beat. No face."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BAAAM!", "RIPP", "RIPP", "BA-BUMP!"],
+          "notes": "Full pump: flexing, chest straining (RIPP x2), heartbeat BA-BUMP!, biceps flexed, book in hand. Layered SFX stack."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; SFX-DRIVEN round-2 growth - FWOOMP/BAAAM/BA-BUMP! give each surge an audible punch. Body parts rotate chest->glutes->chest. Strong device page."
+    },
+    {
+      "page": 17,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Grown blonde flexes, satisfied; settled at new size."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "She moves to a door, towering; dark-haired head FG (OTS) for scale."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRUNK!"],
+          "notes": "Her huge hand grips/crushes the doorframe (CRUNK!), little stress lines. Strength gag; doorframe = size reference."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "She leans through the doorway, arm reaching toward camera; barely fits the frame (scale via architecture)."
+        },
+        {
+          "n": 5,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Two other grown women stand crossed-armed in a room, book on the table between them. Reset to talk."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/CU/WS); flat_panel_count=0; aftermath - shows off the new size against doorways (CRUNK! size-comparison gag). Transitions toward the argument."
+    },
+    {
+      "page": 18,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Caption 'A little later...'. Green-shirt woman gestures, pink-shirt woman across; book on table. Confrontation staged in depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "frustration",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Pink-shirt woman holds her head, exasperated; green-shirt gestures OTS. Argument."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "frustration",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Continuation, faces closer; tension rising."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Pink-shirt woman bares teeth, angry CU; green-shirt smaller behind. Emotional peak of the spat."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/MCU/CU); flat_panel_count=0; pure dialogue/argument, no growth (state=none). Expression carries it - rises from shock to rage (panel 4). A talk page that earns its place via escalating faces."
+    },
+    {
+      "page": 19,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Over the afro woman's shoulder to the brunette, who smirks. Conversation continues."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Brunette (pink) gestures, grown; framed FG against the other."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Green-shirt woman (huge) FG, brunette gesturing; size contrast emphasized but static."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "High 3/4 over the two reaching toward the book on the table. Re-arming for the next read."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; more dialogue, no growth. Pacing sags here (P18-21 are talk-heavy) but staging stays varied via OTS + scale-contrast. Book re-targeted at end."
+    },
+    {
+      "page": 20,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "ecstasy",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Green-shirt woman head-back holding book to chest (still huge), brunette reaching in; residual swell but mainly posing."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Brunette FG, afro woman reacting; conversational."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Afro woman holds the book, smiling, OTS the brunette. Handing it forward again."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "The man (huge) sits reading the book at right, brunette over him. Book changing hands into the gauntlet sub-plot."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; transitional dialogue moving the book toward its next function. Growth-adjacent (panel 1) but no active change; state=none."
+    },
+    {
+      "page": 21,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Brunette (pink) hands the book toward the seated afro woman (green); deep stage. Setting up a private read."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "curiosity",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "High 3/4 of the afro woman opening the book on a couch, pink-shirt arm reaching in. Intimate scale."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["depth-fg-bg"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Closer high on her hands flat on the open book + a glossy illustrated page (the artifact reveal begins)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "High wide of the open book glowing + a second illustrated spread; a golden object pictured. Plants the gauntlet."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; quiet buildup - the book reveals a new artifact (a glowing glove). All high angles looking down at the book; no growth. Sets up the climax."
+    },
+    {
+      "page": 22,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "foreshortening"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "A golden gauntlet/glove materializes on the open book, a hand reaching for it (FG). The new catalyst object."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "curiosity",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Afro woman holds the gauntlet up, brunette reaching to take/share it. Two-hander over the artifact."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Brunette begins pulling the gauntlet onto her hand/forearm; afro woman holds another. Donning the device."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Both women now wearing golden gauntlets, examining their hands. Armed and ready - trigger primed."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the gauntlet (a NEW transformation device beyond the book) is donned. No body change yet, but this is the catalyst beat -> growth_state=trigger. Introduces variety so round-3 doesn't repeat rounds 1-2."
+    },
+    {
+      "page": 23,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["GLOW"],
+          "notes": "Afro woman raises the gauntleted fist, it ignites with light (GLOW), green energy streaks behind, low-hero. Power-up initiated."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["FWOOMP!"],
+          "notes": "Head tipped back, chest surging in golden light (FWOOMP!), inset panel. Artifact-driven growth onset."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["BAAAM!", "SSSHHH"],
+          "notes": "Golden energy ribbons wrap her swelling back/torso (BAAAM!), arm thrust out. Dramatic light-FX growth - new visual flavor."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": ["HAH HAH", "BRRRMM"],
+          "notes": "Eyes shut, panting/ecstatic mid-power-up, golden energy swirling. Peak expression + peak FX combine."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; PEAK round-3 via the gauntlet. Golden energy ribbons + GLOW/FWOOMP/BAAAM make this transformation feel different from the book-reads (superhero origin energy). Expressions hit 5."
+    },
+    {
+      "page": 24,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["GLOW"],
+          "notes": "Brunette raises her glowing gauntlet (GLOW), confident grin, energy behind. Her power-up starts."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["AHHHH", "HAH HAH"],
+          "notes": "Head back, mouth open, panting (AHHHH/HAH HAH) as it takes hold."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Bare chest surging at peak; the growth itself centered (clinical anatomy beat)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["BAAAM!"],
+          "notes": "Golden ribbons wrap her expanding torso (BAAAM!); matches P23's device. Lats/back flaring."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["AHHHHH"],
+          "notes": "Tight low CU, screaming with energy enveloping her (AHHHHH). Climactic peak face closing the transformation."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/CU/MCU); flat_panel_count=0; second gauntlet power-up mirrors P23. Strong climactic faces (5s). The two-women parallel sets up the team reveal."
+    },
+    {
+      "page": 25,
+      "role": "cliffhanger",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["HAHAHA!!!", "HAHAHA!!!"],
+          "notes": "Splash: two finished caped muscle-heroines in matching red-and-white costumes + golden gauntlets, floating/flying on a diagonal, both laughing triumphantly (HAHAHA!!!). 'to be continued...' box bottom right. Full-body-reveal payoff + cliffhanger."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the closing splash - the book/gauntlet arc resolves into a superhero-team reveal and flies off. Clean full-body-reveal + pull-forward to ch.2. Best single composition of the book (low-hero diagonal flight)."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "setup-living-room",
+      "pages": [1, 2],
+      "type": "setup",
+      "escalation_devices": []
+    },
+    {
+      "scene": "book-arrives",
+      "pages": [3, 4],
+      "type": "buildup",
+      "escalation_devices": ["sfx-driven"]
+    },
+    {
+      "scene": "transformation-1-round-robin-reads",
+      "pages": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "sfx-driven", "reaction-intercut", "size-comparison", "zoom-escalation", "slow-burn", "full-body-reveal"]
+    },
+    {
+      "scene": "transformation-2-apartment-reread",
+      "pages": [15, 16, 17],
+      "type": "active-growth",
+      "escalation_devices": ["sfx-driven", "clothing-destruction", "size-comparison", "multi-panel-progressive"]
+    },
+    {
+      "scene": "argument-and-handoff",
+      "pages": [18, 19, 20, 21],
+      "type": "dialogue",
+      "escalation_devices": []
+    },
+    {
+      "scene": "transformation-3-gauntlet-power-up",
+      "pages": [22, 23, 24, 25],
+      "type": "active-growth",
+      "escalation_devices": ["sfx-driven", "clothing-destruction", "zoom-escalation", "reaction-intercut", "full-body-reveal"]
+    }
+  ],
+  "strengths": [
+    "P13 is a 7-panel SFX cascade (HAH/HAH -> KREEEEK -> HNGGK -> CRASSHH) that walks muscle strain all the way to the bench shattering with ZERO dialogue - sound design alone carries the growth sensation and structural payoff. The single best page to steal.",
+    "Consistent low-hero angle + foreshortening on every grower (P5 p2, P6 p1, P11 p4, P12 p4, P13 p1, P16, P23-24) makes the transforming character physically tower over the camera - the opposite of the pipeline's flat-level default.",
+    "Layered impact-SFX growth on P16 (FWOOMP! / BAAAM! / BA-BUMP! / RIPP) gives each surge an audible punch and rotates body-part focus chest->glutes->chest across one page.",
+    "The book is a round-robin engine: a SWIPE!/Swipe! handoff (P4, P8) passes it person-to-person so each cast member grows in turn (P5 teal woman, P7 blonde, P10 the man, P15-16 orange blonde), generating a slow-burn that spans 10 pages instead of one-and-done.",
+    "Escalation in transformation device, not just size: book-reads (rounds 1-2) graduate to a glowing golden gauntlet (P22-24) whose energy-ribbon FX read as a superhero origin, keeping round 3 visually fresh.",
+    "Peak faces genuinely land - P13 p5 and P24 p5 hit head-back open-mouth ecstasy/scream at intensity 5, exactly the register a money-shot demands.",
+    "P25 closing splash (low-hero diagonal flight, two caped heroines, HAHAHA!!! + 'to be continued') is a clean full-body-reveal payoff and an effective pull-forward to ch.2.",
+    "Clothing-destruction is staged as a clear escalation ladder: a single RIPPP (P7) -> RIIPPP x2 burst (P11) -> shredded-to-nude peak (P12-13), so the reader feels the growth outpacing the garments."
+  ],
+  "weaknesses": [
+    "ALL dialogue balloons are empty in this source scan - P2 and P18-21 are talk-heavy pages with no readable text, so the social/argument beats land as dead air. As a craft note the script leans heavily on lettering the corpus can't see; the visuals alone make P18-21 drag.",
+    "Pages 18-21 are four near-consecutive dialogue pages (~16 panels) with no active growth - a long sag between the round-2 peak (P17) and the gauntlet climax (P23). Pacing stalls in the middle third.",
+    "Crowded peak panels hurt clarity: P12 p2-3 and P13 p7 pile 3-4 near-identical peak bodies into one frame so it's hard to tell who is who or who is growing. The money pages get muddy.",
+    "Distance spread is narrow per page - most pages live in the MS/MCU band (P6, P9, P10, P16, P19, P20 never leave it); true wides (EWS) are absent and ECUs are rare (only P11 p3, P13 p3), so zoom-escalation is underused relative to how much growth there is.",
+    "Setup faces are underplayed - P2 p3-4 and several conversation panels sit at intensity 2 (mild/neutral) when a magic-book mystery should register more curiosity or unease on the page-1-2 hook.",
+    "Repetition of staging: the 'grower head-back + onlooker reaching in at smaller scale' composition recurs many times (P5, P6, P11, P16, P20, P23) - effective but formulaic by the third round.",
+    "The man's transformation (P10 p3) is introduced and then mostly sidelined into a spotter/comic-relief role (P12-14) without its own payoff, a dropped thread.",
+    "No establishing EWS anywhere - locations (living room, gym, second apartment) are only ever implied via MS/WS fragments, so spatial geography between the three scenes is loose."
+  ]
+}

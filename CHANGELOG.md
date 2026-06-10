@@ -12,6 +12,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (new `comic-corpus` R&D skill — study reference comics, extract what works)
+
+### Added
+
+- **`research/comic-corpus/` skill** (`SKILL.md` + `analysis-rubric.md` + `schema/beats.schema.json` + `scripts/ingest.py`, `scripts/corpus_stats.py`) — ingest reference comics (web links or local files), analyze every page against a canonical 4-axis rubric, and synthesize what makes female-muscle-growth comics work. The four axes target the pipeline's most-cited failure modes: **growth density** (the niche payload — growth-page ratio, scene length, escalation devices), **camera dynamism** (flat-panel problem — shot-distance spread, the ✓/✗ staging taxonomy from the user's storyboard lesson), **expression intensity** (dead-face problem), and **story/structure** (tease vs payoff). Per-comic output is machine-readable `beats.json` + human `notes.md`; cross-corpus output is `synthesis/success-elements.md` — built so a future model can re-synthesize the stored analysis without re-reading pages. Analysis runs one fresh subagent per comic per `feedback_audit_via_subagent.md`; the rubric is passed verbatim per `feedback_dont_paraphrase_canonical_rubrics.md`.
+- **First corpus entry — *The Mysterious Book* Ch.1–3 (GrowGetter Comics, Boogie/Gribble), 85 pages.** Ingested from growgettercomics.com (full-res pages, predictable upload URLs) and analyzed end-to-end. Headline findings: growth-page ratio tracks chapter intent (28% fight chapter → 77% transformation chapter, 55% corpus); the universal craft weakness is **dead/cropped faces on growth-money-shot ECUs** (Expression 3/5 everywhere — exactly the pipeline's expression complaint, confirmed in a popular comic, with the fix proven in-comic at Ch.2 P17); even the best growth chapter defaults to flat low-hero camera (Ch.3 has the lowest distance-spread despite the highest growth ratio — validates the overshoot-camera directive); SFX-driven growth is the most-used escalation device (10×). Findings route back into `script-breakdown` (growth-ratio targets + device menu), `story-writers-room` (Genre Expert), and QA (dead-face %, distance spread), and back the standing memory directives on camera dynamism, growth density, and expression intensity.
+
+### Notes
+
+- **Copyright:** ingested raw pages live under `research/comic-corpus/corpus/*/pages/` and are **gitignored** — never committed or pushed. Only the transformative analysis (beats/notes/meta) and synthesis are versioned. `.gitignore` updated accordingly.
+- Writer credit reconciled to **Gribble** (Ch.2/Ch.3 covers; the Ch.1 logo-font C/G is ambiguous). Series subtitle on Ch.2 cover reads "Super Beatdown".
+
+---
+
 ## 2026-06-06 (vendor the `comic-folder-organizer` skill into the repo)
 
 ### Added

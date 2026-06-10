@@ -1,0 +1,14 @@
+{
+  "comic_id": "the-mysterious-book-1-the-opening",
+  "title": "The Mysterious Book — Ch.1: The Opening",
+  "series": "The Mysterious Book",
+  "chapter": 1,
+  "source": "https://growgettercomics.com/the-mysterious-book-the-opening-2/",
+  "publisher": "GrowGetter Comics",
+  "creators": {"art": "Boogie", "story": "Gribble", "confirmed": true, "note": "Story credit reconciled to 'Gribble' to match the Ch.2/Ch.3 cover credits (same stylized logo font; the C/G is ambiguous on the Ch.1 cover but reads Gribble across the series)."},
+  "page_count": 25,
+  "popularity": {"available": false, "note": "GrowGetter engagement is Patreon-gated; no public view/comment counts scraped"},
+  "ingested_at": "2026-06-09",
+  "analysis_status": "done",
+  "rubric_version": "1.0"
+}
