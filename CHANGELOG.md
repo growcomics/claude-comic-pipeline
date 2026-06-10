@@ -23,6 +23,7 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **Copyright:** ingested raw pages live under `research/comic-corpus/corpus/*/pages/` and are **gitignored** — never committed or pushed. Only the transformative analysis (beats/notes/meta) and synthesis are versioned. `.gitignore` updated accordingly.
 - Writer credit reconciled to **Gribble** (Ch.2/Ch.3 covers; the Ch.1 logo-font C/G is ambiguous). Series subtitle on Ch.2 cover reads "Super Beatdown".
+- **Validation blog article** at [`research/comic-corpus/blog/2026-06-09-what-makes-fmg-comics-work.md`](research/comic-corpus/blog/2026-06-09-what-makes-fmg-comics-work.md) — narrative, page-cited write-up of the five findings for human review/validation.
 
 ---
 
