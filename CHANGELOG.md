@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (L35 real-render A/B validation on Flow — VALIDATED)
+
+Closes the outstanding-validation note on the L35 entry below, per `feedback_validate_with_credits` (4–8+ real generations before a rendering-path change is done). Higgsfield was out of credits (~1.58 left), so the run used **Google Labs Flow free tier** (Omni-agent chat UI), 16 generations total.
+
+### Added
+
+- **`skills/comic-production/references/l35-validation/`** — committed validation set (L34 staging-examples precedent): best 2 of 4 per arm × 4 arms (`beat1-{baseline,l35}-*.jpg`, `beat2-{baseline,l35}-*.jpg`, Flow-native 1376×768) + `README.md` with the full protocol, per-arm observations, dead-face counts, and verdict.
+
+### Validation
+
+- **A/B, two beats × (action-only baseline vs +verbatim L35 directives), 4 variants each.** Face-visible whole-body beat: baseline **0/4 peak faces** (3 neutral + 1 closed-mouth determined) → L35 **4/4 peak faces** (gritted-teeth strain ×2, open-mouth cry ×2), 0 dead. Body-region ECU beat (head cropped, `_PHYSICAL_MANIFESTATION` only, per the L20 branch): baseline 0/4 with any growth-event phenomena → L35 4/4 sweat + 4/4 seam-tear + 3/4 displaced-air. Coverage preserved 16/16 (always-clothed held through every seam-tear); zero policy trips; no SFX text leaked. **Both L35 branches validated.**
+- **Caveats:** ran on **Nano Banana 2** (Nano Banana Pro daily quota was exhausted — A/B internally consistent, same family as the production `nano_banana_flash` default; re-confirming on Pro is optional). ECU-scale calibration note: "skin taut and flushed" over-saturated into a full-arm red repaint on 2/4 ECU renders — if it recurs on production models, soften the flush clause at ECU scale (prompt calibration, not a rule change).
+- Flow operational lessons captured in the README: Omni-agent submits yield 1 image regardless of the count×4 setting; variants via "run that exact same prompt 3 more times — verbatim"; full-res pulls via the per-asset `media.getMediaUrlRedirect` URL when the download menu doesn't fire.
+
+---
+
 ## 2026-06-09 (apply corpus findings to production — L35 growth-intensity rule + shotlist + QA)
 
 Turns the `comic-corpus` findings into automatic production behavior, so generated comics improve without per-project hand-holding. (The corpus's biggest *defect* finding — empty/unlettered balloons — is intentionally out of scope per direction; it's already covered by L19/bake-dialogue.)
@@ -29,7 +45,7 @@ Turns the `comic-corpus` findings into automatic production behavior, so generat
 
 ### Validation
 
-- `py_compile` clean; registry loads 16 rules with L35 present; in-situ `_apply_rule_at_slot` test confirms correct branching (face directive on face-visible beats, physical-only on body-region ECUs, silent on non-growth, skipped on non-FMG); continuity-check suite 9/9 pass. **Outstanding:** real-render validation (4–8 gens per `feedback_validate_with_credits`) is blocked on Higgsfield credits — do it on Flow or after a top-up before treating L35 as render-proven.
+- `py_compile` clean; registry loads 16 rules with L35 present; in-situ `_apply_rule_at_slot` test confirms correct branching (face directive on face-visible beats, physical-only on body-region ECUs, silent on non-growth, skipped on non-FMG); continuity-check suite 9/9 pass. ~~Outstanding: real-render validation~~ **Done 2026-06-09: real-render A/B validation on Flow (16 gens) — VALIDATED, both branches.** See the 2026-06-09 validation entry above and `skills/comic-production/references/l35-validation/`.
 
 ---
 
