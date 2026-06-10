@@ -196,12 +196,29 @@ def main(argv: list[str] | None = None) -> int:
     pack_dir = out_root / city_slug
     targets_path = pack_dir / "_targets.json"
 
-    if targets_path.exists() and not args.force:
-        print(
-            f"ERROR: {targets_path} already exists. Use --force to overwrite.",
-            file=sys.stderr,
-        )
-        return 1
+    if targets_path.exists():
+        if not args.force:
+            print(
+                f"ERROR: {targets_path} already exists. Use --force to overwrite.",
+                file=sys.stderr,
+            )
+            return 1
+        # --force replaces only the plan; warn about stale captures from the
+        # previous plan that can collide with re-used slot IDs.
+        leftovers = [
+            f
+            for sub in ("source", "cgi")
+            for f in sorted((pack_dir / sub).glob("*"))
+            if f.is_file()
+        ]
+        if leftovers:
+            print(
+                f"WARNING: --force replaces _targets.json but {len(leftovers)} "
+                f"file(s) from the previous plan remain in source/ and cgi/. "
+                f"Slot IDs repeat across plans, so new captures can silently "
+                f"mix with old ones. Move the old files aside before Phase B.",
+                file=sys.stderr,
+            )
 
     # Create folder layout
     (pack_dir / "source").mkdir(parents=True, exist_ok=True)

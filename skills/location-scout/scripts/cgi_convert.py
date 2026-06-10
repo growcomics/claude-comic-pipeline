@@ -11,8 +11,8 @@ from Claude's tool layer, not from Python. Instead, this script:
     updates _targets.json (`--slot-id X --download <url>`).
   - Emits the final canonical manifest into meta/locations.json
     (`--emit-manifest`).
-  - Lists slots needing conversion (`--list-pending-cgi`).
-  - Resume helper: --slot-id X --skip-existing skips slots already done.
+  - Lists slots needing conversion (`--list-pending-cgi`) — this is also the
+    resume mechanism: re-run it after an interruption to see what's left.
 
 Usage examples:
 
@@ -35,10 +35,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
+
+# Hard cap on a single CGI result download; anything bigger is not a 1k render.
+MAX_DOWNLOAD_BYTES = 50 * 1024 * 1024
+DOWNLOAD_TIMEOUT_S = 60
 
 # The canonical conversion prompt. Same body for every slot; the per-slot
 # `intent` is appended as a scene anchor.
@@ -90,8 +96,12 @@ def load_plan(pack_dir: Path) -> dict:
 
 
 def save_plan(pack_dir: Path, plan: dict) -> None:
+    # Atomic write: a crash mid-write must not destroy the plan (it holds
+    # every prior capture's provenance).
     p = pack_dir / "_targets.json"
-    p.write_text(json.dumps(plan, indent=2) + "\n")
+    tmp = p.with_name("_targets.json.tmp")
+    tmp.write_text(json.dumps(plan, indent=2) + "\n")
+    os.replace(tmp, p)
 
 
 def find_slot(plan: dict, slot_id: str) -> dict:
@@ -125,13 +135,22 @@ def emit_prompt(pack_dir: Path, slot_id: str, model: str) -> dict:
 
 
 def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
+    if urlparse(url).scheme != "https":
+        raise ValueError(f"refusing non-HTTPS result URL: {url}")
+
     plan = load_plan(pack_dir)
     slot = find_slot(plan, slot_id)
     final_id = slot.get("final_id", slot_id)
     dst = pack_dir / "cgi" / f"{final_id}.png"
 
-    with urllib.request.urlopen(url) as resp:
-        data = resp.read()
+    with urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_S) as resp:
+        data = resp.read(MAX_DOWNLOAD_BYTES + 1)
+    if len(data) > MAX_DOWNLOAD_BYTES:
+        raise RuntimeError(f"result exceeds {MAX_DOWNLOAD_BYTES} byte cap: {url}")
+    # Reject non-image payloads (an HTML error page must not become a
+    # "completed" slot).
+    if not (data.startswith(b"\x89PNG\r\n\x1a\n") or data.startswith(b"\xff\xd8\xff")):
+        raise RuntimeError(f"result is not a PNG/JPEG image: {url}")
     dst.write_bytes(data)
 
     slot["cgi_image"] = f"cgi/{final_id}.png"
@@ -144,6 +163,8 @@ def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
 def register_local_result(pack_dir: Path, slot_id: str, local_path: Path) -> dict:
     """Used when the result was already downloaded locally and just needs
     to be registered into the plan."""
+    if not local_path.exists():
+        raise FileNotFoundError(f"--register-local path not found: {local_path}")
     plan = load_plan(pack_dir)
     slot = find_slot(plan, slot_id)
     final_id = slot.get("final_id", slot_id)

@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (location-scout hardening — code-review fixes)
+
+### Fixed
+
+- **`scripts/cgi_convert.py` `--download` hardened** — the result fetch previously accepted any URL scheme with no timeout or size limit, and wrote whatever came back. Now: HTTPS-only (rejects `file://` et al.), 60s timeout, 50 MB cap, and PNG/JPEG magic-byte validation so an HTML error page can never be registered as a "completed" CGI slot.
+- **`_targets.json` writes are atomic** (both `cgi_convert.py` and `maps_capture.py`) — write to a temp file + `os.replace`, so a crash mid-write can't destroy the plan and every prior capture's provenance.
+- **`maps_capture.py` no-sips fallback no longer mislabels formats** — when sips is unavailable/fails, the screenshot is copied with its real extension instead of a PNG masquerading as `.jpg`; `normalize_image` returns the actual path written and the plan records it. A failed plan save now also removes the just-written capture instead of leaving an orphan in `source/`.
+- **`cgi_convert.py --register-local`** validates the path exists before touching the plan (clear error instead of a traceback).
+- **`scout_city.py --force`** now warns when `source/`/`cgi/` still hold files from the previous plan (slot IDs repeat across plans, so old and new captures could silently mix). Warns only — never deletes.
+- **`SKILL.md` doc/CLI drift** — Phase B step 4 documented a `--type` flag that doesn't exist and omitted the required `--pack-dir`/`--query`/`--screenshot`; the failure-modes table referenced a nonexistent `cgi_convert.py --resume` (the real resume mechanism is `--list-pending-cgi`). The phantom `--skip-existing` was also dropped from the cgi_convert docstring. All invocations now match the actual CLIs.
+
+---
+
 ## 2026-06-08 (Long Beach pack + v2 toned-down stylized-CGI prompt)
 
 ### Added

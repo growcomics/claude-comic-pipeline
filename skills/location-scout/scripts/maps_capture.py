@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -52,8 +53,12 @@ def load_plan(pack_dir: Path) -> dict:
 
 
 def save_plan(pack_dir: Path, plan: dict) -> None:
+    # Atomic write: a crash mid-write must not destroy the plan (it holds
+    # every prior capture's provenance).
     targets_path = pack_dir / "_targets.json"
-    targets_path.write_text(json.dumps(plan, indent=2) + "\n")
+    tmp = targets_path.with_name("_targets.json.tmp")
+    tmp.write_text(json.dumps(plan, indent=2) + "\n")
+    os.replace(tmp, targets_path)
 
 
 def find_slot(plan: dict, slot_id: str) -> dict:
@@ -63,11 +68,13 @@ def find_slot(plan: dict, slot_id: str) -> dict:
     raise KeyError(f"slot_id={slot_id} not in plan. Known: " + ", ".join(s["id"] for s in plan["targets"]))
 
 
-def normalize_image(src: Path, dst: Path, max_width: int = 1920) -> None:
+def normalize_image(src: Path, dst: Path, max_width: int = 1920) -> Path:
     """Copy src → dst as JPG, downscale if wider than max_width.
 
-    Uses sips (macOS built-in) for resize; falls back to plain copy if sips
-    not available or input is already small.
+    Uses sips (macOS built-in) for format conversion + resize. If sips is
+    unavailable or fails, falls back to a plain copy — but with the SOURCE's
+    real extension, never a mislabeled .jpg. Returns the actual destination
+    path written (may differ from `dst` in the fallback case).
     """
     if not src.exists():
         raise FileNotFoundError(f"screenshot source not found: {src}")
@@ -77,6 +84,7 @@ def normalize_image(src: Path, dst: Path, max_width: int = 1920) -> None:
         shutil.copy(src, dst)
     else:
         # sips converts to JPG and writes to dst
+        converted = False
         if shutil.which("sips"):
             try:
                 subprocess.run(
@@ -90,10 +98,12 @@ def normalize_image(src: Path, dst: Path, max_width: int = 1920) -> None:
                     check=True,
                     capture_output=True,
                 )
-            except subprocess.CalledProcessError as e:
-                # fallback: just copy
-                shutil.copy(src, dst)
-        else:
+                converted = True
+            except subprocess.CalledProcessError:
+                pass
+        if not converted:
+            # Plain copy keeping the real format: don't mislabel a PNG as .jpg
+            dst = dst.with_suffix(src.suffix.lower())
             shutil.copy(src, dst)
 
     # Try to downscale via sips if wider than max_width
@@ -118,6 +128,8 @@ def normalize_image(src: Path, dst: Path, max_width: int = 1920) -> None:
         except (subprocess.CalledProcessError, ValueError):
             pass
 
+    return dst
+
 
 def register_capture(
     pack_dir: Path,
@@ -136,19 +148,26 @@ def register_capture(
     final_id = f"{slot_id}-{name}"
     dst = pack_dir / "source" / f"{final_id}.jpg"
 
-    normalize_image(screenshot, dst)
+    # normalize_image may change the extension in the no-sips fallback;
+    # record whatever was actually written.
+    dst = normalize_image(screenshot, dst)
 
     # Update slot in plan
     slot["google_maps_query"] = query
     slot["google_maps_url"] = url
-    slot["source_image"] = f"source/{final_id}.jpg"
+    slot["source_image"] = f"source/{dst.name}"
     slot["final_id"] = final_id
     slot["name_slug"] = name
     if neighborhood:
         slot["neighborhood"] = neighborhood
     slot["captured_at"] = datetime.now(timezone.utc).isoformat()
 
-    save_plan(pack_dir, plan)
+    try:
+        save_plan(pack_dir, plan)
+    except Exception:
+        # Don't leave an orphan capture the plan knows nothing about
+        dst.unlink(missing_ok=True)
+        raise
     return slot
 
 

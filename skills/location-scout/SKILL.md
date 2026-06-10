@@ -72,7 +72,7 @@ For each slot in `_targets.json`:
 3. **Pick a frame**:
    - **Street View available** (street, exterior landmark, exterior restaurant): drop Pegman, pan to face the architecture at eye level (~90° tilt), confirm no people fill the foreground.
    - **Street View not available** (interior restaurant, interior landmark): open the Photos panel of the POI, pick a high-quality professional photo (avoid user phone-quality shots; prefer "Latest" or business-supplied photos).
-4. **Screenshot the viewport** at ≥1280×720. Save via `maps_capture.py --type <type> --slot-id <id> --url <current-url>`. The helper writes the screenshot to `source/<id>-<slug>.jpg` and updates `_targets.json` with `source_image` + `google_maps_query` (the URL is the provenance).
+4. **Screenshot the viewport** at ≥1280×720, save it to a temp path, then register it: `maps_capture.py --pack-dir <pack-dir> --slot-id <id> --query "<maps-query>" --url "<current-url>" --screenshot <temp-path>`. The helper writes the screenshot to `source/<id>-<slug>.jpg` and updates `_targets.json` with `source_image` + `google_maps_query` (the URL is the provenance).
 5. **Repeat** for all slots.
 
 If a capture fails (Maps blocks, Street View unavailable, NSFW/private business): substitute with a different POI matching the same intent. The skill ships a *complete* pack — every slot in the plan is filled with a source.
@@ -194,7 +194,7 @@ The `cgi/` folder is what gets attached to panel prompts as the env ref. The `so
 | Failure | Recovery |
 |---|---|
 | Chrome extension not connected | Halt; ask user to install. Don't fall back to computer-use. |
-| Higgsfield credits exhausted mid-pack | Halt the conversion phase; keep `source/` complete; surface to user to top up; resume with `cgi_convert.py --resume` (iterates over slots with `source_image` set and `cgi_image` null). |
+| Higgsfield credits exhausted mid-pack | Halt the conversion phase; keep `source/` complete; surface to user to top up; resume by running `cgi_convert.py --list-pending-cgi` (lists slots with `source_image` set and `cgi_image` null) and converting each pending slot. |
 | Google Maps blocks a query (rate limit) | Wait 10s, retry. If second retry fails, substitute target with a different POI of the same intent. |
 | Street View unavailable for target | Fall back to the Photos panel of the POI. If no good photos, substitute a different POI. |
 | CGI conversion adds invented buildings / changes framing | Re-render with stricter prompt language ("ZERO new buildings, ZERO new signage, IDENTICAL framing"). If still drifts, accept source-only and flag in README. |
