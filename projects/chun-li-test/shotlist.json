@@ -127,8 +127,8 @@
           "location": "bisons-lair",
           "time_of_day": "interior, no diurnal cue",
           "weather": "n/a (interior)",
-          "camera": "wide-establish, low-angle, three-quarter",
-          "action": "Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Wide low-angle hero shot establishing the cathedral-scale chamber.",
+          "camera": "medium-wide, low-angle, three-quarter",
+          "action": "Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Medium-wide low-angle hero framing, the cathedral-scale chamber visible behind her.",
           "hair_state": "twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette",
           "costume_state": "Tier 2 baseline. Canonical SF2 cobalt-blue silk qipao with gold trim, side slits, white thigh-highs, brown spiked leather gauntlets on both wrists, white sash. Pristine.",
           "psycho_power_state": "Ambient purple-violet glow filling the chamber. No traceries on her skin yet. Eyes normal brown.",
@@ -508,7 +508,7 @@
             {
               "character": "bison",
               "text": "So... the little dragon has finally come to claim her father's debt.",
-              "type": "balloon"
+              "type": "caption"
             }
           ],
           "captions": [

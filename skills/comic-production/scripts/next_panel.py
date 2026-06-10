@@ -38,21 +38,15 @@ from rules._registry import get_rule  # noqa: E402
 #
 # Maps each target view to the set of prior views whose state can chain.
 # See comic-production/references/lessons-learned.md L1.5 for the source.
+#
+# Source of truth: skills/comic-production/data/view-vocabulary.json. Both
+# this runtime and skills/script-breakdown/scripts/validate_shotlist.py read
+# from that file so the two vocabularies cannot drift.
 
-VIEW_COMPATIBILITY = {
-    "front-full":      {"front-full", "3q-full", "low-angle-front", "wide-establish", "splash"},
-    "3q-full":         {"front-full", "3q-full", "low-angle-front", "wide-establish", "splash"},
-    "back-full":       {"back-full", "low-angle-back"},
-    "side-full":       {"side-full", "profile", "3q-full"},
-    "profile":         {"profile", "side-full", "3q-full"},
-    "low-angle-front": {"front-full", "3q-full", "low-angle-front", "wide-establish"},
-    "low-angle-back":  {"back-full", "low-angle-back"},
-    "high-angle":      {"front-full", "3q-full", "high-angle"},
-    "ecu-face":        set(),  # face card alone is the canonical anchor
-    "ecu-region":      set(),  # depends — needs a panel where that region was prominent
-    "wide-establish":  {"front-full", "3q-full", "wide-establish", "splash"},
-    "splash":          {"front-full", "3q-full", "low-angle-front", "wide-establish", "splash"},
-}
+_VIEW_VOCAB_PATH = _COMIC_PRODUCTION_DIR / "data" / "view-vocabulary.json"
+_VIEW_VOCAB = json.loads(_VIEW_VOCAB_PATH.read_text())
+
+VIEW_COMPATIBILITY = {k: set(v) for k, v in _VIEW_VOCAB["compatibility"].items()}
 
 # Camera category → Flow aspect ratio (per references/shotlist-driven-flow.md)
 ASPECT_FOR_CAMERA = {
@@ -157,36 +151,7 @@ def panel_status(root: Path, panel: dict) -> dict:
 
 
 # --- view-vocabulary normalization (maps shotlist camera dialect -> VIEW_COMPATIBILITY keys) ---
-_VIEW_ALIASES = {
-    "full-body": "front-full",
-    "three-quarter": "3q-full",
-    "3q": "3q-full",
-    "wide splash": "splash",
-    "wide-splash": "splash",
-    "wide": "wide-establish",
-    "wide-establish": "wide-establish",
-    "mcu": "mcu",
-    "medium": "medium",
-    "medium two-shot": "medium",
-    "medium-wide": "medium-wide",
-    "medium close-up": "mcu",
-    "medium shot": "medium",
-    "close-up": "mcu",
-    "extreme close-up": "ecu-region",
-    "full body": "front-full",
-    "wide establishing": "wide-establish",
-    "low-angle": "low-angle-front",
-    "low-angle-front": "low-angle-front",
-    "low-angle-back": "low-angle-back",
-    "high-angle": "high-angle",
-    "profile": "profile",
-    "side-full": "side-full",
-    "back-full": "back-full",
-    "front-full": "front-full",
-    "splash": "splash",
-    "ecu-face": "ecu-face",
-    "ecu-region": "ecu-region",
-}
+_VIEW_ALIASES = dict(_VIEW_VOCAB["aliases"])
 
 def _canon_view(raw: str) -> str:
     """Map a compound shotlist camera string to a single VIEW_COMPATIBILITY key.

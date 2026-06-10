@@ -271,7 +271,7 @@ python skills/script-breakdown/scripts/validate_shotlist.py .
 Catches structural mistakes the runtime would silently mishandle:
 
 - prose in the `camera` field (the head token must be a known view tag — `front-full`, `mcu`, `splash`, etc. — not a sentence; move prose to `action`),
-- unknown view tokens (if the token is legitimate, add an alias to `_VIEW_ALIASES` in `skills/comic-production/scripts/next_panel.py` and to `KNOWN_VIEWS` in this validator; otherwise fix the shotlist),
+- unknown view tokens (if the token is legitimate, add it to `skills/comic-production/data/view-vocabulary.json` — the runtime's `_VIEW_ALIASES` and this validator's `KNOWN_VIEWS` both derive from that one file; otherwise fix the shotlist),
 - non-int `tier` values,
 - on-screen dialogue (balloon/thought/whisper/shout) missing both `speaker` and `character` keys — without either, L4 attribution renders blank ("positioned over ''s side").
 

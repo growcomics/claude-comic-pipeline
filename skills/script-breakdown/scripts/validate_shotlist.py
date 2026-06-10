@@ -17,31 +17,21 @@ from pathlib import Path
 # Canonical view tokens. The HEAD token of `camera` (first comma-clause, minus
 # any parenthetical) must be one of these after lowercasing.
 #
-# SYNC RULE: this set MUST be the union of VIEW_COMPATIBILITY keys and
-# _VIEW_ALIASES keys in skills/comic-production/scripts/next_panel.py. If you
-# add a view alias there, add it here too — otherwise the validator will reject
-# camera tokens that the runtime would have handled correctly. The 2026-05-22
-# "wide splash" / "medium two-shot" aliases were added to the runtime without
-# updating this set, which would have produced false rejections on real
-# shotlists if this gate had been wired earlier.
-KNOWN_VIEWS = {
-    # VIEW_COMPATIBILITY keys (next_panel.py:42)
-    "front-full", "3q-full", "back-full", "side-full", "profile",
-    "low-angle-front", "low-angle-back", "high-angle", "ecu-face",
-    "ecu-region", "wide-establish", "splash",
-    # extra normalized targets used by the runtime (mcu/medium/medium-wide are
-    # VIEW_COMPATIBILITY-adjacent — they are valid heads even though they
-    # don't carry their own VIEW_COMPATIBILITY entry)
-    "mcu", "medium", "medium-wide",
-    # _VIEW_ALIASES keys (next_panel.py:160) — every alias the runtime
-    # normalizes. Keep alphabetical within group for diff-ability.
-    "3q", "close-up", "extreme close-up",
-    "full body", "full-body",
-    "low-angle",
-    "medium close-up", "medium shot", "medium two-shot",
-    "three-quarter",
-    "wide", "wide establishing", "wide splash", "wide-splash",
-}
+# Derived from skills/comic-production/data/view-vocabulary.json — the single
+# source of truth shared with next_panel.py. KNOWN_VIEWS is the union of the
+# runtime's VIEW_COMPATIBILITY keys, its _VIEW_ALIASES keys, and the extra
+# normalized targets (mcu/medium/medium-wide). To add a new view token, edit
+# the JSON file; this script and next_panel.py both pick it up at load time.
+_VIEW_VOCAB_PATH = (
+    Path(__file__).resolve().parent.parent.parent
+    / "comic-production" / "data" / "view-vocabulary.json"
+)
+_VIEW_VOCAB = json.loads(_VIEW_VOCAB_PATH.read_text())
+KNOWN_VIEWS = (
+    set(_VIEW_VOCAB["compatibility"].keys())
+    | set(_VIEW_VOCAB["aliases"].keys())
+    | set(_VIEW_VOCAB["aliases"].values())
+)
 
 ON_SCREEN_DIALOGUE = {"balloon", "thought", "whisper", "shout"}
 

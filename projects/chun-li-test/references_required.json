@@ -1,0 +1,88 @@
+{
+  "characters": {
+    "chun-li": {
+      "face_card": "references/characters/chun-li/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 2,
+          "path": "references/characters/chun-li/body-tier2.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 3,
+          "path": "references/characters/chun-li/body-tier3.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 4,
+          "path": "references/characters/chun-li/body-tier4.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 5,
+          "path": "references/characters/chun-li/body-tier5.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 6,
+          "path": "references/characters/chun-li/body-tier6.png",
+          "lineup_required": true,
+          "tier6_reinforcement_required": true
+        },
+        {
+          "tier": 7,
+          "path": "references/characters/chun-li/body-tier7.png",
+          "lineup_required": true
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 2,
+          "path": "references/characters/chun-li/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "profile",
+          "tier": 2,
+          "path": "references/characters/chun-li/view-profile.png",
+          "lineup_required": false
+        },
+        {
+          "name": "back-full",
+          "tier": 2,
+          "path": "references/characters/chun-li/view-back-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "low-angle-front",
+          "tier": 2,
+          "path": "references/characters/chun-li/view-low-angle-front.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-region",
+          "tier": 2,
+          "path": "references/characters/chun-li/view-ecu-region.png",
+          "lineup_required": false
+        }
+      ]
+    },
+    "bison": {
+      "face_card": "references/characters/bison/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 7,
+          "path": "references/characters/bison/body-tier7.png",
+          "lineup_required": true
+        }
+      ],
+      "views": []
+    }
+  },
+  "locations": {
+    "bisons-lair": {
+      "establishing": "references/locations/bisons-lair/_source.jpg"
+    }
+  }
+}
