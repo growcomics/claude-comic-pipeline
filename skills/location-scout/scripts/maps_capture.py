@@ -26,12 +26,14 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -59,6 +61,23 @@ def save_plan(pack_dir: Path, plan: dict) -> None:
     tmp = targets_path.with_name("_targets.json.tmp")
     tmp.write_text(json.dumps(plan, indent=2) + "\n")
     os.replace(tmp, targets_path)
+
+
+@contextmanager
+def plan_lock(pack_dir: Path):
+    """Hold an exclusive flock around the _targets.json read-modify-write.
+
+    Registrations may run in parallel (one process per slot, same for
+    cgi_convert.py downloads); without the lock, two concurrent runs read
+    the same plan and the last writer silently drops the other's slot.
+    """
+    lock_path = pack_dir / "_targets.json.lock"
+    with open(lock_path, "w") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
 
 
 def find_slot(plan: dict, slot_id: str) -> dict:
@@ -140,37 +159,38 @@ def register_capture(
     name_slug: str | None,
     neighborhood: str | None,
 ) -> dict:
-    plan = load_plan(pack_dir)
-    slot = find_slot(plan, slot_id)
+    with plan_lock(pack_dir):
+        plan = load_plan(pack_dir)
+        slot = find_slot(plan, slot_id)
 
-    # Build the canonical filename: <id>-<name-slug>.jpg
-    # name_slug is re-slugified even though it's operator-supplied — a raw
-    # value containing path separators (e.g. "../../x") would otherwise
-    # escape source/.
-    name = slugify(name_slug or query)[:48] or slot_id
-    final_id = f"{slot_id}-{name}"
-    dst = pack_dir / "source" / f"{final_id}.jpg"
+        # Build the canonical filename: <id>-<name-slug>.jpg
+        # name_slug is re-slugified even though it's operator-supplied — a raw
+        # value containing path separators (e.g. "../../x") would otherwise
+        # escape source/.
+        name = slugify(name_slug or query)[:48] or slot_id
+        final_id = f"{slot_id}-{name}"
+        dst = pack_dir / "source" / f"{final_id}.jpg"
 
-    # normalize_image may change the extension in the no-sips fallback;
-    # record whatever was actually written.
-    dst = normalize_image(screenshot, dst)
+        # normalize_image may change the extension in the no-sips fallback;
+        # record whatever was actually written.
+        dst = normalize_image(screenshot, dst)
 
-    # Update slot in plan
-    slot["google_maps_query"] = query
-    slot["google_maps_url"] = url
-    slot["source_image"] = f"source/{dst.name}"
-    slot["final_id"] = final_id
-    slot["name_slug"] = name
-    if neighborhood:
-        slot["neighborhood"] = neighborhood
-    slot["captured_at"] = datetime.now(timezone.utc).isoformat()
+        # Update slot in plan
+        slot["google_maps_query"] = query
+        slot["google_maps_url"] = url
+        slot["source_image"] = f"source/{dst.name}"
+        slot["final_id"] = final_id
+        slot["name_slug"] = name
+        if neighborhood:
+            slot["neighborhood"] = neighborhood
+        slot["captured_at"] = datetime.now(timezone.utc).isoformat()
 
-    try:
-        save_plan(pack_dir, plan)
-    except Exception:
-        # Don't leave an orphan capture the plan knows nothing about
-        dst.unlink(missing_ok=True)
-        raise
+        try:
+            save_plan(pack_dir, plan)
+        except Exception:
+            # Don't leave an orphan capture the plan knows nothing about
+            dst.unlink(missing_ok=True)
+            raise
     return slot
 
 

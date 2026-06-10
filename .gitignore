@@ -9,3 +9,7 @@ projects/*/pages/
 projects/*/final/
 projects/*/defects.jsonl
 projects/*/*.pdf
+
+# location-scout plan-write artifacts (flock + atomic-write temp)
+_targets.json.lock
+_targets.json.tmp

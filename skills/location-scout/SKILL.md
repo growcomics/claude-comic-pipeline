@@ -88,10 +88,10 @@ If a capture fails (Maps blocks, Street View unavailable, NSFW/private business)
 For each entry in `_targets.json` with `source_image` populated:
 
 1. Upload the source via `mcp__c26fa20c-...__media_upload` (single file mode).
-2. Call `cgi_convert.py --slot-id <id> --emit-prompt` to get the structured prompt + Higgsfield params (model, aspect, count, role mappings).
+2. Call `cgi_convert.py --pack-dir <pack-dir> --slot-id <id> --emit-prompt` to get the structured prompt + Higgsfield params (model, aspect, count, role mappings).
 3. Call `mcp__c26fa20c-...__generate_image` with `model=nano_banana_pro` (default — top quality + image-to-image is its strong suit) and the uploaded source as the `image` role. Aspect matches the source (default 16:9 for landscape, 4:3 for interiors). `count: 1`. Resolution default 1k.
 4. Poll the job; once complete, fetch the result URL.
-5. Run `cgi_convert.py --slot-id <id> --download <result-url>` to download → save as `cgi/<id>-<slug>.png` → update `_targets.json` with `cgi_image`.
+5. Run `cgi_convert.py --pack-dir <pack-dir> --slot-id <id> --download "<result-url>"` to download → save as `cgi/<id>-<slug>.png` → update `_targets.json` with `cgi_image`.
 
 ### CGI conversion prompt template
 

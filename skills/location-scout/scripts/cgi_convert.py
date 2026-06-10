@@ -34,10 +34,12 @@ Usage examples:
 from __future__ import annotations
 
 import argparse
+import fcntl
 import json
 import os
 import sys
 import urllib.request
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -104,6 +106,23 @@ def save_plan(pack_dir: Path, plan: dict) -> None:
     os.replace(tmp, p)
 
 
+@contextmanager
+def plan_lock(pack_dir: Path):
+    """Hold an exclusive flock around the _targets.json read-modify-write.
+
+    Conversions may run in parallel (one process per slot, same for
+    maps_capture.py registrations); without the lock, two concurrent runs
+    read the same plan and the last writer silently drops the other's slot.
+    """
+    lock_path = pack_dir / "_targets.json.lock"
+    with open(lock_path, "w") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+
+
 def find_slot(plan: dict, slot_id: str) -> dict:
     for slot in plan["targets"]:
         if slot["id"] == slot_id:
@@ -138,11 +157,8 @@ def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
     if urlparse(url).scheme != "https":
         raise ValueError(f"refusing non-HTTPS result URL: {url}")
 
-    plan = load_plan(pack_dir)
-    slot = find_slot(plan, slot_id)
-    final_id = slot.get("final_id", slot_id)
-    dst = pack_dir / "cgi" / f"{final_id}.png"
-
+    # Fetch before taking the plan lock — network time must not serialize
+    # the other slots' registrations.
     with urllib.request.urlopen(url, timeout=DOWNLOAD_TIMEOUT_S) as resp:
         data = resp.read(MAX_DOWNLOAD_BYTES + 1)
     if len(data) > MAX_DOWNLOAD_BYTES:
@@ -151,12 +167,19 @@ def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
     # "completed" slot).
     if not (data.startswith(b"\x89PNG\r\n\x1a\n") or data.startswith(b"\xff\xd8\xff")):
         raise RuntimeError(f"result is not a PNG/JPEG image: {url}")
-    dst.write_bytes(data)
 
-    slot["cgi_image"] = f"cgi/{final_id}.png"
-    slot["cgi_url"] = url
-    slot["cgi_completed_at"] = datetime.now(timezone.utc).isoformat()
-    save_plan(pack_dir, plan)
+    with plan_lock(pack_dir):
+        plan = load_plan(pack_dir)
+        slot = find_slot(plan, slot_id)
+        final_id = slot.get("final_id", slot_id)
+        dst = pack_dir / "cgi" / f"{final_id}.png"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        dst.write_bytes(data)
+
+        slot["cgi_image"] = f"cgi/{final_id}.png"
+        slot["cgi_url"] = url
+        slot["cgi_completed_at"] = datetime.now(timezone.utc).isoformat()
+        save_plan(pack_dir, plan)
     return slot
 
 
@@ -165,15 +188,17 @@ def register_local_result(pack_dir: Path, slot_id: str, local_path: Path) -> dic
     to be registered into the plan."""
     if not local_path.exists():
         raise FileNotFoundError(f"--register-local path not found: {local_path}")
-    plan = load_plan(pack_dir)
-    slot = find_slot(plan, slot_id)
-    final_id = slot.get("final_id", slot_id)
-    dst = pack_dir / "cgi" / f"{final_id}.png"
-    if local_path.resolve() != dst.resolve():
-        dst.write_bytes(local_path.read_bytes())
-    slot["cgi_image"] = f"cgi/{final_id}.png"
-    slot["cgi_completed_at"] = datetime.now(timezone.utc).isoformat()
-    save_plan(pack_dir, plan)
+    with plan_lock(pack_dir):
+        plan = load_plan(pack_dir)
+        slot = find_slot(plan, slot_id)
+        final_id = slot.get("final_id", slot_id)
+        dst = pack_dir / "cgi" / f"{final_id}.png"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        if local_path.resolve() != dst.resolve():
+            dst.write_bytes(local_path.read_bytes())
+        slot["cgi_image"] = f"cgi/{final_id}.png"
+        slot["cgi_completed_at"] = datetime.now(timezone.utc).isoformat()
+        save_plan(pack_dir, plan)
     return slot
 
 
@@ -224,7 +249,12 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Convert source captures to CGI via Higgsfield.")
     p.add_argument("--pack-dir", required=True, type=Path)
     p.add_argument("--slot-id", help="Slot to operate on")
-    p.add_argument("--model", default=MODEL_DEFAULT, choices=[MODEL_DEFAULT, MODEL_FAST, "gpt_image_2"])
+    p.add_argument(
+        "--model",
+        default=None,
+        choices=[MODEL_DEFAULT, MODEL_FAST, "gpt_image_2"],
+        help=f"Generation model (default: {MODEL_DEFAULT})",
+    )
     p.add_argument("--fast", action="store_true", help=f"Alias for --model {MODEL_FAST}")
     p.add_argument("--emit-prompt", action="store_true", help="Print Higgsfield params for this slot")
     p.add_argument("--download", metavar="URL", help="Download the CGI result URL for this slot")
@@ -237,7 +267,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERROR: pack dir {args.pack_dir} does not exist", file=sys.stderr)
         return 2
 
-    model = MODEL_FAST if args.fast else args.model
+    if args.fast and args.model not in (None, MODEL_FAST):
+        p.error(f"--fast is an alias for --model {MODEL_FAST}; it conflicts with --model {args.model}")
+    model = MODEL_FAST if args.fast else (args.model or MODEL_DEFAULT)
 
     if args.list_pending_cgi:
         plan = load_plan(args.pack_dir)
