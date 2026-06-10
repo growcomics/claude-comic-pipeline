@@ -2,6 +2,8 @@
 
 Replaces the "when to break the loop and ask the user" section with a config-driven version. Existing behavior preserved when no config exists; autopilot uses config values to decide whether to halt or continue.
 
+> **Status (2026-06-10): applied.** The live section in `shotlist-driven-flow.md` is the source of truth and has evolved beyond this patch — it added the L12/L13 shotlist-warning halts, an anatomy policy, and was re-pointed at Flow's **Omni-agent chat UI**: one chat submit yields ONE image (the count setting doesn't fan out), so "all 4 variants" became "the full candidate set" — the first result plus an optional verbatim re-run fan-out (`flow-workflow.md` "Variant Strategy"). The replace-block below is kept aligned on those mechanics but is not re-expanded; the "Find this block" quote is the historical pre-patch text and stays as written.
+
 ## Find this block (lines ~234–239)
 
 ```markdown
@@ -32,18 +34,18 @@ Behavior depends on whether `production-config.json` exists at project root.
 
 - **Max retries on one panel exceeded**.
   - Threshold: `generation.max_retries_per_panel` from config (default 3 when no config).
-  - Config policy: halt cleanly when exceeded — counts as a script-ambiguity halt (the shotlist entry is producing unrecoverable variants).
+  - Config policy: halt cleanly when exceeded — counts as a script-ambiguity halt (the shotlist entry is producing unrecoverable results).
   - Recovery: the user inspects the panel in the project's panel folder, edits the shotlist entry (camera, action, characters), and reruns.
 
-- **All variants fail QA** (e.g. all 4 drift to 2D illustration, or all 4 have anatomy issues).
+- **All candidates fail QA** (e.g. the full candidate set — the first result plus any verbatim re-run fan-out — drifts to 2D illustration, or every candidate has anatomy issues).
   - Config policy: read `generation.on_all_bad` (default `retry-with-cgi-anchor-boost`).
     - `halt` → write reason, stop cleanly.
     - `retry-with-cgi-anchor-boost` → resubmit ONCE with a strengthened CGI anchor prefix prepended to the prompt: "PHOTOGRAPHIC CGI render, photoreal 3D, NOT illustrated, NOT cel-shaded, NOT 2D. Octane-style materials, ray-traced lighting." This consumes one of the `max_retries_per_panel` budget. If still all-bad after the retry, halt.
-    - `skip-with-flag` → save the best of the bad variants as `pages/panels/<panel_id>/v1.png` with `_accepted.txt` noting the flag, log to `continuity-vision-report.md`'s suggested-actions list for end-of-run human review, advance to next panel.
+    - `skip-with-flag` → save the best of the bad candidates as `pages/panels/<panel_id>/v1.png` with `_accepted.txt` noting the flag, log to `continuity-vision-report.md`'s suggested-actions list for end-of-run human review, advance to next panel.
 
 - **Stage-change panels where the model didn't escalate size despite the lineup ref**.
   - Detection: the panel's `muscle_size_tier` is N+1 but the rendered body looks closer to tier N. This is the L11 cartoony-FMG regression.
-  - Config policy: same as "all variants fail QA" above. If `on_all_bad=retry-with-cgi-anchor-boost`, the retry instead adds the L11 silhouette anchor and the "NOT realistic fitness, NOT athletic" negation, then retries.
+  - Config policy: same as "all candidates fail QA" above. If `on_all_bad=retry-with-cgi-anchor-boost`, the retry instead adds the L11 silhouette anchor and the "NOT realistic fitness, NOT athletic" negation, then retries.
 
 ### Default user-interaction mode: "narrate, don't ask"
 

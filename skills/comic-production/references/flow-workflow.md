@@ -6,8 +6,6 @@ For platform tradeoffs vs Higgsfield, see "Platform Selection" in SKILL.md.
 
 > **UI generation notice.** Flow replaced its pill-based prompt-bar UI with the **Omni-agent chat UI**: prompts go to an agent in a right-side session chat panel, and the agent mediates every generation. The pill-based UI this doc originally described (model/aspect/count pill, settings popup, x4 fan-out, coordinate map) is gone from the live product. Everything below documents the **Omni UI as the primary path**, verified in production 2026-06-09 (the L35 validation run, 16 generations — `l35-validation/README.md`); the old mechanics survive only in the **Legacy Appendix** at the bottom. Flow ships UI changes without notice: **screenshot first, trust the screen over this doc**, and update this doc when reality diverges.
 
-> **Cross-doc status.** `shotlist-driven-flow.md` and `autopilot/patches/shotlist-driven-flow-break-conditions.md` still cite legacy mechanics ("settings popup", "3-dots menu", "x4-always"). Their per-panel loop and break-condition logic stand; for UI mechanics this doc supersedes them. Their x4-always variant strategy does not survive one-image-per-submit — see "Variant Strategy" below.
-
 ---
 
 ## Account & Access
@@ -314,7 +312,7 @@ These are session-burned and worth preserving:
 
 ## Legacy Appendix — the Pill-Based Prompt-Bar UI (pre-Omni)
 
-**Status: replaced by the Omni-agent chat UI (observed gone 2026-06-09).** Kept compact because Google A/B-tests UIs, and because `shotlist-driven-flow.md` still cites these mechanics. If a session lands on this UI, re-locate everything by screenshot — the era's pixel coordinates (measured at a 1568×770 viewport) are deliberately removed. Some pieces (the `+` asset picker, the thumbnail 3-dots menu) may survive inside the Omni UI in some form — re-verify before relying on them.
+**Status: replaced by the Omni-agent chat UI (observed gone 2026-06-09).** Kept compact because Google A/B-tests UIs. If a session lands on this UI, re-locate everything by screenshot — the era's pixel coordinates (measured at a 1568×770 viewport) are deliberately removed. Some pieces (the `+` asset picker, the thumbnail 3-dots menu) may survive inside the Omni UI in some form — re-verify before relying on them.
 
 - **Anatomy**: gallery canvas above a bottom-center **prompt bar**; `+` button left of the prompt (opened the asset picker); **model/aspect/count pill** right of the prompt (e.g. "Nano Banana 2 ☐ x4"); submit arrow at far right. "Generating will use **0 credits**" in the prompt panel confirmed the paid tier. The avatar top-right was NOT a Done button (Google account menu).
 - **Settings popup** (click the pill): aspect row (16:9 / 4:3 / 1:1 / 3:4 / 9:16), count row (1x / 2x / x3 / x4), model dropdown. Quirks: the popup **reset count to x4 every time it reopened**; aspect persisted; `Escape` closed the popup *and* any other open overlay.

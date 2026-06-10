@@ -2144,7 +2144,7 @@ def build_plan(root: Path, target_panel_id: str | None = None) -> dict:
         "accepted_count": len(accepted_history),
         "remaining_count": sum(1 for _, _ in iter_panels(shotlist)) - len(accepted_history),
         "aspect": aspect,
-        "count": "x4",  # Flow default per shotlist-driven-flow.md
+        "count": "1",  # one Omni submit = one image; variants via verbatim re-run fan-out (shotlist-driven-flow.md)
         "refs_to_attach_in_order": refs_to_attach,
         "stage_change": stage_change,
         "composed_prompt": prompt,

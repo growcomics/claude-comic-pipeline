@@ -12,6 +12,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (shotlist-driven Flow loop + autopilot break conditions aligned to the Omni UI)
+
+Closes the follow-up note on the flow-workflow.md rewrite entry below: `shotlist-driven-flow.md` and the autopilot break-conditions patch no longer assume the dead pill-based UI. The per-panel loop logic itself — runtime prompt composition, view-aware anchor selection, accept/retry checkpoints, narrate-don't-ask, config-driven halts — is unchanged; only the Flow mechanics underneath it moved. `flow-workflow.md` remains the source of truth for UI mechanics.
+
+### Changed
+
+- **`skills/comic-production/references/shotlist-driven-flow.md` re-pointed at the Omni-agent chat UI.** The **x4-always variant strategy is dead** — one chat submit produces ONE image regardless of the count setting. New default: set Agent settings once (confirm=Never, model=Nano Banana 2, count=1, aspect per panel), **submit once per panel** (`Generate one image. <prompt>`), and fan out via the follow-up *"Run that exact same prompt 3 more times as 3 separate image generations, verbatim"* only when the panel is novel (new pose category, stage change, money-shot) or the first result fails the pick criteria — verifying each re-run's detail-view prompt. Step 4's pill-UI click sequence (3-dots → "Add to Prompt", `+` picker, settings pill) replaced with the chat-submit flow; ref-attachment steps now defer to `flow-workflow.md` "Reference Attachment" and carry its **not-yet-re-verified caveat** (re-attach every panel; confirm which refs the agent actually used). The **legacy ~22 s wall-clock removed** (the Omni agent adds chat turnaround per submit and per re-run — poll with screenshots, re-measure before promising times). Break conditions reworded from "all 4 variants" to candidate-set language, plus a new note distinguishing the **Nano Banana Pro daily-quota refusal** (not a halt — switch the model default to NB2 and continue) from a content-policy trip (always halts). End-of-run archiving flagged un-re-verified under Omni (the legacy 3-dots → Archive path may have survived; verify on one item before batch-archiving).
+- **`autopilot/patches/shotlist-driven-flow-break-conditions.md`** — dated status note added (patch applied; the live section is source of truth and has since evolved for the Omni UI) and the replace-block's "all 4 variants" phrasing updated to the same candidate-set language. The "Find this block" quote is historical pre-patch text and stays as written.
+- **`skills/comic-production/SKILL.md`** doc-index row for `shotlist-driven-flow.md` — "x4-always default on Flow (Pro is free)" → the Omni variant strategy (one submit = one image; fan out via verbatim re-runs on novel panels or weak first results).
+- **`skills/comic-production/scripts/next_panel.py`** — the emitted plan's Flow `count` changed `"x4"` → `"1"` to match (it cited shotlist-driven-flow.md as its source; the rendered plan now reads `Count: 1`).
+- **`skills/comic-production/references/flow-workflow.md`** — the temporary "Cross-doc status" note at the top removed now that the docs are aligned; the Legacy Appendix intro no longer claims `shotlist-driven-flow.md` still cites legacy mechanics.
+
+---
+
 ## 2026-06-09 (flow-workflow.md rewritten for Flow's new Omni-agent chat UI)
 
 Google Flow replaced its pill-based prompt-bar UI with an **agent-mediated chat UI** ("Omni"): a right-side session chat panel ("What do you want to create?"), Agent settings behind a sliders icon, and an agent that mediates every generation. The mechanics `flow-workflow.md` had documented since the original Flow runs (model/aspect/count pill, settings popup, x4 fan-out, pixel-coordinate map) are gone from the live product — discovered and worked around live during the L35 validation run (entry below; `skills/comic-production/references/l35-validation/README.md`).
