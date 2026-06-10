@@ -33,7 +33,7 @@ The workflow has four phases: **Setup** (characters, environments, folders), **B
 | `references/qa-checklist.md` | After generating panels — run before handing off to `page-composer` for lettering. Covers character consistency, environment consistency, facial expressions, camera variety check (post-L7 addition), transformation-scene QA (no-baked-lettering check, stage-change lineup-ref check), anatomy (incl. FMG-specific via `fmg-anatomy-guide.md`), and chained-sequence continuity (L1/L1.5/L9). **PARTIALLY DEPRECATED**: the original Dialogue and Text section is obsolete (lettering is post-render per L7 Case B); the "Action lines and SFX present" check is replaced with a "no baked-in lettering" check. Inline ⚠️ markers flag the obsolete items. |
 | `references/lessons-learned.md` | When debugging failures — every known API gotcha, visual quality fix, and pitfall with solutions. |
 | `references/three-panel-scenes.md` | When sprinkling a **single-image three-panel growth beat** into a longer story — bicep/breast/glute growth shown as 3 sub-panels rendered as one image. Distinct from chained multi-panel transformation arcs (see "Transformation scenes" in Phase 3). Has fillable templates for 1-character and 3-character interactions, horizontal and vertical orientations, CGI and photo styles, plus rules blocks and modifiers. |
-| `references/flow-workflow.md` | When producing on **Google Labs Flow** instead of Higgsfield — UI mechanics, aspect/count selectors, the three reference-attachment methods (drag-drop, 3-dots → "Add to Prompt", `+` asset picker with Upload), Chrome MCP automation pattern, content-policy quirks, and how to apply view-aware chaining manually through the Flow UI. Read this first if the user names Flow or `labs.google/fx/tools/flow`, or if Higgsfield is unavailable. |
+| `references/flow-workflow.md` | When producing on **Google Labs Flow** instead of Higgsfield — the **Omni-agent chat UI** (one submit = one image; variants via verbatim re-runs), Agent-settings defaults (confirm=Never, aspect/count/model), the Nano Banana Pro daily-quota fallback, the signed-URL full-res download workaround, Chrome MCP automation pattern, content-policy quirks, and how to apply view-aware chaining manually through the Flow UI. Legacy pill-UI mechanics live in its appendix. Read this first if the user names Flow or `labs.google/fx/tools/flow`, or if Higgsfield is unavailable. |
 | `references/shotlist-driven-flow.md` | When a `shotlist.json` exists and the project is being generated on Flow — the **deterministic per-panel loop** that replaces hand-driven prompt typing. Covers: runtime prompt composition (from shotlist data + observed prior-panel state, NOT pre-composed batches), automatic state-anchor selection (view-aware per L1.5), ref attachment order, x4-always default on Flow (Pro is free), **Claude picks the variant** (per the autonomous-production memory), per-panel checkpoints (accept/retry/modify/skip), narrate-don't-ask interaction mode, when to actually interrupt for user judgment, and end-of-run archive cleanup. **The chain advances only when a panel is accepted**, so retries are free and unlimited. Pairs with `flow-workflow.md` (UI mechanics) and `lessons-learned.md` L1.5/L5/L7/L9. |
 
 ---
@@ -44,16 +44,16 @@ Both platforms run Nano Banana 2 and produce comparable image quality. They diff
 
 | Concern | Higgsfield | Flow (`labs.google/fx/tools/flow`) |
 |---|---|---|
-| **Cost per panel** | Paid (Flash credits) or unlimited tier (slow) | Free on Pro/Pro Ultra plan ("0 credits") |
-| **Driving model** | Python runner (`scripts/runner.py`) reads `panels.json` and calls the API | Claude drives the browser via Chrome MCP — clicks, types, attaches refs, submits |
-| **Throughput** | High — one terminal command runs an entire script overnight | Low — every panel is hand-driven; ~30–45 sec UI overhead per panel on top of ~22 sec generation |
+| **Cost per panel** | Paid (Flash credits) or unlimited tier (slow) | Free on the paid Google AI plan — Nano Banana 2 effectively unlimited; Nano Banana Pro daily-quota'd |
+| **Driving model** | Python runner (`scripts/runner.py`) reads `panels.json` and calls the API | Claude drives the **Omni-agent chat UI** via Chrome MCP — prompts the agent in chat, attaches refs, verifies, downloads |
+| **Throughput** | High — one terminal command runs an entire script overnight | Low — every panel is hand-driven through the agent chat, one image per submit (re-measure Omni timing before promising schedules) |
 | **Resume after crash** | Yes — `state.json` records every completed panel; restart with `--start N` | No — if browser dies mid-chain you re-attach refs manually for the next stage |
-| **Reference attachment** | Asset IDs / `.png` URLs in `panels.json` | Three UI methods: drag-drop, 3-dots → "Add to Prompt", `+` button → asset picker |
-| **Multi-ref support** | Native — `medias[]` array per panel | Native — attach multiple refs to one prompt; both refs visible as thumbnails in prompt bar |
+| **Reference attachment** | Asset IDs / `.png` URLs in `panels.json` | Manual, per flow-workflow.md "Reference Attachment" — Omni-UI mechanics not yet re-verified (legacy: 3-dots / `+` picker) |
+| **Multi-ref support** | Native — `medias[]` array per panel | Native — attach multiple refs to one prompt |
 | **Aspect ratios** | Any width/height (e.g. 768×1024) | Five fixed ratios: 16:9, 4:3, 1:1, 3:4, 9:16 |
-| **Output count per submit** | One per panel (multiples need multiple panels) | x1, x2, x3, x4 — same wall-clock for all (parallelized) |
+| **Output count per submit** | One per panel (multiples need multiple panels) | One per submit (the count setting doesn't fan out); variants via verbatim re-run follow-ups |
 | **Content policy** | Permissive enough for FMG with the standard rules block | Stricter — drop celebrity names from prompts that have detailed body description (the face ref handles likeness on its own); see flow-workflow.md "Content Policy Quirks" |
-| **View-aware chaining (Rule #9)** | Reference prior job ID via `medias[]` | Same logic, but you select the prior gen via the `+` picker or 3-dots menu — no automation, you must walk the chain mentally |
+| **View-aware chaining (Rule #9)** | Reference prior job ID via `medias[]` | Same logic, but you select the prior gen by hand (see flow-workflow.md "Reference Attachment") — no automation, you must walk the chain mentally |
 
 ### Decision rules
 
@@ -62,7 +62,7 @@ Both platforms run Nano Banana 2 and produce comparable image quality. They diff
 - **Hybrid is allowed**: explore in Flow, then port the winning prompts into a `panels.json` for Higgsfield production.
 - **The skill rules don't change between platforms.** All view-aware chaining (Key Rule #9), FMG anatomy guidance, mandatory rules block, muscle-size lineup attachment, and pose-variation conventions apply identically. The only differences are mechanical (how you attach a ref, where you set the aspect ratio).
 
-For the full Flow UI guide — including the three reference-attachment methods, Chrome MCP automation, and the content-policy lessons learned — see `references/flow-workflow.md`.
+For the full Flow UI guide — the Omni-agent chat driving pattern, reference attachment, the signed-URL download workaround, Chrome MCP automation, and the content-policy lessons learned — see `references/flow-workflow.md`.
 
 ---
 

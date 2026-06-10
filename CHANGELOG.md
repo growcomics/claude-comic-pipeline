@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (flow-workflow.md rewritten for Flow's new Omni-agent chat UI)
+
+Google Flow replaced its pill-based prompt-bar UI with an **agent-mediated chat UI** ("Omni"): a right-side session chat panel ("What do you want to create?"), Agent settings behind a sliders icon, and an agent that mediates every generation. The mechanics `flow-workflow.md` had documented since the original Flow runs (model/aspect/count pill, settings popup, x4 fan-out, pixel-coordinate map) are gone from the live product — discovered and worked around live during the L35 validation run (entry below; `skills/comic-production/references/l35-validation/README.md`).
+
+### Changed
+
+- **`skills/comic-production/references/flow-workflow.md` restructured — the Omni UI is now the primary documented path.** Verified mechanics folded in from the 2026-06-09 run: **one chat submit = one image regardless of the count×4 setting** (variants via the follow-up *"Run that exact same prompt 3 more times as 3 separate image generations, verbatim"*, with detail-view prompt verification); **Agent settings** defaults (set **confirm=Never** or every gen needs an extra confirmation click; aspect/count/model live there); **Nano Banana Pro daily quota** on the Plus plan (exact refusal string captured) with Nano Banana 2 as fallback; detail-view **filmstrip with arrow-key navigation**; the **signed-URL full-res download workaround** (`labs.google/fx/api/trpc/media.getMediaUrlRedirect?name=<media-uuid>` → curl the signed `flow-content.google` URL that appears as the tab's final URL — the Download→1K menu and programmatic `a.click()` blobs fail *silently* from automation); shared-`~/Downloads` hygiene (only trust files you named yourself). Still-true platform-agnostic material kept: aspect→shot mapping, reference cards, view-aware chaining + the worked 10-stage example, and **Content Policy Quirks** (re-confirmed on the Omni UI — 16/16 submits clean; added Pattern 4, steep-low-angle + body emphasis, which the L35 prompts were deliberately written around). **Reference-attachment mechanics under the Omni UI are explicitly marked not-yet-re-verified** (the L35 run was text-only) with a verify-first checklist for the first chained run. Dead pill-UI mechanics (coordinates, settings popup, count fan-out, 3-dots / `+`-picker steps) are quarantined in a compact **Legacy Appendix** — kept because Google A/B-tests UIs and `shotlist-driven-flow.md` still cites them. All externally-cited section anchors preserved ("Tooling: Chrome MCP", "UI Anatomy", "Content Policy Quirks", "View-Aware Chaining in Flow", "Production Workflow (Step by Step)", Steps 1–3).
+- **`skills/comic-production/SKILL.md`** aligned so it stops asserting dead mechanics: the doc-index row for `flow-workflow.md`, the Platform Selection table's Flow column (cost label, driving model, throughput, reference attachment, multi-ref, output-count — "x1–x4 same wall-clock" no longer exists — and the view-aware chaining row), and the Flow-guide pointer paragraph. No section renames anywhere.
+
+### Notes
+
+- **Follow-up (deliberately not in this change):** `references/shotlist-driven-flow.md` and `autopilot/patches/shotlist-driven-flow-break-conditions.md` still assume legacy mechanics (settings popup, 3-dots menu, **x4-always variant strategy**). Their per-panel loop and break-condition logic stand, but the variant strategy needs a redesign for one-image-per-submit. `flow-workflow.md` carries a cross-doc status note at the top until they're updated.
+
+---
+
 ## 2026-06-09 (L35 real-render A/B validation on Flow — VALIDATED)
 
 Closes the outstanding-validation note on the L35 entry below, per `feedback_validate_with_credits` (4–8+ real generations before a rendering-path change is done). Higgsfield was out of credits (~1.58 left), so the run used **Google Labs Flow free tier** (Omni-agent chat UI), 16 generations total.
