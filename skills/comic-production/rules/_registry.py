@@ -31,6 +31,7 @@ from .l29_tier6_reinforcement import L29
 from .l30_tier7_reinforcement import L30
 from .l31_tier8_reinforcement import L31
 from .l32_tier9_reinforcement import L32
+from .l35_growth_intensity import L35
 
 
 # Phase 3b — every active L-rule migrated to its own module. compose_prompt
@@ -53,6 +54,7 @@ RULE_INSTANCES: list[Rule] = [
     L30(),
     L31(),
     L32(),
+    L35(),
 ]
 
 

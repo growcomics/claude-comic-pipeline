@@ -1379,4 +1379,41 @@ See `references/composition-reading-list.md` for the full annotated list.
 
 ---
 
+## L35 — Growth money-shot intensity, growth-page ratio, and the escalation-device menu
+
+**Status: Active.** New lesson 2026-06-09. Codifies the constructive findings of the `comic-corpus` study — a page-by-page teardown of 9 published FMG comics / 209 pages (`research/comic-corpus/synthesis/success-elements.md`, v2). Where L20 governs *where the camera is* and L34 governs *how subjects are blocked*, L35 governs *the emotional register of the face during growth*, *how much of the book is growth*, and *which escalation devices the transformation uses*. It is the first lesson derived from measured data on the genre rather than from a single project's failures.
+
+**Context**: We can generate competent growth panels, but un-guided output under-delivers exactly where the reference corpus also under-delivers — so matching the corpus isn't enough; the goal is to *beat* it on the levers it fumbles. The corpus quantified three things worth stealing.
+
+**Findings (from 9 comics, multiple writers, scored against `research/comic-corpus/analysis-rubric.md`)**:
+
+1. **Growth-page ratio tracks chapter intent, band 21–77%.** Fight/action chapters cluster low (21–28%); transformation chapters cluster high (67–77%); corpus median ~50%. The most-cited community metric (growth pages ÷ total) is real and measurable. Un-targeted shotlists drift low — the niche payload gets crowded out by plot/action.
+
+2. **The money-shots go faceless or dead — and that's the #1 weakness.** Every transformation ECU that crops the face out (or leaves it neutral) lands emotionless; the reader mirrors a blank face and feels nothing. The corpus contains its own proof of fix: the two books that *lead* their transformations with intensity-5 strain/ecstasy faces score a full expression point higher and read far harder.
+
+3. **SFX-driven physical manifestation is the genre's dominant device (34× across the corpus).** Ranked device frequency: sfx-driven 34, reaction-intercut 26, full-body-reveal 25, size-comparison 22, multi-panel-progressive 20, zoom-escalation 18, clothing-destruction 17, slow-burn 6.
+
+   *(Out of scope by direction — the corpus's biggest defect is empty/unlettered balloons in 6 of 9 books. That's a defect to not replicate, already covered by the bake-dialogue rule / L19; L35 does not re-litigate it.)*
+
+**Fix — three coordinated pieces**:
+
+- **Per-panel (rule module `rules/l35_growth_intensity.py`, slot `6_growth_intensity`, soft).** Fires on any growth beat. Branches on whether the face is in frame:
+  - Face-visible beat (`stage_change`, `whole_body`, `reveal`, `aftermath`, `trigger`, `first_sensation`) → injects a **peak-intensity face directive** (strain / ecstasy / awe / triumphant exertion matched to the beat; never neutral) **plus** the physical-manifestation cue.
+  - Body-region ECU beat (`chest`/`arms`/`abs`/… — head cropped per L20) → injects the **physical-manifestation cue only** (sweat-sheen, fabric strain, flushed taut skin, displaced air — L7-compliant, no baked SFX text). The face fix for ECUs is structural, not in-panel — see the shotlist piece.
+  Composed right after the ACTION DELTA, before the tier-build block.
+
+- **Shotlist (`script-breakdown`).** Three new shaping rules: (a) a **growth-page-ratio target by chapter type** (transformation ≥60%, climax ≥70%, action/plot ≥30%), checked at validation; (b) **reaction-intercut** — a run of body-region ECUs must be interleaved with at least one face-bearing reaction/reveal panel so the money-shot sequence is never faceless end-to-end; (c) a per-`transformation_scenes` **escalation-device selection** from the ranked menu. See `references/escalation-devices.md`.
+
+- **QA (`qa-checklist.md`).** New gates: growth-page ratio vs the chapter-type target; no faceless money-shot run; transformation scene declares ≥2 escalation devices.
+
+**Where this applies**: all FMG / growth comic production. Auto-injected by `compose_prompt()` on growth beats; shaped at `script-breakdown`; audited at QA.
+
+**Where this does NOT apply**: non-growth panels (L35 is silent — `compose_contribution` returns None); non-FMG transformation types until a sibling variant is written (`applicable_transformations=("fmg",)`); the empty-balloon finding (out of scope by direction — handled by L19/bake-dialogue).
+
+**Reverses**: nothing. L35 *extends* L20 (ECU framing) and L34 (subject blocking) with the emotional + density dimensions they don't cover, and complements L15 (baseline beauty) — L15 sets the resting face quality, L35 sets the peak-intensity register during growth.
+
+**Provenance**: `research/comic-corpus/` (skill, rubric, 9-comic corpus, synthesis v2) and the validation blog `research/comic-corpus/blog/2026-06-09-what-makes-fmg-comics-work.md`.
+
+---
+
 ## How to add a lesson

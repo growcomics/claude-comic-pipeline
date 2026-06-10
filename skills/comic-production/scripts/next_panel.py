@@ -1157,6 +1157,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L23":            {"title": "When env ref is dropped, add dense verbal env anchor", "slot": "9_environment", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L24":            {"title": "Suppress anachronistic accessories explicitly", "slot": "4_subject_state", "applicable_transformations": ["*"], "phase1_tracked": True},
     "female_anatomy": {"title": "Female anatomy anchor on body-region ECUs (May 14 lesson)", "slot": "4_subject_state", "applicable_transformations": ["fmg"], "phase1_tracked": True},
+    "L35":            {"title": "Growth money-shot intensity (face register + physical manifestation)", "slot": "6_growth_intensity", "applicable_transformations": ["fmg"], "phase1_tracked": True},
     # Active in build_plan
     "L1.5":           {"title": "Chain view-aware, not blindly to N-1", "slot": "10_state_anchor", "applicable_transformations": ["*"], "phase1_tracked": True},
     "L12":            {"title": "Dialogue panels need close framing", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
@@ -1482,6 +1483,16 @@ def compose_prompt(panel: dict, shotlist: dict, anchor: dict | None,
             "shorthand; the visual identity of those things comes from the "
             "attached references.)"
         ))
+
+    # 4a. L35 growth money-shot intensity — slot 6_growth_intensity. Fires on
+    # any growth beat (body-region, stage_change, reveal, etc.). Corpus-derived
+    # (research/comic-corpus synthesis v2): face-visible growth beats get a
+    # peak-intensity expression directive (the dead-face fix); body-region ECUs
+    # get the L7-compliant physical-manifestation cue only (head cropped per
+    # L20). Sits right after the ACTION DELTA so the emotional/physical register
+    # is co-located with the action content.
+    _apply_rule_at_slot("L35", "6_growth_intensity",
+                        panel, ctx, parts, _trace, transformation_type)
 
     # 5. Lighting state CHANGE only (not the location's baseline lighting)
     if time_of_day:

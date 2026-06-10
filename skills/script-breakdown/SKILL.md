@@ -245,6 +245,25 @@ If the source script contains a multi-page transformation — FMG, growth arc, m
 
 **Validation enforces this.** The `rules_audit.py` `check_transformation_beats` test will HARD-fail the shotlist if a declared `transformation_scenes` entry is missing setup, body-region beats (≥3 by default, or the explicit `required_body_regions` list), or a reveal. Don't skip the decomposition and try to ship a transformation as two panels — the gate will reject it before generation.
 
+### 4.6. Growth density, money-shot faces, and escalation devices (L35 — corpus-derived)
+
+§4.5 makes sure the transformation *happens*. This step makes it *land*. These three rules come from the `comic-corpus` study of 9 published FMG comics (`research/comic-corpus/synthesis/success-elements.md` v2) and are codified in `comic-production`'s § L35. They shape the shotlist so the output beats the reference corpus on the levers it fumbles.
+
+1. **Hit the growth-page-ratio target for the chapter type.** The corpus's most-cited metric is growth pages ÷ total, and it tracks intent: fight/action chapters run 21–28%, transformation chapters 67–77%. Set the target by what this chapter is *for* and count against it:
+
+   | Chapter type | Growth-page target |
+   |---|---|
+   | Transformation / growth-focused | **≥ 60%** |
+   | Climax / peak | **≥ 70%** |
+   | Origin / mixed | ~ 45–55% |
+   | Action / plot / fight | **≥ 30%** (floor — don't let the niche payload vanish) |
+
+   A "growth page" is one whose panels carry an active growth beat (`trigger`/`first_sensation`/body-region/`whole_body`/`reveal`). If a chapter falls under target, add transformation beats or split a thin growth moment across more pages (`slow-burn`) before generation. Note the chapter type + target + actual in the project `notes`.
+
+2. **Never leave a money-shot run faceless (reaction-intercut).** The corpus's #1 weakness: body-region ECU money-shots crop the face out, so the highest-value panels land emotionless. L35 puts a peak-intensity face directive on any *face-visible* growth beat automatically — but a run of body-region ECUs (`chest`→`abs`→`arms`…) has no face by construction. **So interleave at least one face-bearing reaction or reveal panel into every body-region ECU run** — the grower's ecstatic/strained face, or a witness recoiling. Rule of thumb: no more than ~2 consecutive faceless body-region ECUs without a face cut.
+
+3. **Each `transformation_scenes` entry selects ≥2 escalation devices** from the ranked menu in `comic-production`'s `references/escalation-devices.md` (sfx-driven, reaction-intercut, full-body-reveal, size-comparison, multi-panel-progressive, zoom-escalation, clothing-destruction, slow-burn) — more for a climax. Reflect the choice in the beats: `multi-panel-progressive` = 3 panels of the same region growing; `size-comparison` = a fixed gauge (car, doorway, skyline) in the reveal; `zoom-escalation` = tighten the `camera` each beat. Record the chosen devices on the scene entry.
+
 ### 5. Validate
 
 Before saving:

@@ -12,6 +12,27 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (apply corpus findings to production — L35 growth-intensity rule + shotlist + QA)
+
+Turns the `comic-corpus` findings into automatic production behavior, so generated comics improve without per-project hand-holding. (The corpus's biggest *defect* finding — empty/unlettered balloons — is intentionally out of scope per direction; it's already covered by L19/bake-dialogue.)
+
+### Added
+
+- **New lesson L35 — Growth money-shot intensity, growth-page ratio, escalation-device menu** (`references/lessons-learned.md`). First lesson derived from measured genre data (9 comics / 209 pages) rather than one project's failures.
+- **New rule module `rules/l35_growth_intensity.py`** (slot `6_growth_intensity`, soft, FMG-only), registered in `rules/_registry.py` and wired into `compose_prompt()` right after the ACTION DELTA. Fires on any growth beat and branches on face visibility: face-visible beats (`stage_change`/`whole_body`/`reveal`/`aftermath`/`trigger`/`first_sensation`) get a **peak-intensity face directive** (the corpus's #1 weakness was dead/cropped faces on money-shots); body-region ECUs (head cropped per L20) get the **L7-compliant physical-manifestation cue only** (sweat, fabric strain, displaced air — never baked SFX text). Added to `next_panel.py`'s `PHASE_1_RULE_REGISTRY`.
+- **New reference `references/escalation-devices.md`** — the ranked escalation-device menu (sfx-driven 34×, reaction-intercut 26×, full-body-reveal 25×, size-comparison 22×, multi-panel-progressive 20×, …) with L7-compliant prompt fragments and anti-patterns, cited by L35 and script-breakdown.
+
+### Changed
+
+- **`script-breakdown/SKILL.md` §4.6 (new)** — shotlist now shapes for three corpus rules: hit a **growth-page-ratio target by chapter type** (transformation ≥60%, climax ≥70%, action/plot ≥30%); **never leave a money-shot ECU run faceless** (interleave reaction-intercut face panels); **each transformation scene selects ≥2 escalation devices**. §4.5 makes the transformation *happen*; §4.6 makes it *land*.
+- **`references/qa-checklist.md` Transformation Scenes** — four new L35 gates: growth-page ratio vs target, no faceless money-shot run, face-sells-the-growth on every face-visible growth panel, ≥2 escalation devices per scene.
+
+### Validation
+
+- `py_compile` clean; registry loads 16 rules with L35 present; in-situ `_apply_rule_at_slot` test confirms correct branching (face directive on face-visible beats, physical-only on body-region ECUs, silent on non-growth, skipped on non-FMG); continuity-check suite 9/9 pass. **Outstanding:** real-render validation (4–8 gens per `feedback_validate_with_credits`) is blocked on Higgsfield credits — do it on Flow or after a top-up before treating L35 as render-proven.
+
+---
+
 ## 2026-06-09 (comic-corpus expansion — +6 GrowGetter series, corpus → 9 comics / 209 pages)
 
 ### Added
