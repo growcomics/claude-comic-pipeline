@@ -12,6 +12,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (remaining skill/config docs swept for dead pill-UI Flow mechanics)
+
+Follow-up sweep after the flow-workflow.md rewrite and the shotlist-driven-flow.md alignment (entries below): the remaining skill docs, the build-comic command, and the autopilot config schema no longer assume the dead pill-based UI (x4 count fan-out, 3-dots → "Add to Prompt", `+` asset picker). `flow-workflow.md` "Generation Mechanics" / "Variant Strategy" / "Reference Attachment" remain the source of truth; ref-attachment mechanics under the Omni UI stay flagged **not yet re-verified** everywhere they're referenced. Intentional legacy mentions are untouched (flow-workflow.md Legacy Appendix, shotlist-driven-flow.md's "legacy is dead" notes, the l35-validation README record, the break-conditions patch's historical quotes, and SKILL.md's Platform Selection row that explicitly labels 3-dots/`+` as legacy).
+
+### Changed
+
+- **`skills/reference-gathering/SKILL.md`** — body-tier ref generation on Flow: "Generate at x4 (free), pick the best" → submit once (`Generate one image. <prompt>`) + the verbatim re-run follow-up for 4 candidates; body-tier refs are anchor-grade, so always fan out (flow-workflow.md "Variant Strategy").
+- **`skills/production-briefing/SKILL.md`** — interview question 8 reframed from a count setting ("count per panel [x1 / x4 default x4]") to a fan-out policy: `variant fan-out [novel-and-weak default / always / never]`, with a one-submit-one-image explainer. The answer lands in `flow.fan_out` (schema change below).
+- **`skills/comic-production/SKILL.md`** Key Rules 2, 7, 8, 9 — the Flow-mechanic parentheticals stopped asserting legacy click paths (3-dots → "Add to Prompt", `+` picker / "Upload image") and now defer to flow-workflow.md "Reference Attachment" with its not-yet-re-verified caveat. Rule 8 keeps the submit → wait → attach-new-prior-gen chaining sequence; rule 7 now assumes refs must be re-attached on every stage (the legacy persist-in-asset-picker behavior is unverified under Omni).
+- **`commands/build-comic.md`** stage-3 Flow handoff — "x4 default" → single submit per panel + verbatim re-run fan-out on novel panels or weak first results.
+- **`autopilot/configs/production-config.schema.json`** — `flow.default_count` (integer, "x4 is recommended — free per gen") replaced by `flow.fan_out` (`novel-and-weak` default / `always` / `never`), matching the reframed briefing question. The schema has no `additionalProperties: false` and no code reads `default_count` (next_panel.py hard-codes count 1), so existing project configs with the old field stay valid — it's just no longer documented or written. `example-be.json` and `example-glute.json` updated to match.
+
+---
+
 ## 2026-06-10 (shotlist-driven Flow loop + autopilot break conditions aligned to the Omni UI)
 
 Closes the follow-up note on the flow-workflow.md rewrite entry below: `shotlist-driven-flow.md` and the autopilot break-conditions patch no longer assume the dead pill-based UI. The per-panel loop logic itself — runtime prompt composition, view-aware anchor selection, accept/retry checkpoints, narrate-don't-ask, config-driven halts — is unchanged; only the Flow mechanics underneath it moved. `flow-workflow.md` remains the source of truth for UI mechanics.

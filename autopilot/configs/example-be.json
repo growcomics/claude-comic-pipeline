@@ -33,7 +33,7 @@
     "require_source_jpg_for_locations": true
   },
   "flow": {
-    "default_count": 4,
+    "fan_out": "novel-and-weak",
     "aspect_override": null
   },
   "generation": {

@@ -83,7 +83,7 @@
       "type": "object",
       "description": "Flow-specific settings, ignored when platform=higgsfield",
       "properties": {
-        "default_count": {"type": "integer", "enum": [1, 2, 3, 4], "default": 4, "description": "x4 is recommended on Pro/Pro Ultra — free per gen"},
+        "fan_out": {"type": "string", "enum": ["novel-and-weak", "always", "never"], "default": "novel-and-weak", "description": "Verbatim re-run fan-out policy. Omni UI: one chat submit = ONE image regardless of the Agent-settings count (keep that setting at 1); variants cost a follow-up verbatim re-run message. novel-and-weak = fan out on novel panels (new pose, stage change, money-shot) or a weak first result, per shotlist-driven-flow.md 'Defaults on Flow'. always = fan out on every panel. never = single submit only, re-roll on demand. Replaces the dead pill-UI default_count field — the count setting no longer fans out."},
         "aspect_override": {"type": ["string", "null"], "enum": ["1:1", "3:4", "4:3", "9:16", "16:9", null], "default": null, "description": "null = derive per panel from camera category"}
       }
     },

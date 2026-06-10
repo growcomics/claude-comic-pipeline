@@ -133,7 +133,12 @@ PROJECT BASICS
 PLATFORM
   6. Platform [higgsfield / flow / hybrid]:
   7. If higgsfield: folder ID? Default ref_type [nano_banana_2_job slow-free / nano_banana_flash_job fast-paid]?
-  8. If flow: count per panel [x1 / x4 default x4]? Aspect override [none / 1:1 / 3:4 / 4:3 / 9:16 / 16:9]?
+  8. If flow: variant fan-out [novel-and-weak default / always / never]? Aspect override [none / 1:1 / 3:4 / 4:3 / 9:16 / 16:9]?
+       One chat submit = ONE image (the Omni count setting doesn't fan out); variants cost a
+       verbatim re-run follow-up message (flow-workflow.md "Variant Strategy").
+       novel-and-weak = fan out on novel panels (new pose, stage change, money-shot) or a weak first result
+       always         = fan out on every panel (4 candidates each — slower, thorough)
+       never          = single submit only; re-roll on demand
 
 SCRIPT
   9. Script source: [path to file / paste inline / existing shotlist.json to reuse]:

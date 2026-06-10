@@ -76,7 +76,7 @@ For each character in the manifest:
      - Costume: the character's canonical wardrobe (the BASELINE costume, NOT the torn-up version — the tier ref is the body, not the damage state)
      - Lineup instruction: "The attached muscle-size lineup is a 3D BODY CHART showing six figures with TWO progressively-scaled proportion attributes per tier: muscle scale AND breast scale — NOT a silhouette / outline reference, NOT a face / hair / costume reference. CRITICAL — MUSCLE: match the 3D MUSCLE VOLUME and DEFINITION of figure {tier}. CRITICAL — BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure {tier} EXACTLY — do NOT default to average / conservative breast size; do NOT render tier {tier} muscle mass with breasts shrunk to tier 2 or 3 size. The lineup scales both attributes per tier; render both at figure {tier}'s level. Use the lineup ONLY for these two proportion attributes plus frame width."
      - Closing CGI anchor.
-   - Generate at x4 on Flow (free), pick the best, save to the declared path. On Higgsfield: count=1, accept the result.
+   - On Flow: submit once (`Generate one image. <prompt>`), then fan out with the follow-up "Run that exact same prompt 3 more times as 3 separate image generations, verbatim" → 4 candidates, pick the best, save to the declared path. Body-tier refs are anchor-grade, so always fan out (per `skills/comic-production/references/flow-workflow.md` "Variant Strategy"). On Higgsfield: count=1, accept the result.
 
 3. **Each `views` entry** (per **L16** — multi-angle character reference packs):
    - Check if the file exists. If yes, skip.
