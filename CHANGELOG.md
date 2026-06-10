@@ -22,6 +22,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 - **`cgi_convert.py --register-local`** validates the path exists before touching the plan (clear error instead of a traceback).
 - **`scout_city.py --force`** now warns when `source/`/`cgi/` still hold files from the previous plan (slot IDs repeat across plans, so old and new captures could silently mix). Warns only — never deletes.
 - **`SKILL.md` doc/CLI drift** — Phase B step 4 documented a `--type` flag that doesn't exist and omitted the required `--pack-dir`/`--query`/`--screenshot`; the failure-modes table referenced a nonexistent `cgi_convert.py --resume` (the real resume mechanism is `--list-pending-cgi`). The phantom `--skip-existing` was also dropped from the cgi_convert docstring. All invocations now match the actual CLIs.
+- **`maps_capture.py` `--name-slug` re-slugified before filename use** (second review pass) — an operator-supplied value containing path separators (`../../x`) previously escaped `source/` and could write anywhere on disk; `slugify()` now neutralizes it (verified: `../../etc/passwd` → `etcpasswd`).
+
+### Added
+
+- **`scripts/fetch_street_view.py`** — Phase B alternative that fetches Street View Static API images headlessly for every target in `_targets.json` (per-target heading/pitch/fov overrides, `skip` flag for interiors, request throttling, key via `$GOOGLE_MAPS_API_KEY` or `--api-key`). Built for the Lakewood pack after both interactive capture routes failed: Chrome MCP screenshots embed in chat but can't be persisted to disk from the tool layer, and the unauthenticated Street View thumbnail endpoint returns 403. ~$0.007/image via the official API (~$0.07 per 10-target pack). Already follows the hardening rules above: 20s timeout, image Content-Type check before write, API key stripped from logs.
 
 ---
 

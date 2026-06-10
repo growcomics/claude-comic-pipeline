@@ -144,7 +144,10 @@ def register_capture(
     slot = find_slot(plan, slot_id)
 
     # Build the canonical filename: <id>-<name-slug>.jpg
-    name = name_slug or slugify(query)[:48] or slot_id
+    # name_slug is re-slugified even though it's operator-supplied — a raw
+    # value containing path separators (e.g. "../../x") would otherwise
+    # escape source/.
+    name = slugify(name_slug or query)[:48] or slot_id
     final_id = f"{slot_id}-{name}"
     dst = pack_dir / "source" / f"{final_id}.jpg"
 
