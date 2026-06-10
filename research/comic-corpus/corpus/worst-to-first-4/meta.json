@@ -1,0 +1,18 @@
+{
+  "comic_id": "worst-to-first-4",
+  "title": "Worst to First 4",
+  "source": "https://growgettercomics.com/worst-to-first-4-colored/",
+  "creators": {
+    "art": "GrowGetter Comics (studio)",
+    "story": "GrowGetter Comics (studio)",
+    "confirmed": false,
+    "credit_note": "No cover or credits page is among the 18 supplied pages (the comic opens cold mid-scene on page-01), and no artist signature/watermark is visible on any page. Only the publishing studio 'GrowGetter Comics' is identifiable (from the source URL). No individual art/story creator is named on the pages, so confirmed=false."
+  },
+  "popularity": {
+    "available": false
+  },
+  "ingested_at": "2026-06-10T02:12:55.024141+00:00",
+  "analysis_status": "done",
+  "rubric_version": "1.0",
+  "page_count": 18
+}

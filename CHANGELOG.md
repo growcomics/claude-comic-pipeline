@@ -12,6 +12,24 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-09 (comic-corpus expansion — +6 GrowGetter series, corpus → 9 comics / 209 pages)
+
+### Added
+
+- **6 more comics analyzed into the corpus** — *Ultragal* #2 (Domina's Deception), *Ass Effect*, *Worst to First* #4, *The Curse 2* (Curse Control), *Muller* #1, *Breaker* Pt.1 (124 pages). Discovered via GrowGetter's Yoast sitemap (1088 posts; surveyed for full readable comics vs teasers), ingested, and analyzed by one fresh subagent each against the canonical rubric. Corpus is now **9 comics / 209 pages**, spanning 6 stories and multiple writers (Gribble, SuperCDR, uncredited) under one dominant artist (Boogie, ~7 of 9).
+- **`synthesis/success-elements.md` → v2** rewritten on the 209-page corpus. Findings held when the corpus tripled: growth-ratio tracks chapter intent (21% fight → 77% transformation, 50% corpus); **empty/unlettered balloons are endemic (6 of 9 books)** — the pipeline's biggest cheap edge via `bake-dialogue`; dead-face-on-money-shot persists but the corpus contains its own fix (face-led transformations score a full expression point higher); **story is the universal weak axis (median 2/5) — the real differentiation opportunity**; sfx-driven is the dominant device (34×).
+
+### Changed
+
+- **`scripts/ingest.py` generalized** — `growgetter_urls()` was hardcoded to the `TMB` filename pattern; now series-agnostic. It scrapes all `wp-content/uploads` images, drops chrome, and picks the **dominant numbered sequence** (the filename stem with the most sequential members = the comic's pages). Added `.webp` support. Validated against 5 different series' naming schemes. Webp pages are converted to PNG post-download (the Read tool needs png/jpg).
+
+### Notes
+
+- Still one publisher (GrowGetter) and largely one artist (Boogie). Next expansion should target a **different studio/artist** to separate genre norm from house style, and ideally a source with **public engagement numbers** (popularity signal — GrowGetter is Patreon-gated, so scores are craft-only). Candidates surfaced in `_queue.md`.
+- Raw pages remain gitignored; only analysis is versioned.
+
+---
+
 ## 2026-06-09 (new `comic-corpus` R&D skill — study reference comics, extract what works)
 
 ### Added

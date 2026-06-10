@@ -1,0 +1,1269 @@
+{
+  "comic_id": "ultragal-2-dominas-deception",
+  "rubric_version": "1.0",
+  "analyzed_pages": 22,
+  "scores": {
+    "growth_density_score": 4,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 3,
+    "story_structure_score": 3
+  },
+  "narrative_arc": "ordinary redhead walks the city → triggers a secret transformation into muscle-hero Ultragal → flies off and smashes attacking robots → meets a rival heroine (Domina) → they brawl → Domina reveals her own deception and explosively muscle-transforms to match → escalating size-vs-size duel → Ultragal appears to win, but the twist reveals a lab-coated mastermind controlling the fight, leaving Ultragal manipulated (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Hero-shot cover: Ultragal flying toward camera, bicep flexed up, cape billowing, low angle from the city below makes her tower. Title logo ULTRAGAL + Domina's Deception. Credits 'Art by Boogie / Story by Gribble', GrowGetterComics.com, 'Extra special thanks to Alpha Centaurian'."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; single full-bleed cover, strong low-hero framing establishes the muscle-power promise immediately."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Establishing street shot: redhead 'Mira' in yellow top + floral skirt walking a city block, pedestrians and buildings receding in perspective. Empty speech bubble. Strong fg/bg depth down the avenue."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Profile close-up of Mira with glasses, mild pensive look. Speed-line background. Sets the mild-mannered alter ego."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "legs",
+          "sfx": [],
+          "notes": "Down-angle on her yellow flats stepping toward a dark alley/grate — she ducks out of sight to transform. Narrow alley gives vertical depth."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Tight close-up: Mira grins knowingly, hand tugging her collar — the 'about to change' beat. First readable expression; raked composition."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; clean four-panel setup that hooks fast by page-end — establishes ordinary girl + her secret with good distance variety and a final intent grin."
+    },
+    {
+      "page": 3,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["diagonal", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["AAAAAH"],
+          "notes": "Transformation trigger: Mira arches back, hair lifting, head thrown back mid-gasp against a hot pink/orange power field. Body leaning on a strong diagonal. Energy bars rising at frame bottom."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIIIP"],
+          "notes": "Money-shot ECU: bust swelling and straining against the yellow tube top, fabric beginning to give. Radiating burst lines. First clothing-destruction beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["KRRRK"],
+          "notes": "ECU on torso/abs hardening and expanding, skirt waistband stretching. Burst-line energy. Progressive zoom on a second body region."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["RIIIP"],
+          "notes": "ECU on glutes/hips ballooning, floral skirt riding up and tearing. Third progressive body-part zoom in the stacked right column."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["RIIIP"],
+          "notes": "Tightest ECU, lower-body mass filling frame as growth peaks for this page. Stacked-column device runs chest→abs→glutes→glutes top-to-bottom."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the Ultragal transformation engine — left full-figure ecstasy panel paired with a right-side stacked column of progressive body-part ECUs and RIIIP/KRRRK clothing-tear SFX. Textbook multi-panel-progressive + clothing-destruction + sfx-driven."
+    },
+    {
+      "page": 4,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BABAAAM!", "BAAAM!"],
+          "notes": "Peak chest/pec ECU exploding outward, deep burst lines, big onomatopoeia. Maximum-mass money shot."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "shoulders",
+          "sfx": ["BAAAM!", "FWOOMP"],
+          "notes": "Shoulder/upper-arm ECU swelling, FWOOMP cape/aura beat. Continues the peak across body regions."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["BAAAM!", "BAAAM!", "FLEX"],
+          "notes": "Arms/biceps ECU at full size, 'FLEX' tag. Peak muscle mass, fists clenching. Bottom-left of the page."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["WZZZ", "WZZZ"],
+          "notes": "Payoff reveal: Ultragal's new face, eyes closed in a satisfied grin, red hair, gold clasp + white costume now visible. Aura WZZZ sparks. Lands the 'new self' emotionally — best face on the transformation."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; peak page — three explosive body-part ECUs (chest/shoulders/arms) with BABAAAM escalation, capped by a satisfied face reveal. Heavy zoom coverage, but the three growth ECUs themselves are faceless (intensity 0) — sensation is carried entirely by SFX + burst lines, not expression."
+    },
+    {
+      "page": 5,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["FLOOF", "FLUTTER", "HELL YEAH!"],
+          "notes": "Full-figure splash of completed Ultragal launching upward between skyscrapers, one fist flexed, cape fluttering. Worm's-eye low angle, buildings converging for depth. 'HELL YEAH!' sells her delight. Full-body-reveal of the transformed result."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; single splash, the full-body-reveal payoff of the Ultragal transformation. Strong low-hero + converging-building depth; best 'showing off the new body' beat in the issue."
+    },
+    {
+      "page": 6,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["SWOOOOSH"],
+          "notes": "Ultragal rockets across frame, fist thrust toward camera, giant SWOOOOSH lettering. Strong motion diagonal + foreshortened punch-arm."
+        },
+        {
+          "n": 2,
+          "shot_distance": "EWS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Aerial extreme-wide: tiny Ultragal flying over a sprawling city grid far below. Excellent scale-contrast / establishing breather between action beats."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["ZOOM!"],
+          "notes": "Diving figure on a hard diagonal, ZOOM SFX, hair and cape trailing. Dynamic motion staging."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["FWAAM"],
+          "notes": "Superhero landing in a crouch, radial impact burst, FWAAM. Power-pose touchdown into the next scene."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; a flight/transit beat that is camera-dynamic throughout — SWOOOOSH push-in, an EWS aerial for scale, a ZOOM dive, a FWAAM landing. Good example of keeping a non-growth travel page kinetic."
+    },
+    {
+      "page": 7,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["scale-contrast", "depth-fg-bg", "low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KRACIANK", "YZZL", "YZZL"],
+          "notes": "Splash: three hulking white combat robots loom in the background while the dark-haired rival heroine 'Domina' (green/blue costume, blue cape) stands confident mid-frame; Ultragal's huge cape-and-glutes form fills the foreground from behind. Layered scale-contrast (big FG hero, mid villain, tall robots). Introduces Domina and the robot threat."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; villain-and-threat reveal splash with strong three-layer depth and scale-contrast. Best use of foreground-mass + midground-figure staging in the book."
+    },
+    {
+      "page": 8,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Ultragal arms-crossed, dwarfed between two towering robot torsos closing in. Low-hero but threat-framed; sets the fight."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["WHAAAM!"],
+          "notes": "Giant robot fist swings down, foreshortened toward camera, big WHAAAM. Impact framing."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KRUUNK!"],
+          "notes": "Ultragal counter-kicks a robot on a diagonal, KRUUNK. Dynamic action axis."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "She braces and shoves a robot arm, biceps engaged. Mid exchange."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["diagonal"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["CRAASSHH!"],
+          "notes": "Robot smashed apart, debris, CRAASSHH. Mid-page beat."
+        },
+        {
+          "n": 6,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KRZAARK!"],
+          "notes": "A robot hand/head sparks and dies, KRZAARK. Closes the robot-smash with sound."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; six-panel robot-fight with loud SFX (WHAAAM/KRUUNK/CRAASSHH/KRZAARK) and varied angles. Action reads clearly; faces during impacts default a bit flat (panels 2 & 6 are inanimate-focused)."
+    },
+    {
+      "page": 9,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["foreshortening", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["ROLL"],
+          "notes": "Inset: a wrecked robot head rolls past Ultragal's boot. Aftermath detail leading into the confrontation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["OTS", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Ultragal and Domina face off nose-to-nose, profile two-shot, tension between them. The rivalry ignites."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Hard close-up of Ultragal's glaring face, brow furrowed — strongest anger read so far. Sells the heel-turn into the heroine-vs-heroine duel."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "The two grapple/clash, costumes tangling on a diagonal. First blow between them."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Domina hurled back / thrown, dynamic toss. Mid-fight."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["KRAGOOSSH!"],
+          "notes": "Big impact, Ultragal lunging, KRAGOOSSH lettering bottom-center. Punchy fight beat with a snarling face."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the heroine-vs-heroine fight kicks off — good escalating two-shot → CU rage → grapple progression. Faces carry this page better than the robot page (two intensity-4 rage CUs)."
+    },
+    {
+      "page": 10,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Ultragal taunting profile, gold clasp prominent. Trash-talk beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["scale-contrast", "low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["KRRZT"],
+          "notes": "Domina poised confidently in front of a damaged robot, gesturing — she's hinting at her plan. KRRZT machine spark."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Domina full-figure, hand on hip, blue cape spread — confident villain posture before the turn."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Over-Ultragal's-shoulder onto Domina, red hair sweeping foreground. OTS depth."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHUMP!"],
+          "notes": "Domina takes a hit, doubled over, WHUMP starburst. Fight continues."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; rivalry/standoff page — lots of smug posturing and an OTS. Distance band tightens to MS/MCU (less spread than the action pages); carried by character attitude rather than scale variety."
+    },
+    {
+      "page": 11,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "OTS"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Ultragal grabs Domina by the costume, both snarling, raked confrontation axis. Hostility peaks."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHAM"],
+          "notes": "Ultragal lands a blow, Domina's head snaps, WHAM lettering. Strong action + furious faces."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["high-vuln", "diagonal"],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Down-angle on Domina knocked to the ground, Ultragal standing over. High-vuln makes Domina small — she's losing (the deception's bait)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Domina crumpled, looking up. Sets up the reversal — she's about to spring her transformation."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["XZAAAPP"],
+          "notes": "Sudden energy surge between them, XZAAAPP, Domina's eyes flashing — the deception triggers. Cliff into the Domina growth scene."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; Ultragal dominates the fight (high-vuln on Domina twice) right before the reversal — good dramatic-irony staging. XZAAAPP on the last panel is the turn into Domina's transformation."
+    },
+    {
+      "page": 12,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Ultragal crouched over a fallen robot/Domina, low-hero glutes-forward pose, a clawed robot hand reaching in foreground. Tension before the surge."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Scramble/grapple, costumes and limbs tangling on a bright color-field. Mid-beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WZZZ"],
+          "notes": "Domina shoves back with crackling energy (WZZZ) along her arm — power beginning to rise. Foreshortened thrust."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WZZZ"],
+          "notes": "Energy arcs between them, both straining. Building to the transformation."
+        },
+        {
+          "n": 5,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WZZZ"],
+          "notes": "Pull-back wide: the two sprawled across rubble, Domina down but crackling. Resets scale before the growth page."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; transitional brawl that seeds Domina's WZZZ power buildup across three panels. Good spread (MCU→WS) and energy-SFX foreshadowing of the transformation."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KYZZZ"],
+          "notes": "Domina rises with arms spreading, grinning wide, chest swelling, blue costume tightening; KYZZZ electric arcs. The deception transformation begins — strong open-mouthed glee."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Small inset of Ultragal: wide-eyed, hand to mouth, recoiling — the reaction-intercut. Best 'oh no' beat; sells that Domina is now the threat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KYZZZ"],
+          "notes": "Domina's face, eyes wild, mouth open in manic delight as power floods in. Peak-intensity villain ecstasy."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KYZZZ"],
+          "notes": "Bust and shoulders expanding, arcs crackling off her body. Growth visibly progressing."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KYZZZ"],
+          "notes": "Tighter on the gleeful face, fangs of a grin, electricity framing. Maintains peak expression intensity."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Bottom wide-ish panel: noticeably bulkier Domina settling into a confident grin, costume stretched. End of the early growth stage."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; Domina's transformation OPENS strong on expression — unlike Ultragal's faceless TF, this one is face-forward (two intensity-5 ecstasy CUs) plus the key Ultragal reaction-intercut inset. Reaction-intercut + sfx-driven + early growth-focus."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KYZZZ", "KYZZZ"],
+          "notes": "Domina mid-power-up, fists clenched at her sides, lightning lashing all around, screaming with delight. Maximum strain/ecstasy; whole-body growth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KYZZZ"],
+          "notes": "Extreme manic close-up, eyes whited-out, teeth bared — terrifying power-high. Peak villain face of the issue."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["CRACKLE"],
+          "notes": "Arm/shoulder muscle swelling, costume splitting at the seams, CRACKLE. Clothing-destruction begins in earnest."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BAAM!", "BAAM!"],
+          "notes": "Pec/chest ECU bursting toward camera against an orange burst-field, BAAM. Money-shot mid-growth."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the mid stage of Domina's growth — pairs two peak-intensity faces (ecstasy/rage) with a foreshortened muscle ECU. This page proves the studio CAN put a high-intensity face on a growth beat (contrast with p4's faceless peak)."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIIIP"],
+          "notes": "Domina lunging, green top straining and tearing across the bust, RIIIP. Clothing-destruction in motion with a snarling face."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIIIP"],
+          "notes": "Costume splits open across the chest, fabric peeling, wicked grin. Garment failure advances."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIIIP"],
+          "notes": "ECU of bust at full size, last shreds of the green top giving way. Peak clothing-destruction money-shot."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["RIIIP"],
+          "notes": "Lower body swelling, leggings/shorts splitting down the thighs, RIIIP. Growth spreads to legs."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "neutral",
+          "expression_intensity": 0,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["RIIIP"],
+          "notes": "ECU thighs/hips at max mass, last of the costume tearing. Caps the clothing-destruction sequence before the full reveal."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the clothing-destruction climax of Domina's TF — five RIIIP beats walking the garment failure chest→legs. Heavy growth-focus, but like p3-4 the body ECUs go faceless (intensity 0); the two upper panels keep a snarl/smirk."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["FLEX", "FLEX"],
+          "notes": "Full-figure splash of the fully-transformed Domina, both arms in a double-biceps flex, head back roaring with joy, towering over a cracked/devastated cityscape with her old shoes blown off. Worm's-eye low-hero, FLEX tags. The full-body-reveal payoff of her transformation — and the only growth SPLASH that pairs peak muscle with a peak (intensity-5) face."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; Domina's full-body-reveal splash — the strongest single growth page in the issue because it lands maximum mass AND a maximum face simultaneously. Mirror of p5 (Ultragal's reveal) but bigger and angrier."
+    },
+    {
+      "page": 17,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["FLEX"],
+          "notes": "Hulked-out Domina flexing and gloating, dwarfing the frame. Now the size-dominant rival."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Ultragal pointing, alarmed/shouting — reacting to Domina's new size. Reaction beat with a strong face."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["ZOOOOM"],
+          "notes": "Ultragal charges in on a diagonal, ZOOOOM. Re-engaging the now-bigger foe."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["THOOOM!"],
+          "notes": "Domina braces, ground-shaking THOOOM. Power on her side now."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["foreshortening", "scale-contrast"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["WHAAAM!"],
+          "notes": "Bodies collide, WHAAAM starburst, Domina's bulk clearly overpowering. The size-vs-size duel proper begins."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; round two with the size table turned — ZOOOOM/THOOOM/WHAAAM escalation and consistently expressive faces. Scale-contrast now does story work (Domina bigger)."
+    },
+    {
+      "page": 18,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["TWHAACK!"],
+          "notes": "Domina backhands Ultragal across frame, TWHAACK. Hard horizontal action line."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHUUMP!"],
+          "notes": "Domina laughing as she lands a body blow, WHUUMP. She's winning and enjoying it."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["CLENCH"],
+          "notes": "Both flexing/locked up, Domina's mass against Ultragal's, CLENCH. Power-struggle staging."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["foreshortening", "scale-contrast", "low-hero"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHUUMP", "WHAAAMM"],
+          "notes": "Domina swings Ultragal overhead/down, double SFX, Ultragal grimacing. Ultragal on the ropes."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; brutal exchange — Domina dominating with TWHAACK/WHUUMP/WHAAAMM. Distance is monotone (all MS) which slightly flattens the page, but the diagonals, scale-contrast and grimaces keep impact energy up."
+    },
+    {
+      "page": 19,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "OTS", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Domina's massive torso shoved chest-first toward a smaller Ultragal, sneering down. Size-contrast intimidation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Ultragal hand-to-chest, stunned at the power gap. Underdog reaction beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Ultragal squares up again despite the disadvantage, Domina looming. Rallying."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["foreshortening", "diagonal", "low-hero"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["WHOOOOPP"],
+          "notes": "Ultragal drives a chest-to-chest counter, WHOOOOPP. She fights back into the clash."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the muscle-vs-muscle power struggle, heavy on scale-contrast and OTS to sell Domina's size edge. Ends on Ultragal's WHOOOOPP comeback push."
+    },
+    {
+      "page": 20,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal", "OTS"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["CRUUSH!"],
+          "notes": "Chest-to-chest mutual shove, impact starburst between them, CRUUSH. Peak of the power struggle, both straining grins."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Grapple/lock, Domina's bulk bearing down, Ultragal gritting. Mid-struggle."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero", "diagonal"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["BLAM"],
+          "notes": "Big hit lands, BLAM lettering across the bottom. Climactic blow of the duel."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["CRACKLE"],
+          "notes": "Ultragal pressing in, energy crackling — momentum swinging her way before the resolution. CRACKLE."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the climactic CRUUSH/BLAM muscle-clash. Strong scale-contrast + foreshortening; faces consistently strained/determined (no dead faces in the climax)."
+    },
+    {
+      "page": 21,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "foreshortening", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHOOM"],
+          "notes": "Ultragal flies up triumphant over the city, fist forward (apparent victor of the brawl), high aerial with buildings below. WHOOM. The surface 'win'."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["high-vuln", "foreshortening"],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Down-angle on the DEFEATED dark-haired Domina face-down in the dirt/rubble beside a wrecked control-robot, dazed. High-vuln. The 'Domina' Ultragal fought was a decoy/puppet."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Reveal: a lab-coated woman (the real mastermind, dark hair) holding a handheld control device, watching coolly. The DECEPTION lands — the whole fight was engineered/controlled."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "fear",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Gloved hand reaches down toward the beaten Domina's face — she's being collected/controlled. Helplessness beat."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Final panel: the mastermind raises a finger and smirks in triumph — she's in control despite Ultragal's apparent win. Pull-forward cliffhanger button on the villain's smug face."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the twist/denouement-as-cliffhanger — intercuts Ultragal's hollow aerial 'victory' with the lab-coated puppeteer revealing the deception. Good ironic juxtaposition; ends on the villain in control (to be continued)."
+    },
+    {
+      "page": 22,
+      "role": "denouement",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Credits page over a faded ghost of the Ultragal cover figure. 'Art by Boogie / Written by Gribble / Produced by GrowGetterComics.com / Colors by Little L. & Shockoi / Special thanks to SuperCDR, Masu_Lavu, Ichiban' + a two-column Patreon supporter list. Not a story panel."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; back-matter credits/Patreon page, not narrative. Confirms full creator credits."
+    }
+  ],
+  "scene_breakdown": [
+    {"scene": "setup-mira-in-city", "pages": [2], "type": "setup", "escalation_devices": []},
+    {"scene": "ultragal-transformation", "pages": [3, 4], "type": "active-growth", "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "sfx-driven", "full-body-reveal"]},
+    {"scene": "ultragal-debut-flight-and-robot-fight", "pages": [5, 6, 7, 8], "type": "action", "escalation_devices": ["full-body-reveal"]},
+    {"scene": "heroine-vs-domina-brawl-round1", "pages": [9, 10, 11, 12], "type": "action", "escalation_devices": ["reaction-intercut"]},
+    {"scene": "domina-transformation-the-deception", "pages": [13, 14, 15, 16], "type": "active-growth", "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "reaction-intercut", "sfx-driven", "full-body-reveal", "size-comparison"]},
+    {"scene": "size-vs-size-duel-round2", "pages": [17, 18, 19, 20], "type": "action", "escalation_devices": ["size-comparison", "sfx-driven"]},
+    {"scene": "twist-mastermind-reveal-cliffhanger", "pages": [21], "type": "cliffhanger", "escalation_devices": ["reaction-intercut"]},
+    {"scene": "credits", "pages": [22], "type": "denouement", "escalation_devices": []}
+  ],
+  "strengths": [
+    "Two full transformation set-pieces, not one: Ultragal (p3-4) and Domina (p13-16). The Domina TF is the better-built of the two — it leads with peak-intensity faces (p13 panel3 & p14 panel2 are intensity-5 ecstasy/rage) AND cuts to Ultragal's hand-to-mouth shock inset (p13 panel2), so the growth carries emotion instead of relying only on SFX.",
+    "Disciplined multi-panel-progressive + clothing-destruction engines: p3 runs a stacked right-column of chest→abs→glutes ECUs with RIIIP/KRRRK; p15 walks Domina's garment failure chest→legs across five RIIIP beats. This is exactly the progressive body-part zoom device the pipeline wants more of.",
+    "Mirror-structured full-body reveals: p5 (Ultragal) and p16 (Domina) are worm's-eye low-hero splashes that pay off each transformation; p16 is the single best growth page because it lands max muscle AND a max (intensity-5) face at once.",
+    "Consistently dynamic camera: across 22 pages essentially zero flat-level panels. Heavy use of low-hero, foreshortened punches/limbs, diagonals, OTS, and scale-contrast; p7's three-layer depth (big FG hero / mid villain / tall robots) is a standout composition.",
+    "SFX do real sensation work: BABAAAM/BAAAM for growth bursts, RIIIP/KRRRK for tearing cloth, KYZZZ for the electric power-up, and a full WHAAAM/KRUUNK/CRAASSHH fight vocabulary — lettering carries beats with almost no dialogue.",
+    "A genuine narrative twist: the title 'deception' pays off on p21 — Ultragal's aerial 'win' is intercut with a lab-coated mastermind controlling the whole fight, ending on a smug pull-forward cliffhanger rather than a flat KO."
+  ],
+  "weaknesses": [
+    "Ultragal's own transformation (p3-4) goes faceless at the peak: every growth ECU on p4 (chest/shoulders/arms) is intensity-0, so her marquee moment is sold entirely by SFX and burst-lines. Compare Domina's TF, which keeps a screaming face in frame — the studio knows how, but didn't apply it to the hero.",
+    "Body-detail ECUs default to blank faces as a pattern (p3 all four ECUs, p4 panels1-3, p15 panels3-5 all intensity 0). When the body fills the frame the face vanishes and with it the emotional register; a few inset reaction cuts would fix it cheaply.",
+    "Setup is almost nonexistent and exposition is opaque: only one true setup page (p2) before the trigger, and with all dialogue balloons left EMPTY the reader can't tell who Domina is, why she's fighting, or what the lab-coat reveal means without guessing. Great for pacing, weak for stakes/clarity.",
+    "Distance variety sags in the mid-brawl: p18 is four straight MS panels (distance_spread=1) and p10 tightens to MS/MCU posturing — the robot/flight pages (p6, p8) are far more cinematically varied than the heroine-vs-heroine exchanges.",
+    "Round-1 vs round-2 fights are structurally repetitive: p9-12 and p17-20 are both 'rivals trade blows' sequences with similar framing; the Domina TF in between is what separates them, so the second brawl risks feeling like more-of-the-same padding before the twist."
+  ]
+}

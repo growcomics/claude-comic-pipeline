@@ -1,0 +1,907 @@
+{
+  "comic_id": "breaker-1",
+  "rubric_version": "1.0",
+  "analyzed_pages": 19,
+  "scores": {
+    "growth_density_score": 3,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "in-media-res splash of angel vs devil super-brawlers → flashback to a silver-haired woman with a tiny angel & devil on her shoulders (her conscience) → they argue/tempt her through a gym strength-growth montage and a hedonistic aftermath → the angel & devil themselves transform into giant muscle goddesses → they grow city-sized and clash → mid-fight cliffhanger (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["scale-contrast", "diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Title cover. Blonde winged angel (halo) and red horned devil-woman foreheads-locked in a snarling face-off, fists raised; a colossal glaring eyes-and-brows close-up fills the entire background = strong scale-contrast layered behind the two MS figures. Logo 'THE BREAKER'. Credits 'Art by Boogie / Story by SuperCDR / GrowGetterComics.com'."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; striking layered cover — two figures over a giant face. Establishes the angel/devil duality and the muscular-rivalry promise."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Full-page establishing shot of a fantasy realm: a mountain with a glowing portal/eye, a white tower and a red tower, floating islands, a purple star-burst in the sky. Two tiny armored figures fight on a winding path mid-frame; a fallen blonde figure lies in the foreground. Environment dominates — textbook EWS world-build with deep fg/bg perspective."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; full-page EWS scene-setter. Figures are intentionally small against the landscape — the opposite of a flat mid-shot."
+    },
+    {
+      "page": 3,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-page action splash: the red horned devil-woman leaps/lunges down toward camera (low-hero, foreshortened thighs thrust forward), mouth open in a battle yell. A scrum of other muscular costumed women (green-skinned, masked, white-haired) crowds the lower foreground at varied scales. Smoke plume. Dynamic chaotic melee composition."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; energetic low-angle hero splash of the antagonist. Strong scale-contrast crowd staging."
+    },
+    {
+      "page": 4,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "diagonal", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-page hero splash of the blonde winged angel: enormous wings spread, muscular, fist cocked, smug confident grin, descending into a ring of other winged/armored muscular women shown smaller and at varied scales in the foreground. Mirror-image counterpart to page 3's devil splash. Bold low-hero framing."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; protagonist hero splash mirroring p3. The two full-page splashes (p3 devil / p4 angel) make a deliberate diptych."
+    },
+    {
+      "page": 5,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Wide letterbox: cluster of the muscular brawlers mid-fight, devil and others tangled. Motion-heavy."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Wide strip: the blonde angel mid-flight carrying/escorting a brown-haired woman in yellow, angel wings filling the band."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["depth-fg-bg", "diagonal", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Speed-line action band: angel (left) and devil (right) hurtling toward each other through a blue motion-line tunnel, reaching out. Strong converging-perspective energy."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Bottom band splits: small inset of angel+devil clashing, then a large CU of a wide-eyed blonde face (startled). This CU is the transition/match-cut into the flashback. Empty dialogue balloon."
+        }
+      ],
+      "page_notes": "distance_spread=4 (WS/MLS/WS/CU); flat_panel_count=0; the in-media-res prologue closes here. Good distance variety across four bands; the closing face-CU bridges into the real-world flashback that starts p6."
+    },
+    {
+      "page": 6,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU strip of red-lipped mouth/lower face of the silver-haired woman. Decorative crop."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Narrow vertical strip: torso/hair of the silver-haired woman in a purple-to-black top, hand gesture."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU of one eye/brow of the silver-haired woman. Three thin face-crop strips top the page — stylish but emotionally flat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Establishing the premise: silver-haired woman, hands on hips, abs bared, in a sunny street; a tiny winged angel hovers at her left shoulder and a tiny red devil at her right — the angel/devil are her literal shoulder-conscience. Each tiny figure has a scroll/sign. Thought bubble above. Scale-contrast between the woman and the palm-sized angel/devil."
+        }
+      ],
+      "page_notes": "distance_spread=3 (ECU/MCU/MS); flat_panel_count=3; the reveal page — the angel & devil from the prologue are the protagonist's shoulder-angel/shoulder-devil. The three face-crop strips are static (flat-level) but the payoff MS recovers with scale-contrast."
+    },
+    {
+      "page": 7,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["AHHN...", "AHHN..."],
+          "notes": "Tableau: a brown-haired woman in throes on a bed (eyes shut, mouth open in pleasure), the silver-haired woman behind her, a tuxedoed man bursts through the door at left in shock, the tiny devil hovers at right. A 'memory'/temptation vignette."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["dutch", "diagonal", "foreshortening", "scale-contrast"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["THWACK!"],
+          "notes": "Canted high-angle brawl: a man is whip-cracked (THWACK!) and sent tumbling, bodies flung at diagonals across the frame; the silver-haired woman and tiny angel/devil present. Very dynamic dutch action panel — the strongest staging on the page."
+        }
+      ],
+      "page_notes": "distance_spread=2 (MS/WS); flat_panel_count=0; two flashback/temptation vignettes (seduction + a whip brawl). The THWACK panel (p7.2) is a standout dutch-angle action beat. The lone hard SFX so far."
+    },
+    {
+      "page": 8,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Top band: profile beat of the tiny angel (left, halo, eyes shut serene) and tiny devil (right) flanking, with a glow split green/pink between them — the two sides of the argument visualized."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Small CU of the blonde angel's face, pleasant/coaxing."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Small CU of the devil-woman's face, sly. Paired rebuttal to the angel CU."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Silver-haired woman turns, shouting/objecting against a green speed-line burst. Empty balloon. Decent anger but a flat-level talking-head."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Silver-hair points/argues while the palm-sized angel and devil hover near her raised hand. Empty balloons."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Bottom band: silver-hair fist clenched, resolute, devil at left and angel at right of frame. The argument resolves toward action."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/MCU/CU); flat_panel_count=5; the talkiest page — a six-panel angel-vs-devil debate. Distances vary but most panels are flat-level talking heads; this is the book's flattest stretch (and all balloons are empty placeholders)."
+    },
+    {
+      "page": 9,
+      "role": "buildup",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Silver-hair throws a double-biceps-style pose, arms spread, chest pushed out, top straining — first overt strength/muscle display, framed low-hero against a yellow burst. Reads as the 'power awakens' beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["K-KRUNK", "CLINK", "CRACK"],
+          "notes": "Gym floor: she struts past other gym-goers; a huge foreshortened arm/dumbbell of a bystander dominates foreground (strong scale-contrast). Her high heel cracks the floor (CRACK) — a size/strength size-comparison cue. SFX K-KRUNK / CLINK from the weights."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KLANK", "CLUNK CLUNK CLUNK"],
+          "notes": "She sits at a leg-press/cable machine loaded with stacked '1000KG' blocks beside a 'MAX LEVEL 4000KG' sign — explicit size-comparison via labelled weight. Gym crowd watches (blonde + redhead foreground). SFX KLANK / CLUNK x3."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/MS/WS); flat_panel_count=0; the gym strength-feat sequence opens. Growth here is strength/scale-of-power rather than active muscle inflation, but the labelled 1000KG/4000KG plates are a clean size-comparison device. SFX start carrying the load."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["BAAM!!", "BAAM!!", "CLUNK CLUNK CLUNK"],
+          "notes": "She hauls a cable/bar, biceps and chest visibly swelling, a red(devil)/blue(angel) aura splitting behind her as both sides 'push' her; crowd reacts at left. Big BAAM!! SFX. Muscle actively inflating — first true growth money-beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["SLAM!!", "SLAM!!", "SLAM!!"],
+          "notes": "Low angle on her now-massive back/shoulders as she pulls a chain rig, lats flaring, angel+devil tiny on her shoulders, crowd gasping. Escalating SLAM!! x3. Clear stage-up from panel 1."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["CRAAANK!"],
+          "notes": "Tight low-hero on her hugely swollen chest/arms hauling a bar toward camera, teeth bared in a full strain-yell, veins/definition popping. CRAAANK! SFX. Peak of the gym pump — highest expression intensity so far."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/MS/MCU); flat_panel_count=0; THIS is the page-10 growth engine — three escalating strain beats (BAAM → SLAM×3 → CRAAANK) with the body visibly enlarging panel to panel and faces carrying real strain. Best growth+SFX synergy in the book."
+    },
+    {
+      "page": 11,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast", "diagonal"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["SLAM"],
+          "notes": "Locker room: the now-buff silver-hair embraces a blonde against the lockers while other muscular women look on; door SLAM. Transition from gym to hedonistic aftermath."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Tangle of muscular women on a bed (the 'reward' aftermath the devil promised). High-angle group composition."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "ecstasy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Redhead head-back in pleasure foreground, silver-hair behind; tiny angel(distressed)/devil(pleased) react at right edge — conscience still watching."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Closer group beat continuing the aftermath. Muscular bodies fill the frame."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MS/MCU); flat_panel_count=0; explicit hedonistic aftermath montage — the devil's 'payoff' for the strength gain. No active growth; bodies are big but static (aftermath). Page reads as indulgence/reward, not transformation."
+    },
+    {
+      "page": 12,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-body low-hero standing reveal of the transformed silver-hair: towering hyper-muscled physique, one-arm flex, abs and legs detailed, wrecked bed and other women behind her. The 'behold the new body' splash-style beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "She admires/flexes her own swollen arm toward camera (pink burst BG), pleased smirk. Motion ticks around the muscle. A flex-and-admire aftermath beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "CU of her face, hand to chin, self-satisfied; tiny angel(upset)/devil flit in an inset window. Beat of reflection before the story pivots to the angel/devil's own transformation."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MCU/CU); flat_panel_count=1; the full-body 'new body' reveal (p12.1) is the cleanest single growth-result image in the human thread. Closes the protagonist's arc; the focus now shifts to the shoulder angel & devil."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "dutch",
+          "staging": ["dutch", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": ["ZZZZ"],
+          "notes": "Canted CU of the red devil-woman's face thrown back, mouth wide in an ecstatic/straining howl as her own transformation begins. Electric ZZZZ ticks. Peak expression."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "dutch",
+          "staging": ["dutch", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": ["GASP"],
+          "notes": "Matching canted CU of the blonde angel's face mid-cry, mirror to panel 1. The two transform in parallel, intercut."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KRAAK!", "ZZZZ", "BREAK"],
+          "notes": "ECU of the devil's chest/torso bursting with growth — her armor/top KRAAKs and shatters (clothing-destruction) as muscle swells, shards flying. The single most explicit growth-detail panel: ECU + clothing-burst + SFX."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["ZZZZ", "FWOOMP"],
+          "notes": "ECU of the angel's torso/bust swelling against a yellow flare, electric ticks — mirror of the devil's chest-burst. No face in frame."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["ZZZZ", "BRAP"],
+          "notes": "ECU of the devil's now-massive abs/thighs from below. Body-part money-shot continuing the progressive growth."
+        },
+        {
+          "n": 6,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["ZZZZ", "RAM"],
+          "notes": "ECU of the angel's swelling thighs/lower body from below, matching panel 5. Closes the six-panel parallel-transformation grid."
+        }
+      ],
+      "page_notes": "distance_spread=2 (CU/ECU); flat_panel_count=0; THE transformation page — a six-panel grid intercutting the devil and angel growing in parallel: face→face (ecstasy 5/5), chest→chest (with KRAAK clothing-burst), abs→legs. Multi-panel-progressive + reaction-intercut + clothing-destruction + sfx-driven + heavy ECU all at once. The craft high-water mark of the book."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KRAGOOOOM!!"],
+          "notes": "The devil (left) and angel (right), now fully transformed muscle goddesses, rise side by side over a tiny cityscape, grinning, fists up. Huge KRAGOOOOM!! Reveal of the completed forms."
+        },
+        {
+          "n": 2,
+          "shot_distance": "EWS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KRANOOM!!"],
+          "notes": "Wide aerial: the two giants now tower over a full city skyline, dwarfing buildings (size-comparison against the city). KRANOOM!!"
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg", "foreshortening", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["THOOM! THOOM! THOOM!", "VZZZZ"],
+          "notes": "The angel strides forward city-block-sized, foot crushing the street (THOOM x3), a car flung aside, the devil flying in at right. Full kaiju-scale size-comparison payoff of the growth."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/EWS/WS); flat_panel_count=0; the full-body-reveal payoff — the transformed pair scaled against an entire city (size-comparison via skyline + crushed car + THOOM footsteps). Growth literally pays off here, at the end of the chapter, not in setup."
+    },
+    {
+      "page": 15,
+      "role": "buildup",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["GRAB"],
+          "notes": "The two giant goddesses grin and bump/clasp fists toward camera (foreshortened fists), confident; small inset CU of the silver-hair watching at upper-left. Power-pose beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["HMM"],
+          "notes": "The angel (left) and devil (right) recline facing each other across the frame, eyeing one another — tension shifts from rivalry toward attraction."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["diagonal", "depth-fg-bg"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KSSS"],
+          "notes": "The angel and devil kiss, foreheads together, the prologue's rivalry reframed as intimacy. Soft KSSS. Tonal pivot panel."
+        }
+      ],
+      "page_notes": "distance_spread=2 (MCU/MS); flat_panel_count=0; brief aftermath/turn — the two transformed leads go from fist-bump bravado to a kiss. Bridges the growth payoff into the climactic fight. Bodies large but no active growth here."
+    },
+    {
+      "page": 16,
+      "role": "action",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["diagonal", "foreshortening", "scale-contrast", "dutch"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["ZZZT"],
+          "notes": "Angel and devil grapple in midair, bodies tangled on a hard diagonal against a debris field, electric ticks. Combat resumes — dynamic clashing staging."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["ZZZT"],
+          "notes": "Pull back: angel (left) and devil (right) hover apart on purple cloud platforms, squaring off, full muscular figures."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["ZZZT"],
+          "notes": "The two charge/circle for the clash, energy crackling between them. Sets up the page-17 collision."
+        }
+      ],
+      "page_notes": "distance_spread=2 (MS/WS); flat_panel_count=0; the climactic duel begins — grapple then sqube-off. Lots of crackle SFX and diagonal staging; muscular but post-growth (no further inflation)."
+    },
+    {
+      "page": 17,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal", "OTS"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": ["KRRIKKK!!!"],
+          "notes": "OTS-ish over the devil's massive back (center, dark-haired) as the angel (right) and silver-hair (left) brace; energy building. KRRIKKK!!! Tension-charge beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["ZZZZ", "ZZZZ"],
+          "notes": "A figure (silver-hair) at center channels a surge of purple/blue lightning up her body, fists clenched at sides, glowing — a power-charging beat. Electric arcs everywhere."
+        },
+        {
+          "n": 3,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KRRIKKK THOOOOOOOOOOOOOOOOOOMMMMM!!!"],
+          "notes": "EWS: a massive energy detonation/pillar erupts over the city skyline, lightning radiating, tiny onlookers. Enormous page-wide KRRIKKK THOOOM SFX banner. Climax explosion."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/MCU/EWS); flat_panel_count=0; the power-up-and-detonate climax. The page-wide 'KRRIKKK THOOOOO...OMMMM!!!' SFX banner is the loudest lettering in the book and sells the blast with no dialogue."
+    },
+    {
+      "page": 18,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "diagonal", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["SLAM"],
+          "notes": "Angel (left) and devil (right) collide again, the devil's huge back/glutes thrust toward camera as the angel meets her; bodies on a diagonal. Combat continues."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening", "scale-contrast"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": ["RRMEEGH!"],
+          "notes": "Grappling-hands lock-up, a strained shove (RRMEEGH!). Empty balloons. Tight power-struggle beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal", "scale-contrast"],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["BRAAAAH!"],
+          "notes": "Inset/left: the angel (left) and a blonde tumble in a burst as a throw lands (BRAAAH!). Dynamic low-hero scramble."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal", "scale-contrast"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["FWOOOOSSSH!!!"],
+          "notes": "The devil launches/charges, hair and energy streaming (FWOOOSSSH!!!), foot planted on rubble, mid-leap toward the next blow. Mid-action freeze — the chapter ends on motion, a to-be-continued pull-forward rather than a hard cliff."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MCU/MS); flat_panel_count=0; the fight's final exchange. Ends mid-brawl on the FWOOOSSSH!!! charge — momentum cliffhanger (continued in a later part) rather than a discrete reveal/twist. Story-wise it just stops mid-swing."
+    },
+    {
+      "page": 19,
+      "role": "denouement",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Credits page over a faint eyes/face background. Text: 'Art by Boogie / Written by SuperCDR / Produced by GrowGetterComics.com / Colors by Little L. & Zere / Special thanks: Gribble, Masu_Lavu, Ichiban' plus a Patreon supporter list. Not a story panel."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; back-matter credits/Patreon list. No narrative content; counted as a page but contributes nothing to growth or action."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "in-media-res prologue (angel-vs-devil super-brawl)",
+      "pages": [2, 3, 4, 5],
+      "type": "action",
+      "escalation_devices": ["full-body-reveal", "reaction-intercut"]
+    },
+    {
+      "scene": "real-world reveal: protagonist + shoulder angel/devil",
+      "pages": [6, 7, 8],
+      "type": "setup",
+      "escalation_devices": ["reaction-intercut"]
+    },
+    {
+      "scene": "gym strength-feat & muscle pump (protagonist)",
+      "pages": [9, 10],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "zoom-escalation", "size-comparison", "sfx-driven", "reaction-intercut"]
+    },
+    {
+      "scene": "hedonistic aftermath + new-body reveal (protagonist)",
+      "pages": [11, 12],
+      "type": "aftermath",
+      "escalation_devices": ["full-body-reveal"]
+    },
+    {
+      "scene": "angel & devil parallel transformation to muscle goddesses",
+      "pages": [13, 14],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "size-comparison", "reaction-intercut", "sfx-driven", "full-body-reveal"]
+    },
+    {
+      "scene": "transformed leads: kiss → climactic city-scale duel (cliffhanger)",
+      "pages": [15, 16, 17, 18],
+      "type": "action",
+      "escalation_devices": ["sfx-driven", "reaction-intercut"]
+    }
+  ],
+  "strengths": [
+    "Page 13 is a model FMG transformation page: a 6-panel grid intercuts the devil and angel growing in parallel — face→face (ecstasy 5/5), then chest→chest (with a KRAAK!/BREAK clothing-burst), then abs→legs ECUs — stacking multi-panel-progressive + reaction-intercut + clothing-destruction + sfx-driven + heavy ECU in one beat.",
+    "SFX do the heavy lifting for sensation throughout: the gym pump escalates BAAM!! → SLAM!!×3 → CRAAANK! across page 10, and the climax detonates with a page-wide 'KRRIKKK THOOOOO...OMMMM!!!' banner on page 17 — growth/impact is felt even though almost every dialogue balloon is left empty.",
+    "Camera stays genuinely dynamic for an indie book: full-page low-hero hero-splashes (p3 devil, p4 angel as a diptych), an EWS world-establisher (p2), a kaiju size-comparison payoff against a full skyline + crushed car + THOOM footsteps (p14), and frequent foreshortening/scale-contrast — very few default mid-shots.",
+    "Faces carry the peak beats: ecstasy/strain register 5/5 on the page-13 transformation close-ups and the page-10 CRAAANK strain-yell, exactly where the rubric demands intensity."
+  ],
+  "weaknesses": [
+    "Growth is split and partly mistimed: the protagonist's gym arc (p9–12) is strength-feat + aftermath more than visible muscle inflation, and the only true progressive-growth page (p13) lands very late and is over in two pages — only 4/19 pages (21%) are active growth, so the niche product feels under-served for a 19-page chapter.",
+    "Page 8 is a 6-panel flat-level talking-head stretch (5 of 6 panels flat) and ALL dialogue balloons across the book are empty placeholders (p5, p8, p15, p18) — the script/lettering is unfinished, so motivation and the angel/devil argument never actually read.",
+    "The story just stops mid-swing on page 18 (FWOOOSSSH!!! charge) rather than landing a hook or twist; combined with the sex-aftermath detour on p11 that stalls momentum, the structure is loose — prologue, setup, two separate transformations, then an open-ended brawl.",
+    "Several mid-tier beats coast on neutral/under-played faces (e.g. the p6 face-crop strips at intensity 2, the p14.2 wide aerial) where a clearer reaction would sell the scale better."
+  ]
+}

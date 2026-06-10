@@ -1,0 +1,1236 @@
+{
+  "comic_id": "the-curse-2-curse-control",
+  "rubric_version": "1.0",
+  "analyzed_pages": 22,
+  "scores": {
+    "growth_density_score": 5,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 4,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "cursed dark-haired woman drinks potion mid-confrontation → transforms into purple muscle-hero → brawls a Supergirl-type → cut to a second woman who transforms at home (white/gold) and powers up a male bystander → the two muscle-women clash in a canyon → white/gold force-feeds the protagonist another potion → escalating tit-for-tat potion-fueled growth (clothing/armor bursting, towering scale) → ends mid-escalation with the genie-lamp potion source and a smug blonde (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["high-vuln", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["glug glug glug"],
+          "notes": "Dark-haired protagonist tilts head back and chugs the purple potion (the trigger). Raked diagonal of the arm/bottle; small whispered glug SFX."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "panic",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blonde antagonist reacts open-mouthed in alarm/rage. Strong face but flat-level head-on framing with empty speech balloon."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRASSSHH"],
+          "notes": "The emptied bottle shatters mid-air, shards thrown toward camera over an impact starburst. Big yellow CRASSSHH title-SFX dominates the panel; no figure."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Protagonist rises into frame, glowing purple eyes, smug grin, fist to mouth — the curse takes hold. Low-hero angle sells the menace."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; opening page IS the trigger — no preamble, drinks-potion to glowing-eyes in four panels. Strong faces; SFX-forward."
+    },
+    {
+      "page": 2,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["KZZZT"],
+          "notes": "Side view, arms/back swelling with purple energy crackling off the skin; motion lines. KZZZT electrical SFX drives the growth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU-adjacent on the face: glowing eyes, bared grin, neck cords — peak strain/ecstasy. Best face on the page."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["KZZZT"],
+          "notes": "ECU money-shot of swelling glutes/thigh with energy aura; no face. Pure body-part growth panel."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["KZZZT"],
+          "notes": "Thigh/leg detail filling frame as muscle inflates; energy crackle. Multi-panel-progressive body coverage."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; dense ECU/CU body-part growth grid — exactly the zoom coverage the niche wants. KZZZT repeated as a growth pulse."
+    },
+    {
+      "page": 3,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["rip"],
+          "notes": "Full-body splash: completed purple muscle-hero airborne, double-biceps-ish pose, sash torn, against green radial burst. The money full-body reveal of transformation #1."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; single splash full-body-reveal. Caps the first growth scene; dynamic low-hero flight pose."
+    },
+    {
+      "page": 4,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["WHAM!"],
+          "notes": "Purple-suit and blonde collide fist-to-fist on a raked diagonal; WHAM impact star. Strong action diagonal."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRACK!"],
+          "notes": "Blonde lands a gloved punch to the protagonist's face; CRACK. Diagonal exchange continues."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "dutch",
+          "staging": ["dutch", "diagonal"],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["WHUMP!"],
+          "notes": "Protagonist knocked tumbling, canted/dutch frame; WHUMP. Good kinetic tilt."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRASH!", "KRAGSH!"],
+          "notes": "Wide city skyline; tiny figure slammed into a building, dust plume. Strong depth + scale-contrast establishing the fight's stakes."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; fight page with consistent action diagonals, a dutch tilt, and a wide depth establisher. SFX-heavy."
+    },
+    {
+      "page": 5,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["high-vuln", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "High angle down into a crater of rubble where the blonde lies small; red car and wreckage in FG. Vulnerability + depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Blonde heaves a girder, arms thrust toward camera, gritted-teeth rage. Good foreshortening."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": ["CREAK"],
+          "notes": "Both heroines in a wrecked cityscape, blonde from behind hurling debris; small distant purple figure (scale-contrast)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Blonde charges, arms forward; determined snarl."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["FWOOSH!"],
+          "notes": "Blonde takes flight toward the protagonist, FWOOSH. Dynamic launch."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; aftermath-of-impact then re-engage. Lots of low-hero + foreshortening; no flat panels."
+    },
+    {
+      "page": 6,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["KRAKUNK", "FWIP!"],
+          "notes": "Purple-suit catches/flings a hurled truck one-handed, smug; the truck looms in FG (scale-contrast). Power beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["diagonal", "dutch"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["FWOOSH!", "FWOOO-"],
+          "notes": "Tight on the protagonist's grinning face streaking through a purple speed-band; strong canted motion strip."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["diagonal", "foreshortening", "low-hero"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": ["TAGUUUUM!"],
+          "notes": "The two clash again on a strong diagonal, dust and impact; big TAGUUUUM SFX. Energetic collision staging."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; high-energy power+clash page. Speed-band CU is a nice steal. SFX carry the kinetics."
+    },
+    {
+      "page": 7,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Scene change: second blonde waking in bed, looking up; soft high angle. Calm domestic reset after the brawl."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "She sits up in a tank top, smiling, sheet across lap. Flat-level domestic shot."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shyness",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Stands by the mirror stretching, hand to chest. Flat-level full-ish figure; mild expression."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["tk tk tk"],
+          "notes": "Sits at a pink laptop, smiling, typing. Flat-level; small keyboard SFX."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Continues at laptop. Quietest panel; pure setup."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=4; the comic's flat hotspot — a whole domestic page of near-static eye-level mid-shots. Necessary tonal reset but visually the weakest page."
+    },
+    {
+      "page": 8,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KNOCK"],
+          "notes": "Blonde glances toward the door, hand to chest; a KNOCK. Setup beat, flat framing."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "OTS",
+          "staging": ["OTS", "depth-fg-bg"],
+          "expression": "shyness",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["tk tk"],
+          "notes": "Male friend (red shirt) at the doorway, OTS into the dark hall. Some depth."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["SHIIING!"],
+          "notes": "Pink magic flares around the blonde as the curse activates (SHIIING) — the trigger for transformation #2. Man recoils."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Head thrown back, open-mouthed gasp as the change begins; chest swelling into frame. Peak-intensity face."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["tk tk"],
+          "notes": "ECU on the chest/torso starting to expand against a dark void; growth-focus money panel opening scene #2."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; the bridge from domestic setup into transformation #2 — escalates distance from flat MCU to ECU as the curse hits."
+    },
+    {
+      "page": 9,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["KZZZT", "POLM!", "HMMMM"],
+          "notes": "Double-biceps flex mid-growth, arms ballooning, ecstatic grin, pink radial burst. KZZZT growth pulse. Big peak face + flex."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["KZZZT", "POLM!"],
+          "notes": "Torso/abs detail crunching into definition; energy crackle, no face. Progressive body coverage."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["KZZZT"],
+          "notes": "ECU swelling glutes/hip filling frame. Money body-part panel."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["POLM!"],
+          "notes": "Thigh detail inflating. Same progressive-ECU grid as page 2 — consistent device across both transformations."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; transformation #2's dense ECU grid mirrors page 2 — heavy zoom coverage, repeated KZZZT/POLM growth SFX."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-body splash: completed white/gold muscle-heroine, double-biceps pose, in the bedroom doorway (depth). The full-body reveal capping transformation #2."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; second full-body-reveal splash; doorway gives real depth. Pairs with page 3 as the matched reveal pages."
+    },
+    {
+      "page": 11,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["GLM"],
+          "notes": "Towering white/gold heroine (FG) raises a finger while the small kneeling man (BG) looks on — clear scale-contrast. She begins working her curse on him."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["HMMMM", "PLM!", "FLM"],
+          "notes": "Pink magic engulfs the kneeling man; she gestures. Size disparity emphasized."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["POW", "GULP!"],
+          "notes": "She flexes a forearm/biceps that visibly bulks further (gold band straining), grinning; small magic sigil in BG. Growth-focus on her own arm."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["GULP"],
+          "notes": "ECU on her grinning mouth/jaw and raised hand. Confident close-out."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=0; best scale-contrast page in the book — towering heroine vs tiny man, strong FG/BG depth. Wide distance spread MLS→ECU."
+    },
+    {
+      "page": 12,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Canyon location; purple-suit protagonist (FG) faces off, hands on hips, against rock spires. Establishes the new battlefield."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "White/gold heroine posed confidently across the gap. Two-shot setup of the clash."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["WHUMP!", "FWOOO"],
+          "notes": "Purple-suit lunges across a hard diagonal swinging; WHUMP. Kinetic charge."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Reaction CU — white/gold's wide-eyed shock as the blow lands. Good reaction-intercut."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "dutch",
+          "staging": ["dutch", "diagonal", "scale-contrast"],
+          "expression": "pain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["CRAK"],
+          "notes": "Protagonist knocked back/tumbling on a canted frame while white/gold stands ground; CRAK. Strong dutch + scale staging."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the heroine-vs-heroine clash kicks off; reaction-intercut + diagonals + a dutch. Clean action staging."
+    },
+    {
+      "page": 13,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KRAKOOOM!"],
+          "notes": "Wide canyon: white/gold small on a far ridge, energy blast across the gorge; KRAKOOOM. Establishing scale of the fight."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg", "scale-contrast"],
+          "expression": "pain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Protagonist downed in the rocks (FG) under the towering white/gold torso (BG). Size disparity reasserted."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["tk tk"],
+          "notes": "White/gold gloating, finger raised. Fairly flat eye-level close."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "White/gold produces another purple potion, smiling — sets up the force-feed. Repeats the prior framing (mild flatness)."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=2; result of the clash plus the new-potion reveal; two near-identical gloat MCUs are the only soft spot. KRAKOOOM establishes scale well."
+    },
+    {
+      "page": 14,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "fear",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Protagonist looks up apprehensively, dwarfed by the white/gold bust in frame. Dread building."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "fear",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Tight on the protagonist's grimace as a hand grips her jaw. Real fear/strain on the face."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening", "scale-contrast"],
+          "expression": "panic",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["UMPHH!", "FOLM"],
+          "notes": "White/gold tips the potion into the held-open mouth of the protagonist — the forced trigger. Tense, well-staged."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Potion dribbles down the protagonist's chin as it takes hold; wide-eyed. Trigger for transformation #3 (forced)."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the force-feeding beat — fear/panic faces carry the dread. A genuine tease-then-trigger structure (she resists, it's forced)."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["KZZZT", "POLM!"],
+          "notes": "Forearm/gloved fist swelling with pink energy. Growth pulse re-ignites on the protagonist."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["FWOOM!", "POLM!"],
+          "notes": "ECU up the torso as abs/obliques carve in. Pure body-part money panel."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["KZZZT"],
+          "notes": "Thigh detail inflating, energy crackle. Progressive coverage continues."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KZZZT", "POLM!"],
+          "notes": "Hero-shot from below: arms spread, chest surging, ecstatic open-mouthed laugh, pink burst. Peak strain/ecstasy face anchors the page."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; transformation #3 — same proven ECU-progressive grid; bottom hero panel adds a 5/5 ecstasy face. Strong growth page."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["GLM"],
+          "notes": "Full-body splash: protagonist now in matching white/gold armor, far larger, grinning, against magenta burst. Third full-body reveal — the forced upgrade pays off."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; third full-body-reveal splash; low-hero flight pose. Pattern: every transformation ends on a splash (p3/p10/p16)."
+    },
+    {
+      "page": 17,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["GLM", "KSSH"],
+          "notes": "The white fabric over the chest tears/strains as growth continues; ecstatic face. Clothing-destruction beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["FOOOOM"],
+          "notes": "Torso/abs blasting outward against a green burst, garment shredding. Money torso panel."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": ["snap"],
+          "notes": "ECU of a hand snapping fingers, gold band on the wrist. Beat of control/command."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["PMMM"],
+          "notes": "A fresh pink potion materializes in a giant hand. Sets up the next escalation."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["FROOOM"],
+          "notes": "Protagonist arms-up, fully grown chest/torso, smiling. Aftermath flex of the upgrade."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MLS",
+          "angle": "high",
+          "staging": ["high-vuln", "scale-contrast", "depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["glug glug"],
+          "notes": "High angle: the blonde (now smaller) drinks the new potion to keep pace; sweat drop. The arms-race continues."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=0; six-panel escalation page — clothing-destruction + a new-potion handoff that re-arms the rivalry. Widest distance spread in the book."
+    },
+    {
+      "page": 18,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KZZZT", "KRRRRR"],
+          "notes": "Tight on the blonde's glowing eyes/brow as her own growth surges. Intense partial-face."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "shoulders",
+          "sfx": ["POLM!", "CLAK", "FWOMP"],
+          "notes": "Gold armor band on the shoulder/arm cracks and pops off as muscle outgrows it. Clothing/armor-destruction money beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["POLM!"],
+          "notes": "ECU of the chest ballooning further, energy crackle. Pure growth-focus."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["KZZZT", "POLM!"],
+          "notes": "ECU glutes/hip expanding. Progressive body coverage on the blonde's surge."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KZZZT"],
+          "notes": "Blonde with purple-streaked hair, open-mouthed strain, body huge and aura blazing. Caps the surge with a strong face."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; blonde's counter-growth with explicit armor-destruction (panel 2) — the clearest clothing-burst device in the book. KZZZT/POLM throughout."
+    },
+    {
+      "page": 19,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Establishing-scale splash: colossal blonde towering over the canyon, single-biceps flex, with the tiny kneeling man at her feet for scale (lower right). The biggest size-comparison beat in the book."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the size-comparison splash — colossal figure vs human-scale man sells the magnitude better than any panel. Fourth full-body reveal."
+    },
+    {
+      "page": 20,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Colossal blonde looks down, grinning; tiny dark-haired figure in FG (scale-contrast). Gloat beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blonde laughing/taunting in profile. Character beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Small protagonist (FG silhouette) faces the towering blonde reaching down. Size disparity held."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["KZZZT", "KRLT"],
+          "notes": "Protagonist surges back with her own growth, arms up, abs/torso defined, pink aura. Counter-escalation."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["KZZZT"],
+          "notes": "Protagonist re-armored in white/gold, chest/abs huge, confident grin, aura blazing. Re-matches the blonde's tier."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the tit-for-tat continues — blonde gloats, protagonist re-escalates. Persistent scale-contrast and low-hero angles."
+    },
+    {
+      "page": 21,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["WHTMMM"],
+          "notes": "Blonde (now even larger) flexes; torso fills frame, energy dripping. Continued peak growth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "legs",
+          "sfx": ["POLM"],
+          "notes": "Towering pink-aura thigh/hip with a golden genie-lamp vessel at base (FG) — the curse's source object foregrounded. Scale + the lamp motif."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["high-vuln", "scale-contrast"],
+          "expression": "strain",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["POLM", "GLUG"],
+          "notes": "Small dark-haired figure clutches the lamp/potion amid her own pink growth-cloud. The lamp changes hands."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["FROOOM"],
+          "notes": "The golden lamp sits amid swirling pink energy clouds — a quiet 'object' beat before the final reveal."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Final story panel: the blonde grins triumphantly, fingers raised, against a green burst — a smug button, no resolution. The cliffhanger note."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=0; final story page — surfaces the genie-lamp source and ends on a smug blonde mid-arms-race. No real climax/resolution; pull-forward is weak (just 'still escalating')."
+    },
+    {
+      "page": 22,
+      "role": "denouement",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Credits page over a faint gold-armor backdrop. Art by Boogie; Written by Gribble; Produced by GrowGetterComics.com; Colors by Little L. and Zere; special thanks + Patreon supporter list. No story content."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=1; pure credits/back-matter — not a story page. Lists creators and Patreon supporters; no popularity metrics."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "transformation-1-protagonist-drinks",
+      "pages": [1, 2, 3],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "zoom-escalation", "sfx-driven", "full-body-reveal", "clothing-destruction"]
+    },
+    {
+      "scene": "battle-purple-vs-supergirl",
+      "pages": [4, 5, 6],
+      "type": "action",
+      "escalation_devices": ["size-comparison", "reaction-intercut", "sfx-driven"]
+    },
+    {
+      "scene": "transformation-2-blonde-at-home",
+      "pages": [7, 8, 9, 10, 11],
+      "type": "active-growth",
+      "escalation_devices": ["slow-burn", "multi-panel-progressive", "zoom-escalation", "sfx-driven", "full-body-reveal", "size-comparison"]
+    },
+    {
+      "scene": "canyon-clash-and-forcefeed",
+      "pages": [12, 13, 14],
+      "type": "action",
+      "escalation_devices": ["size-comparison", "reaction-intercut", "sfx-driven"]
+    },
+    {
+      "scene": "transformation-3-protagonist-forced-upgrade",
+      "pages": [15, 16, 17],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "zoom-escalation", "clothing-destruction", "sfx-driven", "full-body-reveal"]
+    },
+    {
+      "scene": "escalating-potion-arms-race",
+      "pages": [18, 19, 20, 21],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "size-comparison", "sfx-driven", "full-body-reveal", "zoom-escalation"]
+    }
+  ],
+  "strengths": [
+    "Growth is the spine, not a one-and-done: FOUR distinct transformation surges (p1-3, p8-11, p15-17, p18-21), each using the same proven dense ECU/CU body-part grid (p2, p9, p15, p18) so every limb gets a zoomed money-shot — exactly the multi-panel-progressive zoom coverage the niche prizes.",
+    "Every transformation lands on a full-body splash reveal (p3, p10, p16, p19), and p19's EWS pairs the colossal figure with the tiny kneeling man for the book's best size-comparison — scale sold by composition, not just bigger muscles.",
+    "SFX do real work: KZZZT/POLM pulse through every growth page as a 'sensation' beat with no dialogue needed, and the battle's WHAM/CRACK/WHUMP/KRAGSH/TAGUUUUM/KRAKOOOM carry the kinetics (p4, p6, p13).",
+    "Action pages avoid flat defaults: p4-6 and p12 stage collisions on hard diagonals with foreshortened fists, dutch tilts (p4.3, p12.5) and reaction-intercut CUs (p12.4); p11 nails FG/BG scale-contrast (towering heroine vs tiny man).",
+    "Faces mostly carry the beat — repeated 5/5 ecstasy/strain on growth peaks (p2.2, p8.4, p9.1, p15.4, p17.1) and genuine fear/panic on the force-feed (p14.2-4)."
+  ],
+  "weaknesses": [
+    "Story is thin and ends without a climax: it's a potion-fueled tit-for-tat that just keeps escalating, then stops on a smug blonde (p21.5) with the genie-lamp as the only hook — no resolution, no real cliffhanger payoff, weak pull-forward.",
+    "P7 is the flat hotspot: an entire domestic page of four near-static eye-level mid-shots (p7.2-7.5) with empty/low-energy faces — the only page that reads as default-flat.",
+    "Two characters are hard to track: the opening jumps in with zero setup (p1) and a second protagonist appears cold at home (p7); without the prior issue, who's cursing whom and why is muddy, and both heroines wear matching white/gold by mid-book, hurting clarity.",
+    "Many empty speech balloons are drawn but unlettered across the set (p1.2, p3, p5.1, p7, p10, p13, p20-21) — dialogue beats are staged but the words are missing, so character/plot can't land.",
+    "Repetition creeps in: p13.3-13.4 are near-identical gloat MCUs, and the growth-ECU grids, while effective, recycle the same four body-part framings each surge with little variation."
+  ]
+}

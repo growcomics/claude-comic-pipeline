@@ -1,0 +1,977 @@
+{
+  "comic_id": "ass-effect",
+  "rubric_version": "1.0",
+  "analyzed_pages": 23,
+  "scores": {
+    "growth_density_score": 5,
+    "camera_dynamism_score": 3,
+    "expression_intensity_score": 4,
+    "story_structure_score": 3
+  },
+  "narrative_arc": "Miranda envies the attention busty asari Samara gets -> secretly uses biotics that night to enhance her own curves -> shows off the new body to the crew -> a hit from Wrex plants the idea of strength enhancement -> she pumps biotics into muscle growth, escalating past control -> grows to cosmic/universe scale, clothing destroyed, screaming for MORE POWER -> ends as an 'absolute' macro-muscle goddess in space (cover-gag back to status quo pin-up)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Title cover: Miranda in white catsuit, rear-three-quarter glute-forward hero pose against a planet-rise sky. 'Art by Boogie / GrowGetterComics' credit lower-right. Establishes the glute/lower-body niche up front."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; single-image cover, glute-forward low-hero framing sets the niche."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "diagonal"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Establishing: the Normandy ship banking over a planet, 'Somewhere in Century system' caption. Clean spatial setup."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Two male crew (Joker + bearded officer) chatting, 'Patrol day just got better!' Level two-shot, talking heads."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": ["CLICK!", "CLICK!", "CLICK!"],
+          "notes": "Glute close-up in the catsuit framed by the harness ring; CLICK SFX = the men photographing her. The leer is the inciting beat. body_part_focus glutes."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; establishing wide + crew banter + glute CU, the men's CLICK voyeurism sets up Miranda's envy engine."
+    },
+    {
+      "page": 3,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Miranda strides down a ramp toward the men, 'Sup, boys? See something you like?' Low-angle full figure, good depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Two-shot of the men complimenting ('your ass is out of this galaxy'). Talking heads over starfield."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Miranda reacting pleased, 'Thanks, I guess? Any kind words for the twins?' Chest-up, hand to collar."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Men reply 'About them...' Reaction two-shot, low energy."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shyness",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Miranda turning slightly deflated as the compliment pivots away from her. Sets up the jealousy."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Bearded officer thumbs-up, 'I think Samara got you beat on that department.' The wound that drives the plot. Flat inset."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=5; heavy dialogue page, mostly flat-level talking heads except the low-hero ramp entrance (p1). Plot wound delivered: Samara out-busts her."
+    },
+    {
+      "page": 4,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Samara (red-suited asari) posing confidently at a holo-console, hyper-busty, chest-forward. She is the envy target. Low-hero."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Miranda + crew watching from behind/right, arms crossed, 'Whoa!' Samara large in FG, onlookers smaller. Good scale-contrast."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Inset CU of Miranda's face, eyes down, jealous/scheming. The 'I can fix this' seed before the night scene."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; Samara reveal with scale-contrast staging, closes on Miranda's scheming CU. Motivation fully loaded."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "'Later that night...' Miranda sits on her bunk edge in underwear, brooding, 'Must be nice getting all that attention like Samara.' Quiet beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "She brightens, 'I KNOW! Maybe I can use...' The idea lands. Chest-up, lit by the realization."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Grinning, hands rising into frame beginning to glow. Bridge into the trigger."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "face",
+          "sfx": ["VWOOMP!", "BIOTICS!"],
+          "notes": "TRIGGER: biotic energy (blue particles) erupts from her cupped hands thrust toward camera, 'BIOTICS!' Hands foreshortened. The catalyst for transformation #1."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=3; quiet bunk setup escalates to the biotic trigger; VWOOMP/BIOTICS SFX launch the first growth. Counts as growth page (trigger)."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Miranda flashing double peace-signs, chest swelling, 'Just a little bit of enhancement...' Biotic glow over the bust."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["GASP!", "HAAAH!"],
+          "notes": "Head thrown back, mouth open, 'Oh... This feels...' Peak-pleasure face mid-growth. Strong expression beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["VWOOMP!"],
+          "notes": "Hips/glutes ballooning under shorts, biotic sparkle. Lower-body growth money-shot. body_part_focus glutes."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["FWOOMP!", "FWOOMP!"],
+          "notes": "Tight on the swelling rear filling frame, double FWOOMP. Pure glute ECU growth-focus, no face. Niche payoff."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["VWOOMP!", "FWOOMP!"],
+          "notes": "Hand on swelling midriff/waist, abs/core tightening; SFX-driven. Growth-focus body detail."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["HELL YEAH!"],
+          "notes": "Result panel: noticeably bigger bust + curves, hands lifting the chest, 'HELL YEAH!' First-tier transformation lands."
+        }
+      ],
+      "page_notes": "distance_spread=4 (MS/CU/ECU); flat_panel_count=1; the curve-growth money page - multi-panel-progressive across chest->glutes->abs->result with VWOOMP/FWOOMP throughout and an ecstasy CU. Best growth coverage of the first scene."
+    },
+    {
+      "page": 7,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "'The next day...' Joker + officer at the cockpit, 'What the hell are you looking at?' Reaction setup to her entrance."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Officer gesturing toward enhanced Miranda, crew in FG, 'By Hera's Milky Way...' Depth staging."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": ["CLACK!", "CLACK!", "CLACK!"],
+          "notes": "Enhanced bust foregrounded in the catsuit, men craning up; CLACK = bootsteps/photos. Low-hero shows off the result."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SMIRK"],
+          "notes": "ECU of her lips smirking, 'SMIRK' rendered as SFX. Confident button on the reveal."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=1; aftermath show-off page - reaction-intercut between gawking crew and the enhanced result, capped by a smirk ECU. No active growth."
+    },
+    {
+      "page": 8,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Miranda standing tall on a platform, hands on hips, 'Top of the day, boys & girls!' Towering low-hero full figure, crew small in FG."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "awe",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["WHOA!"],
+          "notes": "OTS past a male crewman gawking up, 'Those are HUUUGEE...!' Reaction shot."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["GASP!"],
+          "notes": "Redheaded female crew + male in FG reacting, 'GASP!' Reaction-intercut closes the aftermath of scene 1."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; strong low-hero hero-shot + OTS reaction-intercut. Good staging variety despite being a static reveal page."
+    },
+    {
+      "page": 9,
+      "role": "dialogue",
+      "growth_state": "aftermath",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Samara and the enhanced Miranda side by side, 'M-Miranda...' / 'Samara.' Two rivals now comparable in build. Standing two-shot with depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "OTS on Samara conceding, 'I see you've made some steps for... self-provements!' Miranda: 'Really? Sweet of you to notice.' The rivalry beat pays off."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; rival face-off dialogue, OTS framing keeps it from going flat. Closes the jealousy arc, but pacing slows here."
+    },
+    {
+      "page": 10,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["high-vuln", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "'A while later...' Miranda stretching back in a console chair, 'Ahhh! That's enough of all these reports!' Slightly high angle, roomy depth."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "She walks off past a large red-armored figure (Wrex, krogan), 'Time to see if I'll get more drinks with these babies!' Wrex looms in FG."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening", "scale-contrast"],
+          "expression": "pain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["OOF!", "BUMP!"],
+          "notes": "She walks face-first into Wrex's armor, 'OOF!' BUMP! impact star. Comedic collision that seeds the strength idea."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; transitional buildup; the Wrex collision (p3) is the plot pivot toward strength enhancement. Good angle variety (high/eye)."
+    },
+    {
+      "page": 11,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "pain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["THUD!"],
+          "notes": "Miranda knocked to the floor by the immovable krogan, 'Ooohh... That felt like I hit a wall.' Wrex's huge red arm reaches in. THUD. Big scale-contrast."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "OTS over Miranda toward Wrex, 'Wrex!' / 'You good, Miranda?' Establishes the size gap she now resents."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Wrex boasts 'Krogan blessed me with indomitable strength and smoldering good looks.' Miranda eyes him, 'I guess... but damn, you're quite strong!' The new envy: strength."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the strength-envy is verbalized here, mirroring the page 3-4 bust-envy setup. Wrex's bulk drives the scale-contrast in every panel."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Wrex walks off (red armor exiting FG), Miranda thinks 'He wasn't even fazed...' The wound that triggers scene 2."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Miranda turning thoughtful/scheming, 'Hmm... Maybe a bit of strength enhancement could come handy in the field.' The plan forms."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["VWOOMP!"],
+          "notes": "TRIGGER #2: she clenches a fist, biotic glow flaring at the forearm, VWOOMP. Launches the muscle-growth scene (the comic's spine)."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; mirror of the first trigger but aimed at muscle. VWOOMP relaunches active growth; the long peak sequence begins next page."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "strain",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["BAAM!", "VWOOMP!", "VWOOMP!"],
+          "notes": "Gritted-teeth strain, one arm curled into a swelling bicep that balloons with a BAAM, biotic burst. 'That's it... just a bit more...' Strong strain face + arm money-shot."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["BA-BAAM!!", "VWOOMP!", "VWOOMP!"],
+          "notes": "Bicep explodes larger toward camera, BA-BAAM, wide grin/eyes, 'NICE!' Foreshortened flexing arm dominates frame. Escalation locked in."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; tight two-panel bicep escalation with rising SFX (BAAM->BA-BAAM) and peak strain/ecstasy faces. zoom-escalation + sfx-driven in action."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["HAAAH!", "RUMBLE", "VWOOMP!"],
+          "notes": "Low ECU on torso: abs beginning to carve under the sports bra, biotic glow, RUMBLE. Faceless midriff growth-focus."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["BAAAM!", "VWOOMP!", "FWOOMP!"],
+          "notes": "Same framing, abs now fully cut + thighs thickening, BAAAM. Stage-to-stage progression on the same body region."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["OOOOOHH...", "FUCK YEAH!", "BULGE!", "BULGE!", "VWOOMP!"],
+          "notes": "Rear-view ECU, glutes ballooning, multiple BULGE SFX, 'FUCK YEAH!' Glute money-shot - the title-promised lower-body payoff. growth-focus glutes."
+        }
+      ],
+      "page_notes": "distance_spread=1 (all ECU); flat_panel_count=0; classic multi-panel-progressive on abs->glutes with stacked SFX. Monotonous distance but maximal zoom coverage; the niche glute beat lands (p3)."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["GLOW", "GLOW"],
+          "notes": "FULL-BODY REVEAL: Miranda hits a double-biceps pose, now heavily muscled (huge arms, cut abs, thick legs) yet still busty, 'That's what I'm talking about!' Low-hero splash-style result of the muscle build."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU of her grinning face from below, devilish grin, 'What if... I want to go a little further?' The fatal escalation hook into the cosmic act."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; full-body-reveal of the muscle tier + a menacing face ECU that turns the story from 'enough' to 'MORE.' Best single hero composition of the book (p1)."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["HAAAAH!!", "VWOOMP!", "VWOOMP!", "VWOOMP!", "RUMBLE"],
+          "notes": "Wild-eyed grin/snarl, arms now grotesquely huge, triple VWOOMP, 'HAAAAH!!' Past the point of control. Intense face."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["foreshortening", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["AAAAHH!!", "THOOM", "THOOM", "RIIIPP!", "RIIIPP!"],
+          "notes": "CLOTHING-DESTRUCTION: the sports bra tears off (RIIIPP), chest + pecs exploding outward, head thrown back screaming. The restraint breaks here."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the turn from 'enhancement' to 'overload' - clothing-destruction (RIIIPP) + peak rage/ecstasy faces + stacked SFX. Pacing accelerates hard into the cosmic finale."
+    },
+    {
+      "page": 17,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["OH MY...", "HAAAHH!"],
+          "notes": "Tilted-back ecstatic/overwhelmed face, eyes rolling, 'OH MY... HAAAHH!' Reaction-intercut at the top of the growth surge."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["KRAGOOOOOM!", "KRAGOOOOOM!", "MORE!!", "MORE!!", "HAHAHAHAHA!!!"],
+          "notes": "Hair wild, fully muscled torso bursting all remaining gear, KRAGOOOOOM x2, screaming 'MORE!! MORE!!' + maniacal 'HAHAHAHAHA!!!' The power-mad turn. Big SFX-driven beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Continuation of the screaming surge (overlapping the big SFX); body swelling further as the panel borders dissolve into the energy. Reads as one escalating moment."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the 'MORE!!' hinge - giant onomatopoeia (KRAGOOOOOM) + maniacal laughter drive a wordless-power sensation. Strong sfx-driven escalation."
+    },
+    {
+      "page": 18,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["MORE POWER!!", "KATHOOM!", "VVZZZ!"],
+          "notes": "Full-page: now planet-scale, the tiny Normandy ship dwarfed against her body, floating in space, 'MORE POWER!!' KATHOOM. size-comparison (ship) makes the macro-scale legible. Splash escalation."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; splash. The ship-as-size-reference (scale-contrast) is the cleverest growth device on the page - sells planetary scale instantly. full-body-reveal at cosmic tier."
+    },
+    {
+      "page": 19,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["YES... YES!!!", "MORE FUCKING POWER!", "VVZZZ!"],
+          "notes": "Full-page: floating in the cosmos mid-laugh-scream, even larger, planets behind her, 'YES... YES!!! / MORE FUCKING POWER!' Pure peak, full-body-reveal."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; near-repeat of p18's cosmic splash - escalation by repetition. Slightly redundant with p18/p20 but sustains the climax."
+    },
+    {
+      "page": 20,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["MORE POWER THAN THE WHOLE UNIVERSE COMBINED!", "KRZZAP!", "KRZZAP!"],
+          "notes": "Full-page: front-on, arms raised, lightning (KRZZAP) crackling around a heart-shaped energy aura, 'MORE POWER THAN THE WHOLE UNIVERSE COMBINED!' The grandiosity peaks here."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; third cosmic splash - the megalomaniac line is the verbal climax. Lightning FX adds variety vs the prior two but the trio of full-page splashes (18-20) blurs together."
+    },
+    {
+      "page": 21,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal", "foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["GREEEET!", "GREEEET!", "I. AM. ABSOLUTE!"],
+          "notes": "CLIMAX SPLASH: maximally muscled goddess on a clean white void, one fist crackling overhead, mid-stride diagonal, 'I. AM. ABSOLUTE!' The money-shot the whole book builds to - clean negative space isolates the figure."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; the climactic hero splash - white-void isolation + dynamic diagonal stride make it the strongest single image. End of the transformation arc."
+    },
+    {
+      "page": 22,
+      "role": "denouement",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Back-matter commission ad ('SLOTS OPEN FOR COMMISSIONS!', 'Boogie here!', price guide $90/$140/$180, socials @boogiedraws). NOT story content - it is the artist's promo page. Confirms creator = Boogie."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; non-story commission advertisement. Excluded from growth ratio; included only because it is one of the 23 supplied files and it confirms authorship."
+    },
+    {
+      "page": 23,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Back-cover pin-up: pre-transformation Miranda in the white catsuit, rear-three-quarter glute-forward, looking back smiling (status-quo reset / cover callback). Credits: 'Art by Boogie / Commissioned by Kray1170 / Produced by GrowGetterComics.com.'"
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; back-cover pin-up mirroring p1; full credit block confirms art=Boogie, commissioner=Kray1170, publisher=GrowGetterComics."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "setup-envy-bust",
+      "pages": [1, 2, 3, 4],
+      "type": "setup",
+      "escalation_devices": []
+    },
+    {
+      "scene": "transformation-1-curves",
+      "pages": [5, 6],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "zoom-escalation", "sfx-driven", "reaction-intercut"]
+    },
+    {
+      "scene": "aftermath-showoff-1",
+      "pages": [7, 8, 9],
+      "type": "aftermath",
+      "escalation_devices": ["reaction-intercut", "size-comparison"]
+    },
+    {
+      "scene": "buildup-envy-strength",
+      "pages": [10, 11, 12],
+      "type": "buildup",
+      "escalation_devices": ["size-comparison"]
+    },
+    {
+      "scene": "transformation-2-muscle-to-cosmic",
+      "pages": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "size-comparison", "slow-burn", "reaction-intercut", "sfx-driven", "full-body-reveal"]
+    }
+  ],
+  "strengths": [
+    "P14 runs a textbook multi-panel-progressive: three stacked ECUs grow abs->abs->glutes stage-by-stage on the same body region with layered VWOOMP/BAAAM/BULGE SFX - exactly the device the pipeline wants more of.",
+    "P18's size-comparison sells cosmic scale instantly by floating the tiny Normandy ship against her thigh; one fixed reference does what a paragraph of prose can't.",
+    "P21's 'I. AM. ABSOLUTE!' climax splash isolates the figure on a clean white void with a dynamic diagonal stride - the strongest single composition and a model money-shot.",
+    "SFX escalation is consistent and legible: BAAM->BA-BAAM (p13), RIIIPP clothing tear (p16), KRAGOOOOOM/KATHOOM/KRZZAP (p17-20) carry the growth sensation even when dialogue drops out.",
+    "Expression intensity stays high through the peak (p13 strain=5, p16 rage=5, p17-21 ecstasy/rage=5); faces consistently register the overload, never going dead during the money pages.",
+    "Two-act envy engine is clean: bust-envy (Samara, p3-4) and strength-envy (Wrex, p10-11) each trigger a transformation, giving the growth a motivated cause rather than a random potion."
+  ],
+  "weaknesses": [
+    "P3 is five consecutive flat-level talking-head panels (only the p1 ramp entrance breaks the level eyeline); the dialogue has almost no camera movement - the book's flattest stretch.",
+    "Camera angle is monotone in the finale: every cosmic page (p17-21) is the same low-hero front/three-quarter framing - no high, dutch, aerial, or POV variety to differentiate five climactic pages.",
+    "Pages 18-20 are three near-identical full-page cosmic splashes ('MORE POWER' / 'YES YES' / 'MORE POWER THAN THE UNIVERSE'); escalation-by-repetition pads the climax and blurs the beats together.",
+    "Distance spread collapses during the peak: p14 is all-ECU and p16/p18/p19/p20 are single-distance pages, so the back half loses the wide/medium/tight rhythm that p6-7 had.",
+    "Story is thin and ends abruptly on the climax splash (p21) with no consequence, comedown, or cliffhanger pull-forward; the back-cover pin-up (p23) silently resets her to baseline with no in-story explanation.",
+    "The first transformation (p5-6) is comparatively rushed - only two pages and one result panel - so the curve-growth act under-delivers zoom coverage relative to the much longer muscle act."
+  ]
+}

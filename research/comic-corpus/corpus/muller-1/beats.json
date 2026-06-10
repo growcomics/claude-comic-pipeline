@@ -1,0 +1,302 @@
+{
+  "comic_id": "muller-1",
+  "rubric_version": "1.0",
+  "analyzed_pages": 20,
+  "scores": {
+    "growth_density_score": 2,
+    "camera_dynamism_score": 3,
+    "expression_intensity_score": 2,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "bored housewife cooks for distracted husband -> secretly brews a green glowing chemical -> starts going to the gym -> falls off a ladder unhurt and emerges suddenly muscular -> slow-burn growth across gym + mirror-flex reveals while dosing husband's food/wine -> intimate scenes punctuate -> ends on a new brunette arriving in a sports car with her own spray bottle (cliffhanger)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist at stove cooking; empty caption box top-left; husband small in BG-right panel."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Husband seated on couch on phone; flat mid-shot."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "First glimpse of green-glowing fluid + bottle on counter beside her — the chemical motif planted early."},
+        {"n": 4, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Husband on phone, dead-face mid-shot."},
+        {"n": 5, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Couple at table, husband served dinner; level two-shot."},
+        {"n": 6, "shot_distance": "MS", "angle": "OTS", "staging": ["OTS", "scale-contrast"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "OTS across the dinner table; big-FG husband head + smaller seated figures — only real composition variety on the page."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=3; pure setup, domestic boredom; chemical motif planted p1 panel 3; all balloons blank/un-lettered."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Couple at table again, husband gesturing; flat."},
+        {"n": 2, "shot_distance": "MCU", "angle": "OTS", "staging": ["OTS"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "OTS on protagonist by a window/painting."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist washing dishes; mundane, flat."},
+        {"n": 4, "shot_distance": "MS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Husband lounging on couch on phone, room depth; slight high angle."},
+        {"n": 5, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Couple in bed, lamps flanking, high wide; emotional distance between them implied (gap in bed)."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=2; the night-routine page; establishes a cold marriage; no growth."
+    },
+    {
+      "page": 3,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "determination", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist sitting on bed lacing up red shoes — decides to act; bedroom depth."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "At a doorway in a tracksuit."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "shyness", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": ["GYM"], "notes": "Pushing through glass gym door (GYM signage); hesitant — readable nerves; a male bodybuilder doing pull-ups visible in BG depth."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Reaction shot, hand raised."},
+        {"n": 5, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "awe", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Gym floor wide: fit patrons (a fit ponytail woman FG, a muscular man) — protagonist eyes the fitness world she is entering; good depth + scale variety. NOTE: background extras present (gym crowd)."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; inciting decision — she joins the gym; GYM signage SFX; gym crowd populates frames."
+    },
+    {
+      "page": 4,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist FG-left, two fit women running on treadmills behind in purple-lit depth; nice big-FG/small-BG scale-contrast."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Low-angle resolve beat on protagonist; readable grit."},
+        {"n": 3, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": ["CSESH"], "notes": "Wide gym floor with several patrons working out; faint reversed signage. Crowd extras present."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["depth-fg-bg", "low-hero"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": ["WACH", "SEI"], "notes": "Leaving the building, big wall signage 'WACH SEI'; low angle gives her presence; cityscape depth."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the most camera-varied page so far — low-hero angles + scale-contrast; still no actual growth, this is buildup montage."
+    },
+    {
+      "page": 5,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "joy", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Protagonist tasting food at the stove, content; steam FG; one of the better-acted faces (soft satisfaction)."},
+        {"n": 2, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "joy", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Inset: bright genuine smile eating dinner — best expression on the page, sells contentment."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": ["PFFT"], "notes": "Husband + a second blond man (brother/friend) at table eating; flat two-shot; small PFFT tag."},
+        {"n": 4, "shot_distance": "MS", "angle": "OTS", "staging": ["OTS", "scale-contrast"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "OTS across table between the two men, protagonist centered eating; big-FG heads frame her."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=2; dinner-table dialogue page; expressions warm here (p5p1-2); no growth."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Couple asleep in bed, protagonist waking; high angle; quiet beat before first change."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["flat-level"], "expression": "awe", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "She notices her body in a mirror — first subtle firmness; mild awe."},
+        {"n": 3, "shot_distance": "MS", "angle": "low", "staging": ["depth-fg-bg", "low-hero"], "expression": "effort", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "arms", "sfx": ["GRUNT"], "notes": "Lifting a dumbbell at a bench, leaning forward; GRUNT SFX; effort registers — early-growth working beat."},
+        {"n": 4, "shot_distance": "CU", "angle": "low", "staging": ["low-hero"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Tight low CU: knowing, pleased smirk — she likes what is happening; strong face."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; FIRST growth page — subtle early firmness + GRUNT effort SFX; counts toward ratio."
+    },
+    {
+      "page": 7,
+      "role": "dialogue",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Fancy restaurant wide, couple + waiter; strong environmental depth, red round table; a date-night flashback/fantasy or memory."},
+        {"n": 2, "shot_distance": "MCU", "angle": "eye", "staging": ["foreshortening"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Husband raising a glass toward camera (foreshortened hand); charming."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "shyness", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Protagonist reaction, soft/flushed; readable."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "shyness", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Bedroom intimate beat (pre-growth body), husband asleep; tender. No active growth."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; relationship/intimacy page; nice restaurant depth p7p1; no growth content."
+    },
+    {
+      "page": 8,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "low", "staging": ["scale-contrast", "low-hero", "foreshortening"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "glutes", "sfx": [], "notes": "Two women in workout gear: huge low-angle glutes FG-left vs protagonist standing in sports bra showing a tighter, fuller build; clear body-comparison + scale-contrast. Visible early growth (abs/glutes)."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Husband + protagonist at a desk/library with green-glowing item; chemical motif returns."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Husband on phone, white shirt; flat."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "joy", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Protagonist outdoors in a hoodie + tight shorts, fuller thighs/glutes; suburban street depth; pleased. Early-growth aftermath-of-gym beat."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; visible early growth (glutes/abs) with size-comparison p8p1; chemical thread continues; counts toward ratio."
+    },
+    {
+      "page": 9,
+      "role": "aftermath",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "foreshortening"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "abs", "sfx": [], "notes": "Intimate scene, protagonist astride, low angle emphasizing newly defined abs/torso; open-mouth ecstasy — high-intensity face. First real display of the changing body in a charged moment."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Continued intimate two-shot, husband reacting; strong expressions both."},
+        {"n": 3, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": ["ZZ"], "notes": "Aftermath: husband asleep (ZZ), protagonist sitting up in a tank top, fuller frame; wide high angle. Quiet button."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; intimacy showcases the early-changed body; faces carry the beat well here (p9p1-2); growth shown but passive (display, not active change)."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "joy", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": ["MYO"], "notes": "Doorway/mirror panel, protagonist in hoodie + shorts, fuller; big 'MYO...' signage SFX (likely 'MYOSTATIN'/brand). Depth via doorway."},
+        {"n": 2, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "scale-contrast"], "expression": "effort", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "arms", "sfx": ["HUFF", "HUFF"], "notes": "MONEY PANEL: barbell curl with heavy plates, visibly muscular arms/shoulders now, low-hero towering framing; HUFF HUFF strain SFX; a smaller gym patron in BG gives scale. Strong effort face."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist with phone/towel, sports bra, defined; flat reaction."},
+        {"n": 4, "shot_distance": "ECU", "angle": "eye", "staging": ["foreshortening"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "ECU of a phone screen in a hand (text message); plot device, not growth — but a rare ECU for variety."},
+        {"n": 5, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Backlit figure jogging down a sunset alley toward camera; strong silhouette depth; tiny figure, no face."}
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=1; mid-growth — heavy-barbell money panel p10p2 with HUFF strain SFX + low-hero; best distance spread in the book (WS->ECU)."
+    },
+    {
+      "page": 11,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "low-hero"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Protagonist up a ladder cleaning a roof gutter with a bucket; strong perspective up the ladder/roofline."},
+        {"n": 2, "shot_distance": "CU", "angle": "high", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Insert: gloved hands + brush in a bucket of white chemical/paint — the catalyst substance in close-up."},
+        {"n": 3, "shot_distance": "MS", "angle": "dutch", "staging": ["diagonal", "dutch", "foreshortening"], "expression": "panic", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "none", "sfx": ["CRASH"], "notes": "The bucket/ladder tips, chemical flung — CRASH SFX, canted/diagonal chaos; alarm registers. The accident trigger."},
+        {"n": 4, "shot_distance": "WS", "angle": "low", "staging": ["diagonal", "foreshortening", "low-hero"], "expression": "fear", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "She falls inverted inside a yellow radial impact burst, legs thrust toward camera (foreshortening), drenched in the chemical; dynamic action panel. TRIGGER moment."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; the inciting accident — doused in chemical mid-fall; CRASH SFX; the most dynamic action staging in the book (dutch + radial burst + foreshortening)."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "high", "staging": ["depth-fg-bg", "high-vuln", "foreshortening"], "expression": "pain", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "none", "sfx": ["THUD"], "notes": "Sprawled on the grass, chemical-splattered, ladder + bucket scattered; THUD SFX; high-angle vulnerability; grimace of pain."},
+        {"n": 2, "shot_distance": "MS", "angle": "high", "staging": ["high-vuln"], "expression": "shock", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "On hands and knees, dazed; high angle; she begins to realize she is unhurt."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["foreshortening"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "ECU of a red-gloved hand reaching/grabbing a rail — getting up; good detail insert."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["depth-fg-bg", "low-hero"], "expression": "awe", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Rising at the ladder, midriff bared by torn/ridden-up top, suddenly firmer; dawning awe — first post-accident change beat."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; aftermath of the fall + first hint of the new body; THUD SFX; high-vuln angles sell the disorientation."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "low-hero", "foreshortening"], "expression": "shock", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Worm/low angle up at her standing tall over the fallen ladder, sneakers thrust toward camera; she realizes her new strength. Big dynamic full-body."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "awe", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "arms", "sfx": [], "notes": "Holds up the dented bucket she crushed/grips, defined arm; awe at her own power. Test-the-strength beat."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["foreshortening"], "expression": "joy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "arms", "sfx": ["KRAK"], "notes": "Crushing/bending the metal bucket with a star-burst impact mark; KRAK-style impact; delighted grin — the 'I am strong now' payoff."},
+        {"n": 4, "shot_distance": "MS", "angle": "low", "staging": ["low-hero"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Hands-on-hips power pose by the TV; fuller muscular frame; low-hero confidence."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; the strength-reveal page — crushes metal (impact SFX), tests new power; consistently dynamic angles + high-intensity faces; a highlight page."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "low", "staging": ["scale-contrast", "low-hero", "depth-fg-bg"], "expression": "joy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "arms", "sfx": [], "notes": "SPLASH-style mirror reveal: protagonist seen from behind (big glutes/lats FG) doing a double-biceps flex into a wardrobe mirror, her muscular reflection beaming back with a torn waistband and visible abs; low-hero + back-vs-reflection scale-contrast. The signature full-body muscle reveal of the issue."}
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; near-splash flex reveal — the money page of the book; the strongest single composition (mirror doubling, low-hero, foreground back vs flexing reflection)."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Protagonist striding in a green crop top + shorts, clearly muscular now (defined arms, broad shoulders, thick legs); confident. Stage-up display."},
+        {"n": 2, "shot_distance": "WS", "angle": "low", "staging": ["depth-fg-bg", "low-hero", "scale-contrast"], "expression": "determination", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Standing tall on the gym floor among normal-sized patrons; low-hero + scale-contrast makes her dominate; plates/dumbbells FG for depth."},
+        {"n": 3, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "foreshortening"], "expression": "effort", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "shoulders", "sfx": [], "notes": "MONEY PANEL: heavy overhead barbell press, shoulders/arms flexed, plates thrust up; low-hero; strong effort face; an onlooker FG-right reacts (reaction-intercut)."},
+        {"n": 4, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "effort", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Multi-figure strip of her doing a workout combo (squat->jump/clap sequence across the panel); a poor-man's progressive multi-pose; impact stars."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; full muscular display + heavy-press money panel p15p3 with onlooker reaction; growth now clearly mid/established."
+    },
+    {
+      "page": 16,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "In a maid/cleaner uniform + gloves at a shelf, decanting chemicals among many bottles/jars (green + clear); the chemist-at-work reveal — she is brewing the substance deliberately. Pantry depth."},
+        {"n": 2, "shot_distance": "MCU", "angle": "low", "staging": ["low-hero"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Holding up a vial of the green fluid, knowing look; low angle. Plan in motion."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["foreshortening"], "expression": "smug", "expression_intensity": 3, "growth_focus": true, "body_part_focus": "arms", "sfx": ["POUR"], "notes": "Pouring/handling product, muscular forearm foreshortened toward camera with a radial highlight on the bottle; her physique still on display even mid-scheme."},
+        {"n": 4, "shot_distance": "MS", "angle": "high", "staging": ["high-vuln", "depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Reaching into a supply cupboard among tools, from behind/high; muscular back; depth."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; KEY PLOT page — reveals she is deliberately brewing the chemical; mostly scheming, classified role=buildup (no active growth on-page)."
+    },
+    {
+      "page": 17,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Stirring a large pot on the counter, library/shelves behind; domestic-but-sinister. Depth."},
+        {"n": 2, "shot_distance": "CU", "angle": "eye", "staging": ["flat-level"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Inset CU: glowing-eyed knowing smirk (purple-lit) — the recurring hypnotic-glow motif; strong sinister expression."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "face", "sfx": ["ZZ"], "notes": "Husband eating, a small spark/'ZZ' over him — being dosed; slightly glazed. Effect-on-victim beat."},
+        {"n": 4, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "She pours him a glass of red wine (laced); two-shot; muscular arm. The administering beat."},
+        {"n": 5, "shot_distance": "MCU", "angle": "eye", "staging": ["scale-contrast", "flat-level"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": ["ZZ"], "notes": "Split: her glowing-eye smirk vs husband drinking the wine ('ZZ' spark); the dosing pays off; strong knowing face."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=2; the dosing page — she drugs his food/wine, glow-eye motif (p17p2,5); plot-forward, no growth."
+    },
+    {
+      "page": 18,
+      "role": "aftermath",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "MCU", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Close intimate two-shot, she touches the dazed husband's face; control dynamic."},
+        {"n": 2, "shot_distance": "MS", "angle": "low", "staging": ["low-hero", "foreshortening"], "expression": "ecstasy", "expression_intensity": 4, "growth_focus": true, "body_part_focus": "full", "sfx": [], "notes": "Intimate scene, full muscular body now on display (defined torso/arms/glutes), low angle; open-mouth ecstasy — body fully transformed since the earlier intimate page (p9). Display of the result."},
+        {"n": 3, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "ecstasy", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Continued two-shot, husband reacting; afterglow."},
+        {"n": 4, "shot_distance": "CU", "angle": "eye", "staging": ["flat-level"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "CU: satisfied, slightly predatory smile — she is in command. Strong button face."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; intimacy showcasing the FINISHED transformed body (contrast vs p9's early body); passive display, not active growth."
+    },
+    {
+      "page": 19,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {"n": 1, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Husband leaving for the day at a window, protagonist seated at table FG; domestic depth; an empty thought-bubble hangs (un-lettered)."},
+        {"n": 2, "shot_distance": "MCU", "angle": "high", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": ["ZZ"], "notes": "Inset: glow-eyed smirk at a laptop with a sparkle; the scheme continues; purple glow."},
+        {"n": 3, "shot_distance": "ECU", "angle": "eye", "staging": ["foreshortening"], "expression": "neutral", "expression_intensity": 1, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "ECU of a tablet/phone screen (a message/order) in her muscular hand; plot device, no face. Rare ECU for variety."},
+        {"n": 4, "shot_distance": "CU", "angle": "eye", "staging": ["flat-level"], "expression": "determination", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "CU thinking, finger to lips, plotting next move; readable scheming."},
+        {"n": 5, "shot_distance": "MS", "angle": "eye", "staging": ["depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Leaning on the desk with a satisfied/scheming smile; sets up the next escalation. Plot bridge to the cliffhanger."}
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; plot-bridge page — she orders more / plans next; glow-eye motif; sets up the new arrival; no growth."
+    },
+    {
+      "page": 20,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {"n": 1, "shot_distance": "WS", "angle": "eye", "staging": ["depth-fg-bg", "foreshortening"], "expression": "neutral", "expression_intensity": 2, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "A red sports car rolls up a suburban street toward camera; an empty caption box; cinematic arrival wide. NEW location/character incoming."},
+        {"n": 2, "shot_distance": "MS", "angle": "eye", "staging": ["OTS", "depth-fg-bg"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "Through the driver door: a NEW brunette woman in a yellow bikini at the wheel; OTS through the car frame; confident newcomer."},
+        {"n": 3, "shot_distance": "MCU", "angle": "eye", "staging": ["flat-level"], "expression": "smug", "expression_intensity": 3, "growth_focus": false, "body_part_focus": "face", "sfx": [], "notes": "Tighter on the brunette, looking off/ahead; introduces her as a player."},
+        {"n": 4, "shot_distance": "MCU", "angle": "low", "staging": ["foreshortening", "low-hero"], "expression": "smug", "expression_intensity": 4, "growth_focus": false, "body_part_focus": "none", "sfx": [], "notes": "She holds up a small spray bottle (the same product line) with a knowing grin, foreshortened toward camera; THE HOOK — links her to the chemical. Cliffhanger to next issue."}
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; CLIFFHANGER — new brunette arrives by sports car holding the same chemical/spray; strong pull-forward but anticlimactic that the issue ends on a brand-new face rather than the protagonist."
+    }
+  ],
+  "scene_breakdown": [
+    {"scene": "domestic-setup", "pages": [1, 2], "type": "setup", "escalation_devices": []},
+    {"scene": "joins-the-gym", "pages": [3, 4, 5], "type": "buildup", "escalation_devices": []},
+    {"scene": "early-growth-montage", "pages": [6, 8, 9], "type": "active-growth", "escalation_devices": ["size-comparison", "slow-burn", "sfx-driven", "reaction-intercut"]},
+    {"scene": "ladder-accident-trigger", "pages": [11, 12], "type": "active-growth", "escalation_devices": ["sfx-driven"]},
+    {"scene": "strength-reveal-and-flex", "pages": [13, 14, 15], "type": "active-growth", "escalation_devices": ["size-comparison", "full-body-reveal", "reaction-intercut", "sfx-driven", "zoom-escalation"]},
+    {"scene": "brewing-and-dosing", "pages": [16, 17, 18, 19], "type": "buildup", "escalation_devices": []},
+    {"scene": "new-arrival-cliffhanger", "pages": [20], "type": "cliffhanger", "escalation_devices": []}
+  ],
+  "strengths": [
+    "P14 near-splash mirror flex is the single best composition: low-hero, big-FG muscular back vs the beaming flexing reflection (back-vs-reflection scale-contrast doubles the reveal) — the model the pipeline should steal for full-body muscle reveals.",
+    "P11 ladder-fall trigger is genuinely dynamic action: dutch/diagonal CRASH panel + inverted fall inside a yellow radial impact burst with legs foreshortened toward camera (p11p3-4) — proves this artist CAN stage energy when motivated.",
+    "P13 strength-reveal page is consistently dynamic AND high-intensity: worm-angle full-body (p13p1), crushing metal with an impact star + delighted grin (p13p3), low-hero power pose (p13p4) — every panel carries angle + face together.",
+    "Recurring escalation/reaction SFX carry sensation where dialogue is absent: GRUNT (p6), HUFF HUFF (p10p2), CRASH (p11), THUD (p12), KRAK-style crush (p13p3), POUR (p16) — sound effects do the heavy lifting on the growth/strength beats.",
+    "Low-hero + scale-contrast is used repeatedly and well to sell dominance: p4p1, p8p1 (glute size-comparison), p10p2, p15p2-3 — she physically towers over normal-sized patrons, a clean size-signal device."
+  ],
+  "weaknesses": [
+    "ZERO multi-panel-progressive growth — the gold-standard device is absent: every stage-up is a single 'now she's bigger' reveal (p6 -> p8 -> p13/14 -> p15), never a body part shown growing stage->stage->stage across adjacent panels; the growth is implied between pages, never depicted in-the-act.",
+    "No clothing-destruction beat lands on-page: the torn waistband on p14 is a static aftermath detail, not a garment shown bursting during growth — a huge missed FMG device given the heavy lifting scenes.",
+    "Front-loaded flatness: P1-2 setup is mostly flat-level mid-shots of phone-scrolling (p1p2, p1p4, p2p1, p2p3) with dead neutral faces (intensity 1-2); the marriage is established but the camera never moves and nobody emotes.",
+    "Pacing is lopsided and the chemistry/plot crowds out growth: 4 of the last 5 pages (p16-19) are brewing/dosing/scheming with NO active growth, so momentum stalls right when the body is most transformed.",
+    "Anticlimactic ending: the issue closes (p20) by introducing a brand-new brunette rather than paying off the protagonist — the cliffhanger pulls forward, but spends the final splash real estate on an unestablished face.",
+    "Dead-face setup pages: peak emotional/relationship beats are undercut by neutral faces (p1p2, p1p4, p2p3, p10p5, p19p3) — only the growth/strength and intimate beats get expressive acting; the connective tissue is emotionless.",
+    "Lettering is absent in the supplied files: nearly all speech/thought balloons and caption boxes are blank (p1p1 caption, p19p1, p20p1), so story clarity leans entirely on visuals + environmental SFX — the silent read is ambiguous in places (e.g., is p7 a memory or present?)."
+  ]
+}

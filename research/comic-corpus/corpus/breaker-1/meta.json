@@ -1,0 +1,19 @@
+{
+  "comic_id": "breaker-1",
+  "title": "Breaker Part 1",
+  "source": "https://growgettercomics.com/breaker-part-1-2/",
+  "creators": {
+    "art": "Boogie",
+    "story": "SuperCDR",
+    "colors": "Little L. & Zere",
+    "confirmed": true,
+    "credit_source": "Cover (page-01) reads 'Art by Boogie / Story by SuperCDR / GrowGetterComics.com'; credits page (page-19) reads 'Art by Boogie / Written by SuperCDR / Produced by GrowGetterComics.com / Colors by Little L. & Zere'."
+  },
+  "popularity": {
+    "available": false
+  },
+  "ingested_at": "2026-06-10T02:13:17.742343+00:00",
+  "analysis_status": "done",
+  "rubric_version": "1.0",
+  "page_count": 19
+}

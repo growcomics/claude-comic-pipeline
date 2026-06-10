@@ -1,0 +1,1089 @@
+{
+  "comic_id": "worst-to-first-4",
+  "rubric_version": "1.0",
+  "analyzed_pages": 18,
+  "scores": {
+    "growth_density_score": 5,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "narrative_arc": "in-medias-res locker-room power-up → pink/red/dark-haired teammates each muscle-transform one after another → blonde antagonist (bat-wing motif) menaces → cast powers up further off green energy/orb → magical-girl-style peak transformations (blonde, red-ponytail) → caped muscle-heroes assemble → angelic feather denouement (to be continued)",
+  "pages": [
+    {
+      "page": 1,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["KRIIIIINNGG", "WOO"],
+          "notes": "Opens cold mid-scene: pink-haired girl grinning at camera in a locker room, two onlookers small in deep BG (good depth). Empty dialogue balloon. KRIIIIINNGG title-style SFX sets an energized tone."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["FSSSHH", "SLURP"],
+          "notes": "Tight on the girl chugging from a tube/bottle, eyes shut, flushed — the catalyst-drink beat. Steam/FSSSHH + SLURP sell ingestion. Strong sweaty-strain face."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "depth-fg-bg"],
+          "expression": "strain",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["BULGE", "BULGE", "BULGE"],
+          "notes": "Low angle on the back/lats already swelling and stretching the blue shirt; BULGE x3 stamps the growth onset. First money-shot of the book."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/CU/MS); flat_panel_count=0. Cold open straight into early growth — no establishing setup, no cover. Dialogue balloons left empty (un-lettered raw)."
+    },
+    {
+      "page": 2,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["OH MY GOD"],
+          "notes": "Head-back ecstasy as bust explodes against the straining shirt, abs cut below; raked diagonal body axis. Big OH MY GOD!! title SFX. Peak money page — face fully sells it."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Reaction intercut: two onlooker girls (blonde + dark) gawking, mouths open. Classic reaction-intercut device punctuating the growth."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["CRUNCH", "CREAAAK"],
+          "notes": "ECU on a fist clenching a tearing garment, forearm/bicep swelling — CRUNCH + CREAAAK carry the strain. No face; pure body-detail beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "pain",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SPLUURT", "SPLUURT"],
+          "notes": "CU sweat-drenched open-mouthed strain face mid-transformation; SPLUURT x2. Eyeline is level/flat but the intensity rescues it."
+        }
+      ],
+      "page_notes": "distance_spread=4 (MS/MCU/ECU/CU); flat_panel_count=0 (panel 4 flat-level but high-intensity). Pink-haired transformation peaks here; reaction-intercut + clothing-strain + SFX all firing."
+    },
+    {
+      "page": 3,
+      "role": "active-growth",
+      "growth_state": "early",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shyness",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["SSSHH", "SPLASH"],
+          "notes": "Scene shift to a new pair: red-haired girl (glasses, braid) holding a cup, dark-haired friend beside her in school-uniform sweaters. Water SPLASH. Sets up the next transformation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shyness",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Blushing flustered CU of the red-haired girl, hand to cheek. Flat eyeline but reads the embarrassed beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["THMP", "THMP", "DRIP", "!!"],
+          "notes": "Thighs/legs in FG visibly thickening (FG growth-focus) while the dark-haired friend points in alarm in BG (scale-contrast). THMP heartbeat + DRIP. Growth migrating to lower body."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["OOH", "OOOH", "MMM", "HUFF", "HUFF"],
+          "notes": "Two flushed open-mouthed reaction faces (red-haired + dark-haired) side by side; OOH/OOOH/MMM. Doubles the reaction-intercut by giving BOTH girls a panel."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/CU/MCU); flat_panel_count=1 (panel 2). Pivot to second character's onset; growth is early/subtle here, more tease than peak."
+    },
+    {
+      "page": 4,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["TIGHTEN"],
+          "notes": "Over-shoulder on the red-haired girl's arm/shoulder filling the sweater sleeve; TIGHTEN labels the strain. No face."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "shoulders",
+          "sfx": ["CRUNCH", "BULGE"],
+          "notes": "Matched OTS continuation, shoulder/trap visibly bigger than panel 1 — a clean 2-stage progressive pair. CRUNCH + BULGE."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "high",
+          "staging": ["high-vuln", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["BULGE", "BULGE"],
+          "notes": "High-angle down onto a massively widened muscular back bursting the sweater; BULGE x2. The back-spread reveal."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": ["diagonal", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": ["RIII-IIP"],
+          "notes": "Wide hero shot of the back as the garment splits, arms thrown out; huge RIII-IIP!! spanning the panel — textbook clothing-destruction + sfx-driven climax of this character's mid-stage."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/MS/WS); flat_panel_count=0. Strongest progressive-growth page so far: matched OTS pair (p1->p2) then back-spread (p3) then RIP (p4). Heavy growth-focus, but every panel is face-less (no expression carried)."
+    },
+    {
+      "page": 5,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["BOING", "BOING"],
+          "notes": "Dark-haired girl now hugely muscled, double-biceps flex, framed by the red-haired girl's massive thighs in FG (scale + foreshortening). BOING x2. Show-off aftermath."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [],
+          "notes": "Low diagonal on the dark-haired girl's lower body — huge thighs/glutes, sneaker stepping toward camera. Face turned/small; would benefit from intensity it doesn't have."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["foreshortening", "low-hero"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "legs",
+          "sfx": ["THMP"],
+          "notes": "ECU calf/thigh with sneaker planting toward camera, sunburst speedlines; THMP. Pure scale-flex detail."
+        }
+      ],
+      "page_notes": "distance_spread=3 (WS/MLS/ECU); flat_panel_count=0. Aftermath show-off for the two girls; strong low-hero scale throughout, but expressions go flat now that the strain is over."
+    },
+    {
+      "page": 6,
+      "role": "buildup",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Tiny inset establishing shot: a winged silhouette at the end of a locker corridor — antagonist tease. Good use of an EWS inset for menace/scale."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Blonde antagonist reveal: bat-wing motif, enormous chest/delts, gloved hand, confident smirk against a purple void. Strong smug menace face — the villain entrance."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": ["SNAP"],
+          "notes": "Gloved hand/forearm thrust to camera mid finger-snap; SNAP in flame lettering. Triggers the next beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KSHHHH", "KSHHHH"],
+          "notes": "Underwater/ceiling sprinkler-like shapes activating; KSHHHH x2. Environmental consequence of the snap. No characters."
+        }
+      ],
+      "page_notes": "distance_spread=4 (EWS/MS/MCU/WS); flat_panel_count=0. Antagonist-introduction beat; widest distance spread in the book (EWS inset -> WS). Strong villain smug face (panel 2)."
+    },
+    {
+      "page": 7,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["FSSHH"],
+          "notes": "Dark-haired girl in FG, red-haired girl smaller in BG; FSSHH. Re-grounds the two leads before the next surge."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["!!"],
+          "notes": "Split ECU of two shocked faces (whites of eyes, gritted teeth) reacting; !! Strong fear/shock register."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["THMP", "THMP"],
+          "notes": "ECU on a wall of sweat-beaded abs/obliques bursting a top; THMP x2. The growth money-shot of the page."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Red-haired girl (now clothed, normal-size) faces the towering dark-haired muscle figure — strong size disparity staged. Mild face."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["OTS"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["THMP", "THMP"],
+          "notes": "OTS toward the dark-haired girl's smirk over her own swelling chest; THMP x2. Confidence beat."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/ECU/MS); flat_panel_count=1 (panel 2 eyeline flat but high-shock). Busy 5-panel page; good ECU abs growth-shot (panel 3) and a nice size-disparity standoff (panel 4)."
+    },
+    {
+      "page": 8,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": ["TIGHTEN"],
+          "notes": "Raised arm/hand of a new red-mohawk character, sleeve straining; TIGHTEN. Onset of another transformation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RIP", "RIP"],
+          "notes": "Chest/dark top splitting open under swelling pecs; RIP x2 in two colors. Clothing-destruction beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BOOOOM"],
+          "notes": "Red-mohawk girl roars, fanged open mouth, massive chest fully erupted; huge BOOOOM spanning the panel. Peak growth + peak rage face together — the page's hero beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["BOW"],
+          "notes": "Calmer CU of the same character, eyes closed/satisfied, then a flushed reaction inset; BOW. Cooldown after the burst."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/MS/CU); flat_panel_count=1 (panel 4). New character's peak; panel 3 is one of the best face+growth+SFX combos in the book."
+    },
+    {
+      "page": 9,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Blonde antagonist (profile) faces off against the assembled muscle-girls ranged in BG at varied sizes; good scale-contrast lineup. Confident profile."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "CU grin of the antagonist + a slit-eyed reaction inset; strong cocky face. Tension build."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal", "dutch"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["KREEEE"],
+          "notes": "Bat-winged silhouette spreading wings against a blue burst; jagged KREEEE. Dramatic transformation-trigger splash for the antagonist."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/CU/WS); flat_panel_count=1 (panel 2). Antagonist tension build into a wing-spread trigger splash; dynamic dutch/low panel 3."
+    },
+    {
+      "page": 10,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SPLUURT"],
+          "notes": "Furious ECU of the red-mohawk character, glaring white eyes, bloodied lip, hair streaming; SPLUURT. Peak-rage face — very expressive."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Dark-haired muscle-girl smirking, hand to chin; confident. Flat eyeline."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "high",
+          "staging": ["flat-level"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "ECU on a single narrowed eye (red-haired). Tight tension cut."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["scale-contrast", "depth-fg-bg"],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Team line-up: five transformed muscle-women in white sportswear posing together (one flashing a peace sign). The cast-assembly aftermath panel; varied sizes/poses give it depth."
+        }
+      ],
+      "page_notes": "distance_spread=3 (ECU/MCU/MS); flat_panel_count=3 (panels 2,3 eyelines flat — talking-heads run). Roster aftermath; panel 1 rage face is a standout, but panels 2-3 are flat tension cuts."
+    },
+    {
+      "page": 11,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "scale-contrast"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Blue-skinned hyper-muscular figure, arms crossed, presenting a glowing green-energy tube to camera; towering low-hero scale. The new power source is introduced."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SHIRP"],
+          "notes": "Reaction-grid tile: red-haired girl's awed face, green glow on her lips; SHIRP (ingest)."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "awe",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["FLUOR"],
+          "notes": "Reaction-grid tile: blonde girl, green glow; FLUOR. Part of a 4-up face grid around the central orb."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["ZOOM"],
+          "notes": "Reaction-grid tile: wide-eyed blonde; ZOOM. The grid reaction-intercuts four characters at once around the energy beat."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SHIRP"],
+          "notes": "Reaction-grid tile: dark-haired girl, green glow; SHIRP. The grid is composed around a glowing white orb center."
+        }
+      ],
+      "page_notes": "distance_spread=2 (MS/CU); flat_panel_count=4 (the four grid tiles are level-eyeline by design). Power-up trigger: distinctive 4-face reaction grid orbiting a central orb — inventive layout even though each tile is flat."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SHI-NG"],
+          "notes": "Black letterbox panel with a blazing SHI-NG! burst — surge ignition. Cinematic beat-of-silence framing."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["RAAA", "AAH", "BAAM"],
+          "notes": "Red-ponytail character roars, fanged grimace, traps/pecs erupting; RAAH split across the frame + BAAM. Peak strain face with active growth."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["BULGE", "BULGE"],
+          "notes": "ECU pushing in tighter on the now-vast chest/pecs, tiny furious face above; BULGE x2. Clear zoom-escalation from panel 2 -> 3."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MS/CU/ECU); flat_panel_count=0. Tight zoom-escalation surge (MS->CU->ECU) with sustained peak-rage faces — one of the book's best-integrated growth pages."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": ["high-vuln", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": ["BO", "OM", "GLINT", "GLINT"],
+          "notes": "High angle onto the red-ponytail character's enormous glutes/thighs, a fist in FG; GLINT highlights + BO...OM split across. Lower-body growth-focus."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "shyness",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["FLUTTER"],
+          "notes": "Serene profile CU of the blonde girl, eyes closed, blushing, in a starfield — a magical-girl transformation tonal shift; FLUTTER. Soft beauty beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": ["SPARKLE", "WOOOSH"],
+          "notes": "Blonde girl flexing, abs/torso defined, a blue ribbon swirling around her; SPARKLE + WOOOSH. Magical-girl power-up styling distinct from the other characters' raw bursts."
+        }
+      ],
+      "page_notes": "distance_spread=3 (MCU/CU/MS); flat_panel_count=0. Two parallel threads on one page: red-ponytail glute-growth (raw) vs blonde's elegant magical-girl onset — nice tonal contrast."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": ["dutch", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["SPIN", "WRAP"],
+          "notes": "Pink-burst panel: blonde girl spinning, blue ribbon wrapping her body; SPIN + WRAP. Transformation-montage kinetic tile."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": ["SMACK", "BOING"],
+          "notes": "Chest swelling as the ribbon snaps taut across it; SMACK + BOING. Growth detail within the montage."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["SHINE"],
+          "notes": "ECU on the blonde's sparkling eyes; SHINE. Magical-girl beauty register."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["SPARKLE"],
+          "notes": "Full-body reveal: blonde now hugely muscled in a blue-ribboned leotard, towering toward camera; SPARKLE. The transformed-result splash for this character."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["BOOM"],
+          "notes": "The blonde's startled face, mouth open; BOOM. Reaction to her own new power."
+        },
+        {
+          "n": 6,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["high-vuln", "depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["CRACK", "CRACK"],
+          "notes": "She rockets up while the ground craters far below; CRACK x2. Power demonstrated via flight/impact — slick action staging."
+        }
+      ],
+      "page_notes": "distance_spread=4 (MS/MCU/ECU/WS); flat_panel_count=2 (panels 3,5 level but expressive). Dense 6-panel magical-girl transformation montage ending on a full-body reveal + flight — the most cinematic page."
+    },
+    {
+      "page": 15,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "effort",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["CRA", "CK!"],
+          "notes": "Outdoor: red-ponytail/caped character lands, forearms huge in FG, splitting a log across her knee; giant CRA-CK! spanning the panel. Strength demo."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "effort",
+          "expression_intensity": 2,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["PUMP", "PUMP", "PUMP"],
+          "notes": "ECU letterbox on flexing forearms/biceps, veins/sweat; PUMP x3. The muscles 'pumping' larger in real time."
+        },
+        {
+          "n": 3,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["RUMBLE", "RUMBLE"],
+          "notes": "Wide environment tile of cracking rocky ground; RUMBLE x2. Establishes the power's effect on the landscape."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": ["depth-fg-bg", "high-vuln"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["LIFT", "CRACK"],
+          "notes": "A boulder/slab being hoisted, debris falling; LIFT + CRACK. Feat-of-strength tile."
+        },
+        {
+          "n": 5,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": ["RAAA"],
+          "notes": "Snarling red character mid-effort, fang bared; RAAH. Carries the exertion."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening"],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": ["AAH"],
+          "notes": "Continuation: arm/shoulder straining as she heaves; AAH (RAAH continued). Effort + growth-focus."
+        }
+      ],
+      "page_notes": "distance_spread=4 (WS/ECU/EWS/CU/MCU); flat_panel_count=0. Strength-feat montage with strong distance variety and SFX; PUMP x3 sustains the live-growth sensation outdoors."
+    },
+    {
+      "page": 16,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 2,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": ["low-hero", "foreshortening", "diagonal"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": ["DUN", "DUN", "DUUN"],
+          "notes": "Splash-scale low-hero of the red caped warrior, hands on hips, abs/torso dominating, debris flying; ominous DUN DUN DUUN. Triumphant aftermath hero pose."
+        },
+        {
+          "n": 2,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["SHI-NG"],
+          "notes": "EWS silhouette of the hero against a horizon sunburst with crossed-blade light; SHI-NG. Cinematic scale-down beat."
+        }
+      ],
+      "page_notes": "distance_spread=2 (WS/EWS); flat_panel_count=0. Big aftermath hero splash + EWS silhouette payoff — strong low-hero-to-EWS scale move."
+    },
+    {
+      "page": 17,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": ["depth-fg-bg", "scale-contrast"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["BO", "OM"],
+          "notes": "Two hero silhouettes converging in a leopard-spotted light burst; huge BO...OM. Epic scale beat."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "high",
+          "staging": ["high-vuln", "foreshortening"],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Blonde hero crouched, reaching a hand toward camera in a golden glow; foreshortened. Dynamic resolve beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": ["low-hero", "scale-contrast", "depth-fg-bg"],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": ["WHEE-WHEEN"],
+          "notes": "Final team tableau: blonde hero (white/gold costume) front and center, red-ponytail and dark-haired heroes flanking, a foot in FG; WHEE-WHEEN (siren). Cast assembled, victorious."
+        }
+      ],
+      "page_notes": "distance_spread=3 (EWS/MLS/MS); flat_panel_count=0. Resolution montage assembling the transformed heroes; strong scale-contrast and the reaching-hand foreshortening (panel 2)."
+    },
+    {
+      "page": 18,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": ["flat-level"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": ["GLINT", "GLINT"],
+          "notes": "Small inset of a single white feather glinting against black; GLINT x2. Mystery/angelic motif seed."
+        },
+        {
+          "n": 2,
+          "shot_distance": "EWS",
+          "angle": "low",
+          "staging": ["depth-fg-bg"],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "A shaft of light/comet streaking down a blue sky. Quiet atmospheric tile."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": ["foreshortening"],
+          "expression": "awe",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "A large white angel wing unfurling in a heavenly light. Foreshadows a new angelic power/character."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "high",
+          "staging": ["high-vuln"],
+          "expression": "shyness",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Serene CU of the red-and-black-haired character's face, eyes lidded, soft light. Gentle to-be-continued close on a tender beat — tonal whiplash from the action."
+        }
+      ],
+      "page_notes": "distance_spread=4 (ECU/EWS/MCU/CU); flat_panel_count=1 (panel 1 inset). Denouement/cliffhanger: angel-wing + feather motif promises the next installment. No growth content; ends on calm rather than a hard pull-forward."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "pink-haired-transformation",
+      "pages": [1, 2],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "reaction-intercut", "sfx-driven"]
+    },
+    {
+      "scene": "redhaired-and-darkhaired-transformation",
+      "pages": [3, 4, 5],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "size-comparison", "reaction-intercut", "sfx-driven", "full-body-reveal"]
+    },
+    {
+      "scene": "antagonist-introduction",
+      "pages": [6, 9],
+      "type": "buildup",
+      "escalation_devices": ["full-body-reveal", "sfx-driven"]
+    },
+    {
+      "scene": "mohawk-and-team-surge",
+      "pages": [7, 8],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "reaction-intercut", "sfx-driven"]
+    },
+    {
+      "scene": "team-roster-aftermath",
+      "pages": [10],
+      "type": "aftermath",
+      "escalation_devices": ["full-body-reveal"]
+    },
+    {
+      "scene": "green-energy-powerup",
+      "pages": [11, 12, 13],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "zoom-escalation", "reaction-intercut", "sfx-driven"]
+    },
+    {
+      "scene": "magical-girl-transformation-blonde",
+      "pages": [13, 14],
+      "type": "active-growth",
+      "escalation_devices": ["multi-panel-progressive", "clothing-destruction", "full-body-reveal", "sfx-driven"]
+    },
+    {
+      "scene": "strength-feat-and-hero-assembly",
+      "pages": [15, 16, 17],
+      "type": "aftermath",
+      "escalation_devices": ["sfx-driven", "size-comparison", "full-body-reveal"]
+    },
+    {
+      "scene": "angelic-cliffhanger",
+      "pages": [18],
+      "type": "cliffhanger",
+      "escalation_devices": []
+    }
+  ],
+  "strengths": [
+    "Growth is the spine, not a side dish: of 18 pages, ~14 carry active transformation across a rotating cast (P1-5, P7-8, P11-16) — the growth-page ratio is exceptional and exactly the slow-burn, many-characters cadence the pipeline wants.",
+    "P12 is a model zoom-escalation surge: MS (SHI-NG) -> CU (RAAH/BAAM) -> ECU (BULGE x2) pushes in tighter as the pecs erupt, with a sustained peak-rage face the whole way — steal this 3-panel push-in template.",
+    "P4 nails multi-panel-progressive + clothing-destruction: a matched OTS pair (p1->p2) escalates the shoulder, then a high-angle back-spread (p3), then a panel-spanning RIII-IIP (p4) bursts the garment — clean stage-to-stage growth with SFX carrying the rip.",
+    "Strong SFX discipline throughout: huge panel-spanning lettering (RIII-IIP P4, BOOOOM P8, BAAM P12, CRA-CK! P15, DUN DUN DUUN P16, BO-OM P17) plus live-growth stamps (BULGE, PUMP x3, TIGHTEN, CREAAAK) carry the sensation even though every dialogue balloon is empty.",
+    "Real expression peaks on the strain beats: P2.1 head-back ecstasy, P8.3 fanged BOOOOM rage, P10.1 bloodied glare, P12.2 roar — faces consistently sell the transformation moments (intensity 4-5).",
+    "P14 magical-girl montage gives one character (blonde) a distinct transformation grammar (SPIN/WRAP/SHINE/full-body reveal + flight) so the cast's power-ups don't all read identically — good variety device.",
+    "Good low-hero scale language: P5.1, P6.2, P12, P16.1 tower the muscle-women with foreshortened limbs in FG; P6.1 uses an EWS corridor inset for menace; P16.2/P17.1 drop to EWS silhouettes for epic scale-contrast."
+  ],
+  "weaknesses": [
+    "ALL dialogue balloons are empty (P1.1, P2, P3, P6, P7, P9, P10, P11, P14, P17, P18) — these are un-lettered raws. With zero dialogue, the multi-character plot (who/why/stakes) is illegible; the reader can only follow 'everyone gets huge,' not the story.",
+    "Cast and continuity are hard to track: characters (pink / red-glasses / dark / red-mohawk / red-ponytail / blonde) swap focus page-to-page with no captions, and hair/identity drifts (the red-ponytail vs red-mohawk vs red-and-black girl read as possibly the same or different people) — clarity suffers badly (P8 vs P12 vs P18).",
+    "Expressions go flat exactly where growth peaks are face-less: the entire P4 back-burst, P5.3, P7.3 abs ECU, and most of P15's feat tiles carry no face at all — many money-shots forgo the strain/ecstasy register the niche rewards.",
+    "Talking-heads flat-level run on P10 (panels 2-3) and the P11 reaction grid (4 level-eyeline tiles) stack same-plane eye-level CUs; the tension cuts go static where a diagonal or scale move would help.",
+    "Structure is episodic and repetitive: it's essentially the same beat (character strains -> shirt rips -> reveal) re-run ~5 times with little escalation between transformations, no clear antagonist confrontation paid off, and a soft non-cliffhanger ending (P18 calm angel-wing) rather than a hard pull-forward.",
+    "Some growth is one-and-done rather than progressive: the dark-haired girl (P5) and mohawk girl (P8) jump near-instantly to peak with little stage-by-stage coverage, unlike the well-built P4/P12 sequences."
+  ]
+}

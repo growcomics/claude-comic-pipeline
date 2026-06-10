@@ -1,0 +1,18 @@
+{
+  "comic_id": "muller-1",
+  "title": "Muller Issue 1",
+  "source": "https://growgettercomics.com/muller-issue-1/",
+  "creators": {
+    "art": null,
+    "story": null,
+    "confirmed": false,
+    "note": "No title/credits cover is present among the 20 supplied pages (page-01 is story page 1, a kitchen scene). No creator names appear on any supplied page, so art/story are left null rather than assumed. Publisher per source URL: GrowGetter Comics."
+  },
+  "popularity": {
+    "available": false
+  },
+  "ingested_at": "2026-06-10T02:13:12.965249+00:00",
+  "analysis_status": "done",
+  "rubric_version": "1.0",
+  "page_count": 20
+}

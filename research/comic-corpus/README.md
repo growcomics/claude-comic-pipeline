@@ -32,4 +32,4 @@ Raw pages under `corpus/*/pages/` are **gitignored and never committed or pushed
 
 ## Current corpus
 
-3 comics / 85 pages — *The Mysterious Book* Ch.1–3 (GrowGetter Comics). Corpus growth-page ratio 55%. See `synthesis/success-elements.md`.
+9 comics / 209 pages — GrowGetter Comics (*The Mysterious Book* Ch.1–3, *Ultragal* #2, *Ass Effect*, *Worst to First* 4, *The Curse 2*, *Muller* #1, *Breaker* Pt.1). Corpus growth-page ratio 50%; ~7 of 9 drawn by Boogie. See `synthesis/success-elements.md`.

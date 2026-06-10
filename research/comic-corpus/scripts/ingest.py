@@ -36,6 +36,7 @@ import shutil
 import sys
 import urllib.request
 import zipfile
+from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -99,40 +100,66 @@ def fetch(url: str, dst: Path) -> bool:
 
 # --- known-host page-URL derivation ---------------------------------------
 
+GGC_CHROME = re.compile(
+    r"avatar|logo|favicon|instagram|twitter|devianart|patreon|popup-sidebar|GROW_GETTER|/t-\d",
+    re.I,
+)
+
+
 def growgetter_urls(html_url: str) -> list[str] | None:
     """Derive page-image URLs for a growgettercomics.com chapter page.
 
-    The site serves full-res pages at predictable wp-content/uploads paths
-    (e.g. TMB1.jpg, TMB12.jpg ... TMB125.jpg). We fetch the chapter HTML and
-    scrape the uploads image URLs, collapsing WP size-variant suffixes and
-    dropping site chrome (logos, avatars, icons).
+    Series-agnostic: every series names its pages differently (TMB1.jpg,
+    angela_long_text-01.png, UG-02-NO-LINES_page_001.jpg, ...-page-1.webp).
+    We scrape all wp-content/uploads images, collapse WP size variants, drop
+    site chrome, then pick the DOMINANT numbered sequence on the page (the
+    group of filenames sharing a stem + trailing number with the most members
+    = the comic's pages) and return it in numeric order. The Mysterious Book's
+    odd numbering (TMB1, TMB12..TMB125) is special-cased.
     """
     if "growgettercomics.com" not in html_url:
         return None
     req = urllib.request.Request(html_url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=DOWNLOAD_TIMEOUT_S) as resp:
         html = resp.read().decode("utf-8", "replace")
-    raw = re.findall(r'https://growgettercomics\.com/wp-content/uploads/[^"\'\s]+?\.(?:jpg|jpeg|png)', html)
-    # collapse -WxH and -scaled variants to the canonical upload
-    canon = []
-    seen = set()
+    raw = re.findall(
+        r'https://growgettercomics\.com/wp-content/uploads/[^"\'\s]+?\.(?:jpg|jpeg|png|webp)',
+        html,
+        re.I,
+    )
+    # collapse -WxH size variants; drop chrome
+    seen: set[str] = set()
+    imgs: list[str] = []
     for u in raw:
         c = re.sub(r"-\d+x\d+(\.\w+)$", r"\1", u)
-        if c in seen:
+        if c in seen or GGC_CHROME.search(c):
             continue
         seen.add(c)
-        canon.append(c)
-    # keep only comic pages: filename starts with TMB and is not chrome
-    pages = [
-        u for u in canon
-        if re.search(r"/TMB\d", u) and not re.search(r"avatar|logo|favicon|instagram|twitter|devianart|patreon", u, re.I)
-    ]
+        imgs.append(c)
 
-    def page_key(u: str):
-        m = re.search(r"/TMB(\d+?)(?:-scaled)?\.\w+$", u)
-        return int(m.group(1)) if m else 0
+    # Mysterious Book special case (TMB1, TMB12..TMB125 — non-padded)
+    tmb = [u for u in imgs if re.search(r"/TMB\d", u)]
+    if tmb:
+        def tmb_key(u: str) -> int:
+            m = re.search(r"/TMB(\d+)(?:-scaled)?\.\w+$", u)
+            return int(m.group(1)) if m else 0
+        return sorted(set(tmb), key=tmb_key) or None
 
-    return sorted(set(pages), key=page_key) or None
+    # Generic: dominant numbered sequence (stem = basename minus trailing digits)
+    groups: dict[str, list[tuple[int, str]]] = defaultdict(list)
+    for u in imgs:
+        base = u.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+        if "cover" in base.lower():
+            continue
+        m = re.search(r"(\d+)$", base)
+        if not m:
+            continue
+        stem = base[: m.start()]
+        groups[stem].append((int(m.group(1)), u))
+    if not groups:
+        return None
+    stem = max(groups, key=lambda k: len(groups[k]))
+    return [u for _, u in sorted(groups[stem])] or None
 
 
 # --- local ingestion -------------------------------------------------------
