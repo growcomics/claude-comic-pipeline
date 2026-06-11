@@ -1,0 +1,60 @@
+{
+  "_note": "RECIPE v4 PROMPT TEMPLATE (D11+D12+D13). Every page prompt is a maximal structured JSON spec — submitted to Flow as single-line minified JSON. THE LAW: appearance lives in attached references ONLY (prompt uses pointer language); prompt words go to camera, staging, per-limb pose, contact points, expression, lighting, continuity. Per-hand accounting + total-hands line are mandatory. Appearance adjectives for a ref'd character = lint failure.",
+  "attachment_order_convention": "1=char A face, 2=char A turnaround, 3=char B face, 4=char B turnaround, 5=scene rung (camera-distance matched), 6=staging ref (if novel pose), 7=prior accepted panel. Prompt pointers use these numbers.",
+  "template": {
+    "instruction": "Generate one image.",
+    "style": "Photorealistic 3D CGI render, DAZ Studio Iray render-engine look, photoreal CGI comic production still. NOT illustrated, NOT 2D, NOT cartoon. No text, no words, no logos, no speech bubbles.",
+    "camera": { "shot": "<shot type + subjects>", "position": "<where the camera physically is>", "angle": "<eye-level/low/dutch/etc>", "lens": "<focal length + DoF behavior>" },
+    "scene": { "environment": "EXACTLY the environment of attached reference <N> (<which ladder rung>)", "continuity": "<carried-over debris/damage/props from attached prior panel>" },
+    "characters": [
+      {
+        "id": "<name>",
+        "appearance": "EXACTLY the person from attached references <N> (face) and <M> (turnaround) — same face, hair, outfit, damage state and height as the references. No appearance changes.",
+        "position": "<frame placement, distance from others, body orientation in degrees vs camera>",
+        "pose": { "overall": "<weight, lean, torso>", "left_arm": "<exact task>", "right_arm": "<exact task>", "hands": "<what EACH hand does — every hand accounted>", "legs": "<stance>" },
+        "expression": "<named emotion + eyebrow/eye/mouth specifics + where the eyes look>",
+        "height": "as the turnaround scale guide — muscle mass does not change height"
+      }
+    ],
+    "spatial_rules": [
+      "exactly <K> people in frame",
+      "exactly <2K> hands total in frame: <enumerate each hand and its task>",
+      "<eyeline / relative-height / distance rules from height-chart>"
+    ],
+    "lighting": "<key + fill + practicals + mood>",
+    "effects": "<ONLY vocabulary from qa/vfx-style-bible.md, if the panel has an effects beat>",
+    "negative": "no extra limbs, no extra hands, no additional people, no text, not illustrated, not 2D"
+  },
+  "worked_example_p10": {
+    "instruction": "Generate one image.",
+    "style": "Photorealistic 3D CGI render, DAZ Studio Iray render-engine look, photoreal CGI comic production still. NOT illustrated, NOT 2D, NOT cartoon. No text, no words, no logos, no speech bubbles.",
+    "camera": { "shot": "medium two-shot, over-the-shoulder", "position": "behind and slightly above the man's right shoulder, his shoulder soft in the near foreground", "angle": "eye-level with a slight diagonal so both faces read", "lens": "85mm portrait look, shallow depth of field, background laboratory softly defocused" },
+    "scene": { "environment": "EXACTLY the environment of attached reference 5 (laboratory medium rung): concrete walls, steel counter camera-left, cracked floor", "continuity": "snapped rope shreds on the floor at the woman's feet and the tipped interrogation chair behind her right side, exactly as in attached reference 7 (previous panel)" },
+    "characters": [
+      {
+        "id": "Dana",
+        "appearance": "EXACTLY the woman from attached references 1 (face) and 2 (turnaround) — same face, same black bob, same torn-but-covering blouse state, same muscle size and height as the turnaround. No appearance changes.",
+        "position": "center-left, two feet in front of the man, body angled 30 degrees toward camera-left, face turned to him",
+        "pose": { "overall": "double-biceps power flex, chest up, chin slightly down, weight even", "left_arm": "raised and flexed, elbow at shoulder height, fist beside her ear, knuckles to camera", "right_arm": "raised and flexed, mirroring the left", "hands": "BOTH of her hands are clenched fists beside her ears — her hands touch nothing", "legs": "feet shoulder-width, planted" },
+        "expression": "fierce exhilarated grin, eyes wide and blazing, locked on the man's eyes, eyebrows raised — triumphant adrenaline",
+        "height": "as the turnaround scale guide"
+      },
+      {
+        "id": "Supraman",
+        "appearance": "EXACTLY the man from attached references 3 (face) and 4 (turnaround) — same face, hair, royal-blue chevron suit with the scorch damage visible in attached reference 7. No appearance changes.",
+        "position": "right third of frame, three-quarter back to camera so his back-right shoulder is nearest, face in right profile toward her, one step from the woman",
+        "pose": { "overall": "leaning slightly toward her, weight on his left foot", "right_arm": "reaching forward, his right hand resting flat on the TOP of her LEFT shoulder", "left_arm": "relaxed at his side, hand open and empty beside his hip", "hands": "his right hand on her left shoulder, his left hand at his side — exactly these two", "legs": "mid-step stance" },
+        "expression": "awe mixed with worry — eyebrows knit upward, lips parted, wide eyes fixed on her face",
+        "height": "as the turnaround scale guide — he stands 4 inches taller (height-chart)"
+      }
+    ],
+    "spatial_rules": [
+      "exactly two people in frame",
+      "exactly four hands total: her two raised fists, his right hand on her left shoulder, his left hand at his side",
+      "their eyelines lock on a diagonal; he is 4 inches taller standing (height-chart)"
+    ],
+    "lighting": "harsh overhead laboratory floods, cool concrete bounce fill, faint warm accent from a sparking console camera-left",
+    "effects": "none on this panel",
+    "negative": "no extra limbs, no extra hands, no third person, no text, not illustrated, not 2D"
+  }
+}

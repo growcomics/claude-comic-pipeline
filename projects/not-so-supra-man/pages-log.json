@@ -1,0 +1,131 @@
+{
+  "_note": "Per-page generation log. status: pending|generating|done. flow_id = chosen variant; disk = pages/panels/<id>.png. Resumable: regenerate any 'pending' page from pages-plan.json.",
+  "done": {
+    "p03-01": {
+      "flow_id": "a1efd7d6-3fb5-4e31-a3b6-fdf2a5e37aa0",
+      "disk": "pages/panels/p03-01.png"
+    },
+    "p04-01": {
+      "flow_id": "a622b675-872a-4593-bb57-82a228bff52d",
+      "disk": "pages/panels/p04-01.png"
+    },
+    "p05-01": {
+      "flow_id": "ad456768-d8e8-4a09-8522-d0e7ee346553",
+      "disk": "pages/panels/p05-01.png"
+    },
+    "p06-01": {
+      "flow_id": "33480d16-da90-4e2b-8c48-188474299e98",
+      "disk": "pages/panels/p06-01.png",
+      "status": "fired-nb2",
+      "variants": [
+        "33480d16-da90-4e2b-8c48-188474299e98",
+        "5c8ce1ab-06c2-4a59-8735-052780f6dcc7",
+        "e353f508-dd77-4a01-865a-bfaa66797f7c",
+        "9c6e5940-2fe5-42e7-9bd7-4e64c3eedf16"
+      ]
+    },
+    "p07-01": {
+      "flow_id": "e3d1e783-0f0a-4e0c-a9d3-fc3ea8d8e5bf",
+      "disk": "pages/panels/p07-01.png",
+      "status": "fired-nb2",
+      "variants": [
+        "e3d1e783-0f0a-4e0c-a9d3-fc3ea8d8e5bf",
+        "b6b329e2-158f-4abe-9c7e-47ced01f4f87",
+        "f2b47f5b-4c94-4413-9bd8-687214a454e4",
+        "1e894d31-fa36-426f-8e8e-20bf5b2e4429"
+      ]
+    },
+    "p09-01": {
+      "flow_id": "d8be37a5-9dcb-4d0a-a3c2-92d82d1d84e9",
+      "disk": "pages/panels/p09-01.png",
+      "status": "fired-nb2"
+    },
+    "p10-01": {
+      "flow_id": "d1ed7ae4-f614-4949-a520-ecc3e7dcad27",
+      "disk": "pages/panels/p10-01.png",
+      "status": "fired-nb2"
+    },
+    "p11-01": {
+      "flow_id": "3f54e210-faa5-4a11-95c1-194e5123cf2f",
+      "disk": "pages/panels/p11-01.png",
+      "status": "fired-nb2"
+    },
+    "p08-01": {
+      "flow_id": "7c394711-abd3-427d-b6e6-051930b0b8a2",
+      "disk": "pages/panels/p08-01.png",
+      "status": "fired-nb2"
+    },
+    "p12-01": {
+      "flow_id": "8a04b93a-b991-4d6c-a35e-a69d2c139178",
+      "disk": "pages/panels/p12-01.png",
+      "status": "fired-nb2"
+    },
+    "p13-01": {
+      "flow_id": "b5dd0a08-3646-44ac-96dc-61ea293de367",
+      "disk": "pages/panels/p13-01.png",
+      "status": "fired-nb2",
+      "note": "3/4 variants NSFW-failed (chest); using sole survivor"
+    },
+    "p14-01": {
+      "flow_id": "7273e35c-d30a-48a4-9ab6-14e61b7120ee",
+      "disk": "pages/panels/p14-01.png",
+      "status": "fired-nb2"
+    },
+    "p15-01": {
+      "flow_id": "ca04874a-c034-4b78-b386-1b0bc31d6a07",
+      "disk": "pages/panels/p15-01.png",
+      "status": "fired-nb2"
+    },
+    "p16-01": {
+      "flow_id": "5df2933a-4910-4f04-9d18-74d99d9f745d",
+      "disk": "pages/panels/p16-01.png",
+      "status": "fired-nb2"
+    },
+    "p17-01": {
+      "flow_id": "8695d3a7-5881-449f-a12f-06ce234c4bae",
+      "disk": "pages/panels/p17-01.png",
+      "status": "fired-nb2"
+    },
+    "p18-01": {
+      "flow_id": "3940248c-87d8-4e1c-8122-5b4d557e93e2",
+      "disk": "pages/panels/p18-01.png",
+      "status": "fired-nb2"
+    },
+    "p19-01": {
+      "flow_id": "1ab0991a-4751-4991-b50f-940f00801f0e",
+      "disk": "pages/panels/p19-01.png",
+      "status": "fired-nb2"
+    }
+  },
+  "pending": [
+    "p01-01",
+    "p02-01",
+    "p20-01",
+    "p21-01",
+    "p22-01",
+    "p23-01",
+    "p24-01",
+    "p25-01",
+    "p26-01",
+    "p27-01",
+    "p28-01",
+    "p29-01",
+    "p30-01",
+    "p31-01",
+    "p32-01",
+    "p33-01",
+    "p34-01",
+    "p35-01",
+    "p36-01",
+    "p37-01",
+    "p38-01",
+    "p39-01",
+    "p40-01",
+    "p41-01",
+    "p42-01",
+    "p43-01",
+    "p44-01",
+    "p45-01",
+    "p46-01"
+  ]
+}

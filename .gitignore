@@ -9,6 +9,10 @@ projects/*/pages/
 projects/*/final/
 projects/*/defects.jsonl
 projects/*/*.pdf
+projects/*/source/
+projects/*/.flow-scratch/
+projects/**/*.png
+projects/**/*.jpg
 
 # comic-corpus: third-party copyrighted pages — analysis stays in git, raw pages never do
 research/comic-corpus/corpus/*/pages/

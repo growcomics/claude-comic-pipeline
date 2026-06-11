@@ -51,9 +51,9 @@ Per `feedback_changelog_with_timestamp.md`. Every commit that ships work to this
 
 Per `feedback_dont_delete_git_backup.md`. It's an intentional pre-rewrite history backup. Leave it alone, don't propose cleanup.
 
-### 5. NEVER commit `projects/` content
+### 5. Project TEXT is versioned in git; project BINARIES are not
 
-`projects/` is symlinked to Google Drive (`~/Library/CloudStorage/GoogleDrive-growcomics@gmail.com/My Drive/claude-comic-projects/`). It's in `.gitignore`. Project outputs are NOT versioned in git.
+(Amended 2026-06-10 by user instruction — the old blanket "never commit projects/" was too blunt and contradicted the repo's own granular .gitignore.) Per-project TEXT — shotlists, page plans/logs, QA defect registries and rubrics, prompt templates, turnaround/reference specs, height charts, VFX style bibles, ref ledgers, PROGRESS/STATUS — **is pipeline state and IS committed**, with a CHANGELOG entry like any other change. Binary outputs stay out via .gitignore (`pages/`, `final/`, `source/`, `.flow-scratch/`, and all `*.png`/`*.jpg`/`*.pdf` under `projects/`): renders are recoverable from the Flow media ids recorded in the ledgers/logs, and heavy sources live outside git. (The old note claiming `projects/` is a Drive symlink is stale — it's a real directory in this repo.) When starting work on a project whose text isn't yet tracked, add it — but only stage that project's text, never bulk-add other projects unreviewed.
 
 ## Generation defaults (active across all comic work here)
 

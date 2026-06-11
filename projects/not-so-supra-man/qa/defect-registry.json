@@ -1,0 +1,181 @@
+{
+  "_note": "SINGLE SOURCE OF TRUTH for defect taxonomy. Every user-reported defect becomes an entry: root cause -> immediate fix -> PREVENTION (hard gate in the loop) -> detection check (QA rubric) -> extension tag. The extension's TAGS array and the QA subagent rubric are REGENERATED from this file. Validated prevention rules graduate to the repo rule registry as L-lessons (cross-project).",
+  "intake_contract": [
+    "1. root cause named at generation-mechanics level",
+    "2. immediate fix recipe (what re-rolls, with what refs/prompt)",
+    "3. prevention = machine-enforced preflight gate, never guidance-only",
+    "4. detection check added to postflight QA rubric",
+    "5. extension tags + QA rubric regenerated from this registry"
+  ],
+  "defects": [
+    {
+      "id": "D1-thin-ref-stack",
+      "tag": "refs",
+      "icon": "🖼️",
+      "symptom": "Identity/outfit/continuity drift across pages and variants",
+      "root_cause": "Pages generated with 1 attached ref (body card only); no prior-panel chaining; skill spec (face+anchor+env) not enforced by anything",
+      "immediate_fix": "Re-roll with recipe v3 full stack: state turnaround + face card + proximity-matched scene ref + staging ref (if novel pose) + prior accepted panel",
+      "prevention_gate": "PREFLIGHT: per-panel required-ref manifest computed from shotlist state; submit BLOCKED if any ref missing from attachment set. Saved to persistent memory: refs are NEVER optional, under any time pressure.",
+      "detection_check": "Variant matches turnaround outfit + face card identity; continuity vs prior accepted panel",
+      "status": "prevention-designed; ESCALATED by user 2026-06-10 ('said it 100 times')",
+      "lesson_candidate": "L36-minimum-ref-stack-enforced"
+    },
+    {
+      "id": "D2-flat-expression",
+      "tag": "face",
+      "icon": "😐",
+      "symptom": "Facial expressions flat / wrong emotion for the beat",
+      "root_cause": "Prompts under-specified emotion; L35 peak-intensity rule never injected into page prompts",
+      "immediate_fix": "Re-roll with per-beat expression block (named expression derived from dialogue type: shout/strain/fear/smug/ecstatic)",
+      "prevention_gate": "PREFLIGHT: any panel with dialogue or transformation_beat MUST contain an expression block; compose-time lint fails otherwise",
+      "detection_check": "Expression intensity/type scored vs beat register; 'neutral face on a shout line' = fail",
+      "status": "prevention-designed",
+      "lesson_candidate": "L37-expression-block-mandatory"
+    },
+    {
+      "id": "D3-front-facing-default",
+      "tag": "angle",
+      "icon": "📐",
+      "symptom": "Characters render front-facing/static regardless of specced camera",
+      "root_cause": "Only front-facing ref cards attached (no multi-angle refs); camera fragment buried mid-prompt",
+      "immediate_fix": "Re-roll with angle-matched turnaround view + camera fragment moved to FRONT of prompt",
+      "prevention_gate": "PREFLIGHT: camera fragment must be prompt-leading; non-frontal cameras require a multi-angle turnaround in the attachment set",
+      "detection_check": "Rendered facing/angle vs shotlist camera field (profile/back/OTS/dutch/worms-eye honored?)",
+      "status": "prevention-designed",
+      "lesson_candidate": "L38-camera-first-and-angle-ref"
+    },
+    {
+      "id": "D4-outfit-probabilistic",
+      "tag": "ward",
+      "icon": "👗",
+      "symptom": "Outfit differs across the 4 variants of one submit (user screenshot: p16 torn blouse, 4 interpretations)",
+      "root_cause": "Costume state existed only as PROSE; every x4 variant independently re-samples anything not pinned by a reference image; some wardrobe states had NO canonical image at all",
+      "immediate_fix": "Generate wardrobe-state turnaround sheets (references/turnaround-specs.json), re-roll flagged pages against them",
+      "prevention_gate": "PREFLIGHT: a state turnaround MUST exist for the panel's costume_state before any page in that state is generated; costume prose limited to a state pointer",
+      "detection_check": "Variant outfit congruent with attached turnaround (cut, color, damage locations)",
+      "status": "prevention-designed",
+      "lesson_candidate": "L39-wardrobe-state-cards"
+    },
+    {
+      "id": "D5-ref-manifest-skipped",
+      "tag": "refs",
+      "icon": "🖼️",
+      "symptom": "Mandated reference set (multi-angle view packs) silently skipped; downstream angle/outfit defects",
+      "root_cause": "references_required.json was spec without enforcement; agent skipped view packs for speed",
+      "immediate_fix": "Generate turnaround sheets now (supersede 5-view packs: one sheet = all angles + outfit pinned)",
+      "prevention_gate": "HARD GATE: page phase cannot start while reference manifest incomplete; skips require explicit user override recorded in the log",
+      "detection_check": "Preflight reports manifest completeness per character/state before phase transitions",
+      "status": "prevention-designed",
+      "lesson_candidate": "L40-manifest-is-a-gate-not-a-doc"
+    },
+    {
+      "id": "D6-size-normalization",
+      "tag": "size",
+      "icon": "📏",
+      "symptom": "Muscle size renders below tier (model normalizes extremes toward average)",
+      "root_cause": "Known model bias; insufficient over-spec + missing size anchor on non-tier-9 pages",
+      "immediate_fix": "Re-roll with tier card + escalated language, one notch over target",
+      "prevention_gate": "Tier pages attach tier card (+anchor at T9); size language over-specs by one notch by default",
+      "detection_check": "4-axis comparison vs tier card/anchor (arm-vs-head, delts, chest shelf, mass fraction); downsize = auto-reject",
+      "status": "active-since-start (gate existed for T9; now extended to all tier pages)",
+      "lesson_candidate": "extends existing chest-oversize-compensate rule"
+    },
+    {
+      "id": "D7-height-scale-inflation",
+      "tag": "height",
+      "icon": "🧍",
+      "symptom": "Character renders giant/towering when the source only grows MUSCLE (user screenshot: p12 Dana ceiling-height over Supraman). Inconsistent heights across pages — user: 'a really big problem with our comics'",
+      "root_cause": "(a) Size language ('MASSIVE', 'far bigger', 'towering') is scale-ambiguous — model reads it as height; (b) reference images carry NO height guide, so nothing pins stature; (c) no canonical height defined anywhere for any character",
+      "immediate_fix": "Re-roll p12 (and any height-drifted page) with height-pinned turnaround + explicit 'muscle mass increases, height does NOT change' language",
+      "prevention_gate": "PREFLIGHT: (1) references/height-chart.json defines canonical height per character per tier — prompts may only reference heights from it; (2) every turnaround sheet MUST include a scale guide (grey reference silhouette + height grid lines); (3) size escalation language must pair with an explicit height clamp ('same height as reference silhouette')",
+      "detection_check": "Multi-character panels: relative heights measured against height-chart ratios (eye-line/head-height comparison); solo panels: character vs environment scale (door frames, furniture). Deviation beyond chart = auto-reject",
+      "status": "prevention-designed; high priority per user",
+      "lesson_candidate": "L41-height-is-pinned-not-prompted"
+    },
+    {
+      "id": "D8-scene-ref-proximity-mismatch",
+      "tag": "scene",
+      "icon": "📷",
+      "symptom": "Backgrounds/scenes drift or get invented when the shot framing differs from the scene ref framing (user's basketball-court rule: wide court ref + close-up shot = big stretch for the AI)",
+      "root_cause": "Only ONE wide establishing ref exists per location; close/medium shots force the model to invent the close-up environment",
+      "immediate_fix": "For each location, generate a REFERENCE LADDER chained from the wide shot: wide -> medium region -> close-up region. Re-roll scene-drifted pages with the proximity-matched rung attached",
+      "prevention_gate": "PREFLIGHT: the attached scene ref's framing must match the panel's camera distance (wide/medium/close). If the matching rung doesn't exist, generate it FIRST (chained from its parent rung), then generate the page",
+      "detection_check": "Background in variant congruent with the attached scene-ref rung (same room/props/lighting, not an invented environment)",
+      "status": "prevention-designed",
+      "lesson_candidate": "L42-scene-reference-ladder"
+    },
+    {
+      "id": "D10-vfx-too-perfect",
+      "tag": "vfx",
+      "icon": "⚡",
+      "symptom": "Energy/VFX effects look simulation-grade — 'too perfect or too advanced', reads as obviously AI-generated (user screenshot: p11 teal filaments conforming to anatomy). Target aesthetic is HUMAN-made DAZ comic art; polish is the tell",
+      "root_cause": "Model defaults to cinematic, physically-plausible volumetric VFX; human DAZ artists use store-bought effect PROPS (SY Energy Beams Iray, Raw Energy Effects, Power FX, FPE Magic) — emissive geometry tubes + sprite flares + uniform postwork bloom — whose crudeness signals human craft",
+      "immediate_fix": "Re-roll effect pages with VFX style-bible vocabulary: prop-like emissive tube with white-hot core + single-color rim, hard edges, sprite/starburst flare at contact, uniform Photoshop-style bloom, effect sits slightly ON the scene rather than physically integrating",
+      "prevention_gate": "PREFLIGHT: panels with sfx/energy beats draw effect language ONLY from qa/vfx-style-bible.md vocabulary; 'volumetric / cinematic / realistic / physically accurate' effect language banned from prompts",
+      "detection_check": "Effect reads as DAZ store prop + postwork (hard-edged, slightly composited, simple falloff). Anatomy-conforming filaments, complex volumetrics, perfect scene illumination = flag ⚡",
+      "status": "research forked 2026-06-10 — style-bible agent running; refinement loop with user A/B samples",
+      "lesson_candidate": "L44-vfx-human-made-prop-aesthetic"
+    },
+    {
+      "id": "D14-size-transfer-direction",
+      "tag": "size",
+      "icon": "📏",
+      "symptom": "Generated tier-9 card is drastically smaller than the attached size anchor even WITH the anchor attached and escalation language (user: 'so so so so smaller'); agent's gate passed it — miscalibrated",
+      "root_cause": "(a) TRANSFER DIRECTION: 'make our character as big as reference 2' anchors generation on our character and nudges size — normalization drags it back. Models preserve the PRIMARY image's structure and apply sparse edits, so size survives only when the anchor IS the base. (b) ASPECT: a 3:4 portrait frame cannot hold a character as wide as a car — the model shrinks mass to fit (the anchor itself is landscape). (c) Gate graded leniently.",
+      "immediate_fix": "ANCHOR-FIRST IDENTITY SWAP (user method): attach the size anchor as PRIMARY + our face card; prompt = KEEP the exact same anatomy, exact same gigantic muscle volume and proportions, same pose, same scale — enumerate every mass to keep (upper arms wider than the head, boulder deltoids, the exact same massive chest proportions fully covered) — CHANGE ONLY her face/hair to reference 2 and the outfit to the blue chevron suit; remove all baked text/speech bubble/caption bar. Generate at a WIDE aspect (16:9). PASS 2: 'zoom out slightly, include the full body and legs, keep everything else exactly the same.' Accepted result REPLACES the old T9 card as canonical.",
+      "prevention_gate": "Extreme-size cards/pages: anchor-first direction is MANDATORY (never character-first inflation); aspect must fit the silhouette (wide subject = wide frame, never tall-portrait); gate comparison is LITERAL side-by-side vs the anchor at matched scale — reject unless mass-fraction matches or exceeds on EVERY axis. Calibration exemplar recorded: agent-pass/user-fail on 270c06dc.",
+      "detection_check": "Side-by-side with anchor: arm-width-vs-head ratio, deltoid span, chest depth, overall mass fraction — under on ANY axis = reject, escalate keep-language, re-roll",
+      "status": "codified from user method 2026-06-10; T9 anchor-swap regen queued (pass 1 → pass 2 → turnaround chain)",
+      "lesson_candidate": "L48-anchor-first-size-transfer-and-aspect-fits-silhouette"
+    },
+    {
+      "id": "D11-appearance-in-prose",
+      "tag": "prose",
+      "icon": "🔤",
+      "symptom": "A character's look is invented differently per variant — e.g. p10: Supraman's suit/damage different in all 4 variants because he had NO reference attached and his appearance lived in prompt text",
+      "root_cause": "Appearance carried by prompt prose while references existed (or a character was simply missing from the attachment set). USER LAW (stated repeatedly): prompts may define appearance ONLY when no reference exists at all (bootstrapping the very first card). Otherwise appearance authority = attached references, exclusively",
+      "immediate_fix": "Re-roll with EVERY character's face card + turnaround attached; prompt refers to characters by pointer only ('the man from reference image 3')",
+      "prevention_gate": "PREFLIGHT: every character in the panel's cast list must have face+turnaround in the attachment set; compose-time lint FAILS the prompt if it contains appearance adjectives (hair/eye/build/outfit descriptors) for any character who has a reference",
+      "detection_check": "Per-character congruence vs their attached refs; any variant where a ref'd character's appearance deviates = fail",
+      "status": "prevention-designed; user escalated twice ('feels hopeless') — all reviewed images predate the refit, first post-refit batch is the proof",
+      "lesson_candidate": "L45-refs-own-appearance-prompts-own-action"
+    },
+    {
+      "id": "D12-prompt-underspecified",
+      "tag": "vary",
+      "icon": "🎲",
+      "symptom": "The 4 variants of one submit diverge wildly in blocking — p10: back-to-camera in one, side-on with a third hand in another, character far away in a third. Ambiguity is resolved randomly per variant",
+      "root_cause": "Terse prompts (~100 words) leave staging, orientation, distance, contact points and limb tasks unpinned. User: 'we have nearly unlimited characters of text... adding more text doesn't hurt anything, it only makes things better — you can even generate JSON'",
+      "immediate_fix": "Re-roll with recipe v4 maximal structured JSON prompt (qa/prompt-template-v4.json): exhaustive camera/lens/lighting/spatial relations/per-character position+orientation+per-limb pose+contact points+expression+continuity. Appearance stays in refs (D11)",
+      "prevention_gate": "Compose-time lint: prompt must contain, per character: position, orientation vs camera, per-hand accounting, contact points, expression; plus spatial_rules and a total-hands statement. Completeness checklist, not word count",
+      "detection_check": "Variant-divergence score: if the 4 variants' blocking differs structurally, the prompt/staging was under-pinned — flag 🎲 even if one variant looks good",
+      "status": "prevention-designed",
+      "lesson_candidate": "L46-maximal-structured-prompts"
+    },
+    {
+      "id": "D13-anatomy-errors",
+      "tag": "anatomy",
+      "icon": "🖐️",
+      "symptom": "Phantom/extra limbs — p10: a third hand on the shoulder in one variant, a disembodied hand in another",
+      "root_cause": "Ambiguous contact staging: 'hand on her shoulder' without owning every hand in frame lets the model add spares",
+      "immediate_fix": "Re-roll with per-hand accounting in the prompt ('exactly four hands total: her two fists raised, his right on her left shoulder, his left at his side') + staging ref",
+      "prevention_gate": "Prompts MUST enumerate every hand and its task + a total-hands line + 'no extra limbs' negative; contact-heavy panels require a staging ref (D9)",
+      "detection_check": "Postflight limb/hand count per character — any mismatch = AUTO-REJECT regardless of other quality",
+      "status": "prevention-designed",
+      "lesson_candidate": "L47-per-hand-accounting"
+    },
+    {
+      "id": "D9-staging-ref-missing",
+      "tag": "staging",
+      "icon": "🧩",
+      "symptom": "Novel positions/interactions (carries, holds, multi-character physical contact) render wrong or inconsistently",
+      "root_cause": "Character refs show standing poses only; the model must invent the staging in one hop — 'when we generate the characters in a new position, we need to generate a reference beforehand, sometimes for every single image'",
+      "immediate_fix": "Generate a staging reference of the arrangement (correct characters, position, scale) first; then generate the page from staging ref + turnarounds + scene rung",
+      "prevention_gate": "PREFLIGHT: panels whose action involves novel poses/physical interaction require a staging ref in the attachment set (generated fresh if absent). Shotlist subject_staging field flags these. UPGRADE (user 2026-06-10): the staging ref is itself a REVIEWABLE artifact — generate it, INSPECT AND PERFECT it (auto-QA, optionally user eyes) BEFORE any page consumes it",
+      "detection_check": "Variant staging matches the staging ref's arrangement (who is where, contact points, relative scale)",
+      "status": "prevention-designed",
+      "lesson_candidate": "L43-staging-refs-for-novel-poses"
+    }
+  ],
+  "pending_user_defects": "User continues writing defects in chat — append as D10+, then regenerate extension TAGS + QA rubric from this registry."
+}

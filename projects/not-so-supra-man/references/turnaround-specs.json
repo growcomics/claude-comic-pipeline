@@ -1,0 +1,70 @@
+{
+  "_note": "Refs-are-truth refit v3 (adds D14 anchor-first size transfer): one TURNAROUND MODEL SHEET per character per wardrobe state — front / three-quarter / profile / back in ONE landscape image, same outfit all views — with MANDATORY SCALE GUIDE (D7): plain matte-grey reference silhouette + faint horizontal height grid lines, heights per references/height-chart.json. ASPECT FITS SILHOUETTE (D14): turnarounds and extreme-size work are WIDE (16:9) — portrait frames squeeze mass. Attached on every page in that state so outfit + angle + HEIGHT + SIZE are pinned by image, not prose.",
+  "page_recipe_v4_pointer": "see qa/prompt-template-v4.json and PROGRESS.md — maximal structured JSON prompts, pointer-only appearance, per-hand accounting.",
+  "scene_ladder_rule": "Per location: wide establish (exists) -> generate medium-region rung chained from wide -> generate close-up rung chained from medium, as pages need them. The attached scene ref must match the shot's framing distance.",
+  "sheets": [
+    {
+      "id": "dana-t6-torn",
+      "priority": 1,
+      "covers_pages": "p12-p17 re-rolls",
+      "save": "references/characters/dana-lane/turnaround-t6-torn.png",
+      "attach": ["young woman beauty (face)", "flexing (T4 body)", "super-suit T6 (size ref)"],
+      "height_pin": "5'10\" — beside a 6'2\" grey mannequin silhouette (she is 4 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME massively muscular amazon black-bob woman shown in four full-body views side by side — front view, three-quarter view, profile view, back view — identical outfit in every view: a white blouse torn to a knotted remnant that still fully covers her chest, sleeves split over huge biceps, and a charcoal pencil skirt torn to a secure wrap, fully covering hips. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: the woman is 4 inches SHORTER than the silhouette — heavily muscular but normal human height. Faint horizontal grid lines across the background. Same hair, same face, same muscle size and same height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "dana-t6-supersuit",
+      "priority": 2,
+      "covers_pages": "p20-p37",
+      "save": "references/characters/dana-lane/turnaround-t6-suit.png",
+      "attach": ["young woman beauty (face)", "super-suit T6 (bba21ce4)"],
+      "height_pin": "5'10\" — beside a 6'2\" grey mannequin silhouette (4 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME massively muscular amazon black-bob woman in four full-body views side by side — front, three-quarter, profile, back — identical outfit in every view: royal-blue super-suit stretched skin-tight, gold double-chevron delta emblem in a diamond outline on the chest (NO letters), crimson cape, crimson boots. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 4 inches SHORTER than the silhouette — muscular, not tall. Faint horizontal grid lines. Same hair, face, muscle size and height in all views. Mid-grey studio. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "dana-t9-ANCHOR-SWAP",
+      "priority": 3,
+      "covers_pages": "p38-p46 (this two-pass flow REPLACES the old character-first T9 card 270c06dc, which failed the user's size read — D14)",
+      "method": "TWO-PASS ANCHOR-FIRST IDENTITY SWAP (D14, user method)",
+      "pass_1": {
+        "aspect": "16:9 (the anchor is landscape; portrait squeezes mass — aspect fits silhouette)",
+        "attach_order": ["lana (ANCHOR — PRIMARY image, the body base)", "young woman beauty (Dana face card)"],
+        "prompt": "Edit this image. KEEP the exact same body: the exact same anatomy, the exact same gigantic muscle volume and proportions — upper arms wider than her head, boulder deltoids, the exact same massive chest proportions fully covered by the suit, the same pose, the same scale, the same camera framing. Do NOT shrink or slim ANY part of her. CHANGE ONLY these things: her face and hair become the woman from the second reference image (jet-black chin-length bob with straight bangs, hazel eyes); her outfit becomes a royal-blue super-suit with a gold double-chevron delta emblem in a diamond outline on the chest (NO letters, NO S symbol) and a crimson cape; remove the speech bubble, remove all text and the caption bar at the bottom. Photorealistic 3D CGI render, DAZ Studio Iray style. Photographic CGI render, NOT illustrated.",
+        "gate": "LITERAL side-by-side vs anchor at matched scale: arm-vs-head ratio, deltoid span, chest depth, mass fraction — under on ANY axis = reject and re-roll with escalated keep-language"
+      },
+      "pass_2": {
+        "aspect": "16:9",
+        "attach_order": ["accepted pass-1 result (PRIMARY)"],
+        "prompt": "Edit this image. Zoom out slightly so her FULL body is visible from head to boots, including her legs. Keep everything else exactly the same: the exact same anatomy, the exact same gigantic muscle volume and proportions, same face, same hair, same suit, same emblem, same cape, same scale. Do NOT shrink any part of her. Photographic CGI render, NOT illustrated.",
+        "save": "references/characters/dana-lane/body-tier9-v2.png",
+        "note": "this becomes the canonical T9 card in ref-ledger.json"
+      },
+      "pass_3_turnaround": {
+        "aspect": "16:9",
+        "attach_order": ["accepted pass-2 result (PRIMARY)", "young woman beauty (face)"],
+        "save": "references/characters/dana-lane/turnaround-t9-battle.png",
+        "prompt": "Character turnaround model sheet from this exact character: the SAME woman with the SAME gigantic muscle volume and proportions in four full-body views side by side — front, three-quarter, profile, back — identical suit, emblem, cape, size and height in every view, do NOT shrink any view. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is the SAME height as the silhouette — overwhelming muscle mass at normal human height, NOT a giantess. Faint horizontal grid lines. Mid-grey studio. Photographic CGI render, NOT illustrated.",
+        "gate": "every view passes the literal anchor comparison AND height-vs-silhouette check"
+      }
+    },
+    {
+      "id": "deedee-t8-destroya",
+      "priority": 4,
+      "covers_pages": "p24-p37",
+      "save": "references/characters/dee-dee/turnaround-t8.png",
+      "attach": ["blonde (face)", "standing villain (T8 body 2f4e1204)"],
+      "height_pin": "6'0\" — beside a 6'2\" grey mannequin silhouette (2 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME hyper-muscular curly-blonde villainess in four full-body views side by side — front, three-quarter, profile, back — identical outfit in every view: black side-laced corset, black choker, black wrist cuffs, black-and-white vertically striped thigh-high boots. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 2 inches shorter than the silhouette — huge muscle, human height. Faint horizontal grid lines. Same mane, face, muscle size and height in all views. Mid-grey studio. Photographic CGI render, NOT illustrated.",
+      "note": "if Destroya also reads undersized vs her card on pages, apply the same D14 anchor-first swap using the best pre-existing Destroya card as the body base"
+    },
+    {
+      "id": "supraman-suit",
+      "priority": 5,
+      "covers_pages": "all Supraman pages (scorched/battered damage carried by prior-panel chaining)",
+      "save": "references/characters/supraman/turnaround.png",
+      "attach": ["male superhero (74c0857f)"],
+      "height_pin": "6'2\" — he IS the reference height; include grid lines",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME tall lean-muscular male superhero in four full-body views side by side — front, three-quarter, profile, back — identical outfit in every view: royal-blue fitted hero suit, gold double-chevron delta emblem in a diamond outline (NO letters, NO S), crimson cape, trunks and boots, gold belt. Faint horizontal height grid lines across the background. Same hair, face and height in all views. Mid-grey studio. Photographic CGI render, NOT illustrated."
+    }
+  ]
+}

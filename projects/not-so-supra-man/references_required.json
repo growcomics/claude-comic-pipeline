@@ -1,0 +1,166 @@
+{
+  "project": "not-so-supra-man",
+  "characters": {
+    "supraman": {
+      "face_card": "references/characters/supraman/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/supraman/body-base.png",
+          "lineup_required": false
+        }
+      ]
+    },
+    "dana-lane": {
+      "face_card": "references/characters/dana-lane/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 2,
+          "path": "references/characters/dana-lane/body-tier2.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 4,
+          "path": "references/characters/dana-lane/body-tier4.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 6,
+          "path": "references/characters/dana-lane/body-tier6.png",
+          "lineup_required": true,
+          "tier6_reinforcement_required": true
+        },
+        {
+          "tier": 7,
+          "path": "references/characters/dana-lane/body-tier7.png",
+          "lineup_required": true,
+          "tier7_reinforcement_required": true
+        },
+        {
+          "tier": 9,
+          "path": "references/characters/dana-lane/body-tier9.png",
+          "lineup_required": true,
+          "tier9_reinforcement_required": true
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 2,
+          "path": "references/characters/dana-lane/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "profile",
+          "tier": 2,
+          "path": "references/characters/dana-lane/view-profile.png",
+          "lineup_required": false
+        },
+        {
+          "name": "back-full",
+          "tier": 2,
+          "path": "references/characters/dana-lane/view-back-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "low-angle-front",
+          "tier": 2,
+          "path": "references/characters/dana-lane/view-low-angle-front.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-region",
+          "tier": 2,
+          "path": "references/characters/dana-lane/view-ecu-region.png",
+          "lineup_required": false
+        }
+      ]
+    },
+    "dee-dee": {
+      "face_card": "references/characters/dee-dee/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 3,
+          "path": "references/characters/dee-dee/body-tier3.png",
+          "lineup_required": true
+        },
+        {
+          "tier": 8,
+          "path": "references/characters/dee-dee/body-tier8.png",
+          "lineup_required": true,
+          "tier8_reinforcement_required": true
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 3,
+          "path": "references/characters/dee-dee/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "profile",
+          "tier": 3,
+          "path": "references/characters/dee-dee/view-profile.png",
+          "lineup_required": false
+        },
+        {
+          "name": "back-full",
+          "tier": 3,
+          "path": "references/characters/dee-dee/view-back-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "low-angle-front",
+          "tier": 3,
+          "path": "references/characters/dee-dee/view-low-angle-front.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-region",
+          "tier": 3,
+          "path": "references/characters/dee-dee/view-ecu-region.png",
+          "lineup_required": false
+        }
+      ]
+    },
+    "dex-doomer": {
+      "face_card": "references/characters/dex-doomer/face-card.png",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/dex-doomer/body-base.png",
+          "lineup_required": false
+        }
+      ]
+    }
+  },
+  "locations": {
+    "doomer-lab": {
+      "establishing": "references/locations/doomer-lab/_source.jpg"
+    },
+    "lab-quarters": {
+      "establishing": "references/locations/lab-quarters/_source.jpg"
+    },
+    "hq-gym": {
+      "establishing": "references/locations/hq-gym/_source.jpg"
+    },
+    "doomer-lab-2": {
+      "establishing": "references/locations/doomer-lab-2/_source.jpg"
+    },
+    "city-street": {
+      "establishing": "references/locations/city-street/_source.jpg"
+    }
+  },
+  "props": {
+    "disinto-ray": {
+      "path": "references/props/disinto-ray/_source.png",
+      "optional": true
+    },
+    "graviton-barbell": {
+      "path": "references/props/graviton-barbell/_source.png",
+      "optional": true
+    }
+  },
+  "notes": "Final-form body refs (dana tier-9, dee-dee tier-8) REQUIRE user juice-review approval before any panel generation. Generated on Google Flow (Nano Banana Pro), lineup + reinforcement refs attached per L28/L29-L32."
+}

@@ -1,0 +1,27 @@
+{
+  "_note": "CANONICAL HEIGHTS — the only legal source for height in any prompt (D7 gate). Muscle tiers change MASS, never height, except where this chart says so. Every turnaround sheet includes a scale guide pinned to these numbers. >>> USER: these are proposed defaults — adjust any number and tell Claude, the chart propagates everywhere. <<<",
+  "scale_guide_device": "Each turnaround renders the character beside a plain matte-grey mannequin silhouette of stated height + faint horizontal grid lines; prompts say 'same height as the reference silhouette — muscle mass increases, height does NOT'.",
+  "characters": {
+    "supraman":   { "height": "6'2\" (188 cm)", "constant": true },
+    "dana-lane":  {
+      "T2": "5'8\" (173 cm)",
+      "T4": "5'8\" (173 cm)",
+      "T6": "5'10\" (178 cm)",
+      "T9": "6'1\" (185 cm)",
+      "rule": "modest gain only — at T9 she is slightly shorter than or equal to Supraman standing; she 'towers' on the cover because he is slumped. NEVER giantess-scale."
+    },
+    "dee-dee":    {
+      "T3": "5'7\" (170 cm)",
+      "T8": "6'0\" (183 cm)",
+      "rule": "Destroya is big but human-scale; Dana at T9 visibly outmasses her — by MUSCLE, not height (1 inch difference)."
+    },
+    "dex-doomer": { "height": "5'11\" (180 cm)", "constant": true },
+    "timmy-olson": { "height": "5'6\" (168 cm)", "constant": true }
+  },
+  "pairwise_checks": [
+    "T6 Dana vs Supraman: she is 4 inches SHORTER standing level",
+    "T9 Dana vs Supraman: within 1 inch of each other",
+    "T9 Dana vs T8 Destroya: ~1 inch taller, dramatically more massive",
+    "Any panel where a character exceeds ~1.15x another's chart ratio = height-drift reject"
+  ]
+}

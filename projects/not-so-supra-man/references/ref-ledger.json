@@ -1,0 +1,124 @@
+{
+  "_note": "Maps each locked reference to its Flow media id (for re-attaching via the + asset picker during production) and its on-disk path. anchor_tier9 is the user's uploaded size truth, attached on EVERY tier-9 Dana gen.",
+  "anchor_tier9": {
+    "flow_id": "4d81c347-a431-44f7-9bf3-c3c53ff8b46b",
+    "disk": ".flow-scratch/anchor-4d81c347.jpg",
+    "name_in_picker": "Lana_character_muscul..."
+  },
+  "lineup_4_9": {
+    "flow_id": null,
+    "disk": "../../skills/comic-production/assets/muscle-size-lineup-4-9.png",
+    "name_in_picker": null,
+    "_todo": "upload to Flow"
+  },
+  "lineup_1_6": {
+    "flow_id": null,
+    "disk": "../../skills/comic-production/assets/muscle-size-lineup.png",
+    "name_in_picker": null,
+    "_todo": "upload to Flow"
+  },
+  "characters": {
+    "dana-lane": {
+      "face": {
+        "flow_id": "01b9bbf0-987f-4048-b533-25c378796c10",
+        "disk": "references/characters/dana-lane/face-card.png"
+      },
+      "body": {
+        "2": {
+          "flow_id": "53ae3c76-57e7-400b-a397-1136c710cf34",
+          "disk": "references/characters/dana-lane/body-tier2.png"
+        },
+        "4": {
+          "flow_id": "3c004457-6481-45be-9f1d-c0dc1da85630",
+          "disk": "references/characters/dana-lane/body-tier4.png"
+        },
+        "6": {
+          "flow_id": "bba21ce4-16f9-41da-bbeb-f502cc1bf28e",
+          "disk": "references/characters/dana-lane/body-tier6.png"
+        },
+        "9": {
+          "flow_id": "270c06dc-3ab3-4e43-a1f5-b51c62dfd9c2",
+          "disk": "references/characters/dana-lane/body-tier9.png"
+        }
+      }
+    },
+    "supraman": {
+      "face": {
+        "flow_id": "8bf6a23e-53c5-437b-8320-beedf104581b",
+        "disk": "references/characters/supraman/face-card.png"
+      },
+      "body": {
+        "1": {
+          "flow_id": "74c0857f-e567-4d31-80b0-ddb13de365b0",
+          "disk": "references/characters/supraman/body-base.png"
+        }
+      }
+    },
+    "dee-dee": {
+      "face": {
+        "flow_id": "d8a98176-8375-46e7-b548-e9a172a384d5",
+        "disk": "references/characters/dee-dee/face-card.png"
+      },
+      "body": {
+        "3": {
+          "flow_id": "c7ec4291-4a6c-49c5-a9e5-c01026626135",
+          "disk": "references/characters/dee-dee/body-tier3.png"
+        },
+        "8": {
+          "flow_id": "2f4e1204-8e67-43fa-a49e-7167d435de64",
+          "disk": "references/characters/dee-dee/body-tier8.png"
+        }
+      }
+    },
+    "dex-doomer": {
+      "face": {
+        "flow_id": "264c9a99-bd17-41f3-9c5d-178b4b1de8e3",
+        "disk": "references/characters/dex-doomer/face-card.png"
+      },
+      "body": {
+        "1": {
+          "flow_id": "5e32792d-9060-4877-9df2-f7938a6f8ad2",
+          "disk": "references/characters/dex-doomer/body-base.png"
+        }
+      }
+    }
+  },
+  "locations": {
+    "hq-gym": {
+      "flow_id": "312a66d9-93ee-4173-b4f4-35f1c907b042",
+      "search": "training hall"
+    },
+    "city-street": {
+      "flow_id": "452c13a3-97d6-4394-97f6-7403a2ac2ccd",
+      "search": "city avenue"
+    },
+    "doomer-lab-2": {
+      "flow_id": "7b7295e2-595a-4827-bd9e-836e03579e17",
+      "search": "backup villain"
+    },
+    "doomer-lab": {
+      "flow_id": null,
+      "search": "underground villain laboratory"
+    },
+    "lab-quarters": {
+      "flow_id": null,
+      "search": "spartan staff quarters"
+    }
+  },
+  "props": {
+    "graviton-barbell": {
+      "flow_id": "7d129a41-6a00-4ddc-85c4-12f3c92fb88b",
+      "search": "barbell"
+    },
+    "disinto-ray": {
+      "flow_id": "036dcc50-52d0-43f0-b857-88be57d471f3",
+      "search": "ray cannon"
+    }
+  },
+  "deedee_destroya_cards": [
+    "6fd24c37-b261-4d24-86cd-831b424dc319",
+    "b02d4e7e-100b-4eff-a4ab-b3818e62f453",
+    "778ec7fc-e304-4688-8f79-91f6821ecb51",
+    "68caf1eb-5446-4bc9-b7e2-d566a0a6b9b9"
+  ]
+}

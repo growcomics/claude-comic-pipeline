@@ -12,6 +12,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (project TEXT now versioned in git — rule 5 amended)
+
+User instruction: the per-project QA/config/state files (defect registry, prompt template v4, VFX style bible, turnaround specs, height chart, page plans/logs, shotlist, ledgers, PROGRESS/STATUS) belong in git history. The old CLAUDE.md rule 5 ("NEVER commit projects/") was stale doctrine — it contradicted the repo's already-granular .gitignore (`projects/*/pages/`, `final/`, `*.pdf`) and a stale Drive-symlink claim (`projects/` is a real directory). New policy: **project text is versioned; project binaries are not.**
+
+### Added
+- `projects/not-so-supra-man/` text tree (13 files): shotlist, pages-plan/pages-log, references_required, ref-ledger, turnaround-specs, height-chart, qa/ (defect-registry D1–D14, prompt-template-v4, vfx-style-bible, README), PROGRESS/STATUS.
+
+### Changed
+- `CLAUDE.md` rule 5 rewritten: project text committed (with CHANGELOG), binaries excluded; only stage a project's text deliberately, never bulk-add other projects unreviewed.
+- `.gitignore`: projects block extended with `source/`, `.flow-scratch/`, and all `*.png`/`*.jpg` under projects/ (renders recoverable from Flow media ids in the ledgers).
+
 ## 2026-06-10 (D14 anchor-first size transfer; Red-Pen extension synced to D1–D14)
 
 Tier-9 renders came out drastically smaller than the user's attached size anchor even with the anchor in the ref set. Two mechanical root causes: **transfer direction** (prompting "make our character as big as the reference" anchors generation on the character and normalization drags size back — models preserve the PRIMARY image's structure and apply sparse edits, so the anchor must BE the base) and **aspect ratio** (a tall-portrait frame physically squeezes a car-wide silhouette; the anchor itself is landscape). The agent's earlier four-axis gate had passed the undersized card — recorded as the first agent-pass/user-fail calibration exemplar for the planned QA subagent.

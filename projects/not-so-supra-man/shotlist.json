@@ -1,0 +1,1998 @@
+{
+  "project": "not-so-supra-man",
+  "version": 1,
+  "source": "Adaptation of 'Not So Super... Man' (Steeleblazer/Zanfadar/Lawson, MFMC) \u2014 own 3D-CGI version, one image per page, original dialogue.",
+  "page_count": 46,
+  "style": "photoreal-daz3d",
+  "format_note": "ONE image per page \u2014 every page is a single full-bleed splash panel. Insert pages marked GROWTH-PROGRESSIVE are a single image internally divided into 3 vertical sub-panels (left to right) showing the SAME body region growing stage by stage.",
+  "location_strategy": "multi",
+  "chapter_type": "origin-mixed",
+  "growth_page_target": "45-55% (origin/mixed per script-breakdown \u00a74.6); actual growth-beat pages: 19/46 = 41% + 5 strength-feat aftermath pages",
+  "transformation_metadata": {
+    "flavor": "body-region-progression",
+    "start_tier": 2,
+    "end_tier": 9,
+    "tier_ladder": {
+      "dana-lane": [
+        2,
+        4,
+        6,
+        9
+      ],
+      "dee-dee": [
+        3,
+        8
+      ]
+    },
+    "oversize_note": "Per feedback_chest_oversize_compensate: prompts over-spec one tier above target. Final-form refs go to user review for further juicing BEFORE production."
+  },
+  "escalation_devices": [
+    "multi-panel-progressive",
+    "zoom-escalation",
+    "clothing-destruction",
+    "sfx-driven",
+    "reaction-intercut",
+    "size-comparison",
+    "full-body-reveal"
+  ],
+  "always_clothed": true,
+  "adult_handling": "steamy-but-covered: all intimate beats framed suggestive/implied \u2014 torn-but-covering wardrobe, silhouettes, embraces, exterior cutaway. No nudity.",
+  "emblem": "ORIGINAL gold double-chevron delta emblem (two nested upward chevrons in a diamond outline) \u2014 NO letterforms, NO S-shield.",
+  "cast": [
+    {
+      "id": "supraman",
+      "name": "Supraman",
+      "ref_folder": "references/characters/supraman/",
+      "soul_id": null,
+      "sex": "m",
+      "wardrobe": "royal-blue fitted hero suit, crimson cape + trunks + boots, gold belt, gold double-chevron delta emblem on chest",
+      "look": "square-jawed classic hero, black side-parted hair, tall lean-muscular (male athletic, NOT hyper)"
+    },
+    {
+      "id": "dana-lane",
+      "name": "Dana Lane",
+      "ref_folder": "references/characters/dana-lane/",
+      "soul_id": null,
+      "sex": "f",
+      "wardrobe": "ACT1: white blouse + charcoal pencil skirt (progressively torn but always covering). FROM PAGE 20: Supraman's spare royal-blue suit stretched over her physique, gold chevron emblem, crimson cape",
+      "look": "jet-black chin-length bob with straight bangs, hazel eyes, strikingly beautiful; grows tier 2\u21924\u21926\u21929 across the story"
+    },
+    {
+      "id": "dee-dee",
+      "name": "Dee-Dee / Destroya",
+      "ref_folder": "references/characters/dee-dee/",
+      "soul_id": null,
+      "sex": "f",
+      "wardrobe": "PRE: white lab coat over black top. AS DESTROYA (page 24+): black side-laced corset, black choker, black wrist cuffs, black-and-white striped thigh-high boots",
+      "look": "big curly blonde mane, ice-blue eyes, cruel smirk, strikingly beautiful; tier 3 \u2192 8 as Destroya"
+    },
+    {
+      "id": "dex-doomer",
+      "name": "Dex Doomer",
+      "ref_folder": "references/characters/dex-doomer/",
+      "soul_id": null,
+      "sex": "m",
+      "wardrobe": "slate-grey tailored business suit, striped tie",
+      "look": "bald, heavy brow, smug corporate villain"
+    },
+    {
+      "id": "timmy-olson",
+      "name": "Timmy Olson",
+      "sex": "m",
+      "wardrobe": "tan jacket, red bow tie, vintage flashbulb camera",
+      "look": "freckled young photographer"
+    }
+  ],
+  "props": [
+    {
+      "id": "disinto-ray",
+      "description": "chunky retro-future ray cannon: brushed chrome barrel with three cooling rings, glowing teal coil core, black grips \u2014 handheld-cannon scale",
+      "ref_folder": "references/props/disinto-ray/"
+    },
+    {
+      "id": "graviton-barbell",
+      "description": "oversized matte-black barbell, six thick disc plates per side, teal holo readout on the collar",
+      "ref_folder": "references/props/graviton-barbell/"
+    }
+  ],
+  "locations": [
+    {
+      "id": "doomer-lab",
+      "description": "villain laboratory: concrete walls, steel gantry, cable bundles, the Disinto-Ray rig aimed at a bolted interrogation chair, harsh overhead floods",
+      "ref_folder": "references/locations/doomer-lab/"
+    },
+    {
+      "id": "lab-quarters",
+      "description": "spartan staff quarters off the lab: steel-frame bed, concrete walls, one caged wall lamp, warm low light",
+      "ref_folder": "references/locations/lab-quarters/"
+    },
+    {
+      "id": "lab-exterior",
+      "description": "night exterior of the brutalist lab block: cracked facade, one lit top-floor window, dust drifting, moonlit"
+    },
+    {
+      "id": "hq-locker",
+      "description": "Hall of Justice locker room: glass suit-display cases (one empty hanger), brushed steel lockers"
+    },
+    {
+      "id": "hq-gym",
+      "description": "Hall of Justice training hall: vaulted ceiling, graviton weight rack, holo readout pillars, polished floor with crater dents",
+      "ref_folder": "references/locations/hq-gym/"
+    },
+    {
+      "id": "doomer-lab-2",
+      "description": "backup Doomer lab: wall of security monitors, workbench with the rebuilt Disinto-Ray prototype, red accent lighting",
+      "ref_folder": "references/locations/doomer-lab-2/"
+    },
+    {
+      "id": "city-street",
+      "description": "downtown avenue: glass office towers, overturned yellow taxi, cracked asphalt crater, scattered debris, late-afternoon sun",
+      "ref_folder": "references/locations/city-street/"
+    }
+  ],
+  "transformation_scenes": [
+    {
+      "name": "dana-growth-1",
+      "pages": [
+        4,
+        10
+      ],
+      "required_body_regions": [
+        "arms",
+        "abs"
+      ],
+      "devices": [
+        "multi-panel-progressive",
+        "sfx-driven",
+        "clothing-destruction"
+      ]
+    },
+    {
+      "name": "dana-growth-2",
+      "pages": [
+        11,
+        16
+      ],
+      "required_body_regions": [
+        "chest",
+        "back",
+        "legs"
+      ],
+      "devices": [
+        "multi-panel-progressive",
+        "zoom-escalation",
+        "clothing-destruction",
+        "reaction-intercut"
+      ]
+    },
+    {
+      "name": "deedee-transformation",
+      "pages": [
+        23,
+        27
+      ],
+      "required_body_regions": [
+        "shoulders",
+        "legs"
+      ],
+      "devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "full-body-reveal"
+      ]
+    },
+    {
+      "name": "dana-growth-3-final",
+      "pages": [
+        38,
+        44
+      ],
+      "required_body_regions": [
+        "arms",
+        "chest",
+        "back"
+      ],
+      "devices": [
+        "multi-panel-progressive",
+        "zoom-escalation",
+        "size-comparison",
+        "full-body-reveal",
+        "reaction-intercut"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "splash",
+          "characters": [
+            "supraman",
+            "dana-lane",
+            "dee-dee"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "interior",
+          "camera": "medium, eye-level",
+          "subject_staging": "triangular",
+          "action": "COVER. Foreground: drained Supraman slumped, suit torn. Mid: tier-9 Dana towers behind him, hand on his shoulder, smiling. Back-right: Destroya (tier 8, corset) pressing the graviton barbell overhead.",
+          "dialogue": [],
+          "captions": [
+            "NOT SO SUPRA... MAN"
+          ],
+          "sfx": [],
+          "notes": "Title cover \u2014 composite of final states. Title text added by page-composer.",
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 9,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: spare suit stretched (final); supraman: suit torn; dee-dee: corset ensemble"
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "size": "splash",
+          "characters": [
+            "dex-doomer",
+            "dee-dee",
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "wide-establish, eye-level",
+          "subject_staging": "depth-staged",
+          "action": "Dana (tier 2, blouse + skirt) bound to the interrogation chair under the Disinto-Ray barrel. Doomer gestures grandly in the foreground; Dee-Dee in lab coat at the console behind.",
+          "dialogue": [
+            {
+              "character": "dex-doomer",
+              "text": "Cheer up, Miss Lane. Tonight you make scientific history.",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "You won't get away with this, Doomer!",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 2,
+            "dee-dee": 3
+          },
+          "costume_state": "dana: blouse+skirt intact, roped; doomer: grey suit; dee-dee: lab coat"
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "size": "splash",
+          "characters": [
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "low-angle-front, dutch",
+          "subject_staging": "depth-staged",
+          "action": "Supraman smashes THROUGH the concrete wall, fist first, debris exploding toward camera, cape snapping.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "Let her go, Doomer. Last warning.",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "THOOOM!",
+              "source": "wall breach"
+            }
+          ],
+          "continuity_refs": [
+            "p02-01"
+          ],
+          "transformation_beat": null,
+          "costume_state": "supraman: suit pristine"
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "size": "splash",
+          "characters": [
+            "dex-doomer",
+            "supraman",
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "medium, profile",
+          "subject_staging": "depth-staged",
+          "action": "Doomer fires the Disinto-Ray. Supraman throws himself in front of bound Dana \u2014 the teal beam strikes his back and visibly REFRACTS through his chest into her, both lit by the discharge.",
+          "dialogue": [
+            {
+              "character": "dex-doomer",
+              "text": "Then share the demonstration!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "ZZZAKKK!",
+              "source": "ray beam"
+            }
+          ],
+          "continuity_refs": [
+            "p02-01"
+          ],
+          "transformation_beat": "trigger",
+          "muscle_size_tier": {
+            "dana-lane": 2
+          },
+          "costume_state": "supraman: suit pristine; dana: blouse intact, roped"
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "size": "splash",
+          "characters": [
+            "supraman",
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "cowboy, three-quarter",
+          "subject_staging": "depth-staged",
+          "action": "Smoke clears. Supraman on one knee, steaming, drained. Dana still roped to the chair, head swimming. Far background: the Doomjet hatch sealing as the villains flee.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "Ugh... like my bones went through a blender...",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Supraman... something feels... off.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p04-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 2
+          },
+          "costume_state": "supraman: suit scorched at back; dana: blouse intact, roped"
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "mcu, eye-level",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "Tight on Dana in the chair: flushed cheeks, wide eyes, breath caught \u2014 a faint teal shimmer crawling along her forearms under the ropes.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Hot... it's like sunlight under my skin...",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p05-01"
+          ],
+          "transformation_beat": "first_sensation",
+          "muscle_size_tier": {
+            "dana-lane": 2
+          },
+          "costume_state": "dana: blouse intact, ropes straining"
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "full, low-angle-front",
+          "subject_staging": "depth-staged",
+          "action": "GROWTH 1 EVENT. Dana stands up THROUGH the ropes \u2014 they snap off her swelling frame (tier 4: visible athletic muscle now filling the blouse, sleeves tight). Chair tips behind her. Supraman gapes in the background.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Actually... I feel SUPER.",
+              "type": "shout"
+            },
+            {
+              "character": "supraman",
+              "text": "Great galaxies...",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "SNAP! SNAP!",
+              "source": "ropes bursting"
+            }
+          ],
+          "continuity_refs": [
+            "p06-01"
+          ],
+          "transformation_beat": "whole_body",
+          "muscle_size_tier": {
+            "dana-lane": 4
+          },
+          "costume_state": "dana: blouse tight at seams, ropes snapped off; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "ecu-region, three-quarter",
+          "action": "GROWTH-PROGRESSIVE page: one image, three vertical sub-panels, the SAME right arm left-to-right. Stage 1: toned forearm-to-bicep flex inside a tightening blouse sleeve. Stage 2: bicep ballooning, seam splitting at the shoulder. Stage 3: arm fully swollen athletic-hyper, sleeve burst to threads, veins surfacing, sweat sheen.",
+          "dialogue": [],
+          "captions": [
+            "Every heartbeat poured more of his power into her."
+          ],
+          "sfx": [
+            {
+              "text": "KREEEK",
+              "source": "stage 2 seam"
+            },
+            {
+              "text": "RIIIP",
+              "source": "stage 3 sleeve"
+            }
+          ],
+          "notes": "In-image 3-panel progressive device. Same arm, same angle, ONLY the size changes.",
+          "continuity_refs": [
+            "p07-01"
+          ],
+          "transformation_beat": "arms",
+          "muscle_size_tier": {
+            "dana-lane": 4
+          },
+          "costume_state": "dana: blouse R sleeve bursts across stages (intact->split->gone)"
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "ecu-region, profile, dutch",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dana's midsection in profile. Stage 1: blouse taut over a soft waist. Stage 2: fabric stretching as abdominal ridges press through. Stage 3: blouse hem parted, carved eight-pack abs exposed, skin glistening.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "STRRRETCH",
+              "source": "stage 2 fabric"
+            }
+          ],
+          "notes": "In-image 3-panel progressive. Keep blouse covering the chest \u2014 midriff only exposed.",
+          "continuity_refs": [
+            "p08-01"
+          ],
+          "transformation_beat": "abs",
+          "muscle_size_tier": {
+            "dana-lane": 4
+          },
+          "costume_state": "dana: blouse hem parts across stages, midriff bare by stage 3"
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "medium, over-shoulder",
+          "subject_staging": "tension-block",
+          "action": "Dana flexes both arms in a power pose, rope shreds at her feet; Supraman steps close, hand on her shoulder, equal parts awe and worry. Their eyelines lock along a diagonal.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "The beam bounced my power into you. It should wear off... I think.",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "And if I don't want it to?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p07-01"
+          ],
+          "transformation_beat": "aftermath",
+          "muscle_size_tier": {
+            "dana-lane": 4
+          },
+          "costume_state": "dana: blouse torn-but-covering; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "panels": [
+        {
+          "panel_id": "p11-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "mcu, three-quarter",
+          "subject_staging": "tension-block",
+          "action": "Mid-embrace. Dana's eyes fly open against his cheek \u2014 the teal shimmer reignites along her shoulders, stronger.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Oh\u2014 it's happening AGAIN\u2014",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p10-01"
+          ],
+          "transformation_beat": "first_sensation",
+          "muscle_size_tier": {
+            "dana-lane": 4
+          },
+          "costume_state": "dana: blouse torn-but-covering; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "panels": [
+        {
+          "panel_id": "p12-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "full, worms-eye",
+          "subject_staging": "depth-staged",
+          "action": "GROWTH 2 EVENT. Dana surges to tier 6 \u2014 head thrown back, fists clenched, blouse and skirt seams splitting at shoulder and hip (still covering), hem lines snapping. Supraman shields his face from flying buttons in the foreground.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Bigger\u2014 I'm getting BIGGER!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "RRRIIIP!",
+              "source": "seams"
+            }
+          ],
+          "continuity_refs": [
+            "p11-01"
+          ],
+          "transformation_beat": "whole_body",
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: blouse+skirt seams split at shoulder/hip, still covering; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "panels": [
+        {
+          "panel_id": "p13-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "ecu-region, low-angle-front",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dana's chest and shoulders front-on. Stage 1: blouse straining across her chest, top button gone. Stage 2: chest and pec shelf swelling outward, placket gapping, fabric pulled to silk-thin. Stage 3: blouse knotted remnant barely containing a massively expanded bust + flared collarbone shelf, every seam blown but coverage intact.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "POP",
+              "source": "stage 1 button"
+            },
+            {
+              "text": "KREEEEK",
+              "source": "stage 3"
+            }
+          ],
+          "notes": "Over-spec chest size per compensation rule. COVERED at every stage.",
+          "continuity_refs": [
+            "p12-01"
+          ],
+          "transformation_beat": "chest",
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: blouse strains to knotted remnant across stages, chest covered throughout"
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "panels": [
+        {
+          "panel_id": "p14-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "ecu-region, low-angle-back",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her back. Stage 1: blouse back taut, shoulder blades defined. Stage 2: lats flaring wide, back seam splitting downward. Stage 3: full cobra back exposed through the split, trap mountains, blouse hanging on as sleeves.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "SRRRIP",
+              "source": "back seam"
+            }
+          ],
+          "continuity_refs": [
+            "p13-01"
+          ],
+          "transformation_beat": "back",
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: blouse back seam splits across stages, hangs as sleeves by stage 3"
+        }
+      ]
+    },
+    {
+      "page_number": 15,
+      "panels": [
+        {
+          "panel_id": "p15-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "ecu-region, profile",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, hip-to-calf in profile. Stage 1: pencil skirt taut over toned thighs. Stage 2: quad sweep and glutes stretching the skirt, side-slit tearing upward. Stage 3: skirt reduced to a secure wrap, diamond calves and huge sweeping quads exposed, heels snapped flat.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "RRRT",
+              "source": "slit tearing"
+            }
+          ],
+          "notes": "Wrap stays covering hips/glutes \u2014 slit shows thigh only.",
+          "continuity_refs": [
+            "p14-01"
+          ],
+          "transformation_beat": "legs",
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: skirt tears to secure wrap across stages, hips/glutes covered"
+        }
+      ]
+    },
+    {
+      "page_number": 16,
+      "panels": [
+        {
+          "panel_id": "p16-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "doomer-lab",
+          "time_of_day": "interior",
+          "camera": "mcu, eye-level",
+          "subject_staging": "tension-block",
+          "action": "Dana, tier 6 in torn-but-covering remnants, lifts his chin with one finger, leaning down into his space \u2014 he's flustered. Heat, confidence, a held breath between them.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "We should... find you something to wear\u2014",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Why? I have never felt MORE dressed for the occasion.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p15-01"
+          ],
+          "transformation_beat": "aftermath",
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: torn-but-covering remnants; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 17,
+      "panels": [
+        {
+          "panel_id": "p17-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "lab-quarters",
+          "time_of_day": "night",
+          "camera": "cowboy, low-angle-front",
+          "subject_staging": "foreground-occlusion",
+          "action": "Shot past the door frame (out-of-focus foreground): Dana carries Supraman bridal-style toward the steel-frame bed, his cape trailing on the floor, her silhouette rimmed in warm lamplight. Both still clothed in torn-but-covering remnants.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "I have waited a LONG time to sweep you off your feet.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p16-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: torn-but-covering remnants; supraman: suit scorched"
+        }
+      ]
+    },
+    {
+      "page_number": 18,
+      "panels": [
+        {
+          "panel_id": "p18-01",
+          "size": "splash",
+          "characters": [],
+          "location": "lab-exterior",
+          "time_of_day": "night",
+          "camera": "wide-establish, worms-eye",
+          "subject_staging": "parallel-acceptable",
+          "action": "CUTAWAY GAG. The brutalist lab block at night. One top-floor window glows warm. Fresh cracks spider across the facade, dust puffs from the roofline, a chunk of cornice drops past a startled pigeon.",
+          "dialogue": [],
+          "captions": [
+            "Structural engineers would later have QUESTIONS."
+          ],
+          "sfx": [
+            {
+              "text": "BAM! BAM!",
+              "source": "inside the building"
+            },
+            {
+              "text": "KRRRK",
+              "source": "facade crack"
+            }
+          ],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "costume_state": "n/a (no characters in frame)"
+        }
+      ]
+    },
+    {
+      "page_number": 19,
+      "panels": [
+        {
+          "panel_id": "p19-01",
+          "size": "splash",
+          "characters": [
+            "supraman"
+          ],
+          "location": "hq-locker",
+          "time_of_day": "morning",
+          "camera": "medium, high-angle",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "Morning after, Hall of Justice locker room. Supraman hobbles past the suit display cases using a locker for support \u2014 hair wrecked, one boot on. One display case holds an EMPTY hanger.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "Note to self: never say 'show me what you've got' to a supercharged Dana Lane.",
+              "type": "thought"
+            },
+            {
+              "character": "supraman",
+              "text": "...wait. Where is my spare suit?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "costume_state": "supraman: suit rumpled, hair wrecked, one boot"
+        }
+      ]
+    },
+    {
+      "page_number": 20,
+      "panels": [
+        {
+          "panel_id": "p20-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "morning",
+          "camera": "full, low-angle-front",
+          "subject_staging": "depth-staged",
+          "action": "REVEAL. Dana \u2014 tier 6, wearing HIS spare suit stretched skin-tight, cape and all \u2014 presses the loaded graviton barbell overhead, beaming. Readout pillar: MAX. Supraman's stunned face small in the foreground doorway.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Morning, sleepyhead! Hope you don't mind \u2014 mine kept exploding.",
+              "type": "balloon"
+            },
+            {
+              "character": "supraman",
+              "text": "That's... my MAX setting...",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p19-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: HIS spare suit stretched skin-tight + cape; supraman: primary suit"
+        }
+      ]
+    },
+    {
+      "page_number": 21,
+      "panels": [
+        {
+          "panel_id": "p21-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "morning",
+          "camera": "mcu, three-quarter",
+          "subject_staging": "tension-block",
+          "action": "Side-by-side bicep comparison: his earnest full flex vs her relaxed arm simply RESTING larger beside it. She grins down at him along the diagonal.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "I AM flexing.",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "I'm not.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p20-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: spare suit stretched; supraman: suit"
+        }
+      ]
+    },
+    {
+      "page_number": 22,
+      "panels": [
+        {
+          "panel_id": "p22-01",
+          "size": "splash",
+          "characters": [
+            "dex-doomer",
+            "dee-dee"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "medium, over-shoulder",
+          "subject_staging": "depth-staged",
+          "action": "Backup lab. Over Doomer's shoulder: the monitor wall replays Dana snapping the ropes. Dee-Dee (lab coat, tier 3) leans at the workbench where the rebuilt Disinto-Ray prototype sits under a work lamp.",
+          "dialogue": [
+            {
+              "character": "dex-doomer",
+              "text": "The beam re-routed his power. Which means power can be POURED.",
+              "type": "balloon"
+            },
+            {
+              "character": "dee-dee",
+              "text": "Poured into WHOM, exactly?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dee-dee": 3
+          },
+          "costume_state": "dee-dee: lab coat over black top; doomer: grey suit"
+        }
+      ]
+    },
+    {
+      "page_number": 23,
+      "panels": [
+        {
+          "panel_id": "p23-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee",
+            "dex-doomer"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "medium, profile, dutch",
+          "subject_staging": "depth-staged",
+          "action": "Dee-Dee stands square in the prototype's teal beam, lab coat whipping, arms spread, lit up; Doomer at the trigger console behind, grinning.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "All of it, Dex. I have EARNED this.",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "ZZZAKKK!",
+              "source": "prototype beam"
+            }
+          ],
+          "continuity_refs": [
+            "p22-01"
+          ],
+          "transformation_beat": "trigger",
+          "muscle_size_tier": {
+            "dee-dee": 3
+          },
+          "costume_state": "dee-dee: lab coat, whipping in beam"
+        }
+      ]
+    },
+    {
+      "page_number": 24,
+      "panels": [
+        {
+          "panel_id": "p24-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "full, worms-eye",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "DEE-DEE TRANSFORMATION. She erupts to tier 8 \u2014 lab coat blasting off in shreds revealing the black laced corset ensemble beneath, curly mane wild, fists up, monitors cracking from proximity.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "YES. Finally a body that fits my ambitions!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "RRRIIIP!",
+              "source": "lab coat"
+            }
+          ],
+          "continuity_refs": [
+            "p23-01"
+          ],
+          "transformation_beat": "whole_body",
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: lab coat blasted to shreds -> black corset ensemble revealed"
+        }
+      ]
+    },
+    {
+      "page_number": 25,
+      "panels": [
+        {
+          "panel_id": "p25-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "ecu-region, low-angle-front",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dee-Dee's shoulders and arms front-on. Stage 1: lab-coat sleeves tight over toned arms. Stage 2: boulder shoulders splitting the sleeves at the seam. Stage 3: bare hyper delts and biceps, shredded sleeve cuffs still ringing her wrists like trophies.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRRT",
+              "source": "sleeves"
+            }
+          ],
+          "continuity_refs": [
+            "p24-01"
+          ],
+          "transformation_beat": "shoulders",
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: corset; coat sleeves burst across stages, cuffs remain stage 3"
+        }
+      ]
+    },
+    {
+      "page_number": 26,
+      "panels": [
+        {
+          "panel_id": "p26-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "ecu-region, low-angle-back",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, thigh-high boots and glutes from behind-low. Stage 1: striped boots fitted over athletic legs. Stage 2: quads and glutes swelling, boot shafts creaking, stitching strained. Stage 3: hyper legs \u2014 boots burst at the top seam, corset bottom holding coverage, diamond calves.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "CREEEAK",
+              "source": "boot shafts"
+            }
+          ],
+          "notes": "Corset bottom + boots keep full coverage throughout.",
+          "continuity_refs": [
+            "p25-01"
+          ],
+          "transformation_beat": "legs",
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: corset+striped thigh boots; boot top seams burst stage 3, coverage held"
+        }
+      ]
+    },
+    {
+      "page_number": 27,
+      "panels": [
+        {
+          "panel_id": "p27-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee",
+            "dex-doomer"
+          ],
+          "location": "doomer-lab-2",
+          "time_of_day": "interior",
+          "camera": "medium, dutch",
+          "subject_staging": "foreground-occlusion",
+          "action": "IMPLIED, NOT GRAPHIC: shot past Destroya's massive forearm (foreground, out of focus) as she lifts Doomer by his collar one-handed, his shoes off the floor, monitor light flickering across her smirk. His silhouette goes limp against the monitor wall glow.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "New org chart, Dex. There is a NEW Doom in town \u2014 call me DESTROYA.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "Dex Doomer's final performance review."
+          ],
+          "sfx": [
+            {
+              "text": "KRRK",
+              "source": "off-panel"
+            }
+          ],
+          "notes": "Keep violence implied \u2014 silhouette + caption carry it.",
+          "continuity_refs": [
+            "p24-01"
+          ],
+          "transformation_beat": "aftermath",
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: corset ensemble; doomer: grey suit"
+        }
+      ]
+    },
+    {
+      "page_number": 28,
+      "panels": [
+        {
+          "panel_id": "p28-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "day",
+          "camera": "medium, eye-level",
+          "subject_staging": "tension-block",
+          "action": "Arm-wrestle across a steel table \u2014 his whole body straining, her elbow planted casually, chin in her free hand. The tabletop crumples under her grip.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "I... am going... EASY on you\u2014",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Sweetie. The table disagrees.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRUNCH",
+              "source": "table edge"
+            }
+          ],
+          "continuity_refs": [
+            "p20-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: spare suit stretched; supraman: suit"
+        }
+      ]
+    },
+    {
+      "page_number": 29,
+      "panels": [
+        {
+          "panel_id": "p29-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "day",
+          "camera": "cowboy, three-quarter",
+          "subject_staging": "depth-staged",
+          "action": "He deadlifts the graviton bar to his knees, shaking, floor cracking under his boots; behind him Dana holds an identical loaded bar overhead ONE-HANDED while checking her nails on the other.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "GNNGH\u2014 it feels like lifting a SKYSCRAPER\u2014",
+              "type": "shout"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Try two. Builds character.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "WUNK!",
+              "source": "plates settling"
+            }
+          ],
+          "continuity_refs": [
+            "p28-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: spare suit stretched; supraman: suit"
+        }
+      ]
+    },
+    {
+      "page_number": 30,
+      "panels": [
+        {
+          "panel_id": "p30-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "hq-gym",
+          "time_of_day": "day",
+          "camera": "medium, three-quarter",
+          "subject_staging": "tension-block",
+          "action": "She has him wrapped in a gentle, inescapable bear-hug from behind, his arms pinned, boots off the ground; he taps her forearm.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "Okay! Uncle! UNCLE!",
+              "type": "shout"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Then it's settled \u2014 I take patrol today, champ.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p29-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6
+          },
+          "costume_state": "dana: spare suit stretched; supraman: suit"
+        }
+      ]
+    },
+    {
+      "page_number": 31,
+      "panels": [
+        {
+          "panel_id": "p31-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "wide-establish, worms-eye",
+          "subject_staging": "foreground-occlusion",
+          "action": "RAMPAGE. Destroya mid-avenue, holding an overturned yellow taxi overhead one-handed (foreground wheel out of focus), office glass raining around her. Street otherwise emptied \u2014 abandoned cars, scattered briefcases.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "Citizens of this city! Your new management has ARRIVED!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: corset ensemble (Destroya)"
+        }
+      ]
+    },
+    {
+      "page_number": 32,
+      "panels": [
+        {
+          "panel_id": "p32-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee",
+            "supraman"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "cowboy, high-angle",
+          "subject_staging": "depth-staged",
+          "action": "Supraman lies flattened in a fresh crater, cape over his face; Destroya stands over him dusting her palms, one striped boot planted on his chest emblem.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "THIS is the city's finest? Dex lost to THIS?",
+              "type": "balloon"
+            },
+            {
+              "character": "dee-dee",
+              "text": "Oh \u2014 Dex says hi, by the way. Posthumously.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "WOOMP",
+              "source": "boot planting"
+            }
+          ],
+          "continuity_refs": [
+            "p31-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dee-dee": 8
+          },
+          "costume_state": "dee-dee: corset; supraman: suit dusted, cratered"
+        }
+      ]
+    },
+    {
+      "page_number": 33,
+      "panels": [
+        {
+          "panel_id": "p33-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "dee-dee",
+            "supraman"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "cowboy, dutch",
+          "subject_staging": "depth-staged",
+          "action": "Dana descends from the sky fists-first between Destroya and downed Supraman, cape flaring, landing crack radiating from her boots. The two huge women lock eyes; he peers up from the crater between them.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Step AWAY from the nice man, Dee-Dee.",
+              "type": "shout"
+            },
+            {
+              "character": "dee-dee",
+              "text": "The pet reporter got an upgrade! Adorable.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRACK",
+              "source": "landing"
+            }
+          ],
+          "continuity_refs": [
+            "p32-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: spare suit; dee-dee: corset; supraman: suit battered"
+        }
+      ]
+    },
+    {
+      "page_number": 34,
+      "panels": [
+        {
+          "panel_id": "p34-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "dee-dee"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "medium, dutch",
+          "subject_staging": "tension-block",
+          "action": "The brawl \u2014 both women mid-swing along a hard diagonal, her fist meeting Destroya's crossed guard, shockwave ring blowing dust off the asphalt.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "I'm the ORIGINAL recipe now \u2014 you're the knock-off!",
+              "type": "shout"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Funny. You hit like an intern.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRAKK!",
+              "source": "impact"
+            }
+          ],
+          "continuity_refs": [
+            "p33-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: spare suit scuffed; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 35,
+      "panels": [
+        {
+          "panel_id": "p35-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee",
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "full, birds-eye",
+          "subject_staging": "depth-staged",
+          "action": "Destroya dominates: one hand chokeslamming Dana into the asphalt (crater webbing out), the other backhanding Supraman through an office window line \u2014 three storeys of glass detonating.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "I'll deal with you TWO at a TIME!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRISSSH!",
+              "source": "window line"
+            },
+            {
+              "text": "WHUMM",
+              "source": "chokeslam"
+            }
+          ],
+          "continuity_refs": [
+            "p34-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: suit scuffed; supraman: suit + glass scuffs; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 36,
+      "panels": [
+        {
+          "panel_id": "p36-01",
+          "size": "splash",
+          "characters": [
+            "dee-dee",
+            "supraman",
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "cowboy, low-angle-front",
+          "subject_staging": "foreground-occlusion",
+          "action": "Shot past Destroya's striped boot (foreground) pressing Supraman's shoulders into rubble; behind her, Dana drags herself up the rim of the crater, suit scuffed, eyes furious.",
+          "dialogue": [
+            {
+              "character": "dee-dee",
+              "text": "Stay DOWN, little man. The grown-ups are talking.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p35-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: suit dusty, crater grime; supraman: suit battered; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 37,
+      "panels": [
+        {
+          "panel_id": "p37-01",
+          "size": "splash",
+          "characters": [
+            "supraman",
+            "dee-dee",
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "afternoon",
+          "camera": "wide-establish, three-quarter",
+          "subject_staging": "depth-staged",
+          "action": "Supraman rockets AWAY low over the rooftops, jaw set, torn cape snapping \u2014 while behind him Destroya hammers Dana through a brick storefront column.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "Hold on, Dana. There is exactly ONE thing left that can out-muscle her.",
+              "type": "thought"
+            },
+            {
+              "character": "dee-dee",
+              "text": "HA! Your boyfriend just LEFT!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRUNK!",
+              "source": "column"
+            }
+          ],
+          "continuity_refs": [
+            "p36-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "supraman: cape torn; dana: suit battered; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 38,
+      "panels": [
+        {
+          "panel_id": "p38-01",
+          "size": "splash",
+          "characters": [
+            "supraman",
+            "dana-lane",
+            "dee-dee"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "medium, profile",
+          "subject_staging": "depth-staged",
+          "action": "Supraman back-from-the-lab, braced on one knee with the Disinto-Ray prototype shoulder-mounted, pouring its FULL teal charge into kneeling Dana \u2014 she's haloed in light; Destroya whirls in the background.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "You're the strongest of us, Dana. So TAKE THE REST OF IT!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "ZZZAKKKK!",
+              "source": "full discharge"
+            }
+          ],
+          "continuity_refs": [
+            "p37-01"
+          ],
+          "transformation_beat": "trigger",
+          "muscle_size_tier": {
+            "dana-lane": 6,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: suit battered pre-final; supraman: cape torn; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 39,
+      "panels": [
+        {
+          "panel_id": "p39-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "mcu, low-angle-front",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "Dana rises inside the beam-glow, head back, teeth gritted in ecstatic strain, suit seams beginning to lift OFF her swelling shoulders, hair floating in the energy wash.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "It's... EVERYTHING... and it's MINE!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "SHRRRP",
+              "source": "shoulder seams"
+            }
+          ],
+          "continuity_refs": [
+            "p38-01"
+          ],
+          "transformation_beat": "first_sensation",
+          "muscle_size_tier": {
+            "dana-lane": 7
+          },
+          "costume_state": "dana: suit shoulder seams lifting in beam glow"
+        }
+      ]
+    },
+    {
+      "page_number": 40,
+      "panels": [
+        {
+          "panel_id": "p40-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "ecu-region, three-quarter",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her right arm mid-beam. Stage 1: tier-7 bicep splitting the blue sleeve. Stage 2: sleeve gone \u2014 bicep doubling, veins like cables, energy crackling across the skin. Stage 3: TIER-9 hyper arm, forearm wider than her head, fist clenched, asphalt cracking under the static.",
+          "dialogue": [],
+          "captions": [
+            "The last of the ray. The last limit."
+          ],
+          "sfx": [
+            {
+              "text": "RIIIP",
+              "source": "stage 2"
+            },
+            {
+              "text": "KRRRR",
+              "source": "stage 3 energy"
+            }
+          ],
+          "continuity_refs": [
+            "p39-01"
+          ],
+          "transformation_beat": "arms",
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit R sleeve bursts across stages"
+        }
+      ]
+    },
+    {
+      "page_number": 41,
+      "panels": [
+        {
+          "panel_id": "p41-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "ecu-region, low-angle-front",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, torso front-on. Stage 1: gold chevron emblem stretching wide across her ballooning chest. Stage 2: emblem distorted drum-tight, suit fibers tearing at the sternum line, abs erupting below. Stage 3: TIER-9 torso \u2014 colossal chest shelf and cobblestone abs, the emblem heroically intact at the center of the strained suit.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KREEEEK",
+              "source": "suit fibers"
+            }
+          ],
+          "notes": "Suit holds coverage. Emblem survives \u2014 brand moment.",
+          "continuity_refs": [
+            "p40-01"
+          ],
+          "transformation_beat": "chest",
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit torso strained across stages, emblem intact"
+        }
+      ]
+    },
+    {
+      "page_number": 42,
+      "panels": [
+        {
+          "panel_id": "p42-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "ecu-region, low-angle-back",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her back with cape mounts. Stage 1: lats flaring, cape clasps straining. Stage 2: back widening past the cape's hem, one clasp PINGING off. Stage 3: TIER-9 cobra back in full eclipse of the sun, cape re-hung off one heroic shoulder, suit back panel split clean down the spine line (musculature visible, coverage maintained at hips).",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "PING!",
+              "source": "cape clasp"
+            }
+          ],
+          "continuity_refs": [
+            "p41-01"
+          ],
+          "transformation_beat": "back",
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit back splits down spine across stages, cape one clasp"
+        }
+      ]
+    },
+    {
+      "page_number": 43,
+      "panels": [
+        {
+          "panel_id": "p43-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "dee-dee"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "full, worms-eye",
+          "subject_staging": "depth-staged",
+          "action": "FINAL REVEAL. Tier-9 Dana \u2014 now visibly LARGER than Destroya \u2014 stands in the settling beam-haze and catches Destroya's full-power haymaker in one open palm without sliding an inch. Shockwave ring. Destroya's face: first crack of fear.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "I said it nicely once. HANDS OFF MY SUPRAMAN.",
+              "type": "shout"
+            },
+            {
+              "character": "dee-dee",
+              "text": "...oh no.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRAK!",
+              "source": "caught punch"
+            }
+          ],
+          "continuity_refs": [
+            "p42-01"
+          ],
+          "transformation_beat": "reveal",
+          "muscle_size_tier": {
+            "dana-lane": 9,
+            "dee-dee": 8
+          },
+          "costume_state": "dana: suit final battle-state torn-but-covering, emblem intact; dee-dee: corset"
+        }
+      ]
+    },
+    {
+      "page_number": 44,
+      "panels": [
+        {
+          "panel_id": "p44-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "dee-dee"
+          ],
+          "location": "city-street",
+          "time_of_day": "late-afternoon",
+          "camera": "full, low-angle-front",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "THE UPPERCUT. Dana's follow-through fills the lower-left third of the frame; Destroya is a flailing silhouette rocketing into the empty sky that dominates the rest, already past the tower tops.",
+          "dialogue": [
+            {
+              "character": "dana-lane",
+              "text": "Enjoy the view!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "BOOOOOM!",
+              "source": "uppercut"
+            }
+          ],
+          "continuity_refs": [
+            "p43-01"
+          ],
+          "transformation_beat": "aftermath",
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit final battle-state; dee-dee: corset (airborne)"
+        }
+      ]
+    },
+    {
+      "page_number": 45,
+      "panels": [
+        {
+          "panel_id": "p45-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman"
+          ],
+          "location": "city-street",
+          "time_of_day": "sunset",
+          "camera": "mcu, three-quarter",
+          "subject_staging": "tension-block",
+          "action": "Dust settling, sunset rim-light. Tier-9 Dana cradles Supraman in both arms; he reaches up to touch her jaw. Foreheads meeting, both smiling, his cape draped over her forearm.",
+          "dialogue": [
+            {
+              "character": "supraman",
+              "text": "I guess you saved ME this time.",
+              "type": "balloon"
+            },
+            {
+              "character": "dana-lane",
+              "text": "Get used to it. You'll always be MY hero.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "continuity_refs": [
+            "p44-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit final battle-state; supraman: suit battered"
+        }
+      ]
+    },
+    {
+      "page_number": 46,
+      "panels": [
+        {
+          "panel_id": "p46-01",
+          "size": "splash",
+          "characters": [
+            "dana-lane",
+            "supraman",
+            "timmy-olson"
+          ],
+          "location": "city-street",
+          "time_of_day": "sunset",
+          "camera": "cowboy, low-angle-front",
+          "subject_staging": "foreground-occlusion",
+          "action": "FINALE. Shot past Timmy Olson's raised flash camera (foreground, mid-flash): Dana and Supraman pose together in the settling dust \u2014 her arm around his shoulders, his hand proud on her forearm, both grinning at the lens.",
+          "dialogue": [
+            {
+              "character": "timmy-olson",
+              "text": "Dana Lane?! Are you the city's new protector?!",
+              "type": "off-panel"
+            },
+            {
+              "character": "dana-lane",
+              "text": "We protect EACH OTHER, Timmy. We're a SUPRA-TEAM.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "THE END."
+          ],
+          "sfx": [
+            {
+              "text": "FLASH",
+              "source": "camera"
+            }
+          ],
+          "continuity_refs": [
+            "p45-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": {
+            "dana-lane": 9
+          },
+          "costume_state": "dana: suit final battle-state; supraman: suit battered; timmy: tan jacket"
+        }
+      ]
+    }
+  ],
+  "camera_note": "Mean-distance sits above the multi-panel benchmark BY FORMAT: one full-bleed image per page means every page carries establishing duty. Body-region beats are all ecu-region per L20; reveal beats full-close per the beat table. Accepted intentionally."
+}
