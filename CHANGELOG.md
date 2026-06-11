@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: t2 card attempt-1 all-fail on D7 scale — bootstrap prompt v2)
+
+**Changed**
+- `projects/cheer-ascension/references/bootstrap-prompts.json` — `kelsey-t2-card` prompt hardened to v2 after the fresh-context post-flight judge rejected ALL 4 attempt-1 variants (`975ae3c2`, `a215d935`, `974c4ad9`, `0bedf317`) on D7: Kelsey rendered only ~1.5–4.5 in shorter than the 6'2" mannequin instead of the specified 8 in (plus V3's 2D-outline mannequin + teal undershorts, V2/V4 mild face drift). v2 states explicit heights (5'6" vs 6'2"), pins TOP OF HEAD level with the mannequin's CHIN on a shared floor line at equal camera distance, requires a solid 3D mannequin (not an outline/drawing), and locks WHITE brief shorts. Full verdict: `projects/cheer-ascension/qa/receipts/card_kelsey-t2.attempt1.verdict.json`. Bootstrap prompts stay file-sourced and pasted verbatim — the edit lands here in git, never at paste time.
+
+**Added**
+- User re-bless of the v2 gates executed in-session on the Mac mini (Claude as proxy per the HANDOFF flow, explicit in-session yes) — manifest fingerprint `768c204c16de92f3`, commit `f96b4c1`. Chained jobs unlocked on both projects.
+
 ## 2026-06-11 (HANDOFF-MACMINI.md — terminal-free machine handoff)
 
 Self-contained handoff doc at repo root for picking up the pipeline on the Mac mini with Claude running every command (user opens no terminal): repo sync, CLAUDE.md law-load, gate status + the terminal-free bless flow (Claude may run the rebless ONLY as the user's proxy after showing the qa/ diff and receiving an explicit in-session yes — then commits the manifest as the approval signature), orientation reading list, current state of both projects, Flow-driving mechanics (pill verify, picker chip DOM-verification by media id, uuid harvest, signed-URL download, NB2 rate notes), and the bank-then-commit cadence.
