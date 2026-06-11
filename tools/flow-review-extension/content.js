@@ -1,6 +1,6 @@
 // Flow Red-Pen — production-QA verdicts on Flow generations, keyed by media uuid.
 // TAGS are REGENERATED from projects/<project>/qa/defect-registry.json — do not hand-edit
-// without updating the registry first. Last regen: 2026-06-10 (D1–D9).
+// without updating the registry first. Last regen: 2026-06-10 (D1–D14).
 
 const TAGS = [
   ["accept",  "✓",  "Accept as-is"],
@@ -12,7 +12,7 @@ const TAGS = [
   ["face",    "😐", "D2 — expression flat / wrong emotion for the beat"],
   ["angle",   "📐", "D3 — too front-facing / camera not as specced"],
   ["ward",    "👗", "D4 — outfit wrong or inconsistent vs wardrobe state"],
-  ["size",    "📏", "D6 — muscle size under tier (no-downsize violation)"],
+  ["size",    "📏", "D6/D14 — size under tier or far below the size anchor (literal side-by-side gate)"],
   ["height",  "🧍", "D7 — height/scale wrong (giant or shrunken vs height chart)"],
   ["scene",   "📷", "D8 — background invented / scene ref proximity mismatch"],
   ["staging", "🧩", "D9 — pose/interaction staging wrong (needed a staging ref)"],
@@ -136,7 +136,7 @@ function updatePill() {
 function exportJSON() {
   const payload = {
     tool: "flow-red-pen",
-    taxonomy_version: "D1-D9 2026-06-10",
+    taxonomy_version: "D1-D14 2026-06-10",
     exported_at: new Date().toISOString(),
     legend: Object.fromEntries(TAGS.map(([k, i, tip]) => [k, tip])),
     verdicts

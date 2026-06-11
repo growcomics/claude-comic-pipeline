@@ -1,4 +1,4 @@
-# QA Defect Doctrine (D1–D13) — user-calibrated, 2026-06-10
+# QA Defect Doctrine (D1–D14) — user-calibrated, 2026-06-10
 
 Source of truth for *why pages fail* and the **hard gates** that prevent recurrence. Distilled from a
 live red-pen session on Not-So-Supra-Man (17 pre-refit pages). Per-project machine-readable registry:
@@ -6,7 +6,7 @@ live red-pen session on Not-So-Supra-Man (17 pre-refit pages). Per-project machi
 post-flight QA rubric). Prevention is **enforced pre-flight, never guidance-only** — the root failure
 was that mandated refs lived in docs and got skipped under time pressure.
 
-## The two laws
+## The three laws
 
 1. **Refs own appearance; prompts own action.** A prompt may describe a character's appearance ONLY
    when no reference exists at all (bootstrapping the first card). Once any ref exists: pointer
@@ -16,6 +16,12 @@ was that mandated refs lived in docs and got skipped under time pressure.
 2. **Prompts are maximal structured specs** (JSON, submitted single-line; template:
    `projects/<project>/qa/prompt-template-v4.json`). The length goes to camera, staging,
    per-limb pose, per-HAND accounting, expression, lighting, continuity — never appearance.
+3. **Size transfers are anchor-first.** To match an extreme-size reference, never start from the
+   character and inflate ("make her as big as ref 2" gets normalized back down). Start FROM the
+   anchor: attach it as the PRIMARY image, KEEP everything (enumerate each mass to keep), CHANGE
+   only identity/outfit, strip baked text — then zoom out in a second pass. Aspect must fit the
+   silhouette (a car-wide character needs a wide frame, never tall-portrait). The size gate is a
+   LITERAL side-by-side vs the anchor: under on any axis = reject.
 
 ## Defect classes → gates (compact)
 
@@ -34,6 +40,7 @@ was that mandated refs lived in docs and got skipped under time pressure.
 | D11 | Appearance in prose | Lint fails prompts containing appearance adjectives for ref'd characters |
 | D12 | Prompt underspecified | Completeness lint: per-character position/orientation/per-limb/contact/expression + spatial rules |
 | D13 | Phantom limbs | Every hand enumerated with a task + total-hands line + limb-count auto-reject post-flight |
+| D14 | Size under-transfer from anchor | Anchor-first identity swap (anchor = PRIMARY image, enumerated keep-list, identity/outfit-only changes, two-pass zoom-out); aspect fits silhouette; literal side-by-side anchor gate |
 
 ## Aesthetic principle (D10, generalizes)
 

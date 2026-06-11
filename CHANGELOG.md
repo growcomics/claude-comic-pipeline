@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (D14 anchor-first size transfer; Red-Pen extension synced to D1–D14)
+
+Tier-9 renders came out drastically smaller than the user's attached size anchor even with the anchor in the ref set. Two mechanical root causes: **transfer direction** (prompting "make our character as big as the reference" anchors generation on the character and normalization drags size back — models preserve the PRIMARY image's structure and apply sparse edits, so the anchor must BE the base) and **aspect ratio** (a tall-portrait frame physically squeezes a car-wide silhouette; the anchor itself is landscape). The agent's earlier four-axis gate had passed the undersized card — recorded as the first agent-pass/user-fail calibration exemplar for the planned QA subagent.
+
+### Changed
+- `skills/comic-production/references/qa-defect-doctrine.md` — now D1–D14; third law added (size transfers are anchor-first: anchor as PRIMARY image, enumerated keep-list, identity/outfit-only changes, two-pass zoom-out; aspect fits silhouette; LITERAL side-by-side anchor gate).
+- `tools/flow-review-extension/` — v0.2.0: README tag table synced to the full 16-tag taxonomy (was stale at the original 10), 📏 size tooltip covers D6/D14, export taxonomy_version bumped to D1–D14.
+
 ## 2026-06-10 (user-calibrated QA doctrine D1–D13, Flow Red-Pen review extension, three-panel growth v4)
 
 A live red-pen session on Not-So-Supra-Man's first 17 pages surfaced 13 recurring defect classes (thin ref stacks, appearance carried in prose instead of references, flat expressions, front-facing default, probabilistic outfits, height/giantess inflation, scene-ref proximity mismatch, missing staging refs, phantom limbs, simulation-grade "obviously AI" VFX, terse prompts). Root finding: mandated references lived in docs without enforcement and got skipped under throughput pressure — prevention must be machine-enforced gates, not guidance. Per-project enforcement artifacts (defect registry, prompt-template v4, height chart, turnaround specs, VFX style bible) live under `projects/<project>/qa|references/` (not versioned); the doctrine and tooling graduate here.
