@@ -39,7 +39,40 @@
         "9": {
           "flow_id": "270c06dc-3ab3-4e43-a1f5-b51c62dfd9c2",
           "disk": "references/characters/dana-lane/body-tier9.png"
+        },
+        "9_v2": {
+          "flow_id": "0bef3eee-0ff1-463a-8c42-562f3fc04fc1",
+          "disk": "references/characters/dana-lane/body-tier9-v2.png",
+          "note": "D14 anchor-swap full body \u2014 SUPERSEDES 270c06dc"
         }
+      },
+      "turnaround_t9": {
+        "flow_id": "17b10b4b-a7a6-4200-b2de-a6d29033e148",
+        "disk": "references/characters/dana-lane/turnaround-t9-battle.png",
+        "height_guide": "6ft2 silhouette + grid"
+      },
+      "turnaround_t6_torn": {
+        "flow_id": "a3945eda-cfd8-423c-97ee-6548381e8415",
+        "disk": "references/characters/dana-lane/turnaround-t6-torn.png",
+        "height_guide": "6ft2 silhouette; she reads 4in shorter",
+        "variants": [
+          "6ca9f699-7d91-41a0-a7a4-addee5231bf9",
+          "b4cf98ce-d8ba-4991-855d-6ae4bc580901",
+          "82b26d3a-1d7d-4c0d-9c30-4517a164f022",
+          "a3945eda-cfd8-423c-97ee-6548381e8415"
+        ]
+      },
+      "turnaround_t6_suit": {
+        "flow_id": "85a5e567-035a-4003-847d-20621004e9db",
+        "disk": "references/characters/dana-lane/turnaround-t6-suit.png",
+        "height_guide": "6ft2 silhouette; she reads 4in shorter",
+        "variants": [
+          "85a5e567-035a-4003-847d-20621004e9db",
+          "4748686b-f4ab-4f5a-8616-a639327d435e",
+          "57614b77-70df-4ae2-b0a1-45b894493003",
+          "39ec7ca1-6db6-461e-aecb-058641d106df"
+        ],
+        "qa_notes": "V3 auto-rejected (D4: suit rolled crimson), V2 rejected (emblem drift: single V + blue boots), V4 backup"
       }
     },
     "supraman": {
@@ -120,5 +153,32 @@
     "b02d4e7e-100b-4eff-a4ab-b3818e62f453",
     "778ec7fc-e304-4688-8f79-91f6821ecb51",
     "68caf1eb-5446-4bc9-b7e2-d566a0a6b9b9"
-  ]
+  ],
+  "restart_v2": {
+    "flow_project_id": "901da77e-6400-4fed-99d9-3ee32d4c896d",
+    "flow_project_name": "Jun 10, 07:29 PM",
+    "d14_anchor_swap": {
+      "pass1_variants": [
+        "086e48e9-2ebd-4602-8615-bb8d2d3740b3",
+        "344303ca-57a1-4df4-9fc6-d4c939e885ce",
+        "47baaf3e-6c78-47fc-a269-aac848a9e168",
+        "4cac1b7c-d052-4c49-b584-beb47b683959"
+      ],
+      "pass2_full_body_pick": "0bef3eee-0ff1-463a-8c42-562f3fc04fc1",
+      "pass2_variants": [
+        "0bef3eee-0ff1-463a-8c42-562f3fc04fc1",
+        "8e285ea7-4fe8-4fa4-949b-d6b073f57c1f",
+        "0c319e85-bf23-4f93-ae77-9a65bbcb22c0",
+        "6a4089f7-8ff5-4939-a572-27a4ec024e8d"
+      ],
+      "turnaround_pick": "17b10b4b-a7a6-4200-b2de-a6d29033e148",
+      "turnaround_variants": [
+        "17b10b4b-a7a6-4200-b2de-a6d29033e148",
+        "4116f23d-7b85-450c-b389-60f9d8f2f64f",
+        "276d8831-0093-4599-9e20-fa6e713cfdbc",
+        "b349c16f-ab89-4e4e-906e-539363294843"
+      ],
+      "gate": "LITERAL side-by-side vs anchor: PASSED all four axes; height = silhouette (no giantess)"
+    }
+  }
 }

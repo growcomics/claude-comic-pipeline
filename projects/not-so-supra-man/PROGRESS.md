@@ -4,9 +4,11 @@
 v1's 17 pages had systemic defects (D1–D14, see qa/defect-registry.json) — user ordered a clean
 rebuild in a NEW Flow project, references-first, all gates enforced. Execution order:
 `references/restart-plan-v2.md`. Pre-submit gate: `qa/preflight.py`.
-**STATUS: blocked at Phase 0 — growcomics Google account is SIGNED OUT on the macmini Chrome**
-(account chooser open in the Flow tab; agent cannot enter credentials — user must sign in, then say go).
-v1 assets remain on disk + in the old Flow project ("Jun 09, 11:25 PM") for cross-project reuse.
+**STATUS: RUNNING on macmini. Phase 0 ✓ Phase 1 ✓ (old locked faces reusable cross-project) Phase 2 ✓✓**
+- New Flow project: "Jun 10, 07:29 PM" `901da77e-6400-4fed-99d9-3ee32d4c896d`. Picker reaches old-project assets via its project dropdown (resets to current project on every open — re-select each time).
+- **D14 three-pass anchor swap COMPLETE and gate-PASSED**: pass1 swap (anchor+face, 16:9) → pass2 zoom-out full body (`0bef3eee`, saved body-tier9-v2.png) → pass3 four-view turnaround WITH 6'2" silhouette (`17b10b4b`, saved turnaround-t9-battle.png). Mass = anchor on all axes; height = silhouette (no giantess). Proof: .flow-scratch/d14-proof.png. Old T9 270c06dc superseded.
+- Phase 4 in flight: dana-t6-torn turnaround (face + T4 flexed card attached, height-pinned prompt).
+- UI lesson: picker auto-titles in old project — T4 cards = "Woman flexing muscular…" (items 5+; items 1-4 are the v1 p10 PAGES "Woman flexing power po…"). Verify preview pane before every Add. Blind coordinate batches misfire on the elevated layout — verify dropdown state with a screenshot first.
 
 _Live log — Claude updates this as it goes. Started 2026-06-10._
 

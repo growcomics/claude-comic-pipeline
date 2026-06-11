@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (generation protocol: 7-layer redundancy chain — no freehand prompts)
+
+During the v2 restart the agent broke its own codified rules again (appearance prose in prompts with refs attached, thinned ref stacks under picker friction, zero preflight runs) — with the enforcement tooling sitting on disk. Root cause stated plainly: the agent's promises are not load-bearing; only mechanical in-path gates are, and a gate the violator invokes voluntarily is decoration. Fix: the tool now PRODUCES the action instead of auditing it, with independent layers. `qa/compose.py` is the only legal prompt source (refuses on missing refs/staging/clamps; auto-swaps prose-bootstrap to pointer language once a state's turnaround exists); `qa/audit_prompt.py` independently re-checks and hash-ties the pasted prompt to the receipt (live tamper test: one freehand word = FAIL); post-flight verdicts come from a fresh-context subagent; `qa/bank.py` refuses to ledger any pick lacking receipt+audit+verdict; `qa/verify_chain.py` lets the user audit for bypassed entries. Protocol embedded in CLAUDE.md (auto-loads every session) + persistent memory.
+
+### Added
+- `projects/not-so-supra-man/qa/{compose.py,audit_prompt.py,bank.py,verify_chain.py}` — layers 0/1, 2, 5, 7 of the chain; all six demo checks pass (legit compose→audit, tamper detection, verdict-less bank refusal, staging-less page refusal, chain audit).
+
+### Changed
+- `CLAUDE.md` — mandatory "Generation protocol" section: compose → audit → submit (receipt's attach list only) → post-flight subagent → bank.
+
 ## 2026-06-10 (RESTART v2 kit: preflight gate + references-first rebuild plan)
 
 User ordered a full rebuild of Not-So-Supra-Man in a NEW Flow project ("it came out with 10000 problems") — references-first, all D1–D14 gates enforced. Shipped the kit while blocked on the Flow re-login: `qa/preflight.py` (machine gate run before EVERY submit — ref-stack manifest per character, scene-rung-vs-camera-distance, staging-on-contact, tier anchor/height-clamp, v4 prompt completeness, pointer-only appearance, per-hand accounting, banned VFX vocabulary; verified it rejects v1's actual p16 recipe with 12 violations) and `references/restart-plan-v2.md` (39-step ordered build: identity → D14 anchor-swap T9 → ladder → 8 wardrobe-state turnarounds → scene ladders per location → props → pages with runtime-composed v4 prompts).

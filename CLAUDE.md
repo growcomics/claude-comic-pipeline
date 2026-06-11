@@ -73,6 +73,19 @@ Per `feedback_dont_delete_git_backup.md`. It's an intentional pre-rewrite histor
 - **Tier reinforcement refs**: `skills/comic-production/references/peak-body-scale/tier-{6,7,8,9}/`. Auto-attach when a panel hits the corresponding tier.
 - **Canonical rubrics**: `skills/continuity-check/qa-checklist.md` + `cinematic-framing.md`. Pass these verbatim to QA subagents — never paraphrase. Per `feedback_dont_paraphrase_canonical_rubrics.md`.
 
+## Generation protocol (MANDATORY — no freehand prompts, ever)
+
+(Added 2026-06-10 after repeated rule-breaking under throughput pressure. Diagnosis: Claude's promises are not load-bearing; only in-path mechanical gates are. Full chain in `projects/<project>/qa/`.)
+
+Every Flow/Higgsfield submit follows this chain — **reference sheets included**:
+
+1. **COMPOSE** — `python3 qa/compose.py --job sheet:<id>|page:<panel>` is the ONLY legal source of prompts. Paste its output verbatim. It refuses if refs/staging/clamps are missing. Freehanding or editing a prompt is a protocol violation — the audit hash will catch it.
+2. **AUDIT** — `python3 qa/audit_prompt.py --receipt … --prompt-file …` (independent checker). Both PASS lines get quoted in the transcript before the submit.
+3. **SUBMIT** — attach exactly the receipt's list (verify each in the preview pane), then paste the composed prompt.
+4. **POST-FLIGHT** — download the pick; a FRESH-context subagent judges it against the registry rubric → `qa/receipts/<job>.verdict.json`. The generator never grades its own work.
+5. **BANK** — `python3 qa/bank.py` is the only way picks enter the ledger/pages-log; it refuses any entry lacking receipt + audit + passing verdict. Unbanked work is invisible downstream.
+6. **VERIFY (user-side)** — `python3 qa/verify_chain.py` audits the ledger for chainless entries at any time.
+
 ## QA pattern
 
 Per `feedback_audit_via_subagent.md` — spawn a fresh subagent for the audit pass. The main agent shortcuts to "looks fine" after generation; subagent gives independent read against the canonical rubric.
