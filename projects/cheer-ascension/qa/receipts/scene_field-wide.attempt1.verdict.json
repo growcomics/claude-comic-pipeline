@@ -1,0 +1,19 @@
+{
+  "job": "scene:field-wide (bootstrap, prompt v1 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "bb8ca189-672f-4adf-a7c5-6fb1b9107c77",
+    "9901cf11-8530-4b5e-8e20-a3b40212a91e",
+    "f09b5727-6a55-4c31-a88b-8b1a0933151b",
+    "cb09d982-99fc-4aa9-9511-3c755dc71481"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "bb8ca189-672f-4adf-a7c5-6fb1b9107c77", "verdict": "fail", "defects": ["text: painted yard numerals (50/40/...)", "angle: grass-level, not a wide establishing", "scene: single bleacher block, track only on right edge"], "notes": "Clean render, wrong everything else."},
+    {"variant": "V2", "flow_id": "9901cf11-8530-4b5e-8e20-a3b40212a91e", "verdict": "fail", "defects": ["text: numerals 30/40/50/40 legible, one garbled", "coherence: hash-row drift", "style: painterly midfield shadow (minor)"], "notes": "Best geometry of batch; field covered in numbers."},
+    {"variant": "V3", "flow_id": "f09b5727-6a55-4c31-a88b-8b1a0933151b", "verdict": "fail", "defects": ["text: field numerals + track lane numbers 1-6, many melted", "scene: unspecced goalpost-like uprights", "style: photographic sun flare"], "notes": "Worst text contamination."},
+    {"variant": "V4", "flow_id": "cb09d982-99fc-4aa9-9511-3c755dc71481", "verdict": "fail", "defects": ["text: numerals incl. mirrored/inverted", "scene: pylons/hurdle/fencing/second field invented", "coherence: hash rows multiply"], "notes": "Good elevated framing; littered with numbers + props."}
+  ],
+  "pick": "none",
+  "resubmit_guidance": "Prompt v2: 'plain white painted LINES and hash marks only', 'single plain white 50-yard LINE with NO painted numbers', explicit negatives (NO yard numbers/numerals on grass or track/lane numbers; no goalposts/benches/pylons/hurdles), camera elevated full-field. D10-adjacent lesson: '50-yard marker' reads as 'paint numbers' to NB2."
+}

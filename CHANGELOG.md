@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: field-wide attempt-1 all-fail on painted yard numbers — prompt v2)
+
+**Changed**
+- `field-wide` bootstrap prompt → v2 after the judge rejected all 4 attempt-1 variants (`bb8ca189`/`9901cf11`/`f09b5727`/`cb09d982`): every one had painted yard numerals on the grass (V3 also numbered track lanes; V1 additionally shot from grass level instead of a wide establishing). Root cause: "50-yard marker" reads as "paint numbers" to NB2. v2 says lines-and-hash-marks ONLY, a single plain white 50-yard LINE with NO painted numbers, adds explicit numeral/prop negatives (no goalposts/benches/pylons/hurdles), and pins an elevated full-field camera. Verdict: `projects/cheer-ascension/qa/receipts/scene_field-wide.attempt1.verdict.json`.
+
 ## 2026-06-11 (cheer-ascension: kelsey-t2-card BANKED — attempt 3, V1 at ratio 0.890)
 
 **Added**
