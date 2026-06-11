@@ -12,6 +12,10 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (HANDOFF-MACMINI.md — terminal-free machine handoff)
+
+Self-contained handoff doc at repo root for picking up the pipeline on the Mac mini with Claude running every command (user opens no terminal): repo sync, CLAUDE.md law-load, gate status + the terminal-free bless flow (Claude may run the rebless ONLY as the user's proxy after showing the qa/ diff and receiving an explicit in-session yes — then commits the manifest as the approval signature), orientation reading list, current state of both projects, Flow-driving mechanics (pill verify, picker chip DOM-verification by media id, uuid harvest, signed-URL download, NB2 rate notes), and the bank-then-commit cadence.
+
 ## 2026-06-10 (NEW PROJECT: cheer-ascension — protocol demo, references-first, fully scaffolded)
 
 Demo project to prove the generation protocol end-to-end on fresh material: Kelsey Brandt, a pro-am cheerleader who gets hotter/fitter across a 6-page arc (tiers 2→4→6, one location, always_clothed, no extras). References gathered FIRST per skills/reference-gathering (Google Images → click-through → Daz CDN originals, full provenance): 4 genuine DAZ/Iray product renders; chosen starting ref = dForce Cheerleader Outfit sheet (same character ×3 uniform variants on studio grey — anchors render style + uniform + slim t2 baseline). Scaffolded: 6-page shotlist + plan, height chart (5'6\" pinned at every tier), 6 turnaround/card sheet specs (pointer-style prompts), ALL 6 staging stanzas pre-authored (per-hand accounting, turnaround_key overrides on t4/t6 pages, progressive stage rules), pre-committed bootstrap prompts (face/t2-card/scene-rungs/prop — the job kinds compose can't express yet; noted as a future gate extension for user blessing). Gates are SHARED from not-so-supra-man/qa (verified live: compose from the new project root correctly reports ALL GATES LOCKED) — one user rebless unlocks both projects; generation starts only after it.
