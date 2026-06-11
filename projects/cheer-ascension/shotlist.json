@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "title": "Cheer Ascension",
+    "premise": "Kelsey Brandt, 22, newest member of the pro-am Comets squad, drinks the team's experimental 'Comet Fuel' shake and gets fitter, stronger and more stunning with every page. Single-character story; 6 full-bleed pages; photoreal 3D CGI / DAZ Iray style; always_clothed: true (uniform strains but always fully covers).",
+    "cast_rule": "Kelsey ONLY — no background extras, no squad-mates, ever.",
+    "tier_ladder": "2 -> 4 -> 6 (no anchor-swap tier; max tier 6)",
+    "palette": "Comets colors: deep teal + gold + white (ORIGINAL design — no real-team or Daz-product trade dress)"
+  },
+  "pages": [
+    {
+      "page": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "wide establishing, eye-level, 28mm",
+          "action": "Golden-hour practice field. Kelsey alone mid-routine: pom-poms raised in a V, one knee popped, beaming with team-captain energy. Empty bleachers behind her.",
+          "muscle_size_tier": {"kelsey-brandt": 2},
+          "costume_state": "kelsey: teal-and-gold Comets uniform, crisp and fitted",
+          "continuity_refs": []
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "medium, eye-level, 35mm",
+          "action": "Water break at the sideline bench. Kelsey lifts the team's new 'Comet Fuel' shaker bottle (teal liquid, faint glow) and drinks deep; her free hand rests on her hip; a first pleasant shiver crosses her face.",
+          "muscle_size_tier": {"kelsey-brandt": 2},
+          "costume_state": "kelsey: uniform crisp and fitted",
+          "continuity_refs": ["p01-01"]
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "close, slight low angle, 50mm",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, same framing. Stage 1: she studies her own raised arm, curious. Stage 2: a sleek line of new muscle draws itself along the arm, uniform sleeve-band going snug; delighted gasp. Stage 3: toned shoulders and arms, top now fitted like a glove; thrilled grin.",
+          "muscle_size_tier": {"kelsey-brandt": 4},
+          "costume_state": "kelsey: GROWTH page — uniform goes from crisp to snug, fully covering throughout",
+          "continuity_refs": ["p02-01"]
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "full body, low angle, 35mm",
+          "action": "Showcase: Kelsey nails a toe-touch jump at peak height, pom-poms flared, new athletic build obvious — sculpted shoulders, toned core, powerful legs — uniform taut and fully covering. Pure joy.",
+          "muscle_size_tier": {"kelsey-brandt": 4},
+          "costume_state": "kelsey: uniform taut, fully covering",
+          "continuity_refs": ["p03-01"]
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "close, slight low angle, 50mm",
+          "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, same framing, sunset deepening. Stage 1: she flexes an arm experimentally — bicep rises. Stage 2: shoulders cap and broaden, waistband and sleeve-bands straining white at the seams yet holding, fully covering; she laughs. Stage 3: fitness-cover physique — capped delts, carved abs faintly showing through the taut top, uniform at its limit but intact; radiant, confident smirk.",
+          "muscle_size_tier": {"kelsey-brandt": 6},
+          "costume_state": "kelsey: GROWTH page — uniform strains to its limit, seams whitening, ALWAYS fully covering",
+          "continuity_refs": ["p04-01"]
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "characters": ["kelsey-brandt"],
+          "location": "practice-field",
+          "camera": "wide hero shot, low angle, 28mm",
+          "action": "Finale under stadium lights just switched on: Kelsey in the Comets' rebuilt pro uniform sized to her new physique, planted in a victorious wide stance at the 50-yard stripe, pom-poms on hips, chin up — the hottest, strongest version of herself, owning the empty stadium.",
+          "muscle_size_tier": {"kelsey-brandt": 6},
+          "costume_state": "kelsey: rebuilt pro uniform, fitted to her new build",
+          "continuity_refs": ["p05-01"]
+        }
+      ]
+    }
+  ]
+}

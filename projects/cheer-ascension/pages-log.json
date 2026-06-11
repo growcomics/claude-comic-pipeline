@@ -1,0 +1,5 @@
+{
+  "_note": "Written ONLY by bank.py (receipt + audit + verdict required). Pages generate strictly in order: compose refuses any page whose continuity_refs are not banked-with-chain.",
+  "done": {},
+  "pending": ["p01-01", "p02-01", "p03-01", "p04-01", "p05-01", "p06-01"]
+}

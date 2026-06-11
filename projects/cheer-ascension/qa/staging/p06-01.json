@@ -1,0 +1,21 @@
+{
+  "kelsey-brandt": {
+    "turnaround_key": "turnaround_t6_rebuilt",
+    "position": "centered on the 50-yard stripe, full body, camera low near grass level looking up — hero framing, stadium lights blazing behind her",
+    "pose": {
+      "overall": "victorious wide stance, feet planted beyond shoulder width, chest proud, chin up",
+      "left_arm": "fist planted on her left hip, pom-pom hanging from that grip against the hip",
+      "right_arm": "fist planted on her right hip, pom-pom hanging from that grip against the hip",
+      "hands": "exactly two hands, both hers, both planted on her hips in pom-pom grips"
+    },
+    "expression": "calm, earned, dazzling closed-lip smile — the strongest, hottest version of herself, completely at ease"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total, both on her hips",
+    "stadium light masts ON: four cool-white light bursts rendered as simple 2D billboard starbursts with gentle uniform bloom — DAZ postwork style, NOT volumetric god-rays",
+    "tier-6 build per the attached turnaround in the freshly tailored pro uniform — fitted cleanly, fully covering",
+    "empty stadium, no other people anywhere"
+  ],
+  "lighting": "dusk; stadium floods as cool-white key from behind-above, warm sunset remnant camera-left, grass speculars subtle"
+}

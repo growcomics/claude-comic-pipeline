@@ -1,0 +1,20 @@
+{
+  "kelsey-brandt": {
+    "turnaround_key": "turnaround_t4_strain",
+    "position": "centered in all three sub-panels, waist-up framing, body angled slightly three-quarter left, identical camera in every sub-panel",
+    "pose": {
+      "overall": "standing at the sideline, examining her own raised right arm — identical stance all three stages, only the musculature and fabric tension change",
+      "left_arm": "relaxed at her side, hand open against her skirt",
+      "right_arm": "raised and bent in front of her chest, palm rotated up as she studies the forearm",
+      "hands": "exactly two hands: right hand raised palm-up being studied, left hand open at her side — they touch nothing"
+    },
+    "expression": "stage 1: curious frown at her own arm; stage 2: delighted gasp, mouth open, eyebrows up; stage 3: thrilled wide grin looking straight at her bicep"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total: her raised right hand and her lowered left hand",
+    "three equal vertical sub-panels, same camera, same distance, same lighting — time passes left to right",
+    "stage 1: slim arm, uniform crisp; stage 2: a clean line of new muscle along the raised arm, sleeve-band of the shell top going snug; stage 3: toned sculpted shoulders and arms, top fitted like a glove — growth strictly monotonic, never reverting, uniform fully covering in every stage"
+  ],
+  "lighting": "golden hour, warm key from camera-left, identical across all three sub-panels"
+}

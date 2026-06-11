@@ -1,0 +1,59 @@
+{
+  "_note": "Cheer Ascension sheet jobs — composed via the SHARED gate suite (../not-so-supra-man/qa/compose.py run from this project root). Bootstraps that the chain cannot yet express (face card, t2 body card, scene wide + rungs) are documented in ref-ledger.json as bootstrap-class and held to THE LAW (prompt-described ONLY because no reference exists yet). Build order: face card (bootstrap) -> t2 card (bootstrap) -> kelsey-t2-turnaround -> kelsey-t4-card -> kelsey-t4-strain-turnaround -> kelsey-t6-card -> kelsey-t6-rebuilt-turnaround -> field wide -> medium -> close rungs -> pages p01..p06 in order.",
+  "sheets": [
+    {
+      "id": "kelsey-t2-turnaround",
+      "priority": 1,
+      "covers_pages": "p01-p02",
+      "save": "references/characters/kelsey-brandt/turnaround-t2-uniform.png",
+      "attach": ["kelsey face card (bootstrap pick)", "kelsey t2 body card (bootstrap pick)"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit shown in the second reference in every view, identical in all views. Her face exactly matches the first reference image. Same slim athletic build as the second reference. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — normal human height. Faint horizontal grid lines across the background. Same hair, face, build and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "kelsey-t4-card",
+      "priority": 2,
+      "covers_pages": "feeds p03-p04 turnaround",
+      "save": "references/characters/kelsey-brandt/body-tier4.png",
+      "attach": ["kelsey face card", "kelsey t2 body card"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter; SAME height as tier 2)",
+      "prompt": "Full-body studio reference card, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman from the second reference, same face as the first reference, standing front-full with hands at her sides, wearing EXACTLY the outfit from the second reference — now visibly one full fitness tier more muscular than the second reference: sculpted capped shoulders, toned defined arms, firm flat abs hinted through the top, strong dancer thighs — an elite college athlete's build. Muscle mass increases, height does NOT change. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette. Faint horizontal grid lines. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "kelsey-t4-strain-turnaround",
+      "priority": 3,
+      "covers_pages": "p03-p04",
+      "save": "references/characters/kelsey-brandt/turnaround-t4-strain.png",
+      "attach": ["kelsey face card", "kelsey t4 body card (banked)"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME athletic woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit from the second reference in every view, now fitted TAUT over her athletic build: fabric smooth and snug at the shoulders and waistband, fully covering everywhere, identical in all views. Her face exactly matches the first reference. Same muscle size as the second reference — muscle mass stays, height does NOT change. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — fit, not tall. Faint horizontal grid lines. Same hair, face, muscle size and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "kelsey-t6-card",
+      "priority": 4,
+      "covers_pages": "feeds p05-p06 turnaround",
+      "save": "references/characters/kelsey-brandt/body-tier6.png",
+      "attach": ["kelsey face card", "kelsey t4 body card (banked)"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter; SAME height as tier 4)",
+      "prompt": "Full-body studio reference card, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman from the second reference, same face as the first reference, standing front-full with hands at her sides, wearing EXACTLY the outfit from the second reference — now two full fitness tiers more muscular than the second reference: a fitness-magazine cover physique with capped round deltoids, defined biceps and triceps, visibly carved abs through the taut top, powerful sweeping quads and calves — dramatic feminine muscle, glamorous and strong. Muscle mass increases, height does NOT change. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — muscular, not tall, NOT a giantess. Faint horizontal grid lines. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "kelsey-t6-strain-turnaround",
+      "priority": 5,
+      "covers_pages": "p05",
+      "save": "references/characters/kelsey-brandt/turnaround-t6-strain.png",
+      "attach": ["kelsey face card", "kelsey t6 body card (banked)"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME muscular woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit from the second reference in every view, the ORIGINAL squad uniform now at its absolute limit on her muscular build: fabric stretched taut, seams whitening at the shoulders and waistband yet holding, hem riding slightly high, everything still FULLY covering, identical in all views. Her face exactly matches the first reference. Same muscle size as the second reference — muscle mass stays, height does NOT change. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — muscular, not tall, NOT a giantess. Faint horizontal grid lines. Same hair, face, muscle size and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "kelsey-t6-rebuilt-turnaround",
+      "priority": 6,
+      "covers_pages": "p05-p06",
+      "save": "references/characters/kelsey-brandt/turnaround-t6-rebuilt.png",
+      "attach": ["kelsey face card", "kelsey t6 body card (banked)"],
+      "height_pin": "5'6\" — beside a 6'2\" grey mannequin silhouette (8 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME muscular woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit from the second reference in every view, a professional squad uniform freshly tailored to her muscular build: fitted cleanly, fully covering, identical in all views. Her face exactly matches the first reference. Same muscle size as the second reference — muscle mass stays, height does NOT change. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — muscular, not tall, NOT a giantess. Faint horizontal grid lines. Same hair, face, muscle size and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    }
+  ]
+}

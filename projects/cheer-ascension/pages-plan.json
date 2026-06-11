@@ -1,0 +1,11 @@
+{
+  "_note": "Page inventory for compose.py page jobs. Camera here wins over shotlist camera if both set.",
+  "pages": [
+    {"id": "p01-01", "aspect": "16:9", "camera": "wide establishing, eye-level, 28mm"},
+    {"id": "p02-01", "aspect": "16:9", "camera": "medium, eye-level, 35mm"},
+    {"id": "p03-01", "aspect": "16:9", "camera": "close, slight low angle, 50mm"},
+    {"id": "p04-01", "aspect": "16:9", "camera": "full body, low angle, 35mm"},
+    {"id": "p05-01", "aspect": "16:9", "camera": "close, slight low angle, 50mm"},
+    {"id": "p06-01", "aspect": "16:9", "camera": "wide hero shot, low angle, 28mm"}
+  ]
+}

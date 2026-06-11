@@ -1,0 +1,21 @@
+{
+  "kelsey-brandt": {
+    "turnaround_key": "turnaround_t4_strain",
+    "position": "centered, full body airborne at the peak of a toe-touch jump, mid-frame height, camera low looking slightly up",
+    "pose": {
+      "overall": "textbook toe-touch: legs split wide and straight, toes pointed, torso upright and proud",
+      "left_arm": "extended out along the left leg line, pom-pom flared",
+      "right_arm": "extended out along the right leg line, pom-pom flared",
+      "hands": "exactly two hands, both hers, both gripping flared pom-poms at the ends of her extended arms"
+    },
+    "expression": "pure mid-air joy — open laughing smile, eyes wide, ponytail whipped upward"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total, both in pom-pom grips at her extended arms",
+    "she is clearly airborne — grass shadow detached directly beneath her",
+    "athletic tier-4 build per the attached turnaround: sculpted shoulders, toned core and thighs — uniform taut and FULLY covering, skirt with white brief shorts beneath",
+    "no other people anywhere"
+  ],
+  "lighting": "golden hour, sun low camera-left, rim light tracing her arms and legs, long shadow on the grass below"
+}

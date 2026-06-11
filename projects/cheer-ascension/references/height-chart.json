@@ -1,0 +1,10 @@
+{
+  "_rule": "Muscle mass increases across tiers; height NEVER changes (D7). Every turnaround carries the 6'2\" grey mannequin silhouette + grid.",
+  "characters": {
+    "kelsey-brandt": {
+      "height": "5'6\"",
+      "vs_silhouette": "8 inches SHORTER than the 6'2\" mannequin at EVERY tier",
+      "tiers": {"2": "5'6\"", "4": "5'6\"", "6": "5'6\""}
+    }
+  }
+}

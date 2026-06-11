@@ -1,0 +1,35 @@
+{
+  "_note": "PRE-COMMITTED bootstrap prompts — the ONLY generation prompts in this project that do not flow through compose.py (no card:/scene: job kinds exist yet; extension proposed for user blessing). These are pasted VERBATIM at submit time; editing at paste time is a protocol violation. THE LAW compliance: each describes appearance ONLY because no reference image of the subject exists yet. All 16:9, Nano Banana 2, x4.",
+  "jobs": [
+    {
+      "id": "kelsey-face",
+      "attach": [],
+      "prompt": "Studio portrait reference card, photorealistic 3D CGI render, DAZ Studio Iray style: head-and-shoulders portrait of an original character — a 22-year-old American woman, honey-blonde hair pulled into a high glossy ponytail with a gold scrunchie, a few loose strands at the temples, bright green eyes, light freckles across the nose and cheekbones, soft square face with a warm confident smile, coral-pink lips, subtle athletic glow. Dead-front symmetrical framing, neutral expression-forward look, plain mid-grey studio cyclorama, even soft lighting. No text, no logos. Photographic CGI render, NOT illustrated, NOT anime."
+    },
+    {
+      "id": "kelsey-t2-card",
+      "attach": ["kelsey face card (pick from kelsey-face)"],
+      "prompt": "Full-body studio reference card, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman as the attached face reference — same honey-blonde high ponytail, same green eyes, same freckles — standing front-full with hands relaxed at her sides, slim athletic cheerleader build. She wears an ORIGINAL pro-am squad uniform: deep-teal sleeveless shell top with gold double-stripe trim at collar and armholes, white side panels, a gold comet-streak emblem on the chest with NO letters, a sunray-pleated skirt in teal, gold and white worn over white brief shorts for full coverage, white cheer shoes with gold laces. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 8 inches SHORTER than the silhouette — normal human height. Faint horizontal grid lines across the background. Plain mid-grey studio cyclorama, even lighting. No text, no words, no logos. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "field-wide",
+      "attach": [],
+      "prompt": "Environment reference, photorealistic 3D CGI render, DAZ Studio Iray style: wide establishing view of an EMPTY outdoor practice football field at golden hour — manicured green grass with a crisp white sideline stripe and a 50-yard marker, a red running track ringing the field, rows of empty silver metal bleachers, four tall stadium light masts (lights off), clear warm late-afternoon sky with long soft shadows. NO people anywhere in the frame. No text, no words, no logos, no signage. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "field-medium",
+      "attach": ["field-wide pick"],
+      "prompt": "Environment reference, photorealistic 3D CGI render, DAZ Studio Iray style: EXACTLY the same location as the attached reference — same field, same bleachers, same track, same golden-hour light — now seen from a MEDIUM camera distance at the sideline: the white sideline stripe runs through the foreground, a sideline team bench visible, bleachers filling the midground, grass texture readable. NO people anywhere in the frame. Same palette and lighting as the reference. No text, no logos. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "field-close",
+      "attach": ["field-medium pick"],
+      "prompt": "Environment reference, photorealistic 3D CGI render, DAZ Studio Iray style: EXACTLY the same location as the attached reference — same sideline, same bench, same bleachers, same golden-hour light — now a CLOSE camera distance: grass blades and the painted white stripe sharply detailed in the foreground, the bleachers softly defocused behind, shallow depth of field. NO people anywhere in the frame. Same palette and lighting as the reference. No text, no logos. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "comet-fuel-shaker",
+      "attach": ["field-medium pick (style/lighting anchor)"],
+      "prompt": "Prop reference, photorealistic 3D CGI render, DAZ Studio Iray style: a sports shaker bottle standing on a sideline team bench in golden-hour light matching the attached environment reference — translucent bottle filled with luminous teal liquid that gives off a FAINT soft glow, brushed-steel cap, a plain gold band around the middle with NO text and NO logo. The glow reads as a simple emissive prop material with gentle bloom, like a DAZ store prop render — NOT volumetric, NOT physically accurate light scattering. Plain composition, the bottle is the only subject. No text anywhere. Photographic CGI render, NOT illustrated."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "kelsey-brandt": {
+    "position": "at the sideline bench, camera-right of frame center, body angled three-quarters toward camera",
+    "pose": {
+      "overall": "standing relaxed at the bench mid water-break, weight on right hip",
+      "left_arm": "raised, holding the teal Comet Fuel shaker bottle to her lips, elbow out",
+      "right_arm": "bent, hand resting on her right hip",
+      "hands": "exactly two hands: left hand wrapped around the shaker bottle, right hand flat on her hip"
+    },
+    "expression": "eyes half-closed mid-drink, a first pleased shiver — eyebrows lifting, the beginning of a surprised smile around the bottle"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total: left on the bottle, right on her hip",
+    "the shaker bottle contains luminous teal liquid with a FAINT simple emissive glow — DAZ prop style, not volumetric",
+    "pom-poms resting on the bench beside her"
+  ],
+  "lighting": "golden hour, warm rim light from camera-left, faint teal bounce on her chin from the bottle"
+}

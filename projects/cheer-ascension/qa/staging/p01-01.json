@@ -1,0 +1,19 @@
+{
+  "kelsey-brandt": {
+    "position": "centered on the 50-yard stripe, full figure small enough to read the whole field, facing camera",
+    "pose": {
+      "overall": "classic high-V cheer pose at the top of a routine beat, weight on the left leg, right knee popped",
+      "left_arm": "raised high and angled out in the V, elbow locked, pom-pom gripped overhead",
+      "right_arm": "mirrored high V, elbow locked, pom-pom gripped overhead",
+      "hands": "exactly two hands, both hers, both wrapped in pom-pom grips overhead — knuckles hidden by pom material"
+    },
+    "expression": "huge open performance smile, eyes bright, chin lifted — captain energy"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total, both Kelsey's, both holding pom-poms overhead",
+    "empty bleachers and empty field — no other people anywhere",
+    "both pom-poms teal and gold metallic"
+  ],
+  "lighting": "golden hour, sun low camera-left, long soft shadow stretching right across the grass"
+}

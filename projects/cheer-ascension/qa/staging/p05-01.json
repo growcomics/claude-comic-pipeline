@@ -1,0 +1,21 @@
+{
+  "kelsey-brandt": {
+    "turnaround_key": "turnaround_t6_strain",
+    "position": "centered in all three sub-panels, waist-up framing, body square to camera, identical camera in every sub-panel",
+    "pose": {
+      "overall": "standing facing camera performing a deliberate single-arm flex test — identical stance all three stages, only musculature and fabric tension change",
+      "left_arm": "bent in a classic bicep flex at shoulder height, fist toward her own ear",
+      "right_arm": "at her side, hand loosely curled",
+      "hands": "exactly two hands: left fist in the flex, right hand loose at her side — they touch nothing"
+    },
+    "expression": "stage 1: playful concentration, lip bitten; stage 2: laughing out loud as the flex pops; stage 3: radiant confident smirk straight into camera"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total: her flexed left fist and her loose right hand",
+    "three equal vertical sub-panels, same camera, same distance, same lighting — time passes left to right",
+    "stage 1: athletic arm rising into the flex, uniform taut; stage 2: shoulders capping and broadening, sleeve-bands and waistband straining white at the seams yet holding; stage 3: fitness-cover physique — capped delts, carved abs read through the taut top, uniform at its absolute limit but intact — growth strictly monotonic, never reverting, FULLY covering in every stage",
+    "coverage of chest and hips fully intact in every stage"
+  ],
+  "lighting": "deepening sunset, warm-orange key from camera-left, identical across all three sub-panels"
+}
