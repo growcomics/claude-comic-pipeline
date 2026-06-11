@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (Layer 8: gate-integrity self-verification — the gates now guard each other)
+
+The remaining attacker was the agent editing the gates themselves ("the gate is wrong, let me patch it" is the likeliest rationalization under pressure). New `qa/integrity.py`: every protocol script verifies the sha256 of ALL gate scripts against the user-blessed `qa/MANIFEST.sha256` before doing anything — any edit to any gate locks every gate simultaneously, including the tampered one (verified live: one appended comment line → ALL GATES LOCKED; byte-identical restore → unlocked, same fingerprint). Re-blessing is user-only (`--rebless --i-am-the-user`, prohibited to Claude per CLAUDE.md); compose receipts embed the manifest fingerprint so every banked item records which gate-version produced it. Honest limit: inside the agent's own toolspace nothing is cryptographically absolute — the deeper anchor is that gate code is versioned and pushed, so tampering requires coordinated edits that surface in git history.
+
+### Added
+- `projects/not-so-supra-man/qa/integrity.py` + `qa/MANIFEST.sha256`; verify_or_die() wired into compose/audit/bank/verify_chain/preflight; receipts carry `gates_fingerprint`.
+
+### Changed
+- `CLAUDE.md` protocol: Layer 8 documented; Claude prohibited from re-blessing; bug-in-gate procedure = report with proposed diff, never patch-and-proceed.
+
 ## 2026-06-10 (generation protocol: 7-layer redundancy chain — no freehand prompts)
 
 During the v2 restart the agent broke its own codified rules again (appearance prose in prompts with refs attached, thinned ref stacks under picker friction, zero preflight runs) — with the enforcement tooling sitting on disk. Root cause stated plainly: the agent's promises are not load-bearing; only mechanical in-path gates are, and a gate the violator invokes voluntarily is decoration. Fix: the tool now PRODUCES the action instead of auditing it, with independent layers. `qa/compose.py` is the only legal prompt source (refuses on missing refs/staging/clamps; auto-swaps prose-bootstrap to pointer language once a state's turnaround exists); `qa/audit_prompt.py` independently re-checks and hash-ties the pasted prompt to the receipt (live tamper test: one freehand word = FAIL); post-flight verdicts come from a fresh-context subagent; `qa/bank.py` refuses to ledger any pick lacking receipt+audit+verdict; `qa/verify_chain.py` lets the user audit for bypassed entries. Protocol embedded in CLAUDE.md (auto-loads every session) + persistent memory.

@@ -3,7 +3,9 @@
 recorded WITHOUT the full receipt chain (i.e., banked by hand or by a
 rule-breaking agent). Run anytime:  python3 qa/verify_chain.py
 """
-import json, os
+import json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import integrity; integrity.verify_or_die()  # LAYER 8
 
 bad, ok = [], 0
 

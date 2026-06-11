@@ -5,7 +5,9 @@ the prompt actually about to be pasted (sha256), then lints it cold.
 
   python3 qa/audit_prompt.py --receipt qa/receipts/<job>.receipt.json --prompt-file /tmp/p.txt
 """
-import argparse, hashlib, json, re, sys
+import argparse, hashlib, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import integrity; integrity.verify_or_die()  # LAYER 8
 
 BANNED_APPEARANCE = re.compile(r"\b(blonde?|curly|hazel|ice-blue|bald|freckl\w*|square-?jaw\w*|"
                                r"chin-length|bangs|jet-black|black-?bob)\b", re.I)

@@ -11,6 +11,8 @@ Freehanding prompts is banned (CLAUDE.md protocol). Run from project root.
 Receipts land in qa/receipts/<job>.receipt.json (consumed by audit + bank).
 """
 import argparse, hashlib, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import integrity; integrity.verify_or_die()  # LAYER 8
 
 STYLE = ("Photorealistic 3D CGI render, DAZ Studio Iray render-engine look, photoreal CGI. "
          "NOT illustrated, NOT anime, NOT cartoon, NOT 2D.")
@@ -26,7 +28,8 @@ def refuse(msgs):
 def receipt(job, kind, prompt, attach, aspect, flags):
     os.makedirs("qa/receipts", exist_ok=True)
     body = {"job": job, "kind": kind, "prompt_sha": hashlib.sha256(prompt.encode()).hexdigest(),
-            "attach": attach, "aspect": aspect, "flags": flags}
+            "attach": attach, "aspect": aspect, "flags": flags,
+            "gates_fingerprint": integrity.manifest_fingerprint()}
     path = f"qa/receipts/{job.replace(':','_')}.receipt.json"
     json.dump(body, open(path, "w"), indent=1)
     return path

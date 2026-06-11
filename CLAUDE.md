@@ -85,6 +85,7 @@ Every Flow/Higgsfield submit follows this chain — **reference sheets included*
 4. **POST-FLIGHT** — download the pick; a FRESH-context subagent judges it against the registry rubric → `qa/receipts/<job>.verdict.json`. The generator never grades its own work.
 5. **BANK** — `python3 qa/bank.py` is the only way picks enter the ledger/pages-log; it refuses any entry lacking receipt + audit + passing verdict. Unbanked work is invisible downstream.
 6. **VERIFY (user-side)** — `python3 qa/verify_chain.py` audits the ledger for chainless entries at any time.
+7. **GATE INTEGRITY (Layer 8)** — every protocol script self-verifies all gate scripts against `qa/MANIFEST.sha256` before running; ANY edit to ANY gate locks ALL gates. **Claude is prohibited from running `integrity.py --rebless`** — re-blessing is a user-only act, done after reviewing the git diff on `qa/`. Receipts embed the manifest fingerprint, so every banked item records which gate-version produced it. If Claude believes a gate has a bug, the move is: report it to the user with the proposed diff — never patch-and-proceed.
 
 ## QA pattern
 

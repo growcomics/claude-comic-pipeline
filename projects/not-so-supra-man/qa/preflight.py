@@ -8,7 +8,9 @@ Usage:
 Exit 0 = PASS (submit allowed). Exit 1 = FAIL (reasons printed; do NOT submit).
 Run from the project root (projects/not-so-supra-man/).
 """
-import argparse, json, re, sys
+import argparse, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import integrity; integrity.verify_or_die()  # LAYER 8
 
 CONTACT_WORDS = re.compile(
     r"\b(carr(y|ies|ying)|lift|hug|embrace|grab|press(es|ing)?|chokeslam|slam|pin(s|ned)?|"

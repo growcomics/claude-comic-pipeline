@@ -1,0 +1,15 @@
+{
+ "job": "sheet:deedee-t8-destroya",
+ "kind": "sheet",
+ "prompt_sha": "d86840f30c0b45f79ba423ece1194f132bc9de69b2bf843385e5082c81eb4637",
+ "attach": [
+  "blonde (face)",
+  "standing villain (T8 body 2f4e1204)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ }
+}

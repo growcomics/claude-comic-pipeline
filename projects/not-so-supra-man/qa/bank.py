@@ -8,6 +8,8 @@ cannot propagate.
   python3 qa/bank.py --job sheet:deedee-t8-destroya --flow-id <uuid> --disk references/characters/dee-dee/turnaround-t8.png
 """
 import argparse, json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import integrity; integrity.verify_or_die()  # LAYER 8
 
 def refuse(m):
     print(f"BANK REFUSED: {m}")
