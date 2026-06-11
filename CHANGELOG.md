@@ -18,6 +18,7 @@ Demo project to prove the generation protocol end-to-end on fresh material: Kels
 
 ### Added
 - `projects/cheer-ascension/` — shotlist, pages-plan, pages-log, PROGRESS, height-chart, turnaround-specs (6 sheets), ref-ledger (bootstrap-class tracking + scene_ladders), bootstrap-prompts.json, 6 staging files, judge-rubric copy, reference provenance doc.
+- Generation started (bootstrap phase): Flow project `d8ff2c7c` created (NB2 · 16:9 · x4); face card banked (V2 of 4 — V3 rejected for an unspecced necklace, V4 for breaking dead-front; all variant ids ledgered); chip-vs-pick now DOM-verified by media id before every submit (closes the wrong-chip hole mechanically). Chained jobs remain blocked: gates still LOCKED (user rebless hasn't landed on this machine).
 
 ## 2026-06-10 (pre-mortem fix batch: smarter gates + judge rubric — gates LOCKED pending user re-bless)
 

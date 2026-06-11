@@ -1,30 +1,65 @@
 {
-  "_note": "Cheer Ascension ledger. flow_id null = not yet generated. Entries gain a 'chain' block ONLY via bank.py (receipt + audit + verdict required). Bootstrap-class items (face, t2 card, scene rungs) cannot flow through compose yet (no card:/scene: job kinds — proposed gate extension pending user blessing); their prompts are PRE-COMMITTED in references/bootstrap-prompts.json and pasted verbatim, never freehanded.",
+  "_note": "Cheer Ascension ledger. flow_id null = not yet generated. Entries gain a 'chain' block ONLY via bank.py (receipt + audit + verdict required). Bootstrap-class items (face, t2 card, scene rungs) cannot flow through compose yet (no card:/scene: job kinds \u2014 proposed gate extension pending user blessing); their prompts are PRE-COMMITTED in references/bootstrap-prompts.json and pasted verbatim, never freehanded.",
   "inspiration": {
     "folder": "references/style/daz-cheer-inspiration/",
     "provenance": "references/style/daz-cheer-inspiration/_provenance.md",
-    "chosen_start": "dforce-cheer-outfit-g8.jpg — anchors render style + uniform construction + slim t2 baseline on a studio backdrop",
+    "chosen_start": "dforce-cheer-outfit-g8.jpg \u2014 anchors render style + uniform construction + slim t2 baseline on a studio backdrop",
     "role": "style/wardrobe/environment guidance for the BOOTSTRAP prompts only; no Daz product trade-dress, text, or identity is copied; never attached as a generation ref"
   },
   "characters": {
     "kelsey-brandt": {
       "design": "22, honey-blonde high ponytail with gold scrunchie, bright green eyes, light freckles, soft square face; Comets uniform: deep-teal sleeveless shell top with gold double-stripe trim and a gold comet-streak chest emblem (NO letters), white side panels, sunray-pleated teal/gold/white skirt, white brief shorts beneath (coverage insurance), white cheer shoes",
-      "face": {"flow_id": null, "disk": "references/characters/kelsey-brandt/face-card.png", "class": "bootstrap"},
+      "face": {
+        "flow_id": "12c236a4-6b35-4e7f-b618-e153cbc71802",
+        "disk": "references/characters/kelsey-brandt/face-card.png",
+        "class": "bootstrap",
+        "bootstrap_job": "kelsey-face (references/bootstrap-prompts.json, pasted verbatim)",
+        "variants": [
+          "1e3b6aa2-2b7f-49dd-9028-f4f3113376f5",
+          "12c236a4-6b35-4e7f-b618-e153cbc71802",
+          "c8be289c-6a63-45d3-92cb-b2d9b4114678",
+          "8802d884-3289-4d3e-9e5c-cc71b32f922d"
+        ],
+        "qa_notes": "V2 picked (dead-front symmetric, ponytail+gold scrunchie, green eyes, freckles). V3 rejected: unspecced gold necklace. V4 rejected: 3/4 angle + loose curls. V1 backup."
+      },
       "body": {
-        "2": {"flow_id": null, "disk": "references/characters/kelsey-brandt/body-tier2.png", "class": "bootstrap"}
+        "2": {
+          "flow_id": null,
+          "disk": "references/characters/kelsey-brandt/body-tier2.png",
+          "class": "bootstrap"
+        }
       }
     }
   },
   "scene_ladders": {
     "_note": "compose.py refuses any page whose camera-distance rung is not banked here (D8). Rungs are bootstrap-class until the card:/scene: gate extension lands; each rung chains from the previous (wide -> medium -> close).",
     "practice-field": {
-      "wide": {"flow_id": null, "class": "bootstrap"},
-      "medium": {"flow_id": null, "class": "bootstrap-chained-from-wide"},
-      "close": {"flow_id": null, "class": "bootstrap-chained-from-medium"}
+      "wide": {
+        "flow_id": null,
+        "class": "bootstrap"
+      },
+      "medium": {
+        "flow_id": null,
+        "class": "bootstrap-chained-from-wide"
+      },
+      "close": {
+        "flow_id": null,
+        "class": "bootstrap-chained-from-medium"
+      }
     }
   },
   "props": {
-    "comet-fuel-shaker": {"flow_id": null, "note": "teal glowing shaker bottle — bootstrap with the field-medium rung attached for style", "class": "bootstrap"},
-    "pom-poms": {"note": "teal/gold metallic — carried by the t2 turnaround + page prompts; no separate card unless drift appears"}
+    "comet-fuel-shaker": {
+      "flow_id": null,
+      "note": "teal glowing shaker bottle \u2014 bootstrap with the field-medium rung attached for style",
+      "class": "bootstrap"
+    },
+    "pom-poms": {
+      "note": "teal/gold metallic \u2014 carried by the t2 turnaround + page prompts; no separate card unless drift appears"
+    }
+  },
+  "flow_project": {
+    "id": "d8ff2c7c-7cd4-4daa-9e90-84cfd123f0db",
+    "name": "Jun 10, 11:31 PM (Cheer Ascension)"
   }
 }
