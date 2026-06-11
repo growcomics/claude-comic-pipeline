@@ -1,0 +1,19 @@
+{
+  "dana-lane": {
+    "position": "centered in all three sub-panels, seen from behind at a low angle, torso filling the frame from hips to shoulders, head turned slightly right so the edge of her jaw is visible past her hair",
+    "pose": {
+      "overall": "standing, weight even, back square to camera in all three sub-panels — identical framing, only the musculature and fabric damage change stage to stage",
+      "left_arm": "at her side, slightly flexed; fist clenching progressively harder each stage",
+      "right_arm": "at her side, mirroring the left; by stage 3 both forearms flare outward as the lats widen",
+      "hands": "exactly two hands, both her own, both visible at her sides as clenched fists — they touch nothing"
+    },
+    "expression": "face mostly hidden from behind; the visible sliver of jaw and cheek reads gritted-teeth strain in stage 2 and an exhilarated half-smile by stage 3"
+  },
+  "spatial_rules": [
+    "exactly one person in the image",
+    "exactly two hands total: her left fist and right fist at her sides",
+    "three equal vertical sub-panels, same camera, same distance, same lighting — time passes left to right",
+    "stage 1: blouse back taut, shoulder blades defined; stage 2: lats flaring wide, the back seam splitting downward; stage 3: full muscular cobra back exposed through the split, trapezius mountains, the blouse hanging on only as sleeves — growth strictly monotonic, never reverting"
+  ],
+  "lighting": "harsh overhead laboratory floods raking down the back, cool concrete bounce — identical across all three sub-panels"
+}

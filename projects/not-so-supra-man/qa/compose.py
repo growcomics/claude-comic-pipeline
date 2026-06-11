@@ -9,6 +9,11 @@ Freehanding prompts is banned (CLAUDE.md protocol). Run from project root.
   python3 qa/compose.py --job page:p20-01
 
 Receipts land in qa/receipts/<job>.receipt.json (consumed by audit + bank).
+
+v2 (user-blessed fix batch): costume-state->turnaround mapping, prior-panel
+existence check (continuity_refs must be banked WITH chain), scene-ladder rung
+enforcement by camera distance, anti-reference-bleed negatives, progressive
+stage-direction rule, torn-state coverage insurance, pill-verify reminder.
 """
 import argparse, hashlib, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -17,8 +22,12 @@ import integrity; integrity.verify_or_die()  # LAYER 8
 STYLE = ("Photorealistic 3D CGI render, DAZ Studio Iray render-engine look, photoreal CGI. "
          "NOT illustrated, NOT anime, NOT cartoon, NOT 2D.")
 NEG = "No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands."
-APPEARANCE_WORDS = re.compile(r"\b(blonde?|curly|hazel|ice-blue|bald|freckl\w*|square-?jaw\w*|"
-                              r"chin-length|bangs|jet-black|black-?bob)\b", re.I)
+NEG_PAGE_BLEED = " No mannequin, no reference silhouette figure, no grid lines, no model-sheet layout."
+CAMERA_DISTANCE = {
+    "wide": "wide", "establish": "wide", "splash": "wide", "birds-eye": "wide",
+    "full": "medium", "cowboy": "medium", "medium": "medium", "over-shoulder": "medium",
+    "mcu": "close", "ecu": "close", "close": "close",
+}
 
 def refuse(msgs):
     print("COMPOSE REFUSED:")
@@ -73,6 +82,39 @@ def compose_sheet(sheet_id, pass_key):
     if "No text" not in line: line += " " + NEG
     return line, attach, aspect, {"bootstrap": bootstrap, "gate": gate, "tier_job": "t9" in sheet_id.lower()}
 
+def state_for(char, panel):
+    """Pull this character's costume-state fragment from the panel's combined string."""
+    cs = panel.get("costume_state", "") or ""
+    short = char.split("-")[0] if char != "dee-dee" else "dee-dee"
+    for seg in cs.split(";"):
+        seg = seg.strip()
+        if seg.lower().startswith(short + ":"):
+            return seg.partition(":")[2].strip().lower()
+    return cs.lower()
+
+def pick_turnaround(char, ch_entry, panel, staging):
+    override = staging.get(char, {}).get("turnaround_key")
+    keys = [k for k in ch_entry if k.startswith("turnaround")]
+    if override:
+        if override in ch_entry: return override
+        refuse([f"staging override turnaround_key '{override}' not in ledger for {char}"])
+    if not keys: return None
+    state = state_for(char, panel)
+    tiers = panel.get("muscle_size_tier") or {}
+    tier = tiers.get(char) if isinstance(tiers.get(char), int) else 0
+    want = None
+    if "corset" in state: want = "t8"
+    elif "lab coat" in state: want = "t3"
+    elif tier >= 7: want = "t9"
+    elif re.search(r"torn|remnant|shred|tear|split", state): want = "torn"
+    elif "suit" in state: want = "t6_suit"
+    elif "blouse" in state and tier >= 4: want = "t4"
+    elif "blouse" in state or "reporter" in state or (tier and tier <= 2): want = "t2"
+    matches = [k for k in keys if want and want in k]
+    if len(matches) == 1: return matches[0]
+    refuse([f"D4: ambiguous turnaround for {char} (state='{state}', tier={tier}, "
+            f"candidates={keys}) — set turnaround_key in the staging file"])
+
 def compose_page(panel_id):
     shot = json.load(open("shotlist.json"))
     panel = None
@@ -92,14 +134,21 @@ def compose_page(panel_id):
         refuse([f"D9/D13: multi-character page requires {staging_path} "
                 "(per-character position/orientation + per-HAND accounting + total-hands line); author it first"])
     staging = json.load(open(staging_path)) if os.path.exists(staging_path) else {}
-    # mechanical v4 assembly — appearance is pointer-only BY CONSTRUCTION
+
+    # PRIOR CHECK: shotlist continuity_refs must be banked WITH a chain (v2 pages only count)
+    log = json.load(open("pages-log.json")) if os.path.exists("pages-log.json") else {"done": {}}
+    for ref_id in panel.get("continuity_refs", []) or []:
+        rec = log.get("done", {}).get(ref_id)
+        if not rec or "chain" not in rec:
+            errs.append(f"D1: continuity ref {ref_id} is not banked-with-chain yet — generate pages in order")
+
     refs, characters = [], []
-    for i, c in enumerate(chars):
+    for c in chars:
         ch = led["characters"].get(c, {})
-        t_keys = [k for k in ch if k.startswith("turnaround")]
         if not ch.get("face"): errs.append(f"D1: no face ref in ledger for {c}")
-        if not t_keys: errs.append(f"D4/D11: no wardrobe turnaround in ledger for {c} — generate the sheet first")
-        refs += [f"face:{c}", f"turnaround:{c}:{t_keys[0] if t_keys else '?'}"]
+        tkey = pick_turnaround(c, ch, panel, staging) if ch else None
+        if not tkey: errs.append(f"D4/D11: no wardrobe turnaround in ledger for {c} — generate the sheet first")
+        refs += [f"face:{c}", f"turnaround:{c}:{tkey or '?'}"]
         characters.append({
             "id": c,
             "appearance": f"EXACTLY the person from the attached face card and turnaround for {c} — same face, hair, outfit, damage state, muscle size and height. No appearance changes.",
@@ -108,20 +157,37 @@ def compose_page(panel_id):
             "expression": staging.get(c, {}).get("expression", "<MISSING>"),
         })
         if contact and "<MISSING>" in json.dumps(characters[-1]): errs.append(f"D12: staging stanza incomplete for {c}")
-    if panel.get("location") and panel["location"] not in ("lab-exterior",):
-        refs.append(f"scene:{panel['location']}:{entry['aspect']}")
-    if panel_id not in ("p01-01", "p02-01"): refs.append("prior:last-accepted")
+
+    # SCENE LADDER: rung must match camera distance AND exist in the ledger (D8)
+    loc = panel.get("location")
+    if loc and loc not in ("lab-exterior",):
+        cam = (entry.get("camera") or panel.get("camera") or "").lower()
+        want = next((cls for kw, cls in CAMERA_DISTANCE.items() if kw in cam), "medium")
+        rung = (led.get("scene_ladders", {}).get(loc, {}) or {}).get(want, {})
+        if not rung or not rung.get("flow_id"):
+            errs.append(f"D8: scene ladder rung '{loc}:{want}' not banked — generate it first (chained from the wide)")
+        refs.append(f"scene:{loc}:{want}")
+
+    for ref_id in panel.get("continuity_refs", []) or []:
+        refs.append(f"prior:{ref_id}")
     tiers = panel.get("muscle_size_tier") or {}
     t9 = any(isinstance(t, int) and t >= 9 for t in tiers.values())
     if t9: refs.append("anchor:lana")
+
+    action = panel.get("action", "")
     body = {"instruction": "Generate one image.", "style": STYLE,
             "camera": entry.get("camera", panel.get("camera")),
-            "scene": {"environment": "EXACTLY the attached scene reference", "continuity": "continue from the attached previous panel"},
+            "scene": {"environment": "EXACTLY the attached scene reference", "continuity": "continue from the attached previous panel" if panel.get("continuity_refs") else "establishing beat"},
             "characters": characters,
-            "spatial_rules": staging.get("spatial_rules", ["<MISSING>"] if contact else []),
-            "action": panel.get("action", ""),
+            "spatial_rules": list(staging.get("spatial_rules", ["<MISSING>"] if contact else [])),
+            "action": action,
             "lighting": staging.get("lighting", panel.get("time_of_day", "")),
-            "negative": NEG.lower()}
+            "negative": (NEG + NEG_PAGE_BLEED).lower()}
+    if any("torn" in state_for(c, panel) or "remnant" in state_for(c, panel) for c in chars):
+        body["spatial_rules"].append("coverage of chest and hips fully intact in every stage")
+    if "GROWTH-PROGRESSIVE" in action:
+        body["progression_rule"] = ("damage and musculature progress TOWARD the state shown in the attached "
+                                    "turnaround, reaching it only in the FINAL stage; earlier stages show progressively less")
     if any(isinstance(t, int) and t >= 4 for t in tiers.values()):
         body["size_rule"] = "muscle mass per the attached turnaround — height does NOT change"
     if errs: refuse(errs)
@@ -138,6 +204,7 @@ def main():
     else: refuse([f"unknown job kind '{kind}'"])
     rpath = receipt(a.job, kind, prompt, attach, aspect, flags)
     print(f"COMPOSE OK [{a.job}]  aspect={aspect}  receipt={rpath}")
+    print(f"VERIFY PILL BEFORE SUBMIT: model=Nano Banana 2  count=x4  aspect={aspect}")
     print("ATTACH (in order):")
     for r in attach: print(f"  - {r}")
     print("PROMPT (paste verbatim, single line):")

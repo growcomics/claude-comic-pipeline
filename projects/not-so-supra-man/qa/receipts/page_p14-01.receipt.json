@@ -1,0 +1,17 @@
+{
+ "job": "page:p14-01",
+ "kind": "page",
+ "prompt_sha": "4e5bd848fe832eaddd89188428d8a30f9df38d531121292687758a708f72f28e",
+ "attach": [
+  "face:dana-lane",
+  "turnaround:dana-lane:turnaround_t9",
+  "scene:doomer-lab:16:9",
+  "prior:last-accepted"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "d38c398692c053ad"
+}

@@ -180,5 +180,78 @@
       ],
       "gate": "LITERAL side-by-side vs anchor: PASSED all four axes; height = silhouette (no giantess)"
     }
+  },
+  "scene_ladders": {
+    "_note": "compose.py refuses any page whose camera-distance rung is not banked here (D8 basketball rule). Generate rungs chained: wide -> medium -> close. v1 wides are reusable cross-project via the picker.",
+    "doomer-lab": {
+      "wide": {
+        "flow_id": null,
+        "note": "v1 had none banked \u2014 generate fresh in v2"
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    },
+    "hq-gym": {
+      "wide": {
+        "flow_id": "312a66d9-93ee-4173-b4f4-35f1c907b042",
+        "project": "v1"
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    },
+    "city-street": {
+      "wide": {
+        "flow_id": "452c13a3-97d6-4394-97f6-7403a2ac2ccd",
+        "project": "v1"
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    },
+    "doomer-lab-2": {
+      "wide": {
+        "flow_id": "7b7295e2-595a-4827-bd9e-836e03579e17",
+        "project": "v1"
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    },
+    "lab-quarters": {
+      "wide": {
+        "flow_id": null
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    },
+    "hq-locker": {
+      "wide": {
+        "flow_id": null
+      },
+      "medium": {
+        "flow_id": null
+      },
+      "close": {
+        "flow_id": null
+      }
+    }
   }
 }

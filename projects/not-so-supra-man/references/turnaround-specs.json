@@ -65,6 +65,42 @@
       "attach": ["male superhero (74c0857f)"],
       "height_pin": "6'2\" — he IS the reference height; include grid lines",
       "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME tall lean-muscular male superhero in four full-body views side by side — front, three-quarter, profile, back — identical outfit in every view: royal-blue fitted hero suit, gold double-chevron delta emblem in a diamond outline (NO letters, NO S), crimson cape, trunks and boots, gold belt. Faint horizontal height grid lines across the background. Same hair, face and height in all views. Mid-grey studio. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "dana-t2-reporter",
+      "priority": 6,
+      "covers_pages": "p01-p06",
+      "save": "references/characters/dana-lane/turnaround-t2-reporter.png",
+      "attach": ["young woman beauty (face 01b9bbf0)", "dana T2 body card (53ae3c76)"],
+      "height_pin": "5'8\" — beside a 6'2\" grey mannequin silhouette (6 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit shown in the second reference in every view, identical in all views. Her face exactly matches the first reference image. Same slim build as the second reference. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 6 inches SHORTER than the silhouette — normal human height. Faint horizontal grid lines across the background. Same hair, face, build and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "dana-t4-blouse",
+      "priority": 7,
+      "covers_pages": "p07-p11",
+      "save": "references/characters/dana-lane/turnaround-t4-blouse.png",
+      "attach": ["young woman beauty (face 01b9bbf0)", "dana T4 body card (3c004457)"],
+      "height_pin": "5'8\" — beside a 6'2\" grey mannequin silhouette (6 inches shorter; SAME height as tier 2)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME athletically muscular woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit shown in the second reference in every view, the blouse straining at the seams but fully intact and fully covering, identical in all views. Her face exactly matches the first reference image. Same muscle size as the second reference — muscle mass increases, height does NOT. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 6 inches SHORTER than the silhouette — fit, not tall. Faint horizontal grid lines across the background. Same hair, face, muscle size and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "deedee-t3-labcoat",
+      "priority": 8,
+      "covers_pages": "p21-p23",
+      "save": "references/characters/dee-dee/turnaround-t3-labcoat.png",
+      "attach": ["blonde (face d8a98176)", "dee-dee T3 body card (c7ec4291)"],
+      "height_pin": "5'7\" — beside a 6'2\" grey mannequin silhouette (7 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME woman from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit shown in the second reference in every view, identical in all views. Her face exactly matches the first reference image. Same build as the second reference. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: she is 7 inches SHORTER than the silhouette — normal human height. Faint horizontal grid lines across the background. Same hair, face, build and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
+    },
+    {
+      "id": "doomer-suit",
+      "priority": 9,
+      "covers_pages": "all Doomer pages",
+      "save": "references/characters/dex-doomer/turnaround.png",
+      "attach": ["doomer face card (264c9a99)", "doomer body base (5e32792d)"],
+      "height_pin": "5'11\" — beside a 6'2\" grey mannequin silhouette (3 inches shorter)",
+      "prompt": "Character turnaround model sheet, photorealistic 3D CGI render, DAZ Studio Iray style: the SAME man from the second reference in four full-body views side by side — front view, three-quarter view, profile view, back view — wearing EXACTLY the outfit shown in the second reference in every view, identical in all views. His face exactly matches the first reference image. Same build as the second reference. At the far right a plain matte-grey mannequin silhouette of a 6-foot-2 man for scale: he is 3 inches SHORTER than the silhouette. Faint horizontal grid lines across the background. Same hair, face, build and height in all four views. Plain mid-grey studio cyclorama, even lighting. Photographic CGI render, NOT illustrated."
     }
   ]
 }

@@ -12,6 +12,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (pre-mortem fix batch: smarter gates + judge rubric — gates LOCKED pending user re-bless)
+
+Applied the full pre-mortem as code, built and tested on unguarded staging copies first, then installed over the blessed gates — which correctly LOCKED all gates pending `python3 qa/integrity.py --rebless --i-am-the-user`. Gate upgrades (compose v2): costume-state→turnaround mapping with staging override and refuse-if-ambiguous (unit-tested: torn pages→t6-torn, suit pages→t6-suit, finale→t9 — fixes the caught dry-run bug); prior-panel check (shotlist continuity_refs must be banked WITH chain — pages generate in order); scene-ladder rung enforcement (camera distance class must have a banked rung in the ledger — basketball rule end-to-end); anti-reference-bleed negative on pages (no mannequin/silhouette/grid/model-sheet); progression_rule for GROWTH-PROGRESSIVE pages (stages build TOWARD the attached turnaround — kills the end-state paradox); auto coverage-insurance line on torn-state pages; pill-verify reminder. Audit v2 independently requires the bleed negative + progression rule (verified: old p14 dry-run prompt now FAILS on both; fresh sheet passes). Staging copies deleted after install (they're a Layer-0 bypass surface).
+
+### Added
+- `projects/not-so-supra-man/qa/judge-rubric.md` — Layer 4 post-flight rubric: 13 checks vs the actual attached ref images, uncertain→FAIL bias, user-calibration exemplar (270c06dc size miss), chip-vs-receipt submit check, per-variant verdict JSON schema.
+- `references/turnaround-specs.json`: 4 missing sheets (dana-t2-reporter, dana-t4-blouse p07–p11 gap, deedee-t3-labcoat, doomer-suit) — pointer-style prompts (outfits carried by the attached body cards, not prose).
+- `references/ref-ledger.json`: `scene_ladders` scaffold (wide/medium/close per location; v1 wides registered where they exist).
+
 ## 2026-06-10 (Layer 8: gate-integrity self-verification — the gates now guard each other)
 
 The remaining attacker was the agent editing the gates themselves ("the gate is wrong, let me patch it" is the likeliest rationalization under pressure). New `qa/integrity.py`: every protocol script verifies the sha256 of ALL gate scripts against the user-blessed `qa/MANIFEST.sha256` before doing anything — any edit to any gate locks every gate simultaneously, including the tampered one (verified live: one appended comment line → ALL GATES LOCKED; byte-identical restore → unlocked, same fingerprint). Re-blessing is user-only (`--rebless --i-am-the-user`, prohibited to Claude per CLAUDE.md); compose receipts embed the manifest fingerprint so every banked item records which gate-version produced it. Honest limit: inside the agent's own toolspace nothing is cryptographically absolute — the deeper anchor is that gate code is versioned and pushed, so tampering requires coordinated edits that surface in git history.

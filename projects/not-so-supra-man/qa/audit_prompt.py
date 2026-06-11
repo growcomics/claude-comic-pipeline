@@ -4,6 +4,10 @@ than compose.py — both must pass before a submit. Verifies the receipt matches
 the prompt actually about to be pasted (sha256), then lints it cold.
 
   python3 qa/audit_prompt.py --receipt qa/receipts/<job>.receipt.json --prompt-file /tmp/p.txt
+
+v2 (user-blessed fix batch): pages that attach a turnaround MUST carry the
+anti-reference-bleed negative; GROWTH-PROGRESSIVE pages MUST carry a
+progression_rule (independent encodings of the compose-side fixes).
 """
 import argparse, hashlib, json, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -42,6 +46,10 @@ if rec["kind"] == "page" and len(rec["attach"]) < 3: errs.append("D1: page with 
 if rec.get("flags", {}).get("tier_job") and not any("anchor" in s or "turnaround" in s for s in rec["attach"]):
     errs.append("D6/D14: tier job without anchor/turnaround in attach list")
 if "NOT illustrated" not in prompt and "not illustrated" not in prompt: errs.append("style anchor missing")
+if rec["kind"] == "page" and any("turnaround" in s for s in rec["attach"]) and "no mannequin" not in prompt.lower():
+    errs.append("reference-bleed: page attaches a turnaround but lacks the no-mannequin/no-grid negative")
+if "GROWTH-PROGRESSIVE" in prompt and "progression_rule" not in prompt:
+    errs.append("end-state paradox: progressive page lacks a progression_rule (stages must build TOWARD the attached turnaround)")
 
 if errs: fail(errs)
 marker = args.receipt.replace(".receipt.json", ".audit-pass")

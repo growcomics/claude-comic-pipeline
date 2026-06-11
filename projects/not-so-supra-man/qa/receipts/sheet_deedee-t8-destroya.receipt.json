@@ -11,5 +11,6 @@
   "bootstrap": true,
   "gate": "",
   "tier_job": false
- }
+ },
+ "gates_fingerprint": "d38c398692c053ad"
 }
