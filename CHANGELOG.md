@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: field-wide attempt-3 all-fail — prompt v4, last auto-iteration)
+
+**Changed**
+- `field-wide` bootstrap prompt → v4. Attempt-3 (v3, batch `9ab6cd8b`/`4882e4d1`/`24308dae`/`6acc128d`) eliminated numerals AND goalposts but failed on concrete strips inside the oval, doubled boundaries, scattered bleacher props, clipped track ring, and invented buildings. v4 applies the judge's five targeted fixes (grass+white-paint-only inside the oval; exactly one line per boundary; aligned bleacher rows outside the track; pulled-back camera with margin on all sides; no buildings/press boxes/parking inside the fence). Per-session escalation rule: if v4 also all-fails, stop iterating and surface the best candidates for user red-pen. Verdict: `qa/receipts/scene_field-wide.attempt3.verdict.json`.
+
 ## 2026-06-11 (cheer-ascension: field-wide attempt-2 all-fail — prompt v3)
 
 **Changed**

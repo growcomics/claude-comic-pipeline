@@ -1,0 +1,20 @@
+{
+  "job": "scene:field-wide (bootstrap, prompt v3 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "9ab6cd8b-18c8-47c8-8059-31416ca23b28",
+    "4882e4d1-3f90-4e25-b50f-af55b49822c2",
+    "24308dae-b14e-4c40-a6ac-a607813910b2",
+    "6acc128d-2e6a-4791-b296-daa292d35c8d"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "9ab6cd8b-18c8-47c8-8059-31416ca23b28", "verdict": "fail", "defects": ["concrete strips inside grass (near sideline + left side + end-zone pad)", "doubled boundary", "track ring clipped bottom", "field offset in ring"], "notes": "No numerals/goalposts; bleachers empty."},
+    {"variant": "V2", "flow_id": "4882e4d1-3f90-4e25-b50f-af55b49822c2", "verdict": "fail", "defects": ["concrete strip across grass at midfield", "doubled/converging lines at right end-zone corner", "track clipped bottom-right and lower-left"], "notes": "Otherwise clean."},
+    {"variant": "V3", "flow_id": "24308dae-b14e-4c40-a6ac-a607813910b2", "verdict": "fail", "defects": ["messiest line work: doubled sideline + stray diagonal + inset rectangle", "walkway across grass apron", "invented press-box buildings + parking lot", "right bleachers oversized/slanted/clipped"], "notes": ""},
+    {"variant": "V4", "flow_id": "6acc128d-2e6a-4791-b296-daa292d35c8d", "verdict": "fail", "defects": ["left bleacher units scattered at random rotations on a pad", "extra white rectangle parallel to sideline + converging diagonals", "concrete pads inside surround; clipped bottom-left"], "notes": "Far-side bleachers clean; framing nearly right."}
+  ],
+  "pick": "none",
+  "progress": "v3 killed numerals (4/4 clean) and goalposts (4/4 clean this round). Remaining modes: concrete strips inside the oval, doubled boundaries, scattered bleacher props, clipped track ring, invented buildings.",
+  "resubmit_guidance": "Prompt v4 (judge's five changes, all applied): grass+white-paint-only inside the oval; exactly one line per boundary with nothing parallel; bleachers straight rows outside the track aligned same direction; camera pulled back with grass margin on all four sides, nothing clipped; no buildings/press boxes/sheds/parking lots inside the fence line. Escalation rule from session: if attempt 4 (v4) also all-fails, STOP iterating and surface best candidates to the user for red-pen."
+}
