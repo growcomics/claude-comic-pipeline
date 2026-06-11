@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: t2 card attempt-2 all-fail on D7 scale — bootstrap prompt v3)
+
+**Changed**
+- `kelsey-t2-card` prompt → v3 after attempt-2 (prompt v2, batch `a4514114`/`5d28eaf3`/`6c3d4b27`/`95203993`) again failed the literal scale gate — ratios improved to 0.92–0.945 but the target is 0.89 (head at the mannequin's chin). v3 adds the exact percentage ("exactly 89% of the mannequin's height, a full 8 inches / 20 cm shorter"), a grid-line redundancy cue (one horizontal grid line passes through both the mannequin's CHIN and the TOP OF HER HEAD), and explicit "NOT the same height / eye levels do NOT match" negatives. Verdict: `projects/cheer-ascension/qa/receipts/card_kelsey-t2.attempt2.verdict.json`.
+
 ## 2026-06-11 (cheer-ascension: t2 card attempt-1 all-fail on D7 scale — bootstrap prompt v2)
 
 **Changed**

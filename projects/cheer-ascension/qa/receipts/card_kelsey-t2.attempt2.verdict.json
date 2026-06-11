@@ -1,0 +1,20 @@
+{
+  "job": "card:kelsey-t2 (bootstrap, prompt v2 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "a4514114-521e-4c77-b88d-9ebf6273b308",
+    "5d28eaf3-947f-43fa-b304-01e06b12b61d",
+    "6c3d4b27-fab0-49f5-bfab-c8bfc7528ad5",
+    "95203993-1807-4496-bf36-b9d57da27de8"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "a4514114-521e-4c77-b88d-9ebf6273b308", "verdict": "fail", "defects": ["D7 size: ratio 0.935 (~4.8in shorter, head ~5in above chin line); spec 0.89/8in"], "notes": "Cleanest uniform/grid/identity; too tall."},
+    {"variant": "V2", "flow_id": "5d28eaf3-947f-43fa-b304-01e06b12b61d", "verdict": "fail", "defects": ["D7 size: ratio 0.92-0.93 (~5.3in)", "scene: no horizontal grid; invented floor ticks + vertical scale", "lighting: dark/vignetted", "build: curvier than slim-athletic t2"], "notes": "Closest ratio but multiple spec deviations."},
+    {"variant": "V3", "flow_id": "6c3d4b27-fab0-49f5-bfab-c8bfc7528ad5", "verdict": "fail", "defects": ["D7 size: ratio 0.924 (~5.6in shorter, head ~4in above chin line)"], "notes": "Best overall — everything conforms except scale."},
+    {"variant": "V4", "flow_id": "95203993-1807-4496-bf36-b9d57da27de8", "verdict": "fail", "defects": ["D7 size: worst, ratio ~0.945 (~4in)", "scene: full square grid w/ vertical lines vs faint horizontal only"], "notes": "Tallest read + wrong grid."}
+  ],
+  "pick": "none",
+  "trend": "v2 prompt improved ratios (0.92-0.945 vs attempt-1 0.94-0.98) but still short of 0.89 target",
+  "resubmit_guidance": "Prompt v3: state exact percentage ('exactly 89% of the mannequin's height, a full 8 inches / 20 cm shorter'), add redundancy cue ('one faint horizontal grid line passes exactly through both the mannequin's CHIN and the TOP OF HER HEAD'). Keep all other language unchanged (identity/uniform/mannequin/no-text all passing)."
+}
