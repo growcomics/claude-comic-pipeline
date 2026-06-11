@@ -1,0 +1,26 @@
+.rp-bar {
+  position: absolute; top: 4px; left: 4px; right: 4px;
+  display: flex; flex-wrap: wrap; gap: 2px;
+  opacity: 0; transition: opacity .15s;
+  z-index: 9999; pointer-events: none;
+}
+[data-redpen]:hover .rp-bar { opacity: 1; pointer-events: auto; }
+.rp-btn {
+  font: 12px/1 system-ui; padding: 3px 5px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(20,20,24,.82); color: #eee; cursor: pointer;
+}
+.rp-btn:hover { background: rgba(60,60,70,.95); }
+.rp-btn.rp-on { background: #ffd45a; color: #1c1c1f; border-color: #ffd45a; }
+.rp-badge {
+  position: absolute; bottom: 4px; left: 4px;
+  font: 12px/1.2 system-ui; background: rgba(20,20,24,.82); color: #ffd45a;
+  padding: 3px 6px; border-radius: 6px; z-index: 9998; display: none;
+}
+#rp-pill {
+  position: fixed; bottom: 14px; left: 14px; z-index: 2147483647;
+  font: 13px/1 system-ui; padding: 9px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(20,20,24,.92); color: #ffd45a; cursor: pointer;
+}
+#rp-pill:hover { background: rgba(50,50,58,.95); }

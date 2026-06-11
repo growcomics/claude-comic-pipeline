@@ -12,6 +12,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (user-calibrated QA doctrine D1–D13, Flow Red-Pen review extension, three-panel growth v4)
+
+A live red-pen session on Not-So-Supra-Man's first 17 pages surfaced 13 recurring defect classes (thin ref stacks, appearance carried in prose instead of references, flat expressions, front-facing default, probabilistic outfits, height/giantess inflation, scene-ref proximity mismatch, missing staging refs, phantom limbs, simulation-grade "obviously AI" VFX, terse prompts). Root finding: mandated references lived in docs without enforcement and got skipped under throughput pressure — prevention must be machine-enforced gates, not guidance. Per-project enforcement artifacts (defect registry, prompt-template v4, height chart, turnaround specs, VFX style bible) live under `projects/<project>/qa|references/` (not versioned); the doctrine and tooling graduate here.
+
+### Added
+- `tools/flow-review-extension/` — **Flow Red-Pen** Chrome extension (MV3): hover tag-bar over Flow gallery generations keyed by media uuid, defect taxonomy regenerated from the per-project registry, verdict export JSON that merges directly into the fix queue.
+- `skills/comic-production/references/qa-defect-doctrine.md` — D1–D13 defect classes → hard pre-flight gates; the two laws (refs own appearance / prompts are maximal structured JSON specs); human-made DAZ aesthetic principle ("if the effect obeys physics it's wrong").
+- `skills/comic-production/references/three-panel-growth-v4.md` — growth-progressive page template fusing the legacy doctrine (size-chart pinning, concrete benchmarks, per-panel face beats, escalating action lines, never-shrink) with v4 gates (pointer-only appearance, per-hand accounting, no baked text, Flow-filter-safe chest language).
+
 ## 2026-06-10 (remaining skill/config docs swept for dead pill-UI Flow mechanics)
 
 Follow-up sweep after the flow-workflow.md rewrite and the shotlist-driven-flow.md alignment (entries below): the remaining skill docs, the build-comic command, and the autopilot config schema no longer assume the dead pill-based UI (x4 count fan-out, 3-dots → "Add to Prompt", `+` asset picker). `flow-workflow.md` "Generation Mechanics" / "Variant Strategy" / "Reference Attachment" remain the source of truth; ref-attachment mechanics under the Omni UI stay flagged **not yet re-verified** everywhere they're referenced. Intentional legacy mentions are untouched (flow-workflow.md Legacy Appendix, shotlist-driven-flow.md's "legacy is dead" notes, the l35-validation README record, the break-conditions patch's historical quotes, and SKILL.md's Platform Selection row that explicitly labels 3-dots/`+` as legacy).

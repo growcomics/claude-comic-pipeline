@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Flow Red-Pen — comic production QA",
+  "version": "0.1.0",
+  "description": "Tag Flow generations with production-QA verdicts (angle, expression, refs, size, wardrobe, style) keyed by media uuid; export as JSON for the comic pipeline.",
+  "content_scripts": [
+    {
+      "matches": ["https://labs.google/*"],
+      "js": ["content.js"],
+      "css": ["redpen.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": ["storage"]
+}
