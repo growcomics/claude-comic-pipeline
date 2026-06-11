@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: field-wide attempt-2 all-fail — prompt v3)
+
+**Changed**
+- `field-wide` bootstrap prompt → v3. Attempt-2 (v2 prompt) killed the yard-number failure mode (zero numerals across the batch `459563a8`/`1dbbf134`/`5ab64d22`/`56597130`) but each variant failed on something new: V1 a centered goalpost, V3 figure-or-debris blobs on the bleacher rows, V2/V4 low cameras + invented concrete walkways/tripled sidelines. v3 bans posts/uprights at bare end zones, demands clean EMPTY aluminum bleacher rows and single-line boundaries, pins a HIGH aerial three-quarter camera, and accepts a full unnumbered yard-line grid (the model paints one regardless; only numerals were ever illegal). Verdict: `qa/receipts/scene_field-wide.attempt2.verdict.json`.
+
 ## 2026-06-11 (cheer-ascension: field-wide attempt-1 all-fail on painted yard numbers — prompt v2)
 
 **Changed**
