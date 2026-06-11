@@ -1,5 +1,13 @@
 # Not So Supra... Man — Autonomous Build Progress
 
+## 🔁 RESTART v2 (2026-06-10, user-ordered full rebuild)
+v1's 17 pages had systemic defects (D1–D14, see qa/defect-registry.json) — user ordered a clean
+rebuild in a NEW Flow project, references-first, all gates enforced. Execution order:
+`references/restart-plan-v2.md`. Pre-submit gate: `qa/preflight.py`.
+**STATUS: blocked at Phase 0 — growcomics Google account is SIGNED OUT on the macmini Chrome**
+(account chooser open in the Flow tab; agent cannot enter credentials — user must sign in, then say go).
+v1 assets remain on disk + in the old Flow project ("Jun 09, 11:25 PM") for cross-project reuse.
+
 _Live log — Claude updates this as it goes. Started 2026-06-10._
 
 ## Status: PAGE GENERATION in progress — 9 story pages banked, foundation 100% done

@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-10 (RESTART v2 kit: preflight gate + references-first rebuild plan)
+
+User ordered a full rebuild of Not-So-Supra-Man in a NEW Flow project ("it came out with 10000 problems") — references-first, all D1–D14 gates enforced. Shipped the kit while blocked on the Flow re-login: `qa/preflight.py` (machine gate run before EVERY submit — ref-stack manifest per character, scene-rung-vs-camera-distance, staging-on-contact, tier anchor/height-clamp, v4 prompt completeness, pointer-only appearance, per-hand accounting, banned VFX vocabulary; verified it rejects v1's actual p16 recipe with 12 violations) and `references/restart-plan-v2.md` (39-step ordered build: identity → D14 anchor-swap T9 → ladder → 8 wardrobe-state turnarounds → scene ladders per location → props → pages with runtime-composed v4 prompts).
+
+### Added
+- `projects/not-so-supra-man/qa/preflight.py`, `projects/not-so-supra-man/references/restart-plan-v2.md`; PROGRESS.md RESTART v2 status (blocked: growcomics signed out on macmini — credentials are user-only).
+
 ## 2026-06-10 (project TEXT now versioned in git — rule 5 amended)
 
 User instruction: the per-project QA/config/state files (defect registry, prompt template v4, VFX style bible, turnaround specs, height chart, page plans/logs, shotlist, ledgers, PROGRESS/STATUS) belong in git history. The old CLAUDE.md rule 5 ("NEVER commit projects/") was stale doctrine — it contradicted the repo's already-granular .gitignore (`projects/*/pages/`, `final/`, `*.pdf`) and a stale Drive-symlink claim (`projects/` is a real directory). New policy: **project text is versioned; project binaries are not.**
