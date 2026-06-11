@@ -24,9 +24,17 @@
       },
       "body": {
         "2": {
-          "flow_id": null,
+          "flow_id": "47120b51-8f7c-46e3-9880-55f030662fa4",
           "disk": "references/characters/kelsey-brandt/body-tier2.png",
-          "class": "bootstrap"
+          "class": "bootstrap",
+          "bootstrap_job": "kelsey-t2-card (references/bootstrap-prompts.json prompt v3, pasted verbatim; face card 12c236a4 attached, chip DOM-verified)",
+          "variants": [
+            "47120b51-8f7c-46e3-9880-55f030662fa4",
+            "503e028a-8a16-4c6f-8e42-4cfc82bd3084",
+            "09e8a8b5-16ca-4a26-8f0c-f806a250b985",
+            "aa2b12e0-f953-4f59-9d3e-6d2e4a412944"
+          ],
+          "qa_notes": "Attempt 3 (prompt v3). V1 picked: judge-measured height ratio 0.890 vs spec 0.89 (head-top at mannequin chin), uniform/identity/grid/anatomy all clean. V2 0.928 + missing armhole stripes, V3 0.951 + unspecced waist chevron, V4 0.919 chin-anchor miss. Attempts 1-2 (prompts v1/v2) all-failed D7 scale, ratios 0.92-0.98 — see qa/receipts/card_kelsey-t2.attempt{1,2,3}.verdict.json"
         }
       }
     }

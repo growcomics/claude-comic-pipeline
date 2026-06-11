@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (cheer-ascension: kelsey-t2-card BANKED — attempt 3, V1 at ratio 0.890)
+
+**Added**
+- t2 body card banked: `47120b51-8f7c-46e3-9880-55f030662fa4` (V1 of the prompt-v3 batch), fresh-context judge pass at pixel-measured height ratio 0.890 vs the 6'2" mannequin (spec 0.89, head-top at chin). Ledger entry (bootstrap class, variant ids + QA notes) in `projects/cheer-ascension/references/ref-ledger.json`; verdict `qa/receipts/card_kelsey-t2.attempt3.verdict.json`; PROGRESS.md updated. Lesson for future scale-pinned cards: the working combination is exact percentage + a shared grid-line cue through both anchor points + explicit "NOT the same height" negatives — relative phrasing alone ("8 inches shorter") under-transfers ~2–4 inches per attempt.
+
 ## 2026-06-11 (cheer-ascension: t2 card attempt-2 all-fail on D7 scale — bootstrap prompt v3)
 
 **Changed**

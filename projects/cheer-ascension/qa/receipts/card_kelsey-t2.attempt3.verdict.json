@@ -1,0 +1,20 @@
+{
+  "job": "card:kelsey-t2 (bootstrap, prompt v3 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "47120b51-8f7c-46e3-9880-55f030662fa4",
+    "503e028a-8a16-4c6f-8e42-4cfc82bd3084",
+    "09e8a8b5-16ca-4a26-8f0c-f806a250b985",
+    "aa2b12e0-f953-4f59-9d3e-6d2e4a412944"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "47120b51-8f7c-46e3-9880-55f030662fa4", "verdict": "pass", "measured_ratio": 0.890, "notes": "Ratio exactly 0.890 (spec 0.89), head-top ~1.2in from chin line; identity, uniform (double-stripe collar+armholes, letterless comet, WHITE briefs, gold laces), 3D mannequin, grid, lighting, anatomy, no-text all compliant."},
+    {"variant": "V2", "flow_id": "503e028a-8a16-4c6f-8e42-4cfc82bd3084", "verdict": "fail", "measured_ratio": 0.928, "notes": "Too tall (0.928); armhole double-stripe missing."},
+    {"variant": "V3", "flow_id": "09e8a8b5-16ca-4a26-8f0c-f806a250b985", "verdict": "fail", "measured_ratio": 0.951, "notes": "Worst scale (0.951); extra unspecced waist-hem chevron."},
+    {"variant": "V4", "flow_id": "aa2b12e0-f953-4f59-9d3e-6d2e4a412944", "verdict": "fail", "measured_ratio": 0.919, "notes": "At fail margin; chin-level anchor missed by ~3in; minor finger clump (low confidence)."}
+  ],
+  "pick": "V1",
+  "pick_flow_id": "47120b51-8f7c-46e3-9880-55f030662fa4",
+  "history": "attempt1 (prompt v1): all-fail, ratios 0.94-0.98. attempt2 (v2): all-fail, 0.92-0.945. attempt3 (v3, +exact-percentage +grid-line chin cue +not-same-height negatives): V1 pass at 0.890."
+}
