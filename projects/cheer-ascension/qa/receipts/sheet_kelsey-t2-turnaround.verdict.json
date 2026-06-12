@@ -1,0 +1,18 @@
+{
+  "pass": true,
+  "tags": ["ward", "angle"],
+  "reasons": [
+    "V1 44e1b7ea FAIL [angle]: no true straight-on front view — views 1 and 2 are both slight near-front three-quarter turns (~15-25 deg), effectively duplicate angles; the front/three-quarter pair is not distinct. [ward]: shoe drift — view-2 shoes carry large tan/gold side panels and view-4 shoes have oversized gold heel wedges vs the ref's plain white sneakers with gold laces; shoes also inconsistent view-to-view. Mannequin ratio 0.891 (target ~0.89) OK; face/hair/emblem/skirt/briefs OK; anatomy OK.",
+    "V2 28099981 PASS: four distinct views (straight front, clear ~40-deg three-quarter, profile, back); outfit matches ref-2 in all views — gold double-stripe collar and armholes, white side panels, letterless gold comet emblem, teal/gold/white sunray pleats, white briefs visible, white shoes with gold laces consistent across views and matching ref; face matches face card in all face-visible views; high ponytail in all views (scrunchie occluded by drape in back view — gather visible, minor note, present in all four variants); slim athletic t2 build consistent; mannequin ratio 0.895, view-height variance <1%; grid lines, mid-grey cyclorama, even lighting, no text, photoreal DAZ/Iray, 2 hands/2 legs per figure, no merged views.",
+    "V3 d2caed44 FAIL [ward]: shoe drift and view-to-view inconsistency — view-2 shoes have heavy gold lacing spilling over the toe box, view-3 (profile) shoes carry a wide gold mid-band, view-4 shoes a gold heel disc; none match the ref's plain white w/ gold laces and they differ from each other. Otherwise strong: distinct views, ratio 0.894, face/hair/emblem/skirt/briefs OK, anatomy OK.",
+    "V4 53d2bff2 FAIL [ward]: invented GREEN side stripes on the shoes in views 2, 3 and 4 (view 1 has gold laces) — a color not in the ref palette, drifting from ref-2 AND inconsistent across views; build also reads marginally softer/heavier than the t2 ref. Ratio 0.898, face/hair/emblem/skirt OK, anatomy OK.",
+    "Common minor note (all variants): gold scrunchie not visible in the back view because hair drapes over the gather; gather point itself is visible. Not failed on this alone since the ref set contains no rear hair reference.",
+    "Chip check skipped: no post-submit metadata screenshot provided. Receipt attach list (face card + t2 body card) consistent with the two refs supplied."
+  ],
+  "variant_ranking": [
+    "28099981-ff1b-49dc-abdb-621566a472f7",
+    "d2caed44-0f7f-41a4-b8ff-4f790acbca61",
+    "44e1b7ea-bf2c-4fd9-8d26-c3459b6d6512",
+    "53d2bff2-714a-47ff-a5a4-62701a369d04"
+  ]
+}

@@ -12,7 +12,7 @@
 **Chosen starting ref: dforce-cheer-outfit-g8.jpg** — same character ×3 uniform variants on studio grey; anchors render style + uniform construction + slim t2 baseline. Others: HOT Cheerleader 1 (glam escalation energy), Cheer Fantasy Pro (pom-poms/action), Cheer Fantasy HS (practice-field environment read).
 
 ## Build order (each item: compose → audit → submit ×4 → judge → bank)
-1. ☑ kelsey-face (bootstrap) → 2. ☑ kelsey-t2-card (bootstrap) → 3. ☐ kelsey-t2-turnaround (sheet)
+1. ☑ kelsey-face (bootstrap) → 2. ☑ kelsey-t2-card (bootstrap) → 3. ☑ kelsey-t2-turnaround (sheet, 28099981 — FIRST full-chain bank)
 4. ☐ kelsey-t4-card (sheet) → 5. ☐ kelsey-t4-strain-turnaround (sheet)
 6. ☐ kelsey-t6-card (sheet) → 7. ☐ kelsey-t6-strain-turnaround (sheet) → 8. ☐ kelsey-t6-rebuilt-turnaround (sheet)
 9. ☑ field-wide (user-accepted bcf73770) → 10. ☑ field-medium (d96a2994) → 11. ☑ field-close (02a87013) → 12. ☑ comet-fuel-shaker (edd62fe1) — ALL BOOTSTRAPS DONE

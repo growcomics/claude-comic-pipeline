@@ -34,7 +34,21 @@
             "09e8a8b5-16ca-4a26-8f0c-f806a250b985",
             "aa2b12e0-f953-4f59-9d3e-6d2e4a412944"
           ],
-          "qa_notes": "Attempt 3 (prompt v3). V1 picked: judge-measured height ratio 0.890 vs spec 0.89 (head-top at mannequin chin), uniform/identity/grid/anatomy all clean. V2 0.928 + missing armhole stripes, V3 0.951 + unspecced waist chevron, V4 0.919 chin-anchor miss. Attempts 1-2 (prompts v1/v2) all-failed D7 scale, ratios 0.92-0.98 — see qa/receipts/card_kelsey-t2.attempt{1,2,3}.verdict.json"
+          "qa_notes": "Attempt 3 (prompt v3). V1 picked: judge-measured height ratio 0.890 vs spec 0.89 (head-top at mannequin chin), uniform/identity/grid/anatomy all clean. V2 0.928 + missing armhole stripes, V3 0.951 + unspecced waist chevron, V4 0.919 chin-anchor miss. Attempts 1-2 (prompts v1/v2) all-failed D7 scale, ratios 0.92-0.98 \u2014 see qa/receipts/card_kelsey-t2.attempt{1,2,3}.verdict.json"
+        }
+      },
+      "turnaround-t2": {
+        "flow_id": "28099981-ff1b-49dc-abdb-621566a472f7",
+        "disk": "references/characters/kelsey-brandt/turnaround-t2.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t2-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t2-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t2-turnaround.verdict.json",
+          "verdict_tags": [
+            "ward",
+            "angle"
+          ],
+          "prompt_sha": "e035ead6b8f93e7a335655c660bb9e22a89ebfb515be4d7c06b6bb6ec3cfcf44"
         }
       }
     }
@@ -53,7 +67,7 @@
           "248663c0-11d6-438b-b1dc-bfb6231a3c37",
           "475e76e9-9861-4c0d-a7bb-4536b430562e"
         ],
-        "qa_notes": "USER-ACCEPTED with known deviation (attempt 4 V1): bleacher units step diagonally along the lower-right curve instead of straight sideline-parallel rows; everything else clean (no numerals/goalposts/people, grass+white-paint-only oval, single boundaries, full oval framed with margin, 4 masts lights-off, golden hour). 4 attempts / 16 variants; judge pick was none each round — see qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json. Prompt evolution v1→v4 killed yard numerals, goalposts, concrete-in-oval, low cameras."
+        "qa_notes": "USER-ACCEPTED with known deviation (attempt 4 V1): bleacher units step diagonally along the lower-right curve instead of straight sideline-parallel rows; everything else clean (no numerals/goalposts/people, grass+white-paint-only oval, single boundaries, full oval framed with margin, 4 masts lights-off, golden hour). 4 attempts / 16 variants; judge pick was none each round \u2014 see qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json. Prompt evolution v1\u2192v4 killed yard numerals, goalposts, concrete-in-oval, low cameras."
       },
       "medium": {
         "flow_id": "d96a2994-9b5e-466c-9917-75e6b6a14deb",

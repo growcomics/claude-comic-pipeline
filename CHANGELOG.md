@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: kelsey-t2-turnaround BANKED via FULL chain — first protocol-complete item)
+
+**Added**
+- `kelsey-t2-turnaround` sheet banked through the complete COMPOSE→AUDIT→SUBMIT→POST-FLIGHT→BANK chain (gates fingerprint `768c204c16de92f3`): pick `28099981-ff1b-49dc-abdb-621566a472f7` (V2 — only variant with a distinct front+three-quarter pair AND ref-exact shoes across all four views; mannequin ratio 0.895 vs 0.89 target). Rejects: V1 duplicate lead angles + shoe drift, V3 gold-panel shoes, V4 invented green shoe stripes. `verify_chain.py`: 1 chain-verified entry, only the pre-protocol face card unchained (expected). Disk: `references/characters/kelsey-brandt/turnaround-t2.png`.
+
+**Fixed**
+- Ledger mis-nest from a wrong `--ledger-key` invocation (`characters.kelsey-brandt.turnarounds.t2` per the `--help` string) removed and re-banked correctly as `kelsey-brandt.turnaround-t2`. GATE BUG REPORT (not patched, per Layer-8 rules): `bank.py`'s `--ledger-key` help text says "characters.<id>.<key> path" but the code partitions on the FIRST dot only (docstring example `dee-dee.turnaround_t8` is the real contract) — passing the help-text form silently creates `characters.characters.<flat-key>`. Proposed fix for user review: change the help string to `<char-id>.<key> (e.g. dee-dee.turnaround_t8)` or split on the last dot.
+
 ## 2026-06-12 (cheer-ascension: comet-fuel-shaker BANKED — edd62fe1; ALL bootstraps complete)
 
 **Added**

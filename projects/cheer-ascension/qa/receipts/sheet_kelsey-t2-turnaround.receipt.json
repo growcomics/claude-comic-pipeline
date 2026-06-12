@@ -1,0 +1,16 @@
+{
+ "job": "sheet:kelsey-t2-turnaround",
+ "kind": "sheet",
+ "prompt_sha": "e035ead6b8f93e7a335655c660bb9e22a89ebfb515be4d7c06b6bb6ec3cfcf44",
+ "attach": [
+  "kelsey face card (bootstrap pick)",
+  "kelsey t2 body card (bootstrap pick)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}
