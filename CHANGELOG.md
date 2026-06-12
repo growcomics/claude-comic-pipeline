@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: kelsey-t4-strain-turnaround BANKED — 1a3651e7, batch 2)
+
+**Added**
+- `kelsey-t4-strain-turnaround` banked via full chain: `1a3651e7-ccef-457b-b514-b72adff9f662` (batch-2 V1, ratio 0.891 ≈ exact; clean emblem both required views; silhouette pixel-identical to the t4 card). Batch 1 failed 4/4 — 3 on D7 giantess drift (0.92–0.936), 1 on missing emblem; identical-prompt re-roll succeeded (V2 also passed as backup). GATE OBSERVATION for user review (compose.py prompt, not patched per Layer-8): the sheet prompts' scale sentence ("8 inches SHORTER") under-pins height — the t2 card needed exact-percentage + chin-line-cue language (bootstrap prompt v3) to hold 0.89; proposed diff is to port that phrasing into compose's sheet templates.
+
 ## 2026-06-12 (cheer-ascension: kelsey-t4-card BANKED via full chain — 3a327885)
 
 **Added**

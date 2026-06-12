@@ -61,6 +61,17 @@
           "verdict_tags": [],
           "prompt_sha": "a3350fdb662ea34e9ce97040ec91bf968c8707d7ad5469a207c7747440cb8e5e"
         }
+      },
+      "turnaround-t4-strain": {
+        "flow_id": "1a3651e7-ccef-457b-b514-b72adff9f662",
+        "disk": "references/characters/kelsey-brandt/turnaround-t4-strain.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t4-strain-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t4-strain-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t4-strain-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "2cac9dddc0332fdacebf0c6b42c16c383722d7935a221be8b2b67ea9db174c38"
+        }
       }
     }
   },
