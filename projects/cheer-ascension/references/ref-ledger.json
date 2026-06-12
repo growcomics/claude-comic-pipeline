@@ -56,8 +56,18 @@
         "qa_notes": "USER-ACCEPTED with known deviation (attempt 4 V1): bleacher units step diagonally along the lower-right curve instead of straight sideline-parallel rows; everything else clean (no numerals/goalposts/people, grass+white-paint-only oval, single boundaries, full oval framed with margin, 4 masts lights-off, golden hour). 4 attempts / 16 variants; judge pick was none each round — see qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json. Prompt evolution v1→v4 killed yard numerals, goalposts, concrete-in-oval, low cameras."
       },
       "medium": {
-        "flow_id": null,
-        "class": "bootstrap-chained-from-wide"
+        "flow_id": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+        "disk": "references/locations/practice-field/medium.png",
+        "class": "bootstrap-chained-from-wide",
+        "chained_from": "bcf73770-fef8-429b-8ca5-e9de2f586016",
+        "bootstrap_job": "field-medium (references/bootstrap-prompts.json prompt v2, pasted verbatim; wide rung attached, chip DOM-verified)",
+        "variants": [
+          "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+          "2c959a8e-40fe-49a1-b1c0-e8b7733bfb4d",
+          "991f3e2c-cc78-4b58-9dda-b6bab94dfb01",
+          "04a36773-9516-481f-9977-fa1ff41bfddc"
+        ],
+        "qa_notes": "Attempt 2 V1 judge-PASS: correct small rail-less aluminum bleacher sections, medium sideline framing w/ bench, palette/track continuity, no people/text. Minor noted drift: section count/placement vs wide rung. Attempt 1 failed 4/4 on grandstand drift (D8 lesson: chained rungs need distinctive construction RE-STATED in prose). Receipts: qa/receipts/scene_field-medium.attempt{1,2}.verdict.json"
       },
       "close": {
         "flow_id": null,

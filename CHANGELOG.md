@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: field-medium BANKED — d96a2994, attempt-2 V1)
+
+**Added**
+- field-medium rung banked: `d96a2994-9b5e-466c-9917-75e6b6a14deb` (attempt-2 V1, judge PASS) — the v2 prompt's restated bleacher construction fixed the grandstand drift. Ledger + receipts updated. Session note: Flow re-auth (Google OAuth account pick, user-approved) reset the aspect pill to 3:4 — caught by the mandatory pre-submit pill verify; ALWAYS re-verify after any re-auth.
+
 ## 2026-06-12 (cheer-ascension: field-medium attempt-1 all-fail on bleacher continuity — prompt v2)
 
 **Changed**

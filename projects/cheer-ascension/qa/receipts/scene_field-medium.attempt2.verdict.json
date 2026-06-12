@@ -1,0 +1,20 @@
+{
+  "job": "scene:field-medium (bootstrap, prompt v2, chained from wide pick bcf73770 — chip DOM-verified)",
+  "judged": "2026-06-12 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+    "2c959a8e-40fe-49a1-b1c0-e8b7733bfb4d",
+    "991f3e2c-cc78-4b58-9dda-b6bab94dfb01",
+    "04a36773-9516-481f-9977-fa1ff41bfddc"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "d96a2994-9b5e-466c-9917-75e6b6a14deb", "verdict": "pass", "defects": ["minor: 5-6 sections along back straight vs wide's 3 near curve", "minor: rows 5-6 vs ~5"], "notes": "Correct bleacher type (small separate low aluminum, NO rails), clean medium sideline framing, sane bench, palette/track/mast continuity, no people/text, photoreal Iray."},
+    {"variant": "V2", "flow_id": "2c959a8e-40fe-49a1-b1c0-e8b7733bfb4d", "verdict": "fail", "defects": ["giant white paint apron through foreground", "duplicate far bench", "orange haze palette drift"], "notes": ""},
+    {"variant": "V3", "flow_id": "991f3e2c-cc78-4b58-9dda-b6bab94dfb01", "verdict": "fail", "defects": ["invented props: cooler cart/bottles/duffels", "cart merges into bench", "7-8-row sections", "corner framing"], "notes": ""},
+    {"variant": "V4", "flow_id": "04a36773-9516-481f-9977-fa1ff41bfddc", "verdict": "fail", "defects": ["bench outside track (wrong side)", "railed taller sections", "reads wide not medium"], "notes": ""}
+  ],
+  "pick": "V1",
+  "pick_flow_id": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+  "history": "attempt1 (v1 prompt): 4/4 fail on grandstand drift. attempt2 (v2, explicit bleacher construction + negatives): V1 pass."
+}
