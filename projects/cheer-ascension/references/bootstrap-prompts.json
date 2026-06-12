@@ -19,7 +19,7 @@
     {
       "id": "field-medium",
       "attach": ["field-wide pick"],
-      "prompt": "Environment reference, photorealistic 3D CGI render, DAZ Studio Iray style: EXACTLY the same location as the attached reference — same field, same bleachers, same track, same golden-hour light — now seen from a MEDIUM camera distance at the sideline: the white sideline stripe runs through the foreground, a sideline team bench visible, bleachers filling the midground, grass texture readable. NO people anywhere in the frame. Same palette and lighting as the reference. No text, no logos. Photographic CGI render, NOT illustrated."
+      "prompt": "Environment reference, photorealistic 3D CGI render, DAZ Studio Iray style: EXACTLY the same location as the attached reference — same field, same bleachers, same track, same golden-hour light — now seen from a MEDIUM camera distance at the sideline: the white sideline stripe runs through the foreground, a sideline team bench visible, grass texture readable. The bleachers in the midground are SMALL separate low aluminum sections of about five rows each with NO guard rails, exactly as in the attached reference, seen across the track — NOT a grandstand. NO people anywhere in the frame. Same palette and lighting as the reference. No grandstand, no guardrails, no goalposts, no referee stand, no painted yard numbers, no field numerals. No text, no logos. Photographic CGI render, NOT illustrated."
     },
     {
       "id": "field-close",

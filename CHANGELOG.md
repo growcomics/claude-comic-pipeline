@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: field-medium attempt-1 all-fail on bleacher continuity — prompt v2)
+
+**Changed**
+- `field-medium` bootstrap prompt → v2. Attempt-1 (batch `d1d0f8ed`/`b6c21d54`/`3adf9455`/`91caa589`, wide rung attached + chip-verified) failed 4/4 on bleacher-style drift: every variant invented a 10–12-row railed grandstand instead of the wide rung's four small low rail-less sections (V4 also re-grew yard numerals + a goalpost). D8 lesson: a chained rung does NOT inherit distinctive construction details from the attached ref alone — the prompt must restate them. v2 spells out the bleacher construction and adds grandstand/guardrail/goalpost/referee-stand/numeral negatives. Verdict: `qa/receipts/scene_field-medium.attempt1.verdict.json`.
+
 ## 2026-06-12 (cheer-ascension: field-wide BANKED by user acceptance — bcf73770)
 
 **Added**
