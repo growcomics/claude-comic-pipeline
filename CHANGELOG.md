@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: kelsey-t6-card BANKED — 85eb0fd9, first-batch V1)
+
+**Added**
+- `kelsey-t6-card` banked via full chain: `85eb0fd9-83fe-408f-8c4d-76c2a2a78434` (V1 — two-tier growth measured on every axis: bicep +15.9%, thigh +11.8%, calf +16.0% over t4; height held 0.894; uniform exact). V2/V3/V4 rejected as one-tier-or-less under-delivery (V3's thighs unchanged). Disk: `references/characters/kelsey-brandt/body-tier6.png`.
+
 ## 2026-06-12 (cheer-ascension: kelsey-t4-strain-turnaround BANKED — 1a3651e7, batch 2)
 
 **Added**

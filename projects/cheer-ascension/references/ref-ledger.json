@@ -72,6 +72,17 @@
           "verdict_tags": [],
           "prompt_sha": "2cac9dddc0332fdacebf0c6b42c16c383722d7935a221be8b2b67ea9db174c38"
         }
+      },
+      "body-tier6": {
+        "flow_id": "85eb0fd9-83fe-408f-8c4d-76c2a2a78434",
+        "disk": "references/characters/kelsey-brandt/body-tier6.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-card.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-card.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-card.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c204001fc56d82ccbafe9e6ce3e9d907f8561530603ebd4226fd7bfa7dcac95b"
+        }
       }
     }
   },

@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "tags": [],
+  "reasons": [
+    "V1 (85eb0fd9): PASS. Pixel-measured vs banked t4 card at identical mannequin scale (mannequin 725-726px in all images): bicep +15.9%, thigh +11.8%, calf +16.0%, deltoid span +9.6% — clearly beyond the +5-10% t2->t4 single-tier step on every axis, reads as fitness-magazine-cover physique (capped delts, defined biceps/triceps, carved abs through the taut top, sweeping quads/calves) without bodybuilder overshoot. Height ratio 0.894 (head-top 103 / feet 752 vs mannequin 27-753), unchanged from ref2's 0.894. Uniform identical: double gold/white neckline+armhole stripes, white side panels, letterless gold comet, pleated skirt with gold/white hem stripes, white shoes with gold laces, low socks. Face/ponytail/gold scrunchie match face card. Front-full, hands at sides, mannequin far right, grid + cyc present, no text, photoreal Iray, anatomy clean (2 hands, 2 legs).",
+    "V2 (66744a40): FAIL size-under. Bicep +10.1%, thigh +9.4%, calf +10.6% vs t4 — magnitude of a single tier step (+5-10%), not two tiers. Everything else (height 0.894, uniform, face, mannequin, grid) clean.",
+    "V3 (8d3bace2): FAIL size-under. Bicep +8.7%, thigh +0.8%, calf +8.5% — thighs essentially unchanged from t4; barely one tier on arms, zero on legs. Worst size offender.",
+    "V4 (47042a91): FAIL size-under. Bicep +10.1%, thigh +3.1%, calf +11.7% — thighs well under the required two-tier jump; under on ANY axis = fail."
+  ],
+  "variant_ranking": [
+    "85eb0fd9-83fe-408f-8c4d-76c2a2a78434",
+    "66744a40-1210-47c8-b4ab-6bdebeeb6dcb",
+    "47042a91-7170-467c-8f37-882595c4b834",
+    "8d3bace2-5c80-48eb-a424-e1f50fe9f677"
+  ]
+}
