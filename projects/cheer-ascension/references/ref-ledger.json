@@ -83,6 +83,17 @@
           "verdict_tags": [],
           "prompt_sha": "c204001fc56d82ccbafe9e6ce3e9d907f8561530603ebd4226fd7bfa7dcac95b"
         }
+      },
+      "turnaround-t6-strain": {
+        "flow_id": "ef679021-0573-47ff-8f60-e01ea0ece789",
+        "disk": "references/characters/kelsey-brandt/turnaround-t6-strain.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-strain-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-strain-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-strain-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c275c79e0eee1328f109c8f5a0b216bde26a5ee99e61cedb776d108964c865c8"
+        }
       }
     }
   },
