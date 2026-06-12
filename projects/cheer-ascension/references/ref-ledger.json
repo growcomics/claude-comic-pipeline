@@ -43,8 +43,17 @@
     "_note": "compose.py refuses any page whose camera-distance rung is not banked here (D8). Rungs are bootstrap-class until the card:/scene: gate extension lands; each rung chains from the previous (wide -> medium -> close).",
     "practice-field": {
       "wide": {
-        "flow_id": null,
-        "class": "bootstrap"
+        "flow_id": "bcf73770-fef8-429b-8ca5-e9de2f586016",
+        "disk": "references/locations/practice-field/wide.png",
+        "class": "bootstrap",
+        "bootstrap_job": "field-wide (references/bootstrap-prompts.json prompt v4, pasted verbatim, no attachments)",
+        "variants": [
+          "bcf73770-fef8-429b-8ca5-e9de2f586016",
+          "e4f05054-ff57-4813-a63d-5949d1bc84ba",
+          "248663c0-11d6-438b-b1dc-bfb6231a3c37",
+          "475e76e9-9861-4c0d-a7bb-4536b430562e"
+        ],
+        "qa_notes": "USER-ACCEPTED with known deviation (attempt 4 V1): bleacher units step diagonally along the lower-right curve instead of straight sideline-parallel rows; everything else clean (no numerals/goalposts/people, grass+white-paint-only oval, single boundaries, full oval framed with margin, 4 masts lights-off, golden hour). 4 attempts / 16 variants; judge pick was none each round — see qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json. Prompt evolution v1→v4 killed yard numerals, goalposts, concrete-in-oval, low cameras."
       },
       "medium": {
         "flow_id": null,

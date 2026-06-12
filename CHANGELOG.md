@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: field-wide BANKED by user acceptance — bcf73770)
+
+**Added**
+- field-wide rung banked: `bcf73770-fef8-429b-8ca5-e9de2f586016` (attempt-4 V1), accepted BY THE USER in-session over the judge's none-pick. Known deviation recorded in the ledger: bleacher units step diagonally instead of straight rows; all hard bans clean. 4 attempts / 16 variants total; per-attempt verdicts in `qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json`. Next: field-medium chains from this pick.
+
 ## 2026-06-11 (cheer-ascension: field-wide attempt-3 all-fail — prompt v4, last auto-iteration)
 
 **Changed**
