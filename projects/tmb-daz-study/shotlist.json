@@ -1,0 +1,42 @@
+{
+  "project": "tmb-daz-study",
+  "purpose": "Corpus-learnings demo: remake the TMB Ch.1 first-transformation beat (source pages 5-14) as photoreal DAZ3D pages. Applies: intensity faces on growth beats (Finding 3), multi-panel-progressive (Finding 4), real lettering (Finding 2), low-hero + depth staging (Finding 6 / L34), always_clothed.",
+  "style": "photoreal-daz3d",
+  "always_clothed": true,
+  "cast": [
+    {"id": "zara", "name": "Zara", "ref_folder": "references/characters/zara/"},
+    {"id": "mia", "name": "Mia", "ref_folder": "references/characters/mia/"}
+  ],
+  "pages": [
+    {"page_number": 1, "panels": [{
+      "panel_id": "s01-01", "size": "splash", "characters": ["zara", "mia"], "location": null,
+      "time_of_day": "evening interior", "camera": "low-angle-front, cowboy",
+      "action": "GROWTH EVENT: Zara's first surge - she rises off the couch mid-flex as her hoodie seams split at the shoulders, energy motes drifting up from the glowing book on the floor. Mia recoils into the couch cushions behind her. Cozy living room: couch, rug, floor lamp, the old book glowing on the rug.",
+      "costume_state": "zara: teal hoodie with seams splitting at shoulders and sleeves, dark leggings - fully covered; mia: mustard sweater and jeans, intact",
+      "muscle_size_tier": {"zara": 5},
+      "continuity_refs": [],
+      "dialogue": [{"character": "zara", "text": "Oh. OH. It's not stopping--", "type": "shout"}, {"character": "mia", "text": "Zara?! Your ARMS!", "type": "balloon"}],
+      "captions": [], "sfx": [{"text": "KRRRT!", "source": "hoodie seams"}]
+    }]},
+    {"page_number": 2, "panels": [{
+      "panel_id": "s02-01", "size": "splash", "characters": ["zara"], "location": null,
+      "time_of_day": "evening interior", "camera": "ecu-region, three-quarter",
+      "action": "GROWTH-PROGRESSIVE page: one image divided into three vertical sub-panels, the SAME right arm left to right. Stage 1: forearm and bicep tensing inside the hoodie sleeve. Stage 2: the sleeve seam bursting open as the bicep balloons. Stage 3: sleeve gone, the arm fully swollen with veins surfacing, and her face enters frame behind the flex lit with fierce joy.",
+      "costume_state": "zara: hoodie right sleeve progressively bursting, rest intact - fully covered",
+      "muscle_size_tier": {"zara": 6},
+      "continuity_refs": ["s01-01"],
+      "dialogue": [{"character": "zara", "text": "More. MORE.", "type": "shout"}],
+      "captions": ["The book always asks who is reading."], "sfx": [{"text": "KREEEK", "source": "stage 2 seam"}, {"text": "RIIIP!", "source": "stage 3 sleeve"}]
+    }]},
+    {"page_number": 3, "panels": [{
+      "panel_id": "s03-01", "size": "splash", "characters": ["zara", "mia"], "location": null,
+      "time_of_day": "evening interior", "camera": "low-angle-front, full",
+      "action": "FULL-BODY REVEAL, low hero angle looking up: Zara stands at full new mass in the wrecked living room, fists clenched at her sides, chin high, the ceiling lamp level with her shoulder. Mia stands beside her reaching only chest-high, staring up and hugging the closed book to her chest. Floorboards cracked under Zara's feet, dust motes in the lamplight.",
+      "costume_state": "zara: hoodie torn to a strained covering vest, dark leggings - chest and hips fully covered; mia: mustard sweater and jeans, intact",
+      "muscle_size_tier": {"zara": 7},
+      "continuity_refs": ["s02-01"],
+      "dialogue": [{"character": "zara", "text": "Okay. NOW we talk about who reads it next.", "type": "balloon"}, {"character": "mia", "text": "...me. Obviously me.", "type": "balloon"}],
+      "captions": [], "sfx": [{"text": "krk", "source": "floorboard"}]
+    }]}
+  ]
+}

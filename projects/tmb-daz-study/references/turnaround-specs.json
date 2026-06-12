@@ -1,0 +1,12 @@
+{"sheets": [
+ {"id": "zara-identity",
+  "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman from the attached comic lineart panels into a 3D person: SAME face structure as the lineart, natural afro-textured dark hair, deep brown skin, and the SAME teal hoodie and dark leggings, athletic-muscular build with visible biceps. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter double-biceps flexing view. She stands beside a plain grey 5-foot-6 scale silhouette bar for height; she is normal human height, NOT a giantess. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+  "attach": ["lineart crop: refs-src/zara-face.png (uploaded to Flow)", "lineart crop: refs-src/zara-flex.png (uploaded to Flow)"],
+  "save": "references/characters/zara/identity-sheet.png",
+  "gate": "face matches lineart structure; hoodie teal; build athletic-muscular; silhouette bar present"},
+ {"id": "mia-identity",
+  "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman in the mustard-yellow sweater from the attached comic lineart into a 3D person: SAME face structure as the lineart, shoulder-length wavy brown hair, light skin, mustard-yellow sweater and blue jeans, slim build. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view holding an old leather-bound book. She stands beside a plain grey 5-foot-6 scale silhouette bar for height; she is normal human height, NOT a giantess. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+  "attach": ["lineart crop: refs-src/mia-react.png (uploaded to Flow)", "lineart context: refs-src/page-05-full.png (uploaded to Flow)"],
+  "save": "references/characters/mia/identity-sheet.png",
+  "gate": "face matches lineart; sweater mustard; slim build; silhouette bar present"}
+]}

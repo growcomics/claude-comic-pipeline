@@ -1,0 +1,5 @@
+{"pages": [
+ {"id": "s01-01", "camera": "low-angle-front, cowboy", "aspect": "2:3"},
+ {"id": "s02-01", "camera": "ecu-region, three-quarter", "aspect": "16:9"},
+ {"id": "s03-01", "camera": "low-angle-front, full", "aspect": "2:3"}
+]}

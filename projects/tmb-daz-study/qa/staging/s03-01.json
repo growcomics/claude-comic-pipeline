@@ -1,0 +1,11 @@
+{
+  "zara": {"position": "center frame, feet planted wide on cracked floorboards", "pose": "victory stance, fists at her sides, chin high", "expression": "radiant triumphant grin", "turnaround_key": "turnaround_hoodie"},
+  "mia": {"position": "left of Zara, standing close, head level with Zara's chest", "pose": "looking straight up, the closed book hugged to her chest", "expression": "awed disbelief", "turnaround_key": "turnaround_sweater"},
+  "spatial_rules": [
+    "size comparison is the point: Mia's head reaches only Zara's chest height; both standing on the same floor plane",
+    "four hands total: Zara's two fists at her sides, Mia's two hands on the book",
+    "total hands in frame: 4",
+    "low hero angle - camera at knee height looking up; ceiling lamp sits level with Zara's shoulder"
+  ],
+  "lighting": "lamp key from below-left, teal rim from the book"
+}

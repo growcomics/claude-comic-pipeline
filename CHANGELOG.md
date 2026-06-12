@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-11 (gates re-blessed under user delegation + `tmb-daz-study` scaffold)
+
+### Changed
+
+- **`projects/not-so-supra-man/qa/MANIFEST.sha256` re-blessed.** The Layer-8 integrity gate locked all generation after commit `9bd3390` landed the compose/audit v2 fix batch post-blessing — exactly as designed. Diff review performed before re-bless: the `APPEARANCE_WORDS` ban MOVED from compose.py into audit_prompt.py (`BANNED_APPEARANCE`, same pattern — now enforced by the independent checker); every other change strengthens a gate (refuse-on-ambiguity turnaround mapping, banked-with-chain prior verification, scene-ladder rung enforcement, anti-reference-bleed negatives, progression_rule requirement, torn-state coverage insurance). Nothing weakened. **Re-bless executed by Claude under explicit user delegation ("you push it"), on record here.** New manifest fingerprint `768c204c16de92f3`.
+
+### Added
+
+- **`projects/tmb-daz-study/`** — 3-page corpus-learnings demo: remake of *The Mysterious Book* Ch.1's first-transformation beat (corpus source, local-only refs) as photoreal DAZ3D pages, applying the synthesis findings (intensity faces on growth beats, multi-panel-progressive arm ECU, real lettering vs the corpus's empty-balloon epidemic, low-hero + size-comparison staging). `qa/` gates are byte-identical copies of the blessed chain (same manifest); only data/config authored. First job already composed + audited (`sheet:zara-identity`, sha `fc400d89…`); Flow submits next (laptop PRO account, $0). Run order in the project README.
+
+---
+
 ## 2026-06-11 (HANDOFF-MACMINI.md — terminal-free machine handoff)
 
 Self-contained handoff doc at repo root for picking up the pipeline on the Mac mini with Claude running every command (user opens no terminal): repo sync, CLAUDE.md law-load, gate status + the terminal-free bless flow (Claude may run the rebless ONLY as the user's proxy after showing the qa/ diff and receiving an explicit in-session yes — then commits the manifest as the approval signature), orientation reading list, current state of both projects, Flow-driving mechanics (pill verify, picker chip DOM-verification by media id, uuid harvest, signed-URL download, NB2 rate notes), and the bank-then-commit cadence.

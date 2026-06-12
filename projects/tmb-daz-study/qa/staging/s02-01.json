@@ -1,0 +1,9 @@
+{
+  "zara": {"position": "right arm fills each of the three sub-panels at the same angle", "pose": "right-arm flex held across all three stages", "expression": "fierce joyful strain entering frame in stage 3", "turnaround_key": "turnaround_hoodie"},
+  "spatial_rules": [
+    "same arm, same camera angle in all three sub-panels - only muscle size and sleeve damage change between stages",
+    "two hands maximum visible across the whole page, both hers",
+    "total hands in frame: 2"
+  ],
+  "lighting": "same living-room lamp warmth with teal book-glow accents"
+}

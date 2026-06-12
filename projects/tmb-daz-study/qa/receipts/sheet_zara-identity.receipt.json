@@ -1,0 +1,16 @@
+{
+ "job": "sheet:zara-identity",
+ "kind": "sheet",
+ "prompt_sha": "fc400d892f6dec2b4083346f37486e8fc6846d3e5a5b565aab748f8a6787b827",
+ "attach": [
+  "lineart crop: refs-src/zara-face.png (uploaded to Flow)",
+  "lineart crop: refs-src/zara-flex.png (uploaded to Flow)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart structure; hoodie teal; build athletic-muscular; silhouette bar present",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

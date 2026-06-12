@@ -1,0 +1,11 @@
+{
+  "zara": {"position": "center-left foreground, rising off the couch toward camera", "pose": "double-biceps flex mid-rise, weight on the forward foot", "expression": "ecstatic strain - eyes squeezed shut, grin breaking through gritted teeth", "turnaround_key": "turnaround_hoodie"},
+  "mia": {"position": "right midground, pressed back into the couch", "pose": "recoiling, one cushion clutched to her chest", "expression": "open-mouthed shock", "turnaround_key": "turnaround_sweater"},
+  "spatial_rules": [
+    "Zara fills the left two-thirds of frame in the foreground; Mia is visibly smaller on the couch in the right midground",
+    "four hands total in frame: Zara's two fists raised in the flex, Mia's two hands clutching the cushion",
+    "total hands in frame: 4",
+    "the glowing book lies on the rug at lower frame between them"
+  ],
+  "lighting": "warm floor-lamp key from the right, teal underglow from the book below"
+}
