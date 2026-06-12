@@ -13,7 +13,7 @@
 
 ## Build order (each item: compose → audit → submit ×4 → judge → bank)
 1. ☑ kelsey-face (bootstrap) → 2. ☑ kelsey-t2-card (bootstrap) → 3. ☑ kelsey-t2-turnaround (sheet, 28099981 — FIRST full-chain bank)
-4. ☐ kelsey-t4-card (sheet) → 5. ☐ kelsey-t4-strain-turnaround (sheet)
+4. ☑ kelsey-t4-card (3a327885, full chain) → 5. ☐ kelsey-t4-strain-turnaround (sheet)
 6. ☐ kelsey-t6-card (sheet) → 7. ☐ kelsey-t6-strain-turnaround (sheet) → 8. ☐ kelsey-t6-rebuilt-turnaround (sheet)
 9. ☑ field-wide (user-accepted bcf73770) → 10. ☑ field-medium (d96a2994) → 11. ☑ field-close (02a87013) → 12. ☑ comet-fuel-shaker (edd62fe1) — ALL BOOTSTRAPS DONE
 13. ☐ pages p01 → p06 strictly in order (compose enforces priors + rungs)

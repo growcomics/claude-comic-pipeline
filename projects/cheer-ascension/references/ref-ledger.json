@@ -39,7 +39,7 @@
       },
       "turnaround-t2": {
         "flow_id": "28099981-ff1b-49dc-abdb-621566a472f7",
-        "disk": "references/characters/kelsey-brandt/turnaround-t2.png",
+        "disk": "references/characters/kelsey-brandt/turnaround-t2-uniform.png",
         "chain": {
           "receipt": "qa/receipts/sheet_kelsey-t2-turnaround.receipt.json",
           "audit": "qa/receipts/sheet_kelsey-t2-turnaround.audit-pass",
@@ -49,6 +49,17 @@
             "angle"
           ],
           "prompt_sha": "e035ead6b8f93e7a335655c660bb9e22a89ebfb515be4d7c06b6bb6ec3cfcf44"
+        }
+      },
+      "body-tier4": {
+        "flow_id": "3a327885-fcaf-456a-89c0-e58bf390701d",
+        "disk": "references/characters/kelsey-brandt/body-tier4.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t4-card.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t4-card.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t4-card.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "a3350fdb662ea34e9ce97040ec91bf968c8707d7ad5469a207c7747440cb8e5e"
         }
       }
     }

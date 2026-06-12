@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: kelsey-t4-card BANKED via full chain — 3a327885)
+
+**Added**
+- `kelsey-t4-card` banked: `3a327885-fcaf-456a-89c0-e58bf390701d` (V1 — only all-clean variant: full-tier gain measured at thigh +9.8%/shoulder +5.4% over t2 with ratio 0.890 held exactly). Rejects: V2 crew-sock wardrobe drift, V3/V4 half-tier under-delivery on the size axis (the judge's both-directions strictness working as designed). Disk: `references/characters/kelsey-brandt/body-tier4.png`.
+
+**Fixed**
+- t2 turnaround disk path aligned to `turnaround-specs.json`'s save path (`turnaround-t2-uniform.png`, re-banked via bank.py) so compose's self-heal correctly detects the existing sheet. `verify_chain.py`: 2 chain-verified entries.
+
 ## 2026-06-12 (cheer-ascension: kelsey-t2-turnaround BANKED via FULL chain — first protocol-complete item)
 
 **Added**
