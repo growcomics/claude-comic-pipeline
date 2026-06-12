@@ -70,8 +70,18 @@
         "qa_notes": "Attempt 2 V1 judge-PASS: correct small rail-less aluminum bleacher sections, medium sideline framing w/ bench, palette/track continuity, no people/text. Minor noted drift: section count/placement vs wide rung. Attempt 1 failed 4/4 on grandstand drift (D8 lesson: chained rungs need distinctive construction RE-STATED in prose). Receipts: qa/receipts/scene_field-medium.attempt{1,2}.verdict.json"
       },
       "close": {
-        "flow_id": null,
-        "class": "bootstrap-chained-from-medium"
+        "flow_id": "02a87013-5bfd-4aa1-adf9-ecca1588e4d2",
+        "disk": "references/locations/practice-field/close.png",
+        "class": "bootstrap-chained-from-medium",
+        "chained_from": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+        "bootstrap_job": "field-close (references/bootstrap-prompts.json prompt v1, pasted verbatim; medium rung attached, chip DOM-verified)",
+        "variants": [
+          "02a87013-5bfd-4aa1-adf9-ecca1588e4d2",
+          "81a198a9-2f02-45c8-934e-bcc6f3492d51",
+          "5197fce0-1b9a-4664-b9dc-143da0e13b2e",
+          "d1f7f215-8a4f-4f53-a9ee-7d8316be6f68"
+        ],
+        "qa_notes": "Attempt 1 V1 judge-PASS first try (V4 d1f7f215 also passed, backup). Sharp foreground stripe/grass, defocused rail-less bleachers, full medium-rung continuity. V2 bench-split glitch, V3 invented infield pole. Receipt: qa/receipts/scene_field-close.attempt1.verdict.json"
       }
     }
   },

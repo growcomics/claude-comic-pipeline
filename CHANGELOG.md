@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: field-close BANKED — 02a87013, first-try pass)
+
+**Added**
+- field-close rung banked: `02a87013-5bfd-4aa1-adf9-ecca1588e4d2` (attempt-1 V1, judge PASS; V4 `d1f7f215` also passed as backup). Scene ladder wide→medium→close now COMPLETE for practice-field. Receipt: `qa/receipts/scene_field-close.attempt1.verdict.json`.
+
 ## 2026-06-12 (cheer-ascension: field-medium BANKED — d96a2994, attempt-2 V1)
 
 **Added**
