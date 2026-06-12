@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: comet-fuel-shaker BANKED — edd62fe1; ALL bootstraps complete)
+
+**Added**
+- comet-fuel-shaker prop banked: `edd62fe1-9a3e-4f18-a157-dd3861b9a35f` (attempt-1 V4, judge PASS incl. D10 vfx-style-bible check; V3 `505074bb` backup pass). V1 failed on banned-look-#4 physically-accurate light spill — the style bible's doctrine held up exactly as written. With this, every bootstrap item (face, t2 card, wide/medium/close rungs, shaker) is banked; remaining work is the 6 chained sheets + pages p01–p06 through compose/audit/bank.
+
 ## 2026-06-12 (cheer-ascension: field-close BANKED — 02a87013, first-try pass)
 
 **Added**

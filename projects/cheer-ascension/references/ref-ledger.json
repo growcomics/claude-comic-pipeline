@@ -87,9 +87,19 @@
   },
   "props": {
     "comet-fuel-shaker": {
-      "flow_id": null,
+      "flow_id": "edd62fe1-9a3e-4f18-a157-dd3861b9a35f",
+      "disk": "references/props/comet-fuel-shaker.png",
       "note": "teal glowing shaker bottle \u2014 bootstrap with the field-medium rung attached for style",
-      "class": "bootstrap"
+      "class": "bootstrap",
+      "chained_from": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+      "bootstrap_job": "comet-fuel-shaker (references/bootstrap-prompts.json prompt v1, pasted verbatim; field-medium attached, chip DOM-verified)",
+      "variants": [
+        "442a412c-1303-481c-9bf9-ce96224e7d31",
+        "172459d7-510b-46b1-9b36-9da00ce70c64",
+        "505074bb-2c7d-4c0a-afeb-0cb1bd0ca58e",
+        "edd62fe1-9a3e-4f18-a157-dd3861b9a35f"
+      ],
+      "qa_notes": "Attempt 1 V4 judge-PASS (V3 505074bb backup pass): true flip-top sports shaker, faintest glow, textbook D10 bloom-halo (not physical spill). V1 failed banned-look-#4 physical light spill, V2 blown-out glow + scale inflation. Receipt: qa/receipts/prop_comet-fuel-shaker.attempt1.verdict.json"
     },
     "pom-poms": {
       "note": "teal/gold metallic \u2014 carried by the t2 turnaround + page prompts; no separate card unless drift appears"
