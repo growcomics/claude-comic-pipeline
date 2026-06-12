@@ -94,6 +94,17 @@
           "verdict_tags": [],
           "prompt_sha": "c275c79e0eee1328f109c8f5a0b216bde26a5ee99e61cedb776d108964c865c8"
         }
+      },
+      "turnaround-t6-rebuilt": {
+        "flow_id": "a3eb5504-08a5-4f25-8586-e2f71093dd83",
+        "disk": "references/characters/kelsey-brandt/turnaround-t6-rebuilt.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c3799f1c2fd357a837ce12c1ff2780d2cd8455ad62f290de4ecce5e4b27a554b"
+        }
       }
     }
   },

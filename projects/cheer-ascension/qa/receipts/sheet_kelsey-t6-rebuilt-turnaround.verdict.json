@@ -1,0 +1,18 @@
+{
+  "pass": true,
+  "tags": [],
+  "reasons": [
+    "Calibration: pixel-measured ref body-tier6.png with identical method (per-row background subtraction, column clustering, top-to-bottom figure extent) -> Kelsey/mannequin = 0.890, matching the stated ~0.89. Pass bar: within ~0.02 (<=~0.910).",
+    "V1 (faf76eed): FAIL size — measured ratio 0.935 front (0.930-0.935 across views) vs ref 0.890; worse than the prior failed batch (0.916-0.927). Emblem front+3/4, wardrobe, four views, full front-facing mannequin, face, anatomy all otherwise OK.",
+    "V2 (a3eb5504): PASS — measured ratio 0.907 front (0.898-0.907 across views), within ~0.02 of 0.890. Comet emblem present front + 3/4; double-stripe trim, white side panels, pleats, white briefs visible, white shoes w/ gold laces, low white socks; clean tailored fit (no strain/whitening/tears); four distinct views; mannequin front-facing, full in frame, no plinths; face/ponytail/scrunchie match face card; photoreal Iray, grid + cyc, no text/callouts, clean anatomy. Note: scale at the upper edge of tolerance.",
+    "V3 (287e6495): FAIL size — ratio 0.933 (0.929-0.933 across views). Also mannequin is BACK-facing (ref shows front) and its left arm is cropped by the right frame edge.",
+    "V4 (4d9274e5): FAIL size — ratio 0.920 (0.918-0.921 across views), outside tolerance. Mannequin's left arm also cropped by the right frame edge. Wardrobe/emblem/views otherwise OK."
+  ],
+  "variant_ranking": [
+    "a3eb5504-08a5-4f25-8586-e2f71093dd83",
+    "4d9274e5-1cde-4f90-9bb6-8ec677cfd297",
+    "faf76eed-fb26-4608-81e9-eb0647706ef5",
+    "287e6495-7ae8-4fd3-b2d6-f08e80c48d05"
+  ],
+  "rubric_version": "LAYER 4 post-flight judge rubric (gates_fingerprint 768c204c16de92f3)"
+}

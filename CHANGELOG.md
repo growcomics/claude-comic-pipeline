@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (cheer-ascension: t6-strain + t6-rebuilt BANKED — ALL 6 SHEETS COMPLETE)
+
+**Added**
+- `kelsey-t6-strain-turnaround` banked: `ef679021` (batch-1 V2, ratio 0.902; 3 siblings failed D7 scale 0.93–0.957, one with a baked-in measurement callout — a new no-text failure mode worth watching).
+- `kelsey-t6-rebuilt-turnaround` banked: `a3eb5504` (batch-2 V2, calibrated ratio 0.907 — upper edge of tolerance, judge flags it for user-eye confirmation; batch 1 failed 4/4: three scale-over 0.916–0.927, one on-scale but missing the comet emblem). Reference canon for the demo is now COMPLETE: face, t2/t4/t6 cards, t2-uniform/t4-strain/t6-strain/t6-rebuilt turnarounds, wide/medium/close field rungs, shaker. `verify_chain.py`: 6 chain-verified entries, only the pre-protocol face unchained. Remaining: pages p01–p06.
+- Recurring-gate evidence (for the compose.py scale-language diff already proposed): across 4 sheet jobs, 11 of 20 turnaround variants failed D7 scale with the compose prompt's "8 inches SHORTER" phrasing, while both identical-prompt re-rolls eventually yielded a passing variant — the prompt under-pins height and passes only by luck of the draw.
+
 ## 2026-06-12 (cheer-ascension: kelsey-t6-card BANKED — 85eb0fd9, first-batch V1)
 
 **Added**
