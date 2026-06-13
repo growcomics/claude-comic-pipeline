@@ -35,6 +35,17 @@
           "verdict_tags": [],
           "prompt_sha": "5a34aa5a598b0e0f59e1b0eaab2477adf821a20df68d389103fe48042bc00be6"
         }
+      },
+      "turnaround_t1": {
+        "flow_id": "06453bee-2922-404e-838f-e67b6a702e7f",
+        "disk": "references/characters/cel/body-base.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cel-t1.receipt.json",
+          "audit": "qa/receipts/sheet_cel-t1.audit-pass",
+          "verdict": "qa/receipts/sheet_cel-t1.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "ad1c34ca44aade8a77ffa1d7b2ec3b107e1b6a4366d6cdd6748a602d06ba17d9"
+        }
       }
     },
     "dr-santos": {

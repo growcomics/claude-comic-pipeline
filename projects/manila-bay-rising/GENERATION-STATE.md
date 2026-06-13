@@ -7,14 +7,17 @@ Last updated 2026-06-13 by the autonomous run. **The gate is blessed; the pipeli
 - Browser: macmini Chrome (deviceId 2a9bd64b), tab 1283846633; scratch tab 1283846634 for download redirects.
 - Agent settings: Confirm=**Never**, count=**1x**, model=**Nano Banana 2**. Aspect: set per item BUT the 16:9 setting did NOT reliably apply (hae-won-t1 came out 1024×1024 anyway — it was fine, 4 figures fit). Verify output aspect; re-roll if a wide scene/panel crops.
 
-## BANKED so far (4/62) — all chain-verified
+## BANKED so far (5/62) — all chain-verified
 - hae-won.face (52ca8c9a-5a29-4c41-9e50-fa36b5dfb4cf)
 - cel.face (02e5b5fe-f873-4855-b7f2-0044d9cec095)
 - dr-santos.face (92f7e3f6-e9e8-49be-88b7-b184617d7418)
 - hae-won.turnaround_t1 (1c3c2b8c-92c2-4218-a903-2180738cd091) — identity transfer confirmed
+- cel.turnaround_t1 (06453bee-2922-404e-838f-e67b6a702e7f) — identity transfer confirmed
 
 ## NEXT items in order (sheets → scenes → panels)
-Sheets remaining: **cel-t1, dr-santos-t1** (genesis, attach face only), then **hae-won-t2** (attach face+t1), **hae-won-t3** (face+t2), **cel-t2, cel-t3**, then views (**hae-won/cel** ×3, **dr-santos** ×2; attach face+t1). Then **14 scenes** (upload the gathered jpg via the picker's "Upload media" — use the `mcp__Claude_in_Chrome__file_upload` tool for the file input; NOT yet proven). Then **30 panels in page order** (attach face+turnaround per char + scene + prior; multi-char panels have staging files). See RUNBOOK for ledger-keys + tier map.
+Sheets remaining: **dr-santos-t1** (genesis, attach dr-santos.face), then **hae-won-t2** (attach face+t1), **hae-won-t3** (face+t2), **cel-t2** (face+t1), **cel-t3** (face+t2), then views (**hae-won/cel** ×3 each, **dr-santos** ×2; attach face+t1). Then **14 scenes** (upload the gathered jpg via the picker's "Upload media" — use the `mcp__Claude_in_Chrome__file_upload` tool for the file input; NOT yet proven). Then **30 panels in page order** (attach face+turnaround per char + scene + prior; multi-char panels have staging files). See RUNBOOK for ledger-keys + tier map.
+
+Asset-picker uuid→title map (Recent order shifts; match by uuid in the row's img src): 52ca8c9a=hae-won.face, 02e5b5fe=cel.face, 92f7e3f6=dr-santos.face, 1c3c2b8c=hae-won.turnaround_t1, 06453bee=cel.turnaround_t1.
 
 ## The proven per-item loop (copy this)
 1. `python3 qa/compose.py --job <job>` → ATTACH list + PROMPT; write prompt to `/tmp/p.txt`; `python3 qa/audit_prompt.py --receipt qa/receipts/<job>.receipt.json --prompt-file /tmp/p.txt`.
