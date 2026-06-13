@@ -1,0 +1,13 @@
+{
+ "job": "sheet:hae-won-face",
+ "kind": "sheet",
+ "prompt_sha": "b25556b2bc3514f6168179dcda9f7168f950fbed464c6f8a28b27b81feb69c9f",
+ "attach": [],
+ "aspect": "1:1",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

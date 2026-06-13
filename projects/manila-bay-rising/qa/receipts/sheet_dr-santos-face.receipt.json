@@ -1,0 +1,13 @@
+{
+ "job": "sheet:dr-santos-face",
+ "kind": "sheet",
+ "prompt_sha": "2bb2a4a38fd3bcae29668848f640cf4472ecd5f8caeb93ca46125133df1a748a",
+ "attach": [],
+ "aspect": "1:1",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

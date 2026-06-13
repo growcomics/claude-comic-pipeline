@@ -1,8 +1,55 @@
 {
   "characters": {
-    "hae-won": {},
-    "cel": {},
-    "dr-santos": {}
+    "hae-won": {
+      "face": {
+        "flow_id": "52ca8c9a-5a29-4c41-9e50-fa36b5dfb4cf",
+        "disk": "references/characters/hae-won/face-card.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_hae-won-face.receipt.json",
+          "audit": "qa/receipts/sheet_hae-won-face.audit-pass",
+          "verdict": "qa/receipts/sheet_hae-won-face.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "b25556b2bc3514f6168179dcda9f7168f950fbed464c6f8a28b27b81feb69c9f"
+        }
+      },
+      "turnaround_t1": {
+        "flow_id": "1c3c2b8c-92c2-4218-a903-2180738cd091",
+        "disk": "references/characters/hae-won/body-base.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_hae-won-t1.receipt.json",
+          "audit": "qa/receipts/sheet_hae-won-t1.audit-pass",
+          "verdict": "qa/receipts/sheet_hae-won-t1.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "2c8e2162f44671016d07a0f6b5ee7ebf06871407259530e04b61458fe354b919"
+        }
+      }
+    },
+    "cel": {
+      "face": {
+        "flow_id": "02e5b5fe-f873-4855-b7f2-0044d9cec095",
+        "disk": "references/characters/cel/face-card.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cel-face.receipt.json",
+          "audit": "qa/receipts/sheet_cel-face.audit-pass",
+          "verdict": "qa/receipts/sheet_cel-face.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "5a34aa5a598b0e0f59e1b0eaab2477adf821a20df68d389103fe48042bc00be6"
+        }
+      }
+    },
+    "dr-santos": {
+      "face": {
+        "flow_id": "92f7e3f6-e9e8-49be-88b7-b184617d7418",
+        "disk": "references/characters/dr-santos/face-card.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dr-santos-face.receipt.json",
+          "audit": "qa/receipts/sheet_dr-santos-face.audit-pass",
+          "verdict": "qa/receipts/sheet_dr-santos-face.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "2bb2a4a38fd3bcae29668848f640cf4472ecd5f8caeb93ca46125133df1a748a"
+        }
+      }
+    }
   },
   "scene_ladders": {}
 }

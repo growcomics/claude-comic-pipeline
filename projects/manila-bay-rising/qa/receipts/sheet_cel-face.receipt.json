@@ -1,0 +1,13 @@
+{
+ "job": "sheet:cel-face",
+ "kind": "sheet",
+ "prompt_sha": "5a34aa5a598b0e0f59e1b0eaab2477adf821a20df68d389103fe48042bc00be6",
+ "attach": [],
+ "aspect": "1:1",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

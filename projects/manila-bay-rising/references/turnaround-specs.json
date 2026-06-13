@@ -8,18 +8,18 @@
       "ledger_key": "hae-won.face",
       "attach": [],
       "aspect": "1:1",
-      "prompt": "Character face card portrait of a fair-skinned Korean woman in her late twenties named Seo Hae-won: soft oval face, warm dark-brown eyes, straight dark-brown shoulder-length hair, light natural makeup, small gold stud earrings. Three head-and-shoulders views in one frame — front, three-quarter, and profile — neutral relaxed expression, plain mid-grey studio cyclorama, even neutral studio lighting, no hat. Consistent identical face across all three views."
+      "prompt": "Character face card portrait of a fair-skinned Korean woman in her late twenties named Seo Hae-won: soft oval face, warm dark-brown eyes, straight dark-brown shoulder-length hair, light natural makeup, small gold stud earrings. Three head-and-shoulders views in one frame \u2014 front, three-quarter, and profile \u2014 neutral relaxed expression, plain mid-grey studio cyclorama, even neutral studio lighting, no hat. Consistent identical face across all three views."
     },
     {
       "id": "hae-won-t1",
-      "genesis": false,
+      "genesis": true,
       "save": "references/characters/hae-won/body-base.png",
       "ledger_key": "hae-won.turnaround_t1",
       "attach": [
         "hae-won.face"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side — front, three-quarter, profile, back — identical in every view, wearing a cream linen sundress, wide-brim straw sun hat, tan crossbody bag, flat sandals. Slim natural tier-1 build. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal slim human height. Faint horizontal height grid lines across the background. Height stays fixed; this is the baseline rung 1 of 6. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, wearing a cream linen sundress, wide-brim straw sun hat, tan crossbody bag, flat sandals. Slim natural tier-1 build. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal slim human height. Faint horizontal height grid lines across the background. Height stays fixed; this is the baseline rung 1 of 6. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "hae-won-t2",
@@ -31,7 +31,7 @@
         "hae-won.turnaround_t1"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-1 turnaround, full body in four views side by side — front, three-quarter, profile, back — identical in every view, same cream linen sundress now strained at the seams but fully covering. Muscle/size lineup rung 2 of 6: noticeably fuller and more athletic than the tier-1 rung — only muscle mass and fullness grow, height stays exactly the same as the tier-1 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as in the tier-1 sheet. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-1 turnaround, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, same cream linen sundress now strained at the seams but fully covering. Muscle/size lineup rung 2 of 6: noticeably fuller and more athletic than the tier-1 rung \u2014 only muscle mass and fullness grow, height stays exactly the same as the tier-1 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as in the tier-1 sheet. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "hae-won-t3",
@@ -43,7 +43,7 @@
         "hae-won.turnaround_t2"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-2 turnaround, full body in four views side by side — front, three-quarter, profile, back — identical in every view, same cream linen sundress strained with seams stretched but fully covering chest and hips. Muscle/size lineup rung 3 of 6: distinctly more muscular and full than the tier-2 rung — only muscle mass and fullness grow per the lineup rung, height stays exactly the same as the tier-2 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as the earlier sheets. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-2 turnaround, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, same cream linen sundress strained with seams stretched but fully covering chest and hips. Muscle/size lineup rung 3 of 6: distinctly more muscular and full than the tier-2 rung \u2014 only muscle mass and fullness grow per the lineup rung, height stays exactly the same as the tier-2 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as the earlier sheets. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "hae-won-view-3q-full",
@@ -88,18 +88,18 @@
       "ledger_key": "cel.face",
       "attach": [],
       "aspect": "1:1",
-      "prompt": "Character face card portrait of a morena (brown-skinned) Filipina in her mid twenties named Maricel 'Cel' Reyes: oval face with warm full features, dark eyes, dark hair in a low messy bun, gold hoop earrings, minimal makeup. Three head-and-shoulders views in one frame — front, three-quarter, and profile — neutral relaxed expression, plain mid-grey studio cyclorama, even neutral studio lighting. Consistent identical face across all three views."
+      "prompt": "Character face card portrait of a morena (brown-skinned) Filipina in her mid twenties named Maricel 'Cel' Reyes: oval face with warm full features, dark eyes, dark hair in a low messy bun, gold hoop earrings, minimal makeup. Three head-and-shoulders views in one frame \u2014 front, three-quarter, and profile \u2014 neutral relaxed expression, plain mid-grey studio cyclorama, even neutral studio lighting. Consistent identical face across all three views."
     },
     {
       "id": "cel-t1",
-      "genesis": false,
+      "genesis": true,
       "save": "references/characters/cel/body-base.png",
       "ledger_key": "cel.turnaround_t1",
       "attach": [
         "cel.face"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side — front, three-quarter, profile, back — identical in every view, wearing a black ribbed tank top, high-waist denim cutoffs, gold hoop earrings, worn white sneakers, friendship bracelets, hair in a low messy bun. Slim athletic tier-1 build. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal slim human height. Faint horizontal height grid lines across the background. Height stays fixed; baseline rung 1 of 6. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, wearing a black ribbed tank top, high-waist denim cutoffs, gold hoop earrings, worn white sneakers, friendship bracelets, hair in a low messy bun. Slim athletic tier-1 build. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal slim human height. Faint horizontal height grid lines across the background. Height stays fixed; baseline rung 1 of 6. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "cel-t2",
@@ -111,7 +111,7 @@
         "cel.turnaround_t1"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-1 turnaround, full body in four views side by side — front, three-quarter, profile, back — identical in every view, same black ribbed tank and denim cutoffs now strained at the seams but fully covering. Muscle/size lineup rung 2 of 6: noticeably fuller and more athletic than the tier-1 rung — only muscle mass and fullness grow, height stays exactly the same as the tier-1 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as in the tier-1 sheet. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-1 turnaround, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, same black ribbed tank and denim cutoffs now strained at the seams but fully covering. Muscle/size lineup rung 2 of 6: noticeably fuller and more athletic than the tier-1 rung \u2014 only muscle mass and fullness grow, height stays exactly the same as the tier-1 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as in the tier-1 sheet. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "cel-t3",
@@ -123,7 +123,7 @@
         "cel.turnaround_t2"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-2 turnaround, full body in four views side by side — front, three-quarter, profile, back — identical in every view, same black ribbed tank and denim cutoffs strained with seams stretched but fully covering chest and hips. Muscle/size lineup rung 3 of 6: distinctly more muscular and full than the tier-2 rung — only muscle mass and fullness grow per the lineup rung, height stays exactly the same as the tier-2 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as the earlier sheets. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card and the attached tier-2 turnaround, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, same black ribbed tank and denim cutoffs strained with seams stretched but fully covering chest and hips. Muscle/size lineup rung 3 of 6: distinctly more muscular and full than the tier-2 rung \u2014 only muscle mass and fullness grow per the lineup rung, height stays exactly the same as the tier-2 turnaround. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale, at the SAME height as the earlier sheets. Faint horizontal height grid lines. Same face, hair, outfit, height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "cel-view-3q-full",
@@ -168,18 +168,18 @@
       "ledger_key": "dr-santos.face",
       "attach": [],
       "aspect": "1:1",
-      "prompt": "Character face card portrait of a Filipina woman in her early fifties named Dr. Elena Santos: composed intelligent face, rimless glasses, hair in a neat low ponytail with grey streaks, ID lanyard at the neck. Three head-and-shoulders views in one frame — front, three-quarter, and profile — neutral measured expression, plain mid-grey studio cyclorama, even neutral studio lighting. Consistent identical face across all three views."
+      "prompt": "Character face card portrait of a Filipina woman in her early fifties named Dr. Elena Santos: composed intelligent face, rimless glasses, hair in a neat low ponytail with grey streaks, ID lanyard at the neck. Three head-and-shoulders views in one frame \u2014 front, three-quarter, and profile \u2014 neutral measured expression, plain mid-grey studio cyclorama, even neutral studio lighting. Consistent identical face across all three views."
     },
     {
       "id": "dr-santos-t1",
-      "genesis": false,
+      "genesis": true,
       "save": "references/characters/dr-santos/body-base.png",
       "ledger_key": "dr-santos.turnaround_t1",
       "attach": [
         "dr-santos.face"
       ],
       "aspect": "16:9",
-      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side — front, three-quarter, profile, back — identical in every view, wearing a white lab coat over a teal blouse, ID lanyard, rimless glasses, hair in a neat low ponytail with grey streaks. Ordinary tier-1 build, non-growing character. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal human height. Faint horizontal height grid lines across the background. Height stays fixed. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
+      "prompt": "Character turnaround model sheet: EXACTLY the woman in the attached face card, full body in four views side by side \u2014 front, three-quarter, profile, back \u2014 identical in every view, wearing a white lab coat over a teal blouse, ID lanyard, rimless glasses, hair in a neat low ponytail with grey streaks. Ordinary tier-1 build, non-growing character. At the far right a plain matte-grey reference silhouette of a 6-foot man for scale; she is of normal human height. Faint horizontal height grid lines across the background. Height stays fixed. Same face, hair, outfit, build and height in all four views. Plain mid-grey studio cyclorama, even lighting."
     },
     {
       "id": "dr-santos-view-3q-full",
@@ -211,98 +211,136 @@
     {
       "id": "up-manila-lab",
       "save": "references/locations/up-manila-lab/_source.jpg",
-      "attach": ["references/locations/up-manila-lab/up-manila-lab-01.jpg", "references/locations/up-manila-lab/up-manila-lab-02.jpg"],
+      "attach": [
+        "references/locations/up-manila-lab/up-manila-lab-01.jpg",
+        "references/locations/up-manila-lab/up-manila-lab-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of a UP Manila health-sciences research lab interior at night: stainless steel benches, a central fume hood, a centrifuge, sample fridges, racks of amber vials, fluorescent ceiling light with a late-night blue cast through window blinds. Match the layout, equipment and perspective of the attached photos. Empty of people, clinical and foreboding."
     },
     {
       "id": "up-manila-lab-reverse",
       "save": "references/locations/up-manila-lab/_reverse.jpg",
-      "attach": ["references/locations/up-manila-lab/up-manila-lab-01.jpg"],
+      "attach": [
+        "references/locations/up-manila-lab/up-manila-lab-01.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "DAZ3D Iray establishing render of the SAME UP Manila research lab as the attached reference, but seen from the 180-degree opposite side of the room (reverse angle): the door and floor drain wall now in view, the fume hood and benches seen from behind. Consistent equipment, materials and night blue-cast lighting with the attached reference. Empty of people."
     },
     {
       "id": "up-manila-ermita",
       "save": "references/locations/up-manila-ermita/_source.jpg",
-      "attach": ["references/locations/up-manila-ermita/up-manila-ermita-01.jpg", "references/locations/up-manila-ermita/up-manila-ermita-02.jpg"],
+      "attach": [
+        "references/locations/up-manila-ermita/up-manila-ermita-01.jpg",
+        "references/locations/up-manila-ermita/up-manila-ermita-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of the UP Manila campus exterior in Ermita at dawn: mid-century concrete academic buildings, the campus gate with acacia trees, jeepneys on Padre Faura, tropical haze. Match the architecture and layout of the attached photos. Empty of people."
     },
     {
       "id": "manila-bay-outfall",
       "save": "references/locations/manila-bay-outfall/_source.jpg",
-      "attach": ["references/locations/manila-bay-outfall/manila-bay-outfall-01.jpg", "references/locations/manila-bay-outfall/manila-bay-outfall-04.jpg"],
+      "attach": [
+        "references/locations/manila-bay-outfall/manila-bay-outfall-01.jpg",
+        "references/locations/manila-bay-outfall/manila-bay-outfall-04.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of a cordoned-off stretch of Manila Bay shoreline at dusk: a concrete storm outfall pipe discharging grey runoff into the sea shallows, a rope cordon staked into wet sand, breakwater, overcast sky. Match the outfall structure and shoreline of the attached photos. Empty of people."
     },
     {
       "id": "manila-bay-outfall-reverse",
       "save": "references/locations/manila-bay-outfall/_reverse.jpg",
-      "attach": ["references/locations/manila-bay-outfall/manila-bay-outfall-04.jpg"],
+      "attach": [
+        "references/locations/manila-bay-outfall/manila-bay-outfall-04.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "DAZ3D Iray establishing render of the SAME Manila Bay outfall location as the attached reference, seen from the 180-degree opposite angle (looking back from the water toward the shore): the cordon, the leaning warning-sign post and the boardwalk/streetlights now facing camera, the outfall pipe behind. Consistent materials, dusk-to-night lighting with the attached reference. Empty of people."
     },
     {
       "id": "manila-bay-sunset",
       "save": "references/locations/manila-bay-sunset/_source.jpg",
-      "attach": ["references/locations/manila-bay-sunset/manila-bay-sunset-01.jpg", "references/locations/manila-bay-sunset/manila-bay-sunset-04.jpg"],
+      "attach": [
+        "references/locations/manila-bay-sunset/manila-bay-sunset-01.jpg",
+        "references/locations/manila-bay-sunset/manila-bay-sunset-04.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of Manila Bay at golden hour: orange-red sky, silhouetted cargo ships and bancas on the horizon, breakwater rocks, the baywalk. Match the horizon line and sky of the attached photos. Empty of people."
     },
     {
       "id": "manila-bay-dolomite-beach",
       "save": "references/locations/manila-bay-dolomite-beach/_source.jpg",
-      "attach": ["references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-02.jpg", "references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-01.jpg"],
+      "attach": [
+        "references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-02.jpg",
+        "references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-01.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of the artificial white-sand (dolomite) beach on Manila Baywalk: pale crushed-stone sand, low wave breakers, Roxas Boulevard palms and lampposts behind. Match the sand, breakwater and skyline of the attached photos. Empty of people."
     },
     {
       "id": "manila-bay-dolomite-beach-reverse",
       "save": "references/locations/manila-bay-dolomite-beach/_reverse.jpg",
-      "attach": ["references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-02.jpg"],
+      "attach": [
+        "references/locations/manila-bay-dolomite-beach/manila-bay-dolomite-beach-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "DAZ3D Iray establishing render of the SAME dolomite beach as the attached reference, seen from the 180-degree opposite angle (looking from the water back toward Roxas Boulevard): the palms, lampposts and boardwalk facing camera, pale dolomite sand in the foreground. Consistent materials and lighting with the attached reference. Empty of people."
     },
     {
       "id": "makati-skyline",
       "save": "references/locations/makati-skyline/_source.jpg",
-      "attach": ["references/locations/makati-skyline/makati-skyline-01.jpg", "references/locations/makati-skyline/makati-skyline-05.jpg"],
+      "attach": [
+        "references/locations/makati-skyline/makati-skyline-01.jpg",
+        "references/locations/makati-skyline/makati-skyline-05.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing aerial render of the Makati CBD skyline at dusk: glass office towers, evening lights, money-and-heat haze, EDSA's traffic and the distant bay with casino glow on the horizon. Match the skyline silhouette of the attached photos. Empty of people."
     },
     {
       "id": "edsa",
       "save": "references/locations/edsa/_source.jpg",
-      "attach": ["references/locations/edsa/edsa-01.jpg", "references/locations/edsa/edsa-02.jpg"],
+      "attach": [
+        "references/locations/edsa/edsa-01.jpg",
+        "references/locations/edsa/edsa-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of EDSA highway at rush hour: bumper-to-bumper traffic, buses and jeepneys, the MRT line overhead, giant billboards, smog haze. Match the road layout and overhead rail of the attached photos. Vehicles only, no pedestrians in frame."
     },
     {
       "id": "poblacion-night",
       "save": "references/locations/poblacion-night/_source.jpg",
-      "attach": ["references/locations/poblacion-night/poblacion-night-01.jpg", "references/locations/poblacion-night/poblacion-night-02.jpg"],
+      "attach": [
+        "references/locations/poblacion-night/poblacion-night-01.jpg",
+        "references/locations/poblacion-night/poblacion-night-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of the Poblacion Makati nightlife strip: neon bar signs, string lights overhead, rooftop bars, a crowded narrow street, warm night glow. Match the neon signage and street layout of the attached photos. Empty of people (signage and lights only)."
     },
     {
       "id": "entertainment-city",
       "save": "references/locations/entertainment-city/_source.jpg",
-      "attach": ["references/locations/entertainment-city/entertainment-city-01.jpg", "references/locations/entertainment-city/entertainment-city-02.jpg"],
+      "attach": [
+        "references/locations/entertainment-city/entertainment-city-01.jpg",
+        "references/locations/entertainment-city/entertainment-city-02.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of Entertainment City reclamation at night: Solaire / City of Dreams style casino facades, fountains, gold-and-purple light spill across the reclaimed bay. Match the facade architecture and light colour of the attached photos. Empty of people."
     },
     {
       "id": "bayfront-hotel",
       "save": "references/locations/bayfront-hotel/_source.jpg",
-      "attach": ["references/locations/bayfront-hotel/bayfront-hotel-02.jpg", "references/locations/bayfront-hotel/bayfront-hotel-01.jpg"],
+      "attach": [
+        "references/locations/bayfront-hotel/bayfront-hotel-02.jpg",
+        "references/locations/bayfront-hotel/bayfront-hotel-01.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "Convert the attached photographic references into a DAZ3D Iray establishing render of a mid-rise bayfront hotel room on Roxas Boulevard: neutral modern decor, a bed and door frame, a floor-to-ceiling window and small balcony facing Manila Bay with the bay visible through the glass, afternoon light. Match the room layout and the bay-view window of the attached photos. Empty of people."
     },
     {
       "id": "bayfront-hotel-reverse",
       "save": "references/locations/bayfront-hotel/_reverse.jpg",
-      "attach": ["references/locations/bayfront-hotel/bayfront-hotel-03.jpg"],
+      "attach": [
+        "references/locations/bayfront-hotel/bayfront-hotel-03.jpg"
+      ],
       "aspect": "16:9",
       "prompt": "DAZ3D Iray establishing render of the SAME bayfront hotel room as the attached reference, seen from the 180-degree opposite angle (from the window looking back into the room): the door frame, bed and entry wall facing camera, the bay window behind the camera. Consistent decor and lighting with the attached reference. Empty of people."
     }
