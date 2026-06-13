@@ -16,3 +16,6 @@ projects/**/*.jpg
 
 # comic-corpus: third-party copyrighted pages — analysis stays in git, raw pages never do
 research/comic-corpus/corpus/*/pages/
+
+# gap fix 2026-06-12: Flow zips extract as .jpeg
+projects/**/*.jpeg

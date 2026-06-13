@@ -18,6 +18,10 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **Zara + Mia identity sheets generated, verdicted, and BANKED** (`projects/tmb-daz-study/`): lineart→photoreal-DAZ3D translation on Flow (PRO acct, $0). Each followed the complete protocol — compose receipt → independent audit (shas `fc400d89…`, `dbf039c9…`) → submit with exact attach list → fresh-context subagent verdict (both PASS, written to `qa/receipts/*.verdict.json`) → `bank.py` under face + turnaround ledger keys. Page `s01-01` composed + audited (`018ab464…`) and submitted (×4, NB2, 3:4).
 
+### Fixed
+
+- **.gitignore gap**: `projects/**/*.jpeg` was not ignored (only .png/.jpg/.pdf), so 8 generated variant renders briefly entered git in `5cee8e8`; untracked in the follow-up commit. Renders remain on disk and recoverable from Flow media ids in `harvest/uuid-map.md`.
+
 ### Notes
 
 - Flow's **Nano Banana Pro daily cap** hit after the Zara sheet — all 4 Mia variants failed with "daily limit"; the rerun of the identical audited prompt on **Nano Banana 2** (the model compose.py's advisory specifies anyway) passed verdict. Model + aspect deviations (no 2:3 on Flow → 3:4) logged in `harvest/uuid-map.md`.
