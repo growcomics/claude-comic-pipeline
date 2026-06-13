@@ -1,0 +1,16 @@
+{
+ "job": "sheet:mia-identity",
+ "kind": "sheet",
+ "prompt_sha": "dbf039c9df34a5d500d6901e0e08160682cae8b4d096e24ca1d9541a592cf427",
+ "attach": [
+  "lineart crop: refs-src/mia-react.png (uploaded to Flow)",
+  "lineart context: refs-src/page-05-full.png (uploaded to Flow)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; sweater mustard; slim build; silhouette bar present",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

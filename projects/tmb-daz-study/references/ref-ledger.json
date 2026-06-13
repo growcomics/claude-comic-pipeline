@@ -1,1 +1,53 @@
-{"characters": {}, "scene_ladders": {}}
+{
+  "characters": {
+    "zara": {
+      "face": {
+        "flow_id": "bfa41e6c-7f52-443f-80a0-b2379cffa4ca",
+        "disk": "references/characters/zara/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_zara-identity.receipt.json",
+          "audit": "qa/receipts/sheet_zara-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_zara-identity.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "fc400d892f6dec2b4083346f37486e8fc6846d3e5a5b565aab748f8a6787b827"
+        }
+      },
+      "turnaround_hoodie": {
+        "flow_id": "bfa41e6c-7f52-443f-80a0-b2379cffa4ca",
+        "disk": "references/characters/zara/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_zara-identity.receipt.json",
+          "audit": "qa/receipts/sheet_zara-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_zara-identity.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "fc400d892f6dec2b4083346f37486e8fc6846d3e5a5b565aab748f8a6787b827"
+        }
+      }
+    },
+    "mia": {
+      "face": {
+        "flow_id": "0fd1d666-ac23-4f8e-a162-d526fb085c1e",
+        "disk": "references/characters/mia/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_mia-identity.receipt.json",
+          "audit": "qa/receipts/sheet_mia-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_mia-identity.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "dbf039c9df34a5d500d6901e0e08160682cae8b4d096e24ca1d9541a592cf427"
+        }
+      },
+      "turnaround_sweater": {
+        "flow_id": "0fd1d666-ac23-4f8e-a162-d526fb085c1e",
+        "disk": "references/characters/mia/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_mia-identity.receipt.json",
+          "audit": "qa/receipts/sheet_mia-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_mia-identity.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "dbf039c9df34a5d500d6901e0e08160682cae8b4d096e24ca1d9541a592cf427"
+        }
+      }
+    }
+  },
+  "scene_ladders": {}
+}

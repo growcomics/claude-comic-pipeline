@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (`tmb-daz-study`: both identity sheets banked through the full gate chain)
+
+### Added
+
+- **Zara + Mia identity sheets generated, verdicted, and BANKED** (`projects/tmb-daz-study/`): lineart→photoreal-DAZ3D translation on Flow (PRO acct, $0). Each followed the complete protocol — compose receipt → independent audit (shas `fc400d89…`, `dbf039c9…`) → submit with exact attach list → fresh-context subagent verdict (both PASS, written to `qa/receipts/*.verdict.json`) → `bank.py` under face + turnaround ledger keys. Page `s01-01` composed + audited (`018ab464…`) and submitted (×4, NB2, 3:4).
+
+### Notes
+
+- Flow's **Nano Banana Pro daily cap** hit after the Zara sheet — all 4 Mia variants failed with "daily limit"; the rerun of the identical audited prompt on **Nano Banana 2** (the model compose.py's advisory specifies anyway) passed verdict. Model + aspect deviations (no 2:3 on Flow → 3:4) logged in `harvest/uuid-map.md`.
+- Laptop Chrome extension disconnected mid-run with `s01-01`'s ×4 render complete-but-unharvested in the PRO project; resumes at harvest → verdict → bank when a PRO-signed browser reconnects.
+
+---
+
 ## 2026-06-11 (gates re-blessed under user delegation + `tmb-daz-study` scaffold)
 
 ### Changed
