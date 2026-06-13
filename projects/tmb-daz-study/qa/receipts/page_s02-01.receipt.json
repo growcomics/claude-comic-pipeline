@@ -1,0 +1,16 @@
+{
+ "job": "page:s02-01",
+ "kind": "page",
+ "prompt_sha": "fab6f886bb02103f4545db98f7cbe07ae0b553f159e43bd9f1b74411bbb2bd0e",
+ "attach": [
+  "face:zara",
+  "turnaround:zara:turnaround_hoodie",
+  "prior:s01-01"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

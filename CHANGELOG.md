@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (`tmb-daz-study` COMPLETE — 3 photoreal-DAZ3D pages, full gate chain, lettered)
+
+### Added
+
+- **All 3 study pages generated, judged PASS, banked, and lettered.** s01 growth-event, s02 progressive-arm-ECU, s03 tower-reveal — each composed by `qa/compose.py`, independently audited, submitted on Flow (PRO, NB2, $0), judged by a fresh-context subagent, and banked. `verify_chain.py`: **7 chain-verified entries, zero chainless**. Lettered with original dialogue (`pages/lettered/`); 3-page sequence + source-vs-study deliverables in `harvest/`. New `FINDINGS.md` maps each page to the corpus finding it demonstrates.
+- **The gate caught a real miss**: s02 variant 1 was REJECTED by the judge for a calm stage-3 face (the exact dead-money-shot flaw the page exists to disprove); re-picked variant 3 (fierce gritted-teeth strain), which passed. Documented as the protocol working as designed — generator never graded its own work.
+
+### Notes
+
+- Flow NB-Pro daily cap forced NB2 for everything after the Zara sheet (NB2 is compose.py's advisory model regardless). Aspect deviations (Flow has no native 2:3 → 3:4) and every variant→pick media-id mapping logged in `harvest/uuid-map.md`.
+
+---
+
 ## 2026-06-12 (`tmb-daz-study` page 1 rendered, judged PASS, lettered — first finished study page)
 
 ### Added

@@ -1,1 +1,40 @@
-{"done": {}, "pending": ["s01-01", "s02-01", "s03-01"]}
+{
+  "done": {
+    "s01-01": {
+      "flow_id": "7a2bba76-8e89-4a3c-807d-888076cc2735",
+      "disk": "pages/panels/s01-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_s01-01.receipt.json",
+        "audit": "qa/receipts/page_s01-01.audit-pass",
+        "verdict": "qa/receipts/page_s01-01.verdict.json",
+        "verdict_tags": [
+          "angle"
+        ],
+        "prompt_sha": "018ab46436b844299c3140ce1502b5dd0d6b1176d86ae33906e954209a069045"
+      }
+    },
+    "s02-01": {
+      "flow_id": "3b0ecb59",
+      "disk": "pages/panels/s02-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_s02-01.receipt.json",
+        "audit": "qa/receipts/page_s02-01.audit-pass",
+        "verdict": "qa/receipts/page_s02-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "fab6f886bb02103f4545db98f7cbe07ae0b553f159e43bd9f1b74411bbb2bd0e"
+      }
+    },
+    "s03-01": {
+      "flow_id": "1d0e6fa7",
+      "disk": "pages/panels/s03-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_s03-01.receipt.json",
+        "audit": "qa/receipts/page_s03-01.audit-pass",
+        "verdict": "qa/receipts/page_s03-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "de1d7efc14f4fc25a9a385a7daaf65002de9e2c7c7f0caf1113bb8e1f2e055a4"
+      }
+    }
+  },
+  "pending": []
+}
