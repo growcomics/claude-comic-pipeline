@@ -1,0 +1,154 @@
+{
+  "pages": [
+    {
+      "id": "p01-01",
+      "camera": "wide-establish, high-angle",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p01-02",
+      "camera": "mcu, three-quarter",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p01-03",
+      "camera": "ecu-region, eye-level",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p01-04",
+      "camera": "cu, high-angle",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p02-01",
+      "camera": "wide-establish, high-angle",
+      "aspect": "9:16"
+    },
+    {
+      "id": "p02-02",
+      "camera": "ms, eye-level",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p02-03",
+      "camera": "cu, low-angle-front",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p03-01",
+      "camera": "wide-establish, aerial",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p04-01",
+      "camera": "ms, low-angle-front",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p04-02",
+      "camera": "mcu, three-quarter",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p04-03",
+      "camera": "ms, three-quarter",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p04-04",
+      "camera": "wide-establish, eye-level",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p05-01",
+      "camera": "ms, over-shoulder",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p05-02",
+      "camera": "mcu, two-shot",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p05-03",
+      "camera": "ms, profile",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p06-01",
+      "camera": "ms, three-quarter",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p06-02",
+      "camera": "wide-establish, eye-level",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p06-03",
+      "camera": "ms, three-quarter",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p07-01",
+      "camera": "cu, low-angle-front",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p07-02",
+      "camera": "cu, three-quarter",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p07-03",
+      "camera": "ms, over-shoulder",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p08-01",
+      "camera": "ms, eye-level",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p08-02",
+      "camera": "ecu-face, eye-level",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p08-03",
+      "camera": "ms, profile",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p09-01",
+      "camera": "ms, eye-level",
+      "aspect": "4:5"
+    },
+    {
+      "id": "p09-02",
+      "camera": "ms, three-quarter, motion",
+      "aspect": "16:9"
+    },
+    {
+      "id": "p09-03",
+      "camera": "mcu, two-shot",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p10-01",
+      "camera": "cu, eye-level",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p10-02",
+      "camera": "mcu, two-shot",
+      "aspect": "1:1"
+    },
+    {
+      "id": "p10-03",
+      "camera": "ms, low-angle-front",
+      "aspect": "16:9"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "project": "manila-bay-rising",
+  "characters": {
+    "hae-won": {
+      "face_card": "references/characters/hae-won/face-card.png",
+      "body_tiers": [
+        { "tier": 1, "path": "references/characters/hae-won/body-base.png", "lineup_required": false },
+        { "tier": 2, "path": "references/characters/hae-won/body-tier2.png", "lineup_required": true },
+        { "tier": 3, "path": "references/characters/hae-won/body-tier3.png", "lineup_required": true }
+      ],
+      "views": [
+        { "name": "3q-full", "tier": 1, "path": "references/characters/hae-won/view-3q-full.png", "lineup_required": false },
+        { "name": "profile", "tier": 1, "path": "references/characters/hae-won/view-profile.png", "lineup_required": false },
+        { "name": "back-full", "tier": 1, "path": "references/characters/hae-won/view-back-full.png", "lineup_required": false }
+      ]
+    },
+    "cel": {
+      "face_card": "references/characters/cel/face-card.png",
+      "body_tiers": [
+        { "tier": 1, "path": "references/characters/cel/body-base.png", "lineup_required": false },
+        { "tier": 2, "path": "references/characters/cel/body-tier2.png", "lineup_required": true },
+        { "tier": 3, "path": "references/characters/cel/body-tier3.png", "lineup_required": true }
+      ],
+      "views": [
+        { "name": "3q-full", "tier": 1, "path": "references/characters/cel/view-3q-full.png", "lineup_required": false },
+        { "name": "profile", "tier": 1, "path": "references/characters/cel/view-profile.png", "lineup_required": false },
+        { "name": "back-full", "tier": 1, "path": "references/characters/cel/view-back-full.png", "lineup_required": false }
+      ]
+    },
+    "dr-santos": {
+      "face_card": "references/characters/dr-santos/face-card.png",
+      "body_tiers": [
+        { "tier": 1, "path": "references/characters/dr-santos/body-base.png", "lineup_required": false }
+      ],
+      "views": [
+        { "name": "3q-full", "tier": 1, "path": "references/characters/dr-santos/view-3q-full.png", "lineup_required": false },
+        { "name": "profile", "tier": 1, "path": "references/characters/dr-santos/view-profile.png", "lineup_required": false }
+      ]
+    }
+  },
+  "locations": {
+    "up-manila-lab": {
+      "establishing": "references/locations/up-manila-lab/_source.jpg",
+      "reverse": "references/locations/up-manila-lab/_reverse.jpg"
+    },
+    "up-manila-ermita": {
+      "establishing": "references/locations/up-manila-ermita/_source.jpg"
+    },
+    "manila-bay-outfall": {
+      "establishing": "references/locations/manila-bay-outfall/_source.jpg",
+      "reverse": "references/locations/manila-bay-outfall/_reverse.jpg"
+    },
+    "manila-bay-sunset": {
+      "establishing": "references/locations/manila-bay-sunset/_source.jpg"
+    },
+    "manila-bay-dolomite-beach": {
+      "establishing": "references/locations/manila-bay-dolomite-beach/_source.jpg",
+      "reverse": "references/locations/manila-bay-dolomite-beach/_reverse.jpg"
+    },
+    "makati-skyline": {
+      "establishing": "references/locations/makati-skyline/_source.jpg"
+    },
+    "edsa": {
+      "establishing": "references/locations/edsa/_source.jpg"
+    },
+    "poblacion-night": {
+      "establishing": "references/locations/poblacion-night/_source.jpg"
+    },
+    "entertainment-city": {
+      "establishing": "references/locations/entertainment-city/_source.jpg"
+    },
+    "bayfront-hotel": {
+      "establishing": "references/locations/bayfront-hotel/_source.jpg",
+      "reverse": "references/locations/bayfront-hotel/_reverse.jpg"
+    }
+  },
+  "props": {
+    "bawal-lumangoy-sign": {
+      "path": "references/props/bawal-lumangoy-sign/_source.png",
+      "optional": false
+    },
+    "compound-vial": {
+      "path": "references/props/compound-vial/_source.png",
+      "optional": true
+    }
+  },
+  "notes": "Chapter 1 manifest. FMG growth arc: hae-won + cel carry body tiers 1 (baseline), 2 (first adrenaline spike, p9), 3 (cliffhanger reveal, p10). Tiers 2-3 require the 1-6 muscle-size lineup attachment (carries muscle scale + breast size/fullness only; surgical-scoped per L11). No tier >=6 in Ch1, so no tier-6/7/8/9 reinforcement refs yet. dr-santos is non-growing (tier 1 only). Locations gathered from internet refs then DAZ-converted (_source.jpg = DAZ3D establishing render per environment-references.md); reverse views (L14, 180 deg) only for the recurring hero locations. Higher tiers (4-9) arrive in later chapters with their own manifest extension."
+}

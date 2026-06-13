@@ -1,0 +1,20 @@
+{
+  "hae-won": {
+    "position": "foreground-left at the cordon, larger, mid-step over the rope",
+    "pose": "one hand pushing the rope down, the other out for balance, sandals left behind — exactly two hands",
+    "expression": "reluctant, grinning despite herself"
+  },
+  "cel": {
+    "position": "background-right, smaller, already past the cordon wading toward the water, half-turned to wave Hae-won on",
+    "pose": "one hand waving her forward, the other holding her pulled-off tank — exactly two hands",
+    "expression": "laughing, urging her on"
+  },
+  "spatial_rules": [
+    "Hae-won foreground-large crossing, Cel background-smaller ahead — strong depth stagger",
+    "diagonal axis across the cordon toward the water",
+    "both tier 1, same real height",
+    "prop rope cordon present; coverage preserved (swimsuit beneath Cel's removed tank)",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "distant streetlight glance, moonlight on the wet sand, night"
+}

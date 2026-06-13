@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-13 (`manila-bay-rising` — new project scaffold + location reference gather)
+
+### Added
+
+- **New project `manila-bay-rising`** (Metro Manila FMG growth story; companion to the Natal/Brazil pairing). Project text scaffolded: `brief.md`; `shotlist.json` + `shotlist.md` (Ch.1 "Forbidden Zone", 10 pages / 30 panels, camera-variety validated — 7 distance × 9 angle categories, ≤3 panels per combo); `references_required.json` manifest (3 characters with body tiers 1–3, 10 locations, 2 props). Cast: Seo Hae-won (Korean tourist), Maricel "Cel" Reyes (morena Manileña, Poblacion bar staff), Dr. Elena Santos (UP Manila biochem).
+- **Manifest-driven location reference gather**: 36 full-res, QA'd, provenance-logged images across all 10 locations + 2 BABALA-format style refs for the bawal-lumangoy-sign prop. Per-subject `_provenance.md` + `_contact-sheet.md`; project `references/_completeness.md` tracks per-location status and the remaining generation half (DAZ `_source.*` conversion + character refs, pending Flow sign-in). Gathered via Google Images click-through + embedded-URL scrape (no thumbnails); watermarked images flagged for comp/typography use only. `poblacion-night` (2) and `up-manila-lab` (2, generic) flagged for top-up at generation.
+- **Built the Ch1 generation-gate `qa/` chain** for `manila-bay-rising` (adapted from the proven `not-so-supra-man` chain; required before ANY panel can be generated per the CLAUDE.md protocol). Six guarded scripts (`integrity`, `compose`, `audit_prompt`, `bank`, `preflight`, `verify_chain`) + data specs: `references/turnaround-specs.json` (18 character sheets + 14 location/scene DAZ-conversion specs), `pages-plan.json` (30 panels, camera+aspect), `references/ref-ledger.json` skeleton, `pages-log.json` (30 pending), 15 multi-character `qa/staging/*.json`, and `shotlist.json` enriched in place with per-panel `costume_state` + `muscle_size_tier`. Ch1-scoped (max tier 3, no t9/anchor machinery). New seams closed vs the source chain: a `scene:<location>` job kind (compose + bank + verify_chain) for single-rung DAZ scene refs, and a character-aware audit min-ref rule so character-less establishing panels (scene-only) pass. Validated: all scripts ast-clean, all JSON loads, integrity-stubbed dry-run confirms the gate refuses unbanked-ref pages and composes a tier-3 two-character page correctly. **Blessing the manifest (`integrity.py --rebless`) is user-only and still pending** — see `projects/manila-bay-rising/GENERATION-RUNBOOK.md` for the full bless→scenes→sheets→panels→letter→PDF order.
+
+---
+
 ## 2026-06-12 (`tmb-daz-study` COMPLETE — 3 photoreal-DAZ3D pages, full gate chain, lettered)
 
 ### Added

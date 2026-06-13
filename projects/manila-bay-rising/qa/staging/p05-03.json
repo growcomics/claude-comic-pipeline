@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-right in near silhouette, larger, facing out toward the sea then half-turning to Hae-won",
+    "pose": "knees up, arms loosely wrapped around her shins — exactly two hands resting on her own forearms",
+    "expression": "thoughtful half-smile, mostly read in silhouette"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, smaller and set back, profile to camera",
+    "pose": "one hand planted on the breakwater, the other resting on her knee — exactly two hands",
+    "expression": "contemplative, lips parted to answer"
+  },
+  "spatial_rules": [
+    "dusk silhouettes with depth stagger, Cel nearer/larger",
+    "profile axis runs on a diagonal toward the dropping sun",
+    "both tier 1, same real height",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "dusk afterglow, figures near-silhouetted against the orange-red sky"
+}

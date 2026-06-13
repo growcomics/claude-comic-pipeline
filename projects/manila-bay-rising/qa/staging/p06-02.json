@@ -1,0 +1,19 @@
+{
+  "hae-won": {
+    "position": "foreground-left at the jeepney window, larger, near camera, looking out",
+    "pose": "both hands on the window edge, leaning to look out — exactly two hands",
+    "expression": "awed, slightly wary"
+  },
+  "cel": {
+    "position": "mid-ground-right beside her, smaller in the cramped jeepney interior, also looking out past her",
+    "pose": "one hand braced on the seat rail, the other pointing out at the casino strip — exactly two hands",
+    "expression": "knowing grin"
+  },
+  "spatial_rules": [
+    "interior depth stagger, Hae-won nearer the window and larger",
+    "diagonal sightline out to the casino glow across the bay",
+    "both tier 1, same real height",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "gold-and-purple casino glow through the window, dim jeepney interior"
+}

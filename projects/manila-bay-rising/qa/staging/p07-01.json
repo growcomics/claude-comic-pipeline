@@ -1,0 +1,20 @@
+{
+  "hae-won": {
+    "position": "mid-ground-left, smaller, looking up at the looming sign",
+    "pose": "one hand lifting toward the sign, other hand at her side — exactly two hands",
+    "expression": "reading it, half-nervous"
+  },
+  "cel": {
+    "position": "foreground-right under the sign, larger and nearer camera",
+    "pose": "one hand already on the rope cordon, the other on her hip — exactly two hands",
+    "expression": "unbothered smirk"
+  },
+  "spatial_rules": [
+    "low-angle so the bawal-lumangoy sign looms largest, figures depth-staggered beneath it",
+    "diagonal axis up the leaning sign post",
+    "both tier 1, same real height",
+    "prop bawal-lumangoy sign + rope cordon present and legible",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "hard cool pool of a distant streetlight on the sign, surrounding night dark"
+}

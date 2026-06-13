@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-right on the breakwater, nearer camera and a touch larger",
+    "pose": "seated on the breakwater, leaning back on her left hand, right hand offering a bottle — exactly two hands",
+    "expression": "easy warm grin"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, slightly back and smaller, seated turned toward Cel",
+    "pose": "both hands cupping the two bottles she just bought in her lap — exactly two hands",
+    "expression": "shy pleased smile"
+  },
+  "spatial_rules": [
+    "seated two-shot with depth stagger, Cel nearer camera",
+    "diagonal seated axis along the breakwater, not a flat horizontal line",
+    "both tier 1, same real height",
+    "4 hands total, all accounted: Cel's brace hand + offering hand, Hae-won's two hands on bottles"
+  ],
+  "lighting": "golden-hour rim light off the water, soft fill on faces"
+}

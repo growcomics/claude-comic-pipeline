@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-right in the narrow alley, larger and nearer camera, now clearly the taller of the two",
+    "pose": "one hand braced on the alley wall catching her breath, the other on her own stretched tank — exactly two hands",
+    "expression": "panting, dawning astonishment"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, smaller in the depth-staggered alley, looking up at Cel",
+    "pose": "both hands on her knees, bent, catching her breath — exactly two hands",
+    "expression": "wide-eyed realization"
+  },
+  "spatial_rules": [
+    "tight alley depth stagger, Cel nearer/larger",
+    "diagonal alley axis",
+    "BOTH tier 2: visibly taller and fuller, seams stretched, per the attached tier-2 turnarounds; coverage of chest and hips fully intact",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "single warm bar-sign glow spilling into the dark alley, night"
+}

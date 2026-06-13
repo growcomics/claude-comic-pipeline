@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-right, larger, nearer camera, already pivoting to run",
+    "pose": "one hand grabbing Hae-won's wrist, the other thrown up shielding her eyes from the flashlight — exactly two hands",
+    "expression": "alarmed, shouting"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, smaller, frozen mid-turn",
+    "pose": "one wrist caught in Cel's grip, the other hand up against the glare — exactly two hands",
+    "expression": "startled, frightened"
+  },
+  "spatial_rules": [
+    "depth stagger, Cel nearer/larger pulling Hae-won; the guard's flashlight beam rakes in from frame edge — NO guard figure in frame, only the beam",
+    "diagonal flee-axis away from the boardwalk",
+    "both still tier 1, same real height",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "harsh raking flashlight beam from off-frame, otherwise dark night sand"
+}

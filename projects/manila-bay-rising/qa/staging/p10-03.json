@@ -1,0 +1,20 @@
+{
+  "hae-won": {
+    "position": "foreground-left, larger, nearer the low camera, framed against the bay window",
+    "pose": "one hand on her hip, the other half-raised toward the casino glow outside — exactly two hands",
+    "expression": "grinning at a dawning idea"
+  },
+  "cel": {
+    "position": "mid-ground-right, slightly smaller by depth, beside her facing the same window",
+    "pose": "both arms folded across her chest, confident — exactly two hands",
+    "expression": "matching scheming grin"
+  },
+  "spatial_rules": [
+    "low-angle to sell the new scale, depth stagger Hae-won foreground-large",
+    "diagonal axis toward the distant casino glow through the window",
+    "BOTH tier 3: taller and fuller per the attached tier-3 turnarounds; only muscle/fullness grows, height per the tier lineup never beyond it",
+    "seams strained, coverage of chest and hips fully intact",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "low warm key from below, cool bay-window night with distant gold casino glow"
+}

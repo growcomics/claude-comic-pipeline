@@ -1,0 +1,20 @@
+{
+  "cel": {
+    "position": "foreground-right, larger, nearer camera, waist-deep",
+    "pose": "both hands skimming the water surface to splash — exactly two hands",
+    "expression": "gleeful, head tipped back"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, smaller, waist-deep and set back",
+    "pose": "both hands raised against the splash, water beading on her skin — exactly two hands",
+    "expression": "laughing, eyes half-shut"
+  },
+  "spatial_rules": [
+    "depth stagger in the water, Cel nearer/larger",
+    "diagonal axis along the dark outfall plume",
+    "both tier 1, same real height; the faint blue-green sheen catches moonlight on their skin",
+    "coverage intact, waist-deep framing",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "moonlight on the water, faint blue-green sheen glinting on wet skin, night"
+}

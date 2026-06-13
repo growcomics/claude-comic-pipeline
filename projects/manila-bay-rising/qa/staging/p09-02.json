@@ -1,0 +1,20 @@
+{
+  "hae-won": {
+    "position": "foreground-left, larger, nearer camera, mid-sprint stride",
+    "pose": "arms pumping in a run, one hand clawing at her tightening dress shoulder, the other driving forward — exactly two hands",
+    "expression": "terrified-exhilarated, mouth open shouting"
+  },
+  "cel": {
+    "position": "mid-ground-right, smaller, sprinting a step ahead-and-back on the diagonal",
+    "pose": "both arms pumping in full run — exactly two hands",
+    "expression": "wild adrenaline grin"
+  },
+  "spatial_rules": [
+    "motion depth stagger across the dolomite sand, Hae-won foreground-large",
+    "diagonal sprint axis",
+    "BOTH now tier 2: visibly fuller and a touch taller per the attached tier-2 turnarounds; growth driven by camera-staged scale per the turnaround, NOT distortion",
+    "garments strain at shoulders and thighs, seams stretched, coverage of chest and hips fully intact",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "cool moonlight, motion blur on the sand, night"
+}

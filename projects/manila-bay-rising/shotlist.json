@@ -1,0 +1,1037 @@
+{
+  "project": "manila-bay-rising",
+  "version": 1,
+  "chapter": 1,
+  "chapter_title": "Forbidden Zone",
+  "page_count": 10,
+  "cast": [
+    {
+      "id": "hae-won",
+      "name": "Seo Hae-won",
+      "ref_folder": "references/characters/hae-won/",
+      "soul_id": null,
+      "wardrobe": "fair-skinned Korean woman, late 20s; cream linen sundress, wide-brim straw sun hat, tan crossbody bag, flat sandals; small gold studs; light natural makeup",
+      "notes": "Tourist. Baseline tier 1. Grows across the arc on emotional spikes."
+    },
+    {
+      "id": "cel",
+      "name": "Maricel \"Cel\" Reyes",
+      "ref_folder": "references/characters/cel/",
+      "soul_id": null,
+      "wardrobe": "morena (brown-skinned) Filipina, mid 20s; black ribbed tank top, high-waist denim cutoffs, hoop earrings, worn white sneakers, friendship bracelets; hair in a low messy bun",
+      "notes": "Local. Bar staff in Poblacion, hustles near the bay. Baseline tier 1. Grows across the arc."
+    },
+    {
+      "id": "dr-santos",
+      "name": "Dr. Elena Santos",
+      "ref_folder": "references/characters/dr-santos/",
+      "soul_id": null,
+      "wardrobe": "Filipina woman, early 50s; white lab coat over a teal blouse, ID lanyard, rimless glasses, hair in a neat low ponytail with grey streaks",
+      "notes": "UP Manila biochem researcher (sarcopenia compound). Non-growing. Tier 1 only."
+    }
+  ],
+  "props": [
+    {
+      "id": "bawal-lumangoy-sign",
+      "description": "weathered metal warning sign on a leaning post: 'BAWAL LUMANGOY / NO SWIMMING', red text on white, rust streaks, zip-tied to a rope cordon",
+      "ref_folder": "references/props/bawal-lumangoy-sign/"
+    },
+    {
+      "id": "compound-vial",
+      "description": "small amber serum vial with a typed UP Manila lab label, rubber stopper, faint blue-green fluid",
+      "ref_folder": "references/props/compound-vial/"
+    }
+  ],
+  "locations": [
+    {
+      "id": "up-manila-lab",
+      "description": "UP Manila health-sciences research lab interior; stainless benches, fume hood, centrifuge, sample fridges, fluorescent light, late-night blue cast through blinds",
+      "ref_folder": "references/locations/up-manila-lab/"
+    },
+    {
+      "id": "up-manila-ermita",
+      "description": "UP Manila campus exterior in Ermita, mid-century concrete academic buildings, acacia trees, jeepneys on Padre Faura, daytime tropical haze",
+      "ref_folder": "references/locations/up-manila-ermita/"
+    },
+    {
+      "id": "manila-bay-outfall",
+      "description": "cordoned-off stretch of Manila Bay shoreline; concrete storm outfall pipe discharging grey runoff into the sea, rope cordon, bawal-lumangoy sign, dusk",
+      "ref_folder": "references/locations/manila-bay-outfall/"
+    },
+    {
+      "id": "manila-bay-sunset",
+      "description": "Manila Bay at golden hour; orange-red sky, silhouetted cargo ships and bancas, breakwater rocks, crowds along the baywalk",
+      "ref_folder": "references/locations/manila-bay-sunset/"
+    },
+    {
+      "id": "manila-bay-dolomite-beach",
+      "description": "the artificial white-sand (dolomite) beach on Manila Baywalk; pale crushed-stone sand, low wave breakers, Roxas Boulevard palms and lampposts behind",
+      "ref_folder": "references/locations/manila-bay-dolomite-beach/"
+    },
+    {
+      "id": "makati-skyline",
+      "description": "Makati CBD skyline; glass towers, RCBC/PBCom/GT towers, evening lights, money-and-heat haze",
+      "ref_folder": "references/locations/makati-skyline/"
+    },
+    {
+      "id": "edsa",
+      "description": "EDSA highway at rush hour; bumper-to-bumper traffic, buses and jeepneys, MRT line overhead, billboards, smog and noise",
+      "ref_folder": "references/locations/edsa/"
+    },
+    {
+      "id": "poblacion-night",
+      "description": "Poblacion Makati nightlife strip; neon bar signs, string lights, rooftop bars, crowded narrow streets, warm night glow",
+      "ref_folder": "references/locations/poblacion-night/"
+    },
+    {
+      "id": "entertainment-city",
+      "description": "Entertainment City reclamation at night; Solaire / City of Dreams casino facades, fountains, gold-and-purple light spill across the bay",
+      "ref_folder": "references/locations/entertainment-city/"
+    },
+    {
+      "id": "bayfront-hotel",
+      "description": "mid-rise bayfront hotel on Roxas Boulevard; room with floor-to-ceiling window facing Manila Bay, neutral modern decor, balcony",
+      "ref_folder": "references/locations/bayfront-hotel/"
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "wide",
+          "characters": [],
+          "location": "up-manila-lab",
+          "time_of_day": "night",
+          "weather": "indoor",
+          "camera": "wide-establish, high-angle",
+          "action": "Empty UP Manila lab at 2 a.m. Centrifuge spinning, racks of amber vials glowing under blue blinds-light.",
+          "dialogue": [],
+          "captions": [
+            "UP Manila. Health Sciences. Ermita.",
+            "2:14 A.M."
+          ],
+          "sfx": [
+            {
+              "text": "hummmm",
+              "source": "centrifuge"
+            }
+          ],
+          "notes": "Cold open. Establish the origin lab. Foreboding, clinical.",
+          "continuity_refs": [],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        },
+        {
+          "panel_id": "p01-02",
+          "size": "standard",
+          "characters": [
+            "dr-santos"
+          ],
+          "location": "up-manila-lab",
+          "time_of_day": "night",
+          "weather": "indoor",
+          "camera": "mcu, three-quarter",
+          "action": "Dr. Santos, exhausted, holds a compound-vial to the light and makes a note on a tablet.",
+          "dialogue": [
+            {
+              "character": "dr-santos",
+              "text": "Batch nine. If the muscle uptake holds, we change how the old grow old.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Establish the sarcopenia compound and her hope. Sympathetic, not villainous.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "costume_state": "dr-santos: lab coat over teal blouse, intact",
+          "muscle_size_tier": {
+            "dr-santos": 1
+          }
+        },
+        {
+          "panel_id": "p01-03",
+          "size": "standard",
+          "characters": [
+            "dr-santos"
+          ],
+          "location": "up-manila-lab",
+          "time_of_day": "night",
+          "weather": "indoor",
+          "camera": "ecu-region, eye-level",
+          "action": "Her elbow clips a rack. A tray of vials tips; one shatters on the floor, fluid spreading toward a floor drain.",
+          "dialogue": [
+            {
+              "character": "dr-santos",
+              "text": "No—",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KLINK-SHHH",
+              "source": "glass shatter and spill"
+            }
+          ],
+          "notes": "The spill. ECU on the breaking vial + drain. This is the inciting accident.",
+          "continuity_refs": [
+            "p01-02"
+          ],
+          "costume_state": "dr-santos: lab coat over teal blouse, intact",
+          "muscle_size_tier": {
+            "dr-santos": 1
+          }
+        },
+        {
+          "panel_id": "p01-04",
+          "size": "wide",
+          "characters": [
+            "dr-santos"
+          ],
+          "location": "up-manila-lab",
+          "time_of_day": "night",
+          "weather": "indoor",
+          "camera": "cu, high-angle",
+          "action": "Santos kneels with paper towels, but the blue-green fluid has already run into the floor drain. She stares at the grate.",
+          "dialogue": [
+            {
+              "character": "dr-santos",
+              "text": "...The drain goes to the estuary.",
+              "type": "thought"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Dread beat. She realizes where it went. End page on the drain.",
+          "continuity_refs": [
+            "p01-03"
+          ],
+          "costume_state": "dr-santos: lab coat over teal blouse, intact",
+          "muscle_size_tier": {
+            "dr-santos": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "size": "tall",
+          "characters": [],
+          "location": "up-manila-ermita",
+          "time_of_day": "dawn",
+          "weather": "clear",
+          "camera": "wide-establish, high-angle",
+          "action": "Bird's-eye: campus drainage canal carries a faint blue-green sheen out past Padre Faura toward the bay.",
+          "dialogue": [],
+          "captions": [
+            "The drain goes to the estuary."
+          ],
+          "sfx": [],
+          "notes": "Begin the runoff journey. Visual continuity: the blue-green tint.",
+          "continuity_refs": [
+            "p01-04"
+          ],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        },
+        {
+          "panel_id": "p02-02",
+          "size": "wide",
+          "characters": [],
+          "location": "manila-bay-outfall",
+          "time_of_day": "dawn",
+          "weather": "overcast",
+          "camera": "ms, eye-level",
+          "action": "A concrete storm outfall pipe discharges grey runoff into the bay shallows; the blue-green sheen blends into the plume.",
+          "dialogue": [],
+          "captions": [
+            "The estuary goes to the bay."
+          ],
+          "sfx": [
+            {
+              "text": "gush",
+              "source": "outfall discharge"
+            }
+          ],
+          "notes": "The delivery route arrives at the bay. The contaminated zone.",
+          "continuity_refs": [
+            "p02-01"
+          ],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        },
+        {
+          "panel_id": "p02-03",
+          "size": "wide",
+          "characters": [],
+          "location": "manila-bay-outfall",
+          "time_of_day": "dawn",
+          "weather": "overcast",
+          "camera": "cu, low-angle-front",
+          "action": "Close on the leaning bawal-lumangoy sign and rope cordon staked into the wet sand at the outfall.",
+          "dialogue": [],
+          "captions": [
+            "And the bay does not care who is warned."
+          ],
+          "sfx": [],
+          "notes": "Plant the sign + cordon as a Chekhov prop. They'll cross it on p7.",
+          "continuity_refs": [
+            "p02-02"
+          ],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "size": "splash",
+          "characters": [],
+          "location": "makati-skyline",
+          "time_of_day": "dusk",
+          "weather": "hazy",
+          "camera": "wide-establish, aerial",
+          "action": "Splash: Metro Manila at dusk. Makati glass towers blaze; EDSA's river of taillights; casino glow far out on the bay.",
+          "dialogue": [],
+          "captions": [
+            "METRO MANILA.",
+            "Money and heat. The city never lowers its voice."
+          ],
+          "sfx": [],
+          "notes": "World-establish splash. Sells the setting. Carries the casino glow on the horizon for later.",
+          "continuity_refs": [],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "size": "standard",
+          "characters": [],
+          "location": "edsa",
+          "time_of_day": "afternoon",
+          "weather": "hazy",
+          "camera": "ms, low-angle-front",
+          "action": "An airport taxi crawls in EDSA gridlock under giant billboards; jeepneys box it in.",
+          "dialogue": [],
+          "captions": [
+            "She came for a sunset."
+          ],
+          "sfx": [
+            {
+              "text": "BEEEP",
+              "source": "jeepney horn"
+            }
+          ],
+          "notes": "Introduce Hae-won via her ride in. Don't show her face yet.",
+          "continuity_refs": [],
+          "costume_state": "",
+          "muscle_size_tier": {}
+        },
+        {
+          "panel_id": "p04-02",
+          "size": "standard",
+          "characters": [
+            "hae-won"
+          ],
+          "location": "bayfront-hotel",
+          "time_of_day": "afternoon",
+          "weather": "clear",
+          "camera": "mcu, three-quarter",
+          "action": "Hae-won pulls a curtain aside in her hotel room; the bay opens up in the window, light on her face.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "Okay. Worth the flight already.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "First clear look at Hae-won. Tourist delight. Tier 1 baseline.",
+          "continuity_refs": [],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact",
+          "muscle_size_tier": {
+            "hae-won": 1
+          }
+        },
+        {
+          "panel_id": "p04-03",
+          "size": "wide",
+          "characters": [
+            "hae-won"
+          ],
+          "location": "manila-bay-dolomite-beach",
+          "time_of_day": "golden-hour",
+          "weather": "clear",
+          "camera": "ms, three-quarter",
+          "action": "Hae-won walks the pale dolomite beach, sandals in hand, phone up for the sunset, hat brim catching the light.",
+          "dialogue": [],
+          "captions": [
+            "The famous white sand. The famous sky."
+          ],
+          "sfx": [],
+          "notes": "Establish the dolomite beach + her at it. Golden hour key light.",
+          "continuity_refs": [
+            "p04-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact",
+          "muscle_size_tier": {
+            "hae-won": 1
+          }
+        },
+        {
+          "panel_id": "p04-04",
+          "size": "wide",
+          "characters": [
+            "hae-won"
+          ],
+          "location": "manila-bay-sunset",
+          "time_of_day": "golden-hour",
+          "weather": "clear",
+          "camera": "wide-establish, eye-level",
+          "action": "Silhouette wide: Hae-won small against the burning bay, cargo ships on the horizon, crowd along the baywalk.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "The sunset payoff. Pure setting beauty before the meet.",
+          "continuity_refs": [
+            "p04-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact",
+          "muscle_size_tier": {
+            "hae-won": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-sunset",
+          "time_of_day": "golden-hour",
+          "weather": "clear",
+          "camera": "ms, over-shoulder",
+          "action": "Cel, balancing a tray of bottled drinks she's hawking, nearly bumps Hae-won; both catch a falling bottle.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "Whoa—nice hands, ate. You play volleyball?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "The meet-cute. Fair tourist + morena local. Stagger depth: Cel foreground, Hae-won mid.",
+          "continuity_refs": [
+            "p04-04"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p05-02",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-sunset",
+          "time_of_day": "golden-hour",
+          "weather": "clear",
+          "camera": "mcu, two-shot",
+          "action": "They laugh. Hae-won buys two bottles she doesn't need; Cel sits on the breakwater beside her.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "First time here. I don't really know anyone.",
+              "type": "balloon"
+            },
+            {
+              "character": "cel",
+              "text": "Lucky. Now you know me. I'm Cel.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Chemistry established. Keep it warm.",
+          "continuity_refs": [
+            "p05-01"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p05-03",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-sunset",
+          "time_of_day": "dusk",
+          "weather": "clear",
+          "camera": "ms, profile",
+          "action": "Two silhouettes on the breakwater as the sun drops, talking, the crowd thinning behind them.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "You want to see the real Manila? Not this postcard one?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Transition hook into the night tour.",
+          "continuity_refs": [
+            "p05-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "poblacion-night",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, three-quarter",
+          "action": "Cel pulls Hae-won through the neon Poblacion crowd, string lights overhead, both grinning.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "This is my block. I pour drinks two streets over.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "Poblacion."
+          ],
+          "sfx": [
+            {
+              "text": "thump thump",
+              "source": "bar bass"
+            }
+          ],
+          "notes": "Cel's world. Nightlife energy. Sets up the 'hunting highs' premise visually.",
+          "continuity_refs": [
+            "p05-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p06-02",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "entertainment-city",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "wide-establish, eye-level",
+          "action": "From a jeepney window, the casino strip of Entertainment City blazes gold and purple across the reclaimed bay.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "It's like the city is daring you to do something stupid.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Foreshadow. Establish Entertainment City for later high-hunting.",
+          "continuity_refs": [
+            "p06-01"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p06-03",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-dolomite-beach",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, three-quarter",
+          "action": "Back at the bay near midnight, shoes off on the dolomite sand, the water black and glassy ahead.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "Come on. Nobody's watching. The water's warm.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Drift toward the forbidden swim. Lower the inhibition.",
+          "continuity_refs": [
+            "p06-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07-01",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "cu, low-angle-front",
+          "action": "They reach the rope cordon. The bawal-lumangoy sign looms, lit by a far streetlight.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "'Bawal lumangoy.' That means no swimming, right?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Payoff the planted sign. Camera echoes p02-03.",
+          "continuity_refs": [
+            "p02-03",
+            "p06-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p07-02",
+          "size": "standard",
+          "characters": [
+            "cel"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "cu, three-quarter",
+          "action": "Cel, grinning, lifts the rope and ducks under it, already pulling her tank top off over a swimsuit.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "It means it's empty. Race you to the buoy.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Cel crosses the line first. Keep coverage (swimsuit underneath, always_clothed).",
+          "continuity_refs": [
+            "p07-01"
+          ],
+          "costume_state": "cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p07-03",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, over-shoulder",
+          "action": "Hae-won hesitates at the cordon, then steps over it to follow, sandals left in the sand.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "This is so dumb. Wait for me!",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "They ignored the sign."
+          ],
+          "sfx": [],
+          "notes": "The point of no return. Both now past the cordon.",
+          "continuity_refs": [
+            "p07-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08-01",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, eye-level",
+          "action": "Waist-deep, they splash and laugh near the dark outfall plume; the blue-green sheen catches moonlight on their skin.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "See? Best water in the city. All ours.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "splash",
+              "source": "swimming"
+            }
+          ],
+          "notes": "Skin contact with contaminated water. The dose. Show the sheen on skin.",
+          "continuity_refs": [
+            "p07-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p08-02",
+          "size": "standard",
+          "characters": [
+            "hae-won"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ecu-face, eye-level",
+          "action": "ECU on Hae-won: a sudden odd warmth, a flicker of confusion, water beading on her cheek.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "Do you feel that? Like... pins and needles.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "First physiological cue. Subtle. Tier still 1.",
+          "continuity_refs": [
+            "p08-01"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact",
+          "muscle_size_tier": {
+            "hae-won": 1
+          }
+        },
+        {
+          "panel_id": "p08-03",
+          "size": "standard",
+          "characters": [
+            "cel"
+          ],
+          "location": "manila-bay-outfall",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, profile",
+          "action": "Cel shrugs it off, wading back toward shore, wringing out her hair.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "It's just cold. Don't be dramatic, tourist.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Dismiss the cue. Set up the reveal landing harder on p9-10.",
+          "continuity_refs": [
+            "p08-02"
+          ],
+          "costume_state": "cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "cel": 1
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09-01",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-dolomite-beach",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, eye-level",
+          "action": "Dripping on the sand, they freeze as a security guard's flashlight sweeps toward them from the boardwalk.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "Guard. Go go go—run!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "FWEEEET",
+              "source": "guard whistle"
+            }
+          ],
+          "notes": "The adrenaline trigger: fear/thrill spike. This is what fires the growth.",
+          "continuity_refs": [
+            "p08-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, intact; cel: black ribbed tank + denim cutoffs, intact",
+          "muscle_size_tier": {
+            "hae-won": 1,
+            "cel": 1
+          }
+        },
+        {
+          "panel_id": "p09-02",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "manila-bay-dolomite-beach",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, three-quarter, motion",
+          "action": "They sprint across the dolomite sand, hearts pounding, laughing-terrified. Mid-stride, their clothes pull tight at the shoulders and thighs.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "Cel—my dress—it's getting tight!",
+              "type": "shout"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "First visible growth under adrenaline. Tier 2. Garments strain (coverage preserved).",
+          "continuity_refs": [
+            "p09-01"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, strained/seams stretched (coverage intact); cel: black ribbed tank + denim cutoffs, strained/seams stretched (coverage intact)",
+          "muscle_size_tier": {
+            "hae-won": 2,
+            "cel": 2
+          }
+        },
+        {
+          "panel_id": "p09-03",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "poblacion-night",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "mcu, two-shot",
+          "action": "Ducking into a dark Poblacion alley, panting, they look at each other—both visibly taller, fuller, seams stretched.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "...Ate. Why are you looking up at me less?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "They notice the change on each other. Tier 2 hold. Stagger depth in the alley.",
+          "continuity_refs": [
+            "p09-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, strained/seams stretched (coverage intact); cel: black ribbed tank + denim cutoffs, strained/seams stretched (coverage intact)",
+          "muscle_size_tier": {
+            "hae-won": 2,
+            "cel": 2
+          }
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10-01",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "bayfront-hotel",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "cu, eye-level",
+          "action": "Hotel room. Hae-won stands against the door frame she measured at check-in; her head now clears the old mark by inches.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "I was here. This morning. I was *here*.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Concrete proof of growth. Tier 2-3. Quiet awe.",
+          "continuity_refs": [
+            "p09-03"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, strained/seams stretched (coverage intact); cel: black ribbed tank + denim cutoffs, strained/seams stretched (coverage intact)",
+          "muscle_size_tier": {
+            "hae-won": 2,
+            "cel": 2
+          }
+        },
+        {
+          "panel_id": "p10-02",
+          "size": "standard",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "bayfront-hotel",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "mcu, two-shot",
+          "action": "Cel flexes an arm experimentally; the muscle swells as her pulse jumps with excitement.",
+          "dialogue": [
+            {
+              "character": "cel",
+              "text": "Every time my heart races... it happens again. Watch.",
+              "type": "balloon"
+            },
+            {
+              "character": "cel",
+              "text": "I got scared, I grew. I get excited—",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "They CLOCK THE PATTERN: emotion spike = growth. Tier 3 micro-spike on the flex.",
+          "continuity_refs": [
+            "p10-01"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, strained/seams stretched (coverage intact); cel: black ribbed tank + denim cutoffs, strained/seams stretched (coverage intact)",
+          "muscle_size_tier": {
+            "hae-won": 3,
+            "cel": 3
+          }
+        },
+        {
+          "panel_id": "p10-03",
+          "size": "wide",
+          "characters": [
+            "hae-won",
+            "cel"
+          ],
+          "location": "bayfront-hotel",
+          "time_of_day": "night",
+          "weather": "clear",
+          "camera": "ms, low-angle-front",
+          "action": "Low angle: the two of them, taller and fuller, framed against the bay window and the distant casino glow, grinning at a dawning idea.",
+          "dialogue": [
+            {
+              "character": "hae-won",
+              "text": "Then this city is full of ways to feel something.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "They went hunting highs."
+          ],
+          "sfx": [],
+          "notes": "Chapter-1 button. Low angle to sell the new scale. Casino glow = the playground ahead. Tier 3 close.",
+          "continuity_refs": [
+            "p10-02"
+          ],
+          "costume_state": "hae-won: cream linen sundress + straw sun hat, strained/seams stretched (coverage intact); cel: black ribbed tank + denim cutoffs, strained/seams stretched (coverage intact)",
+          "muscle_size_tier": {
+            "hae-won": 3,
+            "cel": 3
+          }
+        }
+      ]
+    }
+  ]
+}

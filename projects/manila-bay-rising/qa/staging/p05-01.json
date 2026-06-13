@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-left, close to camera and largest in frame, body angled in toward Hae-won on a diagonal",
+    "pose": "balancing a drink tray on her left hand at shoulder height; right hand shooting out to catch the falling bottle — exactly two hands, both her own",
+    "expression": "surprised delighted grin"
+  },
+  "hae-won": {
+    "position": "mid-ground-right, set back and smaller than Cel, turned three-quarter toward her",
+    "pose": "right hand also darting up to catch the same bottle, left hand clutching her sun hat brim — exactly two hands, both her own",
+    "expression": "startled wide-eyed half-laugh"
+  },
+  "spatial_rules": [
+    "Cel foreground-large, Hae-won mid-ground-smaller — staggered depth, not a flat eye-line",
+    "diagonal axis between them, apparent size difference from camera depth not from height change",
+    "both at tier 1, same real height",
+    "4 hands total, all accounted: Cel's tray hand + catching hand, Hae-won's catching hand + hat hand"
+  ],
+  "lighting": "warm golden-hour key from the low sun, long shadows on the baywalk"
+}

@@ -1,0 +1,19 @@
+{
+  "cel": {
+    "position": "foreground-right on the dark dolomite sand, larger, half-turned back to Hae-won, beckoning toward the black water",
+    "pose": "shoes dangling from her left hand, right hand beckoning — exactly two hands",
+    "expression": "daring playful smile"
+  },
+  "hae-won": {
+    "position": "mid-ground-left, smaller, hanging back on the sand",
+    "pose": "both hands hugging her own elbows, hesitating — exactly two hands",
+    "expression": "uncertain, tempted"
+  },
+  "spatial_rules": [
+    "depth stagger, Cel nearer the water and larger, Hae-won set back",
+    "diagonal axis from Hae-won toward the glassy water past Cel",
+    "both tier 1, same real height",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "low warm boardwalk lamplight behind, the bay black and glassy ahead, night"
+}

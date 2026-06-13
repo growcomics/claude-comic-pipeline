@@ -1,0 +1,19 @@
+{
+  "hae-won": {
+    "position": "foreground-center against the hotel door frame, larger, near camera",
+    "pose": "one hand flat on the door frame at the old check-in mark now below her crown, the other touching the top of her own head — exactly two hands",
+    "expression": "quiet awe, lips parted"
+  },
+  "cel": {
+    "position": "mid-ground-right, smaller, watching from deeper in the room",
+    "pose": "both hands loosely crossed, leaning on the wall — exactly two hands",
+    "expression": "amazed, still"
+  },
+  "spatial_rules": [
+    "depth stagger, Hae-won foreground-large at the frame, Cel set back",
+    "the door-frame measuring mark gives concrete proof of growth",
+    "BOTH tier 2: taller and fuller per the attached tier-2 turnarounds; seams strained, coverage intact",
+    "4 hands total, all accounted"
+  ],
+  "lighting": "soft hotel-room lamplight, cool bay-window night glow behind"
+}
