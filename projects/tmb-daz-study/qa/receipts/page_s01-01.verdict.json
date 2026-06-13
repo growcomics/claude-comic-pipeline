@@ -1,0 +1,8 @@
+{
+  "job": "page:s01-01",
+  "pass": true,
+  "tags": ["angle"],
+  "reason": "Identity, staging, and expression contracts all hold: Zara matches her banked sheet (afro, teal hoodie with drawstrings/kangaroo pocket, dark leggings, build) and registers genuine peak ecstatic strain (eyes squeezed shut, grin through gritted teeth); Mia matches her sheet (wavy brown hair, mustard sweater, jeans) with clean open-mouthed shock, recoiling with the cushion. Exactly four correctly attached hands, glowing book on the rug between them, warm lamp key right + teal underglow, coverage intact at the split shoulder seams, photoreal DAZ look, no text/logos, only the two named characters. Sole deviation is camera: rendered near eye-level full shot instead of low-angle cowboy - a known softening nit, not reject-level, since the foreground-dominance and depth staging intent still lands.",
+  "judge": "fresh-context-subagent",
+  "date": "2026-06-12"
+}

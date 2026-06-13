@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-12 (`tmb-daz-study` page 1 rendered, judged PASS, lettered — first finished study page)
+
+### Added
+
+- **Page s01-01 ("growth event") rendered and verdicted**: composed prompt (sha `018ab464…`) → audit PASS → Flow submit (NB2 ×4, 3:4) → fresh-context judge verdict **PASS** (one non-blocking `angle` tag: eye-level full vs specced low-cowboy). Pick at `pages/panels/s01-01.png`, lettered with the original dialogue at `pages/lettered/s01-01.png`, and a source-vs-study side-by-side at `harvest/side-by-side-p1.png`. The corpus lessons read on-page: peak-intensity growth face, clothing-destruction tell, reacting witness, lettered balloons (vs the source's endemic empty ones).
+
+### Notes
+
+- **Banking s01 is pending one field**: `bank.py --flow-id` needs the Flow media id, which is only scrapeable from the laptop browser — the extension disconnected again mid-run (it drops whenever Chrome closes there). s02/s03 composition requires s01 banked-with-chain, so the run resumes at id-scrape → bank → s02 when the laptop reconnects.
+
+---
+
 ## 2026-06-12 (`tmb-daz-study`: both identity sheets banked through the full gate chain)
 
 ### Added
