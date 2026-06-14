@@ -68,3 +68,6 @@ Scene gen loop: clear input (click+cmd+a+del) → OS type 'Generate one image. <
 - manila-bay-dolomite-beach/_source.png — submitted (in flight).
 LOCATION SET now ~complete: lab, outfall, makati(+edsa), casino + user scenes (bayfront-terrace=sunset/hotel-ext, baywalk, alley=poblacion, street). Possibly still want: dolomite beach (in flight), bayfront-hotel INTERIOR (p4-02/p10), up-manila-ermita campus. 
 NEXT after scenes: PANELS. To avoid a gate re-bless, re-bank each character.sheet under face + turnaround_t1/t2/t3 ledger keys (bank.py sheet job, reuse receipt, multiple --ledger-key) so compose_page resolves them to the rich sheet; bank scenes into scene_ladders similarly (create scene receipts/verdicts). Then compose_page runs unchanged; attach rich sheet(s)+scene+prior per panel.
+
+- entertainment-city/_source.png DONE (89fa41bb). manila-bay-dolomite-beach/_source.png DONE (2ed9de27, white sand+sunset). bayfront-hotel/_source.png DONE (d689e08c, room w/ bay window + DOOR FRAME for p10).
+FOUNDATION COMPLETE: 3 character sheets + 10 location plates (6 generated + 4 user). All in bcbf138a, on disk references/{characters,locations}/.
