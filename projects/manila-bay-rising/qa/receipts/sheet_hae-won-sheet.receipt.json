@@ -1,0 +1,13 @@
+{
+ "job": "sheet:hae-won-sheet",
+ "kind": "sheet",
+ "prompt_sha": "5eea583df9704ccccf2a451a869cae421c12f6a54ed4d80e0e79b2be23fea953",
+ "attach": [],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

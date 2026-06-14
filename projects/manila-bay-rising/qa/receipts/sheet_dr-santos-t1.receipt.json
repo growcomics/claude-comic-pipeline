@@ -1,0 +1,15 @@
+{
+ "job": "sheet:dr-santos-t1",
+ "kind": "sheet",
+ "prompt_sha": "3c93b6d4610775cddcad6321e80b6bc8419cbfb082f87844bd6490bb8de8f570",
+ "attach": [
+  "dr-santos.face"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

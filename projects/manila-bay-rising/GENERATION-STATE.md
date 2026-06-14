@@ -31,3 +31,17 @@ Asset-picker uuid→title map (Recent order shifts; match by uuid in the row's i
 ## Decisions made this run (for user review)
 - **t1 body sheets set `genesis:true`** in turnaround-specs.json (data-only fix). Reason: the ported D1 "≥2 refs" rule wrongly rejected first-body sheets that legitimately attach only the face card. Did NOT patch the guarded gate code (blessing-preserving). t2/t3/views/scenes unaffected.
 - Faces rendered 1:1 (correct); hae-won-t1 also 1:1 and fine.
+
+---
+## PIVOT 2026-06-13 (afternoon): switched to user's PRO project bcbf138a
+- The user's canonical references live in Flow project **bcbf138a** (marrtrobinson PRO, **laptop** Chrome deviceId 6b35bfe8). The growcomics/e564d9bf work (6 banked refs) is SUPERSEDED.
+- Pulled the user's 5 refs to `references/_from-flow-bcbf138a/`: **Cel character sheet** (canonical) + 4 Manila scene plates (bayfront terrace, residential alley, street-to-bay, Roxas baywalk). See its _README.md.
+- Gaps: NO Hae-won sheet (user showed one but it's absent here → generating to match), NO Dr. Santos, and locations lab/outfall/dolomite/makati-skyline/edsa/casino/campus uncovered.
+- Wardrobe pivot: Hae-won is now **white tank + denim shorts + lotus necklace + 168cm + long dark hair** (per user's shown design), NOT the cream sundress. Cel = "Manila Bay Sunset" tank + denim shorts, 165cm, morena.
+- New rich-sheet paradigm: character refs are single rich DAZ3D character sheets (front/back/expressions/details), not face-card+turnaround. compose_page (gate) will need adapting to attach `sheet` ledger key instead of face/turnaround — that's a GATE-CODE change needing user re-bless before panels.
+
+### bcbf138a UI mechanics (pill-based, PRO, differs from Omni)
+- Input is a Lexical contenteditable BUT **synthetic beforeinput does NOT populate it** — use OS `type` (real keystrokes) instead, then OS-click the submit arrow.
+- Model/aspect/count: click the "Nano Banana 2" pill at bottom of input → popup with aspect row (16:9/4:3/1:1/3:4/9:16) + count (1x/x2/x3/x4) + model. **x4 = 4 candidates per submit, 0 credits (free).**
+- "Flow Downloader" userscript (bottom-right) downloads gallery → `~/Downloads/Flow Google Flow - <title> <projid>/` as flow-NNN.jpg. Laptop IS this shell's machine (hostname Mac.lan).
+- First gen in this project: hae-won-sheet, 16:9 x4, composed+audited (sha 5eea583df970), generating.

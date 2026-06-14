@@ -1,0 +1,16 @@
+{
+ "job": "sheet:hae-won-t2",
+ "kind": "sheet",
+ "prompt_sha": "c953def12302165236523e8afdf83308a75ac40e66420680dea1d0550d7a533d",
+ "attach": [
+  "hae-won.face",
+  "hae-won.turnaround_t1"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": false,
+  "tier_job": false,
+  "bootstrap": false
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

@@ -22,6 +22,26 @@
           "verdict_tags": [],
           "prompt_sha": "2c8e2162f44671016d07a0f6b5ee7ebf06871407259530e04b61458fe354b919"
         }
+      },
+      "sheet": {
+        "flow_id": "b1876e33-0c4f-4922-813e-951355657b04",
+        "disk": "references/characters/hae-won/character-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_hae-won-sheet.receipt.json",
+          "audit": "qa/receipts/sheet_hae-won-sheet.audit-pass",
+          "verdict": "qa/receipts/sheet_hae-won-sheet.verdict.json",
+          "verdict_tags": [
+            "on-design",
+            "identity-consistent",
+            "outfit-correct",
+            "lotus-necklace-present",
+            "clean-anatomy",
+            "matches-cel-layout",
+            "legible-labels",
+            "height-scale-correct"
+          ],
+          "prompt_sha": "5eea583df9704ccccf2a451a869cae421c12f6a54ed4d80e0e79b2be23fea953"
+        }
       }
     },
     "cel": {
@@ -58,6 +78,17 @@
           "verdict": "qa/receipts/sheet_dr-santos-face.verdict.json",
           "verdict_tags": [],
           "prompt_sha": "2bb2a4a38fd3bcae29668848f640cf4472ecd5f8caeb93ca46125133df1a748a"
+        }
+      },
+      "turnaround_t1": {
+        "flow_id": "954ec12d-9e4e-4821-8b5c-73c77bea1177",
+        "disk": "references/characters/dr-santos/body-base.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dr-santos-t1.receipt.json",
+          "audit": "qa/receipts/sheet_dr-santos-t1.audit-pass",
+          "verdict": "qa/receipts/sheet_dr-santos-t1.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "3c93b6d4610775cddcad6321e80b6bc8419cbfb082f87844bd6490bb8de8f570"
         }
       }
     }
