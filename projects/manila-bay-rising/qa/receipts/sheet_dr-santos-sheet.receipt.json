@@ -1,0 +1,13 @@
+{
+ "job": "sheet:dr-santos-sheet",
+ "kind": "sheet",
+ "prompt_sha": "19ed18f3410ac7881dc1fcf72206ef882377ce9a04634f000c863c12a7388cc8",
+ "attach": [],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": true,
+  "tier_job": false,
+  "bootstrap": true
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

@@ -45,3 +45,11 @@ Asset-picker uuid→title map (Recent order shifts; match by uuid in the row's i
 - Model/aspect/count: click the "Nano Banana 2" pill at bottom of input → popup with aspect row (16:9/4:3/1:1/3:4/9:16) + count (1x/x2/x3/x4) + model. **x4 = 4 candidates per submit, 0 credits (free).**
 - "Flow Downloader" userscript (bottom-right) downloads gallery → `~/Downloads/Flow Google Flow - <title> <projid>/` as flow-NNN.jpg. Laptop IS this shell's machine (hostname Mac.lan).
 - First gen in this project: hae-won-sheet, 16:9 x4, composed+audited (sha 5eea583df970), generating.
+
+
+### Character anchors COMPLETE (2026-06-13)
+All 3 canonical rich character sheets ready (matching the user's Cel-sheet style):
+- hae-won.sheet — GENERATED+banked (b1876e33), white tank/denim shorts/lotus necklace/168cm, judge-picked from x4.
+- dr-santos.sheet — GENERATED+banked (86332bb7), mature 50s lab coat/glasses/lanyard, judge PASS.
+- cel — user-provided sheet, copied to references/characters/cel/character-sheet.png (canonical anchor; not gate-banked since user-made).
+NEXT: missing location scenes (up-manila-lab, manila-bay-outfall, makati-skyline, edsa, entertainment-city, dolomite-beach, up-manila-ermita — the 4 user scenes cover bayfront/alley/street/baywalk loosely). Generate at x4 in bcbf138a matching the user's Manila-scene style. THEN 30 panels — but compose_page must be adapted to attach the `sheet` ledger key (rich-sheet paradigm) instead of face/turnaround → that is a GATE-CODE change requiring user re-bless.

@@ -213,6 +213,15 @@
       "attach": [],
       "aspect": "16:9",
       "prompt": "DAZ3D character model sheet titled \"DAZ3D CHARACTER SHEET: SEO HAE-WON\", same clean layout and label style as a professional reference sheet: a fair-skinned Korean woman in her late twenties, slim, 168 cm (5 foot 6), long straight dark-brown hair past the shoulders, delicate lotus pendant necklace, small stud earrings, wearing a fitted white ribbed tank top, high-waist blue denim shorts, white low sneakers, a tan crossbody bag. FRONT VIEW and BACK VIEW full body standing on the left with a vertical height scale (150-180 cm marks, height 168 cm noted). A row of FACIAL EXPRESSIONS head shots: neutral, wink, serious, excited. A THREE-QUARTER PROFILE head shot. HAND DETAILS, FOOT DETAILS (sneakers), and NECKLACE DETAIL close-ups. A BACK-VIEW casual-wear analysis. Two full-body POSES (A and B, casual street poses). Identical face, hair, outfit, build and height across every view. Neutral grey studio background, even soft studio lighting."
+    },
+    {
+      "id": "dr-santos-sheet",
+      "genesis": true,
+      "save": "references/characters/dr-santos/character-sheet.png",
+      "ledger_key": "dr-santos.sheet",
+      "attach": [],
+      "aspect": "16:9",
+      "prompt": "DAZ3D character model sheet titled \"DAZ3D CHARACTER SHEET: DR. ELENA SANTOS\", same clean layout and label style as a professional reference sheet: a Filipina woman in her early fifties, composed and intelligent, medium height, hair in a neat low ponytail with natural grey streaks, rimless glasses, wearing a white lab coat over a teal blouse with an ID lanyard at the neck and dark slacks, sensible flat shoes. FRONT VIEW and BACK VIEW full body standing on the left with a vertical height scale (150-180 cm marks). A row of FACIAL EXPRESSIONS head shots: neutral, focused, concerned, tired. A THREE-QUARTER PROFILE head shot. HAND DETAILS, GLASSES DETAIL, and ID-LANYARD DETAIL close-ups. A BACK-VIEW lab-coat analysis. Two full-body POSES (A standing with tablet, B at a lab bench). Mature ~50s appearance, NOT a young woman. Identical face, hair, outfit, build and height across every view. Neutral grey studio background, even soft studio lighting."
     }
   ],
   "_scenes_note": "scene:<id> jobs DAZ-convert the gathered internet establishing photo(s) into a DAZ3D location render that becomes the single-rung scene ref (banked into ref-ledger scene_ladders.<id>). Establishing scenes are empty of people. Reverse (-reverse) scenes are the 180-degree opposite view for L14 continuity on recurring hero locations. compose.py appends STYLE+NEG; attach paths are the on-disk gathered refs.",
