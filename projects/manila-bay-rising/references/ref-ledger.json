@@ -220,5 +220,116 @@
       }
     }
   },
-  "scene_ladders": {}
+  "scene_ladders": {
+    "up-manila-lab": {
+      "flow_id": "e7c6a1ff-0107-4ec5-855d-3e1a783a7327",
+      "disk": "references/locations/up-manila-lab/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_up-manila-lab.receipt.json",
+        "audit": "qa/receipts/scene_up-manila-lab.audit-pass",
+        "verdict": "qa/receipts/scene_up-manila-lab.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "c917734398e3a15f53be7426ec5333f171d62781e0fce2c3a299e80ad5747740"
+      }
+    },
+    "manila-bay-outfall": {
+      "flow_id": "19ef41c1-9e47-45d7-a3a8-b20e186dd746",
+      "disk": "references/locations/manila-bay-outfall/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_manila-bay-outfall.receipt.json",
+        "audit": "qa/receipts/scene_manila-bay-outfall.audit-pass",
+        "verdict": "qa/receipts/scene_manila-bay-outfall.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "babf14518385357a761b5471ccb4fddd1d48fdef96ffc48c2c0bc988201a2a5c"
+      }
+    },
+    "makati-skyline": {
+      "flow_id": "efe3683a-d89d-4758-9a65-b8d965903c1c",
+      "disk": "references/locations/makati-skyline/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_makati-skyline.receipt.json",
+        "audit": "qa/receipts/scene_makati-skyline.audit-pass",
+        "verdict": "qa/receipts/scene_makati-skyline.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "b68cb3c7f28fdc972120105aa03735a5be336e61272b77eec582ed4ec0528b20"
+      }
+    },
+    "edsa": {
+      "flow_id": "efe3683a-d89d-4758-9a65-b8d965903c1c",
+      "disk": "references/locations/makati-skyline/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_edsa.receipt.json",
+        "audit": "qa/receipts/scene_edsa.audit-pass",
+        "verdict": "qa/receipts/scene_edsa.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "551cc51d8fdfd893b09d50fcb77424f2d7b6de78d064f6a26def1b46ac0e5fe1"
+      }
+    },
+    "entertainment-city": {
+      "flow_id": "89fa41bb-41d6-4295-bff6-7bad868e8e3e",
+      "disk": "references/locations/entertainment-city/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_entertainment-city.receipt.json",
+        "audit": "qa/receipts/scene_entertainment-city.audit-pass",
+        "verdict": "qa/receipts/scene_entertainment-city.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "1e26639ab27714529583ca0a624f2584634d161f2f49bc13963dc4bc245fed36"
+      }
+    },
+    "manila-bay-dolomite-beach": {
+      "flow_id": "2ed9de27-9246-41cf-8f06-c2c98c60d912",
+      "disk": "references/locations/manila-bay-dolomite-beach/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_manila-bay-dolomite-beach.receipt.json",
+        "audit": "qa/receipts/scene_manila-bay-dolomite-beach.audit-pass",
+        "verdict": "qa/receipts/scene_manila-bay-dolomite-beach.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "c31ca03f9d75368714f0c51643ddafaa3c54ded57f033aa880ee4bbcfd1626ae"
+      }
+    },
+    "bayfront-hotel": {
+      "flow_id": "d689e08c-bd25-48a9-94c0-d946e8cc7f19",
+      "disk": "references/locations/bayfront-hotel/_source.png",
+      "chain": {
+        "receipt": "qa/receipts/scene_bayfront-hotel.receipt.json",
+        "audit": "qa/receipts/scene_bayfront-hotel.audit-pass",
+        "verdict": "qa/receipts/scene_bayfront-hotel.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "a6afeb95eb1525e6da963a3f0360a4949e8f1d80d58c86e4aa0c0191bb83602c"
+      }
+    },
+    "manila-bay-sunset": {
+      "flow_id": "user-baywalk",
+      "disk": "references/_from-flow-bcbf138a/scene-baywalk-palms-jeepneys.jpg",
+      "chain": {
+        "receipt": "qa/receipts/scene_manila-bay-sunset.receipt.json",
+        "audit": "qa/receipts/scene_manila-bay-sunset.audit-pass",
+        "verdict": "qa/receipts/scene_manila-bay-sunset.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "9b107a8e04548518e52c7243fcccdf0b5ca7fdae574f3cfdac5d74cfc29dfe2c"
+      }
+    },
+    "poblacion-night": {
+      "flow_id": "user-alley",
+      "disk": "references/_from-flow-bcbf138a/scene-residential-alley-dusk.jpg",
+      "chain": {
+        "receipt": "qa/receipts/scene_poblacion-night.receipt.json",
+        "audit": "qa/receipts/scene_poblacion-night.audit-pass",
+        "verdict": "qa/receipts/scene_poblacion-night.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "9de6e955091ffb9a973d7eb80cfdc267b046c2c46d8a3deefaef0d10cae07689"
+      }
+    },
+    "up-manila-ermita": {
+      "flow_id": "user-street",
+      "disk": "references/_from-flow-bcbf138a/scene-street-to-bay-sunset.jpg",
+      "chain": {
+        "receipt": "qa/receipts/scene_up-manila-ermita.receipt.json",
+        "audit": "qa/receipts/scene_up-manila-ermita.audit-pass",
+        "verdict": "qa/receipts/scene_up-manila-ermita.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "623be0eef0c05415dcd63b4e5ce198048f31eaa426a8b666602417381fe61edb"
+      }
+    }
+  }
 }

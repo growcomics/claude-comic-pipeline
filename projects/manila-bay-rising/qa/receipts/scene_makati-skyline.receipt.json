@@ -1,0 +1,13 @@
+{
+ "job": "scene:makati-skyline",
+ "kind": "scene",
+ "prompt_sha": "b68cb3c7f28fdc972120105aa03735a5be336e61272b77eec582ed4ec0528b20",
+ "attach": [
+  "scene-src:makati-skyline"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

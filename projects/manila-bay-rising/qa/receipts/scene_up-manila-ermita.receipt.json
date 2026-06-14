@@ -1,0 +1,13 @@
+{
+ "job": "scene:up-manila-ermita",
+ "kind": "scene",
+ "prompt_sha": "623be0eef0c05415dcd63b4e5ce198048f31eaa426a8b666602417381fe61edb",
+ "attach": [
+  "scene-src:up-manila-ermita"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

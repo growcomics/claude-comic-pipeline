@@ -1,0 +1,13 @@
+{
+ "job": "scene:manila-bay-sunset",
+ "kind": "scene",
+ "prompt_sha": "9b107a8e04548518e52c7243fcccdf0b5ca7fdae574f3cfdac5d74cfc29dfe2c",
+ "attach": [
+  "scene-src:manila-bay-sunset"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

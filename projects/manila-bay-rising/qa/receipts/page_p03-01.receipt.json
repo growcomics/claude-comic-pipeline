@@ -1,0 +1,15 @@
+{
+ "job": "page:p03-01",
+ "kind": "page",
+ "prompt_sha": "d02e0135d7031c9f8d592a2aeddddd0e96aa171763d98c8323016575824cd221",
+ "attach": [
+  "scene:makati-skyline"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": false,
+  "tier_job": false,
+  "bootstrap": false
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

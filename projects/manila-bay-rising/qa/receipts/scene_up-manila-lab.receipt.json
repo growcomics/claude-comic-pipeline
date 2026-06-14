@@ -1,0 +1,13 @@
+{
+ "job": "scene:up-manila-lab",
+ "kind": "scene",
+ "prompt_sha": "c917734398e3a15f53be7426ec5333f171d62781e0fce2c3a299e80ad5747740",
+ "attach": [
+  "scene-src:up-manila-lab"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

@@ -1,0 +1,13 @@
+{
+ "job": "scene:poblacion-night",
+ "kind": "scene",
+ "prompt_sha": "9de6e955091ffb9a973d7eb80cfdc267b046c2c46d8a3deefaef0d10cae07689",
+ "attach": [
+  "scene-src:poblacion-night"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

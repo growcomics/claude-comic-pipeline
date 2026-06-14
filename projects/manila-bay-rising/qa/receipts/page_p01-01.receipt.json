@@ -1,0 +1,15 @@
+{
+ "job": "page:p01-01",
+ "kind": "page",
+ "prompt_sha": "cf6c6ac921cf5f4a68111311738b8a84c5fa11c6a2797fdbac28dc6b0c134a98",
+ "attach": [
+  "scene:up-manila-lab"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "genesis": false,
+  "tier_job": false,
+  "bootstrap": false
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}

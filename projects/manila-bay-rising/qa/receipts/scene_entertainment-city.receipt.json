@@ -1,0 +1,13 @@
+{
+ "job": "scene:entertainment-city",
+ "kind": "scene",
+ "prompt_sha": "1e26639ab27714529583ca0a624f2584634d161f2f49bc13963dc4bc245fed36",
+ "attach": [
+  "scene-src:entertainment-city"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

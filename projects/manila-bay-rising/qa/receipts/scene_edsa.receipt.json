@@ -1,0 +1,13 @@
+{
+ "job": "scene:edsa",
+ "kind": "scene",
+ "prompt_sha": "551cc51d8fdfd893b09d50fcb77424f2d7b6de78d064f6a26def1b46ac0e5fe1",
+ "attach": [
+  "scene-src:edsa"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

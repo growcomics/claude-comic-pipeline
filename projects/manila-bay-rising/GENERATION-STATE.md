@@ -71,3 +71,11 @@ NEXT after scenes: PANELS. To avoid a gate re-bless, re-bank each character.shee
 
 - entertainment-city/_source.png DONE (89fa41bb). manila-bay-dolomite-beach/_source.png DONE (2ed9de27, white sand+sunset). bayfront-hotel/_source.png DONE (d689e08c, room w/ bay window + DOOR FRAME for p10).
 FOUNDATION COMPLETE: 3 character sheets + 10 location plates (6 generated + 4 user). All in bcbf138a, on disk references/{characters,locations}/.
+
+### PANEL PHASE STARTED (2026-06-13)
+- Scenes banked into scene_ladders (all 10). Characters panel-ready (face/turnaround->rich sheets). compose_page works unchanged.
+- BANKED panels: p01-01 (lab plate), p03-01 (makati splash plate). Both character-less establishing = used the location plate directly (legit for establishing shots).
+- GATE ENFORCES PAGE ORDER: compose_page refuses a panel whose continuity_ref prior isnt banked-with-chain. So panels MUST be done in shotlist order; cannot cherry-pick later establishing shots. Standalone panels (continuity_refs==[]) can bank anytime (thats why p03-01 worked).
+- NEXT in order: p01-02 (Dr Santos holds vial, lab), p01-03 (spill ECU), p01-04 (drain), then p02-xx... Most are CHARACTER panels needing real x4 generation with the character rich sheet + scene plate attached.
+- Attach in bcbf138a picker: + (bottom-left ~513,741) opens picker; search-by-title is UNRELIABLE (titles are truncated prompt-starts, e.g. laboratory/UP Manila found nothing). Use click-by-sight: clear search, scroll, click the asset thumbnail, verify preview, Add to Prompt. Character sheets + scene plates are all in the project gallery.
+- Per character panel: compose page:<id> -> audit -> open picker, attach each present characters rich sheet + the scene plate (+ prior panel for continuity) -> clear input, OS-type the JSON prompt -> submit x4 -> poll -> download best via scratch-tab signed URL -> fresh-subagent judge (identity vs sheet) -> bank page:<id>.

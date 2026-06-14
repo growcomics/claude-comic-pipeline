@@ -1,0 +1,13 @@
+{
+ "job": "scene:manila-bay-outfall",
+ "kind": "scene",
+ "prompt_sha": "babf14518385357a761b5471ccb4fddd1d48fdef96ffc48c2c0bc988201a2a5c",
+ "attach": [
+  "scene-src:manila-bay-outfall"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}

@@ -1,14 +1,35 @@
 {
-  "done": {},
+  "done": {
+    "p01-01": {
+      "flow_id": "e7c6a1ff-0107-4ec5-855d-3e1a783a7327",
+      "disk": "pages/panels/p01-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p01-01.receipt.json",
+        "audit": "qa/receipts/page_p01-01.audit-pass",
+        "verdict": "qa/receipts/page_p01-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "cf6c6ac921cf5f4a68111311738b8a84c5fa11c6a2797fdbac28dc6b0c134a98"
+      }
+    },
+    "p03-01": {
+      "flow_id": "efe3683a-d89d-4758-9a65-b8d965903c1c",
+      "disk": "pages/panels/p03-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-01.receipt.json",
+        "audit": "qa/receipts/page_p03-01.audit-pass",
+        "verdict": "qa/receipts/page_p03-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "d02e0135d7031c9f8d592a2aeddddd0e96aa171763d98c8323016575824cd221"
+      }
+    }
+  },
   "pending": [
-    "p01-01",
     "p01-02",
     "p01-03",
     "p01-04",
     "p02-01",
     "p02-02",
     "p02-03",
-    "p03-01",
     "p04-01",
     "p04-02",
     "p04-03",

@@ -1,0 +1,13 @@
+{
+ "job": "scene:manila-bay-dolomite-beach",
+ "kind": "scene",
+ "prompt_sha": "c31ca03f9d75368714f0c51643ddafaa3c54ded57f033aa880ee4bbcfd1626ae",
+ "attach": [
+  "scene-src:manila-bay-dolomite-beach"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "scene": true
+ },
+ "gates_fingerprint": "ref-input"
+}
