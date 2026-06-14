@@ -60,3 +60,5 @@ Generated at x4 in bcbf138a, prose-style matching the user's Manila scene plates
 - up-manila-lab/_source.png — DONE (e7c6a1ff): night research lab, fume hood, amber-vial fridge, FLOOR DRAIN center (p1 spill beat). Excellent.
 STILL TO GENERATE: manila-bay-outfall, manila-bay-dolomite-beach, makati-skyline, edsa, entertainment-city, up-manila-ermita. User scenes (_from-flow-bcbf138a/) already cover bayfront/baywalk/alley/street.
 Scene gen loop: clear input (click+cmd+a+del) → OS type 'Generate one image. <prose plate, NO people, photoreal DAZ Manila, 16:9>' → OS-click submit (~1037,717 at 1568w) → poll newest uuid → scratch-tab redirect → curl to _source.png → view.
+
+- manila-bay-outfall/_source.png — DONE (19ef41c1): outfall pipe + grey runoff + blue-green sheen + rope cordon + WARNING sign + casino skyline at dusk. Excellent; has the warning-sign prop built in (English text; swap to BAWAL LUMANGOY if wanted).
