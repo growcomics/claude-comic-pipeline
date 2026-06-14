@@ -53,3 +53,10 @@ All 3 canonical rich character sheets ready (matching the user's Cel-sheet style
 - dr-santos.sheet — GENERATED+banked (86332bb7), mature 50s lab coat/glasses/lanyard, judge PASS.
 - cel — user-provided sheet, copied to references/characters/cel/character-sheet.png (canonical anchor; not gate-banked since user-made).
 NEXT: missing location scenes (up-manila-lab, manila-bay-outfall, makati-skyline, edsa, entertainment-city, dolomite-beach, up-manila-ermita — the 4 user scenes cover bayfront/alley/street/baywalk loosely). Generate at x4 in bcbf138a matching the user's Manila-scene style. THEN 30 panels — but compose_page must be adapted to attach the `sheet` ledger key (rich-sheet paradigm) instead of face/turnaround → that is a GATE-CODE change requiring user re-bless.
+
+
+### Location scenes — in progress (2026-06-13)
+Generated at x4 in bcbf138a, prose-style matching the user's Manila scene plates, saved to references/locations/<loc>/_source.png (treated as reference inputs like the user's scenes, not gate-banked):
+- up-manila-lab/_source.png — DONE (e7c6a1ff): night research lab, fume hood, amber-vial fridge, FLOOR DRAIN center (p1 spill beat). Excellent.
+STILL TO GENERATE: manila-bay-outfall, manila-bay-dolomite-beach, makati-skyline, edsa, entertainment-city, up-manila-ermita. User scenes (_from-flow-bcbf138a/) already cover bayfront/baywalk/alley/street.
+Scene gen loop: clear input (click+cmd+a+del) → OS type 'Generate one image. <prose plate, NO people, photoreal DAZ Manila, 16:9>' → OS-click submit (~1037,717 at 1568w) → poll newest uuid → scratch-tab redirect → curl to _source.png → view.
