@@ -62,3 +62,9 @@ STILL TO GENERATE: manila-bay-outfall, manila-bay-dolomite-beach, makati-skyline
 Scene gen loop: clear input (click+cmd+a+del) → OS type 'Generate one image. <prose plate, NO people, photoreal DAZ Manila, 16:9>' → OS-click submit (~1037,717 at 1568w) → poll newest uuid → scratch-tab redirect → curl to _source.png → view.
 
 - manila-bay-outfall/_source.png — DONE (19ef41c1): outfall pipe + grey runoff + blue-green sheen + rope cordon + WARNING sign + casino skyline at dusk. Excellent; has the warning-sign prop built in (English text; swap to BAWAL LUMANGOY if wanted).
+
+- makati-skyline/_source.png — DONE (efe3683a): aerial dusk, Makati towers + EDSA traffic river + MRT + casino glow. Covers makati-skyline AND edsa.
+- entertainment-city/_source.png — DONE (89fa41bb, after 1 retry; first batch had transient Oops failures): Solaire-style casino, gold-purple LED facades, palm boulevard, fountain, bay glow.
+- manila-bay-dolomite-beach/_source.png — submitted (in flight).
+LOCATION SET now ~complete: lab, outfall, makati(+edsa), casino + user scenes (bayfront-terrace=sunset/hotel-ext, baywalk, alley=poblacion, street). Possibly still want: dolomite beach (in flight), bayfront-hotel INTERIOR (p4-02/p10), up-manila-ermita campus. 
+NEXT after scenes: PANELS. To avoid a gate re-bless, re-bank each character.sheet under face + turnaround_t1/t2/t3 ledger keys (bank.py sheet job, reuse receipt, multiple --ledger-key) so compose_page resolves them to the rich sheet; bank scenes into scene_ladders similarly (create scene receipts/verdicts). Then compose_page runs unchanged; attach rich sheet(s)+scene+prior per panel.
