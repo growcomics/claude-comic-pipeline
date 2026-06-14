@@ -1,0 +1,18 @@
+{
+ "job": "page:p01-02",
+ "kind": "page",
+ "prompt_sha": "31b3bb2889c5ce955b487b0f85735df94e60d56ca69c5756bb8297f11092d742",
+ "attach": [
+  "face:dr-santos",
+  "turnaround:dr-santos:t1",
+  "scene:up-manila-lab",
+  "prior:p01-01"
+ ],
+ "aspect": "1:1",
+ "flags": {
+  "genesis": false,
+  "tier_job": false,
+  "bootstrap": false
+ },
+ "gates_fingerprint": "c6ac68cce86f977b"
+}
