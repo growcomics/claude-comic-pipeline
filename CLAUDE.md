@@ -65,6 +65,7 @@ Per `feedback_dont_delete_git_backup.md`. It's an intentional pre-rewrite histor
 - **Coverage**: `always_clothed: true` is the default for every project. Garments may strain, stretch, or tear at seams; coverage of breasts/buttocks/groin is always preserved.
 - **Cast**: NO background extras in panels. Only the named cast appears in frame. Per `feedback_no_extra_characters.md`.
 - **Refs as truth**: appearance is carried by attached references (face card, body-tier lineup, costume turnaround, tier-N reinforcement, prior accepted panel, view pack, env ref). Prompts describe ACTION, CAMERA, LIGHTING — never appearance walls. The `refactor/refs-are-truth-prompts-are-action` branch enforces this structurally; main still has appearance-text rules in flight.
+- **Flow account (dual-account safety)**: two Flow accounts exist (growcomics = primary/mac mini; marrtrobinson = laptop). Flow has no `/u/N/` switcher — account = browser profile. CONFIRM the active account before any Flow submit/edit/upload/delete/download, per `skills/comic-production/references/flow-accounts.md`.
 
 ## Architecture pointers
 

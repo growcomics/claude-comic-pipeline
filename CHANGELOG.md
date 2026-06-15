@@ -12,6 +12,40 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-14 (Flow dual-account safety + review-bundle harvester)
+
+### Added
+
+- **`skills/comic-production/references/flow-accounts.md`** — documents the **two Flow accounts** (growcomics = primary/mac mini; marrtrobinson = laptop), the access model, and a MANDATORY confirm-account-before-acting rule. Access finding: Flow does **not** honor Google's `/u/N/` account-switcher (`labs.google/fx/u/1/tools/flow` → 404, verified), so a Flow tab's account = its browser **profile**; both accounts run as two profiles (already the case across laptop + mac mini), and Claude targets one with the Chrome MCP `select_browser <deviceId>` (deviceId→account map included). Awareness: confirm the live account with one read of `document.documentElement[data-flow-account]` (stamped by the harvester) or a gmail script-scan fallback, before any submit/edit/upload/delete/download.
+- **Flow Review Harvester** Chrome extension (MV3) — lives outside this repo at `~/Documents/flow-review-harvester/` (with `README.md` + a real `sample-manifest.json`). Per generation it exports the output image(s), the **exact prompt**, the **attached input reference images**, and metadata (model, timestamp, account, project) as a structured `manifest.json` a review subagent ingests in one pass — without driving the Flow UI. It reads Flow's `flow.projectInitialData` tRPC payload (`image.generatedImage.prompt`, `…requestData.imageGenerationRequestData.imageGenerationImageInputs[].mediaId` refs, `name` outputs, `modelNameType`, `createTime`) from the in-memory React Query cache / a `document_start` fetch-intercept, and saves images via `chrome.downloads` (sidesteps page CORS). Sibling to `flow-bulk-downloader` (outputs-only). **Validated live** against a 93-generation marrtrobinson project: the top-8 bundle paired every output with its exact prompt and input refs; model-key mapping correct (`NARWHAL`→Nano Banana 2); refs deduped (8 gens → 2 ref files); non-generation media (uploads + a video) correctly excluded. Plugs into the canonical-rubric review-pass doctrine (`continuity-check/qa-checklist.md` + `cinematic-framing.md`).
+
+### Changed
+
+- **`CLAUDE.md`** — added a "Flow account (dual-account safety)" bullet to Generation defaults: confirm the active Flow account before any Flow action, per `flow-accounts.md`.
+
+---
+
+## 2026-06-14 (L34 staging — page-insertable guide + mechanical gate in qa/compose.py)
+
+### Added
+
+- **`skills/comic-production/references/staging-and-composition.md`** — page-insertable copy-paste prompt guide for subject staging, built in the exact shape of `posing-and-expressions.md` (core principle → works-for-solo → selection order → universal template → 5 full prompt blocks → applying-to-panels → quick-reference mechanics + failure-modes tables). The five blocks: TENSION BLOCK (2-char confrontation), DEPTH STAGING (lead dominance over a small far figure), TRIANGULAR GROUPING (3+ char squad, the police-lineup cure), NEGATIVE-SPACE HERO (solo reveal/splash), FOREGROUND OCCLUSION (intimacy/witness). FMG-flavored — every block makes lead-character dominance come from staging (foreground + scale-by-distance + intent line), never from drawing the lead bigger on a shared plane. Vocabulary-consistent with the L34 staging values already in `cinematic-framing.md` + `lessons-learned.md`. Sourced from the user's five whiteboard sketches (tension/static, depth/flat, dynamic-triangular).
+
+### Changed
+
+- **`projects/not-so-supra-man/qa/compose.py` — L34 staging is now a HARD compose gate (defect `D14`).** The project already required a `qa/staging/<panel_id>.json` for multi-character pages (D9/D12/D13) but the staging text was free-form — an author could write "everyone faces camera" and the gate passed it. Now: (1) multi-character pages must declare a top-level `staging_type` ∈ {tension-block, depth-staged, triangular, negative-space-asymmetric, foreground-occlusion, parallel-acceptable} or compose REFUSES; (2) for tension/depth/triangular types, flat-camera-plane language in the staging text ("face the camera", "side by side", "in a row", "lined up", "parallel to the lens", "level eye-line") is REJECTED; (3) on pass, the matching "break the camera plane" directive is auto-injected into the composed prompt so it lands in every submit. This closes the gap noted when L34 first shipped (7d2d8a8): the rule existed in docs + audit but nothing enforced it at compose time. Diagnosis per CLAUDE.md generation protocol — "only in-path mechanical gates are load-bearing," a paste-in doc is not.
+- **`staging-and-composition.md`** gained an ENFORCEMENT section documenting the D14 gate so the author guide and the gate point at each other.
+
+### Gate-integrity status (ACTION REQUIRED — user only)
+
+- Editing `compose.py` tripped the Layer-8 integrity lock: **all gates in `not-so-supra-man` are LOCKED** until re-blessed. Per CLAUDE.md, Claude is prohibited from re-blessing. To unlock: review `git diff projects/not-so-supra-man/qa/compose.py`, then run `python3 qa/integrity.py --rebless --i-am-the-user` from the project root. Commit the whole set (compose.py + updated MANIFEST.sha256 + this guide + CHANGELOG) atomically AFTER re-blessing — committing before would record a hash-mismatched gate.
+
+### Propagation (pending)
+
+- The D14 gate was implemented in `not-so-supra-man` as the reference. The other tracked qa chains (`manila-bay-rising`, `tmb-daz-study`) and the untracked `cheer-ascension` still have the pre-D14 compose.py; each needs the same edit + its own user re-bless when it next generates multi-character pages.
+
+---
+
 ## 2026-06-13 (`manila-bay-rising` — new project scaffold + location reference gather)
 
 ### Added
