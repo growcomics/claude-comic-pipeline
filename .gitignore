@@ -17,5 +17,10 @@ projects/**/*.jpg
 # comic-corpus: third-party copyrighted pages — analysis stays in git, raw pages never do
 research/comic-corpus/corpus/*/pages/
 
+# comic-corpus B1: the user's raw SCRIPT text stays local; normalized records are versioned
+research/comic-corpus/corpus/*/source.*
+research/comic-corpus/scripts-raw/*
+!research/comic-corpus/scripts-raw/README.md
+
 # gap fix 2026-06-12: Flow zips extract as .jpeg
 projects/**/*.jpeg

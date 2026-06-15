@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "comic-corpus/script-record.schema.json",
+  "title": "Comic Corpus script record",
+  "description": "Normalized analysis of a TEXT comic script (the user's own story scripts) as corpus feedstock — the B1 path. Sibling of beats.schema.json (which analyzes rendered comics from page images). A script supports only the two TEXT-assessable rubric axes (growth density, story structure); the two VISUAL axes (camera dynamism, expression intensity) are deferred to storyboard/render and listed under deferred_axes. Reuses analysis-rubric.md vocabulary so scripts and comics pool into one corpus.",
+  "type": "object",
+  "required": ["record_type", "script_id", "title", "premise", "transformation", "cast", "rubric_version", "analysis_status"],
+  "additionalProperties": true,
+  "properties": {
+    "record_type": {"const": "script"},
+    "script_id": {"type": "string"},
+    "title": {"type": "string"},
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {"const": "user-script"},
+        "delivered_as": {"enum": ["paste", "txt", "md", "markdown", "pdf", "docx", "other"]},
+        "path": {"type": ["string", "null"], "description": "Local path to the raw script (gitignored) — provenance only."},
+        "delivered_at": {"type": "string"}
+      }
+    },
+    "premise": {"type": "string"},
+    "transformation": {
+      "type": "object",
+      "description": "The growth spine the script sets up.",
+      "properties": {
+        "flavor": {"type": "string", "description": "potion | curse | latent-power | tech | rivalry-driven | training | ambient-field | ..."},
+        "trigger": {"type": "string"},
+        "arc": {"type": "string", "description": "one-line beat string: trigger -> escalation -> peak -> aftermath"},
+        "peak_state": {"type": "string"}
+      }
+    },
+    "cast": {
+      "type": "array",
+      "items": {"type": "object", "required": ["name"], "properties": {"name": {"type": "string"}, "role": {"type": "string"}}}
+    },
+    "cast_size": {"type": "integer", "minimum": 1},
+    "structure": {
+      "type": "object",
+      "properties": {
+        "act_breakdown": {"type": "string"},
+        "scene_count": {"type": "integer", "minimum": 0},
+        "est_page_count": {"type": "integer", "minimum": 0},
+        "narrative_arc": {"type": "string", "description": "one-line arc, same convention as beats.json narrative_arc"}
+      }
+    },
+    "notable_beats": {"type": "array", "items": {"type": "string"}, "description": "Scene/beat-cited standout moments."},
+    "chapter_type": {"enum": ["transformation", "climax", "origin", "action", "mixed"], "description": "Drives the growth-ratio target (corpus F1)."},
+    "growth_accounting": {
+      "type": "object",
+      "properties": {
+        "est_growth_scene_ratio": {"type": "number", "minimum": 0, "maximum": 1, "description": "Share of scenes that are active-growth — the script-level proxy for the growth-page ratio (corpus F1: transformation >= 0.60, climax >= 0.70, action >= 0.30)."},
+        "growth_scenes": {"type": "array", "items": {"type": "string"}},
+        "escalation_devices_planned": {
+          "type": "array",
+          "items": {"enum": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "size-comparison", "slow-burn", "reaction-intercut", "sfx-driven", "full-body-reveal"]}
+        }
+      }
+    },
+    "assessable_scores": {
+      "type": "object",
+      "description": "Only the rubric axes a TEXT script can be honestly scored on.",
+      "properties": {
+        "growth_density_score": {"type": "integer", "minimum": 0, "maximum": 5},
+        "story_structure_score": {"type": "integer", "minimum": 0, "maximum": 5}
+      }
+    },
+    "deferred_axes": {
+      "type": "array",
+      "description": "Visual axes not assessable from script text; assess at storyboard/render.",
+      "items": {"enum": ["camera_dynamism", "expression_intensity"]},
+      "default": ["camera_dynamism", "expression_intensity"]
+    },
+    "strengths": {"type": "array", "items": {"type": "string"}, "description": "What's strong — elements to STEAL into production (concrete)."},
+    "weaknesses": {"type": "array", "items": {"type": "string"}},
+    "rubric_version": {"type": "string"},
+    "analyzed_at": {"type": ["string", "null"]},
+    "analysis_status": {"enum": ["pending", "done"]}
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "skills/ideator/concept-schema.json",
+  "title": "Ideator concepts.json — the Ideator→Writer contract",
+  "description": "A ranked slate of comic concept pitches produced by the ideator's concept tournament (Stage 1). This is the artifact the Writer (Stage 2) consumes: it reads selected_concept_id and expands that concept into a panel-ready script. Built to docs/PRODUCTION-SYSTEM-VISION.md §4. Scores are produced against skills/ideator/references/rubric.md; growth/story fields are grounded in research/comic-corpus findings.",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "concepts"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"type": "string", "description": "Version of THIS contract. Start at 1.0; bump on any breaking field change."},
+    "generated_at": {"type": "string", "description": "ISO-8601 timestamp the slate was produced."},
+    "seed": {"type": ["string", "null"], "description": "The spark this slate was generated from: a theme, character, phrase, or null for 'surprise me'."},
+    "rubric_version": {"type": "string", "description": "Version of references/rubric.md the scores were produced against."},
+    "corpus_synthesis_version": {"type": "string", "description": "Which research/comic-corpus synthesis the grounding/findings cite (e.g. 'success-elements v2')."},
+    "roster_snapshot": {
+      "type": "array",
+      "description": "The locked characters available for reuse at generation time (cheaper to produce — refs already exist).",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "project": {"type": "string", "description": "Where the character's refs live."},
+          "ref_status": {"enum": ["locked", "partial", "new"]}
+        }
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "description": "The full slate (typically >= 8, >= 2 per generation angle). Ranked via 'ranking'.",
+      "items": {"$ref": "#/definitions/concept"}
+    },
+    "ranking": {
+      "type": "array",
+      "description": "concept_ids ordered best -> worst by weighted_total.",
+      "items": {"type": "string"}
+    },
+    "top3": {
+      "type": "array",
+      "description": "The three concept_ids surfaced to the user at the human gate.",
+      "items": {"type": "string"},
+      "maxItems": 3
+    },
+    "selected_concept_id": {
+      "type": ["string", "null"],
+      "description": "The concept the user picked at the human gate. Null until selection. The Writer reads THIS."
+    }
+  },
+  "definitions": {
+    "concept": {
+      "type": "object",
+      "required": ["concept_id", "title", "logline", "premise", "transformation", "cast", "setting", "hook", "est_page_count", "generation_angle"],
+      "additionalProperties": true,
+      "properties": {
+        "concept_id": {"type": "string", "description": "Stable slug, e.g. 'gym-rivals-ascension'."},
+        "title": {"type": "string"},
+        "logline": {"type": "string", "description": "One sentence — the whole comic in a breath."},
+        "premise": {"type": "string", "description": "A short paragraph: who, the situation, what changes."},
+        "transformation": {
+          "type": "object",
+          "required": ["flavor", "arc"],
+          "properties": {
+            "flavor": {"type": "string", "description": "The growth mechanic, e.g. potion | curse | latent-power | tech | rivalry-driven | ambient-field | training | infection."},
+            "trigger": {"type": "string", "description": "The catalyst beat that starts the growth."},
+            "arc": {"type": "string", "description": "The growth spine: trigger -> escalation -> peak -> aftermath, as a one-line beat string."},
+            "peak_state": {"type": "string", "description": "What the transformed peak looks like (the money state)."},
+            "tier_curve": {"type": "string", "description": "Optional est. tier escalation, in the pipeline's peak-body-scale vocabulary (e.g. 'tier 3 -> 7')."}
+          }
+        },
+        "cast": {
+          "type": "array",
+          "description": "Named cast only (no background extras, per house rule). Prefer locked characters for cheaper production.",
+          "items": {
+            "type": "object",
+            "required": ["name", "role"],
+            "properties": {
+              "name": {"type": "string"},
+              "role": {"type": "string", "description": "e.g. protagonist | rival | mentor | catalyst | antagonist."},
+              "reuse": {"type": "boolean", "description": "True if this is an existing locked character."},
+              "ref_status": {"enum": ["locked", "partial", "new"], "description": "locked = refs exist; new = a full ref pack must be built (a production cost)."}
+            }
+          }
+        },
+        "cast_size": {"type": "integer", "minimum": 1, "description": "Derived: number of named cast members."},
+        "setting": {"type": "string", "description": "Where it happens; note if an env/location ref pack already exists."},
+        "hook": {"type": "string", "description": "The scroll-stopping promise — what makes someone open page 1."},
+        "est_page_count": {"type": "integer", "minimum": 1},
+        "chapter_type": {"enum": ["transformation", "climax", "origin", "action", "mixed"], "description": "Drives the growth-ratio target (corpus Finding 1)."},
+        "est_growth_page_ratio": {"type": "number", "minimum": 0, "maximum": 1, "description": "Target share of pages that are active-growth. Corpus Finding 1 targets: transformation >= 0.60, climax >= 0.70, action/plot >= 0.30."},
+        "planned_escalation_devices": {
+          "type": "array",
+          "description": "Which corpus growth devices the concept is built to use (Finding 4 steal-list).",
+          "items": {"enum": ["multi-panel-progressive", "clothing-destruction", "zoom-escalation", "size-comparison", "slow-burn", "reaction-intercut", "sfx-driven", "full-body-reveal"]}
+        },
+        "generation_angle": {"enum": ["transformation-flavor-first", "character-first", "setting-first", "hook-first"], "description": "Which tournament angle produced this concept."},
+        "why_itll_perform": {"type": "string", "description": "The rationale: why this lands with the audience, tied to evidence."},
+        "corpus_grounding": {
+          "type": "array",
+          "description": "Which corpus findings the concept leans on, e.g. ['F1 growth-ratio-by-intent', 'F5 story-as-differentiator'].",
+          "items": {"type": "string"}
+        },
+        "scores": {
+          "type": "object",
+          "description": "Per-axis 0-5 against references/rubric.md. Produced by the (stubbed) scoring engine or by hand.",
+          "properties": {
+            "hook": {"type": "integer", "minimum": 0, "maximum": 5},
+            "growth_payoff_density": {"type": "integer", "minimum": 0, "maximum": 5},
+            "story_spine": {"type": "integer", "minimum": 0, "maximum": 5},
+            "camera_staging_potential": {"type": "integer", "minimum": 0, "maximum": 5},
+            "cast_reuse": {"type": "integer", "minimum": 0, "maximum": 5},
+            "novelty": {"type": "integer", "minimum": 0, "maximum": 5},
+            "production_economy": {"type": "integer", "minimum": 0, "maximum": 5}
+          }
+        },
+        "weighted_total": {"type": "number", "description": "Weighted, normalized score (see rubric weights). Used to rank."},
+        "score_rationale": {"type": "string", "description": "Optional short justification per axis or overall."}
+      }
+    }
+  }
+}

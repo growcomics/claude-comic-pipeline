@@ -24,3 +24,27 @@ Lines starting with `#` are comments. Lines starting with `- [x]` are done.
 ## Catalog (GrowGetter, 1088 posts — not yet ingested; full readable comics found in survey)
 
 Available full comics (≥15pp) for future runs: angela-issue-1 (75pp, naturalman), nami (24pp), the-magic-cloak-5-betrayal-2 (21pp), superior-part_1 (15pp). Teasers/partial (skip): rivalry, crystal-peaks, seven-idols, mary-sue-part-2. NOTE: next expansion should target a DIFFERENT studio/artist than Boogie to separate genre norm from house style.
+
+## Premium / authenticated catalog  (B2 — BLOCKED on user login; Claude must NOT log in)
+
+The 9 comics above were pulled from PUBLIC chapter pages via the cookieless
+`ingest.py --web` path. **Premium content needs the authenticated session** — and the
+auth constraint is non-negotiable: **the USER** creates the account, grants their own
+premium, and logs in to the driven Chrome profile; **Claude never creates an account
+or enters a password.** Once the user confirms they're logged in, ingest premium-visible
+comics by **reading the authenticated session via the Chrome MCP** (the blob-fetch
+pattern in `SKILL.md` Phase 1 / `feedback_flow_bulk_download_blob.md`) — NOT the
+cookieless urllib path (it can't see premium pages).
+
+Priority once the session is live (corpus's #1 open question — separate genre law from
+Boogie's house style → target a DIFFERENT artist):
+- [ ] angela-issue-1 (75pp, **naturalman** — different artist ✓)
+- [ ] nami (24pp)
+- [ ] the-magic-cloak-5-betrayal-2 (21pp)
+- [ ] superior-part_1 (15pp)
+- [ ] premium-only titles — TBD once the authenticated catalog is visible
+
+## Scripts (B1 — the user's own story scripts)
+
+Not URLs — drop script files in `scripts-raw/` and run `scripts/ingest_script.py`
+(see `scripts-raw/README.md`). Tracked separately from this URL queue.

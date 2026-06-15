@@ -12,6 +12,27 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-14 (Ideator stage shell + corpus script/catalog feedstock)
+
+### Added
+
+- **Stage 1 IDEATOR — skill SHELL** at `skills/ideator/` (vision §2/§5; build-roadmap #4). Scaffolds the front of the production line without building the heavy engine yet (deliberate — deferred to a stronger model):
+  - `SKILL.md` — the **concept-tournament** workflow (generate N concepts from four angles — transformation-flavor / character / setting / hook-first — score against a corpus-grounded rubric, surface the top 3 for the human gate), the I/O contract (seed + roster + corpus findings → `concepts.json` + selected concept), and triggers ("ideate a comic", "pitch me some comics", "what should we make next").
+  - `references/concept-schema.json` — the **Ideator→Writer contract** (vision §4): per-concept logline, transformation arc, cast (with reuse/ref-status), setting, hook, page count, growth-ratio target, why-it'll-perform, per-axis score breakdown; plus slate `ranking`/`top3`/`selected_concept_id`.
+  - `references/rubric.md` — the **concept rubric v1.0**, 7 weighted axes **grounded in `research/comic-corpus` findings** (not invented): growth payoff density (F1 + `growth-density-mandate`) and story spine (F5 — *story is the niche's universal weak axis, hence the differentiation opportunity*) carry the top weight; plus hook, camera/staging potential (F4/F6 + `overshoot-camera-dynamism`), cast reuse, novelty, production economy. Notes two "free wins" the pipeline already banks (baked dialogue F2, face-led ECUs F3).
+  - `scripts/tournament.py` — **SHELL ONLY**: real plumbing (feedstock load, scoring math, ranking, JSON emit, schema validation, CLI) around two **stubbed** reasoning steps — `generate_concepts()` and `score_concept()` raise `NotImplementedError` with a `BUILD ME (stronger model)` marker. Verified: `--print-contract` emits a schema-valid concept, `--validate` passes via jsonschema, `--run` raises the stub.
+- **Corpus ingestion feedstock** — extends `research/comic-corpus/` with three new feedstock paths beyond rendered comics, all feeding the ideator:
+  - **B1 — the user's scripts**: `scripts-raw/` dropzone + `scripts/ingest_script.py` normalizer + `schema/script-record.schema.json`. A text script is scored only on the two TEXT-assessable rubric axes (growth density, story structure); the visual axes are deferred under `deferred_axes`. Reuses the corpus rubric vocabulary so scripts and comics pool into one library. Raw script text is gitignored (`corpus/*/source.*`, `scripts-raw/*`); the normalized record is versioned — same raw-stays-local / analysis-versioned philosophy as rendered pages. Verified: ingest round-trip + pending-skeleton schema validation + gitignore behavior.
+  - **B2 — premium catalog**: `_queue.md` gains a premium/authenticated section. Premium comics ingest by **reading the user's logged-in session via the Chrome MCP** (not the cookieless `ingest.py` path). **Auth constraint (non-negotiable): the USER creates the account, grants premium, and logs in; Claude never creates an account or enters a password.** BLOCKED on user login confirmation. Priority targets a different artist than Boogie (the corpus's #1 open question).
+  - **B3 — helper scripts**: `scripts/helpers/` placeholder for the user's accelerator tooling; integrated + documented on delivery. Awaiting delivery.
+- **`docs/PRODUCTION-SYSTEM-VISION.md`** committed (was untracked) and updated: Stage 1 `MISSING → SHELL`; heat map + §4 contract row reflect the scaffolded ideator with stubbed engine.
+
+### Notes
+
+- Shell-now / engine-later is intentional: the scaffold + schemas + rubric + ingestion plumbing are real and verified; the tournament scoring engine is a documented stub. B2/B3 execution is blocked on the user (logged-in session, script delivery, helper scripts).
+
+---
+
 ## 2026-06-14 (Flow default login per machine)
 
 ### Added
