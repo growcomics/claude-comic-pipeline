@@ -15,6 +15,19 @@ on before doing anything**, so actions never land on the wrong account.
 | **growcomics@gmail.com** | Primary comic production ("g" account) | **mac mini** Chrome | Plus | from memory — re-confirm |
 | **marrtrobinson2312@gmail.com** | Secondary / overflow account | **laptop** Chrome (deviceId `6b35bfe8-66a7-44c7-8ca2-191cf22b7b87`) | PRO (`PAYGATE_TIER_ONE` / `G1_TIER1`), 1844 credits on 2026-06-14 | live 2026-06-14 |
 
+### Default login per machine (RULE)
+
+Each machine has a **standing default account** — these are the default logins:
+
+- **Laptop** → **marrtrobinson2312** (deviceId `6b35bfe8-66a7-44c7-8ca2-191cf22b7b87`)
+- **Mac mini** → **growcomics**
+
+So: **when driving the laptop, default to marrtrobinson; when driving the mac mini,
+default to growcomics.** When you `select_browser` a machine, expect its default
+account — and still run the confirm-account check below. If the active account does
+NOT match the machine's default, stop (the wrong profile is loaded) and switch back
+before acting.
+
 Model rule is unchanged on both: **Nano Banana Pro** for comic gens
 (`feedback_flow_nano_banana_pro`). Flow model keys seen in payloads:
 `NARWHAL` = "Nano Banana 2", `GEM_PIX_2` = "Nano Banana Pro".

@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-14 (Flow default login per machine)
+
+### Added
+
+- **`references/flow-accounts.md` — default-login-per-machine rule** (user direction). Each machine has a standing default Flow account: **laptop → marrtrobinson2312** (deviceId `6b35bfe8-…`), **mac mini → growcomics**. When driving a machine, default to / expect its account; if the active account doesn't match the machine, the wrong profile is loaded — switch back before acting. This sharpens the confirm-account-before-acting check (it now has an expected value per machine). Memory `feedback_flow_confirm_account` updated to match.
+
+---
+
 ## 2026-06-14 (Remove the "no baked-in lettering" rule — finish the L7→L19 migration)
 
 ### Changed
