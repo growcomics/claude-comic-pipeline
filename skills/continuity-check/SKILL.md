@@ -170,4 +170,4 @@ After audit:
 1. User decides what to fix (regenerate, accept, update shotlist)
 2. Run those fixes
 3. Re-run continuity-check (rules + vision on changed panels)
-4. Then `page-composer` for lettering and PDF
+4. Then `page-composer` for layout + PDF (lettering is already baked into the panels per L19)

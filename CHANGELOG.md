@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-14 (Remove the "no baked-in lettering" rule — finish the L7→L19 migration)
+
+### Changed
+
+- **Purged the lingering "no baked-in lettering" rule across the pipeline (per user direction).** The pipeline was half-migrated from the old **L7 Case B** doctrine (strip all bubbles/SFX/captions from the prompt; defer lettering to `page-composer` vector overlay) to **L19** (bake lettering into the render as scope-bounded flat 2D comic overlay, auto-emitted by `next_panel.py`'s `_l19_lettering_block()`). The generation path (`next_panel.py`, `prompt-templates.md`, `commands/build-comic.md`, `comic-production/SKILL.md` §300/§339) already baked — but the QA rubric, the Flow workflow doc, several presets, a rule script, and the breakdown skill still enforced no-bake, a live contradiction. This pass removes the L7 remnants so **baked lettering (L19) is the single consistent rule**. Files: `references/qa-checklist.md` (the "No baked-in lettering / reject and regenerate" check + deprecation banner → now audits baked-lettering *quality*: legibility, attribution, no AI-garble, scope-bounded 2D), `script-breakdown/SKILL.md` (dialogue/SFX/captions bake at generation, not page-composer), `references/shotlist-driven-flow.md` (the Flow per-panel loop), `references/escalation-devices.md` (two-layer model — physical cues photoreal + SFX text 2D overlay), `references/three-panel-growth-v4.md`, `rules/l35_growth_intensity.py` (drops the "never baked SFX text" claim; it now owns only the physical/photoreal manifestation), `production-briefing/SKILL.md` (removed the no/yes opt-out — baked lettering is unconditional), `style-lock/styles/photoreal-daz3d/preset.md` (the default style — global "no text / 2D illustration / speech bubbles" negatives replaced with the L19 scope-bounded pattern so bodies stay photoreal while bubbles render), `style-lock/SKILL.md`, `continuity-check/SKILL.md`. `lessons-learned.md` already reflected L19 (no change).
+- Prompted by studying the user's real 130-gen Flow work (every panel bakes dialogue) and the crawl-audit finding that the old rubric would have wrongly rejected all of it. Aligns the canon with `feedback_bake_dialogue`.
+
+### Gate-integrity status (ACTION REQUIRED — user only)
+
+- Three per-project compose gates still strip lettering via `NEG = "No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands."` — in `projects/{manila-bay-rising, not-so-supra-man, tmb-daz-study}/qa/compose.py`. These were **NOT edited** (editing a gate trips the Layer-8 lock; re-bless is user-only). To finish those projects: set `NEG = "No extra limbs, no extra hands."`; in `not-so-supra-man` + `tmb-daz-study` also change the guard `if "No text" not in line:` → `if "No extra limbs" not in line:` (so NEG still appends once); then `python3 qa/integrity.py --rebless --i-am-the-user` per project after reviewing `git diff qa/compose.py`. The per-project `letter_pages.py` overlay scripts are now legacy/optional — left in place.
+
+---
+
 ## 2026-06-14 (Flow dual-account safety + review-bundle harvester)
 
 ### Added

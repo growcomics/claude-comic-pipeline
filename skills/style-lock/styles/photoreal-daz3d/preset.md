@@ -41,13 +41,20 @@ style.
 
 ## Mandatory prompt suffix
 > photorealistic skin micro-detail, golden-hour warm outdoor lighting,
-> natural pore detail, no painterly softness, no text, no speech bubbles,
-> no watermarks, no logos
+> natural pore detail, no painterly softness, no watermarks
+>
+> (Lettering is baked via the L19 block — see the Lettering section. Body-photoreal
+> is held by the L19 closing scope-bounded negation, not by a "no text" suffix.)
 
 ## Mandatory negative prompt
-> cartoon, anime, 2D illustration, painting, watercolor, ink lines,
-> speech bubbles, text overlay, watermark, logo, plastic skin, oversmoothed,
-> stock-flash front-lit
+> cartoon-shaded skin, anime, painting, watercolor, ink lines on the bodies,
+> watermark, plastic skin, oversmoothed, stock-flash front-lit
+>
+> (Body-photoreal is protected by the **L19 closing scope-bounded negation** in the
+> positive prompt — *"NOT a 2D illustration on the bodies, NOT cartoon-shaded skin;
+> only the bubble / caption / SFX graphics are flat 2D comic-book overlay."* Do NOT
+> put `2D illustration` / `speech bubbles` / `text overlay` in the global negative —
+> that suppresses the baked L19 lettering. See L19 in lessons-learned.)
 
 ## Elemental color rules (project-specific — HARD rules, not style hints)
 - <character A>'s aura / lightning / eye glow: <COLOR A> (hex range)
@@ -65,18 +72,21 @@ chapters each tier appears in.
 Document each chapter's wardrobe state. Suits and outfits should evolve
 deliberately, not jump between panels.
 
-## Lettering
-- NO text, dialogue, or captions baked into generated images
-- Lettering is applied in post by `page-composer`
-- Font: bold sans (e.g. WildWords-Bold or Comic Neue Bold)
-- Balloon: 2px black stroke, white fill
-- Thought bubbles: round cloud shape with trailing circles
-- Captions: rectangular, yellow tint
-- SFX: bold, black with colored drop shadow matching character energy color
+## Lettering — BAKED INTO THE RENDER (L19)
+- Speech bubbles, captions, and SFX are **baked into the generated panel** as flat
+  2D comic-book overlay graphics (auto-emitted by `next_panel.py`'s
+  `_l19_lettering_block()` from the shotlist `dialogue[]` / `captions[]` / `sfx[]`),
+  paired with the L19 closing scope-bounded negation so the bodies/scene stay
+  photoreal CGI. `page-composer` is **layout + PDF only** — it does not letter.
+- Baked-overlay style targets the model should render:
+  - Font: bold comic display (e.g. WildWords-Bold or Comic Neue Bold), ALL CAPS
+  - Balloon: clean white fill, bold black outline, tail to the speaker
+  - Thought bubbles: round cloud shape with trailing circles
+  - Captions: rounded rectangle, yellow tint, black outline
+  - SFX: bold flat 2D, black or color matching the character's energy color
 
 ## Banned
-- Ink outlines / cel shading / non-photorealistic rendering
-- Text or dialogue baked into the image
+- Ink outlines / cel shading / non-photorealistic rendering **on the bodies/scene** (the lettering overlay is the only 2D element)
 - Front-facing flat flash lighting (all panels use directional natural light)
 - Anime-style eyes or proportions
 - Visible DAZ3D UI artifacts or render noise
@@ -99,16 +109,20 @@ deliberately, not jump between panels.
 - **Suffix names "golden-hour warm outdoor lighting" + "natural pore detail"**
   — pushes the generator off its default stock-flash-lit ad aesthetic and
   toward the established Bay Watch look.
-- **Negative prompt is load-bearing** — bans `cartoon`, `anime`, `ink lines`,
-  `speech bubbles`, `watermark`, `plastic skin`. Without these, the model
-  drifts into stylized output even with a strong prefix.
+- **Negative prompt is load-bearing for the BODIES** — bans `cartoon-shaded skin`,
+  `anime`, `ink lines`, `watermark`, `plastic skin`. It no longer bans
+  `speech bubbles` / `2D illustration` globally (that would suppress the baked L19
+  lettering); body-photoreal is held by the L19 scope-bounded negation in the
+  positive prompt instead.
 - **Elemental color rules** — character-identity colors (e.g. Lana=blue,
   Lacy=gold for Bay Watch) under-render unless named explicitly in the
   prompt. Documented as a project-level hard rule, not a style hint, so
   `continuity-check` can flag swaps.
-- **No text in generated images** — lettering is `page-composer`'s job; baking
-  text into the panel produces ugly artifacts and forces re-gen on dialogue
-  changes.
+- **Lettering is baked into the render (L19)** — bubbles/captions/SFX are part of
+  the panel as scope-bounded flat 2D overlay, so each accepted panel is final and
+  the text integrates with the scene instead of looking pasted on. `page-composer`
+  is layout + PDF only. (Watch for AI-garbled text — re-roll the panel if a bubble
+  is scrambled.)
 
 ## Reference-image attachment is required, not optional
 

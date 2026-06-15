@@ -4,7 +4,7 @@ Ranked menu of the techniques that make a female-muscle-growth transformation *l
 
 **How to use this**: at `script-breakdown`, every declared `transformation_scenes` entry should consciously select **≥2 devices** (more for a climax) and reflect them in the per-panel beats. At generation, L35 (`rules/l35_growth_intensity.py`) reinforces the physical manifestation; the device *selection* is a shotlist decision, not an automatic one.
 
-**Hard constraint — L7 compliance**: all visual cues are *physical scene phenomena* (sweat, fabric, dust, particles, motion). **No baked-in comic SFX text or action lines** — those are added by `page-composer` as vector overlays post-render. "sfx-driven" below means the *sensation* is carried by physical phenomena + (post-render) lettering, not by typing "RRRIP" into the image prompt.
+**Two layers (L19)**: the *physical* escalation cues — sweat, fabric strain, dust, particles, motion blur — render in the **photoreal layer**; the **SFX text** ("RRRIP", "THROB") is baked as a **flat 2D comic overlay** by L19's lettering block (from the shotlist `sfx[]`), scope-bounded so it doesn't pull the panel to 2D. "sfx-driven" below means the sensation is carried by the physical phenomena *and* the baked 2D SFX overlay together — not by ambient "comic-style" vocabulary applied to the whole image (the original L7 Case B failure mode).
 
 ---
 

@@ -2,7 +2,7 @@
 
 Fuses the legacy growth-sequence doctrine (size benchmarks, per-panel face beats, escalating
 effects, "TWO REFERENCES" device, never-shrink rule) with the v4 gates (refs own appearance,
-size-chart pinning, per-hand accounting, no baked text). One image, three equal panels, time
+size-chart pinning, per-hand accounting, baked 2D lettering per L19). One image, three equal panels, time
 reads in panel order.
 
 ## What the legacy doctrine got right (keep forever)
@@ -23,9 +23,9 @@ reads in panel order.
 
 - **No appearance prose** — legacy templates described characters; v4 uses pointer language only
   ("the woman from reference 1"); face card + wardrobe turnaround attached (D11).
-- **No baked SFX text by default** — AI text gets typos; this pipeline letters in page-composer
-  (L7). Action lines/motion blur stay IN the render (they're visuals, not text). If a project
-  wants baked SFX anyway, add it as a toggle block, knowing the risk.
+- **Baked SFX text (L19)** — SFX is auto-emitted as a flat 2D comic overlay from `sfx[]` and baked
+  into the render; check legibility (AI text can garble — re-roll if scrambled). Action lines/motion
+  blur stay IN the photoreal render (they're visuals). `page-composer` no longer letters.
 - **Per-hand accounting + exactly-N-limbs lines** (D13), **identical camera/lighting/background
   across panels** stated explicitly (only size, damage, expression change), **height clamp** (D7),
   and Flow-filter-safe language on chest/glute pages (neutral anatomy terms, coverage explicit —
@@ -53,8 +53,8 @@ reads in panel order.
   "size_rules": [ "growth is strictly monotonic across panels — each panel larger than the previous, never equal, never smaller", "muscle mass increases, her HEIGHT does not change" ],
   "lighting": "[scene lighting] — identical in all three panels",
   "background": "EXACTLY the environment of the attached scene reference rung, softly defocused — identical in all three panels",
-  "sfx": "NONE baked — no text, no words, no letters (lettering added in composition)",
-  "negative": "no text, not illustrated, not 2D, no extra limbs or hands, no heavy vein networks, no height change, panels must not repeat the same size"
+  "sfx": "[SFX word(s) for this growth beat, e.g. RRRIP / THROB — baked as flat 2D comic ALL-CAPS overlay per L19, scope-bounded so bodies stay photoreal; one per growth panel]",
+  "negative": "not illustrated on the bodies, not cartoon-shaded skin, no extra limbs or hands, no heavy vein networks, no height change, panels must not repeat the same size (the lettering overlay is the only 2D element — keep it via the L19 scope-bounded positive negation, do not ban text globally)"
 }
 ```
 

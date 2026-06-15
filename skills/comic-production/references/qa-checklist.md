@@ -1,16 +1,14 @@
 # Quality Assurance Checklist
 ## Run This After Every Batch of Generated Pages
 
-> **STATUS: PARTIALLY DEPRECATED — read before using.** Last reviewed 2026-05-11.
+> **STATUS: Updated for L19 (baked lettering) — 2026-06-14.** Last reviewed 2026-06-14.
 >
-> Two areas of this checklist pre-date the discovery of **L7 Case B** in `lessons-learned.md` (lettering and SFX baked into the generation prompt cause 2D illustration drift in CGI panels):
+> Per **L19** in `lessons-learned.md`, lettering (speech bubbles, captions, and SFX text) is **baked into the generation render** as flat 2D comic-book overlay graphics, scope-bounded so the bodies/scene stay photoreal CGI. `page-composer` no longer letters — it is layout + PDF only. So the lettering/SFX/dialogue checks below are **active again**, but they now audit the **quality of the baked lettering**, not its absence (the old "no baked-in lettering / reject and regenerate" rule has been removed):
 >
-> - **Transformation Scenes → "Action lines and SFX present"** — obsolete. SFX text ("RRRRIP!", "CRACK!", "THROB") and "action lines radiating outward" in the render are exactly what causes L7 Case B 2D drift. Confirmed in the Chun-Li growth series. These now belong in `page-composer` post-render. The render itself should have NO baked-in lettering. See L7 Case B for the alternative (physical scene cues only: sweat, fabric strain, dust, motion blur — described in non-comic-coded language).
-> - **Dialogue and Text** (whole section) — obsolete. Speech bubbles, attribution, repeated lines, text legibility — all of these are now checked at the `page-composer` stage, not against the generation output. The render must NOT include speech bubbles, thought bubbles, or caption boxes. Per L4 (deprecated) and L7 Case B, dialogue/captions live in `shotlist.json`'s `dialogue[]` / `captions[]` arrays and are added as vector overlays.
+> - **Transformation Scenes → "SFX present"** — active. SFX text ("RRRRIP!", "CRACK!", "THROB") IS baked, rendered as flat 2D comic-style ALL-CAPS overlay with the L19 scope-bounded negation (so it doesn't pull the whole panel to 2D). Check it's present on growth beats, legible, and not AI-garbled. Physical scene cues (sweat, fabric strain, dust, motion blur) still render in the photoreal layer alongside the SFX overlay.
+> - **Dialogue and Text** (whole section) — active. Speech bubbles, attribution, unique lines, and legibility are checked **against the generation output** (the render now contains the lettering). Dialogue/captions live in `shotlist.json`'s `dialogue[]` / `captions[]` arrays and are auto-baked by `next_panel.py`'s `_l19_lettering_block()`.
 >
-> What's still valid: **Character Consistency, Background and Environment Consistency, Facial Expressions and Character Acting, Anatomy, Production Hygiene**, and most of the Transformation Scenes section (everything except the SFX check). The visual-quality-standards benchmarks (`assets/visual-quality-standards.json`) for breast size, bicep detail, and abs detail are still the canonical floor.
->
-> The deprecated items are preserved with inline ⚠️ markers so this doc remains useful as a historical record and so contributors can see what changed.
+> Everything else (Character Consistency, Background/Environment, Facial Expressions, Anatomy, Production Hygiene, the Transformation-Scene benchmarks) is unchanged. The visual-quality-standards benchmarks (`assets/visual-quality-standards.json`) for breast size, bicep detail, and abs detail remain the canonical floor.
 
 This checklist catches the most common and damaging issues. Run through it for every batch of generated pages before delivering to the user. Each item comes from real production failures — they're ordered roughly by how often they occur and how badly they hurt the final product.
 
@@ -66,7 +64,7 @@ This checklist catches the most common and damaging issues. Run through it for e
 - [ ] **L35 — Face sells the growth on every face-visible growth panel**: On any growth panel where a face is in frame (stage_change, whole_body, reveal, aftermath, trigger, first_sensation), the face registers PEAK intensity matched to the beat (strain / ecstasy / awe / triumphant) — never neutral, calm, or slack. A dead face on a growth beat is a hard defect. (See also "Facial Expressions" above.)
 - [ ] **L35 — Scene uses ≥2 escalation devices**: Each transformation scene visibly employs at least two devices from `references/escalation-devices.md` (sfx-driven, reaction-intercut, full-body-reveal, size-comparison, multi-panel-progressive, zoom-escalation, clothing-destruction, slow-burn). Avoid escalation-by-repetition — each reveal must change scale, angle, or stakes, not repeat the same big-body splash.
 - [ ] **Multi-panel expansion**: Transformations are spread across multiple panels (growth beginning, closeup of focal body part, optional torso laughing shot, final reveal). No single-panel transformations unless it's a very minor change.
-- [ ] ⚠️ **DEPRECATED — Action lines and SFX present**: ~~Transformation panels include visual storytelling cues — action lines radiating from growing areas, SFX text ("RRRRIP!", "CRACK!", "THROB") near tearing fabric or swelling muscles.~~ This check is OBSOLETE per L7 Case B. Baked-in SFX text causes 2D drift in CGI panels. **New check**: transformation panels include *physical-scene* storytelling cues only — sweat, fabric strain, dust kicked up, motion blur, particle effects — in non-comic-coded language. SFX text and action lines are added by `page-composer` post-render as vector overlays.
+- [ ] **SFX baked + scope-bounded (L19)**: Transformation panels bake SFX text ("RRRRIP!", "CRACK!", "THROB") near tearing fabric or swelling muscles as **flat 2D comic-style ALL-CAPS lettering** (auto-emitted from the shotlist's `sfx[]`), paired with the L19 closing scope-bounded negation so only the lettering is 2D and the bodies/scene stay photoreal CGI. Check the SFX is present on growth beats, legible, not AI-garbled, and that it did NOT pull the whole panel into 2D illustration (if it did, the scope-bounded negation is missing — fix per L19; that is not a reason to strip the SFX). Physical-scene cues (sweat, fabric strain, dust, motion blur) render in the photoreal layer alongside.
 - [ ] **Growth sequence order**: Multi-panel transformations follow breasts-first, glutes-second, muscles-third order (unless the story requires otherwise). See `posing-and-expressions.md` "Growth Sequence Order".
 - [ ] **Muscle color correct**: Muscles are rendered as natural healthy skin tone, not red or inflamed. Skin is wet/shiny/glistening, not raw or damaged.
 - [ ] **Muscles and breasts together**: Any character with enlarged muscles also has proportionally enlarged breasts. These are always specified together.
@@ -81,19 +79,15 @@ This checklist catches the most common and damaging issues. Run through it for e
 
 ---
 
-## ⚠️ DEPRECATED — Dialogue and Text
+## Dialogue and Text (baked lettering — L19)
 
-> The entire section below is obsolete. The render must not include speech bubbles, thought bubbles, captions, or any baked-in text. All lettering is done by `page-composer` as vector overlays on top of the clean CGI render. These checks now apply at the `page-composer` review stage instead, and they apply to the lettered overlays — not to the model's output.
->
-> Preserved for historical reference only.
+> Per L19, lettering is baked into the render, so these checks apply **to the generated panel itself**. Bubbles/captions/SFX are auto-emitted by `next_panel.py` from the shotlist `dialogue[]` / `captions[]` / `sfx[]`; `page-composer` does not letter.
 
-- [ ] ~~**Correct character speaking**: Speech bubbles appear next to/above the correct character. The bubble clearly belongs to the character who is supposed to be speaking that line.~~
-- [ ] ~~**No repeated lines**: Every speech bubble contains a unique line. No character says the same thing twice in one panel or in adjacent panels.~~
-- [ ] ~~**Dialogue matches the script**: The text in bubbles matches what the script says. No paraphrasing, no missing lines, no added lines.~~
-- [ ] ~~**Text is legible**: Speech bubble and narration text is readable and not cut off or overlapping.~~
-
-**Replacement check (during render QA, pre-page-composer)**:
-- [ ] **No baked-in lettering**: The generated panel contains zero speech bubbles, thought bubbles, caption boxes, SFX text, or any visible written words apart from incidental real-world signage (e.g., shop signs, posters in the environment that happen to be in the scene). If any speech bubble or SFX text is in the render, **reject and regenerate** — the prompt has a lettering instruction that needs to be removed.
+- [ ] **Correct character speaking**: Speech bubbles sit next to/above the correct character, tail pointing to the right speaker (per L4 attribution).
+- [ ] **No repeated lines**: Every speech bubble contains a unique line. No character repeats themselves in one panel or in adjacent panels.
+- [ ] **Dialogue matches the script**: Bubble text matches the shotlist `dialogue[]` exactly — no paraphrasing, no missing lines, no added lines.
+- [ ] **Text is legible and clean**: Bubble/caption/SFX text is readable, correctly spelled, not cut off or overlapping, and **not AI-garbled** (scrambled words / nonsense glyphs — the most common baked-lettering defect). Re-roll the panel if the text is garbled.
+- [ ] **Lettering is scope-bounded 2D**: Bubbles/captions/SFX render as flat 2D comic-book overlay while the bodies, skin, hair, costumes, and environment stay photoreal CGI. If the whole panel drifted to 2D/illustration, the L19 closing scope-bounded negation is missing — regenerate with it (do NOT strip the lettering).
 
 ---
 
@@ -127,6 +121,6 @@ This checklist catches the most common and damaging issues. Run through it for e
 
 ## Quick Pass vs. Full Review
 
-**Quick pass** (for mid-batch spot checks): Check character consistency, background consistency, expressions, and the no-baked-lettering check. These are the most common failures and can be caught at a glance.
+**Quick pass** (for mid-batch spot checks): Check character consistency, background consistency, expressions, and the baked-lettering quality check (legible, correct speaker, not AI-garbled). These are the most common failures and can be caught at a glance.
 
-**Full review** (before delivering to the user): Run every item on this checklist. Focus extra attention on transformation scenes (especially stage-change panels with lineup ref + size language) and continuity across the chain. After this checklist passes, hand off to `page-composer` for lettering — that's where dialogue, captions, and SFX get added as vector overlays.
+**Full review** (before delivering to the user): Run every item on this checklist. Focus extra attention on transformation scenes (especially stage-change panels with lineup ref + size language) and continuity across the chain. After this checklist passes, hand off to `page-composer` for **layout + PDF only** — lettering is already baked into the accepted panels (L19), so each accepted panel is the final shippable image.

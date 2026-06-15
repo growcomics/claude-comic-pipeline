@@ -30,7 +30,7 @@ generation-prompt bug, not a style-lock issue — fix the prompt, don't relock.
 
 **`styles/photoreal-daz3d/preset.md`** — photorealistic DAZ3D Iray render,
 3D Muscle Comics house style, 3:4 portrait, Nano Banana 2 Pro, golden-hour
-outdoor lighting, no ink lines, no baked text. This is the default for any
+outdoor lighting, no ink lines, baked 2D lettering (L19). This is the default for any
 new comic project unless the user explicitly asks for a different aesthetic.
 
 The previous ink-line example template now lives at
@@ -54,8 +54,8 @@ The template's required sections:
   every panel prompt; the negative is load-bearing
 - **Project-specific hard rules** — character energy colors, suit state by
   chapter, scale tiers
-- **Lettering** — font, balloon stroke, caption tint, SFX styling (read by
-  `page-composer`; never baked into the generated image)
+- **Lettering** — font, balloon stroke, caption tint, SFX styling (the
+  baked-overlay style targets per L19; lettering bakes into the render, `page-composer` is layout + PDF only)
 - **Banned** — explicit list of looks the project must not produce
 - **Style sample reference** — the locked-in test image for drift checks
 

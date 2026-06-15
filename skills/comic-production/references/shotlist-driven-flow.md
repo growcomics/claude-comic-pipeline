@@ -67,7 +67,7 @@ Read alongside:
 
   Aspect is an Agent-settings default — it persists until changed. When a panel's aspect differs from the previous submit, reopen Agent settings and change it before submitting.
 
-- **No baked lettering.** Dialogue, captions, and SFX are data in the shotlist; they are NEVER written into the generation prompt. The render must be clean (L7 Case B). Lettering happens in `page-composer`.
+- **Baked lettering (L19).** Dialogue, captions, and SFX live in the shotlist as data and are auto-baked into the render as flat 2D comic-book overlay by `next_panel.py`'s `_l19_lettering_block()`, scope-bounded so the bodies/scene stay photoreal CGI. `page-composer` is layout + PDF only.
 
 ---
 
@@ -87,7 +87,7 @@ What it handles for you:
 - Detecting stage-change panels (when `muscle_size_tier` differs from the prior accepted panel's tier) and attaching the lineup ref per **L5**
 - Mapping the panel's camera category to the Flow aspect ratio
 - Resolving each character's face card path and each hero location's `_source.jpg`
-- Composing a starter prompt that's L7-compliant: positive CGI anchor up front, no baked-in lettering, single closing `Photographic CGI render, NOT illustrated.` negation
+- Composing a starter prompt with the positive CGI anchor up front, the L19 lettering block (when the panel has dialogue/captions/SFX), and the closing scope-bounded negation (`Photographic CGI render on the bodies/scene; NOT a 2D illustration on the bodies; only the bubble/caption/SFX graphics are flat 2D overlay.`)
 - Including a state-anchor reference to the chosen prior panel in the prompt so chain continuity is explicit
 
 What stays as Claude's work:
@@ -189,7 +189,7 @@ Evaluation criteria, in order:
 4. **Costume continuity** — fabric state evolves monotonically from the prior accepted panel (per L1 — torn seams don't heal)
 5. **Size continuity** — muscle/breast size is at or above the prior tier (per the "muscles never revert" rule)
 6. **Anatomy clean** — exactly two arms, two legs, no extra/missing limbs
-7. **No baked-in lettering** — no speech bubbles, SFX text, caption boxes in the render. (Should be ruled out by prompt design, but check.)
+7. **Baked lettering present + clean (L19)** — speech bubbles / captions / SFX are baked in, legible, correctly attributed, not AI-garbled, and scope-bounded (bodies stay photoreal). Re-roll if the text is garbled or the whole panel drifted to 2D.
 8. **Expressive face** — vivid, readable expression that fits the action beat
 9. **Composition quality** — readable body framing, focal point clear
 

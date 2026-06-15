@@ -170,9 +170,10 @@ MANDATORY RULES BLOCK
        (a) accept the type's defaults (most common — just say "accept defaults")
        (b) list which rule numbers to drop FROM the type default
        (c) list which rule numbers to add TO the type default
-  19. Allow baked lettering (L19 experimental)? [no default / yes]:
-        no  = strip all bubbles/SFX/captions from prompts (L7 Case B canonical rule)
-        yes = bake lettering as physical scene objects with aggressive anchoring (L19)
+  19. (Not a toggle.) Baked lettering is UNCONDITIONAL as of 2026-05-25 (L19):
+        bubbles/captions/SFX always bake into the render as flat 2D scope-bounded
+        overlay (auto-emitted by next_panel.py from dialogue[]/captions[]/sfx[]).
+        There is no opt-out; page-composer is layout + PDF only.
   20. Additional project-specific extra_lines [optional, any]:
 
 REFERENCES

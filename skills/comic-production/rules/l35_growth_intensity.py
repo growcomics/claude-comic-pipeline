@@ -11,8 +11,10 @@ findings this rule enforces at the panel level:
     mandatory peak-intensity expression directive.
   - Finding 4: physical manifestation (sweat-sheen, fabric strain, flushed
     taut skin, displaced air) is the genre's dominant escalation signal. On
-    growth beats we inject the L7-compliant PHYSICAL cues — never baked SFX
-    text or action lines (those are page-composer vector overlays per L7).
+    growth beats we inject the PHYSICAL cues (sweat-sheen, fabric strain, motion
+    blur) in the photoreal render layer. SFX TEXT is baked separately as a flat
+    2D comic overlay by L19's lettering block (from the shotlist sfx[]); the two
+    layers coexist — this rule owns only the physical/photoreal manifestation.
 
 The directive branches on whether the face is in frame:
   - body-region ECU beat (chest/arms/abs/... — head cropped per L20): physical
@@ -70,8 +72,9 @@ _PHYSICAL_MANIFESTATION = (
     "sweat-sheen and glisten over the swelling muscle, fabric straining and "
     "splitting at the seams across the expanding region, skin taut and flushed, "
     "displaced air and motion (dust, particles, snapping cloth). Physical "
-    "phenomena ONLY — no comic-book SFX text and no action lines (those are "
-    "added as vector overlays in page-composer per L7)."
+    "phenomena in the photoreal render layer. (SFX TEXT is baked separately as a "
+    "flat 2D comic overlay by the L19 lettering block — NOT this rule's job; this "
+    "directive covers only the physical/photoreal manifestation of the growth.)"
 )
 
 
