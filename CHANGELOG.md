@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-14 (Make the L34 subject-staging gate load-bearing + Flow/NB2 staging field notes)
+
+### Added
+
+- **L34 subject-staging gate committed and made load-bearing.** The staging reference `skills/comic-production/references/staging-and-composition.md` (the "camera plane is the enemy" guide — TENSION BLOCK / DEPTH STAGING / TRIANGULAR GROUPING / NEGATIVE-SPACE HERO / FOREGROUND OCCLUSION) and its enforcement in `projects/not-so-supra-man/qa/compose.py` had been **authored but never committed** — the lesson sat dormant in the working tree and was not being applied, so multi-character panels kept coming back flat (figures on a level horizontal eye-line, equal scale, square to the lens). This commit lands both. `compose.py` now: (a) **refuses** (defect `D14`) any multi-character page lacking a recognized top-level `staging_type` (`tension-block` / `depth-staged` / `triangular` / `negative-space-asymmetric` / `foreground-occlusion` / `parallel-acceptable`); (b) **rejects** flat-camera-plane language ("face the camera", "side by side", "in a row", "lined up", "parallel to the lens", "level eye-line") in the staging text of depth/tension/triangular pages; (c) **auto-injects** the matching condensed "break the camera plane" directive into every composed prompt. *Why:* a guide you have to remember to read gets skipped under throughput pressure — the gate makes correct staging the only thing that composes.
+- **`staging-and-composition.md` → new "PRACTICAL NOTES — generating on Flow / Nano Banana 2"** section, field-verified 2026-06-12 driving these stagings through Flow's Omni chat UI:
+  - **Foreground-LEAN beats back-of-head occlusion** — the model resists hiding a face, so true over-the-shoulder framing tends to soften back to a flat two-shot; a foreground lean (near figure angled three-quarter toward the other, face still visible, large by perspective) lands the diagonal depth reliably on the first try.
+  - **Lock scale with a height-comparison reference, not prose** — generate a one-off both-characters-on-a-labeled-measurement-grid chart at true heights, attach it as a ref on every multi-character panel, and clamp in-prompt ("on-screen size difference is camera distance, not a change in real height"). Pins the ratio (per the height-consistency lesson) while the staging supplies the drama.
+  - **The Omni agent paraphrases the prompt** before it reaches the model, diluting forceful directives — keep staging language blunt, CAPS-led, and ended on an explicit negative.
+
+### Notes
+
+- The gate's reference images (`references/sketches/staging-examples/`) and any per-project `qa/staging/*.json` are out of scope here and not bulk-added; only the reference doc, its `compose.py` enforcement, and the field notes are committed.
+
+---
+
 ## 2026-06-14 (Ideator stage shell + corpus script/catalog feedstock)
 
 ### Added

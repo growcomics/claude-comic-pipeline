@@ -29,6 +29,39 @@ CAMERA_DISTANCE = {
     "mcu": "close", "ecu": "close", "close": "close",
 }
 
+# L34 subject staging — break the camera plane. The six recognized staging
+# types and the canonical directive each injects into the prompt. Authored
+# reference: skills/comic-production/references/staging-and-composition.md.
+STAGING_TYPES = {
+    "tension-block", "depth-staged", "triangular",
+    "negative-space-asymmetric", "foreground-occlusion", "parallel-acceptable",
+}
+STAGING_DIRECTIVE = {
+    "tension-block": ("TENSION BLOCK — the figures are rotated three-quarter and lean toward a shared collision "
+                      "point; the line between their heads is a strong diagonal, NOT a level horizontal; the lead "
+                      "is nearer the camera and larger by perspective; minimal gap between them; NOT parallel, NOT square to the lens"),
+    "depth-staged": ("DEPTH STAGING — lead in the immediate foreground at ~55-60% of frame height; the other figure "
+                     "deep in the background at much smaller perspective scale; three distinct near/mid/far layers; "
+                     "environment perspective lines converge behind the far figure; the figures are NOT on the same plane or comparable scale"),
+    "triangular": ("TRIANGULAR GROUPING — lead at the apex (foreground, largest, head highest); supporting figures at "
+                   "lower base points at differing depths and scales; no two figures at the same scale or Z-depth; the "
+                   "eye travels apex to base; NOT a level row of equal-size figures"),
+    "negative-space-asymmetric": ("NEGATIVE-SPACE HERO — the figure occupies one third of the frame; the other two thirds is "
+                                  "empty space (sky/void/architecture/a shaft of light); shot from a low angle so she towers; "
+                                  "asymmetric, NOT centered, NOT square to the lens; high-contrast single light source"),
+    "foreground-occlusion": ("FOREGROUND OCCLUSION — the camera shoots past a soft out-of-focus foreground object intruding "
+                             "from one corner (~20-25% of frame); the lead is sharp in the midground framed by it; shallow "
+                             "depth of field isolates her; NOT a clean unobstructed front-on shot"),
+    "parallel-acceptable": ("PARALLEL (intentional escape hatch) — figures sit on a shared plane for a formal lineup / portrait "
+                            "/ ceremonial beat; use rarely, only when a flat arrangement is the deliberate point"),
+}
+# Dead-panel phrases that defeat the staging types built to break the camera plane.
+FLAT_LINEUP_RE = re.compile(
+    r"fac(?:e|ing)\s+the\s+camera|side[\s-]by[\s-]side|in\s+a\s+row|lined?\s+up|"
+    r"parallel\s+to\s+the\s+(?:camera|lens)|level\s+eye[\s-]?line",
+    re.I,
+)
+
 def refuse(msgs):
     print("COMPOSE REFUSED:")
     for m in msgs: print(f"  ✗ {m}")
@@ -135,6 +168,21 @@ def compose_page(panel_id):
                 "(per-character position/orientation + per-HAND accounting + total-hands line); author it first"])
     staging = json.load(open(staging_path)) if os.path.exists(staging_path) else {}
 
+    # L34: multi-character pages must declare a recognized staging_type, and the
+    # staging text must not contain flat-camera-plane language that defeats it.
+    stype = staging.get("staging_type")
+    if contact:
+        if stype not in STAGING_TYPES:
+            errs.append(f"D14 (L34): multi-character page requires staging_type in {sorted(STAGING_TYPES)} "
+                        f"at the top level of {staging_path}; got {stype!r}. "
+                        "See skills/comic-production/references/staging-and-composition.md")
+        elif stype in ("tension-block", "depth-staged", "triangular"):
+            m = FLAT_LINEUP_RE.search(json.dumps(staging))
+            if m:
+                errs.append(f"D14 (L34): staging text contains flat-camera-plane language '{m.group(0)}' under a "
+                            f"'{stype}' stage — break the plane (diagonal intent / near-far depth / varied scale), "
+                            "not a flat lineup. See staging-and-composition.md")
+
     # PRIOR CHECK: shotlist continuity_refs must be banked WITH a chain (v2 pages only count)
     log = json.load(open("pages-log.json")) if os.path.exists("pages-log.json") else {"done": {}}
     for ref_id in panel.get("continuity_refs", []) or []:
@@ -183,6 +231,8 @@ def compose_page(panel_id):
             "action": action,
             "lighting": staging.get("lighting", panel.get("time_of_day", "")),
             "negative": (NEG + NEG_PAGE_BLEED).lower()}
+    if stype in STAGING_DIRECTIVE:  # L34: inject the camera-plane-breaking staging directive
+        body["staging"] = STAGING_DIRECTIVE[stype]
     if any("torn" in state_for(c, panel) or "remnant" in state_for(c, panel) for c in chars):
         body["spatial_rules"].append("coverage of chest and hips fully intact in every stage")
     if "GROWTH-PROGRESSIVE" in action:
