@@ -1416,4 +1416,54 @@ See `references/composition-reading-list.md` for the full annotated list.
 
 ---
 
+## L36 — Flow Omni conversational single-instruction editing + the Nano-Banana-validated "prosumer DAZ" style block
+
+**Status: Active.** New lesson 2026-06-17. Burned from the Chun-Li character-build session on the Omni-agent Flow UI (project `8e5f2654-8513-41d6-a7ea-6db370c58004`, growcomics account, 28 generations across one session). Where L35/L34/L20 govern *what to draw*, L36 governs *how to drive the Omni agent to build a single hero figure and its action panels*, and pins the **exact style suffix that survives on Nano Banana 2 / Pro** — distinct from the Higgsfield/Bay-Watch outdoor block in `styles/photoreal-daz3d/preset.md`.
+
+**Three findings.**
+
+### 1. The Nano-Banana-validated "prosumer DAZ" style block
+
+The documented preset suffix ("golden-hour warm outdoor lighting, natural pore detail") is tuned for outdoor narrative panels. For **studio / character-sheet / interior** work on Nano Banana, the block that held across the whole Chun-Li run is:
+
+```
+High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX.
+```
+
+For **action/dialogue panels** append the negative inline (Nano Banana honors it appended, no separate negative field on Flow Omni):
+
+```
+NO thick lines, NO borders
+```
+
+Load-bearing words, do not paraphrase: **"clean prosumer 3D CGI comic art"** (pulls off the glossy-cinematic default), **"PBR skin with pores and subsurface scattering"** (the micro-detail lever), **"well-lit Iray global illumination"** (studio key — replaces the outdoor golden-hour cue), **"not glossy cinematic VFX"** (the single most useful negation — kills the over-rendered Unreal/VFX look that Nano Banana drifts to). The `NO thick lines, NO borders` tail is what keeps Nano Banana from drawing comic panel gutters / inked outlines around the figure.
+
+**Style-transfer entry point:** to convert an uploaded real-photo reference into the house look, prompt `convert to <the block above>` with the photo attached. This is how the canonical 3D base ref was minted from the source image before any posing.
+
+### 2. Conversational single-instruction editing beats one fat prompt on Omni
+
+The Omni agent mediates every generation, and it **edits an attached image far more reliably than it builds a complex scene from a wall of text**. The Chun-Li action panels were built as a chain of *one-change-per-message* edits on the prior accepted image, not as one big prompt:
+
+1. `Change her pose to the reference so she looks like she is kicking, just like the reference` (+ pose ref attached)
+2. `Change her facial expression so she looks like shouting, she is looking to her right directly in the position of her leg`
+3. `Add a text dialogue bubble that comes from her and says Tenshoukyaku!`
+
+Each message carries the style suffix and changes exactly one thing. The agent keeps everything else stable, so identity/costume/accessories don't drift between edits the way they do when you re-roll a fresh full prompt. **Gaze direction is steerable in plain language** ("looking to her right directly in the position of her leg" → eyes track the kicking leg). Dialogue is baked at generation time via the agent (consistent with L19) — `Add a text dialogue bubble that comes from her and says "<line>"`.
+
+This is a genuinely different driving model from the L35 run's "compose one full prompt, then verbatim re-runs." Use **single-instruction editing** for refining an accepted figure (pose, expression, gaze, wardrobe state, lettering); use **full-prompt + verbatim re-runs** only for the cold-start baseline and for novel money-shots.
+
+### 3. Turnaround / reference sheets: Nano Banana Pro, 16:9, black background, "consistent every time"
+
+The canonical multi-view turnaround (Front / Side / Rear-cape-blowing in one frame) was generated on **Nano Banana Pro at 16:9 on a black background** — Pro's higher fidelity is worth spending the daily quota on for the *reference* assets even though NB2 carries the panels. The instruction that locked proportion across the views was literal: `Update the turnaround sheet and make sure the muscle size is consistent every time, make sure it's 16:9, and put in a black background`. Black bg + 16:9 is the reference-sheet convention (clean alpha-friendly cutout, all views legible side-by-side); 4:3 is the action-panel convention.
+
+**FMG escalation lever on Omni** is literal repetition, not adjectives: `Make her muscles way way way way way way way way bigger` steps the figure up a tier per "way"-stacked message. Re-issue the same message to push further; pair with the turnaround "muscle size consistent every time" instruction afterward to re-lock the new tier across all views.
+
+**Accessory/identity continuity observed holding across edits** (Chun-Li canon, for reference): ox-horn hair buns with gold ornaments at the base, sleeveless blue qipao halter with gold frog-button trim and mandarin collar, **black spiked studded wristbands on both wrists**, blue athletic leggings. These survived pose/expression/lighting edits intact *because* the edits were single-instruction on the prior image (finding 2) — a fresh full-prompt re-roll would have dropped the wristbands. This is the practical payoff of L24 (accessory suppression/lock) under the Omni edit model.
+
+**Where this applies**: any character-build or hero-figure session on the Flow Omni UI; the style block applies to all studio/interior Nano Banana work. **Where it does NOT**: outdoor narrative panels keep the golden-hour preset block; Higgsfield production is unaffected (it has its own negative field and the `compose.py` chain). **Reverses**: nothing — extends `flow-workflow.md` (which had Omni ref-attachment marked unverified — now observed working 2026-06-17) and complements L19 (baked lettering) and L24 (accessory lock).
+
+**Provenance**: Flow project `8e5f2654-8513-41d6-a7ea-6db370c58004` (Chun-Li build, 2026-06-17), read live via the Chrome MCP.
+
+---
+
 ## How to add a lesson

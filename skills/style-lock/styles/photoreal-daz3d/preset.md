@@ -88,6 +88,30 @@ deliberately, not jump between panels.
 - Drift check: re-run weekly or every 10 panels; compare to the locked sample.
 ```
 
+## Flow / Nano Banana validated variant — studio & interior (added 2026-06-17, L36)
+
+The prefix/suffix above are tuned for **outdoor golden-hour** narrative panels. For
+**studio / interior / character-sheet** work on **Nano Banana 2 / Pro** (Flow Omni),
+use this field-validated block instead — it held across the entire Chun-Li build
+session (see `comic-production/references/lessons-learned.md` § L36):
+
+```
+High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX.
+```
+
+- Append `NO thick lines, NO borders` on action/dialogue panels (Nano Banana honors a
+  trailing negation inline — there is no separate negative field on Flow Omni).
+- Style-transfer a real-photo reference into this look with `convert to <block>` + photo attached.
+- **`not glossy cinematic VFX`** is the load-bearing negation — it kills the
+  over-rendered Unreal/VFX drift; **`well-lit Iray global illumination`** replaces the
+  outdoor golden-hour cue for studio lighting.
+- Reference/turnaround sheets: Nano Banana **Pro, 16:9, black background**; action
+  panels: Nano Banana **2, 4:3**. Lock proportion across turnaround views with
+  "make sure the muscle size is consistent every time."
+
+Pick by setting: outdoor scene → keep the golden-hour suffix; studio sheet / interior →
+this block. Same `photoreal-daz3d` family, two lighting-context suffixes.
+
 ## Why these choices
 
 - **Nano Banana 2 (Pro / Flash) at 3:4, 1K** — the model whose default look is

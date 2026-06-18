@@ -12,6 +12,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-17 (L36 — Flow Omni conversational editing + Nano-Banana-validated "prosumer DAZ" style block)
+
+**Added**
+- **L36** in `skills/comic-production/references/lessons-learned.md` — burned from the Chun-Li character-build session on the Flow Omni UI (project `8e5f2654-8513-41d6-a7ea-6db370c58004`, 28 gens, read live via Chrome MCP 2026-06-17). Three findings: (1) the Nano-Banana-validated **"prosumer DAZ" studio/interior style block** (`clean prosumer 3D CGI comic art … PBR skin with pores and subsurface scattering … well-lit Iray global illumination … not glossy cinematic VFX`, + `NO thick lines, NO borders` on panels) — distinct from the outdoor golden-hour preset suffix; (2) **conversational single-instruction editing** beats one fat prompt on Omni for refining an accepted figure (pose / expression / gaze / wardrobe / lettering, one change per message) — holds identity + accessories where a fresh re-roll drifts them; (3) **turnaround/reference sheets = NB Pro, 16:9, black bg; action panels = NB2, 4:3**, with literal `way way … bigger` as the FMG tier-up lever and "muscle size consistent every time" to re-lock proportion across views.
+- `styles/photoreal-daz3d/preset.md` — new **"Flow / Nano Banana validated variant — studio & interior"** section documenting the validated block and when to use it vs the outdoor golden-hour suffix.
+
+**Changed**
+- `skills/comic-production/references/flow-workflow.md` — Reference Attachment status flipped from *not yet re-verified* to **observed working (2026-06-17)** (style-transfer + pose-by-reference both seen on Omni; exact click path still to be driven end-to-end). Added **"Conversational single-instruction editing (Omni)"** subsection under Generation Mechanics, plus lessons-learned bullets 10–12.
+
+*Docs/reference only — no rule-module, gate, or `compose.py` behavior changed. Source: live read of the Flow project; nothing generated or banked.*
+
 ## 2026-06-12 (cheer-ascension: t6-strain + t6-rebuilt BANKED — ALL 6 SHEETS COMPLETE)
 
 **Added**

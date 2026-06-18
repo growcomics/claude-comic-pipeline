@@ -86,11 +86,23 @@ The legacy x4 fan-out is gone — variants now cost one extra chat message and r
 - **Predictable chain stages**: a single submit is usually enough — the chain advances only on an accepted panel, so re-roll on demand instead of pre-paying for variants.
 - **Novel poses / money-shots**: submit + 3 verbatim re-runs, pick the strongest.
 
+### Conversational single-instruction editing (Omni) — the refinement path *(added 2026-06-17, L36)*
+
+The Omni agent **edits an attached/prior image far more reliably than it builds a complex scene from a wall of text.** For refining an *already-accepted* figure — pose, facial expression, gaze, wardrobe state, lettering — drive one change per message instead of re-rolling a fat prompt:
+
+```
+Change her pose to the reference so she looks like she is kicking, just like the reference        (+ pose ref attached)
+Change her facial expression so she looks like shouting, she is looking to her right at her leg
+Add a text dialogue bubble that comes from her and says "Tenshoukyaku!"
+```
+
+Each message carries the style suffix and changes exactly one thing; the agent holds identity / costume / accessories stable between edits, so they don't drift the way a fresh re-roll drifts them. Gaze direction is steerable in plain language. Dialogue is baked here (consistent with L19). **Decision rule:** full-prompt + verbatim re-runs for the cold-start baseline and novel money-shots; **single-instruction editing for everything downstream of an accepted figure.** See L36 for the full Chun-Li worked example, the validated "prosumer DAZ" style block, and the turnaround conventions (NB Pro, 16:9, black bg).
+
 ---
 
 ## Reference Attachment
 
-**Status: the Omni-UI attachment mechanics are NOT yet re-verified.** The 2026-06-09 validation run was deliberately text-only (A/B prompt arms, no refs), so no chained, ref-anchored panel has been driven through the Omni UI yet.
+**Status: Omni-UI attachment is OBSERVED WORKING (2026-06-17), exact mechanic still to be driven end-to-end.** The Chun-Li build session (project `8e5f2654…`, L36) attached references in the Omni UI — generations carry attached-media chips, an uploaded real-photo ref was style-transferred (`convert to <style>`), and pose-by-reference worked (`Change her pose to the reference … just like the reference`). What's not yet re-documented step-by-step is the precise click path to attach in Omni; pin it down on the next driven run and replace the numbered list below with what actually works. The 2026-06-09 validation run was text-only, which is why this section was previously marked unverified.
 
 The **requirement** is unchanged and non-negotiable (SKILL.md Key Rule #9): every chained panel attaches its **state anchor** (the view-compatible prior panel) plus the **canonical face card**; external uploads anchor real-person likeness or outside art. Refs did not persist between submits on the legacy UI — assume the same until proven otherwise and re-attach on every stage.
 
@@ -307,6 +319,12 @@ These are session-burned and worth preserving:
 8. **A failed generation doesn't "cost" anything on the paid tier**, but it does waste UI time. Compose policy-sensitive prompts conservatively the first time.
 
 9. **Budget wall-clock honestly.** The legacy UI measured ~22 s/gen plus 30–45 s/stage of UI overhead (~10 min minimum for a 10-stage chain). The Omni agent adds chat turnaround per submit and per re-run on top of generation — re-measure before promising times on a long chain.
+
+10. **Edit, don't re-roll, to refine an accepted figure** *(2026-06-17, L36)*. Single-instruction Omni edits (pose / expression / gaze / wardrobe / lettering, one per message) hold identity and accessories far better than a fresh full prompt. The Chun-Li action panels were built this way; the spiked wristbands and qipao trim survived every edit. See "Conversational single-instruction editing."
+
+11. **Use the Nano-Banana-validated "prosumer DAZ" block for studio/interior work** *(2026-06-17, L36)*: `…clean prosumer 3D CGI comic art … PBR skin with pores and subsurface scattering … well-lit Iray global illumination … not glossy cinematic VFX`, plus `NO thick lines, NO borders` on action panels. `not glossy cinematic VFX` is the key negation; the golden-hour preset block stays for outdoor narrative. Convert a real-photo ref with `convert to <block>`.
+
+12. **Reference/turnaround sheets: NB Pro, 16:9, black background; action panels: NB2, 4:3** *(2026-06-17, L36)*. Spend Pro's daily quota on the reference assets, not the panels. Lock proportion across views with `make sure the muscle size is consistent every time`. FMG tier-up lever is literal `way way way … bigger` repetition, re-locked with the turnaround instruction afterward.
 
 ---
 
