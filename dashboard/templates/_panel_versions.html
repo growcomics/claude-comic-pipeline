@@ -1,0 +1,29 @@
+<h2 class="modal-title">
+  {{ panel.name }}
+  {% if panel.accepted_label %}
+    <span class="badge badge-accepted">✓ accepted {{ panel.accepted_label }}</span>
+  {% else %}
+    <span class="badge badge-in_progress">◑ in progress</span>
+  {% endif %}
+</h2>
+
+<div class="versions-grid">
+  {% for v in panel.versions %}
+    {% set stem = v.stem %}
+    {% set is_accepted = panel.accepted_label == stem %}
+    <figure class="version-tile {% if is_accepted %}is-accepted{% endif %}">
+      <a href="/image?project={{ project }}&path={{ v|string|urlencode }}" target="_blank" rel="noopener">
+        <img loading="lazy"
+             src="/thumb?project={{ project }}&path={{ v|string|urlencode }}&w=480"
+             alt="{{ stem }}">
+      </a>
+      <figcaption>
+        <strong>{{ stem }}</strong>
+        {% if is_accepted %}<span class="muted">· accepted</span>{% endif %}
+        {% if panel.notes.get(stem) %}
+          <pre class="version-note">{{ panel.notes[stem] }}</pre>
+        {% endif %}
+      </figcaption>
+    </figure>
+  {% endfor %}
+</div>
