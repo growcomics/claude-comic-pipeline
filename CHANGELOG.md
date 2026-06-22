@@ -23,7 +23,8 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 ### Added
 
 - **flow-to-studio packaged to the admin Extensions page** — registered in `admin/packages/extensions.json` and shipped as `flow-to-studio.zip.b64`, so the team one-click downloads + side-loads it alongside the other in-house extensions.
-- **`studio/extension/FLOW-TOOLKIT-PLAN.md`** — plan to consolidate the four Flow extensions (bulk-downloader, bulk-delete, review-harvester, flow-to-studio) into one "Flow Toolkit": a single tRPC-based harvester + shared config, with Download / Send-to-Studio / Review-bundle / (guarded) Delete modes. Phased, with the decisions to make first.
+- **`studio/extension/FLOW-TOOLKIT-PLAN.md`** — plan to consolidate the four Flow extensions (bulk-downloader, bulk-delete, review-harvester, flow-to-studio) into one "Flow Studio Tools": a single tRPC-based harvester + shared config, with Download / Send-to-Studio / Review-bundle / (guarded) Delete modes. Phased, with the decisions to make first.
+- **Flow Studio Tools — Phase 1** (`studio/extension/flow-studio-tools/`). The consolidated extension: one tRPC harvester core (`flow-core.js` — `getProject`/`getAccount`/`outputList`/`buildReviewBundle`) + a panel with **Download / → Studio / Review** actions, an account banner, and a count selector. Packaged to the admin Extensions page (`flow-studio-tools` v1.0.0). Bulk-delete is Phase 2; the four standalone Flow extensions stay until this is proven, then retire (Phase 3).
 
 ## 2026-06-21 (Comic Studio — web GUI for organizing draft pages/projects)
 
