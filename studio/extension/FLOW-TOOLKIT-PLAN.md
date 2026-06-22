@@ -1,4 +1,4 @@
-# Flow Toolkit — consolidation plan
+# Flow Studio Tools — consolidation plan
 
 > **Status: plan / proposal (2026-06-22).** Goal: fold the four separate Flow
 > browser extensions into ONE, sharing a single harvester + config, so there's
@@ -24,7 +24,7 @@ There are two ways to read a Flow project, and one is strictly better:
 
 So the unified extension should **standardize on the tRPC harvest as the single source of truth** (DOM scan only as a fallback). Every action then operates on one rich, normalized dataset.
 
-## 3. Proposed architecture — "Flow Toolkit"
+## 3. Proposed architecture — "Flow Studio Tools"
 
 One MV3 extension. A shared core + one panel + four action modes.
 
@@ -42,13 +42,13 @@ One MV3 extension. A shared core + one panel + four action modes.
 
 - **Phase 1 — safe core.** Extract `flow-core.js` (tRPC harvest + account). Build the panel with the three non-destructive actions: **Download, Send to Studio, Review bundle** (they all just consume the harvest). Package to the admin Extensions page; test against a real Flow project.
 - **Phase 2 — delete (guarded).** Fold in bulk-delete as a visually distinct tab with: explicit multi-select, a dry-run count, a typed/confirm step, and clear "soft delete → recoverable in Trash" messaging. It's destructive + currently v0.1, so it gets its own hardening pass.
-- **Phase 3 — cut over.** Replace the four Extensions-page entries with the single **Flow Toolkit**; keep the old singles for one release as fallback, then retire them.
+- **Phase 3 — cut over.** Replace the four Extensions-page entries with the single **Flow Studio Tools**; keep the old singles for one release as fallback, then retire them.
 
-## 5. Decisions needed before building
+## 5. Decisions (resolved 2026-06-22)
 
-1. **Bulk-delete: include or keep separate?** One extension is the goal, but putting a destructive action in the same panel as the everyday ones risks an accidental click. Options: (a) include it as a heavily-guarded, separated tab; (b) keep delete as its own standalone extension and consolidate only the three safe tools.
-2. **Name** — e.g. `Flow Toolkit`, `Flow → 3DMC`, `Flow Studio Tools`.
-3. **Harvest source** — adopt tRPC-first (recommended; richer + more robust) vs keep the DOM scanner.
+1. **Bulk-delete: INCLUDED** — as a visually separate, confirm-gated tab (multi-select + dry-run count + typed confirm + "soft delete → recoverable in Trash"). True all-in-one, but impossible to trigger by accident.
+2. **Name: "Flow Studio Tools".**
+3. **Harvest: tRPC-first** (`flow.projectInitialData`), with the DOM scan as fallback.
 
 ## 6. Risks / notes
 - `flow.projectInitialData` is an internal Flow API; if Google changes it, the core needs an update (but it's one place, vs three scanners today).
