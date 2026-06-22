@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-21 (Comic Studio — web GUI for organizing draft pages/projects)
+
+### Added
+
+- **`studio/` — Comic Studio, a self-contained PHP web app** for pre-production organization of comic drafts. Deployed to the InterServer cPanel at `/studio` (separate from the 3dmusclecomics public site + its admin). v1 = **organize + track**: a projects index (status + the 7-stage marker), per-project **drag-drop image upload** (GD downscale + thumbnail), and a draft gallery with **keyboard rating** (G good / B bad / A keep), set-cover, tags, and notes. Data in `studio/data/*.json`; uploads in `studio/uploads/<id>/` — both `.htaccess`-denied and served only through the auth-gated `img.php`. **Auth shares the 3dmusclecomics admin/team logins** (`admin/data/users.json`) via its own `mgstudio` session, so the team signs in with the same credentials. Files: `studio/{index,project,login,api,img}.php`, `studio/inc/boot.php`, `studio/assets/`. Runtime `data/` + `uploads/` are gitignored. *Next (v2): AI-assisted "pick the best" selection (comic-folder-organizer-style) + drive generation from the GUI.*
+
 ## 2026-06-14 (Make the L34 subject-staging gate load-bearing + Flow/NB2 staging field notes)
 
 ### Added

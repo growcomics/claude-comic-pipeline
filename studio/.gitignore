@@ -1,0 +1,5 @@
+# Runtime data + uploaded images are not code — keep them out of git.
+data/*
+!data/.htaccess
+uploads/*
+!uploads/.htaccess

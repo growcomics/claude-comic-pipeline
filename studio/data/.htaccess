@@ -1,0 +1,6 @@
+# Private: JSON store (auth, projects, image metadata). PHP reads via filesystem.
+Require all denied
+<IfModule !mod_authz_core.c>
+  Order deny,allow
+  Deny from all
+</IfModule>
