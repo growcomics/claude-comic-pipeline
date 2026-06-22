@@ -76,6 +76,13 @@
   }
   function beatFiles(beatEl) { return [].map.call(beatEl.querySelectorAll('.shot'), function (s) { return s.dataset.file; }); }
 
+  // ---- sequence: one beat each ----
+  var oneeach = document.getElementById('oneeach');
+  if (oneeach) oneeach.addEventListener('click', function () {
+    if (!confirm('Put each image in its own beat (page) and mark all as keepers? Use this for a sequence (not variants); you can then delete any duplicates and Port.')) return;
+    post({ action: 'one_beat_each' }).then(function (r) { if (r.ok) location.reload(); });
+  });
+
   // ---- lightbox ----
   var LB = document.getElementById('lightbox');
   var lbImg = LB.querySelector('.lb-img'), lbCount = LB.querySelector('.lb-count'),

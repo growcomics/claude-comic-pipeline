@@ -81,6 +81,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   </div>
 
   <p class="muted khint">Reorder beats with ▲▼ or type a number. <b>Compare</b> opens a lightbox: <b>←/→</b> to flip, <b>Enter</b> picks the winner. In the grid: hover + <b>G</b>/<b>B</b>/<b>A</b>.</p>
+  <?php if ($imgs): ?><div class="seqbar"><button class="btn sm" id="oneeach" type="button">▭ One beat each</button> <span class="muted">— a sequence (not variants)? Make every image its own panel/page, all kept. Then delete any dupes &amp; Port.</span></div><?php endif; ?>
 
   <div id="gallery">
   <?php $pos = 0; foreach ($groups as $gname => $list): $isU = ($gname === 'Ungrouped'); if (!$isU) $pos++; ?>

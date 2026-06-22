@@ -62,6 +62,16 @@ if ($action === 'move_beat') {
     jout(['ok'=>true]);
 }
 
+// sequence mode: each image becomes its own beat (page), in current order, all kept
+if ($action === 'one_beat_each') {
+    $meta = images_all($id);
+    usort($meta, fn($a,$b)=> beat_num($a['group']??'') <=> beat_num($b['group']??'') ?: (($a['ts']??0) <=> ($b['ts']??0)));
+    foreach ($meta as $i=>&$m) { $m['group'] = 'Beat ' . ($i+1); $m['accepted'] = true; $m['rating'] = 'good'; }
+    unset($m);
+    images_save($id, $meta); touch_project($id);
+    jout(['ok'=>true]);
+}
+
 // per-image mutations
 $file = basename((string)($_POST['file'] ?? ''));
 $meta = images_all($id);
