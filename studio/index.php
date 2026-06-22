@@ -42,6 +42,18 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
     </form>
   </details>
 
+  <?php $bkey = (s_read(SDATA . '/bridge.json', [])['key'] ?? ''); ?>
+  <details class="card newproj">
+    <summary>⚙ Flow import (browser extension)</summary>
+    <div style="margin-top:10px;font-size:13px;color:var(--muted);max-width:560px">
+      <p>Install the <strong>Flow → 3DMC Studio</strong> extension, open it on a Google Flow project, click its ⚙ and paste the values below. Then “Send to Studio” drops a Flow project’s images straight into a project here.</p>
+      <div style="font-size:12px;margin:8px 0 4px">Bridge URL</div>
+      <input readonly value="https://3dmusclecomics.com/studio/bridge.php" onclick="this.select()">
+      <div style="font-size:12px;margin:8px 0 4px">Your Studio key (keep private)</div>
+      <input readonly value="<?= h($bkey) ?>" onclick="this.select()">
+    </div>
+  </details>
+
   <?php if (!$projects): ?>
     <p class="muted">No projects yet — create one above.</p>
   <?php else: ?>

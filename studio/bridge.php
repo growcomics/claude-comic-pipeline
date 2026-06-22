@@ -23,7 +23,7 @@ $do = $_POST['do'] ?? $_GET['do'] ?? '';
 if ($do === 'projects') bout(['ok'=>true,'projects'=>projects_all()]);
 
 $id = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? $_GET['p'] ?? ''));
-if (!$id || !project_get($id)) bout(['ok'=>false,'error'=>'unknown project']);
+if ($do !== 'ingest_init' && $do !== 'ingest' && (!$id || !project_get($id))) bout(['ok'=>false,'error'=>'unknown project']);
 
 if ($do === 'images') bout(['ok'=>true,'project'=>project_get($id),'images'=>images_all($id)]);
 
@@ -53,4 +53,37 @@ if ($do === 'write') {
     if ($cover !== '') { $all = projects_all(); foreach ($all as &$pp) if (($pp['id']??'')===$id) $pp['cover'] = $cover; unset($pp); projects_save($all); }
     bout(['ok'=>true,'updated'=>$n]);
 }
+// ---- ingest (used by the Flow → Studio extension) ----
+// resolve or create a project by name, return its id
+if ($do === 'ingest_init') {
+    $name = trim((string)($_POST['project'] ?? $_GET['project'] ?? ''));
+    if ($name === '') bout(['ok'=>false,'error'=>'no project name']);
+    $all = projects_all(); $pid = '';
+    foreach ($all as $p) if (($p['id']??'')===$name || strcasecmp((string)($p['name']??''),$name)===0) { $pid=$p['id']; break; }
+    if ($pid === '') {
+        $base = slugify($name); $pid=$base; $k=2; $taken=array_column($all,'id');
+        while (in_array($pid,$taken,true)) $pid=$base.'-'.$k++;
+        array_unshift($all, ['id'=>$pid,'name'=>mb_substr($name,0,120),'status'=>'active','stage'=>'page-build',
+            'tags'=>[],'notes'=>'','cover'=>null,'created'=>date('c'),'updated'=>date('c')]);
+        projects_save($all);
+    }
+    bout(['ok'=>true,'project'=>$pid]);
+}
+// store one uploaded image into a project (multipart field 'file')
+if ($do === 'ingest') {
+    $pid = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? ''));
+    if ($pid==='' || !project_get($pid)) bout(['ok'=>false,'error'=>'unknown project']);
+    $f = $_FILES['file'] ?? null;
+    if (!$f || ($f['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) bout(['ok'=>false,'error'=>'no file']);
+    if (($f['size'] ?? 0) > MAX_BYTES) bout(['ok'=>false,'error'=>'too big']);
+    $orig = (string)($_POST['orig'] ?? $f['name'] ?? 'flow.png');
+    $res = store_image($f['tmp_name'], $orig, $pid);
+    if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
+    $meta = images_all($pid);
+    $seq = (int)($_POST['seq'] ?? count($meta));
+    $meta[] = ['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'unrated','accepted'=>false,'group'=>'','tags'=>[],'ts'=>time()+$seq];
+    images_save($pid, $meta);
+    bout(['ok'=>true,'count'=>count($meta)]);
+}
+
 bout(['ok'=>false,'error'=>'unknown action']);

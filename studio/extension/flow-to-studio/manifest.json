@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Flow → 3DMC Studio",
+  "version": "1.0.0",
+  "description": "Send a Google Flow project's images straight into the 3DMC Comic Studio — no manual download/upload.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://labs.google/*",
+    "https://*.googleusercontent.com/*",
+    "https://flow-content.google/*",
+    "https://3dmusclecomics.com/*"
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": ["https://labs.google/fx/tools/flow/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
