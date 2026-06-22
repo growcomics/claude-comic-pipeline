@@ -104,7 +104,7 @@
     lbCount.textContent = (lbIdx + 1) + ' / ' + lbFiles.length;
     var shot = document.querySelector('.shot[data-file="' + f + '"]');
     lbKeepBtn.classList.toggle('on', !!(shot && shot.dataset.accepted === '1'));
-    lbKeepBtn.textContent = (shot && shot.dataset.accepted === '1') ? '★ Winner ✓' : '★ Winner (Enter)';
+    lbKeepBtn.textContent = (shot && shot.dataset.accepted === '1') ? '🏆 Winner ✓' : '🏆 Winner (Enter)';
     var an = (window.STUDIO_ANALYSIS || {})[f];
     if (an && (an.caption || (an.defects || []).length || an.tier || an.notes || (an.tags || []).length)) {
       var chips = '';
@@ -135,9 +135,39 @@
       lbRender();
     });
   }
+  // rate / keep / delete the current image from the detail view (decide + move on)
+  function lbShot() { return document.querySelector('.shot[data-file="' + lbFiles[lbIdx] + '"]'); }
+  function lbRate(act) {
+    var s = lbShot(); if (!s) return;
+    s.dataset.rating = act; s.classList.remove('rate-good', 'rate-bad', 'rate-unrated'); s.classList.add('rate-' + act);
+    post({ action: 'rate', file: lbFiles[lbIdx], rating: act }); lbDirty = true;
+    lbNav(1);
+  }
+  function lbKeepToggle() {
+    var s = lbShot(); if (!s) return;
+    var nv = s.dataset.accepted === '1' ? 0 : 1;
+    s.dataset.accepted = nv ? '1' : '0'; s.classList.toggle('kept', !!nv);
+    post({ action: 'keep', file: lbFiles[lbIdx], accepted: nv }); lbDirty = true; lbRender();
+  }
+  function lbDelete() {
+    if (!confirm('Delete this image?')) return;
+    var f = lbFiles[lbIdx];
+    post({ action: 'delete', file: f }).then(function (res) {
+      if (!res.ok) return;
+      var s = lbShot(); if (s) s.remove();
+      lbFiles.splice(lbIdx, 1); lbDirty = true;
+      if (!lbFiles.length) { lbClose(); return; }
+      if (lbIdx >= lbFiles.length) lbIdx = lbFiles.length - 1;
+      lbRender();
+    });
+  }
   LB.querySelector('.lb-x').addEventListener('click', lbClose);
   LB.querySelector('.lb-prev').addEventListener('click', function () { lbNav(-1); });
   LB.querySelector('.lb-next').addEventListener('click', function () { lbNav(1); });
+  LB.querySelector('.lb-good').addEventListener('click', function () { lbRate('good'); });
+  LB.querySelector('.lb-bad').addEventListener('click', function () { lbRate('bad'); });
+  LB.querySelector('.lb-star').addEventListener('click', lbKeepToggle);
+  LB.querySelector('.lb-del').addEventListener('click', lbDelete);
   lbKeepBtn.addEventListener('click', lbWinner);
   LB.addEventListener('click', function (e) { if (e.target === LB) lbClose(); });
 
@@ -148,6 +178,9 @@
       else if (e.key === 'ArrowRight') { lbNav(1); e.preventDefault(); }
       else if (e.key === 'Enter') { lbWinner(); e.preventDefault(); }
       else if (e.key === 'Escape') { lbClose(); e.preventDefault(); }
+      else if (e.key.toLowerCase() === 'g') { lbRate('good'); e.preventDefault(); }
+      else if (e.key.toLowerCase() === 'b') { lbRate('bad'); e.preventDefault(); }
+      else if (e.key.toLowerCase() === 'a') { lbKeepToggle(); e.preventDefault(); }
       return;
     }
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName)) return;
@@ -157,6 +190,14 @@
     if (k === 'g') { rate(shot, 'good'); e.preventDefault(); }
     else if (k === 'b') { rate(shot, 'bad'); e.preventDefault(); }
     else if (k === 'a') { keep(shot); e.preventDefault(); }
+  });
+
+  // ---- purge: keep only the good (▲) + kept (★), delete the rest ----
+  var pb = document.getElementById('purgebtn');
+  if (pb) pb.addEventListener('click', function () {
+    if (!confirm('Permanently delete ' + pb.dataset.n + ' image(s) that are NOT ▲ good and NOT ★ kept?\nKeeps ' + pb.dataset.kept + '. This cannot be undone.')) return;
+    pb.disabled = true; pb.textContent = 'Purging…';
+    post({ action: 'purge' }).then(function (r) { if (r.ok) location.reload(); else { pb.disabled = false; alert('Purge failed.'); } });
   });
 
   // ---- upload (drag-drop + picker) ----

@@ -45,13 +45,15 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap" id="proj" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>">
-  <?php $keptN = count(array_filter($imgs, fn($x) => !empty($x['accepted']))); ?>
+  <?php $keptN = count(array_filter($imgs, fn($x) => !empty($x['accepted'])));
+        $purgeN = count(array_filter($imgs, fn($x) => ($x['rating'] ?? '') !== 'good' && empty($x['accepted']))); ?>
   <div class="pagehead"><h1><?= h($proj['name']) ?></h1>
     <span class="phead-actions">
       <?php if ($keptN): ?>
         <a class="btn sm" href="export.php?p=<?= h(urlencode($id)) ?>">⬇ Download winners (<?= $keptN ?>)</a>
         <a class="btn sm primary" href="port.php?p=<?= h(urlencode($id)) ?>">→ Port to comic</a>
       <?php endif; ?>
+      <?php if ($purgeN): ?><button class="btn sm danger" id="purgebtn" data-n="<?= $purgeN ?>" data-kept="<?= count($imgs) - $purgeN ?>">🧹 Purge <?= $purgeN ?></button><?php endif; ?>
     </span>
   </div>
 
@@ -130,7 +132,11 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
     <span class="lb-count muted"></span>
     <span class="lb-beat muted"></span>
     <span class="spacer"></span>
-    <button class="btn primary lb-keep" type="button">★ Winner (Enter)</button>
+    <button class="lb-rate lb-good" type="button" title="Good (G)">▲</button>
+    <button class="lb-rate lb-bad" type="button" title="Bad (B)">▼</button>
+    <button class="lb-rate lb-star" type="button" title="Keep (A)">★</button>
+    <button class="lb-rate lb-del" type="button" title="Delete">🗑</button>
+    <button class="btn primary lb-keep" type="button">🏆 Winner (Enter)</button>
   </div>
 </div>
 <?php $analysis = []; foreach ($imgs as $im) if (!empty($im['analysis'])) $analysis[$im['file']] = $im['analysis']; ?>

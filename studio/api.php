@@ -72,6 +72,20 @@ if ($action === 'one_beat_each') {
     jout(['ok'=>true]);
 }
 
+// purge: hard-delete every image that is NOT rated good (▲) and NOT kept (★)
+if ($action === 'purge') {
+    $meta = images_all($id);
+    $keep = array_values(array_filter($meta, fn($m) => ($m['rating'] ?? '') === 'good' || !empty($m['accepted'])));
+    $del  = array_values(array_filter($meta, fn($m) => ($m['rating'] ?? '') !== 'good' && empty($m['accepted'])));
+    foreach ($del as $m) { @unlink(project_dir($id) . '/' . $m['file']); @unlink(project_dir($id) . '/thumb/' . $m['file']); }
+    images_save($id, $keep);
+    $kf = array_column($keep, 'file');
+    $all = projects_all();
+    foreach ($all as &$p) if (($p['id'] ?? '') === $id) { $cov = $p['cover'] ?? ''; if ($cov !== '' && !in_array($cov, $kf, true)) $p['cover'] = null; }
+    unset($p); projects_save($all); touch_project($id);
+    jout(['ok' => true, 'deleted' => count($del), 'kept' => count($keep)]);
+}
+
 // per-image mutations
 $file = basename((string)($_POST['file'] ?? ''));
 $meta = images_all($id);

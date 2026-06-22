@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Studio — triage from the lightbox + bulk Purge)
+
+### Added
+
+- **Studio: rate + keep + delete from inside the compare lightbox.** The full-res detail view gained **▲ good / ▼ bad / ★ keep / 🗑 delete** buttons and **G / B / A** keyboard shortcuts, and rating an image (good/bad) **auto-advances to the next** — so you can decide quality from the detail image and move on without bouncing back to the grid. The "Winner" action is relabeled **🏆 Winner (Enter)**. (`project.php` lightbox bar, `studio.js` `lbRate`/`lbKeepToggle`/`lbDelete` + keyboard wiring, `studio.css` `.lb-rate`.) *Why:* the user often just needs a good/bad call from the open image; round-tripping to the grid for every call was friction.
+- **Studio: bulk "🧹 Purge" — keep only the winners.** A guarded project-header button (shown only when there's something to drop) that **hard-deletes every image NOT rated ▲ good and NOT ★ kept**, with a typed-count confirm; clears the cover if it gets purged. (`api.php` new `purge` action; button in `project.php`; handler in `studio.js`.) *Why:* dumps from the generation library are overwhelming and deleting rejects one-at-a-time was too much work — purge clears the floor down to the keepers in one move.
+
 ## 2026-06-22 (Studio AI analysis pass)
 
 ### Added
