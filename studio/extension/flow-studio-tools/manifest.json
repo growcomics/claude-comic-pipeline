@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Flow Studio Tools",
-  "version": "1.0.0",
-  "description": "One toolbox for Google Flow projects: Download images, Send them to the 3DMC Comic Studio, or export a Review bundle (prompts + input refs + manifest). Bulk delete coming in a guarded tab.",
+  "version": "1.1.0",
+  "description": "One toolbox for Google Flow projects: Download images, Send them to the 3DMC Comic Studio, export a Review bundle (prompts + input refs + manifest), or Bulk-delete (guarded, soft delete to Trash).",
   "permissions": ["downloads", "storage"],
   "host_permissions": [
     "https://labs.google/*",
@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["https://labs.google/fx/tools/flow/*"],
-      "js": ["flow-core.js", "content.js"],
+      "js": ["flow-core.js", "flow-delete.js", "content.js"],
       "run_at": "document_idle"
     }
   ]

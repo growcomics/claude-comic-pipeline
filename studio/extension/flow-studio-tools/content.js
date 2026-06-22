@@ -1,6 +1,6 @@
-// Flow Studio Tools — content script (UI). One panel, three actions, all driven
+// Flow Studio Tools — content script (UI). One panel, four actions, all driven
 // off FlowCore's single tRPC harvest: Download (disk) / Send to Studio (ingest) /
-// Review bundle (outputs + refs + manifest). [Bulk delete = Phase 2.]
+// Review bundle (outputs + refs + manifest) / Bulk delete (guarded, via FlowDelete).
 (() => {
   if (window.__flowStudioTools) return;
   window.__flowStudioTools = true;
@@ -8,7 +8,7 @@
   if (!FC) { console.error("[Flow Studio Tools] core missing"); return; }
   const DEFAULT_URL = "https://3dmusclecomics.com/studio/bridge.php";
   let cfg = { url: DEFAULT_URL, key: "" };
-  let mode = "download";
+  let mode = "download", prevMode = "download";
 
   function defaultProject() { let t = (document.title || "").replace(/[\\/:*?"<>|]+/g, " ").replace(/\s*[-–|].*$/, "").trim(); return (t || "Flow import").slice(0, 60); }
   function folderName() { const m = location.pathname.match(/project\/([0-9a-f-]+)/i); const id = m ? m[1].slice(0, 8) : "project"; let t = (document.title || "").replace(/[\\/:*?"<>|]+/g, " ").trim() || "Flow"; return ("Flow " + t + " " + id).replace(/\s+/g, " ").slice(0, 80); }
@@ -23,13 +23,15 @@
    #fst .tabs{display:flex;gap:4px;margin-bottom:10px}
    #fst .tab{flex:1;padding:7px 0;border:1px solid #2e3140;border-radius:8px;background:#0f1115;color:#9aa0ab;cursor:pointer;font-size:12px;font-weight:600;text-align:center}
    #fst .tab.on{background:#ef9f27;color:#412402;border-color:transparent}
+   #fst .tab.del.on{background:#e24b4a;color:#fff}
    #fst input{width:100%;box-sizing:border-box;padding:7px 9px;border-radius:8px;border:1px solid #2e3140;background:#0f1115;color:#e8eaed;margin-bottom:8px}
    #fst .cfg{display:none} #fst.cfgopen .cfg{display:block}
    #fst .lbl{opacity:.7;font-size:12px;margin:2px 0 5px}
    #fst .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
    #fst button.pick{flex:1;min-width:42px;padding:8px 0;border:none;border-radius:8px;background:#23252e;color:#e8eaed;cursor:pointer;font-weight:600}
    #fst button.pick:hover{background:#2e3140} #fst button.go{background:#ef9f27;color:#412402} #fst button.go:hover{filter:brightness(1.07)}
-   #fst button:disabled{opacity:.45;cursor:default} #fst input.num{width:52px;margin:0}
+   #fst button.danger{background:#e24b4a;color:#fff} #fst button:disabled{opacity:.45;cursor:default} #fst input.num{width:52px;margin:0}
+   #fst .warn{font-size:11.5px;background:rgba(226,75,74,.12);border:1px solid rgba(226,75,74,.4);color:#f3a3a2;border-radius:8px;padding:7px 9px;margin-bottom:8px}
    #fst .bar{height:6px;border-radius:4px;background:#23252e;margin:10px 0 4px;overflow:hidden} #fst .bar>i{display:block;height:100%;width:0;background:#ef9f27;transition:width .15s}
    #fst .stat{font-size:12px;opacity:.9;min-height:16px} #fst .foot{font-size:11px;opacity:.55;margin-top:6px;word-break:break-all}
    #fst.min .bd{display:none}`;
@@ -43,6 +45,7 @@
        <div class="tab on" data-mode="download">Download</div>
        <div class="tab" data-mode="studio">→ Studio</div>
        <div class="tab" data-mode="review">Review</div>
+       <div class="tab del" data-mode="delete">🗑</div>
      </div>
      <div class="cfg">
        <div class="lbl">Studio bridge URL</div><input class="url" type="text">
@@ -50,37 +53,50 @@
        <div class="row" style="margin-bottom:10px"><button class="pick savecfg">Save settings</button></div>
      </div>
      <div class="studio-only" style="display:none"><div class="lbl">Studio project (created if new)</div><input class="proj" type="text"></div>
-     <div class="lbl modehint">Most-recent generations:</div>
-     <div class="row"><button class="pick" data-n="5">5</button><button class="pick" data-n="10">10</button><button class="pick" data-n="25">25</button>
-       <input class="num" type="number" min="1" placeholder="#"><button class="pick go" data-n="custom">Go</button></div>
-     <div class="row" style="margin-top:8px"><button class="pick go" data-n="all" style="flex:1">Whole project</button></div>
+     <div class="actbody">
+       <div class="lbl modehint">Most-recent generations:</div>
+       <div class="row"><button class="pick" data-n="5">5</button><button class="pick" data-n="10">10</button><button class="pick" data-n="25">25</button>
+         <input class="num" type="number" min="1" placeholder="#"><button class="pick go" data-n="custom">Go</button></div>
+       <div class="row" style="margin-top:8px"><button class="pick go" data-n="all" style="flex:1">Whole project</button></div>
+     </div>
+     <div class="delbody" style="display:none">
+       <div class="warn">⚠ Destructive. Soft-deletes to Flow's <b>Trash</b> (recoverable via "View Trash"). Tick the tiles on the page you want gone.</div>
+       <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
+       <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
+     </div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
   const $ = (s) => panel.querySelector(s);
   const accEl = $(".acctval"), urlInput = $(".url"), keyInput = $(".key"), projInput = $(".proj");
   const barFill = $(".bar>i"), statEl = $(".stat"), footEl = $(".foot"), numInput = $(".num");
-  const studioOnly = $(".studio-only"), modeHint = $(".modehint");
+  const studioOnly = $(".studio-only"), modeHint = $(".modehint"), actbody = $(".actbody"), delbody = $(".delbody"), trashBtn = $(".trash");
   const buttons = [...panel.querySelectorAll("button.pick")];
 
-  chrome.storage.local.get(["studioUrl", "bridgeKey"]).then((s) => {
-    if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey;
-    urlInput.value = cfg.url; keyInput.value = cfg.key;
-  });
+  chrome.storage.local.get(["studioUrl", "bridgeKey"]).then((s) => { if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey; urlInput.value = cfg.url; keyInput.value = cfg.key; });
   projInput.value = defaultProject();
 
+  function onDelCount(n) { trashBtn.textContent = "🗑 Move " + n + " to Trash"; trashBtn.disabled = n === 0; }
   function setMode(m) {
-    mode = m;
+    if (prevMode === "delete" && m !== "delete" && self.FlowDelete) self.FlowDelete.stop();
+    prevMode = mode = m;
     panel.querySelectorAll(".tab").forEach((t) => t.classList.toggle("on", t.dataset.mode === m));
+    const del = m === "delete";
+    actbody.style.display = del ? "none" : "block";
+    delbody.style.display = del ? "block" : "none";
     studioOnly.style.display = m === "studio" ? "block" : "none";
     if (m === "studio" && !cfg.key) panel.classList.add("cfgopen");
-    modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
+    if (del && self.FlowDelete) self.FlowDelete.start(onDelCount);
+    if (!del) modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
   }
   panel.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => setMode(t.dataset.mode)));
 
-  $(".hd .x").addEventListener("click", () => { panel.remove(); style.remove(); window.__flowStudioTools = false; });
+  $(".hd .x").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.stop(); panel.remove(); style.remove(); window.__flowStudioTools = false; });
   $(".hd .g").addEventListener("click", () => panel.classList.toggle("cfgopen"));
   $(".savecfg").addEventListener("click", () => { cfg.url = urlInput.value.trim() || DEFAULT_URL; cfg.key = keyInput.value.trim(); chrome.storage.local.set({ studioUrl: cfg.url, bridgeKey: cfg.key }); statEl.textContent = "Settings saved."; panel.classList.remove("cfgopen"); });
+  $(".selvis").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.selectVisible(); });
+  $(".clr").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.clear(); });
+  trashBtn.addEventListener("click", runTrash);
   (() => { const hd = $(".hd"); let sx, sy, sr, sb, drag = false; hd.addEventListener("mousedown", (e) => { if (e.target.tagName === "SPAN") return; drag = true; sx = e.clientX; sy = e.clientY; const r = panel.getBoundingClientRect(); sr = innerWidth - r.right; sb = innerHeight - r.bottom; e.preventDefault(); }); addEventListener("mousemove", (e) => { if (!drag) return; panel.style.right = Math.max(0, sr - (e.clientX - sx)) + "px"; panel.style.bottom = Math.max(0, sb - (e.clientY - sy)) + "px"; }); addEventListener("mouseup", () => { drag = false; }); })();
 
   let busy = false;
@@ -89,8 +105,21 @@
   const status = (t) => { statEl.textContent = t; };
   function stampAccount(email) { document.documentElement.setAttribute("data-flow-account", email || "unknown"); accEl.textContent = email || "(unknown)"; accEl.style.color = email ? "#34d399" : "#fbbf24"; }
 
+  async function runTrash() {
+    if (busy || !self.FlowDelete) return;
+    const n = self.FlowDelete.count(); if (!n) return;
+    const acct = accEl.textContent || "(unknown)";
+    const typed = prompt("⚠ Move " + n + " generation(s) to Flow's Trash on account:\n  " + acct + "\n\nSoft delete — recoverable from \"View Trash\".\nType the number " + n + " to confirm:");
+    if (typed === null) return;
+    if (typed.trim() !== String(n)) { status("Cancelled — number didn't match."); return; }
+    setBusy(true); setBar(0); status("Trashing 0/" + n + "…");
+    const res = await self.FlowDelete.run((done, total, miss) => { setBar(done / total); status("Trashing " + done + "/" + total + "…" + (miss ? " · " + miss + " not found" : "")); });
+    setBar(1); status("Done ✓ " + res.done + " trashed" + (res.miss ? " · " + res.miss + " not found (scroll + retry)" : ""));
+    onDelCount(self.FlowDelete.count()); setBusy(false);
+  }
+
   async function run(limit) {
-    if (busy) return;
+    if (busy || mode === "delete") return;
     if (mode === "studio" && !cfg.key) { panel.classList.add("cfgopen"); status("Paste your Studio key (⚙) first."); keyInput.focus(); return; }
     setBusy(true); setBar(0); footEl.textContent = "";
     try {
@@ -99,7 +128,6 @@
       stampAccount(account);
       if (!proj) { status("No project data — open a Flow project (/project/<id>), let it load, then retry."); return; }
       if (!proj.records.length) { status("No generations found in this project."); return; }
-
       let kind, payload;
       if (mode === "review") {
         const b = FC.buildReviewBundle(proj.records, account, proj.name, proj.id, limit);
@@ -132,7 +160,8 @@
   }
 
   panel.addEventListener("click", (e) => {
-    const b = e.target.closest("button.pick"); if (!b || busy || b.classList.contains("savecfg")) return;
+    const b = e.target.closest("button.pick"); if (!b || busy) return;
+    if (b.classList.contains("savecfg") || b.classList.contains("selvis") || b.classList.contains("clr") || b.classList.contains("trash")) return;
     const n = b.dataset.n; if (!n) return;
     if (n === "all") return run(Infinity);
     if (n === "custom") { const v = parseInt(numInput.value, 10); if (v > 0) return run(v); numInput.focus(); return; }

@@ -2,14 +2,15 @@
 
 One toolbox for Google Flow projects — replaces the separate downloader / review-harvester / flow-to-studio extensions. Built on a **single tRPC harvest** (`flow.projectInitialData`: prompts + input refs + outputs + model + account), so every action reads the same data.
 
-**Phase 1 (this build):** three actions —
+**Four actions:**
 - **Download** — save the output images to disk (full-res), into a per-project folder.
 - **→ Studio** — push the outputs straight into a 3DMC Comic Studio project (ingest).
 - **Review** — export a bundle: outputs + the deduped input reference images + a `manifest.json` pairing each output with its prompt, model, refs, seed.
+- **🗑 Delete** — tick tiles on the page, then Move to Flow's **Trash** (soft/recoverable). Guarded: shows the active account + requires typing the exact count to confirm. (`flow-delete.js`.)
 
-A count selector (5 / 10 / 25 / # / **Whole project**) applies to whichever action is selected; the panel shows the **active Flow account** up top.
+The first three use a count selector (5 / 10 / 25 / # / **Whole project**); the panel shows the **active Flow account** up top.
 
-**Phase 2 (planned):** a guarded **Bulk delete** tab (multi-select + dry-run + typed confirm). See `../FLOW-TOOLKIT-PLAN.md`.
+**Phase 3 (next):** once proven, retire the four standalone Flow extensions from the Extensions page. See `../FLOW-TOOLKIT-PLAN.md`.
 
 ## Install (unpacked)
 1. Chrome → `chrome://extensions` → **Developer mode** on.
