@@ -107,7 +107,7 @@ $E = fn($s)=>htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
-<title>Port · <?= $E($proj['name']) ?></title><link rel="stylesheet" href="assets/studio.css"></head><body>
+<title>Port · <?= $E($proj['name']) ?></title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css"></head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
   <a class="ghost" href="project.php?p=<?= $E(urlencode($id)) ?>">← <?= $E($proj['name']) ?></a><span class="spacer"></span>
   <span class="ghost"><?= $E(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>

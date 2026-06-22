@@ -86,6 +86,57 @@ if ($action === 'purge') {
     jout(['ok' => true, 'deleted' => count($del), 'kept' => count($keep)]);
 }
 
+// group_similar: auto-cluster images into beats by visual similarity (difference-hash).
+// Flow variants arrive with sequential ts (no real gen-grouping), so we group by LOOK.
+if ($action === 'group_similar') {
+    if (!function_exists('imagecreatefromstring')) jout(['ok'=>false,'error'=>'image support unavailable on host']);
+    $meta = images_all($id);
+    if (count($meta) < 2) jout(['ok'=>true,'beats'=>count($meta)]);
+    $dhash = function (string $path) {                      // 64-bit difference hash from a thumbnail
+        $data = @file_get_contents($path); if ($data === false) return null;
+        $im = @imagecreatefromstring($data); if (!$im) return null;
+        $W = 9; $H = 8; $sm = imagecreatetruecolor($W, $H);
+        imagecopyresampled($sm, $im, 0,0,0,0, $W,$H, imagesx($im), imagesy($im));
+        $bits = [];
+        for ($y = 0; $y < $H; $y++) {
+            $prev = null;
+            for ($x = 0; $x < $W; $x++) {
+                $c = imagecolorat($sm, $x, $y);
+                $l = (int)(0.299*(($c>>16)&0xFF) + 0.587*(($c>>8)&0xFF) + 0.114*($c&0xFF));
+                if ($prev !== null) $bits[] = ($l > $prev) ? 1 : 0;
+                $prev = $l;
+            }
+        }
+        imagedestroy($sm); imagedestroy($im);
+        return $bits;
+    };
+    $ham = function (array $a, array $b) { $d = 0; $n = min(count($a), count($b)); for ($i=0;$i<$n;$i++) if ($a[$i] !== $b[$i]) $d++; return $d + abs(count($a) - count($b)); };
+    $rows = [];
+    foreach ($meta as $k => $m) {
+        $tp = project_dir($id) . '/thumb/' . $m['file'];
+        if (!is_file($tp)) $tp = project_dir($id) . '/' . $m['file'];
+        $rows[] = ['k'=>$k, 'h'=>$dhash($tp), 'ts'=>(int)($m['ts'] ?? 0)];
+    }
+    usort($rows, fn($a,$b) => $a['ts'] <=> $b['ts']);       // beat numbering follows import order
+    $THRESH = 12;                                            // /64 bits — variants of one prompt cluster well below this
+    $clusters = [];                                          // each: ['rep'=>bits|null, 'members'=>[k,...]]
+    foreach ($rows as $r) {
+        if ($r['h'] === null) { $clusters[] = ['rep'=>null, 'members'=>[$r['k']]]; continue; }
+        $bi = -1; $bd = $THRESH + 1;
+        foreach ($clusters as $i => $c) {
+            if ($c['rep'] === null) continue;
+            $d = $ham($r['h'], $c['rep']);
+            if ($d < $bd) { $bd = $d; $bi = $i; }
+        }
+        if ($bi >= 0 && $bd <= $THRESH) $clusters[$bi]['members'][] = $r['k'];
+        else $clusters[] = ['rep'=>$r['h'], 'members'=>[$r['k']]];
+    }
+    $n = 1;
+    foreach ($clusters as $c) { $g = 'Beat ' . $n++; foreach ($c['members'] as $k) $meta[$k]['group'] = $g; }
+    images_save($id, $meta); touch_project($id);
+    jout(['ok'=>true,'beats'=>count($clusters)]);
+}
+
 // per-image mutations
 $file = basename((string)($_POST['file'] ?? ''));
 $meta = images_all($id);

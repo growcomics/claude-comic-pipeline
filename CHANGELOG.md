@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Studio — Group similar, lightbox shortcut legend, favicon)
+
+### Added
+
+- **"⧉ Group similar" — one-click visual clustering into beats.** A button (next to "One beat each") that auto-groups look-alike images into Beat 1..N by perceptual similarity: a 64-bit **difference-hash** per image (computed from its thumbnail via GD), clustered by Hamming distance (≤12/64, leader clustering). Flow's variants of one prompt look alike → land in the same beat; different prompts split apart. Beat numbering follows import order; **ratings / keepers / cover are untouched** (only `group` changes), and it replaces the current grouping when run. New `group_similar` action in `api.php`, button in `project.php`, wiring in `studio.js`. (Flow imports arrive with sequential timestamps and no real generation grouping, so similarity is keyed on *look*, not time.)
+- **Keyboard-shortcut legend on the detail / lightbox view.** A faint pill at the top of the lightbox spells out the keys — `←/→` flip · `G` good · `B` bad · `A` keep · `X` delete · `Enter` winner · `Esc` close. Also added **`X` = delete** (with confirm) so you can fully triage from the full-res view. (`project.php`, `studio.{js,css}`.)
+- **Studio favicon** — an amber clapperboard SVG (`studio/assets/favicon.svg`), linked from all four Studio pages (index / project / login / port).
+
 ## 2026-06-22 (Flow → Studio: a new section per batch)
 
 ### Fixed

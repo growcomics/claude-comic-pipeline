@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><clipPath id="cb-bar"><rect x="11" y="15" width="42" height="12" rx="2"/></clipPath></defs>
+  <rect width="64" height="64" rx="14" fill="#14151C"/>
+  <rect x="11" y="27" width="42" height="25" rx="3.5" fill="#EF9F27"/>
+  <circle cx="22" cy="40" r="3" fill="#14151C" opacity="0.18"/>
+  <circle cx="42" cy="40" r="3" fill="#14151C" opacity="0.18"/>
+  <g transform="rotate(-8 13 24)">
+    <rect x="11" y="15" width="42" height="12" rx="2" fill="#EF9F27"/>
+    <g clip-path="url(#cb-bar)" stroke="#14151C" stroke-width="4.4">
+      <line x1="16" y1="13" x2="7" y2="29"/>
+      <line x1="26" y1="13" x2="17" y2="29"/>
+      <line x1="36" y1="13" x2="27" y2="29"/>
+      <line x1="46" y1="13" x2="37" y2="29"/>
+      <line x1="56" y1="13" x2="47" y2="29"/>
+    </g>
+  </g>
+</svg>

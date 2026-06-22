@@ -83,6 +83,17 @@
     post({ action: 'one_beat_each' }).then(function (r) { if (r.ok) location.reload(); });
   });
 
+  // ---- group similar: cluster look-alike variants into beats (visual hash) ----
+  var gsim = document.getElementById('groupsim');
+  if (gsim) gsim.addEventListener('click', function () {
+    if (!confirm('Group all images into beats by visual similarity? This replaces the current beats (ratings & keepers are untouched).')) return;
+    var label = gsim.textContent; gsim.disabled = true; gsim.textContent = 'Grouping…';
+    post({ action: 'group_similar' }).then(function (r) {
+      if (r && r.ok) location.reload();
+      else { gsim.disabled = false; gsim.textContent = label; alert('Grouping failed' + (r && r.error ? ': ' + r.error : '') + '.'); }
+    });
+  });
+
   // ---- lightbox ----
   var LB = document.getElementById('lightbox');
   var lbImg = LB.querySelector('.lb-img'), lbCount = LB.querySelector('.lb-count'),
@@ -181,6 +192,7 @@
       else if (e.key.toLowerCase() === 'g') { lbRate('good'); e.preventDefault(); }
       else if (e.key.toLowerCase() === 'b') { lbRate('bad'); e.preventDefault(); }
       else if (e.key.toLowerCase() === 'a') { lbKeepToggle(); e.preventDefault(); }
+      else if (e.key.toLowerCase() === 'x') { lbDelete(); e.preventDefault(); }
       return;
     }
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName)) return;

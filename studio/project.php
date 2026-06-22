@@ -40,7 +40,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
-<title><?= h($proj['name']) ?> · Studio</title><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"></head><body>
+<title><?= h($proj['name']) ?> · Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"></head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
@@ -83,7 +83,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   </div>
 
   <p class="muted khint">Reorder beats with ▲▼ or type a number. <b>Compare</b> opens a lightbox: <b>←/→</b> to flip, <b>Enter</b> picks the winner. In the grid: hover + <b>G</b>/<b>B</b>/<b>A</b>.</p>
-  <?php if ($imgs): ?><div class="seqbar"><button class="btn sm" id="oneeach" type="button">▭ One beat each</button> <span class="muted">— a sequence (not variants)? Make every image its own panel/page, all kept. Then delete any dupes &amp; Port.</span></div><?php endif; ?>
+  <?php if ($imgs): ?><div class="seqbar"><button class="btn sm" id="groupsim" type="button">⧉ Group similar</button> <button class="btn sm" id="oneeach" type="button">▭ One beat each</button> <span class="muted">— <b>Group similar</b> clusters look-alike variants into beats. <b>One beat each</b>: a sequence (one panel per image), all kept — then delete dupes &amp; Port.</span></div><?php endif; ?>
 
   <div id="gallery">
   <?php $pos = 0; foreach ($groups as $gname => $list): $isU = ($gname === 'Ungrouped'); if (!$isU) $pos++; ?>
@@ -124,6 +124,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 
 <div id="lightbox" class="lb" hidden>
   <button class="lb-x" type="button" title="Close (Esc)">✕</button>
+  <div class="lb-keys"><b>←</b>/<b>→</b> flip · <b>G</b> good · <b>B</b> bad · <b>A</b> keep · <b>X</b> delete · <b>Enter</b> winner · <b>Esc</b> close</div>
   <button class="lb-arrow lb-prev" type="button" title="Previous (←)">‹</button>
   <div class="lb-stage"><img class="lb-img" src="" alt=""></div>
   <button class="lb-arrow lb-next" type="button" title="Next (→)">›</button>
@@ -135,7 +136,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
     <button class="lb-rate lb-good" type="button" title="Good (G)">▲</button>
     <button class="lb-rate lb-bad" type="button" title="Bad (B)">▼</button>
     <button class="lb-rate lb-star" type="button" title="Keep (A)">★</button>
-    <button class="lb-rate lb-del" type="button" title="Delete">🗑</button>
+    <button class="lb-rate lb-del" type="button" title="Delete (X)">🗑</button>
     <button class="btn primary lb-keep" type="button">🏆 Winner (Enter)</button>
   </div>
 </div>
