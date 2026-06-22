@@ -9,8 +9,9 @@
     Object.keys(data).forEach(function (k) { fd.append(k, data[k]); });
     return fetch('api.php', { method: 'POST', body: fd, credentials: 'same-origin' }).then(function (r) { return r.json(); });
   }
+  function imgSrc(f, thumb) { return 'img.php?p=' + encodeURIComponent(PID) + '&f=' + encodeURIComponent(f) + (thumb ? '&t=1' : ''); }
 
-  // ---- per-image actions ----
+  // ---- per-image rating actions (grid) ----
   function rate(shot, act) {
     var nv = shot.dataset.rating === act ? 'unrated' : act;
     post({ action: 'rate', file: shot.dataset.file, rating: nv }).then(function (res) {
@@ -28,25 +29,107 @@
       shot.classList.toggle('kept', !!res.accepted);
     });
   }
-  function cover(shot) { post({ action: 'cover', file: shot.dataset.file }); }
   function del(shot) {
     if (!confirm('Delete this image?')) return;
     post({ action: 'delete', file: shot.dataset.file }).then(function (res) { if (res.ok) shot.remove(); });
   }
 
-  var gallery = document.getElementById('gallery');
-  if (gallery) gallery.addEventListener('click', function (e) {
-    var btn = e.target.closest('.rb[data-act]'); if (!btn) return;
-    var shot = btn.closest('.shot'); if (!shot) return;
-    var a = btn.dataset.act;
-    if (a === 'good' || a === 'bad') rate(shot, a);
-    else if (a === 'keep') keep(shot);
-    else if (a === 'cover') cover(shot);
-    else if (a === 'delete') del(shot);
-  });
+  // ---- beat reorder ----
+  function moveBeat(beatEl, to) {
+    post({ action: 'move_beat', beat: beatEl.dataset.beat, to: to }).then(function (res) { if (res.ok) location.reload(); });
+  }
 
-  // keyboard: act on the focused (or hovered) shot
+  var gallery = document.getElementById('gallery');
+  if (gallery) {
+    gallery.addEventListener('click', function (e) {
+      var rb = e.target.closest('.rb[data-act]');
+      if (rb) {
+        var shot = rb.closest('.shot'); if (!shot) return;
+        var a = rb.dataset.act;
+        if (a === 'good' || a === 'bad') rate(shot, a);
+        else if (a === 'keep') keep(shot);
+        else if (a === 'cover') post({ action: 'cover', file: shot.dataset.file });
+        else if (a === 'delete') del(shot);
+        return;
+      }
+      var mv = e.target.closest('.bmove');
+      if (mv) {
+        var beatEl = mv.closest('.beat'); var inp = beatEl.querySelector('.beat-pos');
+        var pos = parseInt(inp && inp.value, 10) || 1;
+        moveBeat(beatEl, mv.dataset.dir === 'up' ? pos - 1 : pos + 1);
+        return;
+      }
+      if (e.target.closest('.bcompare')) {
+        var b = e.target.closest('.beat'); lbOpen(beatFiles(b), 0, b.dataset.beat); return;
+      }
+      var im = e.target.closest('.shot-img');
+      if (im) {
+        var bb = e.target.closest('.beat'); var files = beatFiles(bb);
+        var f = im.closest('.shot').dataset.file;
+        lbOpen(files, Math.max(0, files.indexOf(f)), bb.dataset.beat);
+      }
+    });
+    gallery.addEventListener('keydown', function (e) {
+      if (!e.target.classList.contains('beat-pos')) return;
+      if (e.key === 'Enter') { e.preventDefault(); var b = e.target.closest('.beat'); moveBeat(b, parseInt(e.target.value, 10) || 1); }
+    });
+  }
+  function beatFiles(beatEl) { return [].map.call(beatEl.querySelectorAll('.shot'), function (s) { return s.dataset.file; }); }
+
+  // ---- lightbox ----
+  var LB = document.getElementById('lightbox');
+  var lbImg = LB.querySelector('.lb-img'), lbCount = LB.querySelector('.lb-count'),
+      lbBeatEl = LB.querySelector('.lb-beat'), lbKeepBtn = LB.querySelector('.lb-keep');
+  var lbFiles = [], lbIdx = 0, lbBeat = '', lbDirty = false;
+
+  function lbOpen(files, idx, beat) {
+    if (!files || !files.length) return;
+    lbFiles = files; lbIdx = idx || 0; lbBeat = beat || '';
+    lbBeatEl.textContent = beat || '';
+    LB.hidden = false; document.body.style.overflow = 'hidden';
+    lbRender();
+  }
+  function lbRender() {
+    var f = lbFiles[lbIdx];
+    lbImg.src = imgSrc(f, false); // full-res for judging
+    lbCount.textContent = (lbIdx + 1) + ' / ' + lbFiles.length;
+    var shot = document.querySelector('.shot[data-file="' + f + '"]');
+    lbKeepBtn.classList.toggle('on', !!(shot && shot.dataset.accepted === '1'));
+    lbKeepBtn.textContent = (shot && shot.dataset.accepted === '1') ? '★ Winner ✓' : '★ Winner (Enter)';
+  }
+  function lbNav(d) { lbIdx = (lbIdx + d + lbFiles.length) % lbFiles.length; lbRender(); }
+  function lbClose() { LB.hidden = true; document.body.style.overflow = ''; if (lbDirty) location.reload(); }
+  function lbWinner() {
+    var f = lbFiles[lbIdx];
+    post({ action: 'winner', file: f }).then(function (res) {
+      if (!res.ok) return;
+      lbDirty = true;
+      document.querySelectorAll('.beat[data-beat="' + lbBeat + '"] .shot').forEach(function (s) {
+        var win = s.dataset.file === f;
+        s.dataset.accepted = win ? '1' : '0';
+        s.classList.toggle('kept', win);
+        s.classList.remove('rate-good', 'rate-bad', 'rate-unrated');
+        s.dataset.rating = win ? 'good' : (s.dataset.rating === 'good' ? 'unrated' : s.dataset.rating);
+        s.classList.add('rate-' + s.dataset.rating);
+      });
+      lbRender();
+    });
+  }
+  LB.querySelector('.lb-x').addEventListener('click', lbClose);
+  LB.querySelector('.lb-prev').addEventListener('click', function () { lbNav(-1); });
+  LB.querySelector('.lb-next').addEventListener('click', function () { lbNav(1); });
+  lbKeepBtn.addEventListener('click', lbWinner);
+  LB.addEventListener('click', function (e) { if (e.target === LB) lbClose(); });
+
+  // ---- keyboard ----
   document.addEventListener('keydown', function (e) {
+    if (!LB.hidden) {
+      if (e.key === 'ArrowLeft') { lbNav(-1); e.preventDefault(); }
+      else if (e.key === 'ArrowRight') { lbNav(1); e.preventDefault(); }
+      else if (e.key === 'Enter') { lbWinner(); e.preventDefault(); }
+      else if (e.key === 'Escape') { lbClose(); e.preventDefault(); }
+      return;
+    }
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName)) return;
     var shot = (document.activeElement && document.activeElement.closest && document.activeElement.closest('.shot')) || document.querySelector('.shot:hover');
     if (!shot) return;
@@ -57,9 +140,7 @@
   });
 
   // ---- upload (drag-drop + picker) ----
-  var dz = document.getElementById('dropzone'),
-      input = document.getElementById('fileinput'),
-      bar = document.getElementById('uploadbar');
+  var dz = document.getElementById('dropzone'), input = document.getElementById('fileinput'), bar = document.getElementById('uploadbar');
   if (!dz) return;
   document.getElementById('pickbtn').addEventListener('click', function () { input.click(); });
   input.addEventListener('change', function () { if (input.files.length) upload(input.files); input.value = ''; });
@@ -70,7 +151,6 @@
     var files = [].filter.call(e.dataTransfer.files, function (f) { return f.type.indexOf('image') === 0; });
     if (files.length) upload(files);
   });
-
   function upload(files) {
     var fd = new FormData();
     fd.append('action', 'upload'); fd.append('p', PID); fd.append('csrf', CSRF);

@@ -17,6 +17,13 @@ function touch_project(string $id): void {
     foreach ($all as &$p) if (($p['id']??'')===$id) $p['updated']=date('c');
     unset($p); projects_save($all);
 }
+function beat_num(string $s): int { return preg_match('/(\d+)/',$s,$m) ? (int)$m[1] : 9999; }
+function ordered_beats(array $meta): array {
+    $b = [];
+    foreach ($meta as $m) { $g = $m['group'] ?? ''; if ($g!=='' && !in_array($g,$b,true)) $b[]=$g; }
+    usort($b, fn($x,$y)=> beat_num($x) <=> beat_num($y) ?: strcmp($x,$y));
+    return $b;
+}
 
 if ($action === 'upload') {
     $files = $_FILES['files'] ?? null;
@@ -37,12 +44,45 @@ if ($action === 'upload') {
     jout(['ok'=>true,'added'=>$added,'count'=>count($meta)]);
 }
 
+// reorder a beat to a 1-based position; renumbers all beats to "Beat 1..N" in the new order
+if ($action === 'move_beat') {
+    $beat = trim((string)($_POST['beat'] ?? ''));
+    $to   = (int)($_POST['to'] ?? 0);
+    $meta = images_all($id);
+    $beats = ordered_beats($meta);
+    $from = array_search($beat, $beats, true);
+    if ($from === false || !$beats) jout(['ok'=>false,'error'=>'no such beat']);
+    $to = max(1, min(count($beats), $to)) - 1;
+    array_splice($beats, $from, 1);
+    array_splice($beats, $to, 0, [$beat]);
+    $map = []; foreach ($beats as $i=>$b) $map[$b] = 'Beat ' . ($i+1);
+    foreach ($meta as &$m) { $g = $m['group'] ?? ''; if (isset($map[$g])) $m['group'] = $map[$g]; }
+    unset($m);
+    images_save($id, $meta); touch_project($id);
+    jout(['ok'=>true]);
+}
+
 // per-image mutations
 $file = basename((string)($_POST['file'] ?? ''));
 $meta = images_all($id);
 $idx = null; foreach ($meta as $k=>$m) if (($m['file']??'')===$file) { $idx=$k; break; }
-if ($action !== 'upload' && $idx === null) jout(['ok'=>false,'error'=>'Image not found.']);
+if ($idx === null) jout(['ok'=>false,'error'=>'Image not found.']);
 
+// mark current image the winner of its beat: it becomes accepted+good, siblings lose accept + any 'good'
+if ($action === 'winner') {
+    $beat = $meta[$idx]['group'] ?? '';
+    foreach ($meta as &$m) {
+        if ($beat !== '' && ($m['group'] ?? '') === $beat) {
+            $win = ($m['file'] === $file);
+            $m['accepted'] = $win;
+            if ($win) $m['rating'] = 'good';
+            elseif (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated';
+        }
+    }
+    unset($m); images_save($id, $meta);
+    $all = projects_all(); foreach ($all as &$p) if (($p['id']??'')===$id && empty($p['cover'])) $p['cover']=$file; unset($p); projects_save($all);
+    jout(['ok'=>true]);
+}
 if ($action === 'rate') {
     $r = in_array($_POST['rating']??'', RATINGS, true) ? $_POST['rating'] : 'unrated';
     $meta[$idx]['rating'] = $r; images_save($id,$meta); jout(['ok'=>true,'rating'=>$r]);

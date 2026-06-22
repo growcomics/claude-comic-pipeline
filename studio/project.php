@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $imgs = images_all($id);
 $groups = [];
 foreach ($imgs as $im) { $g = $im['group'] ?? ''; $groups[$g === '' ? 'Ungrouped' : $g][] = $im; }
-uksort($groups, fn($a,$b)=> $a==='Ungrouped' ? 1 : ($b==='Ungrouped' ? -1 : strcmp($a,$b)));
+$bn = fn($s) => preg_match('/(\d+)/', (string)$s, $m) ? (int)$m[1] : 9999;
+uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b==='Ungrouped') return -1; return $bn($a) <=> $bn($b) ?: strcmp($a,$b); });
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
@@ -71,30 +72,55 @@ uksort($groups, fn($a,$b)=> $a==='Ungrouped' ? 1 : ($b==='Ungrouped' ? -1 : strc
     <div id="uploadbar" class="uploadbar" hidden><div></div></div>
   </div>
 
-  <p class="muted khint">Tip: hover an image and press <b>G</b> good · <b>B</b> bad · <b>A</b> keep/unkeep.</p>
+  <p class="muted khint">Reorder beats with ▲▼ or type a number. <b>Compare</b> opens a lightbox: <b>←/→</b> to flip, <b>Enter</b> picks the winner. In the grid: hover + <b>G</b>/<b>B</b>/<b>A</b>.</p>
 
   <div id="gallery">
-  <?php foreach ($groups as $gname => $list): ?>
-    <h2 class="gtitle"><?= h($gname) ?> <span class="muted"><?= count($list) ?></span></h2>
-    <div class="shots">
-      <?php foreach ($list as $im): $f = $im['file']; ?>
-        <figure class="shot rate-<?= h($im['rating'] ?? 'unrated') ?><?= !empty($im['accepted'])?' kept':'' ?>" tabindex="0"
-                data-file="<?= h($f) ?>" data-rating="<?= h($im['rating'] ?? 'unrated') ?>" data-accepted="<?= !empty($im['accepted'])?'1':'0' ?>">
-          <div class="shot-img"><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
-          <div class="shot-bar">
-            <button class="rb good" data-act="good" title="Good (G)">▲</button>
-            <button class="rb bad"  data-act="bad"  title="Bad (B)">▼</button>
-            <button class="rb keep" data-act="keep" title="Keep (A)">★</button>
-            <span class="spacer"></span>
-            <a class="rb" href="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>" target="_blank" title="Full size">⤢</a>
-            <button class="rb cover" data-act="cover" title="Set as cover">◳</button>
-            <button class="rb del"  data-act="delete" title="Delete">✕</button>
-          </div>
-        </figure>
-      <?php endforeach; ?>
-    </div>
+  <?php $pos = 0; foreach ($groups as $gname => $list): $isU = ($gname === 'Ungrouped'); if (!$isU) $pos++; ?>
+    <section class="beat" data-beat="<?= h($gname) ?>">
+      <div class="beat-head">
+        <?php if (!$isU): ?>
+          <span class="beat-move">
+            <button class="rb bmove" data-dir="up" title="Move up">▲</button>
+            <button class="rb bmove" data-dir="down" title="Move down">▼</button>
+          </span>
+          <input class="beat-pos" type="number" min="1" value="<?= $pos ?>" title="Type a position then Enter">
+        <?php endif; ?>
+        <h2 class="gtitle"><?= h($gname) ?> <span class="muted"><?= count($list) ?></span></h2>
+        <span class="spacer"></span>
+        <?php if (!$isU && count($list) > 1): ?><button class="btn sm bcompare">Compare ▦</button><?php endif; ?>
+      </div>
+      <div class="shots">
+        <?php foreach ($list as $im): $f = $im['file']; ?>
+          <figure class="shot rate-<?= h($im['rating'] ?? 'unrated') ?><?= !empty($im['accepted'])?' kept':'' ?>" tabindex="0"
+                  data-file="<?= h($f) ?>" data-rating="<?= h($im['rating'] ?? 'unrated') ?>" data-accepted="<?= !empty($im['accepted'])?'1':'0' ?>">
+            <div class="shot-img"><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
+            <div class="shot-bar">
+              <button class="rb good" data-act="good" title="Good (G)">▲</button>
+              <button class="rb bad"  data-act="bad"  title="Bad (B)">▼</button>
+              <button class="rb keep" data-act="keep" title="Keep (A)">★</button>
+              <span class="spacer"></span>
+              <button class="rb cover" data-act="cover" title="Set as cover">◳</button>
+              <button class="rb del"  data-act="delete" title="Delete">✕</button>
+            </div>
+          </figure>
+        <?php endforeach; ?>
+      </div>
+    </section>
   <?php endforeach; ?>
   <?php if (!$imgs): ?><p class="muted" id="empty">No images yet — drop some above.</p><?php endif; ?>
   </div>
 </main>
+
+<div id="lightbox" class="lb" hidden>
+  <button class="lb-x" type="button" title="Close (Esc)">✕</button>
+  <button class="lb-arrow lb-prev" type="button" title="Previous (←)">‹</button>
+  <div class="lb-stage"><img class="lb-img" src="" alt=""></div>
+  <button class="lb-arrow lb-next" type="button" title="Next (→)">›</button>
+  <div class="lb-bar">
+    <span class="lb-count muted"></span>
+    <span class="lb-beat muted"></span>
+    <span class="spacer"></span>
+    <button class="btn primary lb-keep" type="button">★ Winner (Enter)</button>
+  </div>
+</div>
 <script src="assets/studio.js"></script></body></html>
