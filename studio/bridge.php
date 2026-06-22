@@ -58,12 +58,23 @@ if ($do === 'write') {
 if ($do === 'ingest_init') {
     $name = trim((string)($_POST['project'] ?? $_GET['project'] ?? ''));
     if ($name === '') bout(['ok'=>false,'error'=>'no project name']);
+    // new=1 → always create a FRESH section (each Flow→Studio batch gets its own
+    // project). Otherwise resolve an existing project by id/name = "append to".
+    $forceNew = !empty($_POST['new']) || !empty($_GET['new']);
     $all = projects_all(); $pid = '';
-    foreach ($all as $p) if (($p['id']??'')===$name || strcasecmp((string)($p['name']??''),$name)===0) { $pid=$p['id']; break; }
+    if (!$forceNew) {
+        foreach ($all as $p) if (($p['id']??'')===$name || strcasecmp((string)($p['name']??''),$name)===0) { $pid=$p['id']; break; }
+    }
     if ($pid === '') {
+        $disp = mb_substr($name, 0, 80);
+        if ($forceNew) {                                    // timestamp the section so it's unique + self-documenting
+            $disp .= ' · ' . date('M j, H:i');
+            $lc = array_map(fn($p)=>strtolower((string)($p['name']??'')), $all);
+            if (in_array(strtolower($disp), $lc, true)) { $k=2; while (in_array(strtolower($disp.' #'.$k), $lc, true)) $k++; $disp .= ' #'.$k; }
+        }
         $base = slugify($name); $pid=$base; $k=2; $taken=array_column($all,'id');
         while (in_array($pid,$taken,true)) $pid=$base.'-'.$k++;
-        array_unshift($all, ['id'=>$pid,'name'=>mb_substr($name,0,120),'status'=>'active','stage'=>'page-build',
+        array_unshift($all, ['id'=>$pid,'name'=>$disp,'status'=>'active','stage'=>'page-build',
             'tags'=>[],'notes'=>'','cover'=>null,'created'=>date('c'),'updated'=>date('c')]);
         projects_save($all);
     }

@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Flow → Studio: a new section per batch)
+
+### Fixed
+
+- **Flow → Studio was merging every batch into one folder.** The extension pre-filled the Studio-project field with the Flow page's (stable) title, and `bridge.php`'s `ingest_init` reuses any project whose name matches — so repeated sends from the same Flow project all resolved to the *same* Studio project and piled up together. Now the field defaults to **blank = a fresh section each send**: the extension sends `new=1` and `ingest_init` force-creates a new project with a timestamped, auto-numbered name (`<base> · Jun 22, 17:20`, then ` #2` on a same-minute collision). Typing an explicit name (or id) still appends to / reuses that project — the deliberate "add to this section" escape hatch. Touches `studio/bridge.php` and `flow-studio-tools/{content,background}.js` + `manifest.json` (**v1.2.0**); repackaged on the admin Extensions page. Verified live: two same-name `new=1` sends → two distinct sections; `new=0` + an existing id → reuse.
+
 ## 2026-06-22 (Studio — Download / Port act on the whole curated project)
 
 ### Changed

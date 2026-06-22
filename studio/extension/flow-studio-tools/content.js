@@ -52,7 +52,7 @@
        <div class="lbl">Studio key (Studio → Flow import)</div><input class="key" type="password" placeholder="paste your bridge key">
        <div class="row" style="margin-bottom:10px"><button class="pick savecfg">Save settings</button></div>
      </div>
-     <div class="studio-only" style="display:none"><div class="lbl">Studio project (created if new)</div><input class="proj" type="text"></div>
+     <div class="studio-only" style="display:none"><div class="lbl">Studio section — blank = a new one each send (or type a name to append)</div><input class="proj" type="text"></div>
      <div class="actbody">
        <div class="lbl modehint">Most-recent generations:</div>
        <div class="row"><button class="pick" data-n="5">5</button><button class="pick" data-n="10">10</button><button class="pick" data-n="25">25</button>
@@ -74,7 +74,7 @@
   const buttons = [...panel.querySelectorAll("button.pick")];
 
   chrome.storage.local.get(["studioUrl", "bridgeKey"]).then((s) => { if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey; urlInput.value = cfg.url; keyInput.value = cfg.key; });
-  projInput.value = defaultProject();
+  projInput.placeholder = "blank → new section each send";
 
   function onDelCount(n) { trashBtn.textContent = "🗑 Move " + n + " to Trash"; trashBtn.disabled = n === 0; }
   function setMode(m) {
@@ -141,9 +141,12 @@
           payload = { folder, jobs: outs.map((o, i) => ({ url: o.url, path: folder + "/flow-" + String(i + 1).padStart(3, "0") + ".jpg" })) };
           footEl.textContent = "→ Downloads/" + folder + "/"; kind = "download"; status("Downloading " + outs.length + " images…");
         } else {
-          const project = projInput.value.trim() || defaultProject();
-          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg" })), project, cfg };
-          footEl.textContent = "→ Studio project: " + project; kind = "studio"; status("Sending " + outs.length + " to Studio…");
+          const typed = projInput.value.trim();
+          const project = typed || defaultProject();
+          const newSection = typed ? 0 : 1;   // blank field → a fresh Studio section for this batch
+          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg" })), project, newSection, cfg };
+          footEl.textContent = newSection ? ("→ Studio: NEW section (" + project + " · …)") : ("→ Studio project: " + project);
+          kind = "studio"; status("Sending " + outs.length + " to Studio…");
         }
       }
       await new Promise((resolve) => {

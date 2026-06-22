@@ -30,12 +30,13 @@ async function runDownload(port, msg) {
 }
 
 async function runStudio(port, msg) {
-  const { items, project, cfg } = msg;
+  const { items, project, newSection, cfg } = msg;
   const url = (cfg && cfg.url) || "https://3dmusclecomics.com/studio/bridge.php";
   const key = (cfg && cfg.key) || "";
   let pid;
   try {
     const fd = new FormData(); fd.append("do", "ingest_init"); fd.append("key", key); fd.append("project", project);
+    if (newSection) fd.append("new", "1");
     const j = await (await fetch(url, { method: "POST", body: fd })).json();
     if (!j.ok) { post(port, { type: "error", message: j.error || "init failed" }); return; }
     pid = j.project;
