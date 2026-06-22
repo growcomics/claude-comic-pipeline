@@ -40,7 +40,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
-<title><?= h($proj['name']) ?> · Studio</title><link rel="stylesheet" href="assets/studio.css"></head><body>
+<title><?= h($proj['name']) ?> · Studio</title><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"></head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
@@ -135,4 +135,4 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 </div>
 <?php $analysis = []; foreach ($imgs as $im) if (!empty($im['analysis'])) $analysis[$im['file']] = $im['analysis']; ?>
 <script>window.STUDIO_ANALYSIS = <?= json_encode($analysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;</script>
-<script src="assets/studio.js"></script></body></html>
+<script src="assets/studio.js?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.js') ?>"></script></body></html>
