@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Flow import on the Extensions page + Flow Toolkit consolidation plan)
+
+### Added
+
+- **flow-to-studio packaged to the admin Extensions page** — registered in `admin/packages/extensions.json` and shipped as `flow-to-studio.zip.b64`, so the team one-click downloads + side-loads it alongside the other in-house extensions.
+- **`studio/extension/FLOW-TOOLKIT-PLAN.md`** — plan to consolidate the four Flow extensions (bulk-downloader, bulk-delete, review-harvester, flow-to-studio) into one "Flow Toolkit": a single tRPC-based harvester + shared config, with Download / Send-to-Studio / Review-bundle / (guarded) Delete modes. Phased, with the decisions to make first.
+
 ## 2026-06-21 (Comic Studio — web GUI for organizing draft pages/projects)
 
 ### Added
