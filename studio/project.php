@@ -45,7 +45,12 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap" id="proj" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>">
-  <div class="pagehead"><h1><?= h($proj['name']) ?></h1></div>
+  <?php $keptN = count(array_filter($imgs, fn($x) => !empty($x['accepted']))); ?>
+  <div class="pagehead"><h1><?= h($proj['name']) ?></h1>
+    <span class="phead-actions">
+      <?php if ($keptN): ?><a class="btn sm" href="export.php?p=<?= h(urlencode($id)) ?>">⬇ Download winners (<?= $keptN ?>)</a><?php endif; ?>
+    </span>
+  </div>
 
   <details class="card metabox">
     <summary>Project details — <span class="badge" style="--c:#1D9E75"><?= h($proj['status']) ?></span> · <?= h($proj['stage']) ?></summary>
