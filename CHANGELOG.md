@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Studio — Download / Port act on the whole curated project)
+
+### Changed
+
+- **"Download winners" → "⬇ Download all (N)"; Download and Port now act on every image in the project, not just ★-accepted ones.** After the triage→purge workflow a project holds many ▲-good keepers that were never explicitly starred, so the old `accepted`-only filter under-counted (showed e.g. "2" when essentially all of them were keepers). `export.php` now zips all images and `port.php` ports all images as pages (marks all ported); the header button is gated on total count and relabeled. The per-beat **🏆 Winner** action still exists (crowns a pick → sets cover + survives purge) — it's just no longer the export/port filter. The model: you curate by triaging + purging, then the project's remaining contents *are* the set you download/port. (`export.php`, `port.php`, `project.php`.)
+
 ## 2026-06-22 (Studio — triage from the lightbox + bulk Purge)
 
 ### Added

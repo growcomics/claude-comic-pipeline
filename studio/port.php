@@ -1,9 +1,10 @@
 <?php
-// Port a project's winners into the 3dmusclecomics catalog as a (draft) part —
-// new series / existing series, new part / append to an existing part. Reuses
-// the CMS's content.json (atomic same-pattern write) + copies pages into
+// Port a project's images (pages) into the 3dmusclecomics catalog as a (draft)
+// part — new series / existing series, new part / append to an existing part.
+// Reuses the CMS's content.json (atomic same-pattern write) + copies pages into
 // assets/comics/. New parts land as DRAFT so nothing goes public until you
-// publish it in the admin. Winners stay in Studio (marked ported).
+// publish it in the admin. Pages stay in Studio (marked ported). The project's
+// current contents = your curated set after triage + purge, in beat/page order.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
 require_auth();
@@ -19,15 +20,15 @@ $id = preg_replace('/[^a-z0-9-]/', '', (string)($_GET['p'] ?? $_POST['p'] ?? '')
 $proj = project_get($id);
 if (!$proj) { header('Location: index.php'); exit; }
 
-$kept = array_values(array_filter(images_all($id), fn($x) => !empty($x['accepted'])));
-usort($kept, fn($a,$b)=> (preg_match('/(\d+)/',$a['group']??'',$m)?(int)$m[1]:9999) <=> (preg_match('/(\d+)/',$b['group']??'',$n)?(int)$n[1]:9999) ?: (($a['ts']??0) <=> ($b['ts']??0)));
+$pages = images_all($id);
+usort($pages, fn($a,$b)=> (preg_match('/(\d+)/',$a['group']??'',$m)?(int)$m[1]:9999) <=> (preg_match('/(\d+)/',$b['group']??'',$n)?(int)$n[1]:9999) ?: (($a['ts']??0) <=> ($b['ts']??0)));
 
 $err = ''; $done = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
     csrf_check();
     $cms = cms_read();
     if (!cms_valid($cms))            $err = 'Could not read the catalog safely — aborted (nothing changed).';
-    elseif (!$kept)                  $err = 'No winners to port — mark some first.';
+    elseif (!$pages)                 $err = 'No images to port — add some first.';
     else {
         $serSel = (string)($_POST['series'] ?? '');
         $partSel = (string)($_POST['part'] ?? '__new__');
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
                 @mkdir($dir, 0755, true);
                 $existing = $parts[$pi]['pages'] ?? [];
                 $start = count($existing) + 1; $i = $start; $newpages = [];
-                foreach ($kept as $x) {
+                foreach ($pages as $x) {
                     $src = project_dir($id) . '/' . $x['file'];
                     if (!is_file($src)) continue;
                     $ext = ext_of($x['file']) ?: 'png';
@@ -81,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
                     $cms['series'][$si]['parts'] = $parts;
                     if (!s_write(CMS_CONTENT, $cms)) $err = 'Could not save the catalog.';
                     else {
-                        // mark winners ported (kept in Studio)
+                        // mark ported (pages stay in Studio)
                         $meta = images_all($id); $tag = $sid . '/' . part_dir_n($n);
-                        foreach ($meta as &$m) if (!empty($m['accepted'])) $m['ported_to'] = $tag;
+                        foreach ($meta as &$m) $m['ported_to'] = $tag;
                         unset($m); images_save($id, $meta);
                         header('Location: port.php?p=' . urlencode($id) . '&done=' . urlencode($sid . ':' . $n . ':' . count($newpages))); exit;
                     }
@@ -111,17 +112,17 @@ $E = fn($s)=>htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
   <a class="ghost" href="project.php?p=<?= $E(urlencode($id)) ?>">← <?= $E($proj['name']) ?></a><span class="spacer"></span>
   <span class="ghost"><?= $E(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap">
-  <div class="pagehead"><h1>Port winners → comic</h1></div>
+  <div class="pagehead"><h1>Port → comic</h1></div>
   <?php if (isset($_GET['done'])): [$ds,$dn,$dc] = array_pad(explode(':', (string)$_GET['done']), 3, ''); ?>
     <div class="flash">Ported <?= $E($dc) ?> page<?= $dc==='1'?'':'s' ?> into <strong><?= $E($ds) ?></strong> · Part <?= $E($dn) ?> (draft).
       <a href="https://3dmusclecomics.com/admin/series.php" target="_blank">Open in the CMS</a> to review &amp; publish.</div>
   <?php endif; ?>
   <?php if ($err): ?><div class="flash err"><?= $E($err) ?></div><?php endif; ?>
 
-  <p class="muted"><?= count($kept) ?> winner<?= count($kept)===1?'':'s' ?> ready to port (kept images, in beat order). They’re copied as the part’s pages and stay here in Studio. New parts land as <strong>draft</strong>.</p>
+  <p class="muted"><?= count($pages) ?> page<?= count($pages)===1?'':'s' ?> ready to port (all images, in beat/page order). They’re copied as the part’s pages and stay here in Studio. New parts land as <strong>draft</strong>.</p>
 
-  <?php if (!$kept): ?>
-    <p class="muted">Mark some winners first (Compare → Enter), then come back.</p>
+  <?php if (!$pages): ?>
+    <p class="muted">No images in this project yet — add some, then come back.</p>
   <?php elseif (!cms_valid($cms)): ?>
     <div class="flash err">Couldn’t read the catalog — porting disabled.</div>
   <?php else: ?>
@@ -137,7 +138,7 @@ $E = fn($s)=>htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
     <label>Part
       <select name="part" id="prt"></select>
     </label>
-    <div class="actions"><button class="btn primary">Port <?= count($kept) ?> winner<?= count($kept)===1?'':'s' ?> →</button></div>
+    <div class="actions"><button class="btn primary">Port <?= count($pages) ?> page<?= count($pages)===1?'':'s' ?> →</button></div>
   </form>
   <script>
     var SER = <?= json_encode($jsmap, JSON_UNESCAPED_SLASHES) ?>;
