@@ -48,7 +48,10 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   <?php $keptN = count(array_filter($imgs, fn($x) => !empty($x['accepted']))); ?>
   <div class="pagehead"><h1><?= h($proj['name']) ?></h1>
     <span class="phead-actions">
-      <?php if ($keptN): ?><a class="btn sm" href="export.php?p=<?= h(urlencode($id)) ?>">⬇ Download winners (<?= $keptN ?>)</a><?php endif; ?>
+      <?php if ($keptN): ?>
+        <a class="btn sm" href="export.php?p=<?= h(urlencode($id)) ?>">⬇ Download winners (<?= $keptN ?>)</a>
+        <a class="btn sm primary" href="port.php?p=<?= h(urlencode($id)) ?>">→ Port to comic</a>
+      <?php endif; ?>
     </span>
   </div>
 
@@ -98,7 +101,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
         <?php foreach ($list as $im): $f = $im['file']; ?>
           <figure class="shot rate-<?= h($im['rating'] ?? 'unrated') ?><?= !empty($im['accepted'])?' kept':'' ?>" tabindex="0"
                   data-file="<?= h($f) ?>" data-rating="<?= h($im['rating'] ?? 'unrated') ?>" data-accepted="<?= !empty($im['accepted'])?'1':'0' ?>">
-            <div class="shot-img"><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
+            <div class="shot-img"><?php if (!empty($im['ported_to'])): ?><span class="ported-tag" title="Ported to <?= h($im['ported_to']) ?>">ported</span><?php endif; ?><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
             <div class="shot-bar">
               <button class="rb good" data-act="good" title="Good (G)">▲</button>
               <button class="rb bad"  data-act="bad"  title="Bad (B)">▼</button>
