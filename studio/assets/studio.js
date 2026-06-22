@@ -86,8 +86,10 @@
   // ---- lightbox ----
   var LB = document.getElementById('lightbox');
   var lbImg = LB.querySelector('.lb-img'), lbCount = LB.querySelector('.lb-count'),
-      lbBeatEl = LB.querySelector('.lb-beat'), lbKeepBtn = LB.querySelector('.lb-keep');
+      lbBeatEl = LB.querySelector('.lb-beat'), lbKeepBtn = LB.querySelector('.lb-keep'),
+      lbAn = LB.querySelector('.lb-analysis');
   var lbFiles = [], lbIdx = 0, lbBeat = '', lbDirty = false;
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   function lbOpen(files, idx, beat) {
     if (!files || !files.length) return;
@@ -103,6 +105,14 @@
     var shot = document.querySelector('.shot[data-file="' + f + '"]');
     lbKeepBtn.classList.toggle('on', !!(shot && shot.dataset.accepted === '1'));
     lbKeepBtn.textContent = (shot && shot.dataset.accepted === '1') ? '★ Winner ✓' : '★ Winner (Enter)';
+    var an = (window.STUDIO_ANALYSIS || {})[f];
+    if (an && (an.caption || (an.defects || []).length || an.tier || an.notes)) {
+      var defs = (an.defects || []).map(function (x) { return '<span class="an-def">⚠ ' + esc(x) + '</span>'; }).join('');
+      lbAn.innerHTML = (an.tier ? '<span class="an-tier">' + esc(an.tier) + '</span>' : '') +
+        (an.caption ? '<span class="an-cap">' + esc(an.caption) + '</span>' : '') + defs +
+        (an.notes ? '<div class="an-notes">' + esc(an.notes) + '</div>' : '');
+      lbAn.hidden = false;
+    } else { lbAn.hidden = true; lbAn.innerHTML = ''; }
   }
   function lbNav(d) { lbIdx = (lbIdx + d + lbFiles.length) % lbFiles.length; lbRender(); }
   function lbClose() { LB.hidden = true; document.body.style.overflow = ''; if (lbDirty) location.reload(); }

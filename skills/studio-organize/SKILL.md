@@ -68,6 +68,36 @@ Beats default to generation-timestamp groups (variants made together = one
 panel/beat). Reorder beats in the app (▲▼ / type-a-number) — order is the
 intended page/panel sequence. To regroup in a push, set each image's `group`.
 
+## Analysis pass (annotate)
+
+Beyond picking winners, attach an **AI analysis** to each image — shown in the
+Studio as a 🔍/⚠ badge in the grid and a panel in the lightbox. Flow:
+
+1. `pull <project>` (downloads + contact sheet, as above).
+2. Read the images — contact sheet for a coarse pass; `pull --full` or the in-app
+   lightbox (full-res) for fine defect-level detail.
+3. Write a notes file — a JSON array, one entry per image:
+   ```json
+   [{ "file": "abc123.png",
+      "caption": "Mid-transformation, kneeling, energy surge from the rock",
+      "defects": ["left hand 6 fingers", "soft right eye"],
+      "tier": "tier 3 / early growth",
+      "tags": ["transformation", "outdoor"],
+      "notes": "Continuity with prior panel's cape; best of this beat" }]
+   ```
+4. `annotate <project> --notes notes.json` — writes it back via the bridge.
+
+Field guidance (genre-aware, per the corpus + `qa-checklist.md`):
+- **caption** — one line: who, what's happening, the beat's emotion.
+- **defects** — concrete visible flaws only: hands/fingers, face/eyes asymmetry,
+  anatomy, warped props/costume, stray extras, artifacts/seams. Empty if clean.
+- **tier** — transformation / muscle stage if visible ("tier 6 peak", "pre-TF").
+- **tags** — reusable labels (transformation, FMG, costume-change, ECU, hero-pose…).
+- **notes** — continuity vs neighbours, why it's the pick, what to fix.
+
+Annotation and winner-picking compose — do both in one session: pull once, judge
++ analyze, then `push` (winners/grouping) and `annotate` (analysis).
+
 ## Notes
 
 - Decisions are idempotent; re-running `push` with updated picks just overwrites.

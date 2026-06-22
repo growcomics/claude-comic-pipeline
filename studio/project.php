@@ -102,7 +102,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
         <?php foreach ($list as $im): $f = $im['file']; ?>
           <figure class="shot rate-<?= h($im['rating'] ?? 'unrated') ?><?= !empty($im['accepted'])?' kept':'' ?>" tabindex="0"
                   data-file="<?= h($f) ?>" data-rating="<?= h($im['rating'] ?? 'unrated') ?>" data-accepted="<?= !empty($im['accepted'])?'1':'0' ?>">
-            <div class="shot-img"><?php if (!empty($im['ported_to'])): ?><span class="ported-tag" title="Ported to <?= h($im['ported_to']) ?>">ported</span><?php endif; ?><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
+            <div class="shot-img"><?php if (!empty($im['ported_to'])): ?><span class="ported-tag" title="Ported to <?= h($im['ported_to']) ?>">ported</span><?php endif; ?><?php $an = $im['analysis'] ?? null; if ($an): $df = $an['defects'] ?? []; ?><span class="an-tag<?= $df ? ' has-def' : '' ?>" title="<?= h(trim(($an['caption'] ?? '') . ($df ? ' — ⚠ ' . implode(', ', $df) : ''))) ?>"><?= $df ? '⚠' . count($df) : '🔍' ?></span><?php endif; ?><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt=""></div>
             <div class="shot-bar">
               <button class="rb good" data-act="good" title="Good (G)">▲</button>
               <button class="rb bad"  data-act="bad"  title="Bad (B)">▼</button>
@@ -125,6 +125,7 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   <button class="lb-arrow lb-prev" type="button" title="Previous (←)">‹</button>
   <div class="lb-stage"><img class="lb-img" src="" alt=""></div>
   <button class="lb-arrow lb-next" type="button" title="Next (→)">›</button>
+  <div class="lb-analysis" hidden></div>
   <div class="lb-bar">
     <span class="lb-count muted"></span>
     <span class="lb-beat muted"></span>
@@ -132,4 +133,6 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
     <button class="btn primary lb-keep" type="button">★ Winner (Enter)</button>
   </div>
 </div>
+<?php $analysis = []; foreach ($imgs as $im) if (!empty($im['analysis'])) $analysis[$im['file']] = $im['analysis']; ?>
+<script>window.STUDIO_ANALYSIS = <?= json_encode($analysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;</script>
 <script src="assets/studio.js"></script></body></html>

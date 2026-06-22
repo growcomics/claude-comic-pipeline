@@ -86,4 +86,27 @@ if ($do === 'ingest') {
     bout(['ok'=>true,'count'=>count($meta)]);
 }
 
+// ---- annotate (AI analysis pass): per-image caption / defects / tier / notes / tags ----
+if ($do === 'annotate') {
+    $notes = json_decode((string)($_POST['notes'] ?? '[]'), true) ?: [];
+    $meta = images_all($id);
+    $byfile = []; foreach ($meta as $k=>$m) $byfile[$m['file']] = $k;
+    $n = 0;
+    foreach ($notes as $note) {
+        $f = $note['file'] ?? ''; if (!isset($byfile[$f])) continue;
+        $k = $byfile[$f];
+        $meta[$k]['analysis'] = [
+            'caption' => mb_substr((string)($note['caption'] ?? ''), 0, 300),
+            'defects' => array_values(array_slice(array_map(fn($d)=>mb_substr((string)$d,0,60), (array)($note['defects'] ?? [])), 0, 12)),
+            'tier'    => mb_substr((string)($note['tier'] ?? ''), 0, 60),
+            'notes'   => mb_substr((string)($note['notes'] ?? ''), 0, 800),
+            'at'      => date('c'),
+        ];
+        if (isset($note['tags'])) $meta[$k]['tags'] = array_values(array_slice(array_map(fn($t)=>mb_substr((string)$t,0,40), (array)$note['tags']), 0, 12));
+        $n++;
+    }
+    images_save($id, $meta);
+    bout(['ok'=>true,'annotated'=>$n]);
+}
+
 bout(['ok'=>false,'error'=>'unknown action']);

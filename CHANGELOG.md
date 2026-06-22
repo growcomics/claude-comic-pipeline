@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Studio AI analysis pass)
+
+### Added
+
+- **Studio: AI analysis pass.** A Claude Code session can attach per-image analysis — **caption, defect flags, transformation tier/stage, tags, notes** — to a project's drafts via a new key-gated `bridge.php` action `do=annotate`, the `studio_organize.py annotate` subcommand, and the `studio-organize` skill's analysis rubric. Surfaced in the Studio: a **🔍 (or ⚠N for flagged defects) badge** per grid thumbnail, and a **tier / caption / defects / notes panel in the compare lightbox** (`project.php` embeds `window.STUDIO_ANALYSIS`; `studio.js` renders it; `studio.css` styles it). Composes with the winner-pick pass — pull once, judge + analyze, then `push` (winners) + `annotate` (analysis). First run annotated jacked-jill-2's 8-panel transformation sequence.
+
 ## 2026-06-22 (Flow import on the Extensions page + Flow Toolkit consolidation plan)
 
 ### Added

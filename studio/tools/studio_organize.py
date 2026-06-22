@@ -109,12 +109,18 @@ def cmd_push(a):
     if a.cover: f["cover"] = a.cover
     print(_post(f))
 
+def cmd_annotate(a):
+    # notes file: [{file, caption?, defects?[], tier?, notes?, tags?[]}, ...]
+    notes = json.load(open(a.notes))
+    print(_post({"do": "annotate", "p": a.project, "notes": json.dumps(notes)}))
+
 def main():
     ap = argparse.ArgumentParser(description="Comic Studio organizer bridge")
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("list").set_defaults(fn=cmd_list)
     p = sub.add_parser("pull"); p.add_argument("project"); p.add_argument("--full", action="store_true"); p.add_argument("--out"); p.set_defaults(fn=cmd_pull)
     p = sub.add_parser("push"); p.add_argument("project"); p.add_argument("--decisions", required=True); p.add_argument("--cover"); p.set_defaults(fn=cmd_push)
+    p = sub.add_parser("annotate"); p.add_argument("project"); p.add_argument("--notes", required=True); p.set_defaults(fn=cmd_annotate)
     a = ap.parse_args(); a.fn(a)
 
 if __name__ == "__main__":
