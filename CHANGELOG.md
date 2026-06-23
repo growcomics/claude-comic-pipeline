@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-22 (Flow → Studio: group beats by prompt — "same text = same beat")
+
+### Fixed
+
+- **Same beat shot from different angles no longer splits into separate beats.** The visual "Group similar" hash compares how panels *look*, so one beat generated from different camera angles / mirrored compositions split apart even when the dialogue was identical. Fix: group by the Flow **prompt** instead of pixels. The extension now sends each output's generation prompt (already harvested per record) with every image; `bridge.php` derives a normalized **generation key** — `p:<sha1 of lowercased, whitespace-collapsed prompt>`, falling back to the Flow generation id — and **auto-groups images into Beat 1..N by that key at ingest**, so identical prompts (Flow's 4 variants of one submit *and* re-generations of the same line) land in the same beat regardless of angle. The in-app **"Group similar"** button (`api.php`) is now key-aware too: exact grouping by generation key when present, visual difference-hash only as a fallback for images without one (manual uploads / pre-key imports). Server side: `studio/bridge.php` + `studio/api.php` (mine, deployed + tested). Extension side: `flow-studio-tools/{content,background,flow-core}.js` send the prompt (flow-core + the version bump co-land with the parallel session's chronological-order import change). **Verified live** against the bridge: two images with the same normalized prompt but different generation ids → same beat; a different prompt → a new beat. Applies to imports going forward; existing pre-key projects keep visual grouping.
+
 ## 2026-06-22 (Studio — Group similar, lightbox shortcut legend, favicon)
 
 ### Added

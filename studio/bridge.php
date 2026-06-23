@@ -92,9 +92,19 @@ if ($do === 'ingest') {
     if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
     $meta = images_all($pid);
     $seq = (int)($_POST['seq'] ?? count($meta));
-    $meta[] = ['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'unrated','accepted'=>false,'group'=>'','tags'=>[],'ts'=>time()+$seq];
+    // generation key: identical Flow prompt (or gen id) = same beat. Auto-group on the way in.
+    $gen = trim((string)($_POST['gen'] ?? ''));
+    $promptRaw = trim((string)($_POST['prompt'] ?? ''));
+    $genkey = $promptRaw !== '' ? 'p:' . substr(sha1(mb_strtolower(preg_replace('/\s+/', ' ', $promptRaw))), 0, 16)
+            : ($gen !== '' ? 'g:' . $gen : '');
+    $grp = '';
+    if ($genkey !== '') {
+        foreach ($meta as $m) if (($m['genkey'] ?? '') === $genkey && ($m['group'] ?? '') !== '') { $grp = $m['group']; break; }
+        if ($grp === '') { $mx = 0; foreach ($meta as $m) if (preg_match('/(\d+)/', (string)($m['group'] ?? ''), $z)) $mx = max($mx, (int)$z[1]); $grp = 'Beat ' . ($mx + 1); }
+    }
+    $meta[] = ['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'unrated','accepted'=>false,'group'=>$grp,'tags'=>[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey];
     images_save($pid, $meta);
-    bout(['ok'=>true,'count'=>count($meta)]);
+    bout(['ok'=>true,'count'=>count($meta),'group'=>$grp]);
 }
 
 // ---- annotate (AI analysis pass): per-image caption / defects / tier / notes / tags ----

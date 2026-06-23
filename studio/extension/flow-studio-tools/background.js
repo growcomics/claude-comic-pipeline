@@ -52,6 +52,8 @@ async function runStudio(port, msg) {
       const fd = new FormData();
       fd.append("do", "ingest"); fd.append("key", key); fd.append("p", pid);
       fd.append("seq", String(i)); fd.append("orig", name); fd.append("file", blob, name);
+      if (items[i].gen) fd.append("gen", items[i].gen);
+      if (items[i].prompt) fd.append("prompt", items[i].prompt);
       const j = await (await fetch(url, { method: "POST", body: fd })).json();
       j.ok ? ok++ : fail++;
     } catch (e) { fail++; }

@@ -144,7 +144,7 @@
           const typed = projInput.value.trim();
           const project = typed || defaultProject();
           const newSection = typed ? 0 : 1;   // blank field → a fresh Studio section for this batch
-          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg" })), project, newSection, cfg };
+          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "" })), project, newSection, cfg };
           footEl.textContent = newSection ? ("→ Studio: NEW section (" + project + " · …)") : ("→ Studio project: " + project);
           kind = "studio"; status("Sending " + outs.length + " to Studio…");
         }

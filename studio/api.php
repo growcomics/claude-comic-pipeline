@@ -86,10 +86,10 @@ if ($action === 'purge') {
     jout(['ok' => true, 'deleted' => count($del), 'kept' => count($keep)]);
 }
 
-// group_similar: auto-cluster images into beats by visual similarity (difference-hash).
-// Flow variants arrive with sequential ts (no real gen-grouping), so we group by LOOK.
+// group_similar: images that carry a Flow generation key (identical prompt = same beat)
+// group EXACTLY by that key; anything without one falls back to visual difference-hash.
 if ($action === 'group_similar') {
-    if (!function_exists('imagecreatefromstring')) jout(['ok'=>false,'error'=>'image support unavailable on host']);
+    $hasGD = function_exists('imagecreatefromstring');
     $meta = images_all($id);
     if (count($meta) < 2) jout(['ok'=>true,'beats'=>count($meta)]);
     $dhash = function (string $path) {                      // 64-bit difference hash from a thumbnail
@@ -113,28 +113,39 @@ if ($action === 'group_similar') {
     $ham = function (array $a, array $b) { $d = 0; $n = min(count($a), count($b)); for ($i=0;$i<$n;$i++) if ($a[$i] !== $b[$i]) $d++; return $d + abs(count($a) - count($b)); };
     $rows = [];
     foreach ($meta as $k => $m) {
-        $tp = project_dir($id) . '/thumb/' . $m['file'];
-        if (!is_file($tp)) $tp = project_dir($id) . '/' . $m['file'];
-        $rows[] = ['k'=>$k, 'h'=>$dhash($tp), 'ts'=>(int)($m['ts'] ?? 0)];
+        $key = trim((string)($m['genkey'] ?? ''));
+        $h = null;
+        if ($key === '' && $hasGD) {                        // only hash images that need the visual fallback
+            $tp = project_dir($id) . '/thumb/' . $m['file'];
+            if (!is_file($tp)) $tp = project_dir($id) . '/' . $m['file'];
+            $h = $dhash($tp);
+        }
+        $rows[] = ['k'=>$k, 'key'=>$key, 'h'=>$h, 'ts'=>(int)($m['ts'] ?? 0)];
     }
     usort($rows, fn($a,$b) => $a['ts'] <=> $b['ts']);       // beat numbering follows import order
     $THRESH = 12;                                            // /64 bits — variants of one prompt cluster well below this
-    $clusters = [];                                          // each: ['rep'=>bits|null, 'members'=>[k,...]]
+    $clusters = [];                                          // each: ['key'=>str|null, 'rep'=>bits|null, 'members'=>[]]
+    $byKey = [];                                             // genkey => cluster index
     foreach ($rows as $r) {
-        if ($r['h'] === null) { $clusters[] = ['rep'=>null, 'members'=>[$r['k']]]; continue; }
+        if ($r['key'] !== '') {                              // exact group by Flow generation/prompt
+            if (!isset($byKey[$r['key']])) { $clusters[] = ['key'=>$r['key'], 'rep'=>null, 'members'=>[]]; $byKey[$r['key']] = count($clusters) - 1; }
+            $clusters[$byKey[$r['key']]]['members'][] = $r['k'];
+            continue;
+        }
+        if ($r['h'] === null) { $clusters[] = ['key'=>null, 'rep'=>null, 'members'=>[$r['k']]]; continue; }
         $bi = -1; $bd = $THRESH + 1;
         foreach ($clusters as $i => $c) {
-            if ($c['rep'] === null) continue;
+            if ($c['key'] !== null || $c['rep'] === null) continue;
             $d = $ham($r['h'], $c['rep']);
             if ($d < $bd) { $bd = $d; $bi = $i; }
         }
         if ($bi >= 0 && $bd <= $THRESH) $clusters[$bi]['members'][] = $r['k'];
-        else $clusters[] = ['rep'=>$r['h'], 'members'=>[$r['k']]];
+        else $clusters[] = ['key'=>null, 'rep'=>$r['h'], 'members'=>[$r['k']]];
     }
     $n = 1;
     foreach ($clusters as $c) { $g = 'Beat ' . $n++; foreach ($c['members'] as $k) $meta[$k]['group'] = $g; }
     images_save($id, $meta); touch_project($id);
-    jout(['ok'=>true,'beats'=>count($clusters)]);
+    jout(['ok'=>true,'beats'=>count($clusters),'by_prompt'=>count($byKey)]);
 }
 
 // per-image mutations
