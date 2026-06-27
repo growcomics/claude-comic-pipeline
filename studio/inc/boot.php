@@ -77,6 +77,32 @@ function slugify(string $s): string { $s = strtolower(trim($s)); $s = preg_repla
 function nid(): string { return substr(bin2hex(random_bytes(6)),0,10); }
 function ext_of(string $f): string { $e = strtolower(pathinfo($f, PATHINFO_EXTENSION)); return $e==='jpeg'?'jpg':$e; }
 
+// ---- lettering / text-paneling spec ---------------------------------------
+// A per-project style guide for speech balloons + captions, so text paneling is
+// consistent across every panel (the owner's "text style reference that is partly
+// instructions"). Stored on the creator config as $c['lettering']; appended to the
+// prompt of every panel that HAS dialogue — by shots.php (the flat template) and by
+// creator.php (the AI-polished prompt). ONE definition here so both stay identical.
+const LETTER_SPEC_DEFAULT =
+    'Speech balloons: clean rounded-rectangle white balloon with a thin even black outline and a short straight tail '
+  . 'pointing to the speaker\'s mouth; dialogue in bold black sans-serif, upper-and-lowercase, centered, no more than ~20 words per balloon. '
+  . 'Captions / narration: a small rectangular pale-yellow box with a thin black border in the top-left corner, same black sans-serif. '
+  . 'Keep balloon shape, outline weight, tail style, font and placement identical in every panel; never cover faces.';
+
+// Build the lettering instruction appended to a dialogue panel's prompt. Returns ''
+// for a panel with no dialogue (those get no text, so no lettering block). $lettering
+// is the project spec (falls back to LETTER_SPEC_DEFAULT); $dialogue is the spoken line.
+function ck_letter_block(string $lettering, string $dialogue): string {
+    $dialogue = trim($dialogue);
+    if ($dialogue === '') return '';
+    $spec = trim($lettering);
+    $spec = ($spec !== '' ? $spec : LETTER_SPEC_DEFAULT);
+    $spec = rtrim(preg_replace('/\s+/', ' ', $spec), " .\t\n\r") . '.';   // one clean block, single trailing period
+    $line = trim(preg_replace('/\s+/', ' ', $dialogue));                  // keep the text verbatim, just collapse whitespace
+    return ' Lettering — bake the dialogue into the panel as comic text in a consistent house style. ' . $spec
+         . ' The speech balloon reads exactly: "' . $line . '".';
+}
+
 // ---- projects --------------------------------------------------------------
 function projects_all(): array { return s_read(PROJECTS_FILE, []); }
 function projects_save(array $p): bool { return s_write(PROJECTS_FILE, $p); }
@@ -87,6 +113,30 @@ function imeta_path(string $id): string { return SDATA . '/images-' . preg_repla
 function images_all(string $id): array { return s_read(imeta_path($id), []); }
 function images_save(string $id, array $a): bool { return s_write(imeta_path($id), $a); }
 function project_dir(string $id): string { return SUPLOADS . '/' . preg_replace('/[^a-z0-9-]/','',$id); }
+
+// ---- generation job queue --------------------------------------------------
+// One global store. The browser enqueues jobs; a Mac-side worker pulls them
+// (key-gated, over the bridge), generates on Flow/Higgsfield, pushes panels +
+// progress back. Claims are race-safe via s_with_lock() (flock-guarded RMW),
+// so two poll cycles / two workers can't double-claim and double-spend.
+define('JOBS_FILE', SDATA . '/jobs.json');
+function jobs_all(): array { return s_read(JOBS_FILE, []); }
+function jobs_save(array $j): bool { return s_write(JOBS_FILE, $j); }
+
+// Run $fn() while holding an exclusive lock on $f, so the read-decide-write is
+// atomic. $fn receives the current decoded data and returns
+// ['data'=>$newData, 'result'=>$ret]; if 'data' is present it's written back.
+// Returns 'result' (or the raw return if the convention isn't used).
+function s_with_lock(string $f, callable $fn) {
+    if (!is_dir(dirname($f))) @mkdir(dirname($f), 0755, true);
+    $fp = @fopen($f . '.lock', 'c');
+    if ($fp) { flock($fp, LOCK_EX); }
+    $data = s_read($f, []);
+    $out  = $fn($data);
+    if (is_array($out) && array_key_exists('data', $out)) s_write($f, $out['data']);
+    if ($fp) { flock($fp, LOCK_UN); fclose($fp); }
+    return (is_array($out) && array_key_exists('result', $out)) ? $out['result'] : $out;
+}
 
 // Downscale + thumbnail an uploaded image. Returns [file, thumb] or null.
 function store_image(string $tmp, string $orig, string $id): ?array {
