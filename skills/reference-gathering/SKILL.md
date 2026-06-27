@@ -291,6 +291,30 @@ Full workflow lives in the `comic-production` skill's `references/environment-re
 - Generic exteriors the model handles well without anchoring (forest clearings, generic streets, beaches at sunset).
 - Non-CGI projects (illustrated comics, 2D animation references) — fall back to standard photo gathering.
 
+#### Real photos → CGI plates → the Comic Studio (preferred for realism)
+
+A from-scratch AI background reads as "too AI" (samey background crowds, invented
+geometry, no real-world anchor). The more realistic path the owner wants: gather
+**real photos of the actual location**, restyle each into the project's DAZ/CGI
+look, and attach those plates as the env reference on every panel there. This is the
+*real-photo* variant of the DAZ trick above — instead of finding a stock DAZ render,
+you convert genuine location photos, so composition + scale come from the real place.
+
+1. **Gather** 5–7 real photos into `references/locations/<slug>/<slug>-NN.jpg` with
+   provenance (this skill's standard locations workflow; prefer CC0 / Wikimedia /
+   press-kit sources). Worked example in this repo:
+   `references/locations/natal-street-scenes/`.
+2. **Convert** each to `references/locations/<slug>/cgi/<name>-daz.jpg` — Flow Nano
+   Banana 2 or Higgsfield image-edit with a content-preserving DAZ-conversion prompt
+   (recipe + calibration in `comic-production/references/environment-references.md`
+   and `natal-street-scenes/cgi/_provenance.md`).
+3. **Push** into the studio project as `kind=scene` refs:
+   `studio/tools/push-env-refs.sh --project <id> --location "<name>" --dir references/locations/<slug>/ --lock`.
+   Then approve + lock in `refs.php`; the production guide (`shots.php`) attaches the
+   plate to every panel whose location matches `<name>`.
+
+Full SOP: **`studio/docs/REAL-PHOTO-ENV-REFS.md`**.
+
 ### Gathering refs for props
 
 For recurring objects (weapons, vehicles, signature items, distinctive accessories), use the standard Google Images / YouTube workflow with the `props/` bucket: `references/props/<prop-slug>/`. Google Images is usually the right source — product photos for licensed objects, gallery shots for custom designs. YouTube can help for items shown in motion (a specific sword from a fight scene, a vehicle mid-chase).

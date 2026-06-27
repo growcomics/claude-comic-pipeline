@@ -12,6 +12,36 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-27 (Studio — Real-photo environment-reference pipeline + muller chapter-1 regen)
+
+### Added
+
+- **Real-photo → DAZ/CGI environment-reference pipeline** (closes `feedback_comic_stage_refs_and_realism` point 2 — "the gym looks too AI, the background crowd all looks the same; scour the internet for actual gym photos"). Flow: gather real location photos (Wikimedia Commons API, license-clean) → restyle each to an EMPTY, unbranded photoreal-CGI/DAZ plate (Higgsfield image-to-image) → push into a studio project as `kind=scene` refs that attach to every panel at that location.
+  - **`studio/bridge.php` — new `do=ingest_ref` verb**: store an uploaded image AND register it as a project reference (`{kind,char,label,status,src,role,prov,stage?}`; `lock=1` appends to `refsLockedSet`). Mirrors `uploadref` but key-gated for a Claude-Code session. *(bridge.php is a shared integrated superset — it also carries co-session verbs `enrich` + ingest `prompt`/`refs_used` capture, dormant without their consumer page; `php -l` clean.)*
+  - **`studio/tools/push-env-refs.sh`** — CLI pusher: a gathered `references/locations/<slug>/` folder → studio (CGI plates = approved scene refs; raw photos pending-only unless `--include-source`).
+  - **`studio/docs/REAL-PHOTO-ENV-REFS.md`** — SOP; **`skills/reference-gathering/SKILL.md`** — location/env gathering section.
+  - First real run: 3 commercial-gym interiors (GymNation / The Gym Group / Mandarin Oriental, all CC BY-SA) → empty CGI plates → pushed to `muller` as `City gym` scene refs (`references/locations/commercial-gym/`, provenance committed, binaries not).
+- **`projects/muller/regen-spec.json`** — per-panel tier/wardrobe/emotion map for muller chapter-1. Context: this chapter (pages 1–10, 41 panels) is **entirely pre-transformation** — Andrea is soft (p1–6) → lightly toned (p7–10), never muscular. Drove a full all-fixes 41-panel regeneration on Higgsfield (Lane B, 5 subagents): stage-aware soft Andrea (2 new `stage=pre` body refs generated; the muscular turnarounds tagged `stage=post` and excluded), real gym plates, per-panel locked wardrobe, named emotion, only-named-cast, baked dialogue bubbles. Addresses owner Beats 7/11/20/42/48.
+
+### Notes
+
+- Binary references (gym CGI plates, soft Andrea body refs) are intentionally NOT committed — recoverable; provenance `.md` is committed instead (per CLAUDE.md rule 5).
+- `studio/refs.php` (the "🌍 Real-photo location refs" card consumer) remains LIVE-only, not in the repo.
+
+## 2026-06-27 (Studio — Full-width Review surface + prompt/refs capture)
+
+### Added
+
+- **`studio/review.php` — a full-width, story-ordered, sortable chapter-review surface.** The cockpit (`creator.php`) keeps a 340px references column + a sticky run bar, so when the owner just wants to *review* a chapter's generated panels the images get squeezed into a narrow column ("scrolling one tiny image at a time" — owner notes Beat 2 / Beat 4 / Beat 81). The new page drops both: every panel in a justified full-width grid **in story order** (by beat number, then import time), with **sorts** (Story order · Newest — the newest panel also carries a "NEW" ribbon so it's always spottable) and **filters** (has-notes · approval · good/bad rating · flagged defects from `analysis.defects`). Per-panel ✓/✕/★/💬 controls are kept (quick bar on each tile; full controls in the detail). Clicking a panel opens a **per-panel detail** showing the larger image + **the prompt it was built from** + **the references used** (studio-resident refs render as thumbnails; Flow input refs as labeled chips with an external link) + that panel's notes + rating/approval + any QA-flagged defects. Reachable from a "🖼 Review all — full-width" button in the cockpit's Live-panels header. Pure renderer in the `refs.php`/`shots.php` mold: reuses `api.php` (winner/rate/keep); has its own `do=note` JSON handler that appends an annotation to the same `creator-<id>.json` feedback log the cockpit reads — **no reshoot enqueue** (a review note is a diagnostic annotation, not a run command).
+- **Prompt + `refs_used` capture on image metadata (closes the "see the references used" gap — `feedback_comic_stage_refs_and_realism` point 5).** Previously only the genkey *hash* of a panel's prompt was stored — the text itself was unrecoverable, and the input refs weren't recorded at all. `bridge.php`'s `ingest` verb now stores the raw `prompt` (≤2000) + a sanitized `refs_used` list (`ck_parse_refs_used`: `{file?,label?,kind?,src?,url?}`, `file` basename-restricted, `url` constrained to `http(s)`, capped 24). New **`do=enrich`** verb backfills prompt/refs onto already-ingested panels (matched by gen workflow id → genkey → file; fills MISSING fields only unless `force=1`), so panels imported before capture (e.g. the 98 muller panels) get their prompts/refs filled in by a re-sync rather than staying blank.
+- **Flow → Studio Auto-Sync extension v1.1.0** (`~/Documents/flow-studio-autosync`, standalone, outside this repo). `content.js` now reads the canonical prompt (`requestData.promptInputs[0].textInput`) and the **input refs** (`requestData.imageGenerationRequestData.imageGenerationImageInputs[]` → `{imageInputType, mediaId}`) per generation, sends `refs_used` with each ingest, and fires an `enrich` backfill batch once per project (and on every manual "Sync now"). `background.js` forwards `refs_used` and gained an `enrich` message handler.
+
+### Changed
+
+- **`studio/creator.php`** — one addition: a "🖼 Review all — full-width" link in the Live-panels header pointing at `review.php?p=<id>`. (All existing feature markers verified intact post-deploy; live == local, no sibling clobber.)
+
+_Deployed live to `3dmusclecomics.com/studio` (bridge.php, review.php, creator.php) via the cPanel API with the temp-`*_zlint`/token-self-test → promote → unlink protocol. Verified: ingest stores prompt+refs_used; enrich no-clobber/force both correct (throwaway project, then fully removed); review.php renders 98 muller panels with the embedded detail JSON parsing clean; all creator.php sibling markers survived. Adversarially reviewed (XSS via `<script type=application/json>` JSON_HEX_TAG + textContent-only DOM inserts; CSRF on `do=note`; path-traversal; missing-field tolerance) → GO._
+
 ## 2026-06-27 (Extension — Flow Studio Tools v2.0.0: full consolidation)
 
 ### Added

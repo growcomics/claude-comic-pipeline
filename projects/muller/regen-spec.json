@@ -1,0 +1,68 @@
+{
+  "_note": "muller chapter 1 (pages 1-10, 41 panels) = ENTIRELY PRE-TRANSFORMATION. Andrea is a soft ordinary wife, soft (p1-6) -> lightly toned (p7-10). NEVER muscular. The locked 'Muscular physique'/'Gym Tier 4'/athletic-turnaround refs are POST-page-14 and are EXCLUDED from every panel here. Fixes Beat 7 (too muscular early) + Beat 20 (wardrobe drift). Engine: Higgsfield (Lane B). Also applies: env plates (Beat 11), named emotion (Beat 42), no extras (Beat 48), lettering spec (Beat 38).",
+
+  "andrea_tier_by_page": {
+    "1": "soft", "2": "soft", "3": "soft", "4": "soft", "5": "soft", "6": "soft",
+    "7": "lightly_toned", "8": "lightly_toned", "9": "lightly_toned", "10": "lightly_toned"
+  },
+  "andrea_body_ref": {
+    "soft": "TBD-soft-ref-file (generated this session)",
+    "lightly_toned": "TBD-toned-ref-file (generated this session)"
+  },
+  "andrea_refs_EXCLUDE_this_chapter": [
+    "65af7cddc6.png (Muscular physique turnaround)",
+    "d34bf73ddd.png (Gym Tier 4 physique)",
+    "f0af1f810b.png (Full character turnaround - too athletic for ch.1)"
+  ],
+  "andrea_face_ref": "5b5540af1e.png",
+
+  "wardrobe_bible": {
+    "home_casual": "loose oatmeal-beige knit sweater over dark-grey leggings; hair in a loose low bun; barefoot or slippers",
+    "sleep": "grey marl sleep tank + matching shorts; hair down or loose",
+    "gym_frumpy": "mismatched frumpy workout clothes: a baggy faded maroon t-shirt and old navy track pants, white sneakers (page 3 ONLY, before she buys gear)",
+    "gym_new": "her new gym gear: a fitted teal tank top and black leggings, white trainers (page 5 onward)",
+    "restaurant": "a simple dark-green wrap dress, small earrings"
+  },
+
+  "panel_assignments": {
+    "p1-1":{"tier":"soft","outfit":"home_casual","emotion":"weary, going-through-the-motions"},
+    "p1-2":{"tier":"soft","outfit":"home_casual","emotion":"distracted, mild doubt"},
+    "p1-4":{"tier":"soft","outfit":"home_casual","emotion":"hopeful, trying"},
+    "p2-1":{"tier":"soft","outfit":"home_casual","emotion":"controlled anger, jaw clenched"},
+    "p2-2":{"tier":"soft","outfit":"home_casual","emotion":"frustrated, venting"},
+    "p2-4":{"tier":"soft","outfit":"sleep","emotion":"restless resolve, staring"},
+    "p3-1":{"tier":"soft","outfit":"gym_frumpy","emotion":"nervous determination"},
+    "p3-2":{"tier":"soft","outfit":"gym_frumpy","emotion":"overwhelmed, intimidated"},
+    "p3-3":{"tier":"soft","outfit":"gym_frumpy","emotion":"out of place, self-conscious"},
+    "p3-4":{"tier":"soft","outfit":"home_casual","emotion":"guilty, forced smile"},
+    "p4-3":{"tier":"soft","outfit":"home_casual","emotion":"self-conscious but determined"},
+    "p4-4":{"tier":"soft","outfit":"home_casual","emotion":"quiet resolve, chin up"},
+    "p5-1":{"tier":"soft","outfit":"gym_new","emotion":"strained effort, awkward"},
+    "p5-2":{"tier":"soft","outfit":"home_casual","emotion":"bright, asserting herself"},
+    "p5-4":{"tier":"soft","outfit":"home_casual","emotion":"deflated, defeated"},
+    "p6-1":{"tier":"soft","outfit":"sleep","emotion":"sleepless frustration"},
+    "p6-2":{"tier":"soft","outfit":"gym_new","emotion":"grim determination"},
+    "p6-3":{"tier":"soft","outfit":"gym_new","emotion":"focused exertion"},
+    "p6-4":{"tier":"soft","outfit":"gym_new","emotion":"caught, lying on the phone"},
+    "p7-1":{"tier":"lightly_toned","outfit":"restaurant","emotion":"hopeful, dressed up"},
+    "p7-2":{"tier":"lightly_toned","outfit":"restaurant","emotion":"(Mark) mildly surprised"},
+    "p7-3":{"tier":"lightly_toned","outfit":"restaurant","emotion":"pleased-but-bitter, conflicted"},
+    "p7-4":{"tier":"lightly_toned","outfit":"sleep","emotion":"tired, unsatisfied"},
+    "p8-1":{"tier":"lightly_toned","outfit":"gym_new","emotion":"quietly proud, appraising herself"},
+    "p8-2":{"tier":"lightly_toned","outfit":"home_casual","emotion":"casual, baiting"},
+    "p8-4":{"tier":"lightly_toned","outfit":"gym_new","emotion":"resolute, purposeful"},
+    "p9-1":{"tier":"lightly_toned","outfit":"sleep","emotion":"cold determination"},
+    "p9-2":{"tier":"lightly_toned","outfit":"sleep","emotion":"assertive, taking control"},
+    "p9-4":{"tier":"lightly_toned","outfit":"sleep","emotion":"hollow disappointment"},
+    "p10-1":{"tier":"lightly_toned","outfit":"home_casual","emotion":"firm, declarative"},
+    "p10-3":{"tier":"lightly_toned","outfit":"gym_new","emotion":"fierce focus, straining"},
+    "p10-4":{"tier":"lightly_toned","outfit":"gym_new","emotion":"resolved, self-possessed"}
+  },
+
+  "env_plates": {
+    "City gym entrance/floor/changing/exterior": "DONE - 3 real-derived plates pushed (weight floor / machine floor / cardio)",
+    "Other locations (kitchen, dining, living, bedroom, hallway, front door, Sportswear shop, Restaurant)": "muller already has kitchen + bedroom scene refs; Sportswear shop + Restaurant have none -> gather+convert OR rely on existing. Decide in full-pass phase."
+  },
+
+  "panels_no_andrea": ["p1-3 (Mark)","p1-5 (Mark+Andrea)","p4-1 (Mark+son)","p4-2 (Mark+son)","p5-3 (Mark+son)","p7-2 (Mark)","p8-3 (Mark)","p9-3 (Mark)","p10-2 (Mark)"]
+}
