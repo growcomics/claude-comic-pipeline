@@ -1,11 +1,11 @@
-// Flow Studio Tools — content script (UI). One panel, four actions, all driven
+// 3DMC Studio Tools — Flow content script (UI). One panel, four actions, all driven
 // off FlowCore's single tRPC harvest: Download (disk) / Send to Studio (ingest) /
 // Review bundle (outputs + refs + manifest) / Bulk delete (guarded, via FlowDelete).
 (() => {
   if (window.__flowStudioTools) return;
   window.__flowStudioTools = true;
   const FC = self.FlowCore;
-  if (!FC) { console.error("[Flow Studio Tools] core missing"); return; }
+  if (!FC) { console.error("[3DMC Studio Tools] core missing"); return; }
   const DEFAULT_URL = "https://3dmusclecomics.com/studio/bridge.php";
   let cfg = { url: DEFAULT_URL, key: "" };
   let mode = "download", prevMode = "download";
@@ -34,11 +34,16 @@
    #fst .warn{font-size:11.5px;background:rgba(226,75,74,.12);border:1px solid rgba(226,75,74,.4);color:#f3a3a2;border-radius:8px;padding:7px 9px;margin-bottom:8px}
    #fst .bar{height:6px;border-radius:4px;background:#23252e;margin:10px 0 4px;overflow:hidden} #fst .bar>i{display:block;height:100%;width:0;background:#ef9f27;transition:width .15s}
    #fst .stat{font-size:12px;opacity:.9;min-height:16px} #fst .foot{font-size:11px;opacity:.55;margin-top:6px;word-break:break-all}
+   #fst .autorow{margin-top:8px;align-items:center}
+   #fst button.autotoggle{flex:1;padding:8px 0;border:none;border-radius:8px;background:#3a3f4b;color:#fff;cursor:pointer;font-weight:700;font-size:12px}
+   #fst button.autotoggle:hover{filter:brightness(1.08)} #fst button.autotoggle.on{background:#1d9e75}
+   #fst input.autoint{width:54px;box-sizing:border-box;padding:7px 6px;border-radius:8px;border:1px solid #2e3140;background:#0f1115;color:#e8eaed;margin:0;text-align:center}
+   #fst .autostat{font-size:11px;opacity:.85;margin-top:6px;min-height:14px}
    #fst.min .bd{display:none}`;
   const style = document.createElement("style"); style.textContent = css; document.documentElement.appendChild(style);
   const panel = document.createElement("div"); panel.id = "fst";
   panel.innerHTML = `
-   <div class="hd"><b>Flow Studio Tools</b><span class="g" title="Studio settings">⚙</span><span class="x" title="Close">✕</span></div>
+   <div class="hd"><b>3DMC Studio Tools</b><span class="g" title="Studio settings">⚙</span><span class="x" title="Close">✕</span></div>
    <div class="bd">
      <div class="acct"><span class="k">Flow account:</span> <b class="acctval">…</b></div>
      <div class="tabs">
@@ -52,7 +57,16 @@
        <div class="lbl">Studio key (Studio → Flow import)</div><input class="key" type="password" placeholder="paste your bridge key">
        <div class="row" style="margin-bottom:10px"><button class="pick savecfg">Save settings</button></div>
      </div>
-     <div class="studio-only" style="display:none"><div class="lbl">Studio section — blank = a new one each send (or type a name to append)</div><input class="proj" type="text"></div>
+     <div class="studio-only" style="display:none">
+       <div class="lbl">Studio section — blank = a new one each send (or type a name to append)</div>
+       <input class="proj" type="text">
+       <div class="row autorow">
+         <button class="autotoggle" title="While ON, every new Flow generation is pushed into the named Studio section as it lands">○ Auto-sync OFF</button>
+         <input class="autoint" type="number" min="8" title="seconds between checks">
+         <span class="lbl" style="margin:0">sec</span>
+       </div>
+       <div class="autostat"></div>
+     </div>
      <div class="actbody">
        <div class="lbl modehint">Most-recent generations:</div>
        <div class="row"><button class="pick" data-n="5">5</button><button class="pick" data-n="10">10</button><button class="pick" data-n="25">25</button>
@@ -71,6 +85,7 @@
   const accEl = $(".acctval"), urlInput = $(".url"), keyInput = $(".key"), projInput = $(".proj");
   const barFill = $(".bar>i"), statEl = $(".stat"), footEl = $(".foot"), numInput = $(".num");
   const studioOnly = $(".studio-only"), modeHint = $(".modehint"), actbody = $(".actbody"), delbody = $(".delbody"), trashBtn = $(".trash");
+  const autoToggleBtn = $(".autotoggle"), autoIntInput = $(".autoint"), autoStatEl = $(".autostat");
   const buttons = [...panel.querySelectorAll("button.pick")];
 
   chrome.storage.local.get(["studioUrl", "bridgeKey"]).then((s) => { if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey; urlInput.value = cfg.url; keyInput.value = cfg.key; });
@@ -158,7 +173,7 @@
         });
         port.postMessage(Object.assign({ type: "start", kind }, payload));
       });
-    } catch (e) { console.error("[Flow Studio Tools]", e); status("Error — see console."); }
+    } catch (e) { console.error("[3DMC Studio Tools]", e); status("Error — see console."); }
     finally { setBusy(false); }
   }
 
@@ -169,6 +184,77 @@
     if (n === "all") return run(Infinity);
     if (n === "custom") { const v = parseInt(numInput.value, 10); if (v > 0) return run(v); numInput.focus(); return; }
     return run(parseInt(n, 10));
+  });
+
+  // ───────── Auto-sync (continuous → Studio) ─────────────────────────────────
+  // Ported from the standalone "Flow → Studio Auto-Sync" extension. While ON, a
+  // timer reads the open Flow project, finds outputs not yet sent (deduped by a
+  // per-project "seen" set in chrome.storage), and pushes only the fresh ones via
+  // the SAME background.js port-based `studio` path the manual send uses. The
+  // bridge groups identical-prompt panels into "Beat N", so they land organized.
+  // Cross-origin image fetch stays in the service worker (page fetch dies on CORS).
+  let autoOn = false, autoInt = 20, autoTimer = null, autoBusy = false;
+  let sentSet = new Set();
+  const sentKey = () => "sent:" + (FC.currentProjectId() || "none");
+  const autoStatus = (t) => { if (autoStatEl) autoStatEl.textContent = t; };
+  function loadSent(cb) { chrome.storage.local.get(["sentStore"]).then((s) => { sentSet = new Set((s.sentStore || {})[sentKey()] || []); cb && cb(); }); }
+  function persistSent() { chrome.storage.local.get(["sentStore"]).then((s) => { const store = s.sentStore || {}; store[sentKey()] = [...sentSet].slice(-3000); chrome.storage.local.set({ sentStore: store }); }); }
+  function updateAutoToggle() { autoToggleBtn.textContent = autoOn ? "● Auto-sync ON" : "○ Auto-sync OFF"; autoToggleBtn.classList.toggle("on", autoOn); }
+
+  async function syncOnce() {
+    if (busy || autoBusy) return;                       // never race a manual op or a prior tick
+    if (!cfg.key) { autoStatus("Add your Studio key (⚙) to auto-sync."); return; }
+    const project = projInput.value.trim();
+    if (!project) { autoStatus("Type a Studio section name above to auto-sync into."); return; }
+    if (!FC.currentProjectId()) { autoStatus("Open a Flow project to auto-sync."); return; }
+    autoBusy = true; autoStatus("Checking Flow…");
+    try {
+      const proj = await FC.getProject();
+      if (!proj || !proj.records.length) { autoStatus("No generations yet."); autoBusy = false; return; }
+      const outs = FC.outputList(proj.records, Infinity);   // chronological (oldest first) → beats in order
+      const fresh = outs.filter((o) => !sentSet.has(o.id));
+      if (!fresh.length) { autoStatus("✓ Up to date · " + sentSet.size + " synced"); autoBusy = false; return; }
+      autoStatus("Syncing " + fresh.length + " new…");
+      const items = fresh.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "" }));
+      await new Promise((resolve) => {
+        const port = chrome.runtime.connect({ name: "fst" });
+        port.onMessage.addListener((m) => {
+          if (m.type === "progress") { autoStatus("Syncing " + m.done + "/" + m.total + (m.fail ? " · " + m.fail + " failed" : "")); }
+          else if (m.type === "done") {
+            // Mark the whole batch seen on completion: re-sending succeeded items would
+            // duplicate panels in the Studio, which is worse than a rare un-synced miss
+            // (recover those with a manual "Whole project" send). m.fail surfaces any.
+            fresh.forEach((o) => sentSet.add(o.id)); persistSent();
+            autoStatus("Synced ✓ " + m.ok + "/" + m.total + " · " + sentSet.size + " total" + (m.fail ? " · " + m.fail + " failed" : ""));
+            port.disconnect(); resolve();
+          } else if (m.type === "error") { autoStatus("Error: " + m.message); port.disconnect(); resolve(); }
+        });
+        port.postMessage({ type: "start", kind: "studio", items, project, newSection: 0, cfg });
+      });
+    } catch (e) { console.error("[3DMC Studio Tools] auto-sync", e); autoStatus("Error — see console."); }
+    autoBusy = false;
+  }
+  function startAuto() { stopAuto(); autoTimer = setInterval(syncOnce, Math.max(8, autoInt) * 1000); syncOnce(); }
+  function stopAuto() { if (autoTimer) clearInterval(autoTimer); autoTimer = null; }
+
+  autoToggleBtn.addEventListener("click", () => {
+    autoOn = !autoOn; chrome.storage.local.set({ autoSync: autoOn, autoSyncProject: projInput.value.trim() }); updateAutoToggle();
+    if (autoOn) { autoStatus("Auto-sync on. Watching…"); startAuto(); } else { autoStatus("Auto-sync off."); stopAuto(); }
+  });
+  autoIntInput.addEventListener("change", () => { autoInt = Math.max(8, parseInt(autoIntInput.value, 10) || 20); chrome.storage.local.set({ autoSyncInterval: autoInt }); if (autoOn) startAuto(); });
+  // remember the section name across reloads (the standalone autosync persisted its project)
+  projInput.addEventListener("change", () => { if (autoOn) chrome.storage.local.set({ autoSyncProject: projInput.value.trim() }); });
+  // close button also stops the watcher
+  $(".hd .x").addEventListener("click", stopAuto);
+  // react to SPA project switches: swap in that project's own "seen" set
+  let lastPid = FC.currentProjectId();
+  setInterval(() => { const p = FC.currentProjectId(); if (p !== lastPid) { lastPid = p; loadSent(() => { if (autoOn) autoStatus("Switched project · " + sentSet.size + " synced"); }); } }, 3000);
+
+  chrome.storage.local.get(["autoSync", "autoSyncInterval", "autoSyncProject"]).then((s) => {
+    autoOn = !!s.autoSync; if (s.autoSyncInterval) autoInt = s.autoSyncInterval;
+    if (s.autoSyncProject && !projInput.value) projInput.value = s.autoSyncProject;
+    autoIntInput.value = autoInt; updateAutoToggle();
+    loadSent(() => { if (autoOn) { autoStatus("Auto-sync on. Watching…"); startAuto(); } });
   });
 
   FC.getAccount().then(stampAccount);

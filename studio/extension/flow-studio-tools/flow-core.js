@@ -1,4 +1,4 @@
-// Flow Studio Tools — shared core (runs in the page origin, before content.js).
+// 3DMC Studio Tools — Flow shared core (runs in the page origin, before content.js).
 // One harvester for all actions: reads a Flow project via the same-origin tRPC
 // `flow.projectInitialData` query (prompts + input refs + outputs + model +
 // timestamp), plus the active account. Everything downstream (Download / Send to
@@ -85,11 +85,15 @@
     return { folder, jobs, manifest, count: generations.length, refCount: Object.keys(refPathById).length };
   }
 
-  // flat list of output images (newest-first), one entry per output media
+  // flat list of output images in CHRONOLOGICAL order (first-generated first), one
+  // entry per output media. `records` is newest-first, so we pick the most-recent N
+  // (the limit), then REVERSE so the oldest of that set leads — matching comic page
+  // order: the first thing you generated in Flow becomes the first page in the Studio.
   function outputList(records, limit) {
     const recs = (limit && limit !== Infinity) ? records.slice(0, limit) : records.slice();
+    recs.reverse();
     const out = [];
-    recs.forEach((r) => r.output_media_ids.forEach((id) => out.push({ id, url: MEDIA(id), gen_id: r.gen_id })));
+    recs.forEach((r) => r.output_media_ids.forEach((id) => out.push({ id, url: MEDIA(id), gen_id: r.gen_id, prompt: r.prompt || "" })));
     return out;
   }
 

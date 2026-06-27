@@ -12,6 +12,24 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-27 (Extension — Flow Studio Tools v2.0.0: full consolidation)
+
+### Added
+
+- **Auto-sync (continuous → Studio) — Flow Studio Tools now fully replaces both `flow-studio-autosync` and `flow-auto-studio`.** The → Studio tab gained an **Auto-sync ON/OFF** toggle + a configurable interval (default 20s, min 8s). While ON, a timer reads the open Flow project, finds outputs not yet sent (deduped by a per-project "seen" set in `chrome.storage.local.sentStore`, keyed `sent:<projectId>`), and pushes only the fresh ones into the named Studio section as they land. Ported from the standalone `flow-studio-autosync` (`start()`/`syncOnce()`/`auto`/`intervalSec`/`timer`), but it **reuses the existing `background.js` port-based `studio` ingest path** rather than duplicating a bridge client — so the cross-origin image fetch stays in the service worker (a page fetch dies on Flow's media-redirect CORS). Auto-sync requires a non-blank section name (blank-means-new-section is manual-only); the whole batch is marked seen on completion so re-sends can't duplicate Studio panels. SPA project switches swap in that project's own seen-set. (`content.js`.)
+- **Patreon Gallery Downloader folded in (`patreon.js`).** A SECOND content script scoped to `https://www.patreon.com/*` carries the whole standalone `patreon-gallery-downloader` (v1.5.0): the fresh-fetch + post-id-guarded collector (kills the SPA wrong-post bug), the slug-based per-post folder naming, and the zero-padded sequence names. It runs as a self-contained in-page panel (shown only on `/posts/…`, isolated global `window.__fstPatreon`, `#pgd` UI) and hands its image list to the shared service worker via a new `chrome.runtime.onMessage` `{type:"patreonDownload"}` path (downloads survive the panel closing). Fully separated from the Flow surface: the Flow panel never appears on Patreon and vice-versa (non-overlapping `content_scripts` match patterns, no shared globals).
+
+### Changed
+
+- **`manifest.json` → v2.0.0** (major bump because Patreon — a different domain — is now inside). Permissions union `downloads, storage, scripting, activeTab`; host_permissions union adds `https://www.patreon.com/*` + `https://*.patreonusercontent.com/*` to the existing Flow/Studio hosts. A second `content_scripts` entry adds `patreon.js` on patreon.com; the Flow entry (`flow-core.js`, `flow-delete.js`, `content.js` on `labs.google/fx/tools/flow/*`) is unchanged. (`scripting`/`activeTab` are declared per the planned union; the Patreon collector now runs in-page as a content script, so `chrome.scripting.executeScript` is no longer used.)
+- **`background.js`** gained the Patreon download path (`runPatreonDownloads` + `pdl`/`psleep`/`pMergeReport`, 3-retry per file, progress mirrored to `lastReport`) alongside the untouched Flow port handler. Toolbar-badge calls from the old Patreon worker were dropped (the consolidated extension declares no `action`; progress shows in the in-page panel).
+- **Renamed → "3DMC Studio Tools"** (was "Flow Studio Tools"). With Patreon folded in, the old name no longer described the extension; the owner chose the rename over keeping Patreon separate. Only the Chrome-displayed `manifest.name` + the in-page Flow panel header changed; the repo folder (`flow-studio-tools/`) and the internal `FlowCore` object keep their names to avoid churn/broken references. See `studio/extension/FLOW-TOOLKIT-PLAN.md` Phase 4.
+- This supersedes the in-flight v1.3.1 WIP bump (chronological → Studio output ordering), which is retained inside v2.0.0.
+
+### Deprecated
+
+- The six standalone homegrown extensions are now fully covered by Flow Studio Tools v2.0.0 and can be removed from Chrome after testing: Flow Bulk Image Downloader, Flow Review Harvester, Flow → Studio Auto-Sync, Flow → Studio Auto-Pull, Flow Bulk Delete, Patreon Gallery Downloader. Source dirs are intentionally left on disk (the owner removes the Chrome installs). "Chrome Remote Desktop" is Google's, untouched.
+
 ## 2026-06-27 (Studio — per-project lettering / text-paneling spec)
 
 ### Added

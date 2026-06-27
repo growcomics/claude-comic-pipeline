@@ -1,20 +1,44 @@
 {
   "manifest_version": 3,
-  "name": "Flow Studio Tools",
-  "version": "1.2.0",
-  "description": "One toolbox for Google Flow projects: Download images, Send them to the 3DMC Comic Studio, export a Review bundle (prompts + input refs + manifest), or Bulk-delete (guarded, soft delete to Trash).",
-  "permissions": ["downloads", "storage"],
+  "name": "3DMC Studio Tools",
+  "version": "2.0.0",
+  "description": "One toolbox for the comic pipeline: on Google Flow — Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, or Bulk-delete (guarded); on Patreon — bulk-download a post's full-res gallery.",
+  "permissions": [
+    "downloads",
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
   "host_permissions": [
     "https://labs.google/*",
     "https://*.googleusercontent.com/*",
     "https://flow-content.google/*",
-    "https://3dmusclecomics.com/*"
+    "https://3dmusclecomics.com/*",
+    "https://www.patreon.com/*",
+    "https://*.patreonusercontent.com/*"
   ],
-  "background": { "service_worker": "background.js" },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
-      "matches": ["https://labs.google/fx/tools/flow/*"],
-      "js": ["flow-core.js", "flow-delete.js", "content.js"],
+      "matches": [
+        "https://labs.google/fx/tools/flow/*"
+      ],
+      "js": [
+        "flow-core.js",
+        "flow-delete.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.patreon.com/*"
+      ],
+      "js": [
+        "patreon.js"
+      ],
       "run_at": "document_idle"
     }
   ]

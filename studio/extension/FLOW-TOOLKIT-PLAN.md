@@ -54,3 +54,32 @@ One MV3 extension. A shared core + one panel + four action modes.
 - `flow.projectInitialData` is an internal Flow API; if Google changes it, the core needs an update (but it's one place, vs three scanners today).
 - Bulk-delete depends on Flow's "Move to Trash" control text/markup — most fragile piece; keep its selectors isolated + easy to patch.
 - Account confirm is non-negotiable for delete (deleting on the wrong account is the worst-case error).
+
+---
+
+## 7. Shipped — v2.0.0 (2026-06-27): the full consolidation
+
+Phases 1–3 (Download / → Studio / Review / guarded Delete) landed earlier as v1.x. This pass closed the last two gaps, so **one extension now replaces all six** homegrown ones.
+
+### Phase 3.5 — Auto-sync (continuous → Studio)  ✅
+The standalone `flow-studio-autosync` had a continuous watcher that Flow Studio Tools lacked (it only did manual count-based one-shots). Ported into the **→ Studio** tab as an **Auto-sync ON/OFF** toggle + interval (default 20s, min 8s):
+- While ON, a timer reads the project, finds outputs not yet sent (per-project "seen" set in `chrome.storage.local.sentStore`, keyed `sent:<projectId>`), and pushes only the fresh ones into the named section.
+- **Reuses the existing `background.js` port-based `studio` ingest path** — no duplicate bridge client. The cross-origin image fetch stays in the service worker (page fetch dies on Flow's media-redirect CORS).
+- Requires a non-blank section name (blank = new-section is manual-only). Whole batch marked seen on completion → re-sends can't duplicate panels. SPA project switches swap in that project's seen-set.
+- **This makes Flow Studio Tools replace BOTH `flow-studio-autosync` AND `flow-auto-studio`.**
+
+### Phase 4 — Patreon (different domain, cleanly separated)  ✅
+`patreon-gallery-downloader` (v1.5.0) folded in as a **second content script** scoped to `https://www.patreon.com/*` (`patreon.js`) — NOT entangled with the Flow UI:
+- Self-contained in-page panel (`#pgd`, global `window.__fstPatreon`), shown only on `/posts/…`. The Flow panel never appears on Patreon and vice-versa (non-overlapping match patterns, no shared globals).
+- Ported collector (fresh-fetch + post-id guard → kills the SPA wrong-post bug), slug folder naming, zero-padded names. Hands the list to the shared worker via `chrome.runtime.onMessage` `{type:"patreonDownload"}` (downloads survive the panel closing).
+
+### Manifest (v2.0.0)
+- **Major bump** because Patreon (a different domain) is now inside.
+- perms union: `downloads, storage, scripting, activeTab`. hosts union adds `https://www.patreon.com/*` + `https://*.patreonusercontent.com/*`.
+- `content_scripts`: Flow entry unchanged; added the Patreon entry.
+
+### Name — RESOLVED: renamed to "3DMC Studio Tools"
+With Patreon inside, "Flow Studio Tools" was too narrow. The owner chose **rename → "3DMC Studio Tools"** (over keeping Patreon as its own extension). Applied to `manifest.name` + the in-page Flow panel header; the repo folder (`flow-studio-tools/`) and the internal `FlowCore` object keep their names to avoid broken references.
+
+### Retire after testing
+Replaces: Flow Bulk Image Downloader, Flow Review Harvester, Flow → Studio Auto-Sync, Flow → Studio Auto-Pull, Flow Bulk Delete, Patreon Gallery Downloader. (Leave **Chrome Remote Desktop** — Google's, not ours.) Old source dirs stay on disk; the owner removes the Chrome installs.

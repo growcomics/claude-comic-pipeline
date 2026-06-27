@@ -1,4 +1,4 @@
-// Flow Studio Tools — Bulk Delete module (the only destructive action; kept in
+// 3DMC Studio Tools — Flow Bulk Delete module (the only destructive action; kept in
 // its own file so the fragile DOM selectors are easy to find + patch).
 // Flow has no clean delete API, so we drive Flow's OWN per-tile "Move to trash"
 // control — a SOFT delete (items go to Trash, recoverable). Selection is keyed by
