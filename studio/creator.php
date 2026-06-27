@@ -160,7 +160,9 @@ function ck_ai_classify(string $imgPath, string $script): ?array {
 // AI script -> page/panel shotlist. Returns a $c['plan'] array (pages -> panels) or null.
 function ck_ai_breakdown(string $script, string $cast): ?array {
     $cfg = ck_ai_cfg(); if (!$cfg || !function_exists('curl_init') || trim($script) === '') return null;
-    $sys = 'You are a comic script breakdown artist. Turn the script into a page-by-page shotlist. Reply ONLY with JSON of the form {"pages":[{"panels":[{"id":"p1-1","beat":"one vivid sentence of what we SEE in this panel","camera":"shot size + angle e.g. wide low-angle","location":"where","characters":["names present"],"dialogue":"spoken line(s) or empty"}]}]}. Use 3 to 5 panels per page. Make beats visual and specific (action, expression, staging) not summary. Use the provided cast names. Break down the OPENING of the story, the first 6 to 10 pages. Output compact JSON only, no prose, no markdown fences.';
+    $sys = 'You are a comic script breakdown artist. Turn the script into a page-by-page shotlist. Reply ONLY with JSON of the form {"pages":[{"stage":"","panels":[{"id":"p1-1","beat":"one vivid sentence of what we SEE in this panel","camera":"shot size + angle e.g. wide low-angle","location":"where","characters":["names present"],"dialogue":"spoken line(s) or empty"}]}]}. Use 3 to 5 panels per page. Make beats visual and specific (action, expression, staging) not summary. Use the provided cast names. Break down the OPENING of the story, the first 6 to 10 pages. '
+        . 'The page-level "stage" tags a character-progression arc so each page pulls the right version of the cast. ONLY set it when the script is clearly a transformation / progression story (a character visibly changes physique, e.g. muscle growth): use "pre" for pages BEFORE the change begins, "mid" while it is happening, "post" once the character has transformed. If the story is NOT such an arc, set "stage" to "" (empty) on every page. Do NOT invent a transformation the script does not describe — when unsure, leave it "". '
+        . 'Output compact JSON only, no prose, no markdown fences.';
     if (trim($cast) !== '') $sys .= ' Cast: ' . mb_substr($cast, 0, 500) . '.';
     $payload = json_encode(['model'=>'claude-sonnet-4-6', 'max_tokens'=>3500, 'system'=>$sys,
         'messages'=>[['role'=>'user', 'content'=>"SCRIPT:\n" . mb_substr($script, 0, 16000)]]]);
@@ -188,7 +190,7 @@ function ck_ai_breakdown(string $script, string $cast): ?array {
                 'dialogue'   => mb_substr((string)($pn['dialogue'] ?? ''), 0, 300),
             ];
         }
-        if ($panels) $out[] = ['panels'=>$panels];
+        if ($panels) $out[] = ['stage'=>ck_stage_key((string)($pg['stage'] ?? '')), 'panels'=>$panels];
     }
     return $out ?: null;
 }
@@ -470,6 +472,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $kind = in_array($_POST['kind']??'', ['face','body','view','scene','prop'], true) ? $_POST['kind'] : 'view';
                 $c['refs'][] = ['id'=>nid(), 'file'=>$file, 'char'=>mb_substr(trim($_POST['char'] ?? ''),0,40),
                                 'kind'=>$kind, 'label'=>mb_substr(trim($_POST['label'] ?? ''),0,80),
+                                'stage'=>ck_stage_key((string)($_POST['stage'] ?? '')),
                                 'status'=>'approved', 'src'=>'promoted', 'ts'=>time()];
             }
         } else { $c['gateMsg']='Unlock references to add more.'; }
@@ -479,6 +482,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $kindSel  = $_POST['kind'] ?? 'auto';                 // 'auto' = guess per image from shape
             $charAll  = mb_substr(trim($_POST['char'] ?? ''), 0, 40);  // set = apply to all; blank = auto-cluster
             $labelAll = mb_substr(trim($_POST['label'] ?? ''), 0, 80);
+            $stageAll = ck_stage_key((string)($_POST['stage'] ?? ''));  // optional progression stage applied to the whole batch ('' = any)
             $names = $fu ? (array)($fu['name'] ?? []) : [];
             $meta = images_all($id); $newRefs = [];
             for ($i = 0; $i < count($names); $i++) {
@@ -492,7 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $path = project_dir($id) . '/' . $res['file'];
                 $kind = in_array($kindSel, ['face','body','view','scene','prop'], true) ? $kindSel : ck_kind_from_shape($path);
                 $newRefs[] = ['id'=>nid(), 'file'=>$res['file'], 'char'=>$charAll, 'kind'=>$kind, 'label'=>$labelAll,
-                              'status'=>'pending', 'src'=>'upload', 'ts'=>time()];
+                              'stage'=>$stageAll, 'status'=>'pending', 'src'=>'upload', 'ts'=>time()];
             }
             $cnt = count($newRefs);
             if ($cnt) {
@@ -536,10 +540,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gk = (string)($_POST['gk'] ?? '');
             $newChar = isset($_POST['char']) ? mb_substr(trim($_POST['char']),0,40) : '';
             $newKind = (isset($_POST['kind']) && in_array($_POST['kind'], ['face','body','view','scene','prop'], true)) ? $_POST['kind'] : '';
+            // stage on the group select: '' = leave each ref's stage as-is; '-' = clear to any-stage; a valid key = set that stage
+            $stageRaw = (string)($_POST['stage'] ?? '');
             $appr = ($_POST['approve'] ?? '') === '1';
             foreach ($c['refs'] as &$r) {
                 $kd = $r['kind'] ?? ''; $rk = $kd==='scene' ? '_scenes' : ($kd==='prop' ? '_props' : ((($r['char'] ?? '')!=='') ? $r['char'] : '_'));
-                if ($rk === $gk) { if ($newChar !== '') $r['char'] = $newChar; if ($newKind !== '') $r['kind'] = $newKind; if ($appr) $r['status'] = 'approved'; }
+                if ($rk === $gk) {
+                    if ($newChar !== '') $r['char'] = $newChar;
+                    if ($newKind !== '') $r['kind'] = $newKind;
+                    if ($stageRaw === '-') $r['stage'] = '';
+                    elseif ($stageRaw !== '' && ck_stage_key($stageRaw) !== '') $r['stage'] = ck_stage_key($stageRaw);
+                    if ($appr) $r['status'] = 'approved';
+                }
             }
             unset($r);
         } else { $c['gateMsg']='Unlock references to edit.'; }
@@ -549,6 +561,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $c['style'] = mb_substr(trim($_POST['style'] ?? ''), 0, 300);
     } elseif ($do === 'lettering') {                            // per-project speech-balloon / caption style spec, appended to every dialogue panel's prompt
         $c['lettering'] = mb_substr(trim($_POST['lettering'] ?? ''), 0, 800);
+    } elseif ($do === 'pagestage') {                            // tag a plan PAGE with a transformation stage (so its panels pull the stage-right character refs)
+        $pi = (int)($_POST['page'] ?? -1);
+        $stage = ck_stage_key((string)($_POST['stage'] ?? ''));
+        if (isset($c['plan'][$pi]) && is_array($c['plan'][$pi])) { $c['plan'][$pi]['stage'] = $stage; }
+        else { $c['gateMsg'] = 'That page is no longer in the plan.'; }
     } elseif ($do === 'aikey') {                                 // user pastes THEIR OWN key; stored server-side in .htaccess-denied data/ai.json
         $k = trim((string)($_POST['aikey'] ?? ''));
         if (strlen($k) >= 20 && strncmp($k, 'sk-', 3) === 0) {
@@ -578,6 +595,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($_POST['kind'])  && in_array($_POST['kind'],['face','body','view','scene','prop'],true)) $r['kind']=$_POST['kind'];
                 if (isset($_POST['char']))  $r['char']  = mb_substr(trim($_POST['char']),0,40);
                 if (isset($_POST['label'])) $r['label'] = mb_substr(trim($_POST['label']),0,80);
+                if (isset($_POST['stage'])) $r['stage'] = ck_stage_key((string)$_POST['stage']);   // '' (any-stage option) clears it
                 if (isset($_POST['status']) && in_array($_POST['status'],['approved','needed'],true)) $r['status']=$_POST['status'];
             }
             unset($r);
@@ -956,7 +974,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
           <span class="ck-reftag" style="background:<?= $tc ?>"><?= h($kind) ?></span>
           <?php if ($locked&&$appr): ?><span class="ck-reflock">🔒</span><?php elseif (!$appr): ?><span class="ck-reflock" style="background:rgba(239,159,39,.92);color:#412402" title="not yet approved">•</span><?php endif; ?>
           <?php if ($rfile): ?><img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($rfile)) ?>&t=1" data-full="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($rfile)) ?>" alt=""><?php endif; ?>
-          <div class="ck-refbody" style="padding:5px 7px"><div style="font-size:11px;color:#9CA0AC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?= h($r['char']?:($r['label']?:'—')) ?></div></div>
+          <div class="ck-refbody" style="padding:5px 7px"><div style="font-size:11px;color:#9CA0AC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><?php $rst=ck_stage_key((string)($r['stage']??'')); if ($rst!==''): ?><span style="display:inline-block;background:#3a2d5e;color:#cdb6ff;font-weight:800;font-size:9px;border-radius:999px;padding:0 5px;margin-right:4px;text-transform:uppercase"><?= h($rst) ?></span><?php endif; ?><?= h($r['char']?:($r['label']?:'—')) ?></div></div>
         </div>
         <?php endforeach; ?>
         </div>

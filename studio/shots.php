@@ -41,17 +41,34 @@ function shot_prompt(string $style, array $pn, string $lettering = ''): string {
     $p .= ck_letter_block($lettering, (string)($pn['dialogue'] ?? ''));   // appends the house lettering style + the exact line for panels that have dialogue
     return $p;
 }
-function match_chars(array $names, array $charRefs): array {
+function match_chars(array $names, array $charRefs, string $stage = ''): array {
     $out = []; $pri = ['face'=>0, 'view'=>1, 'body'=>2];
     foreach ($names as $n) { $nl = strtolower(trim((string)$n)); if ($nl === '') continue;
         $matched = [];
         foreach ($charRefs as $cn => $rs)                         // exact, or one name is a prefix of the other ("Andrea" ~ "Andrea Müller"); NOT loose substring
             if ($cn === $nl || strpos($cn, $nl . ' ') === 0 || strpos($nl, $cn . ' ') === 0)
                 foreach ($rs as $r) $matched[] = $r;
+        $matched = ck_stage_eligible($matched, $stage);           // stage-aware: drop wrong-stage refs so an early "pre" panel never pulls a "post" body
         usort($matched, fn($a, $b) => ($pri[$a['kind'] ?? ''] ?? 3) <=> ($pri[$b['kind'] ?? ''] ?? 3));
         foreach (array_slice($matched, 0, 4) as $r) $out[$r['file']] = $r;   // a few key refs, face first
     }
     return array_values($out);
+}
+// Per panel: which in-frame characters have NO stage-appropriate ref (so match_chars
+// fell back to wrong-stage refs)? Used to flag "no <stage> ref for X" in the guide.
+function stage_gaps(array $names, array $charRefs, string $stage): array {
+    $stage = ck_stage_key($stage); if ($stage === '') return [];
+    $gaps = [];
+    foreach ($names as $n) { $nl = strtolower(trim((string)$n)); if ($nl === '') continue;
+        $cand = [];
+        foreach ($charRefs as $cn => $rs)
+            if ($cn === $nl || strpos($cn, $nl . ' ') === 0 || strpos($nl, $cn . ' ') === 0)
+                foreach ($rs as $r) $cand[] = $r;
+        if (!$cand) continue;                                     // no ref at all -> already surfaced as "no locked ref"
+        $ok = false; foreach ($cand as $r) { $rs = ck_stage_key((string)($r['stage'] ?? '')); if ($rs === '' || $rs === $stage) { $ok = true; break; } }
+        if (!$ok) $gaps[] = trim((string)$n);
+    }
+    return $gaps;
 }
 function match_scene(string $loc, array $sceneRefs): array {
     $words = array_filter(preg_split('/\s+/', preg_replace('/[^a-z ]/', '', strtolower($loc))), fn($w)=>strlen($w) >= 3);
@@ -99,6 +116,9 @@ function thumb(string $id, array $r): string {
 .sh-rimg{width:62px;height:78px;object-fit:cover;border-radius:6px;border:1px solid #2E3140;background:#0B0C10;cursor:zoom-in;display:block}
 .sh-rlbl{font-size:9.5px;color:#9CA0AC;text-align:center;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sh-tag{display:inline-block;font-size:9px;font-weight:800;color:#0B0C10;padding:1px 5px;border-radius:999px;text-transform:uppercase;margin-right:4px}
+.sh-stage{display:inline-block;font-size:9px;font-weight:800;color:#cdb6ff;background:#3a2d5e;padding:1px 5px;border-radius:999px;text-transform:uppercase;margin-right:3px}
+.sh-stagechip{display:inline-block;font-size:10px;font-weight:800;color:#cdb6ff;background:#3a2d5e;padding:1px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.03em}
+.sh-stagewarn{margin:0 0 8px;font-size:11px;color:#fac775;background:rgba(239,159,39,.10);border:1px solid #7a5a1f;border-radius:7px;padding:5px 8px;line-height:1.4}
 .sh-done-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .sh-done-row input{width:17px;height:17px;accent-color:#1D9E75}
 .sh-lb{position:fixed;inset:0;z-index:60;background:rgba(8,9,12,.94);display:none;align-items:center;justify-content:center}
@@ -123,7 +143,7 @@ function thumb(string $id, array $r): string {
     <h1 style="margin:0"><?= h($c['name']) ?> <span class="muted" style="font-size:15px;font-weight:400">· production guide</span></h1>
     <?php if ($totalPanels): ?><span class="badge" style="--c:#1D9E75"><?= $donePanels ?> / <?= $totalPanels ?> done</span><?php endif; ?>
   </div>
-  <p class="muted" style="max-width:820px;margin:2px 0 16px">For each panel: copy the prompt into Flow, attach the reference images shown, generate, then tick it off. Bring the results back with the Flow → Studio importer. Refs are matched from your locked set by character and location — double-check the scene picks.</p>
+  <p class="muted" style="max-width:860px;margin:2px 0 16px">For each panel: copy the prompt into Flow, attach the reference images shown, generate, then tick it off. Bring the results back with the Flow → Studio importer. Refs are matched from your locked set by character and location — double-check the scene picks. Set each page's <b>progression stage</b> (top-right of the page header) and the guide attaches the stage-right version of each character — so early <em>pre</em> pages don't pull the transformed look.</p>
 
   <div class="sh-card">
     <h3>🎨 Style — prepended to every prompt</h3>
@@ -186,17 +206,30 @@ function thumb(string $id, array $r): string {
   <?php if (!$totalPanels): ?>
   <div class="sh-empty">No page plan yet. Go to the <a href="creator.php?p=<?= h(urlencode($id)) ?>" style="color:#9aa0ec">Comic Creator</a> → <b>📜 Script</b> panel → <b>📑 Break script into pages</b>, then come back here.</div>
   <?php else: ?>
-    <?php foreach ($c['plan'] as $pi => $pg): ?>
-    <div class="sh-pagehd">Page <?= $pi + 1 ?> <span class="muted" style="font-weight:400;font-size:13px">· <?= count($pg['panels'] ?? []) ?> panels</span></div>
+    <?php foreach ($c['plan'] as $pi => $pg): $pageStage = ck_stage_key((string)($pg['stage'] ?? '')); ?>
+    <div class="sh-pagehd" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <span>Page <?= $pi + 1 ?> <span class="muted" style="font-weight:400;font-size:13px">· <?= count($pg['panels'] ?? []) ?> panels</span></span>
+      <form method="post" action="creator.php?p=<?= h(urlencode($id)) ?>" style="margin:0 0 0 auto;display:flex;align-items:center;gap:6px">
+        <?= csrf_field() ?><input type="hidden" name="ret" value="shots"><input type="hidden" name="do" value="pagestage"><input type="hidden" name="page" value="<?= $pi ?>">
+        <label class="muted" style="font-size:11.5px">progression stage</label>
+        <select name="stage" class="sh-in" style="padding:3px 8px;font-size:12px" onchange="this.form.submit()" title="Tag this page's transformation stage so every panel pulls the stage-right character refs (e.g. early pages = pre).">
+          <option value="">— any (no stage) —</option>
+          <?php foreach (STAGE_OPTS as $sv=>$sl): ?><option value="<?= h($sv) ?>"<?= $pageStage===$sv?' selected':'' ?>><?= h($sl) ?></option><?php endforeach; ?>
+        </select>
+        <noscript><button class="btn sm">set</button></noscript>
+      </form>
+    </div>
     <?php foreach (($pg['panels'] ?? []) as $pn): if (!is_array($pn)) continue;
         $pid = (string)($pn['id'] ?? ('p'.($pi+1)));
         $isDone = !empty($pn['done']);
+        $panelStage = ck_stage_key((string)($pn['stage'] ?? '')); if ($panelStage === '') $panelStage = $pageStage;   // panel override, else the page's stage
         $template   = shot_prompt($style, $pn, $letterSpec);
         $polished   = trim((string)($pn['polished'] ?? ''));
         $isPolished = $polished !== '';
         $prompt     = $isPolished ? $polished : $template;     // show the polished prompt if we have one, else the flat template
         $chars = (array)($pn['characters'] ?? []);
-        $cRefs = match_chars($chars, $charRefs);
+        $cRefs = match_chars($chars, $charRefs, $panelStage);
+        $sGaps = stage_gaps($chars, $charRefs, $panelStage);
         $sRefs = $pn['location'] ? match_scene((string)$pn['location'], $sceneRefs) : [];
         $sFallback = (!$sRefs && $sceneRefs);
     ?>
@@ -205,6 +238,7 @@ function thumb(string $id, array $r): string {
         <div class="sh-done-row">
           <input type="checkbox" class="sh-done" <?= $isDone?'checked':'' ?>>
           <span class="sh-id"><?= h($pid) ?></span>
+          <?php if ($panelStage !== ''): ?><span class="sh-stagechip" title="character progression stage in effect for this panel"><?= h($panelStage) ?></span><?php endif; ?>
           <span class="sh-meta"><?= h((string)($pn['camera'] ?? '')) ?><?= !empty($pn['location'])?' · '.h((string)$pn['location']):'' ?></span>
         </div>
         <?php if (!empty($pn['beat'])): ?><div class="sh-beat"><?= h((string)$pn['beat']) ?></div><?php endif; ?>
@@ -219,10 +253,13 @@ function thumb(string $id, array $r): string {
       </div>
       <div class="sh-refs">
         <h4>Attach these refs</h4>
+        <?php if ($panelStage !== ''): ?>
+          <div class="sh-stagewarn" style="<?= $sGaps ? '' : 'background:rgba(122,127,236,.10);border-color:#3a3f7a;color:#cdb6ff' ?>"><b>Stage <?= h(ck_stage_label($panelStage)) ?></b><?php if ($sGaps): ?> · ⚠ no <?= h($panelStage) ?> ref for <b><?= h(implode(', ', $sGaps)) ?></b> — attaching a fallback look; add a <?= h($panelStage) ?> ref in <a href="refs.php?p=<?= h(urlencode($id)) ?>" style="color:#fac775">references</a>.<?php else: ?> · the refs below are this character version.<?php endif; ?></div>
+        <?php endif; ?>
         <?php if ($cRefs): ?>
           <div class="sh-rgrid">
-          <?php foreach ($cRefs as $r): ?>
-            <div class="sh-rwrap"><?= thumb($id, $r) ?><div class="sh-rlbl"><span class="sh-tag" style="background:<?= $kindColor[$r['kind']??'']??'#9CA0AC' ?>"><?= h(substr($r['kind']??'?',0,1)) ?></span><?= h($r['char'] ?? '') ?></div></div>
+          <?php foreach ($cRefs as $r): $rs = ck_stage_key((string)($r['stage'] ?? '')); ?>
+            <div class="sh-rwrap"><?= thumb($id, $r) ?><div class="sh-rlbl"><span class="sh-tag" style="background:<?= $kindColor[$r['kind']??'']??'#9CA0AC' ?>"><?= h(substr($r['kind']??'?',0,1)) ?></span><?php if ($rs!==''): ?><span class="sh-stage"><?= h($rs) ?></span><?php endif; ?><?= h($r['char'] ?? '') ?></div></div>
           <?php endforeach; ?>
           </div>
         <?php else: ?><div class="muted" style="font-size:11.5px;margin-bottom:8px"><?= $chars ? 'No locked ref for: '.h(implode(', ',$chars)) : 'No character in this panel' ?></div><?php endif; ?>

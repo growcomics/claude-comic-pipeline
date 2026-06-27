@@ -103,6 +103,50 @@ function ck_letter_block(string $lettering, string $dialogue): string {
          . ' The speech balloon reads exactly: "' . $line . '".';
 }
 
+// ---- character progression / transformation stages ------------------------
+// A character's look changes across a transformation arc, but a single locked
+// turnaround sheet is ONE look — so early panels rendered a not-yet-muscular
+// character as already muscular (the owner's "Andrea too muscular early" note).
+// Each reference and each page can carry a `stage` so a panel pulls the
+// STAGE-appropriate version of a character (e.g. Andrea pre = soft/untrained,
+// post = muscular). '' = stage-agnostic: applies at every stage (e.g. a face that
+// does not change, a prop, a scene). This is a DIFFERENT axis from the project
+// pipeline stage ($c['stage'] / STAGES) — do not confuse the two.
+const STAGE_OPTS = [
+    'pre'    => 'pre · untransformed',
+    'mid'    => 'mid · transforming',
+    'post'   => 'post · transformed',
+    'tier-1' => 'tier 1',
+    'tier-2' => 'tier 2',
+    'tier-3' => 'tier 3',
+    'tier-4' => 'tier 4',
+    'tier-5' => 'tier 5',
+];
+function ck_stage_norm(string $s): string {
+    $s = strtolower(trim($s));
+    $s = preg_replace('/[^a-z0-9]+/', '-', $s);
+    return trim((string)$s, '-');
+}
+// Validate a stage to a known option key, or '' (= stage-agnostic). Unknown -> ''.
+function ck_stage_key(string $s): string { $s = ck_stage_norm($s); $opts = STAGE_OPTS; return isset($opts[$s]) ? $s : ''; }
+function ck_stage_label(string $s): string { $s = ck_stage_norm($s); $opts = STAGE_OPTS; return $opts[$s] ?? ($s !== '' ? $s : ''); }
+// Pick the stage-appropriate subset of a character's candidate refs for a panel's
+// target stage. Refs with no stage ('') are stage-agnostic and always eligible; if
+// the panel HAS a stage, refs tagged with a DIFFERENT stage are dropped (so a "pre"
+// panel never pulls a "post" / muscular body ref). Falls back to ALL refs if the
+// filter would otherwise strand the panel with none. Panel stage '' = no filtering
+// (current behavior, zero change for projects that don't use stages). Shared by
+// shots.php's match_chars and the future generation worker so they resolve identically.
+function ck_stage_eligible(array $refs, string $stage): array {
+    $stage = ck_stage_key($stage);
+    if ($stage === '') return $refs;
+    $elig = array_values(array_filter($refs, function ($r) use ($stage) {
+        $rs = ck_stage_key((string)($r['stage'] ?? ''));
+        return $rs === '' || $rs === $stage;
+    }));
+    return $elig ?: $refs;
+}
+
 // ---- projects --------------------------------------------------------------
 function projects_all(): array { return s_read(PROJECTS_FILE, []); }
 function projects_save(array $p): bool { return s_write(PROJECTS_FILE, $p); }
