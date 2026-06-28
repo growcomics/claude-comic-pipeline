@@ -132,6 +132,7 @@ foreach ($panels as $im) {
     ];
 }
 $pname = (string)($proj['name'] ?? $id);
+$aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key file as the cockpit's QA scan)
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex,nofollow"><title><?= h($pname) ?> · Review</title>
@@ -186,6 +187,19 @@ $pname = (string)($proj['name'] ?? $id);
 .rv-qbar .qb-approve:hover{color:#6fe0bd}.rv-qbar .qb-bad:hover{color:#f3a3a2}.rv-qbar .qb-keep:hover{color:var(--accent)}
 .rv-empty{border:1px dashed var(--border2);border-radius:12px;padding:40px;text-align:center;color:var(--muted)}
 .rv-hidden{display:none!important}
+/* second action bar: scan + bulk */
+.rv-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:-6px 0 14px;padding:0 2px}
+.rv-kbhint{font-size:11.5px;color:var(--muted2)}
+.rv-kbhint i{font-style:normal;color:var(--muted);font-weight:500}
+.rv-kbhint kbd{background:var(--surface2);border:1px solid var(--border2);border-bottom-width:2px;border-radius:5px;padding:1px 5px;font:600 10.5px/1.4 ui-monospace,monospace;color:#cfd3dc;margin:0 1px}
+.rv-prog{font-size:12px;color:#cdb6ff;min-width:10px}
+.rv-act{border:1px solid var(--border2);background:var(--surface2);color:var(--text);font:600 12px/1 Inter,sans-serif;padding:7px 11px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.rv-act:hover{border-color:#3c4052}
+.rv-act.danger{color:#f3a3a2;border-color:rgba(226,75,74,.35)}
+.rv-act:disabled{opacity:.45;cursor:default}
+.rv-tile:focus{outline:none}
+.rv-tile:focus-visible,.rv-tile.sel{box-shadow:inset 0 0 0 2px #7A7FEC,0 0 0 2px rgba(122,127,236,.35)}
+.rv-tile.kept:focus-visible{box-shadow:inset 0 0 0 2px var(--accent),0 0 0 2px rgba(122,127,236,.5)}
 /* ---- detail overlay ---- */
 .rv-lb{position:fixed;inset:0;z-index:90;background:rgba(6,7,10,.95);display:none}
 .rv-lb.open{display:flex}
@@ -258,6 +272,37 @@ $pname = (string)($proj['name'] ?? $id);
 #lbimg.zoomed{max-width:none;max-height:none;width:auto;height:auto;cursor:zoom-out}
 .rv-lb-stage.zoomed-stage{overflow:auto;align-items:flex-start;justify-content:flex-start}
 .rv-lb-stage.zoomed-stage .rv-arrow{display:none}
+/* --- added: search box, dialogue-on-tile, prompt copy tools, side-by-side compare --- */
+.rv-search{display:flex;align-items:center;gap:6px;border:1px solid var(--border2);background:var(--surface2);border-radius:8px;padding:0 8px;min-width:188px}
+.rv-search input{border:0;background:transparent;color:var(--text);font:600 12px/1 Inter,sans-serif;padding:7px 2px;width:100%;outline:none}
+.rv-search input::placeholder{color:var(--muted2);font-weight:500}
+.rv-search .si{color:var(--muted2);font-size:12px}
+.rv-search .sx{border:0;background:transparent;color:var(--muted2);cursor:pointer;font-size:14px;padding:0 2px;display:none}
+.rv-search.has .sx{display:block}
+.rv-search .sx:hover{color:var(--text)}
+.rv-flag.dlg{color:#7fe3c0}
+.rv-dlg-cap{position:absolute;top:28px;left:6px;right:6px;background:rgba(8,9,12,.86);color:#eaf6f1;font:600 10px/1.35 Inter,sans-serif;padding:4px 7px;border-radius:7px;border-left:2px solid var(--teal);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(-3px);transition:opacity .15s ease,transform .15s ease;pointer-events:none}
+.rv-tile:hover .rv-dlg-cap,.rv-tile:focus-within .rv-dlg-cap{opacity:1;transform:none}
+.rv-sec h3 .mini.alt{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+.rv-sec h3 .mini.alt:hover{color:var(--text);border-color:#3c4052}
+.rv-lb-compare{display:none;flex-wrap:wrap;gap:14px;align-items:flex-start;justify-content:center;align-content:flex-start;width:100%;height:100%;overflow:auto;padding:14px}
+.rv-lb-stage.compare .rv-lb-compare{display:flex}
+.rv-lb-stage.compare>img,.rv-lb-stage.compare>.rv-arrow{display:none}
+.rv-cmp-card{position:relative;width:min(330px,42%);border:1px solid var(--border2);border-radius:10px;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column}
+.rv-cmp-card.good{border-color:var(--teal)}
+.rv-cmp-card.kept{box-shadow:inset 0 0 0 2px var(--accent)}
+.rv-cmp-card img{width:100%;display:block;object-fit:contain;background:#07080b;max-height:54vh}
+.rv-cmp-head{display:flex;align-items:center;gap:7px;padding:7px 9px;font:700 11px/1 Inter,sans-serif;color:#cfd3dc}
+.rv-cmp-head .v{background:#3a2d5e;color:#cdb6ff;font:800 9.5px/1 Inter,sans-serif;padding:3px 6px;border-radius:999px}
+.rv-cmp-head .st{margin-left:auto;font:800 9.5px/1 Inter,sans-serif;padding:3px 7px;border-radius:999px}
+.rv-cmp-head .st.good{background:rgba(29,158,117,.18);color:#6fe0bd}
+.rv-cmp-head .st.kept{background:var(--accent);color:var(--accent-ink)}
+.rv-cmp-ctrls{display:flex;gap:6px;padding:0 9px 9px}
+.rv-cmp-ctrls button{flex:1;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font:700 12px/1 Inter,sans-serif;padding:8px 4px;border-radius:7px;cursor:pointer}
+.rv-cmp-ctrls button:hover{border-color:#3c4052}
+.rv-cmp-ctrls .ca.on{background:var(--teal);color:#04130d;border-color:transparent}
+.rv-cmp-ctrls .cb.on{background:var(--red);color:#fff;border-color:transparent}
+.rv-cmp-ctrls .ck.on{background:var(--accent);color:var(--accent-ink);border-color:transparent}
 </style></head><body>
 <header class="topbar" style="border-bottom:2px solid #7A7FEC">
   <div class="brand"><span class="dot"></span> Comic Studio
@@ -270,7 +315,7 @@ $pname = (string)($proj['name'] ?? $id);
   <a class="ghost" href="login.php?do=logout">Log out</a>
 </header>
 
-<main class="rv-wrap" id="rv" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>" data-count="<?= $galN ?>" data-newest="<?= $newestTs ?>">
+<main class="rv-wrap" id="rv" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>" data-count="<?= $galN ?>" data-newest="<?= $newestTs ?>" data-aion="<?= $aiOn ? '1' : '0' ?>">
   <div class="rv-head">
     <h1><?= h($pname) ?> — review</h1>
     <span class="sub">whole chapter, full width, in story order · click any panel for the prompt + references that built it · keys: A approve, D bad, K keep, N next-unrated</span>
@@ -283,6 +328,11 @@ $pname = (string)($proj['name'] ?? $id);
   <?php endif; ?>
 
   <div class="rv-bar">
+    <label class="rv-search" id="rvsearchbox" title="Search beat #, scene, dialogue, or notes">
+      <span class="si">⌕</span>
+      <input type="search" id="rvsearch" placeholder="Search panels…" autocomplete="off" spellcheck="false">
+      <button type="button" class="sx" id="rvsearchx" title="Clear">✕</button>
+    </label>
     <div class="rv-grp"><span class="lab">Sort</span>
       <span class="rv-seg" id="sortseg">
         <button data-sort="story" class="on">Story order</button>
@@ -305,6 +355,7 @@ $pname = (string)($proj['name'] ?? $id);
       </span>
     </div>
     <button class="rv-tog" id="tognotes" data-f="notes">💬 Has notes</button>
+    <button class="rv-tog" id="togdlg" data-f="dialogue">🗨 Has dialogue</button>
     <button class="rv-tog" id="togdef" data-f="defects">⚑ Flagged defects</button>
     <span class="rv-spacer"></span>
     <span class="rv-count" id="rvcount"><b><?= $galN ?></b> panels · <b><?= $accN ?></b> approved</span>
@@ -318,6 +369,18 @@ $pname = (string)($proj['name'] ?? $id);
     <button class="rv-tog" id="togfit" title="Fit whole image (no crop)">⛶ Fit</button>
     <button class="rv-tog" id="rvrefresh" title="Reload to pick up new panels">↻ Refresh</button>
   </div>
+
+  <?php if ($galN): ?>
+  <div class="rv-actions">
+    <span class="rv-kbhint"><i>Tip:</i> click a tile to inspect, or use <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> to move and <kbd>G</kbd> approve · <kbd>B</kbd> reject · <kbd>K</kbd> keep — no clicking.</span>
+    <span class="rv-spacer"></span>
+    <span class="rv-prog" id="actprog"></span>
+    <button class="rv-act" id="scanbtn" title="<?= $aiOn ? 'AI-scan every shown panel for defects (duplicate characters, extra people)' : 'Needs the AI key — add it in the references workspace' ?>"<?= $aiOn ? '' : ' disabled' ?>>🔎 Scan shown for defects</button>
+    <button class="rv-act" id="approveshown" title="Mark every panel currently shown as approved (good + kept)">✓ Approve shown</button>
+    <button class="rv-act danger" id="delrejects" title="Delete the disapproved (✕) panels among those shown">🗑 Delete rejects</button>
+    <a class="rv-act" id="exportapp" href="export.php?p=<?= h(urlencode($id)) ?>&only=approved" title="Download the approved panels as a zip, in story order">⤓ Export approved</a>
+  </div>
+  <?php endif; ?>
 
   <?php if (!$galN): ?>
     <div class="rv-empty">No panels yet. Import from Flow (the ⚙ Auto-Sync extension) or queue a run — generated panels land here in story order.</div>
@@ -356,10 +419,11 @@ $pname = (string)($proj['name'] ?? $id);
 <!-- per-panel detail overlay -->
 <div class="rv-lb" id="lb">
   <button class="rv-x" id="lbx" title="Close (Esc)">✕</button>
-  <div class="rv-lb-stage">
+  <div class="rv-lb-stage" id="lbstage">
     <button class="rv-arrow prev" id="lbprev" title="Previous (←)">‹</button>
     <img id="lbimg" src="" alt="">
     <button class="rv-arrow next" id="lbnext" title="Next (→)">›</button>
+    <div class="rv-lb-compare" id="lbcompare"></div>
   </div>
   <aside class="rv-info" id="lbinfo"></aside>
 </div>
@@ -377,7 +441,8 @@ $pname = (string)($proj['name'] ?? $id);
   function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
 
   // ---------- sort + filter (client-side; the grid holds every panel) ----------
-  var state = { sort:'story', appr:'all', rate:'all', notes:false, defects:false };
+  var state = { sort:'story', appr:'all', rate:'all', notes:false, defects:false, dialogue:false, q:'' };
+  var SEARCH = {};   // file -> lowercased searchable blob (beat + prompt + notes); built by initPanels()
   function applySort(){
     if(!grid) return;
     var t = tiles();
@@ -398,6 +463,8 @@ $pname = (string)($proj['name'] ?? $id);
       if(state.rate==='unrated' && x.dataset.rating!=='unrated') ok=false;
       if(state.notes   && (+x.dataset.notes)<1)   ok=false;
       if(state.defects && (+x.dataset.defects)<1) ok=false;
+      if(state.dialogue && x.dataset.dialogue!=='1') ok=false;
+      if(state.q){ var blob=SEARCH[x.dataset.file]||''; if(blob.indexOf(state.q)<0) ok=false; }
       x.classList.toggle('rv-hidden', !ok);
       if(ok) shown++;
     });
@@ -421,16 +488,40 @@ $pname = (string)($proj['name'] ?? $id);
   function tog(id, key, render){ var b=document.getElementById(id); if(!b) return;
     b.addEventListener('click', function(){ b.classList.toggle('on'); state[key]=b.classList.contains('on'); render(); writeHash(); }); }
   tog('tognotes','notes', applyFilter);
+  tog('togdlg','dialogue', applyFilter);
   tog('togdef','defects', applyFilter);
   var fitBtn=document.getElementById('togfit');
   if(fitBtn) fitBtn.addEventListener('click', function(){ fitBtn.classList.toggle('on'); grid.classList.toggle('fit', fitBtn.classList.contains('on')); writeHash(); });
   var rf=document.getElementById('rvrefresh'); if(rf) rf.addEventListener('click', function(){ location.reload(); });
+
+  // ---------- search box (matches beat # / scene / dialogue / notes via the SEARCH blob) ----------
+  var sb=document.getElementById('rvsearch'), sbox=document.getElementById('rvsearchbox'), sx=document.getElementById('rvsearchx');
+  function applySearch(){ state.q=(sb?sb.value:'').trim().toLowerCase(); if(sbox) sbox.classList.toggle('has', state.q!==''); applyFilter(); }
+  if(sb) sb.addEventListener('input', applySearch);
+  if(sx) sx.addEventListener('click', function(){ if(sb){ sb.value=''; applySearch(); sb.focus(); } });
+
   var cf=document.getElementById('clearfilters'); if(cf) cf.addEventListener('click', function(){
-    state.appr='all'; state.rate='all'; state.notes=false; state.defects=false;
+    state.appr='all'; state.rate='all'; state.notes=false; state.defects=false; state.dialogue=false; state.q='';
+    if(sb){ sb.value=''; } if(sbox) sbox.classList.remove('has');
     ['apprseg','rateseg'].forEach(function(id){ var box=document.getElementById(id); if(box){ [].forEach.call(box.querySelectorAll('button'),function(x){x.classList.remove('on');}); box.querySelector('button').classList.add('on'); }});
-    ['tognotes','togdef'].forEach(function(id){ var b=document.getElementById(id); if(b) b.classList.remove('on'); });
+    ['tognotes','togdlg','togdef'].forEach(function(id){ var b=document.getElementById(id); if(b) b.classList.remove('on'); });
     applyFilter();
   });
+
+  // ---------- enrich each tile: searchable blob + dialogue caption/badge (reuses extractDialogue) ----------
+  (function initPanels(){
+    tiles().forEach(function(t){
+      var file=t.dataset.file, d=DATA[file]||{};
+      var notesTxt=(d.notes||[]).map(function(n){ return n.text||''; }).join(' ');
+      SEARCH[file]=((d.beat||'')+' '+(d.prompt||'')+' '+notesTxt).toLowerCase();
+      var dlg=d.prompt?extractDialogue(d.prompt):[];
+      if(dlg.length){
+        t.dataset.dialogue='1';
+        var cap=el('div','rv-dlg-cap', dlg.join(' / ')); cap.title=dlg.join('  •  '); t.appendChild(cap);
+        var fl=t.querySelector('.rv-flags'); if(fl && !fl.querySelector('.dlg')){ var df=el('span','rv-flag dlg'); df.title='has dialogue / lettering'; df.textContent='🗨'; fl.insertBefore(df, fl.firstChild); }
+      } else { t.dataset.dialogue='0'; }
+    });
+  })();
 
   // ---------- rating mutations (reuse api.php, same as the cockpit board) ----------
   async function api(action, file, extra){
@@ -452,11 +543,11 @@ $pname = (string)($proj['name'] ?? $id);
       var beat = DATA[file] && DATA[file].beat;
       setRating(file,'good'); setKeep(file,true);
       if(beat){ Object.keys(DATA).forEach(function(k){ if(k!==file && DATA[k].beat===beat){ setKeep(k,false); if(DATA[k].rating==='good') setRating(k,'unrated'); } }); }
-      applyFilter(); syncDetail(file);
+      applyFilter(); syncDetail(file); refreshCompare();
     });
   }
-  function doBad(file){ api('rate', file, {rating:'bad'}).then(function(j){ if(j&&j.ok){ setRating(file,'bad'); applyFilter(); syncDetail(file); }}); }
-  function doKeep(file){ var d=DATA[file]; var next=!(d&&d.accepted); api('keep', file, {accepted:next?'1':'0'}).then(function(j){ if(j&&j.ok){ setKeep(file,next); applyFilter(); syncDetail(file); }}); }
+  function doBad(file){ api('rate', file, {rating:'bad'}).then(function(j){ if(j&&j.ok){ setRating(file,'bad'); applyFilter(); syncDetail(file); refreshCompare(); }}); }
+  function doKeep(file){ var d=DATA[file]; var next=!(d&&d.accepted); api('keep', file, {accepted:next?'1':'0'}).then(function(j){ if(j&&j.ok){ setKeep(file,next); applyFilter(); syncDetail(file); refreshCompare(); }}); }
 
   // quick bar on tiles
   if(grid) grid.addEventListener('click', function(e){
@@ -563,6 +654,10 @@ $pname = (string)($proj['name'] ?? $id);
       box.appendChild(meta);
     }
     ps.appendChild(box);
+    // per-section copy tools (scene only / without style+quality boilerplate) — raw copy stays the full prompt
+    var scBtn=copyBtn('⧉ scene', parsed.scene); scBtn.classList.add('alt'); scBtn.title='Copy just the scene / action (+ dialogue) — the editable creative direction'; ph.appendChild(scBtn);
+    var noBoiler=[parsed.camera, parsed.scene].filter(Boolean).join(' ');
+    if(noBoiler && noBoiler!==parsed.scene){ var nbBtn=copyBtn('⧉ −style', noBoiler); nbBtn.classList.add('alt'); nbBtn.title='Copy the prompt WITHOUT the style preamble + quality suffix (shot + scene)'; ph.appendChild(nbBtn); }
     var rawBox=null, rawOn=false, tg=el('button','mini','raw'); tg.type='button';
     tg.addEventListener('click', function(){
       rawOn=!rawOn;
@@ -571,6 +666,8 @@ $pname = (string)($proj['name'] ?? $id);
     });
     ph.appendChild(tg);
   }
+  // The editable prompt = creative direction minus boilerplate (shot + scene); '' when off-template.
+  function editablePrompt(raw){ var p=parsePrompt(raw); if(!p || !p.templated) return ''; return [p.camera, p.scene].filter(Boolean).join(' '); }
 
   function buildInfo(file){
     var d = DATA[file]; lbinfo.innerHTML=''; if(!d) return;
@@ -599,7 +696,11 @@ $pname = (string)($proj['name'] ?? $id);
     // OTHER TAKES for this beat — winner-pick filmstrip (only when the beat has >1 candidate)
     var sibs = siblingsOf(file);
     if(sibs.length>1){
-      var ss=el('div','rv-sec'); ss.appendChild(el('h3',null,'Other takes for this beat ('+sibs.length+')'));
+      var ss=el('div','rv-sec'); var sh=el('h3',null,'Other takes for this beat ('+sibs.length+')');
+      var cmpB=el('button','mini alt', compareOn?'✕ close compare':'⊞ compare side-by-side'); cmpB.type='button';
+      cmpB.title='Blow up every take of this beat side-by-side and approve the winner';
+      cmpB.addEventListener('click', function(){ if(compareOn) exitCompare(); else enterCompare(); cmpB.textContent=(compareOn?'✕ close compare':'⊞ compare side-by-side'); });
+      sh.appendChild(cmpB); ss.appendChild(sh);
       var strip=el('div','rv-sibs');
       sibs.forEach(function(sf){ var sd=DATA[sf]; if(!sd) return;
         var b=el('button','rv-sib'+(sf===file?' cur':'')+(sd.accepted?' kept':'')); b.type='button';
@@ -672,7 +773,15 @@ $pname = (string)($proj['name'] ?? $id);
     ns.appendChild(nb);
     lbinfo.appendChild(ns);
 
-    var link=el('a','rv-link','✎ Refine this image in the cockpit →'); link.href='creator.php?p='+encodeURIComponent(PID); lbinfo.appendChild(link);
+    var link=el('a','rv-link','✎ Refine this image in the cockpit →'); link.href='creator.php?p='+encodeURIComponent(PID);
+    var ed = d.prompt ? editablePrompt(d.prompt) : '';
+    if(ed){ link.textContent='✎ Copy editable prompt → tweak in cockpit'; link.title='Copies the editable prompt (no style/quality boilerplate) to your clipboard, then opens the cockpit so you can paste + tweak.';
+      link.addEventListener('click', function(e){ e.preventDefault();
+        function go(){ window.location.href=link.href; }
+        if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(ed).then(go, go); else go();
+      });
+    }
+    lbinfo.appendChild(link);
   }
   function renderNotes(container, notes){
     container.innerHTML='';
@@ -700,9 +809,43 @@ $pname = (string)($proj['name'] ?? $id);
   }
   function syncDetail(file){ if(lb.classList.contains('open') && curFile===file) buildInfo(file); }
 
+  // ---------- winner-pick: blow up a beat's takes side-by-side and approve from the grid ----------
+  // Complements the "Other takes" filmstrip switcher above — this view shows every take at size with its
+  // own ✓/✕/★ controls (the existing winner logic). Reuses the sibling-session's siblingsOf(file).
+  var lbstage=document.getElementById('lbstage'), lbcompare=document.getElementById('lbcompare'), compareOn=false;
+  function renderCompare(){
+    if(!lbcompare || !curFile) return;
+    lbcompare.innerHTML='';
+    siblingsOf(curFile).forEach(function(k){ var d=DATA[k]; if(!d) return;
+      var card=el('div','rv-cmp-card'+(d.rating==='good'?' good':'')+(d.accepted?' kept':''));
+      if(k===curFile) card.style.outline='2px solid var(--accent)';
+      var im=el('img'); im.src=d.full; im.alt=d.beat||''; im.title='Open this variant full-size'; im.style.cursor='zoom-in';
+      im.addEventListener('click', function(){ exitCompare(); openLb(k, false); });
+      card.appendChild(im);
+      var head=el('div','rv-cmp-head'); head.appendChild(el('span',null, d.beat||'—'));
+      if(d.derived||d.ver>1) head.appendChild(el('span','v','v'+(d.ver||1)));
+      if(d.accepted) head.appendChild(el('span','st kept','★ kept'));
+      else if(d.rating==='good') head.appendChild(el('span','st good','approved'));
+      card.appendChild(head);
+      var cc=el('div','rv-cmp-ctrls');
+      var ca=el('button','ca'+(d.rating==='good'&&d.accepted?' on':''),'✓'); ca.type='button'; ca.title='Approve — winner of this beat';
+      var cb=el('button','cb'+(d.rating==='bad'?' on':''),'✕'); cb.type='button'; cb.title='Disapprove';
+      var ck=el('button','ck'+(d.accepted?' on':''),'★'); ck.type='button'; ck.title='Keep';
+      ca.addEventListener('click', function(){ doApprove(k); });
+      cb.addEventListener('click', function(){ doBad(k); });
+      ck.addEventListener('click', function(){ doKeep(k); });
+      cc.appendChild(ca); cc.appendChild(cb); cc.appendChild(ck); card.appendChild(cc);
+      lbcompare.appendChild(card);
+    });
+  }
+  function enterCompare(){ compareOn=true; if(lbimg){ lbimg.classList.remove('zoomed'); } if(lbstage){ lbstage.classList.remove('zoomed-stage'); lbstage.classList.add('compare'); } renderCompare(); }
+  function exitCompare(){ compareOn=false; if(lbstage) lbstage.classList.remove('compare'); if(lbcompare) lbcompare.innerHTML=''; }
+  function refreshCompare(){ if(compareOn) renderCompare(); }
+
   function openLb(file, focusNote){
     curFile=file; var d=DATA[file]; if(!d) return;
     lbimg.classList.remove('zoomed'); if(lbimg.parentNode) lbimg.parentNode.classList.remove('zoomed-stage');
+    exitCompare();                          // always open on the single-image view
     lbimg.src=d.full; lbimg.alt=d.orig||'';
     buildInfo(file);
     var order=visibleOrder(); var pos=order.indexOf(file);
@@ -710,7 +853,7 @@ $pname = (string)($proj['name'] ?? $id);
     lb.classList.add('open');
     if(focusNote){ var ta=document.getElementById('lbnotetext'); if(ta){ ta.scrollIntoView({block:'center'}); ta.focus(); } }
   }
-  function closeLb(){ lb.classList.remove('open'); curFile=null; lbimg.src=''; }
+  function closeLb(){ exitCompare(); lb.classList.remove('open'); curFile=null; lbimg.src=''; }
   function step(dir){ var order=visibleOrder(); var i=order.indexOf(curFile); if(i<0) return; var n=i+dir; if(n<0||n>=order.length) return; openLb(order[n], false); }
   document.getElementById('lbx').addEventListener('click', closeLb);
   lbprev.addEventListener('click', function(){ step(-1); });
@@ -796,6 +939,99 @@ $pname = (string)($proj['name'] ?? $id);
     }catch(_){}
   }
   function restoreScroll(){ try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; var k='rvscroll-'+PID, v=sessionStorage.getItem(k); if(v){ sessionStorage.removeItem(k); window.scrollTo(0, +v); } }catch(_){} }
+  // ====== defect scan + keyboard triage + bulk actions ======
+  function visTiles(){ return tiles().filter(function(t){ return !t.classList.contains('rv-hidden'); }); }
+
+  // B — AI defect scan over the shown panels (reuses the cockpit's qascan_one endpoint)
+  (function(){
+    var btn=document.getElementById('scanbtn'), prog=document.getElementById('actprog');
+    if(!btn) return;
+    btn.addEventListener('click', async function(){
+      if(btn.disabled) return;
+      var list=visTiles(); if(!list.length){ if(prog) prog.textContent='nothing shown to scan'; return; }
+      btn.disabled=true; var done=0, flagged=0, fail=0;
+      for(var i=0;i<list.length;i++){
+        var file=list[i].dataset.file;
+        if(prog) prog.textContent='🔎 scanning '+(done+1)+'/'+list.length+'…';
+        try{
+          var r=await fetch('creator.php?p='+encodeURIComponent(PID),{method:'POST',headers:{'X-CSRF':CSRF},
+            body:new URLSearchParams({p:PID,do:'qascan_one',file:file,csrf:CSRF})});
+          var j=await r.json();
+          if(j&&j.ok&&j.analysis){
+            var defs=j.analysis.defects||[]; var d=DATA[file];
+            if(d){ d.defects=defs; if(j.analysis.caption) d.caption=j.analysis.caption; if(j.analysis.tier) d.tier=j.analysis.tier; }
+            var t=tileOf(file);
+            if(t){ t.dataset.defects=String(defs.length); var fl=t.querySelector('.rv-flags');
+              if(fl){ var df=fl.querySelector('.def'); if(defs.length){ if(!df){ df=el('span','rv-flag def'); fl.insertBefore(df, fl.firstChild); } df.textContent='⚑ '+defs.length; } else if(df){ df.remove(); } } }
+            if(defs.length) flagged++;
+            if(lb.classList.contains('open') && curFile===file) buildInfo(file);
+          } else fail++;
+        }catch(e){ fail++; }
+        done++;
+      }
+      if(prog) prog.textContent='✓ scanned '+done+' · '+flagged+' flagged'+(fail?(' · '+fail+' failed'):'');
+      applyFilter(); btn.disabled=false;
+    });
+  })();
+
+  // C — keyboard triage on the grid: arrows move focus, G approve / B reject / K keep
+  (function(){
+    function cols(){ var v=visTiles(); if(v.length<2) return 1; var top=v[0].offsetTop, n=0; for(var i=0;i<v.length;i++){ if(v[i].offsetTop===top) n++; else break; } return Math.max(1,n); }
+    function curTile(){ var a=document.activeElement; return (a&&a.classList&&a.classList.contains('rv-tile')&&!a.classList.contains('rv-hidden'))?a:null; }
+    document.addEventListener('keydown', function(e){
+      if(lb.classList.contains('open')) return;
+      var ae=document.activeElement; if(ae && /^(TEXTAREA|INPUT|SELECT)$/.test(ae.tagName)) return;
+      var v=visTiles(); if(!v.length) return;
+      var cur=curTile();
+      if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='ArrowDown'){
+        e.preventDefault();
+        if(!cur){ v[0].focus(); return; }
+        var i=v.indexOf(cur), c=cols(), n=i;
+        if(e.key==='ArrowRight') n=Math.min(v.length-1,i+1);
+        else if(e.key==='ArrowLeft') n=Math.max(0,i-1);
+        else if(e.key==='ArrowDown') n=Math.min(v.length-1,i+c);
+        else n=Math.max(0,i-c);
+        if(v[n]) v[n].focus(); return;
+      }
+      if(!cur) return;
+      var file=cur.dataset.file;
+      if(e.key==='g'||e.key==='G'||e.key==='a'||e.key==='A'){ e.preventDefault(); doApprove(file); }
+      else if(e.key==='b'||e.key==='B'||e.key==='d'||e.key==='D'){ e.preventDefault(); doBad(file); }
+      else if(e.key==='k'||e.key==='K'){ e.preventDefault(); doKeep(file); }
+    });
+  })();
+
+  // D — bulk actions on the shown set (reuses api.php bulk)
+  (function(){
+    var prog=document.getElementById('actprog');
+    async function bulk(op, files){
+      var r=await fetch('api.php',{method:'POST',headers:{'X-CSRF':CSRF},
+        body:new URLSearchParams({p:PID,action:'bulk',op:op,files:JSON.stringify(files),csrf:CSRF})});
+      return r.json();
+    }
+    var ap=document.getElementById('approveshown');
+    if(ap) ap.addEventListener('click', async function(){
+      var files=visTiles().map(function(t){return t.dataset.file;}); if(!files.length) return;
+      if(!confirm('Approve all '+files.length+' shown panel(s)? (marks them good + kept)')) return;
+      ap.disabled=true; if(prog) prog.textContent='approving '+files.length+'…';
+      var j=await bulk('approve',files);
+      if(j&&j.ok){ files.forEach(function(f){ setRating(f,'good'); setKeep(f,true); }); applyFilter(); if(prog) prog.textContent='✓ approved '+(j.updated||files.length); }
+      else if(prog) prog.textContent='failed';
+      ap.disabled=false;
+    });
+    var dl=document.getElementById('delrejects');
+    if(dl) dl.addEventListener('click', async function(){
+      var files=visTiles().filter(function(t){return t.dataset.rating==='bad';}).map(function(t){return t.dataset.file;});
+      if(!files.length){ if(prog) prog.textContent='no ✕ rejects among shown'; return; }
+      if(!confirm('Permanently delete '+files.length+' disapproved panel(s)? This cannot be undone.')) return;
+      dl.disabled=true; if(prog) prog.textContent='deleting '+files.length+'…';
+      var j=await bulk('delete',files);
+      if(j&&j.ok){ files.forEach(function(f){ var t=tileOf(f); if(t) t.remove(); delete DATA[f]; }); applyFilter(); if(prog) prog.textContent='🗑 deleted '+(j.deleted||files.length); }
+      else if(prog) prog.textContent='failed';
+      dl.disabled=false;
+    });
+  })();
+
   // ====== init ======
   readHash(); applySort(); applyFilter(); markFresh(); restoreScroll();
   if(grid) setInterval(poll, 25000);

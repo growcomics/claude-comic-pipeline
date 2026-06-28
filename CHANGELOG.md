@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-28 (Studio — Review board: panel search, prompt copy tools, side-by-side compare)
+
+### Added
+
+- **`studio/review.php` — panel search + "Has dialogue" filter + dialogue surfaced on the grid.** With ~88 panels and no text search, finding a specific beat meant scrolling. Added a **search box** (top of the sticky toolbar) that matches a per-panel blob of `beat # + prompt + notes` (built once at load into a `SEARCH` map), a **`🗨 Has dialogue`** toggle filter, and on each tile a hover **dialogue caption** + a `🗨` lettering badge. Dialogue is detected client-side by reusing the existing `extractDialogue()` from the structured-prompt parser — no new server data. Verified live: typing `sauce` narrowed 88→3 (the two sauce-argument beats by *dialogue* + the hot-sauce-bottle panel by *scene text*).
+- **`studio/review.php` — per-section prompt copy tools.** Extends the structured-prompt lightbox (shipped earlier today) with two extra copy buttons next to `⧉ copy` / `raw`: **`⧉ scene`** (the scene/action + dialogue only) and **`⧉ −style`** (the prompt minus the style preamble + quality suffix = shot + scene — the editable creative direction). The original **`⧉ copy` still copies the full RAW prompt verbatim** — unchanged. The bottom cockpit link became **"✎ Copy editable prompt → tweak in cockpit"**: it copies the boilerplate-stripped prompt to the clipboard, then opens the cockpit so the owner can paste + tweak (no cockpit change needed — `creator.php` has no prompt-prefill URL param, so clipboard is the honest handoff). All off-template / no-prompt panels degrade to the existing raw render.
+- **`studio/review.php` — side-by-side winner-pick compare.** The lightbox's "Other takes for this beat" filmstrip is a *switcher*; this adds a **`⊞ compare side-by-side`** toggle in that section that blows up *every* take of the beat in the lightbox stage at full size, each with its own `✓/✕/★` controls wired to the existing winner logic (`doApprove`/`doBad`/`doKeep`, which already handle beat-sibling exclusivity). Reuses the sibling session's `siblingsOf(file)`; re-renders on any rating change. Verified live on Beat 18 (v1 vs the "more muscular" v2 shown together).
+
+### Changed
+
+- **`studio/review.php` reconciled from LIVE (clobber war, again).** This file is edited directly on the live server by a *parallel session* (the QA-defect / notes / approval / auto-refresh work) — the repo copy goes stale between every deploy. During this change the live file was clobbered **twice** mid-edit; each time the work was rebased onto the freshly-fetched live so nothing was lost. The committed file therefore also pulls in that session's **latest live block that wasn't yet committed to the repo** — the **AI defect-scan over shown panels** (`do=qascan_one`) + **grid keyboard triage** (arrow-move focus, G approve / B reject / K keep) + bulk actions — credited to that session, captured here only so the repo == live. All sibling features verified intact post-deploy: refs-used image thumbnails, defects/`Analysis`/`togdef`/`⚑ Flagged defects`, the live auto-refresh (`?do=ping` + toast), the winner-pick filmstrip, lightbox zoom, the `Unrated` filter, and URL-hash view-state. Deploy health: `GET /studio/review.php` → 302. My auto-refresh idea was **dropped** as a duplicate — that session already shipped `?do=ping` + toast.
+  - *Future follow-up (noted, not done):* the two sessions need a shared base — both are whole-file-saving `review.php` live with no merge, so the clobber recurs. Until then, every edit must fetch-live-first + grep both feature sets post-deploy.
+
 ## 2026-06-28 (Studio — Review board: live auto-refresh, winner-pick filmstrip, keyboard triage, view-state)
 
 ### Added
