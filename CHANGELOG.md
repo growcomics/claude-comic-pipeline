@@ -12,6 +12,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-28 (Studio — Review lightbox renders the prompt as readable sections)
+
+### Changed
+
+- **`studio/review.php` — the lightbox "Prompt" section now renders structured, semantically-styled sub-sections instead of one undifferentiated monospace blob.** The owner reviews panels by reading the prompt, but the generated template buries the *creative direction* (scene/action/dialogue) between repeated boilerplate (the DAZ3D style preamble + the quality suffix) that doesn't need re-reading every time. A new display-time parser splits the prompt and re-weights it:
+  - **`parsePrompt(text)`** sentence-segments the prompt (quote-aware: it does **not** break inside speech/thought-bubble quotes, and it *does* break after a closing quote whose last char is a terminator — the `…Again." Realistic skin…` case) and classifies sentences into `{style, camera, scene, quality, dialogue}` using small keyword vocabularies. `style` = a **leading** run matching style vocab (photoreal / daz3d / iray / cinematic lighting / single comic panel / …); `quality` = a **trailing** run matching quality vocab (realistic skin / readable expressions / cohesive comic panel / mood tones / …); `camera` = the first remaining sentence if it's short (≤14 words) and matches shot vocab (shot / two-shot / eye level / wide / high angle / looking down / …); `scene` = everything left. `dialogue` = quoted spans (straight or curly) pulled from sentences that mention a bubble/caption/lettering.
+  - **Rendering**: the **scene** stays in the prominent readable box (now Inter 14px normal-weight, not mono — `.rv-prompt.scene`); **dialogue/lettering** is surfaced as an accent-bordered callout above it (`.rv-prompt-dlg`); the **camera/shot** gets its own muted-labeled line (`.rv-prompt-cam`); **style + quality** boilerplate are de-emphasized (smaller, `--muted`) on their own lines below (`.rv-prompt-meta`). A small **`raw`** toggle next to `⧉ copy` flips the structured view back to the unparsed full prompt for power users.
+  - **Copy + storage are untouched**: `copyBtn('⧉ copy', d.prompt)` still copies the **full RAW prompt** verbatim, and nothing about the stored prompt changes — this is purely presentational. No text is dropped: the union of the rendered sections (+ the raw toggle) equals the full prompt.
+  - **Graceful fallback (required)**: if the first sentence isn't a style preamble — Flow-imported / hand-written prompts in other projects (`images-google-flow.json`, `images-bottle-game.json`), or anything off-template — `parsePrompt` returns `{templated:false}` and the body renders the **RAW prompt exactly as before** (`.rv-prompt`, `textContent`). The "no prompt recorded" empty state is also unchanged. Verified live: Müller panels render structured (scene prominent, shot on its own line, DAZ3D style dimmed, dialogue callout for bubble panels); the Google-Flow project (no prompts) still shows the honest empty state.
+  - Single-block JS/CSS change, scoped to the prompt-render block only. **`review.php` was reconciled from LIVE** in this commit (same parallel-session clobber hazard as the thumbnail change): the sibling features were re-verified present post-deploy — the References-used **image thumbnails** (`r.thumb || r.url`), and the QA defect / notes / approval machinery (`defects`, `Analysis`, `togdef`, `⚑ Flagged defects`, the per-panel ✓/✕/★/💬 controls). Deploy health checked: `GET /studio/review.php` → 302.
+  - *Future follow-up (noted, not done):* storing the prompt as structured fields at the generator/worker level would make this parse-free, but that touches the unreachable worker + the whole pipeline; the display-time parser is the right scope and works for all existing data.
+
+---
+
 ## 2026-06-28 (Studio — Review lightbox renders refs as image thumbnails)
 
 ### Changed

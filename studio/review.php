@@ -203,6 +203,16 @@ $pname = (string)($proj['name'] ?? $id);
 .rv-sec h3 .mini{background:var(--surface2);color:var(--muted);border:0;font:600 10.5px/1 Inter,sans-serif;padding:3px 7px;border-radius:6px;cursor:pointer}
 .rv-prompt{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:10px 12px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#dfe2ea;white-space:pre-wrap;word-break:break-word;max-height:230px;overflow:auto}
 .rv-prompt.empty{font-family:Inter,sans-serif;color:var(--muted);font-style:italic}
+/* structured prompt: surface the SCENE prominently, push style/quality boilerplate to the background */
+.rv-prompt.scene{font:14px/1.55 Inter,system-ui,sans-serif;color:#eef0f5}
+.rv-prompt-cam{display:flex;gap:8px;align-items:baseline;margin-top:8px;font:13px/1.5 Inter,sans-serif;color:#cdd2dd}
+.rv-prompt-cam .lab{flex:none;font:700 9.5px/1 Inter,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);background:var(--surface2);padding:4px 7px;border-radius:6px}
+.rv-prompt-dlg{margin-bottom:8px;border-left:3px solid var(--accent);background:rgba(122,127,236,.08);border-radius:0 8px 8px 0;padding:7px 11px;color:#e8eaf2}
+.rv-prompt-dlg .lab{display:block;font:700 9px/1 Inter,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-bottom:5px}
+.rv-prompt-dlg .ln{display:block;margin:3px 0;font:13.5px/1.45 Inter,sans-serif}
+.rv-prompt-dlg .ln:before{content:"“"}.rv-prompt-dlg .ln:after{content:"”"}
+.rv-prompt-meta{margin-top:9px;display:flex;flex-direction:column;gap:4px;font:11.5px/1.45 Inter,sans-serif;color:var(--muted)}
+.rv-prompt-meta .mk{font:700 8.5px/1 Inter,sans-serif;text-transform:uppercase;letter-spacing:.05em;color:var(--muted2);margin-right:6px;vertical-align:1px}
 .rv-refs{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px}
 .rv-ref{border:1px solid var(--border2);border-radius:8px;overflow:hidden;background:var(--bg2);text-decoration:none;color:var(--text);display:block}
 .rv-ref img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
@@ -444,6 +454,88 @@ $pname = (string)($proj['name'] ?? $id);
       if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, function(){ window.prompt('Copy:', text); }); else window.prompt('Copy:', text); });
     return b; }
 
+  // ---------- prompt parsing (display only — copy/storage always use the RAW prompt) ----------
+  // Generated prompts follow a consistent template: STYLE preamble · CAMERA/shot · SCENE/action (+ dialogue) ·
+  // QUALITY suffix. We surface the SCENE prominently, give the shot its own line, pull dialogue/lettering out,
+  // and de-emphasize the repeated style + quality boilerplate. Off-template prompts (Flow-imported / hand-written
+  // in other projects) don't start with a style preamble — those fall back to the RAW prompt, unchanged.
+  var STYLE_VOCAB = ['photoreal','3d cgi','daz3d','iray','cinematic lighting','high detail','single comic panel','octane','unreal','hyperreal','cgi render'];
+  var CAM_VOCAB = ['shot','two-shot','over-the-shoulder','over the shoulder','pov','angle','eye level','eye-level','low angle','high angle','overhead','bird','dutch','wide','medium','close-up','close up','closeup','ecu','extreme close','establishing','framed','framing','looking down','looking up'];
+  var QUAL_VOCAB = ['realistic skin','skin texture','readable expression','facial expression','cohesive comic panel','layered depth','sense of motion','sharp focus','high resolution','night tones','blue tones','warm tones','golden tones','color grade','color grading','depth of field','bokeh','soft focus'];
+  function hasVocab(s, vocab){ s=s.toLowerCase(); for(var i=0;i<vocab.length;i++){ if(s.indexOf(vocab[i])>=0) return true; } return false; }
+  function splitSentences(text){
+    var out=[], buf='', straight=false, curly=0;
+    function flushIfBreak(i){
+      var j=i+1;
+      while(j<text.length && (text[j]==='.'||text[j]==='!'||text[j]==='?'||text[j]==='”'||text[j]==='"')){
+        buf+=text[j];
+        if(text[j]==='"') straight=!straight; else if(text[j]==='”'){ if(curly>0) curly--; }
+        i=j; j++;
+      }
+      if(j>=text.length || /\s/.test(text[j])){ var s=buf.trim(); if(s) out.push(s); buf=''; }
+      return i;
+    }
+    for(var i=0;i<text.length;i++){
+      var ch=text[i]; buf+=ch;
+      var prevInQuote=(straight||curly>0);
+      if(ch==='"') straight=!straight; else if(ch==='“') curly++; else if(ch==='”'){ if(curly>0) curly--; }
+      var nowInQuote=(straight||curly>0);
+      var isTerm=(ch==='.'||ch==='!'||ch==='?');
+      if(isTerm && !nowInQuote){ i=flushIfBreak(i); }
+      else if(prevInQuote && !nowInQuote){                 // a quote just closed — break if its last char was a terminator
+        var before=buf.length>=2?buf[buf.length-2]:'';
+        if(before==='.'||before==='!'||before==='?') i=flushIfBreak(i);
+      }
+    }
+    if(buf.trim()) out.push(buf.trim());
+    return out;
+  }
+  function wordCount(s){ return (s.trim().match(/\S+/g)||[]).length; }
+  function extractDialogue(text){
+    if(!/bubble|caption|lettering|\btext\b|\bsfx\b|sign reading|banner|\bsays\b|\breads\b/i.test(text)) return [];
+    var lines=[], re=/[“"]([^“”"]{1,240})[”"]/g, m, seen={};
+    while((m=re.exec(text))){ var t=m[1].trim(); if(t && /[a-z0-9]/i.test(t) && !seen[t]){ seen[t]=1; lines.push(t); } }
+    return lines;
+  }
+  function parsePrompt(text){
+    var sents=splitSentences(text);
+    if(!sents.length || !hasVocab(sents[0], STYLE_VOCAB)) return {templated:false};   // no style preamble -> raw
+    var i=0, style=[]; while(i<sents.length && hasVocab(sents[i], STYLE_VOCAB)){ style.push(sents[i]); i++; }
+    var j=sents.length-1, quality=[]; while(j>=i && hasVocab(sents[j], QUAL_VOCAB)){ quality.unshift(sents[j]); j--; }
+    var camera=''; if(i<=j && hasVocab(sents[i], CAM_VOCAB) && wordCount(sents[i])<=14){ camera=sents[i]; i++; }
+    var scene=sents.slice(i, j+1).join(' ').trim();
+    if(!scene) return {templated:false};                                              // nothing left to surface -> raw
+    return {templated:true, style:style.join(' '), camera:camera, scene:scene, quality:quality.join(' '), dialogue:extractDialogue(text)};
+  }
+  // Render the prompt body into `ps`: structured sections when the template matches, RAW box otherwise.
+  // `ph` is the section <h3> — we hang the "raw" power-user toggle off it next to the copy button.
+  function renderPromptBody(ps, raw, ph){
+    var parsed=parsePrompt(raw);
+    if(!parsed.templated){ var pp=el('div','rv-prompt'); pp.textContent=raw; ps.appendChild(pp); return; }
+    var box=el('div'); box.className='rv-prompt-struct';
+    if(parsed.dialogue && parsed.dialogue.length){
+      var dl=el('div','rv-prompt-dlg'); dl.appendChild(el('span','lab','Dialogue / lettering'));
+      parsed.dialogue.forEach(function(t){ dl.appendChild(el('span','ln', t)); });
+      box.appendChild(dl);
+    }
+    var sc=el('div','rv-prompt scene'); sc.textContent=parsed.scene; box.appendChild(sc);
+    if(parsed.camera){ var cam=el('div','rv-prompt-cam'); cam.appendChild(el('span','lab','Camera')); cam.appendChild(el('span',null,parsed.camera)); box.appendChild(cam); }
+    if(parsed.style || parsed.quality){
+      var meta=el('div','rv-prompt-meta');
+      if(parsed.style){ var st=el('div'); st.appendChild(el('span','mk','Style')); st.appendChild(document.createTextNode(parsed.style)); meta.appendChild(st); }
+      if(parsed.quality){ var qu=el('div'); qu.appendChild(el('span','mk','Quality')); qu.appendChild(document.createTextNode(parsed.quality)); meta.appendChild(qu); }
+      box.appendChild(meta);
+    }
+    ps.appendChild(box);
+    var rawBox=null, rawOn=false, tg=el('button','mini','raw'); tg.type='button';
+    tg.addEventListener('click', function(){
+      rawOn=!rawOn;
+      if(rawOn){ if(!rawBox){ rawBox=el('div','rv-prompt'); rawBox.textContent=raw; ps.appendChild(rawBox); } rawBox.style.display=''; box.style.display='none'; tg.textContent='structured'; }
+      else { if(rawBox) rawBox.style.display='none'; box.style.display=''; tg.textContent='raw'; }
+    });
+    ph.appendChild(tg);
+  }
+
   function buildInfo(file){
     var d = DATA[file]; lbinfo.innerHTML=''; if(!d) return;
     // header: beat + version + status chips
@@ -468,11 +560,11 @@ $pname = (string)($proj['name'] ?? $id);
     ctr.appendChild(ba); ctr.appendChild(bd); ctr.appendChild(bk);
     lbinfo.appendChild(ctr);
 
-    // PROMPT (always shown)
+    // PROMPT (always shown) — structured display; ⧉ copy + stored value always use the RAW prompt verbatim
     var ps=el('div','rv-sec'); var ph=el('h3'); ph.appendChild(document.createTextNode('Prompt'));
     if(d.prompt){ ph.appendChild(copyBtn('⧉ copy', d.prompt)); }
     ps.appendChild(ph);
-    if(d.prompt){ var pp=el('div','rv-prompt'); pp.textContent=d.prompt; ps.appendChild(pp); }
+    if(d.prompt){ renderPromptBody(ps, d.prompt, ph); }
     else { var pe=el('div','rv-prompt empty','Prompt not recorded for this panel — it was generated before prompt capture. Re-run the Flow Auto-Sync (Sync now) to backfill it.'); ps.appendChild(pe); }
     lbinfo.appendChild(ps);
 
