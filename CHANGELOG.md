@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-28 (Studio — bridge self-resolves the refine card + claim-by-kind)
+
+### Added
+
+- **`studio/bridge.php` `do=claim` now takes an optional `kind=` filter.** `do=claim` was strict FIFO over open jobs (with an existing optional `backend=` filter), so a refine worker polling for `kind=adjust` work would have the oldest *Flow reshoot* handed to it first. A new `$wantKind = $_POST['kind'] ?? $_GET['kind']` param, applied **inside the existing `s_with_lock(JOBS_FILE,…)`** right next to the backend filter (`if ($wantKind !== '' && ($j['kind'] ?? '') !== $wantKind) continue;`), lets the worker do `do=claim kind=adjust worker=<name>` to atomically grab the oldest open **adjust** job and skip unrelated Flow jobs. **When `kind` is omitted the behavior is byte-for-byte identical to before** (oldest open job, FIFO, optional backend) — purely additive.
+
+### Changed
+
+- **`studio/bridge.php` `do=ingest` now auto-resolves the pending refine card on the creator config — removing the last cPanel-token-coupled step in the refine loop.** The cockpit's "✎ Refine this image" enqueues a `kind=adjust` job and appends a `{…, status:'pending'}` record to `data/creator-<pid>.json` `adjusts[]` (that's the "vN · pending" card). A worker generates the new version and pushes it via `do=ingest parent=<parentFile>`; the bridge already chains it as the next derived version — but it did **not** flip the pending `adjusts[]` record, so the card lingered until a separate cPanel-token write cleared it. Now, **only inside the existing lineage branch** (`$lineage` non-empty ⇒ `$parentF` resolved to a real parent image), after `images_save(...)` and before the response, the ingest best-effort flips the matching pending record to `status='done'` with `resultFile` + `doneAt` via `s_with_lock($cfp, …)` (race-safe). Match = oldest `pending` record whose `parentFile` equals `$parentF`; an optional `adjustId=<id>` on the POST disambiguates when a parent has multiple pending edits. The whole block is wrapped in `try/catch (\Throwable)` and only runs when the creator config exists — **any failure here can never abort the ingest** (the image is already saved; the card-flip is cosmetic catch-up). The response gains an additive `adjustResolved` boolean for debugging.
+  - **Flow autosync is completely unaffected.** A Flow → Studio ingest sends no `parent`, so `$parentF` is empty, the lineage loop is skipped, `$lineage` stays `[]`, and the `if ($lineage)` guard short-circuits the entire new block — the only change to a Flow response is the harmless extra `adjustResolved:false` key. Verified by re-fetching the deployed file and confirming the flip lives *inside* the lineage guard.
+  - **Net effect:** the Lane-B refine worker (`studio/worker/LANE-B-REFINE-PLAYBOOK.md`) is now **fully self-contained** — bridge verbs + the Higgsfield MCP, no cPanel deploy token. Playbook updated (prereqs, step 1 `do=claim kind=adjust`, step 8 auto-flip, the `/loop` paste block, and both Follow-ups marked SHIPPED).
+  - **Deploy + reconcile:** edited on top of **LIVE** (the production ingest/worker-queue endpoint), deployed via the cPanel-token text deploy, then reconciled into the repo. Pre-deploy diff: live `bridge.php` and the repo's committed copy were **identical** apart from one cosmetic trailing newline — **no unrelated local WIP** was present in `bridge.php` (the working tree's dirty files were `creator.php` + `index.php`, untouched here). Health: `GET /studio/bridge.php` → **403** clean JSON (not 500); `do=jobs` → `ok:true` (34 jobs live); all verbs still present (`ingest`, `ingest_init`, `ingest_ref`, `jobs`, `claim`, `genspec`, `heartbeat`, `done`, `img`, `enrich`, `annotate`, `write`).
+
+---
+
 ## 2026-06-28 (Studio — Review lightbox renders the prompt as readable sections)
 
 ### Changed

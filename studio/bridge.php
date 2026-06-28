@@ -156,7 +156,38 @@ if ($do === 'ingest') {
     if ($refsUsed) $extra['refs_used'] = $refsUsed;
     $meta[] = array_merge(['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'unrated','accepted'=>false,'group'=>$grp,'tags'=>[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey], $extra, $lineage);
     images_save($pid, $meta);
-    bout(['ok'=>true,'count'=>count($meta),'group'=>$grp]);
+    // best-effort: when this ingest landed a DERIVED version (the refine/adjust loop), flip the
+    // matching pending adjusts[] record on the creator config to done, so the cockpit's "vN · pending"
+    // refine card clears WITHOUT a separate cPanel-token write. Only fires in the lineage branch
+    // ($lineage non-empty ⇒ $parentF resolved to a real parent image), so a normal Flow ingest
+    // (no parent → $lineage empty) is completely unaffected. Non-fatal: the image is already saved,
+    // so ANY failure here must never abort the ingest — the card-flip is purely cosmetic catch-up.
+    $adjustResolved = false;
+    if ($lineage) {
+        try {
+            $cfp = SDATA . '/creator-' . $pid . '.json';            // $pid already sanitized above
+            if (is_file($cfp)) {
+                $adjId   = trim((string)($_POST['adjustId'] ?? '')); // optional: the exact adjust this gen answers
+                $newFile = $res['file'];
+                $adjustResolved = (bool) s_with_lock($cfp, function($cc) use ($parentF, $adjId, $newFile) {
+                    if (!is_array($cc) || empty($cc['adjusts']) || !is_array($cc['adjusts'])) return ['result'=>false];
+                    $pick = null;
+                    foreach ($cc['adjusts'] as $i => $a) {
+                        if (($a['status'] ?? '') !== 'pending') continue;            // only open refine cards
+                        if (($a['parentFile'] ?? '') !== $parentF) continue;        // same parent we chained under
+                        if ($adjId !== '' && (string)($a['id'] ?? '') === $adjId) { $pick = $i; break; }  // exact adjustId wins
+                        if ($pick === null) $pick = $i;                              // else the OLDEST pending on this parent
+                    }
+                    if ($pick === null) return ['result'=>false];
+                    $cc['adjusts'][$pick]['status']     = 'done';
+                    $cc['adjusts'][$pick]['resultFile'] = $newFile;
+                    $cc['adjusts'][$pick]['doneAt']     = date('c');
+                    return ['data'=>$cc, 'result'=>true];
+                });
+            }
+        } catch (\Throwable $e) { /* best-effort: a failed card-flip must never break ingest */ }
+    }
+    bout(['ok'=>true,'count'=>count($meta),'group'=>$grp,'adjustResolved'=>$adjustResolved]);
 }
 
 // ---- enrich: backfill prompt + refs_used onto already-ingested panels --------
@@ -319,14 +350,16 @@ if ($do === 'jobs') {
 }
 
 if ($do === 'claim') {
-    $worker = mb_substr(trim((string)($_POST['worker'] ?? $_GET['worker'] ?? '')), 0, 60); if ($worker === '') $worker = 'worker';
-    $want   = (string)($_POST['backend'] ?? $_GET['backend'] ?? '');         // optional: only claim jobs for this backend
-    $job = s_with_lock(JOBS_FILE, function($jobs) use ($worker, $want) {
+    $worker   = mb_substr(trim((string)($_POST['worker'] ?? $_GET['worker'] ?? '')), 0, 60); if ($worker === '') $worker = 'worker';
+    $want     = (string)($_POST['backend'] ?? $_GET['backend'] ?? '');       // optional: only claim jobs for this backend
+    $wantKind = (string)($_POST['kind'] ?? $_GET['kind'] ?? '');             // optional: only claim jobs of this kind (e.g. adjust → grab refines first)
+    $job = s_with_lock(JOBS_FILE, function($jobs) use ($worker, $want, $wantKind) {
         $pick = null;
         foreach ($jobs as $i => $j) {
             if (($j['status'] ?? '') !== 'open') continue;                  // only un-claimed jobs
             if (!empty($j['stopRequested'])) continue;                      // cancelled before it ever ran
             if ($want !== '' && ($j['backend'] ?? '') !== $want) continue;
+            if ($wantKind !== '' && ($j['kind'] ?? '') !== $wantKind) continue;  // optional kind filter; omitted ⇒ identical FIFO
             if ($pick === null || ($j['createdAt'] ?? '') < ($jobs[$pick]['createdAt'] ?? '')) $pick = $i;  // oldest = FIFO
         }
         if ($pick === null) return ['result'=>null];
@@ -421,3 +454,4 @@ if ($do === 'genspec') {
 }
 
 bout(['ok'=>false,'error'=>'unknown action']);
+
