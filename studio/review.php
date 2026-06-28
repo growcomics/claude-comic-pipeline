@@ -44,6 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'note') {
     exit;
 }
 
+// ---- ping endpoint (JSON): lightweight liveness signal for the live auto-refresh ----
+// Read-only. The review board polls this so newly Auto-Synced panels surface a "+N new" toast
+// without a manual reload. Returns just the panel count + newest import ts (cheap to diff).
+if (($_GET['do'] ?? '') === 'ping') {
+    header('Content-Type: application/json');
+    $pp = array_filter(images_all($id), fn($m) => empty($m['isref']));
+    $cnt = count($pp); $newest = 0;
+    foreach ($pp as $m) { $t = (int)($m['ts'] ?? 0); if ($t > $newest) $newest = $t; }
+    echo json_encode(['ok' => true, 'count' => $cnt, 'newest' => $newest]);
+    exit;
+}
+
 $c       = is_file($cfile) ? s_read($cfile, []) : [];
 $gallery = images_all($id);
 $panels  = array_values(array_filter($gallery, fn($m) => empty($m['isref'])));   // refs are tagged isref
@@ -229,6 +241,23 @@ $pname = (string)($proj['name'] ?? $id);
 .rv-notebox .row{display:flex;gap:7px;align-items:center}
 .rv-muted{color:var(--muted);font-size:12px}
 .rv-link{color:#9aa0ec;font-size:12px;text-decoration:none}.rv-link:hover{text-decoration:underline}
+/* --- added: focus ring, live-refresh toast, fresh markers, sibling filmstrip, lightbox zoom --- */
+.rv-tile:focus{outline:2px solid var(--accent);outline-offset:2px}
+.rv-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);z-index:120;background:var(--teal);color:#04130d;font:800 13px/1 Inter,sans-serif;padding:11px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer;opacity:0;transition:opacity .2s ease,transform .2s ease;display:flex;align-items:center;gap:10px}
+.rv-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.rv-toast .x{opacity:.6}
+.rv-tile.fresh::after{content:'';position:absolute;top:8px;right:8px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 2px rgba(8,9,12,.85);z-index:4}
+.rv-sibs{display:flex;gap:7px;flex-wrap:wrap}
+.rv-sib{position:relative;border:1px solid var(--border2);border-radius:7px;overflow:hidden;width:58px;height:72px;cursor:pointer;background:var(--bg2);padding:0}
+.rv-sib img{width:100%;height:100%;object-fit:cover;display:block}
+.rv-sib.cur{outline:2px solid var(--accent);outline-offset:-2px}
+.rv-sib.kept{outline:2px solid var(--teal);outline-offset:-2px}
+.rv-sib .vb{position:absolute;top:2px;left:2px;background:rgba(8,9,12,.82);color:#cfd3dc;font:800 8px/1 Inter,sans-serif;padding:2px 4px;border-radius:4px}
+.rv-sib .ok{position:absolute;bottom:2px;right:2px;background:var(--teal);color:#04130d;font:800 9px/1 Inter,sans-serif;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+#lbimg{cursor:zoom-in}
+#lbimg.zoomed{max-width:none;max-height:none;width:auto;height:auto;cursor:zoom-out}
+.rv-lb-stage.zoomed-stage{overflow:auto;align-items:flex-start;justify-content:flex-start}
+.rv-lb-stage.zoomed-stage .rv-arrow{display:none}
 </style></head><body>
 <header class="topbar" style="border-bottom:2px solid #7A7FEC">
   <div class="brand"><span class="dot"></span> Comic Studio
@@ -241,10 +270,10 @@ $pname = (string)($proj['name'] ?? $id);
   <a class="ghost" href="login.php?do=logout">Log out</a>
 </header>
 
-<main class="rv-wrap" id="rv" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>">
+<main class="rv-wrap" id="rv" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>" data-count="<?= $galN ?>" data-newest="<?= $newestTs ?>">
   <div class="rv-head">
     <h1><?= h($pname) ?> — review</h1>
-    <span class="sub">whole chapter, full width, in story order · click any panel for the prompt + references that built it</span>
+    <span class="sub">whole chapter, full width, in story order · click any panel for the prompt + references that built it · keys: A approve, D bad, K keep, N next-unrated</span>
   </div>
 
   <?php if ($galN && $noPromptN === $galN): ?>
@@ -272,6 +301,7 @@ $pname = (string)($proj['name'] ?? $id);
         <button data-rate="all" class="on">All</button>
         <button data-rate="good">Good</button>
         <button data-rate="bad">Bad</button>
+        <button data-rate="unrated">Unrated</button>
       </span>
     </div>
     <button class="rv-tog" id="tognotes" data-f="notes">💬 Has notes</button>
@@ -365,6 +395,7 @@ $pname = (string)($proj['name'] ?? $id);
       if(state.appr==='no'  && x.dataset.accepted==='1') ok=false;
       if(state.rate==='good' && x.dataset.rating!=='good') ok=false;
       if(state.rate==='bad'  && x.dataset.rating!=='bad')  ok=false;
+      if(state.rate==='unrated' && x.dataset.rating!=='unrated') ok=false;
       if(state.notes   && (+x.dataset.notes)<1)   ok=false;
       if(state.defects && (+x.dataset.defects)<1) ok=false;
       x.classList.toggle('rv-hidden', !ok);
@@ -380,7 +411,7 @@ $pname = (string)($proj['name'] ?? $id);
     var box = document.getElementById(id); if(!box) return;
     box.addEventListener('click', function(e){ var b=e.target.closest('button'); if(!b) return;
       [].forEach.call(box.querySelectorAll('button'), function(x){ x.classList.remove('on'); });
-      b.classList.add('on'); state[key]=b.dataset[Object.keys(b.dataset)[0]]; after && after(b);
+      b.classList.add('on'); state[key]=b.dataset[Object.keys(b.dataset)[0]]; after && after(b); writeHash();
     });
   }
   seg('sortseg','sort', applySort);
@@ -388,11 +419,11 @@ $pname = (string)($proj['name'] ?? $id);
   seg('rateseg','rate', applyFilter);
   seg('sizeseg','size', function(b){ grid.style.setProperty('--tile', b.dataset.size+'px'); });
   function tog(id, key, render){ var b=document.getElementById(id); if(!b) return;
-    b.addEventListener('click', function(){ b.classList.toggle('on'); state[key]=b.classList.contains('on'); render(); }); }
+    b.addEventListener('click', function(){ b.classList.toggle('on'); state[key]=b.classList.contains('on'); render(); writeHash(); }); }
   tog('tognotes','notes', applyFilter);
   tog('togdef','defects', applyFilter);
   var fitBtn=document.getElementById('togfit');
-  if(fitBtn) fitBtn.addEventListener('click', function(){ fitBtn.classList.toggle('on'); grid.classList.toggle('fit', fitBtn.classList.contains('on')); });
+  if(fitBtn) fitBtn.addEventListener('click', function(){ fitBtn.classList.toggle('on'); grid.classList.toggle('fit', fitBtn.classList.contains('on')); writeHash(); });
   var rf=document.getElementById('rvrefresh'); if(rf) rf.addEventListener('click', function(){ location.reload(); });
   var cf=document.getElementById('clearfilters'); if(cf) cf.addEventListener('click', function(){
     state.appr='all'; state.rate='all'; state.notes=false; state.defects=false;
@@ -441,7 +472,12 @@ $pname = (string)($proj['name'] ?? $id);
   });
   if(grid) grid.addEventListener('keydown', function(e){
     var tile = e.target.closest('.rv-tile'); if(!tile) return;
-    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(tile.dataset.file, false); }
+    var f=tile.dataset.file, k=(e.key||'').toLowerCase();
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLb(f, false); }
+    else if(k==='a'||k==='g'){ e.preventDefault(); doApprove(f); }
+    else if(k==='d'||k==='b'){ e.preventDefault(); doBad(f); }
+    else if(k==='k'){ e.preventDefault(); doKeep(f); }
+    else if(k==='n'){ e.preventDefault(); focusNextUnrated(tile); }
   });
 
   // ---------- detail overlay ----------
@@ -560,6 +596,23 @@ $pname = (string)($proj['name'] ?? $id);
     ctr.appendChild(ba); ctr.appendChild(bd); ctr.appendChild(bk);
     lbinfo.appendChild(ctr);
 
+    // OTHER TAKES for this beat — winner-pick filmstrip (only when the beat has >1 candidate)
+    var sibs = siblingsOf(file);
+    if(sibs.length>1){
+      var ss=el('div','rv-sec'); ss.appendChild(el('h3',null,'Other takes for this beat ('+sibs.length+')'));
+      var strip=el('div','rv-sibs');
+      sibs.forEach(function(sf){ var sd=DATA[sf]; if(!sd) return;
+        var b=el('button','rv-sib'+(sf===file?' cur':'')+(sd.accepted?' kept':'')); b.type='button';
+        b.title=(sd.beat||'')+(sd.derived?(' · v'+sd.ver):'')+(sd.accepted?' · kept':'')+(sd.rating==='good'?' · approved':'')+(sd.rating==='bad'?' · disapproved':'');
+        var im=el('img'); im.src='img.php?p='+encodeURIComponent(PID)+'&f='+encodeURIComponent(sf)+'&t=1'; im.loading='lazy'; im.alt=''; b.appendChild(im);
+        if(sd.derived){ b.appendChild(el('span','vb','v'+sd.ver)); }
+        if(sd.accepted){ b.appendChild(el('span','ok','✓')); }
+        b.addEventListener('click', function(){ if(sf!==curFile) openLb(sf, false); });
+        strip.appendChild(b);
+      });
+      ss.appendChild(strip); lbinfo.appendChild(ss);
+    }
+
     // PROMPT (always shown) — structured display; ⧉ copy + stored value always use the RAW prompt verbatim
     var ps=el('div','rv-sec'); var ph=el('h3'); ph.appendChild(document.createTextNode('Prompt'));
     if(d.prompt){ ph.appendChild(copyBtn('⧉ copy', d.prompt)); }
@@ -649,6 +702,7 @@ $pname = (string)($proj['name'] ?? $id);
 
   function openLb(file, focusNote){
     curFile=file; var d=DATA[file]; if(!d) return;
+    lbimg.classList.remove('zoomed'); if(lbimg.parentNode) lbimg.parentNode.classList.remove('zoomed-stage');
     lbimg.src=d.full; lbimg.alt=d.orig||'';
     buildInfo(file);
     var order=visibleOrder(); var pos=order.indexOf(file);
@@ -661,6 +715,7 @@ $pname = (string)($proj['name'] ?? $id);
   document.getElementById('lbx').addEventListener('click', closeLb);
   lbprev.addEventListener('click', function(){ step(-1); });
   lbnext.addEventListener('click', function(){ step(1); });
+  lbimg.addEventListener('click', function(e){ e.stopPropagation(); var z=!lbimg.classList.contains('zoomed'); lbimg.classList.toggle('zoomed', z); if(lbimg.parentNode) lbimg.parentNode.classList.toggle('zoomed-stage', z); });
   lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('rv-lb-stage')) closeLb(); });
   document.addEventListener('keydown', function(e){
     if(!lb.classList.contains('open')) return;
@@ -669,10 +724,81 @@ $pname = (string)($proj['name'] ?? $id);
     else if(typing) return;
     else if(e.key==='ArrowLeft') step(-1);
     else if(e.key==='ArrowRight') step(1);
-    else if(e.key==='a'||e.key==='A'){ if(curFile) doApprove(curFile); }
-    else if(e.key==='d'||e.key==='D'){ if(curFile) doBad(curFile); }
+    else if(e.key==='a'||e.key==='A'||e.key==='g'||e.key==='G'){ if(curFile) doApprove(curFile); }
+    else if(e.key==='d'||e.key==='D'||e.key==='b'||e.key==='B'){ if(curFile) doBad(curFile); }
     else if(e.key==='k'||e.key==='K'){ if(curFile) doKeep(curFile); }
+    else if(e.key==='n'||e.key==='N'){ stepUnrated(); }
   });
+  // ====== view-state persistence (URL hash) — shareable + survives the live-refresh reload ======
+  function setSeg(id, val){ var box=document.getElementById(id); if(!box) return;
+    [].forEach.call(box.querySelectorAll('button'), function(x){ var dv=x.dataset[Object.keys(x.dataset)[0]]; x.classList.toggle('on', dv===String(val)); }); }
+  function setTog(id, on){ var b=document.getElementById(id); if(b) b.classList.toggle('on', !!on); }
+  function writeHash(){
+    var p=[];
+    if(state.sort!=='story') p.push('sort='+state.sort);
+    if(state.appr!=='all') p.push('appr='+state.appr);
+    if(state.rate!=='all') p.push('rate='+state.rate);
+    if(state.notes) p.push('notes=1');
+    if(state.defects) p.push('defects=1');
+    var sz=grid?parseInt(grid.style.getPropertyValue('--tile'),10):0; if(sz && sz!==200) p.push('size='+sz);
+    if(grid && grid.classList.contains('fit')) p.push('fit=1');
+    try{ history.replaceState(null,'', p.length?('#'+p.join('&')):(location.pathname+location.search)); }catch(e){}
+  }
+  function readHash(){
+    var h=(location.hash||'').replace(/^#/,''); if(!h) return;
+    var q={}; h.split('&').forEach(function(kv){ var i=kv.indexOf('='); if(i>0) q[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1)); });
+    if(q.sort){ state.sort=q.sort; setSeg('sortseg',q.sort); }
+    if(q.appr){ state.appr=q.appr; setSeg('apprseg',q.appr); }
+    if(q.rate){ state.rate=q.rate; setSeg('rateseg',q.rate); }
+    state.notes=q.notes==='1'; setTog('tognotes',state.notes);
+    state.defects=q.defects==='1'; setTog('togdef',state.defects);
+    if(q.size && grid){ var sb=document.querySelector('#sizeseg button[data-size="'+q.size+'"]'); if(sb){ setSeg('sizeseg',q.size); grid.style.setProperty('--tile', q.size+'px'); } }
+    if(q.fit==='1' && grid){ var fb=document.getElementById('togfit'); if(fb) fb.classList.add('on'); grid.classList.add('fit'); }
+  }
+  // ====== winner-pick: siblings (other takes) of a beat ======
+  function siblingsOf(file){ var d=DATA[file]; var beat=d&&d.beat; if(!beat) return [file];
+    return tiles().filter(function(t){ var dd=DATA[t.dataset.file]; return dd && dd.beat===beat; }).map(function(t){ return t.dataset.file; }); }
+  // ====== triage: jump to next UNRATED ======
+  function focusNextUnrated(fromTile){
+    var vis=tiles().filter(function(x){ return !x.classList.contains('rv-hidden'); });
+    var start=fromTile?vis.indexOf(fromTile):-1, i;
+    for(i=start+1;i<vis.length;i++){ if(vis[i].dataset.rating==='unrated'){ vis[i].focus(); vis[i].scrollIntoView({block:'center',behavior:'smooth'}); return; } }
+    for(i=0;i<=start;i++){ if(vis[i].dataset.rating==='unrated'){ vis[i].focus(); vis[i].scrollIntoView({block:'center',behavior:'smooth'}); return; } }
+  }
+  function stepUnrated(){ var order=visibleOrder(); var i=order.indexOf(curFile), n;
+    for(n=i+1;n<order.length;n++){ if(DATA[order[n]] && DATA[order[n]].rating==='unrated'){ openLb(order[n], false); return; } }
+    for(n=0;n<=i;n++){ if(DATA[order[n]] && DATA[order[n]].rating==='unrated'){ openLb(order[n], false); return; } }
+  }
+  // ====== live auto-refresh: poll ping; toast when new panels land ======
+  var INIT_COUNT=+root.dataset.count||0, INIT_NEWEST=+root.dataset.newest||0, toastEl=null;
+  function showToast(delta){
+    if(!toastEl){ toastEl=el('div','rv-toast'); var t=el('span'); toastEl._txt=t; toastEl.appendChild(t);
+      var x=el('span','x','✕');
+      toastEl.addEventListener('click', function(e){ if(e.target===x){ toastEl.classList.remove('show'); return; }
+        try{ sessionStorage.setItem('rvscroll-'+PID, String(window.scrollY||window.pageYOffset||0)); }catch(_){}
+        location.reload(); });
+      toastEl.appendChild(x); document.body.appendChild(toastEl);
+    }
+    toastEl._txt.textContent='+'+delta+' new panel'+(delta===1?'':'s')+' — show';
+    toastEl.classList.add('show');
+  }
+  function poll(){
+    fetch('review.php?p='+encodeURIComponent(PID)+'&do=ping', {headers:{'X-Requested-With':'fetch'}})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j&&j.ok){ var delta=(j.count|0)-INIT_COUNT; if(delta>0 || (j.newest|0)>INIT_NEWEST) showToast(delta>0?delta:1); } })
+      .catch(function(){});
+  }
+  // ====== "new since last visit" markers ======
+  function markFresh(){
+    try{ var k='rvseen-'+PID, last=+localStorage.getItem(k)||0;
+      if(last>0){ tiles().forEach(function(t){ if((+t.dataset.ts)>last && !t.querySelector('.rv-new') && !t.querySelector('.rv-vbadge')) t.classList.add('fresh'); }); }
+      localStorage.setItem(k, String(INIT_NEWEST||0));
+    }catch(_){}
+  }
+  function restoreScroll(){ try{ if('scrollRestoration' in history) history.scrollRestoration='manual'; var k='rvscroll-'+PID, v=sessionStorage.getItem(k); if(v){ sessionStorage.removeItem(k); window.scrollTo(0, +v); } }catch(_){} }
+  // ====== init ======
+  readHash(); applySort(); applyFilter(); markFresh(); restoreScroll();
+  if(grid) setInterval(poll, 25000);
 })();
 </script>
 </body></html>

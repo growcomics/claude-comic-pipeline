@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-28 (Studio — Review board: live auto-refresh, winner-pick filmstrip, keyboard triage, view-state)
+
+### Added
+
+Four purely-additive features to the live `studio/review.php` (the full-width chapter review surface), all in one deploy. Built on top of the same-day ref-thumbnail change; reconciled from LIVE (the repo copy keeps diverging from the parallel QA/notes session, so the deployed file is pulled back as source of truth and all sibling features — `defects`/`Analysis`/`togdef`/`⚑ Flagged defects`/notes/approval + the ✓/✕/★/💬 controls — were verified intact post-deploy).
+
+- **Live auto-refresh.** New read-only `do=ping` JSON endpoint returns `{count, newest}`. The board polls it every 25s and, when newly Auto-Synced panels land, shows a **"+N new panels — show"** toast. Clicking it saves scroll position to `sessionStorage` and reloads — and because filters now live in the URL hash (below), you land back exactly where you were. (Addresses the cockpit-vision "live status/auto-refresh on the board" want.)
+- **Beat-sibling compare + winner pick.** The lightbox now shows an **"Other takes for this beat (N)"** filmstrip of every candidate for that beat (thumbnails, version badge, ✓ for the kept one, current take ringed). Click a take to flip the lightbox to it; ✓ Approve still picks the winner. (Addresses the cockpit-vision "clearer winner-pick guidance" want.)
+- **Keyboard triage.** New **Unrated** rating filter + an `N` key that jumps to the next unrated panel (in the grid, focusing the tile; in the lightbox, opening it). Grid tiles now accept `A/G` approve, `D/B` bad, `K` keep without opening the lightbox, so a chapter can be rated `N → A → N → D …` entirely from the keyboard. Header subtitle documents the keys.
+- **View-state + polish.** Sort/approval/rating/notes/defects/size/fit are serialized to the URL hash (shareable + survives the live-refresh reload, via `history.replaceState`). Every panel imported since your last visit gets a "new" dot (localStorage `rvseen-<pid>`, not just the single server-rendered NEW badge). The lightbox image is **click-to-zoom** (natural size + scroll) for pixel-peeping flagged defects.
+
+Verification: deployed file byte-identical to the patch (sha `c50e1623`), page + `do=ping` both return **302** (auth redirect — proves PHP parses; a syntax error would 500), the app `<script>` passed `node --check`, and all sibling markers confirmed present. Visual eyeball left to the owner (studio is login-gated).
+
 ## 2026-06-28 (Studio — refine worker self-heals: failed-card resolve, claim lease, idempotent ingest)
 
 Three more purely-additive hardening changes to the live `studio/bridge.php`, completing the
