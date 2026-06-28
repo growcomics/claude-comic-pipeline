@@ -12,6 +12,27 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-06-28 (Studio — refine worker self-heals: failed-card resolve, claim lease, idempotent ingest)
+
+Three more purely-additive hardening changes to the live `studio/bridge.php`, completing the
+robustness story started earlier today (the success-flip + claim-by-kind). Each closes a path that
+previously dead-ended. Edited on top of LIVE (pre-deploy diff vs the just-committed repo copy was
+identical bar the trailing newline — no unrelated WIP). Deploy health: `GET /studio/bridge.php` →
+**403** clean JSON (not 500); `do=jobs` → `ok:true` (34 jobs); `do=claim kind=__none__` → `ok:true,
+job:null` (the rewritten claim ran end-to-end with no 500 and no side effect); all verbs intact.
+
+### Changed
+
+- **`do=done` now resolves a *failed* refine card — the symmetric half of the success auto-flip.** The success path (`do=ingest`) flips the pending `adjusts[]` record to `done`; but a refine that **blocked** (NSFW) or **errored** called `do=done status=blocked|error` and the handler never touched `adjusts[]`, leaving a `pending` "vN · pending" card that lingered *forever*. Now `do=done` captures the job's `adjustId`/`parentFile`/`kind`, and when the terminal status is `blocked|error|stopped` for an adjust job it best-effort flips the matching pending record to **`status='failed'`** (+`failReason`=the terminal, +`failedAt`, +`failNote`). Matched by the job's own `adjustId` (exact; `parentFile` oldest-pending as fallback). `'failed'` is distinct from the user-cancel status `'abandoned'` and, like it, drops the card off the cockpit's pending list (`creator.php` builds cards from `status==='pending'` only — verified against every `adjusts[]` consumer, so no mis-render). Wrapped in `try/catch (\Throwable)` — **never aborts `done`**; the success path (`status='done'`) is untouched.
+
+### Added
+
+- **`do=claim` reaps dead claims via a heartbeat lease — the queue self-heals.** `do=claim` only ever picked `status==='open'`, so a job whose worker died (crash, MCP drop, killed `/loop`) was stuck in `claimed`/`running` **forever** and never retried — `heartbeatAt` was written but never read. Now a `claimed`/`running` job whose last heartbeat is older than `$lease` seconds (default **900**, optional `leaseSecs` param, 60s floor) is treated as abandoned and re-claimable; the reclaim stamps `attempts`++ and `reclaimedAt` for telemetry. Default 15 min sits comfortably past any single Higgsfield refine gen, so a live worker is never reaped out from under itself. **Open-job behavior is unchanged** when nothing is stale.
+- **`do=ingest` is idempotent on `adjustId` — a crash-retry can't create a duplicate version.** If a worker ingests (creating `vN+1`) then crashes *before* `do=done` and retries the whole job, it previously produced a duplicate `vN+2`. Now, opt-in via `adjustId`: if the matching `adjusts[]` record is already `done` with a `resultFile`, ingest returns `{duplicate:true, file:<existing>}` instead of storing again. **Flow autosync carries no `adjustId`, so it is completely unaffected** (this is the same reason the success-flip never fires on a Flow ingest).
+- **Lane-B worker playbook (`studio/worker/LANE-B-REFINE-PLAYBOOK.md`) hardened to use all of the above:** `do=claim kind=adjust` as the *primary* atomic grab (no double-spend), `do=heartbeat` between `job_display` polls (holds the lease + surfaces the cockpit Stop via `stopRequested`), `adjustId` passed on `do=ingest` (exact flip + idempotency), and an explicit failure close (`do=done status=blocked` → card flips to `failed`). The `/loop` paste block + Follow-ups were updated to match (all four follow-ups now ✅ SHIPPED).
+
+---
+
 ## 2026-06-28 (Studio — bridge self-resolves the refine card + claim-by-kind)
 
 ### Added

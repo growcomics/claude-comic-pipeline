@@ -50,7 +50,7 @@ if ($do === 'projects') bout(['ok'=>true,'projects'=>projects_all()]);
 $id = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? $_GET['p'] ?? ''));
 // Verbs that don't operate on a single named project (worker queue verbs claim/heartbeat/done
 // span all projects; ingest_init creates one). genspec IS project-scoped, so it stays gated below.
-$noProjVerbs = ['ingest_init','ingest','ingest_ref','claim','heartbeat','done','jobs'];
+$noProjVerbs = ['ingest_init','ingest','ingest_ref','ingest_refcache','claim','heartbeat','done','jobs'];
 if (!in_array($do, $noProjVerbs, true) && (!$id || !project_get($id))) bout(['ok'=>false,'error'=>'unknown project']);
 
 if ($do === 'images') bout(['ok'=>true,'project'=>project_get($id),'images'=>images_all($id)]);
@@ -115,6 +115,21 @@ if ($do === 'ingest') {
     $f = $_FILES['file'] ?? null;
     if (!$f || ($f['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) bout(['ok'=>false,'error'=>'no file']);
     if (($f['size'] ?? 0) > MAX_BYTES) bout(['ok'=>false,'error'=>'too big']);
+    // idempotency (opt-in via adjustId): if this ingest answers an adjust that a PRIOR ingest already
+    // resolved (worker crashed AFTER ingest but BEFORE do=done, then retried the whole job), don't store
+    // a duplicate vN+1 — return the version the first ingest produced. Flow ingest carries no adjustId, so
+    // it is never affected. Read-only lookup; the file's tmp upload is simply discarded (never stored).
+    $adjIdIn = trim((string)($_POST['adjustId'] ?? ''));
+    if ($adjIdIn !== '') {
+        $cfDup = SDATA . '/creator-' . $pid . '.json';
+        if (is_file($cfDup)) {
+            foreach ((array)(s_read($cfDup, [])['adjusts'] ?? []) as $a) {
+                if ((string)($a['id'] ?? '') === $adjIdIn && ($a['status'] ?? '') === 'done' && !empty($a['resultFile'])) {
+                    bout(['ok'=>true,'duplicate'=>true,'file'=>(string)$a['resultFile'],'adjustResolved'=>true]);
+                }
+            }
+        }
+    }
     $orig = (string)($_POST['orig'] ?? $f['name'] ?? 'flow.png');
     $res = store_image($f['tmp_name'], $orig, $pid);
     if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
@@ -228,6 +243,34 @@ if ($do === 'enrich') {
     }
     if ($changed) images_save($id, $meta);
     bout(['ok'=>true,'enriched'=>$touched]);
+}
+
+// ---- ingest_refcache: store a refs_used thumbnail so review.php can render it -----
+// review.php renders a refs_used entry as a real THUMBNAIL only when its `file` points to a
+// studio-resident image. Flow/Higgsfield input refs arrive as external URLs (chips, not images).
+// This verb stores one such ref image as an isref gallery entry (kept OFF the review board, like
+// uploadref, but NOT registered in $c['refs'] — it's a display cache, not a generation reference)
+// and returns its filename, so a sync can map refs_used[].url -> file and the refs show inline.
+// Deduped by `refkey` (e.g. sha1 of the source URL): the SAME ref shared across many panels is
+// stored once. See studio/tools/cache-project-refs.py.
+//   POST bridge.php  key, do=ingest_refcache, p=<id>, file=<multipart image>, refkey=<hash>[, orig=]
+if ($do === 'ingest_refcache') {
+    $pid = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? ''));
+    if ($pid==='' || !project_get($pid)) bout(['ok'=>false,'error'=>'unknown project']);
+    $refkey = mb_substr(trim((string)($_POST['refkey'] ?? '')), 0, 80);
+    $meta = images_all($pid);
+    if ($refkey !== '') foreach ($meta as $m)              // dedup: this ref already cached?
+        if (($m['refkey'] ?? '') === $refkey && !empty($m['isref'])) bout(['ok'=>true,'file'=>$m['file'],'cached'=>true]);
+    $f = $_FILES['file'] ?? null;
+    if (!$f || ($f['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) bout(['ok'=>false,'error'=>'no file']);
+    if (($f['size'] ?? 0) > MAX_BYTES) bout(['ok'=>false,'error'=>'too big']);
+    $orig = mb_substr((string)($_POST['orig'] ?? 'ref.png'), 0, 120);
+    $res = store_image($f['tmp_name'], $orig, $pid);
+    if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
+    $entry = ['file'=>$res['file'],'orig'=>$orig,'rating'=>'unrated','accepted'=>false,'group'=>'','tags'=>[],'isref'=>true,'ts'=>time()];
+    if ($refkey !== '') $entry['refkey'] = $refkey;
+    $meta[] = $entry; images_save($pid, $meta);
+    bout(['ok'=>true,'file'=>$res['file'],'cached'=>false]);
 }
 
 // ---- ingest_ref: store an image AND register it as a project REFERENCE -----
@@ -353,20 +396,32 @@ if ($do === 'claim') {
     $worker   = mb_substr(trim((string)($_POST['worker'] ?? $_GET['worker'] ?? '')), 0, 60); if ($worker === '') $worker = 'worker';
     $want     = (string)($_POST['backend'] ?? $_GET['backend'] ?? '');       // optional: only claim jobs for this backend
     $wantKind = (string)($_POST['kind'] ?? $_GET['kind'] ?? '');             // optional: only claim jobs of this kind (e.g. adjust → grab refines first)
-    $job = s_with_lock(JOBS_FILE, function($jobs) use ($worker, $want, $wantKind) {
+    // lease / reaping: claim used to take ONLY status=open jobs, so a job whose worker died (crash, MCP
+    // drop, /loop killed) was stuck in claimed/running forever and never retried. Now a claimed/running
+    // job whose last heartbeat is older than $lease seconds is treated as abandoned and re-claimable, so
+    // the queue self-heals. Default 15 min is comfortably past any single Higgsfield refine gen; a LIVE
+    // worker (which heartbeats, or finishes well inside the window) is never reaped out from under itself.
+    $lease    = (int)($_POST['leaseSecs'] ?? $_GET['leaseSecs'] ?? 900);
+    if ($lease < 60) $lease = 60;                                            // floor — never reap a job a worker may still be mid-gen on
+    $now      = time();
+    $job = s_with_lock(JOBS_FILE, function($jobs) use ($worker, $want, $wantKind, $lease, $now) {
         $pick = null;
         foreach ($jobs as $i => $j) {
-            if (($j['status'] ?? '') !== 'open') continue;                  // only un-claimed jobs
+            $st = $j['status'] ?? '';
+            $stale = in_array($st, ['claimed','running'], true) && ($now - (int)($j['heartbeatAt'] ?? 0)) > $lease;
+            if ($st !== 'open' && !$stale) continue;                        // un-claimed jobs, or abandoned (stale) claims to rescue
             if (!empty($j['stopRequested'])) continue;                      // cancelled before it ever ran
             if ($want !== '' && ($j['backend'] ?? '') !== $want) continue;
             if ($wantKind !== '' && ($j['kind'] ?? '') !== $wantKind) continue;  // optional kind filter; omitted ⇒ identical FIFO
             if ($pick === null || ($j['createdAt'] ?? '') < ($jobs[$pick]['createdAt'] ?? '')) $pick = $i;  // oldest = FIFO
         }
         if ($pick === null) return ['result'=>null];
+        $reclaimed = ($jobs[$pick]['status'] ?? 'open') !== 'open';         // were we rescuing a stalled job (vs a fresh open one)?
         $jobs[$pick]['status']      = 'claimed';
         $jobs[$pick]['worker']      = $worker;
         $jobs[$pick]['claimedAt']   = date('c');
-        $jobs[$pick]['heartbeatAt'] = time();
+        $jobs[$pick]['heartbeatAt'] = $now;
+        if ($reclaimed) { $jobs[$pick]['attempts'] = (int)($jobs[$pick]['attempts'] ?? 1) + 1; $jobs[$pick]['reclaimedAt'] = date('c'); }
         return ['data'=>$jobs, 'result'=>$jobs[$pick]];
     });
     bout(['ok'=>true, 'job'=>$job]);                                        // job===null => nothing to do
@@ -399,11 +454,12 @@ if ($do === 'done') {
     $jid    = preg_replace('/[^A-Za-z0-9_]/', '', (string)($_POST['job'] ?? $_GET['job'] ?? ''));
     $status = (string)($_POST['status'] ?? 'done'); if (!ck_is_terminal($status)) $status = 'done';
     $note   = mb_substr(trim((string)($_POST['note'] ?? '')), 0, 300);
-    $pid = '';
-    $ok = s_with_lock(JOBS_FILE, function($jobs) use ($jid, $status, $note, &$pid) {
+    $pid = ''; $jAdjustId = ''; $jParent = ''; $jKind = '';
+    $ok = s_with_lock(JOBS_FILE, function($jobs) use ($jid, $status, $note, &$pid, &$jAdjustId, &$jParent, &$jKind) {
         foreach ($jobs as &$j) {
             if (($j['id'] ?? '') !== $jid) continue;
             $pid = (string)($j['projectId'] ?? '');
+            $jAdjustId = (string)($j['adjustId'] ?? ''); $jParent = (string)($j['parentFile'] ?? ''); $jKind = (string)($j['kind'] ?? '');
             $j['status'] = $status; $j['endedAt'] = date('c'); $j['heartbeatAt'] = time();
             if ($note !== '') { $j['progress'] = $j['progress'] ?? ['done'=>0,'total'=>0,'note'=>'']; $j['progress']['note'] = $note; }
             return ['data'=>$jobs, 'result'=>true];
@@ -417,6 +473,32 @@ if ($do === 'done') {
             $c['run'] = $c['run'] ?? []; $c['run']['state'] = $status; $c['run']['stopRequested'] = false; $c['run']['endedAt'] = date('c');
             return ['data'=>$c, 'result'=>true];
         });
+    }
+    // if a refine/adjust job ended in a FAILURE terminal (blocked|error|stopped), resolve its pending
+    // adjusts[] card to 'failed' so the cockpit's "vN · pending" refine card doesn't linger forever on a
+    // gen that never produced an image. (SUCCESS is resolved by do=ingest, which records resultFile; this
+    // is the symmetric failure half.) Matched by the job's own adjustId (exact), parentFile as fallback.
+    // 'failed' is distinct from the user-cancel status ('abandoned') and, like it, drops the card off the
+    // pending list (creator.php renders cards from status==='pending' only). Best-effort + non-fatal.
+    if ($ok && $pid !== '' && ($jAdjustId !== '' || $jKind === 'adjust') && in_array($status, ['blocked','error','stopped'], true)) {
+        try {
+            $cfp = SDATA . '/creator-' . preg_replace('/[^a-z0-9-]/', '', $pid) . '.json';
+            if (is_file($cfp)) s_with_lock($cfp, function($cc) use ($jAdjustId, $jParent, $status, $note) {
+                if (!is_array($cc) || empty($cc['adjusts']) || !is_array($cc['adjusts'])) return ['result'=>false];
+                $pick = null;
+                foreach ($cc['adjusts'] as $i => $a) {
+                    if (($a['status'] ?? '') !== 'pending') continue;
+                    if ($jAdjustId !== '') { if ((string)($a['id'] ?? '') === $jAdjustId) { $pick = $i; break; } continue; }  // exact adjustId only
+                    if ($jParent !== '' && ($a['parentFile'] ?? '') === $jParent && $pick === null) $pick = $i;              // fallback: oldest pending on the parent
+                }
+                if ($pick === null) return ['result'=>false];
+                $cc['adjusts'][$pick]['status']     = 'failed';        // clears the zombie pending card; distinct from user-cancel 'abandoned'
+                $cc['adjusts'][$pick]['failReason'] = $status;         // blocked | error | stopped
+                $cc['adjusts'][$pick]['failedAt']   = date('c');
+                if ($note !== '') $cc['adjusts'][$pick]['failNote'] = mb_substr($note, 0, 300);
+                return ['data'=>$cc, 'result'=>true];
+            });
+        } catch (\Throwable $e) { /* best-effort: a failed card-flip must never break `done` */ }
     }
     bout(['ok'=>$ok, 'status'=>$status]);
 }
