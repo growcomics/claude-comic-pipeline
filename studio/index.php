@@ -29,9 +29,41 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
 <title>Comic Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css"></head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
-  <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
+  <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="help.php">❔ How it works</a> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap">
   <div class="pagehead"><h1>Projects <span class="muted"><?= count($projects) ?></span></h1></div>
+
+  <!-- GUIDE BANNER -->
+  <a class="card" href="help.php" style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px;border-color:#3a3470;background:linear-gradient(135deg,rgba(122,127,236,.16),rgba(29,158,117,.08))">
+    <svg width="300" height="46" viewBox="0 0 372 56" style="flex:none;max-width:46%;height:auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><marker id="gba" markerWidth="7" markerHeight="7" refX="5" refY="2.6" orient="auto"><path d="M0,0 L5,2.6 L0,5.2 Z" fill="#6F7380"/></marker></defs>
+      <g font-size="18" text-anchor="middle">
+        <circle cx="22" cy="28" r="17" fill="#14151C" stroke="#EF9F27" stroke-width="1.5"/><text x="22" y="34">🗂</text>
+        <circle cx="92" cy="28" r="17" fill="#14151C" stroke="#5BA7E6" stroke-width="1.5"/><text x="92" y="34">📜</text>
+        <circle cx="162" cy="28" r="17" fill="#14151C" stroke="#378ADD" stroke-width="1.5"/><text x="162" y="34">📑</text>
+        <circle cx="232" cy="28" r="17" fill="#14151C" stroke="#7A7FEC" stroke-width="1.5"/><text x="232" y="34">🍌</text>
+        <circle cx="302" cy="28" r="17" fill="#14151C" stroke="#4FB3A0" stroke-width="1.5"/><text x="302" y="34">🔄</text>
+        <circle cx="356" cy="28" r="14" fill="#14151C" stroke="#1D9E75" stroke-width="1.5"/><text x="356" y="33" font-size="15" font-weight="800" fill="#1D9E75">✓</text>
+      </g>
+      <g stroke="#6F7380" stroke-width="1.5" marker-end="url(#gba)">
+        <line x1="41" y1="28" x2="71" y2="28"/><line x1="111" y1="28" x2="141" y2="28"/>
+        <line x1="181" y1="28" x2="211" y2="28"/><line x1="251" y1="28" x2="281" y2="28"/>
+        <line x1="321" y1="28" x2="338" y2="28"/>
+      </g>
+    </svg>
+    <div style="flex:1;min-width:180px">
+      <div style="font-weight:800;font-size:16px;color:#fff">📖 New here? Read the guide</div>
+      <div class="muted" style="font-size:13px;margin-top:3px">The full workflow — references → script → pages → generate in Flow → review — with diagrams.</div>
+    </div>
+    <span class="btn primary" style="flex:none">Open the guide →</span>
+  </a>
+
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <a class="btn sm primary" href="creator.php">🎬 Comic Creator</a>
+    <a class="btn sm" href="overview.php">📋 Project overview</a>
+    <a class="btn sm" href="import.php">📄 Comic → 3D Import</a>
+    <a class="btn sm" href="growgetter.php">🎲 Random comic (SFW)</a>
+  </div>
 
   <details class="card newproj"<?= $projects ? '' : ' open' ?>>
     <summary>+ New project</summary>
@@ -63,7 +95,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
       $acc = 0; foreach ($imgs as $im) if (!empty($im['accepted'])) $acc++;
       $cov = $p['cover'] ?? null;
     ?>
-    <a class="pcard" href="project.php?p=<?= h(urlencode($p['id'])) ?>">
+    <a class="pcard" href="creator.php?p=<?= h(urlencode($p['id'])) ?>">
       <div class="pcover">
         <?php if ($cov): ?><img loading="lazy" src="img.php?p=<?= h(urlencode($p['id'])) ?>&f=<?= h(urlencode($cov)) ?>&t=1" alt="">
         <?php else: ?><span class="pcover-empty"><?= h(strtoupper(substr($p['name'],0,2))) ?></span><?php endif; ?>
@@ -81,3 +113,4 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
   </div>
   <?php endif; ?>
 </main></body></html>
+

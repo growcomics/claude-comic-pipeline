@@ -12,6 +12,26 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-03 (Studio — 🎲 GrowGetter random-comic generator, always SFW)
+
+### Added
+
+- **`studio/growgetter.php` — one-click random GrowGetter-style comic generator (ALWAYS SFW), + a "🎲 Random comic (SFW)" button on `studio/index.php`.** Built from a full research scan of growgettercomics.com (all 10 headline series + ~40 catalog titles, the creator's blog "Payoff Doctrine", title patterns, escalation-ladder structure) distilled into an embedded `GG_FORMULA`. The button runs the whole pre-production groundwork chain in the browser: `gg_premise` (server-side random seeds — engine/protagonist/setting/tone banks drawn from catalog frequency — feed one Sonnet call that returns title, logline, countable escalation ladder, cast with mandatory rival, locations, wardrobe lock, and an 8-10 page chapter script) → `gg_create` (project tagged `growgetter`/`sfw`, creator config with brief/script/wardrobe/style + `sfw:true`) → the existing creator.php `do=breakdown` (script → page/panel plan) → `gg_refplan` (one AI call plans the full reference set: face cards, stage-aware pre/mid/post body sheets per transforming character, environment plates per location — each with an SFW-locked generation prompt — stored as `$c['refplan']` and enqueued as a `kind=refs` worker job) → `gg_qa` (per-image vision QA writing the same `analysis` shape as the cockpit 🔎 scan, src=`ggqa`; SFW compliance is the #1 check and any nsfw defect forces `fail`). `GG_SFW_RULES` (adults only, fully clothed always, strength/heroism framing, never sexualized) is baked into every AI call and appended to every generated prompt. JSON verbs also accept the bridge key (skips session+CSRF, same trust as bridge.php) so headless sessions/workers can drive the generator. Verified live end-to-end: premise "Doses" (six-vial serum ladder, rival steals half) → project → 16-spec reference plan → `job_0e5466dfac` open in the queue and visible via `bridge.php do=jobs`/`genspec` → synthetic-image `gg_qa` wrote `verdict:pass, people:0, src:ggqa` (test image then removed). The generated `doses` project was left live as the first sample.
+
+## 2026-06-28 (Studio — Review power tools: ref thumbnails, AI defect scan, keyboard triage, bulk + Higgsfield sync)
+
+### Added
+
+- **Reference thumbnails in the review detail (`studio/review.php` + `bridge.php do=ingest_refcache` + `studio/tools/cache-project-refs.py`).** A panel's refs-used previously rendered as chip links for refs that live off-studio (Flow/Higgsfield CDN). New bridge verb `ingest_refcache` stores a ref image as a deduped isref thumbnail (by `refkey` = url hash); `cache-project-refs.py` downloads each project's unique ref urls **once** and `enrich --force`es every panel's `refs_used` with the resolved studio `file`. First run on `m-ller-higgsfield`: 261 ref-slots → 25 unique images stored → all 261 now render as inline thumbnails for side-by-side drift diagnosis.
+- **AI defect scan from the review surface (`review.php`).** A "🔎 Scan shown for defects" button loops the cockpit's existing `qascan_one` endpoint over the visible panels (duplicate characters / extra people — the owner's priority), writes each panel's `analysis.defects`, and lights the ⚑ flag so the "Flagged defects" filter becomes populated. Gated on the `data/ai.json` key (`$aiOn`).
+- **Keyboard triage on the grid (`review.php`).** Arrow keys move a focus ring between visible tiles; **G** approve · **B** reject · **K** keep — rate a whole chapter without clicking. Coexists with the lightbox keymap (the new handler only fires when the lightbox is closed).
+- **Bulk actions on the shown set (`review.php` + `api.php action=bulk`).** "✓ Approve shown", "🗑 Delete rejects" (the ✕-rated among those shown), and "⤓ Export approved" (zip in story order). New `api.php` `bulk` action applies approve/unapprove/bad/keep/delete to a file set in one CSRF-guarded request. `export.php` gained `?only=approved|good` and now **excludes `isref`** images (so cached ref thumbnails are never zipped).
+- **What's-new feed**: posted `upd-review-surface`, `upd-review-power`, `upd-higgsfield-sync` to `admin/data/updates.json`.
+
+### Notes
+
+- **Active multi-session clobber on `studio/review.php` + `bridge.php`** (same-machine, shared working tree). A parallel session added image-zoom + URL-hash view-state + next-unrated to review.php and an `ingest` idempotency block to bridge.php; their deploys repeatedly wiped this session's toolbar HTML/CSS mid-build. Resolved by re-fetching live as the merge base and re-applying; **both sessions' features now coexist live**, but it can recur. DEPLOY-NOTES gained a review.php marker table; treat review.php like creator.php (fetch-live-before-edit, grep-all-markers-after).
+
 ## 2026-06-28 (Studio — Review board: panel search, prompt copy tools, side-by-side compare)
 
 ### Added
