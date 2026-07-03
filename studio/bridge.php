@@ -310,10 +310,12 @@ if ($do === 'ingest_ref') {
     $status = (($_POST['status'] ?? '') === 'approved') ? 'approved' : 'pending';
     $role   = mb_substr(trim((string)($_POST['role'] ?? '')), 0, 24);
     $prov   = mb_substr(trim((string)($_POST['prov'] ?? '')), 0, 1200);
+    $stage  = ck_stage_key((string)($_POST['stage'] ?? ''));   // progression stage (pre/mid/post/tier-N, ''=agnostic) — same axis as uploadref's stage
     $ref = ['id'=>nid(), 'file'=>$res['file'],
             'char'=>mb_substr(trim((string)($_POST['char'] ?? '')), 0, 40),
             'kind'=>$kind,
             'label'=>mb_substr(trim((string)($_POST['label'] ?? '')), 0, 80),
+            'stage'=>$stage,
             'status'=>$status, 'src'=>'gathered', 'ts'=>time()];
     if ($role !== '') $ref['role'] = $role;
     if ($prov !== '') $ref['prov'] = $prov;

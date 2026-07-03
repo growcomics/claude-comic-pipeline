@@ -338,16 +338,32 @@ if ($do === 'gg_qa') {
     $ext = ext_of($path); $mime = $ext==='png'?'image/png':($ext==='webp'?'image/webp':($ext==='gif'?'image/gif':'image/jpeg'));
     $c = s_read(gg_cfile($pid), []);
     $castNames = array_values(array_filter(array_map(fn($m)=>trim((string)($m['name'] ?? '')), (array)($c['gg']['premise']['cast'] ?? [])), 'strlen'));
+    // is this image a registered REFERENCE (character sheet / env plate)? Then the
+    // extra-person check must not fire on the sheet's own single subject, and an
+    // env plate expects zero people.
+    $refOf = null;
+    foreach ((array)($c['refs'] ?? []) as $r) if (($r['file'] ?? '') === $file) { $refOf = $r; break; }
     $sys = 'You are a strict QA inspector for an ALWAYS-SFW comic. You are shown ONE AI-generated image (a comic panel or a reference sheet). Check, in priority order:'
-        . "\n1. SFW COMPLIANCE — any nudity, underwear/swimwear/lingerie, shirtless figures, torn-away clothing, sexualized posing or framing, or sheer/skimpy coverage is an automatic FAIL. Modest athletic wear, streetwear and full-coverage costumes are fine, including muscular physiques in them."
+        . "\n1. SFW COMPLIANCE — any nudity, underwear/swimwear/lingerie, shirtless figures, torn-away clothing, sexualized posing or framing, or sheer/skimpy coverage is an automatic FAIL. Exposed midriff/torso is a fail. However: FORM-FITTING athletic wear (leggings, compression tops, singlets, unitards) with FULL coverage of torso and hips is normal sportswear and is NOT a defect, including on muscular physiques — judge coverage, not tightness."
         . "\n2. DUPLICATE CHARACTER — the same character appearing twice in one image (cloned figure)."
-        . "\n3. UNWANTED EXTRA — any person who is not one of the named cast."
+        . "\n3. UNWANTED EXTRA — a person in frame beyond those the image is supposed to contain."
         . "\n4. MALFORMED ANATOMY — extra/missing fingers or limbs, fused bodies, melted faces."
         . "\n5. TEXT ARTIFACT — garbled text or labels baked into the art."
         . "\nReply ONLY with compact JSON: {\"caption\":\"<one short sentence>\",\"people\":<integer human-figure count>,\"defects\":[{\"type\":\"nsfw|duplicate_character|extra_person|anatomy|text_artifact|other\",\"severity\":\"high|med|low\",\"detail\":\"<short phrase>\"}],\"verdict\":\"pass|warn|fail\"}. "
         . 'verdict is "fail" on ANY nsfw defect or any high-severity defect; "warn" for minor issues; "pass" if clean. When unsure about SFW compliance, FAIL it — this pipeline must never ship a borderline image.';
-    $u = ($castNames ? 'The only allowed people (the named cast): ' . implode(', ', $castNames) . ".\n" : '')
-       . 'Inspect the image now. JSON only.';
+    if ($refOf) {
+        $rk = (string)($refOf['kind'] ?? ''); $rc = trim((string)($refOf['char'] ?? '')); $rl = trim((string)($refOf['label'] ?? ''));
+        if ($rk === 'scene' || $rk === 'prop') {
+            $u = 'This image is a ' . ($rk === 'scene' ? 'LOCATION/environment reference plate' : 'prop reference') . ($rc !== '' ? ' ("' . $rc . '")' : '')
+               . ". It should contain ZERO people — flag ANY human figure as extra_person.\n";
+        } else {
+            $u = 'This image is a CHARACTER REFERENCE SHEET of cast member ' . ($rc !== '' ? $rc : 'a named character') . ($rl !== '' ? ' (' . $rl . ')' : '')
+               . ". Exactly ONE figure — that character — is expected; do NOT flag the single subject as an extra person. Only flag extra_person if MORE than one figure appears.\n";
+        }
+    } else {
+        $u = ($castNames ? 'The only allowed people (the named cast): ' . implode(', ', $castNames) . ".\n" : '');
+    }
+    $u .= 'Inspect the image now. JSON only.';
     $payload = json_encode(['model'=>$cfg['model'] ?? 'claude-haiku-4-5', 'max_tokens'=>500, 'system'=>$sys,
         'messages'=>[['role'=>'user','content'=>[
             ['type'=>'image','source'=>['type'=>'base64','media_type'=>$mime,'data'=>base64_encode($data)]],
