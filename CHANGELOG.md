@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-04 (Doses — chapter 1 complete: 8 pages / 32 panels, worker-generated end-to-end)
+
+### Added
+
+- **Finished the "Doses" chapter (the GrowGetter generator's first comic) as the interim Lane-B worker.** Pages 3-8 (24 panels) generated on Higgsfield nano_banana_pro in one run, on top of pages 1-2: every panel ref-anchored (face + stage-appropriate body sheets by job-id + location plate), prompts + refs_used recorded at ingest, auto-approved, gen=<planPanelId> for plan linkage, dialogue baked as house-style balloons. Cast-law reframes where the plan drifted off-cast: the "Coach" beats staged with the coach off-frame; crowd beats reframed onto Tomás (the witness archetype) or empty-stands/bokeh; race fields framed out (tight lane crops, empty-lane speed language). Growth beats delivered per the density mandate (foam-dent CU, forearm-definition CU, Daria seam-strain closer). SFW QA on all 32: 30 first-pass clean; 2 real catches (balloon typo "respnons-sibility" on p5-1; a person-shaped looming shadow on p7-3) → both regenerated, chained as v2 under their parents via the lineage mechanism, v1s demoted (bad/unapproved), v2s pass. Final: 34 panel images (32 approved story panels + 2 rejected superseded v1s), 8/8 pages done. Known cosmetic drift left for owner ✎ adjust: Daria's jacket sleeve reads dark leather instead of scarlet in the final cliffhanger panel.
+
 ## 2026-07-03 (Studio — 🎲 GrowGetter random-comic generator, always SFW)
 
 ### Added
