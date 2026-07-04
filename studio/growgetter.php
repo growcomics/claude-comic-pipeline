@@ -65,10 +65,12 @@ function gg_enqueue(array $job): string {
 const GG_SFW_RULES =
     'ABSOLUTE SFW RULES (non-negotiable, apply to every character, panel and prompt): '
   . 'All characters are adults. Everyone is FULLY CLOTHED at all times in modest athletic wear, streetwear, work clothes or full-coverage hero costumes — '
-  . 'no swimwear, no underwear, no lingerie, no shirtless/topless anyone, no torn-away clothing, no bath/shower/locker-room scenes. '
+  . 'no swimwear, no underwear, no lingerie, no shirtless/topless anyone, no bath/shower/locker-room scenes. '
+  . 'During growth scenes clothing may strain and seams may visibly split at the shoulder or side (a signature beat) — but coverage of chest, torso and hips is ALWAYS preserved; garments never tear away or fall off. '
   . 'No sexual content, sensual posing, innuendo or fetish framing of any kind. '
   . 'Muscle growth is portrayed as SPORTS, STRENGTH, HEROISM and CONFIDENCE — the fantasy of becoming powerful, framed like a superhero origin or a sports training montage. '
-  . 'Clothing may read as athletic-fitting but always keeps full coverage; never sexualize the transformation.';
+  . 'Clothing may read as athletic-fitting but always keeps full coverage; never sexualize the transformation. '
+  . 'IMPORTANT: muscle SIZE is never an SFW problem — hugely, exaggeratedly muscular physiques in modest full-coverage clothing are exactly the product. SFW constrains coverage and framing, NOT how big the muscles are.';
 
 // ---- the GrowGetter formula (distilled from a full scan of growgettercomics.com,
 // its free readers, blog and series announcements — 2026-07-03). Feeds the premise
@@ -115,6 +117,39 @@ Superior, The Goddess Lucy, Breaker, UltraGal, The Curse, and ~40 more):
 • EMOTIONAL REGISTERS available: wish-fulfillment self-improvement, underdog
   sports triumph, power-corrupts caution, sweet slow-burn romance, classic cape
   heroics, pulp adventure.
+• MUSCLE SIZE IS THE PRODUCT (owner-verified 2026-07-04; calibrated from the
+  source comics). The catalog's own size ladder: "athletic" → "very muscular,
+  biceps the size of a head" → "fantasy sized, biceps double the size of a
+  head" → "extreme proportions". A TRANSFORMED (post) character sits at the
+  fantasy tier: shoulders 2.5-3 head-widths across with the head reading small
+  between mountainous traps; neck thicker than the head; flexed biceps LARGER
+  THAN HER HEAD with forearms nearly as thick; a massive chest shelf; lats so
+  wide the arms rest at 45°; each thigh wider than her waist; visibly TALLER,
+  filling a doorframe. THE FOUR CONSTANT DIMENSIONS (owner-specified, in every
+  transformed figure): (1) a BIG CHEST — a large feminine bust carried forward
+  on the pec shelf; (2) a BIG ROUNDED BUTT and heavily developed hips/glutes;
+  (3) a VERY NARROW wasp waist between them — the exaggerated hourglass is the
+  silhouette; (4) VISIBLE ABS — a defined 6-8-pack reading even through the
+  costume fabric across that narrow waist. The figure stays FEMININE — pretty
+  face, long hair — never male-bodybuilder blocky, and the muscle renders as
+  SMOOTH, ROUND, pumped mass (no shredded striations, veins rare).
+  MID-transformation = competitive-bodybuilder tier with the same four
+  dimensions at smaller scale. "Merely athletic/toned" as a transformed state
+  is a FAILURE of the format.
+• GROWTH SCENES ARE MANDATORY AND MULTIPLE (3-4 per chapter in hero-mode,
+  progress-reveal beats in slow-burn mode), and each is a SEQUENCE — never one
+  cut-away panel. The canonical burst sequence (6-8 panels over 1-2 pages):
+  (1) trigger ECU — hands on the vial/artifact, object glowing; (2) face ECU —
+  gasp or wild grin, eyes flaring, hair lifting; (3) full-body energy pose,
+  back arched, first seams popping; (4) an ECU MONTAGE of single body parts
+  each filling its own panel on burst/speedline backgrounds, in order:
+  chest/shoulders swell → bicep balloons → thighs/hips widen, with baked SFX
+  as the only text (FWOOMP, BAAAM, RIIIP, KRZZT); (5) full-body AFTER splash
+  from a low angle, her new mass filling a doorframe/panel, scale sold by
+  furniture or bystanders; (6) post-growth beats — she squeezes her own bicep
+  in disbelief, a strength-feat demo, and a bystander reaction (dropped jaw).
+  Dialogue drops out during the burst; SFX carry it. Slow-burn variant: same-
+  pose mirror before/afters, prompted flexes, "not as big as I thought" hooks.
 TXT;
 
 // ---- random seed banks (server-side randomness => real variety per click) ---
@@ -188,7 +223,7 @@ if ($do === 'gg_premise') {
         . '"cast":[{"name":"<first name or full name>","role":"protagonist|rival|friend|mentor","look":"<2 sentence visual identity: age (adult), build BEFORE any transformation, hair, face vibe, everyday outfit — modest and fully clothed>","arc":"<how they change across the chapter, or \'constant\'>"}],'
         . '"locations":["<3-5 named recurring locations>"],'
         . '"wardrobe":"<one paragraph locking each cast member\'s outfit(s) for continuity — every garment modest, full coverage>",'
-        . '"script":"<the chapter script: 8-10 pages labeled PAGE 1..PAGE N, each page 2-4 sentences of visual action plus short quoted dialogue lines. Grounded slice-of-life opening, the engine lands by page 2-3, first growth payoff mid-chapter with strength-feat set-pieces and astonished-bystander reaction shots, and a closing cliffhanger that teases the rival or the next rung of the ladder. Only the named cast ever appears.>"}'
+        . '"script":"<the chapter script: 8-10 pages labeled PAGE 1..PAGE N, each page 2-4 sentences of visual action plus short quoted dialogue lines. Grounded slice-of-life opening and the engine landing by page 2-3 — then AT LEAST TWO (ideally three) full GROWTH-SEQUENCE pages following the canonical burst: trigger close-up (hands on the glowing vial/artifact) → face close-up (gasp, eyes flaring) → energy pose with first seams popping → single-body-part close-up montage (chest/shoulders swell, then bicep balloons, then thighs/hips widen — SFX like FWOOMP/BAAAM/RIIIP carry these panels, dialogue drops out) → low-angle full-body AFTER splash with her new mass filling a doorframe and scale sold by props or bystanders → she squeezes her own bicep in disbelief, performs a strength feat, and a bystander reacts with a dropped jaw. Growth happens ON THE PAGE, never between pages, and each sequence lands one rung BIGGER on the size ladder. Closing cliffhanger teases the rival or the next rung. Only the named cast ever appears.>"}'
         . "\nCast size: protagonist + 2-3 supporting characters (one MUST be role \"rival\"), all adults. The transformation stays a strength/sports/heroism fantasy — never sexualized. Keep the total under 3800 tokens.";
     $user = "Random seeds for this generation:\nENGINE: {$seed['engine']}\nPROTAGONIST: {$seed['protagonist']}\nSETTING: {$seed['setting']}\nTONE: {$seed['tone']}\n\nInvent the premise and write the script. JSON only.";
     $o = gg_ai_json($sys, $user, 4000, 170);
@@ -271,7 +306,7 @@ if ($do === 'gg_refplan') {
     $sys = 'You are the reference director for a photoreal 3D/CGI comic. Plan the complete REFERENCE IMAGE set pre-production needs, and write one text-to-image generation prompt per reference.'
         . "\n" . GG_SFW_RULES . "\n"
         . 'Rules for reference prompts: photoreal 3D CGI / DAZ3D render style. Character sheets are shot on a neutral seamless grey studio background, full body visible head to toe, even soft lighting, no text or labels baked into the image. '
-        . 'For each CHARACTER whose arc involves transformation, plan a face card (stage-agnostic) plus a full-body sheet per stage: pre (before, ordinary build), mid (transforming, noticeably athletic), post (transformed, powerfully muscular but SFW — think champion athlete / superheroine, fully clothed). Non-transforming characters get a face card + one body sheet with stage "". '
+        . 'For each CHARACTER whose arc involves transformation, plan a face card (stage-agnostic) plus a full-body sheet per stage — and CALIBRATE THE SIZES to the house ladder: pre = ordinary, unremarkable build; mid = competitive female BODYBUILDER tier (unmistakably heavily muscled: broad thick shoulders, large round biceps, wide back, thick legs — never merely "toned"/"athletic"); post = FANTASY tier, exaggerated beyond bodybuilder realism: shoulders 2.5-3 head-widths across, head small between mountainous traps, neck thicker than the head, flexed biceps LARGER THAN HER HEAD, lats pushing the arms out to 45 degrees, each thigh wider than her waist, visibly taller — ALWAYS with the four constant dimensions: a BIG feminine bust carried on the massive chest shelf, a BIG rounded butt and powerful glutes, a VERY NARROW wasp waist between them (the exaggerated hourglass IS the silhouette), and VISIBLE 6-8-pack abs reading through the fabric across that waist — pretty face, SMOOTH ROUND pumped muscle (no shredded striations, no prominent veins) — always in modest full-coverage athletic clothing that visibly strains but holds. IMPORTANT: image generators normalize physiques DOWN toward average, so write each sheet\'s size language one class LARGER than the target, use the concrete head/waist comparisons, and repeat the size words (massive, enormous, hugely muscled) at least twice per prompt. TWO STRUCTURAL RULES: (a) every body sheet is a TURNAROUND — three full-body views side by side (front, side profile, back), identical size and outfit in all three; (b) each transformation sheet\'s prompt must tell the worker to ATTACH the project\'s numbered muscle-size scale reference (kind=view, "size scale") and anchor the stage to a NUMBER on it ("her muscle size is exactly SIZE N on the attached scale") — a visual anchor beats prose. Non-transforming characters get a face card + one body sheet with stage "". '
         . 'For each LOCATION, one wide establishing environment plate with NO people in frame. '
         . 'Reply ONLY with compact JSON: {"refs":[{"char":"<character name, or location name for scenes>","kind":"face|body|scene","stage":"pre|mid|post|","label":"<2-4 word label>","prompt":"<the full generation prompt, 2-4 sentences, SFW, self-contained>"}]}. 12-20 refs total.';
     $user = "CAST:\n" . $castTxt . "\nLOCATIONS:\n" . $locTxt . "\nWARDROBE LOCK:\n" . mb_substr((string)($c['wardrobe'] ?? ''), 0, 800) . "\n\nPlan the reference set. JSON only.";
@@ -312,6 +347,45 @@ if ($do === 'gg_refplan') {
     gg_jout(['ok'=>true, 'pid'=>$pid, 'jobId'=>$jobId, 'refs'=>$specs]);
 }
 
+// ===== replace a growgetter project's page/panel plan =========================
+// Lets a worker session RESTRUCTURE the shotlist (e.g. expand growth beats into
+// multi-panel growth sequences per the size/density doctrine) without the
+// session-only creator.php breakdown. Only projects tagged growgetter. Plan is
+// normalized to the breakdown shape and written race-safe.
+//   POST growgetter.php  do=gg_plan, pid, plan=<json {pages:[{stage,panels:[{id,beat,camera,location,characters[],dialogue}]}]>
+if ($do === 'gg_plan') {
+    $pid = preg_replace('/[^a-z0-9-]/','',(string)($_POST['pid'] ?? ''));
+    $proj = $pid !== '' ? project_get($pid) : null;
+    if (!$proj) gg_jout(['ok'=>false,'err'=>'Unknown project.']);
+    if (!in_array('growgetter', (array)($proj['tags'] ?? []), true)) gg_jout(['ok'=>false,'err'=>'Not a growgetter project.']);
+    $in = json_decode((string)($_POST['plan'] ?? ''), true);
+    $pages = is_array($in) ? ($in['pages'] ?? $in) : null;
+    if (!is_array($pages) || !$pages) gg_jout(['ok'=>false,'err'=>'Bad plan JSON.']);
+    $out = []; $pi = 0;
+    foreach ($pages as $pg) {
+        $pi++; $panels = [];
+        foreach ((array)($pg['panels'] ?? []) as $qi => $pn) {
+            if (!is_array($pn)) continue;
+            $panels[] = [
+                'id'         => mb_substr((string)($pn['id'] ?? ('p'.$pi.'-'.($qi+1))), 0, 20),
+                'beat'       => mb_substr((string)($pn['beat'] ?? ''), 0, 400),
+                'camera'     => mb_substr((string)($pn['camera'] ?? ''), 0, 80),
+                'location'   => mb_substr((string)($pn['location'] ?? ''), 0, 80),
+                'characters' => array_slice(array_map(fn($x)=>mb_substr((string)$x,0,40), (array)($pn['characters'] ?? [])), 0, 6),
+                'dialogue'   => mb_substr((string)($pn['dialogue'] ?? ''), 0, 300),
+            ];
+        }
+        if ($panels) $out[] = ['stage'=>ck_stage_key((string)($pg['stage'] ?? '')), 'panels'=>$panels];
+    }
+    if (!$out) gg_jout(['ok'=>false,'err'=>'Plan had no panels.']);
+    s_with_lock(gg_cfile($pid), function($c) use ($out) {
+        if (!is_array($c)) $c = [];
+        $c['plan'] = $out; $c['updatedAt'] = date('c');
+        return ['data'=>$c, 'result'=>true];
+    });
+    gg_jout(['ok'=>true, 'pages'=>count($out), 'panels'=>array_sum(array_map(fn($p)=>count($p['panels']), $out))]);
+}
+
 // ===== list a project's scannable images (feeds the SFW QA loop) =============
 if ($do === 'gg_images') {
     $pid = preg_replace('/[^a-z0-9-]/','',(string)($_POST['pid'] ?? ''));
@@ -350,7 +424,8 @@ if ($do === 'gg_qa') {
         . "\n3. UNWANTED EXTRA — a person in frame beyond those the image is supposed to contain."
         . "\n4. MALFORMED ANATOMY — extra/missing fingers or limbs, fused bodies, melted faces."
         . "\n5. TEXT ARTIFACT — garbled text or labels baked into the art."
-        . "\nReply ONLY with compact JSON: {\"caption\":\"<one short sentence>\",\"people\":<integer human-figure count>,\"defects\":[{\"type\":\"nsfw|duplicate_character|extra_person|anatomy|text_artifact|other\",\"severity\":\"high|med|low\",\"detail\":\"<short phrase>\"}],\"verdict\":\"pass|warn|fail\"}. "
+        . "\n6. GROWTH UNDERSIZED — this is a muscle-growth comic in the exaggerated house style: a character described to you as MID-transformation must read as heavily muscled (competitive-bodybuilder scale), and POST-transformation as MASSIVE beyond bodybuilder realism (shoulders more than twice head-width, huge arms and legs). If the figure reads merely slim/toned/athletic when a mid or post stage is expected, that is a growth_undersized defect (high severity). Size is judged only when a stage expectation is stated below."
+        . "\nReply ONLY with compact JSON: {\"caption\":\"<one short sentence>\",\"people\":<integer human-figure count>,\"defects\":[{\"type\":\"nsfw|duplicate_character|extra_person|anatomy|text_artifact|growth_undersized|other\",\"severity\":\"high|med|low\",\"detail\":\"<short phrase>\"}],\"verdict\":\"pass|warn|fail\"}. "
         . 'verdict is "fail" on ANY nsfw defect or any high-severity defect; "warn" for minor issues; "pass" if clean. When unsure about SFW compliance, FAIL it — this pipeline must never ship a borderline image.';
     if ($refOf) {
         $rk = (string)($refOf['kind'] ?? ''); $rc = trim((string)($refOf['char'] ?? '')); $rl = trim((string)($refOf['label'] ?? ''));
@@ -360,6 +435,9 @@ if ($do === 'gg_qa') {
         } else {
             $u = 'This image is a CHARACTER REFERENCE SHEET of cast member ' . ($rc !== '' ? $rc : 'a named character') . ($rl !== '' ? ' (' . $rl . ')' : '')
                . ". Exactly ONE figure — that character — is expected; do NOT flag the single subject as an extra person. Only flag extra_person if MORE than one figure appears.\n";
+            $rstg = ck_stage_key((string)($refOf['stage'] ?? ''));
+            if ($rstg === 'mid')  $u .= "STAGE EXPECTATION: this is a MID-transformation sheet — competitive female-BODYBUILDER scale with the house hourglass (big chest, big glutes, very narrow waist, visible abs). Merely toned/athletic = growth_undersized (high); a blocky straight-waisted figure with a flat chest and no visible abs = other defect 'hourglass missing' (med).\n";
+            if ($rstg === 'post') $u .= "STAGE EXPECTATION: this is a POST-transformation sheet — FANTASY tier: shoulders 2.5-3 head-widths, biceps reading as large as her head or bigger, thighs wider than her waist, visibly towering — WITH the four house dimensions: big feminine bust, big rounded glutes, very narrow wasp waist, visible abs through the fabric. Undersized = growth_undersized (high); missing the hourglass/bust/abs = other defect 'hourglass missing' (med).\n";
         }
     } else {
         $u = ($castNames ? 'The only allowed people (the named cast): ' . implode(', ', $castNames) . ".\n" : '');
