@@ -130,7 +130,12 @@ Superior, The Goddess Lucy, Breaker, UltraGal, The Curse, and ~40 more):
   on the pec shelf; (2) a BIG ROUNDED BUTT and heavily developed hips/glutes;
   (3) a VERY NARROW wasp waist between them — the exaggerated hourglass is the
   silhouette; (4) VISIBLE ABS — a defined 6-8-pack reading even through the
-  costume fabric across that narrow waist. The figure stays FEMININE — pretty
+  costume fabric across that narrow waist. CALIBRATION BIAS (owner, after
+  reviewing first scale-anchored sheets): when in doubt, go NARROWER on the
+  waist and BIGGER on the chest and butt than feels natural — the model pulls
+  all three toward average, so overshoot the hourglass contrast specifically:
+  say "impossibly narrow wasp waist" and "enormous bust / enormous rounded
+  glutes", not just "narrow" and "big". The figure stays FEMININE — pretty
   face, long hair — never male-bodybuilder blocky, and the muscle renders as
   SMOOTH, ROUND, pumped mass (no shredded striations, veins rare).
   MID-transformation = competitive-bodybuilder tier with the same four
