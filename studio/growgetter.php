@@ -242,6 +242,7 @@ if ($do === 'gg_create') {
         'wardrobe'=> mb_substr(trim((string)($pr['wardrobe'] ?? '')), 0, 1000),
         'style'   => 'Photoreal 3D CGI / DAZ3D render, cinematic lighting, dynamic comic staging. Strictly SFW: every character fully clothed in modest wear at all times.',
         'sfw'     => true,
+        'autoApprove' => true,   // panels land approved; the board is veto-only (owner ask 2026-07-04)
         'gg'      => ['seed'=>$seed, 'premise'=>['logline'=>(string)($pr['logline'] ?? ''), 'ladder'=>(string)($pr['ladder'] ?? ''),
                       'cast'=>(array)($pr['cast'] ?? []), 'locations'=>(array)($pr['locations'] ?? [])],
                       'generatedAt'=>date('c'), 'by'=>current_studio_user()],
