@@ -225,6 +225,117 @@ function ck_ai_polish(array $pn, array $siblings, array $charNames, string $ward
     return $txt !== '' ? mb_substr($txt, 0, 1200) : null;
 }
 
+// ---- AI QA SCAN: inspect a GENERATED PANEL for defects ----------------------
+// The owner's pain (Beat 48): "QA should have picked up duplicate guys here — a
+// defect in the image AND the system." This is the QA pass that catches what
+// slipped through. ONE vision call per panel (same pattern as ck_ai_classify);
+// returns a structured `analysis` stored on the image's `analysis` field — the
+// SAME shape the bridge `annotate` verb writes and the organizer's `an-tag`
+// badge reads. Prioritises DUPLICATE characters + unwanted EXTRAS.
+function ck_qa_checklist(): string {
+    return
+      "DUPLICATE CHARACTER — the SAME character appears two or more times in one panel (a cloned / twinned figure). This is the #1 defect to catch.\n"
+    . "UNWANTED EXTRA / BACKGROUND PERSON — any human in frame who is not one of the named cast (strangers, crowd, photo-bombers, blurred background people). The cast is fixed: only named characters may appear.\n"
+    . "WRONG PEOPLE COUNT — more (or fewer) people than the panel's intended cast.\n"
+    . "WOODEN / NEUTRAL FACE ON AN EMOTIONAL BEAT — a flat, dead, expressionless face when the beat calls for emotion (talking, strain, shock, effort, fear).\n"
+    . "WARDROBE DRIFT — a character's outfit or colour differs from the intended wardrobe, or changes mid-scene.\n"
+    . "ANACHRONISTIC / HALLUCINATED PROP — watches, jewellery, phones or modern objects that do not belong; a reference sheet rendered as a literal in-scene object.\n"
+    . "WRONG TRANSFORMATION STAGE — the character is muscular / transformed when this beat should be soft / untransformed (or vice-versa).\n"
+    . "MALFORMED ANATOMY — extra or missing fingers / limbs, fused or distorted bodies, broken hands, melted faces.\n"
+    . "TEXT / LETTERING ARTIFACT — garbled gibberish text, stray tier labels or metadata baked into the art.";
+}
+// Distinct named characters for this project (the cast), drawn from the plan +
+// the character references (face / body / view). Scenes and props are excluded.
+function ck_qa_cast(array $c): array {
+    $names = [];
+    foreach ((array)($c['plan'] ?? []) as $pg) foreach ((array)($pg['panels'] ?? []) as $pn)
+        foreach ((array)($pn['characters'] ?? []) as $nm) { $nm = trim((string)$nm); if ($nm !== '') $names[mb_strtolower($nm)] = $nm; }
+    foreach ((array)($c['refs'] ?? []) as $r) {
+        $kd = $r['kind'] ?? ''; if ($kd === 'scene' || $kd === 'prop') continue;
+        $nm = trim((string)($r['char'] ?? '')); if ($nm !== '') $names[mb_strtolower($nm)] = $nm;
+    }
+    return array_values($names);
+}
+// Best-effort: find the PLAN panel a generated image belongs to, for richer
+// cast / expression / stage context. Generated panels rarely carry a hard plan
+// link, so we only match when a plan panel id token (e.g. "p3-2") appears as a
+// whole token in the image's planId / gen field. Returns
+// ['panel'=>plan panel, 'stage'=>page stage] or null (-> image-only QA, which
+// still catches the owner's duplicate / extra pain against the cast list).
+function ck_qa_match(array $c, array $im): ?array {
+    $hay = ' ' . (string)($im['planId'] ?? '') . ' ' . (string)($im['gen'] ?? '') . ' ';
+    foreach ((array)($c['plan'] ?? []) as $pg) foreach ((array)($pg['panels'] ?? []) as $pn) {
+        $pid = trim((string)($pn['id'] ?? '')); if ($pid === '') continue;
+        if (preg_match('/(^|[^a-z0-9])' . preg_quote($pid, '/') . '([^a-z0-9]|$)/i', $hay))
+            return ['panel' => $pn, 'stage' => ck_stage_key((string)($pg['stage'] ?? ''))];
+    }
+    return null;
+}
+// ONE vision call: inspect $imgPath against $ctx (cast names, optional matched
+// plan panel, stage, wardrobe). Returns the normalised analysis array (caption,
+// defects[] as short strings, verdict pass|warn|fail, people, notes, src) or null.
+function ck_ai_qa(string $imgPath, array $ctx): ?array {
+    $cfg = ck_ai_cfg(); if (!$cfg || !is_file($imgPath) || !function_exists('curl_init')) return null;
+    $data = @file_get_contents($imgPath); if ($data === false) return null;
+    $ext = ext_of($imgPath); $mime = $ext==='png'?'image/png':($ext==='webp'?'image/webp':($ext==='gif'?'image/gif':'image/jpeg'));
+    $cast = array_values(array_filter(array_map(fn($n)=>trim((string)$n), (array)($ctx['cast'] ?? [])), 'strlen'));
+    $sys = 'You are a strict QA inspector for AI-generated comic panels. You are shown ONE generated panel. Find generation DEFECTS — flaws an editor would reject or fix — using this checklist:' . "\n" . ck_qa_checklist() . "\n"
+         . 'PRIORITISE the first three (duplicate character, unwanted extra, wrong people count) — those matter most. '
+         . 'Count the distinct HUMAN figures in the frame carefully, including blurred, background and partially-cropped people. '
+         . 'Reply ONLY with compact JSON, no prose and no markdown fences: {"caption":"<one short sentence of what is shown>","people":<integer count of human figures>,"defects":[{"type":"duplicate_character|extra_person|people_count|wooden_face|wardrobe_drift|anachronism|wrong_stage|anatomy|text_artifact|other","severity":"high|med|low","detail":"<short specific phrase>"}],"verdict":"pass|warn|fail"}. '
+         . 'verdict is "fail" if any high-severity defect (especially a duplicate character or an unwanted extra), "warn" for minor defects, "pass" if clean. If you are unsure whether an extra person is a defect, FLAG it — for this QA a false positive is cheaper than the miss it exists to catch. Use an empty defects array for a clean panel.';
+    $u = '';
+    if ($cast) $u .= 'The ONLY characters allowed in this comic (the named cast) are: ' . implode(', ', $cast) . ". Anyone else in frame is an unwanted extra.\n";
+    $pn = $ctx['panel'] ?? null;
+    if (is_array($pn)) {
+        $want = array_values(array_filter(array_map(fn($x)=>trim((string)$x), (array)($pn['characters'] ?? [])), 'strlen'));
+        if ($want) $u .= 'This specific panel should contain ONLY: ' . implode(', ', $want) . ' (' . count($want) . ' character' . (count($want)===1?'':'s') . ").\n";
+        if (trim((string)($pn['beat'] ?? '')) !== '')     $u .= 'Intended action: ' . trim((string)$pn['beat']) . "\n";
+        if (trim((string)($pn['dialogue'] ?? '')) !== '') $u .= 'A character is SPEAKING here ("' . mb_substr(trim((string)$pn['dialogue']),0,160) . '") — a wooden / neutral face is a defect on this beat.' . "\n";
+        $stg = ck_stage_label((string)($ctx['stage'] ?? ''));
+        if ($stg !== '') $u .= 'Transformation stage for this beat: ' . $stg . ' — flag the character if their build does not match this stage.' . "\n";
+    } else {
+        $u .= "No per-panel cast is linked; judge duplicates and extras against the named cast above (or, if none is listed, flag any obviously cloned or out-of-place figure).\n";
+    }
+    if (trim((string)($ctx['wardrobe'] ?? '')) !== '') $u .= 'Wardrobe continuity note: ' . mb_substr(trim((string)$ctx['wardrobe']),0,300) . "\n";
+    $u .= 'Inspect the panel now. JSON only.';
+    $payload = json_encode(['model'=>$cfg['model'] ?? 'claude-haiku-4-5', 'max_tokens'=>600, 'system'=>$sys,
+        'messages'=>[['role'=>'user','content'=>[
+            ['type'=>'image','source'=>['type'=>'base64','media_type'=>$mime,'data'=>base64_encode($data)]],
+            ['type'=>'text','text'=>$u]]]]]);
+    $ch = curl_init('https://api.anthropic.com/v1/messages');
+    curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>45,
+        CURLOPT_HTTPHEADER=>['content-type: application/json','anthropic-version: 2023-06-01','x-api-key: '.$cfg['key']],
+        CURLOPT_POSTFIELDS=>$payload]);
+    $resp = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+    if (!$resp || $code >= 400) return null;
+    $j = json_decode($resp, true); $txt = $j['content'][0]['text'] ?? '';
+    if (preg_match('/\{.*\}/s', $txt, $m)) $txt = $m[0];
+    $o = json_decode($txt, true); if (!is_array($o)) return null;
+    // normalise the model's structured defects into the stored flat string[] shape
+    $defs = []; $hi = 0;
+    foreach ((array)($o['defects'] ?? []) as $d) {
+        if (is_array($d)) {
+            $t = trim((string)($d['type'] ?? '')); $sev = trim((string)($d['severity'] ?? '')); $det = trim((string)($d['detail'] ?? ''));
+            $label = ($t !== '' ? str_replace('_', ' ', $t) : 'defect') . ($det !== '' ? ': ' . $det : '');
+            if ($sev === 'high') $hi++;
+        } else { $label = trim((string)$d); }
+        if ($label !== '') $defs[] = mb_substr($label, 0, 60);
+    }
+    $defs = array_values(array_slice($defs, 0, 12));
+    $verdict = in_array($o['verdict'] ?? '', ['pass','warn','fail'], true) ? $o['verdict'] : ($defs ? ($hi ? 'fail' : 'warn') : 'pass');
+    $people  = isset($o['people']) && is_numeric($o['people']) ? (int)$o['people'] : null;
+    return [
+        'caption' => mb_substr(trim((string)($o['caption'] ?? '')), 0, 300),
+        'defects' => $defs,
+        'verdict' => $verdict,
+        'people'  => $people,
+        'notes'   => $people !== null ? ($people . ' figure' . ($people===1?'':'s') . ' detected') : '',
+        'tier'    => '',
+        'src'     => 'qa',
+    ];
+}
+
 $id     = preg_replace('/[^a-z0-9-]/', '', (string)($_GET['p'] ?? ''));
 $cfile  = $id !== '' ? creator_file($id) : '';
 $proj   = $id !== '' ? project_get($id) : null;
@@ -317,6 +428,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($r);
         s_write($cfile, $c);
         echo json_encode($out); exit;
+    }
+
+    if ($do === 'qascan_one') {                                  // AI QA: inspect ONE generated panel for defects; JSON, browser-driven (one call, no PHP timeout)
+        header('Content-Type: application/json');
+        if (!ck_ai_cfg()) { echo json_encode(['ok'=>false,'err'=>'Add your API key first (the references workspace).']); exit; }
+        $file = basename((string)($_POST['file'] ?? ''));
+        if ($file === '') { echo json_encode(['ok'=>false,'err'=>'no file']); exit; }
+        $im = null; foreach ($gallery as $m) if (($m['file'] ?? '') === $file && empty($m['isref'])) { $im = $m; break; }   // panels only, never refs
+        if (!$im) { echo json_encode(['ok'=>false,'file'=>$file,'err'=>'not a panel in this project']); exit; }
+        $match = ck_qa_match($c, $im);
+        $an = ck_ai_qa(project_dir($id) . '/' . $file, [
+            'cast'     => ck_qa_cast($c),
+            'panel'    => $match['panel'] ?? null,
+            'stage'    => $match['stage'] ?? '',
+            'wardrobe' => $c['wardrobe'] ?? '',
+        ]);
+        if ($an === null) { echo json_encode(['ok'=>false,'file'=>$file,'err'=>'unreadable (often explicit content the filter blocks — judge it by hand)']); exit; }
+        $an['at'] = date('c');
+        // write onto the image's analysis field — race-safe vs concurrent rate/keep writes (api.php)
+        s_with_lock(imeta_path($id), function($meta) use ($file, $an) {
+            foreach ($meta as &$mm) if (($mm['file'] ?? '') === $file) { $mm['analysis'] = $an; break; }
+            unset($mm); return ['data'=>$meta, 'result'=>true];
+        });
+        echo json_encode(['ok'=>true, 'file'=>$file, 'analysis'=>$an,
+                          'defects'=>count($an['defects']), 'verdict'=>$an['verdict']]); exit;
     }
 
     if ($do === 'shotdone') {                                    // toggle a planned panel's done flag (production guide); JSON, no reload
@@ -802,6 +938,20 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 .ck-vbadge{position:absolute;top:6px;right:6px;font-size:9.5px;font-weight:800;background:rgba(122,127,236,.96);color:#0B0C10;border-radius:999px;padding:2px 7px;z-index:2}
 .ck-vbadge.pend{position:static;display:inline-block;margin:0 0 7px;background:rgba(239,159,39,.95)}
 .ck-adjnote{font-size:10.5px;line-height:1.35;color:#bcbfe9;padding:5px 7px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 🔎 QA scan: per-panel defect badge (bottom-left so it clears the ★ref / vN badges) + scan toolbar + flagged filter */
+.ck-shot .an-tag{top:auto;bottom:6px;left:6px;right:auto;cursor:help;z-index:3}
+.ck-shot .an-tag.v-pass{background:rgba(29,158,117,.92);color:#fff;font-weight:700}
+.ck-shot .an-tag.v-warn{background:rgba(239,159,39,.96);color:#1a1205;font-weight:800}
+.ck-shot.qa-hide{display:none}
+.ck-qabar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.ck-qaprog{font-size:12px}
+.ck-qafilter{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#cdd0d8;cursor:pointer;user-select:none}
+.ck-qafilter input{accent-color:#E24B4A}
+.ck-lb-an{position:absolute;left:14px;bottom:74px;max-width:min(560px,calc(100% - 110px));background:rgba(12,13,18,.95);border:1px solid #2E3140;border-radius:10px;padding:9px 12px;font-size:12px;color:#cdd0d8;line-height:1.45}
+.ck-lb-an[hidden]{display:none}
+.ck-lb-an .v{font-weight:800;text-transform:uppercase;font-size:11px;letter-spacing:.04em;margin-right:6px}
+.ck-lb-an .v.fail{color:#ff8a88}.ck-lb-an .v.warn{color:#fac775}.ck-lb-an .v.pass{color:#6fe0bd}
+.ck-lb-an ul{margin:5px 0 0;padding-left:16px}.ck-lb-an li{margin:1px 0}
 .ck-pending{margin:0;border:2px dashed #5b5fd0;border-radius:10px;overflow:hidden;background:#13131d;position:relative;display:flex;flex-direction:column}
 .ck-pending>img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#0B0C10;opacity:.55}
 .ck-pbody{padding:9px;display:flex;flex-direction:column;gap:6px}
@@ -989,19 +1139,37 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 
     <!-- LIVE PANELS -->
     <section class="ck-panel">
-      <h2>Live panels <span class="muted" style="font-weight:400">· auto-refresh</span></h2>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px"><h2 style="margin:0">Live panels <span class="muted" style="font-weight:400">· auto-refresh</span></h2><a class="btn sm primary" href="review.php?p=<?= h(urlencode($id)) ?>" style="margin-left:auto" title="Review every panel full-width, in story order, with the prompt + references that built each one">🖼 Review all — full-width</a></div>
       <p class="ck-cap"><?= $galN ?> panel<?= $galN===1?'':'s' ?> in this project · <?= $accN ?> approved<?= $planN ? ' · ' . $planN . ' planned' : '' ?>. <span class="muted">✓ approve · ✕ disapprove · ★ keep · ⊕ reference · ✎ adjust (refine this image) · 💬 note</span></p>
       <?php if ($planN): ?><a class="btn sm primary" href="shots.php?p=<?= h(urlencode($id)) ?>" style="margin:0 0 12px;display:inline-block">📋 Open production guide — Flow prompts + refs for all <?= $planN ?> panels</a><?php endif; ?>
+      <?php if ($galN):
+            $qaScannedN = count(array_filter($panels, fn($m)=>!empty($m['analysis'])));
+            $qaFlaggedN = count(array_filter($panels, fn($m)=>!empty($m['analysis']['defects']))); ?>
+      <div class="ck-qabar" id="qabar">
+        <?php if (ck_ai_cfg()): ?>
+          <button type="button" class="btn sm" id="qascanbtn" title="AI-inspect each generated panel for defects — duplicate characters, unwanted extras, wooden faces on emotional beats, wardrobe drift, anachronistic props, wrong transformation stage">🔎 QA scan<?= $qaScannedN ? ' (' . ($galN - $qaScannedN) . ' left)' : ' all ' . $galN ?></button>
+          <button type="button" class="btn sm" id="qarescanbtn" title="Re-scan every panel, including ones already scanned">↻ rescan all</button>
+          <span class="ck-qaprog muted" id="qaprog" style="display:none"></span>
+        <?php else: ?>
+          <span class="muted" style="font-size:12px">🔎 QA scan needs the AI key — add it in the <a href="refs.php?p=<?= h(urlencode($id)) ?>" style="color:#9aa0ec">references workspace</a>.</span>
+        <?php endif; ?>
+        <span class="spacer"></span>
+        <label class="ck-qafilter" id="qafilter"<?= $qaFlaggedN ? '' : ' style="display:none"' ?>><input type="checkbox" id="qafilterck"> ⚠ flagged only <span class="muted" id="qaflaggedn">(<?= $qaFlaggedN ?>)</span></label>
+      </div>
+      <?php endif; ?>
       <?php if ($galN): ?>
         <?php foreach ($beats as $gname => $list): $pend = $pendByBeat[$gname] ?? []; ?>
         <div class="ck-bgroup">
           <div class="ck-bg-head"><span class="ck-beat-id"><?= h($gname) ?></span> <span class="muted"><?= count($list) ?> shot<?= count($list)===1?'':'s' ?><?= $pend ? ' · '.count($pend).' refining' : '' ?></span></div>
           <div class="ck-shots">
             <?php foreach (ck_order_lineage($list, $lin) as $im): $f = $im['file']; $rt = $im['rating'] ?? 'unrated'; $kp = !empty($im['accepted']); $isRef = in_array($f, $refFiles, true);
-                  $ver = (int)($im['ver'] ?? ($lin['ver'][$f] ?? 1)); $isDer = !empty($im['parent']); $anote = (string)($im['adjust'] ?? ''); ?>
-            <figure class="ck-shot rate-<?= h($rt) ?><?= $kp?' kept':'' ?><?= $isDer?' derived':'' ?>" data-file="<?= h($f) ?>" data-rating="<?= h($rt) ?>" data-accepted="<?= $kp?'1':'0' ?>" data-beat="<?= h($gname) ?>" data-ver="<?= (int)$ver ?>">
+                  $ver = (int)($im['ver'] ?? ($lin['ver'][$f] ?? 1)); $isDer = !empty($im['parent']); $anote = (string)($im['adjust'] ?? '');
+                  $an = $im['analysis'] ?? null; $adf = $an ? (array)($an['defects'] ?? []) : []; $av = $an ? (string)($an['verdict'] ?? ($adf?'fail':'pass')) : '';
+                  $aTitle = $an ? ('QA ' . strtoupper($av) . ((($an['caption']??'')!=='') ? ' · '.$an['caption'] : '') . ($adf ? ' — ⚠ '.implode(', ', $adf) : ' — clean')) : ''; ?>
+            <figure class="ck-shot rate-<?= h($rt) ?><?= $kp?' kept':'' ?><?= $isDer?' derived':'' ?>" data-file="<?= h($f) ?>" data-rating="<?= h($rt) ?>" data-accepted="<?= $kp?'1':'0' ?>" data-beat="<?= h($gname) ?>" data-ver="<?= (int)$ver ?>" data-defects="<?= count($adf) ?>" data-verdict="<?= h($av) ?>">
               <?php if ($isRef): ?><span class="ck-refbadge">★ ref</span><?php endif; ?>
               <?php if ($isDer): ?><span class="ck-vbadge" title="<?= h($anote!=='' ? 'adjusted: '.$anote : 'refined version') ?>">v<?= (int)$ver ?></span><?php endif; ?>
+              <?php if ($an): ?><span class="an-tag v-<?= h($av) ?><?= $adf?' has-def':'' ?>" title="<?= h($aTitle) ?>"><?= $adf ? '⚠'.count($adf) : '✓' ?></span><?php endif; ?>
               <img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt="">
               <?php if ($isDer && $anote!==''): ?><div class="ck-adjnote" title="<?= h($anote) ?>">✎ <?= h($anote) ?></div><?php endif; ?>
               <div class="ck-shot-bar">
@@ -1071,6 +1239,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     <img id="lbimg" src="" alt="">
     <button class="ck-lb-arrow" id="lbnext" title="Next (→)">›</button>
   </div>
+  <div class="ck-lb-an" id="lban" hidden></div>
   <div class="ck-lb-bar">
     <span class="meta" id="lbmeta"></span>
     <button class="b-approve" data-act="approve" title="Approve — winner (A)">✓ Approve</button>
@@ -1098,10 +1267,13 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
   </div>
 </div>
 
+<?php $qaAnalysis = []; foreach ($panels as $m) if (!empty($m['analysis'])) $qaAnalysis[$m['file']] = $m['analysis']; ?>
+<script>window.STUDIO_ANALYSIS = <?= json_encode($qaAnalysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;</script>
 <script>
 (function(){
   var root = document.getElementById('cockpit');
   var PID = root.dataset.id, CSRF = root.dataset.csrf;
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
   // --- approve / disapprove / keep / note on a panel ---
   async function api(action, file, extra){
@@ -1140,9 +1312,22 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 
   // --- lightbox: expand a panel, approve / disapprove / keep / note full-size ---
   var lb = document.getElementById('cklb'), lbimg = document.getElementById('lbimg'),
-      lbmeta = document.getElementById('lbmeta'), lbprev = document.getElementById('lbprev'), lbnext = document.getElementById('lbnext');
+      lbmeta = document.getElementById('lbmeta'), lbprev = document.getElementById('lbprev'), lbnext = document.getElementById('lbnext'),
+      lban = document.getElementById('lban');
   var shots = [], lbIdx = -1;
   function ratingWord(fig){ var r = fig.dataset.rating; return (r==='good'?'approved':r==='bad'?'disapproved':'unrated') + (fig.dataset.accepted==='1'?' · kept':''); }
+  // render the QA analysis strip (caption + verdict + defect list) for the open panel
+  function renderLbAnalysis(file){
+    if(!lban) return;
+    var an = (window.STUDIO_ANALYSIS||{})[file];
+    if(!an){ lban.hidden = true; lban.innerHTML = ''; return; }
+    var d = (an.defects||[]), v = String(an.verdict||(d.length?'fail':'pass'));
+    var html = '<span class="v '+(v==='fail'?'fail':v==='warn'?'warn':'pass')+'">QA: '+escapeHtml(v||'—')+'</span>';
+    if(an.caption) html += escapeHtml(an.caption);
+    if(typeof an.people==='number') html += ' <span style="color:#8d92a0">· '+an.people+' figure'+(an.people===1?'':'s')+' seen</span>';
+    if(d.length){ html += '<ul>'; d.forEach(function(x){ html += '<li>⚠ '+escapeHtml(x)+'</li>'; }); html += '</ul>'; }
+    lban.innerHTML = html; lban.hidden = false;
+  }
   function openLb(i){
     shots = [].slice.call(document.querySelectorAll('.ck-shot'));
     if(i<0 || i>=shots.length) return; lbIdx = i;
@@ -1151,6 +1336,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     lbimg.className = fig.dataset.rating==='good'?'rate-good':fig.dataset.rating==='bad'?'rate-bad':'';
     lbmeta.textContent = (beat?beat+' · ':'') + (i+1)+' / '+shots.length + '  ·  ' + ratingWord(fig);
     lbprev.disabled = i<=0; lbnext.disabled = i>=shots.length-1;
+    renderLbAnalysis(file);
     lb.classList.add('open');
   }
   function closeLb(){ lb.classList.remove('open'); lbIdx = -1; }
@@ -1164,6 +1350,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     shots = []; lbIdx = -1;
     lbimg.src = rimg.dataset.full || rimg.src; lbimg.className = '';
     lbmeta.textContent = 'reference'; lbprev.disabled = true; lbnext.disabled = true;
+    if(lban){ lban.hidden = true; lban.innerHTML = ''; }   // references have no QA analysis
     lb.classList.add('open');
   });
   document.getElementById('lbx').addEventListener('click', closeLb);
@@ -1259,7 +1446,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
       if(lastSig === null){ lastSig = j.sig; return; }
       if(j.sig !== lastSig){
         lastSig = j.sig;
-        if(typing() || notesOpen()){ pending = true; banner.style.display = 'block'; }
+        if(typing() || notesOpen() || lb.classList.contains('open') || adj.classList.contains('open')){ pending = true; banner.style.display = 'block'; }
         else location.reload();
       }
     }catch(e){}
@@ -1287,6 +1474,75 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
                          else { if(bdmsg) bdmsg.textContent=(j&&j.err)||'Breakdown failed.'; setTimeout(function(){ if(bdov) bdov.style.display='none'; bdbtn.disabled=false; },3000); } })
       .catch(function(){ if(bdmsg) bdmsg.textContent='Request failed — try again.'; setTimeout(function(){ if(bdov) bdov.style.display='none'; bdbtn.disabled=false; },3000); });
   });
+
+  // --- 🔎 QA scan: AI-inspect each generated panel for defects (duplicates / extras / etc) ---
+  (function(){
+    var scanBtn = document.getElementById('qascanbtn'), rescanBtn = document.getElementById('qarescanbtn'),
+        prog = document.getElementById('qaprog'), filterCk = document.getElementById('qafilterck'),
+        ANALYSIS = window.STUDIO_ANALYSIS || (window.STUDIO_ANALYSIS = {});
+    function badgeTitle(an){ var d = (an.defects||[]); return 'QA ' + String(an.verdict||'').toUpperCase() + (an.caption?' · '+an.caption:'') + (d.length?' — ⚠ '+d.join(', '):' — clean'); }
+    // paint / refresh the defect badge on a figure after a scan, in place (no reload)
+    function paintBadge(fig, an){
+      var d = (an.defects||[]), v = an.verdict || (d.length?'fail':'pass');
+      fig.dataset.defects = d.length; fig.dataset.verdict = v;
+      var b = fig.querySelector('.an-tag');
+      if(!b){ b = document.createElement('span'); var img = fig.querySelector('img'); fig.insertBefore(b, img); }
+      b.className = 'an-tag v-' + v + (d.length?' has-def':'');
+      b.textContent = d.length ? ('⚠'+d.length) : '✓';
+      b.title = badgeTitle(an);
+      ANALYSIS[fig.dataset.file] = an;
+    }
+    function applyFilter(){
+      var on = !!(filterCk && filterCk.checked);
+      document.querySelectorAll('.ck-shot').forEach(function(f){
+        var flagged = f.dataset.defects && f.dataset.defects !== '0';
+        f.classList.toggle('qa-hide', on && !flagged);
+      });
+      document.querySelectorAll('.ck-bgroup').forEach(function(g){
+        var shots = [].slice.call(g.querySelectorAll('.ck-shot'));
+        var anyVisible = shots.some(function(s){ return !s.classList.contains('qa-hide'); });
+        g.style.display = (on && shots.length && !anyVisible) ? 'none' : '';
+      });
+    }
+    function refreshFilterCount(){
+      var n = document.querySelectorAll('.ck-shot[data-defects]:not([data-defects="0"])').length;
+      var lab = document.getElementById('qafilter'), cnt = document.getElementById('qaflaggedn');
+      if(cnt) cnt.textContent = '('+n+')';
+      if(lab) lab.style.display = n ? '' : 'none';
+      applyFilter();
+    }
+    if(filterCk) filterCk.addEventListener('change', applyFilter);
+    async function scanOne(file){
+      var body = new URLSearchParams({p:PID, do:'qascan_one', file:file, csrf:CSRF});
+      var r = await fetch('creator.php?p='+encodeURIComponent(PID), {method:'POST', headers:{'X-CSRF':CSRF}, body:body});
+      return r.json();
+    }
+    async function runScan(all){
+      if(!scanBtn || scanBtn.disabled) return;
+      // one figure per unique file (skip panels promoted to a reference — they carry ★ ref)
+      var seen = {}, figs = [].slice.call(document.querySelectorAll('.ck-shot')).filter(function(f){
+        var fl = f.dataset.file; if(!fl || seen[fl] || f.querySelector('.ck-refbadge')) return false; seen[fl] = 1; return true;
+      });
+      if(!all) figs = figs.filter(function(f){ return !(f.dataset.verdict); });   // un-scanned only
+      var total = figs.length, done = 0, flagged = 0, fail = 0;
+      if(prog) prog.style.display = '';
+      if(!total){ if(prog) prog.textContent = 'All panels already scanned — use ↻ rescan all to redo.'; return; }
+      scanBtn.disabled = true; if(rescanBtn) rescanBtn.disabled = true;
+      for(var i=0;i<figs.length;i++){
+        if(prog) prog.textContent = '🔎 scanning ' + (done+1) + '/' + total + '…';
+        try{ var j = await scanOne(figs[i].dataset.file);
+             if(j && j.ok && j.analysis){ paintBadge(figs[i], j.analysis); if(j.defects>0) flagged++; if(j.verdict==='fail') fail++; }
+             else if(prog && j && j.err){ /* keep going */ } }
+        catch(e){}
+        done++;
+      }
+      scanBtn.disabled = false; if(rescanBtn) rescanBtn.disabled = false;
+      if(prog) prog.textContent = '✓ scanned ' + done + ' · ' + flagged + ' flagged' + (fail?(' · '+fail+' fail'):'') + ' — open a panel for details';
+      refreshFilterCount();
+    }
+    if(scanBtn) scanBtn.addEventListener('click', function(){ runScan(false); });
+    if(rescanBtn) rescanBtn.addEventListener('click', function(){ runScan(true); });
+  })();
 
   // --- notes log: filter (all / panel / system) + copy-all export; collapsed by default ---
   function notesOpen(){ var n = document.getElementById('notes'); return !!(n && n.open); }
