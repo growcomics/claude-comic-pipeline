@@ -449,7 +449,9 @@ if ($do === 'gg_qa') {
         $u = ($castNames ? 'The only allowed people (the named cast): ' . implode(', ', $castNames) . ".\n" : '');
     }
     $u .= 'Inspect the image now. JSON only.';
-    $payload = json_encode(['model'=>$cfg['model'] ?? 'claude-haiku-4-5', 'max_tokens'=>500, 'system'=>$sys,
+    // sonnet, not the cheap default: haiku proved unreliable at the fabric-vs-skin and
+    // growth-exaggeration-vs-defect boundaries (false NSFW/anatomy flags both ways, 2026-07-04)
+    $payload = json_encode(['model'=>'claude-sonnet-4-6', 'max_tokens'=>500, 'system'=>$sys,
         'messages'=>[['role'=>'user','content'=>[
             ['type'=>'image','source'=>['type'=>'base64','media_type'=>$mime,'data'=>base64_encode($data)]],
             ['type'=>'text','text'=>$u]]]]]);
