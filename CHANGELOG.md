@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-06 (Command Center + Ops Board — the Monday.com replacement, live)
+
+### Added
+
+- **⌘ Command Center shipped to `3dmusclecomics.com/studio` (`studio/cc.php`) with a Monday.com-replacement Ops Board (`studio/ops.php` + `studio/ops-api.php` + `studio/inc/ops.php`) and per-site overview pages (`studio/site.php?s=<key>`).** Why: the owner exported his 4½-year Monday.com "Operations" board (403 rows + 513 update threads across GrowGetter/MAXXMuscle/BloomBeauty/GiantessGirl/MGAI/PH) and wants Monday retired, the backlog AI-triaged, and the comic pipeline to become ONE section of a cross-property command center. One-time importer `studio/tools/monday-import.py` (stdlib xlsx parse — inline-string XML, group-divider state machine, embedded subitem blocks → checklists, subitem updates rerouted to parent tasks) landed **372 tasks + 511 threaded updates with zero unmapped values**; import report at `studio/data/import-report.txt`. Board: groups / inline status / person-site-priority-revenue-aiTag-batch chips / filters+sort serialized to `location.hash` (shareable views, `#task=<id>` deep links) / task drawer (fields, checklist, read-only Monday thread + add-note) / bulk bar (drives the upcoming AI-triage pass via `action=bulk`). Every task carries `aiTag`/`aiPlan`/`batch` from day one — the hooks for triage-then-batch-execution. All writes race-safe via `s_with_lock()`; update threads in a separate JSON so note-adds never contend with status flips. Site registry `data/cc-sites.json` (8 keys, aliases drive import normalization, editable quick-links + notes per site).
+- **Studio-only collaborator login** (`data/users-studio.json` + `studio_login_local()` fallback in `login.php`): Magnamus gets board access WITHOUT entering `admin/data/users.json` (the main-site admin file — verified untouched, `['admin']` only). Session gains `studio_role` (`collab`) for future gating.
+- Verified live end-to-end as Magnamus via curl: create → status flip (completedOn stamps) → note → thread fetch (imported Monday reply threading intact) → archive → bulk; bad CSRF rejected; `data/*.json` return 403; cc.php tile counts (97 open / 4 critical) match the data exactly. DEPLOY-NOTES.md gained the Command Center marker table; login.php is now a shared edited file (fetch-live rule applies).
+
 ## 2026-07-04 (GrowGetter generator — size doctrine recalibration, owner-driven)
 
 ### Changed

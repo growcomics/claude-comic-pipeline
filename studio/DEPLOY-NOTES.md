@@ -64,3 +64,24 @@ _Also 2026-06-27 — added the **🔎 QA defect scan** (auto-flags generation de
 | AI defect scan + keyboard triage + bulk + ref thumbnails | `id="scanbtn"` `id="approveshown"` `id="delrejects"` `function visTiles` `qascan_one` `rv-kbhint` `.rv-act{` `data-aion` |
 
 bridge.php also gained `do=ingest_refcache` (caches a refs_used image as a studio thumbnail; deduped by `refkey`) alongside `do=enrich` + the `ingest` prompt/refs_used capture + the sibling's `adjustResolved` idempotency — keep ALL of them. api.php gained `action === 'bulk'`; export.php gained `?only=approved` + isref exclusion.
+
+## ⌘ Command Center (added 2026-07-06) — cc.php / ops.php / ops-api.php / site.php / inc/ops.php + login.php edit
+
+The Monday.com replacement: ops board (one-time import of the owner's Monday "Operations"
+export — 372 tasks + 511 update threads), Command Center landing, per-site overview pages.
+All NEW standalone files except **login.php**, which gained the studio-only collaborator
+login fallback (Magnamus). Data: `data/ops-tasks.json`, `data/ops-updates.json`,
+`data/cc-sites.json`, `data/users-studio.json` (all under the data/ `.htaccess` deny).
+Local importer: `tools/monday-import.py` (not deployed).
+
+| File | Markers (grep) | Notes |
+|---|---|---|
+| inc/ops.php | `OPS_GROUPS` `OPS_TASKS_FILE` `ops_open` | shared constants/wrappers; deliberately NOT in inc/boot.php so boot.php never redeploys for CC work |
+| ops-api.php | `action === 'bulk'` `action === 'note'` `ops_clean_patch` `sitelinks` | all task writes via `s_with_lock(OPS_TASKS_FILE)`; update threads in a SEPARATE file (`OPS_UPDATES_FILE`) so note-adds never contend with status flips |
+| ops.php | `const OPS =` `dwWrap` `writeHash` `bulkBar` `quickAdd` | pure renderer; threads lazy-fetched (`action=updates`); `ops.php#task=<id>` deep links; `#ai=ai-now` etc. shareable filters |
+| cc.php | `cc-tile` `Cross-property` `Coming next` | open counts computed in one PHP pass; grayed v2 tiles (calendar/analytics/SOPs) |
+| site.php | `sp-links` `sitenote` `editLinks` | `?s=<key>` against cc-sites.json; bad key → cc.php redirect |
+| **login.php** | `studio_login_local` `users-studio.json` | ⚠ now a SHARED EDITED file — fetch-live before touching; the fallback must survive any redeploy. Magnamus is NOT in admin/data/users.json (main-site admin) by design. |
+
+Known/accepted: index.php still shows the bridge key to ANY studio session, including
+collaborator logins — acceptable for a trusted collaborator (owner decision 2026-07-06).

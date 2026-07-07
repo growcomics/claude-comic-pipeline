@@ -5,10 +5,28 @@ s_boot();
 if (($_GET['do'] ?? '') === 'logout') { sign_out(); header('Location: login.php'); exit; }
 if (is_authed()) { header('Location: index.php'); exit; }
 
+// Studio-ONLY collaborator logins (data/users-studio.json). Fallback when the shared
+// 3dmusclecomics admin file (ADMIN_USERS_FILE) doesn't match — collaborators like
+// Magnamus get studio access WITHOUT being added to the main-site admin users file.
+function studio_login_local(string $username, string $password): bool {
+    $username = strtolower(trim($username));
+    foreach (s_read(SDATA . '/users-studio.json', []) as $u) {
+        if (strtolower($u['username'] ?? '') === $username && !empty($u['hash']) && password_verify($password, $u['hash'])) {
+            s_boot(); session_regenerate_id(true);
+            $_SESSION['studio_ok']   = true;
+            $_SESSION['studio_user'] = $u['name'] ?? $u['username'];
+            $_SESSION['studio_role'] = $u['role'] ?? 'collab';
+            return true;
+        }
+    }
+    return false;
+}
+
 $err = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     usleep(250000);
-    if (studio_login((string)($_POST['username'] ?? ''), (string)($_POST['password'] ?? ''))) { header('Location: index.php'); exit; }
+    $lu = (string)($_POST['username'] ?? ''); $lp = (string)($_POST['password'] ?? '');
+    if (studio_login($lu, $lp) || studio_login_local($lu, $lp)) { header('Location: index.php'); exit; }
     $err = 'Wrong username or password.';
 }
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
