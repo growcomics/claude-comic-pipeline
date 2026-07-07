@@ -1,10 +1,12 @@
 <?php
 // cc.php — COMMAND CENTER landing: the front door for running all the properties.
 //
-// Three sections — Ops Board (the Monday.com replacement, ops.php), the Comic Pipeline
-// (the existing studio pages, untouched), and per-site overviews (site.php?s=<key>) —
-// plus grayed tiles where the v2 sections (posting calendar / analytics / SOP library)
-// will slot in. Open-task counts are computed in one PHP pass over data/ops-tasks.json;
+// Four sections — Ops Board (the Monday.com replacement, ops.php), the Comic Pipeline
+// (the existing studio pages, untouched), Patron Analytics (pulse/ — Creator Pulse,
+// the creatormetrics.io clone; static app auth-gated by pulse/index.php), and per-site
+// overviews (site.php?s=<key>) — plus grayed tiles where the remaining v2 sections
+// (posting calendar / SOP library) will slot in.
+// Open-task counts are computed in one PHP pass over data/ops-tasks.json;
 // a task with no sites[] counts as "cross-property". Pure renderer: no POST handlers.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/ops.php';
@@ -25,6 +27,12 @@ foreach ($tasks as $t) {
     foreach ($ts as $k) if (isset($bySite[$k])) $bySite[$k]++;
 }
 $projN = count(projects_all());
+
+// site-traffic headline (latest analytics snapshot) — Command Center Traffic section
+$anSnaps = s_read(SDATA . '/analytics-snapshots.json', ['snapshots' => []])['snapshots'] ?? [];
+$anSnap = null; foreach ($anSnaps as $s) if (!$anSnap || strcmp((string)($s['month'] ?? ''), (string)($anSnap['month'] ?? '')) > 0) $anSnap = $s;
+$anSess = 0; $anMonth = '';
+if ($anSnap) { $anMonth = (string)($anSnap['label'] ?? ''); foreach (($anSnap['properties'] ?? []) as $pp) $anSess += (int)($pp['sessions'] ?? 0); }
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
@@ -48,6 +56,8 @@ $projN = count(projects_all());
   <a class="ghost" href="cc.php" style="color:var(--text);font-weight:700">Home</a>
   <a class="ghost" href="ops.php">📋 Ops Board</a>
   <a class="ghost" href="index.php">🎬 Pipeline</a>
+  <a class="ghost" href="pulse/">📈 Analytics</a>
+  <a class="ghost" href="analytics.php">📊 Traffic</a>
   <span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span>
   <a class="ghost" href="login.php?do=logout">Log out</a>
@@ -66,6 +76,16 @@ $projN = count(projects_all());
       <h3>🎬 Comic Pipeline</h3>
       <div class="big"><?= $projN ?></div>
       <div class="sub">studio projects<br>creator · references · review · GrowGetter generator · importer</div>
+    </a>
+    <a class="cc-tile" href="pulse/">
+      <h3>📈 Patron Analytics</h3>
+      <div class="big">4</div>
+      <div class="sub">Patreon accounts · Creator Pulse<br>patrons · earnings · retention · cohorts, per account</div>
+    </a>
+    <a class="cc-tile" href="analytics.php">
+      <h3>📊 Site Traffic</h3>
+      <div class="big"><?= $anSess ? number_format($anSess) : '—' ?></div>
+      <div class="sub"><?= $anMonth ? h($anMonth) . ' sessions · GA4 + Search Console' : 'GA4 web traffic' ?><br>insights + actions to grow the sites</div>
     </a>
     <a class="cc-tile" href="ops.php#view=open&ai=ai-now">
       <h3>🤖 AI queue</h3>
@@ -93,7 +113,6 @@ $projN = count(projects_all());
   <div class="cc-h">Coming next</div>
   <div class="cc-grid">
     <div class="cc-tile soon"><span class="tag">soon</span><h3>🗓 Posting calendar</h3><div class="sub">cross-property content schedule</div></div>
-    <div class="cc-tile soon"><span class="tag">soon</span><h3>📈 Analytics rollup</h3><div class="sub">traffic + revenue per property</div></div>
     <div class="cc-tile soon"><span class="tag">soon</span><h3>📚 SOP library</h3><div class="sub">every guide and SOP, indexed</div></div>
   </div>
 </main></body></html>
