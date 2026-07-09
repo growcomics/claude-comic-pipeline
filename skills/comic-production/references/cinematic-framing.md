@@ -177,7 +177,37 @@ Emitted automatically by `next_panel.py` `_l34_staging_directive()` when the pan
 
 ---
 
-## Rhythm patterns — how to actually vary shots across a sequence
+## Lighting-pass fragments — the volume block
+
+*Validated 2026-07-09 on Nano Banana 2 Lite via Flow (7 batches / 28 images, Chun-Li & Cammy growth chain, athletic tier through beyond-tier). Composition lock held 28/28. No anatomy inflation observed at any size tier — the block sculpts with light only, so it is safe to apply across a chapter regardless of growth tier.*
+
+Muscle volume perception comes almost entirely from the highlight-to-shadow gradient across each muscle group — not from blur, not from re-describing the anatomy. This section is the validated wording for adding that gradient. Two uses:
+
+1. **Post-hoc lighting pass (i2i)** — attach the accepted panel as the SOLE ref and submit the block alone. Same framing comes back with sculpted light.
+2. **Inline lighting section** — drop the block minus its first sentence into the lighting section of a fresh panel prompt.
+
+### Default volume block (golden hour + deep AO)
+
+> "Keep the exact same camera angle, framing, character poses, expressions, speech bubbles, and composition as the source image — no zoom, crop, or recenter. Lighting pass only: low golden-hour sunlight skims across [both women's bodies / her body] from the left, modeling every muscle group with a bright highlight-to-shadow gradient. Push the sculpt: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet, so each muscle reads as a distinct rounded volume. Glossy sweat highlights on the peaks, subtle warm rim light on [both silhouettes / her silhouette]. Background half a stop darker with light haze. Photoreal DAZ3D render, no restyling."
+
+### Climax variant (warm chiaroscuro)
+
+> "Keep the exact same camera angle, framing, character poses, expressions, speech bubbles, and composition as the source image — no zoom, crop, or recenter. Lighting pass only: dramatic high-contrast chiaroscuro keyed to the scene's existing [warm dusk / interior / night] palette — a single hard warm key light from the upper left rakes across the muscles, shadows one stop deeper in every muscle crease, hot specular highlights on the peaks, warm amber rim light separating the figures from the background. Keep the sky and environment at their original palette — do not shift the scene toward night or cool blue tones. Photoreal DAZ3D render, no restyling."
+
+Reserve the chiaroscuro variant for climax / dominance beats — it is the moodiest grade, and over-use flattens the chapter's lighting arc. ALWAYS name the palette to preserve ("existing warm dusk palette"): the un-keyed version reliably drifted dusk → cool night, breaking time-of-day continuity with neighboring panels.
+
+### Hard rules (each bought with a failure)
+
+| Rule | Failure mode it prevents |
+|---|---|
+| Composition lock is the FIRST clause, verbatim | Edit models weight the opening clause heavily; lock-last or lock-free versions recompose the shot |
+| Emphasis stays PLURAL — "every muscle group", "both silhouettes" | Naming one muscle as the sharp/focal subject recrops the panel into a macro ECU of that muscle |
+| No f-stop or bokeh language in a lighting pass; at most "background very slightly softened" | "f/1.8, only her [X] tack-sharp" re-shoots the panel as an isolated macro crop — and an unfilled `[placeholder]` makes it hunt even harder |
+| Rim light is "subtle warm", never "strong, hot" | "Strong hot rim" renders a literal glowing outline around the silhouette (sticker/aura look) on ~half the variants |
+| The volume dial is shadow depth, not blur | If a pass reads flat, push "shadows one stop deeper in the creases" on the next pass; adding DOF instead triggers recompose |
+| In-image footer/watermark strips do NOT survive re-renders | The fake DAZ footer text mutated across passes (GHUN-LI → SHUN-LI → CHUN-U); render-carried micro-text is unstable — letter footer strips at L19 / composition stage |
+
+Interactions: pairs with **L19** (SFX stays scope-bounded 2D overlay — max one SFX word + 2–3 short radial burst clusters per panel; full-frame speed lines re-trigger 2D drift) and **L20** (get close first — the block sculpts whatever the framing gives it, so a chest-up panel gains more perceived volume than a full-body one).
 
 Variety isn't randomness. Cinematic comics follow patterns. Four reliable ones:
 

@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-09 (cinematic-framing: validated "volume block" lighting-pass fragments)
+
+### Added
+
+- **"Lighting-pass fragments — the volume block" section in `skills/comic-production/references/cinematic-framing.md`.** Why: interactive prompt-testing on the Chun-Li & Cammy growth chain (Flow, NB2 Lite, 7 batches / 28 images, laptop account) found that muscle volume reads from the highlight-to-shadow gradient across each muscle group — and produced a composition-locked wording that adds that gradient to an existing panel i2i without recomposing (28/28 framing hold, no anatomy inflation at any size tier). Two fragments landed: a default **golden-hour + deep-AO** block and a **warm chiaroscuro** climax variant (palette must be named or the grade drifts dusk→night). Also codified the failure modes bought during testing: composition lock must be the FIRST clause; emphasis must stay plural (naming one muscle recrops to a macro ECU); no f-stop/bokeh language in a grade pass; rim light "subtle warm" never "strong hot" (halo artifact); volume dial = shadow depth not blur; in-image footer/watermark micro-text mutates on re-render (letter it at L19/composition instead). Cross-referenced against L19 (SFX overlay scope) and L20 (distance bias).
+
 ## 2026-07-07 (Command Center — Site Traffic analytics section + live GA4 reporting)
 
 ### Added
