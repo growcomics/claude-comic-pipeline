@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "generated_from_shotlist": true,
+  "note": "Refs for this project live in the Google Flow project (fd1942db), not on local disk. This manifest is the planning record of what each character/location/prop needs. rules_audit check_reference_completeness will HARD-fail against local disk — that is expected and non-blocking for a Flow-driven project.",
+  "characters": {
+    "batman": {
+      "face_card": "references/characters/batman/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/batman/body-tier1.png", "lineup_required": false},
+        {"tier": 6, "path": "references/characters/batman/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 1, "path": "references/characters/batman/view-3q-full.png", "lineup_required": false},
+        {"name": "profile", "tier": 1, "path": "references/characters/batman/view-profile.png", "lineup_required": false},
+        {"name": "back-full", "tier": 1, "path": "references/characters/batman/view-back-full.png", "lineup_required": false},
+        {"name": "low-angle-front", "tier": 1, "path": "references/characters/batman/view-low-angle-front.png", "lineup_required": false},
+        {"name": "ecu-region", "tier": 1, "path": "references/characters/batman/view-ecu-region.png", "lineup_required": false}
+      ]
+    },
+    "nightwing": {
+      "face_card": "references/characters/nightwing/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/nightwing/body-tier1.png", "lineup_required": false},
+        {"tier": 6, "path": "references/characters/nightwing/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 1, "path": "references/characters/nightwing/view-3q-full.png", "lineup_required": false},
+        {"name": "profile", "tier": 1, "path": "references/characters/nightwing/view-profile.png", "lineup_required": false},
+        {"name": "back-full", "tier": 1, "path": "references/characters/nightwing/view-back-full.png", "lineup_required": false},
+        {"name": "low-angle-front", "tier": 1, "path": "references/characters/nightwing/view-low-angle-front.png", "lineup_required": false},
+        {"name": "ecu-region", "tier": 1, "path": "references/characters/nightwing/view-ecu-region.png", "lineup_required": false}
+      ]
+    },
+    "bane": {
+      "face_card": "references/characters/bane/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/bane/body-tier1.png", "lineup_required": false},
+        {"tier": 6, "path": "references/characters/bane/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 6, "path": "references/characters/bane/view-3q-full.png", "lineup_required": true},
+        {"name": "back-full", "tier": 6, "path": "references/characters/bane/view-back-full.png", "lineup_required": true},
+        {"name": "ecu-region", "tier": 6, "path": "references/characters/bane/view-ecu-region.png", "lineup_required": true}
+      ]
+    },
+    "killer-croc": {
+      "face_card": "references/characters/killer-croc/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/killer-croc/body-tier1.png", "lineup_required": false, "_note": "baseline/normal-size Croc — needed for cold-open growth start (p01-01..03)"},
+        {"tier": 6, "path": "references/characters/killer-croc/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 6, "path": "references/characters/killer-croc/view-3q-full.png", "lineup_required": true},
+        {"name": "back-full", "tier": 6, "path": "references/characters/killer-croc/view-back-full.png", "lineup_required": true}
+      ]
+    },
+    "scarecrow": {
+      "face_card": "references/characters/scarecrow/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/scarecrow/body-tier1.png", "lineup_required": false, "_note": "baseline Scarecrow — have turnaround sheets in Flow"},
+        {"tier": 6, "path": "references/characters/scarecrow/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 6, "path": "references/characters/scarecrow/view-3q-full.png", "lineup_required": true},
+        {"name": "back-full", "tier": 6, "path": "references/characters/scarecrow/view-back-full.png", "lineup_required": true}
+      ]
+    },
+    "joker": {
+      "face_card": "references/characters/joker/face-card.png",
+      "body_tiers": [
+        {"tier": 1, "path": "references/characters/joker/body-tier1.png", "lineup_required": false, "_note": "baseline/normal-size Joker — MAY BE MISSING in Flow (only titan confirmed). Needed for cold-open growth start."},
+        {"tier": 6, "path": "references/characters/joker/body-tier6.png", "lineup_required": true, "tier6_reinforcement_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 6, "path": "references/characters/joker/view-3q-full.png", "lineup_required": true}
+      ]
+    }
+  },
+  "locations": {
+    "arkham-cells": {"establishing": "references/locations/arkham-cells/_source.jpg", "views": []},
+    "batcave": {"establishing": "references/locations/batcave/_source.jpg", "views": []},
+    "arkham-exterior": {"establishing": "references/locations/arkham-exterior/_source.jpg", "views": []},
+    "arkham-lobby": {
+      "establishing": "references/locations/arkham-lobby/_source.jpg",
+      "views": [
+        {"name": "reverse", "path": "references/locations/arkham-lobby/_source-reverse.jpg"}
+      ]
+    }
+  },
+  "props": {
+    "experimental-serum": {"establishing": "references/props/experimental-serum/_source.png"},
+    "batmobile": {"establishing": "references/props/batmobile/_source.png"}
+  }
+}

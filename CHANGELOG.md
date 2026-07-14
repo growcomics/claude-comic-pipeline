@@ -12,6 +12,32 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-14 (L37 body-orientation variety + cinematography/continuity refs + Studio worker + project text tracked)
+
+Batch commit of pipeline work accumulated in the working tree across recent sessions. Reviewed, secret-scanned (no credentials — the Studio bridge key lives in `~/.config/studio-worker/config.json`, never in the repo), and documented here before push.
+
+**Added**
+- **L37** in `skills/comic-production/references/lessons-learned.md` — *Body-orientation variety is mandatory anti-AI; build + attach multi-angle turnaround sheets* (STANDING RULE). A sequence of front-facing-everything panels is a top AI tell even with good camera variety; L37 makes body orientation an independent lever from camera distance/angle (front / 3q-front / profile / 3q-rear / back / over-shoulder / looking-away), makes per-character turnaround sheets a required ref asset (attach on any non-front panel), and adds the scale-constancy corollary for size-change comics (only the transforming character's scale moves; the room is the fixed ruler — clamp non-transforming characters to furniture anchors so they never appear to "shrink"). Folds into `script-breakdown` (assign orientation per panel) and `continuity-check`/`qa-checklist.md` (flag >2 consecutive front-body panels; flag room-relative scale drift). Provenance: user directive on the goth-witch "Bigger Plans" build (Flow project `7103f1eb`).
+- `skills/comic-production/references/cinematography.md` — Hollywood camera-and-lighting craft translated to prompt language: the three mandatory per-panel axes (shot size / camera angle / lighting), with phrasing lines `style-lock` copies into `style.md` and `script-breakdown` sets per panel. First-class reference per `feedback_pipeline_improve`.
+- `skills/comic-production/references/continuity.md` — the anti-drift ruleset (winner-first chaining, prop/placement persistence, object refs, physics constraints, monotonic transformation scaling) applied on every multi-panel project.
+- `tools/studio_worker.py` — transport layer for the 3DMC comic-creator worker: `pull` / `progress` / `ingest` queue HTTP plumbing (header-only `X-Bridge-Key` auth, config + key read from `~/.config/studio-worker/config.json`, never the command line or repo). Lets a live Claude session drive the Studio queue without hand-rolling multipart/auth.
+- **Project TEXT now tracked** (per CLAUDE.md rule 5 — binaries stay gitignored, renders recoverable from the Flow media ids in each `PAGES.md`): `projects/goth-witch-growth/` (10-panel giantess comic, COMPLETE), `projects/the-bet/` (FMG, COMPLETE), `projects/daughter-of-hercules/` (57 panels, ledger), `projects/batman-arkham-titan/` (14pg/58-panel shotlist + refs), `projects/meteor-muscle/` (shotlist + style + refs), `projects/bottle-game-muscle/` (config + shotlist + style). Staged text only: `shotlist.json`/`.md`, `style.md`, `production-config.json`, `references_required.json`, `PAGES.md`, location `_source.md`.
+
+**Fixed**
+- `skills/continuity-check/scripts/rules_audit.py` — `_infer_arc_character()` now normalizes `wardrobe` when it is a **list** (the v3 production-briefing format) instead of assuming a string, and falls back to the cast `slug` when `id` is absent. Previously a list-form wardrobe silently failed the arc-character heuristic, skipping downstream monotonic-size checks.
+
+## 2026-06-22 (New project: goth-witch giantess comic "Bigger Plans")
+
+**Added**
+- New project `projects/goth-witch-growth/` — a 10-panel DAZ3D giantess/size-growth comic ("Bigger Plans"): sexy goth witch Luna grows enormous with violet magic while shy Ethan panics; funny "party trick" running gag; woman-forward framing.
+- Project text committed per CLAUDE.md rule 5: `shotlist.json` (+ `.md`), `style.md`, `production-config.json`, `references_required.json`, `PAGES.md` (pages ledger w/ Flow media ids), `references/locations/goth-loft/_source.md` (DAZ3D interior look provenance).
+- `transformation_type: size` handled as a non-muscle arc — mandatory rules adapted (dropped muscle rules 1/2/3/10; added size-monotonicity + curvy-not-muscular + violet-magic identity + adult-only via `extra_lines`).
+- Shotlist tuned to pass the L20 camera-distance gate (mean 3.0, 8 distinct distances, 5 angles) and continuity audit (only the expected Flow refs-on-disk findings remain).
+
+**Notes**
+- Generated entirely on Flow (growcomics, Nano Banana 2, free tier), project id `7103f1eb-7899-4c2d-bde5-2a50737b7717`. All 10 panels generated, QA'd, and accepted (favorited). Lettering baked per L19 (flat 2D B&W comic bubbles + comic font on photoreal DAZ3D scenes). Binaries not committed (recoverable from media ids in PAGES.md).
+- Flow legacy pill-UI was live (not Omni): x4 count fans out 4 candidates per submit; ref-attach via hover→3-dots→"Add to prompt" or the "+" asset picker (search by auto-title, favorites show hearts).
+
 ## 2026-06-17 (L36 — Flow Omni conversational editing + Nano-Banana-validated "prosumer DAZ" style block)
 
 **Added**

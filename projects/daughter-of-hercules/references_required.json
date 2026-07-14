@@ -1,0 +1,95 @@
+{
+  "project": "daughter-of-hercules",
+  "title": "Daughter of Hercules!",
+  "author": "Gribble (gribble77@hotmail.com)",
+  "platform": "flow + 3dmc-studio",
+  "style": "photoreal-daz3d",
+  "transformation_type": "fmg",
+  "pages": 20,
+  "content_compliance": {
+    "adult_only": "Macaria is written as 18; she will be DEPICTED as a clearly-adult young woman (mid-20s read) per the pipeline adult-only rule (rule_comic_adult_only). No minor depiction.",
+    "coverage": "always_clothed = true. Script says Macaria/Cyclops end 'naked'; renders keep torn-scrap remnants / posing that ALWAYS cover breasts+groin (rule 4). No nudity."
+  },
+  "characters": {
+    "macaria": {
+      "desc": "Heroine, daughter of Hercules. Adult young woman, athletic with well-defined muscle, long blond hair, fair Mediterranean skin. Wears a short white-and-gold Greek chiton/tunic with leather belt and sandals. FMG subject — grows huge twice.",
+      "views": [
+        {"id": "macaria_face", "desc": "Face/portrait card, blond hair, determined. Black bg, 16:9."},
+        {"id": "macaria_body_base", "desc": "Full-body baseline (size 1) — athletic 18-but-adult, white/gold chiton, sandals. Studio backdrop 3:4."},
+        {"id": "macaria_lineup_1_6", "desc": "Numbered 1-6 muscle-growth lineup, her face on all 6 tiers, double-bicep flex. 1=athletic baseline -> 4=7ft muscle mountain (first battle form, scraps of chiton) -> 6=final form, biggest of all (bigger than grown Cyclops), torn remnants only. 16:9. SIZE ANCHOR."}
+      ],
+      "required": ["macaria_face", "macaria_body_base", "macaria_lineup_1_6"]
+    },
+    "hercules": {
+      "desc": "Father, ~40, classic Greek hero. Well-muscled but NOT huge (lean heroic, not a bodybuilder). Short dark beard, dark wavy hair, bronzed skin. Brown leather/tunic warrior garb, sandals, maybe a lion-skin nod. Gets beaten by the monsters mid-story (battered/limping later).",
+      "views": [
+        {"id": "hercules_face", "desc": "Face card, bearded Greek hero ~40. Black bg, 16:9."},
+        {"id": "hercules_body", "desc": "Full-body, lean-muscular heroic, Greek warrior tunic. Studio backdrop 3:4."}
+      ],
+      "required": ["hercules_face", "hercules_body"]
+    },
+    "the_man": {
+      "desc": "Desperate villager messenger. Ordinary adult man, simple tunic, frightened/earnest. Comic-relief lust beat on p2.",
+      "views": [
+        {"id": "man_face", "desc": "Face card, ordinary Greek villager man. Black bg, 16:9."},
+        {"id": "man_body", "desc": "Full-body, plain peasant tunic. Studio backdrop 3:4."}
+      ],
+      "required": ["man_face", "man_body"]
+    },
+    "cyclops": {
+      "desc": "FEMALE Cyclops monster. 7ft tall, very muscular, single large central eye, ONE earring, carries a heavy club. Tough leather/hide outfit. Mid-story drinks a stolen potion and grows even larger muscles + breasts than Macaria's first form, growing out of her clothes (torn remnants cover). Secondary transforming antagonist.",
+      "views": [
+        {"id": "cyclops_face", "desc": "Face/head card, one central eye, one earring, fierce. Black bg, 16:9."},
+        {"id": "cyclops_body_base", "desc": "Full-body baseline, 7ft female cyclops, muscular, hide outfit, club. Studio backdrop 3:4."},
+        {"id": "cyclops_grown", "desc": "Potion-grown form — even larger muscles and bust than Macaria's first battle form, clothes torn to remnants (still covering). Full-body, flexing. 3:4."}
+      ],
+      "required": ["cyclops_face", "cyclops_body_base", "cyclops_grown"]
+    },
+    "minotaur": {
+      "desc": "Male Minotaur monster. 7ft, very muscular, bull head, horns, a NOSE RING, carries a sledgehammer. Snorts. Gets beaten by Macaria.",
+      "views": [
+        {"id": "minotaur_card", "desc": "Full-body + head detail, muscular bull-man, horns, nose ring, sledgehammer. Studio backdrop / black bg. 3:4."}
+      ],
+      "required": ["minotaur_card"]
+    },
+    "rock": {
+      "desc": "Man-shaped ROCK creature monster. 7ft, very muscular humanoid made of cracked grey stone/boulders, glowing seams. Roars ('Raaawwwrrggghhh!'). Smashed apart by Macaria mid-story.",
+      "views": [
+        {"id": "rock_card", "desc": "Full-body humanoid rock golem, muscular, cracked stone. Studio backdrop / black bg. 3:4."}
+      ],
+      "required": ["rock_card"]
+    }
+  },
+  "locations": {
+    "env_hercules_home": {"aspect": "4:3", "desc": "Interior of Hercules' ancient-Greek home — stone walls, simple wooden table + chairs, clay bowls/amphorae, doorway with daylight, rustic hero's dwelling. DAZ3D Iray."},
+    "env_greek_village": {"aspect": "4:3", "desc": "Ancient Greek village square mid-destruction — whitewashed stone houses, market stalls, overturned wagons, smashed barrels, dust, scattered debris. The battleground. DAZ3D Iray."}
+  },
+  "growth_metadata": {
+    "macaria": "Two-stage FMG. Pages 6-8: athletic -> 7ft muscle mountain (battle form, lineup tier ~4, scraps of chiton). Pages 16-17: grows AGAIN, even bigger than grown Cyclops (lineup tier 6), torn remnants. Monotonic: never shrinks until story-end 'back to normal' line (p20, off-page).",
+    "cyclops": "One potion jump (p13): baseline 7ft -> grown (even larger muscle+bust than Macaria's first form). Torn remnants cover.",
+    "lineup_use": "Attach macaria_lineup on each Macaria stage-change panel; call the tier number. Build a Cyclops base+grown pair as the cyclops size anchor."
+  },
+  "turnarounds": {
+    "comment": "Per feedback_turnarounds_and_props: every character gets a front/side/back (+expression) turnaround sheet. 16:9, chain the character's body sheet for outfit+identity.",
+    "macaria_turnaround": "Macaria front/side/back + expressions, chiton, baseline",
+    "hercules_turnaround": "Hercules front/side/back, leather kilt + lion-skin",
+    "man_turnaround": "Villager front/side/back",
+    "cyclops_turnaround": "Cyclops base front/side/back, single eye, club",
+    "minotaur_turnaround": "Minotaur front/side/back, horns/nose ring/hammer",
+    "rock_turnaround": "Rock golem front/side/back"
+  },
+  "props": {
+    "comment": "Clean neutral-bg shots of important script props.",
+    "prop_potion_vial": "Small glowing magic potion vial Cyclops steals + drinks (p12-13) - PLOT CRITICAL",
+    "prop_cyclops_club": "Cyclops' big crude knotted wooden club",
+    "prop_minotaur_hammer": "Minotaur's massive iron sledgehammer (shatters on Macaria p9)"
+  },
+  "build_order": [
+    "macaria_face", "hercules_face", "man_face", "cyclops_face",
+    "macaria_body_base", "hercules_body", "man_body", "cyclops_body_base",
+    "minotaur_card", "rock_card", "cyclops_grown",
+    "macaria_lineup_1_6",
+    "env_hercules_home", "env_greek_village"
+  ],
+  "notes": "Generate all sheets in Flow (new Flow project) -> they become attachable Flow assets AND get downloaded for upload+LOCK in 3DMC Studio refs.php. Per handoff: group/name/set-kind/approve/LOCK before panel generation. No background extras beyond named cast (feedback_no_extra_characters) EXCEPT the script explicitly calls for fleeing villagers/crowd in the village scenes."
+}

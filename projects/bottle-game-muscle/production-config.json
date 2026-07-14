@@ -1,0 +1,40 @@
+{
+  "project": "bottle-game-muscle",
+  "title": "Spin & Swell",
+  "platform": "flow",
+  "style_preset": "photoreal-daz3d",
+  "transformation_type": "fmg",
+  "adult_only": true,
+  "logline": "Girls' night, four women, one bottle. Whenever the spin stops pointing at you, you have to flex — and your muscles balloon, shredding your clothes. Last one standing wins. They all end up enormous, ripped, and loving it.",
+  "ensemble": true,
+  "muscle_arc": {
+    "subjects": ["maria", "roxy", "mei", "linda"],
+    "tiers": 6,
+    "tier_reference": "references/muscle-tiers-1-6.png (the 1->6 chart the user supplied: tier1 slim/baseline -> tier6 huge female-bodybuilder, shirt ripped). Scale BUILD and the MODEST height per that chart.",
+    "monotonic_per_character": true,
+    "growth_is_muscle_dominant": true,
+    "flavor": "Female muscle growth (FMG), MUSCLE-DOMINANT. 6 tiers per the supplied 1->6 reference chart: 1 slim baseline -> 2 toned -> 3 athletic/fit -> 4 clearly muscular (shirt straining) -> 5 very muscular (shirt tearing) -> 6 HUGE female bodybuilder (massive defined muscles, clothes ripped open but still covered). Growth = DRAMATIC muscle mass increase; HEIGHT increases only MODESTLY (they are NOT giantesses / NOT tall-with-little-muscle). Sexy-strong and feminine, natural healthy skin tone (NOT red, NOT inflamed, NOT oiled). Clothing rips progressively each tier. Across the 20 pages the picked women ramp UP toward tier 6 by the finale.",
+    "pacing_note": "20 pages: each time the bottle picks a woman she jumps ~1-2 tiers; the finale (Maria's KRAKOOM) is the biggest single jump. By p19-20 the women should read as tier 5-6 (huge), clothes shredded but covered."
+  },
+  "mandatory_rules": {
+    "active": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "extra_lines": [
+      "Every character is an ADULT woman (25+). Four distinct ORIGINAL fictional women (not real people): maria (warm-tan Latina, wavy brown hair, green tank), roxy (pale, cherry-red bob, a few small tasteful tattoos, crop top + ripped jeans), mei (East-Asian, glasses, blouse + skirt), linda (fair, wavy blonde, curvy, off-shoulder top + shorts) — keep each one's face, hair, tattoos and outfit consistent every panel (refs are truth).",
+      "Muscle growth is monotonic PER CHARACTER: once a woman grows to a tier she stays at that tier or larger for the rest of the comic; she NEVER shrinks back.",
+      "FIXED ENVIRONMENT SCALE (continuity-critical): the room, couch, coffee table, bookshelf, rug, bottle, snacks and all props stay the SAME real-world size in every single panel. ONLY the women change size — as they gain muscle they grow TALLER and BIGGER, so a grown woman looks visibly larger relative to the unchanged furniture (e.g. by the end she dwarfs the couch). NEVER resize the furniture to 'fit' a bigger woman; keep the props constant and let her scale up against them. Use the unchanged couch/rug as the visual size yardstick.",
+      "Muscles are powerful, defined and SEXY — natural healthy skin tone (NOT red, NOT inflamed, NOT oiled/wet), beautiful feminine faces kept throughout.",
+      "On a growth/flex beat the clothing over the growing region tears at the seams (sleeve splits, buttons pop, fabric rips) but the woman stays fully covered — no nudity.",
+      "Tone is FUN and playful — confident grins, hype reactions, comic energy.",
+      "CINEMATOGRAPHY: follow references/cinematography.md. Vary shot size and angle every panel; power/flex beats use a LOW angle + hard rim/back light carving the muscle; the spinning-bottle/circle beats use a TOP-DOWN angle; nervous/loss beats use a slightly HIGH angle. Name a light source on every panel; never flat front-on flash."
+    ]
+  },
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "classic black-and-white 2D comic balloons — bold solid black outline, white fill, ALL-CAPS bold Bangers-style comic font, triangular tail pointing to the speaker; flat 2D overlay ONLY, photoreal DAZ3D everywhere else; SFX as bold black-and-white comic lettering (e.g. WHIRRR, FFLEX, RRRIP, KRAKOOM)."
+  },
+  "location_strategy": "single-location",
+  "location": "simple-modern-living-room",
+  "woman_forward": {
+    "rule": "Ensemble of four women — all are the focus. Each round spotlights one (solo CU/ECU on her growth beat), with the other three as hype reactions. Give each woman at least one solo power panel."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "project": "meteor-muscle",
+  "title": "Critical Mass",
+  "platform": "flow",
+  "style_preset": "photoreal-daz3d",
+  "transformation_type": "fmg",
+  "adult_only": true,
+  "always_clothed": true,
+  "muscle_arc": {
+    "subject": "hazel",
+    "tiers": 6,
+    "monotonic": true,
+    "size_lineup": "assets/muscle-size-lineup.png (sizes 1-6) — attach on stage-change panels, call out the number",
+    "flavor": "FMG muscle ONLY; natural skin tone (not red); athletic sheen; not fat; not giantess-magic"
+  },
+  "mandatory_rules": {
+    "active": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "note": "FMG default = all 10 rules.",
+    "extra_lines": [
+      "Hazel's muscle size is monotonic — each transformation panel is the same size or larger than before; never smaller.",
+      "It is MUSCLE growth, NOT fat — deep muscle separation, vascularity at high tiers; muscles a NATURAL healthy skin tone, never red/inflamed.",
+      "Brooke, Tiffany and the campus stay a FIXED normal size in every panel; ONLY Hazel changes (scale to stone steps / benches / the bullies).",
+      "Body-orientation variety is mandatory (L37): include back, profile, 3q-rear and over-shoulder views; attach the matching turnaround-sheet angle.",
+      "Transformation energy is cosmic blue-white with violet edges (identity FX).",
+      "Every character is an ADULT (21, university students)."
+    ]
+  },
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "classic black-and-white 2D comic balloons + yellow caption boxes + 2D SFX, bold black outline, ALL-CAPS Bangers-style comic font; flat 2D overlay only, photoreal DAZ3D everywhere else"
+  },
+  "camera_directive": {
+    "rule": "Cinematic, varied. Low-angle/worm's-eye for Hazel's growing scale (p05/p06/p11/p14); ECU for emotion (p04/p10); high-angle for Hazel's early weakness (p03); over-shoulder/back/profile for orientation variety (p02/p09/p12/p13/p15).",
+    "reference": "User-supplied camera charts (shot sizes, camera angles, camera movement) — folded into shotlist per panel."
+  }
+}

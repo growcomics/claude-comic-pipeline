@@ -1466,4 +1466,28 @@ The canonical multi-view turnaround (Front / Side / Rear-cape-blowing in one fra
 
 ---
 
+## L37 — Body-orientation variety is mandatory anti-AI; build + attach multi-angle turnaround sheets
+
+**Status: Active. STANDING RULE.** New lesson 2026-06-22, user directive during the goth-witch "Bigger Plans" build (project `7103f1eb`). Sibling of L20/L34 (camera *distance/staging*) and the `cinematic-framing.md` angle table — but this one is about the **character's own body orientation**, which is a distinct failure axis the camera-variety checks miss.
+
+**The failure mode (a top AI tell).** A sequence where every character faces the camera front-on — even with varied camera distance and good lettering — reads as AI-generated. Front-facing-everything is one of the most common, most recognizable AI-comic signatures. Hand-made comics constantly turn characters away: backs, three-quarter-rear, over-the-shoulder, profile, looking-away. The user's words: *"when it's a bunch of images that are just face-forward, it looks way too much like AI… we're doing our best not to appear as an AI comic."*
+
+**The rule (apply at script-breakdown AND QA):**
+- Across any multi-panel sequence, **deliberately vary body orientation**, not just camera angle/distance. Target: no more than ~2 consecutive panels share a front-facing body orientation. Work in at least one true **back / 3-quarter-rear** view and one **profile / over-shoulder** view per ~5-panel run.
+- Orientation vocabulary to rotate through: `front`, `3q-front`, `profile`, `3q-rear`, `back`, `over-shoulder` (camera behind character A looking past them at character B), `looking-away` (body angled, head turned off-frame).
+- This is **additive to** L20/`cinematic-framing.md`: vary distance, camera angle, AND body orientation. A panel can be a low-angle (camera) of a 3-quarter-rear (body) — those are independent levers.
+
+**The enabler — turnaround sheets are now a required ref asset, not optional.** You cannot reliably render a clean back or profile of a character from a front-only face card + front body baseline; the model invents the back and it drifts. So:
+- Build a **multi-angle turnaround sheet per character** up front (front / 3q / side / **rear** / face turnaround / expression strip / detail crops — hands, footwear, accessories). Convention from L36/L24: Nano Banana **Pro, 16:9, black background**, `make sure it's consistent every time`.
+- **Attach the turnaround sheet as a reference on any panel that uses a non-front orientation** (and ideally on all panels — it carries identity from every side). When a panel calls for a back view, the rear view on the sheet is what keeps hair/outfit/proportion correct from behind.
+- Add `turnaround_sheet` to each character's `references_required.json` views list; treat its absence as a HARD gap for any project that wants the non-AI look.
+
+**Scale-constancy corollary (same directive).** In a size-change comic (giantess/macro/shrink), only the *transforming* character's scale moves; **every other character and the room/furniture stay a fixed real size across the whole book.** The non-transforming character must be scaled to room anchors (couch seat height, doorway, floorboards) identically in every panel — if they look smaller in a later panel they have visibly "shrunk," which breaks the gag and reads as an inconsistency error. Bake an explicit clamp into those panels: *"<character> is a normal-sized adult (~1.7 m), the SAME size as earlier panels and correctly scaled to the couch/door/furniture; he has NOT shrunk — only <subject> is giant."* The room is the fixed ruler; the giant is the only variable.
+
+**Where this applies**: every comic, every platform. Fold the orientation-variety check into `script-breakdown` (assign body orientation per panel alongside camera) and into `continuity-check`/`qa-checklist.md` (flag a run of >2 front-facing-body panels; flag a non-transforming character whose room-relative scale changes). **Reverses**: nothing — strengthens `cinematic-framing.md` and the `feedback_shot_variety` guidance.
+
+**Provenance**: user directive 2026-06-22 on Flow project `7103f1eb` (goth-witch "Bigger Plans"); user supplied turnaround sheets for both characters (Luna + the male lead) and asked to re-angle panels 6–10 and fix a panel-10 scale-shrink on the non-transforming character.
+
+---
+
 ## How to add a lesson

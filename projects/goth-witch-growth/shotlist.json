@@ -1,0 +1,501 @@
+{
+  "project": "goth-witch-growth",
+  "title": "Bigger Plans",
+  "version": "1.0",
+  "page_count": 10,
+  "estimated_panel_count": 10,
+  "platform": "flow",
+  "style": "photoreal-daz3d",
+  "transformation_type": "size",
+  "location_strategy": "single",
+  "transformation_metadata": {
+    "kind": "macro / giantess size growth (curvy, sexy — NOT muscle)",
+    "subject": "luna",
+    "scale_tiers": {
+      "1": "Baseline. Normal adult height (~1.7m). Standing comfortably in the loft.",
+      "2": "Slightly larger — clothes start to feel snug, she rises a head taller than Ethan.",
+      "3": "Noticeably big — ~2.5m, has to tilt head under the rafters, couch looks small under her.",
+      "4": "Towering — ~3.5m, fills a third of the room, furniture is doll-sized beside her.",
+      "5": "Huge — ~5m, head near the ceiling beams, has to kneel/hunch, Ethan is knee-height.",
+      "6": "Enormous — room-filling giantess, the loft is cramped around her, Ethan is shin-to-ankle height. Maximum, sexy and triumphant."
+    },
+    "monotonicity": "Once Luna reaches a size tier she never shrinks below it. Each panel >= previous panel's tier.",
+    "flavor": "Confident, playful, sexy. Growth is fun and showing-off, not painful. Curves grow proportionally — fuller bust, hips, thighs — hourglass figure maintained. NO muscle growth, NO red/inflamed skin."
+  },
+  "cast": [
+    {
+      "id": "luna",
+      "name": "Luna",
+      "age": 25,
+      "ref_folder": "references/characters/luna/",
+      "wardrobe": "Sexy goth: black velvet/leather corset minidress with lace-up front, choker with a small silver pentacle, fishnet sleeves, chunky platform boots, black-painted nails. As she grows the dress stretches and strains at the seams — laces pull tight, hemline rides up — but always fully covers her (L4). Boots laces creak.",
+      "appearance": "Adult woman, 25. Pale porcelain skin, long jet-black hair with deep-purple streaks, blunt straight bangs. Smoky dark eye makeup, black lipstick, sharp winged eyeliner. Hourglass figure, full curves. When using magic her eyes glow faint violet and purple sparks/energy curl around her hands and body. Confident, mischievous, alluring expressions.",
+      "prominence": "PRIMARY — she is the focus of the comic. Most panels feature her solo or with her dominating the frame."
+    },
+    {
+      "id": "ethan",
+      "name": "Ethan",
+      "age": 25,
+      "ref_folder": "references/characters/ethan/",
+      "wardrobe": "Casual shy-guy: slightly oversized grey hoodie over a plain tee, dark jeans, white sneakers. Round wire-frame glasses.",
+      "appearance": "Adult man, 25. Slim, a little gangly, soft features, short tidy brown hair, light stubble. Perpetually nervous — flushed red cheeks that get redder through the comic, wide eyes, fidgety hands. Always looks small next to Luna.",
+      "prominence": "SECONDARY — appears smaller and off to the side; never dominates a panel. Reaction-shot fodder. Several panels omit him entirely (Luna solo)."
+    }
+  ],
+  "locations": [
+    {
+      "id": "goth-loft",
+      "name": "Luna's Gothic Loft",
+      "ref_folder": "references/locations/goth-loft/",
+      "description": "A cozy but spacious top-floor loft apartment decorated goth-chic. Deep plum and charcoal walls, a tufted dark-burgundy velvet couch, a worn Persian rug, tall arched window with sheer black curtains and city dusk light. Dozens of dripping candles in iron holders, a few potted dead roses, an antique bookshelf of occult tomes, a pentagram tapestry, string of warm fairy lights. Exposed wooden ceiling beams overhead (these matter — they become the height marker as Luna grows). Simple, uncluttered DAZ3D-style interior: clean geometry, soft warm key light + cool violet rim light, shallow depth of field.",
+      "daz3d_bg_note": "Background should read like a rendered DAZ3D Iray interior set — simple modeled furniture, soft global illumination, gentle bloom on candle flames, slightly empty/clean staging. We will source a DAZ3D interior reference from the web (environment-references.md trick) and build a NEW original room in Flow off it, not copy it."
+    }
+  ],
+  "props": [
+    {
+      "id": "candles",
+      "note": "Dripping black/red candles, warm flames — consistent across panels."
+    },
+    {
+      "id": "velvet-couch",
+      "note": "Burgundy tufted couch — shrinks visually as Luna grows (scale anchor)."
+    },
+    {
+      "id": "ceiling-beams",
+      "note": "Exposed wooden rafters — the height gag marker as she gets huge."
+    },
+    {
+      "id": "magic-fx",
+      "note": "Violet/purple sparks and curling energy around Luna's hands and body during growth."
+    }
+  ],
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "Classic black-and-white 2D comic balloons: clean white rounded ovals, bold 3-4px solid black outline, ALL-CAPS bold black comic display font (Bangers-style), short triangular black-outlined tail to the speaker's mouth. Flat 2D overlay only — NO 3D shading, NO drop shadow on the scene. Bodies/room stay photoreal DAZ3D.",
+    "note": "Every panel with dialogue bakes the bubble in at render time per L19."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01",
+          "size": "wide",
+          "tier": 1,
+          "view": "wide-establish",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "wide-establish, three-quarter, eye-level, slight 3q on the doorway",
+          "costume_state": "Luna: corset minidress fully intact, neatly laced, fully clothed. Ethan: grey hoodie intact, fully clothed.",
+          "action": "Luna holds the loft door open with a warm, sly smile, beckoning Ethan inside. Ethan hovers on the threshold, shoulders hunched, clutching the strap of his bag, cheeks pink. The candlelit gothic loft glows behind her. Both at normal height. She is clearly the confident host; he is the timid guest. Luna dominant in frame, Ethan smaller near the doorframe.",
+          "luna_face": "Eyes half-lidded and warm, one brow arched, lips closed in a knowing crooked smile, head tilted invitingly.",
+          "ethan_face": "Eyes wide behind glasses, brows raised, mouth a small nervous line, cheeks flushed pink.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "COME IN, DON'T BE SHY... I'VE BEEN DYING TO SHOW YOU SOMETHING."
+            },
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "H-HI, LUNA. NICE, UH... CANDLES?"
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "view_tag": "wide-establish",
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "notes": "Cold open. Both baseline tier 1. Establishes the loft (candles, beams, couch) and the dynamic."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02",
+          "size": "standard",
+          "tier": 1,
+          "view": "3q-full",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "mcu, high-angle, gentle look-down on the couch two-shot",
+          "costume_state": "Luna: corset minidress fully intact, fully clothed. Ethan: grey hoodie intact, fully clothed.",
+          "action": "On the burgundy velvet couch. Luna lounges sideways, relaxed and sultry, an arm draped along the backrest, leaning toward Ethan. Ethan sits stiffly on the far edge, knees together, hands clamped on his thighs, leaning slightly away. Candles flicker. Luna takes up more of the couch and the frame.",
+          "luna_face": "Eyes steady and direct on Ethan, full relaxed smile, head level, faintly mischievous.",
+          "ethan_face": "Eyes darting sideways, brows up, lips pressed, a bead of sweat, cheeks redder.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "RELAX. IT'S JUST A LITTLE... PARTY TRICK. NOT EVERYONE GETS TO SEE IT."
+            },
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "OKAY BUT THE LAST 'TRICK' SET MY EYEBROWS ON FIRE."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "view_tag": "3q-full",
+          "continuity_refs": [
+            "p01"
+          ],
+          "transformation_beat": null,
+          "notes": "Comfort beat. Still tier 1. Comedy: he's been burned before (literally)."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03",
+          "size": "standard",
+          "tier": 1,
+          "view": "ecu-region",
+          "characters": [
+            "luna"
+          ],
+          "location": "goth-loft",
+          "camera": "ecu-region, eye-level, close on Luna's raised hand and face, shallow DOF",
+          "costume_state": "Luna: corset minidress fully intact, fully clothed.",
+          "action": "SOLO LUNA. She lifts one hand, fingers splayed, and violet sparks crackle to life curling between her black-painted nails. Her eyes begin to glow faint purple. A smug, delighted grin. Candle glow + magic glow on her face. No Ethan in frame.",
+          "luna_face": "Eyes glowing violet, narrowed in playful confidence, one corner of mouth raised higher than the other, brow cocked.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "WATCH CLOSELY, CUTIE. THINGS ARE ABOUT TO GET... BIG."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "FWOOMM",
+              "source": "magic igniting"
+            }
+          ],
+          "captions": [],
+          "view_tag": "ecu-region",
+          "continuity_refs": [
+            "p02"
+          ],
+          "transformation_beat": "ignition",
+          "notes": "SOLO WOMAN focus. Magic ignites. Pun setup for the growth. Tier still 1 (no size change yet)."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04",
+          "size": "standard",
+          "tier": 2,
+          "view": "front-full",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "mcu, low-angle-front, tight on Luna's torso and face as she rises",
+          "costume_state": "Luna: corset minidress snug, faint seam tension starting, fully covering. Ethan: grey hoodie intact, fully clothed.",
+          "action": "Growth begins. Luna rises off the couch as her whole body swells a size larger — now a head taller, her corset dress pulling snug, curves fuller, purple energy rippling over her skin. She arches with a pleased gasp. Ethan, much smaller in the corner of the frame, recoils on the couch, going red, pointing weakly. Luna dominates ~70% of the frame.",
+          "luna_face": "Head tipped back slightly, eyes half-closed, mouth open in a pleased breathless smile, enjoying it.",
+          "ethan_face": "Eyes huge, mouth open in a startled little 'o', whole face flushing red, hands up defensively.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "MMM... THERE WE GO. FEELS SO GOOD TO STRETCH OUT."
+            },
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "Y-YOU'RE GETTING BIGGER. THAT'S— THAT'S NEW."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "FWMP",
+              "source": "sudden size pop"
+            }
+          ],
+          "captions": [],
+          "view_tag": "front-full",
+          "continuity_refs": [
+            "p03"
+          ],
+          "transformation_beat": "growth-start",
+          "notes": "Tier 2. First real size change. Clothes strain (L4 — stay on). Ethan small + red."
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05",
+          "size": "standard",
+          "tier": 3,
+          "view": "ecu-face",
+          "characters": [
+            "luna"
+          ],
+          "location": "goth-loft",
+          "camera": "ecu-face, low-angle-front, beauty close-up, shallow DOF, violet rim light",
+          "costume_state": "Luna: corset minidress straining, laces tight, hem riding up, fully covering.",
+          "action": "SOLO LUNA. Glamour beauty shot mid-growth. Her hair lifts and flows on the magic current, eyes glowing violet, black lips parted in a delighted smirk. Candle flames reflected in her eyes. She looks gorgeous and powerful. Implied scale-up (she's at tier 3 now — head brushing toward the beams behind, slightly out of focus).",
+          "luna_face": "Eyes glowing, half-lidded and sultry, lips parted in a slow confident smile, chin slightly lifted.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "OH, I'M JUST GETTING WARMED UP."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "view_tag": "ecu-face",
+          "continuity_refs": [
+            "p04"
+          ],
+          "transformation_beat": "growth-mid",
+          "notes": "SOLO WOMAN beauty/sexy showcase. Tier 3. Pure glamour beat."
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06",
+          "size": "wide",
+          "tier": 4,
+          "view": "low-angle-back",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "full, low-angle-back, camera low behind and to the right of Luna, over-the-shoulder past her back and down at tiny Ethan craning up",
+          "costume_state": "Luna: corset minidress seams stretched taut, first small strain tears at seams, still fully covering. Ethan: grey hoodie intact, fully clothed.",
+          "action": "Luna now towers — tier 4, ~3.5m — filling a third of the loft, one hand on her hip, looking down with a grin. The velvet couch is doll-sized beside her boots. Her dress strains hard at the seams. Down near the bottom corner, tiny Ethan is on the floor, craning his neck up, glasses askew, jaw on the ground, beet-red. Low angle makes Luna look immense and dominant. Luna ~75% of frame. BODY ANGLE: we are BEHIND giant Luna — her back, hair and the back of her strained corset dress and platform boots fill the frame from a low angle; tiny Ethan is seen past her hip/leg, craning his neck up. This is a back/3q-rear orientation (anti-AI variety, L37). Use Luna's turnaround REAR view as reference.",
+          "luna_face": "Looking down past her cleavage at Ethan, chin tucked, smug satisfied smile, one brow raised, eyes glinting violet.",
+          "ethan_face": "Head craned all the way back, mouth hanging open, eyes saucer-wide behind crooked glasses, face deep red.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "STILL WITH ME DOWN THERE, SWEETHEART?"
+            },
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "I, UM. I FORGOT HOW TO BLINK."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "CREEEAK",
+              "source": "dress seams + floorboards under her weight"
+            }
+          ],
+          "captions": [],
+          "view_tag": "low-angle-back",
+          "continuity_refs": [
+            "p04"
+          ],
+          "transformation_beat": "growth-tower",
+          "notes": "Tier 4. Power low-angle. Couch as scale anchor. Ethan tiny + redder. Mostly Luna. RE-ANGLED 2026-06-22 (L37): back/over-shoulder orientation, attach Luna turnaround (rear).",
+          "body_orientation": "luna: 3q-rear/back; ethan: front, small"
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07",
+          "size": "standard",
+          "tier": 5,
+          "view": "3q-rear",
+          "characters": [
+            "luna"
+          ],
+          "location": "goth-loft",
+          "camera": "cowboy, three-quarter, slight low angle, 3-quarter-REAR of Luna as she braces on the rafter and glances back over her shoulder (down, not at camera)",
+          "costume_state": "Luna: corset minidress heavily strained, seams splitting at the sides, laces maxed, still fully covering.",
+          "action": "SOLO LUNA. Hero showcase. Tier 5 (~5m) — she has to hunch under the wooden ceiling beams, one hand braced playfully on a rafter, the other on her hip, hip cocked in a confident pin-up pose. Purple aura glows around her. The whole loft is dwarfed and cramped around her gorgeous goth figure. Candlelight + violet glow. No Ethan. BODY ANGLE: shot from behind/side — Luna's back and curves and cascading hair are toward camera, one arm up braced on the beam, she glances back over her shoulder with a self-satisfied grin (looking down at her own body, NOT at the camera). 3-quarter-rear orientation (L37). Use Luna's turnaround REAR/3q view as reference.",
+          "luna_face": "Playful self-admiration — eyes glancing down at her own grown body, brows raised, wide mischievous grin.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "CEILING'S GETTING KIND OF RUDE ABOUT MY PERSONAL SPACE."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "view_tag": "3q-rear",
+          "continuity_refs": [
+            "p06"
+          ],
+          "transformation_beat": "growth-huge",
+          "notes": "SOLO WOMAN hero/pin-up beat. Tier 5. Beams as height gag. Mostly her. RE-ANGLED 2026-06-22 (L37): 3q-rear over-shoulder pin-up, attach Luna turnaround.",
+          "body_orientation": "luna: 3q-rear, head turned over shoulder"
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08",
+          "size": "standard",
+          "tier": 5,
+          "view": "side-full",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "mcu, profile, low angle, side-on view of giant Luna kneeling and reaching, tiny Ethan against the wall also in profile",
+          "costume_state": "Luna: corset minidress heavily strained, seams split at sides, still fully covering. Ethan: grey hoodie intact, fully clothed.",
+          "action": "Tier 5 maintained. Luna kneels/hunches because she no longer fits standing, knee on the floor, leaning a giant hand down toward Ethan. Tiny Ethan is backed against the wall by the arched window, only knee-to-ankle height beside her huge boot, pressing himself flat, sweat flying, completely red. She's playfully reaching a single fingertip toward him. Luna fills most of the frame; Ethan a tiny flustered speck against the wall. BODY ANGLE: strict SIDE/PROFILE view — giant Luna kneels in profile reaching a fingertip across toward tiny Ethan who is flat against the window wall, also in profile. Profile orientation (L37 variety). Use the turnaround SIDE views as reference. Ethan stays normal man-size scaled to the wall/window — only Luna is giant.",
+          "luna_face": "Leaning down close, eyes warm and teasing, lips in a big amused grin, head tilted.",
+          "ethan_face": "Pressed flat to the wall, both hands up, eyes squeezed half-shut, mouth in a nervous wobble, sweat drops, fully red.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "AWW, YOU'RE ADORABLE WHEN YOU'RE TINY AND PANICKING."
+            },
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "PLEASE DON'T STEP ON THE GUY WHO BROUGHT SNACKS."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "GULP",
+              "source": "Ethan"
+            }
+          ],
+          "captions": [],
+          "view_tag": "profile",
+          "continuity_refs": [
+            "p06"
+          ],
+          "transformation_beat": "growth-huge",
+          "notes": "Tier 5. Scale gag peak — Ethan ankle-height. Comedy beat. Mostly Luna. RE-ANGLED 2026-06-22 (L37): profile/side-on, attach turnarounds (side).",
+          "body_orientation": "both profile/side-on"
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09",
+          "size": "splash",
+          "tier": 6,
+          "view": "splash",
+          "characters": [
+            "luna"
+          ],
+          "location": "goth-loft",
+          "camera": "splash, worms-eye, dynamic low 3-quarter with strong foreshortening (NOT flat front, NOT dutch)",
+          "costume_state": "Luna: corset minidress at absolute limit, multiple seam splits, laces straining, STILL fully covering (L4).",
+          "action": "SOLO LUNA. Full-page reveal. Tier 6 — enormous, room-filling giantess. She has burst into a triumphant glamour pose, curled around the cramped loft, one knee down, back arched, hair cascading, both hands sparking with violet energy thrown wide. Candles and fairy lights glow tiny around her. Her gorgeous goth figure absolutely dominates — the entire loft is just a frame for her. Dress strained to its limits but holding (L4). Maximum sexy, maximum confident. BODY ANGLE: dynamic worm's-eye 3-quarter with foreshortening looking up at the colossal triumphant Luna — angled, not a flat front-on pin-up (L37). She still reads sexy and triumphant; the low foreshortened angle gives it energy.",
+          "luna_face": "Triumphant pride — chin raised, eyes blazing violet, lips in a wide victorious smile, radiant.",
+          "dialogue": [
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "TA-DAAA! SO... WHAT DO YOU THINK OF MY LITTLE PARTY TRICK?"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "VWOOOOSH",
+              "source": "magic peak"
+            }
+          ],
+          "captions": [],
+          "view_tag": "splash",
+          "continuity_refs": [
+            "p07"
+          ],
+          "transformation_beat": "growth-max",
+          "notes": "SOLO WOMAN splash hero reveal. Tier 6 max. The money shot — mostly/entirely her. RE-ANGLED 2026-06-22 (L37): worm's-eye dynamic 3q reveal (was flat dutch-front).",
+          "body_orientation": "luna: dynamic 3q-front, foreshortened"
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10",
+          "size": "wide",
+          "tier": 6,
+          "view": "over-shoulder",
+          "characters": [
+            "luna",
+            "ethan"
+          ],
+          "location": "goth-loft",
+          "camera": "medium, over-shoulder, camera at FLOOR level behind tiny Ethan looking up past him at giant Luna leaning down",
+          "costume_state": "Luna: corset minidress maxed, multiple seam splits, still fully covering. Ethan: grey hoodie intact, fully clothed.",
+          "action": "Tier 6 maintained. Closing gag. Giant Luna leans down with a flirty wink, resting her chin on one giant hand, looking at teeny Ethan who has gone completely red and is giving a tiny, dazed double thumbs-up from the floor near her boot, glasses fogged up. Warm, funny, sweet finish. Luna dominates the frame; Ethan a tiny grinning speck. BODY ANGLE + SCALE FIX (L37): camera is on the floor BEHIND tiny Ethan — we see the BACK of his grey hoodie and the back of his head in the foreground (use Ethan's turnaround REAR view) — looking up past him at giant Luna leaning down with the flirty wink. SCALE CLAMP: Ethan is a normal-sized adult man (~1.7m), the SAME size as in every earlier panel and correctly scaled to the room — his head reaches about the burgundy couch's seat-back height; the couch, door and floorboards are the same size as always. He has NOT shrunk. ONLY Luna is the giant. The room and Ethan are the fixed ruler.",
+          "luna_face": "One eye closed in a flirty wink, other eye bright violet, lips in a big warm grin.",
+          "ethan_face": "Beet-red, fogged glasses, goofy dazed smile, tiny double thumbs-up.",
+          "dialogue": [
+            {
+              "speaker": "ethan",
+              "type": "balloon",
+              "text": "TEN OUT OF TEN. WOULD GET STEPPED NEAR AGAIN."
+            },
+            {
+              "speaker": "luna",
+              "type": "balloon",
+              "text": "GOOD ANSWER. SECOND DATE'S AT THE PLANETARIUM — I'LL NEED THE LEGROOM."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "view_tag": "over-shoulder",
+          "continuity_refs": [
+            "p06"
+          ],
+          "transformation_beat": null,
+          "notes": "Tier 6. Funny sweet button. Callback to 'party trick'. Mostly Luna. RE-ANGLED + SCALE-FIXED 2026-06-22 (L37): over-Ethan's-shoulder back view; Ethan room-scale-locked (he was rendered shrunk before).",
+          "body_orientation": "ethan: back (foreground); luna: front, leaning down from above"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "WOMAN-FORWARD: panels 3,5,7,9 are SOLO Luna; in shared panels (1,2,4,6,8,10) Luna occupies ~70-80% of the frame and Ethan is the small reaction. 4 solo-her panels + dominant framing in the rest satisfies 'show more of the woman than the guy'.",
+    "Monotonic size: tiers go 1,1,1,2,3,4,5,5,6,6 — never decreasing.",
+    "Camera: 8 distinct distances (wide-establish, mcu, ecu-region, ecu-face, full, cowboy, splash, medium), mean ~3.0, middle-distance fraction 0.5; 5 distinct angles. Tuned to pass the L20 distance/variety gate while keeping the giantess scale reveals.",
+    "Style is photoreal DAZ3D Iray CGI on bodies/room; ONLY the speech bubbles are flat 2D black-and-white comic overlays (L19).",
+    "Every character is an ADULT (25). Mandatory adult-only line baked into prompts.",
+    "Background = original DAZ3D-style gothic loft built in Flow off a web-sourced DAZ3D interior reference (not a copy).",
+    "Funny throughout: running 'party trick' gag, Ethan's deadpan terror one-liners, the snacks line, the planetarium button.",
+    "L37 (2026-06-22): body-orientation variety — p06 back/over-shoulder, p07 3q-rear, p08 profile, p09 worm's-eye 3q, p10 over-Ethan's-shoulder (back). Attach character TURNAROUND SHEETS as refs for non-front angles. Avoids the all-face-forward AI tell.",
+    "Scale constancy: Ethan + room stay fixed real size in EVERY panel; only Luna grows. p10 scale-fixed (Ethan was rendered shrunk)."
+  ],
+  "arc_character": "luna"
+}

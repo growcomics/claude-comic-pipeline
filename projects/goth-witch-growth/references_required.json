@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "project": "goth-witch-growth",
+  "generated_from_shotlist": true,
+  "platform": "flow",
+  "note": "Refs for this project live in the Google Flow project, not on local disk. This manifest is the planning record of what each character/location needs. rules_audit check_reference_completeness will HARD-fail against local disk — that is expected and non-blocking for a Flow-driven project (same as batman-arkham-titan).",
+  "characters": {
+    "luna": {
+      "face_card": "references/characters/luna/face-card.png",
+      "face_card_brief": "Adult woman, 25. Pale porcelain skin, long jet-black hair with deep-purple streaks, blunt straight bangs, smoky dark eye makeup, sharp winged eyeliner, black lipstick. Beautiful, confident, alluring goth. Neutral closed-mouth expression for the canonical card.",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/luna/body-tier1.png",
+          "brief": "Baseline. Normal adult height, hourglass figure, full curves, in the black corset minidress + fishnet sleeves + platform boots, fully laced/intact.",
+          "lineup_required": false
+        },
+        {
+          "tier": 6,
+          "path": "references/characters/luna/body-tier6.png",
+          "brief": "Max giantess scale. Same goth figure scaled enormous, curves fuller in proportion, dress strained to its limit with seam splits but fully covering, violet magic aura.",
+          "lineup_required": false,
+          "tier6_reinforcement_required": true
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 1,
+          "path": "references/characters/luna/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-face",
+          "tier": 1,
+          "path": "references/characters/luna/view-ecu-face.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-region",
+          "tier": 1,
+          "path": "references/characters/luna/view-ecu-region-hand.png",
+          "brief": "Hand/forearm with violet magic sparks for the ignition beat.",
+          "lineup_required": false
+        },
+        {
+          "name": "low-angle-front",
+          "tier": 1,
+          "path": "references/characters/luna/view-low-angle-front.png",
+          "lineup_required": false
+        },
+        {
+          "name": "splash",
+          "tier": 6,
+          "path": "references/characters/luna/view-splash-tier6.png",
+          "lineup_required": false
+        }
+      ],
+      "turnaround_sheet": {
+        "path": "references/characters/luna/turnaround-sheet.png",
+        "source": "flow-upload",
+        "brief": "User-supplied multi-angle turnaround: full-body turnaround (front/3q/side/REAR), face turnaround, expression strip (smirk+smug, angry+blush, sad+mockery, thoughtful), hand/boot detail crops. ATTACH for any non-front panel (L37) so back/profile views keep hair/outfit/proportion correct.",
+        "required_for_nonfront": true
+      }
+    },
+    "ethan": {
+      "face_card": "references/characters/ethan/face-card.png",
+      "face_card_brief": "Adult man, 25. Slim, soft features, short tidy brown hair, light stubble, round wire-frame glasses, flushed/nervous. Grey hoodie.",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/ethan/body-tier1.png",
+          "brief": "Slim, slightly gangly, grey hoodie over tee, dark jeans, white sneakers. Never grows — always small.",
+          "lineup_required": false
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 1,
+          "path": "references/characters/ethan/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-face",
+          "tier": 1,
+          "path": "references/characters/ethan/view-ecu-face.png",
+          "brief": "Nervous, red-cheeked, wide-eyed behind glasses.",
+          "lineup_required": false
+        }
+      ],
+      "turnaround_sheet": {
+        "path": "references/characters/ethan/turnaround-sheet.png",
+        "source": "flow-upload",
+        "note": "Sheet is titled 'ELIAS' in Flow; same character as our 'ethan' (name never spoken in-comic).",
+        "brief": "User-supplied turnaround: detailed skin close-up, neutral/expression/contemplative faces, FULL BODY turnaround front/profile/BACK view, detail close-ups, sneaker detail. ATTACH for any non-front panel (L37); REAR view used for p10 over-shoulder.",
+        "required_for_nonfront": true
+      }
+    }
+  },
+  "locations": {
+    "goth-loft": {
+      "env_ref": "references/locations/goth-loft/env-establish.png",
+      "source_daz3d_ref": "references/locations/goth-loft/_source.jpg",
+      "brief": "Cozy top-floor goth loft: plum/charcoal walls, burgundy velvet tufted couch, Persian rug, tall arched window with sheer black curtains + city dusk, dozens of dripping candles, dead roses, occult bookshelf, pentagram tapestry, fairy lights, EXPOSED WOODEN CEILING BEAMS (height marker). DAZ3D Iray look: simple modeled furniture, soft GI, gentle candle bloom, shallow DOF. Build NEW off a web-sourced DAZ3D interior ref — do not copy.",
+      "scale_anchors": [
+        "velvet-couch",
+        "ceiling-beams"
+      ]
+    }
+  },
+  "props": {
+    "magic-fx": {
+      "brief": "Violet/purple sparks + curling energy around Luna's hands and body. Identity color — never another hue."
+    }
+  },
+  "build_order": [
+    "1. Source a DAZ3D interior reference from the web; save as goth-loft/_source.jpg with provenance.",
+    "2. Build the original goth-loft env-establish.png in Flow off that look.",
+    "3. Build Luna face-card, then body-tier1, then views (3q-full, ecu-face, ecu-region-hand, low-angle-front) off the face card + loft.",
+    "4. Build Luna body-tier6 + splash reinforcement (the max giantess scale anchor).",
+    "5. Build Ethan face-card, body-tier1, ecu-face.",
+    "6. Then generate panels p01..p10 via the shotlist-driven-flow loop, view-aware chaining."
+  ],
+  "flow_project_id": "7103f1eb-7899-4c2d-bde5-2a50737b7717",
+  "flow_project_url": "https://labs.google/fx/tools/flow/project/7103f1eb-7899-4c2d-bde5-2a50737b7717",
+  "env_ref_note": "goth-loft env established: 16:9 x4 batch, picked the balanced top-right render (couch+beams+arched windows+bookshelf+pentagram+candles). Lives in Flow project; attach via + asset picker to panels.",
+  "L37_note": "Body-orientation variety mandatory (anti-AI). Turnaround sheets uploaded to Flow by user 2026-06-22; attach the relevant angle (rear/side) on p06(back), p07(3q-rear), p08(profile), p10(over-shoulder/back). Ethan + room are fixed real size; only Luna grows."
+}
