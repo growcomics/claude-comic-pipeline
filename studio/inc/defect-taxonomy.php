@@ -1,0 +1,103 @@
+<?php
+// defect-taxonomy.php — GENERATED from claude-comic-pipeline
+//   skills/comic-production/references/defect-registry.json
+//   by skills/comic-production/scripts/gen_defect_taxonomy.py
+// DO NOT HAND-EDIT — regenerate and redeploy instead.
+// Marker for DEPLOY-NOTES greps: DEFECT_TAXONOMY
+declare(strict_types=1);
+
+$DEFECT_CATEGORIES = [
+    'CAST' => 'Cast / people in frame',
+    'IDENT' => 'Character identity',
+    'WARD' => 'Wardrobe',
+    'BODY' => 'Body, size & anatomy',
+    'HAIR' => 'Hair',
+    'ENV' => 'Environment',
+    'PROP' => 'Props & artifacts',
+    'LET' => 'Lettering',
+    'FACE' => 'Expression',
+    'CAM' => 'Camera & composition',
+    'STYLE' => 'Render style',
+    'CONT' => 'Continuity',
+    'PAGE' => 'Page / chapter structure',
+    'GEN' => 'Generation process',
+    'MISC' => 'Other',
+];
+
+$DEFECT_TAXONOMY = [
+    'CAST-01' => ['slug'=>'duplicate_character', 'label'=>'Duplicate character (same person twice)', 'cat'=>'CAST', 'sev'=>'blocker', 'pick'=>true],
+    'CAST-02' => ['slug'=>'extra_person', 'label'=>'Unwanted extra / background person', 'cat'=>'CAST', 'sev'=>'blocker', 'pick'=>true],
+    'CAST-03' => ['slug'=>'people_count', 'label'=>'Wrong people count / missing character', 'cat'=>'CAST', 'sev'=>'major', 'pick'=>true],
+    'IDENT-01' => ['slug'=>'identity_drift', 'label'=>'Identity / likeness drift', 'cat'=>'IDENT', 'sev'=>'major', 'pick'=>true],
+    'IDENT-02' => ['slug'=>'canon_drift', 'label'=>'Canonical/IP character off-model', 'cat'=>'IDENT', 'sev'=>'major', 'pick'=>true],
+    'IDENT-03' => ['slug'=>'male_drift', 'label'=>'Male-anatomy drift on female ECU', 'cat'=>'IDENT', 'sev'=>'major', 'pick'=>true],
+    'IDENT-04' => ['slug'=>'beauty_regression', 'label'=>'Beauty regression (plain face)', 'cat'=>'IDENT', 'sev'=>'major', 'pick'=>true],
+    'WARD-01' => ['slug'=>'wardrobe_drift', 'label'=>'Wardrobe drift / garment redesign', 'cat'=>'WARD', 'sev'=>'blocker', 'pick'=>true],
+    'WARD-02' => ['slug'=>'damage_regression', 'label'=>'Costume-damage regression (tears reset)', 'cat'=>'WARD', 'sev'=>'major', 'pick'=>true],
+    'WARD-03' => ['slug'=>'reveal_retraction', 'label'=>'Reveal retraction (exposure re-covered)', 'cat'=>'WARD', 'sev'=>'major', 'pick'=>true],
+    'WARD-04' => ['slug'=>'costume_stage_error', 'label'=>'Wrong story-stage costume', 'cat'=>'WARD', 'sev'=>'major', 'pick'=>true],
+    'WARD-05' => ['slug'=>'emblem_leak', 'label'=>'Emblem/insignia on wrong garment', 'cat'=>'WARD', 'sev'=>'major', 'pick'=>true],
+    'WARD-06' => ['slug'=>'coverage_violation', 'label'=>'Coverage violation (always-clothed breach)', 'cat'=>'WARD', 'sev'=>'blocker', 'pick'=>true],
+    'BODY-01' => ['slug'=>'size_underrender', 'label'=>'Tier under-render (size too small)', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'BODY-02' => ['slug'=>'size_regression', 'label'=>'Size regression between panels', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'BODY-03' => ['slug'=>'wrong_stage', 'label'=>'Wrong transformation stage for the beat', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'BODY-04' => ['slug'=>'invented_state_change', 'label'=>'Invented state change (unasked tier bump)', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'BODY-05' => ['slug'=>'malformed_anatomy', 'label'=>'Malformed anatomy (limbs/hands/fusion)', 'cat'=>'BODY', 'sev'=>'blocker', 'pick'=>true],
+    'BODY-06' => ['slug'=>'fmg_anatomy_error', 'label'=>'FMG-anatomy style error', 'cat'=>'BODY', 'sev'=>'minor', 'pick'=>true],
+    'BODY-07' => ['slug'=>'height_inflation', 'label'=>'Height/scale inflation (accidental giantess)', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'BODY-08' => ['slug'=>'skin_sheen_drift', 'label'=>'Skin sheen/texture inconsistency', 'cat'=>'BODY', 'sev'=>'minor', 'pick'=>true],
+    'BODY-09' => ['slug'=>'contact_pose_failure', 'label'=>'Contact pose failure (carries/holds wrong)', 'cat'=>'BODY', 'sev'=>'major', 'pick'=>true],
+    'HAIR-01' => ['slug'=>'hair_drift', 'label'=>'Hair state drift (buns/ribbons/loose)', 'cat'=>'HAIR', 'sev'=>'major', 'pick'=>true],
+    'ENV-01' => ['slug'=>'location_drift', 'label'=>'Location reinvention / room drift', 'cat'=>'ENV', 'sev'=>'major', 'pick'=>true],
+    'ENV-02' => ['slug'=>'void_background', 'label'=>'Void/grey studio background', 'cat'=>'ENV', 'sev'=>'major', 'pick'=>true],
+    'ENV-03' => ['slug'=>'lighting_drift', 'label'=>'Lighting/time-of-day drift', 'cat'=>'ENV', 'sev'=>'minor', 'pick'=>true],
+    'ENV-04' => ['slug'=>'prop_drift', 'label'=>'Prop/furniture inconsistency', 'cat'=>'ENV', 'sev'=>'minor', 'pick'=>true],
+    'PROP-01' => ['slug'=>'anachronistic_prop', 'label'=>'Anachronistic accessory (watch/jewelry)', 'cat'=>'PROP', 'sev'=>'major', 'pick'=>true],
+    'PROP-02' => ['slug'=>'ref_as_object', 'label'=>'Reference rendered as scene object', 'cat'=>'PROP', 'sev'=>'major', 'pick'=>true],
+    'PROP-03' => ['slug'=>'prompt_literalization', 'label'=>'Prompt literalization (metaphor rendered)', 'cat'=>'PROP', 'sev'=>'blocker', 'pick'=>true],
+    'LET-01' => ['slug'=>'missing_lettering', 'label'=>'Missing / empty lettering', 'cat'=>'LET', 'sev'=>'blocker', 'pick'=>true],
+    'LET-02' => ['slug'=>'garbled_text', 'label'=>'Garbled text / text artifacts', 'cat'=>'LET', 'sev'=>'blocker', 'pick'=>true],
+    'LET-03' => ['slug'=>'wrong_attribution', 'label'=>'Balloon tail points at wrong speaker', 'cat'=>'LET', 'sev'=>'major', 'pick'=>true],
+    'LET-04' => ['slug'=>'dialogue_mismatch', 'label'=>'Dialogue text differs from script', 'cat'=>'LET', 'sev'=>'major', 'pick'=>true],
+    'FACE-01' => ['slug'=>'dead_face', 'label'=>'Dead face on an emotional beat', 'cat'=>'FACE', 'sev'=>'major', 'pick'=>true],
+    'FACE-02' => ['slug'=>'faceless_run', 'label'=>'Faceless money-shot run (no reaction panel)', 'cat'=>'FACE', 'sev'=>'major', 'pick'=>true],
+    'FACE-03' => ['slug'=>'expression_uniformity', 'label'=>'Uniform expressions / wrong gaze', 'cat'=>'FACE', 'sev'=>'minor', 'pick'=>true],
+    'CAM-01' => ['slug'=>'camera_too_far', 'label'=>'Camera too far for the beat', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-02' => ['slug'=>'camera_monotony', 'label'=>'Camera monotony across the sequence', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-03' => ['slug'=>'flat_staging', 'label'=>'Flat subject staging (yearbook lineup)', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-04' => ['slug'=>'dialogue_wide', 'label'=>'Dialogue at wide framing', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-05' => ['slug'=>'crammed_speakers', 'label'=>'Multi-speaker crammed panel', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-06' => ['slug'=>'camera_disobeyed', 'label'=>'Declared camera/angle disobeyed', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'CAM-07' => ['slug'=>'composition_infidelity', 'label'=>'2D→3D composition not preserved', 'cat'=>'CAM', 'sev'=>'major', 'pick'=>true],
+    'STYLE-01' => ['slug'=>'style_2d_drift', 'label'=>'2D/illustration drift (should be 3D CGI)', 'cat'=>'STYLE', 'sev'=>'blocker', 'pick'=>true],
+    'STYLE-02' => ['slug'=>'style_propagation', 'label'=>'Style inconsistent with cast lineup', 'cat'=>'STYLE', 'sev'=>'major', 'pick'=>true],
+    'STYLE-03' => ['slug'=>'vfx_too_perfect', 'label'=>'VFX too perfect / AI-grade effects', 'cat'=>'STYLE', 'sev'=>'minor', 'pick'=>true],
+    'CONT-01' => ['slug'=>'state_regression', 'label'=>'State regression (progress resets)', 'cat'=>'CONT', 'sev'=>'major', 'pick'=>true],
+    'PAGE-01' => ['slug'=>'growth_ratio_low', 'label'=>'Growth-page ratio under target', 'cat'=>'PAGE', 'sev'=>'major', 'pick'=>true],
+    'PAGE-02' => ['slug'=>'escalation_repetition', 'label'=>'Escalation by repetition', 'cat'=>'PAGE', 'sev'=>'major', 'pick'=>true],
+    'PAGE-03' => ['slug'=>'story_stall', 'label'=>'Story flatline / stall', 'cat'=>'PAGE', 'sev'=>'major', 'pick'=>true],
+    'PAGE-04' => ['slug'=>'duplicate_beats', 'label'=>'Duplicate / orphan beats shipped', 'cat'=>'PAGE', 'sev'=>'minor', 'pick'=>true],
+    'GEN-01' => ['slug'=>'filter_rejection', 'label'=>'Safety-filter rejection', 'cat'=>'GEN', 'sev'=>'major', 'pick'=>false],
+    'GEN-02' => ['slug'=>'broken_chain', 'label'=>'Broken chain (lost job IDs)', 'cat'=>'GEN', 'sev'=>'major', 'pick'=>false],
+    'GEN-03' => ['slug'=>'manifest_skipped', 'label'=>'Reference manifest skipped', 'cat'=>'GEN', 'sev'=>'major', 'pick'=>false],
+    'GEN-04' => ['slug'=>'variant_divergence', 'label'=>'Variant divergence (underspecified prompt)', 'cat'=>'GEN', 'sev'=>'minor', 'pick'=>false],
+    'MISC-00' => ['slug'=>'other', 'label'=>'Other / unclassified (describe in note)', 'cat'=>'MISC', 'sev'=>'major', 'pick'=>true],
+];
+
+$DEFECT_CK_MAP = [
+    'duplicate_character' => 'CAST-01',
+    'extra_person' => 'CAST-02',
+    'people_count' => 'CAST-03',
+    'wardrobe_drift' => 'WARD-01',
+    'wrong_stage' => 'BODY-03',
+    'anatomy' => 'BODY-05',
+    'anachronism' => 'PROP-01',
+    'text_artifact' => 'LET-02',
+    'wooden_face' => 'FACE-01',
+    'other' => 'MISC-00',
+];
+
+$DEFECT_ID_BY_SLUG = [];
+foreach ($DEFECT_TAXONOMY as $ck_did => $ck_dd) { $DEFECT_ID_BY_SLUG[$ck_dd['slug']] = $ck_did; }
+unset($ck_did, $ck_dd);
+
