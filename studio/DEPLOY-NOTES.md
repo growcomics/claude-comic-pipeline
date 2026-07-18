@@ -133,3 +133,26 @@ intact after deploy (byte-identical fetch-backs); bridge `do=flag` roundtrip —
 slug lookup, invalid-id rejection, panel resolution, image `flags[]` + log event — then
 self-test data removed. If you redeploy creator.php/review.php/bridge.php/growgetter.php,
 KEEP all of the above, and remember inc/defect-taxonomy.php regenerates from the repo.
+
+**🔎 Auto-scan + headless qascan (added 2026-07-18, same day as 🏴).** The QA-scan ENGINE
+(`ck_ai_cfg` + `ck_qa_checklist`/`ck_qa_cast`/`ck_qa_match`/`ck_ai_qa`) **moved from
+creator.php into inc/defects.php** (inside a `function_exists('ck_ai_qa')` guard for
+rolling-deploy safety) so bridge.php's new key-gated **`do=qascan`** verb runs the exact
+same scan headlessly (writes `analysis` + defect-log events; used for fleet sweeps).
+creator.php keeps a pointer comment; do NOT re-add local copies. Both UIs now **AUTO-SCAN
+on open**: unscanned panels kick the existing scan automatically, **capped at 120 unscanned**
+(bulk archives like muller's 9k raw Flow gens stay manual — above the cap a hint shows
+instead). review.php's DATA gained a `scanned` flag; its scan loop refactored into
+`scanFiles(files)` (button = shown tiles, auto = unscanned only).
+
+| File | Markers (grep after ANY redeploy) |
+|---|---|
+| inc/defects.php | `function_exists('ck_ai_qa')` `ck_ai_cfg` `ck_qa_checklist` `ck_qa_cast` `ck_qa_match` `ck_ai_qa` (engine lives HERE now) |
+| creator.php | `MOVED to inc/defects.php` (2: pointer comments) `AUTO-SCAN on open` `autoUnN` — and NO local `function ck_qa_*`/`function ck_ai_cfg` definitions (re-adding them fatals against the include's guard-free future) |
+| bridge.php | `do === 'qascan'` (1) |
+| review.php | `scanFiles` `'scanned'` `AUTO-SCAN on open` |
+
+Verified live 2026-07-18: parse probes on creator/review/bridge/growgetter/refs/shots;
+full marker sweep (pre-existing + 🏴 + these) clean; bridge `do=qascan` real-scan roundtrip
+(2.4s, analysis + verdict + log event). Production-wide sweep run via `do=qascan`
+(all projects except the muller raw archive — owner-scoped 2026-07-18).
