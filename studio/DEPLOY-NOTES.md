@@ -88,6 +88,19 @@ Local importer: `tools/monday-import.py` (not deployed).
 Known/accepted: index.php still shows the bridge key to ANY studio session, including
 collaborator logins — acceptable for a trusted collaborator (owner decision 2026-07-06).
 
+**🧭 Attribution section (added 2026-07-09).** New standalone `attribution.php` — cross-property
+MULTI-TOUCH attribution fed by the **ATS v5 WordPress plugin** (live on growgettercomics.com since
+2026-07-09; plugin source: `~/Documents/ats-v5/plugin/attribution-tracking-system-v5/`). Each WP
+property exposes key-gated `/wp-json/ats/v1/rollup` (aggregates only, NO PII); `attribution.php?do=sync`
+(session-auth POST or BRIDGE-KEY GET, same trust as bridge.php) pulls every site in
+`data/attribution-sites.json` (SECRET — holds rollup keys; data/ deny; NOT in git) into
+`data/attribution/<site>.json`. Markers: attribution.php `do=sync` `attr_bridge_ok` `MODELS =`
+`at-card` `Patron journeys`; **cc.php now ALSO carries** the `🧭 Attribution` tile + topbar link +
+`$atMonthly`/`glob(SDATA . '/attribution/*.json')` headline read. ⚠ cc.php fetch-live grep after ANY
+redeploy: `pulse/` (≥4), `Patron Analytics` (2), `analytics.php` (2), `Site Traffic` (1),
+`attribution.php` (≥3), `🧭 Attribution` (≥2). DISTINCT from analytics.php (GA4 snapshots) and
+pulse/ (Patreon revenue): attribution answers "which channel produced the money".
+
 **📊 Site Traffic analytics section (added 2026-07-07).** New standalone `analytics.php`
 (GA4 + Search Console web-traffic snapshots + INSIGHTS/ACTIONS) reading `data/analytics-snapshots.json`.
 DISTINCT from `pulse/` (Creator Pulse = Patreon revenue). Markers: analytics.php `Insights &amp; actions`
@@ -97,3 +110,26 @@ DISTINCT from `pulse/` (Creator Pulse = Patreon revenue). Markers: analytics.php
 read of the snapshots file). Fetch-live before editing cc.php and after deploy grep: `pulse/` (≥4),
 `Patron Analytics` (2), `analytics.php` (2), `Site Traffic` (1). Snapshots are appended by Claude during
 an analytics session (needs the owner's live Google login — not headless).
+
+**🏴 Defect flags + shared defect log (added 2026-07-18).** The owner-feedback loop's data
+layer (design: pipeline repo `docs/DEFECT-FEEDBACK-LOOP.md`; taxonomy: `DEFECT-REGISTRY.md` —
+registry IDs like `CAST-01`/`duplicate_character` are the SHARED CONTRACT between the 🔎 QA
+scan, gg_qa, bridge writers and human 🏴 flags). New: **inc/defect-taxonomy.php** (GENERATED
+from the pipeline repo's `defect-registry.json` by `gen_defect_taxonomy.py` — never hand-edit;
+marker `DEFECT_TAXONOMY`) + **inc/defects.php** (`ck_defect_event` `ck_defect_norm`
+`ck_defect_log_analysis` `ck_defect_options` `DEFECT_LOG_FILE`) + **data/defect-log.json**
+(append-only event log, newest-20k cap, under the data/ deny). Every flag/scan defect writes
+one event {ts,project,file,panel,defect,slug,sev,src:human|qa|ggqa|gate,by,note,verdict}.
+
+| File | New markers (grep after ANY redeploy) | What was added |
+|---|---|---|
+| creator.php | `flag_defect` (≥4) `ck-flagrow`/`ckflag` (≥3) `showFlagRow` (≥3) `ck_defect_log_analysis` (1) `'typed'` (2) `inc/defects.php` (1) | `do=flag_defect` JSON handler (image `flags[]` + log event); 🏴 lightbox row (grouped registry picker + note); `qascan_one` now also appends log events; `ck_ai_qa` returns `typed[]` alongside the flat labels |
+| review.php | `flag_defect` (≥3) `submitFlag` (≥2) `DEFECT_OPTIONS` (≥2) | own `do=flag_defect` endpoint (same contract); 🏴 Flag-a-defect section in the detail pane (buildInfo) |
+| bridge.php | `do === 'flag'` (1) `ck_defect_log_analysis` (1) `ck_defect_event` (1) | key-gated headless flag verb (accepts id OR slug; `src` defaults `gate`); `annotate` now logs events too |
+| growgetter.php | `ck_defect_log_analysis` (1) `typed` (≥2) | `gg_qa` logs events (src `ggqa`; its `nsfw` type → WARD-06) |
+
+Verified live 2026-07-18: parse-probes 302/403 on all four; ALL pre-existing marker tables
+intact after deploy (byte-identical fetch-backs); bridge `do=flag` roundtrip — canonical id,
+slug lookup, invalid-id rejection, panel resolution, image `flags[]` + log event — then
+self-test data removed. If you redeploy creator.php/review.php/bridge.php/growgetter.php,
+KEEP all of the above, and remember inc/defect-taxonomy.php regenerates from the repo.

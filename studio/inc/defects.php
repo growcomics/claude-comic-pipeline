@@ -31,6 +31,7 @@ function ck_defect_row(string $key): ?array {
 // normalise to PROP-02 ref_as_object, everything else to PROP-01.
 function ck_defect_norm(string $ckType, string $detail = ''): string {
     global $DEFECT_CK_MAP;
+    if ($ckType === 'nsfw') return 'WARD-06';                     // gg_qa SFW scan → coverage violation
     if ($ckType === 'anachronism'
         && preg_match('/\b(reference|ref sheet|model[ -]sheet|lineup|face[ -]card|turnaround|inset photo|watermark|figure number|grid line)/i', $detail))
         return 'PROP-02';

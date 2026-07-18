@@ -1,8 +1,14 @@
 # Owner Feedback Loop — defect flags → frequency stats → new rules
 
-*Added 2026-07-18. Design document (Studio PHP changes NOT yet built — deploy is a separate
-step under `studio/DEPLOY-NOTES.md`'s fetch-live protocol). Companion to the canonical
-defect taxonomy in `skills/comic-production/references/DEFECT-REGISTRY.md`.*
+*Added 2026-07-18. Companion to the canonical defect taxonomy in
+`skills/comic-production/references/DEFECT-REGISTRY.md`.*
+
+*STATUS 2026-07-18 (same day, later session): §0–§2 and the flag UX are **BUILT AND LIVE** —
+`inc/defect-taxonomy.php` (generated from `defect-registry.json`), `inc/defects.php`,
+`data/defect-log.json`, `do=flag_defect` in creator.php (🏴 lightbox row) + review.php
+(detail-pane section), bridge `do=flag` (key-gated, headless), and event logging from
+`qascan_one`/`gg_qa`/bridge `annotate`. See DEPLOY-NOTES.md 🏴 section for markers. Still
+open: §3 stats surface + trend chart, §4 fast/slow improvement arms.*
 
 ## Goal
 
