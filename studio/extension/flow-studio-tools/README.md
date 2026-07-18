@@ -14,6 +14,7 @@ Built on a **single tRPC harvest** (`flow.projectInitialData`: prompts + input r
   - **Auto-sync (NEW):** type a **section name**, then flip **Auto-sync ON**. From then on, every *new* Flow generation in this project is pushed into that section automatically as it lands — no manual sends. Configurable interval (default 20s, min 8s). It dedupes per-project (a "seen" set in `chrome.storage`), so nothing double-imports, and tracks each Flow project separately. *(Replaces the old Flow → Studio Auto-Sync / Auto-Pull extensions.)*
 - **Review** — export a bundle: outputs + deduped input reference images + a `manifest.json` pairing each output with its prompt, model, refs, seed.
 - **🗑 Delete** — tick tiles on the page, then Move to Flow's **Trash** (soft/recoverable). Guarded: shows the active account + requires typing the exact count to confirm. (`flow-delete.js`.)
+- **Prompt buttons (v2.1.0)** — one-click insert of canonical prompt blocks into Flow's composer, for manual driving sessions: **📷 Cine+Light** *appends* the cinematic-framing + golden-hour volume-lighting master block (`cinematic-framing.md` — fresh generations only; it directs the camera, so never pair it with the i2i keep-composition lock sentence), **🎨 DAZ style** *prepends* the canonical style prefix from `prompt-templates.md` (exact tested wording). Both use the React-native value setter so Flow's composer registers the text.
 
 ## Patreon side (`www.patreon.com/*`)
 

@@ -78,6 +78,7 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -185,6 +186,72 @@
     if (n === "custom") { const v = parseInt(numInput.value, 10); if (v > 0) return run(v); numInput.focus(); return; }
     return run(parseInt(n, 10));
   });
+
+  // ───────── Prompt blocks — one-click paste of canonical prompt presets ─────
+  // Sources: skills/comic-production/references/prompt-templates.md (Style Prefix —
+  // exact tested wording, do not rewrite) and cinematic-framing.md (hero framing +
+  // "volume block" golden-hour lighting, validated 2026-07-09, 28/28 composition
+  // hold). DAZ prefix PREPENDS (style anchors lead the prompt); Cine+Light APPENDS
+  // after whatever action text is already typed. NOTE: Cine+Light directs the
+  // camera, so it is for FRESH generations — it fights the i2i composition-lock
+  // sentence; for relight-only passes use the lighting block from the framing doc.
+  const PROMPT_BLOCKS = {
+    daz: {
+      where: "start",
+      label: "DAZ style prefix",
+      text: "Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art."
+    },
+    cine: {
+      where: "end",
+      label: "Cine+Light block",
+      text: "Camera and framing: the camera sits slightly below chest height, tilted up a gentle ten degrees — low enough that the physiques loom with quiet authority, never so steep that proportions distort; both women stand on the same ground plane as the camera, normal human proportions, no wide-angle distortion. Framed from mid-thigh up so the upper bodies dominate the frame, at a three-quarter angle forty-five degrees between front and side — the most sculptural angle for figure work, showing chest depth, arm peaks, and thigh sweep simultaneously instead of flattening them into symmetry — with gentle 50–85mm portrait-lens compression so the figures pop from the background. Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The two figures sit on a diagonal axis from lower-left toward upper-right, angled toward each other with visible intent, one nearer the camera and meaningfully larger in frame, the other a step deeper and smaller by perspective, silhouettes slightly overlapping, so the composition reads in distinct depth layers — foreground figure, mid-ground figure, environment behind, with an out-of-focus environmental element grazing a lower corner in the extreme foreground and asymmetric negative space above one shoulder line giving the masses room to read as mass. Both faces visible and carrying the beat's emotion clearly. Lighting: late golden-hour sunlight, the sun low on the horizon to the left of frame, throwing long warm light that skims almost parallel across the scene and rakes across both women's bodies at a shallow grazing angle, so every muscle group is modeled with a full highlight-to-shadow gradient — bright warm gold where each muscle faces the sun, rolling through midtone amber, falling into soft warm shadow on the far side of every curve. Because the light arrives from the side, every ridge and swell casts its own small shadow and every hollow deepens: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet — the separation between shoulder and arm, between the heads of arms and legs, along the spine and the abdominal wall — so each muscle reads as its own distinct, rounded volume. Striations, veins, and tendon lines catch the raking light and cast crisp micro-shadows. The skin carries a glossy sheen of sweat, with tight specular highlights riding the highest point of every muscle peak and sweat beads sparkling on the lit side. A subtle warm rim light wraps from behind, tracing both silhouettes with a thin amber edge along shoulders, arms, hips, and legs — lifting them off the background without ever becoming a glow or outline. The environment sits half a stop darker than the figures, catching the same warm dusk light through a veil of light atmospheric haze, slightly cooler and softer, with faint dust motes drifting in the low sun shafts, so the bodies pop forward as the brightest, sharpest, warmest things in frame; nearby surfaces return a faint warm bounce that keeps shadow sides luminous rather than black. Everything is photoreal DAZ3D CGI render quality — no restyling, no illustration drift, no added blur."
+    }
+  };
+  function findPromptBox() {
+    const vis = (el) => el.offsetParent !== null && el.getBoundingClientRect().height > 0 && !panel.contains(el);
+    // Flow's composer is a Slate contenteditable (data-slate-editor) — prefer it.
+    const slate = [...document.querySelectorAll('[data-slate-editor="true"]')].filter(vis)[0];
+    if (slate) return { el: slate, kind: "ce" };
+    const tas = [...document.querySelectorAll("textarea")].filter(vis);
+    const ta = tas.find((t) => /what do you want/i.test(t.placeholder || "")) || tas[0];
+    if (ta) return { el: ta, kind: "ta" };
+    const ce = [...document.querySelectorAll('[contenteditable="true"]')].filter(vis)[0];
+    return ce ? { el: ce, kind: "ce" } : null;
+  }
+  function ceRealText(el) {
+    // textContent includes Slate's in-DOM placeholder + zero-width chars; exclude both
+    const clone = el.cloneNode(true);
+    clone.querySelectorAll("[data-slate-placeholder]").forEach((n) => n.remove());
+    return clone.textContent.replace(/[﻿​]/g, "").trim();
+  }
+  function insertPromptBlock(kind) {
+    const blk = PROMPT_BLOCKS[kind]; if (!blk) return;
+    const box = findPromptBox();
+    if (!box) { status("No Flow prompt box on screen — open a project composer first."); return; }
+    box.el.focus();
+    if (box.kind === "ta") {
+      const cur = box.el.value || "";
+      const next = blk.where === "start"
+        ? blk.text + (cur ? "\n\n" + cur.replace(/^\s+/, "") : "")
+        : (cur ? cur.replace(/\s+$/, "") + "\n\n" : "") + blk.text;
+      // React ignores plain .value writes — go through the native setter + input event
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set.call(box.el, next);
+      box.el.dispatchEvent(new Event("input", { bubbles: true }));
+      box.el.selectionStart = box.el.selectionEnd = next.length;
+    } else {
+      // Slate path: put the caret at the start/end via DOM selection (Slate syncs it),
+      // then execCommand("insertText") → fires beforeinput, which Slate applies to its
+      // model. Join with a space, not newlines — programmatic newlines split Slate
+      // blocks unpredictably in this composer.
+      const sel = getSelection(), range = document.createRange();
+      range.selectNodeContents(box.el); range.collapse(blk.where === "start");
+      sel.removeAllRanges(); sel.addRange(range);
+      const pad = ceRealText(box.el) ? " " : "";
+      document.execCommand("insertText", false, blk.where === "start" ? blk.text + pad : pad + blk.text);
+    }
+    status(blk.label + " inserted — review & submit.");
+  }
+  panel.querySelectorAll("button.pb").forEach((b) => b.addEventListener("click", () => insertPromptBlock(b.dataset.pb)));
 
   // ───────── Auto-sync (continuous → Studio) ─────────────────────────────────
   // Ported from the standalone "Flow → Studio Auto-Sync" extension. While ON, a
