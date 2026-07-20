@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-18 (3DMC Studio Tools v2.2.1 — prompt-insert now persists in Flow's Slate editor)
+
+### Fixed
+
+- **Prompt-button text vanished from Flow's composer (v2.2.0 → v2.2.1).** Symptom (owner): click a 📷 / 🎬 / 🎨 button and the block appears in Flow's prompt box, but it "doesn't stay like text I type" — it disappears on blur/submit. Root cause: Flow's composer is a **Slate** editor and the old code collapsed the caret on the editor ROOT (`selectNodeContents(editor)`), a position Slate can't map to its document. Slate therefore ignored the `beforeinput` that `execCommand("insertText")` fires, and the browser fell back to a raw contentEditable insert — the text painted into the DOM but never entered Slate's model, so Slate discarded it on its next re-render (blur/submit). Fix: walk to the first/last **real text leaf** (skipping Slate's overlaid `data-slate-placeholder` span) and collapse the caret there before inserting; the `beforeinput` now maps to a valid Slate range, Slate applies it to its model, and the text persists exactly like typed input — survives blur and is included on submit. `content.js` Slate branch only; the textarea fallback is unchanged. Verification note: the laptop Chrome profile reachable for automated testing was not signed into Flow (it hit Google's account chooser), so this ships for owner confirmation rather than an automated live check — reload the extension, then type a word, click a prompt button, click outside the box, and confirm the text stays.
+
 ## 2026-07-18 (3DMC Studio Tools v2.2.0 — framing-only prompt button)
 
 ### Added

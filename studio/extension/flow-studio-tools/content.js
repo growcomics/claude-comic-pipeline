@@ -247,15 +247,32 @@
       box.el.dispatchEvent(new Event("input", { bubbles: true }));
       box.el.selectionStart = box.el.selectionEnd = next.length;
     } else {
-      // Slate path: put the caret at the start/end via DOM selection (Slate syncs it),
-      // then execCommand("insertText") → fires beforeinput, which Slate applies to its
-      // model. Join with a space, not newlines — programmatic newlines split Slate
-      // blocks unpredictably in this composer.
+      // Slate path. The caret MUST land inside a real text leaf — NOT the editor root.
+      // Collapsing the selection on box.el itself (selectNodeContents) puts the caret at
+      // a position Slate can't map to its document, so Slate ignores the beforeinput that
+      // execCommand fires and the browser does a RAW contentEditable insert instead: the
+      // text is painted into the DOM but was never entered into Slate's model, so Slate
+      // wipes it on its next re-render — on blur or submit. That's the "it goes in but
+      // doesn't stay like typed text" bug. Fix: walk to the first/last REAL text node
+      // (skipping Slate's overlaid placeholder span) and collapse the caret there; now
+      // execCommand("insertText") fires a beforeinput Slate maps + applies, so the text
+      // enters the model and persists exactly like typed input. Space, not newline —
+      // programmatic newlines split Slate blocks unpredictably in this composer.
+      const isEmpty = !ceRealText(box.el);
+      const toStart = isEmpty || blk.where === "start";
+      const walker = document.createTreeWalker(box.el, NodeFilter.SHOW_TEXT, {
+        acceptNode: (n) => (n.parentElement && n.parentElement.closest("[data-slate-placeholder]"))
+          ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT,
+      });
+      let firstT = null, lastT = null, tn;
+      while ((tn = walker.nextNode())) { if (!firstT) firstT = tn; lastT = tn; }
+      const target = toStart ? firstT : lastT;
       const sel = getSelection(), range = document.createRange();
-      range.selectNodeContents(box.el); range.collapse(blk.where === "start");
+      if (target) { range.setStart(target, toStart ? 0 : target.length); range.collapse(true); }
+      else { range.selectNodeContents(box.el); range.collapse(toStart); }
       sel.removeAllRanges(); sel.addRange(range);
-      const pad = ceRealText(box.el) ? " " : "";
-      document.execCommand("insertText", false, blk.where === "start" ? blk.text + pad : pad + blk.text);
+      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + " " : " " + blk.text);
+      document.execCommand("insertText", false, text);
     }
     status(blk.label + " inserted — review & submit.");
   }
