@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "3DMC Studio Tools",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "One toolbox for the comic pipeline: on Google Flow — Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), or one-click-insert canonical prompt blocks; on Patreon — bulk-download a post's full-res gallery.",
   "permissions": [
     "downloads",
@@ -31,6 +31,16 @@
         "content.js"
       ],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://labs.google/fx/tools/flow/*"
+      ],
+      "js": [
+        "flow-inject.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
     },
     {
       "matches": [

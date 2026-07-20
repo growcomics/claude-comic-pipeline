@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-19 (3DMC Studio Tools v2.2.2 — prompt-insert rewritten to Slate's own API; verified live)
+
+### Fixed
+
+- **Prompt buttons finally persist in Flow's composer (v2.2.1 → v2.2.2).** The v2.2.1 caret fix did NOT work — confirmed by driving the real Flow composer on the laptop account (2026-07-19). Root cause, proven by reading Slate's live model off the React fiber: this Flow build's Slate editor **ignores both `execCommand("insertText")` and `beforeinput` for its model** — they mutate only the DOM, so the text was there visually but the model stayed empty and Slate wiped it on the next re-render (blur/submit). The only insert that reaches the model is Slate's own `editor.insertText`, which lives in the page's JS world and is unreachable from an isolated content script. Fix: a new **`world:"MAIN"` content script `flow-inject.js`** runs in the page context; `content.js` (isolated) hands it `{text, where, index}` via a shared `#__fstBridge` DOM node + a `fst-insert` event (document is shared across worlds); it grabs the live editor off the fiber, calls `editor.insertText`, then `editor.onChange()` to force React's re-render. Verified end-to-end against the real composer: text enters the model, the view updates, the placeholder clears, it **survives blur**, and both the append (Cine+Light / Framing) and prepend (DAZ style) paths work. `manifest.json` gains the MAIN-world content-script entry (2.2.1 → 2.2.2); `content.js` Slate branch now dispatches to the bridge (a caret+execCommand path remains only for non-Slate contenteditable surfaces). Also grabbed a memory: Slate editor instances remount, so always re-grab the editor at insert time — never cache it.
+
 ## 2026-07-19 (Studio: project-card cover auto-select + ◳ use-as-cover on the cockpit board)
 
 ### Added

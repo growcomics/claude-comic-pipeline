@@ -246,18 +246,28 @@
       Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set.call(box.el, next);
       box.el.dispatchEvent(new Event("input", { bubbles: true }));
       box.el.selectionStart = box.el.selectionEnd = next.length;
+    } else if (box.el.getAttribute("data-slate-editor") === "true") {
+      // Flow's composer is a Slate editor. VERIFIED live (2026-07-19) against the real
+      // composer: its MODEL ignores execCommand AND beforeinput entirely — those mutate
+      // only the DOM, so Slate discards the text on its next re-render (it vanished on
+      // blur/submit; the earlier caret-placement fix did NOT help — the model stayed
+      // empty). The ONLY thing that persists is Slate's own editor.insertText, which
+      // lives in the PAGE's JS world and is unreachable from this isolated content
+      // script. So we hand off to flow-inject.js (a world:"MAIN" content script): stash
+      // {text, where, index} in a shared #__fstBridge node and fire a "fst-insert" DOM
+      // event (document is shared across worlds). flow-inject grabs the live editor off
+      // the React fiber, calls editor.insertText, then editor.onChange() to re-render.
+      const editors = [...document.querySelectorAll('[data-slate-editor="true"]')];
+      const idx = editors.indexOf(box.el);
+      const isEmpty = !ceRealText(box.el);
+      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + " " : " " + blk.text);
+      let bridge = document.getElementById("__fstBridge");
+      if (!bridge) { bridge = document.createElement("div"); bridge.id = "__fstBridge"; bridge.style.display = "none"; document.documentElement.appendChild(bridge); }
+      bridge.textContent = JSON.stringify({ text, where: blk.where, index: idx });
+      document.dispatchEvent(new Event("fst-insert"));
     } else {
-      // Slate path. The caret MUST land inside a real text leaf — NOT the editor root.
-      // Collapsing the selection on box.el itself (selectNodeContents) puts the caret at
-      // a position Slate can't map to its document, so Slate ignores the beforeinput that
-      // execCommand fires and the browser does a RAW contentEditable insert instead: the
-      // text is painted into the DOM but was never entered into Slate's model, so Slate
-      // wipes it on its next re-render — on blur or submit. That's the "it goes in but
-      // doesn't stay like typed text" bug. Fix: walk to the first/last REAL text node
-      // (skipping Slate's overlaid placeholder span) and collapse the caret there; now
-      // execCommand("insertText") fires a beforeinput Slate maps + applies, so the text
-      // enters the model and persists exactly like typed input. Space, not newline —
-      // programmatic newlines split Slate blocks unpredictably in this composer.
+      // Plain contenteditable fallback (non-Slate surfaces): caret in a real text node,
+      // then execCommand insertText. Skips Slate's overlaid placeholder span.
       const isEmpty = !ceRealText(box.el);
       const toStart = isEmpty || blk.where === "start";
       const walker = document.createTreeWalker(box.el, NodeFilter.SHOW_TEXT, {
