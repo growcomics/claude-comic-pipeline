@@ -28,7 +28,10 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
 <title>Comic Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css"></head><body>
-<header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
+<header class="topbar">
+  <div class="brand"><a href="cc.php" style="color:inherit;text-decoration:none"><span class="dot"></span> ⌘ Command Center</a></div>
+  <a class="ghost" href="index.php" style="color:var(--text);font-weight:700">🎬 Comic Studio</a>
+  <a class="ghost" href="ops.php">📋 Ops Board</a>
   <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="help.php">❔ How it works</a> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap">
   <div class="pagehead"><h1>Projects <span class="muted"><?= count($projects) ?></span></h1></div>
@@ -93,7 +96,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
     <?php foreach ($projects as $p):
       $imgs = images_all($p['id']); $n = count($imgs);
       $acc = 0; foreach ($imgs as $im) if (!empty($im['accepted'])) $acc++;
-      $cov = $p['cover'] ?? null;
+      $cov = ($p['cover'] ?? null) ?: ck_pick_cover($imgs);   // explicit cover, else best kept/rated panel (never a ref)
     ?>
     <a class="pcard" href="creator.php?p=<?= h(urlencode($p['id'])) ?>">
       <div class="pcover">

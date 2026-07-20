@@ -6,6 +6,7 @@
 // up live; Approve / Disapprove / Keep / Note drive the human-in-the-loop loop.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
+require_once __DIR__ . '/inc/defects.php';
 require_auth();
 
 function creator_file(string $id): string { return SDATA . '/creator-' . preg_replace('/[^a-z0-9-]/', '', $id) . '.json'; }
@@ -134,7 +135,7 @@ function ck_dhash(string $path): ?array {
 }
 function ck_ham(array $a, array $b): int { $d=0; $n=min(count($a),count($b)); for($i=0;$i<$n;$i++) if($a[$i]!==$b[$i]) $d++; return $d + abs(count($a)-count($b)); }
 // AI auto-tag (dormant until a key is dropped in studio/data/ai.json). Returns [kind,char,label] or null.
-function ck_ai_cfg(): ?array { $f = SDATA . '/ai.json'; if (!is_file($f)) return null; $j = s_read($f, []); return !empty($j['key']) ? $j : null; }
+// ck_ai_cfg() moved to inc/defects.php (2026-07-18) — shared with bridge.php do=qascan.
 function ck_ai_classify(string $imgPath, string $script): ?array {
     $cfg = ck_ai_cfg(); if (!$cfg || !is_file($imgPath) || !function_exists('curl_init')) return null;
     $data = @file_get_contents($imgPath); if ($data === false) return null;
@@ -225,116 +226,9 @@ function ck_ai_polish(array $pn, array $siblings, array $charNames, string $ward
     return $txt !== '' ? mb_substr($txt, 0, 1200) : null;
 }
 
-// ---- AI QA SCAN: inspect a GENERATED PANEL for defects ----------------------
-// The owner's pain (Beat 48): "QA should have picked up duplicate guys here — a
-// defect in the image AND the system." This is the QA pass that catches what
-// slipped through. ONE vision call per panel (same pattern as ck_ai_classify);
-// returns a structured `analysis` stored on the image's `analysis` field — the
-// SAME shape the bridge `annotate` verb writes and the organizer's `an-tag`
-// badge reads. Prioritises DUPLICATE characters + unwanted EXTRAS.
-function ck_qa_checklist(): string {
-    return
-      "DUPLICATE CHARACTER — the SAME character appears two or more times in one panel (a cloned / twinned figure). This is the #1 defect to catch.\n"
-    . "UNWANTED EXTRA / BACKGROUND PERSON — any human in frame who is not one of the named cast (strangers, crowd, photo-bombers, blurred background people). The cast is fixed: only named characters may appear.\n"
-    . "WRONG PEOPLE COUNT — more (or fewer) people than the panel's intended cast.\n"
-    . "WOODEN / NEUTRAL FACE ON AN EMOTIONAL BEAT — a flat, dead, expressionless face when the beat calls for emotion (talking, strain, shock, effort, fear).\n"
-    . "WARDROBE DRIFT — a character's outfit or colour differs from the intended wardrobe, or changes mid-scene.\n"
-    . "ANACHRONISTIC / HALLUCINATED PROP — watches, jewellery, phones or modern objects that do not belong; a reference sheet rendered as a literal in-scene object.\n"
-    . "WRONG TRANSFORMATION STAGE — the character is muscular / transformed when this beat should be soft / untransformed (or vice-versa).\n"
-    . "MALFORMED ANATOMY — extra or missing fingers / limbs, fused or distorted bodies, broken hands, melted faces.\n"
-    . "TEXT / LETTERING ARTIFACT — garbled gibberish text, stray tier labels or metadata baked into the art.";
-}
-// Distinct named characters for this project (the cast), drawn from the plan +
-// the character references (face / body / view). Scenes and props are excluded.
-function ck_qa_cast(array $c): array {
-    $names = [];
-    foreach ((array)($c['plan'] ?? []) as $pg) foreach ((array)($pg['panels'] ?? []) as $pn)
-        foreach ((array)($pn['characters'] ?? []) as $nm) { $nm = trim((string)$nm); if ($nm !== '') $names[mb_strtolower($nm)] = $nm; }
-    foreach ((array)($c['refs'] ?? []) as $r) {
-        $kd = $r['kind'] ?? ''; if ($kd === 'scene' || $kd === 'prop') continue;
-        $nm = trim((string)($r['char'] ?? '')); if ($nm !== '') $names[mb_strtolower($nm)] = $nm;
-    }
-    return array_values($names);
-}
-// Best-effort: find the PLAN panel a generated image belongs to, for richer
-// cast / expression / stage context. Generated panels rarely carry a hard plan
-// link, so we only match when a plan panel id token (e.g. "p3-2") appears as a
-// whole token in the image's planId / gen field. Returns
-// ['panel'=>plan panel, 'stage'=>page stage] or null (-> image-only QA, which
-// still catches the owner's duplicate / extra pain against the cast list).
-function ck_qa_match(array $c, array $im): ?array {
-    $hay = ' ' . (string)($im['planId'] ?? '') . ' ' . (string)($im['gen'] ?? '') . ' ';
-    foreach ((array)($c['plan'] ?? []) as $pg) foreach ((array)($pg['panels'] ?? []) as $pn) {
-        $pid = trim((string)($pn['id'] ?? '')); if ($pid === '') continue;
-        if (preg_match('/(^|[^a-z0-9])' . preg_quote($pid, '/') . '([^a-z0-9]|$)/i', $hay))
-            return ['panel' => $pn, 'stage' => ck_stage_key((string)($pg['stage'] ?? ''))];
-    }
-    return null;
-}
-// ONE vision call: inspect $imgPath against $ctx (cast names, optional matched
-// plan panel, stage, wardrobe). Returns the normalised analysis array (caption,
-// defects[] as short strings, verdict pass|warn|fail, people, notes, src) or null.
-function ck_ai_qa(string $imgPath, array $ctx): ?array {
-    $cfg = ck_ai_cfg(); if (!$cfg || !is_file($imgPath) || !function_exists('curl_init')) return null;
-    $data = @file_get_contents($imgPath); if ($data === false) return null;
-    $ext = ext_of($imgPath); $mime = $ext==='png'?'image/png':($ext==='webp'?'image/webp':($ext==='gif'?'image/gif':'image/jpeg'));
-    $cast = array_values(array_filter(array_map(fn($n)=>trim((string)$n), (array)($ctx['cast'] ?? [])), 'strlen'));
-    $sys = 'You are a strict QA inspector for AI-generated comic panels. You are shown ONE generated panel. Find generation DEFECTS — flaws an editor would reject or fix — using this checklist:' . "\n" . ck_qa_checklist() . "\n"
-         . 'PRIORITISE the first three (duplicate character, unwanted extra, wrong people count) — those matter most. '
-         . 'Count the distinct HUMAN figures in the frame carefully, including blurred, background and partially-cropped people. '
-         . 'Reply ONLY with compact JSON, no prose and no markdown fences: {"caption":"<one short sentence of what is shown>","people":<integer count of human figures>,"defects":[{"type":"duplicate_character|extra_person|people_count|wooden_face|wardrobe_drift|anachronism|wrong_stage|anatomy|text_artifact|other","severity":"high|med|low","detail":"<short specific phrase>"}],"verdict":"pass|warn|fail"}. '
-         . 'verdict is "fail" if any high-severity defect (especially a duplicate character or an unwanted extra), "warn" for minor defects, "pass" if clean. If you are unsure whether an extra person is a defect, FLAG it — for this QA a false positive is cheaper than the miss it exists to catch. Use an empty defects array for a clean panel.';
-    $u = '';
-    if ($cast) $u .= 'The ONLY characters allowed in this comic (the named cast) are: ' . implode(', ', $cast) . ". Anyone else in frame is an unwanted extra.\n";
-    $pn = $ctx['panel'] ?? null;
-    if (is_array($pn)) {
-        $want = array_values(array_filter(array_map(fn($x)=>trim((string)$x), (array)($pn['characters'] ?? [])), 'strlen'));
-        if ($want) $u .= 'This specific panel should contain ONLY: ' . implode(', ', $want) . ' (' . count($want) . ' character' . (count($want)===1?'':'s') . ").\n";
-        if (trim((string)($pn['beat'] ?? '')) !== '')     $u .= 'Intended action: ' . trim((string)$pn['beat']) . "\n";
-        if (trim((string)($pn['dialogue'] ?? '')) !== '') $u .= 'A character is SPEAKING here ("' . mb_substr(trim((string)$pn['dialogue']),0,160) . '") — a wooden / neutral face is a defect on this beat.' . "\n";
-        $stg = ck_stage_label((string)($ctx['stage'] ?? ''));
-        if ($stg !== '') $u .= 'Transformation stage for this beat: ' . $stg . ' — flag the character if their build does not match this stage.' . "\n";
-    } else {
-        $u .= "No per-panel cast is linked; judge duplicates and extras against the named cast above (or, if none is listed, flag any obviously cloned or out-of-place figure).\n";
-    }
-    if (trim((string)($ctx['wardrobe'] ?? '')) !== '') $u .= 'Wardrobe continuity note: ' . mb_substr(trim((string)$ctx['wardrobe']),0,300) . "\n";
-    $u .= 'Inspect the panel now. JSON only.';
-    $payload = json_encode(['model'=>$cfg['model'] ?? 'claude-haiku-4-5', 'max_tokens'=>600, 'system'=>$sys,
-        'messages'=>[['role'=>'user','content'=>[
-            ['type'=>'image','source'=>['type'=>'base64','media_type'=>$mime,'data'=>base64_encode($data)]],
-            ['type'=>'text','text'=>$u]]]]]);
-    $ch = curl_init('https://api.anthropic.com/v1/messages');
-    curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>45,
-        CURLOPT_HTTPHEADER=>['content-type: application/json','anthropic-version: 2023-06-01','x-api-key: '.$cfg['key']],
-        CURLOPT_POSTFIELDS=>$payload]);
-    $resp = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
-    if (!$resp || $code >= 400) return null;
-    $j = json_decode($resp, true); $txt = $j['content'][0]['text'] ?? '';
-    if (preg_match('/\{.*\}/s', $txt, $m)) $txt = $m[0];
-    $o = json_decode($txt, true); if (!is_array($o)) return null;
-    // normalise the model's structured defects into the stored flat string[] shape
-    $defs = []; $hi = 0;
-    foreach ((array)($o['defects'] ?? []) as $d) {
-        if (is_array($d)) {
-            $t = trim((string)($d['type'] ?? '')); $sev = trim((string)($d['severity'] ?? '')); $det = trim((string)($d['detail'] ?? ''));
-            $label = ($t !== '' ? str_replace('_', ' ', $t) : 'defect') . ($det !== '' ? ': ' . $det : '');
-            if ($sev === 'high') $hi++;
-        } else { $label = trim((string)$d); }
-        if ($label !== '') $defs[] = mb_substr($label, 0, 60);
-    }
-    $defs = array_values(array_slice($defs, 0, 12));
-    $verdict = in_array($o['verdict'] ?? '', ['pass','warn','fail'], true) ? $o['verdict'] : ($defs ? ($hi ? 'fail' : 'warn') : 'pass');
-    $people  = isset($o['people']) && is_numeric($o['people']) ? (int)$o['people'] : null;
-    return [
-        'caption' => mb_substr(trim((string)($o['caption'] ?? '')), 0, 300),
-        'defects' => $defs,
-        'verdict' => $verdict,
-        'people'  => $people,
-        'notes'   => $people !== null ? ($people . ' figure' . ($people===1?'':'s') . ' detected') : '',
-        'tier'    => '',
-        'src'     => 'qa',
-    ];
-}
+// ---- AI QA SCAN engine MOVED to inc/defects.php (2026-07-18) ----------------
+// ck_qa_checklist / ck_qa_cast / ck_qa_match / ck_ai_qa now live in the shared
+// include so bridge.php's headless do=qascan uses the SAME engine as do=qascan_one.
 
 $id     = preg_replace('/[^a-z0-9-]/', '', (string)($_GET['p'] ?? ''));
 $cfile  = $id !== '' ? creator_file($id) : '';
@@ -384,7 +278,7 @@ if (!$hasCockpit) {
         <?php foreach ($list as $p):
             $g = images_all($p['id']); $n = count($g);
             $acc = 0; foreach ($g as $im) if (!empty($im['accepted'])) $acc++;
-            $pp = project_get($p['id']); $cov = $pp['cover'] ?? null; ?>
+            $pp = project_get($p['id']); $cov = ($pp['cover'] ?? null) ?: ck_pick_cover($g); ?>
         <a class="pcard" href="creator.php?p=<?= h(urlencode($p['id'])) ?>">
           <div class="pcover">
             <?php if ($cov): ?><img loading="lazy" src="img.php?p=<?= h(urlencode($p['id'])) ?>&f=<?= h(urlencode($cov)) ?>&t=1" alt="">
@@ -451,8 +345,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($meta as &$mm) if (($mm['file'] ?? '') === $file) { $mm['analysis'] = $an; break; }
             unset($mm); return ['data'=>$meta, 'result'=>true];
         });
+        ck_defect_log_analysis($id, $file, (string)($im['group'] ?? ''), $an, 'qa');   // 🏴 shared defect log (registry IDs)
         echo json_encode(['ok'=>true, 'file'=>$file, 'analysis'=>$an,
                           'defects'=>count($an['defects']), 'verdict'=>$an['verdict']]); exit;
+    }
+
+    if ($do === 'flag_defect') {                                 // 🏴 owner defect flag → image flags[] + global defect log (registry IDs); JSON
+        header('Content-Type: application/json');
+        $file = basename((string)($_POST['file'] ?? ''));
+        $row  = ck_defect_row((string)($_POST['defect'] ?? ''));
+        $fnote = mb_substr(trim((string)($_POST['note'] ?? '')), 0, 500);
+        if ($file === '' || !$row) { echo json_encode(['ok'=>false,'err'=>'panel file + a valid defect id are required']); exit; }
+        $im = null; foreach ($gallery as $m) if (($m['file'] ?? '') === $file && empty($m['isref'])) { $im = $m; break; }   // panels only, never refs
+        if (!$im) { echo json_encode(['ok'=>false,'file'=>$file,'err'=>'not a panel in this project']); exit; }
+        $flag = ['ts'=>date('c'), 'by'=>$by, 'defect'=>$row['id'], 'slug'=>$row['slug'], 'note'=>$fnote, 'src'=>'human'];
+        s_with_lock(imeta_path($id), function($meta) use ($file, $flag) {
+            foreach ($meta as &$mm) if (($mm['file'] ?? '') === $file) { $mm['flags'] = array_merge((array)($mm['flags'] ?? []), [$flag]); break; }
+            unset($mm); return ['data'=>$meta, 'result'=>true];
+        });
+        ck_defect_event(['project'=>$id, 'file'=>$file, 'panel'=>(string)($im['group'] ?? ''), 'defect'=>$row['id'], 'src'=>'human', 'by'=>$by, 'note'=>$fnote]);
+        echo json_encode(['ok'=>true, 'file'=>$file, 'defect'=>$row['id'], 'label'=>$row['label']]); exit;
     }
 
     if ($do === 'shotdone') {                                    // toggle a planned panel's done flag (production guide); JSON, no reload
@@ -934,6 +846,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 .ck-lb-bar .b-keep:hover,.ck-lb-bar .b-note:hover{background:#2E3140;color:#fff}
 /* iterative refinement — version lineage */
 .ck-shot-bar .b-adjust:hover{background:#7A7FEC;border-color:#7A7FEC;color:#0B0C10}
+.ck-shot-bar .b-cover:hover{background:#EF9F27;border-color:#EF9F27;color:#0B0C10}
 .ck-shot.derived{border-left:3px solid #7A7FEC}
 .ck-vbadge{position:absolute;top:6px;right:6px;font-size:9.5px;font-weight:800;background:rgba(122,127,236,.96);color:#0B0C10;border-radius:999px;padding:2px 7px;z-index:2}
 .ck-vbadge.pend{position:static;display:inline-block;margin:0 0 7px;background:rgba(239,159,39,.95)}
@@ -952,6 +865,12 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 .ck-lb-an .v{font-weight:800;text-transform:uppercase;font-size:11px;letter-spacing:.04em;margin-right:6px}
 .ck-lb-an .v.fail{color:#ff8a88}.ck-lb-an .v.warn{color:#fac775}.ck-lb-an .v.pass{color:#6fe0bd}
 .ck-lb-an ul{margin:5px 0 0;padding-left:16px}.ck-lb-an li{margin:1px 0}
+.ck-flagrow{position:absolute;left:14px;bottom:44px;display:flex;gap:6px;align-items:center;max-width:min(640px,calc(100% - 110px))}
+.ck-flagrow[hidden]{display:none}
+.ck-flagrow select{max-width:250px;background:#191b23;color:#cdd0d8;border:1px solid #2E3140;border-radius:8px;padding:5px 7px;font-size:12px}
+.ck-flagrow input{flex:1;min-width:120px;background:#191b23;color:#cdd0d8;border:1px solid #2E3140;border-radius:8px;padding:5px 8px;font-size:12px}
+.ck-flagrow button{background:#2a2330;color:#fac775;border:1px solid #4a3a52;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer}
+.ck-flagrow .msg{font-size:11.5px;color:#8d92a0;white-space:nowrap}
 .ck-pending{margin:0;border:2px dashed #5b5fd0;border-radius:10px;overflow:hidden;background:#13131d;position:relative;display:flex;flex-direction:column}
 .ck-pending>img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;background:#0B0C10;opacity:.55}
 .ck-pbody{padding:9px;display:flex;flex-direction:column;gap:6px}
@@ -1179,6 +1098,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
                 <button type="button" class="b-ref" data-act="ref" title="<?= $isRef?'Already a reference':'Use as reference' ?>"<?= $isRef?' disabled':'' ?>>⊕</button>
                 <button type="button" class="b-adjust" data-act="adjust" title="Adjust — refine THIS image with a small prompt nudge">✎</button>
                 <button type="button" class="b-note" data-act="note" title="Note this panel">💬</button>
+                <button type="button" class="b-cover" data-act="cover" title="Use as cover — this image becomes the project card's thumbnail">◳</button>
               </div>
             </figure>
             <?php endforeach; ?>
@@ -1240,6 +1160,12 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     <button class="ck-lb-arrow" id="lbnext" title="Next (→)">›</button>
   </div>
   <div class="ck-lb-an" id="lban" hidden></div>
+  <div class="ck-flagrow" id="ckflag" hidden>
+    <select id="flagsel"><option value="">🏴 flag a defect…</option><?= ck_defect_options() ?></select>
+    <input id="flagnote" maxlength="500" placeholder="optional note — what you saw">
+    <button type="button" id="flaggo">Flag</button>
+    <span class="msg" id="flagmsg"></span>
+  </div>
   <div class="ck-lb-bar">
     <span class="meta" id="lbmeta"></span>
     <button class="b-approve" data-act="approve" title="Approve — winner (A)">✓ Approve</button>
@@ -1307,6 +1233,8 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
       fetch('creator.php?p=' + encodeURIComponent(PID), {method:'POST', body:rb, headers:{'X-CSRF':CSRF}}).then(function(){ location.reload(); });
     } else if(act === 'adjust'){       // refine THIS image: open the adjust modal
       openAdjust(file, fig.dataset.ver || '1');
+    } else if(act === 'cover'){       // use THIS image as the project card's cover (listing thumbnail)
+      api('cover', file).then(function(j){ if(j && j.ok){ btn.textContent = '✓'; setTimeout(function(){ btn.textContent = '◳'; }, 1200); }});
     }
   });
 
@@ -1337,6 +1265,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     lbmeta.textContent = (beat?beat+' · ':'') + (i+1)+' / '+shots.length + '  ·  ' + ratingWord(fig);
     lbprev.disabled = i<=0; lbnext.disabled = i>=shots.length-1;
     renderLbAnalysis(file);
+    showFlagRow(true);
     lb.classList.add('open');
   }
   function closeLb(){ lb.classList.remove('open'); lbIdx = -1; }
@@ -1351,6 +1280,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     lbimg.src = rimg.dataset.full || rimg.src; lbimg.className = '';
     lbmeta.textContent = 'reference'; lbprev.disabled = true; lbnext.disabled = true;
     if(lban){ lban.hidden = true; lban.innerHTML = ''; }   // references have no QA analysis
+    showFlagRow(false);                                    // …and no defect flags
     lb.classList.add('open');
   });
   document.getElementById('lbx').addEventListener('click', closeLb);
@@ -1370,6 +1300,22 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
       else if(act==='disapprove'){ api('rate',file,{rating:'bad'}).then(function(j){ if(j&&j.ok){ fig.className='ck-shot rate-bad'+(fig.dataset.accepted==='1'?' kept':''); fig.dataset.rating='bad'; openLb(lbIdx); }}); }
       else if(act==='keep'){ var n=fig.dataset.accepted==='1'?'0':'1'; api('keep',file,{accepted:n}).then(function(j){ if(j&&j.ok){ fig.dataset.accepted=n; fig.classList.toggle('kept',n==='1'); openLb(lbIdx); }}); }
     });
+  });
+  // 🏴 structured defect flag (registry IDs) — writes image flags[] + the global defect log
+  var flagRow = document.getElementById('ckflag'), flagSel = document.getElementById('flagsel'),
+      flagNote = document.getElementById('flagnote'), flagMsg = document.getElementById('flagmsg');
+  function showFlagRow(on){ if(flagRow){ flagRow.hidden = !on; if(on && flagMsg) flagMsg.textContent = ''; } }
+  if(flagRow) document.getElementById('flaggo').addEventListener('click', function(){
+    if(lbIdx < 0 || !shots[lbIdx]) return;
+    var file = shots[lbIdx].dataset.file, d = flagSel.value;
+    if(!d){ flagMsg.textContent = 'pick a defect class'; return; }
+    flagMsg.textContent = '…';
+    var body = new URLSearchParams({p:PID, do:'flag_defect', file:file, defect:d, note:(flagNote.value||''), csrf:CSRF});
+    fetch('creator.php?p='+encodeURIComponent(PID), {method:'POST', headers:{'X-CSRF':CSRF}, body:body})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j && j.ok){ flagMsg.textContent = '🏴 flagged ' + j.defect; flagSel.value=''; flagNote.value=''; }
+                         else { flagMsg.textContent = (j && j.err) || 'failed'; } })
+      .catch(function(){ flagMsg.textContent = 'network error'; });
   });
   document.addEventListener('keydown', function(e){
     if(!lb.classList.contains('open')) return;
@@ -1542,6 +1488,18 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
     }
     if(scanBtn) scanBtn.addEventListener('click', function(){ runScan(false); });
     if(rescanBtn) rescanBtn.addEventListener('click', function(){ runScan(true); });
+    // 🔎 AUTO-SCAN on open (2026-07-18): any un-scanned panels get scanned automatically so
+    // defects are visible the moment the project opens. Analyses persist, so this only ever
+    // pays for NEW panels; runScan(false) is unscanned-only and self-disables while running.
+    if(scanBtn){
+      var autoUnN = [].slice.call(document.querySelectorAll('.ck-shot')).filter(function(f){
+        return f.dataset.file && !f.dataset.verdict && !f.querySelector('.ck-refbadge');
+      }).length;
+      // cap: bulk-archive projects (thousands of unscanned raw gens) must NOT auto-burn scans —
+      // above the cap it stays a manual "🔎 QA scan" click (or the headless bridge sweep).
+      if(autoUnN > 0 && autoUnN <= 120) setTimeout(function(){ runScan(false); }, 600);
+      else if(autoUnN > 120 && prog){ prog.style.display=''; prog.textContent = autoUnN + ' unscanned — auto-scan skipped above 120; use 🔎 QA scan.'; }
+    }
   })();
 
   // --- notes log: filter (all / panel / system) + copy-all export; collapsed by default ---

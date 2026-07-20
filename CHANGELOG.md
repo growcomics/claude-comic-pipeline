@@ -12,6 +12,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-19 (Studio: project-card cover auto-select + ◳ use-as-cover on the cockpit board)
+
+### Added
+
+- **Auto-selected project covers on the Studio listings (deployed live).** Most project cards on `studio/index.php` (and creator.php's project picker) showed a two-letter initials placeholder because nothing ever set `$p['cover']` unless the owner happened to click ✓ Approve (api.php's `winner` fills an empty cover) or the ◳ button on the little-used project.php organizer. New `ck_pick_cover(array $imgs)` in `inc/boot.php` picks a default at render time when no explicit cover is set: best **non-reference** image wins — kept/approved beats rated-good beats unrated beats bad, ties go to the newest — and `isref` uploads (turnarounds, scene plates, refcache) are never eligible, because a character sheet is a bad cover. Explicit covers always win; projects with zero eligible images (empty ones, or all-refs like daughter-of-hercules) keep the initials placeholder. Render-time = no data migration, works for every future project, and costs no extra I/O since both listings already load `images_all()` per project for their counts. Verified on-server against real data via a temporary key-gated probe before deploy (all 17 projects: 10 initials-cards gained covers; on the two projects where the owner had hand-picked a cover and metadata was comparable, the heuristic chose the same file; probe deleted after).
+- **◳ Use-as-cover button on the Comic Creator live-panels board (`creator.php`).** Each panel card's action bar (and its existing `api.php action=cover` endpoint, previously reachable only from project.php) now lets the owner override the auto-pick in one click; button flashes ✓ on success. The explicit cover persists on `projects.json` and survives the auto-pick (and is already cleared by delete/purge when its file goes away — existing behavior).
+
+### Changed
+
+- **`studio/creator.php` + `studio/inc/boot.php` repo copies synced from LIVE before the feature landed.** Live was ahead of the repo (a parallel session's QA-defect refactor: `ck_ai_cfg`/QA helpers moved into `inc/defects.php`, `require` added, plus the race-safe `images_update()` helper in boot.php). Per DEPLOY-NOTES.md the live server is source of truth — this commit folds that deployed state in rather than clobbering it; post-deploy marker greps confirmed every documented feature (QA scan, lineage/adjust, lettering, stage-refs, review link, polish, growgetter link) survived. Deploy protocol followed: fetch-live immediately before each edit, byte-diff recheck before each push, staged `-covertest` copies parse-checked via 302 first, staging files deleted after.
+
 ## 2026-07-18 (3DMC Studio Tools v2.2.1 — prompt-insert now persists in Flow's Slate editor)
 
 ### Fixed

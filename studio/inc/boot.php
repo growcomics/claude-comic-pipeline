@@ -156,7 +156,38 @@ function project_get(string $id): ?array { foreach (projects_all() as $p) if (($
 function imeta_path(string $id): string { return SDATA . '/images-' . preg_replace('/[^a-z0-9-]/','',$id) . '.json'; }
 function images_all(string $id): array { return s_read(imeta_path($id), []); }
 function images_save(string $id, array $a): bool { return s_write(imeta_path($id), $a); }
+// Locked read-modify-write of a project's image metadata — atomic against concurrent writers
+// (worker ingest + Flow auto-sync + browser rating all append to images-<id>.json). $fn($meta)
+// receives the current array and returns the new one. Prefer this over the racy
+// images_all()+mutate+images_save() pattern wherever more than one writer can touch a project.
+function images_update(string $id, callable $fn) {
+    return s_with_lock(imeta_path($id), function ($meta) use ($fn) {
+        $new = $fn(is_array($meta) ? $meta : []);
+        return ['data' => $new, 'result' => $new];
+    });
+}
 function project_dir(string $id): string { return SUPLOADS . '/' . preg_replace('/[^a-z0-9-]/','',$id); }
+
+// Default cover for a project card when no explicit cover is set. Called by the listing
+// pages (index.php + creator.php's project picker) with the images_all() array they
+// already hold, so it adds no I/O. Best non-reference image wins: kept/approved beats
+// rated-good beats unrated beats bad; ties go to the newest. Reference uploads (isref —
+// turnarounds, scene plates, refcache) never win: a character sheet is a bad cover.
+// Returns null when a project has no eligible image, so the card keeps its initials
+// placeholder. An explicit $p['cover'] (◳ button / api.php action=cover / bridge
+// do=write cover) always takes precedence in the caller.
+function ck_pick_cover(array $imgs): ?string {
+    $best = null; $bs = -1; $bt = -1;
+    foreach ($imgs as $m) {
+        $f = (string)($m['file'] ?? '');
+        if ($f === '' || !empty($m['isref']) || !empty($m['blueprint'])) continue;
+        $r = (string)($m['rating'] ?? '');
+        $s = (empty($m['accepted']) ? 0 : 4) + ($r === 'good' ? 2 : ($r === 'bad' ? 0 : 1));
+        $t = (int)($m['ts'] ?? 0);
+        if ($s > $bs || ($s === $bs && $t > $bt)) { $best = $f; $bs = $s; $bt = $t; }
+    }
+    return $best;
+}
 
 // ---- generation job queue --------------------------------------------------
 // One global store. The browser enqueues jobs; a Mac-side worker pulls them
@@ -209,3 +240,4 @@ function _img_out($im, string $path, string $ext): void {
     elseif ($ext==='gif') imagegif($im,$path);
     else imagejpeg($im,$path,82);
 }
+
