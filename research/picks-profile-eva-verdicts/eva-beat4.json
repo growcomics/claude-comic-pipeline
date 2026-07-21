@@ -1,0 +1,57 @@
+{
+  "beat": "Beat 4",
+  "project": "eva",
+  "favorite": "2de9681e4d.jpg",
+  "blind_top3": [
+    {
+      "file": "2de9681e4d.jpg",
+      "reason": "Only roll with a raked diagonal walking axis + mildly elevated three-quarter camera (closest to the prompt's 'overhead, three-quarter'), mid-stride gait that reads as real motion, and low golden-hour raking light with long cast shadows modeling delts/arms/quads."
+    },
+    {
+      "file": "583bdd56b7.jpg",
+      "reason": "Best pure muscle render of the batch — dominant scale-in-frame (~85% frame height), striated quads, deep AO and speculars under dappled garden light — but a static, near-frontal eye-level pose with the head turned away, and it ignores the requested camera entirely."
+    },
+    {
+      "file": "7d86a19856.jpg",
+      "reason": "Clean and readable with an engaged slight smile, but the classic flat-level failure: frontal, centered, symmetric, eye-level, with hazy washed-out backlight that flattens the muscle modeling."
+    }
+  ],
+  "blind_agrees_with_favorite": true,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "fav_better",
+      "evidence": "The favorite is the only sibling with dynamic staging: a diagonal motion axis across the frame, a slightly elevated camera, and clear FG/BG depth (crisp gravel FG, long shadows, distant lawn). 7d86a19856 and 901b860172 are frontal-centered flat-level; 583bdd56b7 is a static near-frontal at eye level despite its scale. It is also the only roll that even approximates the prompt's 'overhead, three-quarter angle' — none of the four is truly overhead."
+    },
+    "expression_intensity": {
+      "verdict": "tie",
+      "evidence": "Favorite's sunlit squint + set jaw reads as purposeful determination (~3/5), but 583bdd56b7's serene look-away and 7d86a19856's mild smirk are at comparable intensity — none sells a strong beat. The favorite only clearly beats 901b860172, whose downcast near-closed eyes are the batch's dead-face."
+    },
+    "muscle_rendering_size": {
+      "verdict": "fav_worse",
+      "evidence": "583bdd56b7 reads distinctly bigger and better sculpted: larger scale-in-frame, visibly striated quads, deeper crease shadows and glossier speculars. The favorite's musculature is well modeled by the raking sun but is mid-pack in apparent size — the smaller figure-in-frame costs it against the over-spec direction."
+    },
+    "wardrobe_identity": {
+      "verdict": "tie",
+      "evidence": "Same character, ripped denim crop top, light-wash cutoffs, left-arm tattoo and wristwatch hold across all four rolls. Footwear splits the batch 2-2 (dark gladiator sandals in the favorite and 901b860172 vs brown T-strap sandals in 583bdd56b7 and 7d86a19856), so there is no canonical style to drift from; 583bdd56b7 has the prettiest, most on-model face render."
+    },
+    "lighting": {
+      "verdict": "fav_better",
+      "evidence": "Warm low-sun raking light with long crisp shadows gives the cleanest highlight-to-shadow gradient across every muscle group (the volume-block doctrine) and anchors the figure to the ground. 583bdd56b7 is a near-tie with dramatic dappled color but the shadow lace mottles the legs; 7d86a19856's hazy backlight washes contrast out; 901b860172 leaves the face in blotchy half-shade against a blown background."
+    },
+    "defect_absence": {
+      "verdict": "fav_worse",
+      "evidence": "The favorite contains multiple background pedestrians plus two dogs — a no-background-extras violation shared with 583bdd56b7, while 7d86a19856 and 901b860172 are extras-free. Anatomy is otherwise clean in the favorite (feet/toes in sandals render correctly, hands slightly stubby but passable); 901b860172 carries a blotchy facial-skin artifact."
+    },
+    "growth_payoff": {
+      "verdict": "fav_worse",
+      "evidence": "583bdd56b7 commits hardest to the payload: the physique dominates the frame and the tiny background pedestrians act as an implicit size-comparison. The favorite delivers full-body muscle in motion but at ~half the frame scale, so the size read is softer."
+    }
+  },
+  "decisive_factors": [
+    "Only roll that honors the requested elevated three-quarter camera with a diagonal mid-stride axis — candid motion, not a posed lookbook shot",
+    "Golden-hour raking light + long shadows: best muscle-modeling gradient and most photoreal grade of the batch",
+    "Believable living-park context (distant people, dogs) that normalizes scale — even though it technically breaks the no-extras rule"
+  ],
+  "promptable_rule": "For walking/aftermath beats, stage the character mid-stride on a diagonal across the frame from a slightly elevated three-quarter camera under low raking golden-hour sun with long cast shadows — dynamic motion plus a strong light gradient beats a larger but frontally-posed static figure.",
+  "notes": "Contrarian core finding: the favorite is NOT the best muscle render — 583bdd56b7 clearly wins size, striation, and scale-in-frame — so this pick evidences the owner weighting camera dynamism, gait naturalism, and light quality over raw payload in a non-growth walking beat; it was a near-tie and 583bdd56b7 would be the pick if size were the criterion. Defects in the favorite itself: background extras + two dogs (feedback_no_extra_characters violation), sandal style differs from the brown T-straps of 583bdd56b7/7d86a19856, and hands are slightly stubby at full zoom. Also notable: no roll executed the prompt's literal 'overhead' camera — the model consistently downgraded it to eye-level/mildly-elevated, so a true high-angle needs stronger fragment language (e.g., the cinematic-framing high-angle/birds-eye fragments) rather than the bare word 'overhead'."
+}

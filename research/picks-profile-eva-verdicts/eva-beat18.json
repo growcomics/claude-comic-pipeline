@@ -1,0 +1,51 @@
+{
+  "beat": "Beat 18",
+  "project": "eva",
+  "favorite": "ae80ee28a5.jpg",
+  "blind_top3": [
+    {"file": "65a129a178.jpg", "reason": "Only roll where the face sells triumph (big open grin) plus reaction-intercut onlookers (clapping woman, shocked man) and a dynamic three-quarter diagonal — highest expression intensity and story energy in the batch."},
+    {"file": "ae80ee28a5.jpg", "reason": "Cleanest render: smooth pretty face, correct gaze right-of-camera, huge FG bicep sweeping a diagonal with real depth, subtle lightning that lets the sculpt read — but the expression is soft awe, not peak."},
+    {"file": "b31f3e5660.jpg", "reason": "Best pure facial acting after 65a1 (open-mouth joyful laugh) and clean anatomy, but the lettering deviates: two ALL-CAPS bubbles and 'SUPERGIRL' as one word vs the script's 'super girl'."}
+  ],
+  "blind_agrees_with_favorite": false,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "fav_better",
+      "evidence": "8 of 12 rolls (4b64b6fd80, ac0e4f0212, 677752c9eb, da42013515, f1cacf0386, dd0f229d96, b31f3e5660, 893181504b) are flat-level frontal mirror poses — the rubric's red-X failure mode. ae80ee28a5 is one of only three genuine three-quarter stagings, with the viewer-left bicep as a foreground mass driving a diagonal and FG/BG depth toward the path."
+    },
+    "expression_intensity": {
+      "verdict": "tie",
+      "evidence": "The favorite's parted-lips soft awe (~3) beats the batch's calm-smile median (da42013515, 677752c9eb, 893181504b are near-neutral on a power-surge beat), but it is clearly below 65a129a178's triumphant grin and b31f3e5660's open-mouth joy (~4-5). For a line as excited as 'The power, I can feel it' the favorite underplays."
+    },
+    "muscle_rendering_size": {
+      "verdict": "tie",
+      "evidence": "Size sits mid-high: 7cde68ff71 and 65a129a178 carry more raw mass and dd0f229d96 more glossy sculpt, so the favorite does not win the over-spec direction. It wins shape quality instead — round believable peaks, no lumpy deltoid-bicep junctions like 7cde68ff71's balloon masses."
+    },
+    "wardrobe_identity": {
+      "verdict": "fav_better",
+      "evidence": "Outfit (ripped denim crop, jeans, watch, sleeve tattoo) is stable across all 12, but the favorite has the smoothest, youngest, most conventionally pretty face in the batch — the closest match to the prompt's explicit 'keep her skin smooth and she should look a little beautiful' clause. ac0e4f0212, da42013515 and 33f77b2a16 read visibly older/more weathered."
+    },
+    "lighting": {
+      "verdict": "tie",
+      "evidence": "All rolls share the same golden park key. The favorite's edge is readability: its lightning VFX is the subtlest, so the highlight-to-shadow sculpt on the biceps stays legible, whereas 4b64b6fd80 and dd0f229d96 bury the muscle modeling under dense hot crackle. Marginal, not decisive."
+    },
+    "defect_absence": {
+      "verdict": "fav_better",
+      "evidence": "Favorite is defect-free: clean anatomy, legible mixed-case two-line bubble, unobtrusive background (bench figure, dog). Siblings carry real defects — 893181504b renders the script's quotation marks literally in the bubble, b31f3e5660 splits into two ALL-CAPS bubbles with a 'SUPERGIRL' wording mismatch, 7cde68ff71 has lumpy anatomy, 33f77b2a16's four background onlookers have soft/mutated faces."
+    },
+    "growth_payoff": {
+      "verdict": "tie",
+      "evidence": "Arms dominate the frame and the FG bicep is huge, but 7cde68ff71/65a129a178 commit harder on mass and 65a129a178/33f77b2a16/f1cacf0386 amplify the payoff with visibly reacting witnesses (reaction-intercut), which the favorite lacks — its background is calm."
+    }
+  },
+  "decisive_factors": [
+    "Prettiest/smoothest face in the batch — the prompt's explicit beauty clause dominated the pick",
+    "Only clean roll that nails 'looking to the right of the camera' with a natural three-quarter head turn",
+    "Zero defects + subtle VFX so the bicep sculpt actually reads"
+  ],
+  "promptable_rule": "When a prompt names face beauty/smoothness and a specific gaze direction, those clauses outrank raw muscle size in the owner's pick — select for the cleanest, prettiest face with the correct eyeline and keep energy VFX subtle enough not to obscure the muscle sculpt.",
+  "fav_vs_studio_pick": {
+    "comparison": "ae80ee28a5.jpg (Flow favorite) vs 65a129a178.jpg (Studio ownerManualPick): the favorite wins face beauty/smoothness, gaze compliance, and defect absence (65a1's viewer-left deltoid-bicep junction is slightly balloon-like and its two close onlookers have mildly rubbery faces); the Studio pick wins expression intensity (triumphant grin vs soft awe), growth payoff (bigger arms plus clapping/shocked witnesses = reaction-intercut), and shows more of the figure. I would keep 65a129a178.jpg for the page: the corpus rubric weights dead-face avoidance and escalation devices heavily, and its emotional register actually matches the 'The power, I can feel it' line, while its minor anatomy softness costs less than the favorite's understated face. ae80ee28a5.jpg is the better character-beauty reference, so it is worth banking as a ref-chain anchor even if 65a1 ships."
+  },
+  "notes": "The two owner signals disagree, and they map cleanly onto two value systems: the Flow favorite optimizes character rendering (beauty, cleanliness, eyeline), the Studio pick optimizes storytelling (expression, witnesses). The favorite's own weakness is emotional understatement relative to its excited dialogue. Batch-level: 11 of 12 rolls are near-identical framings, so this beat contributes to camera monotony regardless of pick; the favorite and the Studio pick are the only two that break the flat-frontal mold cleanly (7cde68ff71 breaks it too but with grotesque anatomy)."
+}

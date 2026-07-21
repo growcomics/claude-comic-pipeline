@@ -1,0 +1,57 @@
+{
+  "beat": "Beat 38",
+  "project": "eva",
+  "favorite": "2e0f39594d.jpg",
+  "blind_top3": [
+    {
+      "file": "2e0f39594d.jpg",
+      "reason": "Hardest commitment to the climax payload: largest double-boulder bicep mass in the set, full lightning wreath plus an eruptive fiery laser column, dusk chiaroscuro, aerial scale with a cheering crowd ring at her feet."
+    },
+    {
+      "file": "4f940f4b80.jpg",
+      "reason": "Cleanest literal execution of the 150-ft aerial brief — bird's-eye down on her with fists-raised crowd selling scale, huge round biceps, warm golden light, defect-free anatomy."
+    },
+    {
+      "file": "8c69f98633.jpg",
+      "reason": "Top-down over a diagonal park path with the best face in the batch — a genuinely ecstatic open-mouth laugh that sells 'Yes, yes, the power' at thumbnail size."
+    }
+  ],
+  "blind_agrees_with_favorite": true,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "tie",
+      "evidence": "The favorite's high-angle aerial with depth-staged plaza and tiny crowd is strong, but 4f940f4b80, 8c69f98633, and e3f005de78 execute the same 150-ft bird's-eye as cleanly or cleaner. Where the favorite clearly beats the field is against the six ground-level rolls (182ea6644d, 3114d8b552, 61a6778305, df7a814f36) that ignored the aerial brief entirely."
+    },
+    "expression_intensity": {
+      "verdict": "fav_worse",
+      "evidence": "The favorite's gritted grin is half-swallowed by the laser bloom across the eyes and brow — a partial dead-face by L35 standards. Siblings 8c69f98633, c2795a3c9f, and 3c090bc7a5 deliver full open-mouth ecstatic laughs that read instantly."
+    },
+    "muscle_rendering_size": {
+      "verdict": "fav_better",
+      "evidence": "The favorite carries the largest, widest bicep masses in the batch — twin boulder lobes that dwarf the forearms, out-scaling even e3f005de78 and 4f940f4b80. It is the roll that most literally lands the prompt's ten-times-'really' big/wide/round over-spec."
+    },
+    "wardrobe_identity": {
+      "verdict": "tie",
+      "evidence": "Same white-gold toga, rope belt, left-arm tattoo sleeve, and long dark hair as 14 of 15 siblings — nothing distinguishing. Only 1d8db3a781 drifted (ripped denim crop top + jean shorts), which disqualifies that roll, not the favorite specifically."
+    },
+    "lighting": {
+      "verdict": "fav_better",
+      "evidence": "Dusk golden-hour chiaroscuro: the energy column acts as a warm key raking the muscle groups, deep AO in the creases, rim separation from the darkened park — essentially the climax-variant volume block occurring naturally. Most siblings (3114d8b552, 61a6778305, 182ea6644d) are flat midday daylight; only 3c090bc7a5's storm look rivals it but shifts the palette to cool blue, breaking the beat's golden-laser continuity."
+    },
+    "defect_absence": {
+      "verdict": "tie",
+      "evidence": "The favorite's viewer-left bicep reads as a doubled lobe (borderline anatomy under over-spec) and the laser column occludes the upper face. Siblings carry equal or worse defects: 1d8db3a781 full wardrobe drift, c31dd09f43 back view hides face/chest/lasers entirely, 9fbf787e4a and 3114d8b552 have stumpy/ambiguous leg anatomy. Mid-pack clean."
+    },
+    "growth_payoff": {
+      "verdict": "fav_better",
+      "evidence": "It stacks the most escalation devices in one frame: max size, full-body lightning wreath, eruptive beam column, size-comparison via tiny cheering crowd, dusk drama. Siblings deliver size alone (e3f005de78, a1647d80af) or FX alone (2239dad51a's KRAKOOM/WHOOSH SFX — the only roll with baked SFX) but none stack them like the favorite."
+    }
+  },
+  "decisive_factors": [
+    "Biggest, roundest bicep mass in the set — the over-spec size direction rewarded",
+    "Maximal energy-FX commitment: lightning wreathing both arms plus an eruptive laser column",
+    "Dusk chiaroscuro drama versus the flat-daylight siblings"
+  ],
+  "promptable_rule": "On climax power beats, don't stop at over-specced muscle size — explicitly stack surge FX (crackling energy wreathing the flexed arms, an eruptive beam column) with a dusk/golden-hour chiaroscuro key, because light-plus-energy drama layered on top of size is what wins the pick.",
+  "notes": "Blind #1 matched the owner's favorite. The pick trades face readability for spectacle: the laser bloom obscures the eyes/brow (an L35 dead-face risk the owner evidently accepted), and the viewer-left bicep's doubled lobe is borderline anatomy. Batch-level findings: roughly half the rolls ignored 'camera is 150 ft. in the air' and rendered ground-level low angles; 1d8db3a781 is a hard wardrobe-drift defect (denim outfit vs the toga in all 15 others); c31dd09f43 wastes the beat on a back view; 2239dad51a is the only roll with baked SFX lettering (KRAKOOM!/WHOOSH!), clean and legible, worth noting as a near-tie contender for a lettered-page slot. All rolls kept coverage (always_clothed) and the recurring wristwatch (L24 anachronism) appears across nearly the whole batch, so it stems from the ref chain, not the roll."
+}

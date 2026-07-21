@@ -778,6 +778,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 .ck-addref select{background:#0B0C10;border:1px solid #2E3140;color:#F2F2F4;border-radius:6px;padding:5px 7px;font:12px Inter,sans-serif}
 .ck-addref input[type=text]{background:#0B0C10;border:1px solid #2E3140;color:#F2F2F4;border-radius:6px;padding:5px 7px;font:12px Inter,sans-serif}
 .ck-shot .ck-refbadge{position:absolute;top:6px;left:6px;font-size:9.5px;font-weight:800;background:rgba(122,127,236,.95);color:#0B0C10;border-radius:999px;padding:2px 7px;z-index:2}
+.ck-shot .ck-favbadge{position:absolute;bottom:34px;right:6px;font-size:12px;background:rgba(8,9,12,.8);border-radius:6px;padding:2px 5px;z-index:2;cursor:help}
 .ck-shot-bar .b-ref:hover{background:#5b5fd0;border-color:#5b5fd0;color:#fff}
 /* live board */
 .ck-bgroup{margin-bottom:18px}
@@ -1084,9 +1085,11 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
             <?php foreach (ck_order_lineage($list, $lin) as $im): $f = $im['file']; $rt = $im['rating'] ?? 'unrated'; $kp = !empty($im['accepted']); $isRef = in_array($f, $refFiles, true);
                   $ver = (int)($im['ver'] ?? ($lin['ver'][$f] ?? 1)); $isDer = !empty($im['parent']); $anote = (string)($im['adjust'] ?? '');
                   $an = $im['analysis'] ?? null; $adf = $an ? (array)($an['defects'] ?? []) : []; $av = $an ? (string)($an['verdict'] ?? ($adf?'fail':'pass')) : '';
-                  $aTitle = $an ? ('QA ' . strtoupper($av) . ((($an['caption']??'')!=='') ? ' · '.$an['caption'] : '') . ($adf ? ' — ⚠ '.implode(', ', $adf) : ' — clean')) : ''; ?>
+                  $aTitle = $an ? ('QA ' . strtoupper($av) . ((($an['caption']??'')!=='') ? ' · '.$an['caption'] : '') . ($adf ? ' — ⚠ '.implode(', ', $adf) : ' — clean')) : '';
+                  $isFav = in_array('flow-fav', (array)($im['tags'] ?? []), true); ?>
             <figure class="ck-shot rate-<?= h($rt) ?><?= $kp?' kept':'' ?><?= $isDer?' derived':'' ?>" data-file="<?= h($f) ?>" data-rating="<?= h($rt) ?>" data-accepted="<?= $kp?'1':'0' ?>" data-beat="<?= h($gname) ?>" data-ver="<?= (int)$ver ?>" data-defects="<?= count($adf) ?>" data-verdict="<?= h($av) ?>">
               <?php if ($isRef): ?><span class="ck-refbadge">★ ref</span><?php endif; ?>
+              <?php if ($isFav): ?><span class="ck-favbadge" title="⭐ Flow favorite — the owner's pick in Google Flow">⭐</span><?php endif; ?>
               <?php if ($isDer): ?><span class="ck-vbadge" title="<?= h($anote!=='' ? 'adjusted: '.$anote : 'refined version') ?>">v<?= (int)$ver ?></span><?php endif; ?>
               <?php if ($an): ?><span class="an-tag v-<?= h($av) ?><?= $adf?' has-def':'' ?>" title="<?= h($aTitle) ?>"><?= $adf ? '⚠'.count($adf) : '✓' ?></span><?php endif; ?>
               <img loading="lazy" src="img.php?p=<?= h(urlencode($id)) ?>&f=<?= h(urlencode($f)) ?>&t=1" alt="">

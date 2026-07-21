@@ -1,0 +1,57 @@
+{
+  "beat": "Beat 17",
+  "project": "eva",
+  "favorite": "7451e9ee1d.jpg",
+  "blind_top3": [
+    {
+      "file": "7451e9ee1d.jpg",
+      "reason": "Tight portrait MCU where the vein-covered bicep+forearm fill nearly half the frame (zoom-escalation / L20 get-close win), single clean BULGE!, soft bokeh background isolates the money shot."
+    },
+    {
+      "file": "5b5cca9a9e.jpg",
+      "reason": "Shock face (wide eyes, open mouth) actually sells the 'Wow' line, massive vascular arm, and a bonus GROW! SFX escalating the beat."
+    },
+    {
+      "file": "559de793c1.jpg",
+      "reason": "Strongest expression intensity of the batch (raised brows, open-mouth shock) plus classic single-bicep flex and pointing onlookers as a reaction-intercut, though heavy lightning VFX is noisy and the second arm poses awkwardly."
+    }
+  ],
+  "blind_agrees_with_favorite": true,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "fav_better",
+      "evidence": "The favorite is one of only two portrait tight-MCU crops (with 5fd4fdcf7d); the flexed arm cuts a diagonal across the frame at ~40-50% frame area with the background dropped to bokeh depth. The other 14 are eye-level landscape waist-up mid-shots (13c5e35acd, 4c98b406d9, ffec217464 etc.) where the bicep is only ~20% of frame — exactly the flat-default the camera-dynamism axis penalizes."
+    },
+    "expression_intensity": {
+      "verdict": "fav_worse",
+      "evidence": "The favorite's face is a soft downward pleased smile (~intensity 2-3) — readable but underplayed for a 'Wow, they're getting even bigger' beat. 559de793c1, fb3f8a0d1e, and 5b5cca9a9e deliver genuine wide-eyed open-mouth shock (~4) that better matches the dialogue; the owner traded face for bicep scale."
+    },
+    "muscle_rendering_size": {
+      "verdict": "fav_better",
+      "evidence": "Largest apparent bicep-to-frame ratio in the beat, with the densest vein network across bicep AND forearm plus glossy specular peaks. Rivals are smoother/smaller (7b922c1f99, 9b85797afa) or have odd double-lobed bicep geometry (13c5e35acd, 8856a91b1f); only 5fd4fdcf7d matches its mass."
+    },
+    "wardrobe_identity": {
+      "verdict": "tie",
+      "evidence": "Same torn denim crop top, denim shorts, right-arm tattoo sleeve, and long brown hair as all 15 siblings; face stays on-model with the real-photo refs. The wristwatch present in most siblings is absent on the favorite's flexed arm, but watch placement wanders batch-wide (left wrist in 7b922c1f99, right elsewhere), so it's batch noise rather than fav-specific drift."
+    },
+    "lighting": {
+      "verdict": "fav_better",
+      "evidence": "Warm golden-hour key rakes across the bicep giving a strong highlight-to-shadow gradient that sculpts the peak and veins (the volume-block effect), with the background softened for separation. Siblings 16dfddbb23, 564987be82, and 559de793c1 bury the light read under wall-to-wall lightning VFX; the flat mid-shots get less sculpt from the same sun."
+    },
+    "defect_absence": {
+      "verdict": "fav_better",
+      "evidence": "Favorite has one legible BULGE!, a correctly tailed bubble, action lines, correct limb count, and no intrusive extras. 5fd4fdcf7d and ffec217464 render 'BULGE!' twice (duplicate-lettering defect), 9b85797afa's eyes miss the bicep entirely (prompt says she's looking at it), and 13c5e35acd/8856a91b1f have anatomically odd bicep lobing."
+    },
+    "growth_payoff": {
+      "verdict": "fav_better",
+      "evidence": "Hardest commitment to the growth payload in the batch: near-ECU-region framing of the actively bulging bicep, veins + restrained lightning + action lines all concentrated on the muscle. Wider siblings dilute the payoff across abs/chest/environment; only 5fd4fdcf7d commits equally and it carries the duplicate-SFX defect and a busier pointing-crowd background."
+    }
+  },
+  "decisive_factors": [
+    "Scale-in-frame: portrait crop makes the bicep the whole panel (zoom-escalation / L20 get-close)",
+    "Most aggressive vascular size rendering in the batch",
+    "Clean single SFX + soft background isolating the money shot (its twin 5fd4fdcf7d lost on duplicated lettering)"
+  ],
+  "promptable_rule": "For bicep money-shot beats, request a tight portrait/near-ECU crop where the flexed arm fills 40%+ of the frame with heavy vascularity and exactly ONE SFX word over a softened background — not a waist-up eye-level mid-shot.",
+  "notes": "Contrarian finding: the favorite is NOT the best face in the beat — shock-face siblings (559de793c1, fb3f8a0d1e, 5b5cca9a9e) sell the 'Wow' dialogue harder, so expression was sacrificed for sheer bicep dominance. The favorite's pose is a cross-body high flex rather than the textbook front single-bicep pose, and the owner didn't punish that drift. Near-tie: 5fd4fdcf7d is compositionally almost identical and plausibly lost only on its duplicated 'BULGE!' lettering and pointing-crowd background. Batch-wide issues worth logging: ~7 siblings spawn a pointing trio of background extras the prompt never asked for (no-extras rule), duplicate SFX appeared twice in 16 rolls, and the favorite's own expression (2-3 intensity on a growth beat) would flag under the L35 face-sells-the-growth check."
+}

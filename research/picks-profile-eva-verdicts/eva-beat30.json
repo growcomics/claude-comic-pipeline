@@ -1,0 +1,57 @@
+{
+  "beat": "Beat 30",
+  "project": "eva",
+  "favorite": "4cb45a421c.jpg",
+  "blind_top3": [
+    {
+      "file": "fa418335cf.jpg",
+      "reason": "Peak expression in the set (open-mouth ecstatic laugh, 5/5 intensity) plus clothing-destruction escalation — torn-open tank delivers the prompt's 'big cleavage' harder than any sibling, in a prompt-compliant close crop."
+    },
+    {
+      "file": "2aae39a430.jpg",
+      "reason": "Best camera in the set — bird's-eye aerial with tiny onlookers far below (scale-contrast + depth) genuinely sells 'flying', with an awe/joy face and a comic panel border; every other roll is near-frontal."
+    },
+    {
+      "file": "4cb45a421c.jpg",
+      "reason": "Best full-beat storytelling: raised knee, fists clutching the S-shield, open-mouth awe aimed DOWN at her own body per the script, diagonal knee-to-cape composition, warm park light, fully canonical costume."
+    }
+  ],
+  "blind_agrees_with_favorite": false,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "fav_better",
+      "evidence": "The favorite is a diagonal knee-up MLS — raised-thigh FG mass, cape sweeping the frame, park-bokeh depth — while most siblings (3388bd2724, 05d1b4fd3a, c593660471, a43b66a2da, fa418335cf) are flat-level frontal chest-up crops against blank sky, the rubric's named failure mode. Exception worth noting: 2aae39a430's high-angle aerial with scale-contrast beats the favorite on pure angle dynamism."
+    },
+    "expression_intensity": {
+      "verdict": "tie",
+      "evidence": "The favorite's open-mouth awe (intensity ~4) is aimed correctly DOWN at her own body per the script and beats the mild closed-lip smiles on ~10 siblings (3388bd2724, f1da087195, 7ba36a9adc, 6ae40d799d, 05d1b4fd3a). But fa418335cf's ecstatic laugh and 382ad85ff1's open laugh are rawer 5/5 faces, so the favorite is top-quartile, not the peak."
+    },
+    "muscle_rendering_size": {
+      "verdict": "tie",
+      "evidence": "Clean, huge, believable rendering — and the only framing that adds giant quads/calves to the arm/chest payload. But in-frame arm mass reads larger in the tight crops (2aae39a430, c593660471, a43b66a2da), and 6ae40d799d/9f743c33e8 push vein detail further (to the point of noise). Mid-to-high in set, not dominant."
+    },
+    "wardrobe_identity": {
+      "verdict": "fav_better",
+      "evidence": "Fully canonical: intact blue S-shield tank + red cape + denim shorts. Roughly half the batch drifted — 2d14815345, 382ad85ff1, a43b66a2da lost the S-logo entirely (gray tank), b86540546d faded it, fa418335cf destroyed it, and six rolls (05d1b4fd3a, 7ba36a9adc, 9aa82ea23a, 9f743c33e8, a7f8102838) swapped shorts for a Supergirl skirt, 9aa82ea23a adding red boots."
+    },
+    "lighting": {
+      "verdict": "fav_better",
+      "evidence": "Warm directional golden-hour sun models every muscle group with a highlight-to-shadow gradient (the volume-block doctrine) and lights the face; sky-background siblings (05d1b4fd3a, c593660471, fa418335cf, a43b66a2da, f1da087195) sit in flat cool diffuse light that leaves the muscles less sculpted. 28a92d402a and b86540546d have comparable park light."
+    },
+    "defect_absence": {
+      "verdict": "fav_better",
+      "evidence": "Cleanest of the strong candidates: legible 4-line bubble, correct anatomy, no garbling. Siblings carry worse issues — 9aa82ea23a's torn-chest flesh bulges read as an anatomy artifact, fa418335cf borders on caricature at max laugh with the logo destroyed, 01d29ce2e5/7fe2a91024 have awkward tucked-leg passages, 9f743c33e8's strained face breaks the 'face looks beautiful' spec. Caveats in the favorite itself: blurred background extras (shared with several park rolls) and the batch-wide anachronistic wristwatch."
+    },
+    "growth_payoff": {
+      "verdict": "tie",
+      "evidence": "The favorite commits broadly — active lightning FX, clutching-the-chest 'still growing' action, and the widest body coverage (arms+chest+quads), plus an extra dialogue line ('The power feels amazing!'). But it keeps the tank intact, so the prompt's explicit 'big cleavage' payload is delivered harder by fa418335cf (torn-open top) and 7fe2a91024 (low-cut tank, above-clouds)."
+    }
+  },
+  "decisive_factors": [
+    "Canonical costume fidelity — intact S-shield tank/cape/shorts while ~half the batch drifted to gray tanks, skirts, or destroyed logos",
+    "Pose-complete storytelling — the only strong roll showing the scripted 'one knee up + squeezing arms against chest + looking down' in one frame",
+    "Warm directional light + diagonal knee-up composition: dynamism without the defects the flashier rolls carry"
+  ],
+  "promptable_rule": "When a beat scripts a specific pose action (knee up, arms squeezed against chest, gaze down), frame wide enough to include the named pose landmark and hold the canonical costume — the owner picks the pose-complete, on-costume roll over tighter crops or higher-intensity faces that drop either.",
+  "notes": "My blind #1 (fa418335cf, peak-ecstasy torn-top roll) was passed over despite the prompt's explicit 'big cleavage' ask — evidence that costume integrity and pose fidelity outweigh raw payload intensity for this owner at this beat. Contrarian findings: the favorite is NOT the most intense face (fa418335cf, 382ad85ff1) nor the most dynamic camera (2aae39a430's aerial), and it actually deviates from the prompt's '12-inch close-up, arms/chest/face only' spec by going wider — the owner rewarded beat-storytelling over literal framing compliance. Batch-wide defects that don't differentiate: anachronistic wristwatch on all 19 rolls (L24 violation — add suppression to the genspec), speech-bubble paraphrase drift across rolls (favorite's bubble adds an unscripted line), and park-extras in every park-background roll including the favorite."
+}

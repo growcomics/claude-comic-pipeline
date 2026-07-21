@@ -1,0 +1,48 @@
+{
+  "beat": "Beat 95",
+  "project": "muller",
+  "favorite": "b606123d37.jpg",
+  "blind_top3": [
+    {"file": "e049bfb538.jpg", "reason": "Most complete package: 5-view turnaround in a body-revealing grey one-piece, face/eye ECU section, plus a dedicated BODY CURVES section with three glam poses and full measurements — near-clean text (one 'RLONDE' typo)."},
+    {"file": "1ed476af0b.jpg", "reason": "Cleanest lettering in the batch, textbook 5-view A-pose turnaround, and the best face close-ups (three expressive CUs plus an eyes ECU) — the most production-usable identity ref."},
+    {"file": "97bf4ca982.jpg", "reason": "Best feature coverage: 5-view turnaround plus facial-feature ECUs (eye, lips, hair), a tattoo callout, and wardrobe-variant lifestyle insets; only minor text duplication ('(Approx.) (Approx.)')."}
+  ],
+  "blind_agrees_with_favorite": false,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "fav_better",
+      "evidence": "The favorite's bottom detail row spans full -> ecu-face -> profile -> chest MCU -> high-angle lean-forward, the only sheet in the beat with a real angle change (its high-angle crop); siblings like cb5caa5010 and fcb12c53c0 are all eye-level rows. e049bfb538 comes closest with its glam-pose strip but stays eye-level."
+    },
+    "expression_intensity": {
+      "verdict": "fav_worse",
+      "evidence": "The favorite's faces are neutral-to-stern in both the turnaround and the face crops; 1ed476af0b and 64e8e26858 deliver warm, engaged smiles in their headshot rows and 97bf4ca982 varies expression across its three face CUs. On the dead-face axis the pick loses."
+    },
+    "muscle_rendering_size": {
+      "verdict": "fav_better",
+      "evidence": "Curve payload (this beat's size axis) is the largest in the batch: visibly fuller bust and hips than any sibling, displayed in a tight white tank and denim shorts with bare legs, while cb5caa5010, fcb12c53c0, and 1ed476af0b bury the figure in dark leggings. Directly honors the prompt's 'Do not reduce her curves.'"
+    },
+    "wardrobe_identity": {
+      "verdict": "tie",
+      "evidence": "Identity (blonde beach waves, blue-green eyes, freckles) holds across all 11 sheets and is internally consistent across the favorite's 5 views (its wrist detail even persists in back views). Mild hair drift toward dark roots vs the honey-blonde of 97bf4ca982/1ed476af0b, offset by the most figure-revealing wardrobe choice."
+    },
+    "lighting": {
+      "verdict": "tie",
+      "evidence": "Flat, even grey-studio light — readable but unremarkable; skin specular detail in the face/chest crops is good. a9a4d4ed73 actually stages a lit white studio with visible softboxes and soft shadows, and e049bfb538 has slightly better body modeling, so the favorite does not win here."
+    },
+    "defect_absence": {
+      "verdict": "fav_worse",
+      "evidence": "The favorite carries the batch's worst AI-garbled lettering: 'FONE SHOT', 'FACE BUWWN SHOT', 'ADA BACK', 'RAIR: Wavy Blonde', 'Left Wrlst' — a hard QA-checklist lettering defect. 1ed476af0b, cb5caa5010, and a9a4d4ed73 are essentially clean-text; anatomy is clean everywhere, so text is the differentiator."
+    },
+    "growth_payoff": {
+      "verdict": "fav_better",
+      "evidence": "It commits hardest to the beat's payload (curve display density): a dedicated chest close-up crop plus a high-angle lean-forward crop function as body money-shots no other sheet includes; only e049bfb538's 'BODY CURVES & PROPORTIONS' strip is in the same league, and it is tamer."
+    }
+  },
+  "decisive_factors": [
+    "Curviest body in the batch — the one roll that fully obeyed 'Do not reduce her curves'",
+    "Figure-revealing wardrobe (white tank + denim shorts, bare legs) vs siblings' dark leggings",
+    "Dedicated body-detail crops (chest MCU + high-angle lean-forward) alongside the turnaround"
+  ],
+  "promptable_rule": "For character spec sheets, explicitly request a light, figure-revealing outfit (tank + shorts, bare legs) and body-detail close-up crops (chest, high-angle) in addition to the 5-view turnaround — the owner picks curve display over text cleanliness.",
+  "notes": "Contrarian finding: the owner's pick is the WORST sheet in the beat on baked-lettering quality (garbled 'FONE SHOT'/'FACE BUWWN SHOT'/'ADA BACK' labels, a re-roll defect per qa-checklist), and its faces are the sternest — the pick was driven almost entirely by body/curve fidelity and the revealing outfit, dimensions the rubric-clean siblings (1ed476af0b, e049bfb538) under-delivered. e049bfb538 is a near-tie: curves + glam poses + near-clean text; if lettering matters downstream it is the better banking candidate. Implication: on ref-sheet beats, text garble is apparently tolerable to the owner because sheets are used as visual refs, not shipped pages."
+}

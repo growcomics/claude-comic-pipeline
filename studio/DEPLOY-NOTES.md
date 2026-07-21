@@ -156,3 +156,5 @@ Verified live 2026-07-18: parse probes on creator/review/bridge/growgetter/refs/
 full marker sweep (pre-existing + 🏴 + these) clean; bridge `do=qascan` real-scan roundtrip
 (2.4s, analysis + verdict + log event). Production-wide sweep run via `do=qascan`
 (all projects except the muller raw archive — owner-scoped 2026-07-18).
+
+_Also 2026-07-20 — added the **⭐ Flow-favorite pick loop**: bridge.php `do=flowfav` (additive, idempotent pick marker: +tag `flow-fav`, `unrated→good`, `accepted` only when the beat has no owner-kept winner — owner's manual rating ALWAYS wins) + `addtags` (additive tag merge) in `do=write`; review.php `flowfav` in the detail payload + `data-flowfav` + `.rv-flag.fav` ⭐ tile badge + `togfav` "⭐ Flow favs" toolbar filter (state/hash key `flowfav`) + `.rv-chip.fav` detail chip; creator.php `$isFav`/`.ck-favbadge` ⭐ board badge. Fed by flow-studio-autosync v1.2.0 (posts favorited workflow ids each sync; favorites live on Flow's `projectContents.workflows[].metadata.favorited`, wf name = the bridge `gen` id). KEEP markers on redeploy: bridge `do === 'flowfav'`/`addtags`; review `togfav`/`flowfav`/`rv-flag fav`; creator `ck-favbadge`._

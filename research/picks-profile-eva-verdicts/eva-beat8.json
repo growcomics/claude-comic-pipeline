@@ -1,0 +1,57 @@
+{
+  "beat": "Beat 8",
+  "project": "eva",
+  "favorite": "9f625a28d0.jpg",
+  "blind_top3": [
+    {
+      "file": "9f625a28d0.jpg",
+      "reason": "Most committed trigger panel: both arms fully sheathed in dense coherent lightning FX, biggest in-frame mass with the denim top intact and straining, hands pressed to the abdomen selling 'magic surging through her body', rock correctly gone."
+    },
+    {
+      "file": "b17c74efc7.jpg",
+      "reason": "Best pure facial shock in the batch (huge eyes, open mouth) with a motivated downward eyeline at the FX-wrapped flexing arm, but portrait crop truncates the torso and extra forearm tattoos are identity drift."
+    },
+    {
+      "file": "cb822b77b2.jpg",
+      "reason": "Clean all-rounder: readable shock aimed at her own raised hands, well-formed hands, filament FX over arms/chest/abs, no beat-state errors, though the FX are thin threads rather than a surge."
+    }
+  ],
+  "blind_agrees_with_favorite": true,
+  "dimensions": {
+    "camera_composition": {
+      "verdict": "tie",
+      "evidence": "The favorite is a dead-frontal eye-level MS — flat-level staging by the corpus rubric, less dynamic than 23bc5fcd7c's three-quarter hand-gaze or b17c74efc7's downward diagonal. But it is the only frame that lands the prompted 'upper torso view' completely: both FX-sheathed arms edge-to-edge plus the strained chest at maximum scale-in-frame, where portrait rolls (054b04ecf6, b17c74efc7, e45009ec2a) crop coverage."
+    },
+    "expression_intensity": {
+      "verdict": "tie",
+      "evidence": "The favorite's wide-eyed open-mouth shock is a solid 4 and exceeds the prompt's 'a little bit surprised', but b17c74efc7 and 054b04ecf6 match or beat it on raw facial intensity, and e45009ec2a is the only genuinely underplayed sibling. The favorite's gaze is near-camera rather than at her own body — siblings 23bc5fcd7c and 414a2777ee have better-motivated eyelines."
+    },
+    "muscle_rendering_size": {
+      "verdict": "fav_better",
+      "evidence": "Largest overall mass in the batch while clothed — traps/delts/pecs visibly bigger than cb822b77b2 and e45009ec2a, with the top straining to contain the chest (over-spec direction the owner wants). Only topless a6eeeab614 rivals it, and 260cec85b4's comparable arms drift glossy/plastic where the favorite's stay photoreal."
+    },
+    "wardrobe_identity": {
+      "verdict": "fav_better",
+      "evidence": "Torn denim crop tank intact and consistent, tattoo sleeve stays on the left shoulder like the batch canon. Siblings break it: a6eeeab614 loses the top entirely (always_clothed violation), b17c74efc7 sprouts dense extra forearm tattoos, 260cec85b4 shifts skin toward CGI-plastic. Minor: the wristwatch most siblings show is not visible on the favorite."
+    },
+    "lighting": {
+      "verdict": "tie",
+      "evidence": "All twelve share the same golden-hour park key; the favorite's dense FX doubles as rim/fill that models the muscle gradient nicely, but 054b04ecf6 and b17c74efc7 have equally attractive warm portrait light. No sibling is unreadable."
+    },
+    "defect_absence": {
+      "verdict": "fav_better",
+      "evidence": "Favorite is clean: correct beat state (rock melted away), plausible anatomy, legible bubble, no drift. Siblings carry real defects — 054b04ecf6 and 99fa5a63 still show the rock/orb that the prompt says has melted, a6eeeab614 is topless, 414a2777ee's FX read as string-scribble overlays, 7422106a01's belly FX is a muddy occluding blob. Small background park-goers appear in every roll equally, so they don't discriminate."
+    },
+    "growth_payoff": {
+      "verdict": "fav_better",
+      "evidence": "For a trigger beat the payload is the surge, and the favorite commits hardest: dense electric arcs hugging the musculature of BOTH arms plus chest, hands pressed to the abdomen anticipating the coming growth, body already at maximum believable pre-growth mass. Siblings deliver wisps (414a2777ee, cb822b77b2) or an incoherent FX cloud (7422106a01) instead of a full-body surge."
+    }
+  },
+  "decisive_factors": [
+    "Densest, most coherent full-body energy FX — 'magic going all through her body' delivered literally on both arms + torso",
+    "Biggest in-frame mass with the wardrobe intact and straining (over-spec direction)",
+    "Correct beat state (rock fully melted) in a complete symmetric upper-torso money framing"
+  ],
+  "promptable_rule": "On trigger/surge beats, demand the energy FX sheath BOTH arms and the torso as dense arcs that hug the musculature (not wisps or threads), stage the full upper torso frontal at large scale with hands feeling the body, and explicitly state the catalyst object is already gone.",
+  "notes": "Contrarian finding: the pick was NOT driven by camera or face — the favorite is the flattest, most frontal composition among the strong candidates and its near-camera gaze is a QA eyeline flag; b17c74efc7 has the better face. What separates it is FX density + clothed mass + zero beat-state errors. Near-tie with b17c74efc7, which loses on portrait crop, forearm-tattoo drift, and weaker ribbon FX. Batch-wide observations: 2 of 12 rolls kept the rock the prompt says melted, 1 of 12 stripped the top (Flow wardrobe roulette), and every roll includes small background extras from the park env — acceptable here but against the no-extras default. The favorite's missing wristwatch is trivially consistent with L24 accessory suppression."
+}

@@ -9,6 +9,7 @@
 //   POST bridge.php  key,do=write,p,decisions=<json>[,cover] -> writes ratings
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
+require_once __DIR__ . '/inc/defects.php';
 header('Content-Type: application/json');
 header('X-Robots-Tag: noindex');
 function bout($a){ echo json_encode($a); exit; }
@@ -74,12 +75,63 @@ if ($do === 'write') {
         if (isset($d['rating']) && in_array($d['rating'], RATINGS, true)) $meta[$k]['rating'] = $d['rating'];
         if (array_key_exists('accepted', $d)) $meta[$k]['accepted'] = (bool)$d['accepted'];
         if (isset($d['group'])) $meta[$k]['group'] = mb_substr((string)$d['group'], 0, 60);
+        // additive tag merge (e.g. 'flow-fav' from the Flow favorite sync) — only ever ADDS,
+        // so owner-set tags and prior markers survive every re-sync
+        if (!empty($d['addtags']) && is_array($d['addtags'])) {
+            $cur = (array)($meta[$k]['tags'] ?? []);
+            foreach ($d['addtags'] as $t) { $t = mb_substr(trim((string)$t), 0, 40); if ($t !== '' && !in_array($t, $cur, true)) $cur[] = $t; }
+            $meta[$k]['tags'] = array_values(array_slice($cur, 0, 12));
+        }
         $n++;
     }
     images_save($id, $meta);
     $cover = basename((string)($_POST['cover'] ?? ''));
     if ($cover !== '') { $all = projects_all(); foreach ($all as &$pp) if (($pp['id']??'')===$id) $pp['cover'] = $cover; unset($pp); projects_save($all); }
     bout(['ok'=>true,'updated'=>$n]);
+}
+
+// ---- flowfav: mark Flow-favorited generations as picks (additive, owner-wins) --------
+// The owner ⭐-favorites a generation in Google Flow; the auto-sync extension posts the
+// favorited workflow ids here each cycle. Per matched panel (gen id first, file fallback):
+//   +tag 'flow-fav' (badge/filter in review.php + creator.php); rating unrated->good (an
+//   owner-set good/bad is never changed); accepted=true ONLY if no other panel in the same
+//   beat is already accepted — the owner's manual winner pick always wins. Idempotent, so
+//   re-posting the same favorites every sync is a no-op. Additive-only: un-favoriting in
+//   Flow never removes anything here.
+//   POST bridge.php  key, do=flowfav, p=<id>, items=<json [{gen}|{file}]>
+if ($do === 'flowfav') {
+    $items = json_decode((string)($_POST['items'] ?? '[]'), true);
+    if (!is_array($items)) bout(['ok'=>false,'error'=>'bad items']);
+    $res = s_with_lock(imeta_path($id), function($meta) use ($items) {
+        $byGen = []; $byFile = []; $accByGroup = [];
+        foreach ($meta as $k => $m) {
+            if (!empty($m['isref'])) continue;
+            if (($g = (string)($m['gen'] ?? '')) !== '') $byGen[$g][] = $k;
+            if (($f = (string)($m['file'] ?? '')) !== '') $byFile[$f] = $k;
+            if (!empty($m['accepted'])) $accByGroup[(string)($m['group'] ?? '')] = true;
+        }
+        $tagged = 0; $kept = 0; $keptSkipped = 0; $matched = 0;
+        foreach ($items as $it) {
+            if (!is_array($it)) continue;
+            $g = trim((string)($it['gen'] ?? '')); $f = basename((string)($it['file'] ?? ''));
+            $targets = [];
+            if ($g !== '' && isset($byGen[$g])) $targets = $byGen[$g];
+            elseif ($f !== '' && isset($byFile[$f])) $targets = [$byFile[$f]];
+            foreach ($targets as $k) {
+                $matched++;
+                $tags = (array)($meta[$k]['tags'] ?? []);
+                if (!in_array('flow-fav', $tags, true)) { $tags[] = 'flow-fav'; $meta[$k]['tags'] = array_values(array_slice($tags, 0, 12)); $tagged++; }
+                if (($meta[$k]['rating'] ?? 'unrated') === 'unrated') $meta[$k]['rating'] = 'good';
+                $grp = (string)($meta[$k]['group'] ?? '');
+                if (empty($meta[$k]['accepted'])) {
+                    if (empty($accByGroup[$grp])) { $meta[$k]['accepted'] = true; $accByGroup[$grp] = true; $kept++; }
+                    else $keptSkipped++;
+                }
+            }
+        }
+        return ['data'=>$meta, 'result'=>['matched'=>$matched,'tagged'=>$tagged,'kept'=>$kept,'keptSkipped'=>$keptSkipped]];
+    });
+    bout(['ok'=>true] + (array)$res);
 }
 // ---- ingest (used by the Flow → Studio extension) ----
 // resolve or create a project by name, return its id
@@ -364,10 +416,59 @@ if ($do === 'annotate') {
             'at'      => date('c'),
         ];
         if (isset($note['tags'])) $meta[$k]['tags'] = array_values(array_slice(array_map(fn($t)=>mb_substr((string)$t,0,40), (array)$note['tags']), 0, 12));
+        $esrc = (string)($note['src'] ?? ''); $esrc = in_array($esrc, ['qa','ggqa','gate','human'], true) ? $esrc : 'qa';
+        ck_defect_log_analysis($id, (string)$f, (string)($meta[$k]['group'] ?? ''), $meta[$k]['analysis'], $esrc);   // 🏴 shared defect log
         $n++;
     }
     images_save($id, $meta);
     bout(['ok'=>true,'annotated'=>$n]);
+}
+
+// ---- 🏴 flag (headless structured defect flag): repo QA gates / workers → image flags[] + defect log ----
+// Same contract as creator.php do=flag_defect, but key-gated for headless writers. src defaults to 'gate'.
+if ($do === 'flag') {
+    $f = basename((string)($_POST['f'] ?? $_POST['file'] ?? ''));
+    $row = ck_defect_row((string)($_POST['defect'] ?? ''));
+    $note = mb_substr(trim((string)($_POST['note'] ?? '')), 0, 500);
+    $src = in_array(($_POST['src'] ?? ''), ['qa','ggqa','gate','human'], true) ? (string)$_POST['src'] : 'gate';
+    if ($f === '' || !$row) bout(['ok'=>false,'error'=>'file + a valid defect id required']);
+    $panel = ''; $found = false;
+    foreach (images_all($id) as $m) if (($m['file'] ?? '') === $f && empty($m['isref'])) { $found = true; $panel = (string)($m['group'] ?? ''); break; }
+    if (!$found) bout(['ok'=>false,'error'=>'no such panel']);
+    $flag = ['ts'=>date('c'), 'by'=>mb_substr((string)($_POST['by'] ?? 'bridge'), 0, 40), 'defect'=>$row['id'], 'slug'=>$row['slug'], 'note'=>$note, 'src'=>$src];
+    s_with_lock(imeta_path($id), function($meta) use ($f, $flag) {
+        foreach ($meta as &$mm) if (($mm['file'] ?? '') === $f) { $mm['flags'] = array_merge((array)($mm['flags'] ?? []), [$flag]); break; }
+        unset($mm); return ['data'=>$meta, 'result'=>true];
+    });
+    ck_defect_event(['project'=>$id, 'file'=>$f, 'panel'=>$panel, 'defect'=>$row['id'], 'src'=>$src, 'by'=>$flag['by'], 'note'=>$note]);
+    bout(['ok'=>true, 'file'=>$f, 'defect'=>$row['id']]);
+}
+
+// ---- 🔎 qascan (headless QA scan): run the ck_ai_qa defect scan on ONE panel ----
+// Same engine + context as creator.php's do=qascan_one (engine lives in inc/defects.php).
+// Writes the image `analysis` + defect-log events (registry IDs). Uses the studio AI key.
+if ($do === 'qascan') {
+    if (!ck_ai_cfg()) bout(['ok'=>false,'error'=>'no AI key configured (add it in the references workspace)']);
+    $f = basename((string)($_POST['f'] ?? $_GET['f'] ?? ''));
+    if ($f === '') bout(['ok'=>false,'error'=>'f required']);
+    $im = null; foreach (images_all($id) as $m) if (($m['file'] ?? '') === $f && empty($m['isref'])) { $im = $m; break; }
+    if (!$im) bout(['ok'=>false,'error'=>'no such panel']);
+    $c = s_read(SDATA . '/creator-' . $id . '.json', []);
+    $match = ck_qa_match($c, $im);
+    $an = ck_ai_qa(project_dir($id) . '/' . $f, [
+        'cast'     => ck_qa_cast($c),
+        'panel'    => $match['panel'] ?? null,
+        'stage'    => $match['stage'] ?? '',
+        'wardrobe' => $c['wardrobe'] ?? '',
+    ]);
+    if ($an === null) bout(['ok'=>false,'file'=>$f,'error'=>'unreadable (vision refused, no curl, or file missing)']);
+    $an['at'] = date('c');
+    s_with_lock(imeta_path($id), function($meta) use ($f, $an) {
+        foreach ($meta as &$mm) if (($mm['file'] ?? '') === $f) { $mm['analysis'] = $an; break; }
+        unset($mm); return ['data'=>$meta, 'result'=>true];
+    });
+    ck_defect_log_analysis($id, $f, (string)($im['group'] ?? ''), $an, 'qa');
+    bout(['ok'=>true, 'file'=>$f, 'defects'=>count($an['defects']), 'verdict'=>$an['verdict'], 'analysis'=>$an]);
 }
 
 // ---- worker (the generation engine) ---------------------------------------

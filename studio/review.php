@@ -18,6 +18,7 @@
 // recorded" state until a re-sync backfills them.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
+require_once __DIR__ . '/inc/defects.php';
 require_auth();
 
 $id   = preg_replace('/[^a-z0-9-]/', '', (string)($_GET['p'] ?? ''));
@@ -41,6 +42,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'note') {
         return ['data' => $cc, 'result' => true];
     });
     echo json_encode(['ok' => true, 'note' => $note]);
+    exit;
+}
+
+// ---- 🏴 defect-flag endpoint (JSON): structured defect → image flags[] + the global defect log ----
+// Registry IDs from inc/defect-taxonomy.php; same contract as creator.php's do=flag_defect.
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'flag_defect') {
+    header('Content-Type: application/json');
+    if (!csrf_ok()) { echo json_encode(['ok' => false, 'error' => 'Bad token — reload.']); exit; }
+    $file = basename((string)($_POST['file'] ?? ''));
+    $row  = ck_defect_row((string)($_POST['defect'] ?? ''));
+    $note = mb_substr(trim((string)($_POST['note'] ?? '')), 0, 500);
+    if ($file === '' || !$row) { echo json_encode(['ok' => false, 'error' => 'panel file + a valid defect id required']); exit; }
+    $panel = ''; $found = false;
+    foreach (images_all($id) as $m) if (($m['file'] ?? '') === $file && empty($m['isref'])) { $found = true; $panel = (string)($m['group'] ?? ''); break; }
+    if (!$found) { echo json_encode(['ok' => false, 'error' => 'not a panel in this project']); exit; }
+    $flag = ['ts' => date('c'), 'by' => current_studio_user(), 'defect' => $row['id'], 'slug' => $row['slug'], 'note' => $note, 'src' => 'human'];
+    s_with_lock(imeta_path($id), function ($meta) use ($file, $flag) {
+        foreach ($meta as &$mm) if (($mm['file'] ?? '') === $file) { $mm['flags'] = array_merge((array)($mm['flags'] ?? []), [$flag]); break; }
+        unset($mm); return ['data' => $meta, 'result' => true];
+    });
+    ck_defect_event(['project' => $id, 'file' => $file, 'panel' => $panel, 'defect' => $row['id'], 'src' => 'human', 'by' => current_studio_user(), 'note' => $note]);
+    echo json_encode(['ok' => true, 'file' => $file, 'defect' => $row['id'], 'label' => $row['label']]);
     exit;
 }
 
@@ -122,13 +145,19 @@ foreach ($panels as $im) {
         'prompt'   => (string)($im['prompt'] ?? ''),
         'gen'      => (string)($im['gen'] ?? ''),
         'orig'     => (string)($im['orig'] ?? ''),
+        // Flow-sourced panel? Only these can be backfilled by "Flow Auto-Sync (Sync now)".
+        // Flow imports carry an orig like "flow-030.jpg" and no worker/Higgsfield gen id;
+        // importer / transform / adjust outputs do not, so they must NOT be told to re-sync Flow.
+        'flow'     => (empty($im['gen']) && preg_match('/^flow-/i', (string)($im['orig'] ?? ''))) ? 1 : 0,
         'full'     => $imgUrl($f),
         'refs'     => $rused,
         'notes'    => $notes,
         'defects'  => $defects,
+        'scanned'  => !empty($an['verdict']),
         'caption'  => (string)($an['caption'] ?? ''),
         'tier'     => (string)($an['tier'] ?? ''),
         'newest'   => ($f === $newestFile),
+        'flowfav'  => in_array('flow-fav', (array)($im['tags'] ?? []), true),   // ⭐ owner favorited this gen in Google Flow (synced via bridge do=write addtags)
     ];
 }
 $pname = (string)($proj['name'] ?? $id);
@@ -176,7 +205,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-new{position:absolute;top:6px;right:6px;background:var(--teal);color:#04130d;font:800 9.5px/1 Inter,sans-serif;padding:3px 7px;border-radius:999px;letter-spacing:.04em}
 .rv-flags{position:absolute;bottom:34px;left:6px;display:flex;gap:4px}
 .rv-flag{font-size:11px;background:rgba(8,9,12,.8);border-radius:6px;padding:2px 5px;line-height:1.3}
-.rv-flag.def{color:#f3a3a2}.rv-flag.note{color:#cdb6ff}
+.rv-flag.def{color:#f3a3a2}.rv-flag.note{color:#cdb6ff}.rv-flag.fav{color:#ffd166}
 .rv-okmark{position:absolute;bottom:34px;right:6px;background:var(--teal);color:#04130d;font:800 11px/1 Inter,sans-serif;width:20px;height:20px;border-radius:50%;display:none;align-items:center;justify-content:center}
 .rv-tile.kept .rv-okmark{display:flex}
 /* quick rate bar (hover) */
@@ -219,6 +248,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-chip.bad{background:rgba(226,75,74,.18);color:#f3a3a2}
 .rv-chip.kept{background:var(--accent);color:var(--accent-ink)}
 .rv-chip.ver{background:#3a2d5e;color:#cdb6ff}
+.rv-chip.fav{background:rgba(255,209,102,.16);color:#ffd166}
 .rv-ctrls{display:flex;gap:7px;flex-wrap:wrap}
 .rv-ctrls button{flex:1;min-width:64px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font:600 12.5px/1 Inter,sans-serif;padding:9px 6px;border-radius:8px;cursor:pointer}
 .rv-ctrls button:hover{border-color:#3c4052}
@@ -357,6 +387,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     <button class="rv-tog" id="tognotes" data-f="notes">💬 Has notes</button>
     <button class="rv-tog" id="togdlg" data-f="dialogue">🗨 Has dialogue</button>
     <button class="rv-tog" id="togdef" data-f="defects">⚑ Flagged defects</button>
+    <button class="rv-tog" id="togfav" data-f="flowfav" title="Only the panels the owner ⭐ favorited in Google Flow">⭐ Flow favs</button>
     <span class="rv-spacer"></span>
     <span class="rv-count" id="rvcount"><b><?= $galN ?></b> panels · <b><?= $accN ?></b> approved</span>
     <div class="rv-grp"><span class="lab">Size</span>
@@ -393,12 +424,14 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
             data-rating="<?= h($rt) ?>" data-accepted="<?= $kp ? '1' : '0' ?>"
             data-notes="<?= $nN ?>" data-defects="<?= $dN ?>"
             data-hasprompt="<?= $d['prompt'] !== '' ? '1' : '0' ?>" data-hasrefs="<?= $d['refs'] ? '1' : '0' ?>"
+            data-flowfav="<?= $d['flowfav'] ? '1' : '0' ?>"
             tabindex="0">
       <span class="rv-beat"><?= h($d['beat'] !== '' ? $d['beat'] : '—') ?></span>
       <?php if ($d['newest']): ?><span class="rv-new">NEW</span>
       <?php elseif ($d['derived']): ?><span class="rv-vbadge">v<?= (int)$d['ver'] ?></span><?php endif; ?>
       <img loading="lazy" src="<?= h($imgUrl($f, true)) ?>" alt="">
       <div class="rv-flags">
+        <?php if ($d['flowfav']): ?><span class="rv-flag fav" title="⭐ Flow favorite — the owner's pick in Google Flow">⭐</span><?php endif; ?>
         <?php if ($dN): ?><span class="rv-flag def" title="flagged defects">⚑ <?= $dN ?></span><?php endif; ?>
         <?php if ($nN): ?><span class="rv-flag note" title="notes">💬 <?= $nN ?></span><?php endif; ?>
       </div>
@@ -428,6 +461,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   <aside class="rv-info" id="lbinfo"></aside>
 </div>
 
+<script>window.DEFECT_OPTIONS = <?= json_encode(ck_defect_options(), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
 <script id="detaildata" type="application/json"><?= json_encode($detail, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE) ?: '{}' ?></script>
 <script>
 (function(){
@@ -441,7 +475,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   function el(tag, cls, txt){ var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
 
   // ---------- sort + filter (client-side; the grid holds every panel) ----------
-  var state = { sort:'story', appr:'all', rate:'all', notes:false, defects:false, dialogue:false, q:'' };
+  var state = { sort:'story', appr:'all', rate:'all', notes:false, defects:false, dialogue:false, flowfav:false, q:'' };
   var SEARCH = {};   // file -> lowercased searchable blob (beat + prompt + notes); built by initPanels()
   function applySort(){
     if(!grid) return;
@@ -463,6 +497,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
       if(state.rate==='unrated' && x.dataset.rating!=='unrated') ok=false;
       if(state.notes   && (+x.dataset.notes)<1)   ok=false;
       if(state.defects && (+x.dataset.defects)<1) ok=false;
+      if(state.flowfav && x.dataset.flowfav!=='1') ok=false;
       if(state.dialogue && x.dataset.dialogue!=='1') ok=false;
       if(state.q){ var blob=SEARCH[x.dataset.file]||''; if(blob.indexOf(state.q)<0) ok=false; }
       x.classList.toggle('rv-hidden', !ok);
@@ -490,6 +525,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   tog('tognotes','notes', applyFilter);
   tog('togdlg','dialogue', applyFilter);
   tog('togdef','defects', applyFilter);
+  tog('togfav','flowfav', applyFilter);
   var fitBtn=document.getElementById('togfit');
   if(fitBtn) fitBtn.addEventListener('click', function(){ fitBtn.classList.toggle('on'); grid.classList.toggle('fit', fitBtn.classList.contains('on')); writeHash(); });
   var rf=document.getElementById('rvrefresh'); if(rf) rf.addEventListener('click', function(){ location.reload(); });
@@ -618,10 +654,24 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     return out;
   }
   function wordCount(s){ return (s.trim().match(/\S+/g)||[]).length; }
+  // A quoted span is real lettering ONLY when a speech/thought/caption/bubble/balloon/SFX cue
+  // sits right next to it — not merely somewhere in the prompt. This stops a stray quoted word
+  // (e.g. a quoted style term) from poisoning the "has dialogue" filter + caption. We look in the
+  // ~32 chars before the opening quote and ~12 after the closing quote, but CLIP each window at the
+  // nearest neighbouring quote char so a *previous* span's cue can't leak in and vouch for this one.
+  var DLG_CUE=/speech|thought|bubble|balloon|caption|lettering|\btext\b|\bsfx\b|sign(?:\s+reading)?|banner|placard|reads?\b|\bsays?\b|saying|shouts?|yells?|whispers?|captioned|label(?:ed|led)?/i;
   function extractDialogue(text){
-    if(!/bubble|caption|lettering|\btext\b|\bsfx\b|sign reading|banner|\bsays\b|\breads\b/i.test(text)) return [];
-    var lines=[], re=/[“"]([^“”"]{1,240})[”"]/g, m, seen={};
-    while((m=re.exec(text))){ var t=m[1].trim(); if(t && /[a-z0-9]/i.test(t) && !seen[t]){ seen[t]=1; lines.push(t); } }
+    if(!DLG_CUE.test(text)) return [];
+    var lines=[], re=/[“"]([^“”"]{1,240})[”"]/g, m, seen={}, quoteChar=/[“”"]/;
+    while((m=re.exec(text))){
+      var t=m[1].trim(); if(!t || !/[a-z0-9]/i.test(t) || seen[t]) continue;
+      var b0=Math.max(0, m.index-32), before=text.slice(b0, m.index);
+      var bq=before.search(/[“”"][^“”"]*$/); if(bq>=0) before=before.slice(bq+1);   // drop past a prior quote
+      var after=text.slice(re.lastIndex, re.lastIndex+12);
+      var aq=after.search(quoteChar); if(aq>=0) after=after.slice(0, aq);            // stop at the next quote
+      if(!DLG_CUE.test(before) && !DLG_CUE.test(after)) continue;   // no nearby cue -> not balloon text
+      seen[t]=1; lines.push(t);
+    }
     return lines;
   }
   function parsePrompt(text){
@@ -678,6 +728,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     if(d.rating==='good') meta.appendChild(el('span','rv-chip good','approved'));
     else if(d.rating==='bad') meta.appendChild(el('span','rv-chip bad','disapproved'));
     if(d.accepted) meta.appendChild(el('span','rv-chip kept','★ kept'));
+    if(d.flowfav) meta.appendChild(el('span','rv-chip fav','⭐ Flow favorite'));
     if(d.newest) meta.appendChild(el('span','rv-chip good','newest'));
     lbinfo.appendChild(meta);
     if(d.adjust){ var aj=el('div','rv-muted','✎ '+d.adjust); lbinfo.appendChild(aj); }
@@ -719,7 +770,10 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     if(d.prompt){ ph.appendChild(copyBtn('⧉ copy', d.prompt)); }
     ps.appendChild(ph);
     if(d.prompt){ renderPromptBody(ps, d.prompt, ph); }
-    else { var pe=el('div','rv-prompt empty','Prompt not recorded for this panel — it was generated before prompt capture. Re-run the Flow Auto-Sync (Sync now) to backfill it.'); ps.appendChild(pe); }
+    else { var pmsg = d.flow
+        ? 'Prompt not recorded for this panel — it was generated before prompt capture. Re-run the Flow Auto-Sync (Sync now) to backfill it.'
+        : 'Prompt not recorded for this panel — it wasn’t captured when this panel was generated.';
+      var pe=el('div','rv-prompt empty', pmsg); ps.appendChild(pe); }
     lbinfo.appendChild(ps);
 
     // REFERENCES USED
@@ -773,6 +827,21 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     ns.appendChild(nb);
     lbinfo.appendChild(ns);
 
+    // 🏴 DEFECT FLAG — structured, feeds the shared registry defect log (vs the free-text note above)
+    var fs=el('div','rv-sec'); fs.appendChild(el('h3',null,'🏴 Flag a defect'));
+    var fsel=document.createElement('select'); fsel.id='lbflagsel';
+    fsel.innerHTML='<option value="">defect class…</option>'+(window.DEFECT_OPTIONS||'');
+    fsel.style.cssText='width:100%;margin:4px 0;background:#191b23;color:#cdd0d8;border:1px solid #2E3140;border-radius:8px;padding:6px 8px;font-size:12px';
+    var fnote=document.createElement('input'); fnote.type='text'; fnote.maxLength=500; fnote.id='lbflagnote';
+    fnote.placeholder='optional note — what you saw';
+    fnote.style.cssText='width:100%;margin:2px 0 6px;background:#191b23;color:#cdd0d8;border:1px solid #2E3140;border-radius:8px;padding:6px 8px;font-size:12px';
+    var frow=el('div','row'); var fbtn=el('button','btn','🏴 Flag'); fbtn.type='button';
+    var fhint=el('span','rv-muted',''); fhint.id='lbflaghint';
+    fbtn.addEventListener('click', function(){ submitFlag(file, fsel, fnote, fhint); });
+    frow.appendChild(fbtn); frow.appendChild(fhint);
+    fs.appendChild(fsel); fs.appendChild(fnote); fs.appendChild(frow);
+    lbinfo.appendChild(fs);
+
     var link=el('a','rv-link','✎ Refine this image in the cockpit →'); link.href='creator.php?p='+encodeURIComponent(PID);
     var ed = d.prompt ? editablePrompt(d.prompt) : '';
     if(ed){ link.textContent='✎ Copy editable prompt → tweak in cockpit'; link.title='Copies the editable prompt (no style/quality boilerplate) to your clipboard, then opens the cockpit so you can paste + tweak.';
@@ -789,6 +858,17 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     notes.forEach(function(n){ var w=el('div','rv-note'); w.appendChild(el('div','nt', n.text||''));
       var when=''; try{ if(n.ts){ when=new Date(n.ts).toLocaleString(); } }catch(e){}
       w.appendChild(el('div','nm', [n.by, when].filter(Boolean).join(' · '))); container.appendChild(w); });
+  }
+  function submitFlag(file, sel, note, hint){
+    var d=sel.value; if(!d){ hint.textContent='pick a defect class'; sel.focus(); return; }
+    hint.textContent='saving…';
+    fetch('review.php?p='+encodeURIComponent(PID), {method:'POST', headers:{'X-CSRF':CSRF},
+        body:new URLSearchParams({p:PID, do:'flag_defect', file:file, defect:d, note:(note.value||''), csrf:CSRF})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j&&j.ok){ hint.textContent='🏴 flagged '+j.defect; sel.value=''; note.value='';
+          setTimeout(function(){ hint.textContent=''; }, 1600); }
+        else { hint.textContent=(j&&j.error)||'failed'; } })
+      .catch(function(){ hint.textContent='failed'; });
   }
   function submitNote(file, ta, hint){
     var txt=(ta.value||'').trim(); if(!txt){ ta.focus(); return; }
@@ -883,6 +963,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     if(state.rate!=='all') p.push('rate='+state.rate);
     if(state.notes) p.push('notes=1');
     if(state.defects) p.push('defects=1');
+    if(state.flowfav) p.push('flowfav=1');
     var sz=grid?parseInt(grid.style.getPropertyValue('--tile'),10):0; if(sz && sz!==200) p.push('size='+sz);
     if(grid && grid.classList.contains('fit')) p.push('fit=1');
     try{ history.replaceState(null,'', p.length?('#'+p.join('&')):(location.pathname+location.search)); }catch(e){}
@@ -895,6 +976,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     if(q.rate){ state.rate=q.rate; setSeg('rateseg',q.rate); }
     state.notes=q.notes==='1'; setTog('tognotes',state.notes);
     state.defects=q.defects==='1'; setTog('togdef',state.defects);
+    state.flowfav=q.flowfav==='1'; setTog('togfav',state.flowfav);
     if(q.size && grid){ var sb=document.querySelector('#sizeseg button[data-size="'+q.size+'"]'); if(sb){ setSeg('sizeseg',q.size); grid.style.setProperty('--tile', q.size+'px'); } }
     if(q.fit==='1' && grid){ var fb=document.getElementById('togfit'); if(fb) fb.classList.add('on'); grid.classList.add('fit'); }
   }
@@ -946,20 +1028,20 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   (function(){
     var btn=document.getElementById('scanbtn'), prog=document.getElementById('actprog');
     if(!btn) return;
-    btn.addEventListener('click', async function(){
+    async function scanFiles(files){
       if(btn.disabled) return;
-      var list=visTiles(); if(!list.length){ if(prog) prog.textContent='nothing shown to scan'; return; }
+      if(!files.length){ if(prog) prog.textContent='nothing to scan'; return; }
       btn.disabled=true; var done=0, flagged=0, fail=0;
-      for(var i=0;i<list.length;i++){
-        var file=list[i].dataset.file;
-        if(prog) prog.textContent='🔎 scanning '+(done+1)+'/'+list.length+'…';
+      for(var i=0;i<files.length;i++){
+        var file=files[i];
+        if(prog) prog.textContent='🔎 scanning '+(done+1)+'/'+files.length+'…';
         try{
           var r=await fetch('creator.php?p='+encodeURIComponent(PID),{method:'POST',headers:{'X-CSRF':CSRF},
             body:new URLSearchParams({p:PID,do:'qascan_one',file:file,csrf:CSRF})});
           var j=await r.json();
           if(j&&j.ok&&j.analysis){
             var defs=j.analysis.defects||[]; var d=DATA[file];
-            if(d){ d.defects=defs; if(j.analysis.caption) d.caption=j.analysis.caption; if(j.analysis.tier) d.tier=j.analysis.tier; }
+            if(d){ d.defects=defs; d.scanned=true; if(j.analysis.caption) d.caption=j.analysis.caption; if(j.analysis.tier) d.tier=j.analysis.tier; }
             var t=tileOf(file);
             if(t){ t.dataset.defects=String(defs.length); var fl=t.querySelector('.rv-flags');
               if(fl){ var df=fl.querySelector('.def'); if(defs.length){ if(!df){ df=el('span','rv-flag def'); fl.insertBefore(df, fl.firstChild); } df.textContent='⚑ '+defs.length; } else if(df){ df.remove(); } } }
@@ -971,7 +1053,19 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
       }
       if(prog) prog.textContent='✓ scanned '+done+' · '+flagged+' flagged'+(fail?(' · '+fail+' failed'):'');
       applyFilter(); btn.disabled=false;
+    }
+    btn.addEventListener('click', function(){
+      scanFiles(visTiles().map(function(t){ return t.dataset.file; }).filter(Boolean));
     });
+    // 🔎 AUTO-SCAN on open (2026-07-18): un-scanned panels are scanned automatically so
+    // defects show the moment the page opens. Persisted analyses mean only NEW panels pay.
+    if(!btn.disabled){
+      var autoUn=Object.keys(DATA).filter(function(f){ return DATA[f] && !DATA[f].scanned; });
+      // cap: bulk-archive projects must NOT auto-burn thousands of scans on open —
+      // above the cap scanning stays manual (the 🔎 button / headless bridge sweep).
+      if(autoUn.length && autoUn.length <= 120) setTimeout(function(){ scanFiles(autoUn); }, 700);
+      else if(autoUn.length > 120 && prog){ prog.textContent = autoUn.length + ' unscanned — auto-scan skipped above 120; use the 🔎 button.'; }
+    }
   })();
 
   // C — keyboard triage on the grid: arrows move focus, G approve / B reject / K keep

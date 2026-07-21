@@ -1,0 +1,27 @@
+{
+ "beat": "Beat 20",
+ "project": "eva",
+ "favorite": "3f024c506b.jpg",
+ "blind_top3": [
+  {"file": "3f024c506b.jpg", "reason": "Only sheet that delivers the full requested upgrade visibly — tank cropped to expose ripped abs + obliques, thin waist, capped shoulders, big chest/arms — across four consistent, fully-clothed views with the spec sidebar intact."},
+  {"file": "4c1b92b9c3.jpg", "reason": "Biggest raw arm/back mass in the batch with a clean 4-view layout and a sidebar that echoes the ask (narrow waist, massively thick arms), but abs stay mostly covered so the 'ripped abs/obliques' clause reads weaker."},
+  {"file": "d5cead36a9.jpg", "reason": "Huge, view-consistent physique with wardrobe intact in all four views; knocked down by extreme stringy vascularity on quads/forearms that reads gnarly rather than beautiful."}
+ ],
+ "blind_agrees_with_favorite": true,
+ "dimensions": {
+  "camera_composition": {"verdict": "fav_better", "evidence": "For a turnaround, composition = view coverage + template integrity. The favorite has four aligned orthographic views (front, left profile, back, right profile/3q) on the height chart with the sidebar intact. Siblings degrade this: 312ed94e27 drops to 3 views with a flex pose, 74a9b4fca8 has no true side profile, 84c42e934c/d07dde7b73/bef0f947bb let figures overlap the spec panel, and 862c811ec8 loses the entire sidebar."},
+  "expression_intensity": {"verdict": "tie", "evidence": "Every sheet in the batch uses the same neutral slight-smile reference face; a turnaround is a neutral-expression document, so no image separates on this axis."},
+  "muscle_rendering_size": {"verdict": "fav_better", "evidence": "On raw arm circumference 4c1b92b9c3 and 74a9f4-class sheets equal or beat the favorite, but the favorite is the only top-mass sheet that lands the WHOLE requested spec simultaneously: exposed ripped abs and obliques, visibly thinner waist, capped delts, and a bigger chest. Siblings like 22e71d9ca0/7516483eb4 hide the abs under the tank; 2033a14283 is plainly smaller and softer."},
+  "wardrobe_identity": {"verdict": "fav_better", "evidence": "Favorite keeps tank + shorts + left-shoulder tattoo + watch identical in all four views. Siblings drift hard: a04a7c80dc, 5c534748cd, bd990ce6a5, and b67627777c render topless backs on rear views; bd990ce6a5/74a9b4fca8 grow a full-sleeve tattoo; d07dde7b73 invents sunglasses and a choker. Caveat: the favorite's tank is cropped higher (underboob) than the established costume — mild drift traded for the requested ab visibility."},
+  "lighting": {"verdict": "tie", "evidence": "Uniform flat studio ref-sheet lighting across the batch; the favorite has marginally stronger AO modeling on the abs/delts but nothing decisive over 4c1b92b9c3 or d5cead36a9."},
+  "defect_absence": {"verdict": "fav_better", "evidence": "Favorite has clean anatomy in all views and, notably, a correct second-from-left side profile (the corruption the prompt asked to fix); its only flaw is minor sidebar garble ('ATTEST: Upgraded Super-Strength', truncated 'TATTOO: Upgraded Super-'). Siblings carry heavier defects: lightning VFX on c180556045/d08e0f0138, duplicated ACCESSORIES block on 8925e5da90, garbled/overlapped sidebars on bef0f947bb/a04a7c80dc, missing sidebar on 862c811ec8, missing views on 312ed94e27."},
+  "growth_payoff": {"verdict": "fav_better", "evidence": "The upgrade reads as a clear stage-jump in every one of the favorite's four silhouettes, and the exposed ab/oblique detail is the money element the prompt asked for. Only 4c1b92b9c3, 74a9b4fca8, and d5cead36a9 rival its mass, and each pays for it with a defect (covered abs, missing profile + sleeve-tattoo drift, or excessive vascularity respectively)."}
+ },
+ "decisive_factors": [
+  "Full prompt spec made VISIBLE: ripped abs + obliques + thin waist + big shoulders/chest all readable at once (tank cropped to expose the midsection)",
+  "Template integrity: intact spec sidebar and four consistent, fully-clothed views while siblings lost views, overlapped the panel, or went topless on rear views",
+  "No invented elements: no lightning VFX, no accessory drift, no full-sleeve tattoo mutation"
+ ],
+ "promptable_rule": "When upgrading a character turnaround, make the requested body evidence visible (crop/cut the garment so abs and obliques actually show) and hard-lock wardrobe, tattoo placement, and view count identical across all views — reject sheets that drop a view, strip clothing on rear views, or add VFX/accessories.",
+ "notes": "Blind #1 matched the owner's pick. The favorite is not flawless: its sidebar fields are garbled ('ATTEST:' as a label, truncated tattoo line) and its higher tank crop is technically costume drift from the established cut-off tank — the owner appears to have accepted that trade for ab visibility, which itself is signal (payload visibility outranks strict costume fidelity on a ref sheet). Nearest miss is 4c1b92b9c3, which beats the favorite on raw arm/back mass with a clean layout but keeps the abs covered. bd990ce6a5's front figure nearly duplicates the favorite's exposed-abs look but its sheet breaks on a topless back view and sleeve-tattoo drift. Batch-wide failure taxonomy worth logging: topless rear views (4 sheets), sidebar corruption/overlap (5), invented VFX or accessories (3), lost or wrong views (2), under-muscled regression (2)."
+}

@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-20 (⭐ Flow-favorite pick loop: Flow favorites → Studio pick markers + eva taste profile)
+
+### Added
+
+- **⭐ Flow-favorite → Studio pick loop (LIVE).** The owner's ⭐ favorites in Google Flow now sync into the Studio as the pick marker. Flow side: `favorited:true` lives on `projectContents.workflows[].metadata` (workflow `name` = the bridge `gen` id; `primaryMediaId` = the picked output). Studio side: new key-gated **`bridge.php do=flowfav`** (items=`[{gen}|{file}]`) — additive + idempotent: adds tag `flow-fav`, `unrated→good`, and `accepted=true` ONLY when the beat has no owner-kept winner; an owner's manual rating always wins and un-favoriting never removes anything. `do=write` also gained an additive `addtags` field. UI: review.php ⭐ tile badge + **"⭐ Flow favs" toolbar filter** (hash `#flowfav=1`) + detail chip; creator.php ⭐ `.ck-favbadge` on board tiles. flow-studio-autosync **v1.2.0** posts the favorited gen ids every sync cycle (skips unchanged sets). Backfilled: **eva 7/7** favorites (Beat 18 conflict resolved owner-first: the in-Studio keep `65a129a178.jpg` stayed the winner; Flow fav `ae80ee28a5.jpg` got tag+approved only) and **muller 1** (Beat 95). Deploy followed the fetch-live protocol; all DEPLOY-NOTES feature markers verified post-deploy; new markers appended there.
+- **`research/picks-profile-eva.md` — the "why these win" taste profile.** 8 favorites vs all 114 beat siblings, graded by 8 fresh-context subagents against the canonical corpus rubric + cinematic-framing + qa-checklist (blind rank first, then revealed comparison; raw verdicts in `research/picks-profile-eva-verdicts/`). Headlines: camera/scale-in-frame is the strongest pick driver (6/8, never worse); payload density, canon fidelity, and cleanliness follow; **expression intensity NEVER drove a pick (0/8, 3 fav_worse)** — a generation mandate but only a selection tiebreaker; Beat 18 exposes two owner value systems (Flow favoriting = rendering beauty; Studio review picking = storytelling). Includes prompt-able per-beat-type rules, 3 proposed lesson candidates (aerial-prose failure, golden-hour raking key default, one-SFX rule), and systemic defects to feed the genspec (wristwatch batch-wide, park extras, wardrobe roulette). 56 favorites sit in never-synced Flow projects (54 in the Jul-11 "Esmeralda" project) — flagged for a Whole-project send; the growcomics-account sweep is still open.
+
 ## 2026-07-19 (3DMC Studio Tools v2.2.2 — prompt-insert rewritten to Slate's own API; verified live)
 
 ### Fixed
