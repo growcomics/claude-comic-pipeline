@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "lower-center/right, lying face-down on the bed", "pose": "prone on the bed, a white towel draped over her lower body/legs, one arm bent up near her head; her other hand is tucked beneath her, not visible in frame -- exactly two hands, both her own, one out of sight", "expression": "relaxed, eyes closed or half-closed", "turnaround_key": "turnaround_18in"},
+  "mark": {"position": "upper-left, kneeling above Heather", "pose": "kneeling on the bed, both hands pressed onto Heather's upper back giving a massage; exactly two hands, both his own", "expression": "focused, gentle", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "Mark is upright/kneeling above Heather, who is prone beneath him -- a clear over-under composition, not side-by-side",
+    "bedroom-c set, tight crop -- wood nightstand with a lit lamp and a massage-oil bottle plus folded towels visible",
+    "total hands in frame: 4 (one of Heather's is not visible, tucked beneath her -- do not render a visible extra hand there)"
+  ],
+  "lighting": "warm lamp glow, evening, dim"
+}

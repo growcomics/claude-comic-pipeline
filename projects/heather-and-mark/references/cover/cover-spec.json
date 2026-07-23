@@ -1,0 +1,16 @@
+{
+ "title": "Heather & Mark",
+ "kicker": "3D MUSCLE COMICS PRESENTS",
+ "pre_image": "panels/004.jpeg",
+ "post_image": "panels/054.jpeg",
+ "accent": "#F0B87A",
+ "pre_focus": 0.5,
+ "pre_focus_y": 0.22,
+ "pre_zoom": 1.0,
+ "post_focus": 0.35,
+ "post_focus_y": 0.25,
+ "post_zoom": 1.25,
+ "post_brightness": 0.6,
+ "post_blur": 2,
+ "_note": "pre=004 warm two-shot (crop below its caption); post=054 peak dumbbell curl as the glowing tease. Exact lockup composited in post."
+}

@@ -1,0 +1,118 @@
+--- a/projects/heather-and-mark/qa/compose.py
++++ b/projects/heather-and-mark/qa/compose.py
+@@ -7,6 +7,7 @@
+   python3 qa/compose.py --job sheet:deedee-t8-destroya
+   python3 qa/compose.py --job sheet:dana-t9-ANCHOR-SWAP --pass pass_1
+   python3 qa/compose.py --job page:p20-01
++  python3 qa/compose.py --job edit:009
+ 
+ Receipts land in qa/receipts/<job>.receipt.json (consumed by audit + bank).
+ 
+@@ -14,6 +15,15 @@
+ existence check (continuity_refs must be banked WITH chain), scene-ladder rung
+ enforcement by camera distance, anti-reference-bleed negatives, progressive
+ stage-direction rule, torn-state coverage insurance, pill-verify reminder.
++
++v3 (owner-reviewed, heather-and-mark fix-pass): edit:<panel_id> job kind for
++i2i retouch of an ALREADY-ACCEPTED panel — baked-lettering correction and/or a
++narrow anatomy fix, sourced entirely from fix-jobs.json (project root). Unlike
++sheet:/page:, this kind does not touch shotlist.json/ref-ledger.json — it
++requires only a fix-jobs.json entry for the panel and the source panel file
++itself. Composes the composition-lock + L19 scope-bounded re-lettering pattern
++(skills/comic-production/references/cinematic-framing.md "Lighting-pass
++fragments"; skills/comic-production/references/lessons-learned.md L19).
+ """
+ import argparse, hashlib, json, os, re, sys
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+@@ -23,11 +33,22 @@
+          "NOT illustrated, NOT anime, NOT cartoon, NOT 2D.")
+ NEG = "No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands."
+ NEG_PAGE_BLEED = " No mannequin, no reference silhouette figure, no grid lines, no model-sheet layout."
++# edit: jobs correct baked lettering, so — unlike NEG above — this does NOT ban text/bubbles.
++NEG_EDIT = "No extra limbs, no extra hands, no new characters, no changes outside the corrected region."
+ CAMERA_DISTANCE = {
+     "wide": "wide", "establish": "wide", "splash": "wide", "birds-eye": "wide",
+     "full": "medium", "cowboy": "medium", "medium": "medium", "over-shoulder": "medium",
+     "mcu": "close", "ecu": "close", "close": "close",
+ }
++# L19 bubble-shape vocabulary (lessons-learned.md L19), keyed by substring match against
++# a corrected_dialogue entry's bubble_type.
++BUBBLE_SHAPE = {
++    "shout": "JAGGED-EDGED starburst comic shout bubble with a bold 3-4 pixel black outline",
++    "thought": "cloud-shaped thought bubble with a trail of small circles, bold 3-4 pixel black outline",
++    "whisper": "rounded oval speech balloon with a DASHED bold 3-4 pixel black outline",
++    "caption": "yellow rounded-corner caption rectangle with a bold 3-4 pixel black outline",
++    "speech": "classic comic-book speech balloon — clean white rounded oval with a bold 3-4 pixel black outline",
++}
+ 
+ def refuse(msgs):
+     print("COMPOSE REFUSED:")
+@@ -193,14 +214,67 @@
+     if errs: refuse(errs)
+     return json.dumps(body, separators=(",", ":")), refs, entry["aspect"], {"bootstrap": False, "tier_job": t9}
+ 
++def compose_edit(panel_id):
++    """i2i retouch of an already-accepted panel — NOT a fresh composition. Reads fix-jobs.json
++    (project root) for the panel's job entry and requires the source panel file to exist; refuses
++    on either being missing. No shotlist/ref-ledger/staging dependency — see PLAN section 6."""
++    jobs_path = "fix-jobs.json"
++    if not os.path.exists(jobs_path): refuse([f"{jobs_path} not found at project root"])
++    jobs = json.load(open(jobs_path)).get("jobs", [])
++    job = next((j for j in jobs if os.path.splitext(j.get("panel") or "")[0] == panel_id), None)
++    if not job: refuse([f"no fix-jobs.json entry for panel_id '{panel_id}'"])
++    panel_file = job.get("panel") or ""
++    panel_path = os.path.join("panels", panel_file)
++    if not panel_file or not os.path.exists(panel_path):
++        refuse([f"source panel '{panel_path}' does not exist — edit: requires the exact panel it corrects"])
++
++    c = job.get("constraints", {}) or {}
++    holds = [c.get(k) for k in ("identity_lock", "tier_lock", "wardrobe_lock", "camera_lock") if c.get(k)]
++    other = [o for o in (c.get("other") or []) if o]
++
++    parts = ["Keep the exact same camera angle, framing, character poses, expressions, and "
++             "composition as the source image."]
++    parts.append(STYLE)  # D-style-anchor: audit_prompt.py's "NOT illustrated" check is unconditional,
++                          # not scoped to kind=="page" — every job kind must carry this substring.
++    fix_line = (job.get("defect_summary") or "").strip()
++    if fix_line: parts.append(f"Correction: {fix_line}")
++    if holds: parts.append("Hold exactly as shown in the source, do not drift: " + "; ".join(holds) + ".")
++    if other: parts.append(" ".join(other))
++
++    dlg = job.get("corrected_dialogue") or []
++    if dlg:
++        blocks = []
++        for d in dlg:
++            btype = (d.get("bubble_type") or "").lower()
++            shape = next((v for k, v in BUBBLE_SHAPE.items() if k in btype), BUBBLE_SHAPE["speech"])
++            tail = d.get("tail_target")
++            tail_txt = f", tail pointing to {tail}" if tail and tail.lower() != "none" else ", no tail (floating box)"
++            blocks.append(f'{shape}{tail_txt}, bold black comic display font reads exactly: "{d.get("line", "")}"')
++        parts.append("LETTERING — classic comic-book lettering composited onto the photoreal CGI scene, flat 2D "
++                      "vector graphics only (no 3D shading, no bevel, no chrome, no drop shadow on the scene); "
++                      "everything else in the panel stays exactly as in the source image. Re-letter to: "
++                      + " | ".join(blocks) + ". No speaker-name prefix, no stray quotation marks beyond the "
++                      "quoted text itself.")
++
++    prompt = " ".join(p.strip() for p in parts if p and p.strip())
++    prompt = prompt if prompt.endswith(".") else prompt + "."
++    prompt += " " + NEG_EDIT
++
++    attach = [panel_path]
++    plan = json.load(open("pages-plan.json")) if os.path.exists("pages-plan.json") else {"pages": []}
++    entry = next((e for e in plan.get("pages", []) if e["id"] == panel_id), None)
++    aspect = entry["aspect"] if entry else "match-source"
++    return prompt, attach, aspect, {"bootstrap": False, "edit": True, "source_job": job.get("id"), "source_panel": panel_path}
++
+ def main():
+     ap = argparse.ArgumentParser()
+-    ap.add_argument("--job", required=True, help="sheet:<id> | page:<panel_id>")
++    ap.add_argument("--job", required=True, help="sheet:<id> | page:<panel_id> | edit:<panel_id>")
+     ap.add_argument("--pass", dest="pass_key", default=None)
+     a = ap.parse_args()
+     kind, _, ident = a.job.partition(":")
+     if kind == "sheet": prompt, attach, aspect, flags = compose_sheet(ident, a.pass_key)
+     elif kind == "page": prompt, attach, aspect, flags = compose_page(ident)
++    elif kind == "edit": prompt, attach, aspect, flags = compose_edit(ident)
+     else: refuse([f"unknown job kind '{kind}'"])
+     rpath = receipt(a.job, kind, prompt, attach, aspect, flags)
+     print(f"COMPOSE OK [{a.job}]  aspect={aspect}  receipt={rpath}")

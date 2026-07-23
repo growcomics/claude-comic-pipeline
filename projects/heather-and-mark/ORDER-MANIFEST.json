@@ -1,0 +1,416 @@
+[
+ {
+  "seq": 1,
+  "panel": "001.jpeg",
+  "cockpit_file": "067fe823b2.jpg",
+  "act": "Act 1 \u2014 origin"
+ },
+ {
+  "seq": 2,
+  "panel": "002.jpeg",
+  "cockpit_file": "eff0f2e26f.jpg",
+  "act": "Act 1 \u2014 origin"
+ },
+ {
+  "seq": 3,
+  "panel": "003.jpeg",
+  "cockpit_file": "4c832696b1.jpg",
+  "act": "Act 1 \u2014 origin"
+ },
+ {
+  "seq": 4,
+  "panel": "004.jpeg",
+  "cockpit_file": "eca5d248c2.jpg",
+  "act": "Act 1 \u2014 origin"
+ },
+ {
+  "seq": 5,
+  "panel": "005.jpeg",
+  "cockpit_file": "fc282323b6.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 6,
+  "panel": "006.jpeg",
+  "cockpit_file": "9f3302d6e3.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 7,
+  "panel": "007.jpeg",
+  "cockpit_file": "9a1649f4e9.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 8,
+  "panel": "008.jpeg",
+  "cockpit_file": "e408de86c9.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 9,
+  "panel": "009.jpeg",
+  "cockpit_file": "b3673f4b3f.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 10,
+  "panel": "010.jpeg",
+  "cockpit_file": "e01e863483.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 11,
+  "panel": "011.jpeg",
+  "cockpit_file": "34516f32e9.jpg",
+  "act": "Act 2 \u2014 beach trigger"
+ },
+ {
+  "seq": 12,
+  "panel": "012.jpeg",
+  "cockpit_file": "d9b8793c8a.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 13,
+  "panel": "013.jpeg",
+  "cockpit_file": "b804b01733.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 14,
+  "panel": "014.jpeg",
+  "cockpit_file": "60d8f11610.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 15,
+  "panel": "015.jpeg",
+  "cockpit_file": "70d61ee849.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 16,
+  "panel": "016.jpeg",
+  "cockpit_file": "65f3e3b0c4.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 17,
+  "panel": "017.jpeg",
+  "cockpit_file": "1f7ca685fa.jpg",
+  "act": "Act 3a \u2014 first gains"
+ },
+ {
+  "seq": 18,
+  "panel": "018.png",
+  "cockpit_file": "9b27e9df89.png",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 19,
+  "panel": "019.jpeg",
+  "cockpit_file": "28c6909832.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 20,
+  "panel": "020.jpeg",
+  "cockpit_file": "29026df93a.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 21,
+  "panel": "021.jpeg",
+  "cockpit_file": "a91e4c40b2.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 22,
+  "panel": "022.jpeg",
+  "cockpit_file": "e88d11d22f.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 23,
+  "panel": "023.jpeg",
+  "cockpit_file": "606fa0a52b.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 24,
+  "panel": "024.jpeg",
+  "cockpit_file": "136afeb4d3.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 25,
+  "panel": "025.jpeg",
+  "cockpit_file": "a1034ac0a8.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 26,
+  "panel": "026.jpeg",
+  "cockpit_file": "25e22c98bf.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 27,
+  "panel": "027.jpeg",
+  "cockpit_file": "b90dab9287.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 28,
+  "panel": "028.jpeg",
+  "cockpit_file": "5d2f6814d8.jpg",
+  "act": "Act 3b \u2014 14.5in chapter"
+ },
+ {
+  "seq": 29,
+  "panel": "029.jpeg",
+  "cockpit_file": "00254fbd06.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 30,
+  "panel": "030.jpeg",
+  "cockpit_file": "e918b1b2bd.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 31,
+  "panel": "031.jpeg",
+  "cockpit_file": "32a519ebc1.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 32,
+  "panel": "032.jpeg",
+  "cockpit_file": "60f3a102f4.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 33,
+  "panel": "033.jpeg",
+  "cockpit_file": "1e92da10b1.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 34,
+  "panel": "034.jpeg",
+  "cockpit_file": "657d0aba78.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 35,
+  "panel": "035.jpeg",
+  "cockpit_file": "3309660b5a.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 36,
+  "panel": "036.jpeg",
+  "cockpit_file": "e2fe48a6b6.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 37,
+  "panel": "037.jpeg",
+  "cockpit_file": "86bec23b27.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 38,
+  "panel": "038.jpeg",
+  "cockpit_file": "8609687e6d.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 39,
+  "panel": "039.jpeg",
+  "cockpit_file": "1323a9e5fa.jpg",
+  "act": "Act 3c \u2014 18in chapter"
+ },
+ {
+  "seq": 40,
+  "panel": "040.jpeg",
+  "cockpit_file": "4076e19066.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 41,
+  "panel": "041.jpeg",
+  "cockpit_file": "ab25f4df00.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 42,
+  "panel": "042.jpeg",
+  "cockpit_file": "e4b0318cd4.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 43,
+  "panel": "043.jpeg",
+  "cockpit_file": "1a10ddc131.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 44,
+  "panel": "044.jpeg",
+  "cockpit_file": "e9ddbd7d65.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 45,
+  "panel": "045.jpeg",
+  "cockpit_file": "bd06eb1a11.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 46,
+  "panel": "046.jpeg",
+  "cockpit_file": "c0ab24ffc9.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 47,
+  "panel": "047.jpeg",
+  "cockpit_file": "311e827749.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 48,
+  "panel": "048.jpeg",
+  "cockpit_file": "9e53837bde.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 49,
+  "panel": "049.png",
+  "cockpit_file": "036d97b577.png",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 50,
+  "panel": "050.jpeg",
+  "cockpit_file": "53096466ff.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 51,
+  "panel": "051.jpeg",
+  "cockpit_file": "92448e88d3.jpg",
+  "act": "Act 4a \u2014 140lb chapter"
+ },
+ {
+  "seq": 52,
+  "panel": "052.jpeg",
+  "cockpit_file": "0e607597e5.jpg",
+  "act": "Act 4b \u2014 wall chart + peak reveal"
+ },
+ {
+  "seq": 53,
+  "panel": "053.jpeg",
+  "cockpit_file": "8d30f57d67.jpg",
+  "act": "Act 4b \u2014 wall chart + peak reveal"
+ },
+ {
+  "seq": 54,
+  "panel": "054.jpeg",
+  "cockpit_file": "084d41684b.jpg",
+  "act": "Act 4b \u2014 wall chart + peak reveal"
+ },
+ {
+  "seq": 55,
+  "panel": "055.jpeg",
+  "cockpit_file": "16707d55ca.jpg",
+  "act": "Act 4b \u2014 wall chart + peak reveal"
+ },
+ {
+  "seq": 56,
+  "panel": "056.jpeg",
+  "cockpit_file": "594cf42cec.jpg",
+  "act": "Act 4b \u2014 wall chart + peak reveal"
+ },
+ {
+  "seq": 57,
+  "panel": "057.jpeg",
+  "cockpit_file": "78ee34eeb3.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 58,
+  "panel": "058.jpeg",
+  "cockpit_file": "925bc1eff0.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 59,
+  "panel": "059.jpeg",
+  "cockpit_file": "1892f95efa.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 60,
+  "panel": "060.jpeg",
+  "cockpit_file": "bdd7a0e880.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 61,
+  "panel": "061.jpeg",
+  "cockpit_file": "fb0ab277ba.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 62,
+  "panel": "062.jpeg",
+  "cockpit_file": "4d5463d50d.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 63,
+  "panel": "063.jpeg",
+  "cockpit_file": "433689c55b.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 64,
+  "panel": "064.jpeg",
+  "cockpit_file": "aee23b9941.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 65,
+  "panel": "065.jpeg",
+  "cockpit_file": "6616c7f5b6.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 66,
+  "panel": "066.png",
+  "cockpit_file": "13355b6bf5.png",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 67,
+  "panel": "067.jpeg",
+  "cockpit_file": "483f92c319.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 68,
+  "panel": "068.jpeg",
+  "cockpit_file": "0c2364f979.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ },
+ {
+  "seq": 69,
+  "panel": "069.jpeg",
+  "cockpit_file": "3af2125fe4.jpg",
+  "act": "Act 5 \u2014 world + resolution"
+ }
+]

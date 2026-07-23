@@ -1,0 +1,11 @@
+{
+  "_note": "PROSPECTIVE staging for a NEW, OPTIONAL beat (fix-new-b) -- no existing panel to derive pose from. fix-jobs.json marks this job SKIPPABLE if fix-new-a alone already flips Act 3b's camera-variety verdict to PASS; author only intends this as ready-to-use IF the owner confirms it's still needed.",
+  "heather": {"position": "mid-ground, near the foot of the bed", "pose": "standing or sitting on the edge of the bed, looking toward Mark or toward camera, settling into the room; exactly two hands, both her own", "expression": "relaxed, warm", "turnaround_key": "turnaround_14_5in"},
+  "mark": {"position": "mid-ground, near Heather", "pose": "standing or seated near Heather, relaxed; exactly two hands, both his own", "expression": "relaxed, warm", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "both figures kept mid-ground/smaller in frame so the wide/full shot reads as a genuine establishing shot of Bedroom A -- dark wood dresser, framed photos, two lit lamps, wood-toned wall -- all fully readable per L23's 5+-named-element standard",
+    "purely an establishing beat before the 026-027 romantic beat -- no stat reveal, no invented dialogue",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm lamp-lit, night -- matches 025/026's established lighting for Bedroom A"
+}

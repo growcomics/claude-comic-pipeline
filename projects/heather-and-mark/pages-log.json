@@ -1,0 +1,5 @@
+{
+  "_note": "Cloned schema from projects/ultra-gal-origin/pages-log.json. Filled ONLY by qa/bank.py. Starts empty per PLAN section 8 step 5 -- none of this fix-pass's ~35 jobs have been generated/banked yet. The 33 pre-existing panels this project retouches (007, 009, ... 068) are NOT backfilled here as 'done' entries: they were accepted through an earlier, different production process before this qa/ chain existed, so they have no real receipt/audit/verdict chain to record honestly. Per qa-scaffold-PLAN.md section 8 step 3, this is scoped to the touched panels only, not a full 69-panel retroactive backfill.",
+  "done": {},
+  "pending": []
+}

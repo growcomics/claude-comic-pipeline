@@ -1,0 +1,1192 @@
+{
+ "project": "heather-and-mark",
+ "donor": "ultra-gal-origin",
+ "generated": "2026-07-20",
+ "source_docs": [
+  "qa-report.md",
+  "panel-transcriptions.md",
+  "ORDER-MANIFEST.json"
+ ],
+ "schema_note": "Content spec for the ~35-job fix pass. compose.py (verbatim clone from ultra-gal-origin) has NO job kind for 'i2i-edit this exact existing accepted image' -- see qa-scaffold-PLAN.md section 6 for the two paths (A: bend page:/sheet:, B: owner-reviewed compose.py 'edit:' extension + rebless). Each job's constraints/attach_hint are written to be actionable under either path; compose_job_hint names the current gap honestly rather than pretending a clean mapping exists.",
+ "counts": {
+  "total_jobs": 35,
+  "by_severity": {
+   "blocker": 7,
+   "systemic_lettering_only": 26,
+   "new_beat": 2
+  },
+  "by_fix_type": {
+   "i2i re-letter": 30,
+   "i2i re-render": 3,
+   "new beat": 2
+  },
+  "reconciliation_note": "Owner said ~37 (7 blockers + 28 systemic + 1-2 new). Panels 059 and 062 are both blockers AND in the 28-panel systemic list; each is one job, not two, so systemic-only count is 26 and total is 35. See qa-scaffold-PLAN.md section 5."
+ },
+ "jobs": [
+  {
+   "id": "fix-007",
+   "panel": "007.jpeg",
+   "act": "Act 2 -- beach trigger",
+   "severity": "blocker",
+   "fix_type": "i2i re-render",
+   "defect_summary": "Duplicate identical Heather figure (blue one-piece) bent over in left foreground alongside the standing Heather at right; the same admiring line is baked twice (floating caption top-right AND tailed bubble bottom-center).",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "They're incredible. Tight arms, legs... those abs.",
+     "bubble_type": "speech",
+     "tail_target": "standing Heather, right foreground",
+     "instance_count": 1
+    }
+   ],
+   "constraints": {
+    "identity_lock": "Exactly ONE Heather in frame (the standing figure, right foreground); remove the duplicate bent-over figure entirely.",
+    "tier_lock": "Act 2 baseline/pre-transformation -- this is before any growth beat; do not add muscle size.",
+    "wardrobe_lock": "Blue one-piece swimsuit, unchanged.",
+    "camera_lock": "unchanged -- same beach framing; background group (4 flexing women + 2 photographing boys) stays as the admired group, untouched.",
+    "other": [
+     "Remove the floating top-right caption instance entirely -- keep only the single tailed bubble, bottom-center.",
+     "No new extras introduced while removing the duplicate."
+    ]
+   },
+   "compose_job_hint": "No clean fit -- see PLAN section 6. Under path A this is closest to a page: reroll (materially different composition is intended here, unlike the pure re-letters).",
+   "attach_hint": [
+    "panels/007.jpeg (existing accepted panel -- retouch/reroll source)",
+    "Heather face+tier ref appropriate to Act 2 baseline"
+   ],
+   "risk_notes": "RISKIEST (#2). Removing a full duplicate character while preserving an unrelated background crowd and re-baking a caption exactly once is a compositional edit, not a text swap -- higher chance of new artifacts or background drift than any re-letter job.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-009",
+   "panel": "009.jpeg",
+   "act": "Act 2 -- beach trigger",
+   "severity": "blocker",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Mark's bubble bakes a doubled opening clause: 'You are a lovely girl and I You are a lovely girl and I admit, you might look even better with some muscles. If you want it, I will be there, supporting you.'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "You are a lovely girl and I admit, you might look even better with some muscles. If you want it, I will be there, supporting you.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 2 baseline -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- sunset beach walk framing, text-region-only edit",
+    "other": [
+     "Single clean sentence, no prefix, no quote marks, no duplicated clause."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (PLAN section 6, path B) for a true text-only retouch; path A (page: reroll) risks changing pose/framing to fix a pure lettering bug.",
+   "attach_hint": [
+    "panels/009.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low art risk (text-only) but the corrected line is a derivation from the transcription's verbatim read, not the original script -- worth a quick human sanity read before baking.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-020",
+   "panel": "020.jpeg",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "blocker",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Heather's bubble bakes a grammatically incomplete first sentence: 'I wonder if I'm bigger than.' followed by a complete second sentence. Scene is the living-room couch with a muscle-heroine movie playing on TV.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I wonder if I'm bigger than her. Would you like to measure my muscles?",
+     "bubble_type": "speech",
+     "tail_target": "Heather",
+     "note": "Completion 'than her' derived from scene context (TV plays a muscle-heroine movie) -- Heather is comparing herself to the on-screen heroine. Flag for a quick owner glance since it's a narrative completion, not pure transcription, though the lowest-invention option available."
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b (14.5in chapter) -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": []
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/020.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Medium -- the sentence completion is an editorial judgment call (well-grounded in the TV-movie detail, but still invented text). Confirm wording before baking.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-032",
+   "panel": "032.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "blocker",
+   "fix_type": "i2i re-render",
+   "defect_summary": "Store-mirror Heather rendered slim/moderately toned immediately after the visibly huge 030-031 -- a tier regression within the act. Lettering ('Oops.') is already clean, not touched.",
+   "corrected_dialogue": null,
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "MUST match the scale established by 030-031 (Act 3c huge tier), feeding into 033's 18in payoff -- this is the single number the fix must correct.",
+    "wardrobe_lock": "unchanged -- fitting-room store outfit",
+    "camera_lock": "unchanged -- mirror framing, sales clerk and reflections stay as-is",
+    "other": [
+     "Do not touch the 'Oops.' bubble -- already clean, no prefix, no quotes."
+    ]
+   },
+   "compose_job_hint": "No clean fit -- see PLAN section 6. Anatomy-only reroll; under path A this is one of the better fits since a materially different (bigger) render is the actual goal.",
+   "attach_hint": [
+    "panels/032.jpeg (existing accepted panel)",
+    "panels/030.jpeg or 031.jpeg as the tier-match reference"
+   ],
+   "risk_notes": "Medium -- tier/anatomy correction, not lettering; success criteria is purely visual (does the arm/torso now read as consistent with 030-031's scale).",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-033",
+   "panel": "033.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "blocker",
+   "fix_type": "i2i re-render",
+   "defect_summary": "The act's payoff measurement triptych: bicep sub-panel is drawn athletic/defined, not bodybuilder-huge, despite the '18 inches' label. All caption/label text is already correct and internally consistent (confirmed by transcription: 'Biceps: 18 inches. Butt: 55 inches. Thighs: 26 inches.' + 'Curves and power together.' + matching tape labels) -- do not touch any text.",
+   "corrected_dialogue": null,
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Bicep sub-panel must visibly read as an 18-inch scale, consistent with the act's peak/payoff framing.",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- keep the triptych layout; thigh and glutes sub-panels and ALL caption/label text stay pixel-identical, only the bicep sub-panel's muscle rendering changes.",
+    "other": [
+     "Do not alter any of the 3 baked labels or the 2 captions -- they are already correct and must not drift."
+    ]
+   },
+   "compose_job_hint": "No clean fit -- see PLAN section 6. Narrow anatomy-only reroll of a single sub-panel within a multi-panel image -- harder than fix-032 because the other two sub-panels and all text must stay exactly as-is.",
+   "attach_hint": [
+    "panels/033.jpeg (existing accepted panel -- sole source, narrow region edit)"
+   ],
+   "risk_notes": "Medium-high -- isolating a single sub-panel within a triptych for an anatomy-only edit while leaving 2 other sub-panels and 5 text elements untouched is a precise ask; verify all labels survived unchanged after the pick.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: overlapping tapes on butt sub-panel, floating thigh tape, mottled skin on thigh/glute sub-panels -- not in scope, backlog."
+   ]
+  },
+  {
+   "id": "fix-059",
+   "panel": "059.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "blocker",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Three boxes baked: (1) tailed bubble to Heather 'HEATHER: \"I've got you.\"'; (2) untailed/mid-left box reading 'We chose grace.' whose tail direction misreads as the angry stranger's line; (3) an orphan, untailed, misspelled duplicate box 'HEATHE: grace.' near Mark. Box 3 is a broken duplicate of box 2's content and must be removed, not just re-lettered.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I've got you.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    },
+    {
+     "speaker": "narration",
+     "line": "We chose grace.",
+     "bubble_type": "caption",
+     "tail_target": "none -- convert to a plain untailed caption box so it reads as shared narration, not misattributed dialogue"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 peak -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- street confrontation framing untouched; only the lettering layer changes",
+    "other": [
+     "DELETE the third box ('HEATHE: grace.') entirely -- it is a garbled duplicate, not a distinct line.",
+     "Box 2 changes from a mis-tailed bubble to an untailed caption box -- this is a lettering-layer element type change, still within L19's scope-bounded overlay, not a scene/art change."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) -- multi-element lettering surgery (keep+strip / retype / delete) is a poor fit for a fresh page: reroll.",
+   "attach_hint": [
+    "panels/059.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "RISKIEST (#3). Three simultaneous lettering operations (edit, retype-as-caption, delete) in one pass has more failure surface than a 1:1 text swap -- if a re-roll only partially applies, re-verify all three boxes, not just the one that looks fixed.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-062",
+   "panel": "062.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "blocker",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Bubble 'HEATHER: \"New PR.\"' plus an untethered stat box 'Biceps: 26 inches'. 26 matches the 052 wall chart's Month-24 column, but 052's chart (earlier in reading order, Act 4b) already circles Current = 28 as the established latest value. A 'New PR' in the later Act 5 stated as 26 is a 2-inch regression from the already-established 28.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "New PR.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    },
+    {
+     "speaker": "narration",
+     "line": "Biceps: 28 inches",
+     "bubble_type": "caption",
+     "tail_target": "none",
+     "note": "NARRATIVE/CONTINUITY DECISION, NOT a pure transcription fix -- 29 is a proposed default (first whole inch above the established Current=28) so the 'New PR' framing is literally true. NEEDS OWNER CONFIRMATION of the exact number before this job is generated -- if the owner has a different canonical peak in mind, substitute it here before baking."
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 peak -- unchanged; stat box number must be > 28 to avoid regressing 052's chart",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- gym framing, tape-on-bicep pose untouched, text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks from the dialogue bubble."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/062.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "RISKIEST (#1). This is the one job in the whole batch where the 'corrected' content is an invented story fact (a new canonical biceps number), not a derivation from existing baked text. Get explicit owner sign-off on the number BEFORE generating -- rerolling this one twice because the number was wrong is the most expensive mistake available in this batch.",
+   "out_of_scope_defects_on_panel": [],
+   "owner_decision": "2026-07-21: corrected number = 28 (match wall chart; chart is canon)"
+  },
+  {
+   "id": "fix-010",
+   "panel": "010.jpeg",
+   "act": "Act 2 -- beach trigger",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Then I start tomorrow.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Then I start tomorrow.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 2 baseline -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/010.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-014",
+   "panel": "014.jpeg",
+   "act": "Act 3a -- first gains",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Mark, look!\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Mark, look!",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/014.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: mirror-reflection geometry loose (real Heather off-frame); fitness-book spines garbled -- cosmetic/continuity, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-015",
+   "panel": "015.jpeg",
+   "act": "Act 3a -- first gains",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I have abs! Finally!\"' baked into the bubble. BUNDLED FIX: qa-report also flags this panel's tail dropping toward Mark's blurred head instead of Heather (the actual speaker) -- since the lettering layer is already being touched, retarget the tail in the same pass rather than leaving a known misattribution in place.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I have abs! Finally!",
+     "bubble_type": "speech",
+     "tail_target": "Heather (RETARGET -- currently mis-points toward Mark)"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit plus tail retarget",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks.",
+     "Bundled: move the bubble tail to point at Heather, not Mark."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/015.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low-medium -- two lettering-layer changes bundled (text + tail direction) instead of one; flagged explicitly rather than silently scope-creeping.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-017",
+   "panel": "017.jpeg",
+   "act": "Act 3a -- first gains",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Attribution baked as a parenthetical stage direction instead of a normal tail: '\"Keep up with me.\" (Heather's voice)' -- a third, distinct attribution style in the book.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Keep up with me.",
+     "bubble_type": "speech",
+     "tail_target": "Heather",
+     "note": "Convert from floating stage-direction style to a normal tailed bubble."
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Remove the '(Heather's voice)' parenthetical entirely; use a tail instead."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/017.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low-medium -- changing from a floating caption style to a tailed bubble is a small layout change, not pure text swap.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: unmotivated torn holes in Heather's top plus ink-like black blotches on Mark's tee -- render artifact, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-018",
+   "panel": "018.png",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I think I'm addicted.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I think I'm addicted.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/018.png (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-021",
+   "panel": "021.jpeg",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'MARK: \"It would be... I mean yeah, let's find out.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "It would be... I mean yeah, let's find out.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'MARK:' prefix and quote marks.",
+     "2-character contact panel (Mark + Heather) -- needs qa/staging/021.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/021.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: measuring-tape prop morphs across 020-022 (soft white -> rigid construction -> soft yellow); cream/navy outfit becomes red/red mid-conversation -- continuity/prop issues, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-023",
+   "panel": "023.jpeg",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Why don't we continue these measurements in the bedroom...\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Why don't we continue these measurements in the bedroom...",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks.",
+     "2-character contact panel -- needs qa/staging/023.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/023.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: hand cluster at Mark's cheek muddled (her hand + his two hands merge) -- anatomy, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-025",
+   "panel": "025.jpeg",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Feel how strong I've become.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Feel how strong I've become.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/025.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: red outfit -> green romper on the living-room-to-bedroom cut -- plausible scene change per qa-report, not touched."
+   ]
+  },
+  {
+   "id": "fix-027",
+   "panel": "027.jpeg",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2, unquoted style: 'HEATHER: More?...' / 'MARK: Yes.'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "More?...",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    },
+    {
+     "speaker": "Mark",
+     "line": "Yes.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip both 'HEATHER:'/'MARK:' prefixes.",
+     "2-character contact panel -- needs qa/staging/027.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/027.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: dark-green tank (025/026) becomes green long-sleeve top in the same bedroom scene -- continuity, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-030",
+   "panel": "030.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak, single-quote style (inconsistent with double quotes elsewhere): \"HEATHER: 'No pain, no gain.'\"",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "No pain, no gain.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3c -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and the single-quote marks; normalize to no quotes, matching the target house style."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/030.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-035",
+   "panel": "035.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2, unquoted: 'HEATHER: Are my boobs... growing? Usually female athletes' boobs shrink!' / 'MARK: Crazy or not, I think you have grown a bit bigger indeed.'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Are my boobs... growing? Usually female athletes' boobs shrink!",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    },
+    {
+     "speaker": "Mark",
+     "line": "Crazy or not, I think you have grown a bit bigger indeed.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3c -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip both prefixes.",
+     "2-character contact panel -- needs qa/staging/035.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/035.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-037",
+   "panel": "037.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2, unquoted: 'MARK: Tell me where it hurts.' / 'HEATHER: Between the shoulder blades.'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "Tell me where it hurts.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    },
+    {
+     "speaker": "Heather",
+     "line": "Between the shoulder blades.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3c -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip both prefixes.",
+     "2-character contact panel -- needs qa/staging/037.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/037.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: trailing right-arm bend awkward; massage-oil label garbled -- anatomy/micro-text, not lettering-prefix, not touched."
+   ]
+  },
+  {
+   "id": "fix-038",
+   "panel": "038.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2: thought bubble (cloud tail, Mark) \"MARK'S THOUGHTS: 'My god. She is so tight and solid!'\" -- stage-direction leak on top of an already-thought-styled bubble; plus 'HEATHER: \"Harder.\"'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "My god. She is so tight and solid!",
+     "bubble_type": "thought (cloud tail)",
+     "tail_target": "Mark",
+     "note": "Bubble is already styled as a thought bubble -- the cloud tail alone signals internal monologue, so the 'MARK'S THOUGHTS:' label is redundant as well as leaked; remove it entirely."
+    },
+    {
+     "speaker": "Heather",
+     "line": "Harder.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3c -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'MARK'S THOUGHTS:' label and quote marks from the thought bubble; strip 'HEATHER:' prefix and quotes from the speech bubble.",
+     "2-character contact panel -- needs qa/staging/038.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/038.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-039",
+   "panel": "039.jpeg",
+   "act": "Act 3c -- 18in chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I can't let you have all the fun.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I can't let you have all the fun.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 3c -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/039.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: mauve tank during massage (037/038) becomes black sports bra + leggings in the continuing bedroom scene -- continuity, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-042",
+   "panel": "042.jpeg",
+   "act": "Act 4a -- 140lb chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Thank you for believing in me.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Thank you for believing in me.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/042.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix (coverage default): no bottoms visible below the torn crop tee, groin implied-covered only by shadow/pose -- always_clothed coverage issue, NOT a lettering fix, needs its own re-render job outside this batch; flagging so it isn't mistaken for resolved."
+   ]
+  },
+  {
+   "id": "fix-043",
+   "panel": "043.jpeg",
+   "act": "Act 4a -- 140lb chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Are you ready?\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Are you ready?",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks.",
+     "2-character contact panel -- needs qa/staging/043.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/043.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-046",
+   "panel": "046.jpeg",
+   "act": "Act 4a -- 140lb chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak plus an unclosed quote: 'MARK: \"My goodness, those clothes stood no chance!' (opens a quote, never closes it). Baked SFX 'SHHHRAAAT' is fine and stays.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "My goodness, those clothes stood no chance!",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit; do not touch the 'SHHHRAAAT' SFX",
+    "other": [
+     "Strip 'MARK:' prefix and the unclosed quote mark."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/046.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: inside the continuous 043->046 growth beat, outfit jumps from blue long-sleeve+grey jeans (mid-rip in 044/045) to white tee+khaki torn pants with no on-page transition -- costume-regression continuity, not lettering, NOT touched; this is a larger re-render issue outside this batch."
+   ]
+  },
+  {
+   "id": "fix-047",
+   "panel": "047.jpeg",
+   "act": "Act 4a -- 140lb chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2: 'HEATHER: \"I'll be gentle.\"' / 'MARK: \"Please don't.\"'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I'll be gentle.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    },
+    {
+     "speaker": "Mark",
+     "line": "Please don't.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip both prefixes and quote marks.",
+     "2-character contact panel -- needs qa/staging/047.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/047.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-049",
+   "panel": "049.png",
+   "act": "Act 4a -- 140lb chapter",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak x2, ECU interlaced-hands panel: 'HEATHER: \"Say you love my muscles.\"' / 'MARK: \"I love your muscles.\"' (tails point into the crop; Mark mostly out of frame).",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Say you love my muscles.",
+     "bubble_type": "speech",
+     "tail_target": "Heather (into crop)"
+    },
+    {
+     "speaker": "Mark",
+     "line": "I love your muscles.",
+     "bubble_type": "speech",
+     "tail_target": "Mark (into crop, mostly out of frame)"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4a -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- ECU framing, text-region-only edit",
+    "other": [
+     "Strip both prefixes and quote marks.",
+     "2-character contact panel -- needs qa/staging/049.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/049.png (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: interlaced-fingers ECU has one knuckle-row too many at the clasp crest -- anatomy, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-053",
+   "panel": "053.jpeg",
+   "act": "Act 4b -- wall chart + peak reveal",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I might've grown taller... or my posture's better.\"' baked into the bubble. Baked band labels ('BICEPS 26', 'WAIST 24', 'HIPS 68', 'THIGHS 35') are NOT touched -- 26/24/68 already match the 052 chart's Month-24 column; THIGHS 35 vs. 033's Thighs:26 is treated as CANON (later story-time growth from an earlier measurement, not a contradiction -- 033 and 053 are different points in the timeline and thighs have no chart row to cross-check against, per the transcription's own note). No numeric change made here.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I might've grown taller... or my posture's better.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit; do NOT alter any of the 4 band labels",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks from the dialogue bubble only."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/053.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low -- explicitly scoped to the dialogue bubble only so the (already-canon) band labels aren't accidentally touched by an overzealous retouch pass.",
+   "out_of_scope_defects_on_panel": [
+    "Should-fix: gym now populated with a Heather-lookalike redhead extra and others -- no-background-extras violation, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-056",
+   "panel": "056.jpeg",
+   "act": "Act 4b -- wall chart + peak reveal",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I never thought... this was possible.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I never thought... this was possible.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 4b -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/056.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: reflection fills the mirror but the subject isn't in frame -- mirror logic, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-060",
+   "panel": "060.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"Fuel the gains.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "Fuel the gains.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/060.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-063",
+   "panel": "063.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak, ALL CAPS (inconsistent with every other Mark line): 'MARK: \"I ALWAYS THOUGHT YOU WERE POSSIBLE.\"'",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "I always thought you were possible.",
+     "bubble_type": "speech",
+     "tail_target": "Mark",
+     "note": "Normalized from ALL CAPS to standard sentence case to match the rest of the book's dialogue styling."
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'MARK:' prefix and quote marks; normalize casing."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/063.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: reflection shows Mark's arm around her waist while real Mark's arms are held in front of him -- mirror logic, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-064",
+   "panel": "064.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"I'm not done.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "I'm not done.",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/064.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: foreground strap reads black, reflection tank reads gray-green -- likely shadow, not lettering, not touched."
+   ]
+  },
+  {
+   "id": "fix-065",
+   "panel": "065.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'HEATHER: \"You think I'm done growing?\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Heather",
+     "line": "You think I'm done growing?",
+     "bubble_type": "speech",
+     "tail_target": "Heather"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'HEATHER:' prefix and quote marks."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/065.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": [
+    "Cosmetic: chest/pec skin heavily vein-marbled at peak tier, borders on 'raw' -- skin-render, not lettering, not touched.",
+    "Should-fix (pacing, not this batch): qa-report suggests this exchange (065 -> 068) reads better if 067 is reordered before 065 -- a manifest/reading-order change, no generation needed, not a fix-job."
+   ]
+  },
+  {
+   "id": "fix-068",
+   "panel": "068.jpeg",
+   "act": "Act 5 -- world + resolution",
+   "severity": "should-fix-systemic",
+   "fix_type": "i2i re-letter",
+   "defect_summary": "Prefix-leak: 'MARK: \"God, I hope not.\"' baked into the bubble.",
+   "corrected_dialogue": [
+    {
+     "speaker": "Mark",
+     "line": "God, I hope not.",
+     "bubble_type": "speech",
+     "tail_target": "Mark"
+    }
+   ],
+   "constraints": {
+    "identity_lock": "unchanged",
+    "tier_lock": "Act 5 -- unchanged",
+    "wardrobe_lock": "unchanged",
+    "camera_lock": "unchanged -- text-region-only edit",
+    "other": [
+     "Strip 'MARK:' prefix and quote marks.",
+     "2-character contact panel -- needs qa/staging/068.json under path A."
+    ]
+   },
+   "compose_job_hint": "REQUIRES compose.py edit:<panel_id> kind (path B) for text-only fidelity.",
+   "attach_hint": [
+    "panels/068.jpeg (existing accepted panel -- sole retouch source)"
+   ],
+   "risk_notes": "Low.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-new-a",
+   "panel": "NEW (insert between 020 and 021 -- renumbering left to the owner)",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "new_beat",
+   "fix_type": "new beat",
+   "defect_summary": "Camera-variety audit verdict for Act 3b (018-028, 11 panels) is FAIL: no wide-establish or splash shot in the whole act, heavy medium-eye-level repetition 018-021. The act also silently crosses at least 4 distinct locations (gym, city street, hotel/living room, two differently-dressed bedrooms) with no establishing shot for any of them. Best candidate per the scene survey: the hotel/living-room set (021-023), the chapter's measurement-beat throughline.",
+   "corrected_dialogue": [],
+   "constraints": {
+    "identity_lock": "Heather + Mark, matching their established Act 3b appearance (the same identity/face used in neighboring 018-028 panels).",
+    "tier_lock": "Act 3b (14.5in chapter) tier -- must match the scale used in 020-023, not baseline and not any later act's larger tiers. No new stat reveal, no invented numbers -- purely an establishing beat.",
+    "wardrobe_lock": "Editorial suggestion, needs owner confirmation: traveling/arrival clothes, prior to the cream-tee/navy-shorts (020) -> red-tee/red-shorts (021) change already documented in the qa-report -- i.e. dressed for arriving at the hotel, not yet in the measurement outfit.",
+    "camera_lock": "NEW -- wide-establish, environment fully readable (warm lamps, hotel living-room furnishings per the transcription's scene survey). This is the deliberate fix for the FAIL verdict, not a hold of any prior camera.",
+    "other": [
+     "No caption/stat text -- keep this beat text-light to avoid inventing new canon (per house rule: don't invent transformation state changes beyond what's asked).",
+     "2-character contact panel -- needs qa/staging/<new-id>.json.",
+     "This is a genuine NEW page: composition, not a retouch -- fits compose.py's existing page: job kind reasonably well (unlike the retouch jobs), but still needs the shotlist/ledger/scene-ladder backfill described in PLAN section 6."
+    ]
+   },
+   "compose_job_hint": "page:<new-panel-id> once shotlist.json/pages-plan.json/ref-ledger.json (incl. a 'hotel-room' scene_ladders entry) exist for this project -- see PLAN sections 3 and 6. Declare continuity_refs: [] to avoid the D1 chain-refusal trap described in PLAN section 6.",
+   "attach_hint": [
+    "Heather + Mark face/turnaround refs at Act 3b tier",
+    "hotel-room scene-ladder wide rung (to be authored)"
+   ],
+   "risk_notes": "Medium -- genuinely new content (wardrobe/exact staging is an editorial guess flagged for confirmation), plus it's the one job most exposed to the shotlist/ledger backfill dependency chain in PLAN section 6.",
+   "out_of_scope_defects_on_panel": []
+  },
+  {
+   "id": "fix-new-b",
+   "panel": "NEW (optional -- insert before 026, insertion point left to the owner)",
+   "act": "Act 3b -- 14.5in chapter",
+   "severity": "new_beat",
+   "fix_type": "new beat",
+   "defect_summary": "OPTIONAL / lower priority. The single new hotel-room wide-establish (fix-new-a) likely already flips Act 3b from FAIL to PASS on its own (the checklist requires >=1 wide-establish-or-splash per act, scaled -- Act 3b needs 1, not 2). This second beat is offered as extra variety only if the owner wants it: a wide/full establishing shot of 'Bedroom A' (026's setting -- wood-toned wall, dark dresser, framed photos, two lit lamps, night) before the 026-027 beat, since that bedroom is also introduced with zero establishing coverage.",
+   "corrected_dialogue": [],
+   "constraints": {
+    "identity_lock": "Heather + Mark, matching Act 3b appearance.",
+    "tier_lock": "Act 3b tier -- unchanged, no new stat reveal.",
+    "wardrobe_lock": "Editorial suggestion, needs owner confirmation: whatever precedes the dark-green-tank state already established at the start of 026.",
+    "camera_lock": "NEW -- wide or full shot of Bedroom A, environment fully readable (wood-toned wall, dark dresser, framed photos, two lamps, night).",
+    "other": [
+     "2-character contact panel -- needs qa/staging/<new-id>.json.",
+     "SKIP if fix-new-a alone already satisfies the camera-variety gate for Act 3b -- confirm with a fresh audit pass before spending a generation here."
+    ]
+   },
+   "compose_job_hint": "page:<new-panel-id>, same backfill dependency as fix-new-a -- see PLAN sections 3 and 6.",
+   "attach_hint": [
+    "Heather + Mark face/turnaround refs at Act 3b tier",
+    "bedroom-a scene-ladder wide rung (to be authored)"
+   ],
+   "risk_notes": "Low priority / skippable -- lowest-value job in the batch if fix-new-a already resolves the FAIL verdict on its own.",
+   "out_of_scope_defects_on_panel": []
+  }
+ ]
+}

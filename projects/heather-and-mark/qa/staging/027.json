@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "left, profile, forehead touching Mark's", "pose": "close profile-to-profile embrace; hands not visible in this face-only ECU crop, presumed at her sides or around Mark, out of frame", "expression": "smiling, intimate", "turnaround_key": "turnaround_14_5in"},
+  "mark": {"position": "right, profile, forehead touching Heather's", "pose": "close profile-to-profile embrace; hands not visible in this face-only ECU crop, presumed at his sides or around Heather, out of frame", "expression": "smiling, intimate", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "extreme close-up, profile-to-profile, foreheads touching -- faces fill the frame, no hands or lower body visible",
+    "background too blurred to resolve detail, but continuous with the 025/026 bedroom-a scene",
+    "total hands in frame: 0 (face-only ECU crop -- do not add visible hands/arms into this framing)"
+  ],
+  "lighting": "warm interior lamp-lit, night, soft glow"
+}

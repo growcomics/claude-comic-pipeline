@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "standing, right", "pose": "standing over the seated Mark, confident stance, one hand relaxed at her side, the other loosely on her hip; exactly two hands, both her own", "expression": "smiling, confident", "turnaround_key": "turnaround_140lb_torn"},
+  "mark": {"position": "seated on the sofa, left", "pose": "seated, looking up at Heather, hands resting on his own knees; exactly two hands, both his own", "expression": "curious, slightly nervous anticipation", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "Heather stands, large in scale; Mark is seated and noticeably smaller in the frame -- a clear standing-over-seated size disparity",
+    "living-room set -- gray sofa, dark wood bookshelf with books behind Mark, floor lamp lit, TV, framed picture on the wall",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm interior lamp-lit, evening"
+}

@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "standing right, near the sofa", "pose": "relaxed standing pose, watching Mark at the side table, one hand loosely at her side, the other resting on her hip; exactly two hands, both her own", "expression": "smiling, amused/anticipating", "turnaround_key": "turnaround_14_5in"},
+  "mark": {"position": "standing left, at an open-drawer side table", "pose": "leaning slightly into the open drawer, one hand pulling a yellow tape measure out, the other hand resting on the drawer edge; exactly two hands, both his own", "expression": "focused, faint smile", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "Mark is at the side table on the left, actively pulling the tape measure from the drawer; Heather stands to the right, a few steps away, watching",
+    "same warm-lamp-lit hotel-room living-room set as 020/023 -- sofa, dark wood bookshelf, floor lamp, TV visible in the background",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm interior lamp-lit, evening"
+}

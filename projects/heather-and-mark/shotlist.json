@@ -1,0 +1,396 @@
+{
+  "project": "heather-and-mark",
+  "title": "Heather & Mark",
+  "purpose": "Fix-pass shotlist scoped to the ~35 jobs in fix-jobs.json (7 blockers + 26 systemic lettering re-letters + 2 new wide-establish beats). This is NOT a full 69-panel retroactive shotlist -- per qa-scaffold-PLAN.md section 8 step 3, only the touched panels are entered. Content (characters/location/camera/action/costume_state/tier) was derived from direct visual inspection of projects/heather-and-mark/panels/*, cross-checked against qa-report.md and panel-transcriptions.md.",
+  "style": "photoreal-daz3d",
+  "always_clothed": true,
+  "cast": [
+    {"id": "heather", "name": "Heather", "note": "protagonist; undergoes the muscle-growth transformation arc. muscle_size_tier follows the ladder in _tier_map below."},
+    {"id": "mark", "name": "Mark", "note": "supportive partner; does NOT transform in this story. Held at muscle_size_tier 0 in every panel he appears in -- there is no visual or narrative evidence anywhere in the touched panels of Mark gaining size."}
+  ],
+  "_tier_map": {
+    "note": "Coarse per-act muscle_size_tier integer ladder for Heather, mapped from the owner's 6-rung framing (baseline/subtle/14.5in/18in/140lb/200lb) per qa-scaffold-PLAN.md section 8 step 3. Documented here (top-level) AND restated in cast[0].note per the plan's instruction to note it in a top-level comment field if the schema allows.",
+    "0": "baseline -- Act 2 (beach trigger), pre-transformation",
+    "1": "subtle -- Act 3a (first gains)",
+    "2": "14.5in -- Act 3b (14.5in chapter)",
+    "3": "18in -- Act 3c (18in chapter)",
+    "4": "140lb -- Act 4a (140lb chapter)",
+    "5": "200lb/peak -- Act 4b (wall chart + peak reveal) AND Act 5 (world + resolution). The owner's ladder has only ONE rung past 140lb, so these two acts collapse onto the same integer tier. Finer story-time deltas within tier 5 (e.g. 053's baked 'BICEPS 26' band vs. 062's corrected ~29in stat) are caption/label CONTENT, not a distinct muscle_size_tier value."
+  },
+  "_location_note": "qa-scaffold-PLAN.md section 6 assumed 'bedroom-a'/'bedroom-b' would cover every bedroom beat (reusing panel-transcriptions.md's donor-style A/B labels for context panels 026/028). Direct visual inspection of every touched bedroom panel did not support that: 014/015/017 (Act 3a) and 035/037/038/039 (Act 3c) and 063/064/065/068 (Act 5) each show decor that only partially or does not at all match either 026 ('Bedroom A': dark dresser, framed photos, two lamps) or 028 ('Bedroom B': pale walls, big window with night sky, white bedding) -- see references/ref-ledger.json scene_ladders notes for the room-by-room comparison. This shotlist therefore uses FOUR distinct bedroom location slugs (bedroom-gains, bedroom-a, bedroom-c, bedroom-peak), not two. Flagged in the final report as a plan deviation.",
+  "pages": [
+    {"page_number": 1, "panels": [{
+      "panel_id": "007", "size": "full", "characters": ["heather"], "location": "beach",
+      "time_of_day": "midday, bright sun", "camera": "medium, eye-level",
+      "action": "Heather stands in the foreground admiring a background group of 4 flexing athletic women being photographed by 2 onlookers with phones/cameras. ONE Heather only -- the duplicate bent-over figure in the current accepted render is the fix-007 defect and must not appear.",
+      "costume_state": "heather: blue one-piece swimsuit (scoop-neck, high-cut leg), ponytail, intact - fully covered",
+      "muscle_size_tier": {"heather": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "They're incredible. Tight arms, legs... those abs.", "type": "balloon"}],
+      "captions": [],
+      "sfx": []
+    }]},
+    {"page_number": 2, "panels": [{
+      "panel_id": "009", "size": "medium", "characters": ["heather", "mark"], "location": "beach",
+      "time_of_day": "sunset, golden backlight", "camera": "medium, eye-level",
+      "action": "Heather and Mark walk together on the beach at sunset, facing each other in conversation.",
+      "costume_state": "heather: cream/ivory fitted crew-neck t-shirt, ponytail, intact - fully covered; mark: heather-gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 0, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "heather", "text": "What if I start to workout? Do you think I'd look good with muscles?", "type": "balloon"},
+        {"character": "mark", "text": "You are a lovely girl and I admit, you might look even better with some muscles. If you want it, I will be there, supporting you.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 3, "panels": [{
+      "panel_id": "010", "size": "medium", "characters": ["heather"], "location": "beach",
+      "time_of_day": "sunset, golden backlight", "camera": "medium-close, eye-level",
+      "action": "Heather stands alone, fists clenched at her waist, resolved expression, ocean and sunset behind her.",
+      "costume_state": "heather: cream/ivory fitted t-shirt, damp ponytail, intact - fully covered",
+      "muscle_size_tier": {"heather": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Then I start tomorrow.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 4, "panels": [{
+      "panel_id": "014", "size": "medium", "characters": ["heather", "mark"], "location": "bedroom-gains",
+      "time_of_day": "daylight", "camera": "medium, eye-level (via mirror)",
+      "action": "Heather sees herself in a full-length bedroom mirror and calls Mark over excitedly; Mark stands with his back to camera, also visible in the reflection.",
+      "costume_state": "heather: white/cream fitted t-shirt, black leggings, ponytail, intact - fully covered; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 1, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Mark, look!", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 5, "panels": [{
+      "panel_id": "015", "size": "close", "characters": ["heather", "mark"], "location": "bedroom-gains",
+      "time_of_day": "daylight", "camera": "close, eye-level",
+      "action": "Heather lifts the hem of her t-shirt to show emerging ab definition, beaming; Mark is a small out-of-focus element at frame edge.",
+      "costume_state": "heather: cream/ivory t-shirt (hem lifted), black leggings, ponytail, intact - fully covered; mark: gray t-shirt, intact (mostly out of frame)",
+      "muscle_size_tier": {"heather": 1, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I have abs! Finally!", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 6, "panels": [{
+      "panel_id": "017", "size": "ecu", "characters": ["heather", "mark"], "location": "bedroom-gains",
+      "time_of_day": "ambiguous (blurred, likely evening -- see ref-ledger note)", "camera": "ecu, eye-level",
+      "action": "Extreme close-up: Heather and Mark, faces close together, about to kiss, in the middle of a workout-adjacent moment.",
+      "costume_state": "heather: cream/ivory t-shirt with small tears at shoulder/collar, ponytail, sweat-sheen; mark: gray t-shirt (sweat-marked), intact",
+      "muscle_size_tier": {"heather": 1, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Keep up with me.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 7, "panels": [{
+      "panel_id": "018", "size": "medium", "characters": ["heather"], "location": "gym",
+      "time_of_day": "indoor, gym lighting", "camera": "medium, eye-level",
+      "action": "Heather does standing dumbbell bicep curls in an empty gym, mirror behind her reflecting more equipment, sweaty and smiling.",
+      "costume_state": "heather: purple racerback tank top, purple leggings, wavy hair down, intact - fully covered",
+      "muscle_size_tier": {"heather": 2},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I think I'm addicted.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 8, "panels": [{
+      "panel_id": "020", "size": "medium", "characters": ["heather", "mark"], "location": "hotel-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium, eye-level",
+      "action": "Heather and Mark sit together on the sofa; a muscle-heroine movie plays on the TV. Heather flexes a bicep, comparing herself to the on-screen heroine, and offers Mark the tape measure.",
+      "costume_state": "heather: cream/ivory fitted t-shirt with small shoulder tear, dark navy/black shorts, ponytail; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I wonder if I'm bigger than her. Would you like to measure my muscles?", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 9, "panels": [{
+      "panel_id": "020a", "size": "wide", "characters": ["heather", "mark"], "location": "hotel-room",
+      "time_of_day": "evening, arrival", "camera": "wide-establish, eye-level",
+      "action": "NEW BEAT (fix-new-a). Wide establishing shot of the hotel-room living-room set (warm lamps, sofa, TV, furnishings) as Heather and Mark arrive -- inserted between 020 and 021 to fix Act 3b's camera-variety FAIL verdict (qa-report.md: no wide/splash in 018-028). No stat reveal, no invented dialogue -- purely an establishing beat. Renumbering left to the owner per fix-jobs.json.",
+      "costume_state": "heather: traveling/arrival outfit -- EDITORIAL GUESS, NEEDS OWNER CONFIRMATION per fix-jobs.json fix-new-a (prior to 020's cream-tee/navy-shorts state), intact - fully covered; mark: casual traveling outfit -- EDITORIAL GUESS, NEEDS OWNER CONFIRMATION, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [], "captions": [], "sfx": []
+    }]},
+    {"page_number": 10, "panels": [{
+      "panel_id": "021", "size": "full", "characters": ["heather", "mark"], "location": "hotel-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium-full, eye-level",
+      "action": "Mark pulls a tape measure from an open side-table drawer while Heather stands by, smiling.",
+      "costume_state": "heather: red fitted t-shirt, red athletic shorts, hair down, intact; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "mark", "text": "It would be... I mean yeah, let's find out.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 11, "panels": [{
+      "panel_id": "023", "size": "medium", "characters": ["heather", "mark"], "location": "hotel-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium, eye-level",
+      "action": "Heather touches Mark's face, hand in his; the measuring beat is about to move to the bedroom.",
+      "costume_state": "heather: red fitted t-shirt, hair down, intact; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Why don't we continue these measurements in the bedroom...", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 12, "panels": [{
+      "panel_id": "025", "size": "medium", "characters": ["heather", "mark"], "location": "bedroom-a",
+      "time_of_day": "night, warm lamp-lit", "camera": "medium, high-angle",
+      "action": "Heather leans over Mark on the bed, one hand on his chest, showing off her strength; he reclines beneath her looking up.",
+      "costume_state": "heather: dark green fitted tank top, hair down, intact; mark: navy/dark t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Feel how strong I've become.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 13, "panels": [{
+      "panel_id": "025a", "size": "wide", "characters": ["heather", "mark"], "location": "bedroom-a",
+      "time_of_day": "night, warm lamp-lit", "camera": "wide-establish, eye-level",
+      "action": "NEW BEAT, OPTIONAL (fix-new-b). Wide/full establishing shot of Bedroom A (dark dresser, framed photos, two lit lamps, wood-toned wall, night) before the 026-027 beat -- SKIP if fix-new-a alone already flips Act 3b's camera-variety verdict to PASS (confirm with a fresh audit before generating).",
+      "costume_state": "heather: pre-dark-green-tank state -- EDITORIAL GUESS, NEEDS OWNER CONFIRMATION per fix-jobs.json fix-new-b, intact - fully covered; mark: casual -- EDITORIAL GUESS, NEEDS OWNER CONFIRMATION, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [], "captions": [], "sfx": []
+    }]},
+    {"page_number": 14, "panels": [{
+      "panel_id": "027", "size": "ecu", "characters": ["heather", "mark"], "location": "bedroom-a",
+      "time_of_day": "night, warm lamp-lit", "camera": "ecu, eye-level, profile",
+      "action": "Extreme close-up, profile: Heather and Mark, foreheads touching, smiling at each other.",
+      "costume_state": "heather: dark green top, hair down, intact; mark: gray long-sleeve top, intact",
+      "muscle_size_tier": {"heather": 2, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "heather", "text": "More?...", "type": "balloon"},
+        {"character": "mark", "text": "Yes.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 15, "panels": [{
+      "panel_id": "030", "size": "full", "characters": ["heather"], "location": "gym",
+      "time_of_day": "indoor, gym lighting", "camera": "medium-full, low-angle",
+      "action": "Heather strikes a full double-biceps flex in the gym, very muscular, big confident smile.",
+      "costume_state": "heather: black/dark racerback tank top, dark shorts, intact - fully covered",
+      "muscle_size_tier": {"heather": 3},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "No pain, no gain.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 16, "panels": [{
+      "panel_id": "032", "size": "medium", "characters": ["heather"], "location": "clothing-store",
+      "time_of_day": "indoor, bright retail lighting", "camera": "medium, eye-level",
+      "action": "Heather looks at herself in a fitting-room mirror, laughing in surprise at how her shirt now hugs new muscle definition. Target render must read at the SAME scale as 030-031 (tier 3, 18in) -- the current accepted render under-shoots this and is the fix-032 defect.",
+      "costume_state": "heather: white fitted t-shirt (fabric taut over new muscle), blue jeans, hair down, intact - fully covered",
+      "muscle_size_tier": {"heather": 3},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Oops.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 17, "panels": [{
+      "panel_id": "033", "size": "ecu", "characters": ["heather"], "location": "clothing-store",
+      "time_of_day": "indoor, warm bokeh (room not resolvable)", "camera": "ecu, macro-insert collage",
+      "action": "Three-panel measurement collage (bicep / hips-and-glutes / thigh) with a tape measure on each. ONLY the bicep sub-panel's rendered muscle needs to read as an 18in scale (fix-033) -- the thigh and glutes sub-panels and all 5 baked text elements are already correct and must not change.",
+      "costume_state": "heather: measurement close-up insert only -- no full costume visible (cream sleeve fragment / navy-dark shorts fragment)",
+      "muscle_size_tier": {"heather": 3},
+      "continuity_refs": [],
+      "dialogue": [],
+      "captions": ["Biceps: 18 inches. Butt: 55 inches. Thighs: 26 inches.", "Curves and power together."],
+      "sfx": []
+    }]},
+    {"page_number": 18, "panels": [{
+      "panel_id": "035", "size": "full", "characters": ["heather", "mark"], "location": "bedroom-c",
+      "time_of_day": "daylight (bright window light)", "camera": "medium-full, eye-level",
+      "action": "Heather, surprised, touches her own chest/collarbone noticing new growth; Mark stands behind her, thoughtful.",
+      "costume_state": "heather: black/dark racerback tank top, intact - fully covered; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 3, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "heather", "text": "Are my boobs... growing? Usually female athletes' boobs shrink!", "type": "balloon"},
+        {"character": "mark", "text": "Crazy or not, I think you have grown a bit bigger indeed.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 19, "panels": [{
+      "panel_id": "037", "size": "medium", "characters": ["heather", "mark"], "location": "bedroom-c",
+      "time_of_day": "evening, warm lamp-lit", "camera": "medium, high-angle",
+      "action": "Mark gives Heather a back massage; she lies face-down on the bed, a towel draped over her legs.",
+      "costume_state": "heather: mauve/dusty-rose racerback tank top, towel over legs, intact; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 3, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "mark", "text": "Tell me where it hurts.", "type": "balloon"},
+        {"character": "heather", "text": "Between the shoulder blades.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 20, "panels": [{
+      "panel_id": "038", "size": "medium", "characters": ["heather", "mark"], "location": "bedroom-c",
+      "time_of_day": "evening, warm lamp-lit", "camera": "medium, eye-level",
+      "action": "Massage continues; Mark internally marvels at her new strength while Heather, face-down, asks for more pressure.",
+      "costume_state": "heather: mauve/dusty-rose tank top, intact; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 3, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "mark", "text": "My god. She is so tight and solid!", "type": "thought"},
+        {"character": "heather", "text": "Harder.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 21, "panels": [{
+      "panel_id": "039", "size": "close", "characters": ["heather", "mark"], "location": "bedroom-c",
+      "time_of_day": "evening, warm lamp-lit", "camera": "close, low-angle",
+      "action": "Heather reclines with one arm raised in a dramatic flexed bicep close to camera, dominating the frame; Mark looks on from the side.",
+      "costume_state": "heather: black/charcoal sports bra and matching shorts/leggings, intact; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 3, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I can't let you have all the fun.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 22, "panels": [{
+      "panel_id": "042", "size": "full", "characters": ["heather", "mark"], "location": "living-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium-full, eye-level",
+      "action": "Heather, now towering over Mark in scale, embraces him and kisses the top of his head.",
+      "costume_state": "heather: gray fitted crop top with tears/holes exposing abs, torn (coverage per always_clothed default -- see out-of-scope note in fix-jobs.json); mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 4, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Thank you for believing in me.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 23, "panels": [{
+      "panel_id": "043", "size": "full", "characters": ["heather", "mark"], "location": "living-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium-full, eye-level",
+      "action": "Heather stands over a seated Mark, asking if he's ready for what's coming (the growth/clothes-tearing beat).",
+      "costume_state": "heather: blue ripped/torn long-sleeve top, dark olive/gray jeans, torn; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 4, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Are you ready?", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 24, "panels": [{
+      "panel_id": "046", "size": "full", "characters": ["heather", "mark"], "location": "living-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium-full, eye-level",
+      "action": "Heather's growth tears through her clothes; Mark reacts, blushing and surprised. Torn fabric scraps litter the floor.",
+      "costume_state": "heather: white/cream top with large tears exposing midriff/abs, tan/khaki pants shredded to strips, torn; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 4, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "mark", "text": "My goodness, those clothes stood no chance!", "type": "balloon"}],
+      "captions": [], "sfx": [{"text": "SHHHRAAAT", "source": "clothes tearing"}]
+    }]},
+    {"page_number": 25, "panels": [{
+      "panel_id": "047", "size": "medium", "characters": ["heather", "mark"], "location": "living-room",
+      "time_of_day": "evening, warm lamp-lit interior", "camera": "medium, eye-level",
+      "action": "Heather carries Mark bridal-style, demonstrating her new strength.",
+      "costume_state": "heather: cream/off-white top, tan/khaki pants torn/shredded at thighs, torn; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 4, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "heather", "text": "I'll be gentle.", "type": "balloon"},
+        {"character": "mark", "text": "Please don't.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 26, "panels": [{
+      "panel_id": "049", "size": "ecu", "characters": ["heather", "mark"], "location": "living-room",
+      "time_of_day": "evening, warm lamp-lit interior (crop, room not resolvable)", "camera": "ecu, macro-insert",
+      "action": "Extreme close-up insert: Heather and Mark's hands interlaced; Mark is mostly out of frame.",
+      "costume_state": "heather: cream/off-white shirt sleeve visible (ECU crop), intact; mark: gray shirt sleeve visible (ECU crop), intact",
+      "muscle_size_tier": {"heather": 4, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [
+        {"character": "heather", "text": "Say you love my muscles.", "type": "balloon"},
+        {"character": "mark", "text": "I love your muscles.", "type": "balloon"}
+      ],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 27, "panels": [{
+      "panel_id": "053", "size": "full", "characters": ["heather", "mark"], "location": "gym",
+      "time_of_day": "indoor, bright gym lighting", "camera": "medium-full, low-angle",
+      "action": "Heather poses in front of a gym mirror with measurement bands overlaid on her body; Mark looks on from the reflection.",
+      "costume_state": "heather: purple racerback tank top and purple shorts, intact - fully covered; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I might've grown taller... or my posture's better.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 28, "panels": [{
+      "panel_id": "056", "size": "full", "characters": ["heather", "mark"], "location": "bedroom-peak",
+      "time_of_day": "night, warm lamp-lit", "camera": "medium-full, eye-level (via mirror)",
+      "action": "Heather looks at her full-length reflection in an ornate gold-framed bedroom mirror, awed at her own transformation; Mark stands nearby, back to camera. Room reads as the SAME set later seen in 063 (ornate mirror, wood-plank accent wall, dresser with a can-like object on top) rather than Bedroom A (026) -- reassigned from bedroom-a during authoring after a direct decor comparison; see references/ref-ledger.json scene_ladders note.",
+      "costume_state": "heather: gray/olive fitted tank top, dark green/olive leggings, intact; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I never thought... this was possible.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 29, "panels": [{
+      "panel_id": "059", "size": "wide", "characters": ["heather", "mark"], "location": "city-street",
+      "time_of_day": "daytime", "camera": "wide, eye-level",
+      "action": "Heather and Mark walk hand-in-hand down a city street, Heather now dramatically larger in scale; a bystander reacts/comments as they pass.",
+      "costume_state": "heather: navy/dark blue fitted t-shirt, light blue/denim jeans, hair down, intact; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I've got you.", "type": "balloon"}],
+      "captions": ["We chose grace."],
+      "sfx": []
+    }]},
+    {"page_number": 30, "panels": [{
+      "panel_id": "060", "size": "full", "characters": ["heather", "mark"], "location": "dining-area",
+      "time_of_day": "evening", "camera": "medium-full, eye-level",
+      "action": "Heather and Mark eat takeout together at the dining table; Heather, very muscular, eats heartily and laughs.",
+      "costume_state": "heather: cream/off-white long-sleeve top with rips at shoulder/sleeve, blue jeans, torn; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "Fuel the gains.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 31, "panels": [{
+      "panel_id": "062", "size": "close", "characters": ["heather", "mark"], "location": "gym",
+      "time_of_day": "indoor, dim gym lighting", "camera": "close, eye-level",
+      "action": "Heather flexes a bicep filling the frame while Mark measures it with a tape measure, both pleased with the result.",
+      "costume_state": "heather: gray/heather-gray tank top, intact; mark: light tan/khaki-colored shirt (may be a lighting effect of the dim gym, not a true wardrobe change), intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "New PR.", "type": "balloon"}],
+      "captions": ["Biceps: 29 inches (fix-062 proposed value -- NEEDS OWNER CONFIRMATION, see fix-jobs.json)"],
+      "sfx": []
+    }]},
+    {"page_number": 32, "panels": [{
+      "panel_id": "063", "size": "full", "characters": ["heather", "mark"], "location": "bedroom-peak",
+      "time_of_day": "night, warm lamp-lit", "camera": "medium-full, eye-level (via mirror)",
+      "action": "Heather admires her reflection in an ornate mirror, hands at her waist; Mark stands close behind her, visible in the reflection.",
+      "costume_state": "heather: gray/olive tank top, dark leggings, intact; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "mark", "text": "I always thought you were possible.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 33, "panels": [{
+      "panel_id": "064", "size": "medium", "characters": ["heather", "mark"], "location": "bedroom-peak",
+      "time_of_day": "night, warm lamp-lit", "camera": "medium, eye-level",
+      "action": "Heather, towering over Mark, rests a hand on his shoulder; they lean in close, about to kiss.",
+      "costume_state": "heather: gray/olive racerback tank top, dark leggings, intact; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "I'm not done.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 34, "panels": [{
+      "panel_id": "065", "size": "full", "characters": ["heather", "mark"], "location": "bedroom-peak",
+      "time_of_day": "night, warm lamp-lit", "camera": "medium, low-angle",
+      "action": "Heather raises one arm in a massive flexed bicep dominating the frame; Mark looks up at her in awe.",
+      "costume_state": "heather: beige/khaki tank top with tears/holes, matching torn shorts, torn; mark: gray t-shirt, khaki pants, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "heather", "text": "You think I'm done growing?", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]},
+    {"page_number": 35, "panels": [{
+      "panel_id": "068", "size": "close", "characters": ["heather", "mark"], "location": "bedroom-peak",
+      "time_of_day": "night, warm lamp-lit", "camera": "close, eye-level",
+      "action": "Close-up: Mark leans in to kiss Heather's shoulder; she smiles down at him.",
+      "costume_state": "heather: beige/khaki tank top with tears (matches 065), torn; mark: gray t-shirt, intact",
+      "muscle_size_tier": {"heather": 5, "mark": 0},
+      "continuity_refs": [],
+      "dialogue": [{"character": "mark", "text": "God, I hope not.", "type": "balloon"}],
+      "captions": [], "sfx": []
+    }]}
+  ]
+}

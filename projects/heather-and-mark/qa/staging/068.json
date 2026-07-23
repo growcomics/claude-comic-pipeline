@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "right/center", "pose": "standing close to Mark, looking down at him, hands relaxed at her sides; exactly two hands, both her own", "expression": "warm, smiling", "turnaround_key": "turnaround_200lb_peak_torn"},
+  "mark": {"position": "left, leaning in toward Heather's shoulder", "pose": "leaning in to kiss/nuzzle Heather's shoulder, hands gently at her waist or shoulder; exactly two hands, both his own", "expression": "affectionate, tender", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "close two-shot, Mark leaning into Heather's shoulder from her left; Heather looking down toward him",
+    "bedroom-peak set, tight crop -- tan wall, a dark framed picture upper-right, red-toned bedding visible at the lower-left edge",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm lamp-lit, night, dim"
+}

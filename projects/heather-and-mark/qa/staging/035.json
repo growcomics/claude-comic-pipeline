@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "left-center foreground, standing", "pose": "one hand touching her own upper chest/collarbone in surprise, the other hand at her side; exactly two hands, both her own", "expression": "surprised, open-mouth", "turnaround_key": "turnaround_18in"},
+  "mark": {"position": "right, standing behind/beside Heather", "pose": "standing, hands at his sides, watching her; exactly two hands, both his own", "expression": "thoughtful, neutral", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "Heather is larger-scaled/foreground, noticeably more muscular than Mark, who stands slightly behind and to the right",
+    "bedroom-c set -- dark wood bookshelf with books, lit lamp, tan wall, large window with sheer curtains, bright daylight",
+    "total hands in frame: 4"
+  ],
+  "lighting": "bright daylight through the window, warm ambient fill"
+}

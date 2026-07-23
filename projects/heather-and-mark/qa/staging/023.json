@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "left, close to Mark", "pose": "one hand raised to touch Mark's jaw/face, the other hand relaxed at her side; exactly two hands, both her own", "expression": "warm, affectionate smile", "turnaround_key": "turnaround_14_5in"},
+  "mark": {"position": "right, close to Heather", "pose": "one hand holding Heather's hand against his own face, the other hand relaxed at his side; exactly two hands, both his own", "expression": "warm, affectionate smile", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "close two-shot, Heather and Mark face to face, her raised hand meeting his cheek and his hand covering hers",
+    "soft-focus warm interior background (sheer curtain, lit wall sconce) -- same hotel-room set as 020/021, later beat",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm interior lamp-lit, evening, soft sconce glow"
+}

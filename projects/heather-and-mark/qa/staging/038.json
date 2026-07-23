@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "lower-right, lying face-down on the bed, head turned toward camera", "pose": "prone on the bed, head turned to face camera; both hands not visible, presumed tucked beneath her or off-frame -- exactly two hands, both her own, out of sight", "expression": "content, slightly intense (asking for more pressure)", "turnaround_key": "turnaround_18in"},
+  "mark": {"position": "upper-left, kneeling above Heather", "pose": "kneeling, both hands pressed onto Heather's back continuing the massage; exactly two hands, both his own", "expression": "internally awed (thought bubble), outwardly focused", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "same over-under composition as 037 -- Mark kneeling above, Heather prone beneath, continuous scene",
+    "bedroom-c set, same nightstand/lamp/oil-bottle visible (blurred) in this crop",
+    "total hands in frame: 4 (both of Heather's are not visible in this framing -- do not render visible extra hands for her)"
+  ],
+  "lighting": "warm lamp glow, evening, dim"
+}

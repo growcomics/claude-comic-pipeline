@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "lower-left to center, ECU crop", "pose": "one hand, forearm and hand only, clasped with Mark's hand; her other hand and the rest of her body are out of frame -- exactly one of her own hands visible, the other not in frame", "expression": "not visible (ECU hand crop, no face in frame)", "turnaround_key": "turnaround_140lb_torn"},
+  "mark": {"position": "right, ECU crop, mostly out of frame", "pose": "one hand, wrist and hand only, interlocked with Heather's hand; the rest of him is out of frame -- exactly one of his own hands visible, the other not in frame", "expression": "not visible (ECU hand crop, no face in frame)", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "extreme close-up insert on interlaced hands only -- no faces, no room detail, no lower/upper body visible for either character",
+    "background heavily blurred warm tan tones, room not resolvable at this crop (same living-room scene as 047, immediately following the bridal-carry beat)",
+    "total hands in frame: 2 (one from each character, interlaced; do not render extra hands or any other body parts in this ECU crop)"
+  ],
+  "lighting": "warm blurred ambient glow, evening"
+}

@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "standing, center, carrying Mark", "pose": "bridal-carrying Mark in both arms, one arm under his knees, the other supporting his back; exactly two hands, both her own", "expression": "playful smile", "turnaround_key": "turnaround_140lb_torn"},
+  "mark": {"position": "held horizontally in Heather's arms", "pose": "held bridal-style, one arm loosely around Heather's neck/shoulder for balance, the other resting on his own chest; exactly two hands, both his own", "expression": "nervous, pleading", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "Heather stands and carries Mark horizontally in her arms -- a clear strength/scale-disparity pose, not two figures standing side by side",
+    "living-room set -- gray sofa, floor lamp lit, mounted TV, same room as 042/043/046",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm interior lamp-lit, evening"
+}

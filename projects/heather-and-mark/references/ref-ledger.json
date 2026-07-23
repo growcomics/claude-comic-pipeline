@@ -1,0 +1,104 @@
+{
+  "_note": "HONESTY NOTE (required by qa-scaffold-PLAN.md section 8 step 3 / task instructions): this project has NO formal character identity sheets or turnaround model-sheets, and NO real Flow/Higgsfield generation history -- unlike projects/ultra-gal-origin's ref-ledger.json, whose face/turnaround/scene_ladder entries all point at real banked generations with a full receipt/audit/verdict chain. Every entry below instead points at an ALREADY-EXISTING ACCEPTED STORY PANEL from projects/heather-and-mark/panels/, used as an honest stand-in reference image. 'flow_id' fields are NOT real generation ids -- they are clearly-marked placeholder strings, present only because qa/compose.py's D8 scene-ladder gate (compose_page(), 'if not rung or not rung.get(\"flow_id\")') requires a truthy value to proceed. No 'chain' sub-object is included anywhere in this file (unlike the donor's real banked entries) because none of these went through the actual compose->audit->submit->judge->bank protocol -- fabricating a chain pointing at receipts that don't exist would be dishonest. If any of these rungs are ever properly generated and banked for real, qa/bank.py will overwrite the relevant entry with a real chain automatically.",
+  "_gate_compatibility_note": "IMPORTANT CROSS-CHECK FINDING: qa/compose.py's pick_turnaround() keyword-matches costume_state text against a hardcoded donor-specific vocabulary ('corset'->t8, 'lab coat'->t3, tier>=7->t9, torn/remnant/shred/tear/split->'torn', 'suit'->t6_suit, 'blouse'+tier>=4->t4, 'blouse'/'reporter'/tier<=2->t2). Heather & Mark's costume vocabulary (t-shirts, tanks, shorts, jeans, swimsuits) matches NONE of these keywords except the torn/shred/tear regex (which does fire correctly for the several genuinely-torn panels, e.g. 042/043/046/047/065/068) and the tier>=7 branch (which never fires -- this project's tiers only run 0-5). For every OTHER panel, pick_turnaround() would fall through to 'D4: ambiguous turnaround' and REFUSE unless the panel's qa/staging/<id>.json file supplies an explicit turnaround_key override (pick_turnaround() checks staging.get(char,{}).get('turnaround_key') FIRST, before any keyword logic, and returns it directly if present). This is true even for SOLO (1-character) panels, which compose_page() does not otherwise require a staging file for -- meaning path A (page: reroll) is actually broken for MOST of this project's panels without an override, a gap beyond what qa-scaffold-PLAN.md section 6 already flagged. Not a reason to modify compose.py (out of scope, and the recommended fix is the separate edit: job kind in proposed-compose-edit-kind.diff) -- flagging here so a future reader of this ledger understands why turnaround_key values below won't auto-resolve.",
+  "characters": {
+    "heather": {
+      "face": {
+        "flow_id": "NO-FORMAL-IDENTITY-SHEET -- sourced from panels/018.png",
+        "disk": "panels/018.png",
+        "note": "Clearest, most direct-gaze, well-lit shot of Heather's face in the touched-panel set (gym, dumbbell curls). No formal face card exists for this project."
+      },
+      "turnaround_baseline": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/009.jpeg",
+        "disk": "panels/009.jpeg",
+        "tier": 0, "note": "Act 2 pre-transformation state: cream/ivory fitted t-shirt, beach casualwear. Also see panels/007.jpeg (blue one-piece swimsuit) as an alternate baseline wardrobe state -- both are tier 0."
+      },
+      "turnaround_subtle": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/015.jpeg",
+        "disk": "panels/015.jpeg",
+        "tier": 1, "note": "Act 3a first-gains state: cream t-shirt, black leggings, emerging ab definition."
+      },
+      "turnaround_14_5in": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/018.png",
+        "disk": "panels/018.png",
+        "tier": 2, "note": "Act 3b 14.5in-chapter state. Wardrobe varies by scene within this tier (018 purple gym set; 020 cream tee; 021/023 red tee; 025/027 dark green tank) -- 018 chosen as the representative reference image since it shows the clearest full-body view; costume_state text on each panel entry in shotlist.json carries the actual per-panel wardrobe."
+      },
+      "turnaround_18in": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/030.jpeg",
+        "disk": "panels/030.jpeg",
+        "tier": 3, "note": "Act 3c 18in-chapter state, double-biceps flex, clearest full-body reference for this tier's scale. This is also the tier fix-032 and fix-033 must visually match (per fix-jobs.json attach_hint pointing at 030/031)."
+      },
+      "turnaround_140lb_torn": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/046.jpeg",
+        "disk": "panels/046.jpeg",
+        "tier": 4, "note": "Act 4a 140lb-chapter state, post clothes-tearing growth beat (torn white top, shredded khaki pants). Every touched Act 4a panel (042/043/046/047/049) shows some degree of torn/damaged wardrobe -- no intact tier-4 reference exists among the touched panels, so no separate non-torn turnaround_140lb key was invented."
+      },
+      "turnaround_200lb_peak": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/059.jpeg",
+        "disk": "panels/059.jpeg",
+        "tier": 5, "note": "Act 5 / late Act 4b peak state, intact wardrobe (navy tee, jeans). Represents the 'clean' peak costume variant."
+      },
+      "turnaround_200lb_peak_torn": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/065.jpeg",
+        "disk": "panels/065.jpeg",
+        "tier": 5, "note": "Act 5 peak state, torn variant (beige/khaki tank + shorts with holes) -- also matches 068's wardrobe. Same muscle_size_tier as turnaround_200lb_peak, distinguished only by costume damage state."
+      }
+    },
+    "mark": {
+      "face": {
+        "flow_id": "NO-FORMAL-IDENTITY-SHEET -- sourced from panels/026.jpeg",
+        "disk": "panels/026.jpeg",
+        "note": "Clearest three-quarter view of Mark's face among the available panels (context panel, not itself a fix job, but a real existing accepted image usable as an honest reference)."
+      },
+      "turnaround_casual": {
+        "flow_id": "NO-FORMAL-TURNAROUND -- sourced from panels/009.jpeg",
+        "disk": "panels/009.jpeg",
+        "tier": 0, "note": "Mark does not transform anywhere in this story (see shotlist.json cast[1].note and _tier_map). His wardrobe is consistently a gray t-shirt + khaki pants across nearly every touched panel (occasional variants: navy tee in 025, gray long-sleeve in 027) -- a single representative turnaround key covers all of it; no per-tier variants needed since he has only one tier."
+      }
+    }
+  },
+  "scene_ladders": {
+    "beach": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/009.jpeg", "disk": "panels/009.jpeg", "note": "Open beach, ocean, sand. Covers 007/009/010, all medium-distance."}
+    },
+    "bedroom-gains": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/014.jpeg", "disk": "panels/014.jpeg", "note": "Act 3a bedroom, viewed via mirror. Wood-toned headboard, wood nightstand with stacked fitness books, cream/tan walls, wood floor, area rug, daylight. Decor LOOSELY echoes Bedroom A (026) on wood-tone/furniture but the lighting is bright daylight (not A's warm lamp-lit night) and the furniture piece is a nightstand-with-books, not A's dresser -- treated as a DISTINCT location per honest visual comparison, not merged with bedroom-a. See shotlist.json _location_note."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/015.jpeg", "disk": "panels/015.jpeg", "note": "Same room as the medium rung, tighter crop. Covers 015/017 (017's background is too blurred to independently confirm the room, but it is the same continuous 2-panel beat as 015)."}
+    },
+    "gym": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/018.png", "disk": "panels/018.png", "note": "Empty gym, mirrored wall, dumbbell racks. Covers 018/030/053, all medium-distance."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/062.jpeg", "disk": "panels/062.jpeg", "note": "Same gym, close bicep-measurement framing. Covers 062."}
+    },
+    "hotel-room": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/021.jpeg", "disk": "panels/021.jpeg", "note": "Warm-lamp-lit living-room-style hotel suite: gray sofa, dark wood bookshelf, floor lamp, TV, side table with drawer. Covers 020/021/023, all medium-distance. NOTE: 020's furniture set (sofa/bookshelf/lamp/TV) is visually similar to the separate 'living-room' location used in Act 4a (042/043/046/047) -- treated as a distinct story location per narrative context (a trip/hotel-stay vs. later home life), but flagging the visual similarity as a possible soft continuity spot worth the owner's awareness, same spirit as qa-report.md's own flagged findings."},
+      "wide": {"flow_id": "PLACEHOLDER-PENDING-FIX-NEW-A -- sourced from panels/021.jpeg", "disk": "panels/021.jpeg", "note": "No true wide-establish shot of the hotel-room set exists among the accepted panels -- that absence is exactly the fix-new-a defect (qa-report.md Act 3b camera-variety FAIL). This rung is a stand-in using the best available medium shot as an environment reference so compose_page()'s D8 gate can pass for fix-new-a itself. Once fix-new-a is generated, audited, judged, and banked for real via qa/bank.py, this placeholder rung should be replaced with the real banked wide shot."}
+    },
+    "bedroom-a": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/025.jpeg", "disk": "panels/025.jpeg", "note": "Dark wood dresser-like furniture, two lit lamps, framed photos, tan wall, night -- matches the donor-labeled 'Bedroom A' (context panel 026.jpeg) reasonably well. Covers 025."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/027.jpeg", "disk": "panels/027.jpeg", "note": "Same room, ECU profile framing (background not independently resolvable at this crop, but continuous with 025's scene). Covers 027."},
+      "wide": {"flow_id": "PLACEHOLDER-PENDING-FIX-NEW-B -- sourced from panels/026.jpeg", "disk": "panels/026.jpeg", "note": "No wide-establish shot of Bedroom A exists among the FIX panels. panels/026.jpeg (a context/untouched panel, not itself a fix job) is a real existing accepted image that clearly shows this room and is used here as the honest environment reference for fix-new-b, which is optional/skippable per fix-jobs.json. Replace with a real banked wide shot if fix-new-b is generated."}
+    },
+    "clothing-store": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/032.jpeg", "disk": "panels/032.jpeg", "note": "Bright white/gray retail store, track lighting, clothing racks, full-length mirror. Covers 032."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/033.jpeg", "disk": "panels/033.jpeg", "note": "Same store, ECU measurement-collage insert. Covers 033."}
+    },
+    "bedroom-c": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/035.jpeg", "disk": "panels/035.jpeg", "note": "Act 3c bedroom -- dark wood bookshelf, lit lamp, tan wall, large window with sheer curtains, bright daylight. LEANS toward matching Bedroom A's palette (lamp/tan-wall/photos) per direct visual comparison, but the furniture piece is a bookshelf (not A's dresser) and lighting is daytime, not A's warm night -- treated as a DISTINCT location pending confirmation, not merged with bedroom-a. Covers 035/037/038, all medium-distance (037/038 share the same nightstand-with-lamp-and-massage-oil-bottle setup, confirming same room as 035)."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/039.jpeg", "disk": "panels/039.jpeg", "note": "Same room, close/low-angle framing on a flexed bicep; two framed photos visible on the wall here (the strongest Bedroom-A signal in this location's panel set, per direct comparison), still kept as its own scene-ladder entry rather than merged, since no dresser was independently confirmed. Covers 039."}
+    },
+    "living-room": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/042.jpeg", "disk": "panels/042.jpeg", "note": "Act 4a living room -- gray sofa, dark wood bookshelf, floor lamp, mounted/on TV, warm lighting. Covers 042/043/046/047, all medium-distance."},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/049.png", "disk": "panels/049.png", "note": "Same room, ECU hands-interlaced insert (room itself not resolvable at this crop, but continuous with the 047 bridal-carry beat immediately preceding it). Covers 049."}
+    },
+    "dining-area": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/060.jpeg", "disk": "panels/060.jpeg", "note": "Dining table with takeout containers, two lamps, evening. Covers 060."}
+    },
+    "city-street": {
+      "wide": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/059.jpeg", "disk": "panels/059.jpeg", "note": "Genuine wide establishing shot already exists at this location (unlike hotel-room/bedroom-a's placeholder wide rungs) -- parked cars, brick buildings, street lamp, daytime. Covers 059."}
+    },
+    "bedroom-peak": {
+      "medium": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/063.jpeg", "disk": "panels/063.jpeg", "note": "Act 4b/5 peak-era bedroom -- ornate gold-framed mirror, wood-plank accent wall, dark wood dresser with a can-like object on top, warm lamp. Distinct from both Bedroom A (026) and Bedroom B (028) -- no wood-plank wall or ornate gold mirror in either reference. Covers 056/063/064/065, all medium-distance. (056 was reassigned here from an earlier bedroom-a draft assignment after a direct decor comparison found it matches this room's specific ornate-mirror + wood-plank + dresser-with-can combination much more closely than Bedroom A's description.)"},
+      "close": {"flow_id": "NO-FORMAL-LADDER -- sourced from panels/068.jpeg", "disk": "panels/068.jpeg", "note": "Same room, close framing (red-toned bedding visible at crop edge, consistent with 064/065's fuller view of this room). Covers 068."}
+    }
+  }
+}

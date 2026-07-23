@@ -1,0 +1,11 @@
+{
+  "_note": "PROSPECTIVE staging for a NEW beat (fix-new-a) -- no existing panel to derive pose from. Position/pose/expression below are an editorial staging suggestion for a wide-establish arrival shot, consistent with fix-jobs.json's constraints (wide-establish, environment fully readable, no stat reveal). Needs owner confirmation alongside the wardrobe note already in fix-jobs.json fix-new-a.",
+  "heather": {"position": "entering frame left-of-center, mid-ground so the room reads fully around her", "pose": "walking into the hotel-room living-room, glancing around at the space, one hand possibly on a bag/luggage strap if arrival props are wanted; exactly two hands, both her own", "expression": "pleasantly surprised, taking in the room", "turnaround_key": "turnaround_14_5in"},
+  "mark": {"position": "beside/slightly behind Heather, right-of-center", "pose": "walking in alongside Heather, relaxed; exactly two hands, both his own", "expression": "relaxed, pleased", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "both figures placed mid-ground/smaller in frame so the wide shot reads as a genuine establishing shot of the hotel-room set -- sofa, dark wood bookshelf, floor lamp, TV, side table -- all fully readable per L23's 5+-named-element standard",
+    "this is the fix for Act 3b's camera-variety FAIL verdict (qa-report.md) -- environment readability is the point of this panel, do not crop tight on the characters",
+    "total hands in frame: 4"
+  ],
+  "lighting": "warm interior lamp-lit, evening -- matches 020/021/023's established lighting for this room"
+}

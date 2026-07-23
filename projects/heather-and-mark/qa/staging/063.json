@@ -1,0 +1,10 @@
+{
+  "heather": {"position": "center, reflected in the full-length mirror", "pose": "standing, both hands resting at her own waist/hips; exactly two hands, both her own", "expression": "smiling, admiring her own reflection", "turnaround_key": "turnaround_200lb_peak"},
+  "mark": {"position": "behind-right of Heather, back to camera in the real foreground, faintly visible in the reflection behind her", "pose": "standing close behind Heather, hands not clearly resolved (mostly hidden by his own back-to-camera pose); exactly two hands, both his own", "expression": "not visible from behind; content per the reflected view", "turnaround_key": "turnaround_casual"},
+  "spatial_rules": [
+    "device shot through an ornate gold-framed full-length mirror -- Heather is seen only as a reflection; Mark is seen both as a real body (back to camera, foreground) and faintly in the reflection behind Heather",
+    "bedroom-peak set -- wood-plank accent wall, dark wood dresser with a small object on top, warm lamp, sheer curtain edge",
+    "total hands in frame: 4 (2 reflected for Heather, 2 for Mark though largely obscured by his own back)"
+  ],
+  "lighting": "warm lamp-lit, night"
+}
