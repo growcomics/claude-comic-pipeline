@@ -1,0 +1,37 @@
+{
+ "title": "Baywatch",
+ "pre_image": "panels/pre.png",
+ "post_image": "panels/post.png",
+ "pre_focus_y": 0.25,
+ "pre_zoom": 1.05,
+ "post_focus": 0.45,
+ "post_focus_y": 0.3,
+ "post_zoom": 1.0,
+ "post_brightness": 0.62,
+ "post_topdim": 0.2,
+ "banner_overrides": {
+  "post_focus": 0.3,
+  "post_focus_y": 0.35
+ },
+ "split_overrides": {
+  "cover": {
+   "pre_zoom": 1.0,
+   "post_zoom": 1.4,
+   "post_focus": 0.55,
+   "post_focus_y": 0.2,
+   "split_width": 0.56
+  },
+  "banner": {}
+ },
+ "pre_inset": [
+  0.21,
+  0,
+  0,
+  0
+ ],
+ "preferred_layout": "framed",
+ "cover_overrides": {
+  "pre_focus": 0.28,
+  "pre_zoom": 1.12
+ }
+}

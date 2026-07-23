@@ -1,0 +1,21 @@
+{
+ "title": "K-pop Star",
+ "pre_image": "panels/pre.png",
+ "post_image": "panels/post.png",
+ "pre_focus_y": 0.3,
+ "pre_zoom": 1.0,
+ "post_focus": 0.5,
+ "post_focus_y": 0.28,
+ "post_zoom": 1.0,
+ "post_brightness": 0.6,
+ "post_topdim": 0.15,
+ "banner_overrides": {
+  "post_focus": 0.3,
+  "post_focus_y": 0.3
+ },
+ "cover_overrides": {
+  "post_focus_y": 0.32
+ },
+ "formula_note": "APPROVED DEVIATION: pre_image is the mirror-split retrospective (both states in one source) \u2014 kept as the strongest cover art; strict pre-only alternative: dressing-room group panel.",
+ "preferred_layout": "split"
+}

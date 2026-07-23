@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-21 (cover-composer v2 — 9-iteration hardening loop, QA-verified ship set)
+
+### Changed
+
+- **`tools/cover-composer/compose_cover.py` v2** — owner-directed autonomous iteration loop (9 iterations, two independent fresh-context QA passes + per-iteration self-review). Added: per-rendition overrides (`cover_overrides`/`banner_overrides`), full-bleed **split layout** (`--split`, gradient-blend pre/post, `split_overrides` incl. per-rendition), auto-accent extracted from the tease art, Avenir-Next-Condensed heavy masthead with auto-fit, `post_topdim` band + banner `left_scrim` (quiet lockup zone per QA), source `pre_inset`/`post_inset` boxes (root fix for truncated baked bubbles), `formula_note` explicit-deviation field, `preferred_layout` per spec, `proof_sheet.py` review harness. QA reports: `tools/cover-composer/qa-i4.md` (mid-loop) + `qa-final.md` (ship checklist — 6/6 preferred outputs SHIP after the final Baywatch crop fix).
+- Demo cover specs shipped for three projects: heather-and-mark (framed), k-pop-star (split — approved formula deviation: mirror-split source), baywatch-local (framed, insets kill baked bubbles). Rendered covers are binaries (gitignored); regenerate with `python3 tools/cover-composer/compose_cover.py projects/<p> [--split]`.
+
 ## 2026-07-21 (Cover/banner auto-composer v1 + Heather & Mark fix-pass scaffold)
 
 ### Added
