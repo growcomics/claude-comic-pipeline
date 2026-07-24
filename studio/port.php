@@ -5,6 +5,8 @@
 // assets/comics/. New parts land as DRAFT so nothing goes public until you
 // publish it in the admin. Pages stay in Studio (marked ported). The project's
 // current contents = your curated set after triage + purge, in beat/page order.
+// ?only=approved ports just the approved winners (same filter as export.php),
+// so a triaged project can ship without purging the rejects first.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
 require_auth();
@@ -23,12 +25,18 @@ if (!$proj) { header('Location: index.php'); exit; }
 $pages = images_all($id);
 usort($pages, fn($a,$b)=> (preg_match('/(\d+)/',$a['group']??'',$m)?(int)$m[1]:9999) <=> (preg_match('/(\d+)/',$b['group']??'',$n)?(int)$n[1]:9999) ?: (($a['ts']??0) <=> ($b['ts']??0)));
 
+$only = (string)($_GET['only'] ?? $_POST['only'] ?? '');
+if ($only !== 'approved') $only = '';
+$allN = count($pages);
+$accN = count(array_filter($pages, fn($m) => !empty($m['accepted'])));
+if ($only === 'approved') $pages = array_values(array_filter($pages, fn($m) => !empty($m['accepted'])));
+
 $err = ''; $done = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
     csrf_check();
     $cms = cms_read();
     if (!cms_valid($cms))            $err = 'Could not read the catalog safely — aborted (nothing changed).';
-    elseif (!$pages)                 $err = 'No images to port — add some first.';
+    elseif (!$pages)                 $err = $only === 'approved' ? 'No approved panels to port — approve winners in Review first.' : 'No images to port — add some first.';
     else {
         $serSel = (string)($_POST['series'] ?? '');
         $partSel = (string)($_POST['part'] ?? '__new__');
@@ -82,11 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
                     $cms['series'][$si]['parts'] = $parts;
                     if (!s_write(CMS_CONTENT, $cms)) $err = 'Could not save the catalog.';
                     else {
-                        // mark ported (pages stay in Studio)
+                        // mark ported (pages stay in Studio) — only the images actually ported,
+                        // so an approved-only port doesn't stamp the rejects too
                         $meta = images_all($id); $tag = $sid . '/' . part_dir_n($n);
-                        foreach ($meta as &$m) $m['ported_to'] = $tag;
+                        $sel = array_flip(array_column($pages, 'file'));
+                        foreach ($meta as &$m) if (isset($sel[$m['file'] ?? ''])) $m['ported_to'] = $tag;
                         unset($m); images_save($id, $meta);
-                        header('Location: port.php?p=' . urlencode($id) . '&done=' . urlencode($sid . ':' . $n . ':' . count($newpages))); exit;
+                        header('Location: port.php?p=' . urlencode($id) . ($only === 'approved' ? '&only=approved' : '') . '&done=' . urlencode($sid . ':' . $n . ':' . count($newpages))); exit;
                     }
                 }
             }
@@ -119,15 +129,22 @@ $E = fn($s)=>htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
   <?php endif; ?>
   <?php if ($err): ?><div class="flash err"><?= $E($err) ?></div><?php endif; ?>
 
-  <p class="muted"><?= count($pages) ?> page<?= count($pages)===1?'':'s' ?> ready to port (all images, in beat/page order). They’re copied as the part’s pages and stay here in Studio. New parts land as <strong>draft</strong>.</p>
+  <p class="muted">
+    <?php if ($only === 'approved'): ?>
+      <a href="port.php?p=<?= $E(urlencode($id)) ?>">All images (<?= $allN ?>)</a> · <strong>✓ Approved only (<?= $accN ?>)</strong>
+    <?php else: ?>
+      <strong>All images (<?= $allN ?>)</strong> · <a href="port.php?p=<?= $E(urlencode($id)) ?>&amp;only=approved">✓ Approved only (<?= $accN ?>)</a>
+    <?php endif; ?>
+    — <?= count($pages) ?> page<?= count($pages)===1?'':'s' ?> ready to port, in beat/page order. They’re copied as the part’s pages and stay here in Studio. New parts land as <strong>draft</strong>.
+  </p>
 
   <?php if (!$pages): ?>
-    <p class="muted">No images in this project yet — add some, then come back.</p>
+    <p class="muted"><?= $only === 'approved' ? 'No approved panels yet — approve winners in Review, then come back.' : 'No images in this project yet — add some, then come back.' ?></p>
   <?php elseif (!cms_valid($cms)): ?>
     <div class="flash err">Couldn’t read the catalog — porting disabled.</div>
   <?php else: ?>
   <form class="card form" method="post">
-    <?= csrf_field() ?><input type="hidden" name="do" value="port"><input type="hidden" name="p" value="<?= $E($id) ?>">
+    <?= csrf_field() ?><input type="hidden" name="do" value="port"><input type="hidden" name="p" value="<?= $E($id) ?>"><input type="hidden" name="only" value="<?= $E($only) ?>">
     <label>Series
       <select name="series" id="ser">
         <?php foreach ($series as $s): ?><option value="<?= $E($s['id']) ?>"><?= $E($s['title'] ?? $s['id']) ?></option><?php endforeach; ?>

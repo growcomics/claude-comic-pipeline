@@ -410,6 +410,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     <button class="rv-act" id="approveshown" title="Mark every panel currently shown as approved (good + kept)">✓ Approve shown</button>
     <button class="rv-act danger" id="delrejects" title="Delete the disapproved (✕) panels among those shown">🗑 Delete rejects</button>
     <a class="rv-act" id="exportapp" href="export.php?p=<?= h(urlencode($id)) ?>&only=approved" title="Download the approved panels as a zip, in story order">⤓ Export approved</a>
+    <a class="rv-act" id="portapp" href="port.php?p=<?= h(urlencode($id)) ?>&only=approved" title="Port the approved panels into the 3DMC site catalog as a draft part — no purge needed">→ Port approved</a>
   </div>
   <?php endif; ?>
 

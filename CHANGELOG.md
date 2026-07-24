@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-22
+
+### Added
+
+- **studio/port.php `?only=approved` mode** — Port can now ship just the approved winners into the 3DMC site catalog, using the same `accepted` filter as `export.php?only=approved`. Why: porting previously took *all* project images, forcing a purge of rejects before every port (e.g. Psycho Cammy: 341 panels, 26 approved). Now: All-images / ✓ Approved-only toggle pills with live counts on the Port page, mode carried through the POST + redirect, tailored empty/error copy, and `ported_to` is stamped **only on the images actually ported** (previously an approved-only port would have mis-stamped the rejects too). `review.php` gains a companion "→ Port approved" action next to "⤓ Export approved". Deployed live + verified (auth 302, all markers incl. prior sessions' `flowfav` intact).
+
 ## 2026-07-21 (cover-composer v2 — 9-iteration hardening loop, QA-verified ship set)
 
 ### Changed
