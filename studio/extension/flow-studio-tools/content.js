@@ -78,7 +78,7 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock)">🎬 Framing</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock)">🎬 Framing</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -190,19 +190,28 @@
   // ───────── Prompt blocks — one-click paste of canonical prompt presets ─────
   // Sources: skills/comic-production/references/prompt-templates.md (Style Prefix —
   // exact tested wording, do not rewrite) and cinematic-framing.md (hero framing +
-  // "volume block" golden-hour lighting). Three blocks:
-  //   • daz   — style prefix, PREPENDS (style anchors lead the prompt)
-  //   • cine  — framing + golden-hour lighting master block, APPENDS
-  //   • frame — framing ONLY (no lighting), APPENDS — for pairing with a separate
-  //             lighting choice, or when you'll relight the panel afterward
-  // NOTE: cine AND frame both DIRECT THE CAMERA, so they are for FRESH generations —
-  // they fight the i2i composition-lock sentence; for relight-only passes use the
-  // lighting block from the framing doc, not these.
+  // "volume block" golden-hour lighting). Four blocks:
+  //   • daz      — style prefix, PREPENDS (style anchors lead the prompt)
+  //   • director — scene-adaptive reframe, APPENDS — attach a source panel as ref;
+  //                the model chooses the camera (dolly/orbit/height/zoom) for the
+  //                beat instead of a prescribed angle. Keeps scene + lighting.
+  //   • cine     — framing + golden-hour lighting master block, APPENDS
+  //   • frame    — framing ONLY (no lighting), APPENDS — for pairing with a separate
+  //                lighting choice, or when you'll relight the panel afterward
+  // NOTE: cine AND frame both DIRECT THE CAMERA at a FIXED setup, so they are for
+  // FRESH generations — they fight the i2i composition-lock sentence. director is
+  // the opposite: it is FOR i2i reframes (source attached), and must NOT be paired
+  // with the composition lock either — its whole job is to move the camera.
   const PROMPT_BLOCKS = {
     daz: {
       where: "start",
       label: "DAZ style prefix",
       text: "Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art."
+    },
+    director: {
+      where: "end",
+      label: "Director block",
+      text: "You are the film director and cinematographer for this scene. Study the source image — who is in it, what they are doing, the emotion of the beat, and the space around them — then re-stage the CAMERA ONLY for maximum cinematic impact: dolly in or out, orbit around the subjects to a new angle, raise or lower the camera height, tilt it, frame tighter or wider — whatever this specific moment calls for. Keep the scene itself untouched: the same characters with the same faces, bodies, proportions, costumes, poses, expressions, action, speech bubbles, environment, and time of day — only the camera changes. Choose like a director: if the beat is emotional, move close on the faces; if it is a power moment, get low; if scale is the story, pull wide; if the tension lives between two characters, shoot past one onto the other; if one body region carries the beat, fill the frame with it. Vary your choice — do NOT default to a low hero angle: high angles looking down, pure profiles, over-the-shoulder, three-quarter rear, and top-down are all in play when they serve the beat. Strongly avoid the source image's exact framing — pick a meaningfully different distance AND a meaningfully different angle — and avoid flat, front-on, eye-level staging: put the subjects on diagonals, stage depth between foreground and background, let the physiques dominate the composition from whatever angle you choose. Do not re-light the scene: keep the existing lighting scheme and mood, re-rendered correctly and consistently from the new camera position. Photoreal DAZ3D CGI render, no restyling, no illustration drift."
     },
     cine: {
       where: "end",

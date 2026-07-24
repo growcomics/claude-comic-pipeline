@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-23 (🎥 Director block — scene-adaptive camera reframe, doc + extension v2.3.0)
+
+### Added
+
+- **"Director's-choice reframe — scene-adaptive camera" section in `cinematic-framing.md`.** Why: the fixed hero-framing fragments always return the same setup (three-quarter, mid-thigh-up, mild low angle) — the owner flagged that everything was coming back "low down, looking up." The Director block inverts the contract: attached-source i2i where the MODEL is told to act as the cinematographer — study the beat and choose the camera move (dolly / orbit / height / zoom), with guards: an explicit "do NOT default to a low hero angle" list of alternatives, "meaningfully different distance AND angle from the source," no flat eye-level staging, scene/poses/lettering/lighting preserved ("do not re-light"). Rules of engagement documented: never pair with the composition-lock sentence (opposite jobs); it deliberately carries no lighting language (run it on graded panels or follow with a volume pass); per-submit convergence is possible — resubmit with a one-line nudge to steer; chapter-level Variety-check quotas still apply. **Validated live** (NB2 Lite edit-mode i2i on the golden-hour door two-shot, laptop account): submit 1 orbited to a rear three-quarter (backs/glutes dominant, depth-staged), submit 3 chose a face-to-face MCU profile close-up (emotional-beat framing) — distinct, scene-justified setups, zero scene/lettering/lighting drift. Also restored the "## Rhythm patterns" section header that a prior edit had eaten.
+- **🎥 Director button in 3DMC Studio Tools (v2.2.2 → v2.3.0).** Fourth prompt-block button in the Flow panel's Prompt row, first position: appends the Director block (attach a source panel as ref first). Rides the v2.2.2 Slate-API insert pipeline unchanged; block-map comment + README updated with the fixed-vs-adaptive contrast and the no-composition-lock rule shared by all camera blocks.
+
 ## 2026-07-22
 
 ### Added

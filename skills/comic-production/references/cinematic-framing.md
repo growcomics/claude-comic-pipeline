@@ -209,6 +209,26 @@ Reserve the chiaroscuro variant for climax / dominance beats — it is the moodi
 
 Interactions: pairs with **L19** (SFX stays scope-bounded 2D overlay — max one SFX word + 2–3 short radial burst clusters per panel; full-frame speed lines re-trigger 2D drift) and **L20** (get close first — the block sculpts whatever the framing gives it, so a chest-up panel gains more perceived volume than a full-body one).
 
+---
+
+## Director's-choice reframe — scene-adaptive camera
+
+The fixed hero-framing fragments above always produce the same setup (three-quarter, mid-thigh-up, mild low angle) — reliable, but a chapter shot only with them ruts into low-and-heroic. The Director block inverts the contract: instead of prescribing the camera, it hands the model the *cinematographer's job* — study the attached source panel and choose the move (dolly, orbit, height change, tighter/wider) that serves that specific beat. Use it i2i: attach the source panel as the sole ref, then this block IS the prompt.
+
+> "You are the film director and cinematographer for this scene. Study the source image — who is in it, what they are doing, the emotion of the beat, and the space around them — then re-stage the CAMERA ONLY for maximum cinematic impact: dolly in or out, orbit around the subjects to a new angle, raise or lower the camera height, tilt it, frame tighter or wider — whatever this specific moment calls for. Keep the scene itself untouched: the same characters with the same faces, bodies, proportions, costumes, poses, expressions, action, speech bubbles, environment, and time of day — only the camera changes. Choose like a director: if the beat is emotional, move close on the faces; if it is a power moment, get low; if scale is the story, pull wide; if the tension lives between two characters, shoot past one onto the other; if one body region carries the beat, fill the frame with it. Vary your choice — do NOT default to a low hero angle: high angles looking down, pure profiles, over-the-shoulder, three-quarter rear, and top-down are all in play when they serve the beat. Strongly avoid the source image's exact framing — pick a meaningfully different distance AND a meaningfully different angle — and avoid flat, front-on, eye-level staging: put the subjects on diagonals, stage depth between foreground and background, let the physiques dominate the composition from whatever angle you choose. Do not re-light the scene: keep the existing lighting scheme and mood, re-rendered correctly and consistently from the new camera position. Photoreal DAZ3D CGI render, no restyling, no illustration drift."
+
+Rules of engagement:
+
+- **Never pair it with the composition-lock sentence** — its whole job is to move the camera; the lock's whole job is to forbid that. (The fixed framing fragments have the same conflict; the lighting-pass volume block is the only one that rides with the lock.)
+- **It deliberately does not carry the volume-lighting language** — it preserves whatever lighting the source has ("do not re-light"), so run it on panels that already carry the grade you want, or follow it with a volume pass.
+- **Per-batch variance is real but per-submit convergence is possible** — the block asks the model to justify the choice from the scene, and x4 batches typically return 2–3 distinct setups; if a batch converges on one angle you don't want, resubmit with a nudge appended ("this beat reads best from above" / "favor the over-the-shoulder option").
+- **QA against the Variety check below as usual** — the block is a per-panel tool; the chapter-level distance × angle quotas still apply.
+- Available as the **🎥 Director** one-click button in the 3DMC Studio Tools Flow panel (v2.3.0), alongside Cine+Light / Framing / DAZ style.
+
+---
+
+## Rhythm patterns — how to actually vary shots across a sequence
+
 Variety isn't randomness. Cinematic comics follow patterns. Four reliable ones:
 
 ### Pattern 1 — The pull-in (build to a beat)
