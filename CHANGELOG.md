@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-25 (🧍 Character turnaround-sheet block — canonical template + extension v2.4.0)
+
+### Added
+
+- **"Character Turnaround Sheet" section in `prompt-templates.md`.** Codified the owner's oft-repeated ad-hoc sheet prompt into canonical tested wording: i2i with the character attached as sole ref → full-body FRONT + BACK (seen from directly behind) + SIDE PROFILE in the same neutral standing pose at identical scale, plus a large face CLOSE-UP PORTRAIT, on a clean light-grey studio background with no scenery. Two variants — a header name plate reading the character's name in capitals, or a "no text, no labels, no name plate anywhere" variant — because a `[NAME]`-style placeholder left unfilled is a documented failure mode. Notes cover its role as the base-ref generator for the L1 chaining stack and the L21 pairing when the sheet is later attached as a ref. **Validated live** (NB2 Lite i2i on a solo Chun-Li source, laptop account, x4): all variants returned proper model sheets — "CHUN-LI" name plate, consistent outfit/proportions/muscle tier across views, face portrait, clean studio ground; the model even added small per-view labels (FRONT / SIDE PROFILE / BACK / CLOSE-UP PORTRAIT) unprompted.
+- **🧍 Char sheet button in 3DMC Studio Tools (v2.3.0 → v2.4.0).** Fifth prompt-block button in the Flow panel's Prompt row. On click it `window.prompt()`s for the character's name — blank inserts the no-text variant, a name inserts the name-plate variant with the name upper-cased — so no unfilled placeholder can ever reach the composer (`askName` flag + `textNamed`/`%NAME%` template in the block map). Rides the v2.2.2 Slate insert pipeline; README updated.
+
 ## 2026-07-23 (🎥 Director block — scene-adaptive camera reframe, doc + extension v2.3.0)
 
 ### Added

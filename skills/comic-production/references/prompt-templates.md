@@ -39,6 +39,22 @@ Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an
 
 ---
 
+## Character Turnaround Sheet
+
+i2i: attach the character image as the sole ref, then this block is the whole prompt. Codified 2026-07-23 from the owner's ad-hoc sheet prompts (the "CHARACTER REFERENCE:" pages in the Flow archive); available as the **🧍 Char sheet** one-click button in 3DMC Studio Tools (v2.4.0), which asks for the name at click time. Two variants — NEVER leave a `[NAME]`-style placeholder unfilled (documented failure mode: the model hunts for it).
+
+**With name plate** (replace `%NAME%` with the character's name in capitals):
+
+```
+Create a professional character model sheet — a full turnaround reference page for the character in the source image, preserving the exact same face, hairstyle, body proportions, muscle size, and outfit in every view. Clean plain light-grey studio background, soft even studio lighting, no scenery, no props beyond what the character wears. Layout: a FULL-BODY FRONT view, a FULL-BODY BACK view seen from directly behind, and a FULL-BODY SIDE PROFILE view, all in the same relaxed neutral standing pose, at identical scale and height, evenly spaced across the page like an animation turnaround. Plus one large CLOSE-UP PORTRAIT of the face, front three-quarter from the shoulders up, showing the hairstyle and facial features clearly. A bold header name plate reading “%NAME%” in clean capital letters sits at the top of the page; no other text or labels anywhere. Flat reference-sheet presentation: straight-on camera for every view, no dramatic angles, no action poses, no environment; every view is the same character at the same size. Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art.
+```
+
+**Without name** (no lettering at all): same block, but swap the name-plate sentence for *"No text, no labels, no name plate anywhere on the page."*
+
+Notes: works as the base-ref generator for the L1 chaining stack (face card / view pack); pairs with L21 when the sheet is later ATTACHED as a ref (suppress in-scene rendering of the sheet itself); the neutral-pose / identical-scale / straight-on-camera clauses are what keep the views usable as proportion anchors rather than pin-ups.
+
+---
+
 ## Mandatory Rules Block
 
 > **Active — all ten rules.** Per **L19** (May 16, 2026 rewrite), classic 2D comic-book lettering is baked into the CGI render with the 2D scope explicitly bounded to bubble/caption/SFX graphics; the bodies and scene stay photoreal CGI. The dialogue lines below apply alongside the rest of the block. Paste the full block — and pair it with the L19 opening render-engine anchor and the closing scope-bounded negation block: *"Photographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay."*

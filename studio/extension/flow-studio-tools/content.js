@@ -78,7 +78,7 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock)">🎬 Framing</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock)">🎬 Framing</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -190,11 +190,16 @@
   // ───────── Prompt blocks — one-click paste of canonical prompt presets ─────
   // Sources: skills/comic-production/references/prompt-templates.md (Style Prefix —
   // exact tested wording, do not rewrite) and cinematic-framing.md (hero framing +
-  // "volume block" golden-hour lighting). Four blocks:
+  // "volume block" golden-hour lighting). Five blocks:
   //   • daz      — style prefix, PREPENDS (style anchors lead the prompt)
   //   • director — scene-adaptive reframe, APPENDS — attach a source panel as ref;
   //                the model chooses the camera (dolly/orbit/height/zoom) for the
   //                beat instead of a prescribed angle. Keeps scene + lighting.
+  //   • sheet    — character turnaround reference page, APPENDS — attach the
+  //                character as ref; front/back/side + face close-up on a clean
+  //                studio background. askName: prompts for the character's name on
+  //                click (blank = "no text/name plate" variant) — never leaves an
+  //                unfilled [placeholder] in the prompt (documented failure mode).
   //   • cine     — framing + golden-hour lighting master block, APPENDS
   //   • frame    — framing ONLY (no lighting), APPENDS — for pairing with a separate
   //                lighting choice, or when you'll relight the panel afterward
@@ -207,6 +212,13 @@
       where: "start",
       label: "DAZ style prefix",
       text: "Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art."
+    },
+    sheet: {
+      where: "end",
+      label: "Turnaround sheet block",
+      askName: true,
+      text: "Create a professional character model sheet — a full turnaround reference page for the character in the source image, preserving the exact same face, hairstyle, body proportions, muscle size, and outfit in every view. Clean plain light-grey studio background, soft even studio lighting, no scenery, no props beyond what the character wears. Layout: a FULL-BODY FRONT view, a FULL-BODY BACK view seen from directly behind, and a FULL-BODY SIDE PROFILE view, all in the same relaxed neutral standing pose, at identical scale and height, evenly spaced across the page like an animation turnaround. Plus one large CLOSE-UP PORTRAIT of the face, front three-quarter from the shoulders up, showing the hairstyle and facial features clearly. Flat reference-sheet presentation: straight-on camera for every view, no dramatic angles, no action poses, no environment; every view is the same character at the same size. No text, no labels, no name plate anywhere on the page. Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art.",
+      textNamed: "Create a professional character model sheet — a full turnaround reference page for the character in the source image, preserving the exact same face, hairstyle, body proportions, muscle size, and outfit in every view. Clean plain light-grey studio background, soft even studio lighting, no scenery, no props beyond what the character wears. Layout: a FULL-BODY FRONT view, a FULL-BODY BACK view seen from directly behind, and a FULL-BODY SIDE PROFILE view, all in the same relaxed neutral standing pose, at identical scale and height, evenly spaced across the page like an animation turnaround. Plus one large CLOSE-UP PORTRAIT of the face, front three-quarter from the shoulders up, showing the hairstyle and facial features clearly. A bold header name plate reading “%NAME%” in clean capital letters sits at the top of the page; no other text or labels anywhere. Flat reference-sheet presentation: straight-on camera for every view, no dramatic angles, no action poses, no environment; every view is the same character at the same size. Hyperrealistic DAZ3D Studio 3D CGI render, physically-based rendering — NOT an illustration, NOT anime, NOT cartoon, NOT 2D drawn art."
     },
     director: {
       where: "end",
@@ -242,7 +254,13 @@
     return clone.textContent.replace(/[﻿​]/g, "").trim();
   }
   function insertPromptBlock(kind) {
-    const blk = PROMPT_BLOCKS[kind]; if (!blk) return;
+    let blk = PROMPT_BLOCKS[kind]; if (!blk) return;
+    if (blk.askName) {
+      const nm = window.prompt("Character name for the sheet's name plate (leave blank for no name):", "");
+      if (nm === null) return; // cancelled
+      const t = nm.trim();
+      blk = Object.assign({}, blk, { text: t ? blk.textNamed.replace("%NAME%", t.toUpperCase()) : blk.text });
+    }
     const box = findPromptBox();
     if (!box) { status("No Flow prompt box on screen — open a project composer first."); return; }
     box.el.focus();
