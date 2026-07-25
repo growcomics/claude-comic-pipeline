@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-25
+
+- **🗓 Posting board shipped — studio/posting.php (LIVE)**: cross-property content
+  queue with per-platform locked-&-loaded tracking. Lanes: Fan Art Friday (next 4
+  Fridays rendered as fill-me slots), Monthly comic (per-property slot grid for
+  current + next month), Side content. Items carry title/slot/owner/caption
+  (copy-button)/asset links/notes; platform chips (Site/Patreon/DeviantArt/X/IG)
+  click-cycle todo→scheduled→posted→n/a; item goes 🔒 locked & loaded when ready +
+  all platforms armed. Board never posts anywhere itself — a human fires.
+  Auth: studio session OR bridge key (headless, same data/bridge.json key).
+  State: studio/data/posting.json (live data, gitignored). cc.php's "soon" Posting
+  calendar tile flipped to a live link via fetch-live protocol (marker
+  CK-POSTING-TILE, one-line diff verified). Smoke-tested add/cycle/del headlessly.
+  Grounded in the 2026-07-25 publishing-reality crawl (see posting-ops memory).
+
 ## 2026-07-25 (🧍 Character turnaround-sheet block — canonical template + extension v2.4.0)
 
 ### Added
