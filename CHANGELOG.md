@@ -12,6 +12,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-25 (2)
+
+- **🅿️ Patreon live-stats sync shipped**: new studio/patreon-sync.php pulls
+  patron_count for all four Patreon accounts (growgetter/maxxmuscle/bloombeauty/
+  3dmuscle) via API v2 creator tokens and caches data/patreon-stats.json; tokens
+  live OUTSIDE the web root (<home>/private/patreon-tokens.json, verified 404
+  from the web). posting.php gained a Patreon strip (per-property member counts,
+  color dots, synced-X-ago, ↻ sync now). Daily cPanel cron (06:17 UTC) hits the
+  sync with the bridge key so counts refresh with no device awake. First live
+  sync verified: GG 3,511 / Maxx 1,422 / Bloom 511 / 3DMC 97.
+
 ## 2026-07-25
 
 - **🗓 Posting board shipped — studio/posting.php (LIVE)**: cross-property content

@@ -262,6 +262,33 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 <?php
 if (isset($_GET['ok'])) echo '<div class="po-banner ok">Saved.</div>';
 if (isset($_GET['err'])) echo '<div class="po-banner err">' . h((string)$_GET['err']) . '</div>';
+
+// 🅿️ Patreon member-count strip (cached by patreon-sync.php)
+$pstats = s_read(SDATA . '/patreon-stats.json', array());
+$syncUrl = 'patreon-sync.php?back=1' . ($keyAuthed ? '&key=' . urlencode((string)($_GET['key'] ?? '')) : '');
+echo '<div class="po-sec" style="padding:10px 18px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap">';
+echo '<strong style="font-size:13px">🅿️ Patreon</strong>';
+if (!empty($pstats['accounts'])) {
+    $names = array('growgetter' => 'GrowGetter', 'maxxmuscle' => 'MAXX', 'bloombeauty' => 'Bloom', '3dmuscle' => '3DMC');
+    foreach ($names as $pk => $label) {
+        $a = $pstats['accounts'][$pk] ?? null;
+        if (!$a) continue;
+        $col = isset($PROPS[$pk]) ? $PROPS[$pk]['color'] : '#378ADD';
+        echo '<span class="small"><span class="dot" style="background:' . h($col) . ';width:8px;height:8px;border-radius:2px;display:inline-block;margin-right:5px"></span>';
+        if (!empty($a['ok'])) {
+            echo '<a href="' . h($a['url']) . '" target="_blank" rel="noopener" style="color:var(--text)">' . h($label) . '</a> <strong>' . number_format((int)$a['members']) . '</strong>';
+        } else {
+            echo h($label) . ' <span style="color:#ff9aa6">sync err</span>';
+        }
+        echo '</span>';
+    }
+    $age = time() - (int)strtotime((string)($pstats['ts'] ?? ''));
+    $ageTxt = $age < 3600 ? floor($age / 60) . 'm' : ($age < 86400 ? floor($age / 3600) . 'h' : floor($age / 86400) . 'd');
+    echo '<span class="small" style="color:var(--muted)">synced ' . h($ageTxt) . ' ago · <a href="' . h($syncUrl) . '">↻ sync now</a></span>';
+} else {
+    echo '<span class="small" style="color:var(--muted)">no data yet — <a href="' . h($syncUrl) . '">run first sync</a></span>';
+}
+echo '</div>';
 ?>
 
 <?php if ($newOpen): ?>
