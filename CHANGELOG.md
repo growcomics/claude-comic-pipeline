@@ -12,6 +12,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-25 (3)
+
+- **GiantessGirl fully retired from our systems** (owner: property was given away).
+  WP application password revoked via REST (verified 401 after) + local credential
+  file deleted; posting.php monthly-comic lanes now growgetter/maxxmuscle/
+  bloombeauty only; live cc-sites.json marks giantessgirl active:false and
+  renames it "(transferred)". Its Patreon was never tokenized. Social links kept
+  in config as reference only.
+
 ## 2026-07-25 (2)
 
 - **🅿️ Patreon live-stats sync shipped**: new studio/patreon-sync.php pulls

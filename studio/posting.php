@@ -17,7 +17,8 @@ $ISTATES = array('draft', 'ready', 'posted', 'skipped');
 
 $SITES = s_read(SDATA . '/cc-sites.json', array());
 $PROPS = array();
-foreach (array('growgetter', 'maxxmuscle', 'bloombeauty', 'giantessgirl') as $pk) {
+// giantessgirl removed 2026-07-25 — property transferred away, not ours to schedule
+foreach (array('growgetter', 'maxxmuscle', 'bloombeauty') as $pk) {
     if (isset($SITES[$pk])) $PROPS[$pk] = array('name' => (string)$SITES[$pk]['name'], 'color' => (string)$SITES[$pk]['color']);
 }
 
