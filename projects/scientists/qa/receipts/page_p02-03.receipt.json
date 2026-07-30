@@ -1,7 +1,7 @@
 {
  "job": "page:p02-03",
  "kind": "page",
- "prompt_sha": "6bacbc4a83a383039bc28ed40ad3030205c44eca71cfcbfc1df84cfb538c6532",
+ "prompt_sha": "04a75b609007210cc5647e968282e3971fa29f87afda23b801bc1bbc200279a4",
  "attach": [
   "face:rochelle",
   "turnaround:rochelle:turnaround_baseline",

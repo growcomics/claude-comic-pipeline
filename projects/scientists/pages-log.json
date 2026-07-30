@@ -1,173 +1,144 @@
 {
   "done": {
     "p01-01": {
-      "flow_id": "3369c7c6-13f4-4324-b153-473a6fc8e801",
+      "flow_id": "b131ef07-1086-4de5-b408-dd9bcab54b74",
       "disk": "pages/p01-01.png",
       "chain": {
         "receipt": "qa/receipts/page_p01-01.receipt.json",
         "audit": "qa/receipts/page_p01-01.audit-pass",
         "verdict": "qa/receipts/page_p01-01.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "environment-consistency",
-          "hand-count-ok",
-          "camera-angle-mild"
+          "caption-yellow-box",
+          "oval-bubble",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "ca540fe5ef79e61f88ac97acbe3f692eb4fa376870cf4c19b017f3e4b38896ca"
+        "prompt_sha": "12f00d308ccef070e2396591852d4154652b2ff0ff6140aab4218d6b5e261fd1"
       }
     },
     "p02-01": {
-      "flow_id": "1b511048-6115-4b98-abb5-b41d39a57e49",
+      "flow_id": "48c985f1-1d36-49dd-9bb3-3b616007a36c",
       "disk": "pages/p02-01.png",
       "chain": {
         "receipt": "qa/receipts/page_p02-01.receipt.json",
         "audit": "qa/receipts/page_p02-01.audit-pass",
         "verdict": "qa/receipts/page_p02-01.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "environment-consistency",
-          "hand-count-ok",
-          "vfx-glow"
+          "caption-yellow-box",
+          "oval-bubble",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "e225f67611af18bd5485537b1b0977632aeca78c5529a9e2b2a902384b2e16f0"
+        "prompt_sha": "fb13006c8e25ca391bb2a9644ad926322db40b834503ada5895211a44a514a76"
       }
     },
     "p01-03": {
-      "flow_id": "44ac7a4c-3126-4e44-a906-ae2c13e0f11c",
+      "flow_id": "1d2171fa-a947-4bc1-a2e8-25e68394366e",
       "disk": "pages/p01-03.png",
       "chain": {
         "receipt": "qa/receipts/page_p01-03.receipt.json",
         "audit": "qa/receipts/page_p01-03.audit-pass",
         "verdict": "qa/receipts/page_p01-03.verdict.json",
         "verdict_tags": [
+          "oval-bubble",
+          "photoreal-body",
           "on-model",
-          "close-mcu",
-          "diagonal-staging",
-          "fg-element",
-          "morning-raking-light",
-          "two-hands",
-          "no-text",
-          "expression-subtle"
+          "solo-speaker-tail-loose"
         ],
-        "prompt_sha": "a9dea1c8e0f518ebc984de45c5f1f4952af7a697371d1c1d41d9bcfd1a042287"
+        "prompt_sha": "bf98ab0d93996e2b476ed6327e11858b578713a7af3a36c50f3c775a67e77fef"
       }
     },
     "p02-03": {
-      "flow_id": "7503b378-6054-4225-b27c-e5d506872ef2",
+      "flow_id": "4c1a9de5-19a3-40d3-86e3-35f5fcc44535",
       "disk": "pages/p02-03.png",
       "chain": {
         "receipt": "qa/receipts/page_p02-03.receipt.json",
         "audit": "qa/receipts/page_p02-03.audit-pass",
         "verdict": "qa/receipts/page_p02-03.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "close-mcu",
-          "eye-level",
-          "two-hands",
-          "fg-element",
-          "defocused-background",
-          "coat-continuity-good",
-          "no-text"
+          "oval-bubble",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "6bacbc4a83a383039bc28ed40ad3030205c44eca71cfcbfc1df84cfb538c6532"
+        "prompt_sha": "04a75b609007210cc5647e968282e3971fa29f87afda23b801bc1bbc200279a4"
       }
     },
     "p02-04": {
-      "flow_id": "23a2a4da-9e20-45cf-bece-c7701d62e33d",
+      "flow_id": "b2b5e8ec-d60a-4eca-bfe4-40c923137873",
       "disk": "pages/p02-04.png",
       "chain": {
         "receipt": "qa/receipts/page_p02-04.receipt.json",
         "audit": "qa/receipts/page_p02-04.audit-pass",
         "verdict": "qa/receipts/page_p02-04.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "two-hands",
-          "fg-element",
-          "lab-coat-continuity-good",
-          "angle-drift-toward-full-profile",
-          "no-text"
+          "thought-cloud",
+          "dot-trail",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "b65f990adafac5f702ea79f13d5131f6620202fcf6126eef153d7a1f5c71be07"
+        "prompt_sha": "b3bd8263e9b0772732f54bb899841d24d16517fd0f57d1e01c40d023410949a9"
       }
     },
     "p01-02": {
-      "flow_id": "17638886-5677-4470-8c61-ff2a4cd9f9f6",
+      "flow_id": "c214d0ab-dd02-44a9-8f3f-2f7fbc60c905",
       "disk": "pages/p01-02.png",
       "chain": {
         "receipt": "qa/receipts/page_p01-02.receipt.json",
         "audit": "qa/receipts/page_p01-02.audit-pass",
         "verdict": "qa/receipts/page_p01-02.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "ots-good",
-          "soft-fg-mass-jim",
-          "four-hands-correct",
-          "kitchen-continuity",
-          "morning-light-continuity",
-          "hand-planted-counter-good",
-          "gesture-hand-good",
-          "low-ish-camera-good",
-          "no-text"
+          "jagged-starburst-shout",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "53d7c58f593d9fe6f9e71b11d3cea7b06afdbbe854d9b452efab5dd72baf82dd"
+        "prompt_sha": "020143f0187c4bcd577be4ab48790725bb6a26807a0b169091a0a49d2bdf19fc"
       }
     },
     "p01-04": {
-      "flow_id": "1c04a4d5-fb1b-44bf-8139-b212a365a658",
+      "flow_id": "906bb7c3-6e70-4dd4-bfbb-83d66070566f",
       "disk": "pages/p01-04.png",
       "chain": {
         "receipt": "qa/receipts/page_p01-04.receipt.json",
         "audit": "qa/receipts/page_p01-04.audit-pass",
         "verdict": "qa/receipts/page_p01-04.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "reverse-ots-good",
-          "kitchen-continuity",
-          "donut-near-mouth-good",
-          "defensive-shrug-good",
-          "oof-fg-hair-shoulder-good",
-          "angle-mild-not-extreme-high",
-          "no-text"
+          "oval-bubble",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "10b54af1dec515cbd50c192cd9b3f3e7951097eb32c4177e41689453c90d1242"
+        "prompt_sha": "00524fde45f6c04af9b07bba1ef95cc679ec6792c89938d72abfdffd443f9765"
       }
     },
     "p01-05": {
-      "flow_id": "cbccb743-1ad3-4979-8263-c2816e1feed5",
+      "flow_id": "e76bf5c3-8d30-4a67-a92b-ebc1848d729b",
       "disk": "pages/p01-05.png",
       "chain": {
         "receipt": "qa/receipts/page_p01-05.receipt.json",
         "audit": "qa/receipts/page_p01-05.audit-pass",
         "verdict": "qa/receipts/page_p01-05.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "size-depth-contrast-good",
-          "doorframe-fg-good",
-          "deflated-bg-jim-good",
-          "extra-coat-carried-non-defect",
-          "no-text"
+          "oval-bubble",
+          "tail-to-background-speaker",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "914d41b246505d9beb5fe5f43214c80ae2766080abe4fe425863a7917dadbcbd"
+        "prompt_sha": "2ede02f2fe5e28dbf4d3620b3eea64be94a6a9029ee7ac85fbaff8a402ccb667"
       }
     },
     "p02-02": {
-      "flow_id": "258d74a4-44c0-44a2-a6cd-4317e4923ce8",
+      "flow_id": "829901ed-6bba-45a8-ad72-8e1f1f81be9a",
       "disk": "pages/p02-02.png",
       "chain": {
         "receipt": "qa/receipts/page_p02-02.receipt.json",
         "audit": "qa/receipts/page_p02-02.audit-pass",
         "verdict": "qa/receipts/page_p02-02.verdict.json",
         "verdict_tags": [
-          "on-model",
-          "lab-coat-continuity-restored",
-          "low-camera-favors-jill-good",
-          "four-hands-correct",
-          "staging-diagonal-good",
-          "fg-element-good",
-          "no-text",
-          "v2-fixes-D4-costume-regression"
+          "oval-bubble",
+          "dual-speaker-both-labcoats",
+          "photoreal-body",
+          "on-model"
         ],
-        "prompt_sha": "47f8e15e7992f641dae3a8fb97c1d4fcbb36d8c8c8319ac0ee424422e4055cf8"
+        "prompt_sha": "c4dd5242dc3d6d132166e8d19b46e9ea54062fafe8f52a8ccb6d4281832cff96"
       }
     }
   },
