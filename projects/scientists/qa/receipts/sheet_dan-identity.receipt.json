@@ -1,0 +1,16 @@
+{
+ "job": "sheet:dan-identity",
+ "kind": "sheet",
+ "prompt_sha": "c70a7f80d643825b87a05d1ebb1b9e9571a5f7ca196b83d55641d18afb9d5d01",
+ "attach": [
+  "reference lineart: references/harvest/dan-baseline-p19.jpg",
+  "reference lineart: references/harvest/dan-grown-p20.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "bald, strong jaw matches lineart; athletic baseline; white tank + jeans; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

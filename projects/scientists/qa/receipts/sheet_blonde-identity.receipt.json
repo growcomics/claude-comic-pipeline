@@ -1,0 +1,16 @@
+{
+ "job": "sheet:blonde-identity",
+ "kind": "sheet",
+ "prompt_sha": "684532ac97b63a67885a33215eee679fde746b5e9c6398648e9164336c7c3956",
+ "attach": [
+  "reference lineart: references/harvest/blonde-entry-p25.jpg",
+  "reference lineart: references/harvest/blonde-face-p25.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; long straight blonde hair; blouse + pencil skirt; large round bust; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

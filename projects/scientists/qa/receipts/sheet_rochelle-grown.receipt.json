@@ -1,0 +1,18 @@
+{
+ "job": "sheet:rochelle-grown",
+ "kind": "sheet",
+ "prompt_sha": "d2ec90a9cad4a46b783d8bddf6ff06a0fe50e9fe8e68b5a4447cd5b8ed456a23",
+ "attach": [
+  "reference lineart: references/harvest/rochelle-flex-p16-cov.jpg",
+  "reference lineart: references/harvest/rochelle-face-vials-p18.jpg",
+  "reference lineart: references/harvest/rochelle-drink-p14.jpg",
+  "reference lineart: references/harvest/rochelle-arms-p39.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face/bob as identity refs; breasts as large and round as the lineart; muscles round and full, beyond-bodybuilder; tank+coat+joggers straining but covering; two views incl. rear; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

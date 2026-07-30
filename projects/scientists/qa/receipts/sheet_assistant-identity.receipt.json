@@ -1,0 +1,16 @@
+{
+ "job": "sheet:assistant-identity",
+ "kind": "sheet",
+ "prompt_sha": "639df680aee8b367edfeeea4a0af43d0571c0222ad971de4366661cc6e7d9d46",
+ "attach": [
+  "reference lineart: references/harvest/assistant-listen-p13.jpg",
+  "reference lineart: references/harvest/assistant-body-p17.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; slim petite, timid look; cardigan + blouse + skirt; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

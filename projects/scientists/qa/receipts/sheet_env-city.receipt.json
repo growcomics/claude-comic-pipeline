@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-city",
+ "kind": "sheet",
+ "prompt_sha": "1fdf47a631f7bc75f6a9f5c233480eb3015f47906dc7d7352cfac30ca0526851",
+ "attach": [
+  "reference lineart: references/harvest/env-city-p43-rubble.jpg",
+  "reference lineart: references/harvest/env-city-p44-building.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "ruined city block, collapsed buildings, dusk; scale silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

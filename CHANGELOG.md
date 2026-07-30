@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-29
+
+### Added
+
+- **projects/scientists — full asset build for the GrowGetter "Scientists" remake** (owner request, via platform backend `growgetter/scientists`). 44 source pages harvested from growgettercomics.com; 4-batch spotter scan + identity-resolver pass locked an 8-slot cast (Rochelle bob-antagonist / Jill rival / Jim / Donny / Dan / assistant / blonde one-off / 5-girl cheer squad), resolving the source's Jim-name reuse and hair-drift continuity errors (see `references/CANON-NOTES.md`). 21 sheets generated on Higgsfield **nano_banana_pro** 1k with original-panel lineart crops attached as i2i refs (NSFW panels re-clothed via prompt; 4 crops needed drawn-on coverage to clear upload screening; env-city needed figure-free crops to clear output screening). Full compose→audit→submit→fresh-subagent-verdict→bank chain on every sheet (qa/ scaffold copied intact from ultra-gal-origin, manifest fingerprint 768c204c16de92f3); 20 banked in `references/ref-ledger.json` + cast-lineup pending at commit time. 2 re-rolls (jim-grown size tier, cheer-squad hairstyle fidelity). Known deviations logged: compose VERIFY-PILL still prints the stale Flow "Nano Banana 2 x4" line (submits went Higgsfield pro x1 per owner instruction, verified against the credit ledger); cast-lineup rendered 21:9 vs receipt 16:9.
+
+
 ## 2026-07-25 (3)
 
 - **GiantessGirl fully retired from our systems** (owner: property was given away).

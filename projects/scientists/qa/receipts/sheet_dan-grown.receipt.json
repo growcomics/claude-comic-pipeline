@@ -1,0 +1,16 @@
+{
+ "job": "sheet:dan-grown",
+ "kind": "sheet",
+ "prompt_sha": "44c97bcab64d642294d0a46dc0d4e5c2cfae9abe3a58c0c432dac4d362db2b8d",
+ "attach": [
+  "reference lineart: references/harvest/dan-grown-p20.jpg",
+  "reference lineart: references/harvest/dan-baseline-p19.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "bald, same face; largest male physique, muscles round per lineart; shirtless + jeans; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

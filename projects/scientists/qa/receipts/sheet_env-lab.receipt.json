@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-lab",
+ "kind": "sheet",
+ "prompt_sha": "6dcb41c485698e54dcd4da426cc6530a468494313f8be9de9976e98734cf6b3a",
+ "attach": [
+  "reference lineart: references/harvest/env-lab-p02.jpg",
+  "reference lineart: references/harvest/blonde-entry-p25.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "empty lab matching lineart layout (glass door, benches, shelving); photoreal; scale silhouette at door; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

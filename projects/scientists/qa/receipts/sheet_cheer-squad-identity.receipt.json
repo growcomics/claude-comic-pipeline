@@ -1,0 +1,17 @@
+{
+ "job": "sheet:cheer-squad-identity",
+ "kind": "sheet",
+ "prompt_sha": "61e07956ef46fe0bed377c95fcb658efe2dad7afc1d702cf834ceae5498bb466",
+ "attach": [
+  "reference lineart: references/harvest/cheer-field-p34.jpg",
+  "reference lineart: references/harvest/cheer-buns-p34.jpg",
+  "reference lineart: references/harvest/cheer-lineup-p36.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "exactly five women; five distinct hairstyles per spec; matching red/white cheer uniforms intact; baseline slim builds; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

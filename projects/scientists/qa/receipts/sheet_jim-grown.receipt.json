@@ -1,0 +1,16 @@
+{
+ "job": "sheet:jim-grown",
+ "kind": "sheet",
+ "prompt_sha": "dd76aa60408e6d5aa57a38fcf56395ab57cc92ec9b1d0427191d9bdd31ccc4f3",
+ "attach": [
+  "reference lineart: references/harvest/jim-grown-p12.jpg",
+  "reference lineart: references/harvest/jim-face-p01.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face/hair as identity; muscles round and huge per lineart; shirtless + grey sweatpants; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

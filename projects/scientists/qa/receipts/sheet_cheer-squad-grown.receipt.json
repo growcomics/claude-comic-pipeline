@@ -1,0 +1,16 @@
+{
+ "job": "sheet:cheer-squad-grown",
+ "kind": "sheet",
+ "prompt_sha": "72414e3caf8362402915933aa6d74b2c2ca7cd9aaaefd9978822fdde4d717b62",
+ "attach": [
+  "reference lineart: references/harvest/cheer-lineup-p36.jpg",
+  "reference lineart: references/harvest/cheer-ponytail-p37-cov.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "exactly five women, same hairstyles as baseline; muscles+breasts at lineart scale, ponytail girl biggest; uniforms strained/split but covering; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

@@ -1,0 +1,271 @@
+{
+  "_note": "Sheet specs consumed by qa/compose.py --job sheet:<id>. Prompts are the ONLY legal generation text once composed. All refs are lineart crops in references/harvest/ (see CANON-NOTES.md). Model: Higgsfield nano_banana_pro, 1k, count=1, aspect 16:9.",
+  "sheets": [
+    {
+      "id": "rochelle-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman from the attached black-and-white lineart comic panels into a 3D person with the same face structure, hair and proportions as drawn: an adult female scientist around 30 with a dark-brown chin-length bob with side-swept fringe, small stud earrings, brown eyes, fair skin, a soft curvy non-athletic figure with large round full breasts, wide hips and a slightly plump waist. She wears a white lab coat over a teal blouse and grey pencil skirt, all garments intact. Neutral confident expression. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. She stands beside a plain grey 5-foot-6 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no necklace. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/rochelle-baseline-p01.jpg",
+        "reference lineart: references/harvest/rochelle-face-vials-p18.jpg"
+      ],
+      "save": "references/characters/rochelle/identity-sheet.png",
+      "ledger_key": "rochelle.face",
+      "also_keys": [
+        "rochelle.turnaround_baseline"
+      ],
+      "gate": "face matches lineart bob + stud earrings; soft curvy baseline body with large round breasts; lab coat + teal blouse + grey pencil skirt; photoreal 3D not 2D; scale silhouette present; two views; no baked text"
+    },
+    {
+      "id": "rochelle-grown",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the hyper-muscular woman from the attached black-and-white lineart comic panels into a 3D person with the same face, same dark-brown chin-length bob with side-swept fringe, small stud earrings, and the same extreme proportions as drawn, kept at full scale: enormous perfectly round full breasts that project far forward from her ribcage, thick round muscle bellies everywhere \u2014 cannonball shoulders, softball biceps, deep rounded pecs beneath the breasts, hard cobblestone abs, a dramatically small waist, wide flaring lats and big round glutes and thighs. Physique far beyond a female bodybuilder. She wears a strained white tank top stretched to its limit but fully covering her breasts, an open white lab coat pulled tight at the shoulders, and grey joggers; every seam strains, nothing rips open, coverage preserved. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view showing back and glutes. She stands beside a plain grey 5-foot-6 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no necklace. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/rochelle-flex-p16-cov.jpg",
+        "reference lineart: references/harvest/rochelle-face-vials-p18.jpg",
+        "reference lineart: references/harvest/rochelle-drink-p14.jpg",
+        "reference lineart: references/harvest/rochelle-arms-p39.jpg"
+      ],
+      "save": "references/characters/rochelle/turnaround-grown.png",
+      "ledger_key": "rochelle.turnaround_grown",
+      "gate": "same face/bob as identity refs; breasts as large and round as the lineart; muscles round and full, beyond-bodybuilder; tank+coat+joggers straining but covering; two views incl. rear; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "rochelle-titan",
+      "prompt": "Character scale sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the building-scale woman from the attached black-and-white lineart comic panels into a 3D figure with the same face, same dark-brown chin-length bob, and the same extreme proportions as drawn, kept at full scale: enormous perfectly round breasts, mountainous round muscle bellies, tiny waist, immense round glutes and thighs \u2014 the final goddess form of the character. She wears a white improvised wrap costume with torn edges that fully covers her breasts and groin. She stands amid the rubble of a ruined city street at dusk, collapsed multi-story buildings reaching only to her thighs; a plain grey human scale silhouette figure stands near her foot for scale. Triumphant expression, hands on hips. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/rochelle-titan-p44.jpg",
+        "reference lineart: references/harvest/rochelle-titan-p42.jpg",
+        "reference lineart: references/harvest/rochelle-face-vials-p18.jpg"
+      ],
+      "save": "references/characters/rochelle/turnaround-titan.png",
+      "ledger_key": "rochelle.turnaround_titan",
+      "gate": "same face/bob; building-scale vs ruined city; wrap costume covers breasts+groin; human silhouette at foot for scale; proportions match p44 splash; photoreal; no baked text"
+    },
+    {
+      "id": "jill-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman from the attached black-and-white lineart comic panels into a 3D person with the same face structure, hair and proportions as drawn: an adult female scientist around 30 with long caramel-brown wavy hair swept to one side, green eyes, fair skin, a slim attractive figure with large round breasts and a confident sly expression. She wears a white lab coat over a burgundy blouse and black slacks, all garments intact. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. She stands beside a plain grey 5-foot-7 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/jill-baseline-p02.jpg",
+        "reference lineart: references/harvest/jill-face-p07.jpg"
+      ],
+      "save": "references/characters/jill/identity-sheet.png",
+      "ledger_key": "jill.face",
+      "also_keys": [
+        "jill.turnaround_baseline"
+      ],
+      "gate": "face matches lineart; long wavy side-swept hair; slim baseline with large round breasts; lab coat + burgundy blouse + black slacks; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "jill-grown",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the hyper-muscular woman from the attached black-and-white lineart comic panels into a 3D person with the same face, same long caramel-brown wavy side-swept hair, and the same extreme proportions as drawn, kept at full scale: enormous perfectly round full breasts projecting far forward, thick round muscle bellies \u2014 cannonball shoulders, softball biceps, cobblestone abs on show, small waist, big round glutes and thighs. Physique far beyond a female bodybuilder. She wears a burgundy button-up blouse straining at every button and tied above her bare midriff, and black slacks; seams strain, nothing rips open, breasts fully covered. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view. She stands beside a plain grey 5-foot-7 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/jill-face-p07.jpg",
+        "reference lineart: references/harvest/jill-grown-p09-cov.jpg"
+      ],
+      "save": "references/characters/jill/turnaround-grown.png",
+      "ledger_key": "jill.turnaround_grown",
+      "gate": "same face/hair as identity; breasts and muscles as large/round as lineart; blouse strains but covers; two views incl. rear; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "jill-super",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the superhumanly muscular woman from the attached black-and-white lineart comic panels into a 3D person with the same face, same long caramel-brown wavy hair now loose past her shoulders, and the same extreme proportions as drawn, kept at full scale: breasts even larger and rounder than before, projecting far forward, colossal round muscle bellies \u2014 boulder shoulders, biceps bigger than her head is tall, deep pec shelf under the breasts, tiny waist, massive round glutes and tree-trunk thighs. This is her superwoman final form, a full tier beyond the grown state. She wears a black athletic crop top stretched to its limit but fully covering her breasts, and black training shorts. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view. She stands beside a plain grey 5-foot-7 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/jill-super-p40-cov.jpg",
+        "reference lineart: references/harvest/jill-super-p33.jpg",
+        "reference lineart: references/harvest/jill-face-p07.jpg"
+      ],
+      "save": "references/characters/jill/turnaround-super.png",
+      "ledger_key": "jill.turnaround_super",
+      "gate": "same face; hair loose; visibly a tier larger than jill-grown; crop top + shorts cover fully; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "jim-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the man from the attached black-and-white lineart comic panels into a 3D person with the same face structure, hair and proportions as drawn: an adult man around 30 with short tousled brown hair, light skin, an average slightly soft build, mild friendly face. He wears a navy track jacket with white sleeve stripes over a grey t-shirt and blue jeans, all intact. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. He stands beside a plain grey 5-foot-11 scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/jim-face-p01.jpg",
+        "reference lineart: references/harvest/jim-standing-p26.jpg"
+      ],
+      "save": "references/characters/jim/identity-sheet.png",
+      "ledger_key": "jim.face",
+      "also_keys": [
+        "jim.turnaround_baseline"
+      ],
+      "gate": "face matches lineart; average soft build; track jacket + jeans; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "jim-grown",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the hyper-muscular man from the attached black-and-white lineart comic panels into a 3D person with the same face, same short tousled brown hair, and the same extreme proportions as drawn, kept at full scale: huge round muscle bellies \u2014 cannonball shoulders, biceps like bowling balls, a deep square pec shelf, cobblestone abs, thick neck and traps, V-taper to the waist. Physique beyond a heavyweight bodybuilder. He is shirtless in grey sweatpants. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view. He stands beside a plain grey 5-foot-11 scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/jim-grown-p12.jpg",
+        "reference lineart: references/harvest/jim-face-p01.jpg"
+      ],
+      "save": "references/characters/jim/turnaround-grown.png",
+      "ledger_key": "jim.turnaround_grown",
+      "gate": "same face/hair as identity; muscles round and huge per lineart; shirtless + grey sweatpants; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "donny-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the man from the attached black-and-white lineart comic panels into a 3D person with the same face structure and proportions as drawn: an adult man in his late 20s with short spiky sandy-blond hair, light skin, a lean average build, sharp features. He wears a plain grey t-shirt and blue jeans, all intact. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. He stands beside a plain grey 6-foot scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/donny-face-p22.jpg",
+        "reference lineart: references/harvest/donny-grown-p23.jpg"
+      ],
+      "save": "references/characters/donny/identity-sheet.png",
+      "ledger_key": "donny.face",
+      "also_keys": [
+        "donny.turnaround_baseline"
+      ],
+      "gate": "face matches lineart; sandy-blond spiky hair distinct from jim's brown; lean baseline; grey tee + jeans; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "donny-grown",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the hyper-muscular man from the attached black-and-white lineart comic panels into a 3D person with the same face, same short spiky sandy-blond hair, and the same extreme proportions as drawn, kept at full scale: huge round muscle bellies \u2014 boulder shoulders, bowling-ball biceps, deep square pecs, cobblestone abs, thick traps. Physique beyond a heavyweight bodybuilder. He is shirtless in blue jeans. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view. He stands beside a plain grey 6-foot scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/donny-grown-p23.jpg",
+        "reference lineart: references/harvest/donny-face-p22.jpg"
+      ],
+      "save": "references/characters/donny/turnaround-grown.png",
+      "ledger_key": "donny.turnaround_grown",
+      "gate": "same face/sandy hair; huge round muscles per lineart; shirtless + jeans; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "dan-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the man from the attached black-and-white lineart comic panels into a 3D person with the same face structure and proportions as drawn: an adult man in his 30s, completely bald, light-medium skin, strong jaw, an athletic gym-built physique with broad shoulders and visible muscle under his clothes. He wears a white tank top and blue jeans, all intact. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. He stands beside a plain grey 6-foot-2 scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/dan-baseline-p19.jpg",
+        "reference lineart: references/harvest/dan-grown-p20.jpg"
+      ],
+      "save": "references/characters/dan/identity-sheet.png",
+      "ledger_key": "dan.face",
+      "also_keys": [
+        "dan.turnaround_baseline"
+      ],
+      "gate": "bald, strong jaw matches lineart; athletic baseline; white tank + jeans; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "dan-grown",
+      "prompt": "Character turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the hyper-muscular man from the attached black-and-white lineart comic panels into a 3D person with the same bald head, same face, and the same extreme proportions as drawn, kept at full scale: enormous round muscle bellies \u2014 boulder shoulders, biceps like bowling balls, a deep square pec shelf, cobblestone abs, thick neck and traps. The biggest male physique in the cast, beyond any bodybuilder. He is shirtless in blue jeans. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter rear view. He stands beside a plain grey 6-foot-2 scale silhouette bar for height. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/dan-grown-p20.jpg",
+        "reference lineart: references/harvest/dan-baseline-p19.jpg"
+      ],
+      "save": "references/characters/dan/turnaround-grown.png",
+      "ledger_key": "dan.turnaround_grown",
+      "gate": "bald, same face; largest male physique, muscles round per lineart; shirtless + jeans; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "assistant-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman from the attached black-and-white lineart comic panels into a 3D person with the same face structure, hair and proportions as drawn: a young adult female lab assistant in her mid 20s with long light-brown wavy hair, fair skin, a slim petite build with a modest bust, timid worried expression. She wears a cream cardigan over a white blouse and khaki skirt, all intact. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. She stands beside a plain grey 5-foot-4 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/assistant-listen-p13.jpg",
+        "reference lineart: references/harvest/assistant-body-p17.jpg"
+      ],
+      "save": "references/characters/assistant/identity-sheet.png",
+      "ledger_key": "assistant.face",
+      "also_keys": [
+        "assistant.turnaround_baseline"
+      ],
+      "gate": "face matches lineart; slim petite, timid look; cardigan + blouse + skirt; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "blonde-identity",
+      "prompt": "Character identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the woman from the attached black-and-white lineart comic panels into a 3D person with the same face structure, hair and proportions as drawn: an adult female office researcher in her late 20s with long straight blonde hair, fair skin, an attractive slim-average figure with large round breasts. She wears a light-blue button blouse and navy pencil skirt, all intact. Curious slightly guilty expression. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. Two views side by side on a plain grey studio backdrop: relaxed standing front view, and three-quarter view. She stands beside a plain grey 5-foot-6 scale silhouette bar for height; she is normal human height, NOT a giantess. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/blonde-entry-p25.jpg",
+        "reference lineart: references/harvest/blonde-face-p25.jpg"
+      ],
+      "save": "references/characters/blonde/identity-sheet.png",
+      "ledger_key": "blonde.face",
+      "also_keys": [
+        "blonde.turnaround_baseline"
+      ],
+      "gate": "face matches lineart; long straight blonde hair; blouse + pencil skirt; large round bust; two views; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "cheer-squad-identity",
+      "prompt": "Character group identity sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the five cheerleaders from the attached black-and-white lineart comic panels into 3D people, standing in one line on a plain grey studio backdrop, front-facing, matching the drawn faces and proportions. Five distinct young women aged around 20, all in matching red-and-white crop-top cheerleader uniforms with pleated skirts, all intact: 1) high ponytail, athletic; 2) twin space-buns, petite; 3) twin low pigtails, light hair; 4) shoulder-length curly hair, tan skin; 5) long straight hair, tallest. Slim toned baseline builds with large round busts. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. A plain grey 5-foot-6 scale silhouette bar stands at the end of the line for height; they are normal human height, NOT giantesses. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/cheer-field-p34.jpg",
+        "reference lineart: references/harvest/cheer-buns-p34.jpg",
+        "reference lineart: references/harvest/cheer-lineup-p36.jpg"
+      ],
+      "save": "references/characters/cheer-squad/identity-sheet.png",
+      "ledger_key": "cheer-squad.face",
+      "also_keys": [
+        "cheer-squad.turnaround_baseline"
+      ],
+      "gate": "exactly five women; five distinct hairstyles per spec; matching red/white cheer uniforms intact; baseline slim builds; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "cheer-squad-grown",
+      "prompt": "Character group turnaround sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the five hyper-muscular cheerleaders from the attached black-and-white lineart lineup panel into 3D people, standing in one line on a plain grey studio backdrop, front-facing, same five faces and hairstyles as the baseline squad: 1) high ponytail; 2) twin space-buns; 3) twin low pigtails; 4) shoulder-length curly hair, tan skin; 5) long straight hair. Proportions kept at the drawn scale: enormous perfectly round breasts, thick round muscle bellies \u2014 cannonball shoulders, softball biceps, cobblestone abs, small waists, big round glutes and thighs, all far beyond female bodybuilders; the ponytail girl is the biggest of the five. Their red-and-white cheer uniforms are strained and split at the seams but every breast and hip stays fully covered. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. A plain grey 5-foot-6 scale silhouette bar stands at the end of the line for height; they are normal human height, NOT giantesses. No wristwatch, no jewelry. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "reference lineart: references/harvest/cheer-lineup-p36.jpg",
+        "reference lineart: references/harvest/cheer-ponytail-p37-cov.jpg"
+      ],
+      "save": "references/characters/cheer-squad/turnaround-grown.png",
+      "ledger_key": "cheer-squad.turnaround_grown",
+      "gate": "exactly five women, same hairstyles as baseline; muscles+breasts at lineart scale, ponytail girl biggest; uniforms strained/split but covering; silhouette bar; photoreal; no baked text"
+    },
+    {
+      "id": "env-lab",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the laboratory from the attached black-and-white lineart comic panels into a photoreal 3D set, empty of people: a small private research lab with a glass entry door, long workbenches with test-tube racks, beakers, a microscope, wall shelving crowded with labeled bottles and jars, overhead fluorescent work lights, tiled floor. Clean wide establishing view. A plain grey human scale silhouette figure stands at the doorway for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles",
+      "attach": [
+        "reference lineart: references/harvest/env-lab-p02.jpg",
+        "reference lineart: references/harvest/blonde-entry-p25.jpg"
+      ],
+      "save": "references/environments/lab.png",
+      "ledger_key": "env.lab",
+      "gate": "empty lab matching lineart layout (glass door, benches, shelving); photoreal; scale silhouette at door; no baked text"
+    },
+    {
+      "id": "env-kitchen",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the kitchen from the attached black-and-white lineart comic panels into a photoreal 3D set, empty of people: a modest suburban home kitchen and dining nook with counter, kettle, bread basket, condiment jars, cabinets and a small table. Morning light through a window. Clean wide establishing view. A plain grey human scale silhouette figure stands by the counter for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles",
+      "attach": [
+        "reference lineart: references/harvest/env-kitchen-p01.jpg",
+        "reference lineart: references/harvest/rochelle-drink-p14.jpg"
+      ],
+      "save": "references/environments/kitchen.png",
+      "ledger_key": "env.kitchen",
+      "gate": "empty suburban kitchen matching lineart; morning light; scale silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "env-field",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the football practice field from the attached black-and-white lineart comic panels into a photoreal 3D set, empty of people: a high-school football field with goalposts, sideline bench, a large orange drink cooler on a folding table, low bleachers in the background, overcast daylight. Clean wide establishing view. A plain grey human scale silhouette figure stands at the sideline for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles",
+      "attach": [
+        "reference lineart: references/harvest/cheer-field-p34.jpg",
+        "reference lineart: references/harvest/cheer-ponytail-p37-cov.jpg"
+      ],
+      "save": "references/environments/field.png",
+      "ledger_key": "env.field",
+      "gate": "empty football field with cooler table + goalposts; scale silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "env-city",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. Translate the ruined city street from the attached black-and-white lineart comic panels into a photoreal 3D set, empty of people: a devastated urban block at dusk, two collapsed multi-story buildings flanking a rubble-strewn street, cracked asphalt, dust haze, distant intact skyline. Clean wide establishing view. A plain grey human scale silhouette figure stands in the rubble for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles",
+      "attach": [
+        "reference lineart: references/harvest/env-city-p43-rubble.jpg",
+        "reference lineart: references/harvest/env-city-p44-building.jpg"
+      ],
+      "save": "references/environments/city-ruins.png",
+      "ledger_key": "env.city",
+      "gate": "ruined city block, collapsed buildings, dusk; scale silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "cast-lineup",
+      "prompt": "Cast size-scale lineup sheet rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. The SAME eight people exactly as they appear in the attached generated reference sheets, standing in one line on a plain grey studio backdrop against a faint horizontal height grid: Rochelle (dark bob, lab coat, curvy baseline), Jill (long wavy hair, lab coat, slim baseline), the lab assistant (light-brown wavy hair, cardigan, petite), the blonde researcher (blue blouse), Jim (navy track jacket), Donny (sandy spiky hair, grey tee), Dan (bald, white tank), and the ponytail cheerleader in her red-and-white uniform. Everyone at their baseline state, correct relative heights, front-facing, relaxed. A plain grey scale silhouette bar marks 6 feet at the end of the line; all are normal human height, NOT giantesses. Do NOT reproduce panel borders or line art style. No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands",
+      "attach": [
+        "generated sheet: references/characters/rochelle/identity-sheet.png",
+        "generated sheet: references/characters/jill/identity-sheet.png",
+        "generated sheet: references/characters/assistant/identity-sheet.png",
+        "generated sheet: references/characters/blonde/identity-sheet.png",
+        "generated sheet: references/characters/jim/identity-sheet.png",
+        "generated sheet: references/characters/donny/identity-sheet.png",
+        "generated sheet: references/characters/dan/identity-sheet.png",
+        "generated sheet: references/characters/cheer-squad/identity-sheet.png"
+      ],
+      "save": "references/characters/cast-lineup.png",
+      "ledger_key": "cast.lineup",
+      "gate": "exactly eight figures matching their banked identity sheets; correct relative heights; grey backdrop + height grid; photoreal; no baked text"
+    }
+  ]
+}

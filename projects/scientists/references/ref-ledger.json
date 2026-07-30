@@ -1,0 +1,406 @@
+{
+  "_note": "Filled ONLY by qa/bank.py (full-chain entries). Starts empty; compose.py refuses any page whose cast lacks a banked face+turnaround here.",
+  "characters": {
+    "rochelle": {
+      "face": {
+        "flow_id": "6d7cc20c-1c3f-4c12-ac82-1017e74c1f22",
+        "disk": "references/characters/rochelle/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_rochelle-identity.receipt.json",
+          "audit": "qa/receipts/sheet_rochelle-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_rochelle-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "5bab3dbfe07fd681e680e5cbc1e42a2be3247b561e65d8947df7ebe3c504736c"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "60fd435a-a14c-4d12-b165-362301a1555e",
+        "disk": "references/characters/rochelle/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_rochelle-grown.receipt.json",
+          "audit": "qa/receipts/sheet_rochelle-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_rochelle-grown.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "rear-view-present",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "d2ec90a9cad4a46b783d8bddf6ff06a0fe50e9fe8e68b5a4447cd5b8ed456a23"
+        }
+      },
+      "turnaround_titan": {
+        "flow_id": "1a7ba4ae-e293-4e04-9025-0095c86fc27a",
+        "disk": "references/characters/rochelle/turnaround-titan.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_rochelle-titan.receipt.json",
+          "audit": "qa/receipts/sheet_rochelle-titan.audit-pass",
+          "verdict": "qa/receipts/sheet_rochelle-titan.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "proportions-pass",
+            "coverage-pass",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "5352703f3c7f68f6f75c421e78069fe43061d17f6af2605ed7f6bd94bf227563"
+        }
+      }
+    },
+    "jill": {
+      "face": {
+        "flow_id": "136107a9-d563-41ab-b5cb-df0981a66e64",
+        "disk": "references/characters/jill/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jill-identity.receipt.json",
+          "audit": "qa/receipts/sheet_jill-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_jill-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "hair-match",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "d347aa39aa7260d6729035ec2c988e5415ef4684e726f6b38ab67750c357cec6"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "db62c7f5-a01c-43d2-bc6e-a914a131dd77",
+        "disk": "references/characters/jill/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jill-grown.receipt.json",
+          "audit": "qa/receipts/sheet_jill-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_jill-grown.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "hair-match",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "rear-view-present",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "d64a9369e766d378c9160d80872ce519b675d3469a3b913e9234c2ea9467147f"
+        }
+      },
+      "turnaround_super": {
+        "flow_id": "622a4373-e3f0-4087-9ef7-dfa2333afd14",
+        "disk": "references/characters/jill/turnaround-super.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jill-super.receipt.json",
+          "audit": "qa/receipts/sheet_jill-super.audit-pass",
+          "verdict": "qa/receipts/sheet_jill-super.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "hair-loose",
+            "tier-jump-confirmed",
+            "coverage-pass",
+            "two-views",
+            "rear-view-present",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "43db3686d9b9d22bb62dbfda310618f71283a5050275c02e3b0667b6b2b552fa"
+        }
+      }
+    },
+    "jim": {
+      "face": {
+        "flow_id": "ddf8c630-47c7-4f75-ad1f-0238c02b2a07",
+        "disk": "references/characters/jim/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jim-identity.receipt.json",
+          "audit": "qa/receipts/sheet_jim-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_jim-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "average-build",
+            "track-jacket-jeans",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "c35ac9f9a1ef5214ad6a44f29f0994d62620dc51ba643001e80c7a96b12e6f13"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "cf1e5e9a-15db-4098-823a-91436f9c1e39",
+        "disk": "references/characters/jim/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jim-grown.receipt.json",
+          "audit": "qa/receipts/sheet_jim-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_jim-grown.verdict.json",
+          "verdict_tags": [
+            "face-hair-match",
+            "muscle-scale-pass",
+            "shirtless-sweatpants",
+            "two-views-incl-rear",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "dd76aa60408e6d5aa57a38fcf56395ab57cc92ec9b1d0427191d9bdd31ccc4f3"
+        }
+      }
+    },
+    "donny": {
+      "face": {
+        "flow_id": "6b4eef60-124c-46d2-bc97-995914b8c741",
+        "disk": "references/characters/donny/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_donny-identity.receipt.json",
+          "audit": "qa/receipts/sheet_donny-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_donny-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "distinct-hair-color",
+            "lean-baseline",
+            "grey-tee-jeans",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "9d075d4041c804fcdb408c06e704b818c4e49631607ab79daba4902c582e6334"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "6557f4a9-d7d2-4851-b3bd-dc1ad1307ec8",
+        "disk": "references/characters/donny/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_donny-grown.receipt.json",
+          "audit": "qa/receipts/sheet_donny-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_donny-grown.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "proportions-pass",
+            "shirtless-jeans",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "6be3917ea7d64cfcafbd5f6e8a7e9807fce00aa91cb262bf0c52f5beff02b553"
+        }
+      }
+    },
+    "dan": {
+      "face": {
+        "flow_id": "90950f27-fd6a-4799-9d0b-7b1bedfdd5f4",
+        "disk": "references/characters/dan/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dan-identity.receipt.json",
+          "audit": "qa/receipts/sheet_dan-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_dan-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "bald",
+            "athletic-baseline",
+            "white-tank-jeans",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "c70a7f80d643825b87a05d1ebb1b9e9571a5f7ca196b83d55641d18afb9d5d01"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "5eff6e96-7f16-4182-9b2f-12f3755c874e",
+        "disk": "references/characters/dan/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dan-grown.receipt.json",
+          "audit": "qa/receipts/sheet_dan-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_dan-grown.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "bald",
+            "proportions-pass",
+            "shirtless-jeans",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "44c97bcab64d642294d0a46dc0d4e5c2cfae9abe3a58c0c432dac4d362db2b8d"
+        }
+      }
+    },
+    "assistant": {
+      "face": {
+        "flow_id": "8e56e115-6380-46a6-b62c-93448b3e0ccc",
+        "disk": "references/characters/assistant/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_assistant-identity.receipt.json",
+          "audit": "qa/receipts/sheet_assistant-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_assistant-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "slim-petite",
+            "timid-expression",
+            "cardigan-blouse-skirt",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "639df680aee8b367edfeeea4a0af43d0571c0222ad971de4366661cc6e7d9d46"
+        }
+      }
+    },
+    "blonde": {
+      "face": {
+        "flow_id": "4da45d0d-7258-4d3e-8e49-2541b1cfefa9",
+        "disk": "references/characters/blonde/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_blonde-identity.receipt.json",
+          "audit": "qa/receipts/sheet_blonde-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_blonde-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "long-straight-blonde",
+            "blouse-pencil-skirt",
+            "large-bust",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "684532ac97b63a67885a33215eee679fde746b5e9c6398648e9164336c7c3956"
+        }
+      }
+    },
+    "cheer-squad": {
+      "face": {
+        "flow_id": "19cb082e-206d-448b-b88b-94e862875c1d",
+        "disk": "references/characters/cheer-squad/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cheer-squad-identity.receipt.json",
+          "audit": "qa/receipts/sheet_cheer-squad-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_cheer-squad-identity.verdict.json",
+          "verdict_tags": [
+            "five-women",
+            "distinct-hairstyles",
+            "uniforms-intact",
+            "baseline-slim-busty",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "61e07956ef46fe0bed377c95fcb658efe2dad7afc1d702cf834ceae5498bb466"
+        }
+      },
+      "turnaround_grown": {
+        "flow_id": "282abe0e-2c59-4eca-9e84-a0f7b9c023f9",
+        "disk": "references/characters/cheer-squad/turnaround-grown.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cheer-squad-grown.receipt.json",
+          "audit": "qa/receipts/sheet_cheer-squad-grown.audit-pass",
+          "verdict": "qa/receipts/sheet_cheer-squad-grown.verdict.json",
+          "verdict_tags": [
+            "five-women",
+            "same-hairstyles",
+            "ponytail-biggest",
+            "coverage-pass",
+            "uniforms-strained",
+            "silhouette-present",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "72414e3caf8362402915933aa6d74b2c2ca7cd9aaaefd9978822fdde4d717b62"
+        }
+      }
+    },
+    "env": {
+      "lab": {
+        "flow_id": "42167676-4b08-43fd-be8d-55b2f1187a41",
+        "disk": "references/environments/lab.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "6dcb41c485698e54dcd4da426cc6530a468494313f8be9de9976e98734cf6b3a"
+        }
+      },
+      "kitchen": {
+        "flow_id": "c0721aa4-497e-4169-b48e-f0cf0b7caf90",
+        "disk": "references/environments/kitchen.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-kitchen.receipt.json",
+          "audit": "qa/receipts/sheet_env-kitchen.audit-pass",
+          "verdict": "qa/receipts/sheet_env-kitchen.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "morning-light",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "162de5d7ff4ae0b4c59afc907cdd3837268d9fb4d65faca4de7fd90e9da3e5d8"
+        }
+      },
+      "field": {
+        "flow_id": "b1709a91-3bf9-4e38-baf7-4081cb4f72db",
+        "disk": "references/environments/field.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-field.receipt.json",
+          "audit": "qa/receipts/sheet_env-field.audit-pass",
+          "verdict": "qa/receipts/sheet_env-field.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "goalposts-present",
+            "cooler-table-present",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "f68327323dc7c9389162acfc61241a1bfef6bbc7f47af1a7f861cd3bf55e191a"
+        }
+      },
+      "city": {
+        "flow_id": "4ba2c16e-5caf-4e83-9e31-31d2435230f6",
+        "disk": "references/environments/city-ruins.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-city.receipt.json",
+          "audit": "qa/receipts/sheet_env-city.audit-pass",
+          "verdict": "qa/receipts/sheet_env-city.verdict.json",
+          "verdict_tags": [
+            "ruined-city-block",
+            "collapsed-buildings",
+            "dusk-lighting",
+            "empty-except-silhouette",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "1fdf47a631f7bc75f6a9f5c233480eb3015f47906dc7d7352cfac30ca0526851"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+ "job": "sheet:donny-identity",
+ "kind": "sheet",
+ "prompt_sha": "9d075d4041c804fcdb408c06e704b818c4e49631607ab79daba4902c582e6334",
+ "attach": [
+  "reference lineart: references/harvest/donny-face-p22.jpg",
+  "reference lineart: references/harvest/donny-grown-p23.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; sandy-blond spiky hair distinct from jim's brown; lean baseline; grey tee + jeans; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

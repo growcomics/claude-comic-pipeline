@@ -1,0 +1,17 @@
+{
+ "job": "sheet:jill-super",
+ "kind": "sheet",
+ "prompt_sha": "43db3686d9b9d22bb62dbfda310618f71283a5050275c02e3b0667b6b2b552fa",
+ "attach": [
+  "reference lineart: references/harvest/jill-super-p40-cov.jpg",
+  "reference lineart: references/harvest/jill-super-p33.jpg",
+  "reference lineart: references/harvest/jill-face-p07.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face; hair loose; visibly a tier larger than jill-grown; crop top + shorts cover fully; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

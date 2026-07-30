@@ -1,0 +1,17 @@
+{
+ "job": "sheet:rochelle-titan",
+ "kind": "sheet",
+ "prompt_sha": "5352703f3c7f68f6f75c421e78069fe43061d17f6af2605ed7f6bd94bf227563",
+ "attach": [
+  "reference lineart: references/harvest/rochelle-titan-p44.jpg",
+  "reference lineart: references/harvest/rochelle-titan-p42.jpg",
+  "reference lineart: references/harvest/rochelle-face-vials-p18.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face/bob; building-scale vs ruined city; wrap costume covers breasts+groin; human silhouette at foot for scale; proportions match p44 splash; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

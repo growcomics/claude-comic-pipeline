@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-field",
+ "kind": "sheet",
+ "prompt_sha": "f68327323dc7c9389162acfc61241a1bfef6bbc7f47af1a7f861cd3bf55e191a",
+ "attach": [
+  "reference lineart: references/harvest/cheer-field-p34.jpg",
+  "reference lineart: references/harvest/cheer-ponytail-p37-cov.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "empty football field with cooler table + goalposts; scale silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

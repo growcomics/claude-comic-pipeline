@@ -1,0 +1,16 @@
+{
+ "job": "sheet:jim-identity",
+ "kind": "sheet",
+ "prompt_sha": "c35ac9f9a1ef5214ad6a44f29f0994d62620dc51ba643001e80c7a96b12e6f13",
+ "attach": [
+  "reference lineart: references/harvest/jim-face-p01.jpg",
+  "reference lineart: references/harvest/jim-standing-p26.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; average soft build; track jacket + jeans; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

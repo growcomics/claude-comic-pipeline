@@ -1,0 +1,22 @@
+{
+ "job": "sheet:cast-lineup",
+ "kind": "sheet",
+ "prompt_sha": "2a396452919d83e2769857d99faf7ba6e27cc217b2256134ebfefa00ad343aff",
+ "attach": [
+  "generated sheet: references/characters/rochelle/identity-sheet.png",
+  "generated sheet: references/characters/jill/identity-sheet.png",
+  "generated sheet: references/characters/assistant/identity-sheet.png",
+  "generated sheet: references/characters/blonde/identity-sheet.png",
+  "generated sheet: references/characters/jim/identity-sheet.png",
+  "generated sheet: references/characters/donny/identity-sheet.png",
+  "generated sheet: references/characters/dan/identity-sheet.png",
+  "generated sheet: references/characters/cheer-squad/identity-sheet.png"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "exactly eight figures matching their banked identity sheets; correct relative heights; grey backdrop + height grid; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

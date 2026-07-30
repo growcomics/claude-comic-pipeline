@@ -1,0 +1,16 @@
+{
+ "job": "sheet:jill-identity",
+ "kind": "sheet",
+ "prompt_sha": "d347aa39aa7260d6729035ec2c988e5415ef4684e726f6b38ab67750c357cec6",
+ "attach": [
+  "reference lineart: references/harvest/jill-baseline-p02.jpg",
+  "reference lineart: references/harvest/jill-face-p07.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart; long wavy side-swept hair; slim baseline with large round breasts; lab coat + burgundy blouse + black slacks; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

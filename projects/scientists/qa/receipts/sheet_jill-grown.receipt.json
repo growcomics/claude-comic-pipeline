@@ -1,0 +1,16 @@
+{
+ "job": "sheet:jill-grown",
+ "kind": "sheet",
+ "prompt_sha": "d64a9369e766d378c9160d80872ce519b675d3469a3b913e9234c2ea9467147f",
+ "attach": [
+  "reference lineart: references/harvest/jill-face-p07.jpg",
+  "reference lineart: references/harvest/jill-grown-p09-cov.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face/hair as identity; breasts and muscles as large/round as lineart; blouse strains but covers; two views incl. rear; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

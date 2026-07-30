@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-kitchen",
+ "kind": "sheet",
+ "prompt_sha": "162de5d7ff4ae0b4c59afc907cdd3837268d9fb4d65faca4de7fd90e9da3e5d8",
+ "attach": [
+  "reference lineart: references/harvest/env-kitchen-p01.jpg",
+  "reference lineart: references/harvest/rochelle-drink-p14.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "empty suburban kitchen matching lineart; morning light; scale silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

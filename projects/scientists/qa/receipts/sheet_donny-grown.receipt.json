@@ -1,0 +1,16 @@
+{
+ "job": "sheet:donny-grown",
+ "kind": "sheet",
+ "prompt_sha": "6be3917ea7d64cfcafbd5f6e8a7e9807fce00aa91cb262bf0c52f5beff02b553",
+ "attach": [
+  "reference lineart: references/harvest/donny-grown-p23.jpg",
+  "reference lineart: references/harvest/donny-face-p22.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same face/sandy hair; huge round muscles per lineart; shirtless + jeans; two views; silhouette bar; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

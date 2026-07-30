@@ -1,0 +1,16 @@
+{
+ "job": "sheet:rochelle-identity",
+ "kind": "sheet",
+ "prompt_sha": "5bab3dbfe07fd681e680e5cbc1e42a2be3247b561e65d8947df7ebe3c504736c",
+ "attach": [
+  "reference lineart: references/harvest/rochelle-baseline-p01.jpg",
+  "reference lineart: references/harvest/rochelle-face-vials-p18.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "face matches lineart bob + stud earrings; soft curvy baseline body with large round breasts; lab coat + teal blouse + grey pencil skirt; photoreal 3D not 2D; scale silhouette present; two views; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}
