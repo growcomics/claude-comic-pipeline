@@ -103,22 +103,20 @@
         }
       },
       "turnaround_super": {
-        "flow_id": "622a4373-e3f0-4087-9ef7-dfa2333afd14",
+        "flow_id": "f1e7caa4-ddbc-4199-8f2e-cf5448ef4614",
         "disk": "references/characters/jill/turnaround-super.png",
         "chain": {
           "receipt": "qa/receipts/sheet_jill-super.receipt.json",
           "audit": "qa/receipts/sheet_jill-super.audit-pass",
           "verdict": "qa/receipts/sheet_jill-super.verdict.json",
           "verdict_tags": [
-            "face-lock-pass",
-            "hair-loose",
-            "tier-jump-confirmed",
-            "coverage-pass",
+            "owner-pick",
+            "override",
+            "proportions-upgraded",
             "two-views",
-            "rear-view-present",
             "silhouette-present",
             "photoreal-daz",
-            "scale-bar-text"
+            "coverage-deviation-rear"
           ],
           "prompt_sha": "43db3686d9b9d22bb62dbfda310618f71283a5050275c02e3b0667b6b2b552fa"
         }
@@ -399,6 +397,29 @@
             "no-baked-text"
           ],
           "prompt_sha": "1fdf47a631f7bc75f6a9f5c233480eb3015f47906dc7d7352cfac30ca0526851"
+        }
+      }
+    },
+    "cast": {
+      "lineup": {
+        "flow_id": "1d92199d-f2ed-49b4-9a65-b7e6d71f0279",
+        "disk": "references/characters/cast-lineup.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cast-lineup.receipt.json",
+          "audit": "qa/receipts/sheet_cast-lineup.audit-pass",
+          "verdict": "qa/receipts/sheet_cast-lineup.verdict.json",
+          "verdict_tags": [
+            "count-correct-8",
+            "identity-match-ok",
+            "cheer-squad-ponytail-correct",
+            "style-photoreal-3d-ok",
+            "grey-backdrop-and-height-grid-ok",
+            "dan-tallest-confirmed",
+            "height-order-ok",
+            "baked-text-scale-labels-acceptable",
+            "duplicate-6ft-label-cosmetic"
+          ],
+          "prompt_sha": "2a396452919d83e2769857d99faf7ba6e27cc217b2256134ebfefa00ad343aff"
         }
       }
     }

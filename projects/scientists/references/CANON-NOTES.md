@@ -57,3 +57,7 @@ references/harvest/*.jpg are crops from source pages (page-NN fractional crops v
 work/crop_refs.py, verified on work/harvest-contact-sheet.png + work/fix-sheet.png).
 Several are topless/nude lineart — they are attached ONLY as proportion/face refs and
 every prompt re-clothes per the wardrobe locks above.
+
+## Model switch (2026-07-29, owner instruction)
+
+All FUTURE Higgsfield generations for this project use `nano_banana_2_lite` (1k, count=1, media role `image_references`) for speed. The initial 21-sheet asset build was generated on `nano_banana_pro` before this instruction landed.

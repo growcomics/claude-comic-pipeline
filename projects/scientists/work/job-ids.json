@@ -4,7 +4,7 @@
  "rochelle-titan": "1a7ba4ae-e293-4e04-9025-0095c86fc27a",
  "jill-identity": "136107a9-d563-41ab-b5cb-df0981a66e64",
  "jill-grown": "db62c7f5-a01c-43d2-bc6e-a914a131dd77",
- "jill-super": "622a4373-e3f0-4087-9ef7-dfa2333afd14",
+ "jill-super": "f1e7caa4-ddbc-4199-8f2e-cf5448ef4614",
  "jim-identity": "ddf8c630-47c7-4f75-ad1f-0238c02b2a07",
  "jim-grown": "cf1e5e9a-15db-4098-823a-91436f9c1e39",
  "donny-identity": "6b4eef60-124c-46d2-bc97-995914b8c741",
@@ -21,5 +21,13 @@
  "env-city": "4ba2c16e-5caf-4e83-9e31-31d2435230f6",
  "env-city-FLAGGED-1st": "3110c441-ec94-42f3-afd4-106cbdf1622d",
  "jim-grown-v1-superseded": "1c3cce35-e78b-40b1-9885-e33ec6d35d3b",
- "cheer-squad-identity-v1-superseded": "a8f4f327-e74e-4e39-9743-149015e1d565"
+ "cheer-squad-identity-v1-superseded": "a8f4f327-e74e-4e39-9743-149015e1d565",
+ "cast-lineup": "1d92199d-f2ed-49b4-9a65-b7e6d71f0279",
+ "jill-super-v1-superseded": "622a4373-e3f0-4087-9ef7-dfa2333afd14",
+ "cast-lineup-rejected": [
+  "82a86486-26d8-46f9-b1fc-e8a3510459fe",
+  "75fcdd99-b6da-40c8-a306-6ec582b643a6",
+  "0cc66d93-f13b-4c41-82f6-67d243a2e644",
+  "4b7bdd22-446d-4e2e-a943-b67fb4a79550"
+ ]
 }

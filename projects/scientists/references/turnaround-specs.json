@@ -1,5 +1,5 @@
 {
-  "_note": "Sheet specs consumed by qa/compose.py --job sheet:<id>. Prompts are the ONLY legal generation text once composed. All refs are lineart crops in references/harvest/ (see CANON-NOTES.md). Model: Higgsfield nano_banana_pro, 1k, count=1, aspect 16:9.",
+  "_note": "Sheet specs consumed by qa/compose.py --job sheet:<id>. Prompts are the ONLY legal generation text once composed. All refs are lineart crops in references/harvest/ (see CANON-NOTES.md). Model (owner instruction 2026-07-29): Higgsfield nano_banana_2_lite, 1k, count=1, media role image_references \u2014 sheets 1-21 were generated on nano_banana_pro before the switch; use nano_banana_2_lite for all future gens/re-rolls.",
   "sheets": [
     {
       "id": "rochelle-identity",

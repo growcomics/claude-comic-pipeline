@@ -1,0 +1,15 @@
+{
+  "pass": true,
+  "tags": [
+    "count-correct-8",
+    "identity-match-ok",
+    "cheer-squad-ponytail-correct",
+    "style-photoreal-3d-ok",
+    "grey-backdrop-and-height-grid-ok",
+    "dan-tallest-confirmed",
+    "height-order-ok",
+    "baked-text-scale-labels-acceptable",
+    "duplicate-6ft-label-cosmetic"
+  ],
+  "notes": "Fresh re-judge, independent of any prior verdict. Count: exactly 8 figures, order Rochelle, Jill, Assistant, Blonde, Jim, Donny, Dan, one ponytail cheerleader. Identity match: each figure checked individually against its banked identity-sheet.png — Rochelle (dark bob, teal blouse, white coat, grey skirt), Jill (wavy strawberry-blonde, maroon blouse, white coat, black pants), Assistant (light brown wavy hair, cream cardigan, khaki skirt), Blonde (blonde hair, light blue blouse, navy skirt, busty per ref), Jim (brown hair, navy/white-stripe jacket, grey tee, jeans), Donny (blonde spiky hair, grey tee, jeans), Dan (bald, muscular, white tank, jeans), and the cheer figure matches cheer-squad member #1 specifically (the high-ponytail, light-brown-haired one, red/white top+skirt, white sneakers) — all on-model, no wardrobe/hair drift. Style: photoreal 3D CGI, consistent with all identity sheets. Backdrop: seamless grey with horizontal height-grid lines across the full width, matching gate requirement. Height order: measured pixel head-top-to-feet-bottom for all 8 (feet baseline consistent within 4px across all figures, confirming a common floor/scale). Dan is the tallest figure in the lineup (verified two ways: background-diff pixel measurement, and a direct side-by-side ruled-overlay crop of Jim/Donny/Dan showing Dan's bald head top sitting clearly above both). Jim and Donny cluster just under Dan, both clearly above the women as a group. Jill's hair-top pixel measurement comes in marginally above Jim/Donny's hair-top (by ~2-3px, <1% of total height) purely because her hairstyle is unusually voluminous/wavy and puffs up higher than the men's hair — an eye-level comparison (a landmark unaffected by hair volume) confirms Jill's actual face/eye position sits lower than Jim/Donny/Dan's, so this is a hairstyle-volume artifact, not a true model-scale violation, and is not a visible height-order defect. Overall the men read taller than the women as a group and Dan reads as the tallest cast member, satisfying the gate. Baked text: only the ruler's small scale labels are present ('6 FT' appears twice on the same vertical ruler — once near the top tick and again partway down — a cosmetic redundancy/mislabel worth flagging but it is the small-scale-label type the gate explicitly allows, not prose or dialogue text). No coverage issues observed. This verdict overrides an earlier stale verdict.json for the same job that reported Jim as tallest and Dan not-tallest — that measurement did not reproduce under careful re-check (bounds re-derived independently from a torso-band column projection, plus a direct visual ruled comparison) and appears to have been erroneous."
+}

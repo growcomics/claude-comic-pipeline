@@ -1,1 +1,13 @@
-{"pass": true, "tags": ["face-lock-pass", "hair-loose", "tier-jump-confirmed", "coverage-pass", "two-views", "rear-view-present", "silhouette-present", "photoreal-daz", "scale-bar-text"], "notes": "Same face as prior sheets with hair worn loose; direct comparison to turnaround-grown.png confirms a clear tier increase in shoulder width, arm/thigh mass, and overall bulk; black crop top and shorts fully cover breasts and glutes in both front and rear views, with a labeled silhouette bar for scale."}
+{
+ "pass": true,
+ "tags": [
+  "owner-pick",
+  "override",
+  "proportions-upgraded",
+  "two-views",
+  "silhouette-present",
+  "photoreal-daz",
+  "coverage-deviation-rear"
+ ],
+ "notes": "Owner explicitly selected Higgsfield asset f1e7caa4 (nano_banana_2_lite, owner-extended prompt: bigger cleavage, narrower waist, deeper abs) to replace the banked 622a4373 pick. Rear-view bottom is thong-cut \u2014 deviates from house full-glute coverage; approved by owner for this sheet."
+}
