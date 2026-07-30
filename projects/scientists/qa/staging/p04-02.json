@@ -1,0 +1,15 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "torso filling the frame, face still visible at the top looking down at herself",
+  "pose": "arms slightly raised, staring down at her own tightening clothes",
+  "expression": "disbelief"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Rochelle has exactly two hands",
+  "mid-growth: visibly more muscular than baseline but NOT yet at the attached muscle reference's full size - clearly between the two",
+  "wardrobe lock: BOTH arms keep their long teal blouse sleeves and white lab-coat sleeves ON and intact, stretched tight over the swelling arms - the attached muscle reference's tank top is NOT her outfit; that reference sets muscle size and face ONLY"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

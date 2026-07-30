@@ -1,0 +1,14 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "right arm dominating the frame on a diagonal, head out of frame",
+  "pose": "arm flexing involuntarily as the coat sleeve splits",
+  "expression": "face not visible"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "one arm is the story; anatomy clean, one elbow, one hand",
+  "approaching the attached muscle reference's arm size"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["continuity-flag-vs-p04-02"],
+  "notes": "No dialogue/balloon in this panel per brief -- SFX only: 'RRIP' renders clean, bold, legible, not garbled, matches spec. Insert framing correct (head out of frame, ECU on right arm flexed, fist up). Sleeve (white coat over teal blouse, both visible at the tear edge) is shown mid-split across the swelling bicep, skin glistening/wet not raw or damaged, muscle color natural healthy tone with visible vein/striation detail appropriate for an 'approaching grown' size step. Judged against its own brief this panel passes. Cross-panel flag (not counted against this panel): p04-02 (the immediately prior beat) already shows both arms fully bare with no sleeve fabric at all, which contradicts this panel's premise that the sleeve is still present and only now tearing -- see page_p04-02.verdict.json. Fixing p04-02's wardrobe state resolves the chain."
+}

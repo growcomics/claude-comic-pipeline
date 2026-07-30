@@ -1,0 +1,13 @@
+{
+ "jill": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "mid-ground three-quarter, angled toward the shelving, eyes cut sideways toward off-frame Rochelle",
+  "pose": "pretending to tidy glassware, one hand on a beaker",
+  "expression": "hidden smile at the corner of her mouth, suppressed anticipation"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Jill has exactly two hands"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

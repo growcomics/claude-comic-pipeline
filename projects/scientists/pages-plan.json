@@ -44,6 +44,61 @@
    "id": "p02-04",
    "camera": "medium, three-quarter rear view of Jill",
    "aspect": "3:4"
+  },
+  {
+   "id": "p03-01",
+   "camera": "close insert on hands and mug",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p03-02",
+   "camera": "medium two-shot, eye level",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p03-03",
+   "camera": "close mcu on Rochelle",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p03-04",
+   "camera": "medium, three-quarter on Jill watching sidelong",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p03-05",
+   "camera": "close insert on the empty mug",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p04-01",
+   "camera": "close mcu on Rochelle",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p04-02",
+   "camera": "mcu on Rochelle's torso, frontal",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p04-03",
+   "camera": "close insert on her right arm",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p04-04",
+   "camera": "close insert on her torso",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p04-05",
+   "camera": "close mcu on Rochelle's face",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p04-06",
+   "camera": "full figure, slight low angle",
+   "aspect": "3:4"
   }
  ]
 }

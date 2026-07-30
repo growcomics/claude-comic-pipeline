@@ -1,0 +1,14 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "chest-up, slightly right of center; the drinker is ROCHELLE - the short dark bob and teal blouse from the attached identity card, NOT the long-haired woman from the previous panel; Jill appears ONLY as a soft defocused shape far behind at the next bench",
+  "pose": "sipping from the mug held in both hands, eyes closed",
+  "expression": "unguarded pleasure"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Rochelle has exactly two hands, both on the mug",
+  "identity lock: the sharp foreground woman matches the attached identity card (dark bob, teal blouse); the previous-panel reference contributes scene continuity ONLY, not the subject's identity"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

@@ -1,0 +1,17 @@
+{
+ "job": "page:p04-01",
+ "kind": "page",
+ "prompt_sha": "72d13c9c154e0339bb2b7ffc380ea1cad36500e3b608859a7516ca8abfa5867c",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_baseline",
+  "scene:lab:close",
+  "prior:p03-01"
+ ],
+ "aspect": "4:5",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

@@ -170,6 +170,205 @@
      "action": "Jill turns away toward the shelving, seen three-quarter from behind, sliding the vial into her lab coat pocket; the sliver of her profile shows a sly smile \u2014 her facial expression and pose reflect a decision already made to go around the rules. One cloud-shaped THOUGHT bubble with a trail of small dots down to Jill's head: \"FINE. THEN I'LL RUN MY OWN TRIAL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the speech balloons and captions specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption graphics are flat 2D comic-book overlay."
     }
    ]
+  },
+  {
+   "page": 3,
+   "panels": [
+    {
+     "panel_id": "p03-01",
+     "location": "lab",
+     "camera": "close insert on hands and mug",
+     "time_of_day": "day",
+     "characters": [
+      "jill"
+     ],
+     "costume_state": "jill: lab coat + burgundy blouse intact",
+     "muscle_size_tier": {
+      "jill": 0
+     },
+     "continuity_refs": [
+      "p02-01"
+     ],
+     "action": "Tight insert behind the wall shelving: Jill's hands dissolve a pale tablet into a steaming coffee mug, her face a furtive sliver in the defocused background; her expression and posture reflect guilty excitement. One cloud-shaped THOUGHT bubble with a trail of small dots: \"IF SHE WON'T RUN THE TRIAL... SHE'LL BE THE TRIAL.\" Small SFX near the mug: \"FIZZZ\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p03-02",
+     "location": "lab",
+     "camera": "medium two-shot, eye level",
+     "time_of_day": "day",
+     "characters": [
+      "jill",
+      "rochelle"
+     ],
+     "costume_state": "jill: lab coat + burgundy blouse intact; rochelle: lab coat + teal blouse intact",
+     "muscle_size_tier": {
+      "jill": 0,
+      "rochelle": 0
+     },
+     "continuity_refs": [
+      "p03-01"
+     ],
+     "action": "Jill hands the steaming mug across the bench to Rochelle with a warm, too-easy smile; Rochelle accepts it, tired and grateful, guard finally down. Two speech balloons: one with tail to Jill's mouth: \"PEACE OFFERING. YOU LOOK EXHAUSTED.\" and one with tail to Rochelle's mouth: \"...THANKS, JILL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p03-03",
+     "location": "lab",
+     "camera": "close mcu on Rochelle",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: lab coat + teal blouse intact",
+     "muscle_size_tier": {
+      "rochelle": 0
+     },
+     "continuity_refs": [
+      "p03-01"
+     ],
+     "action": "Chest-up: Rochelle sips the coffee, eyes closing in genuine pleasure, mug in both hands; her expression reflects a rare unguarded moment. One speech balloon, tail to Rochelle's mouth: \"MMM. THAT'S... ACTUALLY GOOD.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p03-04",
+     "location": "lab",
+     "camera": "medium, three-quarter on Jill watching sidelong",
+     "time_of_day": "day",
+     "characters": [
+      "jill"
+     ],
+     "costume_state": "jill: lab coat + burgundy blouse intact",
+     "muscle_size_tier": {
+      "jill": 0
+     },
+     "continuity_refs": [
+      "p03-01"
+     ],
+     "action": "Jill pretends to tidy glassware at the next bench, watching Rochelle sidelong, a hidden smile at the corner of her mouth; her expression and pose reflect suppressed anticipation. One cloud-shaped THOUGHT bubble with a trail of small dots: \"THE SUGAR HELPS IT BIND. DRINK UP.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p03-05",
+     "location": "lab",
+     "camera": "close insert on the empty mug",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: lab coat + teal blouse intact",
+     "muscle_size_tier": {
+      "rochelle": 1
+     },
+     "continuity_refs": [
+      "p03-01"
+     ],
+     "action": "Insert: Rochelle's hand sets the drained mug down on the bench; a faint green shimmer clings to the dregs at the bottom. Caption box at the bottom edge: \"SHE FINISHED THE WHOLE CUP.\" Small SFX by the dregs: \"GLOW\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    }
+   ]
+  },
+  {
+   "page": 4,
+   "panels": [
+    {
+     "panel_id": "p04-01",
+     "location": "lab",
+     "camera": "close mcu on Rochelle",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: lab coat + teal blouse intact",
+     "muscle_size_tier": {
+      "rochelle": 1
+     },
+     "continuity_refs": [
+      "p03-01"
+     ],
+     "action": "Chest-up: Rochelle pauses over her clipboard, flushed, tugging her blouse collar from her neck; her expression reflects confusion tipping toward alarm. One speech balloon, tail to Rochelle's mouth: \"WHY IS IT SO WARM IN HERE...?\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p04-02",
+     "location": "lab",
+     "camera": "mcu on Rochelle's torso, frontal",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: teal blouse and lab coat tightening across chest and shoulders, all coverage intact",
+     "muscle_size_tier": {
+      "rochelle": 3
+     },
+     "continuity_refs": [
+      "p04-01"
+     ],
+     "action": "Torso MCU, face still in frame at the top: Rochelle's teal blouse and lab coat pull visibly tight across her chest, shoulders and arms as the muscle beneath begins to swell; she stares down at herself; her expression reflects disbelief. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One speech balloon, tail to Rochelle's mouth: \"WH-WHAT'S HAPPENING TO ME?!\" Large SFX across the panel: \"RUMBLE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p04-03",
+     "location": "lab",
+     "camera": "close insert on her right arm",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: lab coat sleeve splitting at the seam over a swelling bicep, blouse intact, all coverage intact",
+     "muscle_size_tier": {
+      "rochelle": 5
+     },
+     "continuity_refs": [
+      "p04-01"
+     ],
+     "action": "Insert, head out of frame: Rochelle's right arm flexes involuntarily and the white lab coat sleeve splits along its seam over a thick, round, swelling bicep. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. Large SFX along the tear: \"RRIP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p04-04",
+     "location": "lab",
+     "camera": "close insert on her torso",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: teal blouse buttons straining over expanding chest and abs, one button popping free, breasts fully covered, all coverage intact",
+     "muscle_size_tier": {
+      "rochelle": 6
+     },
+     "continuity_refs": [
+      "p04-01"
+     ],
+     "action": "Insert, head out of frame: Rochelle's teal blouse strains over her expanding chest and newly ridged abs, the placket pulling into taut horizontal folds as one button pops free - everything still fully covered. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. SFX beside the button: \"POP! POP!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p04-05",
+     "location": "lab",
+     "camera": "close mcu on Rochelle's face",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: strained teal blouse + split-sleeved lab coat, all coverage intact",
+     "muscle_size_tier": {
+      "rochelle": 6
+     },
+     "continuity_refs": [
+      "p04-01"
+     ],
+     "action": "Face CU: the fear melts into an astonished, spreading grin - Rochelle looks down at her own arms with dawning euphoria; her expression reflects fear transforming into exhilaration. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One speech balloon, tail to Rochelle's mouth: \"THIS... THIS FEELS INCREDIBLE.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    },
+    {
+     "panel_id": "p04-06",
+     "location": "lab",
+     "camera": "full figure, slight low angle",
+     "time_of_day": "day",
+     "characters": [
+      "rochelle"
+     ],
+     "costume_state": "rochelle: split-sleeved lab coat + strained teal blouse and grey pencil skirt, seams stressed everywhere, breasts and hips fully covered",
+     "muscle_size_tier": {
+      "rochelle": 7
+     },
+     "continuity_refs": [
+      "p04-01"
+     ],
+     "action": "The payoff: full figure from a slight low angle - Rochelle hits an instinctive double-biceps flex in the middle of the lab, her new physique at the full size of the attached muscle reference, split coat sleeves hanging, blouse strained but fully covering; her expression reflects triumphant, laughing disbelief. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One speech balloon, tail to Rochelle's mouth: \"LOOK AT ME... HAHA! LOOK AT ME!\" Large SFX behind her: \"BOOM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail pointing to the speaker's mouth; thought bubbles are scalloped clouds with a trail of small dots; caption boxes are yellow rounded-corner rectangles with bold black outlines at a panel edge; SFX are bold comic display font ALL CAPS words with solid black outlines overlaid flat on the scene; NO 3D shading, NO bevel, NO translucency, NO drop shadow. The no-text rule in the negative applies ONLY to stray environmental text, signage and logos - the balloons, captions and SFX specified here ARE required and must render exactly as written. Photographic CGI render on the bodies and environment; only the bubble / caption / SFX graphics are flat 2D comic-book overlay."
+    }
+   ]
   }
  ]
 }

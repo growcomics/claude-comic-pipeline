@@ -140,6 +140,163 @@
         ],
         "prompt_sha": "c4dd5242dc3d6d132166e8d19b46e9ea54062fafe8f52a8ccb6d4281832cff96"
       }
+    },
+    "p03-01": {
+      "flow_id": "032987fa-17dd-46ce-a30b-3792327e0390",
+      "disk": "pages/p03-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-01.receipt.json",
+        "audit": "qa/receipts/page_p03-01.audit-pass",
+        "verdict": "qa/receipts/page_p03-01.verdict.json",
+        "verdict_tags": [
+          "defocus-fixed",
+          "lettering-ok",
+          "wardrobe-match",
+          "hands-count-ok"
+        ],
+        "prompt_sha": "5d4446207c28a5ff726db9d9b4bf1a7ea1e79061dc925789a2a7761bc1b222c5"
+      }
+    },
+    "p03-02": {
+      "flow_id": "9e27ff79-08e9-4ad8-8734-ba0db053cce3",
+      "disk": "pages/p03-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-02.receipt.json",
+        "audit": "qa/receipts/page_p03-02.audit-pass",
+        "verdict": "qa/receipts/page_p03-02.verdict.json",
+        "verdict_tags": [
+          "speech-bubble",
+          "photoreal-body",
+          "on-model",
+          "lab-scene-match"
+        ],
+        "prompt_sha": "fc0b6e2875a397a8ec6da348ca3d043d08b0349e75142c9556a52cf55ae4cc91"
+      }
+    },
+    "p03-04": {
+      "flow_id": "bcf3d2c8-0786-4376-979d-ac905c699487",
+      "disk": "pages/p03-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-04.receipt.json",
+        "audit": "qa/receipts/page_p03-04.audit-pass",
+        "verdict": "qa/receipts/page_p03-04.verdict.json",
+        "verdict_tags": [
+          "thought-bubble",
+          "photoreal-body",
+          "on-model",
+          "lab-scene-match"
+        ],
+        "prompt_sha": "e3ea0b5deea2b0e4ac5b2bffe268a132c3b704c30fc82ff54dc6d07e77bbdd32"
+      }
+    },
+    "p03-05": {
+      "flow_id": "569d8cbf-a111-4d40-93bf-b2e848bc1e93",
+      "disk": "pages/p03-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-05.receipt.json",
+        "audit": "qa/receipts/page_p03-05.audit-pass",
+        "verdict": "qa/receipts/page_p03-05.verdict.json",
+        "verdict_tags": [
+          "caption-yellow-box",
+          "sfx-text",
+          "photoreal-body",
+          "on-model",
+          "insert-shot"
+        ],
+        "prompt_sha": "3e123b399b4b0f490b25550e9c344e8459a7a3997f4a95708faa0b41d15783cd"
+      }
+    },
+    "p04-01": {
+      "flow_id": "7fef7f2b-8452-4b4f-817c-8f13f81d350c",
+      "disk": "pages/p04-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-01.receipt.json",
+        "audit": "qa/receipts/page_p04-01.audit-pass",
+        "verdict": "qa/receipts/page_p04-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "72d13c9c154e0339bb2b7ffc380ea1cad36500e3b608859a7516ca8abfa5867c"
+      }
+    },
+    "p03-03": {
+      "flow_id": "d56f62e4-faf5-4968-9c62-b2f1e22a8bc5",
+      "disk": "pages/p03-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p03-03.receipt.json",
+        "audit": "qa/receipts/page_p03-03.audit-pass",
+        "verdict": "qa/receipts/page_p03-03.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "5cac9ef4f6a22055386eaa3a101371db842d98e6b186fee0824a03d25637b0ab"
+      }
+    },
+    "p04-03": {
+      "flow_id": "10423b2f-c9b5-463e-b390-3074e79ab13c",
+      "disk": "pages/p04-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-03.receipt.json",
+        "audit": "qa/receipts/page_p04-03.audit-pass",
+        "verdict": "qa/receipts/page_p04-03.verdict.json",
+        "verdict_tags": [
+          "continuity-flag-vs-p04-02"
+        ],
+        "prompt_sha": "9256bc92d57755e65c7df56298a9a952dd1c2f431464853718100eeb1e4069ef"
+      }
+    },
+    "p04-04": {
+      "flow_id": "929d3cf2-8179-4181-b298-c40d5d0a614f",
+      "disk": "pages/p04-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-04.receipt.json",
+        "audit": "qa/receipts/page_p04-04.audit-pass",
+        "verdict": "qa/receipts/page_p04-04.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "0bc563c4d0a062cac664afa7d1b3009a31a5c028188c959d15eb3e21b4965b00"
+      }
+    },
+    "p04-05": {
+      "flow_id": "3fe88396-5cb2-4b19-a887-053f0061a37e",
+      "disk": "pages/p04-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-05.receipt.json",
+        "audit": "qa/receipts/page_p04-05.audit-pass",
+        "verdict": "qa/receipts/page_p04-05.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "c14a147282a1fa036237ec7f67b0a9d85413be2de3645227de3861b825c4bf4a"
+      }
+    },
+    "p04-02": {
+      "flow_id": "2a84da30-670d-4d4c-ae57-34bc1b264925",
+      "disk": "pages/p04-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-02.receipt.json",
+        "audit": "qa/receipts/page_p04-02.audit-pass",
+        "verdict": "qa/receipts/page_p04-02.verdict.json",
+        "verdict_tags": [
+          "torso-mcu",
+          "sleeves-intact-both-arms",
+          "mid-growth",
+          "balloon-match",
+          "sfx-match"
+        ],
+        "prompt_sha": "e60074a19cb1ed2acfc28075cc37ece212836194bf01400ebd45eb8aa698f62a"
+      }
+    },
+    "p04-06": {
+      "flow_id": "d3c515e3-7e25-40c5-aac2-f4e89babb68e",
+      "disk": "pages/p04-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p04-06.receipt.json",
+        "audit": "qa/receipts/page_p04-06.audit-pass",
+        "verdict": "qa/receipts/page_p04-06.verdict.json",
+        "verdict_tags": [
+          "orchestrator-override",
+          "lettering-exact",
+          "double-biceps-pass",
+          "grown-size-match",
+          "coverage-pass-per-house-canon",
+          "sfx-occluded-legible"
+        ],
+        "prompt_sha": "b23238cdd91c4d8c5482ff704b7acdebd9d1f286df2884208ef14f0bb22e2c59"
+      }
     }
   },
   "pending": []

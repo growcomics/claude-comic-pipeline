@@ -1,0 +1,14 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "only her hand and forearm in frame, setting the mug on the bench",
+  "pose": "releasing the drained mug",
+  "expression": "face not visible - hand only"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "only one hand of Rochelle's in frame",
+  "insert grammar: the empty mug and the faint green shimmer in the dregs are the story"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}
