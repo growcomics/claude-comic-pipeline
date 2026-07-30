@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["environment-consistency", "camera-distance", "kitchen"],
+  "notes": "Same kitchen materials/light as kitchen.png -- wood-grain cabinets, glass-front upper cabinet, spice jars, wicker bread basket with rolls, silver kettle, tan rice cooker, stainless sink, twin windows all match. Framing is a genuinely tight counter shot with kettle/bread-basket/jars large in frame and clear shallow depth of field (window and far counter section soften). Scene is empty except the grey-scale mannequin, visible only as a partial figure cropped at the right frame edge, which satisfies 'partial ok'. Photoreal DAZ3D-style render, no baked text anywhere in frame. Passes all gate criteria."
+}

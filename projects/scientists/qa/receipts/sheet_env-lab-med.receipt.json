@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-lab-med",
+ "kind": "sheet",
+ "prompt_sha": "d6e8f6e1520350c439fe44bce9bba44f1499a07bca7bde599fe2528828f55292",
+ "attach": [
+  "banked wide plate: references/environments/lab.png",
+  "reference lineart: references/harvest/env-lab-p02.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same lab as wide plate (door/benches/shelving match); medium distance, one bench dominant; empty; silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

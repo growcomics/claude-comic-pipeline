@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-lab-close",
+ "kind": "sheet",
+ "prompt_sha": "42f6699b8aef0c2c0904f9b27bb9168420a9cf0e969912e384b8525eac8c7e6d",
+ "attach": [
+  "banked wide plate: references/environments/lab.png",
+  "reference lineart: references/harvest/env-lab-p02.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same lab materials/light as wide plate; tight bench framing, shallow depth; empty; silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

@@ -1,0 +1,20 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "extreme foreground left edge, her near shoulder and hair only, out of focus, cropped by the frame",
+  "pose": "standing over the table",
+  "expression": "face not visible - shoulder only"
+ },
+ "jim": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "below camera in the mid-ground, seated at the table, looking up at Rochelle and the lens",
+  "pose": "donut halfway to his mouth, free hand raised in a defensive shrug",
+  "expression": "sheepish backpedaling"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Hand accounting: Rochelle has exactly two hands, Jim has exactly two hands \u2014 four hands total in frame, each attached to its owner.",
+  "reverse over-the-shoulder from a high angle: camera looks down past her shoulder onto him"
+ ],
+ "lighting": "Low warm morning sun through the kitchen window raking almost parallel across the scene, full highlight-to-shadow gradient across every form, ambient-occlusion shadows deepened in every crease, a subtle warm rim light lifting the figures off an environment that sits half a stop darker, faint dust motes drifting in the sun shafts."
+}

@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-kitchen-close",
+ "kind": "sheet",
+ "prompt_sha": "7c697739cd15b7a9f8cbb0bfd730f04abd017a821e0a5be655049719dcf9a9cd",
+ "attach": [
+  "banked wide plate: references/environments/kitchen.png",
+  "reference lineart: references/harvest/env-kitchen-p01.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same kitchen materials/light as wide plate; tight counter framing, shallow depth; empty; silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

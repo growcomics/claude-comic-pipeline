@@ -266,6 +266,50 @@
       "save": "references/characters/cast-lineup.png",
       "ledger_key": "cast.lineup",
       "gate": "exactly eight figures matching their banked identity sheets; correct relative heights; grey backdrop + height grid; photoreal; no baked text"
+    },
+    {
+      "id": "env-kitchen-med",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. MEDIUM camera rung of EXACTLY the same suburban kitchen as the attached wide reference plate \u2014 same room, same cabinets, counter, kettle, bread basket, condiment jars, window and morning light, unchanged materials and layout \u2014 but the camera has moved in to a medium distance: the counter and dining nook fill the frame, cabinet detail and countertop objects clearly readable, empty of people. A plain grey human scale silhouette figure stands at the counter for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles.",
+      "attach": [
+        "banked wide plate: references/environments/kitchen.png",
+        "reference lineart: references/harvest/env-kitchen-p01.jpg"
+      ],
+      "save": "references/environments/kitchen-med.png",
+      "ledger_key": "env.kitchen_med",
+      "gate": "same kitchen as wide plate (cabinets/counter/window match); medium distance; empty; silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "env-kitchen-close",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. CLOSE camera rung of EXACTLY the same suburban kitchen as the attached wide reference plate \u2014 same room, same materials and morning light \u2014 but the camera is tight on the counter corner by the window: kettle, bread basket and condiment jars large in frame, shallow depth, background cabinets softly defocused, empty of people. A plain grey human scale silhouette figure stands partially in frame at the counter edge for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles.",
+      "attach": [
+        "banked wide plate: references/environments/kitchen.png",
+        "reference lineart: references/harvest/env-kitchen-p01.jpg"
+      ],
+      "save": "references/environments/kitchen-close.png",
+      "ledger_key": "env.kitchen_close",
+      "gate": "same kitchen materials/light as wide plate; tight counter framing, shallow depth; empty; silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "env-lab-med",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. MEDIUM camera rung of EXACTLY the same private research lab as the attached wide reference plate \u2014 same room, same glass entry door, workbenches, test-tube racks, beakers, microscope, wall shelving with labeled bottles, fluorescent lights, tiled floor, unchanged layout \u2014 but the camera has moved in to a medium distance: one workbench dominates the frame with its glassware clearly readable, shelving behind, empty of people. A plain grey human scale silhouette figure stands at the bench for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles.",
+      "attach": [
+        "banked wide plate: references/environments/lab.png",
+        "reference lineart: references/harvest/env-lab-p02.jpg"
+      ],
+      "save": "references/environments/lab-med.png",
+      "ledger_key": "env.lab_med",
+      "gate": "same lab as wide plate (door/benches/shelving match); medium distance, one bench dominant; empty; silhouette; photoreal; no baked text"
+    },
+    {
+      "id": "env-lab-close",
+      "prompt": "Environment reference plate rendered as photorealistic 3D CGI, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D. CLOSE camera rung of EXACTLY the same private research lab as the attached wide reference plate \u2014 same room, same materials and fluorescent light \u2014 but the camera is tight on the main workbench: a test-tube rack, beakers and a microscope large in frame, shallow depth, shelving bottles softly defocused behind, empty of people. A plain grey human scale silhouette figure stands partially in frame at the bench edge for scale. Do NOT reproduce the comic page, panel borders, line art style, or speech bubbles. No text, no words, no logos, no speech bubbles.",
+      "attach": [
+        "banked wide plate: references/environments/lab.png",
+        "reference lineart: references/harvest/env-lab-p02.jpg"
+      ],
+      "save": "references/environments/lab-close.png",
+      "ledger_key": "env.lab_close",
+      "gate": "same lab materials/light as wide plate; tight bench framing, shallow depth; empty; silhouette; photoreal; no baked text"
     }
   ]
 }

@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["environment-consistency", "camera-distance", "lab"],
+  "notes": "Same lab materials/light as lab.png -- white cabinetry, chrome equipment, checkerboard tile floor, glassware style all match. Framing is a tight bench shot with test-tube rack, beakers, flasks, and a microscope large and sharp in the foreground; clear shallow depth of field with the rear cabinets/shelving/second bench visibly softened. Scene is empty except the grey-scale mannequin, visible only as a partial figure (shoulder/torso) cropped at the right frame edge, satisfying 'partial ok'. Photoreal, no baked text. Passes all gate criteria."
+}

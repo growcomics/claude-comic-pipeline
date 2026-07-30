@@ -1,0 +1,16 @@
+{
+ "job": "sheet:env-kitchen-med",
+ "kind": "sheet",
+ "prompt_sha": "b3b3a4bb252d67cea01354a39bcb19cadb79bde3541c984379d6ca1377ec39c7",
+ "attach": [
+  "banked wide plate: references/environments/kitchen.png",
+  "reference lineart: references/harvest/env-kitchen-p01.jpg"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "same kitchen as wide plate (cabinets/counter/window match); medium distance; empty; silhouette; photoreal; no baked text",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

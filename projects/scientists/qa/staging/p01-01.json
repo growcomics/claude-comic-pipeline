@@ -1,0 +1,20 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "mid-ground left, at the kitchen counter, body three-quarters away from Jim, nearer the camera and larger in frame",
+  "pose": "standing, arms crossed tight under her chest, hip against the counter",
+  "expression": "simmering hurt and anger, jaw set"
+ },
+ "jim": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "background right, seated at the dining nook table, a step deeper and smaller by perspective",
+  "pose": "seated, reaching into the bread basket for a donut",
+  "expression": "oblivious, appetite-first"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Hand accounting: Rochelle has exactly two hands, Jim has exactly two hands \u2014 four hands total in frame, each attached to its owner.",
+  "the kettle on the counter grazes the lower-left corner out of focus"
+ ],
+ "lighting": "Low warm morning sun through the kitchen window raking almost parallel across the scene, full highlight-to-shadow gradient across every form, ambient-occlusion shadows deepened in every crease, a subtle warm rim light lifting the figures off an environment that sits half a stop darker, faint dust motes drifting in the sun shafts."
+}

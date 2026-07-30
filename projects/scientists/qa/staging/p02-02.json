@@ -1,0 +1,20 @@
+{
+ "jill": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "left of frame, leaning across the workbench into Rochelle's space, dominant and larger, shot from slightly below her chest height",
+  "pose": "vial raised between two fingers at Rochelle's eye line, weight on her knuckles on the bench",
+  "expression": "confident salesmanship over a hidden agenda"
+ },
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "right of frame, a half step back from the bench, holding her ground",
+  "pose": "clipboard lowered, one brow raised",
+  "expression": "unmoved, weighing her"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Hand accounting: Jill has exactly two hands, Rochelle has exactly two hands - four hands total in frame, each attached to its owner.",
+  "low camera favors Jill: she looms slightly; test-tube rack grazes the lower-left corner out of focus"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

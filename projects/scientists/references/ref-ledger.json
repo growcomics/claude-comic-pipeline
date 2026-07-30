@@ -58,6 +58,25 @@
           ],
           "prompt_sha": "5352703f3c7f68f6f75c421e78069fe43061d17f6af2605ed7f6bd94bf227563"
         }
+      },
+      "turnaround_baseline": {
+        "flow_id": "6d7cc20c-1c3f-4c12-ac82-1017e74c1f22",
+        "disk": "references/characters/rochelle/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_rochelle-identity.receipt.json",
+          "audit": "qa/receipts/sheet_rochelle-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_rochelle-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "5bab3dbfe07fd681e680e5cbc1e42a2be3247b561e65d8947df7ebe3c504736c"
+        }
       }
     },
     "jill": {
@@ -120,6 +139,26 @@
           ],
           "prompt_sha": "43db3686d9b9d22bb62dbfda310618f71283a5050275c02e3b0667b6b2b552fa"
         }
+      },
+      "turnaround_baseline": {
+        "flow_id": "136107a9-d563-41ab-b5cb-df0981a66e64",
+        "disk": "references/characters/jill/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jill-identity.receipt.json",
+          "audit": "qa/receipts/sheet_jill-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_jill-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "hair-match",
+            "proportions-pass",
+            "coverage-pass",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "scale-bar-text"
+          ],
+          "prompt_sha": "d347aa39aa7260d6729035ec2c988e5415ef4684e726f6b38ab67750c357cec6"
+        }
       }
     },
     "jim": {
@@ -159,6 +198,25 @@
             "no-baked-text"
           ],
           "prompt_sha": "dd76aa60408e6d5aa57a38fcf56395ab57cc92ec9b1d0427191d9bdd31ccc4f3"
+        }
+      },
+      "turnaround_baseline": {
+        "flow_id": "ddf8c630-47c7-4f75-ad1f-0238c02b2a07",
+        "disk": "references/characters/jim/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_jim-identity.receipt.json",
+          "audit": "qa/receipts/sheet_jim-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_jim-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "average-build",
+            "track-jacket-jeans",
+            "two-views",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "c35ac9f9a1ef5214ad6a44f29f0994d62620dc51ba643001e80c7a96b12e6f13"
         }
       }
     },
@@ -200,6 +258,26 @@
             "no-baked-text"
           ],
           "prompt_sha": "6be3917ea7d64cfcafbd5f6e8a7e9807fce00aa91cb262bf0c52f5beff02b553"
+        }
+      },
+      "turnaround_baseline": {
+        "flow_id": "6b4eef60-124c-46d2-bc97-995914b8c741",
+        "disk": "references/characters/donny/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_donny-identity.receipt.json",
+          "audit": "qa/receipts/sheet_donny-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_donny-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "distinct-hair-color",
+            "lean-baseline",
+            "grey-tee-jeans",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "9d075d4041c804fcdb408c06e704b818c4e49631607ab79daba4902c582e6334"
         }
       }
     },
@@ -243,6 +321,26 @@
           ],
           "prompt_sha": "44c97bcab64d642294d0a46dc0d4e5c2cfae9abe3a58c0c432dac4d362db2b8d"
         }
+      },
+      "turnaround_baseline": {
+        "flow_id": "90950f27-fd6a-4799-9d0b-7b1bedfdd5f4",
+        "disk": "references/characters/dan/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dan-identity.receipt.json",
+          "audit": "qa/receipts/sheet_dan-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_dan-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "bald",
+            "athletic-baseline",
+            "white-tank-jeans",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "c70a7f80d643825b87a05d1ebb1b9e9571a5f7ca196b83d55641d18afb9d5d01"
+        }
       }
     },
     "assistant": {
@@ -265,10 +363,50 @@
           ],
           "prompt_sha": "639df680aee8b367edfeeea4a0af43d0571c0222ad971de4366661cc6e7d9d46"
         }
+      },
+      "turnaround_baseline": {
+        "flow_id": "8e56e115-6380-46a6-b62c-93448b3e0ccc",
+        "disk": "references/characters/assistant/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_assistant-identity.receipt.json",
+          "audit": "qa/receipts/sheet_assistant-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_assistant-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "slim-petite",
+            "timid-expression",
+            "cardigan-blouse-skirt",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "639df680aee8b367edfeeea4a0af43d0571c0222ad971de4366661cc6e7d9d46"
+        }
       }
     },
     "blonde": {
       "face": {
+        "flow_id": "4da45d0d-7258-4d3e-8e49-2541b1cfefa9",
+        "disk": "references/characters/blonde/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_blonde-identity.receipt.json",
+          "audit": "qa/receipts/sheet_blonde-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_blonde-identity.verdict.json",
+          "verdict_tags": [
+            "face-lock-pass",
+            "long-straight-blonde",
+            "blouse-pencil-skirt",
+            "large-bust",
+            "two-views",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "684532ac97b63a67885a33215eee679fde746b5e9c6398648e9164336c7c3956"
+        }
+      },
+      "turnaround_baseline": {
         "flow_id": "4da45d0d-7258-4d3e-8e49-2541b1cfefa9",
         "disk": "references/characters/blonde/identity-sheet.png",
         "chain": {
@@ -326,6 +464,25 @@
             "photoreal-daz"
           ],
           "prompt_sha": "72414e3caf8362402915933aa6d74b2c2ca7cd9aaaefd9978822fdde4d717b62"
+        }
+      },
+      "turnaround_baseline": {
+        "flow_id": "19cb082e-206d-448b-b88b-94e862875c1d",
+        "disk": "references/characters/cheer-squad/identity-sheet.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_cheer-squad-identity.receipt.json",
+          "audit": "qa/receipts/sheet_cheer-squad-identity.audit-pass",
+          "verdict": "qa/receipts/sheet_cheer-squad-identity.verdict.json",
+          "verdict_tags": [
+            "five-women",
+            "distinct-hairstyles",
+            "uniforms-intact",
+            "baseline-slim-busty",
+            "silhouette-present",
+            "scale-bar-text",
+            "photoreal-daz"
+          ],
+          "prompt_sha": "61e07956ef46fe0bed377c95fcb658efe2dad7afc1d702cf834ceae5498bb466"
         }
       }
     },
@@ -398,6 +555,51 @@
           ],
           "prompt_sha": "1fdf47a631f7bc75f6a9f5c233480eb3015f47906dc7d7352cfac30ca0526851"
         }
+      },
+      "kitchen_close": {
+        "flow_id": "a0c53efa-cf4f-42b4-aaed-bee6309f27c9",
+        "disk": "references/environments/kitchen-close.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-kitchen-close.receipt.json",
+          "audit": "qa/receipts/sheet_env-kitchen-close.audit-pass",
+          "verdict": "qa/receipts/sheet_env-kitchen-close.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "kitchen"
+          ],
+          "prompt_sha": "7c697739cd15b7a9f8cbb0bfd730f04abd017a821e0a5be655049719dcf9a9cd"
+        }
+      },
+      "lab_med": {
+        "flow_id": "6b05421f-665a-4e9b-8681-f5aad1c88c83",
+        "disk": "references/environments/lab-med.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab-med.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab-med.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab-med.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "lab"
+          ],
+          "prompt_sha": "d6e8f6e1520350c439fe44bce9bba44f1499a07bca7bde599fe2528828f55292"
+        }
+      },
+      "lab_close": {
+        "flow_id": "0de61697-275a-41b6-b288-2b53c6ba132e",
+        "disk": "references/environments/lab-close.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab-close.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab-close.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab-close.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "lab"
+          ],
+          "prompt_sha": "42f6699b8aef0c2c0904f9b27bb9168420a9cf0e969912e384b8525eac8c7e6d"
+        }
       }
     },
     "cast": {
@@ -421,6 +623,142 @@
           ],
           "prompt_sha": "2a396452919d83e2769857d99faf7ba6e27cc217b2256134ebfefa00ad343aff"
         }
+      }
+    }
+  },
+  "scene_ladders": {
+    "kitchen": {
+      "wide": {
+        "flow_id": "c0721aa4-497e-4169-b48e-f0cf0b7caf90",
+        "disk": "references/environments/kitchen.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-kitchen.receipt.json",
+          "audit": "qa/receipts/sheet_env-kitchen.audit-pass",
+          "verdict": "qa/receipts/sheet_env-kitchen.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "morning-light",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "162de5d7ff4ae0b4c59afc907cdd3837268d9fb4d65faca4de7fd90e9da3e5d8"
+        },
+        "note": "Mirrored from characters.env.kitchen (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      },
+      "close": {
+        "flow_id": "a0c53efa-cf4f-42b4-aaed-bee6309f27c9",
+        "disk": "references/environments/kitchen-close.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-kitchen-close.receipt.json",
+          "audit": "qa/receipts/sheet_env-kitchen-close.audit-pass",
+          "verdict": "qa/receipts/sheet_env-kitchen-close.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "kitchen"
+          ],
+          "prompt_sha": "7c697739cd15b7a9f8cbb0bfd730f04abd017a821e0a5be655049719dcf9a9cd"
+        },
+        "note": "Mirrored from characters.env.kitchen_close (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      },
+      "medium": {
+        "flow_id": "DERIVED-CROP -- from banked wide c0721aa4-497e-4169-b48e-f0cf0b7caf90",
+        "disk": "references/environments/kitchen-med.png",
+        "note": "Deterministic crop of the banked kitchen wide plate (right 70%, lower 82%, upscaled). Two generation attempts failed verdict (v2 flat mannequin, v3 no push-in); a crop guarantees material continuity. Chain of the source wide applies (sheet_env-kitchen at qa/receipts/)."
+      }
+    },
+    "lab": {
+      "wide": {
+        "flow_id": "42167676-4b08-43fd-be8d-55b2f1187a41",
+        "disk": "references/environments/lab.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "6dcb41c485698e54dcd4da426cc6530a468494313f8be9de9976e98734cf6b3a"
+        },
+        "note": "Mirrored from characters.env.lab (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      },
+      "medium": {
+        "flow_id": "6b05421f-665a-4e9b-8681-f5aad1c88c83",
+        "disk": "references/environments/lab-med.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab-med.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab-med.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab-med.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "lab"
+          ],
+          "prompt_sha": "d6e8f6e1520350c439fe44bce9bba44f1499a07bca7bde599fe2528828f55292"
+        },
+        "note": "Mirrored from characters.env.lab_med (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      },
+      "close": {
+        "flow_id": "0de61697-275a-41b6-b288-2b53c6ba132e",
+        "disk": "references/environments/lab-close.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-lab-close.receipt.json",
+          "audit": "qa/receipts/sheet_env-lab-close.audit-pass",
+          "verdict": "qa/receipts/sheet_env-lab-close.verdict.json",
+          "verdict_tags": [
+            "environment-consistency",
+            "camera-distance",
+            "lab"
+          ],
+          "prompt_sha": "42f6699b8aef0c2c0904f9b27bb9168420a9cf0e969912e384b8525eac8c7e6d"
+        },
+        "note": "Mirrored from characters.env.lab_close (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      }
+    },
+    "field": {
+      "wide": {
+        "flow_id": "b1709a91-3bf9-4e38-baf7-4081cb4f72db",
+        "disk": "references/environments/field.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-field.receipt.json",
+          "audit": "qa/receipts/sheet_env-field.audit-pass",
+          "verdict": "qa/receipts/sheet_env-field.verdict.json",
+          "verdict_tags": [
+            "layout-match",
+            "goalposts-present",
+            "cooler-table-present",
+            "silhouette-present",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "f68327323dc7c9389162acfc61241a1bfef6bbc7f47af1a7f861cd3bf55e191a"
+        },
+        "note": "Mirrored from characters.env.field (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      }
+    },
+    "city-ruins": {
+      "wide": {
+        "flow_id": "4ba2c16e-5caf-4e83-9e31-31d2435230f6",
+        "disk": "references/environments/city-ruins.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_env-city.receipt.json",
+          "audit": "qa/receipts/sheet_env-city.audit-pass",
+          "verdict": "qa/receipts/sheet_env-city.verdict.json",
+          "verdict_tags": [
+            "ruined-city-block",
+            "collapsed-buildings",
+            "dusk-lighting",
+            "empty-except-silhouette",
+            "photoreal-daz",
+            "no-baked-text"
+          ],
+          "prompt_sha": "1fdf47a631f7bc75f6a9f5c233480eb3015f47906dc7d7352cfac30ca0526851"
+        },
+        "note": "Mirrored from characters.env.city (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
       }
     }
   }

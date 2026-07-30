@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["environment-consistency", "camera-distance", "lab"],
+  "notes": "Same lab as lab.png -- glass door (edge visible at far left), stacked freezer/equipment units, ceiling strip lights, white glass-front cabinets, right-hand shelving with labeled bottles, front lab bench with test-tube racks/beakers/flasks, rear bench with sink all match. Genuine medium-distance push-in confirmed by scale: the bottle shelf on the right spans roughly 216px in the wide plate vs roughly 346px in this plate (both at 1376px image width), and the mannequin appears noticeably larger/more central. Front bench with glassware reads as the dominant element. Scene is empty except the grey-scale (female) mannequin standing at the bench, no extra characters. Photoreal, no baked text. Passes all gate criteria."
+}

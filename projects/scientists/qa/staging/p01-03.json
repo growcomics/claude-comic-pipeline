@@ -1,0 +1,13 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "chest-up, centered slightly right of frame with negative space left toward the door",
+  "pose": "glancing down at her bare wrist then toward the door, lip bitten",
+  "expression": "hurt hardening into resolve"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "Rochelle has exactly two hands"
+ ],
+ "lighting": "Low warm morning sun through the kitchen window raking almost parallel across the scene, full highlight-to-shadow gradient across every form, ambient-occlusion shadows deepened in every crease, a subtle warm rim light lifting the figures off an environment that sits half a stop darker, faint dust motes drifting in the sun shafts."
+}

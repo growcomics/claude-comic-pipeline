@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["on-model", "close-mcu", "eye-level", "two-hands", "fg-element", "defocused-background", "coat-continuity-good", "no-text"],
+  "notes": "Rochelle is on-model vs identity-sheet.png (bob, teal blouse, grey skirt) and correctly still wears the white lab coat, consistent with prior=pages/p02-01.png -- no wardrobe regression here (contrast with p02-02, which is failing on exactly this point). Close chest-up MCU at eye level, clipboard hugged to her chest like a shield with chin set -- expression reads as the specified polite/immovable refusal. Exactly two hands confirmed by close inspection: one hand wrapped over the top edge of the clipboard, the other supporting it from underneath -- correctly attached, no extra or phantom limbs. A glassware beaker sits out-of-focus in the lower-right corner as the FG element; cabinetry/shelving behind is softly defocused per intent. No baked text of any kind. Clean pass."
+}

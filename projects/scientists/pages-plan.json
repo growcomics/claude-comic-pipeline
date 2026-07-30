@@ -1,0 +1,49 @@
+{
+ "pages": [
+  {
+   "id": "p01-01",
+   "camera": "wide establishing, slightly high look-down",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p01-02",
+   "camera": "over-shoulder medium, camera slightly below Rochelle's chest height",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p01-03",
+   "camera": "close mcu on Rochelle",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p01-04",
+   "camera": "over-shoulder medium from high angle looking down at Jim",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p01-05",
+   "camera": "medium, high look-down from the doorway",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p02-01",
+   "camera": "wide establishing",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p02-02",
+   "camera": "medium two-shot, camera slightly below chest height favoring Jill",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p02-03",
+   "camera": "close mcu on Rochelle, eye level",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p02-04",
+   "camera": "medium, three-quarter rear view of Jill",
+   "aspect": "3:4"
+  }
+ ]
+}
