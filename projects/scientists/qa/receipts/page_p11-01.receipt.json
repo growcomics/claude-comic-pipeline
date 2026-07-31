@@ -1,0 +1,18 @@
+{
+ "job": "page:p11-01",
+ "kind": "page",
+ "prompt_sha": "6a6e7aea9562afa44e774806f45927ea4d682035d085bc519c8f1f60bf67a876",
+ "attach": [
+  "face:donny",
+  "turnaround:donny:turnaround_baseline",
+  "scene:lab:medium",
+  "prior:p10-06"
+ ],
+ "aspect": "3:4",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false,
+  "continuity_gate_skipped": true
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

@@ -99,6 +99,316 @@
    "id": "p04-06",
    "camera": "full figure, slight low angle",
    "aspect": "3:4"
+  },
+  {
+   "id": "p05-01",
+   "camera": "medium two-shot, eye level, tension",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p05-02",
+   "camera": "close mcu on Jill",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p05-03",
+   "camera": "over-shoulder medium past Jill onto Rochelle, camera slightly below chest height",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p05-04",
+   "camera": "medium, three-quarter on Jill at the bench",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p05-05",
+   "camera": "close mcu on Jill drinking",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p06-01",
+   "camera": "close mcu on Jill's face",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p06-02",
+   "camera": "mcu on Jill's torso, frontal",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p06-03",
+   "camera": "close insert on her left arm",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p06-04",
+   "camera": "close insert on her legs",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p06-05",
+   "camera": "close mcu on Jill's face",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p06-06",
+   "camera": "full figure, slight low angle",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p07-01",
+   "camera": "wide establishing, evening light",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p07-02",
+   "camera": "over-shoulder medium past Rochelle onto Jim",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p07-03",
+   "camera": "close mcu two-shot, intimate",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p07-04",
+   "camera": "close insert on her palm",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p07-05",
+   "camera": "close mcu on Jim",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p08-01",
+   "camera": "mcu on Jim's torso",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p08-02",
+   "camera": "close insert on his arm",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p08-03",
+   "camera": "full figure, slight low angle",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p08-04",
+   "camera": "medium two-shot, eye level, cooling",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p08-05",
+   "camera": "medium, high look-down from the doorway",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p09-01",
+   "camera": "wide establishing, night, single work light",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p09-02",
+   "camera": "close insert on the vial rack",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p09-03",
+   "camera": "medium two-shot, assistant at the door",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p09-04",
+   "camera": "over-shoulder medium past assistant, camera low, Rochelle looming",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p09-05",
+   "camera": "medium, assistant fleeing through the glass door",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p10-01",
+   "camera": "medium two-shot, Rochelle pouring a drink",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p10-02",
+   "camera": "close mcu on Dan drinking",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p10-03",
+   "camera": "mcu on Dan's torso",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p10-04",
+   "camera": "full figure, slight low angle",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p10-05",
+   "camera": "medium two-shot, power inversion, camera high over Rochelle's shoulder",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p10-06",
+   "camera": "close mcu on Rochelle",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p11-01",
+   "camera": "medium, Donny bursting through the glass door",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p11-02",
+   "camera": "over-shoulder medium past Rochelle onto Donny",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p11-03",
+   "camera": "close insert, the glass forced into his hand",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p11-04",
+   "camera": "mcu on Donny's torso",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p11-05",
+   "camera": "full figure, slight low angle, two giants",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p11-06",
+   "camera": "close mcu on Rochelle, flanked by out-of-focus giants",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p12-01",
+   "camera": "wide establishing, afternoon",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p12-02",
+   "camera": "medium, the squad at the cooler",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p12-03",
+   "camera": "close mcu on the ponytail leader",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p12-04",
+   "camera": "medium group, mid-growth",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p12-05",
+   "camera": "close insert, a sleeve and a shoe seam splitting",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p12-06",
+   "camera": "full group, slight low angle",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p13-01",
+   "camera": "medium action, the leader wrecking equipment",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p13-02",
+   "camera": "medium two-shot, Rochelle commanding",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p13-03",
+   "camera": "wide, Jill arriving",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p13-04",
+   "camera": "over-shoulder medium past Jill onto Rochelle",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p13-05",
+   "camera": "close insert, Jill's flask",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p14-01",
+   "camera": "close mcu, Jill drinking the flask",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p14-02",
+   "camera": "mcu torso, second growth",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p14-03",
+   "camera": "close insert, back and shoulders",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p14-04",
+   "camera": "close mcu on Jill's face",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p14-05",
+   "camera": "full figure payoff, low angle",
+   "aspect": "3:4"
+  },
+  {
+   "id": "p14-06",
+   "camera": "medium two-shot, the standoff",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p15-01",
+   "camera": "close mcu, the black vial",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p15-02",
+   "camera": "close mcu, drinking, beginning to glow",
+   "aspect": "4:5"
+  },
+  {
+   "id": "p15-03",
+   "camera": "mcu torso, tier surge",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p15-04",
+   "camera": "wide, growing past the goalposts",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p15-05",
+   "camera": "wide, first titan footfall downtown",
+   "aspect": "16:9"
+  },
+  {
+   "id": "p15-06",
+   "camera": "low wide, Jill tiny at her feet",
+   "aspect": "4:3"
+  },
+  {
+   "id": "p16-01",
+   "camera": "splash: epic low wide, full scene",
+   "aspect": "16:9"
   }
  ]
 }

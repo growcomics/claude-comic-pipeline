@@ -1,0 +1,5 @@
+{
+ "pass": true,
+ "tags": ["runner-checked", "take1"],
+ "notes": "Job 5ea8c908-9e00-4769-a009-a11e67e9d490, take1 PASSED: exactly five cheerleaders crowding the cooler, cups raised, carefree/laughing. Golden-hour raking light. Balloon from the ponytail leader transcribed exactly: 'HYDRATE, LADIES! COACH'S ORDERS!' SFX transcribed exactly: 'GLUG GLUG'. Both match shotlist.json required lettering verbatim. Banked take1. Note: the field:medium scene-ladder rung that blocked compose.py in a prior run of this task was already resolved (work/final-p12-02.txt existed and was submitted verbatim per this runner's protocol)."
+}

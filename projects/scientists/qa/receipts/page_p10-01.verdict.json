@@ -1,0 +1,8 @@
+{
+ "pass": true,
+ "tags": [
+  "runner-checked",
+  "take2"
+ ],
+ "notes": "Take 1 (job 465da1a9-d105-4b30-acce-b4f63b1f1894) returned status=failed, no image. Take 2 (job 523f0f08-8a1f-40f0-b83c-77c228301810) PASSED: Rochelle correctly in BLACK tank + jeans, dark bob, grown huge arms (fixed wardrobe drift from prior teal-blouse failures). Dan correctly bald, white tank, athletic gym-built baseline (not grown, tier0 as specced). Transcription exact: caption 'IT WASN'T HARD TO FIND A VOLUNTEER.' | Dan balloon 'SO THIS IS WHERE THE MAGIC HAPPENS?' | Rochelle balloon 'DRINK UP AND I'LL SHOW YOU.' Model added an unrequested small 'FIZZ' SFX near the glass (not in shotlist) - cosmetic addition only, does not alter required lettering or scene meaning; not treated as a fail. Banked take2."
+}

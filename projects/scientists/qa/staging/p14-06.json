@@ -1,0 +1,23 @@
+{
+ "jill": {
+  "turnaround_key": "turnaround_super",
+  "position": "left, face to face at midfield",
+  "pose": "weight forward",
+  "expression": "ready"
+ },
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "right, producing a slim black vial from her jacket",
+  "pose": "holding the vial up between two fingers",
+  "expression": "amused, unbothered"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "hand accounting: each of the two figures has exactly two hands - four hands total in frame, each attached to its owner",
+  "wardrobe lock: Rochelle's garments stay ON with sleeves/coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "wardrobe lock: Jill's garments stay ON with coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "identity anchor: the LEFT figure is Jill with LONG caramel hair per her attached cards; the RIGHT figure holding the black vial is Rochelle with the short dark bob per her attached cards; the lineart reference anchors POSE and COMPOSITION ONLY - hair and faces come from the CGI cards, never from the lineart"
+ ],
+ "lighting": "Late golden-hour sunlight, the sun low to the left of frame, raking almost parallel across the field so every muscle group is modeled with a full highlight-to-shadow gradient - bright warm gold on lit planes rolling through amber midtone into soft warm shadow; ambient-occlusion one stop deeper where muscle heads meet; a subtle warm rim light wraps from behind with a thin amber edge along shoulders and arms; the environment sits half a stop darker with light haze and dust motes in the low sun shafts."
+}

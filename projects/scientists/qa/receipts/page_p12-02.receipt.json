@@ -1,0 +1,17 @@
+{
+ "job": "page:p12-02",
+ "kind": "page",
+ "prompt_sha": "d3b7888a5cd978c3ca8f3c52ebb476f75c0a142cbf54becef7ecf8e30d91c823",
+ "attach": [
+  "face:cheer-squad",
+  "turnaround:cheer-squad:turnaround_baseline",
+  "scene:field:medium",
+  "prior:p11-06"
+ ],
+ "aspect": "4:3",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

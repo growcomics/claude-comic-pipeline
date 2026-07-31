@@ -1,0 +1,17 @@
+{
+ "job": "page:p06-05",
+ "kind": "page",
+ "prompt_sha": "e2b941e78e9cccd40bcecfaaccc32f8d2c9d4ca008ab6fb0e841d537b4ae2669",
+ "attach": [
+  "face:jill",
+  "turnaround:jill:turnaround_grown",
+  "scene:lab:close",
+  "prior:p05-05"
+ ],
+ "aspect": "4:5",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

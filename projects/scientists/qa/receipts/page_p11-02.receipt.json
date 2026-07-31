@@ -1,0 +1,20 @@
+{
+ "job": "page:p11-02",
+ "kind": "page",
+ "prompt_sha": "f966845308d11a37b2aaa5e06e75a93539cf0373ea565d6c81fc23b49ab08785",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_grown",
+  "face:donny",
+  "turnaround:donny:turnaround_baseline",
+  "scene:lab:medium",
+  "prior:p10-06"
+ ],
+ "aspect": "4:3",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false,
+  "continuity_gate_skipped": true
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

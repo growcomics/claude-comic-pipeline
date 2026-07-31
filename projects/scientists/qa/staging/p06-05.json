@@ -1,0 +1,15 @@
+{
+ "jill": {
+  "turnaround_key": "turnaround_grown",
+  "position": "face filling frame, hair mid-swing",
+  "pose": "head thrown back laughing",
+  "expression": "thrilled"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "the single figure has exactly two hands, each attached correctly",
+  "wardrobe lock: Jill's garments stay ON with coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

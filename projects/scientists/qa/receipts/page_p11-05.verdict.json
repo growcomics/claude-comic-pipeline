@@ -1,0 +1,5 @@
+{
+ "pass": true,
+ "tags": ["runner-checked", "take1", "fresh-regen"],
+ "notes": "Fresh regen per instruction (prior banked image discarded, not reused). Job 94b006bb-a0e3-4d42-8dc9-4fa0c548f855, take1 PASSED: Donny (left, sandy-blond hair, grey tee) and Dan (right, bald, white tank) both rendered huge/grown, slack-faced, shoulder to shoulder in the lab. Four hands total, each correctly attached to its owner. No extra people. Caption transcribed exactly: 'TWO GIANTS. ZERO OBJECTIONS.' Matches shotlist.json required lettering verbatim. Banked take1."
+}

@@ -1,0 +1,20 @@
+{
+ "job": "page:p16-01",
+ "kind": "page",
+ "prompt_sha": "401946aaa92ae742d8b3313919a5798e1790702c26c1f7392b6f588c208fb50c",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_titan",
+  "face:cheer-squad",
+  "turnaround:cheer-squad:turnaround_grown",
+  "scene:city-ruins:wide",
+  "prior:p15-06",
+  "anchor:lana"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": true
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

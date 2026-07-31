@@ -1,0 +1,9 @@
+{
+ "pass": true,
+ "tags": [
+  "runner-checked",
+  "take2",
+  "background-fix"
+ ],
+ "notes": "Take 1 (job 9f491189-61aa-48bf-b789-7a288f38220f) FAILED: only ONE giant visible in background instead of required TWO, and that figure was rendered with too much visible detail (muscle striations) rather than a heavy blur - not banked. Take 2 (job cf3a318e-7a37-42cf-aadd-deaf7a88cc75) re-composed with explicit two-giants + deeper-blur lock lines: PASSED. Rochelle correctly BLACK tank CU, dark bob; TWO giant male figures visible out-of-focus behind her shoulders (one each side), softened by depth of field, no sharp/crisp extra person. Transcription exact: thought cloud 'NOW... A REAL FIELD TEST.' Banked take2."
+}

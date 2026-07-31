@@ -297,6 +297,823 @@
         ],
         "prompt_sha": "b23238cdd91c4d8c5482ff704b7acdebd9d1f286df2884208ef14f0bb22e2c59"
       }
+    },
+    "p05-02": {
+      "flow_id": "8187df2f-eb47-4152-a5d7-2021a9245343",
+      "disk": "pages/p05-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p05-02.receipt.json",
+        "audit": "qa/receipts/page_p05-02.audit-pass",
+        "verdict": "qa/receipts/page_p05-02.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "016890f986a26a64583925e75e61abbaf09e1733cb37320e45183450747a9ce8"
+      }
+    },
+    "p05-03": {
+      "flow_id": "35c864d4-e5db-4aa4-a67c-1737f1e35da5",
+      "disk": "pages/p05-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p05-03.receipt.json",
+        "audit": "qa/receipts/page_p05-03.audit-pass",
+        "verdict": "qa/receipts/page_p05-03.verdict.json",
+        "verdict_tags": [
+          "minor-staging-note"
+        ],
+        "prompt_sha": "c494573e44d391f5df16224b7dfbaae2afda206d2b1df17e5207289d1626f086"
+      }
+    },
+    "p05-04": {
+      "flow_id": "3d4ffb9f-ed24-4057-a8d8-0f8b9aabee05",
+      "disk": "pages/p05-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p05-04.receipt.json",
+        "audit": "qa/receipts/page_p05-04.audit-pass",
+        "verdict": "qa/receipts/page_p05-04.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "547d1cdcce6962b04271a27f2a2b0c528d3ea1cbc1298cf3f537ec364dd1b24a"
+      }
+    },
+    "p05-05": {
+      "flow_id": "c13f1536-8bf3-428f-a5b8-f5d151401ce3",
+      "disk": "pages/p05-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p05-05.receipt.json",
+        "audit": "qa/receipts/page_p05-05.audit-pass",
+        "verdict": "qa/receipts/page_p05-05.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "82d8e48066166d54576a9229ab217d0e75d0e6de550c8151bf8bc64c0e962c2d"
+      }
+    },
+    "p05-01": {
+      "flow_id": "3582240d-0f74-4ae6-ad8e-6d9c036beb72",
+      "disk": "pages/p05-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p05-01.receipt.json",
+        "audit": "qa/receipts/page_p05-01.audit-pass",
+        "verdict": "qa/receipts/page_p05-01.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "128990e1cf9cc8aa40b5ec58349e09b0a6e9ce18e0215262cdb9b94c1cfb3d5e"
+      }
+    },
+    "p06-03": {
+      "flow_id": "a4a08848-b089-4260-9cda-c74fdb0b5f1f",
+      "disk": "pages/p06-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-03.receipt.json",
+        "audit": "qa/receipts/page_p06-03.audit-pass",
+        "verdict": "qa/receipts/page_p06-03.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "0bc078c3a7fc86d128e756182f6dbb73e4d3ec8e248c8e50d7f0c81e02aa4d94"
+      }
+    },
+    "p06-04": {
+      "flow_id": "bfa6b5b6-369a-4331-b751-2296a1144a67",
+      "disk": "pages/p06-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-04.receipt.json",
+        "audit": "qa/receipts/page_p06-04.audit-pass",
+        "verdict": "qa/receipts/page_p06-04.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "7ea71b475aa02f9654870752a96bef11d7db86ebbbe6f7308f340f1bf319d20f"
+      }
+    },
+    "p06-05": {
+      "flow_id": "149d7a5d-b745-4dc2-a4b7-9788af284bb2",
+      "disk": "pages/p06-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-05.receipt.json",
+        "audit": "qa/receipts/page_p06-05.audit-pass",
+        "verdict": "qa/receipts/page_p06-05.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "e2b941e78e9cccd40bcecfaaccc32f8d2c9d4ca008ab6fb0e841d537b4ae2669"
+      }
+    },
+    "p06-01": {
+      "flow_id": "93b8af93-6eea-4a0a-92d2-036c5983ede4",
+      "disk": "pages/p06-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-01.receipt.json",
+        "audit": "qa/receipts/page_p06-01.audit-pass",
+        "verdict": "qa/receipts/page_p06-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "50d3db42625799557ab7a52e5dfb6a8c05ea39e79774964e9d9791f20b4cec79"
+      }
+    },
+    "p06-06": {
+      "flow_id": "22e16ceb-4d90-4083-aeef-38d7cb0f9476",
+      "disk": "pages/p06-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-06.receipt.json",
+        "audit": "qa/receipts/page_p06-06.audit-pass",
+        "verdict": "qa/receipts/page_p06-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "1c14d21883df544e11c9517af32cee851a57c451ce3e48a4b9f994f839a488ae"
+      }
+    },
+    "p06-02": {
+      "flow_id": "e86f88be-11c8-40aa-aa31-0a47ee13413d",
+      "disk": "pages/p06-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p06-02.receipt.json",
+        "audit": "qa/receipts/page_p06-02.audit-pass",
+        "verdict": "qa/receipts/page_p06-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "23d6bdf53ab079e6697ca78d9761bd9c8b7bef1d39ab80187f11507e76a2a512"
+      }
+    },
+    "p07-05": {
+      "flow_id": "fdc01431-a86f-4c8a-84fe-904cd038c6f9",
+      "disk": "pages/p07-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p07-05.receipt.json",
+        "audit": "qa/receipts/page_p07-05.audit-pass",
+        "verdict": "qa/receipts/page_p07-05.verdict.json",
+        "verdict_tags": [],
+        "prompt_sha": "88cf983880562a19f312f1fb543f1ab2cb08e561b347517e106b31b6ecf7fc8a"
+      }
+    },
+    "p07-01": {
+      "flow_id": "59fd1d73-8609-4819-a58d-bc4f68dac5e8",
+      "disk": "pages/p07-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p07-01.receipt.json",
+        "audit": "qa/receipts/page_p07-01.audit-pass",
+        "verdict": "qa/receipts/page_p07-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "813741d4840a33c3e6b2cda676c6622652af6642401f7bcd9fc49923e6ac5788"
+      }
+    },
+    "p07-02": {
+      "flow_id": "c20443a7-8838-4d27-ad37-c4c0ec7634de",
+      "disk": "pages/p07-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p07-02.receipt.json",
+        "audit": "qa/receipts/page_p07-02.audit-pass",
+        "verdict": "qa/receipts/page_p07-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "b79cfb521438f18ba3a173e195e612f71cbaa90bdec532d69f0187aa93941010"
+      }
+    },
+    "p07-03": {
+      "flow_id": "a09aaf45-6ea1-4750-b327-102c66c79f87",
+      "disk": "pages/p07-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p07-03.receipt.json",
+        "audit": "qa/receipts/page_p07-03.audit-pass",
+        "verdict": "qa/receipts/page_p07-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "7a79baa17b14695cee29ba06a84674eafd7a8fa56583835c4b71fb291ac85771"
+      }
+    },
+    "p07-04": {
+      "flow_id": "17e78546-58f3-4b1b-90c8-287c520101c5",
+      "disk": "pages/p07-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p07-04.receipt.json",
+        "audit": "qa/receipts/page_p07-04.audit-pass",
+        "verdict": "qa/receipts/page_p07-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "8d86ded7324a0824c220597b36a49068452c5e9e3bd79245ed0f84c4ec588b10"
+      }
+    },
+    "p08-01": {
+      "flow_id": "f9b8f38e-35f9-4b35-82ba-5ae12a6f29bc",
+      "disk": "pages/p08-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p08-01.receipt.json",
+        "audit": "qa/receipts/page_p08-01.audit-pass",
+        "verdict": "qa/receipts/page_p08-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "5e060022323d7d3f1d84b39fdd6a7cd2e5cbd1f77a34aba074f698597b2b8d0b"
+      }
+    },
+    "p08-02": {
+      "flow_id": "aa0d274f-d7bd-454e-aa53-26cf4ca9855c",
+      "disk": "pages/p08-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p08-02.receipt.json",
+        "audit": "qa/receipts/page_p08-02.audit-pass",
+        "verdict": "qa/receipts/page_p08-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "6c674af0052f8b0ab1107174bb751776b8649b37399275369d0f43d2b50847f1"
+      }
+    },
+    "p08-03": {
+      "flow_id": "0348121d-f1bc-43b8-8efd-3ae0983c9c43",
+      "disk": "pages/p08-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p08-03.receipt.json",
+        "audit": "qa/receipts/page_p08-03.audit-pass",
+        "verdict": "qa/receipts/page_p08-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "1effe8d0035f1fc6f156501d03895799bf281f344b309fcd73d1ce93f468be04"
+      }
+    },
+    "p08-04": {
+      "flow_id": "33a8ad2e-0bf2-4ccd-8dc7-95446a8e38ce",
+      "disk": "pages/p08-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p08-04.receipt.json",
+        "audit": "qa/receipts/page_p08-04.audit-pass",
+        "verdict": "qa/receipts/page_p08-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "837bb3e77dc98b8839c9739e069cedc78717e6613ba75e3f450becd78e06948e"
+      }
+    },
+    "p08-05": {
+      "flow_id": "ac159a59-8c50-4be1-9c28-f2f8e17071a5",
+      "disk": "pages/p08-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p08-05.receipt.json",
+        "audit": "qa/receipts/page_p08-05.audit-pass",
+        "verdict": "qa/receipts/page_p08-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "1169cb1aecf1cdc6f49b068bd04ca92769c5f94baff89b55e7f1efbcb436d8c2"
+      }
+    },
+    "p09-01": {
+      "flow_id": "4e4c6865-88aa-4d17-a772-0c036a447a90",
+      "disk": "pages/p09-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p09-01.receipt.json",
+        "audit": "qa/receipts/page_p09-01.audit-pass",
+        "verdict": "qa/receipts/page_p09-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "777e72ad813d5fa6fad0c4346e64826c7a7de8708e9811393187d422270460e3"
+      }
+    },
+    "p09-05": {
+      "flow_id": "697fb6c5-c004-4bef-93ca-efffbee3e84a",
+      "disk": "pages/p09-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p09-05.receipt.json",
+        "audit": "qa/receipts/page_p09-05.audit-pass",
+        "verdict": "qa/receipts/page_p09-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "46fb00e4aad27d69d08f7991720e7c9b32cac1c189930dc8173051dda19f4394"
+      }
+    },
+    "p09-02": {
+      "flow_id": "b3026eaf-b8ea-46be-92d7-96180a2b3563",
+      "disk": "pages/p09-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p09-02.receipt.json",
+        "audit": "qa/receipts/page_p09-02.audit-pass",
+        "verdict": "qa/receipts/page_p09-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "dfc280e5271517985475a21101b7b31ccd77ded05c60005818f9e8c290a9e587"
+      }
+    },
+    "p09-03": {
+      "flow_id": "6dbc5067-a6c3-4eae-8966-eaaa63c9570d",
+      "disk": "pages/p09-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p09-03.receipt.json",
+        "audit": "qa/receipts/page_p09-03.audit-pass",
+        "verdict": "qa/receipts/page_p09-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "2e1a634e4285d926f7976f70c52015f0adabf262f7e0c1051d11e35ba0b746bc"
+      }
+    },
+    "p09-04": {
+      "flow_id": "94a961d2-d3be-4198-8b4c-2e0e375d0147",
+      "disk": "pages/p09-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p09-04.receipt.json",
+        "audit": "qa/receipts/page_p09-04.audit-pass",
+        "verdict": "qa/receipts/page_p09-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "413de4378e0a5ff83e66cc3aaf730f003349fd4985fe90218171ec387b959719"
+      }
+    },
+    "p10-02": {
+      "flow_id": "c03f19b5-2344-4f31-a492-788bdcfb1b49",
+      "disk": "pages/p10-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-02.receipt.json",
+        "audit": "qa/receipts/page_p10-02.audit-pass",
+        "verdict": "qa/receipts/page_p10-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "159b05c7ebfdc8882b21920175178448ecb5ff7caab4acd349d73aea1be0393e"
+      }
+    },
+    "p10-03": {
+      "flow_id": "06bce974-6bd2-4f9c-b714-b8c09f0e36d0",
+      "disk": "pages/p10-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-03.receipt.json",
+        "audit": "qa/receipts/page_p10-03.audit-pass",
+        "verdict": "qa/receipts/page_p10-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "minor-sfx-duplication"
+        ],
+        "prompt_sha": "ec9eca7d82f78d84ac1de9a7254f3abcc2a389fd8408233bdc780fcbafa2bffb"
+      }
+    },
+    "p10-04": {
+      "flow_id": "1a83c547-29e1-493e-b811-d3d669746aa4",
+      "disk": "pages/p10-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-04.receipt.json",
+        "audit": "qa/receipts/page_p10-04.audit-pass",
+        "verdict": "qa/receipts/page_p10-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "43a56e0d4818b2c51a388a682796f6a7ebf3b4bae9d5ce431713a4112af36c0e"
+      }
+    },
+    "p10-05": {
+      "flow_id": "50bb1c8c-776a-43db-892a-3105022c1d00",
+      "disk": "pages/p10-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-05.receipt.json",
+        "audit": "qa/receipts/page_p10-05.audit-pass",
+        "verdict": "qa/receipts/page_p10-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take2"
+        ],
+        "prompt_sha": "823faaba28ed84cf1a364464369580dd416cd8c9d9a371943f1dcefa1a3af4d5"
+      }
+    },
+    "p10-01": {
+      "flow_id": "523f0f08-8a1f-40f0-b83c-77c228301810",
+      "disk": "pages/p10-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-01.receipt.json",
+        "audit": "qa/receipts/page_p10-01.audit-pass",
+        "verdict": "qa/receipts/page_p10-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take2"
+        ],
+        "prompt_sha": "834cf4227ff7c1bb45338990c392698e7e495353f591c915c73530f1e2c0ec57"
+      }
+    },
+    "p10-06": {
+      "flow_id": "238489c7-e1d8-48f2-b3e2-7d2dbb99afb0",
+      "disk": "pages/p10-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p10-06.receipt.json",
+        "audit": "qa/receipts/page_p10-06.audit-pass",
+        "verdict": "qa/receipts/page_p10-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "8e6324e18c1f3832795dd267e23827ab603e324d3f54e2e81643964908a19d38"
+      }
+    },
+    "p11-01": {
+      "flow_id": "bda440d6-732a-4688-a4a3-306e305d97fe",
+      "disk": "pages/p11-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-01.receipt.json",
+        "audit": "qa/receipts/page_p11-01.audit-pass",
+        "verdict": "qa/receipts/page_p11-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take2"
+        ],
+        "prompt_sha": "6a6e7aea9562afa44e774806f45927ea4d682035d085bc519c8f1f60bf67a876"
+      }
+    },
+    "p11-02": {
+      "flow_id": "07993fb1-bc17-4b0a-883b-54d39d3bfc0c",
+      "disk": "pages/p11-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-02.receipt.json",
+        "audit": "qa/receipts/page_p11-02.audit-pass",
+        "verdict": "qa/receipts/page_p11-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "f966845308d11a37b2aaa5e06e75a93539cf0373ea565d6c81fc23b49ab08785"
+      }
+    },
+    "p11-03": {
+      "flow_id": "f5fb6b27-989e-4cc6-95a1-ebda0aed8b38",
+      "disk": "pages/p11-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-03.receipt.json",
+        "audit": "qa/receipts/page_p11-03.audit-pass",
+        "verdict": "qa/receipts/page_p11-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "a3ca6a81d9fd288b7a28fad78ad8477d740ad822a8ebf8fad31c8db33e2959db"
+      }
+    },
+    "p11-04": {
+      "flow_id": "14aba80b-d046-4ba6-8f7f-38c38498a592",
+      "disk": "pages/p11-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-04.receipt.json",
+        "audit": "qa/receipts/page_p11-04.audit-pass",
+        "verdict": "qa/receipts/page_p11-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "ec31345e6a76ef94bb4d467fe893d92f444e113e9871546a3b357a07ca73e1fb"
+      }
+    },
+    "p11-06": {
+      "flow_id": "cf3a318e-7a37-42cf-aadd-deaf7a88cc75",
+      "disk": "pages/p11-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-06.receipt.json",
+        "audit": "qa/receipts/page_p11-06.audit-pass",
+        "verdict": "qa/receipts/page_p11-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take2",
+          "background-fix"
+        ],
+        "prompt_sha": "0975690ad0fc7ac5509571ab967937898fe111713ce3117a887dd19fa2d07176"
+      }
+    },
+    "p11-05": {
+      "flow_id": "94b006bb-a0e3-4d42-8dc9-4fa0c548f855",
+      "disk": "pages/p11-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p11-05.receipt.json",
+        "audit": "qa/receipts/page_p11-05.audit-pass",
+        "verdict": "qa/receipts/page_p11-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1",
+          "fresh-regen"
+        ],
+        "prompt_sha": "2f33d8ac3a3968aa081b4b53b347c78c98bbbf4e0d78b20c5d535186dfc19410"
+      }
+    },
+    "p12-01": {
+      "flow_id": "e3f5afba-e2a9-4f2d-88a7-4af39b59eac7",
+      "disk": "pages/p12-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-01.receipt.json",
+        "audit": "qa/receipts/page_p12-01.audit-pass",
+        "verdict": "qa/receipts/page_p12-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take2",
+          "person-count-fix"
+        ],
+        "prompt_sha": "dd2b89b6c6b6413e3aa16f088e6b6af43f767181a41228f0451492130fa8bc9d"
+      }
+    },
+    "p12-02": {
+      "flow_id": "5ea8c908-9e00-4769-a009-a11e67e9d490",
+      "disk": "pages/p12-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-02.receipt.json",
+        "audit": "qa/receipts/page_p12-02.audit-pass",
+        "verdict": "qa/receipts/page_p12-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "d3b7888a5cd978c3ca8f3c52ebb476f75c0a142cbf54becef7ecf8e30d91c823"
+      }
+    },
+    "p12-03": {
+      "flow_id": "b346cb39-d61a-42e8-b6fc-10d20b69f2f3",
+      "disk": "pages/p12-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-03.receipt.json",
+        "audit": "qa/receipts/page_p12-03.audit-pass",
+        "verdict": "qa/receipts/page_p12-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "a11085d4492bd205a318f4aa1985f125d5c41f797b1044a2fba106300e24672e"
+      }
+    },
+    "p12-04": {
+      "flow_id": "1c76b593-5bff-43b0-88ab-2ea74d205c17",
+      "disk": "pages/p12-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-04.receipt.json",
+        "audit": "qa/receipts/page_p12-04.audit-pass",
+        "verdict": "qa/receipts/page_p12-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "46f95726be003a57ce0fffe2f29ff6bba7cb04ad25c21279764869b3d9e3c550"
+      }
+    },
+    "p12-05": {
+      "flow_id": "525d716b-eb0b-4168-ae6e-cfb1c714c8b5",
+      "disk": "pages/p12-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-05.receipt.json",
+        "audit": "qa/receipts/page_p12-05.audit-pass",
+        "verdict": "qa/receipts/page_p12-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "5f3accf7a4d3c7cb19c4bb2ddf3eaa62cecaf89229059ca0c7e43e7351ada4dd"
+      }
+    },
+    "p12-06": {
+      "flow_id": "7abe9963-12ac-486d-8980-c806a25ec22d",
+      "disk": "pages/p12-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p12-06.receipt.json",
+        "audit": "qa/receipts/page_p12-06.audit-pass",
+        "verdict": "qa/receipts/page_p12-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "take1"
+        ],
+        "prompt_sha": "45cd178f7f5df2630bd446c264412ddf877f0d3b4bec1772b0b2fa32406b3163"
+      }
+    },
+    "p13-02": {
+      "flow_id": "bb9e9f79-d802-42a3-979c-f2a8ea8e5fb0",
+      "disk": "pages/p13-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p13-02.receipt.json",
+        "audit": "qa/receipts/page_p13-02.audit-pass",
+        "verdict": "qa/receipts/page_p13-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "2c613c9e344b336c05d45c3d9b0e80e8bf11438d55aae9219aa3c933bb5f6801"
+      }
+    },
+    "p13-03": {
+      "flow_id": "cb073846-8abd-4f63-adf5-76572cfcc842",
+      "disk": "pages/p13-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p13-03.receipt.json",
+        "audit": "qa/receipts/page_p13-03.audit-pass",
+        "verdict": "qa/receipts/page_p13-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "30e7b0711e14d2c05e81e1000de7905a70e755d0d99ee0612c03a9671f325ccd"
+      }
+    },
+    "p13-04": {
+      "flow_id": "71260133-c445-4d11-ad08-29e5e78f87fb",
+      "disk": "pages/p13-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p13-04.receipt.json",
+        "audit": "qa/receipts/page_p13-04.audit-pass",
+        "verdict": "qa/receipts/page_p13-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "f6390fd1da2667a212721ab3f43e976c02d6b9276da7e2ef433485fd5c70e39a"
+      }
+    },
+    "p13-05": {
+      "flow_id": "50b4006e-32e3-4276-a310-e980000952f9",
+      "disk": "pages/p13-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p13-05.receipt.json",
+        "audit": "qa/receipts/page_p13-05.audit-pass",
+        "verdict": "qa/receipts/page_p13-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "805c53b564c4fdaec2c6d7b5f4e6ce035b044c0f5d684c3f6b5d7b9b9d25720d"
+      }
+    },
+    "p13-01": {
+      "flow_id": "8b07f4ce-1df5-4bc2-bec8-4ebe7fba8ddd",
+      "disk": "pages/p13-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p13-01.receipt.json",
+        "audit": "qa/receipts/page_p13-01.audit-pass",
+        "verdict": "qa/receipts/page_p13-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "ecde0a1272e752e391fd366895f7fa05f582bcb07ad610926b3cb727fb25b03c"
+      }
+    },
+    "p14-01": {
+      "flow_id": "5189c5c0-595e-4ea2-b711-474f23319fd5",
+      "disk": "pages/p14-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-01.receipt.json",
+        "audit": "qa/receipts/page_p14-01.audit-pass",
+        "verdict": "qa/receipts/page_p14-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "76c3b8f42fed859638ba9f8ea81e604884e1ef44f12c3e9634c5523fc12f5ddf"
+      }
+    },
+    "p14-02": {
+      "flow_id": "53144c84-818a-476b-86c1-f99e74caf3d8",
+      "disk": "pages/p14-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-02.receipt.json",
+        "audit": "qa/receipts/page_p14-02.audit-pass",
+        "verdict": "qa/receipts/page_p14-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "bf2759b3e29eed7a00f19d9df39f000d82cd3ade9c92875f39f3d84bdf44c61a"
+      }
+    },
+    "p14-03": {
+      "flow_id": "0deefe84-66f2-4f47-9bc1-3dca9a183284",
+      "disk": "pages/p14-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-03.receipt.json",
+        "audit": "qa/receipts/page_p14-03.audit-pass",
+        "verdict": "qa/receipts/page_p14-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "7febc21fbe1411932b25ce7d607ef4d674b9090d0e640c3f545765db200b8bb9"
+      }
+    },
+    "p14-04": {
+      "flow_id": "5c18fa76-e591-4774-9b63-97843f730f4c",
+      "disk": "pages/p14-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-04.receipt.json",
+        "audit": "qa/receipts/page_p14-04.audit-pass",
+        "verdict": "qa/receipts/page_p14-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "1a49fb7847bdb26b3fbcad002fa8585420fcf5af54d14c5e559df3bd73f7fe6b"
+      }
+    },
+    "p14-05": {
+      "flow_id": "b993180f-ef39-47b7-bb59-541c481fd562",
+      "disk": "pages/p14-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-05.receipt.json",
+        "audit": "qa/receipts/page_p14-05.audit-pass",
+        "verdict": "qa/receipts/page_p14-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked"
+        ],
+        "prompt_sha": "b54b72caecd58ddd0633e4eaf6285f2b3f53bc0bc8afd0a4555c19df5ed4f8d6"
+      }
+    },
+    "p14-06": {
+      "flow_id": "71786079-fda9-421b-9967-a1986154aeed",
+      "disk": "pages/p14-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p14-06.receipt.json",
+        "audit": "qa/receipts/page_p14-06.audit-pass",
+        "verdict": "qa/receipts/page_p14-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "210579f602433229d060bce8633231384fcf49569e948615dbc38a934a2ec70e"
+      }
+    },
+    "p15-01": {
+      "flow_id": "3e11a46c-ff1a-4ab4-abaf-c445285951a0",
+      "disk": "pages/p15-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-01.receipt.json",
+        "audit": "qa/receipts/page_p15-01.audit-pass",
+        "verdict": "qa/receipts/page_p15-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "fcd4796a9b7b4de3beda516f82cfd86ca17159e07490c4f33778f4367fc907c8"
+      }
+    },
+    "p15-02": {
+      "flow_id": "2f85a60f-894f-485f-b5bc-7fa01f921d65",
+      "disk": "pages/p15-02.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-02.receipt.json",
+        "audit": "qa/receipts/page_p15-02.audit-pass",
+        "verdict": "qa/receipts/page_p15-02.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "8d270c3dfdd428858474f88082bc409ff0b0988fb2a68506e6969318c84c3913"
+      }
+    },
+    "p15-04": {
+      "flow_id": "41ec00bb-7960-448e-90fa-8029e3490091",
+      "disk": "pages/p15-04.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-04.receipt.json",
+        "audit": "qa/receipts/page_p15-04.audit-pass",
+        "verdict": "qa/receipts/page_p15-04.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "4f10a00e11df0f58015adc2e210e74ad6cb3773a7f21d98f0b0e6cc2e9516756"
+      }
+    },
+    "p15-05": {
+      "flow_id": "4ad7afe5-01c0-4bb5-a5f3-140927a0eab5",
+      "disk": "pages/p15-05.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-05.receipt.json",
+        "audit": "qa/receipts/page_p15-05.audit-pass",
+        "verdict": "qa/receipts/page_p15-05.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "ce24d3f2eb9ec977ed4ee464ebd2f245d070211d76f48d9acc5f345592b2b648"
+      }
+    },
+    "p15-06": {
+      "flow_id": "da17772e-b3dd-4601-abed-2f230beb6204",
+      "disk": "pages/p15-06.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-06.receipt.json",
+        "audit": "qa/receipts/page_p15-06.audit-pass",
+        "verdict": "qa/receipts/page_p15-06.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "92694132e5c48c6a94f81c5206b2496a699b61dcec09b601050bcb88911da668"
+      }
+    },
+    "p15-03": {
+      "flow_id": "2a33e412-b83d-4e3a-9d87-cbbe86c403a3",
+      "disk": "pages/p15-03.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p15-03.receipt.json",
+        "audit": "qa/receipts/page_p15-03.audit-pass",
+        "verdict": "qa/receipts/page_p15-03.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "b19533dd53685912869d12eb276145cbd8f7ff387290e72aff7ad4cb39dd00e8"
+      }
+    },
+    "p16-01": {
+      "flow_id": "f2307800-e951-4a8c-b671-536a8bef550f",
+      "disk": "pages/p16-01.png",
+      "chain": {
+        "receipt": "qa/receipts/page_p16-01.receipt.json",
+        "audit": "qa/receipts/page_p16-01.audit-pass",
+        "verdict": "qa/receipts/page_p16-01.verdict.json",
+        "verdict_tags": [
+          "runner-checked",
+          "source-lineart-ref"
+        ],
+        "prompt_sha": "401946aaa92ae742d8b3313919a5798e1790702c26c1f7392b6f588c208fb50c"
+      }
     }
   },
   "pending": []

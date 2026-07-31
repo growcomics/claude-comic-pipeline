@@ -1,0 +1,20 @@
+{
+ "job": "page:p15-04",
+ "kind": "page",
+ "prompt_sha": "4f10a00e11df0f58015adc2e210e74ad6cb3773a7f21d98f0b0e6cc2e9516756",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_titan",
+  "face:jill",
+  "turnaround:jill:turnaround_super",
+  "scene:field:wide",
+  "prior:p14-06",
+  "anchor:lana"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": true
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

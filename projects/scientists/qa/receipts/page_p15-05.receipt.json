@@ -1,0 +1,18 @@
+{
+ "job": "page:p15-05",
+ "kind": "page",
+ "prompt_sha": "ce24d3f2eb9ec977ed4ee464ebd2f245d070211d76f48d9acc5f345592b2b648",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_titan",
+  "scene:city-ruins:wide",
+  "prior:p14-06",
+  "anchor:lana"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": true
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

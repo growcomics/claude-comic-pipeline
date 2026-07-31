@@ -738,6 +738,16 @@
           "prompt_sha": "f68327323dc7c9389162acfc61241a1bfef6bbc7f47af1a7f861cd3bf55e191a"
         },
         "note": "Mirrored from characters.env.field (full compose/audit/verdict/bank chain). scene_ladders mirror added manually because this gate version's bank.py cannot write this path (heather-and-mark precedent, better provenance)."
+      },
+      "medium": {
+        "flow_id": "DERIVED-CROP -- from banked wide b1709a91-3bf9-4e38-baf7-4081cb4f72db",
+        "disk": "references/environments/field-med.png",
+        "note": "Medium rung. Deterministic crop of the banked field wide plate; source chain sheet_env-field applies (heather-and-mark precedent)."
+      },
+      "close": {
+        "flow_id": "DERIVED-CROP -- from banked wide b1709a91-3bf9-4e38-baf7-4081cb4f72db",
+        "disk": "references/environments/field-close.png",
+        "note": "Close rung. Deterministic crop of the banked field wide plate; source chain sheet_env-field applies (heather-and-mark precedent)."
       }
     },
     "city-ruins": {

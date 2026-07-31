@@ -1,0 +1,14 @@
+{
+ "assistant": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "mid-ground, bursting through the glass door away from camera",
+  "pose": "mid-sprint, files scattering",
+  "expression": "terror in the sliver of profile"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "the single figure has exactly two hands, each attached correctly"
+ ],
+ "lighting": "Dark lab, one cone of warm work light over the bench as the key, violet glow accents from the vial rack, deep soft shadows, ambient-occlusion deepened in every crease, a thin cool rim from the glass door's corridor light."
+}

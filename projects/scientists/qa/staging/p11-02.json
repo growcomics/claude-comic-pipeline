@@ -1,0 +1,23 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "extreme foreground left, big shoulder OOF",
+  "pose": "offering a fizzing glass outward",
+  "expression": "face not visible"
+ },
+ "donny": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "beyond her, sharp, squared up",
+  "pose": "fists balling",
+  "expression": "rage faltering into fear"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "hand accounting: each of the two figures has exactly two hands - four hands total in frame, each attached to its owner",
+  "wardrobe lock: Rochelle's garments stay ON with sleeves/coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "wardrobe lock: his garments stay ON with coverage as described except where the action explicitly tears them - the muscle reference sets size and face only",
+  "Rochelle wardrobe lock: BLACK tank top and jeans - NOT the teal blouse, NOT the lab coat"
+ ],
+ "lighting": "Cool overhead fluorescents as the key light with a warm practical accent from the bench equipment, soft ambient-occlusion in creases and folds, the figures a half-stop brighter than the environment, a thin cool rim light from the glass-door side."
+}

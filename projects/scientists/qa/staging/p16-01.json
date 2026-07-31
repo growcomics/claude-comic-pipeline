@@ -1,0 +1,22 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_titan",
+  "position": "towering over the ruined boulevard, centered in dusk haze",
+  "pose": "arms slightly spread, palms open in benediction",
+  "expression": "goddess calm"
+ },
+ "cheer-squad": {
+  "turnaround_key": "turnaround_grown",
+  "position": "the five kneeling in a crescent at her feet, small",
+  "pose": "heads bowed",
+  "expression": "reverent, blank"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "hand accounting: each of the two figures has exactly two hands - four hands total in frame, each attached to its owner",
+  "wardrobe lock: Rochelle's garments stay ON with sleeves/coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "wardrobe lock: all five squad uniforms stay ON with coverage intact except seams the action explicitly splits - the group muscle reference sets sizes and faces only; the squad is EXACTLY five women, no more"
+ ],
+ "lighting": "Dusk in a ruined downtown: low amber sun through smoke and dust as the key, cool blue shadow fill, searchlight beams raking the haze, ambient-occlusion deep in every crease, warm rim light along the titan's silhouette, environment half a stop darker than the figure."
+}

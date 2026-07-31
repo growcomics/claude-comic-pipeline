@@ -1,0 +1,24 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "extreme foreground left, big shoulder and hair OOF",
+  "pose": "standing",
+  "expression": "face not visible"
+ },
+ "jim": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "beyond her shoulder, sharp",
+  "pose": "hands spread wide",
+  "expression": "delighted awe"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "hand accounting: each of the two figures has exactly two hands - four hands total in frame, each attached to its owner",
+  "wardrobe lock: Rochelle's garments stay ON with sleeves/coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "wardrobe lock: his garments stay ON with coverage as described except where the action explicitly tears them - the muscle reference sets size and face only",
+  "Jim lock: normal slim build, navy track jacket with white stripes ON and intact, tousled brown hair - he has NOT grown yet",
+  "Rochelle lock: dark bob hair, split-sleeved white lab coat over strained teal blouse - grown muscle per her muscle card"
+ ],
+ "lighting": "Warm low evening light through the kitchen window as the key, tungsten fill from the ceiling fixture, long soft shadows, ambient-occlusion deepened in creases, a subtle warm rim lifting figures off an environment half a stop darker."
+}

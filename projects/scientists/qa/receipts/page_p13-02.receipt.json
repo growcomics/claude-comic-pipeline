@@ -1,0 +1,19 @@
+{
+ "job": "page:p13-02",
+ "kind": "page",
+ "prompt_sha": "2c613c9e344b336c05d45c3d9b0e80e8bf11438d55aae9219aa3c933bb5f6801",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_grown",
+  "face:cheer-squad",
+  "turnaround:cheer-squad:turnaround_grown",
+  "scene:field:medium",
+  "prior:p12-06"
+ ],
+ "aspect": "4:3",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

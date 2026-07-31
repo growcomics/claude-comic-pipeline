@@ -1,0 +1,19 @@
+{
+ "job": "page:p07-03",
+ "kind": "page",
+ "prompt_sha": "7a79baa17b14695cee29ba06a84674eafd7a8fa56583835c4b71fb291ac85771",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_grown",
+  "face:jim",
+  "turnaround:jim:turnaround_baseline",
+  "scene:kitchen:close",
+  "prior:p06-06"
+ ],
+ "aspect": "4:5",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

@@ -1,0 +1,22 @@
+{
+ "rochelle": {
+  "turnaround_key": "turnaround_grown",
+  "position": "beyond the assistant's shoulder, crossing the lab, looming, camera low",
+  "pose": "bending a steel stool leg flat between two fingers",
+  "expression": "conversational menace"
+ },
+ "assistant": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "extreme foreground right edge, shoulder and hair OOF",
+  "pose": "rooted",
+  "expression": "face not visible"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the two figures sit on a diagonal axis, angled toward each other, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "hand accounting: each of the two figures has exactly two hands - four hands total in frame, each attached to its owner",
+  "wardrobe lock: Rochelle's garments stay ON with sleeves/coverage as described - her muscle reference's outfit is NOT her wardrobe; muscle size and face only",
+  "Rochelle wardrobe lock: BLACK tank top under her white split-sleeved lab coat - NOT the teal blouse; night scene, single warm work light, NO bright ceiling fluorescents"
+ ],
+ "lighting": "Dark lab, one cone of warm work light over the bench as the key, violet glow accents from the vial rack, deep soft shadows, ambient-occlusion deepened in every crease, a thin cool rim from the glass door's corridor light."
+}

@@ -1,0 +1,17 @@
+{
+ "job": "page:p10-03",
+ "kind": "page",
+ "prompt_sha": "ec9eca7d82f78d84ac1de9a7254f3abcc2a389fd8408233bdc780fcbafa2bffb",
+ "attach": [
+  "face:dan",
+  "turnaround:dan:turnaround_grown",
+  "scene:lab:close",
+  "prior:p09-05"
+ ],
+ "aspect": "4:5",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

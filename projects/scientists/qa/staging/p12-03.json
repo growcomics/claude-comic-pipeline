@@ -1,0 +1,15 @@
+{
+ "cheer-squad": {
+  "turnaround_key": "turnaround_baseline",
+  "position": "the ponytail leader's face filling frame, cup lowering",
+  "pose": "blinking, a shiver rolling through her",
+  "expression": "confused"
+ },
+ "spatial_rules": [
+  "Staging breaks the camera plane: the figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens, weight shifted so the silhouette reads dynamic; an out-of-focus environmental element grazes a lower corner in the extreme foreground; readable environment behind; asymmetric negative space above one shoulder line.",
+  "identity lock: each figure matches ONLY its own attached identity/muscle card; the previous-panel reference contributes scene continuity ONLY, never a subject's identity, hair or wardrobe",
+  "the single figure has exactly two hands, each attached correctly",
+  "wardrobe lock: all five squad uniforms stay ON with coverage intact except seams the action explicitly splits - the group muscle reference sets sizes and faces only; the squad is EXACTLY five women, no more"
+ ],
+ "lighting": "Late golden-hour sunlight, the sun low to the left of frame, raking almost parallel across the field so every muscle group is modeled with a full highlight-to-shadow gradient - bright warm gold on lit planes rolling through amber midtone into soft warm shadow; ambient-occlusion one stop deeper where muscle heads meet; a subtle warm rim light wraps from behind with a thin amber edge along shoulders and arms; the environment sits half a stop darker with light haze and dust motes in the low sun shafts."
+}

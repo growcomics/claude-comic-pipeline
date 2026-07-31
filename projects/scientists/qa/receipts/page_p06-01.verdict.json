@@ -1,0 +1,5 @@
+{
+  "pass": true,
+  "tags": ["runner-checked"],
+  "notes": "Take 2 kept (job 93b8af93-6eea-4a0a-92d2-036c5983ede4, verbatim work/final-p06-01.txt). Balloon transcribes exactly 'OH. OH, THERE IT IS-'. SFX renders ONLY the word THRUM with no 'SFX' label baked in and no stray glyphs (the prior take-1 'SFX THRUM' label defect is fixed). Identity/wardrobe/aspect (928x1152, 4:5) all correct. PASS -- copied to pages/p06-01.png, overwriting the failed take-1 image."
+}

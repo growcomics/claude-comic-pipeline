@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-30
+
+### Added
+
+- **projects/scientists — COMIC COMPLETE: all 16 pages / 82 panels generated, lettered at gen-1, full-chain banked (verify_chain: 114 entries clean).** Pages 5-16 produced this run on nano_banana_2_lite via self-checking runner subagents (compose/audit local, runner submits verbatim + transcribes lettering + 2-3 take cap, fresh verdicts, bank): p05 confrontation, p06 Jill growth, p07-08 home/Jim growth/walkout, p09 night-lab mind-control + assistant flees, p10-11 Dan+Donny dosed/grown/enslaved, p12 squad cooler dose + group growth, p13 sled rampage + Jill arrives, p14 Jill SUPER growth + standoff, p15 titan surge field->city, p16 goddess splash + TO-BE-CONTINUED coda. Mid-run owner instruction folded in: every panel now ALSO attaches its matching source-lineart crop as pose/composition/count anchor (media ids in references/harvest/media-ids.json; policy in PRODUCTION-RUNBOOK.md) — immediately fixed the six-cheerleader miscount and unlocked the p14-06 standoff after an identity-anchor staging line. Notable fixes routed through the gate: black-tank night wardrobe locks (p09/p10), reference-outfit leak killed by swapping mid-growth panels to baseline cards (p06-02), D11-clean rephrasings, p15-03 re-staged as a back shot after a frontal coverage fail + nsfw block. Field medium/close ladder rungs derived as deterministic crops of the banked wide (kitchen-med precedent).
+
+
 ## 2026-07-29
 
 ### Added

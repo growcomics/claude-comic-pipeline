@@ -1,0 +1,17 @@
+{
+ "job": "page:p15-02",
+ "kind": "page",
+ "prompt_sha": "8d270c3dfdd428858474f88082bc409ff0b0988fb2a68506e6969318c84c3913",
+ "attach": [
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_grown",
+  "scene:field:close",
+  "prior:p14-06"
+ ],
+ "aspect": "4:5",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

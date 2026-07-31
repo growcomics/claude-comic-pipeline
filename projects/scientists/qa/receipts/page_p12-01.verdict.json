@@ -1,0 +1,5 @@
+{
+ "pass": true,
+ "tags": ["runner-checked", "take2", "person-count-fix"],
+ "notes": "Take 1 (job af87c4b2-39fd-4687-8d5c-731f3b716002) FAILED: background cheer squad rendered as SIX distinct figures (two overlapping bodies in the mid-cluster) instead of exactly five - person-count violation, not banked. Take 2 (job e3f5afba-e2a9-4f2d-88a7-4af39b59eac7) re-submitted verbatim (same work/final-p12-01.txt, no prompt edits) PASSED: exactly five distinct cheerleaders visible mid-drill in the background, evenly spaced, no overlap. Rochelle foreground: dark bob hair, black track jacket, pouring violet vial into team cooler, golden-hour raking light across the field. Caption top transcribed exactly: 'SATURDAY PRACTICE.' Thought bubble transcribed exactly: 'FIVE SUBJECTS. ONE COOLER.' Both match shotlist.json required lettering verbatim. Banked take2. Note: the media-error blocking a prior run of this task (F-wide id b8f7 vs baf7 typo) was not present this run - the F-wide id supplied matched the ledger and resolved successfully."
+}

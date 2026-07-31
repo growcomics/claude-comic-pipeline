@@ -1,0 +1,19 @@
+{
+ "job": "page:p13-04",
+ "kind": "page",
+ "prompt_sha": "f6390fd1da2667a212721ab3f43e976c02d6b9276da7e2ef433485fd5c70e39a",
+ "attach": [
+  "face:jill",
+  "turnaround:jill:turnaround_grown",
+  "face:rochelle",
+  "turnaround:rochelle:turnaround_grown",
+  "scene:field:medium",
+  "prior:p12-06"
+ ],
+ "aspect": "4:3",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}
