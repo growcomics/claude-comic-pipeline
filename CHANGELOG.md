@@ -12,6 +12,28 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-07-24
+
+### Added
+
+- **bridge.php ingest `fav=1` — Flow ⭐ favorites land pre-approved** (owner ask). The Flow→Studio Auto-Sync extension (v1.3.0: content.js consults the same `extractFavorites` set at send time, background.js forwards `fav`) now marks each imported image that was favorited in Google Flow; bridge ingest lands those `accepted=true · rating=good · tags=[flow-fav]`, so winners arrive already approved instead of needing to be re-found and checkbox-clicked in Review. Complements `do=flowfav` (which still back-fills favorites toggled *after* import). Verified end-to-end against a live scratch project (`fav-ingest-test`): fav ingest → approved+tagged, control ingest → unrated.
+
+## 2026-08-02 (16:35 PDT)
+
+### Added
+
+- **`research/gribble-corpus/` — the Gribble script corpus, parsed and measured.** `profile.py` parses all 53 `.txt` files in `~/Documents/gribble stories/`, drops exact duplicates (Crown of Abuul ×3, Gamma Babes ×2, …) and profiles the remaining **41 scripts / 1,355 pages / 5,397 panels** into `gribble-profile.json` + `FORMULA.md`. Two findings drive everything downstream:
+  - **Growth density** — 28.9% of his pages are transformation pages (median 26.8%), in ~5.4 separate runs per script, 22.7% of runs spanning 3+ consecutive pages, first growth landing at 11% in. Growth recurs across the whole book; it is not one act-two set-piece.
+  - **The grid break** — 98.4% of pages are worth exactly four panels, but only 66.9% *draw* four frames. 30.8% collapse into one full-page image written `Panels 1, 2, 3 and 4- ...` or `(Full page panel)- ...`, and **70.3% of those merged pages depict growth vs 1.7% of ordinary panels — a 41× enrichment**. The grid break IS the transformation device. This was invisible until the parser was fixed: an early `^panel (\d+)` regex never matched the plural `Panels 1, 2, 3 and 4-` form, silently folding merged pages into the previous panel and reporting a bogus "92.5% of pages are exactly four panels".
+- **`studio/gribble.php` — ✍️ Gribble Script Writer (NEW standalone page).** Generates a full comic script in Gribble's format *and* structure. `GR_FORMULA` compiles the measured profile into the system prompt with a per-run page budget (growth pages, merge count, first-growth deadline computed from the requested length). Crucially it does not prompt-and-hope: `gr_parse()`/`gr_report()` are a PHP port of the corpus parser, so the server **parses the draft, scores it against the corpus targets, and sends one repair pass naming the exact misses** — keeping the repair only if it reduces the miss count. UI shows the script beside a pass/fail chip row (growth %, run pattern, merge %, merge-growth alignment, first growth, silent panels, direction length). Verbs `gr_write` / `gr_check` / `gr_create`; bridge-key auth alongside session auth so headless sessions can drive it; `gr_create` lands a studio project tagged `gribble` that flows into the existing `do=breakdown` pipeline. Standalone file — no shared-file clobber surface.
+- **`research/gribble-corpus/validate_targets.py` — gate calibration, and it earned its keep.** Runs the shipped gate over Gribble's own 37 full-length scripts. The first draft of the gate passed **22%** of them — it was rejecting *Social Order*, *Not Exactly as Planned* and *The Power of Chocolate*, his three highest-growth scripts, i.e. exactly the ones worth imitating. Recalibrated to **70%**. Rules that rejected his good work were measuring the wrong thing and were loosened (grid tolerance now proportional; growth ceiling 42→55%; merge ceiling 45→65%; alignment 55→45%; first-growth 22→30%; longest-run 3→2). Two floors — growth density ≥20% and merged pages ≥20% — are held **above** his median on purpose and knowingly reject his low-growth outliers (*The Hotter Sister*: 4.8% growth, 0% merged), per the standing growth-density mandate: the generator imitates his best scripts, not his average one. The aim/gate split is documented in `FORMULA.md` §7.
+
+## 2026-07-30 (22:05 PDT)
+
+### Added
+
+- **studio/thanks.php — 🙏 Special Thanks manager (NEW standalone page; replaces the monthly Google Form → Sheet flow).** One "edition" per comic release: create it, copy the unguessable fan link (`https://3dmusclecomics.com/thanks/?e=<token>`) into the comic-tier Patreon post, and the handles fans want credited collect in `studio/data/thanks/` (`editions.json` + `entries-<id>.json`, web-denied, atomic writes). Page offers: open/close/reopen submissions, rename, copy-link button, name chips with per-name remove, add-by-hand for stragglers, paste-ready SPECIAL THANKS credits block, CSV export for Boogie, recoverable trash (status flip, files kept). Auth = standard studio login (`inc/boot.php` + CSRF); touches NO shared studio file, so no clobber surface. Fan-facing counterpart `thanks/index.php` lives in the 3dmusclecomics-site repo (see its CHANGELOG, same date). First edition "Boogie — August 2026" seeded live; submit/dedupe/403 smoke-tested end-to-end.
+
 ## 2026-07-30
 
 ### Added
@@ -31,6 +53,112 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **projects/scientists — full asset build for the GrowGetter "Scientists" remake** (owner request, via platform backend `growgetter/scientists`). 44 source pages harvested from growgettercomics.com; 4-batch spotter scan + identity-resolver pass locked an 8-slot cast (Rochelle bob-antagonist / Jill rival / Jim / Donny / Dan / assistant / blonde one-off / 5-girl cheer squad), resolving the source's Jim-name reuse and hair-drift continuity errors (see `references/CANON-NOTES.md`). 21 sheets generated on Higgsfield **nano_banana_pro** 1k with original-panel lineart crops attached as i2i refs (NSFW panels re-clothed via prompt; 4 crops needed drawn-on coverage to clear upload screening; env-city needed figure-free crops to clear output screening). Full compose→audit→submit→fresh-subagent-verdict→bank chain on every sheet (qa/ scaffold copied intact from ultra-gal-origin, manifest fingerprint 768c204c16de92f3); All 21 banked in `references/ref-ledger.json` including the cast size-scale lineup (5 rolls; height-order + identity drift rejects logged in work/job-ids.json). Post-build owner overrides: jill-super replaced by owner-picked asset f1e7caa4 (owner-extended prompt, rear-coverage deviation approved); generation model switched to nano_banana_2_lite for all future gens (initial 21-sheet build was nano_banana_pro). 2 re-rolls (jim-grown size tier, cheer-squad hairstyle fidelity). Known deviations logged: compose VERIFY-PILL still prints the stale Flow "Nano Banana 2 x4" line (submits went Higgsfield pro x1 per owner instruction, verified against the credit ledger); cast-lineup rendered 21:9 vs receipt 16:9.
 
+
+## 2026-07-28
+
+### Changed
+
+- **Flow extension prompt blocks: Cine+Light + Framing are now parameterized by Cam/Cast selectors** (`studio/extension/flow-studio-tools/content.js`). Failure modes: both blocks hardcoded "the camera sits slightly below chest height" (every generation rutted into a low hero angle) and "both women" (solo panels grew a phantom second figure). The shared framing text is now assembled per click from two persisted panel dropdowns — **Cam:** Vary per beat (default — the model picks the height that serves the beat, explicitly forbidden from defaulting low) / Low hero (old behavior) / Eye-level / High look-down; **Cast:** Auto (default — neutral "figure(s)" wording that never asserts a count) / Solo / Duo. Wording de-gendered ("figure", not "women") per refs-are-truth: appearance is carried by attached refs, prompts carry action/camera/lighting only. The golden-hour lighting wall is unchanged apart from cast-neutral subject phrasing; Director / Char sheet / DAZ prefix blocks untouched. Selections persist in `chrome.storage.local` (`pbCam`/`pbCast`).
+- **Prompt blocks now separate with a blank line in every composer path** (`content.js`). Appended blocks (Director/Cine+Light/Framing/Char sheet) were glued to the existing prompt with a single space in the Slate and contenteditable paths, so it was unclear where the inserted block began; all paths now use `\n\n` on the joined edge, matching the textarea path.
+
+### Added
+
+- **Bake-off analyser — "🔬 Analyse models" on the compare board.** Answers the actual
+  question ("what does Pro buy us over 2 / 2 Lite?") with measurements instead of
+  impressions: Detail, Edge crisp, Noise, Contrast, Colour, Clipping, scored per model
+  per prompt and pooled into a verdict table. Each cell is a model's median score as a
+  % of the best model *on the same prompt*, so prompts of differing difficulty pool
+  fairly, and all metrics run on decoded pixels at a fixed working width so a model
+  earns nothing for merely returning a larger image.
+
+  **The sharpness metric took three attempts, each caught by a ground-truth harness**
+  (synthetic images with known relative sharpness/contrast/clipping):
+  1. mean-|Laplacian| — the deliberately *softest, most-clipped* image won detail 3/3,
+     because isolated clipped pixels are high-frequency and a mean can't tell noise
+     from texture;
+  2. 3×3 **box blur** + median gradient — still wrong, because blurring *smears* each
+     impulse spike into dense mid-frequency texture that reads as detail;
+  3. 3×3 **median filter** + median gradient — inverted the error: the sharpest image
+     scored 0%, since in any detailed image most pixels sit in flat regions so the
+     median gradient lands at zero.
+  Shipped: median filter (discards impulse outliers) + **mean** gradient over the
+  de-noised copy, with the original-vs-median residual exposed as its own **Noise**
+  score. Only this combination ranks every axis correctly against the harness.
+
+  Scope is stated in the UI: these are signal measurements — softness, texture, tonal
+  punch — **not** anatomy, hands, wardrobe fidelity or lettering legibility.
+
+## 2026-07-26 (2)
+
+### Fixed
+
+- **Bake-off never triggered — `button[type="submit"]` matches nothing in Flow's
+  composer.** Those buttons carry no `type` *attribute*; `.type` only reports
+  `"submit"` because that's the IDL default for `<button>`, which made the selector
+  look verified when it was matching zero elements document-wide. `sendEl()`
+  therefore always returned null, the click listener bailed at its first guard, and
+  no badge ever appeared. Now matched on the `arrow_forward` icon text. This also
+  retracts a "fact" recorded in the v2.5.0 notes — *"the submit button is removed
+  from the DOM while the popover is open"* was an artifact of the same broken
+  selector, not real behavior.
+
+### Added
+
+- **Bake-off now fires the other models by itself.** Flow ignores synthetic events on
+  Create, but React keeps the button's real handler in `__reactProps$….onClick`, which
+  is reachable from the MAIN world — so `flow-inject.js` gained an `fst-fire` handler
+  that calls it directly, plus a `data-fst-gen-ticks` counter bumped on every outgoing
+  `batchGenerateImages` request. `flow-bakeoff.js` uses that counter to **verify** each
+  fire actually landed and falls back to the assisted badge flow if it didn't, so one
+  Create click runs all ticked models where Flow allows it and the run still completes
+  where it doesn't. Not verified end-to-end by the authoring session (the environment
+  blocks programmatically triggering generations), which is exactly why the path
+  self-checks rather than assuming success.
+
+## 2026-07-26
+
+### Added
+
+- **🔬 Model bake-off in the Flow extension (3DMC Studio Tools v2.5.0)** — new `🔬`
+  tab that runs the *same* prompt through several image models, so the quality
+  question "is Nano Banana Pro actually worth it over 2 / 2 Lite for our panels?"
+  gets answered on our own work instead of by guesswork. Tick the models, flip
+  **Bake-off ON**, submit as usual: the composer is automatically re-armed on the
+  next model with the prompt, attached refs, aspect ratio and xN count preserved,
+  and a badge tells you which model you're on. **📊 Compare** opens a side-by-side
+  board — one column per model, one row per prompt — and works retroactively on any
+  project, since Flow records the model per generation. New files:
+  `flow-bakeoff.js`, `compare.html`, `compare.js`; `background.js` gains
+  `openCompare` + `bakeoffImage` handlers. Credit guard defaults to free-only (cap 0).
+
+  **Why it's assisted rather than fully automatic:** verified live against Flow on
+  2026-07-26 — switching the model programmatically works and is non-destructive,
+  but Flow **ignores synthetic events on the Create button**; a full
+  pointerdown/mousedown/pointerup/mouseup/click sequence produces no
+  `batchGenerateImages` request at all, because generation is gated behind real user
+  activation. So we automate the tedious part and leave the single click Google
+  requires to be human. Doing otherwise would need `chrome.debugger` and its
+  permanent "being debugged" banner — deliberately not taken.
+
+  **UI facts discovered the hard way** (documented in `flow-bakeoff.js`'s header, and
+  the reason this file is the one to fix if Flow redesigns the composer): the
+  composer holds *two* `type="submit"` buttons — `arrow_forwardCreate` and
+  `closeClear prompt` — so taking the last one silently clears the prompt and
+  generates nothing; the submit button is *removed from the DOM* while the settings
+  popover is open; **Escape clears the composer**, so the popover must be dismissed
+  by re-clicking the chip; a bare `.click()` does nothing to Flow's React controls;
+  and the chip text runs icon ligatures into the model name
+  (`Nano Banana 2 Litecrop_squarex4`), so model names must be prefix-matched
+  longest-first or `Nano Banana 2` swallows `Nano Banana 2 Lite`.
+
+### Fixed
+
+- **Compare board no longer fades prompts that fit.** The overflow check ran once,
+  synchronously, at script end; a page laid out at zero width (background/offscreen
+  tab) measured every prompt as overflowing and left them all permanently greyed
+  behind a gradient. Now re-measured from a ResizeObserver plus rAF / `resize` /
+  `fonts.ready` backstops, since an observer alone can be starved in some rendering
+  contexts and would leave the board stuck on its first guess.
 
 ## 2026-07-25 (3)
 

@@ -224,9 +224,12 @@ if ($do === 'ingest') {
     // auto-approve (owner ask 2026-07-04): panels land APPROVED by default so review is
     // veto-only, not click-every-panel. Explicit POST accepted=0|1 wins; else the project's
     // autoApprove flag on the creator config (gg_create sets it); else legacy false.
+    // fav=1 (owner ask 2026-07-24): the gen was ⭐ favorited in Flow at import time —
+    // land it pre-approved + rating good + flow-fav tag, so winners never need re-finding.
+    $fav = !empty($_POST['fav']);
     $acc = isset($_POST['accepted']) ? !empty($_POST['accepted'])
-         : !empty(s_read(SDATA . '/creator-' . $pid . '.json', [])['autoApprove']);
-    $meta[] = array_merge(['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'unrated','accepted'=>$acc,'group'=>$grp,'tags'=>[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey], $extra, $lineage);
+         : ($fav || !empty(s_read(SDATA . '/creator-' . $pid . '.json', [])['autoApprove']));
+    $meta[] = array_merge(['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>$fav?'good':'unrated','accepted'=>$acc,'group'=>$grp,'tags'=>$fav?['flow-fav']:[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey], $extra, $lineage);
     images_save($pid, $meta);
     // best-effort: when this ingest landed a DERIVED version (the refine/adjust loop), flip the
     // matching pending adjusts[] record on the creator config to done, so the cockpit's "vN · pending"
