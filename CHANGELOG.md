@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-03
+
+### Fixed
+
+- **Flow ⭐ favorites now reach the Studio from the extension the owner actually uses.** Diagnosis: the fav-at-ingest feature (2026-07-24) was patched into the OLD `flow-studio-autosync` extension, but imports run through `studio/extension/flow-studio-tools` ("3DMC Studio Tools"), which had zero favorite handling — and the autosync's ⭐ back-fill never fired because its toggle is OFF. Fix: flow-core.js now reads `workflows[].metadata.favorited` (verified live against the real Flow project data) and carries `fav` per record; content.js/background.js forward it; bridge ingest `fav=1` lands those pre-approved. Retroactive: google-flow-5's 26 favorites back-filled via `do=flowfav` (26 tagged ⭐/good, 19 approved; 7 skipped by the one-winner-per-beat guard).
+
+### Added
+
+- **review.php F = focus mode** in the full-screen viewer: hides the 380px info sidebar + padding so the image truly fills the viewport (Flow-style), persisted in localStorage; toolbar hint rewritten to surface the viewer's existing keys (click tile → ←/→ · G/B/K · N · zoom). Owner feedback: grid tiles too small to judge picks.
+
 ## 2026-07-24
 
 ### Added

@@ -38,7 +38,11 @@
    #fst button.autotoggle{flex:1;padding:8px 0;border:none;border-radius:8px;background:#3a3f4b;color:#fff;cursor:pointer;font-weight:700;font-size:12px}
    #fst button.autotoggle:hover{filter:brightness(1.08)} #fst button.autotoggle.on{background:#1d9e75}
    #fst input.autoint{width:54px;box-sizing:border-box;padding:7px 6px;border-radius:8px;border:1px solid #2e3140;background:#0f1115;color:#e8eaed;margin:0;text-align:center}
+   #fst select.pbsel{flex:1;min-width:0;padding:6px 4px;border-radius:8px;border:1px solid #2e3140;background:#0f1115;color:#e8eaed;font-size:11.5px}
    #fst .autostat{font-size:11px;opacity:.85;margin-top:6px;min-height:14px}
+   #fst .bakemodels{gap:4px;margin-bottom:2px}
+   #fst label.mchk{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 4px;border:1px solid #2e3140;border-radius:8px;background:#0f1115;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
+   #fst label.mchk:hover{background:#181b22} #fst label.mchk input{width:auto;margin:0;accent-color:#ef9f27}
    #fst.min .bd{display:none}`;
   const style = document.createElement("style"); style.textContent = css; document.documentElement.appendChild(style);
   const panel = document.createElement("div"); panel.id = "fst";
@@ -50,6 +54,7 @@
        <div class="tab on" data-mode="download">Download</div>
        <div class="tab" data-mode="studio">→ Studio</div>
        <div class="tab" data-mode="review">Review</div>
+       <div class="tab" data-mode="bakeoff" title="Model bake-off — run each prompt on every Nano Banana model, then compare">🔬</div>
        <div class="tab del" data-mode="delete">🗑</div>
      </div>
      <div class="cfg">
@@ -73,12 +78,22 @@
          <input class="num" type="number" min="1" placeholder="#"><button class="pick go" data-n="custom">Go</button></div>
        <div class="row" style="margin-top:8px"><button class="pick go" data-n="all" style="flex:1">Whole project</button></div>
      </div>
+     <div class="bakebody" style="display:none">
+       <div class="lbl">While ON, hit Create once and the same prompt is run on every ticked model — same refs, aspect and count. If Flow refuses the automatic click it falls back to arming each model and asking you to press Create.</div>
+       <div class="row bakemodels"></div>
+       <div class="row autorow">
+         <button class="autotoggle baketoggle" title="After each submit, re-arm the composer on the next ticked model">○ Bake-off OFF</button>
+       </div>
+       <div class="row" style="margin-top:8px"><button class="pick go bakecompare" style="flex:1">📊 Compare this project</button></div>
+       <div class="autostat bakestat"></div>
+     </div>
      <div class="delbody" style="display:none">
        <div class="warn">⚠ Destructive. Soft-deletes to Flow's <b>Trash</b> (recoverable via "View Trash"). Tick the tiles on the page you want gone.</div>
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock)">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock)">🎬 Framing</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
+     <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Cam:</span><select class="pbsel pbcam" title="Camera height for Cine+Light / Framing. Vary = the model picks the height that serves the beat (never ruts into low-hero shots)."><option value="vary">Vary per beat</option><option value="low">Low hero</option><option value="eye">Eye-level</option><option value="high">High look-down</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing staging assumes. Auto = neutral wording that never asserts a count — no phantom second figure."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -86,6 +101,7 @@
   const accEl = $(".acctval"), urlInput = $(".url"), keyInput = $(".key"), projInput = $(".proj");
   const barFill = $(".bar>i"), statEl = $(".stat"), footEl = $(".foot"), numInput = $(".num");
   const studioOnly = $(".studio-only"), modeHint = $(".modehint"), actbody = $(".actbody"), delbody = $(".delbody"), trashBtn = $(".trash");
+  const bakebody = $(".bakebody"), bakeToggleBtn = $(".baketoggle"), bakeStatEl = $(".bakestat"), bakeModelsEl = $(".bakemodels"), bakeCompareBtn = $(".bakecompare");
   const autoToggleBtn = $(".autotoggle"), autoIntInput = $(".autoint"), autoStatEl = $(".autostat");
   const buttons = [...panel.querySelectorAll("button.pick")];
 
@@ -97,13 +113,14 @@
     if (prevMode === "delete" && m !== "delete" && self.FlowDelete) self.FlowDelete.stop();
     prevMode = mode = m;
     panel.querySelectorAll(".tab").forEach((t) => t.classList.toggle("on", t.dataset.mode === m));
-    const del = m === "delete";
-    actbody.style.display = del ? "none" : "block";
+    const del = m === "delete", bake = m === "bakeoff";
+    actbody.style.display = del || bake ? "none" : "block";
     delbody.style.display = del ? "block" : "none";
+    bakebody.style.display = bake ? "block" : "none";
     studioOnly.style.display = m === "studio" ? "block" : "none";
     if (m === "studio" && !cfg.key) panel.classList.add("cfgopen");
     if (del && self.FlowDelete) self.FlowDelete.start(onDelCount);
-    if (!del) modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
+    if (!del && !bake) modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
   }
   panel.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => setMode(t.dataset.mode)));
 
@@ -160,7 +177,7 @@
           const typed = projInput.value.trim();
           const project = typed || defaultProject();
           const newSection = typed ? 0 : 1;   // blank field → a fresh Studio section for this batch
-          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "" })), project, newSection, cfg };
+          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "", fav: o.fav || 0 })), project, newSection, cfg };
           footEl.textContent = newSection ? ("→ Studio: NEW section (" + project + " · …)") : ("→ Studio project: " + project);
           kind = "studio"; status("Sending " + outs.length + " to Studio…");
         }
@@ -203,10 +220,15 @@
   //   • cine     — framing + golden-hour lighting master block, APPENDS
   //   • frame    — framing ONLY (no lighting), APPENDS — for pairing with a separate
   //                lighting choice, or when you'll relight the panel afterward
-  // NOTE: cine AND frame both DIRECT THE CAMERA at a FIXED setup, so they are for
-  // FRESH generations — they fight the i2i composition-lock sentence. director is
-  // the opposite: it is FOR i2i reframes (source attached), and must NOT be paired
-  // with the composition lock either — its whole job is to move the camera.
+  // cine + frame are PARAMETERIZED by the Cam:/Cast: selectors (persisted):
+  //   Cam  — vary (default; the model picks the height per beat — fixes the old
+  //          hardcoded "below chest height" low-angle rut) / low / eye / high
+  //   Cast — auto (default; neutral "figure(s)" wording that never asserts a count —
+  //          fixes the old hardcoded "both women" phantom-duo) / solo / duo
+  // NOTE: cine AND frame both DIRECT THE CAMERA, so they are for FRESH generations —
+  // they fight the i2i composition-lock sentence. director is the opposite: it is
+  // FOR i2i reframes (source attached), and must NOT be paired with the composition
+  // lock either — its whole job is to move the camera.
   const PROMPT_BLOCKS = {
     daz: {
       where: "start",
@@ -225,17 +247,58 @@
       label: "Director block",
       text: "You are the film director and cinematographer for this scene. Study the source image — who is in it, what they are doing, the emotion of the beat, and the space around them — then re-stage the CAMERA ONLY for maximum cinematic impact: dolly in or out, orbit around the subjects to a new angle, raise or lower the camera height, tilt it, frame tighter or wider — whatever this specific moment calls for. Keep the scene itself untouched: the same characters with the same faces, bodies, proportions, costumes, poses, expressions, action, speech bubbles, environment, and time of day — only the camera changes. Choose like a director: if the beat is emotional, move close on the faces; if it is a power moment, get low; if scale is the story, pull wide; if the tension lives between two characters, shoot past one onto the other; if one body region carries the beat, fill the frame with it. Vary your choice — do NOT default to a low hero angle: high angles looking down, pure profiles, over-the-shoulder, three-quarter rear, and top-down are all in play when they serve the beat. Strongly avoid the source image's exact framing — pick a meaningfully different distance AND a meaningfully different angle — and avoid flat, front-on, eye-level staging: put the subjects on diagonals, stage depth between foreground and background, let the physiques dominate the composition from whatever angle you choose. Do not re-light the scene: keep the existing lighting scheme and mood, re-rendered correctly and consistently from the new camera position. Photoreal DAZ3D CGI render, no restyling, no illustration drift."
     },
-    cine: {
-      where: "end",
-      label: "Cine+Light block",
-      text: "Camera and framing: the camera sits slightly below chest height, tilted up a gentle ten degrees — low enough that the physiques loom with quiet authority, never so steep that proportions distort; both women stand on the same ground plane as the camera, normal human proportions, no wide-angle distortion. Framed from mid-thigh up so the upper bodies dominate the frame, at a three-quarter angle forty-five degrees between front and side — the most sculptural angle for figure work, showing chest depth, arm peaks, and thigh sweep simultaneously instead of flattening them into symmetry — with gentle 50–85mm portrait-lens compression so the figures pop from the background. Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The two figures sit on a diagonal axis from lower-left toward upper-right, angled toward each other with visible intent, one nearer the camera and meaningfully larger in frame, the other a step deeper and smaller by perspective, silhouettes slightly overlapping, so the composition reads in distinct depth layers — foreground figure, mid-ground figure, environment behind, with an out-of-focus environmental element grazing a lower corner in the extreme foreground and asymmetric negative space above one shoulder line giving the masses room to read as mass. Both faces visible and carrying the beat's emotion clearly. Lighting: late golden-hour sunlight, the sun low on the horizon to the left of frame, throwing long warm light that skims almost parallel across the scene and rakes across both women's bodies at a shallow grazing angle, so every muscle group is modeled with a full highlight-to-shadow gradient — bright warm gold where each muscle faces the sun, rolling through midtone amber, falling into soft warm shadow on the far side of every curve. Because the light arrives from the side, every ridge and swell casts its own small shadow and every hollow deepens: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet — the separation between shoulder and arm, between the heads of arms and legs, along the spine and the abdominal wall — so each muscle reads as its own distinct, rounded volume. Striations, veins, and tendon lines catch the raking light and cast crisp micro-shadows. The skin carries a glossy sheen of sweat, with tight specular highlights riding the highest point of every muscle peak and sweat beads sparkling on the lit side. A subtle warm rim light wraps from behind, tracing both silhouettes with a thin amber edge along shoulders, arms, hips, and legs — lifting them off the background without ever becoming a glow or outline. The environment sits half a stop darker than the figures, catching the same warm dusk light through a veil of light atmospheric haze, slightly cooler and softer, with faint dust motes drifting in the low sun shafts, so the bodies pop forward as the brightest, sharpest, warmest things in frame; nearby surfaces return a faint warm bounce that keeps shadow sides luminous rather than black. Everything is photoreal DAZ3D CGI render quality — no restyling, no illustration drift, no added blur."
+    cine: { where: "end", label: "Cine+Light block", build: () => pbFramingText() + pbLightingText() },
+    frame: { where: "end", label: "Framing block", build: () => pbFramingText() }
+  };
+  // ── Cam/Cast variant system for cine + frame ──────────────────────────────
+  // The old blocks hardcoded "camera slightly below chest height" and "both women",
+  // which rutted every generation into a low duo shot. Height and cast are now
+  // selected in the panel (persisted in chrome.storage) and the block text is
+  // assembled per click. Wording is de-gendered ("figure") — appearance is carried
+  // by the attached refs, never by the prompt (refs-are-truth).
+  const PB_CAM = {
+    vary: "Camera and framing: choose the camera height that serves this specific beat — drop below chest height and tilt up when power or dominance is the story, hold natural eye level for connection and confidence, rise above head height and look down when scale, vulnerability, or the geography of the scene carries the moment; do NOT default to a low hero angle. Whatever the height, %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
+    low: "Camera and framing: the camera sits slightly below chest height, tilted up a gentle ten degrees — low enough that the physiques loom with quiet authority, never so steep that proportions distort; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
+    eye: "Camera and framing: the camera sits at natural eye level, held level with no tilt — a grounded, confident vantage that lets the physiques carry the frame on sheer mass; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
+    high: "Camera and framing: the camera sits above head height, tilted gently down — high enough to read the staging and the scale of the physiques against the space, never so steep that proportions distort; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion."
+  };
+  const PB_CAST = {
+    auto: {
+      stand: "every figure stands",
+      dominate: "the upper bodies dominate the frame", pop: "the figures pop",
+      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. Whoever is in frame sits on a diagonal axis running from lower-left toward upper-right — if more than one figure is present, angle them toward each other with visible intent, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping — so the composition reads in distinct depth layers: an out-of-focus environmental element grazing a lower corner in the extreme foreground, the figure or figures in the mid-ground, the readable environment behind, with asymmetric negative space above one shoulder line giving the masses room to read as mass.",
+      faces: "Every face in frame is visible and carries the beat's emotion clearly.",
+      rake: "rakes across every figure in frame", rim: "tracing each silhouette",
+      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale, and not a single element sitting flat against the picture plane."
     },
-    frame: {
-      where: "end",
-      label: "Framing block",
-      text: "Camera and framing: the camera sits slightly below chest height, tilted up a gentle ten degrees — low enough that the physiques loom with quiet authority, never so steep that proportions distort or the figures read as giants; both women stand on the same ground plane as the camera, normal human proportions, no wide-angle distortion. Distance is close and confident: framed from mid-thigh up, so that the upper bodies dominate the frame and the muscle groups of arms, shoulders, and torso are large enough to carry fine detail — full-body distance is not used here; the body fills the frame and the environment supports it. The angle is three-quarter, forty-five degrees between front and side, the most sculptural angle for figure work — showing the depth of the chest, the peak of the arms, and the sweep of the thighs simultaneously instead of flattening them into symmetry. A 50–85mm portrait-lens perspective compresses the figures gently so they pop from the background. Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The two figures are set on a diagonal axis running from lower-left toward upper-right of frame, angled toward each other with visible intent, one figure nearer the camera and meaningfully larger in frame, the second a step deeper in space and smaller by perspective, so the composition reads in distinct layers of depth — foreground figure, mid-ground figure, environment behind. The nearer silhouette overlaps the farther one slightly, locking the depth relationship. Around them, the environment provides depth cues at three scales: something environmental and out-of-focus grazing a lower corner of frame in the extreme foreground, the readable architecture of the location behind them in the mid-background, and atmospheric distance beyond. Asymmetric composition with intentional negative space above one shoulder line gives the masses room to read as mass. Both faces are visible and carry the beat's emotion clearly — proud, delighted, awestruck — angled so expressions read without either head going to pure profile. The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale between figures, and not a single element sitting flat against the picture plane."
+    solo: {
+      stand: "the figure stands",
+      dominate: "the upper body dominates the frame", pop: "the figure pops",
+      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens rather than square, weight shifted so the silhouette reads dynamic, so the composition reads in distinct depth layers: an out-of-focus environmental element grazing a lower corner in the extreme foreground, the figure commanding the mid-ground, the readable environment behind, with asymmetric negative space above one shoulder line giving the mass room to read as mass.",
+      faces: "The face is visible and carries the beat's emotion clearly.",
+      rake: "rakes across the figure's body", rim: "tracing the silhouette",
+      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, layered depth between figure and environment, and not a single element sitting flat against the picture plane."
+    },
+    duo: {
+      stand: "both figures stand",
+      dominate: "the upper bodies dominate the frame", pop: "the figures pop",
+      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The two figures sit on a diagonal axis from lower-left toward upper-right, angled toward each other with visible intent, one nearer the camera and meaningfully larger in frame, the other a step deeper and smaller by perspective, silhouettes slightly overlapping, so the composition reads in distinct depth layers — foreground figure, mid-ground figure, environment behind, with an out-of-focus environmental element grazing a lower corner in the extreme foreground and asymmetric negative space above one shoulder line giving the masses room to read as mass.",
+      faces: "Both faces are visible and carry the beat's emotion clearly.",
+      rake: "rakes across both figures' bodies", rim: "tracing both silhouettes",
+      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale between figures, and not a single element sitting flat against the picture plane."
     }
   };
+  let pbCam = "vary", pbCast = "auto";
+  function pbFramingText() {
+    const c = PB_CAST[pbCast];
+    return PB_CAM[pbCam].replace("%STAND%", c.stand) +
+      " Framed from mid-thigh up so " + c.dominate + ", at a three-quarter angle forty-five degrees between front and side — the most sculptural angle for figure work, showing chest depth, arm peaks, and thigh sweep simultaneously instead of flattening them into symmetry — with gentle 50–85mm portrait-lens compression so " + c.pop + " from the background. " +
+      c.staging + " " + c.faces + " " + c.closer;
+  }
+  function pbLightingText() {
+    const c = PB_CAST[pbCast];
+    return " Lighting: late golden-hour sunlight, the sun low on the horizon to the left of frame, throwing long warm light that skims almost parallel across the scene and " + c.rake + " at a shallow grazing angle, so every muscle group is modeled with a full highlight-to-shadow gradient — bright warm gold where each muscle faces the sun, rolling through midtone amber, falling into soft warm shadow on the far side of every curve. Because the light arrives from the side, every ridge and swell casts its own small shadow and every hollow deepens: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet — the separation between shoulder and arm, between the heads of arms and legs, along the spine and the abdominal wall — so each muscle reads as its own distinct, rounded volume. Striations, veins, and tendon lines catch the raking light and cast crisp micro-shadows. The skin carries a glossy sheen of sweat, with tight specular highlights riding the highest point of every muscle peak and sweat beads sparkling on the lit side. A subtle warm rim light wraps from behind, " + c.rim + " with a thin amber edge along shoulders, arms, hips, and legs — lifting them off the background without ever becoming a glow or outline. The environment sits half a stop darker than the figures, catching the same warm dusk light through a veil of light atmospheric haze, slightly cooler and softer, with faint dust motes drifting in the low sun shafts, so the bodies pop forward as the brightest, sharpest, warmest things in frame; nearby surfaces return a faint warm bounce that keeps shadow sides luminous rather than black. Everything is photoreal DAZ3D CGI render quality — no restyling, no illustration drift, no added blur.";
+  }
   function findPromptBox() {
     const vis = (el) => el.offsetParent !== null && el.getBoundingClientRect().height > 0 && !panel.contains(el);
     // Flow's composer is a Slate contenteditable (data-slate-editor) — prefer it.
@@ -255,6 +318,7 @@
   }
   function insertPromptBlock(kind) {
     let blk = PROMPT_BLOCKS[kind]; if (!blk) return;
+    if (blk.build) blk = Object.assign({}, blk, { text: blk.build(), label: blk.label + " (cam: " + pbCam + " · cast: " + pbCast + ")" });
     if (blk.askName) {
       const nm = window.prompt("Character name for the sheet's name plate (leave blank for no name):", "");
       if (nm === null) return; // cancelled
@@ -287,7 +351,8 @@
       const editors = [...document.querySelectorAll('[data-slate-editor="true"]')];
       const idx = editors.indexOf(box.el);
       const isEmpty = !ceRealText(box.el);
-      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + " " : " " + blk.text);
+      // Blank-line separator on BOTH edges so it's obvious where the block landed
+      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + "\n\n" : "\n\n" + blk.text);
       let bridge = document.getElementById("__fstBridge");
       if (!bridge) { bridge = document.createElement("div"); bridge.id = "__fstBridge"; bridge.style.display = "none"; document.documentElement.appendChild(bridge); }
       bridge.textContent = JSON.stringify({ text, where: blk.where, index: idx });
@@ -308,12 +373,21 @@
       if (target) { range.setStart(target, toStart ? 0 : target.length); range.collapse(true); }
       else { range.selectNodeContents(box.el); range.collapse(toStart); }
       sel.removeAllRanges(); sel.addRange(range);
-      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + " " : " " + blk.text);
+      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + "\n\n" : "\n\n" + blk.text);
       document.execCommand("insertText", false, text);
     }
     status(blk.label + " inserted — review & submit.");
   }
   panel.querySelectorAll("button.pb").forEach((b) => b.addEventListener("click", () => insertPromptBlock(b.dataset.pb)));
+  // Cam/Cast selectors — persisted so the chosen framing style sticks across reloads
+  const camSel = $(".pbcam"), castSel = $(".pbcast");
+  chrome.storage.local.get(["pbCam", "pbCast"]).then((s) => {
+    if (s.pbCam && PB_CAM[s.pbCam]) pbCam = s.pbCam;
+    if (s.pbCast && PB_CAST[s.pbCast]) pbCast = s.pbCast;
+    camSel.value = pbCam; castSel.value = pbCast;
+  });
+  camSel.addEventListener("change", () => { pbCam = camSel.value; chrome.storage.local.set({ pbCam }); });
+  castSel.addEventListener("change", () => { pbCast = castSel.value; chrome.storage.local.set({ pbCast }); });
 
   // ───────── Auto-sync (continuous → Studio) ─────────────────────────────────
   // Ported from the standalone "Flow → Studio Auto-Sync" extension. While ON, a
@@ -385,6 +459,46 @@
     autoIntInput.value = autoInt; updateAutoToggle();
     loadSent(() => { if (autoOn) { autoStatus("Auto-sync on. Watching…"); startAuto(); } });
   });
+
+  // ---------------- 🔬 Model bake-off ----------------
+  // The engine lives in flow-bakeoff.js (it drives Flow's composer); this is just its
+  // panel: which models to mirror onto, the ON/OFF switch, and the compare board.
+  const BO = self.FlowBakeoff;
+  if (BO) {
+    BO.onStatus((t) => { bakeStatEl.textContent = t; });
+    const updateBakeToggle = () => {
+      bakeToggleBtn.textContent = BO.cfg.on ? "● Bake-off ON" : "○ Bake-off OFF";
+      bakeToggleBtn.classList.toggle("on", BO.cfg.on);
+    };
+    bakeModelsEl.innerHTML = BO.MODELS.map((m) =>
+      `<label class="mchk" title="${m.label}"><input type="checkbox" data-m="${m.id}"><span>${m.label.replace("Nano Banana", "NB")}</span></label>`).join("");
+    const syncChecks = () => bakeModelsEl.querySelectorAll("input").forEach((i) => (i.checked = BO.cfg.models.includes(i.dataset.m)));
+
+    bakeModelsEl.addEventListener("change", () => {
+      const models = [...bakeModelsEl.querySelectorAll("input")].filter((i) => i.checked).map((i) => i.dataset.m);
+      if (!models.length) { bakeStatEl.textContent = "Pick at least one model."; syncChecks(); return; }
+      BO.setCfg({ models });
+      bakeStatEl.textContent = "Mirroring onto: " + models.length + " model(s).";
+    });
+    bakeToggleBtn.addEventListener("click", () => {
+      BO.setCfg({ on: !BO.cfg.on }); updateBakeToggle();
+      bakeStatEl.textContent = BO.cfg.on
+        ? "ON — hit Create once; the other models follow."
+        : "Off — submits run on the selected model only.";
+    });
+    bakeCompareBtn.addEventListener("click", async () => {
+      bakeCompareBtn.disabled = true; bakeStatEl.textContent = "Reading this project…";
+      try {
+        const data = await BO.buildCompare();
+        await chrome.storage.local.set({ bakeoffCompare: data });
+        chrome.runtime.sendMessage({ type: "openCompare" });
+        bakeStatEl.textContent = data.error ? data.error : data.rows.length + " prompt(s) with 2+ models — opened in a new tab.";
+      } catch (e) { bakeStatEl.textContent = "✖ " + ((e && e.message) || e); }
+      bakeCompareBtn.disabled = false;
+    });
+
+    BO.load().then(() => { syncChecks(); updateBakeToggle(); });
+  }
 
   FC.getAccount().then(stampAccount);
 })();

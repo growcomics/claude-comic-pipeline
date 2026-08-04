@@ -61,6 +61,7 @@ async function runStudio(port, msg) {
       fd.append("seq", String(i)); fd.append("orig", name); fd.append("file", blob, name);
       if (items[i].gen) fd.append("gen", items[i].gen);
       if (items[i].prompt) fd.append("prompt", items[i].prompt);
+      if (items[i].fav) fd.append("fav", "1");   // ⭐ Flow-favorited → lands pre-approved (bridge ingest fav=1)
       const j = await (await fetch(url, { method: "POST", body: fd })).json();
       j.ok ? ok++ : fail++;
     } catch (e) { fail++; }
@@ -74,6 +75,14 @@ async function grab(u) {
   catch (e) { return null; }
 }
 function extOf(t) { t = (t || "").toLowerCase(); if (t.includes("png")) return "png"; if (t.includes("webp")) return "webp"; if (t.includes("gif")) return "gif"; return "jpg"; }
+// MV3 service workers have no FileReader, so base64 by hand. Chunked — btoa via
+// String.fromCharCode blows the argument limit on a whole multi-MB image.
+function toB64(buf) {
+  const bytes = new Uint8Array(buf);
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(s);
+}
 function downloadOne(url, filename) {
   return new Promise((resolve) => {
     chrome.downloads.download({ url, filename, conflictAction: "uniquify" }, (id) => {
@@ -125,6 +134,28 @@ async function runPatreonDownloads(folder, images) {
   await pMergeReport({ running: false, downloaded: done, failed, errors: errors.slice(0, 30) });
   return { done, failed, errors };
 }
+
+// ---------- bake-off compare board ----------
+// openCompare  : the content script can't call chrome.tabs, so it asks us to open the page.
+// bakeoffImage : Flow media URLs 302 cross-origin and need the session cookie, so the
+//                board can't put them in an <img> directly — we fetch here (no page CORS)
+//                and hand back a data URL.
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+  if (msg && msg.type === "openCompare") {
+    chrome.tabs.create({ url: chrome.runtime.getURL("compare.html") });
+    sendResponse({ ok: true });
+    return;
+  }
+  if (msg && msg.type === "bakeoffImage") {
+    grab(msg.url)
+      .then(async (b) => {
+        if (!b) return sendResponse({ ok: false });
+        sendResponse({ ok: true, dataUrl: "data:" + (b.type || "image/jpeg") + ";base64," + toB64(await b.arrayBuffer()) });
+      })
+      .catch(() => sendResponse({ ok: false }));
+    return true;
+  }
+});
 
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg && msg.type === "patreonDownload") {

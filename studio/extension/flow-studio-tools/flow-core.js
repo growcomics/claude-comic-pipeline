@@ -41,11 +41,14 @@
   // one record per generation, newest-first
   function extract(data) {
     const pc = data.projectContents || {}, media = Array.isArray(pc.media) ? pc.media : [], mmap = modelMap(data), byWf = {};
+    // ⭐ favorites: workflow-level metadata.favorited (workflow.name === gen id). Carried
+    // onto each record so Send-to-Studio can land favorited gens pre-approved (bridge fav=1).
+    const favSet = new Set((Array.isArray(pc.workflows) ? pc.workflows : []).filter((w) => w && w.metadata && w.metadata.favorited).map((w) => w.name));
     media.forEach((m) => {
       const gi = m.image && m.image.generatedImage; if (!gi) return;          // skip user uploads + video (they appear as input refs)
       const wf = m.workflowId || gi.workflowId || m.name; if (!wf) return;
       if (!byWf[wf]) byWf[wf] = {
-        gen_id: wf, prompt: gi.prompt || "", model_key: gi.modelNameType || "", model: mmap[gi.modelNameType] || gi.modelNameType || "",
+        gen_id: wf, fav: favSet.has(wf), prompt: gi.prompt || "", model_key: gi.modelNameType || "", model: mmap[gi.modelNameType] || gi.modelNameType || "",
         timestamp: (m.mediaMetadata && m.mediaMetadata.createTime) || "", aspect_ratio: gi.aspectRatio || "",
         seed: typeof gi.seed === "number" ? gi.seed : null, project: data.projectName || "", project_id: data.projectId || "",
         dimensions: (m.image && m.image.dimensions) || null, output_media_ids: [], input_ref_media_ids: [],
@@ -93,7 +96,7 @@
     const recs = (limit && limit !== Infinity) ? records.slice(0, limit) : records.slice();
     recs.reverse();
     const out = [];
-    recs.forEach((r) => r.output_media_ids.forEach((id) => out.push({ id, url: MEDIA(id), gen_id: r.gen_id, prompt: r.prompt || "" })));
+    recs.forEach((r) => r.output_media_ids.forEach((id) => out.push({ id, url: MEDIA(id), gen_id: r.gen_id, prompt: r.prompt || "", fav: r.fav ? 1 : 0 })));
     return out;
   }
 

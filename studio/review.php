@@ -238,6 +238,12 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-arrow.prev{left:14px}.rv-arrow.next{right:14px}
 .rv-arrow:disabled{opacity:.25;cursor:default}
 .rv-info{width:380px;flex:none;background:var(--surface);border-left:1px solid var(--border);padding:18px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+/* F = focus mode: hide the info sidebar + padding so the image truly fills the screen (Flow-style) */
+.rv-lb.focusmode .rv-info{display:none}
+.rv-lb.focusmode .rv-lb-stage{padding:0}
+.rv-lb.focusmode .rv-lb-stage img{border-radius:0}
+.rv-focus-hint{position:fixed;left:14px;bottom:12px;z-index:95;font-size:11.5px;color:#9aa3ad;background:rgba(10,12,16,.72);padding:4px 10px;border-radius:99px;pointer-events:none;opacity:0;transition:opacity .25s}
+.rv-lb.open ~ .rv-focus-hint, .rv-lb.open .rv-focus-hint{opacity:1}
 @media(max-width:820px){.rv-lb{flex-direction:column}.rv-info{width:auto;border-left:0;border-top:1px solid var(--border);max-height:48vh}}
 .rv-info h2{font-size:15px;margin:0}
 .rv-x{position:absolute;top:14px;right:14px;z-index:2;background:rgba(20,21,28,.9);border:1px solid var(--border2);color:#fff;font-size:15px;width:36px;height:36px;border-radius:8px;cursor:pointer}
@@ -333,7 +339,9 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-cmp-ctrls .ca.on{background:var(--teal);color:#04130d;border-color:transparent}
 .rv-cmp-ctrls .cb.on{background:var(--red);color:#fff;border-color:transparent}
 .rv-cmp-ctrls .ck.on{background:var(--accent);color:var(--accent-ink);border-color:transparent}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar" style="border-bottom:2px solid #7A7FEC">
   <div class="brand"><span class="dot"></span> Comic Studio
     <span style="background:#7A7FEC;color:#0B0C10;font-size:11px;font-weight:800;letter-spacing:.04em;border-radius:999px;padding:2px 9px;margin-left:6px">🖼 REVIEW</span></div>
@@ -403,7 +411,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 
   <?php if ($galN): ?>
   <div class="rv-actions">
-    <span class="rv-kbhint"><i>Tip:</i> click a tile to inspect, or use <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> to move and <kbd>G</kbd> approve · <kbd>B</kbd> reject · <kbd>K</kbd> keep — no clicking.</span>
+    <span class="rv-kbhint"><i>Tip:</i> click a tile for the FULL-SCREEN viewer (<kbd>←</kbd><kbd>→</kbd> next/prev · <kbd>G</kbd> approve · <kbd>B</kbd> reject · <kbd>K</kbd> keep · <kbd>N</kbd> next-unrated · <kbd>F</kbd> hides the info panel so the image fills the screen · click image to zoom) — or rate straight off the grid with the same keys.</span>
     <span class="rv-spacer"></span>
     <span class="rv-prog" id="actprog"></span>
     <button class="rv-act" id="scanbtn" title="<?= $aiOn ? 'AI-scan every shown panel for defects (duplicate characters, extra people)' : 'Needs the AI key — add it in the references workspace' ?>"<?= $aiOn ? '' : ' disabled' ?>>🔎 Scan shown for defects</button>
@@ -952,7 +960,12 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     else if(e.key==='d'||e.key==='D'||e.key==='b'||e.key==='B'){ if(curFile) doBad(curFile); }
     else if(e.key==='k'||e.key==='K'){ if(curFile) doKeep(curFile); }
     else if(e.key==='n'||e.key==='N'){ stepUnrated(); }
+    else if(e.key==='f'||e.key==='F'){ // focus mode: image fills the whole screen, info panel hidden
+      var on=!lb.classList.contains('focusmode'); lb.classList.toggle('focusmode', on);
+      try{ localStorage.setItem('rvFocusMode', on?'1':''); }catch(_){}
+    }
   });
+  try{ if(localStorage.getItem('rvFocusMode')==='1') lb.classList.add('focusmode'); }catch(_){}
   // ====== view-state persistence (URL hash) — shareable + survives the live-refresh reload ======
   function setSeg(id, val){ var box=document.getElementById(id); if(!box) return;
     [].forEach.call(box.querySelectorAll('button'), function(x){ var dv=x.dataset[Object.keys(x.dataset)[0]]; x.classList.toggle('on', dv===String(val)); }); }

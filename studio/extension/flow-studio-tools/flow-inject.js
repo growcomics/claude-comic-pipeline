@@ -14,9 +14,54 @@
 // React fiber, insert via editor.insertText, and call editor.onChange() so React
 // re-renders the view. The text is now in Slate's model → it persists exactly like
 // something the user typed (survives blur, included on submit).
+//
+// It also hosts the bake-off's AUTO-FIRE (see flow-bakeoff.js). Flow ignores synthetic
+// events on the Create button — a full pointer sequence produces no generate request at
+// all. But React keeps the button's real handler in `__reactProps$…onClick`, which lives
+// in the PAGE world, so we can call it directly from here. Whether Flow accepts that is
+// something only the page can answer, so we also tick a counter on every outgoing
+// batchGenerateImages request; the content script reads that counter off a DOM attribute
+// to confirm a fire actually landed, and falls back to asking for a real click if not.
 (() => {
   if (window.__fstInject) return;
   window.__fstInject = true;
+
+  // ---- generation-request counter (the auto-fire's proof of life) ----
+  const TICK_ATTR = "data-fst-gen-ticks";
+  let ticks = 0;
+  document.documentElement.setAttribute(TICK_ATTR, "0");
+  const _fetch = window.fetch;
+  window.fetch = function (input, init) {
+    try {
+      const url = typeof input === "string" ? input : (input && input.url) || "";
+      if (url.includes("batchGenerateImages")) document.documentElement.setAttribute(TICK_ATTR, String(++ticks));
+    } catch (e) {}
+    return _fetch.apply(this, arguments);
+  };
+
+  // ---- auto-fire: invoke the Create button's React onClick directly ----
+  const vis = (el) => !!(el && el.offsetParent !== null && el.getBoundingClientRect().height > 4);
+  function createBtn() {
+    const ed = document.querySelector('[data-slate-editor="true"]');
+    let n = ed, box = null;
+    for (let i = 0; n && i < 14; i++, n = n.parentElement) if (n.querySelectorAll("button").length >= 3) { box = n; break; }
+    if (!box) return null;
+    // Match the arrow icon. NOT [type=submit]: these buttons carry no type attribute
+    // (the IDL default just reports "submit"), and "Clear prompt" sits right beside it.
+    return [...box.querySelectorAll("button")].filter(vis).find((b) => /arrow_forward/i.test(b.textContent || "")) || null;
+  }
+  document.addEventListener("fst-fire", () => {
+    try {
+      const b = createBtn();
+      if (!b || b.disabled) { console.warn("[3DMC Studio Tools] auto-fire: Create button not available"); return; }
+      const pk = Object.keys(b).find((k) => k.startsWith("__reactProps$"));
+      const onClick = pk && b[pk] && b[pk].onClick;
+      if (typeof onClick !== "function") { console.warn("[3DMC Studio Tools] auto-fire: no React onClick on Create"); return; }
+      onClick({ preventDefault() {}, stopPropagation() {}, persist() {}, nativeEvent: {}, currentTarget: b, target: b, type: "click", isTrusted: true });
+    } catch (e) {
+      console.error("[3DMC Studio Tools] auto-fire failed", e);
+    }
+  });
 
   const isEditor = (v) =>
     v && typeof v === "object" && Array.isArray(v.children) &&
