@@ -14,6 +14,10 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ## 2026-08-03
 
+### Added (later same day)
+
+- **review.php ▦ Dense grid mode** — owner feedback: the grid's fixed 4:5 tile cells pillarbox portrait panels, and the black padding reads as huge wasted space between images. Dense mode packs tiles at each image's NATURAL aspect (justified rows, 4px gaps, row height scales with S/M/L); toggled beside ⛶ Fit, persisted in the URL hash like the other view state.
+
 ### Fixed
 
 - **Flow ⭐ favorites now reach the Studio from the extension the owner actually uses.** Diagnosis: the fav-at-ingest feature (2026-07-24) was patched into the OLD `flow-studio-autosync` extension, but imports run through `studio/extension/flow-studio-tools` ("3DMC Studio Tools"), which had zero favorite handling — and the autosync's ⭐ back-fill never fired because its toggle is OFF. Fix: flow-core.js now reads `workflows[].metadata.favorited` (verified live against the real Flow project data) and carries `fav` per record; content.js/background.js forward it; bridge ingest `fav=1` lands those pre-approved. Retroactive: google-flow-5's 26 favorites back-filled via `do=flowfav` (26 tagged ⭐/good, 19 approved; 7 skipped by the one-winner-per-beat guard).

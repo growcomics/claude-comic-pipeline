@@ -195,6 +195,11 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-tile{position:relative;border:1px solid var(--border2);border-radius:10px;overflow:hidden;background:var(--bg2);cursor:pointer;aspect-ratio:4/5}
 .rv-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .18s ease}
 .rv-grid.fit .rv-tile img{object-fit:contain;background:#07080b}
+/* Dense: justified packing — each tile takes its image's natural aspect at a fixed row
+   height (scaled by the S/M/L --tile), rows wrap tight. No 4:5 letterboxing, 4px gaps. */
+.rv-grid.dense{display:flex;flex-wrap:wrap;gap:4px}
+.rv-grid.dense .rv-tile{aspect-ratio:auto;width:auto;flex:0 0 auto;height:calc(var(--tile,200px)*1.45)}
+.rv-grid.dense .rv-tile img{width:auto;height:100%;max-width:none}
 .rv-tile:hover img{transform:scale(1.03)}
 .rv-tile.rate-good{border-color:var(--teal)}
 .rv-tile.rate-bad{border-color:var(--red)}
@@ -406,6 +411,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
       </span>
     </div>
     <button class="rv-tog" id="togfit" title="Fit whole image (no crop)">⛶ Fit</button>
+    <button class="rv-tog" id="togdense" title="Dense: tiles take each image's natural shape and pack tight — no letterboxing, minimal gaps">▦ Dense</button>
     <button class="rv-tog" id="rvrefresh" title="Reload to pick up new panels">↻ Refresh</button>
   </div>
 
@@ -537,6 +543,8 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   tog('togfav','flowfav', applyFilter);
   var fitBtn=document.getElementById('togfit');
   if(fitBtn) fitBtn.addEventListener('click', function(){ fitBtn.classList.toggle('on'); grid.classList.toggle('fit', fitBtn.classList.contains('on')); writeHash(); });
+  var denseBtn=document.getElementById('togdense');
+  if(denseBtn) denseBtn.addEventListener('click', function(){ denseBtn.classList.toggle('on'); grid.classList.toggle('dense', denseBtn.classList.contains('on')); writeHash(); });
   var rf=document.getElementById('rvrefresh'); if(rf) rf.addEventListener('click', function(){ location.reload(); });
 
   // ---------- search box (matches beat # / scene / dialogue / notes via the SEARCH blob) ----------
@@ -980,6 +988,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     if(state.flowfav) p.push('flowfav=1');
     var sz=grid?parseInt(grid.style.getPropertyValue('--tile'),10):0; if(sz && sz!==200) p.push('size='+sz);
     if(grid && grid.classList.contains('fit')) p.push('fit=1');
+    if(grid && grid.classList.contains('dense')) p.push('dense=1');
     try{ history.replaceState(null,'', p.length?('#'+p.join('&')):(location.pathname+location.search)); }catch(e){}
   }
   function readHash(){
@@ -993,6 +1002,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     state.flowfav=q.flowfav==='1'; setTog('togfav',state.flowfav);
     if(q.size && grid){ var sb=document.querySelector('#sizeseg button[data-size="'+q.size+'"]'); if(sb){ setSeg('sizeseg',q.size); grid.style.setProperty('--tile', q.size+'px'); } }
     if(q.fit==='1' && grid){ var fb=document.getElementById('togfit'); if(fb) fb.classList.add('on'); grid.classList.add('fit'); }
+    if(q.dense==='1' && grid){ var db=document.getElementById('togdense'); if(db) db.classList.add('on'); grid.classList.add('dense'); }
   }
   // ====== winner-pick: siblings (other takes) of a beat ======
   function siblingsOf(file){ var d=DATA[file]; var beat=d&&d.beat; if(!beat) return [file];
