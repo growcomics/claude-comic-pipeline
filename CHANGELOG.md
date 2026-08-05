@@ -12,6 +12,34 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-04 (📐 Staging block — the anti-flat guard, doc + extension v2.6.0)
+
+### Added
+
+- **"One-click staging block — the anti-flat guard (L34 distilled)" in `cinematic-framing.md`.** The owner supplied storyboarding first-principles frames (the ✓/✗ pairs artists teach) and asked for them in the extension; the block compresses the three L34 staging moves into one adaptive append-able fragment that rides with any action prompt and prescribes NO camera: tilted EYE-LINE diagonal for a 2-character face-off (level eye-line = static → forbidden), near/far DEPTH layers with readable receding space (same-plane = flat → forbidden), varied-scale PYRAMID with heads tracing a V for 3+ (same-height lineup → forbidden). The tilted eye-line is the piece the per-value L34 fragments under-specified — the doc now also names it as a QA check (trace the line connecting two characters' eyes; level ≈ flag). **Validated live** (NB2 Lite i2i restage of the flat golden-hour door two-shot, laptop account, x4): 4/4 variants broke the flat lineup — foreground/background scale contrast, doorway receding between figures, steeply tilted eye-lines, lighting + bubbles preserved (one variant duplicated a speech bubble — restages re-lay-out lettering, standard LET-class QA catch).
+- **📐 Staging button in 3DMC Studio Tools (v2.5.0 → v2.6.0).** Sixth prompt-block button, placed between Framing and Char sheet. Static text block, APPENDS after the user's own action prompt; composes with everything except the i2i keep-composition lock (and is redundant next to Cine+Light/Framing, whose Cast staging text already covers their fixed-camera use). Comment map + README updated.
+
+## 2026-08-04
+
+### Added
+
+- **L36 — Story spine: the corpus's weak axis becomes an enforced gate.** The `comic-corpus` study measured four axes and found story is the one the whole genre fails: **no book in the 9-comic corpus scores above 3; the median is 2** (`research/comic-corpus/synthesis/success-elements.md`, Finding 5). Growth density, camera and expression all became enforced rules (L35, L20/L34, L15); story stayed a note in a synthesis doc — which is how it stays median. Craft is table stakes in this niche; story coherence is the differentiation opportunity, and it was the only finding not wired into production.
+
+  L36 enforces the four *mechanically checkable* failure modes at shotlist time, before any panel is paid for:
+
+  | Corpus failure | Enforcement |
+  |---|---|
+  | Thin/absent spine (*The Curse* is a potion tit-for-tat that just stops) | `story_spine.{want,obstacle,cost}` required; stubs (`TBD`, one-word answers) rejected as well as absences |
+  | Escalation-by-repetition padding the climax (*Ass Effect*'s three near-identical cosmic splashes) | ≥3 consecutive capstone panels sharing size + camera distance + beat + location = HARD; 2 = SOFT |
+  | Momentum-only endings (*Breaker* stops mid-swing) | `ending` must be `landed` or `cliffhanger`; a cliffhanger needs a real `hook`; the final page needs a resolution beat or closing line |
+  | Identity confusion (both *The Curse* leads end in matching armor) | `cast[].distinguishing_marks` required and pairwise-distinct for every character in a climax panel; non-wardrobe only |
+
+  **Implemented as a chapter-level gate, not a panel rule.** Story is a property of the whole script, so L36 has no prompt slot and contributes nothing to any panel — it lives with the other chapter-scoped checks (`L20_chapter`, `L28`) in `skills/continuity-check/scripts/rules_audit.py::check_story_spine`, running as part of Gate B pre-generation. Applies to all transformation types (`["*"]`), unlike L35's FMG scope: story is not genre-specific.
+
+  Touched: `rules_audit.py` (new `check_story_spine`, wired into `main`), `script-breakdown/SKILL.md` (schema fields `story_spine` + `cast[].distinguishing_marks`, new § 4.7, Gate B description), `comic-production/references/lessons-learned.md` (§ L36), `comic-production/scripts/next_panel.py` (rule catalog entry), `tests/test_story_spine.py` (new — 14 cases, one per failure mode plus the passing shapes; 14/14).
+
+  **Migration cost, stated plainly:** `story_spine` is a HARD requirement, so every existing project shotlist now fails Gate B until a spine block is added. Verified against `projects/cheer-ascension` and `projects/reseda` — both fail with exactly the missing-spine finding and nothing spurious. This is the same pattern as the earlier `style` requirement: re-planning a shotlist is free, regenerating panels is not.
+
 ## 2026-08-03
 
 ### Added (later same day)
