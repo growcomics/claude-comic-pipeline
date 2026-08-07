@@ -92,8 +92,9 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Cam:</span><select class="pbsel pbcam" title="Camera height for Cine+Light / Framing. Vary = the model picks the height that serves the beat (never ruts into low-hero shots)."><option value="vary">Vary per beat</option><option value="low">Low hero</option><option value="eye">Eye-level</option><option value="high">High look-down</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing staging assumes. Auto = neutral wording that never asserts a count — no phantom second figure."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
+     <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Light:</span><select class="pbsel pblight" title="Lighting scheme for Cine+Light and 💡 Light. Each scheme is built to the same spec — a named key with a stated angle, a per-form gradient, ambient occlusion by anatomical location, micro-shadow detail, a rim with an anti-glow guard, and the environment held below the figures."></select><span class="lbl" style="margin:0 4px 0 6px">Render:</span><select class="pbsel pbrender" title="Which variant of the scheme to use. 3D = photoreal / PBR language (pairs with the 🎨 DAZ prefix). Drawn = the same light logic in painted-comic language — do NOT stack it with 🎨 DAZ; bring your own drawn-style prefix."><option value="cgi">3D</option><option value="illo">Drawn</option></select></div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -259,7 +260,11 @@
       text: "STAGING — break the flat picture plane. Never arrange the characters in a flat lineup: standing side by side at the same height, the same scale, the same distance from the camera, with a level eye-line — that staging is forbidden. Instead: if TWO characters face each other, stage them on a diagonal — one face higher in frame and one lower, so the line connecting their eyes runs at a steep angle across the panel, bodies leaning in, faces close, the tension riding that tilted eye-line. When characters share a scene, stage them in DEPTH: one clearly nearer the camera and larger in frame, the other deeper in the scene and smaller by perspective, with readable space — floor, walls, a doorway, furniture — receding between them so the shot has a front and a back. With THREE or more characters, build a pyramid: every figure at a different scale and a different depth, one large in the near foreground cut by the frame edge, the others staggered behind at varied heights, their heads tracing a V or a diagonal across the panel — never a flat row of same-sized heads. Let the environment's perspective lines converge to support the depth, and keep every face readable."
     },
     cine: { where: "end", label: "Cine+Light block", build: () => pbFramingText() + pbLightingText() },
-    frame: { where: "end", label: "Framing block", build: () => pbFramingText() }
+    frame: { where: "end", label: "Framing block", build: () => pbFramingText() },
+    // Lighting only — the one block that legally rides with the i2i keep-composition
+    // lock, because it prescribes no camera. That's the post-hoc lighting pass in
+    // cinematic-framing.md §Lighting-pass fragments, which had no button before v2.7.0.
+    light: { where: "end", label: "Lighting block", build: () => pbLightingText() }
   };
   // ── Cam/Cast variant system for cine + frame ──────────────────────────────
   // The old blocks hardcoded "camera slightly below chest height" and "both women",
@@ -299,16 +304,25 @@
       closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale between figures, and not a single element sitting flat against the picture plane."
     }
   };
-  let pbCam = "vary", pbCast = "auto";
+  let pbCam = "vary", pbCast = "auto", pbLight = "golden", pbRender = "cgi";
   function pbFramingText() {
     const c = PB_CAST[pbCast];
     return PB_CAM[pbCam].replace("%STAND%", c.stand) +
       " Framed from mid-thigh up so " + c.dominate + ", at a three-quarter angle forty-five degrees between front and side — the most sculptural angle for figure work, showing chest depth, arm peaks, and thigh sweep simultaneously instead of flattening them into symmetry — with gentle 50–85mm portrait-lens compression so " + c.pop + " from the background. " +
       c.staging + " " + c.faces + " " + c.closer;
   }
+  // The lighting block shipped through v2.6.0, verbatim (its two cast hooks now
+  // written as the same %RAKE% / %RIM% placeholders the library uses). Two jobs:
+  // the "Golden v1" dropdown entry, so the tightened v2 can be A/B'd against it on
+  // real generations, and the fallback when flow-lighting.js is absent — a missing
+  // library must never yield an unlit prompt.
+  const PB_LIGHT_V1 = " Lighting: late golden-hour sunlight, the sun low on the horizon to the left of frame, throwing long warm light that skims almost parallel across the scene and %RAKE% at a shallow grazing angle, so every muscle group is modeled with a full highlight-to-shadow gradient — bright warm gold where each muscle faces the sun, rolling through midtone amber, falling into soft warm shadow on the far side of every curve. Because the light arrives from the side, every ridge and swell casts its own small shadow and every hollow deepens: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet — the separation between shoulder and arm, between the heads of arms and legs, along the spine and the abdominal wall — so each muscle reads as its own distinct, rounded volume. Striations, veins, and tendon lines catch the raking light and cast crisp micro-shadows. The skin carries a glossy sheen of sweat, with tight specular highlights riding the highest point of every muscle peak and sweat beads sparkling on the lit side. A subtle warm rim light wraps from behind, %RIM% with a thin amber edge along shoulders, arms, hips, and legs — lifting them off the background without ever becoming a glow or outline. The environment sits half a stop darker than the figures, catching the same warm dusk light through a veil of light atmospheric haze, slightly cooler and softer, with faint dust motes drifting in the low sun shafts, so the bodies pop forward as the brightest, sharpest, warmest things in frame; nearby surfaces return a faint warm bounce that keeps shadow sides luminous rather than black. Everything is photoreal DAZ3D CGI render quality — no restyling, no illustration drift, no added blur.";
   function pbLightingText() {
     const c = PB_CAST[pbCast];
-    return " Lighting: late golden-hour sunlight, the sun low on the horizon to the left of frame, throwing long warm light that skims almost parallel across the scene and " + c.rake + " at a shallow grazing angle, so every muscle group is modeled with a full highlight-to-shadow gradient — bright warm gold where each muscle faces the sun, rolling through midtone amber, falling into soft warm shadow on the far side of every curve. Because the light arrives from the side, every ridge and swell casts its own small shadow and every hollow deepens: ambient-occlusion shadows one stop deeper in every crease where muscle heads meet — the separation between shoulder and arm, between the heads of arms and legs, along the spine and the abdominal wall — so each muscle reads as its own distinct, rounded volume. Striations, veins, and tendon lines catch the raking light and cast crisp micro-shadows. The skin carries a glossy sheen of sweat, with tight specular highlights riding the highest point of every muscle peak and sweat beads sparkling on the lit side. A subtle warm rim light wraps from behind, " + c.rim + " with a thin amber edge along shoulders, arms, hips, and legs — lifting them off the background without ever becoming a glow or outline. The environment sits half a stop darker than the figures, catching the same warm dusk light through a veil of light atmospheric haze, slightly cooler and softer, with faint dust motes drifting in the low sun shafts, so the bodies pop forward as the brightest, sharpest, warmest things in frame; nearby surfaces return a faint warm bounce that keeps shadow sides luminous rather than black. Everything is photoreal DAZ3D CGI render quality — no restyling, no illustration drift, no added blur.";
+    const L = self.FlowLighting;
+    const s = (pbLight !== "golden1" && L && L.schemes) ? L.schemes[pbLight] : null;
+    const raw = s ? s[pbRender] : PB_LIGHT_V1;
+    return raw.replaceAll("%RAKE%", c.rake).replaceAll("%RIM%", c.rim);
   }
   function findPromptBox() {
     const vis = (el) => el.offsetParent !== null && el.getBoundingClientRect().height > 0 && !panel.contains(el);
@@ -329,7 +343,7 @@
   }
   function insertPromptBlock(kind) {
     let blk = PROMPT_BLOCKS[kind]; if (!blk) return;
-    if (blk.build) blk = Object.assign({}, blk, { text: blk.build(), label: blk.label + " (cam: " + pbCam + " · cast: " + pbCast + ")" });
+    if (blk.build) blk = Object.assign({}, blk, { text: blk.build(), label: blk.label + " (cam: " + pbCam + " · cast: " + pbCast + " · light: " + pbLight + "/" + pbRender + ")" });
     if (blk.askName) {
       const nm = window.prompt("Character name for the sheet's name plate (leave blank for no name):", "");
       if (nm === null) return; // cancelled
@@ -390,15 +404,47 @@
     status(blk.label + " inserted — review & submit.");
   }
   panel.querySelectorAll("button.pb").forEach((b) => b.addEventListener("click", () => insertPromptBlock(b.dataset.pb)));
-  // Cam/Cast selectors — persisted so the chosen framing style sticks across reloads
-  const camSel = $(".pbcam"), castSel = $(".pbcast");
-  chrome.storage.local.get(["pbCam", "pbCast"]).then((s) => {
+  // Cam/Cast/Light/Render selectors — persisted so the chosen framing style and
+  // lighting scheme stick across reloads.
+  const camSel = $(".pbcam"), castSel = $(".pbcast"), lightSel = $(".pblight"), renderSel = $(".pbrender");
+  // Light options come from the library, not from hardcoded markup: adding a scheme to
+  // lighting.json and re-running build_ext.py is then the whole change. If the library
+  // failed to load, the dropdown offers only the v1 block, which is also the fallback.
+  (function fillLightSel() {
+    const L = self.FlowLighting;
+    if (!L || !L.order || !L.schemes) { lightSel.innerHTML = '<option value="golden1">Golden v1 (legacy)</option>'; pbLight = "golden1"; return; }
+    L.order.forEach((grp) => {
+      const og = document.createElement("optgroup");
+      og.label = grp.label;
+      grp.keys.forEach((k) => {
+        const o = document.createElement("option");
+        o.value = k; o.textContent = L.schemes[k].label; o.title = L.schemes[k].tip;
+        og.appendChild(o);
+      });
+      lightSel.appendChild(og);
+    });
+    const og = document.createElement("optgroup");
+    og.label = "Legacy";
+    const o = document.createElement("option");
+    o.value = "golden1"; o.textContent = "Golden v1";
+    o.title = "The exact block shipped through v2.6.0 — kept for A/B against the tightened Golden Rake.";
+    og.appendChild(o); lightSel.appendChild(og);
+  })();
+  // Guarded reads: a stored scheme key that no longer exists in the library (renamed or
+  // removed) falls back to the default rather than emitting a prompt with no lighting.
+  chrome.storage.local.get(["pbCam", "pbCast", "pbLight", "pbRender"]).then((s) => {
     if (s.pbCam && PB_CAM[s.pbCam]) pbCam = s.pbCam;
     if (s.pbCast && PB_CAST[s.pbCast]) pbCast = s.pbCast;
+    const L = self.FlowLighting;
+    if (s.pbLight && (s.pbLight === "golden1" || (L && L.schemes[s.pbLight]))) pbLight = s.pbLight;
+    if (s.pbRender === "cgi" || s.pbRender === "illo") pbRender = s.pbRender;
     camSel.value = pbCam; castSel.value = pbCast;
+    lightSel.value = pbLight; renderSel.value = pbRender;
   });
   camSel.addEventListener("change", () => { pbCam = camSel.value; chrome.storage.local.set({ pbCam }); });
   castSel.addEventListener("change", () => { pbCast = castSel.value; chrome.storage.local.set({ pbCast }); });
+  lightSel.addEventListener("change", () => { pbLight = lightSel.value; chrome.storage.local.set({ pbLight }); });
+  renderSel.addEventListener("change", () => { pbRender = renderSel.value; chrome.storage.local.set({ pbRender }); });
 
   // ───────── Auto-sync (continuous → Studio) ─────────────────────────────────
   // Ported from the standalone "Flow → Studio Auto-Sync" extension. While ON, a
