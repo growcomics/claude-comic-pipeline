@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-07 (✏️ Drawn style prefix — the counterpart anchor, v2.7.1)
+
+### Added
+
+- **✏️ Drawn style button in 3DMC Studio Tools (v2.7.0 → v2.7.1).** Closes the open question the `Light:` selector shipped with (INTEGRATION.md §6.1 — owner picked "ship the separate prefix block" over making `Render:` swap what 🎨 DAZ emits, so one button keeps doing one thing and a screenshot of the panel still says which anchor went in). The 19 lighting schemes each carry a `Drawn` variant that argues volume in an illustrator's terms — lit shape → halftone → core shadow → reflected light, terminator drawn *as a shape*, cross-hatch occlusion, broken tapering rim strokes — and stacking the photoreal 🎨 DAZ prefix on top of them puts two opposed render anchors in one prompt, which yields plastic-looking linework (`LIGHT-BLOCKS.md`). ✏️ Drawn prepends the opposite anchor: *"Painted comic-book illustration — hand-drawn linework with brushed, painted value rendering, the media visibly present in the mark-making — NOT a photoreal render, NOT DAZ3D or any CGI, NOT physically-based rendering, NOT a photograph."* **One render anchor per prompt**; the two prefix buttons are mutually exclusive by construction, and both tooltips plus the README say so.
+- Verified in the same headless harness: the prefix prepends ahead of the operator's own prompt without eating it, and a full `Drawn`-lane prompt (✏️ prefix + `Render: Drawn` lighting block) carries no photoreal vocabulary outside the prefix's own NOT-list. The 19 illustration variants were also checked to be clean of CGI vocabulary (0/19 mention DAZ / PBR / subsurface / specular), and the 19 CGI variants clean of drawn vocabulary.
+- **Caveat, stated because it matters:** unlike the 🎨 DAZ wording — which is the exact tested string from `prompt-templates.md` — this prefix is **not yet credit-validated**. The house style is photoreal 3D (`feedback_comic_style_3d`), so the Drawn lane is the exception; treat the wording as a first draft until it is burned in alongside the `slat` / `overcast` / `golden` v1-vs-v2 set still owed from v2.7.0.
+
 ## 2026-08-06 (💡 Light selector — 19 lighting schemes in the extension, v2.7.0)
 
 ### Added
