@@ -104,11 +104,85 @@ He addresses the artist directly in first person plural, and hedges constantly:
 
 ## 6. Story shape
 
-Ordinary woman, overlooked or underestimated → a countable growth engine (spinach, a
-formula, a stone, a belt, a cloak, doses) lands early → first growth run by ~10% in →
-a rival or witness registers the change → escalating growth runs with strength feats
-between them → a final full-page payoff (flexing, floating, towering, lifting something
-absurd) → `The End`, often with a `Note:` teasing the sequel.
+> **Corrected 2026-08-09.** The first version of this section said "ordinary woman →
+> countable engine → strength feats → payoff." That was inherited from the GrowGetter
+> generator's formula, not derived from Gribble, and it is **wrong** — it produced
+> scripts the owner rightly called not-very-Gribble ("she saves the ward," "she beats
+> her rival for team captain"). What follows is measured from `plot_scan.py`, which
+> extracts the open / peak / ending of all 41 scripts.
+
+Gribble does not write wholesome empowerment. He writes **a contested power source, a
+hostile takeover of it, and an ending where somebody becomes a god and demands worship.**
+
+### Device frequency (41 scripts)
+
+| Device | Scripts | Share |
+|---|---|---|
+| Villain turn — the grower enjoys it, turns cruel, taunts, laughs | 39 | **95%** |
+| Overpowering — physical humiliation of someone previously stronger | 36 | **88%** |
+| Twist markers | 36 | **88%** |
+| Giantess / cosmic escalation | 33 | **80%** |
+| Backfire — power unstable, uncontrollable, or lost | 21 | 51% |
+| Power transfer — drained, stolen, absorbed, hijacked | 18 | 44% |
+
+### Ending type (last two pages)
+
+| Ending | Share |
+|---|---|
+| **Apotheosis / domination** — godhood, conquest, a demand for worship | **71%** |
+| **Deflation** — the power is lost, shrinks away, resets | 12% |
+| Neither | 17% |
+| Ends on an **ALL-CAPS shouted proclamation** | **59%** |
+
+Actual closing lines: `NOW TO RULE THE WORLD!` · `KNEEL! BOW DOWN AND WORSHIP ME!` ·
+`I HAVE BECOME REALITY ITSELF!` · `SOON ALL WILL WORSHIP MY DIVINE MIGHT!` ·
+`NOW ALL WILL WORSHIP DOMINA THE ALMIGHTY!!!!`
+
+### The four engines
+
+1. **THE POWER IS CONTESTED, NOT CONSUMED.** The source is an artifact or machine that
+   *anyone* can grab — a crown, cloak, belt, stone, idol, book, wand, ray, curse, wish,
+   meteorite. It is not a personal supplement. Two or more characters reach for it, and
+   that competition is the plot. "She drinks a smoothie and gets strong" is not a Gribble
+   story; it is the first two pages of one.
+
+2. **THE POWER CHANGES HANDS — AND THE PROTAGONIST OFTEN LOSES IT.** This is the twist.
+   The character who ends up supreme is frequently *not* the one the story opened on:
+   - *Superior* — Janet is erased mid-scene; **Sarah** wins and ends the universe.
+   - *The Ultra-Cool Ultra-Origin of Ultra-Gal* — Dr. Mundy fakes amnesia, keeps the
+     powers, and walks off as the supervillain **Domina**. The hero's origin story is
+     secretly the villain's origin story.
+   - *Social Order* — **Cindy**, the chubby girl who just wanted tutoring, ends as the
+     goddess with the protagonist kneeling.
+   - *Rivalry* — the twins cancel each other out; **Megan**, their victim, absorbs it all.
+   - *The Power Belt* — the assistant, **Helen**, ends 200 feet tall.
+   - *The Omega Device* — **Ox**, a background biker, becomes the god.
+   - *Ultra-Gal 4* — Ultra-Gal rigs the machine in reverse, and it still can't be undone.
+
+3. **ONE-UPMANSHIP, EXPLICITLY SIZED.** Each transformation is measured against the last
+   holder, in the script text: *"she'll end up four times the size of Jill"*, *"MUCH
+   bigger than Holly and Molly combined"*, *"someone growing bigger than Milo later and
+   then Milo growing even bigger than that person afterwards, so take that into account."*
+   The ladder is between PEOPLE, not against her own past self.
+
+4. **DOMINANCE IS THE MONEY SHOT, NOT THE LIFT.** The payoff is one character physically
+   overpowering another: lifted by the throat, stomped, flicked away with a finger,
+   backhanded through skyscrapers, made to kneel. The vocabulary is contemptuous —
+   `PUNY MORTAL`, `Fucking insect!`, `pathetic mortals`. Feats against objects (a couch,
+   a girder) are warm-ups; feats against *people* are the climax.
+
+### Scale ladder
+
+Person → doorframe → vehicle → building → city → planet → universe. 80% of scripts leave
+human scale entirely. The final image is usually a solo shot: floating, flexing, laughing,
+often with the Earth or a galaxy for scale.
+
+### Note on content
+
+The raw corpus is explicit adult material — nudity, sex, orgasmic transformation, profanity.
+**The plot machinery above is separable from that content**, and the generator's SFW mode
+keeps the twist, the takeover, the dominance and the apotheosis while dropping the sex.
+What SFW must NOT do is sand off the villain turn — that is the story, not the rating.
 
 ## 7. Generator gate (as shipped)
 

@@ -12,6 +12,25 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (🎭 Gribble STORY correction — the formula's story axis was wrong)
+
+### Fixed
+
+- **The story section of the Gribble formula was inherited, not derived — and it was wrong.** The owner read five generated scripts and said they don't sound like Gribble: *"usually Gribble stories have a twist, or there's an overpowering, or something a little more interesting than drinking a potion."* He was right. `FORMULA.md` §6 said "ordinary woman → countable growth engine → strength feats → payoff," which came from `growgetter.php`'s existing `GG_FORMULA`, not from any measurement of Gribble. The structural work (page grid, growth density) was sound; the story axis had never been checked.
+- **`research/gribble-corpus/plot_scan.py` (NEW)** extracts the open / peak / ending of all 41 scripts plus device probes, so plot could be read rather than assumed. What it found:
+  - villain turn **95%** · overpowering another character **88%** · giantess/cosmic scale **80%** · backfire 51% · power stolen or drained 44%
+  - endings: **71% apotheosis** (godhood + a demand for worship), 12% deflation, **59% close on an ALL-CAPS proclamation** (`NOW TO RULE THE WORLD!`, `KNEEL! BOW DOWN AND WORSHIP ME!`)
+  - **the twist is structural: the power changes hands and the protagonist frequently loses it.** *Superior* erases its protagonist mid-scene and the rival ends the universe; the Ultra-Gal origin is secretly Domina's villain origin (the mentor fakes amnesia and keeps the powers); *Social Order*'s overlooked girl ends as the goddess with the lead kneeling; *The Power Belt*'s lab assistant ends 200 feet tall.
+  - the engine is a **contested object** (crown, cloak, belt, stone, idol, book, ray) that a second character can seize — not a supplement the lead consumes.
+- **`GR_FORMULA` story section rewritten** around four mandatory rules (contested power / at least one hand-off / one-upmanship sized against the *other person* / dominance as the climax), with the measured frequencies inline. `GR_ENGINES` replaced with contested sources and a new `GR_TWISTS` seed axis added; the prompt now makes the model commit up front to *who* ends supreme and *which* ending it is landing.
+- **Root cause of the blandness, in our own prompt:** `GR_SFW` told the model "Muscle growth is STRENGTH, SPORT, HEROISM and CONFIDENCE" — actively instructing away the 95% villain turn. It now reads: SFW removes nudity and sex, **never the menace**; a character can be cruel, contemptuous and drunk on power while fully clothed.
+
+### Added
+
+- **Two story gates in `gr_report()`** — `dominance` (somebody is physically overpowered) and `endType` (apotheosis | deflation | neither) — with repair-prompt copy explaining the corpus frequency, plus two new UI chips.
+- **`research/gribble-corpus/validate_story_gates.py` (NEW)** — the calibration harness for the story-axis gates, and the file `gr_sim()`'s comment already claimed existed but which was never committed. Mirrors the splash-repetition, ending-closure, dominance and ending-type logic; fails the build if any gate false-rejects more than 20% of Gribble's own work. Current: **83% of his scripts pass; `ending-neither` bites 15%, `no-dominance` 5%.** The first draft of the apotheosis pattern failed 34% of his endings by omitting the contempt-for-mortals and cosmic-scale vocabulary (`PUNY MORTALS`, "a Universe to rule") — broadened after checking against the corpus. **Run this after any edit to `GR_DOMINANCE`/`GR_APOTHEOSIS`/`GR_DEFLATION`/`gr_sim`.**
+- Validation that the new gates discriminate: of the five scripts generated before the fix, **four fail** (`Iron Reserves`, `Ironbearer`, `Overload`, `Iron Ward`) — the same ones the owner rejected by eye.
+
 ## 2026-08-09 (📚 Gribble script library — every generated script is kept)
 
 ### Added

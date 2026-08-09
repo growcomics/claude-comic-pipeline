@@ -228,12 +228,48 @@ image. A script of uniform four-panel pages is NOT a Gribble script.
   punctuation: "WHAAA...!?!", "AAAGGGHHH!!! LET GO!", "OOOOOOHHHHHHHH!!!!!!!"
 - End the script with "The End", optionally followed by a "Note:" teasing a sequel.
 
-## STORY SHAPE
-An ordinary, overlooked woman -> a COUNTABLE growth engine lands early (spinach, a
-formula, a stone, a belt, a cloak, numbered doses) -> first growth run by ~10% in ->
-a rival or witness registers the change -> escalating growth runs with strength feats
-between them -> a final full-page payoff (flexing, floating, towering, lifting
-something absurd) -> "The End".
+## STORY SHAPE — read this twice; it is where imitations of Gribble fail
+Measured from all 41 of his scripts. He does NOT write wholesome empowerment. He
+writes a CONTESTED power source, a HOSTILE TAKEOVER of it, and an ending where
+somebody becomes a god and demands worship. Frequencies in his corpus:
+villain turn 95% · overpowering another person 88% · giantess/cosmic scale 80% ·
+power stolen or drained 44% · power lost/unstable 51%.
+Endings: 71% apotheosis or domination, 12% deflation, 59% close on an ALL-CAPS shout.
+
+FOUR RULES, all mandatory:
+
+1. THE POWER IS CONTESTED, NOT CONSUMED. The source is an object or machine ANYONE
+   can grab — a crown, cloak, belt, stone, idol, book, wand, ray, curse, wish,
+   meteorite. NOT a personal supplement she drinks and simply keeps. Two or more
+   characters reach for it and that fight IS the plot. "She drinks something and
+   gets strong and wins" is the first two pages of a Gribble story, not the story.
+
+2. THE POWER CHANGES HANDS AT LEAST ONCE — and the character who ends up supreme is
+   OFTEN NOT the one you opened on. This is the twist, and it is his signature.
+   In Superior the protagonist is erased mid-scene and her rival wins. In the
+   Ultra-Gal origin the mentor fakes amnesia, keeps the powers and leaves as the
+   supervillain. In Social Order the overlooked girl who asked for tutoring ends as
+   the goddess with the protagonist kneeling to her. In The Power Belt it is the lab
+   assistant who ends 200 feet tall. Pick a hijacker and let them take it.
+
+3. ONE-UPMANSHIP, EXPLICITLY SIZED AGAINST THE OTHER PERSON. Every transformation is
+   measured against the LAST HOLDER, in the art direction: "she'll end up four times
+   the size of Jill", "MUCH bigger than both of them combined". The ladder runs
+   between PEOPLE, not against her own earlier self.
+
+4. DOMINANCE IS THE CLIMAX, NOT THE LIFT. The payoff is one character physically
+   overpowering another: lifted by the throat, stomped, flicked away with a finger,
+   backhanded through a building, forced to kneel. The winner is contemptuous —
+   "PUNY MORTAL", "pathetic", "insect". Feats against furniture are warm-ups; feats
+   against PEOPLE are the climax.
+
+SCALE LADDER: person -> doorframe -> car -> building -> city -> planet -> universe.
+80% of his scripts leave human scale entirely. The last page is usually a solo shot
+of the new god floating, flexing and laughing.
+
+ENDING: choose APOTHEOSIS (she takes godhood and demands worship / announces she will
+rule) or, less often, DEFLATION (the power proves unstable and drains away, leaving
+her with nothing). Close on a shouted ALL-CAPS proclamation, then "The End".
 
 ## STORY DISCIPLINE (from the corpus study of published FMG comics — story is the
 axis everyone fails: median 2/5, no book above 3. These four failures are why.)
@@ -256,25 +292,43 @@ TXT;
 const GR_SFW = 'SFW RULES (apply to every panel): all characters are adults and stay FULLY CLOTHED. '
     . 'During growth, clothing may strain and seams may visibly split — a signature beat — but coverage of chest, torso and hips is ALWAYS preserved; garments never tear away entirely. '
     . 'No nudity, no sexual content, no sensual posing or fetish framing. Keep the language clean — no profanity. '
-    . 'Muscle growth is STRENGTH, SPORT, HEROISM and CONFIDENCE. '
-    . 'Note: muscle SIZE is never an SFW problem — hugely, exaggeratedly muscular is exactly the product. SFW constrains coverage and framing, NOT how big she gets.';
+    . 'Note: muscle SIZE is never an SFW problem — hugely, exaggeratedly muscular is exactly the product. SFW constrains coverage and framing, NOT how big she gets. '
+    . 'CRITICAL — SFW DOES NOT MEAN NICE. Do not sand off the villain turn, the power grab, the gloating, the humiliation of a rival, the demand to be worshipped or the conquest ending. '
+    . 'Those are the STORY (95% of the corpus), not the rating. A character can be cruel, contemptuous and drunk on power while fully clothed. '
+    . 'What SFW removes is nudity and sex — never the menace.';
 
 const GR_MATURE = 'CONTENT RULES: all characters are adults. Clothing may tear and shred during growth. '
     . 'Mature language is allowed where it fits the moment. Still NO explicit sexual content and no sexual framing of the transformation — '
     . 'the fantasy is strength and power, and growth scenes stay about size, muscle and awe.';
 
 // Random seed banks — server-side so repeat clicks genuinely vary.
+// ENGINES are CONTESTED OBJECTS — things a second character can take, wear, aim or
+// steal. Deliberately not "a supplement she drinks": the corpus engine is an artifact
+// or machine that changes hands, and that hand-off is the plot (see STORY SHAPE).
 const GR_ENGINES = [
-    'a health food she chokes down that turns out to be something else entirely',
-    'an experimental strength formula in numbered doses',
-    'a cursed artifact dug out of the wrong tomb',
-    'a gym machine calibrated catastrophically wrong',
-    'a wish granted by something that does not explain the terms',
-    'an ancient stone worn on a cord around the neck',
-    'a belt/bracer/cloak that rewrites whoever wears it',
-    'a lab accident with a beam that was pointed at the wrong person',
-    'a training regimen from a book nobody should have printed',
-    'a family inheritance nobody warned her about',
+    'an ancient crown/idol dug out of a tomb that empowers whoever wears it',
+    'a cloak or belt that rewrites whoever puts it on — and can be taken off',
+    'a strength ray in a lab, which can be pointed at anyone standing there',
+    'a stone on a cord that grants the wish of whoever is holding it',
+    'a book of rites that works for whoever reads the words aloud',
+    'a machine that DRAINS power from one person and pours it into another',
+    'a meteorite fragment that keeps being passed, stolen and fought over',
+    'a curse laid by a slighted stranger, which can be turned back on the caster',
+    'a numbered set of doses — and there are never enough for everyone who wants one',
+    'an experimental device small enough to be snatched out of someone\'s hand',
+];
+
+// The twist axis — the corpus signature. Every script picks one.
+const GR_TWISTS = [
+    'the character you opened on LOSES the power to someone else, who ends supreme',
+    'the helper/mentor was after the power the whole time and walks off with it',
+    'the overlooked side character quietly takes it and ends as the god',
+    'the rival steals it mid-story and the protagonist must take it back — and does, bigger',
+    'two rivals cancel each other out and a THIRD party absorbs everything',
+    'the power is drained from its first holder and transferred, leaving them with nothing',
+    'the plan works exactly as designed and is far worse than anyone intended',
+    'the winner turns on the person who helped her get there',
+    'the power proves unstable and drains away at the peak, leaving her with nothing',
 ];
 const GR_PROTAGONISTS = [
     'a mousy office worker nobody listens to',
@@ -302,6 +356,21 @@ const GR_TONES = [
    =========================================================================== */
 const GR_ACTIVE = '/\b(grow|growing|grew|grows|growth|swell|swelling|swells|expand|expanding|bulging|ballooning|inflating|surging|ripping|tearing|splitting|straining|bursting|transform|transforming|getting (?:bigger|larger|taller)|continues? to|even (?:bigger|larger|more))\b/i';
 const GR_GROWTH = '/\b(grow|growing|grew|grows|growth|swell|swelling|swells|expand|expanding|bigger|larger|taller|bulge|bulging|balloon|ballooning|inflat|surg|ripping|rips|tearing|tears|split|splitting|strain|straining|burst|bursting|muscles?|muscular|bicep|triceps?|pecs?|abs|quads?|lats|physique|transform|transformation|massive|enormous|huge|towering|gigantic)\b/i';
+
+// Story-device probes (added 2026-08-09 after the owner flagged that generated
+// scripts read nothing like Gribble). Frequencies in his 41: dominance 88%,
+// apotheosis-or-deflation ending 83%. Calibrated in validate_story_gates.py.
+const GR_DOMINANCE = '/\b(overpower\w*|crush\w*|humiliat\w*|stomp\w*|pins? (?:her|him)|lifts? (?:her|him)|'
+    . 'by the throat|backhand\w*|flick\w*|effortless\w*|helpless|no match|puny|pathetic|insect|mortals?|'
+    . 'kneel\w*|bow(?:s|ing)? (?:down|before)|worship\w*|begs?|beggin|sent (?:her|him) flying|tosse[sd])\b/i';
+// The apotheosis register includes contempt-for-mortals and cosmic scale — an
+// earlier, tighter version of this pattern failed 34% of Gribble's own endings.
+const GR_APOTHEOSIS = '/\b(worship\w*|kneel\w*|bow down|rule (?:the|this) (?:world|universe)|conquer\w*|'
+    . 'goddess|god\b|supreme|almighty|omnipotent|reality itself|obey|serve me|mortals?|puny|insect|'
+    . 'universe|galax\w+|planet|limitless|beyond all)\b/i';
+const GR_DEFLATION = '/\b(losing (?:my|her|his) power|lost (?:her|his|my) power|shrink\w*|shrunk|'
+    . 'back to normal|it\'?s over|drained away|no longer super|powerless|too unstable|gone forever|'
+    . 'nothing is happening|my power)\b/i';
 
 function gr_is_growth(string $t): bool {
     $a = preg_match_all(GR_ACTIVE, $t); $g = preg_match_all(GR_GROWTH, $t);
@@ -421,6 +490,20 @@ function gr_report(string $script): array {
     $hasEnd = (bool)preg_match('/\bthe\s+end\b/i', substr($script, -400));
     $closed = $hasEnd || ($lastG >= 0 && $lastG < $n - 1) || $lastDlg > 0;
 
+    // --- story devices (the axis the first version of this gate ignored) -----
+    // A script can hit every structural target and still not be a Gribble story:
+    // the 2026-08-09 batch scored clean on growth and merges while reading like
+    // wholesome empowerment. These two probes are what separate the corpus from
+    // that: somebody gets physically dominated (88%), and the book ends on
+    // apotheosis or deflation rather than a warm resolution (83%).
+    $tail = '';
+    foreach (array_slice($pages, -2) as $pg)
+        foreach ($pg as $s) { $tail .= ' ' . $s['desc']; foreach ($s['lines'] as $l) $tail .= ' ' . $l[1]; }
+    $hasDom  = (bool)preg_match(GR_DOMINANCE, $script);
+    $endApo  = (bool)preg_match(GR_APOTHEOSIS, $tail);
+    $endDef  = (bool)preg_match(GR_DEFLATION, $tail);
+    $endType = $endApo ? 'apotheosis' : ($endDef ? 'deflation' : 'neither');
+
     $m = [
         'pages'          => $n,
         'slots'          => $slots,
@@ -444,6 +527,8 @@ function gr_report(string $script): array {
         'endTheEnd'      => $hasEnd,
         'endDenouement'  => $lastG >= 0 ? $n - 1 - $lastG : null,
         'endClosed'      => $closed,
+        'dominance'      => $hasDom,
+        'endType'        => $endType,
     ];
 
     // ---- the gate ----------------------------------------------------------
@@ -486,6 +571,10 @@ function gr_report(string $script): array {
         $f[] = "First growth lands {$m['firstGrowthPct']}% of the way in — too late. Gribble's median is 11%; fire the engine early.";
     if ($m['descMedian'] > 30)
         $f[] = "Panel directions run long (median {$m['descMedian']} words). Gribble's median is 18 — one clear action per panel.";
+    if (!$hasDom)
+        $f[] = 'Nobody is physically overpowered. 88% of Gribble scripts climax on one character dominating another — lifted by the throat, stomped, flicked aside, made to kneel, backhanded through a wall — with contemptuous dialogue ("puny", "pathetic", "insect"). Feats against furniture are warm-ups; the climax must be against a PERSON.';
+    if ($endType === 'neither')
+        $f[] = 'The ending is neither apotheosis nor deflation. 71% of his scripts end with someone taking godhood and demanding worship or announcing conquest, and another 12% end with the power draining away to nothing. A warm, tidy resolution is the single most un-Gribble way to finish. Pick one and land it on a shouted ALL-CAPS line.';
     if ($m['silentPct'] < 8)
         $f[] = "Only {$m['silentPct']}% of panels are silent. Gribble runs ~18% — let reaction beats and growth images carry themselves.";
     if ($repPairs)
@@ -522,6 +611,7 @@ if ($do === 'gr_write') {
         'protagonist' => $pick(GR_PROTAGONISTS, (string)($_POST['protagonist'] ?? '')),
         'setting'     => $pick(GR_SETTINGS,     (string)($_POST['setting'] ?? '')),
         'tone'        => $pick(GR_TONES,        (string)($_POST['tone'] ?? '')),
+        'twist'       => $pick(GR_TWISTS,       (string)($_POST['twist'] ?? '')),
     ];
 
     // Concrete page budget, derived from the corpus ratios for THIS page count.
@@ -567,7 +657,14 @@ if ($do === 'gr_write') {
           . $avoid
           . ($idea !== '' ? "THE OWNER'S IDEA (this is the story — follow it):\n{$idea}\n\n" : '')
           . "Seeds for this generation" . ($idea !== '' ? " (use them only where they do not conflict with the owner's idea)" : '') . ":\n"
-          . "GROWTH ENGINE: {$seed['engine']}\nPROTAGONIST: {$seed['protagonist']}\nSETTING: {$seed['setting']}\nTONE: {$seed['tone']}\n";
+          . "GROWTH ENGINE (contested — someone else can take it): {$seed['engine']}\n"
+          . "PROTAGONIST (the person we open on — not necessarily the winner): {$seed['protagonist']}\n"
+          . "SETTING: {$seed['setting']}\nTONE: {$seed['tone']}\n"
+          . "THE TWIST (build the second half around this): {$seed['twist']}\n"
+          . "\nBefore writing, decide two things and hold to them: WHO ends up supreme on the last page "
+          . "(it should usually NOT be the character you opened on), and WHICH ending you are landing "
+          . "— apotheosis (worship/conquest) or deflation (the power drains away). "
+          . "Then write toward that ending from page 1.\n";
 
     $maxTok = min(16000, $pages * 480 + 1500);
     $script = gr_ai_text($sys, $user, $maxTok);
@@ -900,7 +997,9 @@ function render(j){
     + chip('direction median', m.descMedian+'w', m.descMedian<=30)
     + chip('splash repeats', (m.splashRepeatPairs||[]).length ? m.splashRepeatPairs.join(' ') : 'none',
            !(m.splashRepeatPairs||[]).length && !(m.splashRepeatChains||[]).length)
-    + chip('ending', m.endClosed ? 'lands' : 'mid-swing', !!m.endClosed);
+    + chip('ending', m.endClosed ? 'lands' : 'mid-swing', !!m.endClosed)
+    + chip('dominance', m.dominance ? 'yes' : 'none', !!m.dominance)
+    + chip('ends on', m.endType || '—', m.endType && m.endType !== 'neither');
   // page strip: green = growth page, dashed inner border = merged full-page image
   var strip = '';
   var g = {}, mm = {};
