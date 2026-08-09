@@ -12,7 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-07 (✏️ Drawn style prefix — the counterpart anchor, v2.7.1)
+## 2026-08-09 (📤 Posting Wizard — Alternate's clean posting surface)
+
+### Added
+
+- **`studio/post/index.php` — standalone 5-step posting wizard, LIVE at https://3dmusclecomics.com/studio/post/** (deployed 2026-08-09 ~08:45 PT). Owner-approved decision: Alternate (the posting/ops hire) found the full studio overwhelming because it mixes comic *generation* tooling with posting/ops. The wizard is a posting-only surface: Pick (resume an in-progress board item, or start new with property + lane + title) → Art & copy (upload art / paste links, caption, notes) → Platforms (tick Site/Patreon/DA/X/IG; unticked → n/a) → Schedule (date + lane-aware quick chips: next 4 Fridays for FAF, month-ends for comics) → Review & confirm (marks the item *ready* and arms ticked platforms as *scheduled* → 🔒 locked & loaded on the board). **Zero forked logic**: every write is a client-side call to `posting.php`'s existing add/update/upload/plat/del API against the same `data/posting.json`; the wizard's only server-side code is a read-only `?do=state` JSON endpoint. Publishing stays HUMAN-FIRED — the wizard queues and prepares; the final-step warning says so explicitly. Auth = shared studio session (cookie pinned to path `/studio` so an existing login carries into the subdirectory) or bridge key, same as posting.php. A "Full studio →" link (to cc.php) is the only path back to the rest of the studio.
+
+### Changed
+
+- **`studio/posting.php`** (fetch-live merge, 3 additive edits): the `add` action's JSON response now includes the new item `id` (so the wizard can keep working on the item it just created); topbar gained a `📤 Wizard` link to `post/`. Repo copy synced from live (live had drifted ahead with the uploads/posting art feature — live is truth per DEPLOY-NOTES).
+- End-to-end verified headlessly via bridge key: full add→update→plat→schedule→ready flow produced a 🔒 locked & loaded card on the board, then the test item was deleted.
 
 ### Added
 

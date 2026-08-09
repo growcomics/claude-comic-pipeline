@@ -5,6 +5,7 @@
 // tracks — a HUMAN presses post on the actual platforms.
 // Auth: studio session (same logins as everything else) OR bridge key (headless,
 // same data/bridge.json key bridge.php uses). State: data/posting.json.
+// Art files: uploads/posting/<item-id>/ (+/thumb), served via posting.php?img=.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
 
@@ -30,6 +31,64 @@ function po_bridge_ok(): bool {
 }
 $keyAuthed = po_bridge_ok();
 if (!$keyAuthed) require_auth();
+
+// ---------------- item art: uploads/posting/<item-id>/ (+/thumb) ------------
+// Same convention as project images (img.php): originals + thumbs live under the
+// web-blocked uploads/ tree and are served only through an authed PHP route —
+// here posting.php?img=<item-id>&f=<file>[&t=1], since img.php's project ids
+// don't cover the posting namespace.
+function po_item_dir(string $id): string {
+    return SUPLOADS . '/posting/' . preg_replace('/[^a-z0-9_-]/', '', strtolower($id));
+}
+function po_asset_url(string $id, string $f): string {
+    return 'posting.php?img=' . rawurlencode($id) . '&f=' . rawurlencode($f);
+}
+// Downscale + thumbnail into the item dir. Mirrors boot.php store_image(), which
+// is hardwired to project_dir() and so can't be reused directly.
+function po_store_image(string $tmp, string $orig, string $id): ?string {
+    $ext = ext_of($orig);
+    if (!in_array($ext, IMG_EXT, true)) return null;
+    $dir = po_item_dir($id);
+    @mkdir($dir . '/thumb', 0755, true);
+    $name = nid() . '.' . $ext;
+    $dest = $dir . '/' . $name; $thumb = $dir . '/thumb/' . $name;
+    if (!extension_loaded('gd')) { if (!move_uploaded_file($tmp, $dest)) return null; @copy($dest, $thumb); return $name; }
+    $im = @($ext==='png'?imagecreatefrompng($tmp):($ext==='webp'&&function_exists('imagecreatefromwebp')?imagecreatefromwebp($tmp):($ext==='gif'?imagecreatefromgif($tmp):imagecreatefromjpeg($tmp))));
+    if (!$im) { if (!move_uploaded_file($tmp, $dest)) return null; @copy($dest, $thumb); return $name; }
+    _img_out(_img_fit($im, IMG_MAX_W), $dest, $ext);
+    _img_out(_img_fit($im, THUMB_W), $thumb, $ext);
+    imagedestroy($im);
+    return $name;
+}
+function po_rm_item_dir(string $id): void {
+    $dir = po_item_dir($id);
+    if (!is_dir($dir) || strpos($dir, SUPLOADS . '/posting/') !== 0) return;
+    foreach (array($dir . '/thumb', $dir) as $d) {
+        if (!is_dir($d)) continue;
+        foreach (scandir($d) ?: array() as $f) { if ($f !== '.' && $f !== '..' && is_file($d . '/' . $f)) @unlink($d . '/' . $f); }
+        @rmdir($d);
+    }
+}
+
+// Serve an uploaded item image (thumb with t=1) — reached only past the auth
+// gate above (session or bridge key), like img.php's require_auth().
+if (isset($_GET['img'])) {
+    $id = preg_replace('/[^a-z0-9_-]/', '', strtolower((string)$_GET['img']));
+    $f = basename((string)($_GET['f'] ?? ''));
+    if ($id === '' || $f === '' || !preg_match('/^[A-Za-z0-9._-]+$/', $f)) { http_response_code(404); exit; }
+    $path = po_item_dir($id) . (empty($_GET['t']) ? '' : '/thumb') . '/' . $f;
+    if (!is_file($path)) {
+        $path = po_item_dir($id) . '/' . $f;
+        if (!is_file($path)) { http_response_code(404); exit; }
+    }
+    $types = array('jpg'=>'image/jpeg','jpeg'=>'image/jpeg','png'=>'image/png','webp'=>'image/webp','gif'=>'image/gif');
+    header('Content-Type: ' . ($types[ext_of($f)] ?? 'application/octet-stream'));
+    header('Cache-Control: private, max-age=600');
+    header('X-Robots-Tag: noindex');
+    header('Content-Length: ' . (string)filesize($path));
+    readfile($path);
+    exit;
+}
 
 function po_locked(array $it): bool {
     if (($it['status'] ?? '') !== 'ready') return false;
@@ -73,7 +132,8 @@ if ($action !== '') {
             $plats = array();
             foreach ($PLATFORMS as $k => $l) $plats[$k] = 'todo';
             $db['seq'] = (int)($db['seq'] ?? 0) + 1;
-            $db['items'][] = array_merge(array('id' => 'po_' . nid(), 'platforms' => $plats, 'createdAt' => gmdate('c')), $fields);
+            $id = 'po_' . nid(); // returned in the JSON response so the wizard (post/) can keep working on the new item
+            $db['items'][] = array_merge(array('id' => $id, 'platforms' => $plats, 'createdAt' => gmdate('c')), $fields);
         } else {
             $db['items'][$idx] = array_merge($db['items'][$idx], $fields);
         }
@@ -84,7 +144,28 @@ if ($action !== '') {
             $db['items'][$idx]['platforms'][$pl] = $st;
             $db['items'][$idx]['updatedAt'] = gmdate('c');
         } else $err = 'Bad platform/state.';
+    } elseif ($action === 'upload' && $idx >= 0) {
+        // Attach art files to an item. Stored under uploads/posting/<item-id>/,
+        // linked into the item's assets as posting.php?img= URLs. Upload only —
+        // per-platform posting stays human-fired via the chips.
+        $files = isset($_FILES['art']) ? $_FILES['art'] : null;
+        if (!$files || !is_array($files['name'])) {
+            $err = 'No files.';
+        } else {
+            $stored = 0; $skipped = 0;
+            foreach ($files['name'] as $i => $orig) {
+                if (($files['error'][$i] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { if (($files['error'][$i] ?? 0) !== UPLOAD_ERR_NO_FILE) $skipped++; continue; }
+                if ((int)$files['size'][$i] > MAX_BYTES || !is_uploaded_file($files['tmp_name'][$i])) { $skipped++; continue; }
+                $name = po_store_image($files['tmp_name'][$i], (string)$orig, $id);
+                if ($name === null) { $skipped++; continue; }
+                $db['items'][$idx]['assets'][] = po_asset_url($id, $name);
+                $stored++;
+            }
+            if ($stored > 0) $db['items'][$idx]['updatedAt'] = gmdate('c');
+            if ($stored === 0) $err = 'Nothing uploaded' . ($skipped ? " ($skipped rejected — images up to 30 MB: jpg/png/webp/gif)." : '.');
+        }
     } elseif ($action === 'del' && $idx >= 0) {
+        po_rm_item_dir($id);
         array_splice($db['items'], $idx, 1);
     } elseif ($idx < 0) {
         $err = 'No such item.';
@@ -97,7 +178,7 @@ if ($action !== '') {
         exit;
     }
     header('Content-Type: application/json');
-    echo json_encode($err === '' ? array('ok' => true) : array('ok' => false, 'error' => $err));
+    echo json_encode($err === '' ? array('ok' => true, 'id' => $id) : array('ok' => false, 'error' => $err));
     exit;
 }
 
@@ -163,10 +244,31 @@ function po_card(array $it, array $PROPS, array $PLATFORMS, array $LANES, array 
         echo '<div class="po-cap"><button type="button" class="mini" onclick="copyCap(this)">copy</button><span>' . nl2br(h($it['caption'])) . '</span></div>';
     }
     if (!empty($it['assets'])) {
-        echo '<div class="po-assets">';
-        foreach ($it['assets'] as $a) echo '🖼 <a href="' . h($a) . '" target="_blank" rel="noopener">' . h(strlen($a) > 58 ? substr($a, 0, 55) . '…' : $a) . '</a><br>';
-        echo '</div>';
+        // uploaded art (posting.php?img= links) renders as a thumbnail strip;
+        // anything else (Drive / portal / Flow CDN) keeps the plain-link row
+        $keyQ = $keyAuthed ? '&key=' . rawurlencode((string)($_GET['key'] ?? '')) : '';
+        $thumbs = array(); $links = array();
+        foreach ($it['assets'] as $a) { if (strpos($a, 'posting.php?img=') === 0) $thumbs[] = $a; else $links[] = $a; }
+        if ($thumbs) {
+            echo '<div class="po-art">';
+            foreach ($thumbs as $a) {
+                echo '<a href="' . h($a . $keyQ) . '" target="_blank" rel="noopener"><img src="' . h($a . '&t=1' . $keyQ) . '" alt="art" loading="lazy"></a>';
+            }
+            echo '</div>';
+        }
+        if ($links) {
+            echo '<div class="po-assets">';
+            foreach ($links as $a) echo '🖼 <a href="' . h($a) . '" target="_blank" rel="noopener">' . h(strlen($a) > 58 ? substr($a, 0, 55) . '…' : $a) . '</a><br>';
+            echo '</div>';
+        }
     }
+    // upload art straight onto the card — files only; firing the platforms stays manual
+    echo '<form class="po-up" method="post" action="posting.php" enctype="multipart/form-data">';
+    echo '<input type="hidden" name="action" value="upload"><input type="hidden" name="id" value="' . h($it['id']) . '">';
+    echo '<input type="hidden" name="back" value="posting.php">';
+    if (!$keyAuthed) echo csrf_field();
+    echo '<input type="file" name="art[]" accept="image/*" multiple required>';
+    echo '<button class="mini" type="submit">⬆ upload art</button></form>';
     if ($it['notes'] !== '') echo '<div class="po-notes">' . h($it['notes']) . '</div>';
     // edit form
     echo '<details class="po-edit"><summary>edit</summary><form method="post" action="posting.php">';
@@ -206,8 +308,8 @@ function po_fields(array $it): void {
 $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['lane'], 'slot' => $pre['slot'],
     'status' => 'draft', 'owner' => '', 'caption' => '', 'assets' => array(), 'notes' => '');
 ?><!DOCTYPE html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>🗓 Posting — Studio</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/studio.css">
@@ -234,6 +336,10 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 .po-plat.ps-na{opacity:.45;text-decoration:line-through}
 .po-cap{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:13px;color:var(--text);background:rgba(0,0,0,.18);border-radius:8px;padding:8px 10px}
 .po-assets{margin-top:6px;font-size:12.5px}
+.po-art{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.po-art img{height:84px;border-radius:6px;border:1px solid var(--border);display:block}
+.po-up{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px}
+.po-up input[type=file]{font-size:11.5px;color:var(--muted);max-width:260px}
 .po-notes{margin-top:6px;font-size:12px;color:var(--muted)}
 .po-edit{margin-top:8px}
 .po-edit summary{cursor:pointer;font-size:12px;color:var(--muted)}
@@ -252,10 +358,14 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 .po-banner{border-radius:8px;padding:8px 12px;margin-top:12px;font-size:13px}
 .po-banner.ok{background:#10331f;color:#9fe8bd}
 .po-banner.err{background:#38151a;color:#ffb3bd}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <div class="topbar">
   <a class="ghost" href="cc.php" style="color:var(--text);font-weight:700">⌘ Command Center</a>
   <a class="ghost" href="posting.php" style="font-weight:700">🗓 Posting</a>
+  <a class="ghost" href="posting-guide.php">❓ Guide</a>
+  <a class="ghost" href="post/">📤 Wizard</a>
   <span style="flex:1"></span>
   <a class="ghost" href="posting.php?new=1">➕ New item</a>
 </div>
