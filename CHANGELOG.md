@@ -12,7 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-09 (📤 Posting Wizard — Alternate's clean posting surface)
+## 2026-08-09 (✍️ Gribble page fatal — csrf_token() → csrf())
+
+### Fixed
+
+- **`studio/gribble.php` HTTP 500 on every logged-in browser GET** (deployed 2026-08-09 ~09:10 PT). Root cause: line ~516 `$CSRF = csrf_token();` — `inc/boot.php` defines `csrf()`, not `csrf_token()`, so the page fataled on undefined function. The bug was invisible until now because (a) anonymous requests exit at `require_auth()`'s redirect before reaching the line, and (b) the JSON verbs (`gr_write`/`gr_check`/`gr_create`) all `gr_jout()`-exit before it — which is exactly how the page was originally validated (headless, bridge-key). First real browser visit → 500. Fix is one word (`csrf()`), applied per DEPLOY-NOTES protocol: fetched the LIVE file, patched that copy, deployed only it (live was otherwise behind the repo — the repo's unvalidated L36 story-gate work was NOT deployed). Verified: logged-in GET renders the writer UI; anonymous GET still 302s to login. Repo copy carries the same one-word fix. Found while wiring the Flow Autopilot extension's first test job (Gribble was the fastest path to a genspec plan).
 
 ### Added
 
