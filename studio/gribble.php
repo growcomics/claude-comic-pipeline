@@ -58,12 +58,22 @@ function gr_libdir(): string { $d = SDATA . '/gribble'; if (!is_dir($d)) @mkdir(
 function gr_sfile(string $id): string { return gr_libdir() . '/s-' . preg_replace('/[^a-z0-9]/', '', $id) . '.json'; }
 function gr_ifile(): string { return gr_libdir() . '/index.json'; }
 
+/** Pull the one-line synopsis the writer puts under the by-line (owner ask
+ *  2026-08-09 — the library list is unreadable as a wall of titles). Lives above
+ *  "Page 1" so gr_parse() ignores it and the structure score is unaffected. */
+function gr_synopsis(string $script): string {
+    if (preg_match('/^\s*synopsis\s*[:\-–]\s*(.+?)\s*$/im', $script, $m))
+        return mb_substr(trim($m[1]), 0, 300);
+    return '';
+}
+
 /** Metadata row for the list view — must stay small. */
 function gr_row(array $rec): array {
     $m = (array)($rec['report']['metrics'] ?? []);
     return [
         'id'         => (string)$rec['id'],
         'title'      => (string)($rec['title'] ?? 'Untitled'),
+        'synopsis'   => (string)($rec['synopsis'] ?? ''),
         'createdAt'  => (string)($rec['createdAt'] ?? date('c')),
         'by'         => (string)($rec['by'] ?? ''),
         'sfw'        => !empty($rec['sfw']),
@@ -82,6 +92,7 @@ function gr_row(array $rec): array {
 function gr_lib_save(array $rec): array {
     if (empty($rec['id'])) $rec['id'] = nid();
     $rec += ['createdAt'=>date('c'), 'status'=>'active', 'starred'=>false, 'pid'=>''];
+    if (empty($rec['synopsis'])) $rec['synopsis'] = gr_synopsis((string)($rec['script'] ?? ''));
     $rec['by']    = $rec['by'] ?? current_studio_user();
     $rec['words'] = str_word_count((string)($rec['script'] ?? ''));
     s_write(gr_sfile($rec['id']), $rec);
@@ -528,10 +539,32 @@ if ($do === 'gr_write') {
          . "- Merged full-page images: about {$mTarget} pages written as \"Panels 1, 2, 3 and 4- ...\" or \"(Full page panel)- ...\", and they should mostly BE the growth pages.\n"
          . "- Every other page: exactly four \"Panel N- \" slots.\n"
          . "- Roughly one panel in five carries no dialogue at all.\n\n"
-         . "Output ONLY the script — title line, \"by Gribble\", then the pages. No preamble, no commentary, no markdown fences, no page-count summary at the end.";
+         . "Output ONLY the script, and start it EXACTLY like this:\n"
+         . "    <Title>\n    by Gribble\n    Synopsis: <ONE sentence, max 25 words, saying what happens and to whom — this is the line the owner reads in the library list, so make it concrete and specific, not a teaser>\n\n    Page 1\n"
+         . "No preamble, no commentary, no markdown fences, no page-count summary at the end.";
+
+    // Anti-repetition. Independent random seeds do NOT stop the model falling into
+    // the same lexical rut: a batch of five run on 2026-08-09 came back Ironclad
+    // Smoothie / Iron Reserves / Ironbearer / Iron Ward, and three synopses opened
+    // "An overlooked ...". Feed the titles already in the library back in as a
+    // blocklist, and ban the openings the seeds themselves suggest.
+    $used = array_slice(array_map(fn($r) => (string)($r['title'] ?? ''), gr_lib_list('active')), 0, 20);
+    $leads = [];
+    foreach ($used as $u) { $w = strtok(trim($u), " \t"); if ($w) $leads[strtolower($w)] = true; }
+    $avoid = '';
+    if ($used) {
+        $avoid = "\nTITLES ALREADY IN THIS LIBRARY — do not reuse any of them, and do NOT start your title "
+               . "with any of these words (" . implode(', ', array_keys($leads)) . "):\n  "
+               . implode("\n  ", $used) . "\n"
+               . "Pick a title from a DIFFERENT house pattern than the ones above — if they are mostly "
+               . "The-[Artifact], use a name-as-title or a stakes phrase instead.\n";
+    }
+    $avoid .= "Do NOT open the synopsis with \"An overlooked\" or \"A shy\" — name her job and what she wants instead. "
+            . "Do not copy the seed wording verbatim into the script; it is a starting point, not dialogue.\n";
 
     $user = "Write the script.\n\n"
           . ($title !== '' ? "TITLE: {$title}\n" : "TITLE: invent a short punchy one (1-3 words).\n")
+          . $avoid
           . ($idea !== '' ? "THE OWNER'S IDEA (this is the story — follow it):\n{$idea}\n\n" : '')
           . "Seeds for this generation" . ($idea !== '' ? " (use them only where they do not conflict with the owner's idea)" : '') . ":\n"
           . "GROWTH ENGINE: {$seed['engine']}\nPROTAGONIST: {$seed['protagonist']}\nSETTING: {$seed['setting']}\nTONE: {$seed['tone']}\n";
@@ -565,9 +598,9 @@ if ($do === 'gr_write') {
     $rec = gr_lib_save(['title'=>$t, 'script'=>$script, 'report'=>$rep, 'seed'=>$seed,
                         'repaired'=>$repaired, 'sfw'=>$sfw, 'idea'=>$idea, 'pagesAsked'=>$pages]);
 
-    gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$t, 'script'=>$script, 'report'=>$rep,
-             'seed'=>$seed, 'repaired'=>$repaired, 'sfw'=>$sfw, 'createdAt'=>$rec['createdAt'],
-             'library'=>gr_lib_list('active')]);
+    gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$t, 'synopsis'=>$rec['synopsis'],
+             'script'=>$script, 'report'=>$rep, 'seed'=>$seed, 'repaired'=>$repaired,
+             'sfw'=>$sfw, 'createdAt'=>$rec['createdAt'], 'library'=>gr_lib_list('active')]);
 }
 
 // ===== LIBRARY VERBS =========================================================
@@ -580,6 +613,7 @@ if ($do === 'gr_get') {
     $rec = gr_lib_get((string)($_POST['id'] ?? ''));
     if (!$rec) gr_jout(['ok'=>false,'err'=>'No such saved script.']);
     gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$rec['title'], 'script'=>$rec['script'],
+             'synopsis'=>(string)($rec['synopsis'] ?? ''),
              'report'=>$rec['report'] ?? gr_report($rec['script']), 'seed'=>$rec['seed'] ?? [],
              'sfw'=>!empty($rec['sfw']), 'repaired'=>!empty($rec['repaired']),
              'createdAt'=>$rec['createdAt'] ?? '', 'pid'=>$rec['pid'] ?? '',
@@ -689,6 +723,7 @@ $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fa
 .gr-item .acts{margin-top:6px;display:flex;gap:10px}
 .gr-item .acts a{font-size:11px;color:var(--muted);text-decoration:none}
 .gr-item .acts a:hover{color:var(--text);text-decoration:underline}
+.gr-item .syn{color:var(--text);opacity:.78;font-size:11.5px;line-height:1.45;margin-top:3px}
 .gr-dot{width:7px;height:7px;border-radius:50%;flex:none;background:#2E7D5B}
 .gr-dot.warn{background:#B8862B}
 </style>
@@ -817,6 +852,7 @@ function renderLib(){
     return '<div class="gr-item'+(on?' on':'')+'" onclick="grOpen(\''+r.id+'\')">'
       + '<div class="t"><span class="gr-dot'+(r.clean?'':' warn')+'" title="'+(r.clean?'hit every structure target':'missed a target')+'"></span>'
       +   '<span class="ttl">'+(r.starred?'★ ':'')+esc(r.title)+'</span></div>'
+      + (r.synopsis ? '<div class="syn">'+esc(r.synopsis)+'</div>' : '')
       + '<div class="meta"><span><b>'+r.pages+'</b>pp</span><span>growth <b>'+r.growthPct+'%</b></span>'
       +   '<span>merges <b>'+r.mergedPct+'%</b></span><span>'+grWhen(r.createdAt)+'</span>'
       +   (r.sfw?'':'<span>mature</span>')+(r.pid?'<span>✓ in production</span>':'')+'</div>'
@@ -870,6 +906,8 @@ function render(j){
   var g = {}, mm = {};
   // rebuild flags from runs is lossy — the server sends counts, so draw from metrics we have
   var html = ''
+    + (j.title ? '<div style="font-size:16px;font-weight:700;margin:0 0 2px">'+esc(j.title)+'</div>' : '')
+    + (j.synopsis ? '<div class="gr-note" style="margin:0 0 10px">'+esc(j.synopsis)+'</div>' : '')
     + '<div class="gr-chips">'+chips+'</div>'
     + (j.repaired ? '<div class="gr-note" style="margin:-4px 0 10px">↻ first draft missed the targets — this is the repaired pass.</div>' : '')
     + (fails.length ? '<div class="gr-fails"><b>Still off after the repair pass:</b><ul>'+fails.map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul></div>' : '')
