@@ -12,6 +12,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (✍️ Attribution — generated scripts no longer carry Gribble's name)
+
+### Fixed
+
+- **Generated scripts were credited `by Gribble`.** The writer copied the corpus header verbatim, putting a real person's name on work he did not write. Owner call: *"none of these stories are by Gribble, so you should probably remove that — you could say an AI-generated Gribble-inspired story."* The credit line is now **`AI-generated · Gribble-inspired`**, and the system prompt states outright that the model is not Gribble and the script must never be credited to him.
+- **Enforced in code, not just in the prompt.** `gr_fix_byline()` rewrites any `by|written by Gribble` header (with or without the corpus's trailing email), collapses repeats, and inserts the credit under the title if none exists. It runs on every `gr_lib_save()` and in `gr_create()`, so a model that reverts to copying the corpus header still cannot ship an attributed script.
+- **Migrated the ten already-saved scripts** via a new idempotent `gr_fixbylines` verb; all ten verified to carry exactly one credit line and no `by Gribble`.
+- **Caught in verification:** the first version double-stamped the credit, because `gr_fix_byline()` ran once in the migration and again inside `gr_lib_save()`, and its insert branch only checked the *title* line for an existing credit. Rewritten to dedupe; migration re-run and all ten re-verified.
+
 ## 2026-08-09 (🎭 Gribble STORY correction — the formula's story axis was wrong)
 
 ### Fixed

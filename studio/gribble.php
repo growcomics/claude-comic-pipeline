@@ -54,6 +54,47 @@ function gr_jout(array $a): void { header('Content-Type: application/json'); hea
    library renders without opening fifty full scripts.
    Deletion is a soft status flip to 'trashed'; the file is never unlinked.
    =========================================================================== */
+/* Attribution. These scripts imitate Gribble's format and structure but are written
+   by a model — crediting them "by Gribble" puts a real person's name on work he did
+   not write. Owner call, 2026-08-09. gr_fix_byline() is belt-and-braces: the prompt
+   asks for this line, and every save rewrites it anyway in case the model reverts to
+   copying the corpus header. */
+const GR_BYLINE = 'AI-generated · Gribble-inspired';
+
+/** Force the credit line. Replaces a "by Gribble"-style header (with or without his
+ *  email, as the corpus files carry it) or inserts the credit under the title. */
+function gr_fix_byline(string $script): string {
+    if (trim($script) === '') return $script;
+
+    // 1. rewrite any "by Gribble" header, in any of the corpus's forms
+    $script = preg_replace('/^[ \t]*(?:by|written by)\s+gribble\b[^\r\n]*$/im', GR_BYLINE, $script);
+
+    // 2. collapse repeats. This function runs on every save AND ran once as a
+    //    migration, so without this the credit stacks up line after line.
+    $lines = preg_split('/\R/', $script);
+    $out = []; $seenCredit = false;
+    foreach ($lines as $l) {
+        $isCredit = trim($l) !== '' && stripos($l, GR_BYLINE) !== false;
+        if ($isCredit) {
+            if ($seenCredit) continue;     // drop the duplicate
+            $seenCredit = true;
+            $out[] = GR_BYLINE;            // normalise spacing while we are here
+            continue;
+        }
+        $out[] = $l;
+    }
+
+    // 3. no credit anywhere — insert one directly under the title
+    if (!$seenCredit) {
+        foreach ($out as $i => $l) {
+            if (trim($l) === '') continue;
+            array_splice($out, $i + 1, 0, [GR_BYLINE]);
+            break;
+        }
+    }
+    return implode("\n", $out);
+}
+
 function gr_libdir(): string { $d = SDATA . '/gribble'; if (!is_dir($d)) @mkdir($d, 0775, true); return $d; }
 function gr_sfile(string $id): string { return gr_libdir() . '/s-' . preg_replace('/[^a-z0-9]/', '', $id) . '.json'; }
 function gr_ifile(): string { return gr_libdir() . '/index.json'; }
@@ -92,6 +133,7 @@ function gr_row(array $rec): array {
 function gr_lib_save(array $rec): array {
     if (empty($rec['id'])) $rec['id'] = nid();
     $rec += ['createdAt'=>date('c'), 'status'=>'active', 'starred'=>false, 'pid'=>''];
+    if (!empty($rec['script'])) $rec['script'] = gr_fix_byline((string)$rec['script']);
     if (empty($rec['synopsis'])) $rec['synopsis'] = gr_synopsis((string)($rec['script'] ?? ''));
     $rec['by']    = $rec['by'] ?? current_studio_user();
     $rec['words'] = str_word_count((string)($rec['script'] ?? ''));
@@ -619,7 +661,9 @@ if ($do === 'gr_write') {
     $mTarget = max(2, (int)round($pages * 0.31));
     $firstBy = max(2, (int)ceil($pages * 0.15));
 
-    $sys = "You are Gribble, a comic writer who writes female muscle-growth transformation scripts for artists to draw.\n\n"
+    $sys = "You write female muscle-growth transformation comic scripts for artists to draw, closely imitating the "
+         . "format, structure and voice of the writer Gribble. You are NOT Gribble and the script must never be "
+         . "credited to him — it is an AI-written script inspired by his work.\n\n"
          . GR_FORMULA . "\n\n" . ($sfw ? GR_SFW : GR_MATURE) . "\n\n"
          . "THIS SCRIPT'S BUDGET (hit these exactly — they are computed from the corpus ratios):\n"
          . "- Length: EXACTLY {$pages} pages, numbered Page 1 to Page {$pages}.\n"
@@ -630,7 +674,8 @@ if ($do === 'gr_write') {
          . "- Every other page: exactly four \"Panel N- \" slots.\n"
          . "- Roughly one panel in five carries no dialogue at all.\n\n"
          . "Output ONLY the script, and start it EXACTLY like this:\n"
-         . "    <Title>\n    by Gribble\n    Synopsis: <ONE sentence, max 25 words, saying what happens and to whom — this is the line the owner reads in the library list, so make it concrete and specific, not a teaser>\n\n    Page 1\n"
+         . "    <Title>\n    " . GR_BYLINE . "\n    Synopsis: <ONE sentence, max 25 words, saying what happens and to whom — this is the line the owner reads in the library list, so make it concrete and specific, not a teaser>\n\n    Page 1\n"
+         . "The by-line is EXACTLY \"" . GR_BYLINE . "\" — never \"by Gribble\". These scripts are not his work and must not carry his name.\n"
          . "No preamble, no commentary, no markdown fences, no page-count summary at the end.";
 
     // Anti-repetition. Independent random seeds do NOT stop the model falling into
@@ -688,6 +733,8 @@ if ($do === 'gr_write') {
         }
     }
 
+    $script = gr_fix_byline($script);   // never ship a script credited to a real person
+
     $t = $title;
     if ($t === '' && preg_match('/^\s*(.+?)\s*$/m', $script, $mm)) $t = mb_substr(trim($mm[1]), 0, 80);
 
@@ -701,6 +748,24 @@ if ($do === 'gr_write') {
 }
 
 // ===== LIBRARY VERBS =========================================================
+// One-off (idempotent) — rewrite the credit line on scripts saved before the
+// attribution fix, active and trashed alike. Safe to re-run; gr_fix_byline is a
+// no-op once the line is correct.
+if ($do === 'gr_fixbylines') {
+    $done = []; $skipped = 0;
+    foreach (array_merge(gr_lib_list('active'), gr_lib_list('trashed')) as $row) {
+        $rec = gr_lib_get((string)($row['id'] ?? ''));
+        if (!$rec) continue;
+        $before = (string)($rec['script'] ?? '');
+        $after  = gr_fix_byline($before);
+        if ($after === $before) { $skipped++; continue; }
+        $rec['script'] = $after;
+        gr_lib_save($rec);
+        $done[] = $rec['title'] ?? $rec['id'];
+    }
+    gr_jout(['ok'=>true, 'rewritten'=>count($done), 'alreadyOk'=>$skipped, 'titles'=>$done]);
+}
+
 if ($do === 'gr_list') {
     $st = (string)($_POST['status'] ?? 'active');
     gr_jout(['ok'=>true, 'library'=>gr_lib_list($st === 'trashed' ? 'trashed' : 'active')]);
@@ -733,7 +798,7 @@ if ($do === 'gr_star' || $do === 'gr_trash' || $do === 'gr_restore' || $do === '
 }
 
 if ($do === 'gr_create') {
-    $script = trim((string)($_POST['script'] ?? ''));
+    $script = gr_fix_byline(trim((string)($_POST['script'] ?? '')));
     $title  = mb_substr(trim((string)($_POST['title'] ?? '')), 0, 80);
     if ($script === '') gr_jout(['ok'=>false,'err'=>'No script to create from.']);
     if ($title === '') $title = 'Untitled Gribble script';

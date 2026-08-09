@@ -28,6 +28,11 @@ Carl- "Hey Lenny, isn't it lunch time?"
 - Dialogue always in double quotes, speaker name then a hyphen. (A minority of scripts
   use `Speaker: "line"` — both are in-house, hyphen is dominant.)
 
+> **Attribution.** The `by Gribble` line above describes *his* scripts. Generated scripts
+> must never carry it — they are not his work. `studio/gribble.php` emits
+> **`AI-generated · Gribble-inspired`** instead, enforced by `gr_fix_byline()` on every
+> save (owner call, 2026-08-09).
+
 ## 2. The page grid — and the one deliberate break
 
 **98.4% of pages are worth exactly four panels of space.** The four-panel grid is the
