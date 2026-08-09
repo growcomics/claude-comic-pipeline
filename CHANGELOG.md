@@ -12,9 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-09 (✍️ Gribble page fatal — csrf_token() → csrf())
+## 2026-08-09 (✍️ Gribble page fatal — csrf_token() → csrf(); writer returned no script)
 
 ### Fixed
+
+- **`studio/gribble.php` gr_write always returned "The AI did not return a script"** (deployed 2026-08-09 ~09:45 PT, live-verified end-to-end). TWO stacked causes, both from `claude-sonnet-5` API behavior: (1) the response parser read only `content[0]['text']`, but newer models lead with a thinking block — now collects ALL text-type blocks; (2) **claude-sonnet-5 runs adaptive thinking BY DEFAULT and `max_tokens` caps thinking + answer together** — the entire ~5K script budget was consumed by (encrypted) thinking, returning zero text blocks. Fixed by sending `thinking: {type: "disabled"}` on the writer call (templated script gen doesn't need it; also accepted by the claude-sonnet-4-6 fallback). Also added a diagnostic — `gr_ai_last` (model/http/curl-err/body-head) is appended to the user-facing error so the next API failure is self-explaining. Verified live: 8-page script generated in ~2.3 min, structure gate passed after one repair pass, gr_create → breakdown (8pp/32 panels) → queue(backend=flow) all green.
 
 - **`studio/gribble.php` HTTP 500 on every logged-in browser GET** (deployed 2026-08-09 ~09:10 PT). Root cause: line ~516 `$CSRF = csrf_token();` — `inc/boot.php` defines `csrf()`, not `csrf_token()`, so the page fataled on undefined function. The bug was invisible until now because (a) anonymous requests exit at `require_auth()`'s redirect before reaching the line, and (b) the JSON verbs (`gr_write`/`gr_check`/`gr_create`) all `gr_jout()`-exit before it — which is exactly how the page was originally validated (headless, bridge-key). First real browser visit → 500. Fix is one word (`csrf()`), applied per DEPLOY-NOTES protocol: fetched the LIVE file, patched that copy, deployed only it (live was otherwise behind the repo — the repo's unvalidated L36 story-gate work was NOT deployed). Verified: logged-in GET renders the writer UI; anonymous GET still 302s to login. Repo copy carries the same one-word fix. Found while wiring the Flow Autopilot extension's first test job (Gribble was the fastest path to a genspec plan).
 

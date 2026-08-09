@@ -49,16 +49,28 @@ function gr_ai_text(string $system, string $user, int $maxTokens = 8000, int $ti
     $cfg = gr_ai_cfg(); if (!$cfg || !function_exists('curl_init')) return null;
     $models = [(string)($cfg['writerModel'] ?? 'claude-sonnet-5'), 'claude-sonnet-4-6'];
     foreach ($models as $model) {
+        // claude-sonnet-5 runs adaptive thinking BY DEFAULT and max_tokens caps
+        // thinking + answer together — the whole script budget was consumed by
+        // thinking, returning zero text (2026-08-09). Templated script generation
+        // doesn't need thinking; disable it so the budget goes to the script.
         $payload = json_encode(['model'=>$model, 'max_tokens'=>$maxTokens, 'system'=>$system,
+            'thinking'=>['type'=>'disabled'],
             'messages'=>[['role'=>'user','content'=>$user]]]);
         $ch = curl_init('https://api.anthropic.com/v1/messages');
         curl_setopt_array($ch, [CURLOPT_POST=>true, CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>$timeout,
             CURLOPT_HTTPHEADER=>['content-type: application/json','anthropic-version: 2023-06-01','x-api-key: '.$cfg['key']],
             CURLOPT_POSTFIELDS=>$payload]);
-        $resp = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+        $resp = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); $cerr = curl_error($ch); curl_close($ch);
+        $GLOBALS['gr_ai_last'] = "model={$model} http={$code}" . ($cerr !== '' ? " curl={$cerr}" : '') . ' body=' . mb_substr((string)$resp, 0, 160);
         if ($resp && $code < 400) {
             $j = json_decode((string)$resp, true);
-            $txt = trim((string)($j['content'][0]['text'] ?? ''));
+            // Newer models (e.g. claude-sonnet-5) may lead with a thinking block —
+            // content[0] is then type=thinking with no text. Collect ALL text blocks.
+            $txt = '';
+            foreach ((array)($j['content'] ?? []) as $blk) {
+                if (($blk['type'] ?? '') === 'text') $txt .= (string)($blk['text'] ?? '');
+            }
+            $txt = trim($txt);
             if ($txt !== '') return $txt;
         }
         // 404/400 = this account can't see that model id; fall through to the next.
@@ -447,7 +459,7 @@ if ($do === 'gr_write') {
 
     $maxTok = min(16000, $pages * 480 + 1500);
     $script = gr_ai_text($sys, $user, $maxTok);
-    if ($script === null || $script === '') gr_jout(['ok'=>false,'err'=>'The AI did not return a script — try again.']);
+    if ($script === null || $script === '') gr_jout(['ok'=>false,'err'=>'The AI did not return a script — try again. [' . ($GLOBALS['gr_ai_last'] ?? 'no call made: missing data/ai.json key or no curl') . ']']);
     $script = trim(preg_replace('/^```[a-z]*\s*|\s*```$/i', '', $script));
 
     // --- validate, and repair once if the structure missed ------------------
