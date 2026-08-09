@@ -42,6 +42,85 @@ function gr_cfile(string $id): string { return SDATA . '/creator-' . preg_replac
 function gr_ai_cfg(): ?array { $f = SDATA . '/ai.json'; if (!is_file($f)) return null; $j = s_read($f, []); return !empty($j['key']) ? $j : null; }
 function gr_jout(array $a): void { header('Content-Type: application/json'); header('X-Robots-Tag: noindex'); echo json_encode($a); exit; }
 
+/* ===========================================================================
+   THE LIBRARY — every generated script is kept, automatically.
+   Owner ask (2026-08-09): "store the comics that get generated so I can review
+   them later." Before this, gr_write handed the script to the browser and forgot
+   it; the only way to keep one was to click "Create studio project", so a closed
+   tab lost the work. Now gr_write always saves first, then returns.
+   Layout: one JSON per script at data/gribble/s-<id>.json (data/.htaccess is
+   "Require all denied" and subdirectories inherit that, so scripts are not
+   web-readable), plus a small index.json holding ONLY list-view metadata — the
+   library renders without opening fifty full scripts.
+   Deletion is a soft status flip to 'trashed'; the file is never unlinked.
+   =========================================================================== */
+function gr_libdir(): string { $d = SDATA . '/gribble'; if (!is_dir($d)) @mkdir($d, 0775, true); return $d; }
+function gr_sfile(string $id): string { return gr_libdir() . '/s-' . preg_replace('/[^a-z0-9]/', '', $id) . '.json'; }
+function gr_ifile(): string { return gr_libdir() . '/index.json'; }
+
+/** Metadata row for the list view — must stay small. */
+function gr_row(array $rec): array {
+    $m = (array)($rec['report']['metrics'] ?? []);
+    return [
+        'id'         => (string)$rec['id'],
+        'title'      => (string)($rec['title'] ?? 'Untitled'),
+        'createdAt'  => (string)($rec['createdAt'] ?? date('c')),
+        'by'         => (string)($rec['by'] ?? ''),
+        'sfw'        => !empty($rec['sfw']),
+        'starred'    => !empty($rec['starred']),
+        'status'     => (string)($rec['status'] ?? 'active'),
+        'pid'        => (string)($rec['pid'] ?? ''),
+        'pages'      => (int)($m['pages'] ?? 0),
+        'growthPct'  => (float)($m['growthPct'] ?? 0),
+        'mergedPct'  => (float)($m['mergedPct'] ?? 0),
+        'clean'      => empty($rec['report']['fails']),
+        'words'      => (int)($rec['words'] ?? 0),
+    ];
+}
+
+/** Write the record and upsert its index row, race-safe. */
+function gr_lib_save(array $rec): array {
+    if (empty($rec['id'])) $rec['id'] = nid();
+    $rec += ['createdAt'=>date('c'), 'status'=>'active', 'starred'=>false, 'pid'=>''];
+    $rec['by']    = $rec['by'] ?? current_studio_user();
+    $rec['words'] = str_word_count((string)($rec['script'] ?? ''));
+    s_write(gr_sfile($rec['id']), $rec);
+    $row = gr_row($rec);
+    s_with_lock(gr_ifile(), function ($idx) use ($row) {
+        $list = is_array($idx['scripts'] ?? null) ? $idx['scripts'] : [];
+        $hit = false;
+        foreach ($list as $k => $r) if (($r['id'] ?? '') === $row['id']) { $list[$k] = $row; $hit = true; break; }
+        if (!$hit) array_unshift($list, $row);
+        return ['data'=>['scripts'=>$list], 'result'=>true];
+    });
+    return $rec;
+}
+
+function gr_lib_get(string $id): ?array {
+    $f = gr_sfile($id);
+    if ($id === '' || !is_file($f)) return null;
+    $r = s_read($f, []);
+    return is_array($r) && !empty($r['id']) ? $r : null;
+}
+
+/** Mutate one record + its index row through a callback. */
+function gr_lib_patch(string $id, callable $fn): ?array {
+    $rec = gr_lib_get($id);
+    if (!$rec) return null;
+    return gr_lib_save($fn($rec));
+}
+
+function gr_lib_list(string $status = 'active'): array {
+    $idx = s_read(gr_ifile(), []);
+    $list = is_array($idx['scripts'] ?? null) ? $idx['scripts'] : [];
+    $list = array_values(array_filter($list, fn($r) => ($r['status'] ?? 'active') === $status));
+    usort($list, function ($a, $b) {                       // starred first, then newest
+        $s = (int)!empty($b['starred']) <=> (int)!empty($a['starred']);
+        return $s !== 0 ? $s : strcmp((string)($b['createdAt'] ?? ''), (string)($a['createdAt'] ?? ''));
+    });
+    return $list;
+}
+
 // ---- one text call to the Anthropic API, expecting plain script text back ---
 // Scripts are long-form prose, not JSON — asking for JSON here would only invite
 // escaping bugs across thousands of quoted dialogue lines.
@@ -482,8 +561,44 @@ if ($do === 'gr_write') {
     $t = $title;
     if ($t === '' && preg_match('/^\s*(.+?)\s*$/m', $script, $mm)) $t = mb_substr(trim($mm[1]), 0, 80);
 
-    gr_jout(['ok'=>true, 'title'=>$t, 'script'=>$script, 'report'=>$rep, 'seed'=>$seed,
-             'repaired'=>$repaired, 'sfw'=>$sfw]);
+    // Save BEFORE returning — a closed tab must never lose a generated script.
+    $rec = gr_lib_save(['title'=>$t, 'script'=>$script, 'report'=>$rep, 'seed'=>$seed,
+                        'repaired'=>$repaired, 'sfw'=>$sfw, 'idea'=>$idea, 'pagesAsked'=>$pages]);
+
+    gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$t, 'script'=>$script, 'report'=>$rep,
+             'seed'=>$seed, 'repaired'=>$repaired, 'sfw'=>$sfw, 'createdAt'=>$rec['createdAt'],
+             'library'=>gr_lib_list('active')]);
+}
+
+// ===== LIBRARY VERBS =========================================================
+if ($do === 'gr_list') {
+    $st = (string)($_POST['status'] ?? 'active');
+    gr_jout(['ok'=>true, 'library'=>gr_lib_list($st === 'trashed' ? 'trashed' : 'active')]);
+}
+
+if ($do === 'gr_get') {
+    $rec = gr_lib_get((string)($_POST['id'] ?? ''));
+    if (!$rec) gr_jout(['ok'=>false,'err'=>'No such saved script.']);
+    gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$rec['title'], 'script'=>$rec['script'],
+             'report'=>$rec['report'] ?? gr_report($rec['script']), 'seed'=>$rec['seed'] ?? [],
+             'sfw'=>!empty($rec['sfw']), 'repaired'=>!empty($rec['repaired']),
+             'createdAt'=>$rec['createdAt'] ?? '', 'pid'=>$rec['pid'] ?? '',
+             'starred'=>!empty($rec['starred']), 'note'=>$rec['note'] ?? '']);
+}
+
+if ($do === 'gr_star' || $do === 'gr_trash' || $do === 'gr_restore' || $do === 'gr_rename' || $do === 'gr_note') {
+    $id = (string)($_POST['id'] ?? '');
+    $val = (string)($_POST['v'] ?? '');
+    $rec = gr_lib_patch($id, function (array $r) use ($do, $val) {
+        if ($do === 'gr_star')    $r['starred'] = $val !== '0';
+        if ($do === 'gr_trash')   $r['status']  = 'trashed';   // soft — the file stays
+        if ($do === 'gr_restore') $r['status']  = 'active';
+        if ($do === 'gr_rename' && trim($val) !== '') $r['title'] = mb_substr(trim($val), 0, 80);
+        if ($do === 'gr_note')    $r['note'] = mb_substr($val, 0, 2000);
+        return $r;
+    });
+    if (!$rec) gr_jout(['ok'=>false,'err'=>'No such saved script.']);
+    gr_jout(['ok'=>true, 'library'=>gr_lib_list('active'), 'trashed'=>gr_lib_list('trashed')]);
 }
 
 if ($do === 'gr_create') {
@@ -522,7 +637,14 @@ if ($do === 'gr_create') {
         'createdAt'=>date('c'), 'updatedAt'=>date('c'),
     ];
     s_write(gr_cfile($pid), $c);
-    gr_jout(['ok'=>true, 'pid'=>$pid, 'title'=>$title]);
+
+    // Link the project back onto the saved script so the library shows which
+    // scripts already went into production (and never offers a second project).
+    $lid = (string)($_POST['id'] ?? '');
+    if ($lid !== '') gr_lib_patch($lid, function (array $r) use ($pid) { $r['pid'] = $pid; return $r; });
+    else gr_lib_save(['title'=>$title, 'script'=>$script, 'report'=>$rep, 'sfw'=>$sfw, 'pid'=>$pid]);
+
+    gr_jout(['ok'=>true, 'pid'=>$pid, 'title'=>$title, 'library'=>gr_lib_list('active')]);
 }
 
 $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fataled every browser GET (2026-08-09)
@@ -556,6 +678,19 @@ $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fa
 .gr-pg.g{background:#2E7D5B;border-color:#3E9B72}
 .gr-pg.m::after{content:'';position:absolute;inset:2px;border:1px dashed rgba(255,255,255,.55);border-radius:2px}
 .gr-spin{display:inline-block;animation:grspin 1s linear infinite}@keyframes grspin{to{transform:rotate(360deg)}}
+/* library */
+.gr-item{display:block;border:1px solid var(--border);border-radius:9px;padding:9px 10px;margin-bottom:7px;cursor:pointer;background:var(--bg)}
+.gr-item:hover{border-color:var(--accent)}
+.gr-item.on{border-color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
+.gr-item .t{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.gr-item .t span.ttl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gr-item .meta{color:var(--muted);font-size:11px;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+.gr-item .meta b{color:var(--text);font-weight:600}
+.gr-item .acts{margin-top:6px;display:flex;gap:10px}
+.gr-item .acts a{font-size:11px;color:var(--muted);text-decoration:none}
+.gr-item .acts a:hover{color:var(--text);text-decoration:underline}
+.gr-dot{width:7px;height:7px;border-radius:50%;flex:none;background:#2E7D5B}
+.gr-dot.warn{background:#B8862B}
 </style>
 <script src="https://3dmusclecomics.com/hub/nav.js"></script>
 </head><body>
@@ -578,6 +713,7 @@ $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fa
   </p>
 
   <div class="gr-wrap">
+   <div><!-- left column: the form and the library stack together, so the grid stays 2-up -->
     <div class="gr-card">
       <h2>The story</h2>
       <label>Title <span style="opacity:.6">(blank = let it invent one)</span></label>
@@ -609,6 +745,16 @@ $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fa
       <div class="gr-note" id="gstatus" style="margin-top:10px"></div>
     </div>
 
+    <div class="gr-card" style="margin-top:18px">
+      <h2 style="display:flex;align-items:center;gap:8px">
+        <span id="glibhead">📚 Saved scripts</span>
+        <span class="spacer" style="flex:1"></span>
+        <a href="#" id="gtrashtog" onclick="return grToggleTrash()" style="font-size:11px;text-transform:none;letter-spacing:0">show trash</a>
+      </h2>
+      <div id="glib"></div>
+    </div>
+   </div>
+
     <div class="gr-card">
       <h2>The script</h2>
       <div id="gout"><p class="gr-note">Nothing written yet. A 20-page script takes a minute or two — it is written, parsed, scored, and repaired if the structure missed.</p></div>
@@ -618,6 +764,8 @@ $CSRF = csrf(); // boot.php defines csrf(), not csrf_token() — csrf_token() fa
 <script>
 var CSRF = <?= json_encode($CSRF) ?>;
 var LAST = null;
+var LIB  = <?= json_encode(gr_lib_list('active')) ?>;   // rendered server-side on first paint
+var TRASHVIEW = false;
 function esc(s){ var d=document.createElement('div'); d.textContent=String(s==null?'':s); return d.innerHTML; }
 function post(data){
   data.csrf = CSRF;
@@ -638,7 +786,69 @@ function grWrite(){
     document.getElementById('gstatus').textContent = '';
     if(!j.ok){ document.getElementById('gout').innerHTML = '<div class="gr-fails">'+esc(j.err||'failed')+'</div>'; return; }
     LAST = j; render(j);
+    if (j.library) { LIB = j.library; TRASHVIEW = false; renderLib(); }
   }).catch(function(e){ btn.disabled=false; document.getElementById('gstatus').textContent = 'error: '+e; });
+}
+
+/* ---- the library ------------------------------------------------------- */
+function grWhen(iso){
+  if(!iso) return '';
+  var d = new Date(iso), now = new Date(), ms = now - d;
+  if (ms < 36e5) return Math.max(1, Math.round(ms/6e4)) + 'm ago';
+  if (ms < 864e5 && d.getDate() === now.getDate()) return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'});
+  return d.toLocaleDateString([], {month:'short', day:'numeric'});
+}
+function renderLib(){
+  var el = document.getElementById('glib');
+  document.getElementById('glibhead').textContent = TRASHVIEW ? '🗑 Trashed scripts' : '📚 Saved scripts';
+  document.getElementById('gtrashtog').textContent = TRASHVIEW ? '← back to saved' : 'show trash';
+  if(!LIB || !LIB.length){
+    el.innerHTML = '<p class="gr-note">'+(TRASHVIEW ? 'Nothing in the trash.' : 'Nothing saved yet. Every script you write is kept here automatically.')+'</p>';
+    return;
+  }
+  el.innerHTML = LIB.map(function(r){
+    var on = LAST && LAST.id === r.id;
+    var acts = TRASHVIEW
+      ? '<a href="#" onclick="return grLibAct(\''+r.id+'\',\'gr_restore\')">restore</a>'
+      : '<a href="#" onclick="return grLibAct(\''+r.id+'\',\'gr_star\',\''+(r.starred?'0':'1')+'\')">'+(r.starred?'unstar':'star')+'</a>'
+      + '<a href="#" onclick="return grLibRename(\''+r.id+'\')">rename</a>'
+      + '<a href="#" onclick="return grLibAct(\''+r.id+'\',\'gr_trash\')">trash</a>'
+      + (r.pid ? '<a href="creator.php?p='+encodeURIComponent(r.pid)+'">project ↗</a>' : '');
+    return '<div class="gr-item'+(on?' on':'')+'" onclick="grOpen(\''+r.id+'\')">'
+      + '<div class="t"><span class="gr-dot'+(r.clean?'':' warn')+'" title="'+(r.clean?'hit every structure target':'missed a target')+'"></span>'
+      +   '<span class="ttl">'+(r.starred?'★ ':'')+esc(r.title)+'</span></div>'
+      + '<div class="meta"><span><b>'+r.pages+'</b>pp</span><span>growth <b>'+r.growthPct+'%</b></span>'
+      +   '<span>merges <b>'+r.mergedPct+'%</b></span><span>'+grWhen(r.createdAt)+'</span>'
+      +   (r.sfw?'':'<span>mature</span>')+(r.pid?'<span>✓ in production</span>':'')+'</div>'
+      + '<div class="acts" onclick="event.stopPropagation()">'+acts+'</div></div>';
+  }).join('');
+}
+function grOpen(id){
+  post({do:'gr_get', id:id}).then(function(j){
+    if(!j.ok){ alert(j.err||'could not open'); return; }
+    LAST = j; render(j); renderLib();
+    document.getElementById('gout').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+}
+function grLibAct(id, verb, v){
+  post({do:verb, id:id, v:(v==null?'':v)}).then(function(j){
+    if(!j.ok){ alert(j.err||'failed'); return; }
+    LIB = TRASHVIEW ? j.trashed : j.library; renderLib();
+  });
+  return false;
+}
+function grLibRename(id){
+  var cur = (LIB.filter(function(r){return r.id===id;})[0]||{}).title || '';
+  var v = prompt('Rename this script', cur);
+  if(v==null || !v.trim()) return false;
+  return grLibAct(id, 'gr_rename', v.trim());
+}
+function grToggleTrash(){
+  TRASHVIEW = !TRASHVIEW;
+  post({do:'gr_list', status: TRASHVIEW?'trashed':'active'}).then(function(j){
+    if(j.ok){ LIB = j.library; renderLib(); }
+  });
+  return false;
 }
 function render(j){
   var m = j.report.metrics || {}, fails = j.report.fails || [];
@@ -666,8 +876,12 @@ function render(j){
     + '<div class="gr-row" style="margin:0 0 12px">'
     +   '<button class="btn" onclick="grCopy()">📋 Copy</button> '
     +   '<button class="btn" onclick="grDownload()">⬇ Download .txt</button> '
-    +   '<button class="btn" onclick="grProject()">🎬 Create studio project</button>'
-    +   '<span class="gr-note" id="gproj"></span>'
+    +   (j.pid
+          ? '<a class="btn" href="creator.php?p='+encodeURIComponent(j.pid)+'">🎬 Open studio project</a>'
+          : '<button class="btn" onclick="grProject()">🎬 Create studio project</button>')
+    +   '<span class="gr-note" id="gproj">'
+    +     (j.createdAt ? '💾 saved to the library · ' + grWhen(j.createdAt) : '')
+    +   '</span>'
     + '</div>'
     + '<div class="gr-script" id="gscript">'+esc(j.script)+'</div>';
   document.getElementById('gout').innerHTML = html;
@@ -680,11 +894,13 @@ function grDownload(){
 }
 function grProject(){
   document.getElementById('gproj').innerHTML = '<span class="gr-spin">⏳</span> creating…';
-  post({do:'gr_create', script:LAST.script, title:LAST.title, sfw:LAST.sfw?'1':'0'}).then(function(j){
+  post({do:'gr_create', script:LAST.script, title:LAST.title, sfw:LAST.sfw?'1':'0', id:(LAST.id||'')}).then(function(j){
     document.getElementById('gproj').innerHTML = j.ok
       ? '✅ <a href="creator.php?p='+encodeURIComponent(j.pid)+'">open '+esc(j.title)+'</a>'
       : '❌ '+esc(j.err||'failed');
+    if(j.ok){ if(LAST) LAST.pid = j.pid; if(j.library){ LIB = j.library; renderLib(); } }
   });
 }
+renderLib();
 </script>
 </body></html>

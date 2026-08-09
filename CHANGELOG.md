@@ -12,6 +12,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (📚 Gribble script library — every generated script is kept)
+
+### Added
+
+- **`studio/gribble.php` — the script library.** Owner ask: *"store the comics that get generated so I can review them later."* Until now `gr_write` handed the script to the browser and forgot it — the only way to keep one was to click **Create studio project**, so closing the tab lost the work. `gr_write` now **saves before it returns**, so nothing the writer produces can be lost.
+  - **Storage**: one JSON per script at `data/gribble/s-<id>.json` (full script + structure report + seeds + the idea it was written from), plus `data/gribble/index.json` holding only list-view metadata so the library renders without opening every script file. Verified `data/.htaccess` (`Require all denied`) inherits to the new subdirectory — `studio/data/gribble/index.json` returns **403** from the web.
+  - **Library panel** in the left column: title, page count, growth %, merge %, age, a green/amber dot for whether the script hit every structure target, and a ✓ marker for scripts already turned into a studio project. Click any row to load it back into the reader.
+  - **Verbs**: `gr_list` / `gr_get` / `gr_star` / `gr_rename` / `gr_trash` / `gr_restore` / `gr_note`. **Trash is a soft status flip — the file is never unlinked**, per the standing "trash to a subfolder, never `rm`" rule; a *show trash* toggle lists and restores.
+  - `gr_create` now records the resulting project id back onto the saved script, and the reader swaps its **Create studio project** button for **Open studio project** once one exists, so a script can't be double-projected.
+
+### Fixed
+
+- **The repo copy of `gribble.php` was ~5.5 KB ahead of the live file** (the STORY DISCIPLINE prompt block and the extra structure chips were committed but never deployed). Confirmed by diffing live against `git HEAD` that live held nothing the repo lacked — in particular that live's `csrf()` fix was already in the repo, so redeploying could not reintroduce the browser fatal — then shipped the repo copy as a fast-forward along with the library work.
+
 ## 2026-08-09 (✍️ Gribble page fatal — csrf_token() → csrf(); writer returned no script)
 
 ### Fixed

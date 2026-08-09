@@ -1,0 +1,878 @@
+{
+  "corpus": {
+    "files": 41,
+    "pages": 1355,
+    "panels": 5397,
+    "slots": 4126
+  },
+  "panels_per_page": {
+    "distribution": {
+      "1": {
+        "pages": 4,
+        "pct": 0.3
+      },
+      "2": {
+        "pages": 6,
+        "pct": 0.4
+      },
+      "3": {
+        "pages": 8,
+        "pct": 0.6
+      },
+      "4": {
+        "pages": 1333,
+        "pct": 98.4
+      },
+      "6": {
+        "pages": 3,
+        "pct": 0.2
+      },
+      "7": {
+        "pages": 1,
+        "pct": 0.1
+      }
+    },
+    "mean": 3.98,
+    "median": 4,
+    "mode": 4,
+    "pct_exactly_4": 98.4,
+    "pct_3_to_5": 99.0
+  },
+  "layout": {
+    "signatures": {
+      "1+1+1+1": {
+        "pages": 907,
+        "pct": 66.9
+      },
+      "4": {
+        "pages": 417,
+        "pct": 30.8
+      },
+      "1+1+1": {
+        "pages": 8,
+        "pct": 0.6
+      },
+      "1+3": {
+        "pages": 8,
+        "pct": 0.6
+      },
+      "1+1": {
+        "pages": 6,
+        "pct": 0.4
+      },
+      "1": {
+        "pages": 4,
+        "pct": 0.3
+      },
+      "1+1+1+1+1+1": {
+        "pages": 3,
+        "pct": 0.2
+      },
+      "1+1+2": {
+        "pages": 1,
+        "pct": 0.1
+      },
+      "4+1+1+1": {
+        "pages": 1,
+        "pct": 0.1
+      }
+    },
+    "slots_per_page_mean": 3.05,
+    "merged_page_pct": 31.5,
+    "merged_slot_pct": 10.3,
+    "merged_slot_growth_pct": 70.3,
+    "single_slot_growth_pct": 1.7
+  },
+  "growth": {
+    "page_ratio_mean": 0.289,
+    "page_ratio_median": 0.268,
+    "run_len_mean": 1.73,
+    "run_len_max": 6,
+    "runs_per_script_mean": 5.37,
+    "runs_ge_3_pages_pct": 22.7,
+    "first_growth_at_frac_median": 0.114,
+    "position_histogram": {
+      "0.0-0.1": 32,
+      "0.1-0.2": 50,
+      "0.2-0.3": 44,
+      "0.3-0.4": 42,
+      "0.4-0.5": 39,
+      "0.5-0.6": 30,
+      "0.6-0.7": 28,
+      "0.7-0.8": 35,
+      "0.8-0.9": 46,
+      "0.9-1.0": 34
+    }
+  },
+  "dialogue": {
+    "silent_panel_pct": 18.2,
+    "lines_per_panel_mean": 1.16,
+    "words_per_line_mean": 10.1,
+    "words_per_line_median": 8.0,
+    "long_lines_over_25w_pct": 5.3
+  },
+  "description": {
+    "words_per_panel_mean": 23.0,
+    "words_per_panel_median": 18.0,
+    "p90": 41
+  },
+  "cast": {
+    "named_speakers_mean": 5.95,
+    "named_speakers_median": 5
+  },
+  "scripts": [
+    {
+      "file": "The Goddess Lucy.txt",
+      "title": "The Goddess Lucy",
+      "pages": 108,
+      "panels": 432,
+      "merged_pages": 30,
+      "growth_pages": 28,
+      "growth_ratio": 0.259,
+      "growth_runs": [
+        3,
+        1,
+        3,
+        3,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        1,
+        3,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 19
+    },
+    {
+      "file": "tMgcCp.txt",
+      "title": "The Magic Cape",
+      "pages": 95,
+      "panels": 379,
+      "merged_pages": 33,
+      "growth_pages": 25,
+      "growth_ratio": 0.263,
+      "growth_runs": [
+        4,
+        1,
+        3,
+        2,
+        2,
+        3,
+        1,
+        2,
+        1,
+        3,
+        1,
+        2
+      ],
+      "longest_run": 4,
+      "cast": 16
+    },
+    {
+      "file": "The Mysterious Book.txt",
+      "title": "The Mysterious Book",
+      "pages": 77,
+      "panels": 298,
+      "merged_pages": 23,
+      "growth_pages": 17,
+      "growth_ratio": 0.221,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 9
+    },
+    {
+      "file": "The Magic Cloak.txt",
+      "title": "The Magic Cloak",
+      "pages": 71,
+      "panels": 284,
+      "merged_pages": 27,
+      "growth_pages": 19,
+      "growth_ratio": 0.268,
+      "growth_runs": [
+        4,
+        1,
+        3,
+        3,
+        1,
+        1,
+        3,
+        1,
+        2
+      ],
+      "longest_run": 4,
+      "cast": 13
+    },
+    {
+      "file": "Wondrous Women of the Wild West.txt",
+      "title": "Wondrous Women of the Wild West",
+      "pages": 49,
+      "panels": 197,
+      "merged_pages": 5,
+      "growth_pages": 8,
+      "growth_ratio": 0.163,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 17
+    },
+    {
+      "file": "Daybird 5 _ Daybird VS Darkness.txt",
+      "title": "Daybird 5 : Daybird VS Darkness",
+      "pages": 46,
+      "panels": 184,
+      "merged_pages": 13,
+      "growth_pages": 14,
+      "growth_ratio": 0.304,
+      "growth_runs": [
+        2,
+        1,
+        1,
+        3,
+        3,
+        3,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 10
+    },
+    {
+      "file": "One Drop.txt",
+      "title": "One Drop",
+      "pages": 46,
+      "panels": 184,
+      "merged_pages": 16,
+      "growth_pages": 12,
+      "growth_ratio": 0.261,
+      "growth_runs": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        3,
+        2
+      ],
+      "longest_run": 3,
+      "cast": 3
+    },
+    {
+      "file": "Daybird 6.txt",
+      "title": "Daybird 6",
+      "pages": 44,
+      "panels": 175,
+      "merged_pages": 16,
+      "growth_pages": 14,
+      "growth_ratio": 0.318,
+      "growth_runs": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 10
+    },
+    {
+      "file": "Superior.txt",
+      "title": "Superior",
+      "pages": 44,
+      "panels": 176,
+      "merged_pages": 14,
+      "growth_pages": 11,
+      "growth_ratio": 0.25,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        4
+      ],
+      "longest_run": 4,
+      "cast": 3
+    },
+    {
+      "file": "tStScncOfFMG (2).txt",
+      "title": "The Sweet Science of FMG",
+      "pages": 43,
+      "panels": 172,
+      "merged_pages": 0,
+      "growth_pages": 10,
+      "growth_ratio": 0.233,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 1,
+      "cast": 9
+    },
+    {
+      "file": "Not Exactly as Planned.txt",
+      "title": "Not Exactly as Planned",
+      "pages": 41,
+      "panels": 164,
+      "merged_pages": 16,
+      "growth_pages": 20,
+      "growth_ratio": 0.488,
+      "growth_runs": [
+        6,
+        3,
+        2,
+        1,
+        2,
+        3,
+        1,
+        2
+      ],
+      "longest_run": 6,
+      "cast": 6
+    },
+    {
+      "file": "The Omega Device (1).txt",
+      "title": "The Omega Device",
+      "pages": 41,
+      "panels": 163,
+      "merged_pages": 14,
+      "growth_pages": 12,
+      "growth_ratio": 0.293,
+      "growth_runs": [
+        3,
+        1,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 7
+    },
+    {
+      "file": "The Crown of Abuul (1).txt",
+      "title": "The Crown of Abuul",
+      "pages": 39,
+      "panels": 153,
+      "merged_pages": 13,
+      "growth_pages": 13,
+      "growth_ratio": 0.333,
+      "growth_runs": [
+        1,
+        4,
+        1,
+        1,
+        1,
+        1,
+        4
+      ],
+      "longest_run": 4,
+      "cast": 6
+    },
+    {
+      "file": "The Curse.txt",
+      "title": "The Curse",
+      "pages": 38,
+      "panels": 152,
+      "merged_pages": 14,
+      "growth_pages": 10,
+      "growth_ratio": 0.263,
+      "growth_runs": [
+        1,
+        2,
+        1,
+        2,
+        1,
+        1,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 5
+    },
+    {
+      "file": "The Power Chamber.txt",
+      "title": "The Power Chamber",
+      "pages": 35,
+      "panels": 139,
+      "merged_pages": 13,
+      "growth_pages": 9,
+      "growth_ratio": 0.257,
+      "growth_runs": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 2,
+      "cast": 5
+    },
+    {
+      "file": "Ultra-Gal 4 _ Domina the Invincible.txt",
+      "title": "Ultra-Gal 4 : Domina the Invincible",
+      "pages": 35,
+      "panels": 139,
+      "merged_pages": 11,
+      "growth_pages": 7,
+      "growth_ratio": 0.2,
+      "growth_runs": [
+        1,
+        1,
+        3,
+        2
+      ],
+      "longest_run": 3,
+      "cast": 9
+    },
+    {
+      "file": "The Ultra-Cool Ultra-Origin of Ultra-Gal (1).txt",
+      "title": "The Ultra-Cool Ultra-Origin of Ultra-Gal!",
+      "pages": 34,
+      "panels": 135,
+      "merged_pages": 6,
+      "growth_pages": 5,
+      "growth_ratio": 0.147,
+      "growth_runs": [
+        3,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 5
+    },
+    {
+      "file": "Rivals.txt",
+      "title": "Rivals",
+      "pages": 31,
+      "panels": 124,
+      "merged_pages": 12,
+      "growth_pages": 12,
+      "growth_ratio": 0.387,
+      "growth_runs": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "longest_run": 3,
+      "cast": 6
+    },
+    {
+      "file": "The Power Belt.txt",
+      "title": "The Power Belt",
+      "pages": 30,
+      "panels": 120,
+      "merged_pages": 10,
+      "growth_pages": 10,
+      "growth_ratio": 0.333,
+      "growth_runs": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "longest_run": 4,
+      "cast": 5
+    },
+    {
+      "file": "Ultra-Gal 3_ Evil-Gal.txt",
+      "title": "Ultra-Gal 3: Evil-Gal",
+      "pages": 30,
+      "panels": 120,
+      "merged_pages": 10,
+      "growth_pages": 8,
+      "growth_ratio": 0.267,
+      "growth_runs": [
+        3,
+        2,
+        3
+      ],
+      "longest_run": 3,
+      "cast": 3
+    },
+    {
+      "file": "tCrshFrml (4).txt",
+      "title": "The CRUSH Formula",
+      "pages": 30,
+      "panels": 120,
+      "merged_pages": 14,
+      "growth_pages": 11,
+      "growth_ratio": 0.367,
+      "growth_runs": [
+        4,
+        2,
+        1,
+        3,
+        1
+      ],
+      "longest_run": 4,
+      "cast": 8
+    },
+    {
+      "file": "The Goddess\u2019s Day.txt",
+      "title": "The Goddess\u2019s Day",
+      "pages": 28,
+      "panels": 109,
+      "merged_pages": 10,
+      "growth_pages": 8,
+      "growth_ratio": 0.286,
+      "growth_runs": [
+        1,
+        1,
+        2,
+        2,
+        1,
+        1
+      ],
+      "longest_run": 2,
+      "cast": 1
+    },
+    {
+      "file": "Social Order.txt",
+      "title": "Social Order",
+      "pages": 27,
+      "panels": 108,
+      "merged_pages": 14,
+      "growth_pages": 13,
+      "growth_ratio": 0.481,
+      "growth_runs": [
+        3,
+        3,
+        3,
+        4
+      ],
+      "longest_run": 4,
+      "cast": 3
+    },
+    {
+      "file": "Project_ Failsafe.txt",
+      "title": "Project: Failsafe",
+      "pages": 23,
+      "panels": 92,
+      "merged_pages": 6,
+      "growth_pages": 6,
+      "growth_ratio": 0.261,
+      "growth_runs": [
+        1,
+        3,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 8
+    },
+    {
+      "file": "The Island Idol.txt",
+      "title": "The Island Idol",
+      "pages": 22,
+      "panels": 88,
+      "merged_pages": 5,
+      "growth_pages": 5,
+      "growth_ratio": 0.227,
+      "growth_runs": [
+        3,
+        2
+      ],
+      "longest_run": 3,
+      "cast": 0
+    },
+    {
+      "file": "Construction Site Growth.txt",
+      "title": "Construction Site Growth",
+      "pages": 21,
+      "panels": 84,
+      "merged_pages": 13,
+      "growth_pages": 8,
+      "growth_ratio": 0.381,
+      "growth_runs": [
+        6,
+        2
+      ],
+      "longest_run": 6,
+      "cast": 3
+    },
+    {
+      "file": "The Hotter Sister.txt",
+      "title": "The Hotter Sister",
+      "pages": 21,
+      "panels": 84,
+      "merged_pages": 0,
+      "growth_pages": 1,
+      "growth_ratio": 0.048,
+      "growth_runs": [
+        1
+      ],
+      "longest_run": 1,
+      "cast": 8
+    },
+    {
+      "file": "Daughter of Hercules!.txt",
+      "title": "Daughter of Hercules!",
+      "pages": 20,
+      "panels": 84,
+      "merged_pages": 7,
+      "growth_pages": 6,
+      "growth_ratio": 0.3,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "longest_run": 2,
+      "cast": 6
+    },
+    {
+      "file": "RgRsofaGddss.txt",
+      "title": "Rogue: Rise of a Goddess",
+      "pages": 20,
+      "panels": 77,
+      "merged_pages": 4,
+      "growth_pages": 7,
+      "growth_ratio": 0.35,
+      "growth_runs": [
+        1,
+        1,
+        2,
+        1,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 5
+    },
+    {
+      "file": "Stone of Desire.txt",
+      "title": "Stone of Desire",
+      "pages": 20,
+      "panels": 78,
+      "merged_pages": 8,
+      "growth_pages": 4,
+      "growth_ratio": 0.2,
+      "growth_runs": [
+        1,
+        3
+      ],
+      "longest_run": 3,
+      "cast": 2
+    },
+    {
+      "file": "Ultra-Gal 5_ Final Battle!.txt",
+      "title": "Ultra-Gal 5: Final Battle!",
+      "pages": 20,
+      "panels": 80,
+      "merged_pages": 11,
+      "growth_pages": 7,
+      "growth_ratio": 0.35,
+      "growth_runs": [
+        2,
+        3,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 2
+    },
+    {
+      "file": "QSA_ Quantum Strength Amplifier.txt",
+      "title": "QSA: Quantum Strength Amplifier",
+      "pages": 19,
+      "panels": 76,
+      "merged_pages": 0,
+      "growth_pages": 4,
+      "growth_ratio": 0.211,
+      "growth_runs": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "longest_run": 1,
+      "cast": 5
+    },
+    {
+      "file": "Ultra-Gal_ Domina\u2019s Return.txt",
+      "title": "Ultra-Gal: Domina\u2019s Return!",
+      "pages": 18,
+      "panels": 74,
+      "merged_pages": 6,
+      "growth_pages": 6,
+      "growth_ratio": 0.333,
+      "growth_runs": [
+        2,
+        2,
+        1,
+        1
+      ],
+      "longest_run": 2,
+      "cast": 3
+    },
+    {
+      "file": "Larry Kotter and the Ultimate Wand (1).txt",
+      "title": "Larry Kotter and the Ultimate Wand",
+      "pages": 16,
+      "panels": 64,
+      "merged_pages": 5,
+      "growth_pages": 4,
+      "growth_ratio": 0.25,
+      "growth_runs": [
+        1,
+        1,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 7
+    },
+    {
+      "file": "The Power of Chocolate.txt",
+      "title": "The Power of Chocolate",
+      "pages": 16,
+      "panels": 64,
+      "merged_pages": 8,
+      "growth_pages": 8,
+      "growth_ratio": 0.5,
+      "growth_runs": [
+        3,
+        3,
+        2
+      ],
+      "longest_run": 3,
+      "cast": 2
+    },
+    {
+      "file": "Grow_Grow_Grow.docx.txt",
+      "title": "Grow, Grow, Grow!",
+      "pages": 13,
+      "panels": 52,
+      "merged_pages": 3,
+      "growth_pages": 4,
+      "growth_ratio": 0.308,
+      "growth_runs": [
+        1,
+        1,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 2
+    },
+    {
+      "file": "Rivalry.txt",
+      "title": "Rivalry",
+      "pages": 13,
+      "panels": 52,
+      "merged_pages": 8,
+      "growth_pages": 5,
+      "growth_ratio": 0.385,
+      "growth_runs": [
+        3,
+        1,
+        1
+      ],
+      "longest_run": 3,
+      "cast": 4
+    },
+    {
+      "file": "Gamma Babes (1).txt",
+      "title": "Gamma Babes",
+      "pages": 11,
+      "panels": 44,
+      "merged_pages": 4,
+      "growth_pages": 4,
+      "growth_ratio": 0.364,
+      "growth_runs": [
+        2,
+        2
+      ],
+      "longest_run": 2,
+      "cast": 2
+    },
+    {
+      "file": "Unstable Omnipotence.txt",
+      "title": "Unstable Omnipotence",
+      "pages": 8,
+      "panels": 29,
+      "merged_pages": 2,
+      "growth_pages": 2,
+      "growth_ratio": 0.25,
+      "growth_runs": [
+        1,
+        1
+      ],
+      "longest_run": 1,
+      "cast": 2
+    },
+    {
+      "file": "Superior_ New Ending.txt",
+      "title": "Superior: New Ending",
+      "pages": 7,
+      "panels": 28,
+      "merged_pages": 2,
+      "growth_pages": 2,
+      "growth_ratio": 0.286,
+      "growth_runs": [
+        2
+      ],
+      "longest_run": 2,
+      "cast": 3
+    },
+    {
+      "file": "A Moving Experience.txt",
+      "title": "A Moving Experience",
+      "pages": 5,
+      "panels": 20,
+      "merged_pages": 1,
+      "growth_pages": 1,
+      "growth_ratio": 0.2,
+      "growth_runs": [
+        1
+      ],
+      "longest_run": 1,
+      "cast": 2
+    }
+  ]
+}
