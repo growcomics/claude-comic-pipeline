@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (🔎 Detail / ECU block — the missing shot type, v2.7.2)
+
+### Added
+
+- **🔎 Detail button in 3DMC Studio Tools (v2.7.1 → v2.7.2).** From an owner prompt — *"Cinematic focus: f/1.8 shallow depth of field — background melts into soft bokeh, only her [muscle group] tack-sharp. Strong rim light from behind-left traces the muscle contour…"* Shipped as its own **shot type**, not as a lighting add-on, because that is what it actually is: every other framing block in the panel is mid-thigh-up hero staging, while `cinematic-framing.md`'s Variety check wants **at least one ECU per 10 panels** and Pattern 2 (the pull-out) opens on `ecu-region`. The panel had no button for it. It asks which region the shot is on when clicked, then fills the frame with it.
+- Four edits to the owner's wording, each bought with a documented failure in `cinematic-framing.md` → *Lighting-pass fragments → Hard rules* (validated 2026-07-09, 7 batches / 28 images): **(1)** the region is asked for on click and interpolated, never left as a bare `[muscle group]` — an unfilled placeholder makes the model hunt for what to fill in — and the block ships a real no-answer variant ("pick the single muscle group that carries this beat") rather than a bracket; **(2)** macro **100–135mm** added per the lens table (100mm+ = ECU-region, isolation), since an f-stop states the aperture but not the magnification; **(3)** "strong rim light" → bright rim **plus** the anti-glow guard, because "strong, hot" rim renders a literal glowing outline (sticker/aura look) on ~half the variants; **(4)** the defocus is named as **optical depth of field, not a softening of the render**, reconciling it with the `no added blur` clause that closes all 19 lighting schemes *and* `PB_LIGHT_V1` — without it the two sentences fight inside one prompt.
+- **The same words are right here and wrong in a lighting pass**, which is why this is a separate button rather than a change to Cine+Light: the Hard-rules table forbids "f/1.8, only her [X] tack-sharp" *in a lighting pass*, because there the shot already exists and that phrasing re-crops it into a macro ECU. That re-crop is exactly the point of a detail shot. So 🔎 Detail is for fresh generations (or an i2i reframe with the panel as ref and **no** composition lock), composes with 💡 Light across all 19 schemes, and must not be stacked with Cine+Light, whose framing half fights it. Written up in `cinematic-framing.md` under the `ecu-region` fragment.
+- **Still unvalidated on credits.** The wording is assembled from validated pieces, but this exact block has never been generated with — it joins the v2.7.0 lighting burn already owed.
+
+### Changed
+
+- **`askName` generalized** so a block can supply its own question, its own pre-filled default, and opt out of upper-casing the answer (`askQuestion` / `askDefault` / `askUpper`). 🧍 Char sheet is unchanged — same question, still upper-cases the name plate — verified by regression in the headless harness, alongside the new block's named / blank / cancelled paths and a check that a `🔎 Detail + 💡 Light` prompt never carries `bokeh` and `no added blur` without the reconciling clause between them.
+
 ## 2026-08-09 (✏️ gr_update — revise a saved script without regenerating it)
 
 ### Added
