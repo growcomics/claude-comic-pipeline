@@ -58,8 +58,8 @@ Per `feedback_dont_delete_git_backup.md`. It's an intentional pre-rewrite histor
 ## Generation defaults (active across all comic work here)
 
 - **Backend**: Higgsfield direct via MCP (`mcp__c26fa20c-...`) — never browser-drive Higgsfield. Per `feedback_higgsfield_mcp.md`.
-- **Model**: `nano_banana_flash` default. `nano_banana_pro` only when explicitly preferred. Per `feedback_higgsfield_model_flash.md`.
-- **Count**: 1 per Higgsfield submit (paid). 4 per Flow submit (free). Per `feedback_higgsfield_count_one.md`.
+- **Model**: ⚠️ `nano_banana_flash` **is gone from the Higgsfield catalog** (verified 2026-08-09 — the call errors `unknown model`). Live ids: `nano_banana_2` (fast default), `nano_banana_pro`, `nano_banana`, `nano_banana_2_lite`. Requesting `nano_banana_pro` currently returns a job tagged `nano_banana_2`, so verify the returned `model` field rather than assuming. Supersedes `feedback_higgsfield_model_flash.md`.
+- **Count**: 1 per Higgsfield submit (paid) for one-off work. 4 per Flow submit (free). ⚠️ **Exception — the bakeoff lane**: use ONE `count:N` call per beat, never N sequential `count:1` calls. These models take no seed, so identical sequential submits collide — measured 2026-08-09: 4 sequential `count:1` calls returned 3 distinct images (two byte-identical), a single `count:4` call returned 4 distinct. Sequential wastes ~25% of spend and shrinks the variant pool over-generation depends on. Per `feedback_higgsfield_count_one.md`, amended.
 - **Resolution**: 1k default. 2k only when explicitly requested. Per `feedback_higgsfield_resolution.md`.
 - **Style**: photoreal CGI / DAZ3D. NOT 2D-stylized. Per `feedback_comic_style_3d.md`. Only L19 lettering and SFX overlays are 2D — and that overlay scope is explicitly bounded.
 - **Coverage**: `always_clothed: true` is the default for every project. Garments may strain, stretch, or tear at seams; coverage of breasts/buttocks/groin is always preserved.

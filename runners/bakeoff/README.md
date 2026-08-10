@@ -85,9 +85,25 @@ undone entry — anchors + refs attached as images, `prompt` (+`style`) as text 
 and writes them to the `out` paths. Then `collect` picks them up.
 
 - **higgsfield-mcp** — a Claude session with the Higgsfield MCP: per entry, run
-  `generate_image` (`{"params":{model:"nano_banana_flash", resolution:"1k",
-  count:1, ...medias}}`) sequentially `count` times (or `generate_image_batch`),
-  download results to `out`. PAID — flash by default, check credits first.
+  `generate_image` (`{"params":{model:"nano_banana_pro", resolution:"1k",
+  count:<N>, ...medias}}`) as ONE call per entry, download results to `out`.
+  PAID (~2 credits/image at 1k) — check credits first.
+  **⚠️ Two corrections from the first live run (2026-08-09), both of which would
+  have failed or degraded the nightly driver:**
+  1. `nano_banana_flash` **no longer exists** in the Higgsfield catalog — the
+     call errors with `unknown model`. Current image ids: `nano_banana_2`,
+     `nano_banana_pro`, `nano_banana`, `nano_banana_2_lite`. Note that requesting
+     `nano_banana_pro` currently comes back tagged `nano_banana_2` in the job —
+     the API substitutes silently, so don't claim Pro was used without checking
+     the returned `model` field.
+  2. **Use ONE `count:N` call per entry, NOT N sequential `count:1` calls.**
+     These models take no seed parameter, so identical sequential submissions
+     collide: four sequential `count:1` calls returned only **3 distinct images**
+     (two byte-identical, same MD5, different job ids), while a single `count:4`
+     call returned **4 distinct**. Sequential burns ~25% of spend on duplicates
+     and shrinks the variant pool the whole lane depends on. This overrides the
+     general "count=1 per Higgsfield submit" house rule *for this lane*, where
+     distinct variants are the entire point.
 - **flow-chrome** — a Claude session driving Google Flow via the Chrome
   extension (Omni attach flow, Nano Banana Pro, x4). FREE with Pro. Verify the
   model + account every submit (house rules).

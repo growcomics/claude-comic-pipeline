@@ -25,6 +25,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **`askName` generalized** so a block can supply its own question, its own pre-filled default, and opt out of upper-casing the answer (`askQuestion` / `askDefault` / `askUpper`). 🧍 Char sheet is unchanged — same question, still upper-cases the name plate — verified by regression in the headless harness, alongside the new block's named / blank / cancelled paths and a check that a `🔎 Detail + 💡 Light` prompt never carries `bokeh` and `no added blur` without the reconciling clause between them.
 
+## 2026-08-09 (🔥 First live bakeoff run — two driver bugs found the hard way)
+
+### Fixed
+
+- **`nano_banana_flash` no longer exists in the Higgsfield catalog.** The very first live generation call errored `unknown model`. Both `CLAUDE.md` and the bakeoff README named it as the default, so **tonight's night-shift driver would have failed on its first entry**. Live image ids are `nano_banana_2`, `nano_banana_pro`, `nano_banana`, `nano_banana_2_lite`. Also observed: requesting `nano_banana_pro` returns a job tagged `nano_banana_2` — the API substitutes silently, so the returned `model` field must be checked rather than assumed.
+- **Sequential `count:1` submissions produce duplicate variants.** These models expose no seed parameter, so identical back-to-back submissions collide: four sequential `count:1` calls for the cast-lineup beat returned **3 distinct images** (two byte-identical, same MD5, different job ids), while a single `count:4` call for the next beat returned **4 distinct**. That burns ~25% of spend and shrinks the variant pool the whole lane is built on. The general "count=1 per Higgsfield submit" house rule is now explicitly overridden **for the bakeoff lane**, where distinct variants are the entire point. Documented in `CLAUDE.md` and the README driver protocol.
+
+### Changed
+
+- `runners/bakeoff/seam-and-stone-refs.json` claimed out of `queue/` for a live laptop-driven run (queue is one-driver; the mini must not double-claim) and switched `flow-chrome` → `higgsfield-mcp`, because this laptop's Flow session is the **marrtrobinson** account, not the mini's growcomics. Cost measured at ~2 credits/image at 1k, so the full 12-beat sheet is ~96 credits of 5,848.
+- Run `bo-20260809-205555`: cast lineup (3 distinct of 4) and Marla face card (4 distinct) generated. **Paused before the remaining 10 beats** — the cast lineup sets the house look for all 22 pages and that style call is the owner's, per the lineup-first doctrine.
+
 ## 2026-08-09 (🎬 Seam and Stone into production — shotlist + bakeoff refs queued)
 
 ### Added
