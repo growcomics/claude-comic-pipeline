@@ -46,6 +46,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
   `studio/data/bakeoff-yield.json`, cap 500 runs); `cc.php` gained the 🎯 Bakeoff Yield trend
   card (clean-variant % + ▲/▼ vs prior run, beats cleared, human queue, defects/shipped).
   What's New entry `upd-bakeoff-lane` posted.
+**Fixed** (from the live validation run `bo-validation-20260809`, 26 real Flow generations
+  re-judged in studio project `bakeoff-validation`)
+- Ingest doesn't echo the stored filename → board files now resolved by unique `gen` id.
+- Image magic bytes sniffed for the orig extension (JPEG-under-.png broke every qascan mime).
+- Stage B pluggable via `<run>/stageb-verdicts.json` (external fresh-context judge) for hosts
+  without `claude` CLI auth.
+- Validation result: stage A emitted registry IDs on real defects (CAST-02 ×18, PROP-01 ×7,
+  BODY-05, LET-02), defect-injected retry cleared one beat, one beat exhausted retries into
+  the flagged human queue, 3 winners landed accepted+`judge-pick`, yield pushed live.
+  Measured clean-variant rate 19.2% — matching the ~20% single-shot diagnosis.
+
 - `research/rule-diet-report.md` — report-only classification of all 38 L-lessons:
   22 mechanical attach-requirements, 15 post-gen detectors (registry IDs mapped), 1 strict
   prompt-prose-only wish (L15 glamour anchor, top prune candidate). Pruning stays an owner
