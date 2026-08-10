@@ -766,6 +766,35 @@ if ($do === 'gr_fixbylines') {
     gr_jout(['ok'=>true, 'rewritten'=>count($done), 'alreadyOk'=>$skipped, 'titles'=>$done]);
 }
 
+// Replace a saved script's text — hand revisions after reader/patron feedback.
+// Keeps the id, re-scores the structure, re-reads the synopsis, and stacks the
+// previous text into revisions[] so an edit can never lose the version somebody
+// already approved.
+if ($do === 'gr_update') {
+    $id  = (string)($_POST['id'] ?? '');
+    $new = trim((string)($_POST['script'] ?? ''));
+    if ($new === '') gr_jout(['ok'=>false,'err'=>'No script text supplied.']);
+    $rec = gr_lib_get($id);
+    if (!$rec) gr_jout(['ok'=>false,'err'=>'No such saved script.']);
+
+    $revs = is_array($rec['revisions'] ?? null) ? $rec['revisions'] : [];
+    $revs[] = ['script'=>(string)($rec['script'] ?? ''), 'report'=>$rec['report'] ?? null,
+               'savedAt'=>(string)($rec['updatedAt'] ?? $rec['createdAt'] ?? date('c')),
+               'note'=>mb_substr(trim((string)($_POST['why'] ?? '')), 0, 300)];
+    if (count($revs) > 10) $revs = array_slice($revs, -10);
+
+    $rec['revisions'] = $revs;
+    $rec['script']    = $new;
+    $rec['report']    = gr_report(gr_fix_byline($new));
+    $rec['synopsis']  = gr_synopsis($new);
+    $rec['updatedAt'] = date('c');
+    if (trim((string)($_POST['title'] ?? '')) !== '') $rec['title'] = mb_substr(trim((string)$_POST['title']), 0, 80);
+    $rec = gr_lib_save($rec);
+
+    gr_jout(['ok'=>true, 'id'=>$rec['id'], 'title'=>$rec['title'], 'report'=>$rec['report'],
+             'synopsis'=>$rec['synopsis'], 'revisions'=>count($revs), 'library'=>gr_lib_list('active')]);
+}
+
 if ($do === 'gr_list') {
     $st = (string)($_POST['status'] ?? 'active');
     gr_jout(['ok'=>true, 'library'=>gr_lib_list($st === 'trashed' ? 'trashed' : 'active')]);

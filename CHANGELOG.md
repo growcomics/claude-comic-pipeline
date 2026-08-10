@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (✏️ gr_update — revise a saved script without regenerating it)
+
+### Added
+
+- **`gr_update` verb.** A patron gave line-level feedback on a generated script (*"I want Jess' fragment there at the end to stop glowing because the moment Marla slams her hand down we see the energy snake into her"*) and there was no way to act on it — the library could save, star, rename and trash, but not edit. Regenerating would have thrown away everything the reader already approved. `gr_update` replaces a saved script's text in place, keeps the id, re-scores the structure, re-reads the synopsis, and **stacks the previous text into `revisions[]` (last 10) so an edit can never lose an approved version.**
+- First use: *Seam and Stone* (`05df6af7aa`) revised to the patron's note — the fragment in Jess's pocket flares on Marla's hand-slam, the energy snakes across the grass into her palm, and the stone ends grey and dead. Re-scored **clean** (22pp · growth 27.3% · merges 27.3% · dominance · apotheosis). Two knock-ons worth noting: Marla's "Relax. Nobody's getting hurt today." is gone, since it contradicted a ground-cracking slam in the same panel; and the closing `Note:` sequel hook is closed by design — the fragment no longer glows, which is exactly what was asked for.
+
 ## 2026-08-09 (🌙 Night-shift worker becomes the bakeoff lane's generation driver)
 
 **Added**
