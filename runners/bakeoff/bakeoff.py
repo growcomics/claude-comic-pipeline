@@ -142,6 +142,7 @@ def cmd_plan(args) -> None:
                                "label": r.get("label", "")})
         n = int(b.get("variants", 4))
         state["beats"][bid] = {
+            "cast": b.get("chars", []),
             "prompt": b["prompt"], "kind": b.get("kind", "panel"),
             "aspect": b.get("aspect", "3:4"), "variants": n,
             "anchors": local_anchors, "refs": local_refs,
@@ -259,6 +260,25 @@ def cmd_judge(args) -> None:
             analysis = qa.get("analysis", qa)
             typed = analysis.get("typed", [])
             resolved = reg.resolve(typed, beat_kind=b["kind"])
+            # Plan-vs-beat cast reconciliation: the project plan can under-list a
+            # panel's characters (seen with Gribble breakdowns), making ck_ai_qa
+            # flag a legitimate co-star as an extra. When the vision people-count
+            # doesn't exceed the beat contract's declared cast, CAST flags are
+            # observations, not blockers.
+            expected = len(b.get("cast") or [])
+            people = analysis.get("people")
+            # Stage doctrine applies to the TRANSFORMER only — a wrong-stage call
+            # on a beat without her is a scanner false positive by construction.
+            if b.get("cast") and "margo" not in [c.lower() for c in b["cast"]]:
+                for d in resolved:
+                    if d["id"] in ("BODY-03", "BODY-01", "BODY-02"):
+                        d["blocking"] = False
+                        d["note"] = "no transformer in beat cast"
+            if expected >= 1 and isinstance(people, int) and people <= expected:
+                for d in resolved:
+                    if d["id"] in ("CAST-01", "CAST-02", "CAST-03") and d["id"] != "CAST-01":
+                        d["blocking"] = False
+                        d["note"] = f"within beat cast ({people}<={expected}; plan under-lists)"
             v["stageA"] = {
                 "verdict": analysis.get("verdict"),
                 "registry": [d["id"] for d in resolved],

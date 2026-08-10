@@ -51,6 +51,10 @@ def resolve(typed: list[dict], *, beat_kind: str = "panel") -> list[dict]:
         blocking = sev == "blocker" or t.get("sev") == "high"
         if beat_kind == "sheet" and rid.startswith("LET-"):
             blocking = False
+        # Multi-phase sequence splashes (grid-break full-pagers) repeat the same
+        # character by design — duplicate-character is the point, not a defect.
+        if beat_kind == "sequence" and rid in ("CAST-01", "CAST-02", "CAST-03"):
+            blocking = False
         out.append({
             "id": rid, "slug": (rec or {}).get("slug", t.get("type")),
             "sev": sev, "model_sev": t.get("sev"), "detail": t.get("detail", ""),
