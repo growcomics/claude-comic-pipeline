@@ -12,6 +12,27 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (💳 Lighting credit-burn validation — Golden v2 loses the A/B, default reverts to v1)
+
+### Fixed
+
+- **`pbLight` default flipped `"golden"` (v2) → `"golden1"` (v1)** in `studio/extension/flow-studio-tools/content.js:342`. The credit burn owed since v2.7.0 (`INTEGRATION.md` §5 step 5, `feedback_validate_with_credits`) finally ran: 5 conditions × 4 seeds = 20 generations on Nano Banana Pro, one identical character ref (`74a9bb22`), identical beat/camera/wardrobe/aspect — the lighting block the only variable, control verified from the exported Review manifest rather than assumed. **Golden v2 did not beat v1.** It tied on usable-panel rate (3/4 vs 3/4) and terminator variation (2/4 vs 2/4), failed to render either of the two ambient-occlusion locations its rewrite exists to add (collarbone notch faint in 1/4, calf split in 0/4), showed the *worst* silhouette-hugging rim of either arm in `goldenV2-3` despite shipping a "stronger anti-glow guard", and introduced a failure mode v1 has never shown — `goldenV2-3` rendered cool blue-grey, a Golden Rake with no golden. The best single image across both arms was `goldenV1-4`. v1 keeps its 28/28 production evidence and the default; v2 stays selectable. Caveat recorded: two of v2's four draws occluded the very anatomy its new claims describe, so those claims are *unproven*, not disproven. **The flip only reaches a fresh install** — `pbLight` persists in `chrome.storage.local` and the stored value wins over the default (`content.js:478`), so any browser that has touched the `Light:` dropdown keeps its stored scheme until the operator picks *Legacy → Golden v1* once or runs `chrome.storage.local.remove("pbLight")`.
+
+### Added
+
+- **`docs/posts/2026-08-09-lighting-validation.md` + `docs/posts/assets/2026-08-09-lighting-validation/`** — the full write-up and all 20 images with an `index.json` seed/timestamp log, per `feedback_validate_with_credits` ("commit the validation results into the pipeline repo"). Judged by a fresh-context subagent against the canonical rubrics passed verbatim by path, per `feedback_audit_via_subagent`.
+- **Venetian Slat half-lands.** The stripes genuinely deform over limbs — bars wrap the bicep cylinder, compress at the waist, and in `slat-3` the floor-plane stripe angle breaks cleanly from the body-plane stripes. But **across all four seeds the bars cross the chest/bra region as straight evenly-spaced lines**, which is exactly what the block's own wording calls "a mistake". Repeatable scheme-wide gap, logged as a defect and a candidate wording fix.
+- **Overcast Soft is the most fragile scheme tested** — 1/4 clean (`overcast-2`, which does prove volume can come from falloff + contained occlusion alone), 1 severe rim-light violation (`overcast-3`, continuous glowing silhouette outline).
+- **✏️ Drawn prefix validated: the painted-comic anchor holds in 4/4** — real ink contours, painted value blocking, no drift back to photoreal/CGI. Confirms the INTEGRATION.md §6.1 call to ship a separate prefix block rather than making `Render:` swap what 🎨 DAZ emits. The stripe *physics*, though, only fully transfer to the drawn medium in 1/4; the illustration variant appears to make deformation harder, not easier.
+
+### Deprecated
+
+- **The canonical-rubric path in `CLAUDE.md` is stale.** It (and `INTEGRATION.md`) cite `skills/continuity-check/qa-checklist.md` + `cinematic-framing.md`; neither file exists there. Both live at `skills/comic-production/references/`. The QA pass used the real path.
+
+### Not done
+
+- **🔎 Detail / ECU (v2.7.2) is still unvalidated on credits.** The browser was running **v2.7.1** — `flow-lighting.js` and all 20 `Light:` options were live, but the panel exposed no `detail` button, confirmed after a hard page reload. The unpacked extension must be reloaded at `chrome://extensions` before that lane can run. Still owed.
+
 ## 2026-08-09 (🔎 Detail / ECU block — the missing shot type, v2.7.2)
 
 ### Added

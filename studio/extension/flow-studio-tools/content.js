@@ -339,7 +339,14 @@
       closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale between figures, and not a single element sitting flat against the picture plane."
     }
   };
-  let pbCam = "vary", pbCast = "auto", pbLight = "golden", pbRender = "cgi";
+  // pbLight defaults to "golden1" (v1), NOT the tightened "golden" (v2). The 2026-08-09
+  // credit-burn A/B ran both on identical refs/beat/model/aspect, 4 seeds each: v2 tied v1
+  // on usable-panel rate (3/4 vs 3/4) and on terminator variation (2/4 vs 2/4), failed to
+  // render either of the two AO locations its rewrite exists to add (collarbone notch
+  // faint in 1/4, calf split in 0/4), and introduced a failure mode v1 does not have
+  // (goldenV2-3 rendered cool blue-grey — a "Golden Rake" with no golden). v1 keeps its
+  // 28/28 production record and the default. See docs/posts/2026-08-09-lighting-validation.md.
+  let pbCam = "vary", pbCast = "auto", pbLight = "golden1", pbRender = "cgi";
   function pbFramingText() {
     const c = PB_CAST[pbCast];
     return PB_CAM[pbCam].replace("%STAND%", c.stand) +

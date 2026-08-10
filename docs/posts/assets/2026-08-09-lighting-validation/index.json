@@ -1,0 +1,102 @@
+{
+ "slat-1.jpg": {
+  "seed": 32827,
+  "ts": "2026-08-10T04:03:49.028926Z",
+  "src": "outputs/ba26fb23-fd3e-412e-baba-907e2321fe92-out-0.jpg"
+ },
+ "slat-2.jpg": {
+  "seed": 871839,
+  "ts": "2026-08-10T04:03:49.226215Z",
+  "src": "outputs/fc75a71e-097d-490d-b1d2-171f6f0ec071-out-0.jpg"
+ },
+ "slat-3.jpg": {
+  "seed": 434598,
+  "ts": "2026-08-10T04:03:49.393009Z",
+  "src": "outputs/373c54c3-a95f-4855-a32b-110922bfc7a8-out-0.jpg"
+ },
+ "slat-4.jpg": {
+  "seed": 781685,
+  "ts": "2026-08-10T04:03:49.564819Z",
+  "src": "outputs/f7c02299-c16b-466a-a436-29a24b118ea7-out-0.jpg"
+ },
+ "overcast-1.jpg": {
+  "seed": 10219,
+  "ts": "2026-08-10T04:06:06.878067Z",
+  "src": "outputs/02a9d275-6ffa-41d4-99dc-8fb3fb85f2a3-out-0.jpg"
+ },
+ "overcast-2.jpg": {
+  "seed": 695471,
+  "ts": "2026-08-10T04:06:07.087134Z",
+  "src": "outputs/de847965-1b07-4671-91ea-dfbcdc0489a4-out-0.jpg"
+ },
+ "overcast-3.jpg": {
+  "seed": 902373,
+  "ts": "2026-08-10T04:06:07.368231Z",
+  "src": "outputs/5002575d-3951-4757-8f12-5b0fcc22329a-out-0.jpg"
+ },
+ "overcast-4.jpg": {
+  "seed": 215206,
+  "ts": "2026-08-10T04:06:07.709278Z",
+  "src": "outputs/2a00c51f-a25f-4d34-ad6c-6a2b5fe6f1ea-out-0.jpg"
+ },
+ "goldenV2-1.jpg": {
+  "seed": 678116,
+  "ts": "2026-08-10T04:07:20.896696Z",
+  "src": "outputs/2ce83e78-ab88-4def-a153-209d3cd21e92-out-0.jpg"
+ },
+ "goldenV2-2.jpg": {
+  "seed": 987365,
+  "ts": "2026-08-10T04:07:21.213186Z",
+  "src": "outputs/04f8d0f5-623d-49a8-ba2c-84ea42cfc66f-out-0.jpg"
+ },
+ "goldenV2-3.jpg": {
+  "seed": 951447,
+  "ts": "2026-08-10T04:07:21.316760Z",
+  "src": "outputs/06326701-bfb6-4aae-8209-4e64894d2789-out-0.jpg"
+ },
+ "goldenV2-4.jpg": {
+  "seed": 715563,
+  "ts": "2026-08-10T04:07:21.417727Z",
+  "src": "outputs/b9ef1f4d-38fb-4a1c-a323-d38f342dc25b-out-0.jpg"
+ },
+ "goldenV1-1.jpg": {
+  "seed": 264185,
+  "ts": "2026-08-10T04:08:26.362958Z",
+  "src": "outputs/2b96e14d-ffea-4a93-99c8-a364b33d82b8-out-0.jpg"
+ },
+ "goldenV1-2.jpg": {
+  "seed": 507993,
+  "ts": "2026-08-10T04:08:26.520428Z",
+  "src": "outputs/0d837847-a1e0-41bb-8c83-2d227a14cda0-out-0.jpg"
+ },
+ "goldenV1-3.jpg": {
+  "seed": 909015,
+  "ts": "2026-08-10T04:08:26.916755Z",
+  "src": "outputs/f47d1fd1-7d63-4a36-9551-8ecddd33912e-out-0.jpg"
+ },
+ "goldenV1-4.jpg": {
+  "seed": 115498,
+  "ts": "2026-08-10T04:08:27.382350Z",
+  "src": "outputs/b039877b-e903-494b-b079-dd5c513f4f38-out-0.jpg"
+ },
+ "slat-drawn-1.jpg": {
+  "seed": 947088,
+  "ts": "2026-08-10T04:09:43.019311Z",
+  "src": "outputs/911a0684-3633-463f-93bf-fadc2554c7a6-out-0.jpg"
+ },
+ "slat-drawn-2.jpg": {
+  "seed": 257374,
+  "ts": "2026-08-10T04:09:43.319772Z",
+  "src": "outputs/5ce964a6-1432-4834-b5b0-a370fca84111-out-0.jpg"
+ },
+ "slat-drawn-3.jpg": {
+  "seed": 951853,
+  "ts": "2026-08-10T04:09:43.565249Z",
+  "src": "outputs/418323ba-2dc2-4391-9dce-f9a3d961f2fc-out-0.jpg"
+ },
+ "slat-drawn-4.jpg": {
+  "seed": 911286,
+  "ts": "2026-08-10T04:09:43.785789Z",
+  "src": "outputs/76c863e8-c9ab-4c72-b146-e00378dfe489-out-0.jpg"
+ }
+}
