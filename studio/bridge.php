@@ -48,6 +48,31 @@ if ($key === '' || strlen($given) < 16 || !hash_equals($key, $given)) { http_res
 $do = $_POST['do'] ?? $_GET['do'] ?? '';
 if ($do === 'projects') bout(['ok'=>true,'projects'=>projects_all()]);
 
+// ---- bakeoff yield telemetry (runners/bakeoff lane) ------------------------
+// yield      POST stats=<json with runId> -> upsert into data/bakeoff-yield.json (cap 500 runs)
+// yieldstats GET [limit=30]               -> most recent runs for the cc.php trend card
+// Cross-project, so handled before the project gate. Registry-ID keyed defect counts ride
+// in defectsById; the trend (cleanVariantRate up, defectsPerShippedPanel down) is the KPI.
+if ($do === 'yield') {
+    $st = json_decode((string)($_POST['stats'] ?? ''), true);
+    if (!is_array($st) || ($st['runId'] ?? '') === '') bout(['ok'=>false,'error'=>'stats json with runId required']);
+    $st = array_intersect_key($st, array_flip(['runId','project','backend','at','beats','rolls',
+        'cleanVariantRate','beatsCleanFirstRoll','beatsClearedAfterRetry','beatsHumanQueue',
+        'clearRate','defectsPerShippedPanel','defectsById','creditsSpent']));
+    $st['receivedAt'] = date('c');
+    $n = s_with_lock(SDATA . '/bakeoff-yield.json', function($runs) use ($st) {
+        $runs = array_values(array_filter((array)$runs, fn($r) => (($r['runId'] ?? '') !== $st['runId'])));
+        $runs[] = $st;
+        if (count($runs) > 500) $runs = array_slice($runs, -500);
+        return ['data'=>$runs, 'result'=>count($runs)];
+    });
+    bout(['ok'=>true,'runs'=>$n]);
+}
+if ($do === 'yieldstats') {
+    $lim = max(1, min(200, (int)($_GET['limit'] ?? $_POST['limit'] ?? 30)));
+    bout(['ok'=>true,'runs'=>array_slice(array_values((array)s_read(SDATA . '/bakeoff-yield.json', [])), -$lim)]);
+}
+
 $id = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? $_GET['p'] ?? ''));
 // Verbs that don't operate on a single named project (worker queue verbs claim/heartbeat/done
 // span all projects; ingest_init creates one). genspec IS project-scoped, so it stays gated below.

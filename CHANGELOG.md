@@ -12,6 +12,45 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-09 (🎯 Bakeoff lane — anchor → over-generate → judge → retry → select)
+
+**Added**
+- `runners/bakeoff/` — the automated generation lane rebuilt around the owner's proven manual
+  method instead of specify→generate-once→hope. Diagnosis (agreed with owner 2026-08-05):
+  ~30 simultaneous prompt constraints × ~90-95% per-clause compliance ≈ ~20% clean panels —
+  single-shot can't converge, over-generation + selection (owner keep-rate ~8% on a 341-panel
+  project) is what works. Five pillars:
+  1. **Beat contract + fan-out** (`bakeoff.py plan`, `beatsheet.schema.json`) — a job = one
+     beat: anchor images + locked identity refs (via `genspec`) + action/camera-only prompt
+     (appearance prose linted per refs-are-truth) × N variants (default 4). Backend-pluggable
+     driver protocol (`jobsheet.json`): higgsfield-mcp / flow-chrome / flow-manual; the
+     night-shift worker drains this lane as a driver, not a rival runner.
+  2. **Two-stage judge** (`judge`, `registry.py`, `judge.py`) — Stage A: the live server-side
+     `ck_ai_qa` scan via `bridge.php do=qascan`, mapped to canonical DEFECT-REGISTRY IDs
+     (`defect-registry.json` is read, never redefined; blockers block, ref-sheets exempt from
+     lettering blocks per picks-profile B95). Stage B: fresh `claude -p` Sonnet ranker over
+     survivors, rubrics passed by path and read verbatim, weights calibrated on the owner's
+     REAL picks (`research/picks-profile-eva.md`: camera/composition first, expression
+     tiebreaker only). The judge never grades its own generations.
+  3. **Retry loop** (`retry`) — zero-clean beats re-roll with the specific registry findings
+     injected as corrective clauses (`registry.RETRY_INJECTION`), max 2, then land FLAGGED
+     (`do=flag` + `needs-human` tag) in the human-review queue — never silently shipped.
+  4. **Selection** (`select`) — winner lands `accepted=true rating=good` + `judge-pick` tag via
+     `do=write` (existing board semantics); losers stay unrated/recoverable; an owner-accepted
+     panel in the same group is never overridden (flowfav invariant mirrored).
+  5. **Yield metric** (`stats`) — clean-variant rate/roll, beats cleared after retry, human-queue
+     count, defects-per-shipped-panel by registry ID → `data/bakeoff-yield.json` (repo) +
+     `do=yield` push to the studio.
+- **Live studio deploy** (fetch-live → edit → save → marker-verified, all prior features intact):
+  `bridge.php` gained cross-project `do=yield` / `do=yieldstats` (s_with_lock upsert into
+  `studio/data/bakeoff-yield.json`, cap 500 runs); `cc.php` gained the 🎯 Bakeoff Yield trend
+  card (clean-variant % + ▲/▼ vs prior run, beats cleared, human queue, defects/shipped).
+  What's New entry `upd-bakeoff-lane` posted.
+- `research/rule-diet-report.md` — report-only classification of all 38 L-lessons:
+  22 mechanical attach-requirements, 15 post-gen detectors (registry IDs mapped), 1 strict
+  prompt-prose-only wish (L15 glamour anchor, top prune candidate). Pruning stays an owner
+  decision; nothing deleted.
+
 ## 2026-08-09 (✍️ Attribution — generated scripts no longer carry Gribble's name)
 
 ### Fixed
