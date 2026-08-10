@@ -12,7 +12,30 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-09 (🎯 Bakeoff lane — anchor → over-generate → judge → retry → select)
+## 2026-08-09 (🌙 Night-shift worker becomes the bakeoff lane's generation driver)
+
+**Added**
+- `runners/bakeoff/queue/` — agreed beat-sheet drop location for the bakeoff lane.
+  Contract in its README: pending `*.json` sheets (validated against
+  `beatsheet.schema.json`) are drained oldest-first by the mac-mini night-shift
+  worker only; completion = `git mv` to `queue/done/` in the same commit as the
+  CHANGELOG entry; unrecoverable halts land in `queue/failed/` with a
+  `<sheet>.halt.txt` note; optional per-sheet `creditCap` (default 100 paid
+  gens/night). Why: the lane shipped with a pluggable driver protocol but no
+  handoff point — sheets had no place to wait for the driver.
+- `HANDOFF-MACMINI.md` §6 — the nightly driver duty end-to-end: pull → plan →
+  drive jobsheet per backend (higgsfield-mcp: mini's MCP session,
+  nano_banana_flash · 1k · count=1 sequential, credits checked first;
+  flow-chrome: mini's growcomics session, account + model verified per submit;
+  flow-manual: skipped) → collect/judge/retry loop → select → stats. Includes
+  the Stage B contingency: verify `claude -p --model sonnet` once per night;
+  on CLI failure use the `<run>/stageb-verdicts.json` external-judge hatch via
+  a fresh Sonnet subagent rather than the first-clean fallback — main-context
+  ranking stays prohibited.
+- `docs/CHARTER-ADDITION-bakeoff.md` — paste-ready draft of the duty for the
+  mini's local CHARTER.md (which lives on the mini, not in this repo).
+
+
 
 **Added**
 - `runners/bakeoff/` — the automated generation lane rebuilt around the owner's proven manual

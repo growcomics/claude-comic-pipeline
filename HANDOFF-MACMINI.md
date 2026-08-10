@@ -85,7 +85,70 @@ Doomer sheets, then scene ladders, then 46 pages — ALL chained.
 - NB Pro rate-limits bulk runs; NB2 is unlimited (~40s per x4). Picks are recoverable from
   Flow ids in the ledgers — local PNGs are cache, git is truth for text.
 
-## 6. After every banked item
+## 6. Nightly bakeoff driver duty (added 2026-08-09)
+
+The bakeoff lane (`runners/bakeoff/` — read its README.md first) is the new
+over-generate→judge→retry→select pipeline. **This machine is its generation
+DRIVER**: every night-shift run, after charter priorities, drain the queue.
+
+**Queue contract**: pending beat sheets live at `runners/bakeoff/queue/*.json`
+(see `runners/bakeoff/queue/README.md`). Oldest first. On completion, `git mv`
+the sheet to `queue/done/`; on unrecoverable halt, to `queue/failed/` with a
+`<sheet>.halt.txt` note.
+
+**Per sheet, the loop is:**
+
+```bash
+cd ~/Documents/claude-comic-pipeline && git pull --ff-only
+python3 runners/bakeoff/bakeoff.py plan --sheet runners/bakeoff/queue/<sheet>.json
+# -> runs/bo-.../jobsheet.json — now DRIVE it (see below)
+python3 runners/bakeoff/bakeoff.py collect --run runners/bakeoff/runs/bo-...
+python3 runners/bakeoff/bakeoff.py judge   --run ...
+python3 runners/bakeoff/bakeoff.py retry   --run ...
+# drive any new jobsheet entries, then collect+judge again, until no beat is 'retry'
+python3 runners/bakeoff/bakeoff.py select  --run ...
+python3 runners/bakeoff/bakeoff.py stats   --run ... --credits <paid gens spent>
+```
+
+**Driving the jobsheet** — per undone entry, attach `anchors[]` + `refs[]` as
+images, submit `prompt` (+`style`) as text, save results to the `out[]` paths:
+
+- `backend: higgsfield-mcp` — use THIS machine's Higgsfield MCP session.
+  `nano_banana_flash`, `1k`, `count:1`, submitted **sequentially** `count`
+  times per entry (house rule: 1 per paid submit). **Check credits before
+  starting**; PAID.
+- `backend: flow-chrome` — use THIS machine's growcomics Flow session via
+  Claude-in-Chrome. Confirm the active account is **growcomics** before any
+  submit (`skills/comic-production/references/flow-accounts.md`), and verify
+  the model pill every submit.
+- `backend: flow-manual` — not yours; skip the sheet (leave it pending).
+
+**Credit cap**: honor the sheet's `"creditCap"`; default **100 paid
+generations per night** across all sheets (Flow gens don't count). If the cap
+hits mid-run, stop driving, leave state resumable (every subcommand is
+idempotent), and note it in the wrap-up — do NOT move the sheet to `failed/`
+unless zero beats cleared.
+
+**Stage B judge prefers the `claude` CLI**: `judge` shells out to
+`claude -p ... --model sonnet`. This machine has a live claude CLI, so it
+should work — **verify once before the first judge of the night**
+(`claude -p "say ok" --model sonnet`). If the CLI errors, `judge` still
+completes: it falls back to first-clean with a logged note, and it checks
+`<run>/stageb-verdicts.json` first — so the better degraded path is to rank
+survivors yourself via a FRESH Sonnet subagent (rubrics by path, verbatim —
+mirror `judge.py`'s prompt) and write that file before running `judge`.
+Never rank in your own main context — the fresh-judge rule holds.
+
+**Wrap-up per sheet**: `git mv` the sheet to `queue/done/`, commit run-state
+text + the sheet move **with a dated CHANGELOG.md entry at the top** (per repo
+law), push. Flagged beats (`bakeoff,needs-human`) are expected output, not
+failures — mention their count in the night report.
+
+**Hard limits**: never touch `.git.backup-*`; never modify `projects/*/qa`
+gate scripts (bakeoff's judge is separate from the chained-protocol gates and
+does not replace them).
+
+## 7. After every banked item
 
 Update the project's ref-ledger/pages-log (via `bank.py` for chained items; manual ledger
 entry marked `"class": "bootstrap"` for bootstrap items, with variant ids + QA notes), update
