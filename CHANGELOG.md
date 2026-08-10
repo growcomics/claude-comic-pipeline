@@ -25,6 +25,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **`askName` generalized** so a block can supply its own question, its own pre-filled default, and opt out of upper-casing the answer (`askQuestion` / `askDefault` / `askUpper`). 🧍 Char sheet is unchanged — same question, still upper-cases the name plate — verified by regression in the headless harness, alongside the new block's named / blank / cancelled paths and a check that a `🔎 Detail + 💡 Light` prompt never carries `bokeh` and `no added blur` without the reconciling clause between them.
 
+## 2026-08-09 (🎬 Seam and Stone into production — shotlist + bakeoff refs queued)
+
+### Added
+
+- **`projects/seam-and-stone/`** — the patron commission (Olo's brief: overlooked redhead, a tear in reality, growth she keeps not noticing) taken from script to shot plan. `script.txt` is the revised 22-page script; `build_shotlist.py` parses it to `shotlist.json`.
+- **Breakdown is a parse, not an AI call, for this format.** A Gribble-format script is already panel-level, so there is no prose to break down — `creator.php?do=breakdown` was skipped deliberately rather than for lack of access (it is session-only, and neither it nor `bridge.php` was worth editing for this). The parser reuses the corpus reader, so **a merged `Panels 1, 2, 3 and 4-` page resolves to ONE slot** — 22 pages become **70 drawn slots, 6 of them full-page merges**, every one landing on a growth or spectacle beat.
+- `shotlist.json` carries per-slot camera, on-screen cast, dialogue, and **Marla's growth tier (1-6)** so the artist always knows what size she is. Camera mix: 41 medium / 18 establishing / 6 full-page / 5 ECU.
+- **`runners/bakeoff/queue/seam-and-stone-refs.json`** — stage-one beat sheet queued for the night-shift driver: 12 reference beats × 4 variants = **48 generations on `flow-chrome` (free)**. Cast lineup first (style propagates from it), then face cards for Marla/Jess/Annie, growth-ladder sheets for both women, and env plates for quad/field/tear-effect/dorm/court/science building. Validated against `beatsheet.schema.json`.
+- **Staged in two sheets on purpose.** `identityRefs` resolve against the project's LOCKED refs only (genspec doctrine), and this project had none — so panels cannot be queued until the reference sheets come back and are locked. The panel beat sheet gets generated from `shotlist.json` after that, with prior accepted panels available as anchors.
+
+### Fixed
+
+- Three defects caught by reading the first shotlist output rather than trusting it: characters named in *dialogue* were being listed as on-screen (a line about the Coach put him in a panel he is nowhere near — now on-screen cast comes from art direction only, with a separate `mentionedOnly` field); the `(Full page panel)- ` layout prefix was surviving into the action text; and the camera classifier was defaulting almost everything to `medium` (18 establishing shots were being missed).
+
 ## 2026-08-09 (✏️ gr_update — revise a saved script without regenerating it)
 
 ### Added

@@ -1,0 +1,91 @@
+{
+  "project": "seam-and-stone",
+  "backend": "flow-chrome",
+  "style": "Photoreal 3D CGI render, DAZ3D/Octane look, physically-based skin and fabric shading, cinematic key light with soft fill. NOT 2D illustration, NOT comic-book inking, NOT cel shading, NOT painterly, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed at all times; garments may strain and split at the seams but chest, torso and hips stay covered. Adults only. No background extras — only the named cast appears in frame.",
+  "beats": [
+    {
+      "id": "ref-cast-lineup",
+      "kind": "sheet",
+      "prompt": "Character lineup reference sheet. Three adult women standing side by side in a row against a plain neutral grey seamless backdrop, full body head to feet, even flat studio lighting, neutral relaxed standing pose, arms at sides, facing camera straight on. Left: MARLA, early twenties, long red hair, slight and unremarkable build, oversized grey hoodie and jeans, shoulders slightly hunched. Centre: JESS, early twenties, tall and athletic, blonde hair in a high ponytail, varsity jacket over athletic wear, confident stance. Right: ANNIE, early twenties, average build, short dark hair, casual sweater and leggings. Full-length wide shot, all three at correct relative height, camera at chest height. This sheet defines the house look for the whole book.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "ref-marla-face",
+      "kind": "sheet",
+      "prompt": "Character face reference card. Head-and-shoulders of MARLA, adult woman in her early twenties, long red hair, pale complexion, quiet guarded expression. Three views in one frame against a plain neutral grey backdrop: front three-quarter, straight-on front, and profile. Even flat studio lighting, no dramatic shadow, sharp focus on the face.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "ref-jess-face",
+      "kind": "sheet",
+      "prompt": "Character face reference card. Head-and-shoulders of JESS, adult woman in her early twenties, blonde hair pulled into a high ponytail, athletic and confident, faint smirk. Three views in one frame against a plain neutral grey backdrop: front three-quarter, straight-on front, and profile. Even flat studio lighting, sharp focus on the face.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "ref-annie-face",
+      "kind": "sheet",
+      "prompt": "Character face reference card. Head-and-shoulders of ANNIE, adult woman in her early twenties, short dark hair, open friendly face. Three views in one frame against a plain neutral grey backdrop: front three-quarter, straight-on front, and profile. Even flat studio lighting, sharp focus on the face.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "ref-marla-ladder",
+      "kind": "sheet",
+      "prompt": "Growth-stage size ladder reference sheet. The SAME adult woman with long red hair shown six times in a single row against a plain neutral grey backdrop with a consistent human-height scale marker behind her, full body, identical neutral standing pose and identical camera distance in every stage so the size change is unmistakable. Stage 1: slight, unremarkable, oversized hoodie. Stage 2: subtly broader through the shoulders, hoodie fitting tighter. Stage 3: clearly athletic and dense with muscle, hoodie sleeves straining and split at one shoulder seam. Stage 4: far beyond an elite female bodybuilder, shoulders more than two head-widths across, arms thicker than her own head, hoodie in shreds but still covering chest and hips. Stage 5: colossal, towering far past human scale. Stage 6: titanic, city-block scale. Each stage must be dramatically larger than the one before it, and overshoot the size rather than under-deliver.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "ref-jess-ladder",
+      "kind": "sheet",
+      "prompt": "Growth-stage size ladder reference sheet. The SAME adult woman with a blonde high ponytail shown three times in a single row against a plain neutral grey backdrop with a consistent human-height scale marker behind her, full body, identical neutral standing pose and camera distance in every stage. Stage 1: tall and athletic in a varsity jacket. Stage 2: hugely muscular, far beyond an elite female bodybuilder, jacket destroyed but athletic top and leggings still covering chest and hips. Stage 3: giant, roughly fifteen feet tall, clothing shredded to strips but coverage preserved. Each stage dramatically larger than the last.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-quad-dusk",
+      "kind": "sheet",
+      "prompt": "Empty location reference plate, no people. A university campus quad at dusk, brick academic buildings on three sides, criss-crossing footpaths across mown grass, low warm sunset light raking across the scene, long shadows. Wide establishing shot, camera at standing eye height.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-field-night",
+      "kind": "sheet",
+      "prompt": "Empty location reference plate, no people. A university athletic field at night lit only by moonlight, goalposts at one end, empty bleachers along one side, tree line in the background, dew on the grass. Wide establishing shot, camera at standing eye height, cool blue night grade.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-field-tear",
+      "kind": "sheet",
+      "prompt": "Effect reference plate, no people. A jagged vertical TEAR IN REALITY hovering a few feet above the grass of a moonlit athletic field — a rip in the air itself, edges crackling with violet-white energy, throwing hard purple light across the ground beneath it and casting its own shadows. Medium wide shot, camera at standing eye height. This is the story's signature effect and must stay visually consistent everywhere it appears.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-dorm",
+      "kind": "sheet",
+      "prompt": "Empty location reference plate, no people. A cramped university dorm room, single bed against one wall, cluttered study desk with a lamp and notebooks, small window, low warm morning light. Wide shot from the doorway, camera at standing eye height.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-court",
+      "kind": "sheet",
+      "prompt": "Empty location reference plate, no people. An indoor university volleyball court, polished wood floor with painted lines, net strung across the centre, padded far wall, retracted bleachers to one side, bright overhead sports lighting. Wide establishing shot from courtside, camera at standing eye height.",
+      "aspect": "16:9",
+      "variants": 4
+    },
+    {
+      "id": "env-science-dawn",
+      "kind": "sheet",
+      "prompt": "Empty location reference plate, no people. The exterior of a modern university science building at dawn, glass and concrete facade three or four storeys tall, low golden sunrise light along one face, wrecked lawn and a churned athletic field in the foreground. Wide establishing shot, camera low and angled slightly up to sell the building's height for later scale comparison.",
+      "aspect": "16:9",
+      "variants": 4
+    }
+  ]
+}

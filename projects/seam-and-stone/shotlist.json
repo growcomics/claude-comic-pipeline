@@ -1,0 +1,1430 @@
+{
+  "project": "seam-and-stone",
+  "title": "Seam and Stone",
+  "source": "script.txt",
+  "pages": 22,
+  "slots": 70,
+  "fullPageMerges": 6,
+  "note": "Merged slots are ONE full-page image, never a four-panel grid \u2014 that grid break is how the transformation is staged (70% of Gribble's merged pages are growth vs 1.7% of ordinary panels).",
+  "shots": [
+    {
+      "id": "p01s1",
+      "page": 1,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "Shot of a busy campus quad at dusk, students crisscrossing everywhere. We start off with MARLA, a quiet redhead in an oversized hoodie, walking through the crowd completely unnoticed.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Excuse me \u2014 sorry \u2014 coming through\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p01s2",
+      "page": 1,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "Nobody even looks at her. A guy walks directly into her path and doesn't apologize.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "...right, invisible again."
+        }
+      ]
+    },
+    {
+      "id": "p01s3",
+      "page": 1,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [
+        "Marla",
+        "Coach"
+      ],
+      "marlaTier": null,
+      "action": "We see her sit alone on a bench outside the science building, eating lunch by herself. In the background, a girl we'll call JESS \u2014 tall, blonde ponytail, varsity jacket \u2014 laughs loudly with a group.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Bench-warmer Marla! Coach still doesn't know your name, huh?"
+        }
+      ]
+    },
+    {
+      "id": "p01s4",
+      "page": 1,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "Marla winces, shrinking into her hoodie.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "It's Marla. Same as last year."
+        }
+      ]
+    },
+    {
+      "id": "p02s1",
+      "page": 2,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "Shot of the empty athletic field at night, moonlight only. Marla walks alone, cutting through on her way home.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Bench for three seasons running. Maybe I should just quit."
+        }
+      ]
+    },
+    {
+      "id": "p02s2",
+      "page": 2,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "She stops dead \u2014 ahead of her, hovering a few feet off the ground, is a jagged, glowing TEAR IN REALITY, crackling faint purple light across the grass.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "...what in the\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p02s3",
+      "page": 2,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "ecu",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "Close on her face, lit from below by the tear's glow, eyes wide.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "That was NOT there yesterday."
+        }
+      ]
+    },
+    {
+      "id": "p02s4",
+      "page": 2,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 1,
+      "action": "She reaches a trembling hand toward it, fingertips almost touching the light.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Okay. Okay. Just... touch it."
+        }
+      ]
+    },
+    {
+      "id": "p03s1",
+      "page": 3,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Marla's hand plunges into the tear and the whole field floods with light. Her hoodie sleeve rips at the shoulder seam as her arm visibly thickens, veins surfacing, her stance widening like something is pouring into her. She doesn't even notice her own sleeve tearing \u2014 her face shows only shock at the light itself, not at her body.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "AAAAHHH\u2014 I CAN'T LET GO\u2014!"
+        }
+      ]
+    },
+    {
+      "id": "p04s1",
+      "page": 4,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Shot of the field, quiet again. Marla stands alone, breathing hard, tear sealed shut behind her, a small dark fragment of rock glowing faintly in her fist.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "It just... closed. And I'm holding a rock."
+        }
+      ]
+    },
+    {
+      "id": "p04s2",
+      "page": 4,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "She flexes her hand around the fragment, not noticing her forearm is now noticeably more defined than it was on page 1.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Feels warm. Feels... good, actually."
+        }
+      ]
+    },
+    {
+      "id": "p04s3",
+      "page": 4,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "She stuffs it in her hoodie pocket and turns to leave, stepping over a low fence without slowing down \u2014 a fence that used to make her climb.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Nobody has to know about this."
+        }
+      ]
+    },
+    {
+      "id": "p04s4",
+      "page": 4,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Wide shot of her walking off, her silhouette just slightly broader through the shoulders than it was a page ago. She hasn't looked down once.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Just a rock. Whatever."
+        }
+      ]
+    },
+    {
+      "id": "p05s1",
+      "page": 5,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Shot of a cramped dorm room the next morning. Marla sits at her desk, taking notes for class, fragment sitting on the desk beside her, glowing faintly.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Didn't sleep much. Weird dreams. Felt like I was... stretching."
+        }
+      ]
+    },
+    {
+      "id": "p05s2",
+      "page": 5,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "ecu",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Close on her hand \u2014 she's gripping a pen so hard it's bending.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Huh?"
+        }
+      ]
+    },
+    {
+      "id": "p05s3",
+      "page": 5,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "The pen snaps clean in half in her fingers. She stares at the pieces, baffled.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "...that's never happened before."
+        }
+      ]
+    },
+    {
+      "id": "p05s4",
+      "page": 5,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Annie"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Her roommate ANNIE pokes her head in the doorway, staring at Marla oddly.",
+      "dialogue": [
+        {
+          "who": "Annie",
+          "line": "Did... did your desk chair always look that small under you?"
+        }
+      ]
+    },
+    {
+      "id": "p06s1",
+      "page": 6,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Shot of a college gym locker room. Jess, changing out of practice clothes, spots the fragment sticking half-out of Marla's gym bag across the row.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "What's THAT? Some kind of rock?"
+        }
+      ]
+    },
+    {
+      "id": "p06s2",
+      "page": 6,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 2,
+      "action": "Marla grabs her bag defensively, pulling it away.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "It's nothing. Found it. It's mine."
+        }
+      ]
+    },
+    {
+      "id": "p06s3",
+      "page": 6,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [
+        "Marla"
+      ],
+      "marlaTier": null,
+      "action": "Jess smirks, unconvinced, arms crossed.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Bench-warmer's got a secret rock. Sure. Whatever helps you sleep, Marla."
+        }
+      ]
+    },
+    {
+      "id": "p06s4",
+      "page": 6,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [
+        "Jess"
+      ],
+      "marlaTier": 2,
+      "action": "Marla walks off, gripping the bag tight \u2014 tight enough that the canvas strap is visibly straining in her fist, though she doesn't notice.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "It's NOTHING, Jess."
+        }
+      ]
+    },
+    {
+      "id": "p07s1",
+      "page": 7,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla",
+        "Coach"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Shot of the volleyball court, team practice in full swing. Marla sits on the bench as usual, fragment tucked in her jacket pocket, glowing faintly against the fabric.",
+      "dialogue": [
+        {
+          "who": "Coach",
+          "line": "Marla, you're up \u2014 Denise twisted her ankle."
+        }
+      ]
+    },
+    {
+      "id": "p07s2",
+      "page": 7,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Marla stands up fast, startled to actually be called.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Wait, ME? Really?"
+        }
+      ]
+    },
+    {
+      "id": "p07s3",
+      "page": 7,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "She jogs onto the court, rolling her shoulders \u2014 and her jacket seam pops audibly at the back.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "...did something just rip?"
+        }
+      ]
+    },
+    {
+      "id": "p07s4",
+      "page": 7,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess, on the other side of the net, eyes her suspiciously.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Since when do YOU have arms like that?"
+        }
+      ]
+    },
+    {
+      "id": "p08s1",
+      "page": 8,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Marla serves the ball \u2014 and it rockets off her palm like a cannon shot, blasting clean through the net and slamming into the far wall hard enough to crack the padding. Her jacket has split fully up the back, shoulders now wide and dense with muscle, easily twice the width of the girl standing next to her. She stares at her own hand in total confusion while the whole team gapes, frozen mid-motion.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "I\u2014 I didn't even swing that hard\u2014?"
+        },
+        {
+          "who": "Teammate",
+          "line": "That dented the WALL!"
+        }
+      ]
+    },
+    {
+      "id": "p09s1",
+      "page": 9,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla",
+        "Coach"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Shot of the coach's office after practice. Coach stares at Marla, who sits across from him looking sheepish, jacket held together with one hand.",
+      "dialogue": [
+        {
+          "who": "Coach",
+          "line": "Marla, that serve. Where has THAT been all season?"
+        }
+      ]
+    },
+    {
+      "id": "p09s2",
+      "page": 9,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [
+        "Coach"
+      ],
+      "marlaTier": 3,
+      "action": "Marla shrugs, genuinely unsure.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "I don't know, Coach. I just... felt strong today."
+        }
+      ]
+    },
+    {
+      "id": "p09s3",
+      "page": 9,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Outside the office window, unseen by either of them, Jess is watching through the glass, arms crossed, jaw tight. Jess (thought)- \"'Felt strong.' Sure.\"",
+      "dialogue": []
+    },
+    {
+      "id": "p09s4",
+      "page": 9,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "ecu",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Close on Jess's eyes narrowing.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "That rock. It's the rock."
+        }
+      ]
+    },
+    {
+      "id": "p10s1",
+      "page": 10,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Shot of Marla's dorm room at night, Marla asleep, fragment glowing softly on her nightstand. Caption- Later that night.",
+      "dialogue": []
+    },
+    {
+      "id": "p10s2",
+      "page": 10,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "The door creaks open. Jess slips in, silhouetted, spotting the glow immediately. Jess (whisper)- \"There you are.\"",
+      "dialogue": []
+    },
+    {
+      "id": "p10s3",
+      "page": 10,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess snatches the fragment off the nightstand. It flares bright in her grip.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Oh\u2014 OH, that's\u2014!"
+        }
+      ]
+    },
+    {
+      "id": "p10s4",
+      "page": 10,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Marla stirs slightly but doesn't wake. Jess bolts from the room, fragment clutched to her chest, practically glowing through her fingers. Jess (whisper)- \"Finally. MY turn.\"",
+      "dialogue": []
+    },
+    {
+      "id": "p11s1",
+      "page": 11,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Shot of the empty gym at night, moonlight through high windows. Jess stands alone, fragment held high, grinning.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Let's see what the invisible girl was hiding."
+        }
+      ]
+    },
+    {
+      "id": "p11s2",
+      "page": 11,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "The fragment flares blinding white. Jess grits her teeth as light pours up her arm.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "OH- OHHH THAT'S A LOT\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p11s3",
+      "page": 11,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Her varsity jacket splits at both shoulders at once, buttons popping off the front.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "I CAN FEEL IT \u2014 I CAN FEEL EVERYTHING\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p11s4",
+      "page": 11,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Wide shot: Jess now towers a full head over where she stood a panel ago, arms thick as a normal person's waist, jacket in tatters around her shoulders.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "This is what POWER feels like."
+        }
+      ]
+    },
+    {
+      "id": "p12s1",
+      "page": 12,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Shot of the quad, morning. Students stop and stare as Jess strides through, now taller than the doorway of the building behind her, jacket gone entirely, replaced with a gym shirt straining across her back.",
+      "dialogue": [
+        {
+          "who": "Student",
+          "line": "Is that... is that JESS?"
+        }
+      ]
+    },
+    {
+      "id": "p12s2",
+      "page": 12,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess flexes one arm just to hear the fabric of her sleeve tear further.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Mmm. Yes it is."
+        }
+      ]
+    },
+    {
+      "id": "p12s3",
+      "page": 12,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 3,
+      "action": "Marla comes running up, having realized the fragment is gone, stopping dead at the sight of Jess.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Jess?! You're\u2014 you're huge! Where's my rock?!"
+        }
+      ]
+    },
+    {
+      "id": "p12s4",
+      "page": 12,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess looks down at her \u2014 actually down, now, a full two feet of difference between them.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "YOUR rock? Honey, it's MINE now. And so is everything else around here."
+        }
+      ]
+    },
+    {
+      "id": "p13s1",
+      "page": 13,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [
+        "Jess"
+      ],
+      "marlaTier": 4,
+      "action": "Shot of the quad, a small crowd gathering at a safe distance. Marla stands her ground, fists clenched.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Give it back, Jess. It's not a toy."
+        }
+      ]
+    },
+    {
+      "id": "p13s2",
+      "page": 13,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [
+        "Marla"
+      ],
+      "marlaTier": null,
+      "action": "Jess laughs, crossing her enormous arms, sleeves audibly straining at the seams.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Not a toy? It's a THRONE, Marla. And thrones don't go to benchwarmers."
+        }
+      ]
+    },
+    {
+      "id": "p13s3",
+      "page": 13,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Jess reaches down and flicks Marla in the chest with one finger \u2014 Marla stumbles back several feet.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Run along now. Go sit on your bench."
+        }
+      ]
+    },
+    {
+      "id": "p13s4",
+      "page": 13,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "ecu",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Close on Marla's face, more furious than scared, watching Jess walk off toward the science building.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "This isn't over."
+        }
+      ]
+    },
+    {
+      "id": "p14s1",
+      "page": 14,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Shot of the science building at night. Jess stands before the very field where the tear first opened, fragment glowing in her hand, clearly hunting for more.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "If one piece did THIS, imagine the source."
+        }
+      ]
+    },
+    {
+      "id": "p14s2",
+      "page": 14,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "The tear rips open again in the air above the field, bigger and angrier than before, lightning-like cracks spreading from it.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "There you are, beautiful."
+        }
+      ]
+    },
+    {
+      "id": "p14s3",
+      "page": 14,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Marla arrives at the tree line, watching, unseen, fragment-light reflected in her eyes. Marla (thought)- \"She's going to open it all the way.\"",
+      "dialogue": []
+    },
+    {
+      "id": "p14s4",
+      "page": 14,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess reaches up toward the tear with both hands, grinning wide.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "MORE. GIVE ME MORE."
+        }
+      ]
+    },
+    {
+      "id": "p15s1",
+      "page": 15,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Jess plunges both hands into the tear and the whole field erupts in violent light. Her body swells massively \u2014 thighs splitting her leggings, shirt shredding down the spine, shoulders broadening past a doorway's width, hair whipping in a wind that isn't there. She's laughing, ecstatic, utterly unaware of Marla sprinting toward her from the tree line in the background, small and fast against the enormous glow.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "YESSS!!! I CAN FEEL THE WHOLE WORLD\u2014!!!"
+        }
+      ]
+    },
+    {
+      "id": "p16s1",
+      "page": 16,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Shot of the field, Jess now roughly fifteen feet tall, straddling the goalposts, remains of her shirt barely holding across her torso. Marla stands at her feet, tiny by comparison.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Jess! STOP! You don't know what that thing DOES to a person!"
+        }
+      ]
+    },
+    {
+      "id": "p16s2",
+      "page": 16,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [
+        "Marla"
+      ],
+      "marlaTier": null,
+      "action": "Jess looks down at her, unimpressed, hands on hips.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "It makes them a GODDESS, Marla. Something you'll never\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p16s3",
+      "page": 16,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Marla lunges, grabbing for the fragment still glowing in Jess's hand. Jess yanks it back, but not fast enough \u2014 Marla's fingers close around the edge of it too.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "HEY\u2014 let GO\u2014!"
+        },
+        {
+          "who": "Marla",
+          "line": "NOT THIS TIME."
+        }
+      ]
+    },
+    {
+      "id": "p16s4",
+      "page": 16,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "Both women hold the fragment between them, light pouring out from the point of contact, blinding.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "IT'S NOT YOURS. IT NEVER WAS EITHER OF OURS."
+        }
+      ]
+    },
+    {
+      "id": "p17s1",
+      "page": 17,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 4,
+      "action": "The fragment shatters between their two grips and the tear itself yawns open behind them, disgorging raw light directly onto Marla. Jess is thrown backward off her feet, shrinking back down through the glow to normal size, stripped of the power as fast as she took it, sprawled on the grass. Marla stands at the center of the blast, hoodie disintegrating at the seams, her frame doubling, then tripling in height, hair streaming out behind her like a red banner in the light.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "IT'S NOT DONE WITH ME YET\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p18s1",
+      "page": 18,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Shot of the field at dawn. Jess sits up groggily on the grass, back to completely normal size, staring up in horror.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "No\u2014 no no no, where did it\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p18s2",
+      "page": 18,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 5,
+      "action": "Towering above her, easily thirty feet tall now, is Marla \u2014 hoodie shredded to rags at the shoulders, standing amid the wreckage of the goalposts she's crushed underfoot without noticing.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "MARLA?!"
+        }
+      ]
+    },
+    {
+      "id": "p18s3",
+      "page": 18,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 5,
+      "action": "Marla looks down at her own hands, turning them over, genuinely stunned.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "I don't... I don't feel like I did anything. I just grabbed it."
+        }
+      ]
+    },
+    {
+      "id": "p18s4",
+      "page": 18,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 5,
+      "action": "She looks around at the flattened field, the crushed bleachers, the crowd of students backing away in the distance.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Did I do THAT?"
+        }
+      ]
+    },
+    {
+      "id": "p19s1",
+      "page": 19,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Coach"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 5,
+      "action": "Shot of Marla standing amid the ruined field, students and faculty gathering at a terrified distance, phones out. Coach (small, in the crowd)- \"MARLA?! Is that\u2014 how is that\u2014\"",
+      "dialogue": []
+    },
+    {
+      "id": "p19s2",
+      "page": 19,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Jess scrambles to her feet, pointing accusingly, voice cracking.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "She stole it! She stole it from ME!"
+        }
+      ]
+    },
+    {
+      "id": "p19s3",
+      "page": 19,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [
+        "Jess"
+      ],
+      "marlaTier": 5,
+      "action": "Marla turns to look at her, and for the first time, doesn't look sorry at all.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "You stole it FIRST, Jess. I just took it back."
+        }
+      ]
+    },
+    {
+      "id": "p19s4",
+      "page": 19,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "ecu",
+      "cast": [
+        "Marla"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 5,
+      "action": "Close on Marla's face, a slow, dangerous smile spreading, red hair whipping in wind she's now generating just by breathing.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "And it turns out... it likes me better."
+        }
+      ]
+    },
+    {
+      "id": "p20s1",
+      "page": 20,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 6,
+      "action": "Marla rises further, unfolding to full height against the sunrise, easily as tall as the science building behind her, cracks of light still crawling up her arms like living veins. Her tattered hoodie hangs in scraps across broad, godlike shoulders, and below, the entire campus \u2014 Jess included \u2014 looks like scattered toys at her feet. She still has one hand half-raised, staring at it like she's only just now realizing the scale of what happened.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "Oh. OH. I don't think this is stopping."
+        }
+      ]
+    },
+    {
+      "id": "p21s1",
+      "page": 21,
+      "slot": 1,
+      "span": 1,
+      "layout": "panel",
+      "camera": "establishing",
+      "cast": [
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": null,
+      "action": "Shot from far below, the whole crowd staring straight up. Jess, small and shaking, backs away into the others \u2014 and in her jacket pocket, the shattered half of the fragment is glowing hard enough to shine through the fabric.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "Somebody\u2014 somebody DO something\u2014"
+        }
+      ]
+    },
+    {
+      "id": "p21s2",
+      "page": 21,
+      "slot": 2,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 6,
+      "action": "Marla SLAMS one massive open hand down flat on the ground beside the crowd. The impact cracks the earth in a ring and throws up a wall of dust. In Jess's pocket the fragment flares white.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "...oh no."
+        }
+      ]
+    },
+    {
+      "id": "p21s3",
+      "page": 21,
+      "slot": 3,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 6,
+      "action": "The energy comes out of Jess. A thick rope of light tears free of her pocket and SNAKES across the grass \u2014 low, fast, whipping like a live wire \u2014 straight into Marla's palm where it struck. Jess is clawing at her own jacket, too late to hold it.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "NO! NO, IT'S MINE\u2014 GIVE IT\u2014!"
+        }
+      ]
+    },
+    {
+      "id": "p21s4",
+      "page": 21,
+      "slot": 4,
+      "span": 1,
+      "layout": "panel",
+      "camera": "medium",
+      "cast": [
+        "Marla",
+        "Jess"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 6,
+      "action": "The last of the light drains up Marla's arm. Jess is on her knees with the fragment in her open hand: grey, cold, dead. Marla reaches down and pins her flat with two fingers, effortless.",
+      "dialogue": [
+        {
+          "who": "Jess",
+          "line": "It's not glowing... it stopped glowing..."
+        },
+        {
+          "who": "Marla",
+          "line": "You had your turn, Jess. Now you get to watch."
+        }
+      ]
+    },
+    {
+      "id": "p22s1",
+      "page": 22,
+      "slot": 1,
+      "span": 4,
+      "layout": "full-page merge",
+      "camera": "full-page",
+      "cast": [
+        "Marla",
+        "Jess",
+        "Coach"
+      ],
+      "mentionedOnly": [],
+      "marlaTier": 6,
+      "action": "Marla stands at colossal, city-block scale now, red hair streaming across the sky like a comet's tail, the stolen light still crawling up her arms in bright veins as the last of it settles into her. One boot rests casually where the football field used to be, arms raised triumphant against the sunrise. Below, the entire student body \u2014 Jess and Coach among them \u2014 kneel in the flattened grass, tiny and awestruck. Jess is still holding the dead grey stone, staring at it. The End Note: Jess keeps her half of the fragment. It never lights up again.",
+      "dialogue": [
+        {
+          "who": "Marla",
+          "line": "NOBODY OVERLOOKS ME EVER AGAIN. KNEEL \u2014 OR DON'T. I'LL STILL BE HERE TOMORROW, BIGGER THAN TODAY!!!"
+        }
+      ]
+    }
+  ]
+}
