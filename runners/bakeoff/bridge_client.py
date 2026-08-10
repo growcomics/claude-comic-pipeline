@@ -84,6 +84,12 @@ class Bridge:
                refs_used: list | None = None, parent: str | None = None,
                accepted: int = 0, seq: int | None = None) -> dict:
         data = png_path.read_bytes()
+        # store_image keeps the orig extension, and ck_ai_qa derives the vision
+        # mime from it — a wrong ext makes every later qascan fail. Sniff magic.
+        ext = ("jpg" if data[:2] == b"\xff\xd8" else
+               "png" if data[:4] == b"\x89PNG" else
+               "webp" if data[8:12] == b"WEBP" else Path(orig).suffix.lstrip(".") or "png")
+        orig = str(Path(orig).with_suffix("." + ext))
         return self.call(
             "ingest", files={"file": (orig, data)}, p=pid, orig=orig, gen=gen,
             prompt=prompt, parent=parent, accepted=accepted, seq=seq,

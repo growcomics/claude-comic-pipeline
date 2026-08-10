@@ -223,11 +223,12 @@ def cmd_judge(args) -> None:
                 if v0.get("board"):
                     parent = v0["board"]
                     break
+        ingested = False
         for i, v in enumerate(rec["variants"]):
-            if v.get("board"):
+            if v.get("board") or v.get("gen"):
                 continue
             gen = f"{state['runId']}-{bid}-{v['slot']}"
-            out = br.ingest(
+            br.ingest(
                 pid, Path(v["path"]), orig=f"{gen}.png", gen=gen,
                 prompt=rec["prompt"], parent=parent,
                 refs_used=[{"file": r["file"], "label": r.get("label", ""),
@@ -235,8 +236,16 @@ def cmd_judge(args) -> None:
                            for r in b["refs"]],
                 accepted=0, seq=i,
             )
-            v["board"] = out["file"]
-            log(state, f"{bid} {v['slot']}: ingested as {out['file']}")
+            v["gen"] = gen
+            ingested = True
+            save_state(run, state)
+        # ingest doesn't echo the stored filename — resolve board files by gen id
+        if ingested or any(not v.get("board") for v in rec["variants"]):
+            by_gen = {m.get("gen"): m.get("file") for m in br.images(pid)}
+            for v in rec["variants"]:
+                if not v.get("board") and v.get("gen") and by_gen.get(v["gen"]):
+                    v["board"] = by_gen[v["gen"]]
+                    log(state, f"{bid} {v['slot']}: ingested as {v['board']}")
             save_state(run, state)
         # -- stage A ---------------------------------------------------------
         for v in rec["variants"]:
@@ -273,8 +282,13 @@ def cmd_judge(args) -> None:
             b["status"] = "clean"
             log(state, f"{bid}: single survivor {clean[0]['slot']} wins")
         else:
+            # Stage B is pluggable: <run>/stageb-verdicts.json (written by ANY
+            # fresh-context judge — e.g. an orchestrating Claude session's Sonnet
+            # subagent when the local `claude` CLI has no auth) wins; otherwise a
+            # fresh `claude -p` ranker; otherwise first-clean with a logged note.
+            ext = _external_verdict(run, bid, [v["slot"] for v in clean])
             try:
-                verdict = judge_mod.rank_variants(
+                verdict = ext or judge_mod.rank_variants(
                     rec["prompt"], [
                         {"slot": v["slot"], "path": v["path"],
                          "stageA_summary": "; ".join(
@@ -287,11 +301,22 @@ def cmd_judge(args) -> None:
                 verdict = {"winner": clean[0]["slot"], "ranking": [], "raw": str(e)}
             rec["stageB"] = {k: verdict[k] for k in ("winner", "ranking") if k in verdict}
             wv = next(v for v in clean if v["slot"] == verdict["winner"])
-            b["winner"] = {"slot": wv["slot"], "board": wv["board"], "via": "stage-b"}
+            b["winner"] = {"slot": wv["slot"], "board": wv["board"],
+                           "via": "stage-b-external" if ext else "stage-b"}
             b["status"] = "clean"
             log(state, f"{bid}: stage B winner {wv['slot']} of {len(clean)} survivors")
         save_state(run, state)
     save_state(run, state)
+
+
+def _external_verdict(run: Path, bid: str, slots: list[str]):
+    f = run / "stageb-verdicts.json"
+    if not f.is_file():
+        return None
+    v = json.loads(f.read_text()).get(bid)
+    if not v or v.get("winner") not in slots:
+        return None
+    return v
 
 
 # ---------------------------------------------------------------------------
