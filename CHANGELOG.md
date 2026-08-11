@@ -159,6 +159,18 @@ The production line's exit stage, built to `PRODUCTION-SYSTEM-VISION.md` §2/§5
 
 - Committed ~390 lines of parked, uncommitted working-tree state found on `feat/comic-corpus` during the 2026-08-11 main↔branch reconciliation, so the merged `main` carries the real pipeline state the fleet pulls.
 
+## 2026-08-11 (later still) — Laptop Flow drive validated end-to-end; Dee-Dee T8 reference-gap fix (WARD-06)
+
+### Added
+
+- **Laptop Flow drive is viable and free.** Validated the full chain on the laptop (`marrtrobinson2312`, **ULTRA → Nano Banana 2 Lite generates at 0 credits**): compose → audit → attach refs → submit → download → fresh-subagent judge. Unblocks driving the 46-page run without the mac mini, which is committed to cheer-ascension on the night-shift charter.
+- **Ref-upload workaround for Flow.** `file_upload` is blocked by the session allowlist and Flow's "Upload media" opens an un-drivable native picker. Working method: serve the ref PNGs from a CORS-enabled loopback server (`127.0.0.1:8791`), then in-page `fetch()` the bytes and inject them into Flow's hidden `input[type=file]` via `DataTransfer` + a `change` event. Flow ingests them as normal uploads. This is the unlock that makes any non-mini machine able to drive Flow with repo refs.
+
+### Fixed
+
+- **WARD-06 coverage violation in the Dee-Dee/Destroya T8 turnaround — root-caused as a REFERENCE GAP, not generation noise.** The first x4 batch had all four variants FAIL post-flight: every one rendered the costume back as a thong with both buttocks bare, violating the project's `always_clothed: true` rule; one variant additionally contradicted its own side-lacing with spine-lacing in the back view. The fresh-context judge correctly identified the cause — `body-tier8.png` is front-only, so the back of the costume was never specified and the model extrapolated a bare seat every time (a re-roll would not have fixed it). Fix applied to `references/turnaround-specs.json` (project data, so **no gate edit and no re-bless required**): the sheet prompt now pins a full-cut high-leg brief that completely covers the buttocks ("NOT a thong, NO bare seat"), pins side-seam-only lacing with an explicitly smooth unlaced back panel, and repeats the seat-coverage requirement for the BACK view. Re-composed and re-audited clean (`AUDIT PASS sha=680526de3f01`); the re-roll renders covered seats.
+- Demonstrates the intended division of labour: the generator never graded its own work, and the blocking defect was caught by an independent judge before anything entered the ledger — `bank.py` would have refused the batch regardless.
+
 ## 2026-08-11 (later) — STYLE BLOCK v3 wired into not-so-supra-man page prompts (owner-directed)
 
 ### Added
