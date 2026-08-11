@@ -1,0 +1,193 @@
+{
+  "city": "Long Beach",
+  "city_slug": "long-beach",
+  "scouted_at": "2026-06-09T01:51:18.988207+00:00",
+  "count": 10,
+  "locations": [
+    {
+      "id": "street-01-pine-avenue",
+      "type": "street",
+      "name": "pine-avenue",
+      "intent": "downtown Long Beach civic landmark \u2014 Terrace Theater area, palm trees + low building",
+      "google_maps_query": "Pine Avenue Long Beach",
+      "google_maps_url": "https://www.google.com/maps/place/Pine+Ave,+Long+Beach,+CA/@33.8080173,-118.1925503,17z",
+      "source_image": "source/street-01-pine-avenue.jpg",
+      "cgi_image": "cgi/street-01-pine-avenue.png",
+      "tags": [
+        "downtown",
+        "civic",
+        "palms",
+        "low-building",
+        "daytime"
+      ],
+      "neighborhood": "Downtown Long Beach"
+    },
+    {
+      "id": "street-02-2nd-street-belmont-shore",
+      "type": "street",
+      "name": "2nd-street-belmont-shore",
+      "intent": "2nd Street Belmont Shore at sunset, beach-town commercial strip with palm trees",
+      "google_maps_query": "2nd Street Belmont Shore Long Beach",
+      "google_maps_url": "https://www.google.com/maps/search/2nd+Street+Belmont+Shore+Long+Beach/",
+      "source_image": "source/street-02-2nd-street-belmont-shore.jpg",
+      "cgi_image": "cgi/street-02-2nd-street-belmont-shore.png",
+      "tags": [
+        "commercial",
+        "sunset",
+        "palms",
+        "storefronts",
+        "beach-town"
+      ],
+      "neighborhood": "Belmont Shore"
+    },
+    {
+      "id": "street-03-belmont-heights-residential",
+      "type": "street",
+      "name": "belmont-heights-residential",
+      "intent": "Belmont Heights residential street at sunset, suburban Long Beach",
+      "google_maps_query": "Belmont Heights Long Beach",
+      "google_maps_url": "https://www.google.com/maps/search/Belmont+Heights+Long+Beach/",
+      "source_image": "source/street-03-belmont-heights-residential.jpg",
+      "cgi_image": "cgi/street-03-belmont-heights-residential.png",
+      "tags": [
+        "residential",
+        "sunset",
+        "suburban",
+        "palms",
+        "balcony-view"
+      ],
+      "neighborhood": "Belmont Heights"
+    },
+    {
+      "id": "street-04-port-of-long-beach",
+      "type": "street",
+      "name": "port-of-long-beach",
+      "intent": "Port of Long Beach container terminal \u2014 gantry cranes, stacked containers, cargo ship at dock",
+      "google_maps_query": "Long Beach Container Terminal",
+      "google_maps_url": "https://www.google.com/maps/place/Long+Beach+Container+Terminal+(LBCT+LLC)/@33.7504649,-118.2146196,17z",
+      "source_image": "source/street-04-port-of-long-beach.jpg",
+      "cgi_image": "cgi/street-04-port-of-long-beach.png",
+      "tags": [
+        "industrial",
+        "port",
+        "cranes",
+        "containers",
+        "cargo-ship",
+        "harbor"
+      ],
+      "neighborhood": "Port of Long Beach"
+    },
+    {
+      "id": "restaurant-01-hofs-hut-diner",
+      "type": "restaurant",
+      "name": "hofs-hut-diner",
+      "intent": "iconic Hof's Hut Long Beach diner exterior with red shield logo and striped awnings",
+      "google_maps_query": "Hof's Hut Long Beach",
+      "google_maps_url": "https://www.google.com/maps/place/Hof's+Hut+Restaurant+%26+Bakery/@33.7952387,-118.1257442,17z",
+      "source_image": "source/restaurant-01-hofs-hut-diner.jpg",
+      "cgi_image": "cgi/restaurant-01-hofs-hut-diner.png",
+      "tags": [
+        "exterior",
+        "diner",
+        "iconic",
+        "mid-century",
+        "awnings",
+        "storefront"
+      ],
+      "neighborhood": "East Long Beach"
+    },
+    {
+      "id": "restaurant-02-555-east-steakhouse",
+      "type": "restaurant",
+      "name": "555-east-steakhouse",
+      "intent": "555 East Steakhouse Long Beach upscale interior, dark wood paneling, warm lighting, wine wall",
+      "google_maps_query": "555 East American Steakhouse Long Beach",
+      "google_maps_url": "https://www.google.com/maps/search/555+East+American+Steakhouse+Long+Beach/",
+      "source_image": "source/restaurant-02-555-east-steakhouse.jpg",
+      "cgi_image": "cgi/restaurant-02-555-east-steakhouse.png",
+      "tags": [
+        "interior",
+        "upscale",
+        "warm-lighting",
+        "dark-wood",
+        "fine-dining"
+      ],
+      "neighborhood": "East Village Arts District"
+    },
+    {
+      "id": "restaurant-03-joe-josts",
+      "type": "restaurant",
+      "name": "joe-josts",
+      "intent": "Joe Jost's Long Beach iconic since-1924 corner storefront on Anaheim Street with red awning",
+      "google_maps_query": "Joe Jost's Long Beach",
+      "google_maps_url": "https://www.google.com/maps/search/Joe+Jost%27s+Long+Beach/",
+      "source_image": "source/restaurant-03-joe-josts.jpg",
+      "cgi_image": "cgi/restaurant-03-joe-josts.png",
+      "tags": [
+        "exterior",
+        "iconic",
+        "historic",
+        "storefront",
+        "awning",
+        "brick"
+      ],
+      "neighborhood": "Long Beach (Anaheim St)"
+    },
+    {
+      "id": "landmark-01-queen-mary",
+      "type": "landmark",
+      "name": "queen-mary",
+      "intent": "the Queen Mary historic ocean liner permanently docked in Long Beach harbor \u2014 three funnels, riveted black hull",
+      "google_maps_query": "The Queen Mary Long Beach",
+      "google_maps_url": "https://www.google.com/maps/place/The+Queen+Mary/@33.7526356,-118.1903235,17z",
+      "source_image": "source/landmark-01-queen-mary.jpg",
+      "cgi_image": "cgi/landmark-01-queen-mary.png",
+      "tags": [
+        "landmark",
+        "iconic",
+        "ship",
+        "harbor",
+        "historic",
+        "wide-vista"
+      ],
+      "neighborhood": "Long Beach Harbor"
+    },
+    {
+      "id": "landmark-02-aquarium-of-the-pacific",
+      "type": "landmark",
+      "name": "aquarium-of-the-pacific",
+      "intent": "Aquarium of the Pacific Long Beach \u2014 iconic wave-like curved blue glass facade and entrance plaza",
+      "google_maps_query": "Aquarium of the Pacific Long Beach",
+      "google_maps_url": "https://www.google.com/maps/search/Aquarium+of+the+Pacific+Long+Beach/",
+      "source_image": "source/landmark-02-aquarium-of-the-pacific.jpg",
+      "cgi_image": "cgi/landmark-02-aquarium-of-the-pacific.png",
+      "tags": [
+        "landmark",
+        "iconic",
+        "modernist",
+        "glass-facade",
+        "plaza",
+        "wide-vista"
+      ],
+      "neighborhood": "Rainbow Harbor"
+    },
+    {
+      "id": "specific-01-downtown-promenade",
+      "type": "specific",
+      "name": "downtown-promenade",
+      "intent": "downtown Long Beach residential sunset street, palm-tree silhouettes, parked cars on both sides",
+      "google_maps_query": "The Promenade Long Beach",
+      "google_maps_url": "https://www.google.com/maps/place/The+Promenade+N,+Long+Beach,+CA+90802/@33.7698416,-118.1910842,17z",
+      "source_image": "source/specific-01-downtown-promenade.jpg",
+      "cgi_image": "cgi/specific-01-downtown-promenade.png",
+      "tags": [
+        "sunset",
+        "palms",
+        "residential",
+        "street-level",
+        "warm-sky"
+      ],
+      "neighborhood": "Downtown Long Beach"
+    }
+  ]
+}

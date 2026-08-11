@@ -1450,6 +1450,61 @@ Closes the follow-up note on the flow-workflow.md rewrite entry below: `shotlist
 
 ---
 
+## 2026-06-09 (location-scout hardening — code-review fixes)
+
+### Fixed
+
+- **`scripts/cgi_convert.py` `--download` hardened** — the result fetch previously accepted any URL scheme with no timeout or size limit, and wrote whatever came back. Now: HTTPS-only (rejects `file://` et al.), 60s timeout, 50 MB cap, and PNG/JPEG magic-byte validation so an HTML error page can never be registered as a "completed" CGI slot.
+- **`_targets.json` writes are atomic** (both `cgi_convert.py` and `maps_capture.py`) — write to a temp file + `os.replace`, so a crash mid-write can't destroy the plan and every prior capture's provenance.
+- **`maps_capture.py` no-sips fallback no longer mislabels formats** — when sips is unavailable/fails, the screenshot is copied with its real extension instead of a PNG masquerading as `.jpg`; `normalize_image` returns the actual path written and the plan records it. A failed plan save now also removes the just-written capture instead of leaving an orphan in `source/`.
+- **`cgi_convert.py --register-local`** validates the path exists before touching the plan (clear error instead of a traceback).
+- **`scout_city.py --force`** now warns when `source/`/`cgi/` still hold files from the previous plan (slot IDs repeat across plans, so old and new captures could silently mix). Warns only — never deletes.
+- **`SKILL.md` doc/CLI drift** — Phase B step 4 documented a `--type` flag that doesn't exist and omitted the required `--pack-dir`/`--query`/`--screenshot`; the failure-modes table referenced a nonexistent `cgi_convert.py --resume` (the real resume mechanism is `--list-pending-cgi`). The phantom `--skip-existing` was also dropped from the cgi_convert docstring. All invocations now match the actual CLIs.
+- **`maps_capture.py` `--name-slug` re-slugified before filename use** (second review pass) — an operator-supplied value containing path separators (`../../x`) previously escaped `source/` and could write anywhere on disk; `slugify()` now neutralizes it (verified: `../../etc/passwd` → `etcpasswd`).
+- **`_targets.json` read-modify-write serialized with an exclusive `flock`** (second review pass; `plan_lock()` in both `cgi_convert.py` and `maps_capture.py`, lock file `_targets.json.lock`) — registrations run in parallel per the documented workflow (one process per slot), and without the lock two concurrent runs read the same plan and the last writer silently dropped the other's slot update. The CGI result fetch happens *before* the lock is taken so network time doesn't serialize the other slots; `cgi/` is created on demand before writing a result. Lock + atomic-write temp files are gitignored.
+- **`cgi_convert.py --fast` no longer silently overrides an explicit `--model`** (second review pass) — `--fast --model gpt_image_2` previously discarded the explicit model and ran `nano_banana_2`; that combination is now a usage error, and `--fast` only applies when `--model` is unset.
+- **`SKILL.md` Phase C doc/CLI drift** (second review pass) — steps 2 and 5 omitted the required `--pack-dir` from the `cgi_convert.py` invocations (same drift class as the Phase B fix in the first pass); both now match the actual CLI.
+
+### Added
+
+- **`scripts/fetch_street_view.py`** — Phase B alternative that fetches Street View Static API images headlessly for every target in `_targets.json` (per-target heading/pitch/fov overrides, `skip` flag for interiors, request throttling, key via `$GOOGLE_MAPS_API_KEY` or `--api-key`). Built for the Lakewood pack after both interactive capture routes failed: Chrome MCP screenshots embed in chat but can't be persisted to disk from the tool layer, and the unauthenticated Street View thumbnail endpoint returns 403. ~$0.007/image via the official API (~$0.07 per 10-target pack). Already follows the hardening rules above: 20s timeout, image Content-Type check before write, API key stripped from logs.
+
+---
+
+## 2026-06-08 (Long Beach pack + v2 toned-down stylized-CGI prompt)
+
+### Added
+
+- **Long Beach validation pack at `references/locations/long-beach/`** — 10 locations: Pine Avenue (rendered as Terrace Theater area), 2nd Street Belmont Shore, Belmont Heights residential, Port of Long Beach container terminal, Hof's Hut diner, 555 East Steakhouse interior, Joe Jost's, Queen Mary, Aquarium of the Pacific, downtown Promenade. 10 source captures + 10 CGI conversions. Built on Google Flow Nano Banana Pro at 16:9, Pro plan, $0.
+
+### Changed
+
+- **`skills/location-scout/scripts/cgi_convert.py` `PROMPT_BODY` (v2 stylized-CGI prompt)** — replaced the Vegas v1 photoreal-anchored prompt with one that explicitly targets "default DAZ3D / Iray render look", "architectural visualization quality", "cleaner shaders / smoother surfaces / slightly simplified geometry", and "no photographic micro-detail (no skin pores, no dust speckles, no film grain) — keep it CG-clean". Triggered by the Vegas v1 pack coming back nearly indistinguishable from the source photographs — the model defaults to hyper-photoreal, which makes the CGI quality vanish and clashes with the photoreal-CGI character renders. The v2 prompt anchors back to a clearly-rendered look. Long Beach pack built with v2; Vegas v1 stays as the baseline for comparison. SKILL.md updated with the new prompt + a "why stylized instead of photoreal" note.
+
+### Notes
+
+- Naples Island and East Village Arts District searches returned 0 Maps photos and were substituted (Belmont Heights for street-03, The Promenade N for specific-01). Pine Avenue's source was a vertical Street View; the model rendered as a Terrace Theater–area downtown scene rather than the Pine Ave block — retagged honestly in `meta/locations.json`.
+
+---
+
+## 2026-06-07 (new `location-scout` skill — city → reusable CGI background pack)
+
+### Added
+
+- **`skills/location-scout/` skill** (`SKILL.md` + `scripts/scout_city.py`, `scripts/maps_capture.py`, `scripts/cgi_convert.py`) — turns a city name into a reusable pack of 8–15 photoreal CGI background reference images. Drives Google Maps via the Chrome MCP to capture random street scenes / restaurants / landmarks / specific-utility shots (alleys, rooftops, parking), then converts each to photoreal DAZ3D / Iray CGI via Higgsfield Nano Banana Pro (default) or Google Flow Nano Banana 2. Output lives at `references/locations/<city-slug>/` with `source/`, `cgi/`, `meta/locations.json`, and a `README.md`. Pre-built city packs eliminate per-project manual screenshotting AND preempt L23's verbal env-anchor fallback for the panel — attaching the pack's CGI ref is more specific than any 5-element verbal description.
+
+- **Las Vegas validation pack at `references/locations/las-vegas/`** — 8 locations end-to-end: Fremont Street (downtown neon), Bellagio (Strip hotel + fountains), MonteLago Village (Lake Las Vegas resort aerial), Peppermill (iconic mid-century diner), Eiffel Tower Restaurant (open kitchen interior), Heart Attack Grill (downtown corner exterior at night), Welcome to Fabulous Las Vegas Sign (S. Las Vegas Blvd), Container Park (shipping-container retail courtyard). 8 source captures from Google Maps + 8 CGI conversions saved under `cgi/`. Built on Google Flow Nano Banana 2 because the wrong-account / out-of-credits state of the Higgsfield MCP this session forced a platform pivot. Cost: $0 (Flow Pro free tier).
+
+### Changed
+
+- **`skills/reference-gathering/SKILL.md`** — added a "Location packs from `location-scout`" section after the DAZ3D-scene-reference trick. The manifest walker can resolve a project's location intent → pack entry by `type` + `tags` lookup, copying the pack's `cgi/` ref into the project instead of generating from scratch.
+- **`skills/script-breakdown/SKILL.md`** — added a "City packs as ref source" bullet under the per-location entry rules: when the script's setting is a real city AND a pack exists at `references/locations/<city-slug>/meta/locations.json`, the location's `ref_folder` can point directly at the pack entry's `cgi_image` instead of declaring a per-project `_source.jpg`.
+- **`skills/comic-production/references/lessons-learned.md` L23 addendum** — when a city-scout pack exists for the project's setting, prefer attaching the pack's CGI ref over the verbal env anchor; verbal anchor stays as the fallback for projects with no pack.
+
+---
+
+---
+
 ## 2026-06-09 (flow-workflow.md rewritten for Flow's new Omni-agent chat UI)
 
 Google Flow replaced its pill-based prompt-bar UI with an **agent-mediated chat UI** ("Omni"): a right-side session chat panel ("What do you want to create?"), Agent settings behind a sliders icon, and an agent that mediates every generation. The mechanics `flow-workflow.md` had documented since the original Flow runs (model/aspect/count pill, settings popup, x4 fan-out, pixel-coordinate map) are gone from the live product — discovered and worked around live during the L35 validation run (entry below; `skills/comic-production/references/l35-validation/README.md`).
