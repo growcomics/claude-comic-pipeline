@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 — Re-bless not-so-supra-man qa gates: L34 staging gate made load-bearing (user-approved in-session)
+
+### Changed
+
+- **Re-blessed `projects/not-so-supra-man/qa/MANIFEST.sha256`** (new fingerprint `49197e3f6bf9b7aa`) after the user reviewed the sole gate change since the prior bless (`91b774e`): commit `48fa3b2` added +50 lines to `qa/compose.py` that make the **L34 subject-staging gate load-bearing** — a multi-character page must now declare a plane-breaking `staging_type` (leading-diagonal / depth-staged / triangular / …), flat "lineup / level row / square to the lens" language is auto-rejected (`FLAT_LINEUP_RE`), and the matching `STAGING_DIRECTIVE` is injected into the composed prompt. This is the corpus camera-dynamism lesson turned into a hard mechanical gate. Re-blessing unlocks the mandatory compose→audit→bank chain for the 46-page build (banked refs: Dana T9 + T6-torn + T6-suit turnarounds; face/body for all four cast). Generation model for this run: Nano Banana 2 Lite. User approved in-session; manifest committed on its own per the Layer-8 protocol.
+
 ## 2026-08-10 (late) — b18/b23 escalation resolved: cast-list fix + money-shot re-rolls (20:36–20:55)
 
 ### Fixed
