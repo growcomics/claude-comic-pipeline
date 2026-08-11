@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "analytics/engagement-stub.json — per-comic engagement record (the flywheel landing pad)",
-  "description": "The Publisher → Ideator contract (VISION §4): which comic went where and how it performed, captured over time. prepare_post.py seeds it with empty captures[] + a capture plan; capture passes append entries. Wiring the capture is Wave-2 — the SHAPE is defined now so every stub is forward-compatible. How each source is read (wrappers only, never raw secrets): references/analytics-capture.md.",
+  "description": "The Publisher → Ideator contract (VISION §4): which comic went where and how it performed, captured over time. prepare_post.py seeds it with empty captures[] + a capture plan; capture passes append entries (ga4+patreon via scripts/capture_engagement.py, other sources by hand). The SHAPE was defined before the wiring so every stub is forward-compatible. How each source is read (wrappers only, never raw secrets): references/analytics-capture.md.",
   "type": "object",
   "required": ["schema_version", "project", "property", "comic_id", "captures"],
   "properties": {
