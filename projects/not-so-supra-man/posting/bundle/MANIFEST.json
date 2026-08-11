@@ -1,0 +1,361 @@
+{
+  "_note": "Bundle inventory + provenance. Nothing here has been posted anywhere.",
+  "bundle_version": 1,
+  "prepared_at": "2026-08-11T06:01:12Z",
+  "project": "not-so-supra-man",
+  "property": "growgetter",
+  "comic_id": "not-so-supra-man",
+  "title": "Not So Supra... Man",
+  "release_date": "2026-07-30",
+  "flip_date": "2027-01-30",
+  "pages": {
+    "count": 46,
+    "source": "override:/Users/mattmenashe/Documents/claude-comic-pipeline/projects/not-so-supra-man/pages/lettered",
+    "dir": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/not-so-supra-man/pages/lettered",
+    "expected_from_shotlist": 46,
+    "inventory": [
+      {
+        "file": "p01-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p02-01.png",
+        "dims": [
+          1264,
+          848
+        ]
+      },
+      {
+        "file": "p03-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p04-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p05-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p06-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p07-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p08-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p09-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p10-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p11-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p12-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p13-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p14-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p15-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p16-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p17-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p18-01.png",
+        "dims": [
+          1264,
+          848
+        ]
+      },
+      {
+        "file": "p19-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p20-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p21-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p22-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p23-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p24-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p25-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p26-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p27-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p28-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p29-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p30-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p31-01.png",
+        "dims": [
+          1264,
+          848
+        ]
+      },
+      {
+        "file": "p32-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p33-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p34-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p35-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p36-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p37-01.png",
+        "dims": [
+          1264,
+          848
+        ]
+      },
+      {
+        "file": "p38-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p39-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p40-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p41-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p42-01.png",
+        "dims": [
+          1376,
+          768
+        ]
+      },
+      {
+        "file": "p43-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p44-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p45-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      },
+      {
+        "file": "p46-01.png",
+        "dims": [
+          848,
+          1264
+        ]
+      }
+    ]
+  },
+  "pdf": "not-so-supra-man.pdf",
+  "platform_order": [
+    "site",
+    "patreon",
+    "deviantart",
+    "twitter",
+    "instagram"
+  ],
+  "files": [
+    "posting/bundle/CHECKLIST.md",
+    "posting/bundle/captions/deviantart.md",
+    "posting/bundle/captions/instagram.md",
+    "posting/bundle/captions/patreon.md",
+    "posting/bundle/captions/site.md",
+    "posting/bundle/captions/twitter.md",
+    "posting/bundle/crop-specs.json",
+    "posting/bundle/posted.template.json",
+    "posting/bundle/site-apply-notes.md",
+    "posting/bundle/whats-new-draft.json"
+  ]
+}

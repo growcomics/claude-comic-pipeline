@@ -1,0 +1,12 @@
+{
+  "_draft_note": "DRAFT ONLY — not posted. Human (or approved session) prepends this to the LIVE admin/data/updates.json per reference_whats_new_feed (read-modify-write, insert at index 0, never overwrite the array). Set ts at post time.",
+  "id": "upd-comic-not-so-supra-man",
+  "type": "feature",
+  "title": "New comic: Not So Supra... Man (46 pages)",
+  "date": "2026-07-30",
+  "pinned": false,
+  "body": "**Not So Supra... Man** is out — 46 pages, GrowGetter.\n\nSupraman gets drained, Dana Lane gets everything — 46 full-bleed pages, four growth sequences, tier 2 to tier 9.\n\n- Read: [SITE-URL]\n- Patreon: https://www.patreon.com/growgetter",
+  "images": [],
+  "author": "Claude (publisher bundle)",
+  "ts": null
+}

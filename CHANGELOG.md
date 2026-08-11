@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (Stage 7 PUBLISHER — prep half built: skills/publisher/, never-post by construction)
+
+The production line's exit stage, built to `PRODUCTION-SYSTEM-VISION.md` §2/§5 and the posting-ops research (2026-07-25). **The stage's hard rule: it never posts, uploads, or deploys — it prepares; the human publishes** (per `feedback_never_post_without_permission`; enforced structurally, not by promise: `prepare_post.py` is stdlib-only with no network-capable imports, and no code path fires outward).
+
+**Added**
+- `skills/publisher/SKILL.md` — Stage 7 skill. Triggers ("prepare the publish", "get this ready to post", build-comic's posting stage); workflow = run `prepare_post.py` → Claude fills the `[FILL-*]` caption slots from the shotlist → sanity pass → **STOP and hand the human `CHECKLIST.md`**. Explicit NEVER-POST rule at the top, including for future Walk/Run autonomy modes. Explicit NOT-triggers: "post it"/"publish it" are requests for the human act, answered with a bundle + checklist, never a post.
+- `skills/publisher/scripts/prepare_post.py` — assembles `projects/<p>/posting/bundle/`: `CHECKLIST.md` (destination-ordered: **site → patreon → deviantart → twitter → instagram** — canonical home first, then money, then reach per the posting-ops research; keys match `studio/posting.php` chips exactly), `captions/<platform>.md` (auto-facts + prose slots), `crop-specs.json` (per-platform dimensions + page picks; **v1 renders nothing**), `site-apply-notes.md` (property-keyed: comic-platform runbook path for WP properties incl. pre-filled manifest JSON + flip-date reminder, admin-CMS path for 3dmc), `whats-new-draft.json` (updates.json entry draft per `reference_whats_new_feed`), `posted.template.json`, `MANIFEST.json` (page inventory with PNG dims read from IHDR, provenance). Also seeds `analytics/engagement-stub.json`. Guards: refuses to run if `posting/posted.json` exists (already posted), refuses to overwrite a bundle without `--force`, warns on shotlist/page-count mismatch. `--pages-dir`/`--aux-root` let binaries live outside the checkout (Drive, another clone).
+- `skills/publisher/references/posted-schema.json` — the `posting/posted.json` contract (what got posted where/when, proof URLs, per-platform status/scope). **The template ships in the bundle; only the human who actually posted fills it and saves it up one level — the file existing is `build-comic.md`'s posting-stage sentinel, so creating it early would falsely mark the stage done.**
+- `skills/publisher/references/engagement-stub-schema.json` + `analytics-capture.md` — the flywheel landing pad (Publisher → Ideator contract, VISION §4): append-only `captures[]` + `capture_plan` (+7d/+30d), source-by-source capture doc (GA4 property ids, Patreon campaign ids, wrappers-only credential rule per `project_credential_architecture`; DA/X/IG are Tier-2 live-session or manual reads). Wiring is Wave-2 — the shape is defined now.
+- `skills/publisher/references/posting-board-alignment.md` — what `studio/posting.php` already does (lanes, chips, locked-and-loaded status; a thin live status surface) vs. what this skill adds (per-comic prep bundles), the end-to-end handoff, and division-of-labor rules so the two never grow overlapping features.
+- **Validation bundle committed** (text only, per CLAUDE.md rule 5): `projects/not-so-supra-man/posting/bundle/` + `analytics/engagement-stub.json`, prepared against the real 46-page lettered set (`--pages-dir` at the main checkout; property growgetter, release 2026-07-30, `--already-on-staging` per the comic-platform runbook Appendix A). All caption slots filled; zero outward actions taken.
+
+**Notes**
+- `docs/PRODUCTION-SYSTEM-VISION.md` status flip applied in this batch (Stage 7 stub → prep-half-built, §3 heat map, §4 contract rows) — the doc reached main via the 2026-08-11 comic-corpus reconciliation merge mid-build.
+- Live `admin/data/updates.json` What's-New entry deliberately NOT posted this session (zero-outward-actions validation mandate); the bundle's draft demonstrates the mechanism.
+
 ## 2026-08-11 — Reconciliation: origin/main merged into feat/comic-corpus (22 commits in, 3 conflicts resolved)
 
 ### Changed

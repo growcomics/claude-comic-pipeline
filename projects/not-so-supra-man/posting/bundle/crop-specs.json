@@ -1,0 +1,99 @@
+{
+  "_note": "SPECS only — v1 renders nothing. gravity=attention-center means crop around the visual subject, not the geometric center. Teaser picks are SUGGESTIONS — human verifies SFW + non-spoiler before use.",
+  "site": {
+    "treatment": "native",
+    "pages": "all",
+    "note": "The reader serves native full-resolution pages; no crops. Cover for the catalogue record comes from the cover page as-is."
+  },
+  "patreon": {
+    "post_header": {
+      "source": "p01-01.png",
+      "w": 1600,
+      "h": 900,
+      "gravity": "attention-center"
+    },
+    "attach_full_pages": [
+      "p01-01.png",
+      "p02-01.png",
+      "p03-01.png",
+      "p04-01.png"
+    ],
+    "note": "Header crop leads the post; attach cover + teasers full-res. Full comic stays behind the paid tier / site link — never attach all pages to a public post."
+  },
+  "deviantart": {
+    "main_deviation": {
+      "source": "p01-01.png",
+      "treatment": "native full-res"
+    },
+    "optional_teasers": [
+      "p02-01.png",
+      "p03-01.png",
+      "p04-01.png"
+    ],
+    "note": "DA takes native aspect at full res. Mature-content flag ON. Teasers as separate deviations or a folder per house style."
+  },
+  "twitter": {
+    "single": {
+      "source": "p01-01.png",
+      "w": 1600,
+      "h": 900,
+      "gravity": "attention-center"
+    },
+    "four_up": [
+      {
+        "source": "p01-01.png",
+        "w": 1200,
+        "h": 675,
+        "gravity": "attention-center"
+      },
+      {
+        "source": "p02-01.png",
+        "w": 1200,
+        "h": 675,
+        "gravity": "attention-center"
+      },
+      {
+        "source": "p03-01.png",
+        "w": 1200,
+        "h": 675,
+        "gravity": "attention-center"
+      },
+      {
+        "source": "p04-01.png",
+        "w": 1200,
+        "h": 675,
+        "gravity": "attention-center"
+      }
+    ],
+    "note": "Lead tweet: single 16:9 cover crop, or the 4-image set. Mark media sensitive if the platform requires it for this content."
+  },
+  "instagram": {
+    "cover_slide": {
+      "source": "p01-01.png",
+      "w": 1080,
+      "h": 1350,
+      "gravity": "attention-center"
+    },
+    "carousel": [
+      {
+        "source": "p02-01.png",
+        "w": 1080,
+        "h": 1350,
+        "gravity": "attention-center"
+      },
+      {
+        "source": "p03-01.png",
+        "w": 1080,
+        "h": 1350,
+        "gravity": "attention-center"
+      },
+      {
+        "source": "p04-01.png",
+        "w": 1080,
+        "h": 1350,
+        "gravity": "attention-center"
+      }
+    ],
+    "note": "4:5 portrait maximizes feed real estate. IG is the strictest platform — SFW crops only; when in doubt, crop tighter or drop the slide."
+  }
+}
