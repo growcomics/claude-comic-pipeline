@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "All three vertical sub-panels share a consistent flat gray backdrop and lighting direction; no foreground/background lighting or shadow mismatch visible."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black bob with blunt bangs matches the face-card reference in hue, saturation, and style across all three stages."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Stage 3 (rightmost sub-panel) shows a gold double-chevron emblem at the skirt waistband near the hip, where the parted blouse meets the skirt. CAST CANON's Emblem rule prohibits this emblem on Dana's Act-1 white blouse or skirt (legal only on Supraman, or on Dana's own hero suit from page 20 onward) — this is page 9."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Single character in an ECU crop; no background character or prop to compare scale against."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Stage 3 shows a defined, carved eight-pack consistent with the scripted muscle_size_tier 4 for Dana; not visibly under- or over-rendered relative to that tier."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal skin texture, sweat sheen, and soft shading throughout; no ink outlines, flat color blocking, or cel-shaded drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "One character (Dana) is shown three times as a growth-progressive sequence, which matches expected_named_cast_size 1 and the pipeline's allowed multi-stage format for growth-progressive pages."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Face and hair match Dana's canonical reference image in all three stages."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Flat neutral gray backdrop in an ECU midsection crop shows no lab set-dressing (walls, gantry, cables) but also no contradicting exterior evidence (no sky, buildings, or rain) — too little background is visible to judge venue with confidence."}
+}

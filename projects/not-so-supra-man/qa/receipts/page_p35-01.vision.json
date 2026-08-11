@@ -1,0 +1,99 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p35-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p35-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Very close, clear view of Destroya's hair (center): pale platinum-blonde, a clear hue/saturation shift from the warmer gold-blonde in her canonical reference."
+    },
+    {
+      "category": "scale_error",
+      "confidence": "medium",
+      "registry_ids": [
+        "BODY-02",
+        "BODY-07"
+      ],
+      "registry_slugs": [
+        "size_regression",
+        "height_inflation"
+      ],
+      "groups": [
+        "SIZE"
+      ],
+      "reason": "Destroya reads as building/near-giant scale in this shot -- her head reaches toward upper-story window height while she simultaneously backhands Supraman through a window several meters away with her other arm -- noticeably larger relative to the environment than her human-adjacent scale established in neighboring panels (p33/34/36/37/38). This could partly be birds-eye foreshortening/dramatic per"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Lighting reads consistent across the office-building glass, street level, and Destroya's figure, though the extreme birds-eye compression makes fine-grained shadow-direction checks harder to fully confirm."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Very close, clear view of Destroya's hair (center): pale platinum-blonde, a clear hue/saturation shift from the warmer gold-blonde in her canonical reference."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's hip/leg area is foreshortened and partly occluded by Destroya's arm in this birds-eye chokeslam pose, so the skirt question (raised in other panels) can't be confidently assessed here. Destroya's corset reads plain black with no gold marks; Supraman's emblem is too small/distant (mid-crash through glass, upper left) to assess."
+    },
+    "scale_error": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Destroya reads as building/near-giant scale in this shot -- her head reaches toward upper-story window height while she simultaneously backhands Supraman through a window several meters away with her other arm -- noticeably larger relative to the environment than her human-adjacent scale established in neighboring panels (p33/34/36/37/38). This could partly be birds-eye foreshortening/dramatic per"
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles are baked into this panel."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Destroya's muscular development itself (independent of the overall-height concern flagged under scale_error) looks appropriately tier-8 massive; Dana and Supraman's visible proportions are unremarkable relative to their tiers."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering, including the shattering glass; no 2D/cel-shaded artifacts."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering is present in this panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All 3 scripted characters are present; Supraman being small/distant mid-crash through the window is the scripted action, not a missing-character issue."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Destroya, Dana, and Supraman are each identifiable by hair, build, and costume."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Street-level asphalt with an adjacent glass-fronted office building matches the scripted city-street location."
+    }
+  }
+}

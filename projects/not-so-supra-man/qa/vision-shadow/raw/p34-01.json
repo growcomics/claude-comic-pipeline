@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Consistent dusk-street lighting on both figures, warm building lights in the background, and grounded dust/debris fx; no fg/bg mismatch or floating-limb artifact."},
+  "hair_discontinuity": {"detected": true, "confidence": "high", "reason": "Extremely clear close view of Destroya's hair (right): pale/platinum-blonde ringlets, a clear hue and saturation shift lighter than the warm gold-blonde in her canonical reference. Dana's black bob (left) matches her reference."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Clearest full-body view of Dana's hero suit in the batch: it is a continuous blue catsuit from shoulder to boot with no distinguishable separate skirt garment at the hip, despite CAST CANON specifying 'hero suit + emblem + skirt' for page 20+."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Destroya reads taller/bulkier than Dana but at human-adjacent scale, consistent with tier 8 vs tier 6."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Mass/proportion gap between Dana and Destroya matches the scripted tier 6 vs tier 8 difference."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering throughout; no ink outlines or flat/cel shading."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly 2 characters present (Dana, Destroya), matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Dana and Destroya are both clearly identifiable by hair, build, and costume."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Paved street with visible road/lane markings, a streetlamp, and city buildings in the background clearly matches the scripted city-street location."}
+}

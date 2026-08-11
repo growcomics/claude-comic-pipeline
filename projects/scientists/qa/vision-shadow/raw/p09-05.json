@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Single overhead spotlight over the lab bench is the consistent light source across the assistant, the door, and the flying papers; blurred shapes at bottom-left/right read as intentional foreground bokeh, not a compositing seam."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Assistant's long wavy light-brown hair is darkened, but the whole panel is a single-source night scene (skin, cardigan, and skirt are equally dimmed) — this is scene lighting, not a hue/pigment shift from the identity sheet."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Cream cardigan over white blouse, tan/khaki skirt, brown flats matches the identity sheet exactly; cardigan shows no tears, consistent with scripted 'cardigan intact.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Assistant is proportionate to the lab bench and door frame she's running through."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Balloon 'I SAW NOTHING! I PROMISE!' is fully lettered; its trailing placement behind/above her is the scripted 'balloon, trailing' staging for a fleeing character, and she's the only figure in frame so the tail cannot be mistargeted."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Tier 0 baseline slim build, matches the assistant identity sheet."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Scene, character, and props are rendered photoreal CGI throughout; only the balloon/caption/SFX graphics are 2D, which is the legal lettering layer."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Balloon 'I SAW NOTHING! I PROMISE!', caption 'SHE NEVER CAME BACK.', and SFX 'SLAM' are all correctly spelled with no doubled words or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Only the assistant appears in frame, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Light-brown long wavy hair and slim build correctly match the assistant identity sheet; no other cast member shares this look."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Dark lab interior with overhead task lighting, chemistry bench, and cabinetry matches the scripted night lab."}
+}

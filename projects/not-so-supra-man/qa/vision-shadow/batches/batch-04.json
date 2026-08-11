@@ -1,0 +1,266 @@
+{
+  "batch_id": "batch-04",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "dee-dee (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dee-dee/face-card.png"
+    },
+    {
+      "label": "dex-doomer (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dex-doomer/face-card.png"
+    },
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p25-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p25-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p25-01.json",
+      "context": {
+        "characters": [
+          "dee-dee"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "ecu-region, low-angle-front",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dee-Dee's shoulders and arms front-on. Stage 1: lab-coat sleeves tight over toned arms. Stage 2: boulder shoulders splitting the sleeves at the seam. Stage 3: bare hyper delts and biceps, shredded sleeve cuffs still ringing her wrists like trophies.",
+        "costume_state": "dee-dee: corset; coat sleeves burst across stages, cuffs remain stage 3",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p26-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p26-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p26-01.json",
+      "context": {
+        "characters": [
+          "dee-dee"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "ecu-region, low-angle-back",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, thigh-high boots and glutes from behind-low. Stage 1: striped boots fitted over athletic legs. Stage 2: quads and glutes swelling, boot shafts creaking, stitching strained. Stage 3: hyper legs \u2014 boots burst at the top seam, corset bottom holding coverage, diamond calves.",
+        "costume_state": "dee-dee: corset+striped thigh boots; boot top seams burst stage 3, coverage held",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "notes": "Corset bottom + boots keep full coverage throughout.",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p27-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p27-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p27-01.json",
+      "context": {
+        "characters": [
+          "dee-dee",
+          "dex-doomer"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "medium, dutch",
+        "action": "IMPLIED, NOT GRAPHIC: shot past Destroya's massive forearm (foreground, out of focus) as she lifts Doomer by his collar one-handed, his shoes off the floor, monitor light flickering across her smirk. His silhouette goes limp against the monitor wall glow.",
+        "costume_state": "dee-dee: corset ensemble; doomer: grey suit",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "notes": "Keep violence implied \u2014 silhouette + caption carry it.",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "New org chart, Dex. There is a NEW Doom in town \u2014 call me DESTROYA.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [
+          "Dex Doomer's final performance review."
+        ],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p28-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p28-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p28-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "day",
+        "camera": "medium, eye-level",
+        "action": "Arm-wrestle across a steel table \u2014 his whole body straining, her elbow planted casually, chin in her free hand. The tabletop crumples under her grip.",
+        "costume_state": "dana: spare suit stretched; supraman: suit",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "I... am going... EASY on you\u2014",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Sweetie. The table disagrees.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p29-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p29-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p29-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "day",
+        "camera": "cowboy, three-quarter",
+        "action": "He deadlifts the graviton bar to his knees, shaking, floor cracking under his boots; behind him Dana holds an identical loaded bar overhead ONE-HANDED while checking her nails on the other.",
+        "costume_state": "dana: spare suit stretched; supraman: suit",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "GNNGH\u2014 it feels like lifting a SKYSCRAPER\u2014",
+            "type": "shout"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Try two. Builds character.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p30-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p30-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p30-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "day",
+        "camera": "medium, three-quarter",
+        "action": "She has him wrapped in a gentle, inescapable bear-hug from behind, his arms pinned, boots off the ground; he taps her forearm.",
+        "costume_state": "dana: spare suit stretched; supraman: suit",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "Okay! Uncle! UNCLE!",
+            "type": "shout"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Then it's settled \u2014 I take patrol today, champ.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p31-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p31-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p31-01.json",
+      "context": {
+        "characters": [
+          "dee-dee"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "wide-establish, worms-eye",
+        "action": "RAMPAGE. Destroya mid-avenue, holding an overturned yellow taxi overhead one-handed (foreground wheel out of focus), office glass raining around her. Street otherwise emptied \u2014 abandoned cars, scattered briefcases.",
+        "costume_state": "dee-dee: corset ensemble (Destroya)",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "Citizens of this city! Your new management has ARRIVED!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p32-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p32-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p32-01.json",
+      "context": {
+        "characters": [
+          "dee-dee",
+          "supraman"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "cowboy, high-angle",
+        "action": "Supraman lies flattened in a fresh crater, cape over his face; Destroya stands over him dusting her palms, one striped boot planted on his chest emblem.",
+        "costume_state": "dee-dee: corset; supraman: suit dusted, cratered",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "THIS is the city's finest? Dex lost to THIS?",
+            "type": "balloon"
+          },
+          {
+            "character": "dee-dee",
+            "text": "Oh \u2014 Dex says hi, by the way. Posthumously.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    }
+  ]
+}

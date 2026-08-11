@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle and the lab background share consistent overhead lighting and shadow falloff; no compositing seam visible."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark-brown chin-length bob with side-swept bangs matches Rochelle's identity-sheet reference in hue and cut."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "White lab coat open over teal blouse and grey skirt matches scripted costume_state 'lab coat + teal blouse intact'."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Rochelle and the clipboard/background lab furniture are proportioned normally."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon contains text 'WHY IS IT SO WARM IN HERE...?' with its tail pointing directly to Rochelle's mouth, the only character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Only flushed face/torso is emphasized with no muscle bulk yet, which is consistent with the early scripted tier 1 (onset symptom, not visible growth)."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin, hair, and lab set render photoreal with natural shading; only the speech balloon is the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text 'WHY IS IT SO WARM IN HERE...?' matches the scripted line exactly, no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Rochelle is present in frame, matching expected_named_cast_size of 1; no background figures visible."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob and teal blouse correctly identify this figure as Rochelle, not Jill."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab benches, shelving, microscope and reagent bottles match the scripted 'lab' location."}
+}

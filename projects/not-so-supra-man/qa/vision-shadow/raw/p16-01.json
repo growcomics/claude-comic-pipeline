@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "medium", "reason": "Warm firelight kicker on both characters' faces reads as integrated with the background fire glow, and the dusky ambient light is consistent across FG/BG; no obvious lighting or color-temperature clash."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black bob and Supraman's dark hair both match their face-card references."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Dana's torn remnants are blue with a gold chevron emblem visible on her chest. Page 16 is Act 1 (pre-page-20), so per CAST CANON's Emblem rule this blue/emblem coloring should not appear yet — consistent with the same drift seen in p13/p14/p15 of this batch. Supraman's suit also looks intact and clean rather than the scripted 'scorched' state."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Dana reads taller/larger than Supraman, consistent with CAST CANON's intentional late-book relative-size gap between them, not a model error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Visible shoulder/arm mass through the torn sleeve is consistent with tier 6; not under-rendered."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal skin and fabric rendering with realistic sweat/tear detail and fire-glow lighting; no 2D illustration drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Two characters (Dana, Supraman) are present, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Both faces match their canonical references."},
+  "location_mismatch": {"detected": true, "confidence": "high", "reason": "Background shows a dusky sky, blurred city skyline, a stone parapet ledge, and visible flames/fire glow — an exterior rooftop scene, not the scripted doomer-lab interior (concrete walls, steel gantry, cable bundles, overhead flood lights)."}
+}

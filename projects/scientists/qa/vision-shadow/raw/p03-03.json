@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Foreground Rochelle and the blurred background lab set share consistent cool overhead lighting and shallow depth-of-field falloff; no lighting-direction or color-temperature mismatch."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's dark-brown chin-length bob with side-swept bangs matches her identity-sheet reference in hue and length."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "White lab coat over teal blouse matches scripted costume_state 'lab coat + teal blouse intact' and the identity sheet."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Rochelle is proportioned normally in the foreground; the background figure, while an extraneous character (see character_count_error), is scaled plausibly for her distance from camera."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon contains text 'MMM. THAT'S... ACTUALLY GOOD.' and its tail leads down to Rochelle's head/mouth, the only scripted speaker."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle shows baseline proportions with no added muscle mass, matching scripted tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Scene rendering is photoreal CGI with natural skin shading and bokeh; only the speech balloon is the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text 'MMM. THAT'S... ACTUALLY GOOD.' matches the scripted line exactly, no typos or duplication."},
+  "character_count_error": {"detected": true, "confidence": "high", "reason": "A second, distinct human figure (long dark hair, white lab coat, seated at a bench with test tubes) is visible defocused in the left background. PANEL CONTEXT scripts only 'rochelle' for this panel (expected_named_cast_size: 1) and CAST CANON prohibits background extras, so this extra figure is a violation."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "The foreground figure correctly matches Rochelle (dark bob, teal blouse, stud earrings); no role is filled by the wrong named character."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab bench, cabinetry, glassware and equipment in frame match the scripted 'lab' location."}
+}

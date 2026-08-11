@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Backlit rim light on her shoulders/traps is consistent with the same low-sun field background seen from behind; no floating or misregistered parts."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark bob matches the reference in hue and length, seen here in profile/from behind."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "This panel's own costume_state calls for a black tank tearing at the shoulder seams and fully covering the torso; the render matches — a black top with tattered/torn edges at both shoulders, form-fitting and fully covering the back. No coverage breach visible."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single-figure medium shot; proportions read normally against the background stands and goalpost."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "No balloon is present in this panel, and none is scripted (only the SFX 'RRRIIIP')."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Back, shoulder, and trap mass shown is extremely large, consistent with the scripted tier 9 'titan-surging' state."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal skin and fabric-tear rendering; the SFX text is the only 2D element, as expected."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "SFX 'RRRIIIP' matches the scripted onomatopoeia; no dialogue to check in this panel."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure in frame, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob and profile facial features match Rochelle."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Field with bleachers and goalpost visible, matching the scripted location."}
+}

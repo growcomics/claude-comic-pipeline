@@ -1,0 +1,216 @@
+{
+  "batch_id": "batch-09",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "jill (identity-sheet)",
+      "path": "projects/scientists/references/characters/jill/identity-sheet.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p14-04",
+      "image": "projects/scientists/pages/p14-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p14-04.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "close mcu on Jill's face",
+        "action": "Face CU: golden light in her eyes, hair lifting, a fierce grin. One balloon: \"YOUR MONSTERS WON'T SAVE YOU.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font AL",
+        "costume_state": "jill: strained top, super",
+        "muscle_size_tier": {
+          "jill": 8
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p14-05",
+      "image": "projects/scientists/pages/p14-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p14-05.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "full figure payoff, low angle",
+        "action": "Payoff: Jill at the full size of the attached SUPER muscle reference, planted between Rochelle and the squad, fists ready, wind whipping her hair. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One balloon: \"LAST CHANCE. SHUT IT DOWN.\" SFX: \"KRAKOOM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photore",
+        "costume_state": "jill: crop top + shorts silhouette per reference, super, coverage intact",
+        "muscle_size_tier": {
+          "jill": 8
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p14-06",
+      "image": "projects/scientists/pages/p14-06.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p14-06.json",
+      "context": {
+        "characters": [
+          "jill",
+          "rochelle"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "medium two-shot, the standoff",
+        "action": "Two titans face to face at midfield, the frozen squad small behind them; Rochelle produces a slim black vial from her jacket. Two balloons: Rochelle \"YOU IMPROVED MY FORMULA?\" and Rochelle again, smaller: \"I PERFECTED IT.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphi",
+        "costume_state": "jill: super; rochelle: track jacket, grown",
+        "muscle_size_tier": {
+          "jill": 8,
+          "rochelle": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p15-01",
+      "image": "projects/scientists/pages/p15-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-01.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "close mcu, the black vial",
+        "action": "CU: Rochelle thumbs the cap off the black vial; the liquid inside bends the light around it. One balloon: \"TIME TO END THIS.\" SFX: \"HISS\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bol",
+        "costume_state": "rochelle: track jacket, grown",
+        "muscle_size_tier": {
+          "rochelle": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p15-02",
+      "image": "projects/scientists/pages/p15-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-02.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "close mcu, drinking, beginning to glow",
+        "action": "CU: she drinks; veins of white light race up her throat and jaw; her silhouette already swelling. One balloon, tail to off-frame Jill: \"ROCHELLE- WHAT THE HELL-\" SFX: \"GLOW\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded",
+        "costume_state": "rochelle: track jacket, grown",
+        "muscle_size_tier": {
+          "rochelle": 8
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p15-03",
+      "image": "projects/scientists/pages/p15-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-03.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "mcu from three-quarter behind, tier surge",
+        "action": "Torso MCU from three-quarter BEHIND: Rochelle's track jacket tears away at the shoulder seams across her broadening back as she surges bigger, the sturdy black tank beneath stretching and holding, fully covering her. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. Large SFX along the tears: \"RRRIIIP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, h",
+        "costume_state": "rochelle: track jacket tearing at shoulder seams over sturdy black tank, tank fully covering, seen from behind",
+        "muscle_size_tier": {
+          "rochelle": 9
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p15-04",
+      "image": "projects/scientists/pages/p15-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-04.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jill"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "wide, growing past the goalposts",
+        "action": "Wide: Rochelle rises PAST the crossbar of the goalpost, still growing, Jill suddenly small at her shins shielding her eyes from the light. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One balloon, tail to Rochelle far above: \"PERFECTED.\" SFX: \"GROOOOOW\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains ph",
+        "costume_state": "rochelle: shredded jacket + straining tank, titan-surging; jill: super",
+        "muscle_size_tier": {
+          "rochelle": 9,
+          "jill": 8
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p15-05",
+      "image": "projects/scientists/pages/p15-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-05.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "city-ruins",
+        "time_of_day": "dusk",
+        "camera": "wide, first titan footfall downtown",
+        "action": "Downtown, dusk: a single titan footfall craters the intersection as Rochelle, now building-tall in her tattered wrap, steps between the towers. Caption top: \"SHE DIDN'T STOP AT THE FIELD.\" SFX: \"STOMP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D",
+        "costume_state": "rochelle: titan wrap per reference, titan scale",
+        "muscle_size_tier": {
+          "rochelle": 10
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p15-06",
+      "image": "projects/scientists/pages/p15-06.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p15-06.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jill"
+        ],
+        "location": "city-ruins",
+        "time_of_day": "dusk",
+        "camera": "low wide, Jill tiny at her feet",
+        "action": "Low wide from street level: Jill - huge by any human measure - stands ankle-high against the titan's foot, fists still up. Two balloons: Jill, small: \"I CAN'T LET YOU DO THIS.\" and Rochelle, vast, from above: \"PUNY.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics ove",
+        "costume_state": "rochelle: titan wrap, titan; jill: super, dusty",
+        "muscle_size_tier": {
+          "rochelle": 10,
+          "jill": 8
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    }
+  ]
+}

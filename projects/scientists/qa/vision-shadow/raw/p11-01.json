@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Bright fluorescent lighting is consistent across Donny, the shattered door, and the background bench/figure; no seam."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Sandy-blond short spiky hair matches the identity sheet closely in both hue and style."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Grey t-shirt and jeans, intact, matches scripted 'grey tee + jeans intact.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Donny is proportionate to the door frame he's bursting through."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Balloon 'DAN?! WHAT DID SHE DO TO YOU?!' is fully lettered, tail pointing to Donny."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Donny's average, non-muscular build matches his tier 0 baseline."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering maintained on Donny and the scene."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Balloon text and SFX 'WHAM' are correctly spelled, no duplication."},
+  "character_count_error": {"detected": true, "confidence": "high", "reason": "A second character — a heavily-muscled, shirtless man at the lab bench, build consistent with Dan's established tier-9 size — is clearly visible in the background (moderately soft-focus but distinctly rendered, not ambiguous bokeh). This panel's context scripts only Donny (expected_named_cast_size: 1), so this reads as an unscripted extra in frame."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Sandy-blond spiky hair correctly identifies Donny, distinct from Jim's brown hair; no scripted role is filled by the wrong character (the unscripted extra is a count issue, not a swap)."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Lab interior with shelving/cabinetry matches the scripted lab."}
+}

@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "The assistant's foreground shoulder/hair is deliberately out of focus for this over-the-shoulder shot (shallow DOF), a normal technique rather than a compositing artifact; lighting is consistent."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's dark bob is correct; the assistant's hair is only barely visible and blurred in the foreground, nothing contradictory."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's lab coat shows a clear torn/split sleeve seam over a black tank, consistent with the grown costume_state; the assistant's cardigan is visible and intact."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "No elements at the wrong physical scale."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "'YOU SAW NOTHING. SAY IT.' balloon contains text with its tail correctly pointing to Rochelle, per script."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle renders clearly large and muscular (visible bicep mass, split coat seam, bending a steel rod) consistent with the scripted tier-7 grown state."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal CGI rendering maintained; only the balloon and 'BEND' SFX are 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon 'YOU SAW NOTHING. SAY IT.' and SFX 'BEND' both match the script exactly, no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Two figures present — the assistant framed per the scripted over-the-shoulder camera direction, and Rochelle full-figure — matching expected_named_cast_size of 2."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Both characters consistent with their references given what's visible."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab bench, shelving and glass door visible, consistent with the scripted lab location."}
+}

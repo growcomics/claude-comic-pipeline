@@ -1,0 +1,113 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p13-01",
+  "image": "projects/scientists/pages/p13-01.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "The pigtails cheerleader (2nd from left) again shows warm dark-blonde/light-brown pigtails here, not the silver/ash-grey from her identity-sheet reference. Same drift as seen in p12-06; the other cheer-squad members' hair colors match canon."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-06"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "coverage_violation"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "All visible cheerleaders wear red sneakers (white laces), not the white sneakers + white crew socks shown for all five in the cheer-squad identity sheet. Leader's top is torn open at both shoulders/side from ripping the sled, consistent with 'strained uniforms, grown' and coverage of the breast itself remains intact (tear exposes side/underarm skin only)."
+    },
+    {
+      "category": "character_identity_swap",
+      "confidence": "medium",
+      "registry_ids": [
+        "IDENT-01"
+      ],
+      "registry_slugs": [
+        "identity_drift"
+      ],
+      "groups": [
+        "IDENT"
+      ],
+      "reason": "A background figure stands exactly where the action text stages 'Rochelle watches from the bleachers edge,' but she has long loose dark hair (not Rochelle's canonical chin-length bob) and wears a white crop top + grey skirt with bare midriff, which does not match any documented Rochelle wardrobe state (baseline lab coat/teal blouse, or the track-jacket 'grown' look used later in this batch). Reads"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Consistent warm hazy/dusty backlight across foreground cheerleaders, the sled prop, and the bleachers background; the more distant bleacher figure is softer-focus consistent with depth of field, not a paste artifact. No floating limbs or lighting-direction conflicts."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The pigtails cheerleader (2nd from left) again shows warm dark-blonde/light-brown pigtails here, not the silver/ash-grey from her identity-sheet reference. Same drift as seen in p12-06; the other cheer-squad members' hair colors match canon."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "All visible cheerleaders wear red sneakers (white laces), not the white sneakers + white crew socks shown for all five in the cheer-squad identity sheet. Leader's top is torn open at both shoulders/side from ripping the sled, consistent with 'strained uniforms, grown' and coverage of the breast itself remains intact (tear exposes side/underarm skin only)."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Foreground cheerleaders, the sled prop, goalpost, and bleachers all read at plausible relative scale; the bleacher-background figure is proportionately smaller consistent with distance, not a scale error."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon \"COACH IS GONNA FREAK!\" contains text and its tail points down to the ponytailed leader's head, matching the scripted attribution to the leader."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Leader and squad show heavy beyond-bodybuilder mass (thick arms tearing steel, dense abs/legs) consistent with the scripted tier 7 grown size."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Panel rendering is photoreal CGI throughout; only the balloon and SHRAKK SFX are the legal 2D overlay layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon text \"COACH IS GONNA FREAK!\" and SFX \"SHRAKK\" are both spelled correctly with no doubled words or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "All five scripted cheer-squad members (ponytail leader, space-buns, pigtails, curly, long-hair) are present and accounted for. A sixth, distant figure stands at the bleachers edge (matching the action text's 'Rochelle watches from the bleachers edge'); since context.characters for this panel lists only cheer-squad, this figure is addressed under character_identity_swap rather than double-counted h"
+    },
+    "character_identity_swap": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "A background figure stands exactly where the action text stages 'Rochelle watches from the bleachers edge,' but she has long loose dark hair (not Rochelle's canonical chin-length bob) and wears a white crop top + grey skirt with bare midriff, which does not match any documented Rochelle wardrobe state (baseline lab coat/teal blouse, or the track-jacket 'grown' look used later in this batch). Reads"
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Football field turf, sideline markings, bleachers, and goalpost match the scripted 'field' location."
+    }
+  }
+}

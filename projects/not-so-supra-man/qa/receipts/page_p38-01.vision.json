@@ -1,0 +1,115 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p38-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p38-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Destroya's hair (background, partially cropped) again reads pale/platinum-blonde vs the gold-blonde canonical reference. Dana's black bob (left, kneeling) matches her reference."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-05",
+        "WARD-04"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "emblem_leak",
+        "costume_stage_error"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Dana's kneeling pose (left) shows her blue hero suit at the hips/thighs with no separate skirt garment over the bodysuit, per CAST CANON's 'hero suit + emblem + skirt' spec for page 20+. Supraman's chest emblem is mostly covered by the ray-gun prop he is holding, so the shield-outline concern noted elsewhere can't be re-checked here."
+    },
+    {
+      "category": "location_mismatch",
+      "confidence": "medium",
+      "registry_ids": [
+        "ENV-01"
+      ],
+      "registry_slugs": [
+        "location_drift"
+      ],
+      "groups": [
+        "ENV"
+      ],
+      "reason": "The background reads as an enclosed interior space -- a ceiling-mounted light fixture, dark shelving/cabinet-like shapes, and no sky or exterior cues visible anywhere in frame -- which is inconsistent with the scripted 'city-street' exterior location. There is genuine residual uncertainty since heavy dust/darkness could also be read as an exterior ruin, hence medium rather than high confidence."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "The teal beam is clearly the dominant intentional light source and lighting on Dana, Supraman, and Destroya reads consistent with it; the background is dim enough that a full foreground/background lighting-direction check is hard to fully confirm."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Destroya's hair (background, partially cropped) again reads pale/platinum-blonde vs the gold-blonde canonical reference. Dana's black bob (left, kneeling) matches her reference."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Dana's kneeling pose (left) shows her blue hero suit at the hips/thighs with no separate skirt garment over the bodysuit, per CAST CANON's 'hero suit + emblem + skirt' spec for page 20+. Supraman's chest emblem is mostly covered by the ray-gun prop he is holding, so the shield-outline concern noted elsewhere can't be re-checked here."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "The three figures read at consistent human-adjacent relative scale."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles are baked into this panel."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana's build (already muscular but not yet at the extremes seen in later panels) is consistent with tier 6 pre-surge, immediately before receiving the beam."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering; the teal beam VFX is a lighting effect, not flat/cel-shaded illustration."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering is present in this panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All 3 scripted characters are present; Destroya's partial/turned-away presence in the background is the scripted action ('whirls in the background'), not a missing-character issue."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana, Supraman, and Destroya are each identifiable by hair, build, and costume."
+    },
+    "location_mismatch": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "The background reads as an enclosed interior space -- a ceiling-mounted light fixture, dark shelving/cabinet-like shapes, and no sky or exterior cues visible anywhere in frame -- which is inconsistent with the scripted 'city-street' exterior location. There is genuine residual uncertainty since heavy dust/darkness could also be read as an exterior ruin, hence medium rather than high confidence."
+    }
+  }
+}

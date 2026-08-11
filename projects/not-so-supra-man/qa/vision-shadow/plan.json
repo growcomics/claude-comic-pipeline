@@ -1,0 +1,22 @@
+{
+  "generated": "2026-08-11T06:07:59Z",
+  "logs": [
+    "hf-log-A.json",
+    "hf-log-B.json",
+    "hf-log-C.json"
+  ],
+  "entries_in_logs": 45,
+  "images_resolved": 45,
+  "images_missing": [],
+  "coverage_pct": 100.0,
+  "batches": [
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-01.json",
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-02.json",
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-03.json",
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-04.json",
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-05.json",
+    "projects/not-so-supra-man/qa/vision-shadow/batches/batch-06.json"
+  ],
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "report_gt": "qa-report.md"
+}

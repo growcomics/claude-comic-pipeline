@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Both figures and the lab background share the same bright fluorescent overhead lighting and shadow direction; no lighting or color-temperature seam between foreground and background."},
+  "hair_discontinuity": {"detected": true, "confidence": "low", "reason": "Rochelle's chin-length bob reads slightly darker/cooler than the warmer dark-brown of her identity sheet under this lab's cool fluorescent light; could well be canonical lighting rather than a real pigment shift, flagging for a second look."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle wears a black tank top + jeans (matches scripted 'black tank + jeans, grown'); Dan wears an intact white tank + jeans (matches scripted 'white tank + jeans intact')."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Dan reads visibly taller than Rochelle, consistent with their reference heights (6'2\" vs 5'6\")."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Both balloons are fully lettered; 'DRINK UP AND I'LL SHOW YOU.' tail points to Rochelle and 'SO THIS IS WHERE THE MAGIC HAPPENS?' tail points to Dan, correctly matched to speaker position."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Rochelle shows visibly built-up/muscular arms and shoulders consistent with grown tier 7; Dan's gym-fit frame matches his tier 0 baseline from the identity sheet."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Fully photoreal rendering of both characters and the lab; no ink outlines or flat cel-shading."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Caption 'IT WASN'T HARD TO FIND A VOLUNTEER.' and both balloons are correctly spelled with apostrophes intact; SFX 'FIZZ' is correct; no duplicated text."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly Rochelle and Dan appear, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Dark bob correctly identifies Rochelle; bald head correctly identifies Dan."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Bright lab interior with benches, glassware, and shelving matches the scripted lab."}
+}

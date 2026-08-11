@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "High-angle doorway shot has consistent lighting across the near-foreground (Rochelle) and the far dining nook (Jim); no lighting-direction or shadow inconsistency."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle's dark-brown bob matches reference; Jim's brown hair (small, background) is consistent in hue."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle is shown wearing the teal blouse and grey pencil skirt with the white lab coat carried over her arm (not worn), matching the action ('coat over her arm') and costume_state ('teal blouse + grey pencil skirt intact'); Jim in the background is correctly in the navy/white jacket, blue jeans, and light sneakers, matching costume_state and consistent with p01-04."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Rochelle (near doorway) reads much larger than Jim (far at the dining table) consistent with normal perspective for the depth of the room, not a model-scale error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Bubble contains full text 'ROCHELLE... COME ON...' positioned near and tailing toward Jim in the background, matching the scripted attribution to him."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Baseline tier-0 proportions for both, consistent with references."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering maintained throughout; only the bubble is 2D lettering."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Text 'ROCHELLE... COME ON...' reads clean, correct ellipses, no doubling or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "2 figures in frame (Rochelle foreground, Jim background), matching expected_named_cast_size of 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Both characters match their canonical hair/build/wardrobe; no swap."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Same kitchen set viewed from the doorway, consistent with scripted location."}
+}

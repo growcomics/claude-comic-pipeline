@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Warm exhaust glow from the background hatch and cooler ambient foreground light fall consistently on both Supraman and Dana; no mismatched shadow direction."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Supraman's dark hair and Dana's black straight-bangs bob both match their reference face-cards."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Supraman's suit shows scorching/darkened patches consistent with costume_state; Dana's blouse is intact and plain with no visible emblem, and she remains roped to the chair as scripted."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Figures, chair, crates, and the background hatch are proportioned plausibly."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles baked into this pre-lettering panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Dana (tier 2) reads as a normal, unmuscled build appropriate for this baseline tier."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering of steam, smoke, and scorched fabric maintained throughout."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No baked-in lettering present."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Two figures present — Supraman and Dana — matching expected named cast of 2; fleeing villains are only implied via the sealing hatch, not rendered as distinct figures."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Identities match canonical hair/build/costume for both characters."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Debris, crates, and the mechanical hatch/thruster background are consistent with the scripted doomer-lab facility."}
+}

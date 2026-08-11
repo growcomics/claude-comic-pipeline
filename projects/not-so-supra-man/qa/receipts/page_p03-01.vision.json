@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p03-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p03-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Backlit dust/debris and rim lighting on Supraman are consistent with a single light source through the breach; no compositing seam or mismatched shadow direction."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dark hair swept back matches the supraman face-card in hue and style."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Suit is pristine/intact as scripted, with correctly shaped gold double-chevron emblem, red cape, red belt, and red boots \u2014 all match CAST CANON."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Debris chunks and the wall breach are proportioned plausibly relative to Supraman's figure."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubble is baked into the panel despite scripted dialogue in PANEL CONTEXT."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Build reads athletic/classic-hero lean, not hyper-massive bodybuilder bulk, matching CAST CANON's Supraman build note."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering of skin, fabric, dust, and concrete; no 2D ink/cel-shaded drift."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering present."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single figure (Supraman) in frame, matching the expected named cast of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Hair, build, and costume all match Supraman's canonical reference."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Concrete wall breach with dust and debris is consistent with the scripted doomer-lab's concrete-wall anchor element; no contradicting exterior signage or unrelated venue elements."
+    }
+  }
+}

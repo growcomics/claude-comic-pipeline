@@ -1,0 +1,166 @@
+{
+  "batch_id": "batch-06",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "dee-dee (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dee-dee/face-card.png"
+    },
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p41-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p41-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p41-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "ecu-region, low-angle-front",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, torso front-on. Stage 1: gold chevron emblem stretching wide across her ballooning chest. Stage 2: emblem distorted drum-tight, suit fibers tearing at the sternum line, abs erupting below. Stage 3: TIER-9 torso \u2014 colossal chest shelf and cobblestone abs, the emblem heroically intact at the center of the strained suit.",
+        "costume_state": "dana: suit torso strained across stages, emblem intact",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "notes": "Suit holds coverage. Emblem survives \u2014 brand moment.",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p42-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p42-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p42-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "ecu-region, low-angle-back",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her back with cape mounts. Stage 1: lats flaring, cape clasps straining. Stage 2: back widening past the cape's hem, one clasp PINGING off. Stage 3: TIER-9 cobra back in full eclipse of the sun, cape re-hung off one heroic shoulder, suit back panel split clean down the spine line (musculature visible, coverage maintained at hips).",
+        "costume_state": "dana: suit back splits down spine across stages, cape one clasp",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p44-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p44-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p44-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "dee-dee"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "full, low-angle-front",
+        "action": "THE UPPERCUT. Dana's follow-through fills the lower-left third of the frame; Destroya is a flailing silhouette rocketing into the empty sky that dominates the rest, already past the tower tops.",
+        "costume_state": "dana: suit final battle-state; dee-dee: corset (airborne)",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Enjoy the view!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p45-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p45-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p45-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "city-street",
+        "time_of_day": "sunset",
+        "camera": "mcu, three-quarter",
+        "action": "Dust settling, sunset rim-light. Tier-9 Dana cradles Supraman in both arms; he reaches up to touch her jaw. Foreheads meeting, both smiling, his cape draped over her forearm.",
+        "costume_state": "dana: suit final battle-state; supraman: suit battered",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "I guess you saved ME this time.",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Get used to it. You'll always be MY hero.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p46-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p46-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p46-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman",
+          "timmy-olson"
+        ],
+        "location": "city-street",
+        "time_of_day": "sunset",
+        "camera": "cowboy, low-angle-front",
+        "action": "FINALE. Shot past Timmy Olson's raised flash camera (foreground, mid-flash): Dana and Supraman pose together in the settling dust \u2014 her arm around his shoulders, his hand proud on her forearm, both grinning at the lens.",
+        "costume_state": "dana: suit final battle-state; supraman: suit battered; timmy: tan jacket",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "timmy-olson",
+            "text": "Dana Lane?! Are you the city's new protector?!",
+            "type": "off-panel"
+          },
+          {
+            "character": "dana-lane",
+            "text": "We protect EACH OTHER, Timmy. We're a SUPRA-TEAM.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [
+          "THE END."
+        ],
+        "expected_named_cast_size": 3
+      }
+    }
+  ]
+}

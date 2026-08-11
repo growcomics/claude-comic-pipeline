@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Even fluorescent lab lighting is consistent across both Jill (foreground) and Rochelle (background); equipment and shelving read as a cohesive single environment."},
+  "hair_discontinuity": {"detected": true, "confidence": "medium", "reason": "Jill's hair reads as a saturated copper/auburn under the lab lights, noticeably more red-orange than the warmer-honey/caramel-brown base tone shown on her identity-sheet reference; Rochelle's dark bob matches her reference with no shift."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Jill: white lab coat over burgundy blouse and black slacks, matches. Rochelle: white lab coat over teal blouse and grey pencil skirt, matches."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Jill (nearer camera) reading larger than Rochelle (farther back near the door) is normal perspective for the depth shown, not a model-scale error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Bubble contains full text 'THE FORMULA WORKS, ROCHELLE. IT'S TIME FOR HUMAN TRIALS.' with tail correctly attached to Jill, who is holding up the vial and visibly speaking."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Both characters at baseline tier-0 proportions consistent with their identity sheets."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Lab equipment, glassware, and both figures render photoreal; only the caption box and bubble are the expected 2D lettering overlay."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Caption 'THE LAB. LATER THAT MORNING.' and bubble text read clean with correct apostrophe ('IT'S'); no doubling or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "2 figures in frame (Jill, Rochelle), matching expected_named_cast_size of 2; no background extras."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Rochelle (dark bob, teal blouse) and Jill (long wavy hair, burgundy blouse) are both distinctly and correctly rendered per their canon builds."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Lab interior with workbenches, glassware, chemical shelving, and glass door matches scripted 'lab' location."}
+}

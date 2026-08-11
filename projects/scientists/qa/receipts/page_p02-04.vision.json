@@ -1,0 +1,83 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p02-04",
+  "image": "projects/scientists/pages/p02-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Consistent with p02-01/p02-02, Jill's long wavy hair here reads as a saturated copper/auburn, more red-orange than the honey/caramel-brown base tone on her identity-sheet reference."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Consistent overhead fluorescent lighting across Jill and the lab shelving/machines behind her; no lighting-direction or color-temperature seam."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Consistent with p02-01/p02-02, Jill's long wavy hair here reads as a saturated copper/auburn, more red-orange than the honey/caramel-brown base tone on her identity-sheet reference."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "White lab coat and black slacks visible and matching costume_state; not enough of the blouse is visible from this rear three-quarter angle to judge it, but nothing visible contradicts canon."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Proportions consistent with a normal medium shot."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Cloud-shaped thought bubble contains full text 'FINE. THEN I'LL RUN MY OWN TRIAL.' with the trailing dots correctly leading to Jill, the sole character in frame."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Baseline tier-0 proportions consistent with her identity sheet."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering maintained; only the thought bubble is the expected 2D lettering layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Text 'FINE. THEN I'LL RUN MY OWN TRIAL.' reads clean with correct apostrophe ('I'LL'); no doubling or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "1 character shown, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Long wavy hair and build are consistent with Jill, not confusable with Rochelle's short bob."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Same lab equipment/shelving set as prior panels."
+    }
+  }
+}

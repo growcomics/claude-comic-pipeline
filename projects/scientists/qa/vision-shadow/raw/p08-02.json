@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Same kitchen background (counter, jars, bread basket, kettle) with consistent warm lighting as the establishing shot; no floating parts."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Only a sliver of jaw/neck is in frame, no hair visible to compare; nothing contradictory."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Sleeve is torn open at the inner elbow/forearm with frayed threads exposed, matching costume_state 'jacket sleeve tearing over swelling bicep.'"},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Tight insert on a single arm, no other elements to mis-scale."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "No speech balloon is present in this panel (SFX only, per script), so there is nothing to flag."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Arm size/vein detail reads larger than the tier-4 establishing panel and smaller than the tier-8 payoff panel later in the sequence, consistent with the scripted tier 6 midpoint."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin and torn-fabric edges render photoreal with realistic fraying; only the 'RRIP' SFX graphic is 2D overlay, which is legal."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "SFX 'RRIP' matches the script exactly, single instance, no typo or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One arm/figure visible, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Skin tone and jacket pattern are consistent with Jim; nothing suggests a swap."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Kitchen counter, jars, kettle and bread basket visible in the background, consistent with the scripted kitchen location."}
+}

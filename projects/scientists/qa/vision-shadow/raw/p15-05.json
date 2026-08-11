@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle and the ruined buildings share the same dusk backlight/rim-light direction and cool ambient fill; foot-strike dust and debris are grounded, with no floating parts."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark bob matches the canonical reference."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "The titan wrap costume matches CAST CANON's titan spec — a white improvised wrap with torn/tattered edges, chest and groin both fully covered."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Rochelle reads as comparable in height to the multi-story ruined buildings flanking her, consistent with the scripted building-tall titan scale."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "No dialogue balloon in this panel; only the caption and SFX, both scripted."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Mass and building-scale height are consistent with the scripted titan tier 10."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal rendering of skin, rubble, and haze is maintained; the caption box and SFX are the expected 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Caption 'SHE DIDN'T STOP AT THE FIELD.' and SFX 'STOMP' match the scripted text exactly, apostrophe correct."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure in frame, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob and face match Rochelle."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Ruined downtown street with collapsed buildings and a wrecked car matches the scripted 'city-ruins' location at dusk."}
+}

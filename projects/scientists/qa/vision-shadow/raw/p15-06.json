@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Both figures share the same dusk rim-lighting/god-ray direction and cool ambient fill; ground contact and shadow placement are coherent for both."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's dark bob matches her reference; Jill's hair reads darker/less saturated under this cool dusk lighting, within plausible range of her caramel-brown reference given the lighting change."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Jill correctly wears the scripted black athletic crop top and shorts for 'super'; Rochelle's titan wrap fully covers chest and groin, matching CAST CANON's titan spec."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "The human-vs-titan size contrast is the scripted action, with both figures grounded and proportionate to the surrounding buildings."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Both balloons have text; 'PUNY.' tails toward Rochelle and 'I CAN'T LET YOU DO THIS.' tails toward Jill, matching their scripted speakers."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle's titan-scale mass and Jill's visible muscularity (abs, arms) are both consistent with their scripted tiers (10 and 8)."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal rendering is maintained on both figures; the balloons are the expected 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Both balloon texts match the scripted lines exactly, apostrophe in 'CAN'T' correct, no doubling or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Two figures in frame, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "The dark-bob titan reads as Rochelle and the long-haired human-scale figure reads as Jill."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Ruined city street at dusk matches the scripted 'city-ruins' location."}
+}

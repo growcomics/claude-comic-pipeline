@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p05-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p05-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Warm exhaust glow from the background hatch and cooler ambient foreground light fall consistently on both Supraman and Dana; no mismatched shadow direction."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Supraman's dark hair and Dana's black straight-bangs bob both match their reference face-cards."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Supraman's suit shows scorching/darkened patches consistent with costume_state; Dana's blouse is intact and plain with no visible emblem, and she remains roped to the chair as scripted."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Figures, chair, crates, and the background hatch are proportioned plausibly."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles baked into this pre-lettering panel."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana (tier 2) reads as a normal, unmuscled build appropriate for this baseline tier."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering of steam, smoke, and scorched fabric maintained throughout."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering present."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Two figures present \u2014 Supraman and Dana \u2014 matching expected named cast of 2; fleeing villains are only implied via the sealing hatch, not rendered as distinct figures."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Identities match canonical hair/build/costume for both characters."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Debris, crates, and the mechanical hatch/thruster background are consistent with the scripted doomer-lab facility."
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "batch_id": "batch-07",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    },
+    {
+      "label": "donny (identity-sheet)",
+      "path": "projects/scientists/references/characters/donny/identity-sheet.png"
+    },
+    {
+      "label": "dan (identity-sheet)",
+      "path": "projects/scientists/references/characters/dan/identity-sheet.png"
+    },
+    {
+      "label": "cheer-squad (identity-sheet)",
+      "path": "projects/scientists/references/characters/cheer-squad/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p11-03",
+      "image": "projects/scientists/pages/p11-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-03.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "donny"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert, the glass forced into his hand",
+        "action": "Insert: her huge hand closes his fingers around the glass, gentle and unstoppable. One balloon, tail to Rochelle off-frame: \"DRINK, DONNY.\" SFX: \"CREAK\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold blac",
+        "costume_state": "rochelle: black tank, grown; donny: grey tee intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "donny": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p11-04",
+      "image": "projects/scientists/pages/p11-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-04.json",
+      "context": {
+        "characters": [
+          "donny"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "mcu on Donny's torso",
+        "action": "Torso MCU: the change hits Donny mid-protest, tee stretching over erupting muscle. He wears HIS OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One balloon: \"NO- NO- OH NO-\" SFX: \"RUMBLE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based render",
+        "costume_state": "donny: grey tee stretching over swelling chest and shoulders, intact",
+        "muscle_size_tier": {
+          "donny": 5
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p11-05",
+      "image": "projects/scientists/pages/p11-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-05.json",
+      "context": {
+        "characters": [
+          "donny",
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "full figure, slight low angle, two giants",
+        "action": "Payoff wide: Donny, now huge as Dan, stands beside him - both slack-faced, obedient, shoulder to shoulder. He wears HIS OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. Caption bottom: \"TWO GIANTS. ZERO OBJECTIONS.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering ",
+        "costume_state": "donny: shredded tee, grown; dan: shredded tank, grown",
+        "muscle_size_tier": {
+          "donny": 8,
+          "dan": 9
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p11-06",
+      "image": "projects/scientists/pages/p11-06.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-06.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Rochelle, flanked by out-of-focus giants",
+        "action": "Face CU, the two blurred giants behind her shoulders like statues: Rochelle smiles at something far bigger than this room. One THOUGHT cloud: \"NOW... A REAL FIELD TEST.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ova",
+        "costume_state": "rochelle: black tank, grown",
+        "muscle_size_tier": {
+          "rochelle": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p12-01",
+      "image": "projects/scientists/pages/p12-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p12-01.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "cheer-squad"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "wide establishing, afternoon",
+        "action": "The practice field: Rochelle in a track jacket tips a violet vial into the team water cooler while the five cheerleaders drill in the background. Caption top: \"SATURDAY PRACTICE.\" One THOUGHT cloud: \"FIVE SUBJECTS. ONE COOLER.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector g",
+        "costume_state": "rochelle: track jacket + leggings, grown; cheer-squad: red-white uniforms intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "cheer-squad": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p12-02",
+      "image": "projects/scientists/pages/p12-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p12-02.json",
+      "context": {
+        "characters": [
+          "cheer-squad"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "medium, the squad at the cooler",
+        "action": "The five girls crowd the cooler, cups raised, laughing between drills. One balloon from the ponytail leader: \"HYDRATE, LADIES! COACH'S ORDERS!\" SFX: \"GLUG GLUG\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with b",
+        "costume_state": "cheer-squad: uniforms intact",
+        "muscle_size_tier": {
+          "cheer-squad": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p12-03",
+      "image": "projects/scientists/pages/p12-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p12-03.json",
+      "context": {
+        "characters": [
+          "cheer-squad"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "close mcu on the ponytail leader",
+        "action": "CU: the ponytail leader lowers her cup, blinking, a shiver rolling through her. One balloon: \"WHOA. WHAT IS IN THIS STUFF?\" SFX: \"THRUM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold",
+        "costume_state": "cheer-squad: uniforms intact",
+        "muscle_size_tier": {
+          "cheer-squad": 2
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p12-04",
+      "image": "projects/scientists/pages/p12-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p12-04.json",
+      "context": {
+        "characters": [
+          "cheer-squad"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "medium group, mid-growth",
+        "action": "Group medium: all five girls seize mid-stretch as their uniforms pull tight over swelling shoulders, arms and thighs - a chorus of confusion. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. Balloons, small, overlapping: \"WHAT-\" \"MY ARMS-\" \"GUYS?!\" SFX: \"RUMBLE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remai",
+        "costume_state": "cheer-squad: uniforms straining over swelling shoulders and thighs, all coverage intact",
+        "muscle_size_tier": {
+          "cheer-squad": 5
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p12-05",
+      "image": "projects/scientists/pages/p12-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p12-05.json",
+      "context": {
+        "characters": [
+          "cheer-squad"
+        ],
+        "location": "field",
+        "time_of_day": "day",
+        "camera": "close insert, a sleeve and a shoe seam splitting",
+        "action": "Insert montage feel in one frame: a uniform shoulder seam pops and a sneaker seam splits under a thickening calf. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. SFX: \"RRIP\" and \"POP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-ba",
+        "costume_state": "cheer-squad: uniform seams splitting, coverage intact",
+        "muscle_size_tier": {
+          "cheer-squad": 6
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

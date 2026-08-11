@@ -1,0 +1,262 @@
+{
+  "batch_id": "batch-03",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    },
+    {
+      "label": "dex-doomer (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dex-doomer/face-card.png"
+    },
+    {
+      "label": "dee-dee (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dee-dee/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p17-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p17-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p17-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "lab-quarters",
+        "time_of_day": "night",
+        "camera": "cowboy, low-angle-front",
+        "action": "Shot past the door frame (out-of-focus foreground): Dana carries Supraman bridal-style toward the steel-frame bed, his cape trailing on the floor, her silhouette rimmed in warm lamplight. Both still clothed in torn-but-covering remnants.",
+        "costume_state": "dana: torn-but-covering remnants; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "I have waited a LONG time to sweep you off your feet.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p18-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p18-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p18-01.json",
+      "context": {
+        "characters": [],
+        "location": "lab-exterior",
+        "time_of_day": "night",
+        "camera": "wide-establish, worms-eye",
+        "action": "CUTAWAY GAG. The brutalist lab block at night. One top-floor window glows warm. Fresh cracks spider across the facade, dust puffs from the roofline, a chunk of cornice drops past a startled pigeon.",
+        "costume_state": "n/a (no characters in frame)",
+        "size": "splash",
+        "scripted_dialogue": [],
+        "scripted_captions": [
+          "Structural engineers would later have QUESTIONS."
+        ],
+        "expected_named_cast_size": 0
+      }
+    },
+    {
+      "panel_id": "p19-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p19-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p19-01.json",
+      "context": {
+        "characters": [
+          "supraman"
+        ],
+        "location": "hq-locker",
+        "time_of_day": "morning",
+        "camera": "medium, high-angle",
+        "action": "Morning after, Hall of Justice locker room. Supraman hobbles past the suit display cases using a locker for support \u2014 hair wrecked, one boot on. One display case holds an EMPTY hanger.",
+        "costume_state": "supraman: suit rumpled, hair wrecked, one boot",
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "Note to self: never say 'show me what you've got' to a supercharged Dana Lane.",
+            "type": "thought"
+          },
+          {
+            "character": "supraman",
+            "text": "...wait. Where is my spare suit?",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p20-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p20-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p20-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "morning",
+        "camera": "full, low-angle-front",
+        "action": "REVEAL. Dana \u2014 tier 6, wearing HIS spare suit stretched skin-tight, cape and all \u2014 presses the loaded graviton barbell overhead, beaming. Readout pillar: MAX. Supraman's stunned face small in the foreground doorway.",
+        "costume_state": "dana: HIS spare suit stretched skin-tight + cape; supraman: primary suit",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Morning, sleepyhead! Hope you don't mind \u2014 mine kept exploding.",
+            "type": "balloon"
+          },
+          {
+            "character": "supraman",
+            "text": "That's... my MAX setting...",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p21-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p21-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p21-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "morning",
+        "camera": "mcu, three-quarter",
+        "action": "Side-by-side bicep comparison: his earnest full flex vs her relaxed arm simply RESTING larger beside it. She grins down at him along the diagonal.",
+        "costume_state": "dana: spare suit stretched; supraman: suit",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "I AM flexing.",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "I'm not.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p22-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p22-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p22-01.json",
+      "context": {
+        "characters": [
+          "dex-doomer",
+          "dee-dee"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "medium, over-shoulder",
+        "action": "Backup lab. Over Doomer's shoulder: the monitor wall replays Dana snapping the ropes. Dee-Dee (lab coat, tier 3) leans at the workbench where the rebuilt Disinto-Ray prototype sits under a work lamp.",
+        "costume_state": "dee-dee: lab coat over black top; doomer: grey suit",
+        "muscle_size_tier": {
+          "dee-dee": 3
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dex-doomer",
+            "text": "The beam re-routed his power. Which means power can be POURED.",
+            "type": "balloon"
+          },
+          {
+            "character": "dee-dee",
+            "text": "Poured into WHOM, exactly?",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p23-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p23-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p23-01.json",
+      "context": {
+        "characters": [
+          "dee-dee",
+          "dex-doomer"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "medium, profile, dutch",
+        "action": "Dee-Dee stands square in the prototype's teal beam, lab coat whipping, arms spread, lit up; Doomer at the trigger console behind, grinning.",
+        "costume_state": "dee-dee: lab coat, whipping in beam",
+        "muscle_size_tier": {
+          "dee-dee": 3
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "All of it, Dex. I have EARNED this.",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p24-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p24-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p24-01.json",
+      "context": {
+        "characters": [
+          "dee-dee"
+        ],
+        "location": "doomer-lab-2",
+        "time_of_day": "interior",
+        "camera": "full, worms-eye",
+        "action": "DEE-DEE TRANSFORMATION. She erupts to tier 8 \u2014 lab coat blasting off in shreds revealing the black laced corset ensemble beneath, curly mane wild, fists up, monitors cracking from proximity.",
+        "costume_state": "dee-dee: lab coat blasted to shreds -> black corset ensemble revealed",
+        "muscle_size_tier": {
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "YES. Finally a body that fits my ambitions!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

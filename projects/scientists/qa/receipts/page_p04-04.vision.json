@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p04-04",
+  "image": "projects/scientists/pages/p04-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "This is a scripted 'close insert on her torso... head out of frame' shot; lighting on the torso matches the visible lab background (shelving, microscope) with no seam or floating-artifact look."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Only a small sliver of dark hair is visible at the top edge of frame; what's visible is consistent with Rochelle's dark-brown bob, no shift observed."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Teal blouse straining over the chest and abs with one popped button (visible loose thread/gap) matches scripted costume_state exactly; breasts remain fully covered by fabric despite the strain, consistent with the coverage rule."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Torso is proportioned plausibly against the background bench and shelving."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech balloon is present in this panel, only SFX text ('POP! POP!'), so there is nothing to evaluate for this category."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The torso shows heavy muscle definition (ridged abs, strained chest) noticeably beyond the tier-5 arm shown in p04-03, consistent with continued escalation to the scripted tier 6; no canonical tier-6 reference image was provided to pin this down more precisely, hence low confidence."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Skin and strained-fabric rendering is photoreal with realistic cloth folds and shading; only the 'POP! POP!' SFX is the legal 2D overlay."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "SFX text 'POP! POP!' matches the scripted SFX exactly, no typos or duplication."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Only Rochelle's torso is shown per the scripted close insert, matching expected_named_cast_size of 1; no other figures visible in the background."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Teal blouse color correctly identifies this as Rochelle's torso, not Jill's (burgundy)."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Lab shelving, microscope and reagent bottles in the background match the scripted 'lab' location."
+    }
+  }
+}

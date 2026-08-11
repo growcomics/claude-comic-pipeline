@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p09-02",
+  "image": "projects/scientists/pages/p09-02.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Warm skin lighting combined with the cool violet glow from the vial reads as intentional and consistent, not a mismatch."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Head is cropped out of this close insert, no hair visible to compare."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Lab coat lapels and black tank neckline visible in this crop look like normal, modest coverage for this framing; no coverage break."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Close insert on a single hand/torso, nothing else to mis-scale."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "'MIND CONTROL, BOTTLED.' balloon contains text with its tail correctly running off-panel per script."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The hand/forearm reads appropriately substantial ('huge hand' per script) for the grown tier-7 state."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal skin and glass rendering; only the balloon and 'GLOW' SFX are 2D overlay."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon and 'GLOW' SFX both match the script exactly, no typos or duplication."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "One figure implied in frame, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Skin tone and lab coat are consistent with Rochelle."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Vial rack and lab bench are consistent with the scripted lab location."
+    }
+  }
+}

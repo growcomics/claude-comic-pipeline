@@ -1,0 +1,125 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p13-03",
+  "image": "projects/scientists/pages/p13-03.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "The pigtails cheerleader (visible in the right-side cluster with Rochelle) again shows warm blonde pigtails rather than the canonical silver/ash-grey from her identity sheet -- the same drift seen in p12-06, p13-01, and p13-02. Jill's caramel wavy hair and Rochelle's bob match their references."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Jill wears a burgundy button-up (tied/open) with bare midriff and black slacks -- this panel's costume_state scripts 'athletic top + leggings, grown' and neither is present. Rochelle wears only her teal blouse and grey pencil skirt with bare feet -- no lab coat and no track jacket, when this panel's costume_state scripts 'track jacket, grown.' The visible cheer-squad members also continue to wear "
+    },
+    {
+      "category": "tier_visualization_mismatch",
+      "confidence": "high",
+      "registry_ids": [
+        "BODY-01"
+      ],
+      "registry_slugs": [
+        "size_underrender"
+      ],
+      "groups": [
+        "SIZE"
+      ],
+      "reason": "Rochelle's context specifies muscle_size_tier 7 ('grown'), but she is rendered at her slender baseline build with no added muscle mass, identical to her identity-sheet proportions. Jill, also scripted at tier 7, is correctly rendered with huge beyond-bodybuilder mass."
+    },
+    {
+      "category": "character_count_error",
+      "confidence": "high",
+      "registry_ids": [
+        "CAST-03"
+      ],
+      "registry_slugs": [
+        "people_count"
+      ],
+      "groups": [
+        "COUNT"
+      ],
+      "reason": "Only 4 distinct cheer-squad figures are visible across the whole frame (ponytail leader beside Jill on the left; pigtails, curly, and long-hair beside Rochelle on the right) -- the space-buns member is absent, with no partial/obscured trace of her anywhere in the panel. The squad was consistently shown as all 5 members in p12-06, p13-01, and p13-02 of this same continuous scene. (Note: this panel'"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Consistent warm hazy backlight and shadow direction across Jill, the ponytail cheerleader, Rochelle, the other cheerleaders, and the field/bleachers background. No floating parts or paste artifacts."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The pigtails cheerleader (visible in the right-side cluster with Rochelle) again shows warm blonde pigtails rather than the canonical silver/ash-grey from her identity sheet -- the same drift seen in p12-06, p13-01, and p13-02. Jill's caramel wavy hair and Rochelle's bob match their references."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Jill wears a burgundy button-up (tied/open) with bare midriff and black slacks -- this panel's costume_state scripts 'athletic top + leggings, grown' and neither is present. Rochelle wears only her teal blouse and grey pencil skirt with bare feet -- no lab coat and no track jacket, when this panel's costume_state scripts 'track jacket, grown.' The visible cheer-squad members also continue to wear "
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill, Rochelle, the cheerleaders, cooler prop, and field/bleachers/goalpost are all proportionate to one another."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The balloon \"FOUND YOU. WHAT DID YOU DO TO THEM, ROCHELLE?\" contains text and its tail points down to Jill's head, matching the scripted 'tail to Jill.'"
+    },
+    "tier_visualization_mismatch": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Rochelle's context specifies muscle_size_tier 7 ('grown'), but she is rendered at her slender baseline build with no added muscle mass, identical to her identity-sheet proportions. Jill, also scripted at tier 7, is correctly rendered with huge beyond-bodybuilder mass."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Rendering is photoreal CGI throughout; only the speech balloon is the legal 2D overlay layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon text \"FOUND YOU. WHAT DID YOU DO TO THEM, ROCHELLE?\" is spelled correctly with no doubling or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Only 4 distinct cheer-squad figures are visible across the whole frame (ponytail leader beside Jill on the left; pigtails, curly, and long-hair beside Rochelle on the right) -- the space-buns member is absent, with no partial/obscured trace of her anywhere in the panel. The squad was consistently shown as all 5 members in p12-06, p13-01, and p13-02 of this same continuous scene. (Note: this panel'"
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill and Rochelle are each correctly identifiable by hair and face against their reference sheets; their costume/tier mismatches are captured separately and are not a swap to a different named character."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Football field turf, yard markings, bleachers, and goalpost match the scripted 'field' location."
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p46-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p46-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-04"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "costume_stage_error"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Dana's suit is rendered fully intact/pristine -- no tears visible anywhere on torso, arms, or legs -- which conflicts with the scripted costume_state 'dana: suit final battle-state.' The identical phrase in this same batch's p44-01 clearly shows heavy tearing at the chest, abdomen, and thigh; this finale panel should carry that established battle-damaged look forward rather than reset to a clean s"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dusk ambient lighting is consistent across Dana, Supraman, and the rubble background. The bright foreground camera flash is a distinct, narratively-motivated light source (Timmy's flash firing mid-shot) rather than a compositing mismatch. No floating-limb artifacts."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's black bob and Supraman's black hair both match their canonical references with no hue shift."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Dana's suit is rendered fully intact/pristine -- no tears visible anywhere on torso, arms, or legs -- which conflicts with the scripted costume_state 'dana: suit final battle-state.' The identical phrase in this same batch's p44-01 clearly shows heavy tearing at the chest, abdomen, and thigh; this finale panel should carry that established battle-damaged look forward rather than reset to a clean s"
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Supraman is a clearly full-proportioned adult male beside Dana, not doll/toy-sized; the intentional relative size gap reads as plausible rather than physically broken."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech bubbles are baked into the panel; scripted dialogue and the 'THE END.' caption are not rendered here (pre-lettering)."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's arms/shoulders dramatically overpower the frame relative to her head, consistent with tier-9; Supraman remains visibly leaner/more athletic by comparison, matching his spec."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal rendering maintained throughout, including the foreground camera prop; no 2D/ink artifacts."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No baked-in lettering is present in the panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Timmy Olson is represented only by his foreground camera mid-flash with no visible human figure/hands holding it; his line is explicitly scripted as type 'off-panel,' and CAST CANON's p46-specific allowance explicitly excuses not flagging his (or TV-crew) presence on this panel. Dana and Supraman are both fully present and posed together as scripted."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both Dana's and Supraman's faces/hair match their canonical face-card references."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dusty, rubble-strewn ground with a hazy dusk skyline is consistent with a post-battle city-street; no anchor elements suggest a different venue."
+    }
+  }
+}

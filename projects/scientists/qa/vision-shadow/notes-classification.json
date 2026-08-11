@@ -1,0 +1,377 @@
+{
+  "p01-01": {
+    "observations": []
+  },
+  "p01-02": {
+    "observations": []
+  },
+  "p01-03": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "LET-03",
+        "quote": "Tail direction is a little loose (trails toward her wrist/watch area rather than precisely her mouth)"
+      }
+    ]
+  },
+  "p01-04": {
+    "observations": []
+  },
+  "p01-05": {
+    "observations": []
+  },
+  "p02-01": {
+    "observations": []
+  },
+  "p02-02": {
+    "observations": []
+  },
+  "p02-03": {
+    "observations": []
+  },
+  "p02-04": {
+    "observations": []
+  },
+  "p03-01": {
+    "observations": []
+  },
+  "p03-02": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "HAIR-01",
+        "quote": "hair reads a shade more saturated copper-red under the lab fluorescents than the neutral-lit identity card"
+      },
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "MISC-00",
+        "quote": "Rochelle's read is more watchful/appraising than overtly 'tired and grateful' but not wrong for the beat"
+      }
+    ]
+  },
+  "p03-03": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "CAST-02",
+        "quote": "an out-of-focus second woman with long auburn/reddish hair is visible in the background bokeh at a distant workstation"
+      }
+    ]
+  },
+  "p03-04": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "HAIR-01",
+        "quote": "reads a touch more saturated red-copper than the identity sheet's warmer honey-brown"
+      },
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "LET-04",
+        "quote": "One unscripted 'FIZZZ' SFX appears near a beaker on the right ... not confirmed against the shotlist's sfx[] array"
+      }
+    ]
+  },
+  "p03-05": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "MISC-00",
+        "quote": "Green swirling shimmer in the mug dregs reads a bit more prominent/saturated than 'faint' as worded in the shot description"
+      }
+    ]
+  },
+  "p04-01": {
+    "observations": []
+  },
+  "p04-02": {
+    "observations": []
+  },
+  "p04-03": {
+    "observations": []
+  },
+  "p04-04": {
+    "observations": []
+  },
+  "p04-05": {
+    "observations": []
+  },
+  "p04-06": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "WARD-06",
+        "quote": "nipple show-through under the opaque strained blouse"
+      },
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "MISC-00",
+        "quote": "middle letters occluded by the raised arms"
+      }
+    ]
+  },
+  "p05-01": {
+    "observations": []
+  },
+  "p05-02": {
+    "observations": []
+  },
+  "p05-03": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "ENV-04",
+        "quote": "the described steel clamp being crushed is not visibly present in her fist (empty clenched fist)"
+      }
+    ]
+  },
+  "p05-04": {
+    "observations": []
+  },
+  "p05-05": {
+    "observations": [
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "BODY-01",
+        "quote": "muscle_size_tier 1 (first flush) is subtle/not visually obvious at this close MCU but not contradicted"
+      }
+    ]
+  },
+  "p06-01": {
+    "observations": []
+  },
+  "p06-02": {
+    "observations": []
+  },
+  "p06-03": {
+    "observations": []
+  },
+  "p06-04": {
+    "observations": []
+  },
+  "p06-05": {
+    "observations": [
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "WARD-04",
+        "quote": "'split-sleeved coat' detail specified in costume_state could not be directly verified in this crop, but no contradicting wardrobe element is visible"
+      }
+    ]
+  },
+  "p06-06": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "ENV-04",
+        "quote": "oversized background glass prop at bottom edge, non-anatomical"
+      }
+    ]
+  },
+  "p07-01": {
+    "observations": []
+  },
+  "p07-02": {
+    "observations": []
+  },
+  "p07-03": {
+    "observations": []
+  },
+  "p07-04": {
+    "observations": []
+  },
+  "p07-05": {
+    "observations": []
+  },
+  "p08-01": {
+    "observations": []
+  },
+  "p08-02": {
+    "observations": []
+  },
+  "p08-03": {
+    "observations": [
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "LET-04",
+        "quote": "SFX 'BOOM' appears twice (mirrored near each raised fist) -- same exact word both places, not a garbled duplicate"
+      }
+    ]
+  },
+  "p08-04": {
+    "observations": []
+  },
+  "p08-05": {
+    "observations": []
+  },
+  "p09-01": {
+    "observations": []
+  },
+  "p09-02": {
+    "observations": []
+  },
+  "p09-03": {
+    "observations": []
+  },
+  "p09-04": {
+    "observations": []
+  },
+  "p09-05": {
+    "observations": []
+  },
+  "p10-01": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "LET-04",
+        "quote": "Model added an unrequested small 'FIZZ' SFX near the glass (not in shotlist)"
+      }
+    ]
+  },
+  "p10-02": {
+    "observations": []
+  },
+  "p10-03": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "LET-04",
+        "quote": "SFX 'BULGE' rendered twice stacked (spec calls for one instance)"
+      }
+    ]
+  },
+  "p10-04": {
+    "observations": []
+  },
+  "p10-05": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "CONT-01",
+        "quote": "Dan's tank renders intact rather than carrying forward the shredded state from p10-04"
+      }
+    ]
+  },
+  "p10-06": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "LET-02",
+        "quote": "a pair of stray single-quote marks wrapping the whole line ('...') that are not in the source lettering"
+      }
+    ]
+  },
+  "p11-01": {
+    "observations": []
+  },
+  "p11-02": {
+    "observations": []
+  },
+  "p11-03": {
+    "observations": []
+  },
+  "p11-04": {
+    "observations": []
+  },
+  "p11-05": {
+    "observations": []
+  },
+  "p11-06": {
+    "observations": []
+  },
+  "p12-01": {
+    "observations": []
+  },
+  "p12-02": {
+    "observations": []
+  },
+  "p12-03": {
+    "observations": []
+  },
+  "p12-04": {
+    "observations": []
+  },
+  "p12-05": {
+    "observations": []
+  },
+  "p12-06": {
+    "observations": []
+  },
+  "p13-01": {
+    "observations": [
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "CAST-03",
+        "quote": "A sixth figure visible small on the bleachers wears a white crop top + gray skirt ... confirmed via zoom crop as Rochelle ... not a sixth squad member"
+      }
+    ]
+  },
+  "p13-02": {
+    "observations": [
+      {
+        "kind": "noted-acceptable",
+        "registry_id": "LET-04",
+        "quote": "SFX 'SNAP' rendered (appears twice, same word, no typo)"
+      }
+    ]
+  },
+  "p13-03": {
+    "observations": []
+  },
+  "p13-04": {
+    "observations": []
+  },
+  "p13-05": {
+    "observations": []
+  },
+  "p14-01": {
+    "observations": []
+  },
+  "p14-02": {
+    "observations": []
+  },
+  "p14-03": {
+    "observations": []
+  },
+  "p14-04": {
+    "observations": []
+  },
+  "p14-05": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "WARD-04",
+        "quote": "continuity wardrobe (maroon shirt/white coat/black pants) held rather than swapping to the reference card's crop-top+shorts silhouette"
+      }
+    ]
+  },
+  "p14-06": {
+    "observations": []
+  },
+  "p15-01": {
+    "observations": []
+  },
+  "p15-02": {
+    "observations": []
+  },
+  "p15-03": {
+    "observations": []
+  },
+  "p15-04": {
+    "observations": []
+  },
+  "p15-05": {
+    "observations": []
+  },
+  "p15-06": {
+    "observations": []
+  },
+  "p16-01": {
+    "observations": [
+      {
+        "kind": "defect",
+        "registry_id": "ENV-03",
+        "quote": "distinct searchlight beams are not clearly visible in the dusk haze"
+      }
+    ]
+  }
+}

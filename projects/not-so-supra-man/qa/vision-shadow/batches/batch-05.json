@@ -1,0 +1,273 @@
+{
+  "batch_id": "batch-05",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "dee-dee (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dee-dee/face-card.png"
+    },
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p33-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p33-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p33-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "dee-dee",
+          "supraman"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "cowboy, dutch",
+        "action": "Dana descends from the sky fists-first between Destroya and downed Supraman, cape flaring, landing crack radiating from her boots. The two huge women lock eyes; he peers up from the crater between them.",
+        "costume_state": "dana: spare suit; dee-dee: corset; supraman: suit battered",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Step AWAY from the nice man, Dee-Dee.",
+            "type": "shout"
+          },
+          {
+            "character": "dee-dee",
+            "text": "The pet reporter got an upgrade! Adorable.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p34-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p34-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p34-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "dee-dee"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "medium, dutch",
+        "action": "The brawl \u2014 both women mid-swing along a hard diagonal, her fist meeting Destroya's crossed guard, shockwave ring blowing dust off the asphalt.",
+        "costume_state": "dana: spare suit scuffed; dee-dee: corset",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "I'm the ORIGINAL recipe now \u2014 you're the knock-off!",
+            "type": "shout"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Funny. You hit like an intern.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p35-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p35-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p35-01.json",
+      "context": {
+        "characters": [
+          "dee-dee",
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "full, birds-eye",
+        "action": "Destroya dominates: one hand chokeslamming Dana into the asphalt (crater webbing out), the other backhanding Supraman through an office window line \u2014 three storeys of glass detonating.",
+        "costume_state": "dana: suit scuffed; supraman: suit + glass scuffs; dee-dee: corset",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "I'll deal with you TWO at a TIME!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p36-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p36-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p36-01.json",
+      "context": {
+        "characters": [
+          "dee-dee",
+          "supraman",
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "cowboy, low-angle-front",
+        "action": "Shot past Destroya's striped boot (foreground) pressing Supraman's shoulders into rubble; behind her, Dana drags herself up the rim of the crater, suit scuffed, eyes furious.",
+        "costume_state": "dana: suit dusty, crater grime; supraman: suit battered; dee-dee: corset",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dee-dee",
+            "text": "Stay DOWN, little man. The grown-ups are talking.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p37-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p37-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p37-01.json",
+      "context": {
+        "characters": [
+          "supraman",
+          "dee-dee",
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "afternoon",
+        "camera": "wide-establish, three-quarter",
+        "action": "Supraman rockets AWAY low over the rooftops, jaw set, torn cape snapping \u2014 while behind him Destroya hammers Dana through a brick storefront column.",
+        "costume_state": "supraman: cape torn; dana: suit battered; dee-dee: corset",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "Hold on, Dana. There is exactly ONE thing left that can out-muscle her.",
+            "type": "thought"
+          },
+          {
+            "character": "dee-dee",
+            "text": "HA! Your boyfriend just LEFT!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p38-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p38-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p38-01.json",
+      "context": {
+        "characters": [
+          "supraman",
+          "dana-lane",
+          "dee-dee"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "medium, profile",
+        "action": "Supraman back-from-the-lab, braced on one knee with the Disinto-Ray prototype shoulder-mounted, pouring its FULL teal charge into kneeling Dana \u2014 she's haloed in light; Destroya whirls in the background.",
+        "costume_state": "dana: suit battered pre-final; supraman: cape torn; dee-dee: corset",
+        "muscle_size_tier": {
+          "dana-lane": 6,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "You're the strongest of us, Dana. So TAKE THE REST OF IT!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p39-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p39-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p39-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "mcu, low-angle-front",
+        "action": "Dana rises inside the beam-glow, head back, teeth gritted in ecstatic strain, suit seams beginning to lift OFF her swelling shoulders, hair floating in the energy wash.",
+        "costume_state": "dana: suit shoulder seams lifting in beam glow",
+        "muscle_size_tier": {
+          "dana-lane": 7
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "It's... EVERYTHING... and it's MINE!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p40-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p40-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p40-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "city-street",
+        "time_of_day": "late-afternoon",
+        "camera": "ecu-region, three-quarter",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her right arm mid-beam. Stage 1: tier-7 bicep splitting the blue sleeve. Stage 2: sleeve gone \u2014 bicep doubling, veins like cables, energy crackling across the skin. Stage 3: TIER-9 hyper arm, forearm wider than her head, fist clenched, asphalt cracking under the static.",
+        "costume_state": "dana: suit R sleeve bursts across stages",
+        "muscle_size_tier": {
+          "dana-lane": 9
+        },
+        "size": "splash",
+        "scripted_dialogue": [],
+        "scripted_captions": [
+          "The last of the ray. The last limit."
+        ],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

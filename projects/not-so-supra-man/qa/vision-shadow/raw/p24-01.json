@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Lighting is consistent across the figure and the cracking-monitor background; sparks and debris look integrated, not pasted."},
+  "hair_discontinuity": {"detected": true, "confidence": "high", "reason": "Dee-Dee's hair renders as very pale platinum/white-blonde, clearly lighter and less saturated than her warm golden dirty-blonde reference, with no special colored lighting in this shot to explain the shift."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "A gold diamond-shaped buckle/emblem with a chevron pattern is prominently visible at the waist of Destroya's corset. CAST CANON explicitly states the corset must be PLAIN BLACK and that any gold chevron on her corset, cuffs, or body is a defect -- this is exactly that named failure mode."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Dee-Dee/Destroya is rendered as a large, powerful adult figure appropriate to a tier-8 transformation, not a model-scale artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Panel is pre-lettering with no baked-in speech bubbles."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "The massive, heavily-muscled build (thick arms/legs, defined abs) reads consistent with the scripted tier-8 eruption, well above her tier-3 baseline."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering with realistic skin/sweat texture and plausible sparks/debris lighting."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering baked into the panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly one figure present, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Facial features match Dee-Dee's reference despite the hair-color drift."},
+  "location_mismatch": {"detected": false, "confidence": "medium", "reason": "The background reads as a monitor-filled office/control area rather than a classic lab interior, but 'monitors cracking from proximity' is explicitly scripted for this doomer-lab-2 panel, so it plausibly is the same backup-lab space framed toward its monitor wall."}
+}

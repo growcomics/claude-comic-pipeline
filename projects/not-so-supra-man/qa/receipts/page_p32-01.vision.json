@@ -1,0 +1,97 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p32-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p32-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Dee-Dee/Destroya's curly hair reads as a bright, warm golden blonde here \u2014 closer to canonical than in this batch's other panels, but still appears slightly brighter/lighter than the reference face-card's honey-gold tone, even allowing for strong direct sunlight in this exterior scene."
+    },
+    {
+      "category": "location_mismatch",
+      "confidence": "medium",
+      "registry_ids": [
+        "ENV-01"
+      ],
+      "registry_slugs": [
+        "location_drift"
+      ],
+      "groups": [
+        "ENV"
+      ],
+      "reason": "The frame shows only a bare dirt/rock crater with no pavement, building, or other urban anchor visible at any edge \u2014 reading as an outdoor rubble field rather than the scripted city-street. CAST CANON specifically calls out 'outdoor rubble field... on a lab-scripted page' as a mismatch example, and the same venue-class concern applies here against the city-street script even though a street-level "
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Both figures and the crater/dust are consistently lit by a single warm overhead/back sun source with matching shadow direction; dust kicked up around Destroya's planted boot is consistently lit, no copy-paste seam."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Dee-Dee/Destroya's curly hair reads as a bright, warm golden blonde here \u2014 closer to canonical than in this batch's other panels, but still appears slightly brighter/lighter than the reference face-card's honey-gold tone, even allowing for strong direct sunlight in this exterior scene."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Destroya is correctly wearing the plain black leather corset/bustier, black bottom, black cuffs, and black-and-white striped thigh-high boots with no visible gold emblem anywhere on the costume \u2014 matches the scripted 'corset' costume_state and CAST CANON's plain-black-corset spec. Supraman's blue suit, red cape, and dusted/cratered state match his scripted costume_state."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "The dramatic size difference between Destroya standing and Supraman lying in the crater is consistent with the scripted tier-8 muscle mass and the story's established power dynamic, not a model/compositing scale error."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles baked in; dialogue is scripted but panel is pre-lettering."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Destroya's extremely bulky delts, traps, and arms are consistent with the scripted tier-8 hyper-muscular size."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering \u2014 skin texture, leather sheen on the corset/boots, realistic dust and rubble; no ink outlines or flat cel-shaded color blocking."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering present to check."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Both scripted characters (Dee-Dee/Destroya, Supraman) are present, no extras; matches expected_named_cast_size of 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Destroya's face/build and Supraman's face/hair (visible tilted back in the crater) are both consistent with their canonical references."
+    },
+    "location_mismatch": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "The frame shows only a bare dirt/rock crater with no pavement, building, or other urban anchor visible at any edge \u2014 reading as an outdoor rubble field rather than the scripted city-street. CAST CANON specifically calls out 'outdoor rubble field... on a lab-scripted page' as a mismatch example, and the same venue-class concern applies here against the city-street script even though a street-level "
+    }
+  }
+}

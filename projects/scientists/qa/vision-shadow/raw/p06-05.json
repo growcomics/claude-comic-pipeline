@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Warm overhead lab lighting is consistent across Jill's face/hair and the blurred background cabinetry/shelves; hair motion (windswept) looks like natural rendered strand physics, not a compositing artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Caramel-brown long wavy hair matches Jill's identity-sheet hue and style closely, including the windswept motion; no perceptible hue shift toward more orange/yellow/lighter."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Burgundy blouse with visible button-gap strain under the open white lab coat matches costume_state 'strained blouse + split-sleeved coat.' Gapping shows skin at the upper chest/neckline but does not expose breast coverage; groin/buttocks not in frame."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single-character face/torso CU with no other figures for scale comparison; proportions look normal for an adult female bust."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Bubble contains 'HAHA! INCREDIBLE!' and its tail points down toward Jill's open, laughing mouth — the only character in frame — correctly attached."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Coat and torso are largely covering the body in this face-focused CU, so little muscle mass is visible to judge against tier 6; nothing visible contradicts the scripted tier."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin, hair strands, and fabric all render photoreal with visible subsurface scattering and individual hair strand detail; no ink outlines or cel-shaded color blocking. Lettering is the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Bubble text reads 'HAHA! INCREDIBLE!' across two lines, matching the scripted line exactly with no doubling, typos, or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure (Jill) visible, matching expected_named_cast_size 1; no extras in frame."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Caramel wavy hair + burgundy blouse combination is diagnostic of Jill, not Rochelle (dark bob/teal); identity matches script."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Background shows lab cabinetry, shelved bottles, and equipment consistent with the scripted 'lab' location."}
+}

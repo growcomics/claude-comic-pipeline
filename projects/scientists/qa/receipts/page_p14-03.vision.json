@@ -1,0 +1,85 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p14-03",
+  "image": "projects/scientists/pages/p14-03.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-06"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "coverage_violation"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Jill wears a burgundy blouse with a structured collar (visible at the nape), split down the back seam -- continuing the same burgundy-blouse look from p14-01/p14-02 -- rather than this panel's scripted 'athletic top seams splitting across broadening back.' The tear exposes only back skin (not breasts/buttocks/groin), so coverage itself remains intact."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill's back is sharply focused in the foreground with the field/bleachers softly blurred behind, consistent warm rim-lighting from the low sun throughout. No paste artifact."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Hair reads as warm caramel-brown consistent with the identity-sheet reference; the strong backlight/rim-light in this shot brightens the edges but doesn't read as a genuine hue-category shift like the reddish cast seen in p14-02."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Jill wears a burgundy blouse with a structured collar (visible at the nape), split down the back seam -- continuing the same burgundy-blouse look from p14-01/p14-02 -- rather than this panel's scripted 'athletic top seams splitting across broadening back.' The tear exposes only back skin (not breasts/buttocks/groin), so coverage itself remains intact."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Single-character back insert; no scale anomaly."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech bubble is present in this panel, and none is scripted (only the RRRIP SFX), so there is nothing to flag."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Back, shoulders, and arms show massive, waves-of-muscle broadening consistent with the scripted tier 8 growth moment."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Rendering is photoreal CGI throughout; only the RRRIP SFX is the legal 2D overlay layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "SFX \"RRRIP\" is legible, correctly formed, and appears only once."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Only Jill appears, matching the single scripted character for this panel."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Hair color/style and build are consistent with Jill; nothing in this back view contradicts her identity."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Field turf, yard lines, guardrail, and bleachers in the background match the scripted 'field' location."
+    }
+  }
+}

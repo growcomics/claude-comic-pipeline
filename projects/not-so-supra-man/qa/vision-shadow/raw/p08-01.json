@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "This is the sanctioned in-image 3-sub-panel growth-progressive device (same character, same angle, divided by black gutters) rather than an unintended copy-paste artifact; lighting is internally consistent within each sub-panel."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Black bob with straight bangs matches the dana-lane face-card consistently across all three stages."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "In the third (rightmost) sub-panel, a small gold chevron-shaped emblem is visible on the remaining torn blouse fabric near the collarbone. CAST CANON requires Dana's Act-1 blouse to be PLAIN with no emblem — this is another instance of the flagged emblem leak."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Same-angle repeated framing across the three stages shows no scale artifacts."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles baked into this pre-lettering panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "The within-panel progression from toned forearm (stage 1) to ballooning bicep with splitting seam (stage 2) to fully swollen, vein-surfaced arm with burst sleeve (stage 3) matches the scripted stage-by-stage description."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal skin, sweat, and fabric-tearing detail maintained across all three stages; no 2D/cel-shaded drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No baked-in lettering visible in the panel image."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "The same character (Dana) appears three times across the sanctioned growth-progressive sub-panels, which CAST CANON explicitly states is the format, not a duplicate-character defect."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Facial features and hair are consistent with Dana's canonical reference across all three stages."},
+  "location_mismatch": {"detected": false, "confidence": "medium", "reason": "Plain dark grey backdrop in each sub-panel does not contradict the scripted doomer-lab; framing is too tight to see distinguishing location anchors either way."}
+}

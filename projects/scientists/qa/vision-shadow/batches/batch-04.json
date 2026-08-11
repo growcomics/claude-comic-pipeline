@@ -1,0 +1,222 @@
+{
+  "batch_id": "batch-04",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "jill (identity-sheet)",
+      "path": "projects/scientists/references/characters/jill/identity-sheet.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    },
+    {
+      "label": "jim (identity-sheet)",
+      "path": "projects/scientists/references/characters/jim/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p06-03",
+      "image": "projects/scientists/pages/p06-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p06-03.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on her left arm",
+        "action": "Insert, head out of frame: Jill's left coat sleeve splits along the seam over a round, hard bicep. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. SFX: \"RRIP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles ar",
+        "costume_state": "jill: lab coat sleeve splitting over swelling bicep, all coverage intact",
+        "muscle_size_tier": {
+          "jill": 5
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p06-04",
+      "image": "projects/scientists/pages/p06-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p06-04.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on her legs",
+        "action": "Insert: Jill's black slacks strain over thickening thighs and calves, a seam opening at the calf. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. SFX: \"CREAK\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles ar",
+        "costume_state": "jill: black slacks straining over swelling thighs, seams stressed, all coverage intact",
+        "muscle_size_tier": {
+          "jill": 6
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p06-05",
+      "image": "projects/scientists/pages/p06-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p06-05.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Jill's face",
+        "action": "Face CU: Jill laughing mid-transformation, hair swinging, utterly thrilled. One speech balloon: \"HAHA! INCREDIBLE!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display ",
+        "costume_state": "jill: strained blouse + split-sleeved coat, all coverage intact",
+        "muscle_size_tier": {
+          "jill": 6
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p06-06",
+      "image": "projects/scientists/pages/p06-06.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p06-06.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "full figure, slight low angle",
+        "action": "Payoff: full figure, slight low angle - Jill at the full size of the attached muscle reference hits a proud double-arm flex beside the bench, coat sleeves split, grinning at off-frame Rochelle. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One speech balloon: \"WELL? I THINK I GREW MORE THAN YOU.\" SFX behind her: \"TA-DAA\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bo",
+        "costume_state": "jill: split-sleeved lab coat + strained burgundy blouse + strained slacks, everything covered",
+        "muscle_size_tier": {
+          "jill": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p07-01",
+      "image": "projects/scientists/pages/p07-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p07-01.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "evening",
+        "camera": "wide establishing, evening light",
+        "action": "Evening kitchen: Rochelle fills the doorway coming home, still in her split-sleeved lab coat, new physique unmistakable; Jim rises from the table, donut forgotten, jaw dropping. Caption top-left: \"THAT EVENING.\" One speech balloon, tail to Jim: \"ROCHELLE?!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering",
+        "costume_state": "rochelle: split-sleeved lab coat + strained teal blouse + grey pencil skirt, grown, straight from the lab; jim: navy track jacket + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p07-02",
+      "image": "projects/scientists/pages/p07-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p07-02.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "evening",
+        "camera": "over-shoulder medium past Rochelle onto Jim",
+        "action": "OTS past Rochelle's big shoulder: Jim's shock breaks into a huge delighted grin. One speech balloon, tail to Jim: \"YOU LOOK AMAZING! WHAT HAPPENED?!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black o",
+        "costume_state": "rochelle: split-sleeved lab coat + strained teal blouse, grown; jim: track jacket intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p07-03",
+      "image": "projects/scientists/pages/p07-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p07-03.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "evening",
+        "camera": "close mcu two-shot, intimate",
+        "action": "Tight two-shot: Rochelle lifts Jim clean off the floor in a hug, his feet dangling; both laughing. One speech balloon, tail to Rochelle: \"LAB BREAKTHROUGH. BIG ONE.\" SFX: \"SQUEEZE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white ",
+        "costume_state": "rochelle: split-sleeved lab coat + strained teal blouse, grown; jim: track jacket intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p07-04",
+      "image": "projects/scientists/pages/p07-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p07-04.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "evening",
+        "camera": "close insert on her palm",
+        "action": "Insert: Rochelle's palm open between them, a single SMALL round pale pill resting on it, tiny against her huge palm; Jim's fingertips hovering over it. One speech balloon, tail to Rochelle (off-panel edge): \"WANT TO CATCH UP?\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector gr",
+        "costume_state": "rochelle: split-sleeved lab coat + strained teal blouse, grown; jim: track jacket intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p07-05",
+      "image": "projects/scientists/pages/p07-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p07-05.json",
+      "context": {
+        "characters": [
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "evening",
+        "camera": "close mcu on Jim",
+        "action": "CU: Jim swallows the tablet dry, eyes wide with nerves and excitement. One speech balloon, tail to Jim: \"DOWN THE HATCH.\" SFX: \"GULP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold bl",
+        "costume_state": "jim: track jacket intact",
+        "muscle_size_tier": {
+          "jim": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

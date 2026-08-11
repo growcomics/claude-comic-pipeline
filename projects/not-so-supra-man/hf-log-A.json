@@ -1,0 +1,18 @@
+{
+  "p01-01": { "page": 1, "job": "5a1b4a9f-a6b6-4fac-997d-63357fa07eee", "status": "done", "note": "cover 3-char composite; no-downsize gate PASS (Dana at parity with anchor); clean on first try" },
+  "p02-01": { "page": 2, "job": "7cfa132d-01f8-4038-9545-53bbe73246ad", "status": "done" },
+  "p03-01": { "page": 3, "job": "e636a78b-f112-4aac-bad7-2404cc61b2b2", "status": "done" },
+  "p04-01": { "page": 4, "job": "18c60e05-8e9c-41ab-8ae6-3b06fc8936b8", "status": "done" },
+  "p05-01": { "page": 5, "job": "e302968f-ba4d-4fef-bad5-c50ff8c61e90", "status": "done" },
+  "p06-01": { "page": 6, "job": "66cf8fa1-774f-4448-891b-3285a5f86553", "status": "done" },
+  "p07-01": { "page": 7, "job": "78308b00-c3fe-4d06-ac3d-d1b6dd83ae35", "status": "done" },
+  "p08-01": { "page": 8, "job": "83be1de5-df85-4318-85d5-45706cb6ff15", "status": "done" },
+  "p09-01": { "page": 9, "job": "8db6e1ce-72ea-4ded-b8db-1fb1fe0d81a6", "status": "done" },
+  "p10-01": { "page": 10, "job": "6ed414df-68b4-4d49-bfbb-10bdbf95f12a", "status": "done" },
+  "p11-01": { "page": 11, "job": "ae28287b-71de-4255-bb7b-5dfc3b655b7b", "status": "done" },
+  "p12-01": { "page": 12, "job": "06844c60-a0c1-4702-b8da-215d51bd9e1a", "status": "done" },
+  "p13-01": { "page": 13, "job": "b3b1991c-5abe-4fa2-b027-6b9f58a5fbd1", "status": "done", "note": "first attempt 7091231a returned NSFW; identical retry cleared" },
+  "p14-01": { "page": 14, "job": "47f1d3c6-0d13-4d71-8392-271fd877ddb4", "status": "done" },
+  "p15-01": { "page": 15, "job": "487c4869-6dc1-45df-b758-aadd2620fa30", "status": "done" },
+  "p16-01": { "page": 16, "job": "f12a9248-6c5d-479a-930d-b6c2119e088a", "status": "done" }
+}

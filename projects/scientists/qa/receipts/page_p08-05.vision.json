@@ -1,0 +1,101 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p08-05",
+  "image": "projects/scientists/pages/p08-05.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "costume_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-04"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "costume_stage_error"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Rochelle is carrying her white lab coat draped over her arm rather than wearing it, and the teal blouse she IS wearing shows no visible strain \u2014 doesn't match the scripted costume_state 'split-sleeved lab coat + strained teal blouse, grown,' which implies the coat is worn (and split) rather than removed and carried."
+    },
+    {
+      "category": "tier_visualization_mismatch",
+      "confidence": "medium",
+      "registry_ids": [
+        "BODY-01",
+        "BODY-07"
+      ],
+      "registry_slugs": [
+        "size_underrender",
+        "height_inflation"
+      ],
+      "groups": [
+        "SIZE"
+      ],
+      "reason": "Rochelle's walking silhouette (teal blouse, grey skirt) reads close to her baseline slim proportions rather than a tier-7 grown build. Confidence is medium rather than high because the higher, farther camera angle makes fine muscle detail harder to confirm than in the closer two-shot of p08-04, but the overall build does not read as grown."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Foreground blur at bottom-left reads as an intentional doorway-framing device for this look-down shot; cooler hallway light vs warmer kitchen light is a plausible dual-source lighting setup, not a mismatch."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Rochelle's dark bob and Jim's brown short hair both remain consistent with their references."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Rochelle is carrying her white lab coat draped over her arm rather than wearing it, and the teal blouse she IS wearing shows no visible strain \u2014 doesn't match the scripted costume_state 'split-sleeved lab coat + strained teal blouse, grown,' which implies the coat is worn (and split) rather than removed and carried."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jim reads smaller only because he is placed farther back in this high-angle doorway shot \u2014 ordinary depth perspective, not a model scale error."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "'ROCHELLE?' balloon contains text and is positioned near Jim in the background, matching the script's 'tail to Jim, small.'"
+    },
+    "tier_visualization_mismatch": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Rochelle's walking silhouette (teal blouse, grey skirt) reads close to her baseline slim proportions rather than a tier-7 grown build. Confidence is medium rather than high because the higher, farther camera angle makes fine muscle detail harder to confirm than in the closer two-shot of p08-04, but the overall build does not read as grown."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal rendering maintained throughout; only the caption box and balloon are 2D overlay."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Caption 'THE FORMULA GAVE HER EVERYTHING. HE JUST WASN'T PART OF IT.' and balloon 'ROCHELLE?' both match scripted text exactly, no typos or duplication."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Two figures present (Rochelle, Jim), matching expected_named_cast_size of 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both characters are correctly identified by hair and wardrobe."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Kitchen is visible through the doorway (cabinets, water heater/cooler unit), consistent with scripted location."
+    }
+  }
+}

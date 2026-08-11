@@ -1,0 +1,83 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p07-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p07-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "location_mismatch",
+      "confidence": "high",
+      "registry_ids": [
+        "ENV-01"
+      ],
+      "registry_slugs": [
+        "location_drift"
+      ],
+      "groups": [
+        "ENV"
+      ],
+      "reason": "PANEL CONTEXT scripts doomer-lab interior, but the background clearly shows wrestling/boxing ring ropes and a corner turnbuckle post with blurred stadium seating beyond, and a metal folding chair (not the lab's wooden interrogation chair) tipped at Dana's feet \u2014 this is a different venue class entirely, matching the rubric's explicit boxing-ring example of a location_mismatch."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Arena spotlighting falls consistently across Dana and Supraman; no mismatched shadow direction or floating-limb artifact."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana's black straight-bangs bob and Supraman's dark hair both match their reference face-cards."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Dana's blouse is tight at the seams with snapped rope pieces flying off, matching costume_state; no emblem shape is visible on the blouse in this pose/angle."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana and Supraman are proportioned plausibly relative to each other and the ring/chair elements."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles baked into this pre-lettering panel despite scripted dialogue."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's legs and arms read visibly muscular/toned, plausibly at the high end of 'athletic' for tier 4, but it is not clearly dramatically above the scripted tier given the growth-event context \u2014 flagging low uncertainty rather than a clear mismatch."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering of skin, sweat, and torn fabric maintained."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering present."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Two figures present \u2014 Dana and Supraman \u2014 matching expected named cast of 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Identities match canonical hair/build/costume for both characters."
+    },
+    "location_mismatch": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "PANEL CONTEXT scripts doomer-lab interior, but the background clearly shows wrestling/boxing ring ropes and a corner turnbuckle post with blurred stadium seating beyond, and a metal folding chair (not the lab's wooden interrogation chair) tipped at Dana's feet \u2014 this is a different venue class entirely, matching the rubric's explicit boxing-ring example of a location_mismatch."
+    }
+  }
+}

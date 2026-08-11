@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Kitchen background (fridge, water cooler, dining table/chairs) is lit consistently with the rest of the sequence; no floating limbs or mismatched shadows."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Brown tousled hair matches Jim's reference in hue and style."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Torn-open jacket hangs off the shoulders with visible holes, grey tee shredded across the chest/abs, jeans intact — matches costume_state exactly."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single figure at plausible adult proportions relative to the kitchen furniture; nothing mis-scaled."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "\"I'M HUGE! HAHA! LOOK AT THIS!\" balloon contains text with tail pointing to Jim's face, the only character present."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "This is visibly the largest/most muscular rendering of Jim across the p08 sequence (huge chest, cut abs, big flexed arms), consistent with a tier-8 payoff peak above the tier-4 and tier-6 panels earlier in the scene."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal skin/muscle shading throughout; no ink outlines or flat cel-shading on the character."},
+  "lettering_error": {"detected": true, "confidence": "medium", "reason": "\"BOOM\" appears twice — once beside each raised fist — while PANEL CONTEXT scripts only a single 'SFX: \"BOOM\"' callout; reads as an unscripted duplicated SFX repeat rather than the one instance called for."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure (Jim) in frame, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Facial features and hair are consistent with Jim's reference."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Fridge, water cooler and dining table place this clearly in the scripted kitchen."}
+}

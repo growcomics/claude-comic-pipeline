@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p04-06",
+  "image": "projects/scientists/pages/p04-06.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Overhead lab lighting and shadow falloff on Rochelle's body match the visible ceiling lights and lab set; no floating or disconnected body parts."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dark-brown chin-length bob matches the rochelle identity-sheet in color and cut."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Teal blouse gaps open in a deep strained V at the sternum from chest growth, and the lab coat has no sleeves left (hanging open/behind), matching the scripted split-sleeved/stressed-seams state; no nipple/areola exposure visible, so breast coverage reads as technically intact, but the strain gap is deep enough to flag for a human double-check. Grey skirt covers hips fully."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single character in frame, full-figure low angle with no other figures or props to create a scale conflict."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble reads \"LOOK AT ME... HAHA! LOOK AT ME!\" with tail pointing to Rochelle's mouth."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Double-biceps flex shows extreme, beyond-bodybuilder mass consistent with the scripted tier-7 full-size payoff; no tier-7 reinforcement reference image was included in this batch's reference set to pin an exact size anchor."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Body, skin, and environment render as photoreal CGI; the BOOM SFX and speech bubble are the only 2D elements, which is the legal lettering-overlay scope."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble text \"LOOK AT ME... HAHA! LOOK AT ME!\" and SFX \"BOOM\" both match the scripted lines exactly, no doubling or typos."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Only Rochelle appears in frame, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Face and hairstyle match Rochelle's reference, not Jill's."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Lab benches, glassware, and shelved reagent bottles in the background match the scripted lab location."
+    }
+  }
+}

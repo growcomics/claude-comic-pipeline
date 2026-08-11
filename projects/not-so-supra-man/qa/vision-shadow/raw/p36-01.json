@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Consistent afternoon lighting across the foreground boot/Destroya, Supraman beneath her, and Dana climbing in the background."},
+  "hair_discontinuity": {"detected": true, "confidence": "medium", "reason": "Destroya's hair (top) again reads pale/platinum-blonde, lighter and less saturated than the warm gold-blonde canonical reference. Dana's hair (background, climbing) matches her reference black bob."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Dana's hips/legs are not clearly in frame (shown gripping the rubble rim, upper body only), so the missing-skirt question seen elsewhere can't be assessed here. Supraman's chest emblem is mostly covered by Destroya's boot, so the shield-outline concern noted in other panels can't be re-checked. Destroya's corset is plain black with no gold marks."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Destroya's dominant foreground size is consistent with the low-angle-front camera choice (intentional perspective), not a model/scale error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Supraman is mostly obscured (pinned under Destroya's boot), limiting assessment, but nothing visible contradicts the scripted tiers for Dana or Destroya."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering throughout; no 2D/ink/cel-shaded artifacts."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "All 3 scripted characters (Destroya, Supraman, Dana) are present in frame."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Destroya, Supraman, and Dana are each identifiable by hair, build, and costume."},
+  "location_mismatch": {"detected": false, "confidence": "medium", "reason": "Rubble/crater terrain under open sky is consistent with the ongoing street battle's aftermath; this crop lacks distinct buildings or road markings to fully confirm city-street, hence not high confidence."}
+}
