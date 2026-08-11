@@ -30,12 +30,13 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 - **Current state**: **shell built** at `skills/ideator/` — `SKILL.md` (the concept-tournament workflow + I/O contract), `references/concept-schema.json` (the Ideator→Writer contract), `references/rubric.md` (the scoring rubric, grounded in the corpus findings). The **tournament engine itself (generate + score) is a documented STUB** in `scripts/tournament.py` (`BUILD ME (stronger model)`) — deliberately deferred per §8. Until it's built, ideation runs by hand against the same contract.
 - **Asset to feed it**: `research/comic-corpus/` — the corpus skill studies reference comics against a rubric. The ideator consumes corpus conclusions so pitches are grounded in what actually works, not invented in a vacuum. The corpus now also ingests the user's own **scripts** (B1) and a premium **catalog** via the authenticated session (B2) as feedstock.
 
-### Stage 2 — WRITER  *(script generation)*  — **MISSING**
+### Stage 2 — WRITER  *(script generation)*  — **BUILT ✓ (2026-08-10)**
 - **Purpose**: turn one selected concept into a full, panel-ready script.
-- **Input**: a chosen concept from Stage 1 (or a human-written concept).
-- **Output**: a script in the format `script-breakdown` already consumes (page → panel beats, dialogue, transformation decomposition, escalation curve). Same shape as the Ultra-Gal PDF the pipeline already digests.
-- **Current state**: nothing dedicated. Scripts arrive as PDFs/prose from the user.
-- **Must be pipeline-aware**: the writer should write *to the pipeline's strengths* — it knows the system does tier escalation, body-region ECUs, transformation triptychs, L34 staging, L35 expression beats, the growth-sequence order (breasts→glutes→muscle, per `posing-and-expressions.md`), and the escalation devices in `escalation-devices.md`. A good script pre-bakes those so storyboard + page-build have an easy time.
+- **Input**: a chosen concept from Stage 1 (`concepts.json` → `selected_concept_id`) or a human-written concept.
+- **Output**: `script.md` in the explicit Writer→Storyboard contract (`skills/writer/references/script-format.md`) — page → panel beats, dialogue, transformation decomposition, tier curve, story spine (L38), situation registers (L39), staging/camera intent — which `script-breakdown` transcribes with zero invention. Same lineage as the hand-fed Ultra-Gal-style scripts, plus first-class annotations.
+- **Current state**: **built** at `skills/writer/` — `SKILL.md` (poll → structural pre-plan → write → validate → human gate), `references/script-format.md` (the contract), `references/craft-digest.md` (the pipeline-strengths ruleset), `references/gribble-alignment.md`, per-type templates (`fmg`/`be`/`bg`/`mmg`), `scripts/validate_script.py` (mechanical gate: density floors, L13, tier monotonicity, decomposition, registers), and a validated worked example (`samples/spot-me/`: concept → script → shotlist, all gates clean).
+- **Pipeline-aware by construction**: the craft digest bakes in tier escalation, body-region ECUs, transformation decomposition, growth-sequence order (breasts→glutes→muscle), the escalation-device menu, L12/L13 dialogue rules, L34 staging, L35 expression beats, L38 spine, L39 registers, always-clothed, and no-extras — so storyboard + page-build have an easy time.
+- **Human gate**: the user approves the script — still the last cheap point to change the story.
 
 ### Stage 3 — STORYBOARD  *(script → shotlist)*  — **MATURE ✓**
 - **Purpose**: break a script into a structured per-panel shotlist.
@@ -74,7 +75,7 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 | Stage | Maturity | Where it lives |
 |---|---|---|
 | 1 Ideator | 🟡 shell (engine stubbed) | `skills/ideator/` (SKILL + schema + rubric); feedstock at `research/comic-corpus` |
-| 2 Writer | ❌ missing | — (scripts arrive manually today) |
+| 2 Writer | ✅ built | `skills/writer/` (SKILL + format contract + craft digest + templates + validator + worked example) |
 | 3 Storyboard | ✅ mature | `skills/script-breakdown/` |
 | 4 Reference | ✅ mature | `skills/reference-gathering/`, `reference-acquisition/`, `location-scout/`, `style-lock/` |
 | 5 Page build | ✅✅✅ deep | `skills/comic-production/`, `projects/<p>/qa/`, `page-composer/`, `production-briefing/` |
@@ -92,7 +93,7 @@ Each handoff is an artifact + a schema. This is the schema-contracts work (exper
 | Handoff | Artifact | Schema status |
 |---|---|---|
 | Ideator → Writer | `concepts.json` (slate) + a `selected_concept` | **schema exists** (`skills/ideator/references/concept-schema.json`); engine stubbed |
-| Writer → Storyboard | `script.md`/`.json` in the script-breakdown input shape | partly implicit (the PDF/prose shape script-breakdown already parses) |
+| Writer → Storyboard | `script.md` in the script-breakdown input shape | **schema exists** (`skills/writer/references/script-format.md`, gated by `skills/writer/scripts/validate_script.py`) |
 | Storyboard → Reference | `shotlist.json` + `references_required.json` | exists (experiment/04 schemas) |
 | Reference → Page build | ref ledger + complete ref pack | exists (`ref-ledger.json`, L28 manifest) |
 | Page build → Reviewer | banked `pages-log.json` + receipts/verdicts | exists (qa chain) |

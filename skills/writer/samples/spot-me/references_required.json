@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "generated_from_shotlist": true,
+  "characters": {
+    "dana": {
+      "face_card": "references/characters/dana/face-card.png",
+      "body_tiers": [
+        {"tier": 2, "path": "references/characters/dana/body-tier2.png", "lineup_required": true},
+        {"tier": 3, "path": "references/characters/dana/body-tier3.png", "lineup_required": true},
+        {"tier": 4, "path": "references/characters/dana/body-tier4.png", "lineup_required": true},
+        {"tier": 5, "path": "references/characters/dana/body-tier5.png", "lineup_required": true}
+      ],
+      "views": [
+        {"name": "3q-full", "tier": 2, "path": "references/characters/dana/view-3q-full.png", "lineup_required": false},
+        {"name": "profile", "tier": 2, "path": "references/characters/dana/view-profile.png", "lineup_required": false},
+        {"name": "back-full", "tier": 2, "path": "references/characters/dana/view-back-full.png", "lineup_required": false},
+        {"name": "low-angle-front", "tier": 2, "path": "references/characters/dana/view-low-angle-front.png", "lineup_required": false},
+        {"name": "ecu-region", "tier": 2, "path": "references/characters/dana/view-ecu-region.png", "lineup_required": false}
+      ]
+    },
+    "kayla": {
+      "face_card": "references/characters/kayla/face-card.png",
+      "body_tiers": [
+        {"tier": 3, "path": "references/characters/kayla/body-tier3.png", "lineup_required": true}
+      ]
+    }
+  },
+  "locations": {
+    "iron-hour-gym": {
+      "establishing": "references/locations/iron-hour-gym/_source.jpg",
+      "views": [
+        {"name": "reverse", "path": "references/locations/iron-hour-gym/_source-reverse.jpg"}
+      ]
+    }
+  },
+  "props": {}
+}

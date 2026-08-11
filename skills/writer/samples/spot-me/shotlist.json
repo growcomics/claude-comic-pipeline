@@ -1,0 +1,847 @@
+{
+  "project": "spot-me",
+  "version": 1,
+  "page_count": 6,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "transformation_metadata": {
+    "flavor": "body-region-progression",
+    "start_tier": 2,
+    "end_tier": 5
+  },
+  "story_spine": {
+    "want": "Dana wants Kayla's 315 squat record off the board before Kayla transfers gyms on Friday.",
+    "obstacle": "Kayla guards the record and the needling superiority that comes with it, and Dana's lifts have been stalled at the same plateau for a year.",
+    "cost": "The prototype is untested and off-book — using it means outgrowing the honest-grinder logbook self she has kept since day one.",
+    "promise_page": 1,
+    "payoff_page": 6,
+    "ending": "landed"
+  },
+  "arc_character": "dana",
+  "cast": [
+    {
+      "id": "dana",
+      "name": "Dana",
+      "ref_folder": "references/characters/dana/",
+      "soul_id": null,
+      "wardrobe": "heather-grey cropped tank, black high-waist leggings, white lifting shoes",
+      "distinguishing_marks": "copper-red high ponytail; crescent scar through the left eyebrow"
+    },
+    {
+      "id": "kayla",
+      "name": "Kayla",
+      "ref_folder": "references/characters/kayla/",
+      "soul_id": null,
+      "wardrobe": "teal zip hoodie over black sports top, charcoal joggers, duffel bag",
+      "distinguishing_marks": "platinum french braid; rose-vine tattoo down the right forearm"
+    }
+  ],
+  "props": [
+    {
+      "id": "overload-vial",
+      "description": "chrome single-dose vial of 'OVERLOAD' prototype pre-workout, paper warning band reading HALF DOSE ONLY"
+    }
+  ],
+  "locations": [
+    {
+      "id": "iron-hour-gym",
+      "description": "24-hour commercial gym at closing: blue-white LED strips, mirror wall, squat rack under a whiteboard record board, rubber plate stacks, dumbbell rack",
+      "ref_folder": "references/locations/iron-hour-gym/"
+    }
+  ],
+  "transformation_scenes": [
+    {
+      "name": "first-surge",
+      "pages": [
+        1,
+        3
+      ],
+      "required_body_regions": [
+        "chest",
+        "arms",
+        "shoulders"
+      ],
+      "devices": [
+        "sfx-driven",
+        "zoom-escalation",
+        "reaction-intercut"
+      ]
+    },
+    {
+      "name": "overload",
+      "pages": [
+        4,
+        6
+      ],
+      "required_body_regions": [
+        "chest",
+        "hips",
+        "rear",
+        "suit_fail",
+        "abs"
+      ],
+      "devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "size-comparison",
+        "reaction-intercut"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "standard",
+          "characters": [
+            "dana",
+            "kayla"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "wide-establish, eye-level",
+          "subject_staging": "depth-staged",
+          "action": "Closing time at Iron Hour — Kayla zips her duffel in the foreground while Dana, small and deep in frame, stares up at the record board over the squat rack.",
+          "dialogue": [],
+          "captions": [
+            "Iron Hour Gym. 11:58 PM."
+          ],
+          "sfx": [],
+          "notes": "Record board legible: KAYLA — 315. Depth-staged: witness FG, protagonist deep BG — their axis is the chapter's geography.",
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "muscle_size_tier": 2,
+          "costume_state": "dana: tank and leggings intact; kayla: kit intact",
+          "panel_situation": "dialogue-tense"
+        },
+        {
+          "panel_id": "p01-02",
+          "size": "standard",
+          "characters": [
+            "kayla"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, three-quarter",
+          "action": "Kayla shoulders her bag at the door, smirk lazy, chin tipped toward the board — cheeks lifted, eyes half-lidded with easy contempt.",
+          "dialogue": [
+            {
+              "character": "kayla",
+              "text": "Lock up when you're done worshipping my record.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "costume_state": "kayla: kit intact"
+        },
+        {
+          "panel_id": "p01-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, high-angle",
+          "action": "Looking down past Dana's shoulder: the chrome vial small in her open palm, the paper band's HALF DOSE ONLY catching the LED light.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Trial batch. Untested. 'Half dose only.'",
+              "type": "thought"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "overload-vial hero moment; warning band legible.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "consider",
+          "muscle_size_tier": 2,
+          "costume_state": "dana: intact"
+        },
+        {
+          "panel_id": "p01-04",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-face, eye-level",
+          "action": "Dana's jaw sets; her eyes come up off the vial to the board, narrowed and bright, the corner of her mouth curling.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Three-fifteen is getting old anyway.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "decide",
+          "muscle_size_tier": 2,
+          "costume_state": "dana: intact"
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, low-angle-front",
+          "action": "Dana upends the vial, throat working, eyes locked on the record board over the rim.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Bottoms up.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "GLUG",
+              "source": "half the vial, measured"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "trigger",
+          "muscle_size_tier": 2,
+          "costume_state": "dana: intact"
+        },
+        {
+          "panel_id": "p02-02",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-face, dutch",
+          "action": "Her pupils blow wide; a flush climbs her neck; breath catches half gasp, half grin, head tipping back.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Oh. Oh, that's warm.",
+              "type": "thought"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "THRRUM",
+              "source": "under her skin"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "first_sensation",
+          "muscle_size_tier": 2,
+          "costume_state": "dana: intact"
+        },
+        {
+          "panel_id": "p02-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-region, eye-level",
+          "action": "Her chest swells against the grey tank, cotton pulling taut, the cropped hem lifting clear of her waistband.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "CRRK",
+              "source": "seams taking the strain"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "chest",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining across the chest"
+        },
+        {
+          "panel_id": "p02-04",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-region, profile",
+          "action": "Her bicep rounds and rises as she curls a fist, a vein surfacing along the peak.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Okay. Okay okay okay—",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "arms",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: sleeves stretched, cuffs biting in"
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "size": "standard",
+          "characters": [
+            "kayla",
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, over-shoulder",
+          "action": "Over Dana's broadened shoulder: Kayla frozen in the doorway with her keys half-raised, eyes wide, smirk gone.",
+          "dialogue": [
+            {
+              "character": "kayla",
+              "text": "...Forgot my keys.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "reaction-intercut: the witness arrives. Door-side reverse of the mirror-side axis.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": 3,
+          "costume_state": "kayla: kit intact; dana: tank straining",
+          "panel_situation": "surprise-reveal"
+        },
+        {
+          "panel_id": "p03-02",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, three-quarter",
+          "action": "Dana's shoulders roll wider as the tank straps track outward toward her delts, stitches ticking loose one by one.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "TIK TIK",
+              "source": "stitches letting go"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "shoulders",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: straps stretched wide, hem riding"
+        },
+        {
+          "panel_id": "p03-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, eye-level",
+          "action": "She curls the fifty-pound dumbbell like it is empty, forearm cording, eyes wide with delighted disbelief and a laugh breaking through.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Fifty. That's adorable.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "First feat: the warm-up weight moves like air. Face in frame with the arm — L35.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "arms",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining"
+        },
+        {
+          "panel_id": "p03-04",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "medium, eye-level (mirror)",
+          "subject_staging": "foreground-occlusion",
+          "action": "Shot past the blurred dumbbell rack: Dana squared at the mirror wall, new mass evident, chin up, grin proud and hungry.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Now we're warm.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Scene-1 mini reveal, mirror composition modifier; foreground-occlusion past the rack.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "reveal",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining at chest and shoulders",
+          "panel_situation": "showcase"
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "wide-establish, high-angle",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "From the ceiling: the empty gym floor vast and blue-white, Dana a lone figure at its center, the vial glinting in her hand.",
+          "dialogue": [],
+          "captions": [
+            "12:04 AM."
+          ],
+          "sfx": [],
+          "notes": "Beat of stillness before the full dose — negative space sells the decision's weight.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining"
+        },
+        {
+          "panel_id": "p04-02",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, eye-level",
+          "action": "Dana peels the warning band off in one strip and looks dead at the remaining half, brows level, smile gone serious.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Warning labels are for maintenance doses.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "decide",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining"
+        },
+        {
+          "panel_id": "p04-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "medium, low-angle-front",
+          "action": "She drains it dry; the surge hits mid-swallow — back arching, ponytail whipping, a ring of dust kicking off the floor around her shoes.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "THOOM",
+              "source": "a pulse through the floor plates"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "trigger",
+          "muscle_size_tier": 3,
+          "costume_state": "dana: tank straining"
+        },
+        {
+          "panel_id": "p04-04",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-region, eye-level",
+          "action": "Her chest surges a full size against the collapsing tank, cotton ripping down one side seam in a clean line.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "RRRIP",
+              "source": "the first seam goes"
+            }
+          ],
+          "notes": "multi-panel-progressive leg 1 (chest, second stage — tops p02-03).",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "chest",
+          "muscle_size_tier": 4,
+          "costume_state": "dana: tank ripped along the side seam"
+        },
+        {
+          "panel_id": "p04-05",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, three-quarter",
+          "action": "Her hips flare wide against the high waistband, the leggings' stitching creaking as the curve rounds outward.",
+          "dialogue": [
+            {
+              "character": "kayla",
+              "text": "Dana? What— what is that stuff?",
+              "type": "off-panel"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "STRRRETCH",
+              "source": "fabric at its limit"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "hips",
+          "muscle_size_tier": 4,
+          "costume_state": "dana: leggings straining, tank ripped at the side"
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "size": "standard",
+          "characters": [
+            "kayla"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, eye-level",
+          "action": "Kayla stands stunned just inside the door, keys sliding out of her fingers, mouth open, brows all the way up.",
+          "dialogue": [
+            {
+              "character": "kayla",
+              "text": "No way. No possible way.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "CLAK",
+              "source": "keys hitting rubber"
+            }
+          ],
+          "notes": "reaction-intercut breaking the body-region run (L35).",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "costume_state": "kayla: kit intact"
+        },
+        {
+          "panel_id": "p05-02",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "medium, low-angle-back",
+          "action": "From behind and below: her glutes and thighs swell against the leggings, the center stitching pulling a pale stress line.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "CRRRK",
+              "source": "the waistband complaining"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "rear",
+          "muscle_size_tier": 4,
+          "costume_state": "dana: leggings seams straining hard, tank ripped at the side"
+        },
+        {
+          "panel_id": "p05-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "medium, profile",
+          "action": "The tank's other seam and both outer-thigh seams give way in the same breath — fabric peeling back at the edges, everything critical still holding.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "RRRRIP",
+              "source": "everywhere at once"
+            }
+          ],
+          "notes": "clothing-destruction peak; coverage preserved per always_clothed.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "suit_fail",
+          "muscle_size_tier": 5,
+          "costume_state": "dana: tank and leggings ripped open at the seams, coverage holding"
+        },
+        {
+          "panel_id": "p05-04",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-face, low-angle-front",
+          "action": "Dana's face, lit from below: eyes blazing, sweat-sheened, a drunk-on-it grin splitting wide.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "More.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Money-shot face at peak intensity (L35) — the run's emotional anchor.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": 5,
+          "costume_state": "dana: seams ripped open, coverage holding"
+        },
+        {
+          "panel_id": "p05-05",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "ecu-region, dutch",
+          "action": "Her abs crunch into carved relief beneath the torn hem, breath punching out through her teeth.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "HHFF",
+              "source": "breath through teeth"
+            }
+          ],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "abs",
+          "muscle_size_tier": 5,
+          "costume_state": "dana: torn at hem and seams, coverage holding"
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "size": "standard",
+          "characters": [
+            "dana",
+            "kayla"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "medium, low-angle-front",
+          "subject_staging": "depth-staged",
+          "action": "Dana walks the record bar — loaded to 405 — out of the rack one-handed like a broom handle; Kayla, small at the door edge of frame, forgets to blink.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Count it for me?",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRNK",
+              "source": "plates shifting"
+            }
+          ],
+          "notes": "size-comparison: the 405 bar as toy + Kayla as human gauge, depth-staged.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "whole_body",
+          "muscle_size_tier": 5,
+          "costume_state": "dana: seams torn, coverage holding; kayla: kit intact",
+          "panel_situation": "surprise-reveal"
+        },
+        {
+          "panel_id": "p06-02",
+          "size": "wide",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "splash, worms-eye",
+          "subject_staging": "negative-space-asymmetric",
+          "action": "From the floor looking straight up: the full new frame against the LED grid, bar locked overhead, plate-bowed ends framing her silhouette, ruined seams fluttering.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [
+            {
+              "text": "KRRNG",
+              "source": "plates settling overhead"
+            }
+          ],
+          "notes": "The reveal — full-bleed row, worms-eye, negative space above. Grid-break energy per the Gribble steal.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "reveal",
+          "muscle_size_tier": 5,
+          "costume_state": "dana: seams torn, coverage holding",
+          "panel_situation": "showcase"
+        },
+        {
+          "panel_id": "p06-03",
+          "size": "standard",
+          "characters": [
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, low-angle-front",
+          "action": "Dana sets the bar back with two fingers steadying it and turns to the record board, breathing easy, chin high.",
+          "dialogue": [
+            {
+              "character": "dana",
+              "text": "Four-oh-five. Witnessed.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": "aftermath",
+          "muscle_size_tier": 5,
+          "costume_state": "dana: seams torn, coverage holding"
+        },
+        {
+          "panel_id": "p06-04",
+          "size": "standard",
+          "characters": [
+            "kayla",
+            "dana"
+          ],
+          "location": "iron-hour-gym",
+          "time_of_day": "night",
+          "camera": "mcu, high-angle",
+          "action": "Kayla crosses the floor, picks the marker off its string, and draws a line through her own name — rueful, beaten, half-smiling despite herself.",
+          "dialogue": [
+            {
+              "character": "kayla",
+              "text": "...I'll write it myself.",
+              "type": "balloon"
+            }
+          ],
+          "captions": [
+            "The board says DANA now."
+          ],
+          "sfx": [],
+          "notes": "Payoff: the want answered on the page it was promised against.",
+          "continuity_refs": [
+            "p01-01"
+          ],
+          "transformation_beat": null,
+          "muscle_size_tier": 5,
+          "costume_state": "dana: seams torn, coverage holding; kayla: kit intact",
+          "panel_situation": "aftermath-victory"
+        }
+      ]
+    }
+  ]
+}

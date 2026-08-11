@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-10T12:00:00-07:00",
+  "seed": "closing-time gym rivalry",
+  "rubric_version": "1.0",
+  "corpus_synthesis_version": "success-elements v2",
+  "_provenance": "Hand-written sample slate for the Writer stage's worked example (the ideator engine is a stub; this conforms to skills/ideator/references/concept-schema.json so the Writer exercises the real Ideator→Writer contract). Single-concept slate, pre-selected.",
+  "roster_snapshot": [],
+  "concepts": [
+    {
+      "concept_id": "spot-me-closing-time",
+      "title": "Spot Me",
+      "logline": "Locked out of her rival's squat record for a year, a plateaued lifter downs an untested prototype at closing time and outgrows the whole board.",
+      "premise": "Dana has chased Kayla's 315 record at Iron Hour Gym for a year and stalled. Kayla transfers gyms on Friday — the record would leave with her, unbeaten. Alone at closing with a prototype pre-workout marked HALF DOSE ONLY, Dana takes the half, likes it, and then takes the rest. The overload rewrites her from plateau to powerhouse while Kayla, back for her forgotten keys, becomes the unwilling witness and the scale she's measured against.",
+      "transformation": {
+        "flavor": "tech",
+        "trigger": "Prototype 'Overload' pre-workout, chrome single-dose vial, warning band reading HALF DOSE ONLY.",
+        "arc": "half-dose first surge -> feats + witness -> full-dose overload through chest/hips/rear/suit-fail/abs -> record-smashing reveal -> rival concedes",
+        "peak_state": "Tier-5 powerhouse walking a 405 bar out of the rack one-handed, seams burst but coverage holding, record board rewritten in her name.",
+        "tier_curve": "tier 2 -> 5"
+      },
+      "cast": [
+        {"name": "Dana", "role": "protagonist", "reuse": false, "ref_status": "new"},
+        {"name": "Kayla", "role": "rival-witness", "reuse": false, "ref_status": "new"}
+      ],
+      "cast_size": 2,
+      "setting": "Iron Hour Gym — a 24-hour commercial gym at closing time (empty by premise, so the no-extras rule is free). No existing env pack; one location, single-strategy.",
+      "hook": "The record board says KAYLA — 315. The vial says HALF DOSE ONLY. She empties it.",
+      "est_page_count": 6,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.8,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "size-comparison",
+        "reaction-intercut",
+        "sfx-driven",
+        "zoom-escalation"
+      ],
+      "generation_angle": "setting-first",
+      "why_itll_perform": "Transformation-type chapter engineered for the corpus growth-ratio band (F1); a rival-witness baked in so every growth beat has a face and a gauge (F3, size-comparison); a real want->answer spine in six pages (F5, the corpus's universal weakness); two-person cast + one location keeps production cost near the floor.",
+      "corpus_grounding": [
+        "F1 growth-ratio-by-intent",
+        "F3 face-led growth ECUs",
+        "F4 escalation-device steal-list",
+        "F5 story-as-differentiator"
+      ],
+      "scores": {
+        "hook": 4,
+        "growth_payoff_density": 4,
+        "story_spine": 4,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 3,
+        "production_economy": 5
+      },
+      "weighted_total": 73.8,
+      "score_rationale": "Dense growth spine and clean want->answer arc in a tiny footprint; loses only on cast reuse (all-new pair) and novelty (proven shape, fresh execution)."
+    }
+  ],
+  "ranking": ["spot-me-closing-time"],
+  "top3": ["spot-me-closing-time"],
+  "selected_concept_id": "spot-me-closing-time"
+}
