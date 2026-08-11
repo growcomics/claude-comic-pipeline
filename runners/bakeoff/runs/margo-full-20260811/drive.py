@@ -12,7 +12,7 @@ everything deterministic around it:
   python3 drive.py winner <beat> <variant> [--notes "..."]  # mark winner + ingest to board
   python3 drive.py status                     # per-beat rollup
 """
-import json, sys, subprocess, time
+import json, sys, os, subprocess, time, fcntl, contextlib
 from pathlib import Path
 
 RUN = Path(__file__).resolve().parent
@@ -23,11 +23,29 @@ BEATS = {b["id"]: b for b in SHEET["beats"]}
 ORDER = [b["id"] for b in SHEET["beats"]]
 STATE_F = RUN / "state.json"
 
+LOCK_F = RUN / ".state.lock"
+
+@contextlib.contextmanager
+def locked():
+    """Hold an exclusive lock across a full read-modify-write of state.json.
+
+    Multiple driver sessions run against this one file; without this, two
+    concurrent load/save pairs silently lose one side's writes."""
+    LOCK_F.touch(exist_ok=True)
+    with open(LOCK_F, "r+") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(fh, fcntl.LOCK_UN)
+
 def _load():
     return json.loads(STATE_F.read_text()) if STATE_F.exists() else {"beats": {}, "spend_notes": []}
 
 def _save(s):
-    STATE_F.write_text(json.dumps(s, indent=1))
+    tmp = STATE_F.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(s, indent=1))
+    os.replace(tmp, STATE_F)
 
 def _bs(s, beat):
     return s["beats"].setdefault(beat, {"jobs": {}, "winner": None, "rounds": {}})
@@ -124,9 +142,19 @@ def winner(beat, variant, notes=""):
     bd = BEATS[beat]
     br = Bridge()
     seq = ORDER.index(beat)
-    out = br.ingest("margo-full", f, orig=f"{beat}-{variant}.png", gen=job,
+    orig = f"{beat}-{variant}.png"
+    out = br.ingest("margo-full", f, orig=orig, gen=job,
                     prompt=bd["fullPrompt"], seq=seq)
+    # do=ingest only returns "file" on its dedupe path; normally it returns
+    # {ok,count,group}. Resolve the stored name by looking the orig back up,
+    # newest first — without this, write_decisions/annotate got file=None and
+    # silently no-opped, leaving every ingest unrated + unaccepted.
     fname = out.get("file")
+    if not fname:
+        cands = [m for m in br.images("margo-full") if m.get("orig") == orig]
+        if not cands:
+            raise SystemExit(f"{beat}: ingest ok but '{orig}' not found on board")
+        fname = sorted(cands, key=lambda m: m.get("ts", 0))[-1]["file"]
     br.write_decisions("margo-full", [{"file": fname, "accepted": True, "rating": "good",
                                        "addtags": ["bakeoff", "judge-pick"]}])
     if notes:
@@ -149,9 +177,12 @@ def status():
 if __name__ == "__main__":
     a = sys.argv[1:]
     cmd = a[0]
-    if cmd == "record": record(a[1], int(a[2]), a[3:])
-    elif cmd == "fetchroll": fetchroll(a[1], a[2])
-    elif cmd == "fetch": fetch(a[1], a[2], a[3])
+    if cmd == "record":
+        with locked(): record(a[1], int(a[2]), a[3:])
+    elif cmd == "fetchroll":
+        with locked(): fetchroll(a[1], a[2])
+    elif cmd == "fetch":
+        with locked(): fetch(a[1], a[2], a[3])
     elif cmd == "sheet": sheet(a[1:])
     elif cmd == "pair": pair(a[1], a[2:])
     elif cmd == "winner":
@@ -159,6 +190,6 @@ if __name__ == "__main__":
         args = a[1:]
         if "--notes" in args:
             i = args.index("--notes"); notes = args[i + 1]; args = args[:i]
-        winner(args[0], args[1], notes)
+        with locked(): winner(args[0], args[1], notes)
     elif cmd == "status": status()
     else: print(__doc__)

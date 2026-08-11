@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 07:45 (margo-full: wardrobe reaches the prompt + concurrent-driver safety)
+
+**Fixed**
+- **`runners/bakeoff/margo-full-beats.json` — the `wardrobe` field was never injected into `fullPrompt` (0 of 86 beats).** Beats carried a wardrobe line in the sheet, but the composed prompt dropped it entirely, so the ONLY clothing signal reaching the model was the `margo` identity reference — a photo of her in a lab coat. Every stage-3 beat therefore rendered the lab coat that the story destroys at b17: `b40-chalk` died 4/4 and `b43-bar-down` 7/7 on exactly this, and it contaminated `b41-money-lift`'s winner too. Each beat's prompt now carries a `WARDROBE (exact ...)` block, inserted before the LETTERING section, which explicitly outranks the reference image ("the reference is for FACE and IDENTITY only"). Corrective re-rolls of b40 and b43 came back 6/6 with the coat gone, confirming the fix. Pre-fix sheet preserved at `margo-full-beats.json.bak-nowardrobe`.
+- **`runs/margo-full-20260811/drive.py` — `winner` silently recorded un-accepted board entries.** `do=ingest` returns `{ok,count,group}` and only includes a `file` key on its dedupe path, but `winner()` read `out.get("file")` unconditionally; on the normal path that is `None`, so the follow-up `write_decisions` and `annotate` calls no-opped. Ingested panels sat `unrated` / `accepted:false` with no judge note, which is why the board read 0 accepted despite successful uploads. `winner()` now resolves the stored filename by looking the `orig` name back up (newest first) and fails loudly if it cannot.
+- **`runs/margo-full-20260811/drive.py` — unlocked read-modify-write on `state.json` lost writes between concurrent drivers.** Two sessions driving one run raced: an observed collision fetched job `8e130cdf` twice, leaving byte-identical `v08`/`v09` in `b41-money-lift` with state pointing at the orphan. Mutating commands (`record`/`fetch`/`fetchroll`/`winner`) now hold an exclusive `flock` on `.state.lock` across the whole load→modify→save, and `_save` writes via temp + atomic `os.replace`. Pre-lock copy at `drive.py.bak-preflock`.
+
+**Changed**
+- 26 of 86 beats judged and ingested to board `margo-full` (accepted, rated, tagged `bakeoff`/`judge-pick`, with per-beat judge notes recording why the winner beat its runners-up).
+
 ## 2026-08-11 00:55 (margo-full: lettering doctrine restored + 86-beat full-comic expansion)
 
 **Added**
