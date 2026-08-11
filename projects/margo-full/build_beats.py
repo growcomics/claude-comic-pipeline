@@ -33,27 +33,53 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-STYLE_V5 = (
+STYLE_CORE_A = (
     "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading "
     "with a glossy specular sheen — hard highlights pop on flexed muscle. LIGHTING: strong "
     "DIRECTIONAL key from behind or beside the subject, never flat overhead fill; warm key "
     "against cool fill (or cool rim against a warm key); one saturated practical or FX light "
     "source coloring the scene; high contrast with deep shadow falloff; a rim light traces "
-    "the body's edge and the background stays darker than the subject. BODIES: dramatically "
-    "oversized, far BEYOND the reference baseline — the bust renders dramatically enlarged, "
-    "well past athletic-realistic proportions, round and heavy; each bicep rivals her head in "
-    "size when flexed; delts, pecs, chest and glutes carry exaggerated round mass; the "
-    "physique dominates and fills the frame. Garments visibly strain and split at their seams "
-    "under the mass, but coverage of chest, torso and hips is always preserved. SLEEVES: when "
-    "a muscle flexes inside a sleeved garment the fabric responds physically — the sleeve seam "
-    "splits open around the flexed muscle with crisp torn fabric edges; bare skin NEVER blends "
-    "or gradients into fabric on the same limb. FRAMING: money shots use a LOW HERO ANGLE and "
-    "a TIGHT CROP — the camera framing, not words, carries the sense of scale; the subject "
-    "fills 75-90% of the frame. FACES: never blank or neutral — the emotion named in the "
-    "prompt renders at full theatrical intensity. NOT 2D illustration, NOT anime, NOT cartoon. "
-    "Strictly SFW: every character fully clothed; garments may strain or split at seams but "
-    "skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background "
-    "extras — only the named cast appears. "
+    "the body's edge and the background stays darker than the subject. "
+)
+
+# Stage-aware BODY blocks (feedback_comic_stage_refs_and_realism +
+# feedback_chest_oversize_compensate: the model scales DOWN whatever is asked,
+# so s3+ over-shoots aggressively; s1/s2 must NOT inherit the money-shot scaling
+# or the slim scientist renders huge before the serum — a continuity break).
+BODY_BY_STAGE = {
+    "s1": ("MARGO'S BODY (stage 1): slim, wiry lab-scientist build exactly as the reference "
+           "image — NOT muscular, NOT enhanced; modest frame, garments fit normally. "),
+    "s2": ("MARGO'S BODY (stage 2): visibly athletic and toned, noticeably fitter and fuller "
+           "than the slim reference baseline — firm defined arms and shoulders, an athletic "
+           "chest — but still human-gym-athlete scale, garments fit snug but intact unless "
+           "the beat says otherwise. "),
+    "s3": ("MARGO'S BODY (stage 3): heavily muscular, dramatically bigger than the reference "
+           "baseline — round heavy delts, pecs and arms, the bust rendering enlarged and "
+           "round past athletic-realistic; a flexed bicep approaches her head in size; "
+           "garments strain and split at seams under the mass, coverage always preserved. "),
+    "s4": ("MARGO'S BODY (stage 4): far BEYOND bodybuilder scale — the bust renders "
+           "dramatically enlarged, well past athletic-realistic proportions, round and heavy; "
+           "each bicep RIVALS her head in size when flexed; delts, pecs, chest and glutes "
+           "carry exaggerated round mass; the physique dominates and fills the frame; "
+           "garments visibly strain and split at their seams, coverage always preserved. "),
+    "s5": ("MARGO'S BODY (stage 5, absolute maximum): colossal — dramatically bigger, rounder "
+           "and heavier than EVERY prior stage and far beyond the reference baseline; the "
+           "bust dramatically enlarged, round and heavy; each flexed bicep EXCEEDS her head "
+           "in size; delts, chest, back and glutes carry colossal round mass and she reads "
+           "taller than every other figure and prop in frame; garments split at every seam "
+           "under the mass, coverage of chest, torso and hips always preserved. "),
+}
+
+STYLE_CORE_B = (
+    "SLEEVES: when a muscle flexes inside a sleeved garment the fabric responds physically — "
+    "the sleeve seam splits open around the flexed muscle with crisp torn fabric edges; bare "
+    "skin NEVER blends or gradients into fabric on the same limb. FRAMING: money shots use a "
+    "LOW HERO ANGLE and a TIGHT CROP — the camera framing, not words, carries the sense of "
+    "scale; the subject fills 75-90% of the frame. FACES: never blank or neutral — the "
+    "emotion named in the prompt renders at full theatrical intensity. NOT 2D illustration, "
+    "NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain "
+    "or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay "
+    "covered. No background extras — only the named cast appears. "
     "LETTERING: classic comic-book lettering composited onto the photoreal CGI scene. The 2D "
     "comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the "
     "panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal 3D "
@@ -407,13 +433,18 @@ def main():
             "anchors": ([{"winner": b["anchor"].split(":", 1)[1]}] if b["anchor"] else []),
             "aspect": "3:4",
             "variants": 12 if b["beatKind"] == "payoff" else 8,
-            "fullPrompt": b["prompt"] + "\n\n" + lettering_block(b["dialogue"]) + "\n\n" + STYLE_V5,
+            "fullPrompt": (b["prompt"] + "\n\n" + lettering_block(b["dialogue"]) + "\n\n"
+                           + STYLE_CORE_A
+                           + (BODY_BY_STAGE[b["stage"]] if "MARGO" in b["chars"] else "")
+                           + STYLE_CORE_B),
         })
     sheet = {
         "project": "margo-full",
         "backend": "higgsfield-mcp",
-        "style": STYLE_V5,
-        "styleVersion": "v5 (v4 + L19 lettering restored, no-text clause RETIRED — owner call 2026-08-12)",
+        "style": STYLE_CORE_A + "<stage-aware BODY block inserted per beat> " + STYLE_CORE_B,
+        "styleVersion": ("v5 (v4 + L19 lettering restored, no-text clause RETIRED — owner call "
+                         "2026-08-12; BODIES clause made STAGE-AWARE s1..s5 so pre-serum beats "
+                         "render slim and money beats over-shoot)"),
         "beats": beats_out,
     }
     out = ROOT / "runners/bakeoff/margo-full-beats.json"
