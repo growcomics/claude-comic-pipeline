@@ -11,15 +11,22 @@
   "94188882"
  ],
  "tags": [
-  "ward-06-coverage-verified-clean",
   "ward-01-lacing-side-seam-only-verified",
   "views-4-complete",
   "identity-matches-face-card",
   "scale-silhouette-ok",
   "anatomy-clean",
   "style-photoreal-no-drift",
-  "no-text-contamination"
+  "no-text-contamination",
+  "ward-06-owner-ruling-pending"
  ],
  "blocking_defects": [],
- "note": "Round 1 (f4fb6bec/fae12045/b478dd49/0be87e08) FAILED 4/4 on WARD-06 \u2014 bare buttocks/thong back. Root cause was a reference gap (body-tier8.png is front-only), fixed in references/turnaround-specs.json rather than by re-rolling. Round 2 passes 4/4."
+ "note": "Round 1 (f4fb6bec/fae12045/b478dd49/0be87e08) FAILED 4/4 on WARD-06 \u2014 bare buttocks/thong back. Root cause was a reference gap (body-tier8.png is front-only), fixed in references/turnaround-specs.json rather than by re-rolling. Round 2 passes 4/4.",
+ "judge_discrepancy": {
+  "found": "2026-08-11 \u2014 the round-2 judge's parent synthesis and its own sub-reader CONTRADICTED each other on the same image (r1): parent said 'fully covered, edge-to-edge'; sub-reader said 'thong/T-back, both cheeks substantially bare'.",
+  "main_model_direct_inspection": "Main model cropped and 4x-upscaled the back-view seat of BOTH r1 and the banked winner r2 and looked directly. Neither report was accurate. Actual rendering: a HIGH-CUT BRIEF \u2014 black spans the full seat and covers the bulk of both cheeks (NOT a thong, NOT a T-back, no thin strap), but cut high enough that outer hip and part of the lower under-curve are bare. Round 1 by contrast was a genuine thong with clearly bare cheeks, so the spec fix DID work; the remaining question is degree, not kind.",
+  "status": "BANKED AS-IS pending owner ruling on the coverage standard for Destroya (a taste call on their own character that propagates to p22-27 and p31-46). Re-roll is 0-credit on the laptop ULTRA account if the owner wants fuller coverage.",
+  "methodology_lesson": "Do not accept a delegated judge's decision-critical claim on a CANONICAL reference without the main model personally viewing the crop \u2014 the parent claimed first-hand pixel inspection while its own sub-reader disagreed. Per SPOTTER MODE, flagged/borderline images are exactly what the main model is supposed to view itself.",
+  "RESOLVED": "Main model inspected the OWNER-APPROVED canon (references/characters/dee-dee/body-tier8.png): Destroya's canonical costume is a VERY HIGH-CUT LEOTARD with bare glutes. The generated sheets were therefore FAITHFUL to the approved reference. The 'full-cut brief that COMPLETELY COVERS the buttocks / NOT a thong' clause was added by Claude when patching the spec after round 1 \u2014 it CONTRADICTS the owner's own canon, which is why the model kept splitting the difference and why two sub-readers scored FAIL (they were grading against Claude's over-spec, not the owner's standard). The banked winner r2 is MORE covered than the approved reference, i.e. conservative, not a violation. LEFT BANKED as working canon; owner asked to rule on the coverage standard for Destroya before the spec language is finalised, since it propagates to p22-27 and p31-46. Re-roll costs 0 credits either way."
+ }
 }

@@ -101,26 +101,6 @@
           "flow_id": "2f4e1204-8e67-43fa-a49e-7167d435de64",
           "disk": "references/characters/dee-dee/body-tier8.png"
         }
-      },
-      "turnaround_t8": {
-        "flow_id": "d49e36bb-5321-4263-bad6-1726be2cec34",
-        "disk": "references/characters/dee-dee/turnaround-t8.png",
-        "chain": {
-          "receipt": "qa/receipts/sheet_deedee-t8-destroya.receipt.json",
-          "audit": "qa/receipts/sheet_deedee-t8-destroya.audit-pass",
-          "verdict": "qa/receipts/sheet_deedee-t8-destroya.verdict.json",
-          "verdict_tags": [
-            "ward-06-coverage-verified-clean",
-            "ward-01-lacing-side-seam-only-verified",
-            "views-4-complete",
-            "identity-matches-face-card",
-            "scale-silhouette-ok",
-            "anatomy-clean",
-            "style-photoreal-no-drift",
-            "no-text-contamination"
-          ],
-          "prompt_sha": "680526de3f01b1226a2feac4ce4defb8464ceebecfc5fc87e1b0d1785383e00a"
-        }
       }
     },
     "dex-doomer": {

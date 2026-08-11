@@ -1,0 +1,16 @@
+{
+ "job": "sheet:supraman-suit",
+ "kind": "sheet",
+ "prompt_sha": "21a8fae2ae2c30fd89782cd0d95dfe042e175c8ca2abb417f407a6f27d892a17",
+ "attach": [
+  "supraman face card (8bf6a23e)",
+  "male superhero base body (74c0857f)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "e826405c2b3fec1f"
+}
