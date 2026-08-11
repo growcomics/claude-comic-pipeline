@@ -1,0 +1,125 @@
+D15 — situation-expression register gate (L39)                    [PROPOSED, NOT APPLIED]
+=========================================================================================
+
+Adds the L39 register check to qa/compose.py (not-so-supra-man, the canonical gate copy),
+alongside the L34/D14 staging check the 2026-08-11 re-bless landed. Authored against
+main@cf07a32. Claude does not edit gate scripts (Layer 8) — this diff is for the USER to
+apply and re-bless at the next gate review (one review + one `integrity.py --rebless`
+covers this and anything else queued):
+
+    git apply docs/proposals/d15-expression-register-gate.diff
+    # review `git diff qa/`, then re-bless per the Layer-8 protocol
+
+What it enforces on every multi-character page job (see situation-expression-registers.md):
+  HARD  panel_situation missing from the shotlist panel (2+ characters)
+  HARD  staging register_pose / register_emotion missing, or outside the situation's register
+  HARD  two characters sharing the same pose+emotion pair
+  SOFT  >3 multi-character showcase/celebratory panels in the chapter (warn only)
+Plus: the composed JSON body gains "dramatic_situation" when a legal situation is set
+(mirrors the L34 "staging" directive injection it sits next to).
+
+Example catch: a confrontation beat where a character carries register_emotion
+"ecstatic-joy" refuses with — D15 (L39): register_emotion 'ecstatic-joy' for rook is
+outside the 'confrontation' register. That leak (showcase emotions on non-showcase
+beats) is the failure L39 exists to stop.
+
+Validated 2026-08-10 (dry-run, zero credits): python3 -m py_compile clean on the patched
+file; 3 worked stanzas (confrontation / surprise-reveal / aftermath-defeat) compose; the
+out-of-register and shared-pair negatives refuse; all 72 register labels cross-checked
+verbatim against situation-expression-registers.md. `git apply` ignores this header text.
+
+diff --git a/projects/not-so-supra-man/qa/compose.py b/projects/not-so-supra-man/qa/compose.py
+index cb0a6b9..4a47bea 100644
+--- a/projects/not-so-supra-man/qa/compose.py
++++ b/projects/not-so-supra-man/qa/compose.py
+@@ -61,6 +61,38 @@ FLAT_LINEUP_RE = re.compile(
+     r"parallel\s+to\s+the\s+(?:camera|lens)|level\s+eye[\s-]?line",
+     re.I,
+ )
++# L39 situation-expression registers — the situation names the register; each character
++# draws a DIFFERENT pose+emotion pair from it. Authored reference:
++# skills/comic-production/references/situation-expression-registers.md.
++SITUATION_REGISTERS = {
++    "showcase": {
++        "poses": ["frontal-flex", "rear-3q-display", "dynamic-frontal", "side-3q-flex"],
++        "emotions": ["triumphant-pride", "ecstatic-joy", "theatrical-commitment", "playful-overwhelm"]},
++    "celebratory": {
++        "poses": ["hands-up-cheer", "mid-leap", "arms-thrown-wide", "shoulders-back-laughing"],
++        "emotions": ["joy", "triumph", "euphoria", "mutual-recognition"]},
++    "confrontation": {
++        "poses": ["forward-lean-aggressive", "guard-up-coiled", "predatory-step-in", "weight-back-assessing"],
++        "emotions": ["locked-jaw-determination", "fierce-narrowed-focus", "contemptuous-smirk", "cold-clinical-assessment"]},
++    "mid-action": {
++        "poses": ["mid-strike", "mid-recover", "mid-dodge", "mid-counter"],
++        "emotions": ["strain", "snarl", "locked-focus", "grimace"]},
++    "surprise-reveal": {
++        "poses": ["recoil-step-back", "hands-framing-face", "lean-in-fascination", "arrested-mid-motion"],
++        "emotions": ["wide-eyed-shock", "dawning-realization", "fascinated-awe", "first-flex-curiosity"]},
++    "aftermath-victory": {
++        "poses": ["hand-on-hip-swagger", "foot-on-debris", "arms-crossed-pleased", "dismissive-hair-flick"],
++        "emotions": ["smug-satisfaction", "earned-tired-pride", "contemptuous-amusement", "quiet-exultation"]},
++    "aftermath-defeat": {
++        "poses": ["slumped-against-wall", "one-knee-recovering", "hand-to-mouth-pain", "defiant-stare-up"],
++        "emotions": ["pain-with-resolve", "disbelief", "barely-suppressed-rage", "quiet-acceptance"]},
++    "dialogue-tense": {
++        "poses": ["forward-engaged-listening", "arms-crossed-challenge", "hand-on-table-emphatic", "lean-on-wall-casual-threat"],
++        "emotions": ["skeptical", "contemptuous", "urgent", "coldly-assessing"]},
++    "intimate": {
++        "poses": ["open-toward-each-other", "hand-reaching", "forehead-touch", "weight-shared-leaning"],
++        "emotions": ["soft", "vulnerable", "tender", "open"]},
++}
+ 
+ def refuse(msgs):
+     print("COMPOSE REFUSED:")
+@@ -206,6 +238,42 @@ def compose_page(panel_id):
+         })
+         if contact and "<MISSING>" in json.dumps(characters[-1]): errs.append(f"D12: staging stanza incomplete for {c}")
+ 
++    # D15 (L39): the situation names the register; each character draws a DIFFERENT
++    # pose+emotion pair from it. L34 places the bodies; D15 governs what each is doing.
++    situation = panel.get("panel_situation")
++    if contact:
++        if not situation:
++            errs.append(f"D15 (L39): multi-character panel {panel_id} missing panel_situation in the "
++                        f"shotlist (legal: {', '.join(sorted(SITUATION_REGISTERS))})")
++        elif situation not in SITUATION_REGISTERS:
++            errs.append(f"D15 (L39): unknown panel_situation '{situation}' "
++                        f"(legal: {', '.join(sorted(SITUATION_REGISTERS))})")
++        else:
++            reg, seen_pairs = SITUATION_REGISTERS[situation], {}
++            for c in chars:
++                st = staging.get(c, {})
++                rpose, remot = st.get("register_pose"), st.get("register_emotion")
++                if not rpose or not remot:
++                    errs.append(f"D15 (L39): staging stanza for {c} missing register_pose/register_emotion "
++                                f"— pick from the '{situation}' register (situation-expression-registers.md)")
++                    continue
++                if rpose not in reg["poses"]:
++                    errs.append(f"D15 (L39): register_pose '{rpose}' for {c} is outside the '{situation}' "
++                                f"register (legal: {', '.join(reg['poses'])})")
++                if remot not in reg["emotions"]:
++                    errs.append(f"D15 (L39): register_emotion '{remot}' for {c} is outside the '{situation}' "
++                                f"register (legal: {', '.join(reg['emotions'])})")
++                if (rpose, remot) in seen_pairs:
++                    errs.append(f"D15 (L39): {c} and {seen_pairs[(rpose, remot)]} share the pair "
++                                f"'{rpose}' + '{remot}' — no two characters may share a pose+emotion pair")
++                seen_pairs.setdefault((rpose, remot), c)
++        festive = sum(1 for pg in shot["pages"] for p in pg["panels"]
++                      if len(p.get("characters", []) or []) >= 2
++                      and p.get("panel_situation") in ("showcase", "celebratory"))
++        if festive > 3:
++            print(f"COMPOSE WARN [D15-soft]: {festive} multi-character showcase/celebratory "
++                  f"panels in this chapter (>3) — vary the situation registers")
++
+     # SCENE LADDER: rung must match camera distance AND exist in the ledger (D8)
+     loc = panel.get("location")
+     if loc and loc not in ("lab-exterior",):
+@@ -233,6 +301,8 @@ def compose_page(panel_id):
+             "negative": (NEG + NEG_PAGE_BLEED).lower()}
+     if stype in STAGING_DIRECTIVE:  # L34: inject the camera-plane-breaking staging directive
+         body["staging"] = STAGING_DIRECTIVE[stype]
++    if situation in SITUATION_REGISTERS:  # L39: name the dramatic register in the prompt
++        body["dramatic_situation"] = situation
+     if any("torn" in state_for(c, panel) or "remnant" in state_for(c, panel) for c in chars):
+         body["spatial_rules"].append("coverage of chest and hips fully intact in every stage")
+     if "GROWTH-PROGRESSIVE" in action:
