@@ -1,0 +1,92 @@
+[
+ {
+  "runId": "bo-validation-20260809",
+  "project": "bakeoff-validation",
+  "backend": "flow-manual",
+  "at": "2026-08-09T17:53:41",
+  "beats": 4,
+  "rolls": 26,
+  "cleanVariantRate": 0.192,
+  "beatsCleanFirstRoll": 2,
+  "beatsClearedAfterRetry": 1,
+  "beatsHumanQueue": 1,
+  "clearRate": 0.75,
+  "defectsPerShippedPanel": 0.0,
+  "defectsById": {
+   "CAST-02": 18,
+   "PROP-01": 7,
+   "MISC-00": 2,
+   "BODY-05": 2,
+   "LET-02": 2
+  },
+  "creditsSpent": 0
+ },
+ {
+  "runId": "bo-flowfresh-20260809",
+  "project": "bakeoff-validation",
+  "backend": "flow-chrome",
+  "at": "2026-08-09T18:05:05",
+  "beats": 2,
+  "rolls": 8,
+  "cleanVariantRate": 0.875,
+  "beatsCleanFirstRoll": 2,
+  "beatsClearedAfterRetry": 0,
+  "beatsHumanQueue": 0,
+  "clearRate": 1.0,
+  "defectsPerShippedPanel": 0.0,
+  "defectsById": {
+   "PROP-01": 1,
+   "BODY-05": 1
+  },
+  "creditsSpent": 8
+ },
+ {
+  "runId": "bo-gribble-autopilot",
+  "project": "autopilot-test",
+  "backend": "higgsfield-mcp",
+  "at": "2026-08-09T19:33:11",
+  "beats": 23,
+  "rolls": 113,
+  "cleanVariantRate": 0.478,
+  "beatsCleanFirstRoll": 17,
+  "beatsClearedAfterRetry": 6,
+  "beatsHumanQueue": 0,
+  "clearRate": 1.0,
+  "defectsPerShippedPanel": 1.74,
+  "defectsById": {
+   "CAST-02": 68,
+   "FACE-01": 47,
+   "CAST-03": 46,
+   "BODY-03": 31,
+   "BODY-05": 10,
+   "PROP-01": 10,
+   "MISC-00": 9,
+   "CAST-01": 8,
+   "LET-02": 2
+  },
+  "creditsSpent": 194
+ },
+ {
+  "runId": "bo-autopilot-ab-20260810",
+  "project": "autopilot-ab",
+  "backend": "higgsfield-mcp",
+  "at": "2026-08-10T20:26:11",
+  "beats": 11,
+  "rolls": 60,
+  "cleanVariantRate": 0.55,
+  "beatsCleanFirstRoll": 9,
+  "beatsClearedAfterRetry": 0,
+  "beatsHumanQueue": 2,
+  "clearRate": 0.818,
+  "defectsPerShippedPanel": 0.22,
+  "defectsById": {
+   "CAST-02": 24,
+   "PROP-01": 7,
+   "MISC-00": 4,
+   "BODY-05": 3,
+   "LET-02": 2,
+   "WARD-01": 1
+  },
+  "creditsSpent": 60
+ }
+]

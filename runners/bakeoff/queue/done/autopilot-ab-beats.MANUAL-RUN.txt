@@ -1,0 +1,9 @@
+autopilot-ab-beats.json was NOT drained by the mac mini nightly driver.
+
+Run manually on 2026-08-10 (owner wanted results same night) by a laptop Claude
+session, per the queue-contract manual-run clause: the sheet was copied to
+runners/bakeoff/autopilot-ab-beats.manual-20260810.json with backend switched
+to higgsfield-mcp, and executed as run runners/bakeoff/runs/bo-autopilot-ab-20260810
+(plan -> generate via session Higgsfield MCP -> collect -> judge -> retry x2 ->
+select -> stats). This move to done/ is the claim/completion record so the mini
+does not double-run the sheet tonight.

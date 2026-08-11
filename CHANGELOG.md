@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (evening) — autopilot-ab bakeoff run EXECUTED manually (20:05–20:26)
+
+### Added
+
+- **Run `bo-autopilot-ab-20260810`** (higgsfield-mcp backend, driven live from a laptop session at the owner's request instead of waiting for the mini's nightly driver). 11 beats × 4 variants + 2 beats × 2 retry rounds = **60 generations, 0 API failures, 0 NSFW blocks, 44/44 and 8+8 retry images all byte-distinct** (one `count:4` call per entry per the lane rule). Yield: **cleanVariantRate 0.55 vs the old lane's 0.192 baseline (2.9×)**; 9/11 beats cleared on roll 1 (clearRate 0.818); winners landed `accepted=true rating=good` + `bakeoff,judge-pick` on board `autopilot-ab`. Stage B ran as fresh Sonnet subagent judges (local `claude -p` had no auth — external-verdict path `stageb-verdicts.json`, same as the validation run), rubrics passed by path incl. `research/owner-defect-feedback-2026-08-10.md`. NEW: each winner's one-line judge reason is posted onto the winning panel via `do=annotate` (caption + notes, QA verdict/people preserved) so "why this won" is visible in Review. `b18-money-lift` and `b23-finale` exhausted 2 retries on persistent CAST-02 (scanner counts the scripted investor trio/cast as extras — the sheet has no `chars` cast list, so the plan-vs-beat reconciliation never fires) and sit FLAGGED `needs-human` on the board (30b03499ab.png, ac9b890bed.png). Lesson for the next sheet author: **populate `chars` per beat** so multi-cast money shots can pass stage A. Yield pushed to studio (`do=yield`); run artifacts in `runners/bakeoff/runs/bo-autopilot-ab-20260810/` (gitignored); composite at `/tmp/dr/autopilot-ab-composite.jpg`; manual-mode sheet committed as `runners/bakeoff/autopilot-ab-beats.manual-20260810.json`. Queue copy `git mv`'d to `queue/done/` with `autopilot-ab-beats.MANUAL-RUN.txt` so the mini does not double-run it tonight.
+
 ## 2026-08-10 (later)
 
 ### Added

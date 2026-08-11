@@ -1,0 +1,203 @@
+{
+  "project": "autopilot-ab",
+  "backend": "higgsfield-mcp",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "beats": [
+    {
+      "id": "b02-kress-entrance",
+      "prompt": "KRESS strides into the lab corner and confronts MARGO, who wears her lab coat ON and buttoned as in previous beats. Conversational TWO-SHOT, TORSO-UP medium framing (not full body), over MARGO's shoulder toward KRESS, tight staging.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "b79b578925.png",
+          "label": "kress"
+        },
+        {
+          "file": "966a9f9282.png",
+          "label": "env-lab"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b03-clipboard-grab",
+      "prompt": "KRESS snatches the clipboard out of MARGO's hands without looking at her, dismissive. MEDIUM CLOSE two-shot, torso-up (not full body), camera slightly low behind MARGO's shoulder, the clipboard exchange dominating the frame.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "b79b578925.png",
+          "label": "kress"
+        },
+        {
+          "file": "966a9f9282.png",
+          "label": "env-lab"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b07-amulet-flex",
+      "prompt": "MARGO (lab coat ON, consistent with prior beats) flexes one arm as the stone amulet pulses green light against her collarbone. THREE-QUARTER medium shot \u2014 she looks at her OWN flexed arm, eyes on the bicep, NOT at the camera; profile-favoring angle, no fourth-wall gaze.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "966a9f9282.png",
+          "label": "env-lab"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b08-coat-split",
+      "prompt": "MARGO's shoulders widen visibly; the lab coat's BACK SEAM creaks and starts to split along the stitching. The coat is otherwise clean and undamaged. Behind-three-quarter medium shot showing the straining seam, her face turned in profile surprise.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "966a9f9282.png",
+          "label": "env-lab"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b13-kress-nervous",
+      "prompt": "Gym presentation floor. CLOSE-UP of KRESS laughing it off nervously, glancing sideways, a bead of sweat on his temple. One clean WHITE speech bubble in the same style as every other panel (never colored).",
+      "identityRefs": [
+        {
+          "file": "b79b578925.png",
+          "label": "kress"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b14-margo-steps",
+      "prompt": "Gym floor, same set dressing and chair positions as the previous presentation beats. MARGO steps forward out of the hallway, one fist clenched, jaw set. TORSO-UP medium shot on a diagonal composition (not full body, not centered-symmetrical).",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b15-kress-panic",
+      "prompt": "MEDIUM CLOSE-UP of KRESS \u2014 head and shoulders in frame, NOT an extreme macro of the eyes \u2014 eyes widening in panic, pupils small, sweat beading, mouth slightly open. No dialogue.",
+      "identityRefs": [
+        {
+          "file": "b79b578925.png",
+          "label": "kress"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b18-money-lift",
+      "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "ee98e411e6.png",
+          "label": "investors"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b19-bar-down",
+      "prompt": "MARGO lowers the SAME fully-loaded barbell under control \u2014 one single intact bar with all plates attached, physically coherent, nothing duplicated or lying on the floor. Low three-quarter angle, controlled-exhale expression.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b20-seam-rip",
+      "prompt": "CLOSE-UP on MARGO's shoulder: the tank top's FABRIC seam rips open a little further \u2014 torn threads and fabric edges clearly visible as cloth \u2014 while the SKIN underneath is smooth, flawless and completely intact. Fabric tears; skin never does.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    },
+    {
+      "id": "b23-finale",
+      "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.",
+      "identityRefs": [
+        {
+          "file": "408ea3036d.png",
+          "label": "margo"
+        },
+        {
+          "file": "b79b578925.png",
+          "label": "kress"
+        },
+        {
+          "file": "ee98e411e6.png",
+          "label": "investors"
+        },
+        {
+          "file": "55acc4a1db.png",
+          "label": "env-gym"
+        }
+      ],
+      "aspect": "3:4",
+      "variants": 4
+    }
+  ]
+}
