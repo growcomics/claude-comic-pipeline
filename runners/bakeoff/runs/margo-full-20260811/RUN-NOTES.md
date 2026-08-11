@@ -5,9 +5,13 @@ Owner directive 2026-08-12: produce the 86-beat margo-full comic (sheet:
 onto studio board **margo-full** (https://3dmusclecomics.com/studio/review.php?p=margo-full).
 
 ## Generation (Higgsfield MCP, this Claude session is the driver)
-- Model `nano_banana_2_lite`, aspect 3:4, ONE `count:4` call per roll (proven distinct);
-  connective beats = 2 rolls (8 variants) single round; payoff beats (beatKind=payoff) =
-  3 rolls (12) + a refinement round (refinements may change structural choices).
+- **LEAN MODE (owner speed directive 2026-08-12):** `nano_banana_2_lite` for EVERY beat
+  including payoffs — no paid-model upgrades. 8 variants/beat (2 rolls of count=4),
+  SINGLE round, best-of-pool wins. **Refinement rounds DROPPED. Size ladders DROPPED**
+  (under-scaled winners are accepted with a note; iterate later). Only a beat with ZERO
+  clean variants gets ONE corrective re-roll of 8.
+- Winner-anchor attachments DROPPED for speed — stage continuity rides on the stage-aware
+  BODY block in each fullPrompt + the base identity refs.
 - Append a distinct "COMPOSITION VARIANT: ..." line on roll 2/3 to avoid cross-call dupes.
 - Prompt = beat's `fullPrompt` from the sheet VERBATIM (includes L19 lettering + stage-aware style).
 - Medias (role `image_references`):
