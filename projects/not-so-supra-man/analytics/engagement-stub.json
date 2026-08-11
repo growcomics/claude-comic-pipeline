@@ -1,0 +1,29 @@
+{
+  "_note": "Flywheel landing pad (Publisher → Ideator contract, VISION §4). Wiring is Wave-2; capture is manual/wrapper-driven for now — see skills/publisher/references/analytics-capture.md. NEVER read raw credential files; use ~/Documents/.credentials/bin/ wrappers (ga, patreon) only. Schema: skills/publisher/references/engagement-stub-schema.json",
+  "schema_version": 1,
+  "project": "not-so-supra-man",
+  "property": "growgetter",
+  "comic_id": "not-so-supra-man",
+  "release_date": "2026-07-30",
+  "captures": [],
+  "capture_plan": [
+    {
+      "when": "release +7d",
+      "sources": [
+        "ga4",
+        "patreon",
+        "deviantart",
+        "twitter",
+        "instagram"
+      ]
+    },
+    {
+      "when": "release +30d",
+      "sources": [
+        "ga4",
+        "patreon",
+        "deviantart"
+      ]
+    }
+  ]
+}

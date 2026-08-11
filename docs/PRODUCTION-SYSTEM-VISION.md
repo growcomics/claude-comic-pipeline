@@ -61,11 +61,11 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 - **Current state**: `continuity-check` + `qa-checklist.md` + `cinematic-framing.md` + the qa gate chain's post-flight verdict step + the fresh-subagent audit pattern + `qa-defect-doctrine.md`. The **vision-audit** (experiment/02) is designed and measured but not wired into the gate as an automatic step — that's the one open piece. The Flow review-harvester (in progress) feeds this stage by bundling output+prompt+input-refs for fast digestion.
 - **Files**: `skills/continuity-check/`, `skills/comic-production/references/qa-checklist.md`, `qa-defect-doctrine.md`, `docs/experiments/02-vision-audit-pilot/`.
 
-### Stage 7 — PUBLISHER  *(posting)*  — **STUB ONLY ✗**
-- **Purpose**: take a finished comic and publish it to its destinations, then capture engagement for the flywheel.
-- **Input**: a compiled, lettered, reviewed comic + metadata. **Output**: posted content + `posted.json` record + (eventually) engagement metrics.
-- **Current state**: a stub. `build-comic.md` names "Stage 6 — Posting" with a `posting/posted.json` sentinel, never exercised. No posting skill exists.
-- **Destinations on file**: `3dmusclecomics.com` (static site at `~/Documents/3dmusclecomics-site`, comics.js manifest, Cloudflare Pages) + social platforms (multi-platform crop bundles).
+### Stage 7 — PUBLISHER  *(posting)*  — **PREP HALF BUILT 🟢 (2026-08-11); posting itself stays human, by design**
+- **Purpose**: take a finished comic and **prepare** everything for its destinations, stop for the human to publish, then capture engagement for the flywheel.
+- **Input**: a compiled, lettered, reviewed comic + metadata. **Output**: an un-posted `posting/bundle/` (destination-ordered checklist, per-platform captions, crop specs, site apply notes, What's-New draft, `posted.template.json`) + the `analytics/engagement-stub.json` landing pad. The human fires each platform and fills `posting/posted.json` — that file appearing is build-comic's stage-done sentinel.
+- **Current state**: `skills/publisher/` — SKILL + `scripts/prepare_post.py` (stdlib-only, structurally cannot post) + schemas (`posted-schema.json`, `engagement-stub-schema.json`) + `analytics-capture.md` + the posting.php alignment note. Validated on Not So Supra... Man (46pp). **Never-post is the stage's hard rule at every autonomy level** (§5). Wave-2: rendered crops, capture wiring, board-item automation.
+- **Destinations**: property-keyed — WP properties publish via `comic-platform/docs/PUBLISH-A-COMIC.md` (manifest → new_comic.py), 3dmc via its admin CMS; then patreon → deviantart → twitter → instagram in the checklist's order (matching `studio/posting.php` chips).
 
 ---
 
@@ -79,7 +79,7 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 | 4 Reference | ✅ mature | `skills/reference-gathering/`, `reference-acquisition/`, `location-scout/`, `style-lock/` |
 | 5 Page build | ✅✅✅ deep | `skills/comic-production/`, `projects/<p>/qa/`, `page-composer/`, `production-briefing/` |
 | 6 Reviewer | ✅✅ (vision-audit unwired) | `skills/continuity-check/`, `qa-checklist.md`, `docs/experiments/02` |
-| 7 Publisher | ⚠️ stub | `build-comic.md` posting sentinel only; site at `~/Documents/3dmusclecomics-site` |
+| 7 Publisher | 🟢 prep half built (posting = human forever) | `skills/publisher/` (SKILL + prepare_post.py + schemas); validated on not-so-supra-man |
 
 **The build priority writes itself: the two missing front-end stages (ideator, writer) and the missing exit stage (publisher) are where the leverage is.** The middle is done.
 
@@ -96,8 +96,8 @@ Each handoff is an artifact + a schema. This is the schema-contracts work (exper
 | Storyboard → Reference | `shotlist.json` + `references_required.json` | exists (experiment/04 schemas) |
 | Reference → Page build | ref ledger + complete ref pack | exists (`ref-ledger.json`, L28 manifest) |
 | Page build → Reviewer | banked `pages-log.json` + receipts/verdicts | exists (qa chain) |
-| Reviewer → Publisher | a "ship-clean" signal + final PDF/PNG bundle + metadata | to design |
-| Publisher → Ideator | engagement/analytics record | to design (the flywheel) |
+| Reviewer → Publisher | a "ship-clean" signal + final PDF/PNG bundle + metadata | partial — publisher discovers `final/`/`pages/lettered/` + shotlist and surfaces open qa-report findings; a formal ship-clean signal is still to design |
+| Publisher → Ideator | engagement/analytics record | **schema defined** (`skills/publisher/references/engagement-stub-schema.json` + capture doc); capture wiring is Wave-2 |
 
 **Design rule** (from experiment/04 + the gate doctrine): every contract gets a JSON schema and a validator at the boundary, so a stage that emits a malformed artifact fails loudly at the handoff instead of silently corrupting the next stage. The "layers disagreeing about vocabulary" failure (Magnamus's diagnosis) is prevented by making the contracts explicit.
 

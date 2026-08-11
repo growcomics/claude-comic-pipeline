@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "analytics/engagement-stub.json — per-comic engagement record (the flywheel landing pad)",
+  "description": "The Publisher → Ideator contract (VISION §4): which comic went where and how it performed, captured over time. prepare_post.py seeds it with empty captures[] + a capture plan; capture passes append entries. Wiring the capture is Wave-2 — the SHAPE is defined now so every stub is forward-compatible. How each source is read (wrappers only, never raw secrets): references/analytics-capture.md.",
+  "type": "object",
+  "required": ["schema_version", "project", "property", "comic_id", "captures"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "project": { "type": "string" },
+    "property": { "enum": ["growgetter", "maxxmuscle", "bloombeauty", "3dmc"] },
+    "comic_id": { "type": "string" },
+    "release_date": { "type": ["string", "null"], "description": "YYYY-MM-DD; capture windows anchor to this" },
+    "capture_plan": {
+      "type": "array",
+      "description": "Intended passes (e.g. release +7d, +30d). A plan entry without a matching capture = a pass still owed.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "when": { "type": "string", "description": "Human-readable anchor, e.g. 'release +7d'" },
+          "sources": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "captures": {
+      "type": "array",
+      "description": "Append-only. One entry per (source, capture moment). Null metric = not available from that source, absent metric = not applicable.",
+      "items": {
+        "type": "object",
+        "required": ["captured_at", "source"],
+        "properties": {
+          "captured_at": { "type": "string", "description": "ISO-8601 UTC" },
+          "source": { "enum": ["ga4", "patreon", "deviantart", "twitter", "instagram", "site-admin", "manual"] },
+          "source_detail": { "type": "string", "description": "e.g. GA4 property id (GrowGetter 303340242, MaxxMuscle 329224171; Bloom has NO GA4), Patreon campaign id (GG 3138139, Maxx 8794850, Bloom 11913067, 3DMC 15535167), or the post URL measured" },
+          "window_days": { "type": ["integer", "null"], "description": "Days since release this capture covers; null for point-in-time platform counters" },
+          "metrics": {
+            "type": "object",
+            "description": "All optional; capture what the source exposes.",
+            "properties": {
+              "pageviews": { "type": ["integer", "null"] },
+              "unique_readers": { "type": ["integer", "null"] },
+              "avg_read_depth_pages": { "type": ["number", "null"] },
+              "favourites": { "type": ["integer", "null"], "description": "DA faves / IG saves" },
+              "likes": { "type": ["integer", "null"] },
+              "comments": { "type": ["integer", "null"] },
+              "shares": { "type": ["integer", "null"], "description": "RTs / reposts" },
+              "impressions": { "type": ["integer", "null"] },
+              "watchers_delta": { "type": ["integer", "null"], "description": "DA watchers / followers gained over the window" },
+              "new_patrons": { "type": ["integer", "null"] },
+              "paying_patrons_total": { "type": ["integer", "null"] },
+              "patron_delta": { "type": ["integer", "null"] },
+              "revenue_delta_usd": { "type": ["number", "null"] }
+            }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
