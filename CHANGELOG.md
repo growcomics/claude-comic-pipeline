@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 — Stale-branch triage: two experiments merged, five branches documented in docs/BRANCH-LEDGER.md
+
+### Added
+
+- **`docs/BRANCH-LEDGER.md`** — disposition record for the seven pre-reconciliation branches. Merged to main: `experiment/01-generalization-smoke-test` (`7445dca` — smoke-test results, schema-disagreement postmortem blog + graphics, read-only validator) and `experiment/04-schema-contracts` (`cf07a32` — six stage-boundary JSON Schemas under `schemas/`, read-only `schema_audit.py`, wiring proposal). Kept unmerged with reasons + content pointers: exp/02 vision-audit pilot (feeds vision-shadow work), exp/03 multipass (rating round never ran), exp/05 defects skill (superseded by the canonical DEFECT-REGISTRY; 42 binaries), yuna-rerun (records the refactor's failed pre-flight), refs-are-truth refactor (sole holder of `skills/reference-acquisition/` — still pointed at by CLAUDE.md; port needs fresh assessment). **No branch deleted.**
+
 ## 2026-08-11 (Stage 7 PUBLISHER — prep half built: skills/publisher/, never-post by construction)
 
 The production line's exit stage, built to `PRODUCTION-SYSTEM-VISION.md` §2/§5 and the posting-ops research (2026-07-25). **The stage's hard rule: it never posts, uploads, or deploys — it prepares; the human publishes** (per `feedback_never_post_without_permission`; enforced structurally, not by promise: `prepare_post.py` is stdlib-only with no network-capable imports, and no code path fires outward).
