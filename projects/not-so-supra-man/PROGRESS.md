@@ -1,3 +1,10 @@
+## ▶▶ 2026-08-10 22:54 PDT — GATES UNLOCKED · RESUME THE 46-PAGE RUN NOW
+Owner re-blessed the qa gates in-session (manifest `49197e3f…`). **Model this run: Nano Banana 2 Lite.**
+Full runbook: **`RUN-NOW.md`** (this folder). ⚠️ Post the Flow project URL here the instant the run
+opens — the owner is watching for the live link, and the laptop is polling this file for it.
+
+---
+
 # Not So Supra... Man — Autonomous Build Progress
 
 ## 🔁 RESTART v2 (2026-06-10, user-ordered full rebuild)
