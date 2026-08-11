@@ -85,6 +85,25 @@
           "flow_id": "74c0857f-e567-4d31-80b0-ddb13de365b0",
           "disk": "references/characters/supraman/body-base.png"
         }
+      },
+      "turnaround": {
+        "flow_id": "9c95faf4-ea41-4d7f-bf83-4671132a090c",
+        "disk": "references/characters/supraman/turnaround.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_supraman-suit.receipt.json",
+          "audit": "qa/receipts/sheet_supraman-suit.audit-pass",
+          "verdict": "qa/receipts/sheet_supraman-suit.verdict.json",
+          "verdict_tags": [
+            "views-4-complete",
+            "emblem-correct-gold-double-chevron-delta-in-diamond",
+            "NO-S-shield-leak",
+            "body-07-scale-VERIFIED-parity",
+            "identity-consistent",
+            "style-photoreal",
+            "no-text-contamination"
+          ],
+          "prompt_sha": "21a8fae2ae2c30fd89782cd0d95dfe042e175c8ca2abb417f407a6f27d892a17"
+        }
       }
     },
     "dee-dee": {
@@ -131,6 +150,24 @@
         "1": {
           "flow_id": "5e32792d-9060-4877-9df2-f7938a6f8ad2",
           "disk": "references/characters/dex-doomer/body-base.png"
+        }
+      },
+      "turnaround": {
+        "flow_id": "f1ab8fcf-4142-4b5e-a302-8fb6ca539385",
+        "disk": "references/characters/dex-doomer/turnaround.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_doomer-suit.receipt.json",
+          "audit": "qa/receipts/sheet_doomer-suit.audit-pass",
+          "verdict": "qa/receipts/sheet_doomer-suit.verdict.json",
+          "verdict_tags": [
+            "views-4-complete",
+            "wardrobe-grey-three-piece-consistent",
+            "identity-bald-matches-face-card",
+            "body-07-scale-ok",
+            "no-text-contamination",
+            "style-photoreal"
+          ],
+          "prompt_sha": "f079e8d51433cb98ef6625553eb439d5ca4af1f85cfe7534e537d85c1ba82ae7"
         }
       }
     }

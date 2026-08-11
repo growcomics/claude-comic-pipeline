@@ -1,0 +1,32 @@
+{
+ "job": "sheet:doomer-suit",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection + numeric height measurement",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "f1ab8fcf-4142-4b5e-a302-8fb6ca539385",
+ "height_measurement": {
+  "him_px": 758,
+  "mannequin_px": 767,
+  "ratio": 0.988,
+  "interpretation": "shorter than the 6'2\" mannequin, correct direction (spec 3in shorter = ~0.96); no giantess/oversize risk",
+  "all_variants": {
+   "d1": 0.997,
+   "d2": 0.988,
+   "d3": 0.993,
+   "d4": 0.936
+  }
+ },
+ "tags": [
+  "views-4-complete",
+  "wardrobe-grey-three-piece-consistent",
+  "identity-bald-matches-face-card",
+  "body-07-scale-ok",
+  "no-text-contamination",
+  "style-photoreal"
+ ],
+ "rejected": {
+  "d4-b3670e7e": "LET-02 text contamination \u2014 rendered a \"6'6 2\\\" (74 inch)\" label (best height ratio otherwise)",
+  "d1-3404870d": "height ratio 0.997, nearly level with the mannequin"
+ },
+ "blocking_defects": []
+}

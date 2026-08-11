@@ -1,0 +1,16 @@
+{
+ "job": "sheet:doomer-suit",
+ "kind": "sheet",
+ "prompt_sha": "f079e8d51433cb98ef6625553eb439d5ca4af1f85cfe7534e537d85c1ba82ae7",
+ "attach": [
+  "doomer face card (264c9a99)",
+  "doomer body base (5e32792d)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "e826405c2b3fec1f"
+}

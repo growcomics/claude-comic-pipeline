@@ -1,0 +1,16 @@
+{
+ "job": "sheet:deedee-t3-labcoat",
+ "kind": "sheet",
+ "prompt_sha": "503b65342545c4c1c98d8529c6badb405a9f793b93da61763a0960fe827e9625",
+ "attach": [
+  "blonde (face d8a98176)",
+  "dee-dee T3 body card (c7ec4291)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "e826405c2b3fec1f"
+}

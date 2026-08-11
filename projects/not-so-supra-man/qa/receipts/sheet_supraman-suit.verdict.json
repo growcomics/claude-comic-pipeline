@@ -1,0 +1,35 @@
+{
+ "job": "sheet:supraman-suit",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection + numeric height measurement",
+ "judged_at": "2026-08-11T07:45-07:00",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "9c95faf4-ea41-4d7f-bf83-4671132a090c",
+ "height_measurement": {
+  "him_px": 709,
+  "mannequin_px": 709,
+  "ratio": 1.0,
+  "interpretation": "exact parity with the 6'2\" mannequin \u2014 correct, he IS the reference height",
+  "all_variants": {
+   "s1": 1.0,
+   "s2": 1.004,
+   "s3": 1.0,
+   "s4": 1.003
+  }
+ },
+ "tags": [
+  "views-4-complete",
+  "emblem-correct-gold-double-chevron-delta-in-diamond",
+  "NO-S-shield-leak",
+  "body-07-scale-VERIFIED-parity",
+  "identity-consistent",
+  "style-photoreal",
+  "no-text-contamination"
+ ],
+ "rejected": {
+  "s4-75649c1c": "added an unspecified gold emblem to the BACK of the cape",
+  "s1-a5d8215e": "figures crop tight to the frame edges"
+ },
+ "blocking_defects": [],
+ "note": "Spec was fixed first: compose refused v1 for D1 (face card missing from attach) and D7 (no scale-silhouette sentence, since Supraman IS the 6'2\" reference so the mannequin had been omitted)."
+}

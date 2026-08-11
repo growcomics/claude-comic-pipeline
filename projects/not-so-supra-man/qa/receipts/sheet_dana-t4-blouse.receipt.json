@@ -1,0 +1,16 @@
+{
+ "job": "sheet:dana-t4-blouse",
+ "kind": "sheet",
+ "prompt_sha": "30f32f828325a88ed0d059c19f1d2604f3fe6a203fe5f57c4dfec5d0068a5d9d",
+ "attach": [
+  "young woman beauty (face 01b9bbf0)",
+  "dana T4 body card (3c004457)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "e826405c2b3fec1f"
+}
