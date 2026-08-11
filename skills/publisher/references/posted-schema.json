@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "posting/posted.json — the durable per-comic posting record",
+  "description": "What got posted where/when, filled by the HUMAN after actually firing each platform (or by a later post-confirm step with per-action approval). This file EXISTING at projects/<p>/posting/posted.json is build-comic.md's 'posting stage complete' sentinel — it must never be created before posting is real. The bundle ships it as posted.template.json; filling it and moving it up one level is the completion act. Committed to git as project text.",
+  "type": "object",
+  "required": ["schema_version", "project", "property", "comic_id", "completed", "posts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "project": { "type": "string", "description": "projects/<p> slug" },
+    "property": { "enum": ["growgetter", "maxxmuscle", "bloombeauty", "3dmc"] },
+    "comic_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "The site catalogue id / URL id" },
+    "title": { "type": "string" },
+    "bundle_version": { "type": "integer", "description": "Which prepare_post.py bundle this record came from" },
+    "prepared_at": { "type": "string", "description": "ISO-8601 UTC — when the bundle was prepared" },
+    "completed": { "type": "boolean", "description": "Human sets true when every platform is posted or explicitly n/a. build-comic treats the file's existence as stage-done; this flag records whether the sweep finished." },
+    "posts": {
+      "type": "array",
+      "description": "One entry per destination. Platform keys match studio/posting.php chips exactly.",
+      "items": {
+        "type": "object",
+        "required": ["platform", "status"],
+        "properties": {
+          "platform": { "enum": ["site", "patreon", "deviantart", "twitter", "instagram", "other"] },
+          "platform_other": { "type": "string", "description": "Name when platform=other (reddit, tumblr, bluesky, pixiv, newgrounds — the syndication ledger tracks eleven)" },
+          "status": { "enum": ["todo", "posted", "n/a"], "description": "todo entries are allowed in a work-in-progress record; completed:true requires none left" },
+          "url": { "type": "string", "description": "The actual live post URL — the proof. An entry with no proof link is worse than no entry (runbook step 6)." },
+          "posted_at": { "type": ["string", "null"], "description": "ISO-8601 UTC" },
+          "posted_by": { "type": "string", "description": "Who fired it (owner / Alternate / ...)" },
+          "scope": { "enum": ["full", "teaser", "announcement"], "description": "full = whole comic readable there (site, paid tier); teaser = cover/teaser pages; announcement = text+link" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

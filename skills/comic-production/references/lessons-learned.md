@@ -31,6 +31,7 @@ L-numbers are chronological, not priority. A lesson's importance comes from bein
 | L23 | When env ref is dropped, add a dense verbal env anchor | Stage-change full-body panels drop env ref to fit the 3-ref ceiling; without 5+ named location elements in the prompt the background goes to a grey void |
 | L24 | Suppress anachronistic accessories explicitly | Models hallucinate watches, bracelets, jewelry on the wrists/neck/ears; suppress by name when those body parts may be in frame |
 | L34 | Subject staging and compositional depth — break the camera plane | What L20 doesn't cover: where the SUBJECTS are arranged in the frame. Tension via diagonal intent, Z-depth via lead-foreground + secondary-deep-background, triangular grouping for 3+ characters, negative-space asymmetry for solo hero, FG occlusion for intimacy. Audited via `subject_staging` field on shotlist beats with 2+ named characters. |
+| L39 | Situation-expression registers — anti-uniformity within a situation-appropriate register | What L34 doesn't cover: what each staged body and face is DOING. The shotlist beat declares `panel_situation` (9 registers in `situation-expression-registers.md`); each character draws a DIFFERENT pose+emotion pair from that register's menus — no shared pairs, no showcase emotions leaking into confrontations/defeats/reveals, equal transformation tier among peers (variety via angle/reaction, never size hierarchy). Gate D15 proposed at `docs/proposals/d15-expression-register-gate.diff`. |
 
 Other lessons (L2, L3, L4, L5, L6, L7, L8) are platform-specific, situational, or historical. L7 in particular is superseded by L19 — read L7 for the diagnosis, L19 for the current rule. L4 was undeprecated when L19 reversed L7.
 
@@ -1523,6 +1524,37 @@ The other three axes became enforced gates and story didn't, so it stayed a note
 
 ---
 
+
+---
+
+## L39 — Situation-expression registers: anti-uniformity within a situation-appropriate register
+
+**Status: Active (reference + shotlist field). Gate D15 PROPOSED, not applied** — `docs/proposals/d15-expression-register-gate.diff`, for the user to review, apply, and re-bless at the next gate review (Layer 8, user-only act). New lesson 2026-08-10, from the user's digestion of the posing guide. Where L34 / `staging-and-composition.md` governs *where the bodies sit in space*, L39 governs *what each body and face is doing there* — companion layers on the same staging stanza.
+
+**Symptom**: The four-woman showcase templates in `posing-and-expressions.md` fix pose/expression uniformity — but they encode exactly ONE situation: the celebratory showcase. Reused on any other beat, their poses and emotions leak: a confrontation panel where someone wears "ecstatic, laughing joy," a defeat panel with a proud display flex, a tense negotiation staged like a victory lineup. The panels are varied and *wrong-for-the-story* — a worse failure than uniformity, because it reads as the comic not knowing what its own scene is about.
+
+**Root cause**: The pipeline had one situation's worth of pose/emotion vocabulary and an anti-uniformity rule (`multi-character-variation.md`) with no situational bounds. "Make every character different" without "different *within what*" pulls choices from the only register on file — the showcase — regardless of the beat's dramatic function.
+
+**The rule — anti-uniformity within a situation-appropriate register**:
+
+1. The shotlist beat declares `panel_situation` (required when 2+ named characters; emitted by `script-breakdown`). **The situation names the register.**
+2. Each character gets a DIFFERENT pose+emotion pair drawn FROM that register's menus — no two characters share a pair; with ≤4 characters, distinct on both axes.
+3. Equal transformation tier among peers — variety via angle/reaction, never size hierarchy (the posing guide's key rule, now enforced across all registers).
+4. Expressions are written mechanically (brow/eyes/mouth/jaw/head), never as bare emotion names (`feedback_expression_intensity`).
+
+Nine registers (pose menu ‖ emotion menu each): `showcase` (= the posing-guide templates, unchanged), `celebratory`, `confrontation`, `mid-action`, `surprise-reveal`, `aftermath-victory`, `aftermath-defeat`, `dialogue-tense`, `intimate`. Full menus, the non-celebratory face-mechanics extension table (32 emotions in mechanical terms), per-register prompt fragments, and three dry-run-validated worked stanzas: **`references/situation-expression-registers.md`**.
+
+**Injection shape**: `script-breakdown` writes `panel_situation` per panel; the staging stanza (`qa/staging/<panel_id>.json`) carries `register_pose` + `register_emotion` (exact labels) per character — alongside the top-level `staging_type` the L34/D14 gate already requires — with `pose`/`expression` prose elaborating them; the composed prompt echoes the situation (`dramatic_situation` field, per the proposed diff).
+
+**Audit shape (D15, proposed)**: HARD — multi-character panel missing `panel_situation`; HARD — `register_pose`/`register_emotion` missing or outside the situation's register; HARD — two characters sharing a pose+emotion pair; SOFT — more than 3 multi-character `showcase`/`celebratory` panels per chapter (celebration-register overuse is the AI-lineup tell). Until applied + re-blessed, the register binds through authoring discipline and the reference doc.
+
+**Where this applies**: every multi-character panel in every project; solo panels are encouraged to declare a situation (the register still names the solo emotion menu).
+
+**Where this does NOT apply**: the grower's face on an active growth beat — L35's peak-intensity directive owns that face; `panel_situation` still governs the witnesses and everyone's poses. Single-character body-region ECUs (head cropped per L20) have no face to register.
+
+**Reverses**: nothing. L39 *extends* `posing-and-expressions.md` (which stays canonical for `showcase`) and bounds `multi-character-variation.md` (whose grid, library, and QA checks all still apply — the register narrows which values are legal for the beat). Companion to L34/`staging-and-composition.md` (bodies in space) and L37 (body orientation composes freely with any register pose).
+
+**Provenance**: user posing-guide digestion session, 2026-08-10 — the observation that the showcase templates fix uniformity "but only fit one situation," and the directive that the situation must name the register. (Dispatched as "L35"; L35–L38 were already assigned on main, so it lands as L39.) Dry-run validation (3 stanzas + negative case) in `situation-expression-registers.md` § Worked examples.
 
 ---
 

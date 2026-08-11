@@ -1,0 +1,58 @@
+{
+  "_template_note": "FILL AND MOVE UP ONE LEVEL. This is a TEMPLATE — while it lives in bundle/ nothing is posted. When you have actually posted, fill each entry (url, posted_at, posted_by), delete or n/a the rest, set completed:true, and save as projects/<p>/posting/posted.json. THAT file existing is build-comic.md's 'posting complete' sentinel — never create it before posting is real. Schema: skills/publisher/references/posted-schema.json",
+  "schema_version": 1,
+  "project": "not-so-supra-man",
+  "property": "growgetter",
+  "comic_id": "not-so-supra-man",
+  "title": "Not So Supra... Man",
+  "bundle_version": 1,
+  "prepared_at": "2026-08-11T06:01:12Z",
+  "completed": false,
+  "posts": [
+    {
+      "platform": "site",
+      "status": "todo",
+      "url": "",
+      "posted_at": null,
+      "posted_by": "",
+      "scope": "full",
+      "notes": ""
+    },
+    {
+      "platform": "patreon",
+      "status": "todo",
+      "url": "",
+      "posted_at": null,
+      "posted_by": "",
+      "scope": "announcement",
+      "notes": ""
+    },
+    {
+      "platform": "deviantart",
+      "status": "todo",
+      "url": "",
+      "posted_at": null,
+      "posted_by": "",
+      "scope": "announcement",
+      "notes": ""
+    },
+    {
+      "platform": "twitter",
+      "status": "todo",
+      "url": "",
+      "posted_at": null,
+      "posted_by": "",
+      "scope": "announcement",
+      "notes": ""
+    },
+    {
+      "platform": "instagram",
+      "status": "todo",
+      "url": "",
+      "posted_at": null,
+      "posted_by": "",
+      "scope": "announcement",
+      "notes": ""
+    }
+  ]
+}

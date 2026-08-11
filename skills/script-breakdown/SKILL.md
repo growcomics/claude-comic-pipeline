@@ -89,6 +89,7 @@ Write both:
           "time_of_day": "dawn",
           "weather": "mist",
           "camera": "low-angle-front, three-quarter",
+          "panel_situation": "surprise-reveal",
           "action": "Lara steps into the clearing, sword hand twitching.",
           "dialogue": [
             {"character": "lara", "text": "What is this place?", "type": "balloon"}
@@ -115,6 +116,7 @@ Field rules:
 - `locations[].ref_folder` for CGI comic projects should contain a `_source.jpg` (DAZ3D-scene-reference render) per `comic-production`'s `references/environment-references.md` — this is what generation attaches as an environment ref via `medias[]`.
 - `camera`: a distance + angle pair using the categories defined in `comic-production`'s `references/cinematic-framing.md` (e.g., `"low-angle-front, three-quarter"`, `"ecu-face"`, `"wide-establish"`). Run the variety check (≥5 distance + ≥4 angle categories, ≤3 panels at the same combo, ≥1 ECU and ≥1 wide-establish/splash per 10-panel sequence) during validation.
 - `transformation_beat`: optional. Set on panels that are part of a transformation scene. Allowed values: setup beats (`consider`, `decide`, `trigger`, `first_sensation`), body-region beats (`chest`, `hips`, `rear`, `arms`, `abs`, `legs`, `back`, `shoulders`, `suit_fail`, `whole_body`), or resolution beats (`reveal`, `aftermath`). Used by `rules_audit.py` to verify a transformation scene decomposes into body-region beats rather than skipping from "before" to "after". See "Transformation decomposition" below.
+- `panel_situation` (per **L39** — situation-expression registers): the beat's dramatic situation, which names the pose/emotion register every character in the panel draws from. One of: `showcase`, `celebratory`, `confrontation`, `mid-action`, `surprise-reveal`, `aftermath-victory`, `aftermath-defeat`, `dialogue-tense`, `intimate`. **Required on any panel with 2+ named characters**; encouraged on solo panels. Menus, face-mechanics table, and worked stanzas: `comic-production`'s `references/situation-expression-registers.md`. Downstream staging assigns each character a DIFFERENT pose+emotion pair from this register (no shared pairs; equal transformation tier among peers — proposed gate D15).
 - `transformation_scenes` (top-level, optional): array of scene declarations. Each entry: `{name, pages: [start, end], required_body_regions?: [...], requirements?: {min_setup_beats, min_body_region_beats, min_reveal_beats}}`. Triggers the transformation-beats check at validation time. Use this whenever the script contains a multi-page transformation (FMG, growth arc, mutation, dress-up sequence, charge-up). See "Transformation decomposition" below.
 - `style` (top-level, **required**): slug of the visual style preset to lock for the project. Must match a folder name under `skills/style-lock/styles/` (e.g. `photoreal-daz3d`, `ink-line`). Decided via the Step 0 questionnaire — never picked silently by the model. The May 2026 lesson driving this: an earlier April-transformation run defaulted to 2D illustration when 3D CGI was wanted; nothing had asked or required a choice. `rules_audit.py` HARD-fails if missing.
 - `location_strategy` (top-level, **required**): one of `single` (one chapter location locked everywhere), `multi` (multiple locations, each locked per scene), or `per-scene` (confirm each detected location individually). Determines how the location-lock invariant is enforced downstream. Decided via the Step 0 questionnaire.
@@ -291,6 +293,16 @@ Fill in `story_spine` before writing panels. Four failures recur in the corpus, 
 
 Avoid **escalation-by-repetition**, the corpus's climax-padding habit: Ass Effect closes on three near-identical cosmic splashes, TMB-3 on interchangeable space splashes. Consecutive capstone panels (splashes, `whole_body`, `reveal`) must differ on at least one axis — re-peg the scale against a *new* fixed gauge (person → car → building → skyline), change camera distance or location, or give each beat different story work. Repeating the same money shot bigger is not escalation; it's the same panel three times.
 
+### 4.8. Situation register per beat (L39)
+
+Anti-uniformity (`multi-character-variation.md`) demands every character do something different; **L39** demands different *within the situation's register*. While sequencing panels, set `panel_situation` on every beat — it names the beat's dramatic function, and downstream it names the only legal pose/emotion menus for that panel:
+
+- Pick from the nine values (see the field rule above). Ask "what is this beat FOR?" — a flex in front of a mirror is `showcase`; the same flex as an opponent watches is `confrontation`; the first time it ever happens is `surprise-reveal`.
+- **Required whenever the panel has 2+ named characters** — that's where register leaks (showcase grins on a face-off) and pair duplication happen. On solo panels it's encouraged: the register still names the solo character's emotion menu.
+- Budget the celebration registers: more than ~3 multi-character `showcase`/`celebratory` panels per chapter reads as an AI lineup comic (soft flag downstream). Confrontations, reveals, and aftermaths are where the story lives.
+- On active growth beats, L35's peak-intensity face directive owns the grower's face; `panel_situation` still governs the witnesses' varied reactions and everyone's poses (the `surprise-reveal` and `mid-action` menus are L35-compatible by design).
+- The register pairs with L34 staging, it doesn't replace it: `panel_situation` says what everyone is doing; the staging layer (`staging-and-composition.md`) says where they are in depth.
+
 ### 5. Validate
 
 Before saving:
@@ -301,6 +313,7 @@ Before saving:
 - Every panel's referenced props (if any) exist in `props[]`.
 - Hero subjects (named characters, recurring props, hero locations) have a `ref_folder` set. The folder doesn't need to be populated yet — `reference-gathering` runs next — but the path must be recorded so downstream coverage checks have something to verify.
 - **Camera variety check** (see `comic-production`'s `references/cinematic-framing.md`): for any 10-panel sequence, the panel `camera` values must include ≥5 distinct distance categories, ≥4 distinct angle categories, ≤3 panels at the same distance × angle combo, ≥1 ECU (face or region) and ≥1 wide-establish or splash. Document an intentional violation in the project notes (e.g., a sustained intimate dialogue beat that legitimately holds on mcu — still flag it explicitly).
+- **Situation-register check (L39)**: every panel with 2+ named characters declares `panel_situation`, and the value is one of the nine registers in `comic-production`'s `references/situation-expression-registers.md`. Soft: >3 multi-character `showcase`/`celebratory` panels in the chapter.
 - Page numbers are contiguous starting at 1.
 - Total panel count roughly matches pages × 4 (sanity check, not a rule).
 - No dialogue balloon exceeds 25 words.

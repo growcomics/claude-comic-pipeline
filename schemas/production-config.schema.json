@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/growcomics/claude-comic-pipeline/schemas/production-config.schema.json",
+  "title": "production-config.json",
+  "description": "Canonical contract emitted by the production-briefing skill and consumed by script-breakdown and comic-production. See docs/experiments/04-schema-contracts/inventory.md.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "version",
+    "project",
+    "transformation_type",
+    "platform",
+    "script_source",
+    "mandatory_rules"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Current canonical version is 3. Legacy versions 1 and 2 predate the platform/policies/continuity blocks."
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Forward-looking alias for `version`. If present, must agree with `version` or supersede it."
+    },
+    "project": {
+      "type": "object",
+      "required": ["name", "root", "brand"],
+      "additionalProperties": true,
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "root": {"type": "string", "minLength": 1},
+        "brand": {
+          "type": "string",
+          "enum": ["GrowGetterComics", "BloomBeautyComics", "MaxxMuscleComics"]
+        },
+        "character_ref": {"type": "string"}
+      }
+    },
+    "transformation_type": {
+      "type": "string",
+      "enum": ["fmg", "be", "glute", "mmg", "mixed"]
+    },
+    "transformation_subtype": {"type": "string"},
+    "platform": {
+      "type": "string",
+      "enum": ["flow", "higgsfield"]
+    },
+    "lineup_files": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "tier_low": {"type": "string"},
+        "tier_high": {"type": "string"},
+        "active_range": {"type": "string"}
+      }
+    },
+    "script_source": {
+      "type": "object",
+      "required": ["type", "value"],
+      "additionalProperties": true,
+      "properties": {
+        "type": {"type": "string", "enum": ["preset", "text"]},
+        "value": {"type": "string"},
+        "page_count": {"type": "integer", "minimum": 1},
+        "panels_per_page": {"type": "integer", "minimum": 1}
+      }
+    },
+    "mandatory_rules": {
+      "type": "object",
+      "required": ["active"],
+      "additionalProperties": true,
+      "properties": {
+        "active": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "extra_lines": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "allow_baked_lettering": {"type": "boolean"}
+      }
+    },
+    "references": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "policy": {"type": "string"},
+        "min_frames_per_character": {"type": "integer", "minimum": 0},
+        "require_source_jpg_for_locations": {"type": "boolean"}
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "max_panels": {"type": "integer", "minimum": 1},
+        "max_retries_per_panel": {"type": "integer", "minimum": 0},
+        "pick_variant": {"type": "string", "enum": ["claude", "user"]}
+      }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "stage3_gate": {"type": "string"},
+        "content_policy_refusal": {"type": "string"},
+        "missing_ref_guardrail": {"type": "string"},
+        "posting": {"type": "string"}
+      }
+    },
+    "continuity": {"type": "object"},
+    "page_composer": {"type": "object"},
+    "status_board": {"type": "object"},
+    "halt_conditions": {"type": "object"},
+    "script_breakdown": {"type": "object"},
+    "project_specific": {"type": "object"},
+    "flow": {"type": "object"}
+  }
+}

@@ -28,6 +28,42 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 - `research/comic-corpus/_queue.md` + `README.md` — B2 section marked SUPERSEDED by the WP-API path (what it does and doesn't cover); feedstock list updated.
 - `.gitignore` — `research/comic-corpus/catalog/raw/` (raw WP responses are re-derivable; derived records stay in git).
 
+## 2026-08-11 — Stale-branch triage: two experiments merged, five branches documented in docs/BRANCH-LEDGER.md
+
+### Added
+
+- **`docs/BRANCH-LEDGER.md`** — disposition record for the seven pre-reconciliation branches. Merged to main: `experiment/01-generalization-smoke-test` (`7445dca` — smoke-test results, schema-disagreement postmortem blog + graphics, read-only validator) and `experiment/04-schema-contracts` (`cf07a32` — six stage-boundary JSON Schemas under `schemas/`, read-only `schema_audit.py`, wiring proposal). Kept unmerged with reasons + content pointers: exp/02 vision-audit pilot (feeds vision-shadow work), exp/03 multipass (rating round never ran), exp/05 defects skill (superseded by the canonical DEFECT-REGISTRY; 42 binaries), yuna-rerun (records the refactor's failed pre-flight), refs-are-truth refactor (sole holder of `skills/reference-acquisition/` — still pointed at by CLAUDE.md; port needs fresh assessment). **No branch deleted.**
+
+## 2026-08-10 (L39 situation-expression registers + proposed D15 gate)
+
+From the user's posing-guide digestion: the four-woman showcase templates in `posing-and-expressions.md` fix uniformity but encode exactly ONE situation — reused on confrontations, defeats, or reveals, their poses/emotions leak and the panel reads varied-but-wrong-for-the-story. The rule: **anti-uniformity within a situation-appropriate register** — the shotlist beat declares the situation, the situation names the register, each character draws a DIFFERENT pose+emotion pair from it. (Dispatched as "L35"; L35–L38 were already assigned on main by the time this shipped — L38 story-spine landed mid-session — so the lesson lands as **L39**. The gate number D15 was free and stands.)
+
+**Added**
+- **L39** in `skills/comic-production/references/lessons-learned.md` (+ load-bearing index row) — *Situation-expression registers: anti-uniformity within a situation-appropriate register.* Companion to L34/`staging-and-composition.md`: L34 places the bodies in space, L39 governs what each body/face is doing there. Equal transformation tier among peers (variety via angle/reaction, never size hierarchy); mechanical expressions per `feedback_expression_intensity`; on active growth beats L35's peak-intensity directive owns the grower's face and the register governs the witnesses.
+- `skills/comic-production/references/situation-expression-registers.md` — the 9 registers (`showcase` = the posing-guide templates unchanged, `celebratory`, `confrontation`, `mid-action`, `surprise-reveal`, `aftermath-victory`, `aftermath-defeat`, `dialogue-tense`, `intimate`), each with 4-pose ‖ 4-emotion menus; the non-showcase face-mechanics extension table (32 emotions in brow/eyes/mouth/jaw/head terms — extends the posing guide's celebratory-only table); per-register prompt fragments; the staging-stanza contract (`register_pose`/`register_emotion` exact labels alongside the L34 `staging_type`); 3 dry-run-validated worked stanzas.
+- `docs/proposals/d15-expression-register-gate.diff` — **PROPOSED** D15 check for `qa/compose.py` (authored against main@cf07a32, NOT applied — Layer 8): HARD multi-char panel missing `panel_situation`; HARD register keys missing/outside the register; HARD two characters sharing a pose+emotion pair; SOFT >3 multi-char showcase/celebratory per chapter; body gains `dramatic_situation` (mirrors the L34 `staging` injection it sits next to). For the user to apply + re-bless at the next gate review.
+
+**Changed**
+- `skills/script-breakdown/SKILL.md` — emits `panel_situation` per beat (**required on panels with 2+ named characters**, encouraged solo): schema example, field rule, new §4.8 (how to pick the register; budget the celebration registers; seams with L34/L35), and a §5 validation bullet.
+
+*Docs/skill/proposal only — no gate script, rule module, or `compose.py` edited; the .diff is a document. Validated 2026-08-10 by zero-credit dry-run: patched gate `py_compile` clean + `git apply --check` clean; 3 stanzas (confrontation / surprise-reveal / aftermath-defeat) compose with distinct poses AND emotions; out-of-register ("ecstatic-joy" on a face-off) and shared-pair negatives both refuse; all 72 register labels cross-checked verbatim between diff and reference doc.*
+
+## 2026-08-11 (Stage 7 PUBLISHER — prep half built: skills/publisher/, never-post by construction)
+
+The production line's exit stage, built to `PRODUCTION-SYSTEM-VISION.md` §2/§5 and the posting-ops research (2026-07-25). **The stage's hard rule: it never posts, uploads, or deploys — it prepares; the human publishes** (per `feedback_never_post_without_permission`; enforced structurally, not by promise: `prepare_post.py` is stdlib-only with no network-capable imports, and no code path fires outward).
+
+**Added**
+- `skills/publisher/SKILL.md` — Stage 7 skill. Triggers ("prepare the publish", "get this ready to post", build-comic's posting stage); workflow = run `prepare_post.py` → Claude fills the `[FILL-*]` caption slots from the shotlist → sanity pass → **STOP and hand the human `CHECKLIST.md`**. Explicit NEVER-POST rule at the top, including for future Walk/Run autonomy modes. Explicit NOT-triggers: "post it"/"publish it" are requests for the human act, answered with a bundle + checklist, never a post.
+- `skills/publisher/scripts/prepare_post.py` — assembles `projects/<p>/posting/bundle/`: `CHECKLIST.md` (destination-ordered: **site → patreon → deviantart → twitter → instagram** — canonical home first, then money, then reach per the posting-ops research; keys match `studio/posting.php` chips exactly), `captions/<platform>.md` (auto-facts + prose slots), `crop-specs.json` (per-platform dimensions + page picks; **v1 renders nothing**), `site-apply-notes.md` (property-keyed: comic-platform runbook path for WP properties incl. pre-filled manifest JSON + flip-date reminder, admin-CMS path for 3dmc), `whats-new-draft.json` (updates.json entry draft per `reference_whats_new_feed`), `posted.template.json`, `MANIFEST.json` (page inventory with PNG dims read from IHDR, provenance). Also seeds `analytics/engagement-stub.json`. Guards: refuses to run if `posting/posted.json` exists (already posted), refuses to overwrite a bundle without `--force`, warns on shotlist/page-count mismatch. `--pages-dir`/`--aux-root` let binaries live outside the checkout (Drive, another clone).
+- `skills/publisher/references/posted-schema.json` — the `posting/posted.json` contract (what got posted where/when, proof URLs, per-platform status/scope). **The template ships in the bundle; only the human who actually posted fills it and saves it up one level — the file existing is `build-comic.md`'s posting-stage sentinel, so creating it early would falsely mark the stage done.**
+- `skills/publisher/references/engagement-stub-schema.json` + `analytics-capture.md` — the flywheel landing pad (Publisher → Ideator contract, VISION §4): append-only `captures[]` + `capture_plan` (+7d/+30d), source-by-source capture doc (GA4 property ids, Patreon campaign ids, wrappers-only credential rule per `project_credential_architecture`; DA/X/IG are Tier-2 live-session or manual reads). Wiring is Wave-2 — the shape is defined now.
+- `skills/publisher/references/posting-board-alignment.md` — what `studio/posting.php` already does (lanes, chips, locked-and-loaded status; a thin live status surface) vs. what this skill adds (per-comic prep bundles), the end-to-end handoff, and division-of-labor rules so the two never grow overlapping features.
+- **Validation bundle committed** (text only, per CLAUDE.md rule 5): `projects/not-so-supra-man/posting/bundle/` + `analytics/engagement-stub.json`, prepared against the real 46-page lettered set (`--pages-dir` at the main checkout; property growgetter, release 2026-07-30, `--already-on-staging` per the comic-platform runbook Appendix A). All caption slots filled; zero outward actions taken.
+
+**Notes**
+- `docs/PRODUCTION-SYSTEM-VISION.md` status flip applied in this batch (Stage 7 stub → prep-half-built, §3 heat map, §4 contract rows) — the doc reached main via the 2026-08-11 comic-corpus reconciliation merge mid-build.
+- Live `admin/data/updates.json` What's-New entry deliberately NOT posted this session (zero-outward-actions validation mandate); the bundle's draft demonstrates the mechanism.
+
 ## 2026-08-11 — Reconciliation: origin/main merged into feat/comic-corpus (22 commits in, 3 conflicts resolved)
 
 ### Changed
@@ -1621,6 +1657,66 @@ Two recurring failure modes drove this:
 ### Companion
 - Memory note `feedback_comic_pipeline_source_of_truth.md` captures the rule for cross-session persistence (when sessions operate outside this repo and the user mentions comic work).
 - SessionStart hook in `~/.claude/settings.json` on both laptop and mini auto-runs `git fetch` + prints branch/behind/HEAD at session start, removing the first-prompt latency.
+
+---
+
+## 2026-05-22 (Experiment 04 — schema-contract enforcement layer at every pipeline-stage boundary)
+
+A structural-fix experiment following the same-day Mac Mini diagnostic session (below). That session ended on Magnamus's root-cause framing: *"every failure traced back to layers of the pipeline disagreeing about vocabulary or convention — nothing enforces a single schema, so each part speaks its own dialect and the joins fail silently."* This experiment writes the missing JSON-Schema contracts at every pipeline-stage boundary, builds a validator, runs it across all known projects, and proposes the wiring path. **Wiring as a HARD gate is deliberately NOT done in this branch** — that's a separate spawn after the user reviews where the drift lives. Experiment branch: `experiment/04-schema-contracts`.
+
+### Added
+
+- **`schemas/`** (new top-level directory). Six JSON Schemas (draft-07) covering every stage-boundary artifact:
+  - `production-config.schema.json` — produced by `production-briefing`, consumed by `script-breakdown` and `comic-production`. Required: `version`, `project.{name,root,brand}`, `transformation_type`, `platform`, `script_source`, `mandatory_rules.active`.
+  - `shotlist.schema.json` — produced by `script-breakdown`, consumed by every downstream stage. Required: `project`, `pages[]`. Per-panel required: `panel_id`, `camera`. Complements `skills/script-breakdown/scripts/validate_shotlist.py`'s camera-vocabulary check at the structural level.
+  - `references_required.schema.json` — produced by `script-breakdown`, consumed by `reference-gathering`. Accepts both `version` and `schema_version` dialect (legacy + canonical) so the audit can flag which is in use.
+  - `checks.schema.json` — per-panel ledger written by `skills/comic-production/scripts/checks_ledger.py::write_checks_ledger()`. Already uses `schema_version: 1` — the canonical convention to standardize on across the other artifacts.
+  - `defects.schema.json` — per-row schema for `defects.jsonl` (the same file the same-day `validate_shotlist.py` work read from). Required: `ts`, `panel_id`, `rule_id`, `severity` (`hard|soft`), `verification` (`pre_render|post_render`), `reason`.
+  - `continuity-report.schema.json` — the artifact is markdown, so the schema applies to the dict produced by `schema_audit.py`'s H1/H2/H3 extractor (verdict line + per-panel sections).
+- **[skills/continuity-check/scripts/schema_audit.py](skills/continuity-check/scripts/schema_audit.py)** — read-only validator. Usage: `schema_audit.py <project>`, `--all`, or `--external <path>`. Emits human-readable or `--json` output. Exit 1 on any violation, 0 clean. Uses `jsonschema` Draft 7. Walks `pages/panels/panel-*/checks.json` for the per-panel ledger and `defects.jsonl` line-by-line.
+- **[docs/experiments/04-schema-contracts/](docs/experiments/04-schema-contracts/)** — experiment write-up:
+  - `inventory.md` — producer/consumer/contract map for all 6 stages, with quoted writer code and per-project shape variance.
+  - `validation-report.md` — full audit results across 13 projects (4 in-repo + 9 in `~/Documents/`).
+  - `validation-snapshot.json` — machine-readable audit dump.
+  - `wiring-proposal.md` — three-level wiring plan (write-time hooks, build-comic checkpoints, halt-condition config key) with legacy-project migration strategy.
+
+### Findings
+
+- **6 schemas written, 27 artifacts validated, 18 pass, 9 fail.** 7 of 13 projects fail at least one schema. Top drift categories: fractional `muscle_size_tier` (2 projects), missing `panels[]` or `page_number=0` (2 projects), missing canonical top-level fields in `production-config.json` (2), missing `cast[].name` (2), unknown brand-enum / `script_source.type` value (1), `dialogue[].type: "sfx"` (1) — which would silently mis-letter as a speech bubble downstream — `version: "v2"` stringified (1), legacy `version` vs canonical `schema_version` in `references_required.json` (1).
+- **The validator surfaced two schema-author bugs of my own** during the first run. The `checks.json` status enum I wrote (`pass | fail | skip | n/a`) was narrower than the writer's actual vocabulary (`pass | fail | pending | blocked | skipped | n/a`), and `shotlist.json:arc_character` should accept `null`. Both fixed in the same branch. Single-sample evidence that even the contract author drifts from the contract without an enforced check.
+- **`checks.json` is the model.** After the enum fix, every on-disk panel ledger passed (26 panels across 3 projects). It already uses `schema_version` and has a single producer (`checks_ledger.py`). The other artifacts should converge on this pattern.
+- **`shotlist.json` is the most drifted** — 8 of 9 failures live there, and 4 of 6 stages consume it. Highest-leverage place to wire the gate.
+- **`defects.jsonl` had zero drift.** All 26 rows across 3 projects validated cleanly — the JSONL writer landed clean, and the format has been stable since.
+
+### Notes
+
+- The same-day Mac Mini session (below) landed `validate_shotlist.py` as a write-time gate for one artifact. This experiment generalizes that approach to all six stage-boundary artifacts and documents the wiring path; it does not modify `validate_shotlist.py` or any other writer.
+- Three open questions for the user to resolve before wiring (per [wiring-proposal.md](docs/experiments/04-schema-contracts/wiring-proposal.md)): (1) are fractional muscle-size tiers legitimate? (2) should `3DMuscleComics` and `script_source.type: "path"` enter the canonical vocabulary? (3) should `sfx` ever be allowed as a `dialogue[].type`?
+- Per Experiment-04 constraints, drift in real projects was documented but **NOT fixed** in this branch. Each drifted project is a candidate per-project migration spawn after the user resolves the open questions.
+
+---
+
+## 2026-05-22 (Experiment 01 — Generalization smoke test across real projects)
+
+Signal-gathering pass to confirm the same-day composition-layer + validator fixes (see entry below) generalize beyond `chun-li-test`. Ran `next_panel.py --as-json` against every real comic project on disk (15 projects, discovered via `find ~ -name shotlist.json`). No fixes applied — this experiment only measures.
+
+### Added
+
+- [`docs/experiments/01-generalization-smoke-test/`](docs/experiments/01-generalization-smoke-test/) containing `results-2026-05-22.md` (results table, per-failure diagnoses, recommended next fixes) and `raw-output.log` (per-project stdout/exit-code dump).
+- [`docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md`](docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md) — long-form postmortem of the schema-disagreement findings (the four field-level bugs + the container-shape next-frontier), framed around Magnamus's "layers using different vocabulary" diagnosis. Eight comic-style explainer graphics in [`docs/blog/assets/`](docs/blog/assets/) generated via Higgsfield Nano Banana Pro (1k, 16:9, 16 credits total): hero (vocabulary mismatch over shared blueprint), one per bug (empty speaker bubble, camera-vocab argument, caption AttributeError, stale Mac Mini), the three-pillar fix-pattern, the 15-project scoreboard, and the flat-vs-nested container-shape diagram. Hand-eye sanity check: Bug-4 (Mac Mini) has the style-block bleed-through as a literal caption (regen candidate); Bug-3 (caption-crash) error balloons have minor letter garble but readable.
+
+### Findings
+
+- **15 projects tested** across `~/Documents/` and `~/Documents/claude-comic-pipeline/projects/`. (Magnamus's expected paths `~/comics/` and `~/growgetter-comics/` don't exist on this machine — stale notes; all real projects live under `~/Documents/`.)
+- **15 / 15 pass the hard test** — every project exits 0 with well-formed JSON. The composition-layer fixes do not crash anywhere.
+- **13 / 15 pass the semantic test.** Two projects produce a false-positive "All shotlist panels have an accepted version. Nothing pending." despite holding 12 + 24 unstarted panels: `chun-li-serum-courtyard`, `Mira's Story — Ch1 Rooftop Pool`.
+- **Top failure category: container-shape disagreement** (frequency 2/15). Both affected projects use a flat `panels: [...]` root, while the other 13 nest panels under `pages: [{panels: [...]}]`. `next_panel.py`'s walker only knows the `pages` envelope, so the flat-shape shotlists walk to zero panels and report "all done" silently. Pre-existing dialogue-shape fix (`961f9b5`) addressed field-level vocabulary; this is the same class of bug one container layer up.
+
+### Next
+
+- **Spawn experiment 02 — fix #1:** container-shape adapter in `next_panel.py` to walk root-level `panels[]` when `pages` is absent. Unblocks the 2 affected projects.
+- **Defensive follow-ups (not blockers):** make the panel walker fail loudly on zero-candidate iteration; extend `validate_shotlist.py` to assert root shape so future variants surface at authoring time.
+- **Verdict on the hypothesis:** partially confirmed — composition layer is stable for the dominant container shape, but container-shape generalization is the next frontier. Not a rule-design problem; same root cause Magnamus diagnosed (layers using different conventions, nothing validating the contract).
 
 ---
 

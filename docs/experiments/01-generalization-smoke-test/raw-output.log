@@ -1,0 +1,2829 @@
+===== /Users/mattmenashe/Documents/chunli-growth-series-v2 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/chunli-growth-series-v2",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 10
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/supergirl-inversion =====
+{
+  "project_root": "/Users/mattmenashe/Documents/supergirl-inversion",
+  "next_panel": {
+    "panel_id": "p02-establishing",
+    "page_number": 2,
+    "camera": "wide-establish, eye-level",
+    "characters": [
+      "supergirl",
+      "lex-luthor"
+    ],
+    "location": "lex-lab-redsun",
+    "action": "Wide establishing camera. Kara restrained at chamber center, arms outstretched. Lex mid-distance camera-right at his terminal, suit immaculate, hands behind his back, watching her.",
+    "muscle_size_tier": 1
+  },
+  "accepted_count": 1,
+  "remaining_count": 29,
+  "aspect": "16:9",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "note",
+      "from_panel": null,
+      "path": null,
+      "reason": "no view-compatible prior found for target view (wide-establish); fall back to canonical view-matched character ref + verbal state carry-forward"
+    },
+    {
+      "kind": "face_card",
+      "character": "supergirl",
+      "path": "references/characters/supergirl/body-baseline.jpeg",
+      "reason": "canonical face anchor for supergirl"
+    },
+    {
+      "kind": "face_card",
+      "character": "lex-luthor",
+      "path": "references/characters/lex-luthor/lex-01.jpg",
+      "reason": "canonical face anchor for lex-luthor"
+    },
+    {
+      "kind": "env_ref",
+      "location": "lex-lab-redsun",
+      "path": "references/locations/lex-lab-redsun/_source.jpg",
+      "reason": "DAZ3D source ref for `lex-lab-redsun` \u2014 first appearance of this location; once this panel is accepted, subsequent panels will chain off its image instead"
+    },
+    {
+      "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
+      "speakers": [
+        "lex-luthor"
+      ],
+      "camera": "wide-establish",
+      "reason": "L12 violation: panel has on-screen dialogue from ['lex-luthor'] but camera is `wide-establish` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+    }
+  ],
+  "stage_change": false,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nWide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.\n\n[SUBJECTS]\nSubjects: supergirl, lex-luthor.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Wide establishing camera. Kara restrained at chamber center, arms outstretched. Lex mid-distance camera-right at his terminal, suit immaculate, hands behind his back, watching her. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: indoor-redsun-pre.\n\n[LINEUP PROPORTIONS \u2014 L11 surgical scope]\nSize tier: 1 (unchanged from prior panel). Carry forward the muscular build from the attached state anchor exactly. No growth in this panel. Preserve the same muscle mass and definition from the prior accepted panel.\n\n[ENVIRONMENT \u2014 ref anchor]\nLocation: lex-lab-redsun. The attached environment reference establishes the location's render style \u2014 Iray quality, lighting setup, scale, depth, atmosphere. Use it as the visual anchor for the location's architecture. Do not reinterpret.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book speech balloon \u2014 clean white rounded oval shape with a bold 3-4 pixel solid black outline, positioned over `lex-luthor`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `lex-luthor`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"Comfortable, Miss Zor-El?\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": null,
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": true,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Size tier: 1 (unchanged from prior panel). Carry forward the muscular build from the attached state anchor exactly. No growth in this panel. Preserve the same muscle mass and definition from the prior accepted panel.",
+      "pre_render": {
+        "status": "skipped",
+        "reason": "tier=1 unchanged carry-forward; style anchor not needed at tier 1"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got None)"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=True, anchor=False, lineup=False)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": false,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 env ref attached (location='lex-lab-redsun') \u2014 dense verbal anchor not needed"
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='wide-establish', tier=1)"
+    },
+    "L1.5": {
+      "applied": true,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "no view-compatible prior in accepted_history for target view 'wide-establish' \u2014 falling back to canonical ref + verbal state carry-forward"
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L12": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "L12 violation: panel has on-screen dialogue from ['lex-luthor'] but camera is `wide-establish` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=1, n_speakers=1"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'wide-establish' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)"
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/chun-li-serum-courtyard =====
+{
+  "project_root": "/Users/mattmenashe/Documents/chun-li-serum-courtyard",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 0
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/comic-april-mutagen-v2 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/comic-april-mutagen-v2",
+  "next_panel": {
+    "panel_id": "p15-01",
+    "page_number": 15,
+    "camera": "splash, low-angle-front",
+    "characters": [
+      "april"
+    ],
+    "location": "april-lab",
+    "action": "Splash composition. April fills the panel head-to-foot in a triumphant double-bicep flex. Body fully transformed \u2014 comic-stylized muscular figure, hair slicked back wet, mutagen still glistening on her skin. Jumpsuit is mostly shredded ribbons clinging at the shoulders, waist, and thighs; utility belt and white boots survive. Wide grin. Lab visible only at the edges \u2014 the figure carries the panel, not the location.",
+    "muscle_size_tier": 6
+  },
+  "accepted_count": 14,
+  "remaining_count": 1,
+  "aspect": "3:4",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "state_anchor",
+      "from_panel": "p14-01",
+      "path": "pages/panels/panel-p14-01/v1_accepted.png",
+      "reason": "view-compatible prior (mcu, three-quarter) for target view (low-angle-front)"
+    },
+    {
+      "kind": "env_anchor_dropped_for_ceiling",
+      "location": "april-lab",
+      "from_panel": "p01-01",
+      "path": "pages/panels/panel-p01-01/v1_accepted.png",
+      "reason": "DROPPED to fit the 3-ref ceiling \u2014 prompt instead carries a dense verbal env anchor (L23). Do NOT attach this ref at submit time; use the verbal anchor in the composed prompt as the location signal."
+    },
+    {
+      "kind": "lineup",
+      "tier": 6,
+      "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png",
+      "reason": "STAGE-CHANGE panel (tier=6) \u2014 lineup ref MUST be attached so the model has a 3D muscular-build target. Per L11 (cartoony FMG proportions need explicit anchoring)."
+    },
+    {
+      "kind": "tier6_reinforcement",
+      "tier": 6,
+      "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/references/peak-body-scale/tier-6/tier-6-full-body.png",
+      "reason": "TIER-6 panel \u2014 `tier-6-full-body.png` MUST be attached alongside the muscle-size lineup. The lineup alone interpolates tier-6 downward; the dedicated tier-6 reinforcement sheets isolate the peak proportions. Per L29 (tier-6 needs dedicated proportion reinforcement)."
+    },
+    {
+      "kind": "tier6_reinforcement",
+      "tier": 6,
+      "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/references/peak-body-scale/tier-6/tier-6-anatomical-detail.png",
+      "reason": "TIER-6 panel \u2014 `tier-6-anatomical-detail.png` MUST be attached alongside the muscle-size lineup. The lineup alone interpolates tier-6 downward; the dedicated tier-6 reinforcement sheets isolate the peak proportions. Per L29 (tier-6 needs dedicated proportion reinforcement)."
+    },
+    {
+      "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
+      "speakers": [
+        "april"
+      ],
+      "camera": "low-angle-front",
+      "reason": "L12 violation: panel has on-screen dialogue from ['april'] but camera is `low-angle-front` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+    },
+    {
+      "kind": "WARNING_MODEL_MUSCULARITY_CEILING",
+      "model": "grok_image",
+      "tier": 6,
+      "ceiling": 3,
+      "reason": "Tier 6 exceeds the observed muscularity ceiling for model `grok_image` (\u2248 tier 3 on female anatomy). If using this model, expect the muscular build to regress toward fitness-model build regardless of prompt or lineup ref. Recommend routing to nano_banana_flash or nano_banana_2 for this panel. See chun-li-grok-validation/ for empirical evidence."
+    }
+  ],
+  "stage_change": true,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nSplash composition \u2014 single dramatic image, subject the focal point filling the panel, cinematic full-bleed framing.\n\n[SUBJECTS]\nSubjects: april.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[STYLE \u2014 L11 cartoony FMG anchor]\nStyle anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume AND tier-scaled breast proportions \u2014 NOT realistic fitness modelling, NOT a fitness-model build at wider scale, NOT a smaller-breasted body grafted onto bigger muscles, NOT a modest costume silhouette flattening the chest. The lineup attached is a 3D body chart that scales TWO attributes per tier: visible musculature AND breast size / fullness / forward projection. The storytelling elements are the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads) AND the breast SIZE, FULLNESS, and forward PROJECTION \u2014 not the outline width, not a default-conservative breast size, not a costume that flattens the breast contour. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume), not the other way around. Render thick, defined, comic-exaggerated muscle volume with proportionally matched breast scale.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Splash composition. April fills the panel head-to-foot in a triumphant double-bicep flex. Body fully transformed \u2014 comic-stylized muscular figure, hair slicked back wet, mutagen still glistening on her skin. Jumpsuit is mostly shredded ribbons clinging at the shoulders, waist, and thighs; utility belt and white boots survive. Wide grin. Lab visible only at the edges \u2014 the figure carries the panel, not the location. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: indeterminate-interior.\n\n[LINEUP PROPORTIONS \u2014 L11 surgical scope]\nSize tier: 6. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 6 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 6: peak cartoony FMG \u2014 deltoids 3x normal mass dwarfing the head, biceps as wide as the waist, full hyper-muscular build with every muscle group visibly developed and individually defined. MAXIMAL 3D muscle volume, the body reads as a cartoony hyper-muscular figure not a fitness model at wider proportions. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 6, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 6 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 6 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 6 shows. At tier 6 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 6 shows so that after the model's downward bias the final rendered scale lands AT figure 6's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 6 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 6 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.\n\n[TIER-6 REINFORCEMENT \u2014 L29]\nTIER-6 PROPORTION REINFORCEMENT: Two additional reference images attached showing canonical tier-6 muscle proportions \u2014 a full-body reference with annotated proportion stats (biceps profile, chest / thoracic detail, waist narrowness, leg musculature) and a close-up anatomical detail sheet (biceps anatomy, breast volume and shape, waistline metrics, full rear view + posterior musculature). These sit ALONGSIDE the muscle-size lineup, not in place of it \u2014 the lineup gives tier context (figure 6 vs the other tiers); these reinforcement sheets isolate tier-6 proportions as their own dedicated anchor. Match the BUST VOLUME and forward PROJECTION, DELTOID MASS, PECTORAL development, LAT spread, OBLIQUE definition, BICEP peak and thickness, and QUAD size shown in these references \u2014 and over-render: the model normalizes off-distribution features toward average, so the rendered output should target the SAME or LARGER scale than the reinforcement refs show, never smaller. PROPORTION REFERENCE ONLY \u2014 do NOT adopt the clothing, hair, hairstyle, hair color, skin tone, face, pose, lighting, background, or setting from these references. Do NOT render the reference images as physical scene objects (no inset photos, no annotated overlays, no figure labels, no proportion stats text floating in the frame). Borrow scale and mass only \u2014 character identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images.\n\n[ENVIRONMENT \u2014 L23 verbal anchor]\nBackground (no env ref attached this panel \u2014 render from this dense anchor instead): April's underground lab inside her sewer hideout \u2014 bare concrete walls with damp staining, exposed pipes running along the ceiling, one buzzing fluorescent strip light overhead, a steel workbench against one wall, metal shelving stocked with rows of green mutagen vials, scattered tools and notebooks; cool greenish-grey ambient with the fluorescent strip the only key light pre-pour, plus a sympathetic green glow from the canister itself; post-pour, the green mutagen on April's body becomes a secondary local light source\n\n[STATE ANCHOR \u2014 L1.5]\nState anchor: prior panel `p14-01` (mcu, three-quarter) is attached as a reference. Preserve costume state, hair state, body size, and any cumulative damage from that panel exactly. Costume tears never regress across panels.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book shout balloon \u2014 white JAGGED-EDGED starburst shape with a bold solid black outline (spiky/zig-zag border, not smooth), denoting yelling, positioned over `april`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `april`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"LOOK at me!\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. Bubble 2: classic comic-book shout balloon \u2014 white JAGGED-EDGED starburst shape with a bold solid black outline (spiky/zig-zag border, not smooth), denoting yelling, positioned over `april`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `april`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"The turtles won't BELIEVE this!\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": "p14-01",
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": true,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Size tier: 6. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 6 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 6: peak cartoony FMG \u2014 deltoids 3x normal mass dwarfing the head, biceps as wide as the waist, full hyper-muscular build with every muscle group visibly developed and individually defined. MAXIMAL 3D muscle volume, the body reads as a cartoony hyper-muscular figure not a fitness model at wider proportions. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 6, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 6 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 6 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 6 shows. At tier 6 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 6 shows so that after the model's downward bias the final rendered scale lands AT figure 6's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 6 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 6 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "tier=6, lineup attached at generation \u2014 slot 8_tier_build (lineup-attached path)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L29": {
+      "applied": true,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "TIER-6 PROPORTION REINFORCEMENT: Two additional reference images attached showing canonical tier-6 muscle proportions \u2014 a full-body reference with annotated proportion stats (biceps profile, chest / thoracic detail, waist narrowness, leg musculature) and a close-up anatomical detail sheet (biceps anatomy, breast volume and shape, waistline metrics, full rear view + posterior musculature). These sit ALONGSIDE the muscle-size lineup, not in place of it \u2014 the lineup gives tier context (figure 6 vs the other tiers); these reinforcement sheets isolate tier-6 proportions as their own dedicated anchor. Match the BUST VOLUME and forward PROJECTION, DELTOID MASS, PECTORAL development, LAT spread, OBLIQUE definition, BICEP peak and thickness, and QUAD size shown in these references \u2014 and over-render: the model normalizes off-distribution features toward average, so the rendered output should target the SAME or LARGER scale than the reinforcement refs show, never smaller. PROPORTION REFERENCE ONLY \u2014 do NOT adopt the clothing, hair, hairstyle, hair color, skin tone, face, pose, lighting, background, or setting from these references. Do NOT render the reference images as physical scene objects (no inset photos, no annotated overlays, no figure labels, no proportion stats text floating in the frame). Borrow scale and mass only \u2014 character identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "tier=6 panel; both tier-6 reinforcement refs attached alongside the muscle-size lineup"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got 'reveal')"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=False, anchor=True, lineup=True)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": true,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "Background (no env ref attached this panel \u2014 render from this dense anchor instead): April's underground lab inside her sewer hideout \u2014 bare concrete walls with damp staining, exposed pipes running along the ceiling, one buzzing fluorescent strip light overhead, a steel workbench against one wall, metal shelving stocked with rows of green mutagen vials, scattered tools and notebooks; cool greenish-grey ambient with the fluorescent strip the only key light pre-pour, plus a sympathetic green glow from the canister itself; post-pour, the green mutagen on April's body becomes a secondary local light source",
+      "pre_render": {
+        "status": "pass",
+        "reason": "env ref dropped for 3-ref ceiling, location='april-lab' \u2014 dense verbal anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='splash', tier=6)"
+    },
+    "L1.5": {
+      "applied": true,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "State anchor: prior panel `p14-01` (mcu, three-quarter) is attached as a reference. Preserve costume state, hair state, body size, and any cumulative damage from that panel exactly. Costume tears never regress across panels.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "view-aware chain found compatible prior panel `p14-01` (view='mcu, three-quarter') for target view 'splash'"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L12": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "L12 violation: panel has on-screen dialogue from ['april'] but camera is `low-angle-front` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=2, n_speakers=1"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'low-angle-front' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "pass",
+        "reason": "required lineup ref present on disk: /Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/mira-five-sips-groa34 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/mira-five-sips-groa34",
+  "next_panel": {
+    "panel_id": "p01-01",
+    "page_number": 1,
+    "camera": "wide-establish, low-angle-front",
+    "characters": [
+      "mira"
+    ],
+    "location": "home-gym",
+    "action": "Mira uncorks the black glass bottle, eyes locked on the loaded barbell across the gym.",
+    "muscle_size_tier": null
+  },
+  "accepted_count": 0,
+  "remaining_count": 5,
+  "aspect": "3:4",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "face_card",
+      "character": "mira",
+      "path": "references/characters/mira/mira_face_card.jpeg",
+      "reason": "canonical face anchor for mira"
+    },
+    {
+      "kind": "env_ref",
+      "location": "home-gym",
+      "path": "references/locations/home-gym/_source.jpg",
+      "reason": "DAZ3D source ref for `home-gym` \u2014 first appearance of this location; once this panel is accepted, subsequent panels will chain off its image instead"
+    },
+    {
+      "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
+      "speakers": [
+        "mira"
+      ],
+      "camera": "low-angle-front",
+      "reason": "L12 violation: panel has on-screen dialogue from ['mira'] but camera is `low-angle-front` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+    }
+  ],
+  "stage_change": false,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nWide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.\n\n[SUBJECTS]\nSubjects: mira.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Mira uncorks the black glass bottle, eyes locked on the loaded barbell across the gym. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: late-night.\n\n[ENVIRONMENT \u2014 ref anchor]\nLocation: home-gym. The attached environment reference establishes the location's render style \u2014 Iray quality, lighting setup, scale, depth, atmosphere. Use it as the visual anchor for the location's architecture. Do not reinterpret.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book speech balloon \u2014 clean white rounded oval shape with a bold 3-4 pixel solid black outline, positioned over `mira`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `mira`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"First sip.\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. Caption box 1: classic comic-book caption \u2014 yellow rounded-corner rectangle with a bold 3-4 pixel solid black outline, positioned at the bottom edge of the panel. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"Day 1 of 5.\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel, NO drop shadow on the scene. SFX 1: the word \"POP\" rendered as bold flat 2D comic-book lettering overlaid on the scene \u2014 bold black or yellow comic display font ALL CAPS, with a solid black outline. Flat 2D vector lettering only \u2014 NO 3D extrusion, NO chrome letter sculptures, NO ray-traced shadows on the scene. The SFX is part of the comic-lettering overlay layer, not the photoreal layer. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": null,
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": false,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier is null \u2014 non-arc panel"
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got None)"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=True, anchor=False, lineup=False)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": false,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 env ref attached (location='home-gym') \u2014 dense verbal anchor not needed"
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='wide-establish', tier=None)"
+    },
+    "L1.5": {
+      "applied": false,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 first panel in chain \u2014 no prior accepted panel exists yet"
+    },
+    "L12": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "L12 violation: panel has on-screen dialogue from ['mira'] but camera is `low-angle-front` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=1, n_speakers=1"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'low-angle-front' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)"
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/chunli-issue-1 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/chunli-issue-1",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 21
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/chunli-ascension-15p-2026-05-16",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 15
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/chun-li-ascension =====
+{
+  "project_root": "/Users/mattmenashe/Documents/chun-li-ascension",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 14
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/checks-balances-demo-2026-05-16 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/checks-balances-demo-2026-05-16",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 6
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/Mira's Story — Ch1 Rooftop Pool =====
+{
+  "project_root": "/Users/mattmenashe/Documents/Mira's Story \u2014 Ch1 Rooftop Pool",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 0
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/moving-experience-v2 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/moving-experience-v2",
+  "next_panel": null,
+  "message": "All shotlist panels have an accepted version. Nothing pending.",
+  "accepted_count": 26
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/supergirl-muscular.archived-2026-05-12",
+  "next_panel": {
+    "panel_id": "13-size-4-tears-begin",
+    "page_number": 13,
+    "camera": "front-full, 35mm equivalent",
+    "characters": [
+      "supergirl"
+    ],
+    "location": "lex-lab-redsun",
+    "action": "Major muscle growth visible. Biceps, shoulders, lats clearly developed. S-shield stretched wider across the broader chest. First fabric tears starting \u2014 shoulder seam fraying, small skirt rip. She looks down at the new tears with a half-smile, head tilted.",
+    "muscle_size_tier": 4
+  },
+  "accepted_count": 16,
+  "remaining_count": 14,
+  "aspect": "3:4",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "state_anchor",
+      "from_panel": "20-restraints-break",
+      "path": "pages/panels/panel-20-restraints-break/v1.png",
+      "reason": "view-compatible prior (wide-establish, eye-level, 28mm equivalent) for target view (front-full)"
+    },
+    {
+      "kind": "face_card",
+      "character": "supergirl",
+      "path": "references/characters/supergirl/face-card.png",
+      "reason": "canonical face anchor for supergirl"
+    },
+    {
+      "kind": "env_anchor_dropped_for_ceiling",
+      "location": "lex-lab-redsun",
+      "from_panel": "01-cover",
+      "path": "pages/panels/panel-01-cover/v1.png",
+      "reason": "DROPPED to fit the 3-ref ceiling \u2014 prompt instead carries a dense verbal env anchor (L23). Do NOT attach this ref at submit time; use the verbal anchor in the composed prompt as the location signal."
+    },
+    {
+      "kind": "lineup",
+      "tier": 4,
+      "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png",
+      "reason": "STAGE-CHANGE panel (tier=4) \u2014 lineup ref MUST be attached so the model has a 3D muscular-build target. Per L11 (cartoony FMG proportions need explicit anchoring)."
+    },
+    {
+      "kind": "WARNING_MODEL_MUSCULARITY_CEILING",
+      "model": "grok_image",
+      "tier": 4,
+      "ceiling": 3,
+      "reason": "Tier 4 exceeds the observed muscularity ceiling for model `grok_image` (\u2248 tier 3 on female anatomy). If using this model, expect the muscular build to regress toward fitness-model build regardless of prompt or lineup ref. Recommend routing to nano_banana_flash or nano_banana_2 for this panel. See chun-li-grok-validation/ for empirical evidence."
+    }
+  ],
+  "stage_change": true,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nFull body front view, 28mm equivalent, eye-level, subject occupies the full vertical of the frame.\n\n[SUBJECTS]\nSubjects: supergirl.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[STYLE \u2014 L11 cartoony FMG anchor]\nStyle anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume AND tier-scaled breast proportions \u2014 NOT realistic fitness modelling, NOT a fitness-model build at wider scale, NOT a smaller-breasted body grafted onto bigger muscles, NOT a modest costume silhouette flattening the chest. The lineup attached is a 3D body chart that scales TWO attributes per tier: visible musculature AND breast size / fullness / forward projection. The storytelling elements are the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads) AND the breast SIZE, FULLNESS, and forward PROJECTION \u2014 not the outline width, not a default-conservative breast size, not a costume that flattens the breast contour. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume), not the other way around. Render thick, defined, comic-exaggerated muscle volume with proportionally matched breast scale.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Major muscle growth visible. Biceps, shoulders, lats clearly developed. S-shield stretched wider across the broader chest. First fabric tears starting \u2014 shoulder seam fraying, small skirt rip. She looks down at the new tears with a half-smile, head tilted. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LINEUP PROPORTIONS \u2014 L11 surgical scope]\nSize tier: 4. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 4 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 4: cartoony hyper-FMG threshold \u2014 deltoids 2x normal mass with clear striation, biceps with visible peaks and triceps mass, full powerful chest pushing fabric, ridged 6-pack abdominal definition, strong sculpted quads, hip flare. THICK 3D muscle volume, not just a wider outline. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 4, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 4 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 4 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 4 shows. At tier 4 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 4 shows so that after the model's downward bias the final rendered scale lands AT figure 4's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 4 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 4 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.\n\n[ENVIRONMENT \u2014 L23 verbal anchor]\nBackground (no env ref attached this panel \u2014 render from this dense anchor instead): Lex's underground laboratory beneath Lexcorp HQ. Industrial Metropolis warehouse aesthetic with sharp tech overlay. Central feature: circular restraint chamber ~30ft across with red-sun emitter array overhead. Walls lined with computer banks, exposed pipes, kryptonite storage cells. Cool industrial gray base lighting overlaid with intense red wash from the emitter. Cathedral-tall ceiling.\n\n[STATE ANCHOR \u2014 L1.5]\nState anchor: prior panel `20-restraints-break` (wide-establish, eye-level, 28mm equivalent) is attached as a reference. Preserve costume state, hair state, body size, and any cumulative damage from that panel exactly. Costume tears never regress across panels.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book thought bubble \u2014 clean white cloud-shaped outline with a bold 3-4 pixel solid black border, small cloud-bubble trail of three round dots leading to the thinker, positioned over `supergirl`'s side of the frame so the tail attribution is unambiguous; cloud-bubble trail of three round dots leading to `supergirl`. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"Hm. The suit can't keep up.\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": "20-restraints-break",
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": true,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Size tier: 4. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 4 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 4: cartoony hyper-FMG threshold \u2014 deltoids 2x normal mass with clear striation, biceps with visible peaks and triceps mass, full powerful chest pushing fabric, ridged 6-pack abdominal definition, strong sculpted quads, hip flare. THICK 3D muscle volume, not just a wider outline. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 4, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 4 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 4 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 4 shows. At tier 4 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 4 shows so that after the model's downward bias the final rendered scale lands AT figure 4's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 4 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 4 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "tier=4, lineup attached at generation \u2014 slot 8_tier_build (lineup-attached path)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got None)"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=False, anchor=True, lineup=True)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": true,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "Background (no env ref attached this panel \u2014 render from this dense anchor instead): Lex's underground laboratory beneath Lexcorp HQ. Industrial Metropolis warehouse aesthetic with sharp tech overlay. Central feature: circular restraint chamber ~30ft across with red-sun emitter array overhead. Walls lined with computer banks, exposed pipes, kryptonite storage cells. Cool industrial gray base lighting overlaid with intense red wash from the emitter. Cathedral-tall ceiling.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "env ref dropped for 3-ref ceiling, location='lex-lab-redsun' \u2014 dense verbal anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='front-full', tier=4)"
+    },
+    "L1.5": {
+      "applied": true,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "State anchor: prior panel `20-restraints-break` (wide-establish, eye-level, 28mm equivalent) is attached as a reference. Preserve costume state, hair state, body size, and any cumulative damage from that panel exactly. Costume tears never regress across panels.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "view-aware chain found compatible prior panel `20-restraints-break` (view='wide-establish, eye-level, 28mm equivalent') for target view 'front-full'"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L12": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no dialogue/camera conflict \u2014 either no on-screen dialogue or camera is close enough"
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=1, n_speakers=1"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'front-full' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "pass",
+        "reason": "required lineup ref present on disk: /Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test =====
+{
+  "project_root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/chun-li-test",
+  "next_panel": {
+    "panel_id": "p01-01",
+    "page_number": 1,
+    "camera": "wide-establish, low-angle, three-quarter",
+    "characters": [
+      "chun-li"
+    ],
+    "location": "bisons-lair",
+    "action": "Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Wide low-angle hero shot establishing the cathedral-scale chamber.",
+    "muscle_size_tier": null
+  },
+  "accepted_count": 0,
+  "remaining_count": 30,
+  "aspect": "16:9",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "face_card",
+      "character": "chun-li",
+      "path": "references/characters/chun-li/face-card.jpg",
+      "reason": "canonical face anchor for chun-li"
+    },
+    {
+      "kind": "env_ref",
+      "location": "bisons-lair",
+      "path": "references/locations/bisons-lair/_source.jpg",
+      "reason": "DAZ3D source ref for `bisons-lair` \u2014 first appearance of this location; once this panel is accepted, subsequent panels will chain off its image instead"
+    },
+    {
+      "kind": "WARNING_DIALOGUE_CAMERA_CONFLICT",
+      "speakers": [
+        "chun-li"
+      ],
+      "camera": "wide-establish",
+      "reason": "L12 violation: panel has on-screen dialogue from ['chun-li'] but camera is `wide-establish` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+    }
+  ],
+  "stage_change": false,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nWide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.\n\n[SUBJECTS]\nSubjects: chun-li.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[HAIR \u2014 L22]\nHair state: twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Chun Li strides into Bison's villain chamber, defiant fighting stance, hands raised in classic guard. Ambient purple-violet Psycho Power energy fills the air around her, swirling like volumetric smoke. Wide low-angle hero shot establishing the cathedral-scale chamber. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: interior, no diurnal cue.\n\n[ENVIRONMENT \u2014 ref anchor]\nLocation: bisons-lair. The attached environment reference establishes the location's render style \u2014 Iray quality, lighting setup, scale, depth, atmosphere. Use it as the visual anchor for the location's architecture. Do not reinterpret.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book shout balloon \u2014 white JAGGED-EDGED starburst shape with a bold solid black outline (spiky/zig-zag border, not smooth), denoting yelling, positioned over `chun-li`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `chun-li`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"BISON! Show yourself!\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. Caption box 1: classic comic-book caption \u2014 yellow rounded-corner rectangle with a bold 3-4 pixel solid black outline, positioned at the bottom edge of the panel. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"I can feel his Psycho Power... everywhere.\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel, NO drop shadow on the scene. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": null,
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": false,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier is null \u2014 non-arc panel"
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got None)"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=True, anchor=False, lineup=False)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": true,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "Hair state: twin buns secured with red silk ribbons, classic SF2 ox-horns silhouette.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "panel.hair_state explicitly set"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L23": {
+      "applied": false,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 env ref attached (location='bisons-lair') \u2014 dense verbal anchor not needed"
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='wide-establish', tier=None)"
+    },
+    "L1.5": {
+      "applied": false,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 first panel in chain \u2014 no prior accepted panel exists yet"
+    },
+    "L12": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "L12 violation: panel has on-screen dialogue from ['chun-li'] but camera is `wide-establish` (too wide for the speaker to be the focal point). Either tighten the camera (mcu / medium / cowboy / ecu-face) or convert the dialogue to a caption / off-panel type. Rendering at the current camera will produce a panel where the reader can't tell who's talking."
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=1, n_speakers=1"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'wide-establish' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)"
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin =====
+{
+  "project_root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/ultra-gal-origin",
+  "next_panel": {
+    "panel_id": "p18-01",
+    "page_number": 18,
+    "camera": "ecu-region, over-shoulder",
+    "characters": [
+      "domina",
+      "ultra-gal"
+    ],
+    "location": "mundy-lab-b",
+    "action": "Ultra-Gal goes serious. Domina has a calculating glint.",
+    "muscle_size_tier": 4
+  },
+  "accepted_count": 65,
+  "remaining_count": 65,
+  "aspect": "1:1",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "note",
+      "from_panel": null,
+      "path": null,
+      "reason": "no view-compatible prior found for target view (ecu-region); fall back to canonical view-matched character ref + verbal state carry-forward"
+    },
+    {
+      "kind": "face_card",
+      "character": "domina",
+      "path": "references/characters/domina/face-card.png",
+      "reason": "canonical face anchor for domina"
+    },
+    {
+      "kind": "face_card",
+      "character": "ultra-gal",
+      "path": "references/characters/ultra-gal/face-card.png",
+      "reason": "canonical face anchor for ultra-gal"
+    },
+    {
+      "kind": "env_anchor",
+      "location": "mundy-lab-b",
+      "from_panel": "p09-03",
+      "path": "pages/panels/p09-03/v1_accepted.png",
+      "reason": "L10 env chaining \u2014 accepted establishing shot for `mundy-lab-b` from panel `p09-03`"
+    },
+    {
+      "kind": "WARNING_MODEL_MUSCULARITY_CEILING",
+      "model": "grok_image",
+      "tier": 4,
+      "ceiling": 3,
+      "reason": "Tier 4 exceeds the observed muscularity ceiling for model `grok_image` (\u2248 tier 3 on female anatomy). If using this model, expect the muscular build to regress toward fitness-model build regardless of prompt or lineup ref. Recommend routing to nano_banana_flash or nano_banana_2 for this panel. See chun-li-grok-validation/ for empirical evidence."
+    }
+  ],
+  "stage_change": false,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nExtreme close-up framed on the focal body region, macro 100mm lens equivalent, hyperdetailed texture, background completely defocused.\n\n[SUBJECTS]\nSubjects: domina, ultra-gal.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[FEMALE ANATOMY]\nFemale anatomy anchor: the body is unambiguously FEMALE despite the hyper-developed muscle. Feminine bone structure, visible breast contour where the chest is in or near frame, feminine waist taper above the hips, smaller hands and wrists than a male equivalent, soft feminine collarbone line. NOT a male body \u2014 no square male pectorals, no flat-plane male upper chest.\n\n[STYLE \u2014 L11 cartoony FMG anchor]\nStyle anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume AND tier-scaled breast proportions \u2014 NOT realistic fitness modelling, NOT a fitness-model build at wider scale, NOT a smaller-breasted body grafted onto bigger muscles, NOT a modest costume silhouette flattening the chest. The lineup attached is a 3D body chart that scales TWO attributes per tier: visible musculature AND breast size / fullness / forward projection. The storytelling elements are the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads) AND the breast SIZE, FULLNESS, and forward PROJECTION \u2014 not the outline width, not a default-conservative breast size, not a costume that flattens the breast contour. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume), not the other way around. Render thick, defined, comic-exaggerated muscle volume with proportionally matched breast scale.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Ultra-Gal goes serious. Domina has a calculating glint. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: day.\n\n[LINEUP PROPORTIONS \u2014 L11 surgical scope]\nSize tier: 4 (unchanged from prior panel). Carry forward the muscular build from the attached state anchor exactly. No growth in this panel. Preserve the same muscle mass and definition from the prior accepted panel.\n\n[ENVIRONMENT \u2014 ref anchor]\nLocation: mundy-lab-b. The attached environment reference IS this location \u2014 it's the accepted establishing shot from panel `p09-03`. Render the same architecture, the same wall layout, the same equipment placement, the same scale, the same depth. The delta describes ONLY what is happening in this panel; the location itself is fixed by this reference.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[LETTERING \u2014 L19 2D overlay]\nLETTERING \u2014 classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics. Everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. The bubbles are flat 2D vector graphics overlaid on the 3D scene; they do NOT turn the scene 2D. Bubble 1: classic comic-book speech balloon \u2014 clean white rounded oval shape with a bold 3-4 pixel solid black outline, positioned over `ultra-gal`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `ultra-gal`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"You're right. Ok, so we don't tell anyone about the meteorite or what's happened here today.\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. Bubble 2: classic comic-book speech balloon \u2014 clean white rounded oval shape with a bold 3-4 pixel solid black outline, positioned over `domina`'s side of the frame so the tail attribution is unambiguous; short triangular black-outlined tail pointing directly to `domina`'s mouth. bold black sans-serif comic display font ALL CAPS text inside (Bangers-style lettering, no shading, no extrusion) reads exactly: \"Yes, but there are other factors. For instance you said you found the meteorite... what if someone else, someone bad, finds another just like it?\". Flat 2D vector graphic \u2014 NO 3D shading, NO bevel/extrusion, NO translucency, NO chrome, NO drop shadow onto the scene. The lettering layer is composited ON TOP of the photoreal CGI render \u2014 like a comic letterer added bubbles and captions directly onto a photograph. The bodies and scene stay photoreal CGI; only the bubble / caption / SFX graphics are flat 2D overlay.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": null,
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": true,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Size tier: 4 (unchanged from prior panel). Carry forward the muscular build from the attached state anchor exactly. No growth in this panel. Preserve the same muscle mass and definition from the prior accepted panel.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "tier=4 unchanged carry-forward; style anchor already emitted at slot 5"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got None)"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=True, anchor=False, lineup=False)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": false,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 env ref attached (location='mundy-lab-b') \u2014 dense verbal anchor not needed"
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": true,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Female anatomy anchor: the body is unambiguously FEMALE despite the hyper-developed muscle. Feminine bone structure, visible breast contour where the chest is in or near frame, feminine waist taper above the hips, smaller hands and wrists than a male equivalent, soft feminine collarbone line. NOT a male body \u2014 no square male pectorals, no flat-plane male upper chest.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "camera=ecu-region tier>=2 female cast (tier=4)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L1.5": {
+      "applied": true,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "fail",
+        "reason": "no view-compatible prior in accepted_history for target view 'ecu-region' \u2014 falling back to canonical ref + verbal state carry-forward"
+      },
+      "post_render": {
+        "status": "blocked",
+        "reason": "pre_render failed"
+      }
+    },
+    "L12": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no dialogue/camera conflict \u2014 either no on-screen dialogue or camera is close enough"
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=2, n_speakers=2"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'ecu-region' within beat ceiling for beat=None"
+    },
+    "L28": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no lineup required for this panel (not stage-change AND not full-body camera AND no manifest miss observed)"
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+
+===== /Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001 =====
+{
+  "project_root": "/Users/mattmenashe/Documents/claude-comic-pipeline/projects/solo-fmg-001",
+  "next_panel": {
+    "panel_id": "p01-01",
+    "page_number": 1,
+    "camera": "wide-establish, eye-level",
+    "characters": [
+      "protagonist"
+    ],
+    "location": "default-location",
+    "action": "Wide establishing shot of the protagonist alone in a modern interior space, framed full-body at eye-level with environment showing scale. She stands or sits at baseline tier 2 (slim athletic build matching the character ref), wearing her baseline outfit per the ref. Soft natural daylight from large windows, photoreal CGI lighting. Hair in its canonical state from the ref. Expression neutral / observant \u2014 just going about her day. No tension, no transformation cues yet.",
+    "muscle_size_tier": 2
+  },
+  "accepted_count": 0,
+  "remaining_count": 40,
+  "aspect": "16:9",
+  "count": "x4",
+  "refs_to_attach_in_order": [
+    {
+      "kind": "lineup",
+      "tier": 2,
+      "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png",
+      "reason": "STAGE-CHANGE panel (tier=2) \u2014 lineup ref MUST be attached so the model has a 3D muscular-build target. Per L11 (cartoony FMG proportions need explicit anchoring)."
+    }
+  ],
+  "stage_change": true,
+  "composed_prompt": "[RENDER STYLE \u2014 Iray photoreal]\nDAZ Studio Iray render of a real 3D scene. Ray-traced subsurface scattering on skin, specular highlights catching warm rim light, physically-accurate fabric weave with visible thread detail, 8K texture detail, shallow depth of field with photographic bokeh.\n\n[CAMERA \u2014 base framing]\nWide establishing shot, subject is small in frame, environment fully visible, 24mm equivalent, deep focus.\n\n[SUBJECTS]\nSubjects: protagonist.\n\n[BEAUTY ANCHOR \u2014 L15]\nL15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.\n\n[STYLE \u2014 L11 cartoony FMG anchor]\nStyle anchor for the body: cartoony hyper-FMG comic-book proportions with HEAVY 3D muscle volume AND tier-scaled breast proportions \u2014 NOT realistic fitness modelling, NOT a fitness-model build at wider scale, NOT a smaller-breasted body grafted onto bigger muscles, NOT a modest costume silhouette flattening the chest. The lineup attached is a 3D body chart that scales TWO attributes per tier: visible musculature AND breast size / fullness / forward projection. The storytelling elements are the muscle MASS and DEFINITION (delts, biceps, chest, abs, quads) AND the breast SIZE, FULLNESS, and forward PROJECTION \u2014 not the outline width, not a default-conservative breast size, not a costume that flattens the breast contour. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume), not the other way around. Render thick, defined, comic-exaggerated muscle volume with proportionally matched breast scale.\n\n[ACTION DELTA]\nDELTA \u2014 action only: Wide establishing shot of the protagonist alone in a modern interior space, framed full-body at eye-level with environment showing scale. She stands or sits at baseline tier 2 (slim athletic build matching the character ref), wearing her baseline outfit per the ref. Soft natural daylight from large windows, photoreal CGI lighting. Hair in its canonical state from the ref. Expression neutral / observant \u2014 just going about her day. No tension, no transformation cues yet. (Any mention of clothing, architecture, or character features in the delta is contextual shorthand; the visual identity of those things comes from the attached references.)\n\n[LIGHTING STATE]\nMomentary lighting state: day.\n\n[LINEUP PROPORTIONS \u2014 L11 surgical scope]\nSize tier: 2. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 2 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 2: visibly developed \u2014 defined deltoid mass beginning to show, small bicep peak, tighter midsection with hint of abdominal definition. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 2, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 2 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 2 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 2 shows. At tier 2 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 2 shows so that after the model's downward bias the final rendered scale lands AT figure 2's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 2 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 2 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.\n\n[RENDER DIRECTIVE \u2014 L10]\nRENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.\n\n[REF SAFETY \u2014 L21 no-render-as-prop]\nDO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.\n\n[POSE & ANATOMY \u2014 L18]\nL18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.\n\n[MANDATORY ANCHORS]\nMandatory: muscles natural healthy skin tone (NOT red, NOT inflamed); skin has subtle healthy sheen, not oiled or wet; vivid expressive face (not neutral or blank); correct human anatomy with exactly two arms and exactly two legs; once a character has grown to a size they stay at that size or larger.\n\n[CLOSING ANCHOR \u2014 CGI scope]\nPhotographic CGI render on the bodies, costumes, skin, hair, environment, and lighting; NOT a 2D illustration on the bodies, NOT cartoon-shaded skin. Only the bubble / caption / SFX graphics are flat 2D comic-book overlay.",
+  "anchor_panel_id": null,
+  "transformation_type": "fmg",
+  "_trace": {
+    "L10": {
+      "applied": true,
+      "slot": "11_render_directive",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "RENDER DIRECTIVE: render the attached references exactly as shown. Do not reinterpret character appearance, costume design, or location architecture from the prompt text \u2014 those are FIXED by the references. The prompt's job is the opposite: it specifies what is new in this panel \u2014 camera, pose, gesture, facial expression, action, momentary lighting state, momentary costume state change. Refs carry identity and constants; prompt carries pose and deltas. References override prompt text on visual identity; prompt overrides references on pose and action.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "render directive always emitted (slot 11_render_directive)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L11": {
+      "applied": true,
+      "slot": [
+        "5_style_anchor",
+        "8_tier_build"
+      ],
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "Size tier: 2. The attached muscle-size lineup is a 3D BODY CHART with six figures showing TWO progressively-scaled attributes per tier: (1) muscle mass / definition (visible deltoids, biceps, chest, abdominal definition, quad mass, frame width) AND (2) breast scale (size, fullness, forward projection). Both attributes scale per tier \u2014 figure 6 has visibly larger and more forward-projected breasts than figure 1 IN ADDITION TO larger muscle mass. It is a PROPORTION reference ONLY (NOT an outline reference, NOT a face / hair / costume reference) \u2014 use figure 2 from the lineup to determine ONLY: (a) the size, mass, and definition of the muscle groups \u2014 shoulders, deltoids, biceps, triceps, chest, lats, abdominal definition, quadriceps, hamstrings, calves; (b) the SIZE, FULLNESS, and forward PROJECTION of the breasts; (c) the overall body mass and frame width. Target muscular build for tier 2: visibly developed \u2014 defined deltoid mass beginning to show, small bicep peak, tighter midsection with hint of abdominal definition. CRITICAL \u2014 MUSCLE: match the visible 3D MUSCLE VOLUME and DEFINITION of figure 2, not just the outline width \u2014 render the body with the same thick muscle mass, the same striation, the same chest depth, the same arm thickness that figure 2 shows. CRITICAL \u2014 BREASTS: match the BREAST SIZE, FULLNESS, and forward PROJECTION of figure 2 EXACTLY. The lineup scales breasts proportionally to muscle tier \u2014 render the breasts at the SAME visible volume, the SAME fullness, and the SAME forward projection that figure 2 shows. At tier 2 the breast scale should read as a DRAMATIC enhancement over figure 1's baseline; the lineup scales breast volume substantially across tiers and the rendered output must reflect that. OVER-SPEC COMPENSATION: nano_banana models normalize breast scale DOWN toward an average prior even when explicit anchoring is in the prompt \u2014 render the breasts SLIGHTLY LARGER than figure 2 shows so that after the model's downward bias the final rendered scale lands AT figure 2's level. The costume must ACCOMMODATE the breast scale (pushed forward, stretched, fitted around the volume) \u2014 NOT flatten or compress the breasts; NO modest profile, NO conservative coverage minimizing the breast contour, NO costume drape that hides the breast volume. Do NOT default to average / conservative breast size; do NOT regress to a smaller tier's breast proportions; do NOT render the body at tier 2 muscle mass with breasts shrunk to tier 2 or 3 size. Breast scale is a LOAD-BEARING attribute of the lineup, not an afterthought. Do NOT borrow from the lineup: face, hair, skin tone, clothing, costume, pose, facial expression, lighting, setting, background, or any visual element other than the muscle and breast proportions themselves. The character's identity, hair, face, costume, pose, and setting are specified in the prompt and the other attached reference images. Render the muscular build AND the breast proportions TO MATCH figure 2 in the lineup exactly \u2014 do not approximate either to smaller realistic-fitness proportions. NOT realistic fitness, NOT athletic, NOT a fitness model at wider scale, NOT bigger muscles with conservative breasts, NOT a modest costume silhouette flattening the chest \u2014 cartoony FMG, comic-book proportions with HEAVY 3D muscle mass AND lineup-matched (or slightly over-spec'd) breast scale that the costume accommodates.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "tier=2, lineup attached at generation \u2014 slot 8_tier_build (lineup-attached path)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L29": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 6 \u2014 L29 only applies at the peak-1-6 figure"
+    },
+    "L30": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 7 \u2014 L30 only applies at the beyond-peak figure"
+    },
+    "L31": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 8 \u2014 L31 only applies at the super-peak figure"
+    },
+    "L32": {
+      "applied": false,
+      "slot": "8b_tier_reinforcement",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 panel.muscle_size_tier != 9 \u2014 L32 only applies at the maximum figure"
+    },
+    "L15": {
+      "applied": true,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "compose_contribution": "L15 glamour anchor: render any female character in this panel with vogue-cover face quality \u2014 sculpted cheekbones, refined jawline, expressive eyes with long natural lashes and depth in the gaze, magazine-cover finish. Strikingly beautiful \u2014 the kind of face that commands attention. NOT plain, NOT generic-AI-face.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "female cast member detected, glamour anchor injected"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L17": {
+      "applied": false,
+      "slot": "3_subject_identity",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no character with cast[].canonical=true in panel"
+    },
+    "L18": {
+      "applied": true,
+      "slot": "13_anatomy_guardrail",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "L18 anatomy coherence: torso, hips, abdomen, and feet all face the same direction. No impossible twists between hips and torso. All limbs attach naturally to the body. Both shoulders visible if the chest is visible; both hips visible if the legs are visible.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "universal soft guardrail \u2014 always emitted"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L20": {
+      "applied": false,
+      "slot": "2_camera_strengthening",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no body-region transformation_beat (got 'establishing')"
+    },
+    "L21": {
+      "applied": true,
+      "slot": "12_ref_safety",
+      "applicable_transformations": [
+        "*"
+      ],
+      "compose_contribution": "DO NOT render any reference image as a physical scene object \u2014 no inset photos, no watermarks, no figure numbers, no badges. References are for identity, proportion, location, and state guidance only and must NOT appear inside the rendered scene.",
+      "pre_render": {
+        "status": "pass",
+        "reason": "at least one ref attached (env=False, anchor=False, lineup=True)"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L22": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 panel.hair_state not set (shotlist author owns this field)"
+    },
+    "L23": {
+      "applied": false,
+      "slot": "9_environment",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no env_ref to drop (location='default-location', env_dropped=False)"
+    },
+    "L24": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no cast[].accessories block, or camera does not include wrists/neck/etc in frame"
+    },
+    "female_anatomy": {
+      "applied": false,
+      "slot": "4_subject_state",
+      "applicable_transformations": [
+        "fmg"
+      ],
+      "reason": "skipped \u2014 not a body-region ECU tier>=2 with female cast (camera='wide-establish', tier=2)"
+    },
+    "L1.5": {
+      "applied": false,
+      "slot": "10_state_anchor",
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 first panel in chain \u2014 no prior accepted panel exists yet"
+    },
+    "L12": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 no dialogue/camera conflict \u2014 either no on-screen dialogue or camera is close enough"
+    },
+    "L13": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 single-speaker (or zero-speaker) panel \u2014 n_lines=0, n_speakers=0"
+    },
+    "L20_chapter": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "skipped \u2014 camera 'wide-establish' within beat ceiling for beat='establishing'"
+    },
+    "L28": {
+      "applied": true,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "pre_render": {
+        "status": "pass",
+        "reason": "required lineup ref present on disk: /Users/mattmenashe/Documents/claude-comic-pipeline/skills/comic-production/assets/muscle-size-lineup.png"
+      },
+      "post_render": {
+        "status": "pending",
+        "reason": null
+      }
+    },
+    "L1": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L9": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "runner concern (post-render deterministic) \u2014 phase 4+"
+    },
+    "L14": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L16": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "gated upstream in reference-gathering"
+    },
+    "L19": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "auto-injected by compose_prompt when panel has dialogue/captions/sfx \u2014 emission verified, no separate trace slot"
+    },
+    "L25": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L26": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L27": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "authoring-guidance only \u2014 not auto-injected \u2014 phase 3"
+    },
+    "L2": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "platform-runtime \u2014 will track as 'refused' status in phase 4"
+    },
+    "L3": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L4": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "applied inside L19 lettering block (bubble shape per dialogue type, tail attribution per speaker)"
+    },
+    "L5": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L11"
+    },
+    "L6": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "infrastructure exemption"
+    },
+    "L7": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "superseded by L19"
+    },
+    "L8": {
+      "applied": false,
+      "slot": null,
+      "applicable_transformations": [
+        "*"
+      ],
+      "reason": "covered by L1 + L25 + L26 + L27"
+    }
+  }
+}
+exit code: 0
+

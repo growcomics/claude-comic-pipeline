@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/growcomics/claude-comic-pipeline/schemas/references_required.schema.json",
+  "title": "references_required.json",
+  "description": "Contract emitted by script-breakdown (when transformation_metadata is present) and consumed by reference-gathering. The version field carries two dialects in the wild (`version` vs `schema_version`); the schema accepts either but the audit report flags the dialect choice.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["characters"],
+  "properties": {
+    "version": {"type": "integer", "minimum": 1},
+    "schema_version": {"type": "integer", "minimum": 1},
+    "generated_from_shotlist": {"type": "boolean"},
+    "characters": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/character_refs"}
+    },
+    "locations": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/location_refs"}
+    },
+    "props": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/prop_refs"}
+    }
+  },
+  "definitions": {
+    "character_refs": {
+      "type": "object",
+      "required": ["face_card"],
+      "additionalProperties": true,
+      "properties": {
+        "face_card": {"type": "string", "minLength": 1},
+        "body_tiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["tier", "path"],
+            "additionalProperties": true,
+            "properties": {
+              "tier": {"type": "integer"},
+              "path": {"type": "string", "minLength": 1},
+              "lineup_required": {"type": "boolean"},
+              "tier6_reinforcement_required": {"type": "boolean"}
+            }
+          }
+        },
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "path"],
+            "additionalProperties": true,
+            "properties": {
+              "name": {"type": "string"},
+              "tier": {"type": "integer"},
+              "path": {"type": "string"},
+              "lineup_required": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "location_refs": {
+      "type": "object",
+      "required": ["establishing"],
+      "additionalProperties": true,
+      "properties": {
+        "establishing": {"type": "string", "minLength": 1},
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "name": {"type": "string"},
+              "path": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "prop_refs": {
+      "type": "object",
+      "required": ["establishing"],
+      "additionalProperties": true,
+      "properties": {
+        "establishing": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}
