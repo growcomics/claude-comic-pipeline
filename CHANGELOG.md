@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (reference-gathering manifest mode: base ref becomes the identity anchor)
+
+**Changed**
+- `skills/reference-gathering/SKILL.md` — the manifest-mode walker no longer builds character identity from prose when a base ref exists. The `face_card` step ("prompt is the character's canonical face description from `cast[].wardrobe`") and the body-tier prompt recipe (Subject/Costume bullets, plus the L11 scoping quote's "identity comes from the character's wardrobe description + the face card") predated L10 refs-are-truth and the just-ported `reference-acquisition` skill (`54eea05`), whose output `references/characters/<slug>/internet-3d-base.png` is the identity anchor. Now: an **identity-ref check** heads the walker — when `internet-3d-base.png` exists, face-card and body-tier generation ATTACH it as the identity reference (at tier ≥ 2 alongside the muscle-size lineup: base ref = identity, lineup = proportions, never trading roles) and the prompt carries only framing/expression/tier deltas; the prose path survives only as the fallback for characters with no base ref. Cross-links to `skills/reference-acquisition/SKILL.md` added, plus a manifest-mode hard rule ("never rebuild identity from prose when a base ref exists") and a `_provenance.md` field (identity base ref attached y/n).
+
 ## 2026-08-10 (reference-acquisition ported off the parked refactor branch)
 
 **Added**
