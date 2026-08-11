@@ -1,111 +1,90 @@
-# HANDOFF — margo-full, Mac mini continuation (2026-08-11 ~08:30 PDT)
+# HANDOFF → mac mini: finish the margo-full comic
 
-> Owner closed the laptop mid-run. `HANDOFF-MACMINI.md` (sibling session) covers
-> **not-so-supra-man** and mentions margo-full ZERO times — this file is the
-> margo-full half. Read both.
+**Written 2026-08-12 by the laptop session. For the Claude Code session on the mac mini (or the night-shift worker).**
+Owner is away. Standing mandate: keep working, don't publish anything outward, surface finals on the board.
 
-## Where it stands
+## What this is
 
-| | |
-|---|---|
-| Board | https://3dmusclecomics.com/studio/review.php?p=margo-full |
-| Pages accepted + annotated on the board | **42 of 86** |
-| Beats with variants but no winner | 12 (see corrective queue) |
-| Beats never generated | 32 |
-| Model | `nano_banana_2_lite`, aspect `3:4`, 8 variants/beat (2 rolls of count=4) |
-| Credits | ~5350 at last check; whole remaining run is ~50-70 credits |
+An 86-beat muscle-growth comic (Margo / Kress / investors serum arc) being produced through the
+bakeoff lane: **anchor → over-generate → judge → select**. Roughly two-thirds generated, half judged.
+Your job is to finish it without re-doing what's done.
 
-**The 42 accepted pages are already on the remote board, so they are safe and
-machine-independent.** Nothing on the laptop is needed to preserve them.
+- **Script (source of truth):** `runners/bakeoff/margo-full-beats.json` (86 beats, per-beat `chars`,
+  dialogue lines ≤8 words, wardrobe/stage states) + readable `projects/margo-full/SCRIPT.md`
+- **Run dir:** `runners/bakeoff/runs/margo-full-20260811/`
+  (`state.json`, `sheets/*.jpg` contact sheets, `variants/<beat>/*.png`, `drive.py`)
+- **Board (winners land here):** https://3dmusclecomics.com/studio/review.php?p=margo-full
+- **Status at handoff:** 54 beats sheeted · 411 variants on disk · **42 winners picked**
 
-## STRUCTURE — settled, do not re-litigate
-Owner confirmed: **each panel IS its own standalone page/image.** 86 beats = 86
-pages. There is NO page-composition / multi-panel-grid step, and the Gribble
-4-panel-grid figure in `research/gribble-corpus/FORMULA.md` does NOT apply to this
-run. An earlier session (mine) wrongly flagged this as a structural mismatch.
+## Do this, in order
 
-## Recovering the images on the mini
+1. `git pull` first. Run `python3 drive.py status` in the run dir to see exactly which beats have
+   jobs/files/winners — trust that over this file, it may be stale by the time you read it.
+2. **Judge every sheeted beat that has no winner yet**, then ingest. Do not regenerate a beat that
+   already has variants on disk.
+3. **Generate the remaining beats** (roughly b59–b86) at 8 variants each, sheet them, judge, ingest.
+4. Checkpoint `git commit` + push every ~20 beats with a dated CHANGELOG entry.
+5. When b86 is in: story-order contact strip, run stats, final commit, and a What's New entry
+   (`admin/data/updates.json`, read-modify-write via the cPanel token — never print the token).
 
-`variants/**/*.png` are gitignored and live only on the laptop. **`state.json` is
-now tracked (force-added in this commit) and holds every job id** — that is the
-recovery key. For any beat you need pixels for:
+## Method (owner-set, do not "improve" it)
 
-1. Collect its job ids from `state.json` (`beats.<id>.jobs`).
-2. `show_generation_by_ids` (≤60 per call) → each completed item has `results.rawUrl`.
-3. `python3 drive.py fetch <beat> <job_id> <rawUrl>`
+- **Model `nano_banana_2_lite` for everything**, 3:4, `count=4` per call (1 credit per call).
+  Lite volume is effectively free — that's the owner's explicit policy.
+- **8 variants per beat, SINGLE round.** No refinement rounds, no size ladders, no winner-anchors
+  this pass (stage continuity rides on the stage-aware BODY block in the style string).
+- Only exception: a beat with **zero** clean variants gets ONE corrective re-roll of 8
+  (modest reframing if the cause was NSFW blocks).
+- If a winner under-shoots on body scale, **take it and note the shortfall** — don't stall the run.
 
-Job results persist server-side on CloudFront. You do NOT need to re-generate
-anything already generated. Note many older jobs are `failed`/`nsfw` — of one
-40-job sample, 20 failed, 7 nsfw, 8 completed; that is normal, not data loss.
+## Image-reading economy (hard rule — the run is ~900 images)
 
-## Fixes already landed (do not redo)
-- `54a511f` — **wardrobe now injected into all 86 prompts.** It was missing from
-  0/86, so the only clothing signal was the `margo` ref image (in a lab coat), and
-  the coat kept reappearing after b17 destroys it. Also fixed `drive.py winner`
-  silently banking un-accepted panels, and added `flock` on `state.json`.
-- `ab811ff` — re-roll queue; renumbered colliding variant files.
-- `76391b3` — flat-face findings + face kill rule.
+- **Never read images in your own context.** Two tiers only:
+  - **Haiku** grades a whole contact sheet in one call: gross defects + keep/cull per tile.
+  - **Sonnet** ranks only the 2–4 survivors per beat (paired composite), picks the winner + one-line reason.
+- **Sanity-check the Haiku output.** One triage agent returned "all 36 tiles clean" from a single
+  call; that was not a credible read and was discarded. If a triage comes back with zero culls and
+  no per-tile detail, re-run it or escalate that beat to Sonnet.
 
-Proof the wardrobe fix works: b40 and b43 were 0/4 and 0/7 before, **6/6 clean** after.
+## Judge contract (what kills a panel)
 
-## DO THESE TWO INPUT FIXES FIRST
-Re-rolling before these will reproduce the same defects.
+Insta-kill: skin rendered as torn fabric · **WARD-07 skin↔fabric gradient blend on a sleeved limb**
+(legal: sleeve tears with frayed edges / rolled with a crisp edge / garment off — never a blend) ·
+coverage violation (always_clothed: garments strain and tear, but breasts/groin stay covered) ·
+headcount ≠ the beat's `chars` list · glitch/incoherent props · garbled OR blank speech bubbles
+(dialogue is **baked in** per L19 — a specified line must render cleanly).
+Then rank survivors on the vitality axes: **body scale vs the owner's standard** (his ⭐ Flow
+favorites, not "realistic"), lighting drama, expression intensity, pose energy, frame-fill.
+Rubrics by path, verbatim, never paraphrased:
+`skills/continuity-check/qa-checklist.md`, `.../cinematic-framing.md`,
+`research/owner-defect-feedback-2026-08-10.md` (+ its 2026-08-11 addendum),
+`research/vitality-gap-2026-08-11.md` (style v2→v5 + the vitality gate).
 
-1. **Scope the SLEEVES clause to Margo.** Every prompt carries a global "when a
-   muscle flexes inside a sleeved garment the sleeve seam splits open" line. It is
-   not character-scoped or stage-scoped, so KRESS's tracksuit shreds. Cost 6/8
-   tiles in b49-kress-protest, 3/8 in b06, and killed b04 v02/v03. One-line change
-   in the beat builder; protects all 32 ungenerated beats.
-2. **b45-tape identity bleed.** The amulet + grey tank bound to INGRID instead of
-   Margo in 3 of 4 tiles, and the coat appeared on Ingrid in 2 of 4. Ref/staging
-   attachment problem — fix the inputs, don't re-roll blind.
+## Camera doctrine (the owner's own words)
 
-## Corrective queue — 12 beats
-Full detail in `runners/bakeoff/runs/margo-full-20260811/REROLL-QUEUE.md`.
+Import his prompt vocabulary **verbatim** from
+`studio/extension/flow-studio-tools/content.js` (`pbFramingText`, `pbLightingText`, the
+director/staging/detail block builders, the 19 lighting schemes). Vary angle per beat — never rut.
+Payoff/flex beats favour the **elevated-intimate vantage**: camera ~1 ft above head height,
+2–3 ft from the subject, looking down. Dialogue beats are torso-up two-shots with tilted eye-lines.
+Groups use the anti-flat staging pyramid — never a same-height lineup.
+Payoff beats also need wardrobe that **shows** the body: a baggy coat structurally caps how
+colossal the silhouette can read (that lesson cost a whole 24-variant round).
 
-**Lab coat, zero clean variants (7):** b18-doorframe, b19-crate, b22-tomorrow,
-b26-margo-watches, b48-terms, b52-amulet-blaze, b53-quads
-**Wrong action (1):** b18b-calipers — wardrobe fine, but no tile shows calipers on the bicep
-**Flat face (4, banked but should be replaced):** b02-vial, b07-stay-out,
-b13-sleeve-tight, b50-clipboard-back
+## Known hazards in this run
 
-Corrective clauses that worked:
-```
-CRITICAL FIX: the previous roll dressed MARGO in a white lab coat. There is NO lab
-coat, jacket, cardigan or any white over-garment in this scene — that coat was
-destroyed earlier in the story. She wears the grey tank top ONLY.
+- **`state.json` read-modify-write race.** Concurrent drivers silently drop each other's records.
+  Verify job counts after every `record` call and re-issue if they don't match. Build contact
+  sheets **from disk**, not from state, so bookkeeping races can't corrupt deliverables.
+- **Rate limit:** roughly one group of 4 in flight. Cadence is submit-4 → poll to terminal →
+  submit-4. Expect 429s; back off 30–45s. Keep concurrent drivers ≤3.
+- `count=4` sometimes returns 3 images; isolated per-image failures are normal. Don't chase them
+  unless a beat drops below ~6 variants.
+- **b40-chalk**'s pool grew after a winner was already picked — re-judge that beat against the
+  full 10-variant sheet.
 
-CRITICAL FIX: the face was wooden last roll. The named emotion must visibly
-transform the WHOLE face — brows driven, eyes wide or narrowed, mouth open or set.
-Theatrical intensity, not a neutral expression.
-```
+## Rails
 
-## Judging — kill rules
-The 8 standard rules PLUS the one that was missing:
-```
-9. Flat face — blank, neutral, waxy, doll-like, or a mild expression on a beat that
-   calls for something strong. A calm face on a dramatic beat is a KILL.
-```
-Face quality was in every prompt but was never a kill rule, so 4 flat faces got
-banked. Text is NOT a problem: all 42 banked pages audited, **0 text defects**.
-
-## Gotchas that cost this session real time
-- **`registry.RETRY_INJECTION["WARD-01"]` is backwards for this run.** It says
-  "match the attached reference images EXACTLY" — but the reference IS the source
-  of the lab-coat defect. Use the custom clause above instead.
-- **`drive.py fetch` numbers files `vNN` from a non-collision-safe count.** If files
-  arrive out of band you get two `v07`s. `winner` globs `<variant>-*.png` and takes
-  the FIRST match — so banking by prefix can silently ingest a KILLED tile. Already
-  bit b45 (caught) and b42. Check `ls variants/<beat>/ | sed 's/-.*//' | sort | uniq -d`
-  before banking.
-- **`count:4` sometimes returns only 3 jobs.** Always record what you actually got.
-- **429 rate_limit_reached** if two drivers submit concurrently. Pause ~75s and retry.
-- **Never run `integrity.py --rebless`** — owner-only.
-- One junk board tile exists: `09db3a5283.png`, a debug probe ingested with prompt
-  `test-probe`. Already marked rated=bad / tagged `probe-artifact`. Safe to delete.
-
-## Suggested order on the mini
-1. Two input fixes above.
-2. Generate the 32 missing beats (~64 credits), judge with rules 1-9, bank winners.
-3. Run the 12 corrective re-rolls.
-4. Final pass: story-order strip + stats + CHANGELOG entry.
+Bridge key `~/Documents/_imptest/bridgekey.txt`, deploy token `~/Documents/.3dmc-deploy-token` —
+load into variables, **never print or commit them**. Never delete board images or projects.
+Nothing publishes outward — Studio boards and drafts only.
