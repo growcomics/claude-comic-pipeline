@@ -12,7 +12,7 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-11 22:0X (margo-full: lettering doctrine restored + 86-beat full-comic expansion)
+## 2026-08-11 00:55 (margo-full: lettering doctrine restored + 86-beat full-comic expansion)
 
 **Added**
 - **`runners/bakeoff/margo-full-beats.json` + `projects/margo-full/{build_beats.py,SCRIPT.md}`** — owner directive 2026-08-12: expand the 11-beat autopilot-ab chapter into a full comic. 86 beats/pages in story order (Acts: Back Room → First Change s1→s2 → The Pitch → Second Surge s2→s3 → Feats → Third Surge s3→s4 → Finale s4→s5), 8 payoff beats (12 variants + refinement) / 78 connective (8 variants single round) = 720 round-1 lite gens. Growth-content ≈ 66% of pages (mandate ≥60%); four 6+-panel growth sequences with reaction intercuts, escalation devices per script-breakdown §4.6 (multi-panel-progressive, clothing-destruction-at-seams, size-comparison ladders: doorframe → tape → whiteboard → rack, zoom-escalation); story spine per §4.7 documented in the builder docstring. Board: `margo-full` (created via `ingest_init`, 5 refs copied from autopilot-ab).
