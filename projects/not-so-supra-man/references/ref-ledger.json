@@ -101,6 +101,25 @@
           "flow_id": "2f4e1204-8e67-43fa-a49e-7167d435de64",
           "disk": "references/characters/dee-dee/body-tier8.png"
         }
+      },
+      "turnaround_t8": {
+        "flow_id": "38c4881e-aa56-4946-baad-aa7d84324324",
+        "disk": "references/characters/dee-dee/turnaround-t8.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_deedee-t8-destroya.receipt.json",
+          "audit": "qa/receipts/sheet_deedee-t8-destroya.audit-pass",
+          "verdict": "qa/receipts/sheet_deedee-t8-destroya.verdict.json",
+          "verdict_tags": [
+            "ward-06-coverage-matches-owner-canon-high-cut",
+            "body-07-scale-VERIFIED-by-measurement",
+            "bust-over-spec-landed",
+            "cross-view-bust-consistency-ok",
+            "views-4-complete",
+            "no-text-contamination",
+            "owner-phrasing-adopted"
+          ],
+          "prompt_sha": "4e85a1306507810304615084e614f405e0724ea3b4ef3f50e7e90d953818b87e"
+        }
       }
     },
     "dex-doomer": {

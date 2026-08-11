@@ -1,3 +1,15 @@
+## ▶▶ 2026-08-11 07:30 PDT — LAPTOP RUN · Dee-Dee T8 BANKED (full chain)
+**Flow project (laptop, marrtrobinson2312, ULTRA → 0 credits): `014292cc-8d7a-493d-9767-b1f9548cb3e9`**
+https://labs.google/fx/tools/flow/project/014292cc-8d7a-493d-9767-b1f9548cb3e9
+⚠️ The previous project `04dd40e0…` now CRASHES the Flow client on load (its 4 failed-policy nodes and/or an edit node appear to poison client state; the app root loads fine). Work moved to the new project. Refs are re-injected per project via the loopback method — they are NOT visible cross-project in the picker.
+
+- **dee-dee.turnaround_t8 = `38c4881e-aa56-4946-baad-aa7d84324324`** — first full-chain-verified bank.
+- Took 5 rounds. What finally worked: the OWNER'S phrasing (plain stacked 'very, very, very, very big' intensifiers + their cross-view clause 'the breasts are the same large equal size'), plus a hard height clamp.
+- Height verified by measurement, not by eye: her 710px vs mannequin 724px = ratio 0.981 (shorter, as spec'd), vs ~1.12-1.20 in the giantess round that got un-banked.
+- Rejected w3-6ae68e13 for rendering a literal "6'2\" (188cm)" text label (LET-02).
+
+---
+
 ## ▶▶ 2026-08-10 22:54 PDT — GATES UNLOCKED · RESUME THE 46-PAGE RUN NOW
 Owner re-blessed the qa gates in-session (manifest `49197e3f…`). **Model this run: Nano Banana 2 Lite.**
 Full runbook: **`RUN-NOW.md`** (this folder). ⚠️ Post the Flow project URL here the instant the run
