@@ -940,6 +940,201 @@ def check_reference_completeness(project: Path, shotlist: dict) -> list[Finding]
     return out
 
 
+def _is_placeholder(text: str, min_len: int = 15) -> bool:
+    """True when a spine field is empty, stub text, or too thin to be a real answer.
+
+    The corpus failure isn't "no story field" — it's a story field nobody made
+    load-bearing. A one-word `want` passes a presence check and fails the reader,
+    so the gate rejects stubs as well as absences.
+    """
+    if not isinstance(text, str):
+        return True
+    stripped = text.strip()
+    if len(stripped) < min_len:
+        return True
+    lowered = stripped.lower().rstrip(".!?")
+    return lowered in _PLACEHOLDER_TOKENS or lowered.startswith(("todo", "tbd", "fixme", "lorem ipsum"))
+
+
+_PLACEHOLDER_TOKENS = {
+    "todo", "tbd", "tba", "fixme", "n/a", "na", "none", "unknown",
+    "placeholder", "xxx", "...", "???",
+}
+
+# Panels that function as a capstone — the corpus's repetition trap lives here.
+# Ass Effect closes on three near-identical cosmic splashes; TMB-3 on
+# interchangeable space splashes. Both read as padding, not escalation.
+_CAPSTONE_BEATS = {"whole_body", "reveal"}
+
+# Beats that let a final page LAND rather than just stop (Breaker ends mid-swing).
+_RESOLUTION_BEATS = {"reveal", "aftermath"}
+
+
+def check_story_spine(shotlist: dict) -> list[Finding]:
+    """L38 — Story spine, setup/payoff, climax distinctness, ending, identity.
+
+    Corpus-derived (research/comic-corpus synthesis v2, Finding 5): no book in
+    the 9-comic corpus scores above 3 on story and the median is 2, which makes
+    story the one axis where competent craft isn't already table stakes. The
+    four recurring failures are mechanically checkable, and this gate checks
+    them at shotlist time — before a single panel is paid for:
+
+      F5a  thin/absent plot spine (The Curse is a potion tit-for-tat that just
+           stops) -> require want / obstacle / cost, reject stubs.
+      F5b  escalation-by-repetition padding the climax (Ass Effect's three
+           near-identical cosmic splashes) -> capstone panels must vary.
+      F5c  abrupt momentum-only ending (Breaker stops mid-swing) -> the last
+           page must land a resolution beat or declare a real cliffhanger.
+      F5d  identity confusion (both The Curse leads end in matching armor) ->
+           characters sharing the climax need distinct, named marks.
+
+    Chapter-scoped, so it lives here with the other build_plan-level checks
+    (L20_chapter, L28) rather than in the panel-prompt rule registry — L38
+    shapes the script, not any single panel's prompt.
+    """
+    out: list[Finding] = []
+    spine = shotlist.get("story_spine")
+    pages = shotlist.get("pages") or []
+    page_numbers = [p.get("page_number") for p in pages if isinstance(p.get("page_number"), int)]
+    max_page = max(page_numbers) if page_numbers else 0
+
+    # --- F5a: the spine itself -------------------------------------------
+    if not isinstance(spine, dict) or not spine:
+        out.append(Finding(
+            None, None, "story_spine", SEVERITY_HARD,
+            "shotlist.json missing top-level `story_spine` — story is the corpus's universal weak axis (median 2/5) and the pipeline's stated differentiation target, so every chapter must state its spine before panels are generated",
+            "Add a `story_spine` object with `want`, `obstacle`, `cost`, `promise_page`, `payoff_page`, `ending`. See script-breakdown SKILL.md § 4.7.",
+        ))
+        return out
+
+    for field, prompt in (
+        ("want", "what the protagonist is actively trying to get"),
+        ("obstacle", "what stands in the way (a force with its own agenda, not just difficulty)"),
+        ("cost", "what it costs them to win — the price the ending charges"),
+    ):
+        if _is_placeholder(spine.get(field, "")):
+            out.append(Finding(
+                None, None, "story_spine", SEVERITY_HARD,
+                f"`story_spine.{field}` is missing or a stub — state {prompt}",
+                "A spine that can't be stated in a sentence produces the corpus's most common failure: a chapter that escalates and then simply stops.",
+            ))
+
+    # --- F5c(a): setup/payoff pairing -------------------------------------
+    promise = spine.get("promise_page")
+    payoff = spine.get("payoff_page")
+    if not isinstance(promise, int) or not isinstance(payoff, int):
+        out.append(Finding(
+            None, None, "story_spine", SEVERITY_HARD,
+            "`story_spine.promise_page` / `payoff_page` must both be page numbers — they pin the page-1 promise to the page that pays it off",
+            "Set promise_page to the page that plants the question, payoff_page to the page that answers it.",
+        ))
+    else:
+        if max_page and not (1 <= promise <= max_page and 1 <= payoff <= max_page):
+            out.append(Finding(
+                None, None, "story_spine", SEVERITY_HARD,
+                f"`story_spine` promise_page={promise} / payoff_page={payoff} fall outside the chapter's page range (1–{max_page})",
+                "Point both at real pages in this shotlist.",
+            ))
+        elif payoff <= promise:
+            out.append(Finding(
+                None, None, "story_spine", SEVERITY_HARD,
+                f"`story_spine.payoff_page` ({payoff}) must come after `promise_page` ({promise}) — a promise paid off before it's made isn't a spine",
+                "Re-order the beats, or correct the page numbers.",
+            ))
+
+    # --- F5c(b): the ending actually ends ---------------------------------
+    ending = (spine.get("ending") or "").strip().lower()
+    if ending not in {"landed", "cliffhanger"}:
+        out.append(Finding(
+            None, None, "story_spine", SEVERITY_HARD,
+            f"`story_spine.ending` must be 'landed' or 'cliffhanger' (got {spine.get('ending')!r}) — the corpus's third failure is chapters that end on momentum alone",
+            "'landed' = this chapter resolves its own promise. 'cliffhanger' = it deliberately pulls forward, and then `hook` is required.",
+        ))
+    elif ending == "cliffhanger" and _is_placeholder(spine.get("hook", "")):
+        out.append(Finding(
+            None, None, "story_spine", SEVERITY_HARD,
+            "`story_spine.ending` is 'cliffhanger' but `hook` is missing or a stub — an unresolved chapter has to name what pulls the reader forward",
+            "State the specific unanswered question the last page plants. 'To be continued' is not a hook.",
+        ))
+
+    if max_page:
+        last_page = next((p for p in pages if p.get("page_number") == max_page), None)
+        panels = (last_page or {}).get("panels") or []
+        has_resolution = any((p.get("transformation_beat") in _RESOLUTION_BEATS) for p in panels)
+        has_words = any((p.get("dialogue") or p.get("captions")) for p in panels)
+        if panels and not has_resolution and not has_words and ending != "cliffhanger":
+            out.append(Finding(
+                max_page, None, "story_spine", SEVERITY_HARD,
+                f"final page {max_page} carries no resolution beat (`reveal`/`aftermath`) and no dialogue or caption — this is the corpus's 'stops mid-swing' ending",
+                "Land the page with a reveal/aftermath beat or a closing line, or set `story_spine.ending: 'cliffhanger'` with a hook if the stop is deliberate.",
+            ))
+
+    # --- F5b: climax repetition -------------------------------------------
+    capstones: list[tuple[int, str, tuple]] = []
+    for page in pages:
+        n = page.get("page_number")
+        for panel in page.get("panels") or []:
+            beat = panel.get("transformation_beat")
+            size = panel.get("size")
+            if size == "splash" or beat in _CAPSTONE_BEATS:
+                distance, _ = parse_camera(panel.get("camera") or "")
+                capstones.append((n, panel.get("panel_id"), (size, distance, beat, panel.get("location"))))
+
+    run_start = 0
+    for i in range(1, len(capstones) + 1):
+        same = i < len(capstones) and capstones[i][2] == capstones[run_start][2]
+        if same:
+            continue
+        run = capstones[run_start:i]
+        if len(run) >= 2:
+            ids = ", ".join(str(p[1]) for p in run)
+            size, distance, beat, location = run[0][2]
+            sev = SEVERITY_HARD if len(run) >= 3 else SEVERITY_SOFT
+            out.append(Finding(
+                run[0][0], run[0][1], "story_spine", sev,
+                f"{len(run)} consecutive capstone panels ({ids}) are interchangeable — same size={size!r}, distance={distance!r}, beat={beat!r}, location={location!r}. The corpus pads climaxes this way (three near-identical cosmic splashes) and it reads as repetition, not escalation",
+                "Vary each capstone on at least one axis: re-peg the scale against a NEW fixed gauge (person -> car -> building -> skyline), change camera distance or location, or make each beat do different story work.",
+            ))
+        run_start = i
+
+    # --- F5d: identity distinctness at the climax --------------------------
+    cast = shotlist.get("cast") or []
+    if len(cast) >= 2:
+        climax_chars: set[str] = set()
+        for page in pages:
+            for panel in page.get("panels") or []:
+                if panel.get("transformation_beat") in _CAPSTONE_BEATS or panel.get("size") == "splash":
+                    climax_chars.update(panel.get("characters") or [])
+        if len(climax_chars) >= 2:
+            by_id = {c.get("id"): c for c in cast if isinstance(c, dict)}
+            marks: dict[str, str] = {}
+            for cid in sorted(climax_chars):
+                member = by_id.get(cid)
+                if member is None:
+                    continue
+                mark = member.get("distinguishing_marks")
+                if _is_placeholder(mark or ""):
+                    out.append(Finding(
+                        None, None, "story_spine", SEVERITY_HARD,
+                        f"cast member `{cid}` shares the climax with {len(climax_chars) - 1} other character(s) but has no `distinguishing_marks` — the corpus ends two leads in matching armor and the reader loses track of who is who",
+                        "Give each climax character a named, non-wardrobe mark that survives transformation: scar, hair, heritage, tattoo, eye colour, asymmetry. See feedback_character_locks_must_be_vivid.",
+                    ))
+                else:
+                    marks[cid] = " ".join(mark.lower().split())
+            seen: dict[str, str] = {}
+            for cid, mark in marks.items():
+                if mark in seen:
+                    out.append(Finding(
+                        None, None, "story_spine", SEVERITY_HARD,
+                        f"cast members `{seen[mark]}` and `{cid}` declare identical `distinguishing_marks` — they will read as the same person at the climax",
+                        "Differentiate the marks. Identical descriptions are the same failure as no description.",
+                    ))
+                else:
+                    seen[mark] = cid
+
+    return out
+
+
 def check_required_metadata(project: Path, shotlist: dict) -> list[Finding]:
     out: list[Finding] = []
 
@@ -1169,6 +1364,7 @@ def main():
         + check_camera_distance_bias(shotlist, pages_filter)
         + check_transformation_beats(shotlist, pages_filter)
         + check_subject_staging(shotlist, pages_filter)
+        + check_story_spine(shotlist)
     )
 
     if args.json:

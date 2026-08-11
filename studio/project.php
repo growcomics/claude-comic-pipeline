@@ -40,7 +40,9 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark"><meta name="robots" content="noindex,nofollow">
-<title><?= h($proj['name']) ?> · Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"></head><body>
+<title><?= h($proj['name']) ?> · Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>

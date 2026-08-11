@@ -38,13 +38,22 @@ Write both:
     "start_tier": 3,
     "end_tier": 5
   },
+  "story_spine": {
+    "want": "Lara wants to lift the family curse before her sister comes of age.",
+    "obstacle": "The altar only answers someone who surrenders their own name.",
+    "cost": "She wins her sister's future and loses the person her sister remembers.",
+    "promise_page": 1,
+    "payoff_page": 12,
+    "ending": "landed"
+  },
   "cast": [
     {
       "id": "lara",
       "name": "Lara",
       "ref_folder": "references/characters/lara/",
       "soul_id": null,
-      "wardrobe": "leather adventurer's jacket, brown trousers, sword belt"
+      "wardrobe": "leather adventurer's jacket, brown trousers, sword belt",
+      "distinguishing_marks": "copper braid over the right shoulder, three-line scar along the jaw"
     }
   ],
   "props": [
@@ -109,6 +118,8 @@ Field rules:
 - `transformation_scenes` (top-level, optional): array of scene declarations. Each entry: `{name, pages: [start, end], required_body_regions?: [...], requirements?: {min_setup_beats, min_body_region_beats, min_reveal_beats}}`. Triggers the transformation-beats check at validation time. Use this whenever the script contains a multi-page transformation (FMG, growth arc, mutation, dress-up sequence, charge-up). See "Transformation decomposition" below.
 - `style` (top-level, **required**): slug of the visual style preset to lock for the project. Must match a folder name under `skills/style-lock/styles/` (e.g. `photoreal-daz3d`, `ink-line`). Decided via the Step 0 questionnaire — never picked silently by the model. The May 2026 lesson driving this: an earlier April-transformation run defaulted to 2D illustration when 3D CGI was wanted; nothing had asked or required a choice. `rules_audit.py` HARD-fails if missing.
 - `location_strategy` (top-level, **required**): one of `single` (one chapter location locked everywhere), `multi` (multiple locations, each locked per scene), or `per-scene` (confirm each detected location individually). Determines how the location-lock invariant is enforced downstream. Decided via the Step 0 questionnaire.
+- `story_spine` (top-level, **required**): object with `{want, obstacle, cost, promise_page, payoff_page, ending}`, plus `hook` when `ending` is `"cliffhanger"`. `ending` is `"landed"` (this chapter resolves its own promise) or `"cliffhanger"` (it deliberately pulls forward). `rules_audit.py` HARD-fails if it's missing or stubbed — see § 4.7.
+- `cast[].distinguishing_marks` (**required for any character present in a climax panel**): a named, non-wardrobe mark that survives transformation — scar, hair, heritage, tattoo, eye colour, asymmetry. Wardrobe is not a mark: the corpus ends two leads in matching armor and the reader loses track of who is who. Must be distinct per character.
 - `transformation_metadata` (top-level, **required when `transformation_scenes` is non-empty**): object with `{flavor: "body-region-progression" | "single-axis" | "other", start_tier: number, end_tier: number}`. Captures the high-stakes transformation choices that the model would otherwise default silently. Decided via the Step 0 questionnaire.
 
 ## Workflow
@@ -264,6 +275,22 @@ If the source script contains a multi-page transformation — FMG, growth arc, m
 
 3. **Each `transformation_scenes` entry selects ≥2 escalation devices** from the ranked menu in `comic-production`'s `references/escalation-devices.md` (sfx-driven, reaction-intercut, full-body-reveal, size-comparison, multi-panel-progressive, zoom-escalation, clothing-destruction, slow-burn) — more for a climax. Reflect the choice in the beats: `multi-panel-progressive` = 3 panels of the same region growing; `size-comparison` = a fixed gauge (car, doorway, skyline) in the reveal; `zoom-escalation` = tighten the `camera` each beat. Record the chosen devices on the scene entry.
 
+### 4.7. Story spine (L38 — corpus-derived)
+
+§4.5 makes the transformation happen and §4.6 makes it land. This step is about whether anyone has a reason to care. It comes from the same corpus study, Finding 5, and it is the one finding that says *don't copy the reference books*: **no book in the 9-comic corpus scores above 3 on story; the median is 2.** Growth, camera and SFX are table stakes in this niche — most books do them competently. Story coherence is where nearly everyone fails, which makes it the cheapest place to be visibly better.
+
+Fill in `story_spine` before writing panels. Four failures recur in the corpus, and each maps to one field:
+
+1. **Spine — `want` / `obstacle` / `cost`.** The corpus failure is a chapter that escalates and then simply stops (The Curse is a potion tit-for-tat that ends when it runs out of potion). State who wants what, what opposes them *with its own agenda*, and what winning costs. If you can't say it in three sentences, the chapter doesn't have a spine yet — fix that before generating panels, not after. The gate rejects stubs (`TBD`, one-word answers) as well as absences.
+
+2. **Setup/payoff — `promise_page` / `payoff_page`.** Page 1 makes a promise. Name the page that pays it. `payoff_page` must come after `promise_page`; both must be real pages in this chapter.
+
+3. **Ending — `ending` + `hook`.** `"landed"` means this chapter answers its own question. `"cliffhanger"` means it deliberately pulls forward and then `hook` is required — the specific unanswered question the last page plants. *"To be continued" is not a hook.* The corpus's third failure is momentum-only endings (Breaker stops mid-swing), so the final page must also carry a resolution beat (`reveal`/`aftermath`) or a closing line unless the stop is a declared cliffhanger.
+
+4. **Identity — `cast[].distinguishing_marks`.** When two or more characters share the climax, each needs a named non-wardrobe mark. Both *The Curse* leads end in matching armor and become indistinguishable at exactly the moment the reader most needs to tell them apart. Tier changes make this worse, not better: everyone converges on the same silhouette at the top of the ladder.
+
+Avoid **escalation-by-repetition**, the corpus's climax-padding habit: Ass Effect closes on three near-identical cosmic splashes, TMB-3 on interchangeable space splashes. Consecutive capstone panels (splashes, `whole_body`, `reveal`) must differ on at least one axis — re-peg the scale against a *new* fixed gauge (person → car → building → skyline), change camera distance or location, or give each beat different story work. Repeating the same money shot bigger is not escalation; it's the same panel three times.
+
 ### 5. Validate
 
 Before saving:
@@ -302,7 +329,7 @@ Exit 1 = errors (shotlist rejected — fix and re-run); exit 0 = clean, warnings
 python skills/continuity-check/scripts/rules_audit.py --project .
 ```
 
-The audit will return HARD findings for camera same-combo overuse (>3 panels at the same distance × angle combo) and for any transformation scene missing setup, body-region beats, or a reveal. If HARD findings exist, surface them inline and revise the shotlist *before* moving to references/generation. Soft findings (variety floor, missing ECU/wide) are hints — review them with the user but don't auto-block.
+The audit will return HARD findings for camera same-combo overuse (>3 panels at the same distance × angle combo), for any transformation scene missing setup, body-region beats, or a reveal, and for **L38 story-spine violations** (missing/stubbed `story_spine`, payoff before promise, cliffhanger without a hook, a final page that stops mid-swing, ≥3 interchangeable capstone panels, or climax characters without distinct `distinguishing_marks`). If HARD findings exist, surface them inline and revise the shotlist *before* moving to references/generation. Soft findings (variety floor, missing ECU/wide) are hints — review them with the user but don't auto-block.
 
 Both gates run pre-generation. Re-planning the shotlist costs nothing; regenerating panels after they've been produced wastes the API budget.
 

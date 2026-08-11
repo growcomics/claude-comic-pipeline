@@ -28,7 +28,9 @@ $post = 'creator.php?p=' . urlencode($id);   // forms post to the shared handler
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex,nofollow"><title><?= h($c['name']) ?> · References</title>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT.'/assets/studio.css') ?>"></head><body>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT.'/assets/studio.css') ?>"><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar" style="border-bottom:2px solid #7A7FEC"><div class="brand"><span class="dot"></span> Comic Studio <span style="background:#7A7FEC;color:#0B0C10;font-size:11px;font-weight:800;letter-spacing:.04em;border-radius:999px;padding:2px 9px;margin-left:6px">🗂 REFERENCES</span></div>
   <a class="ghost" href="creator.php?p=<?= h(urlencode($id)) ?>">← Comic Creator</a>
   <span class="spacer"></span>

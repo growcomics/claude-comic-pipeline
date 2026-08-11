@@ -64,7 +64,9 @@ table.t td.n,table.t th.n{text-align:right}
 .goal{background:linear-gradient(135deg,rgba(122,127,236,.14),rgba(29,158,117,.07));border:1px solid #3a3470;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.6;margin-top:8px}
 .msel{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:13px}
 .freshnote{font-size:12px;color:var(--muted);margin-top:4px}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar">
   <div class="brand"><a href="cc.php" style="color:inherit;text-decoration:none"><span class="dot"></span> ⌘ Command Center</a></div>
   <a class="ghost" href="cc.php">Home</a>

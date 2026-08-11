@@ -28,6 +28,15 @@ Source: owner reviewed https://3dmusclecomics.com/studio/review.php?p=autopilot-
 - **Taste/ranker signal**: body scale should match the owner's own Flow favorites (rounder/bigger), NOT generic-realistic. The screenshotted Beat-~20 panel (redhead flex, torn tank, green amulet glow) shows the production standard the owner engages with.
 - **Camera doctrine**: the existing cinematic-framing.md rubric is the owner's stated standard ("the whole cinematic filmmaker's guide thing we made") — the lane must actually ENFORCE it per beat type, not merely include it.
 
+## Addendum — 2026-08-11 calibrations (owner review of the STYLE-v2 re-rolls)
+
+Two fresh owner calls after reviewing the v2 validation set on the autopilot-ab board:
+
+| # | Observation (verbatim intent) | Defect class | Notes for detector/prevention |
+|---|---|---|---|
+| A1 | Physiques "still not too big — I never see the huge breasts that are common in what I make." v2's "fuller and rounder than the reference baseline" improved framing but the model still scales DOWN whatever is asked. | **Body under-scaling vs owner standard** (BODY-01, re-confirmed; escalates B23 above) | Comparative language is insufficient — specs must over-shoot aggressively and EXPLICITLY with concrete anatomical language (bust dramatically oversized well past athletic-realistic; each bicep rivaling head size when flexed), tuned to what nano_banana accepts without NSFW-tripping; garments strain/tear at seams but coverage always preserved, strictly SFW. Implemented as STYLE BLOCK v3 (research/vitality-gap-2026-08-11.md). |
+| A2 | When a character flexes in a long-sleeve garment (lab coat, sweater), the bicep sometimes renders as BARE SKIN gradienting impossibly into the fabric of the same arm. Physically impossible. | **Skin-fabric gradient blend** (NEW → WARD-07, family: skin/fabric confusion, sibling of B20 skin-torn-as-fabric) | Insta-kill. Detection: skin-to-cloth gradient on a single limb with no seam/hem/cuff/torn edge. Prevention: every flex-in-sleeves beat must state the sleeve behavior explicitly — sleeve tears/splits with visible torn edges, sleeve rolled up with a crisp edge, or garment established as off. STYLE v3 SLEEVES clause + injection rule 6 + stage-A checklist line. |
+
 ## UX notes fixed same day
 - Lightbox: full-size affordance was undiscoverable → added ⤢ 100% + ⤓ Original buttons + tip chip.
 - Dense grid: winners hard to spot → thick accent ring + bigger check on approved tiles in dense mode.

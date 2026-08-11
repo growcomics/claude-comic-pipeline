@@ -1416,4 +1416,37 @@ See `references/composition-reading-list.md` for the full annotated list.
 
 ---
 
+## L38 — Story spine: the axis the whole genre fails
+
+**Status: Active.** New lesson 2026-08-04. (Numbered L38 at the 2026-08-11 reconciliation: L36/L37 were assigned on main to Flow-Omni editing and orientation-variety while this lesson was in flight.) Completes the `comic-corpus` migration into production: L35 shipped the study's craft findings (growth density, money-shot faces, escalation devices); L38 ships **Finding 5**, the one finding the pipeline had diagnosed but never enforced.
+
+**Context**: **No book in the 9-comic corpus scores above 3 on story; the median is 2.** Craft — growth, camera, SFX — is table stakes in this niche and most books do it competently. Story coherence is where nearly everyone fails. That inverts the usual advice: on story, the corpus is not a model to match but a floor to clear. A book that is both craft-strong *and* story-legible would stand at the top of this corpus, and that is the pipeline's strategic target.
+
+The other three axes became enforced gates and story didn't, so it stayed a note in a synthesis document — which is exactly how it stays median.
+
+**The four recurring failures, each mechanically checkable at shotlist time**:
+
+1. **Thin or absent spine.** *The Curse* is a potion tit-for-tat that ends when it runs out of potion; *Muller* stalls and pivots to a different character. There's a sequence of events but no want, no opposition with its own agenda, and nothing at stake.
+2. **Escalation-by-repetition padding the climax.** *Ass Effect* closes on three near-identical cosmic splashes; *TMB-3* on interchangeable space splashes. The same money shot rendered bigger reads as repetition, not escalation.
+3. **Momentum-only endings.** *Breaker* stops mid-swing. The chapter ends because the page count ran out, not because anything resolved or was deliberately withheld.
+4. **Identity confusion.** Both *The Curse* leads end in matching armor and become indistinguishable at the exact moment the reader most needs to tell them apart. Tier ladders make this worse: everyone converges on the same silhouette at the top.
+
+**Fix — a chapter-level gate, not a panel rule.** Story is a property of the whole script, so L38 has no prompt slot and contributes nothing to any single panel. It lives with the other chapter-scoped checks (`L20_chapter`, `L28`) in `skills/continuity-check/scripts/rules_audit.py::check_story_spine`, and runs as part of Gate B pre-generation:
+
+- **`story_spine` becomes a required top-level shotlist field** — `{want, obstacle, cost, promise_page, payoff_page, ending}`, plus `hook` when `ending == "cliffhanger"`. The gate rejects stubs (`TBD`, one-word answers) as well as absences, because a field nobody made load-bearing is the failure being fixed.
+- **Setup/payoff must pair**: `payoff_page` after `promise_page`, both real pages.
+- **The ending must end**: `landed` or `cliffhanger`; a cliffhanger needs a specific hook ("to be continued" is not one), and the final page needs a resolution beat (`reveal`/`aftermath`) or a closing line unless the stop is a declared cliffhanger.
+- **Capstone panels must vary**: ≥3 consecutive splash/`whole_body`/`reveal` panels sharing size + camera distance + beat + location is HARD; 2 is SOFT.
+- **`cast[].distinguishing_marks`** required and pairwise distinct for every character present in a climax panel. Non-wardrobe only — a mark that survives the transformation.
+
+**Where this applies**: every comic project, all transformation types (`["*"]`) — unlike L35, story is not FMG-specific. Enforced at Gate B; authored at `script-breakdown` § 4.7.
+
+**Where this does NOT apply**: it makes no per-panel prompt contribution and never fires during generation — by then it's too late and too expensive. Single-lead chapters are exempt from the identity check. It does not judge whether the story is *good*, only whether it is structurally present; taste stays with the writer and `story-writers-room`.
+
+**Reverses**: nothing. Complements L35 (which makes growth land) and L19/bake-dialogue (which makes the words legible) — a legible line still needs something worth saying.
+
+**Provenance**: `research/comic-corpus/synthesis/success-elements.md` Finding 5. Tests: `tests/test_story_spine.py` (one case per failure mode, plus the passing shapes).
+
+---
+
 ## How to add a lesson

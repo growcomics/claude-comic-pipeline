@@ -34,6 +34,7 @@ function ops_clean_patch(array $in): array {
     if (array_key_exists('group', $in)    && isset(OPS_GROUPS[(string)$in['group']]))                       $out['group']    = (string)$in['group'];
     if (array_key_exists('priority', $in) && array_key_exists((string)$in['priority'], OPS_PRIORITIES))     $out['priority'] = (string)$in['priority'];
     if (array_key_exists('aiTag', $in)    && array_key_exists((string)$in['aiTag'], OPS_AI_TAGS))           $out['aiTag']    = (string)$in['aiTag'];
+    if (array_key_exists('ownerType', $in) && isset(OPS_OWNER_TYPES[(string)$in['ownerType']]))             $out['ownerType'] = (string)$in['ownerType'];
     if (array_key_exists('revenueImpact', $in)) $out['revenueImpact'] = max(0, min(5, (int)$in['revenueImpact']));
     if (array_key_exists('person', $in) && is_array($in['person']))
         $out['person'] = array_values(array_filter(array_map(fn($p) => mb_substr(trim((string)$p), 0, 60), $in['person']), 'strlen'));
@@ -78,7 +79,7 @@ if ($action === 'create') {
         'id'=>nid(), 'mondayId'=>'', 'title'=>$title, 'body'=>'', 'checklist'=>[],
         'group'=>$group, 'status'=>'notstarted', 'mondayStatus'=>'',
         'person'=>[], 'sites'=>$sites, 'priority'=>'', 'revenueImpact'=>0,
-        'aiTag'=>'', 'aiPlan'=>'', 'batch'=>'',
+        'aiTag'=>'', 'ownerType'=>'', 'aiPlan'=>'', 'batch'=>'',
         'createdBy'=>current_studio_user(), 'created'=>date('c'), 'updated'=>date('c'),
         'completedOn'=>'', 'creationLog'=>'', 'archived'=>false, 'sort'=>0,
     ];

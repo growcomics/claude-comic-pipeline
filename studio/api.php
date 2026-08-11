@@ -148,6 +148,38 @@ if ($action === 'group_similar') {
     jout(['ok'=>true,'beats'=>count($clusters),'by_prompt'=>count($byKey)]);
 }
 
+// bulk mutate a set of files in one request (review surface: approve-visible / delete-rejects)
+if ($action === 'bulk') {
+    $files = json_decode((string)($_POST['files'] ?? '[]'), true) ?: [];
+    $op    = (string)($_POST['op'] ?? '');
+    $set   = array_flip(array_map('basename', (array)$files));
+    $meta  = images_all($id);
+    if ($op === 'delete') {
+        $keep = []; $del = 0;
+        foreach ($meta as $m) {
+            if (isset($set[$m['file'] ?? ''])) { @unlink(project_dir($id) . '/' . $m['file']); @unlink(project_dir($id) . '/thumb/' . $m['file']); $del++; }
+            else $keep[] = $m;
+        }
+        images_save($id, $keep);
+        $all = projects_all(); $kf = array_column($keep, 'file');
+        foreach ($all as &$p) if (($p['id'] ?? '') === $id) { $cov = $p['cover'] ?? ''; if ($cov !== '' && !in_array($cov, $kf, true)) $p['cover'] = null; }
+        unset($p); projects_save($all); touch_project($id);
+        jout(['ok' => true, 'deleted' => $del, 'count' => count($keep)]);
+    }
+    $n = 0;
+    foreach ($meta as &$m) {
+        if (!isset($set[$m['file'] ?? ''])) continue;
+        if      ($op === 'approve')   { $m['rating'] = 'good'; $m['accepted'] = true; }
+        elseif  ($op === 'unapprove') { $m['accepted'] = false; if (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated'; }
+        elseif  ($op === 'bad')       { $m['rating'] = 'bad';  $m['accepted'] = false; }
+        elseif  ($op === 'keep')      { $m['accepted'] = true; }
+        else continue;
+        $n++;
+    }
+    unset($m); images_save($id, $meta); touch_project($id);
+    jout(['ok' => true, 'updated' => $n]);
+}
+
 // per-image mutations
 $file = basename((string)($_POST['file'] ?? ''));
 $meta = images_all($id);

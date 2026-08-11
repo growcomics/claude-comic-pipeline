@@ -11,9 +11,12 @@ if (!$proj) { http_response_code(404); exit('Unknown project.'); }
 
 function _bnum(string $s): int { return preg_match('/(\d+)/', $s, $m) ? (int)$m[1] : 9999; }
 
-$imgs = images_all($id);
+$imgs = array_values(array_filter(images_all($id), fn($m) => empty($m['isref'])));   // never zip cached refs / reference uploads
+$only = (string)($_GET['only'] ?? '');
+if ($only === 'approved')   $imgs = array_values(array_filter($imgs, fn($m) => !empty($m['accepted'])));
+elseif ($only === 'good')   $imgs = array_values(array_filter($imgs, fn($m) => ($m['rating'] ?? '') === 'good'));
 usort($imgs, fn($a, $b) => _bnum($a['group'] ?? '') <=> _bnum($b['group'] ?? '') ?: (($a['ts'] ?? 0) <=> ($b['ts'] ?? 0)));
-if (!$imgs) { http_response_code(404); exit('No images in this project yet.'); }
+if (!$imgs) { http_response_code(404); exit($only !== '' ? 'No matching panels to export yet.' : 'No images in this project yet.'); }
 
 if (!class_exists('ZipArchive')) { http_response_code(500); exit('Zip support unavailable on this host.'); }
 $zip = new ZipArchive();

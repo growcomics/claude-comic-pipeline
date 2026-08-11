@@ -524,7 +524,9 @@ $CSRF = csrf();
 .gg-qa-badge{font-size:12px;border-radius:6px;padding:2px 8px;margin-left:6px}
 select.gg{background:#14151C;color:#fff;border:1px solid #2a2c38;border-radius:8px;padding:8px;max-width:100%}
 .gg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:10px}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
   <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>

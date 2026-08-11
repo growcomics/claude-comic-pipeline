@@ -53,7 +53,9 @@ $priC = ['critical'=>'#D9534F', 'high'=>'#EF9F27', 'medium'=>'#5BA7E6', 'low'=>'
 .el-row{display:flex;gap:6px;margin:4px 0}
 .el-row input{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:5px 8px;font-size:12px}
 .toast{position:fixed;bottom:16px;right:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;z-index:60;display:none}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar">
   <div class="brand"><a href="cc.php" style="color:inherit;text-decoration:none"><span class="dot"></span> ⌘ Command Center</a></div>
   <a class="ghost" href="cc.php">Home</a>

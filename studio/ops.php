@@ -35,6 +35,7 @@ $payload = [
     'statuses'   => OPS_STATUSES,
     'priorities' => OPS_PRIORITIES,
     'aiTags'     => OPS_AI_TAGS,
+    'ownerTypes' => OPS_OWNER_TYPES,
     'user'       => current_studio_user(),
     'csrf'       => csrf(),
 ];
@@ -103,7 +104,9 @@ select.pill{appearance:none;-webkit-appearance:none}
 .bb.on{display:flex}
 .bb select,.bb input{background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:5px 8px;font-size:12px}
 .toast{position:fixed;bottom:16px;right:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;z-index:60;display:none}
-</style></head><body>
+</style><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
+<script src="https://3dmusclecomics.com/hub/nav.js"></script>
+</head><body>
 <header class="topbar">
   <div class="brand"><a href="cc.php" style="color:inherit;text-decoration:none"><span class="dot"></span> ⌘ Command Center</a></div>
   <a class="ghost" href="cc.php">Home</a>
@@ -120,6 +123,7 @@ select.pill{appearance:none;-webkit-appearance:none}
     <div class="ob-view" id="viewTabs"></div>
     <input type="search" id="fSearch" placeholder="Search tasks…">
     <select id="fSite"></select>
+    <select id="fOwner"></select>
     <select id="fPerson"></select>
     <select id="fStatus"></select>
     <select id="fPriority"></select>
@@ -140,6 +144,7 @@ select.pill{appearance:none;-webkit-appearance:none}
 
 <div class="bb" id="bulkBar">
   <strong id="bbCount">0 selected</strong>
+  <select id="bbOwner"></select>
   <select id="bbAi"></select>
   <input id="bbBatch" placeholder="batch label" size="10">
   <select id="bbStatus"></select>
@@ -159,9 +164,10 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const STATUS_C = {notstarted:'#6F7380', working:'#EF9F27', confirm:'#C678DD', onhold:'#5BA7E6', done:'#1D9E75', cancelled:'#D9534F'};
 const PRI_C    = {critical:'#D9534F', high:'#EF9F27', medium:'#5BA7E6', low:'#6F7380'};
 const AI_C     = {'ai-now':'#1D9E75', 'ai-assist':'#7A7FEC', 'human-only':'#6F7380'};
+const OWNER_C  = {ai:'#1D9E75', system:'#5BA7E6', human:'#EF9F27'};
 const GROUP_ORDER = ['todo','onhold','done','cancelled'];
 
-let state = {view:'open', q:'', site:'', person:'', status:'', priority:'', ai:'', batch:'', sort:'manual', task:'', bulk:false};
+let state = {view:'open', q:'', site:'', owner:'', person:'', status:'', priority:'', ai:'', batch:'', sort:'manual', task:'', bulk:false};
 let selected = new Set();
 let collapsed = new Set(['done','cancelled']);
 
@@ -183,14 +189,14 @@ const fmtDay = iso => (iso||'').slice(0,10);
 /* ---- hash state (shareable views / deep links) ---- */
 function writeHash(){
   const p = new URLSearchParams();
-  for (const k of ['view','q','site','person','status','priority','ai','batch','sort']) if (state[k] && !(k==='view'&&state[k]==='open') && !(k==='sort'&&state[k]==='manual')) p.set(k, state[k]);
+  for (const k of ['view','q','site','owner','person','status','priority','ai','batch','sort']) if (state[k] && !(k==='view'&&state[k]==='open') && !(k==='sort'&&state[k]==='manual')) p.set(k, state[k]);
   if (state.task) p.set('task', state.task);
   const s = p.toString();
   history.replaceState(null,'', s ? '#'+s : location.pathname);
 }
 function readHash(){
   const p = new URLSearchParams(location.hash.slice(1));
-  for (const k of ['view','q','site','person','status','priority','ai','batch','sort','task']) if (p.has(k)) state[k]=p.get(k);
+  for (const k of ['view','q','site','owner','person','status','priority','ai','batch','sort','task']) if (p.has(k)) state[k]=p.get(k);
   if (!['open','all','archived'].includes(state.view)) state.view='open';
 }
 
@@ -203,6 +209,7 @@ function visibleTasks(){
     if (state.view==='open' && !(['todo','onhold'].includes(t.group) && !['done','cancelled'].includes(t.status))) return false;
     if (q && !((t.title||'').toLowerCase().includes(q) || (t.body||'').toLowerCase().includes(q) || (t.aiPlan||'').toLowerCase().includes(q))) return false;
     if (state.site && !(t.sites||[]).includes(state.site)) return false;
+    if (state.owner && (t.ownerType||'')!==state.owner) return false;
     if (state.person && !(t.person||[]).includes(state.person)) return false;
     if (state.status && t.status!==state.status) return false;
     if (state.priority && t.priority!==state.priority) return false;
@@ -228,6 +235,7 @@ function rowHtml(t){
   const st = esc(t.status), sc = STATUS_C[t.status]||'#6F7380';
   const opts = Object.entries(OPS.statuses).map(([k,v])=>`<option value="${k}"${k===t.status?' selected':''}>${esc(v)}</option>`).join('');
   const siteChips = (t.sites||[]).map(k=>{const s=OPS.sites[k]; return s?`<span class="chip" style="--c:${s.color}">${esc(s.name)}</span>`:'';}).join('');
+  const owner = t.ownerType ? `<span class="chip" style="--c:${OWNER_C[t.ownerType]||'#6F7380'}">${esc(OPS.ownerTypes[t.ownerType]||t.ownerType)}</span>` : '';
   const persons = (t.person||[]).map(p=>`<span class="chip" style="--c:#9aa0b4">${esc(p)}</span>`).join('');
   const pri = t.priority ? `<span class="chip" style="--c:${PRI_C[t.priority]||'#6F7380'}">${esc(OPS.priorities[t.priority]||t.priority)}</span>` : '';
   const ai  = t.aiTag ? `<span class="chip" style="--c:${AI_C[t.aiTag]||'#6F7380'}">🤖 ${esc(OPS.aiTags[t.aiTag]||t.aiTag)}</span>` : '';
@@ -238,7 +246,7 @@ function rowHtml(t){
   const cb = state.bulk ? `<input type="checkbox" class="ob-check" data-sel="${t.id}"${selected.has(t.id)?' checked':''}>` : '';
   return `<div class="ob-row" data-id="${t.id}">${cb}
     <span class="ob-title" data-open="${t.id}">${esc(t.title)}${t.archived?'<span class="arch">archived</span>':''}</span>
-    ${ai}${batch}${pri}${rev}${cl}${siteChips}${persons}${notes}
+    ${owner}${ai}${batch}${pri}${rev}${cl}${siteChips}${persons}${notes}
     <select class="pill" style="--c:${sc}" data-status="${t.id}" title="status">${opts}</select>
     <span class="mut">${fmtDay(t.updated)}</span></div>`;
 }
@@ -272,6 +280,7 @@ function fillSelect(el, label, entries, cur){
 function renderFilters(){
   $('#viewTabs').innerHTML = ['open','all','archived'].map(v=>`<button data-view="${v}" class="${state.view===v?'on':''}">${v[0].toUpperCase()+v.slice(1)}</button>`).join('');
   fillSelect($('#fSite'), 'Site: all', Object.entries(OPS.sites).map(([k,s])=>[k,s.name]), state.site);
+  fillSelect($('#fOwner'), 'Owner: all', Object.entries(OPS.ownerTypes).filter(([k])=>k), state.owner);
   const persons = [...new Set(OPS.tasks.flatMap(t=>t.person||[]))].sort();
   fillSelect($('#fPerson'), 'Person: all', persons.map(p=>[p,p]), state.person);
   fillSelect($('#fStatus'), 'Status: all', Object.entries(OPS.statuses), state.status);
@@ -281,6 +290,7 @@ function renderFilters(){
   fillSelect($('#fBatch'), 'Batch: all', batches.map(b=>[b,b]), state.batch);
   $('#fSort').value = state.sort;
   $('#fSearch').value = state.q;
+  fillSelect($('#bbOwner'), 'Owner…', Object.entries(OPS.ownerTypes).filter(([k])=>k), '');
   fillSelect($('#bbAi'), 'AI tag…', Object.entries(OPS.aiTags).filter(([k])=>k), '');
   fillSelect($('#bbStatus'), 'Status…', Object.entries(OPS.statuses), '');
   fillSelect($('#bbGroup'), 'Group…', Object.entries(OPS.groups), '');
@@ -304,6 +314,7 @@ function drawerHtml(t){
     <div><label>Priority</label>${sel('priority', Object.entries(OPS.priorities), t.priority||'')}</div>
     <div><label>Revenue impact</label>${sel('revenueImpact', [0,1,2,3,4,5].map(n=>[n, n? '●'.repeat(n)+'○'.repeat(5-n)+' '+n : '—']), t.revenueImpact||0)}</div>
     <div><label>AI tag</label>${sel('aiTag', Object.entries(OPS.aiTags), t.aiTag||'')}</div>
+    <div><label>Owner type</label>${sel('ownerType', Object.entries(OPS.ownerTypes), t.ownerType||'')}</div>
     <div><label>Batch</label><input type="text" data-f="batch" value="${esc(t.batch||'')}" placeholder="batch label"></div>
   </div>
   <label>Sites</label><div class="dw-sites" id="dwSites">${sitesHtml}</div>
@@ -438,13 +449,14 @@ document.addEventListener('keydown', async e=>{
 
 let qT;
 $('#fSearch').addEventListener('input', e=>{ clearTimeout(qT); qT=setTimeout(()=>{ state.q=e.target.value; writeHash(); render(); },200); });
-for (const [elId, key] of [['fSite','site'],['fPerson','person'],['fStatus','status'],['fPriority','priority'],['fAi','ai'],['fBatch','batch'],['fSort','sort']])
+for (const [elId, key] of [['fSite','site'],['fOwner','owner'],['fPerson','person'],['fStatus','status'],['fPriority','priority'],['fAi','ai'],['fBatch','batch'],['fSort','sort']])
   $('#'+elId).addEventListener('change', e=>{ state[key]=e.target.value; writeHash(); render(); });
 
 $('#bulkToggle').addEventListener('click', ()=>{ state.bulk=!state.bulk; if(!state.bulk) selected.clear(); $('#bulkToggle').classList.toggle('primary', state.bulk); render(); });
 $('#bbClear').addEventListener('click', ()=>{ selected.clear(); render(); });
 $('#bbApply').addEventListener('click', async ()=>{
   const patch = {};
+  if ($('#bbOwner').value) patch.ownerType = $('#bbOwner').value;
   if ($('#bbAi').value) patch.aiTag = $('#bbAi').value;
   if ($('#bbBatch').value.trim()) patch.batch = $('#bbBatch').value.trim();
   if ($('#bbStatus').value) patch.status = $('#bbStatus').value;

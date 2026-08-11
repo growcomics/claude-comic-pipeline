@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 — Reconciliation prep: parked working-tree state committed (L38 story-spine gate, STYLE v3 / WARD-07, studio ownership layer)
+
+### Added
+
+- **L38 story-spine gate** — `check_story_spine` in `skills/continuity-check/scripts/rules_audit.py` enforces corpus Finding 5 at shotlist time: a stated `want`/`obstacle`/`cost` spine (stubs rejected, not just absences), `promise_page`→`payoff_page` pairing, endings that land or declare a real hook, no runs of interchangeable capstone panels, and pairwise-distinct `distinguishing_marks` for climax characters. Registered in `next_panel.py`'s phase-1 rule registry, authored at `script-breakdown` § 4.7, lesson written up in `lessons-learned.md`, tests at `tests/test_story_spine.py` (14/14 green: one per corpus failure mode plus the passing shapes). NOTE: this work was labeled "L36" while in flight; renumbered **L38** at reconciliation because `main` assigned L36 (Flow Omni editing) and L37 (orientation variety) first.
+- **WARD-07 — skin-fabric gradient blend** defect class in `DEFECT-REGISTRY.md` (insta-kill: bare skin gradienting into fabric on the same limb) + **STYLE BLOCK v3** in `research/vitality-gap-2026-08-11.md` (aggressive explicit body over-spec per owner calibration, SLEEVES clause, per-beat injection rule 6, stage-A rubric line) with the owner-feedback addendum in `research/owner-defect-feedback-2026-08-10.md`.
+- **Studio ops ownership layer** — `ownerType` (🤖 AI / ⚙ System / 🧑 Human) on ops tasks: constant in `inc/ops.php`, create/patch support in `ops-api.php`, filter + bulk-bar + drawer field + row chip in `ops.php`. Plus `studio/api.php` bulk image mutations (`action=bulk`: approve / unapprove / bad / keep / delete), `export.php` `?only=approved|good` filters (reference uploads now always excluded from zips), and the shared `/hub/nav.js` bar on nine studio pages.
+
+### Changed
+
+- Committed ~390 lines of parked, uncommitted working-tree state found on `feat/comic-corpus` during the 2026-08-11 main↔branch reconciliation, so the merged `main` carries the real pipeline state the fleet pulls.
+
 ## 2026-08-11 — Re-bless not-so-supra-man qa gates: L34 staging gate made load-bearing (user-approved in-session)
 
 ### Changed

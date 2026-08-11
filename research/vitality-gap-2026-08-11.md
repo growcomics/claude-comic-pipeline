@@ -1,6 +1,7 @@
 # Vitality gap — automated lane vs owner Flow favorites (2026-08-11)
 
 ## CHANGELOG
+- **2026-08-11 (later)** — STYLE BLOCK v3 from two fresh owner calibrations on the v2 re-rolls: (1) body scale still under-shoots → aggressive explicit bust/bicep over-spec; (2) new defect class WARD-07 skin-fabric gradient blend → SLEEVES clause + injection rule 6 + stage-A checklist line. Validation burn (b07 + b23 re-rolled with v3) recorded at bottom.
 - **2026-08-11** — Initial diagnosis from 3-lens Sonnet analysis (26 owner ⭐ favorites vs 11 bo-autopilot-ab judge winners), prescription table, STYLE BLOCK v2, judge-rubric vitality additions, and validation burn (b07-amulet-flex + b14-margo-steps re-rolled with v2, 4 variants each, nano_banana_2). Validation verdict recorded at bottom.
 
 ## The owner's brief (verbatim intent)
@@ -73,6 +74,25 @@ Note: "more intensity" must NOT be implemented as repetition — the owner has f
 
 (Everything after "NOT 2D illustration" is unchanged from v1 — the SFW, no-extras and bubble invariants are load-bearing and stay.)
 
+## STYLE BLOCK v3 — supersedes v2 (owner calibrations 2026-08-11 on the v2 re-rolls)
+
+Two fresh owner calls after reviewing the v2 validation set:
+
+1. **Body scale STILL under-shoots.** v2's "fuller and rounder than the reference baseline" improved framing, but the physiques are "still not too big — I never see the huge breasts that are common in what I make." The model scales DOWN whatever is asked (owner-defect B23, `feedback_chest_oversize_compensate`), so polite comparative language ("fuller than baseline") is not enough — v3 over-specs aggressively and EXPLICITLY with concrete anatomical overshoot language.
+2. **New defect class — skin-fabric gradient blend (WARD-07).** Flex-in-sleeves beats sometimes render the bicep as bare skin gradienting impossibly into the fabric of the same arm. v3 adds a SLEEVES clause plus per-beat injection rule 6.
+
+**Exact spec lines changed vs v2** (LIGHTING / FACES / tail unchanged):
+
+- BODIES (v2): "heroically massive and ROUND — delts, pecs, chest and glutes render fuller and rounder than the reference baseline suggests, and the physique fills the frame."
+- BODIES (v3): "dramatically oversized, far BEYOND the reference baseline — the bust renders dramatically enlarged, well past athletic-realistic proportions, round and heavy; each bicep rivals her head in size when flexed; delts, pecs, chest and glutes carry exaggerated round mass; the physique dominates and fills the frame. Garments visibly strain and split at their seams under the mass, but coverage of chest, torso and hips is always preserved."
+- SLEEVES (new in v3): "when a muscle flexes inside a sleeved garment the fabric responds physically — the sleeve seam splits open around the flexed muscle with crisp torn fabric edges, or the sleeve is rolled up with a clean cuff edge; bare skin NEVER blends or gradients into fabric on the same limb."
+
+```json
+"style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading with a glossy specular sheen — hard highlights pop on flexed muscle. LIGHTING: strong DIRECTIONAL key from behind or beside the subject, never flat overhead fill; warm key against cool fill (or cool rim against a warm key); one saturated practical or FX light source coloring the scene; high contrast with deep shadow falloff; a rim light traces the body's edge and the background stays darker than the subject. BODIES: dramatically oversized, far BEYOND the reference baseline — the bust renders dramatically enlarged, well past athletic-realistic proportions, round and heavy; each bicep rivals her head in size when flexed; delts, pecs, chest and glutes carry exaggerated round mass; the physique dominates and fills the frame. Garments visibly strain and split at their seams under the mass, but coverage of chest, torso and hips is always preserved. SLEEVES: when a muscle flexes inside a sleeved garment the fabric responds physically — the sleeve seam splits open around the flexed muscle with crisp torn fabric edges, or the sleeve is rolled up with a clean cuff edge; bare skin NEVER blends or gradients into fabric on the same limb. FACES: never blank or neutral — the emotion named in the prompt renders at full theatrical intensity. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras — only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel."
+```
+
+**Injection rule 6 (adds to the five per-beat rules below):** any flex-in-sleeves beat MUST state the sleeve behavior explicitly in the beat prompt — legal renderings are only (a) the sleeve visibly tears/splits around the muscle ("the sleeve seam splits open around the flexed bicep, torn fabric edges visible"), (b) sleeve rolled up with a crisp fabric edge, or (c) the garment established as off in a prior transition panel. A skin-to-cloth gradient on one limb is WARD-07, an insta-kill.
+
 ## Per-beat injection rules (composer/authoring contract)
 
 1. **Expression injection** — every beat carries a named emotion + "expression and pose reflect that at full intensity". A beatsheet linter should reject beats with no emotion word.
@@ -80,6 +100,12 @@ Note: "more intensity" must NOT be implemented as repetition — the owner has f
 3. **Scene lighting recipe** — each location in the sheet declares a 1-sentence recipe (key direction + palette + practical source); the composer injects it into every beat in that location as momentary lighting state. This is L10-compliant: the recipe is the *state*, the env ref stays the architecture anchor.
 4. **Motion-cue stacking** — action/growth beats stack ≥2 kinetic cues (hair / straining fabric / SFX lettering / energy glow).
 5. **Shot-grammar quotas** — per page: ≥1 low-angle hero, ≥1 rear-three-quarter from act 2 on, chest-focal framing on payoff beats, subject fills 75-90% on money shots, no face-only crops on growth/hero beats. Variety, not repetition: quotas force *different* framings across a page, never duplicated panels.
+
+## Judge rubric addition — stage A checklist line (2026-08-11, WARD-07)
+
+Add to the stage-A defect screen (qascan / rubric-driven defect pass), insta-kill tier:
+
+> **SKIN-FABRIC GRADIENT BLEND (WARD-07)** — on any single limb, check the transition between skin and garment fabric: if bare skin gradients or blends into cloth with NO seam, hem, rolled cuff, or torn fabric edge separating the two materials (typical case: a flexed bicep rendered bare mid-sleeve on a lab coat or sweater), the variant is KILLED. Legal renderings only: sleeve visibly torn/split around the muscle, sleeve rolled up with a crisp edge, or the garment established as off.
 
 ## Judge rubric addition — VITALITY GATE (stage B)
 

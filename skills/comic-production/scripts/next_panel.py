@@ -1163,6 +1163,7 @@ PHASE_1_RULE_REGISTRY: dict[str, dict] = {
     "L12":            {"title": "Dialogue panels need close framing", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
     "L13":            {"title": "Multi-speaker beats split into per-speaker panels", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
     "L20_chapter":    {"title": "L20 chapter-aggregate / per-beat overshoot", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
+    "L38":            {"title": "Story spine, setup/payoff, climax distinctness, ending, identity", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
     "L28":            {"title": "Reference completeness is mandatory", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": True},
     # Deferred — known to phase 1, tracked in a later phase
     "L1":             {"title": "Progressive sequences must be chained", "slot": None, "applicable_transformations": ["*"], "phase1_tracked": False, "phase1_reason": "runner concern (post-render deterministic) — phase 4+"},

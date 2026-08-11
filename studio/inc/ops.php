@@ -21,6 +21,9 @@ const OPS_STATUSES   = ['notstarted'=>'Not started', 'working'=>'Working on it',
                         'onhold'=>'On hold', 'done'=>'Done', 'cancelled'=>'Cancelled'];
 const OPS_PRIORITIES = [''=>'—', 'low'=>'Low', 'medium'=>'Medium', 'high'=>'High', 'critical'=>'Critical'];
 const OPS_AI_TAGS    = [''=>'—', 'ai-now'=>'AI can do now', 'ai-assist'=>'AI-assisted', 'human-only'=>'Human only'];
+// ownerType = WHO owns the duty going forward (separate axis from aiTag = "can AI do it").
+// 'human' pairs with person[] naming who (Magna is departing — never assign new work to him).
+const OPS_OWNER_TYPES = [''=>'—', 'ai'=>'🤖 AI', 'system'=>'⚙ System', 'human'=>'🧑 Human'];
 
 function ops_load(): array {
     $d = s_read(OPS_TASKS_FILE, []);

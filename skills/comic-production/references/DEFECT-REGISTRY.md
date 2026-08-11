@@ -180,6 +180,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-roll with clamp; do NOT ship.
 - **Links**: CLAUDE.md generation defaults · compose.py insurance clause.
 
+### WARD-07 · Skin-fabric gradient blend · `skin_fabric_blend`
+- **Symptom**: a character flexes inside a long-sleeved garment (lab coat, sweater) and the model renders the bicep/limb as BARE SKIN that gradients impossibly into the fabric of the SAME arm — no seam, no hem, no cuff, no torn edge; skin and cloth read as one continuous material. Physically impossible.
+- **Root cause**: skin/fabric material confusion — same family as skin-rendered-as-torn-fabric (owner walkthrough B20, insta-kill tier). When the prompt demands a visible flexed muscle while the garment ref says intact long sleeves, the model resolves the conflict by blending materials instead of choosing a physical outcome (tear, roll-up, garment off).
+- **Severity/Frequency**: BLOCKER (physically impossible render; owner-flagged calibration 2026-08-11) / M on flex-in-sleeves beats.
+- **Detect**: J (rubric line: look for a skin-to-cloth gradient on a single limb with NO seam/hem/rolled cuff/torn fabric edge between the two materials) · H. GAP in V and S.
+- **Prevent**: any flex-in-sleeves beat MUST state the sleeve behavior explicitly. The only legal renderings: (a) the sleeve visibly TEARS/splits around the flexed muscle — e.g. "the sleeve seam splits open around the flexed bicep, torn fabric edges visible"; (b) sleeve rolled up with a crisp fabric edge; (c) the garment established as off in a prior transition panel. Enforced by STYLE v3 SLEEVES clause + per-beat injection rule 6 (`research/vitality-gap-2026-08-11.md`).
+- **Repair**: re-roll with the explicit sleeve-behavior sentence; do NOT ship.
+- **Links**: owner calibration 2026-08-11 (`research/owner-defect-feedback-2026-08-10.md` addendum) · sibling: skin-torn-as-fabric (B20) · STYLE v3 · stage-A checklist line in vitality-gap rubric section.
+
 ## BODY — build, size, anatomy
 
 ### BODY-01 · Tier under-render (size scale-down) · `size_underrender`
