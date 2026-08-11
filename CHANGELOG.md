@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10
+
+### Added
+
+- **research/owner-defect-feedback-2026-08-10.md** — owner walked autopilot-test (120 panels) beat by beat and named defects in his own words; structured into registry-aligned classes with severity tiers (insta-kill: skin-torn-as-fabric, glitch props, wardrobe state flips; systemic: shot-scale monotony — dialogue beats must be torso-up per cinematic-framing.md, dead-face/flat staging, fourth-wall gaze from forward-facing refs; consistency: bubble color, prop layout, garment condition; taste: body scale must match the owner's ⭐ Flow picks, not generic-realistic). This is judge/ranker calibration ground truth for the over-generate→judge→retry lane.
+- **review.php viewer: explicit full-size controls** — ⤢ 100% button + ⤓ Original (new tab) + hint chip in the lightbox (zoom existed but was undiscoverable; owner: "can't see it full size, almost impossible to judge"); Dense mode now marks winners unmissably (thick accent ring + larger check).
+
 ## 2026-08-09 (💳 Lighting credit-burn validation — Golden v2 loses the A/B, default reverts to v1)
 
 ### Fixed

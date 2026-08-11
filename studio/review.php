@@ -197,6 +197,13 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 .rv-grid.fit .rv-tile img{object-fit:contain;background:#07080b}
 /* Dense: justified packing — each tile takes its image's natural aspect at a fixed row
    height (scaled by the S/M/L --tile), rows wrap tight. No 4:5 letterboxing, 4px gaps. */
+.rv-lb-tools{position:absolute;top:12px;left:14px;z-index:95;display:flex;align-items:center;gap:6px}
+.rv-lb-tools button,.rv-lb-tools a{border:1px solid var(--border2);background:rgba(14,16,21,.85);color:var(--text);font:600 12px/1 Inter,sans-serif;padding:7px 11px;border-radius:8px;cursor:pointer;text-decoration:none}
+.rv-lb-tools .rv-lb-tip{font-size:11px;color:#8b939d;background:rgba(14,16,21,.6);padding:5px 9px;border-radius:99px}
+.rv-lb{position:fixed}
+/* Dense mode: make winners unmissable — thick accent ring + bigger check */
+.rv-grid.dense .rv-tile.kept{box-shadow:inset 0 0 0 3px var(--accent), 0 0 0 1px var(--accent)}
+.rv-grid.dense .rv-okmark{width:26px;height:26px;font-size:14px;bottom:8px;right:8px}
 .rv-grid.dense{display:flex;flex-wrap:wrap;gap:4px}
 .rv-grid.dense .rv-tile{aspect-ratio:auto;width:auto;flex:0 0 auto;height:calc(var(--tile,200px)*1.45)}
 .rv-grid.dense .rv-tile img{width:auto;height:100%;max-width:none}
@@ -467,6 +474,11 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
 <!-- per-panel detail overlay -->
 <div class="rv-lb" id="lb">
   <button class="rv-x" id="lbx" title="Close (Esc)">✕</button>
+  <div class="rv-lb-tools">
+    <button id="lbzoom" title="Toggle 100% pixel size (or click the image)">⤢ 100%</button>
+    <a id="lborig" href="#" target="_blank" rel="noopener" title="Open the original file in a new tab — guaranteed full size">⤓ Original</a>
+    <span class="rv-lb-tip">F hides the panel · click image zooms</span>
+  </div>
   <div class="rv-lb-stage" id="lbstage">
     <button class="rv-arrow prev" id="lbprev" title="Previous (←)">‹</button>
     <img id="lbimg" src="" alt="">
@@ -944,6 +956,7 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
     lbimg.classList.remove('zoomed'); if(lbimg.parentNode) lbimg.parentNode.classList.remove('zoomed-stage');
     exitCompare();                          // always open on the single-image view
     lbimg.src=d.full; lbimg.alt=d.orig||'';
+    var lo=document.getElementById('lborig'); if(lo) lo.href=d.full;
     buildInfo(file);
     var order=visibleOrder(); var pos=order.indexOf(file);
     lbprev.disabled = pos<=0; lbnext.disabled = pos<0 || pos>=order.length-1;
@@ -956,6 +969,8 @@ $aiOn  = is_file(SDATA . '/ai.json');   // gates the AI defect scan (same key fi
   lbprev.addEventListener('click', function(){ step(-1); });
   lbnext.addEventListener('click', function(){ step(1); });
   lbimg.addEventListener('click', function(e){ e.stopPropagation(); var z=!lbimg.classList.contains('zoomed'); lbimg.classList.toggle('zoomed', z); if(lbimg.parentNode) lbimg.parentNode.classList.toggle('zoomed-stage', z); });
+  var lbzoomBtn=document.getElementById('lbzoom');
+  if(lbzoomBtn) lbzoomBtn.addEventListener('click', function(e){ e.stopPropagation(); lbimg.click(); });
   lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('rv-lb-stage')) closeLb(); });
   document.addEventListener('keydown', function(e){
     if(!lb.classList.contains('open')) return;
