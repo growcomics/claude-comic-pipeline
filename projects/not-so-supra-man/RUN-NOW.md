@@ -9,6 +9,25 @@ cd ~/Documents/claude-comic-pipeline && git pull --ff-only
 cd projects/not-so-supra-man && python3 qa/integrity.py   # must print: gates intact ✓ (fingerprint 49197e3f…)
 ```
 
+## 0b. ⚠️ PENDING OWNER RE-BLESS — STYLE v3 wired into page prompts (2026-08-11)
+Owner directed "keep STYLE v3 as written yesterday" for BUST/body scale. v3 was NOT in this
+project's gate — `qa/compose.py` still carried the bare style, so pages would have rendered the
+conservative physiques the owner complained about. Change made (gates now LOCKED, awaiting the
+owner's `--rebless`):
+- **NEW `STYLE_PAGE`** (v3 verbatim from `research/vitality-gap-2026-08-11.md`) used for STORY
+  PAGES only — aggressive BODIES over-spec ("bust dramatically enlarged… each bicep rivals her
+  head"), directional LIGHTING, SLEEVES (WARD-07), FACES-at-intensity, strict SFW/coverage.
+- **Sheets keep the neutral `STYLE`** — turnarounds need flat studio light + scale silhouette to
+  stay usable as canon. v3's own wording is "far BEYOND the reference baseline": refs carry
+  identity/wardrobe, the page style block carries the scale over-shoot.
+- v3's "speech bubbles" clause OMITTED on purpose — this project letters via overlay
+  (`scripts/letter_pages.py`); baked bubbles would be a defect here.
+- Verified: parses; contains the literal "NOT illustrated" the audit requires (v3's own
+  "NOT 2D illustration" alone would have FAILED every page audit); no banned VFX/appearance/
+  scale-risk strings.
+**Bust policy (owner, 2026-08-11):** aggressive over-shoot is WANTED and now explicit. Never
+enlarge beyond this on personal initiative; muscle/growth over-spec unchanged.
+
 ## 1. Run settings (owner-set)
 - **MODEL: Nano Banana 2 Lite** — owner's pick, fastest generator. Verify the Flow pill reads
   **NB2 Lite** before EVERY submit (it resets on reload/clear). x4 variants; aspect per shot.

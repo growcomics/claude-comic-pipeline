@@ -151,6 +151,21 @@ The production line's exit stage, built to `PRODUCTION-SYSTEM-VISION.md` §2/§5
 
 - Committed ~390 lines of parked, uncommitted working-tree state found on `feat/comic-corpus` during the 2026-08-11 main↔branch reconciliation, so the merged `main` carries the real pipeline state the fleet pulls.
 
+## 2026-08-11 (later) — STYLE BLOCK v3 wired into not-so-supra-man page prompts (owner-directed)
+
+### Added
+
+- **`STYLE_PAGE` in `projects/not-so-supra-man/qa/compose.py`** — STYLE BLOCK v3 (verbatim from `research/vitality-gap-2026-08-11.md`) now rides every STORY PAGE prompt: aggressive BODIES over-spec (bust dramatically enlarged past athletic-realistic, each bicep rivaling head size when flexed, exaggerated round mass on delts/pecs/glutes), strong directional LIGHTING, the SLEEVES clause (WARD-07 skin-fabric gradient), FACES-at-full-intensity, and strict SFW coverage. **Why**: the owner asked whether the pipeline enlarges anatomy unprompted; the audit showed it did not — but it also showed v3 had never been wired into this project's gate, so the 29 pending pages would have rendered the same conservative physiques logged as under-scaled in `research/owner-defect-feedback-2026-08-10.md` ("still not too big — I never see the huge breasts that are common in what I make"). Owner directed keeping v3; bust over-shoot is therefore explicit and intended, not agent initiative.
+- **Scoping decisions**: reference SHEETS keep the neutral `STYLE` (turnarounds need flat studio light + the scale silhouette to stay usable as canon — v3's own framing is "far BEYOND the reference baseline", i.e. refs are the baseline and pages over-shoot them). v3's "speech bubbles" clause is deliberately omitted because this project letters via overlay (`scripts/letter_pages.py`), where baked bubbles are a defect.
+
+### Fixed
+
+- **Style-anchor mismatch that would have failed every page audit**: v3's own wording is "NOT 2D illustration", but `qa/audit_prompt.py` requires the literal `"NOT illustrated"`. Caught by checking the new block against all four independent audit rules before submit; `STYLE_PAGE` now carries both. A live demonstration of the two-independent-encodings design (compose vs audit) catching a compose-side error.
+
+### Changed
+
+- **Re-blessed `qa/MANIFEST.sha256`** (fingerprint `49197e3f6bf9b7aa` → `e826405c2b3fec1f`) — owner approved in-session after reviewing the diff (+28 lines, style constants only, no gate logic touched).
+
 ## 2026-08-11 — Re-bless not-so-supra-man qa gates: L34 staging gate made load-bearing (user-approved in-session)
 
 ### Changed

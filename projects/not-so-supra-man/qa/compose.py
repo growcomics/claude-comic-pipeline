@@ -21,6 +21,33 @@ import integrity; integrity.verify_or_die()  # LAYER 8
 
 STYLE = ("Photorealistic 3D CGI render, DAZ Studio Iray render-engine look, photoreal CGI. "
          "NOT illustrated, NOT anime, NOT cartoon, NOT 2D.")
+# STYLE BLOCK v3 — STORY PAGES ONLY (owner-directed 2026-08-11; source:
+# research/vitality-gap-2026-08-11.md). Sheets keep the neutral STYLE above so
+# turnarounds stay usable as canon (flat studio light + scale silhouette).
+# v3's own framing is "far BEYOND the reference baseline": refs carry identity
+# and wardrobe, this block carries the scale over-shoot at page time.
+# NOTE: v3's "speech bubbles" clause is deliberately OMITTED — this project
+# letters via overlay (scripts/letter_pages.py), so baked bubbles are a defect.
+STYLE_PAGE = (
+    "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading with a "
+    "glossy specular sheen — hard highlights pop on flexed muscle. "
+    "LIGHTING: strong DIRECTIONAL key from behind or beside the subject, never flat overhead fill; "
+    "warm key against cool fill (or cool rim against a warm key); high contrast with deep shadow "
+    "falloff; a rim light traces the body's edge and the background stays darker than the subject. "
+    "BODIES: dramatically oversized, far BEYOND the reference baseline — the bust renders "
+    "dramatically enlarged, well past athletic-realistic proportions, round and heavy; each bicep "
+    "rivals her head in size when flexed; delts, pecs, chest and glutes carry exaggerated round "
+    "mass; the physique dominates and fills the frame. Garments visibly strain and split at their "
+    "seams under the mass, but coverage of chest, torso and hips is always preserved. "
+    "SLEEVES: when a muscle flexes inside a sleeved garment the fabric responds physically — the "
+    "sleeve seam splits open around the flexed muscle with crisp torn fabric edges, or the sleeve "
+    "is rolled up with a clean cuff edge; bare skin NEVER blends or gradients into fabric on the "
+    "same limb. "
+    "FACES: never blank or neutral — the emotion named in the prompt renders at full theatrical "
+    "intensity. NOT illustrated, NOT 2D illustration, NOT anime, NOT cartoon. "
+    "Strictly SFW: every character fully clothed; garments may strain or split at seams but skin "
+    "itself is NEVER torn or damaged; chest, torso and hips stay covered. "
+    "No background extras — only the named cast appears.")
 NEG = "No text, no words, no logos, no speech bubbles. No extra limbs, no extra hands."
 NEG_PAGE_BLEED = " No mannequin, no reference silhouette figure, no grid lines, no model-sheet layout."
 CAMERA_DISTANCE = {
@@ -223,7 +250,7 @@ def compose_page(panel_id):
     if t9: refs.append("anchor:lana")
 
     action = panel.get("action", "")
-    body = {"instruction": "Generate one image.", "style": STYLE,
+    body = {"instruction": "Generate one image.", "style": STYLE_PAGE,
             "camera": entry.get("camera", panel.get("camera")),
             "scene": {"environment": "EXACTLY the attached scene reference", "continuity": "continue from the attached previous panel" if panel.get("continuity_refs") else "establishing beat"},
             "characters": characters,
