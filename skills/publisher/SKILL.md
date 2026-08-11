@@ -80,11 +80,25 @@ the firing of posts is out of scope by design.
    step 1 of the checklist. House content rules apply: DA mature flag ON, IG strictly SFW,
    X sensitive-media per content. Keep every filled caption inside the file it belongs to.
 
-3. **Sanity-pass the bundle** — page count matches the shotlist (the script warns on
-   mismatch), crop sources exist in the page inventory, property URLs are the confirmed ones
-   (unknowns deliberately say "see cc-sites.json" rather than guessing).
+3. **Render the crop specs into a local media kit:**
 
-4. **STOP. Hand over the checklist.** Show the human `CHECKLIST.md` (inline, not just a
+   ```bash
+   python3 skills/publisher/scripts/render_crops.py --project projects/<p> [--pages-dir <dir>]
+   ```
+
+   Executes `crop-specs.json` → `posting/bundle/crops/<platform>/` (true crops + native
+   copies + `RENDER-MANIFEST.json` provenance). Center-crop v1 (attention-center subject
+   detection is a later wave); a spec larger than the source keeps native resolution at the
+   target aspect instead of upscaling (`--allow-upscale` forces exact pixels). Pillow engine,
+   `/usr/bin/sips` fallback. **`crops/` is gitignored — rendered binaries are never
+   committed**; re-render any time from the committed specs + pages.
+
+4. **Sanity-pass the bundle** — page count matches the shotlist (the script warns on
+   mismatch), crop renders came out clean (`RENDER-MANIFEST.json` errors empty), property
+   URLs are the confirmed ones (unknowns deliberately say "see cc-sites.json" rather than
+   guessing).
+
+5. **STOP. Hand over the checklist.** Show the human `CHECKLIST.md` (inline, not just a
    path), note anything unusual (QA findings, page-count mismatch, missing PDF), and end the
    turn. Do not "helpfully" continue into posting, do not open platform tabs, do not draft a
    scheduled task that would fire a post. Offering to *also* create the posting-board item is
@@ -97,12 +111,13 @@ the firing of posts is out of scope by design.
 |---|---|
 | `CHECKLIST.md` | The destination-ordered human publish checklist. Order: **site → patreon → deviantart → twitter → instagram** (canonical home first — everything links to it; then paying members; then biggest audience (DA, per the 2026-07-25 posting-ops research); then socials). Keys match studio/posting.php's chips exactly. |
 | `captions/<platform>.md` | Per-platform title/caption/tags, auto-facts filled by the script, prose filled by Claude in workflow step 2. |
-| `crop-specs.json` | Per-platform image-crop SPECS — dimensions + which pages (cover + suggested teasers). **v1 renders nothing**; a human or a Wave-2 render step executes the specs. Teaser picks are suggestions the human verifies for SFW + non-spoiler. |
+| `crop-specs.json` | Per-platform image-crop SPECS — dimensions + which pages (cover + suggested teasers). `scripts/render_crops.py` executes them (workflow step 3). Teaser picks are suggestions the human verifies for SFW + non-spoiler. |
+| `crops/` (local only) | The executed specs: per-platform crop renders + native copies + `RENDER-MANIFEST.json` provenance. **Gitignored (`projects/*/posting/bundle/crops/`) — rendered binaries never enter git**; re-derivable from specs + pages. |
 | `site-apply-notes.md` | What to add where on the site, pre-filled with this project's values. For WP properties this maps to `comic-platform/docs/PUBLISH-A-COMIC.md` (manifest → new_comic.py → verify → paywall → OCR/translate → URLs → syndication → flip reminder → WP side); for 3dmc it maps to the admin CMS flow. |
 | `whats-new-draft.json` | A ready-to-prepend entry for the live `admin/data/updates.json` (schema per `reference_whats_new_feed`) — DRAFT only, `ts` null until the human posts it. |
 | `posted.template.json` | The unfilled posting record. Human fills real URLs/dates after firing, saves as `posting/posted.json`. Schema: `references/posted-schema.json`. **Never create `posting/posted.json` yourself** — its existence = "posting done" to build-comic. |
 | `MANIFEST.json` | Bundle inventory + provenance: page inventory with dimensions, source dir, files written, platform order. |
-| `../analytics/engagement-stub.json` | The flywheel landing pad (Publisher → Ideator contract, VISION §4). Empty `captures[]` + a capture plan. How each source is read: `references/analytics-capture.md`. Wiring is Wave-2. |
+| `../analytics/engagement-stub.json` | The flywheel landing pad (Publisher → Ideator contract, VISION §4). Seeded with empty `captures[]` + a capture plan; ga4 + patreon passes append via `scripts/capture_engagement.py` (wrapper reads only, append-only). Other sources stay Tier-2/manual: `references/analytics-capture.md`. |
 
 ## Hard rules (repeated because they are the point)
 
@@ -110,10 +125,11 @@ the firing of posts is out of scope by design.
 - **Never create `posting/posted.json`** — only the human who posted does that.
 - **Never render or attach full-comic content into public-platform captions** — full pages go
   to the site + paid tiers; public posts get cover/teasers per crop-specs.
-- **Credentials:** this skill needs none. Analytics capture (later, separate act) uses ONLY
-  the `~/Documents/.credentials/bin/` wrappers (`ga`, `patreon`) — never raw secrets
-  (`project_credential_architecture`).
-- **Bundle text is project text** — commit it (CLAUDE.md rule 5). Never commit page binaries.
+- **Credentials:** bundle prep needs none. Engagement capture (`scripts/capture_engagement.py`,
+  a separate deliberate act) executes ONLY the `~/Documents/.credentials/bin/` wrappers
+  (`ga`, `patreon`) — never raw secrets, never the Keychain (`project_credential_architecture`).
+- **Bundle text is project text** — commit it (CLAUDE.md rule 5). Never commit page binaries
+  or the rendered `crops/` dir (gitignored — renders are local-only and re-derivable).
 
 ## Related surfaces
 

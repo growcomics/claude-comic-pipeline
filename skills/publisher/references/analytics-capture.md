@@ -2,14 +2,32 @@
 
 _The flywheel's read side. The stub (`analytics/engagement-stub.json`, schema in
 `engagement-stub-schema.json`) is the landing pad; this doc is how numbers land in it.
-**Wave-2 wires this; today every capture is a deliberate, read-only act** — nothing here posts
-or mutates any platform._
+**ga4 + patreon are WIRED — `scripts/capture_engagement.py` appends them (wrapper-only
+reads); the other sources stay Tier-2/manual. Every capture is a deliberate, read-only act**
+— nothing here posts or mutates any platform._
 
 ## The one credential rule
 
 Reads go through the `~/Documents/.credentials/bin/` wrappers ONLY (`project_credential_architecture`):
 **never** `cat` a token file, never `secretctl get` into context, never `curl -u "$(cat …)"`.
 If a source has no wrapper yet, write the wrapper first.
+
+## The wired path (ga4 + patreon)
+
+```bash
+python3 skills/publisher/scripts/capture_engagement.py --project projects/<p> \
+    [--sources ga4,patreon] [--window-days N] [--slug extra-site-slug] [--dry-run]
+```
+
+Window defaults to days-since-release from the stub. Appends one entry per source,
+append-only — prior captures are never touched. Patron/revenue deltas compute automatically
+against the most recent prior patreon capture (the entitled run-rate is embedded
+machine-readably in each capture's notes for exactly this). GA caveat: the `ga` wrapper
+reports only the TOP pagePath rows by activeUsers — a comic below that cutoff records
+**null with a note** (below-top-N is NOT zero; don't read null as failure), and `pageviews`
+stays null until the wrapper exposes a pageviews metric. Patreon pages the full roster with
+restricted fields (status/cents/pledge-start) — aggregates only, no per-member data stored.
+First validated run: not-so-supra-man, 2026-08-11 (release +11d).
 
 ## Source by source
 
@@ -25,7 +43,8 @@ If a source has no wrapper yet, write the wrapper first.
 ## Cadence
 
 The stub seeds a `capture_plan` of **release +7d** (all sources) and **release +30d**
-(ga4/patreon/deviantart). Append a capture entry per source per pass; never edit old captures —
+(ga4/patreon/deviantart). Run `capture_engagement.py` for the ga4/patreon share of each pass
+and append the rest by hand; never edit old captures —
 the record is append-only so deltas stay computable. A plan entry with no matching capture is a
 pass still owed; `window_days` says what a capture covers.
 

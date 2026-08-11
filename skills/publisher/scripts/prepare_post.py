@@ -4,8 +4,9 @@ prepare_post.py — Stage 7 (PUBLISHER) bundle assembler.  PREP ONLY.
 
 Assembles projects/<p>/posting/bundle/ from a reviewed, compiled comic:
 destination-ordered publish checklist, per-platform caption skeletons,
-per-platform image-crop SPECS (dimensions + page picks — v1 does NOT render
-crops), site-side apply notes keyed to the property's publish runbook, a
+per-platform image-crop SPECS (dimensions + page picks — render_crops.py
+executes them into gitignored crops/), site-side apply notes keyed to the
+property's publish runbook, a
 What's-New entry draft, and posted.template.json.  Also seeds the per-project
 analytics landing pad (analytics/engagement-stub.json).
 
@@ -87,13 +88,14 @@ PROPERTIES = {
     },
 }
 
-# v1 crop SPECS (dimensions + which pages).  Rendering the crops is Wave-2;
-# a human (or a later render step) executes these specs.
+# Crop SPECS (dimensions + which pages).  scripts/render_crops.py executes them
+# into posting/bundle/crops/ — local-only, gitignored, never committed.
 def crop_specs(cover, teasers):
     return {
-        "_note": "SPECS only — v1 renders nothing. gravity=attention-center means crop around the "
-                 "visual subject, not the geometric center. Teaser picks are SUGGESTIONS — human "
-                 "verifies SFW + non-spoiler before use.",
+        "_note": "SPECS — render with scripts/render_crops.py into bundle/crops/ (local-only, "
+                 "gitignored). gravity=attention-center means crop around the visual subject, not "
+                 "the geometric center (renderer v1 approximates with center-crop). Teaser picks "
+                 "are SUGGESTIONS — human verifies SFW + non-spoiler before use.",
         "site": {
             "treatment": "native",
             "pages": "all",
@@ -313,7 +315,8 @@ def build_checklist(ctx):
         "- [ ] What's-New: `whats-new-draft.json` → prepend to live `admin/data/updates.json`",
         "      (only if this release touches a 3dmc surface the team should know about)",
         "- [ ] Schedule engagement capture: +7d and +30d passes into",
-        "      `projects/%s/analytics/engagement-stub.json` (see skills/publisher/references/analytics-capture.md)" % ctx["slug"],
+        "      `projects/%s/analytics/engagement-stub.json` (scripts/capture_engagement.py wires" % ctx["slug"],
+        "      ga4+patreon; the rest per skills/publisher/references/analytics-capture.md)",
         "",
         "_Anything not applicable: set that platform's chip to n/a on the board and strike the section._",
     ]
@@ -426,10 +429,11 @@ def build_posted_template(ctx):
 
 def build_engagement_stub(ctx):
     return {
-        "_note": "Flywheel landing pad (Publisher → Ideator contract, VISION §4). Wiring is Wave-2; "
-                 "capture is manual/wrapper-driven for now — see skills/publisher/references/"
-                 "analytics-capture.md. NEVER read raw credential files; use ~/Documents/.credentials/bin/ "
-                 "wrappers (ga, patreon) only. Schema: skills/publisher/references/engagement-stub-schema.json",
+        "_note": "Flywheel landing pad (Publisher → Ideator contract, VISION §4). ga4+patreon passes "
+                 "append via scripts/capture_engagement.py; other sources are manual — see "
+                 "skills/publisher/references/analytics-capture.md. NEVER read raw credential files; "
+                 "use ~/Documents/.credentials/bin/ wrappers (ga, patreon) only. Schema: "
+                 "skills/publisher/references/engagement-stub-schema.json",
         "schema_version": 1,
         "project": ctx["slug"],
         "property": ctx["property"],

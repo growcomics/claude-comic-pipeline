@@ -5,7 +5,32 @@
   "property": "growgetter",
   "comic_id": "not-so-supra-man",
   "release_date": "2026-07-30",
-  "captures": [],
+  "captures": [
+    {
+      "captured_at": "2026-08-11T06:50:43Z",
+      "source": "ga4",
+      "source_detail": "GA4 property 303340242 via bin/ga (pagePath, last 11d)",
+      "window_days": 11,
+      "metrics": {
+        "pageviews": null,
+        "unique_readers": null
+      },
+      "notes": "no slug-matching row in bin/ga's top-8 pagePath rows (cutoff ~696 activeUsers) — below the wrapper's top-N, NOT zero; pageviews unavailable from wrapper. slugs tried: not-so-supra-man"
+    },
+    {
+      "captured_at": "2026-08-11T06:51:01Z",
+      "source": "patreon",
+      "source_detail": "Patreon campaign 3138139 via bin/patreon (full roster paged)",
+      "window_days": 11,
+      "metrics": {
+        "paying_patrons_total": 471,
+        "new_patrons": 14,
+        "patron_delta": null,
+        "revenue_delta_usd": null
+      },
+      "notes": "roster 5422 members over 6 pages; paying = active_patron AND entitled cents>0; headline patron_count=3533 (incl. free/former); entitled_run_rate_usd_month=9323.23; new_patrons = paying whose pledge started on/after release; deltas null (no prior patreon capture to diff)"
+    }
+  ],
   "capture_plan": [
     {
       "when": "release +7d",

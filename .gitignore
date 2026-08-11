@@ -27,3 +27,8 @@ research/comic-corpus/scripts-raw/*
 
 # gap fix 2026-06-12: Flow zips extract as .jpeg
 projects/**/*.jpeg
+
+# publisher Wave-2: rendered crop binaries are re-derivable from the committed
+# crop-specs.json + page set — the WHOLE crops/ dir (incl. its render manifest)
+# stays out of git; only the specs are versioned
+projects/*/posting/bundle/crops/
