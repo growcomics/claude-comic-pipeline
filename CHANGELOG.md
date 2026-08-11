@@ -1624,6 +1624,42 @@ Two recurring failure modes drove this:
 
 ---
 
+## 2026-05-22 (Experiment 04 — schema-contract enforcement layer at every pipeline-stage boundary)
+
+A structural-fix experiment following the same-day Mac Mini diagnostic session (below). That session ended on Magnamus's root-cause framing: *"every failure traced back to layers of the pipeline disagreeing about vocabulary or convention — nothing enforces a single schema, so each part speaks its own dialect and the joins fail silently."* This experiment writes the missing JSON-Schema contracts at every pipeline-stage boundary, builds a validator, runs it across all known projects, and proposes the wiring path. **Wiring as a HARD gate is deliberately NOT done in this branch** — that's a separate spawn after the user reviews where the drift lives. Experiment branch: `experiment/04-schema-contracts`.
+
+### Added
+
+- **`schemas/`** (new top-level directory). Six JSON Schemas (draft-07) covering every stage-boundary artifact:
+  - `production-config.schema.json` — produced by `production-briefing`, consumed by `script-breakdown` and `comic-production`. Required: `version`, `project.{name,root,brand}`, `transformation_type`, `platform`, `script_source`, `mandatory_rules.active`.
+  - `shotlist.schema.json` — produced by `script-breakdown`, consumed by every downstream stage. Required: `project`, `pages[]`. Per-panel required: `panel_id`, `camera`. Complements `skills/script-breakdown/scripts/validate_shotlist.py`'s camera-vocabulary check at the structural level.
+  - `references_required.schema.json` — produced by `script-breakdown`, consumed by `reference-gathering`. Accepts both `version` and `schema_version` dialect (legacy + canonical) so the audit can flag which is in use.
+  - `checks.schema.json` — per-panel ledger written by `skills/comic-production/scripts/checks_ledger.py::write_checks_ledger()`. Already uses `schema_version: 1` — the canonical convention to standardize on across the other artifacts.
+  - `defects.schema.json` — per-row schema for `defects.jsonl` (the same file the same-day `validate_shotlist.py` work read from). Required: `ts`, `panel_id`, `rule_id`, `severity` (`hard|soft`), `verification` (`pre_render|post_render`), `reason`.
+  - `continuity-report.schema.json` — the artifact is markdown, so the schema applies to the dict produced by `schema_audit.py`'s H1/H2/H3 extractor (verdict line + per-panel sections).
+- **[skills/continuity-check/scripts/schema_audit.py](skills/continuity-check/scripts/schema_audit.py)** — read-only validator. Usage: `schema_audit.py <project>`, `--all`, or `--external <path>`. Emits human-readable or `--json` output. Exit 1 on any violation, 0 clean. Uses `jsonschema` Draft 7. Walks `pages/panels/panel-*/checks.json` for the per-panel ledger and `defects.jsonl` line-by-line.
+- **[docs/experiments/04-schema-contracts/](docs/experiments/04-schema-contracts/)** — experiment write-up:
+  - `inventory.md` — producer/consumer/contract map for all 6 stages, with quoted writer code and per-project shape variance.
+  - `validation-report.md` — full audit results across 13 projects (4 in-repo + 9 in `~/Documents/`).
+  - `validation-snapshot.json` — machine-readable audit dump.
+  - `wiring-proposal.md` — three-level wiring plan (write-time hooks, build-comic checkpoints, halt-condition config key) with legacy-project migration strategy.
+
+### Findings
+
+- **6 schemas written, 27 artifacts validated, 18 pass, 9 fail.** 7 of 13 projects fail at least one schema. Top drift categories: fractional `muscle_size_tier` (2 projects), missing `panels[]` or `page_number=0` (2 projects), missing canonical top-level fields in `production-config.json` (2), missing `cast[].name` (2), unknown brand-enum / `script_source.type` value (1), `dialogue[].type: "sfx"` (1) — which would silently mis-letter as a speech bubble downstream — `version: "v2"` stringified (1), legacy `version` vs canonical `schema_version` in `references_required.json` (1).
+- **The validator surfaced two schema-author bugs of my own** during the first run. The `checks.json` status enum I wrote (`pass | fail | skip | n/a`) was narrower than the writer's actual vocabulary (`pass | fail | pending | blocked | skipped | n/a`), and `shotlist.json:arc_character` should accept `null`. Both fixed in the same branch. Single-sample evidence that even the contract author drifts from the contract without an enforced check.
+- **`checks.json` is the model.** After the enum fix, every on-disk panel ledger passed (26 panels across 3 projects). It already uses `schema_version` and has a single producer (`checks_ledger.py`). The other artifacts should converge on this pattern.
+- **`shotlist.json` is the most drifted** — 8 of 9 failures live there, and 4 of 6 stages consume it. Highest-leverage place to wire the gate.
+- **`defects.jsonl` had zero drift.** All 26 rows across 3 projects validated cleanly — the JSONL writer landed clean, and the format has been stable since.
+
+### Notes
+
+- The same-day Mac Mini session (below) landed `validate_shotlist.py` as a write-time gate for one artifact. This experiment generalizes that approach to all six stage-boundary artifacts and documents the wiring path; it does not modify `validate_shotlist.py` or any other writer.
+- Three open questions for the user to resolve before wiring (per [wiring-proposal.md](docs/experiments/04-schema-contracts/wiring-proposal.md)): (1) are fractional muscle-size tiers legitimate? (2) should `3DMuscleComics` and `script_source.type: "path"` enter the canonical vocabulary? (3) should `sfx` ever be allowed as a `dialogue[].type`?
+- Per Experiment-04 constraints, drift in real projects was documented but **NOT fixed** in this branch. Each drifted project is a candidate per-project migration spawn after the user resolves the open questions.
+
+---
+
 ## 2026-05-22 (Experiment 01 — Generalization smoke test across real projects)
 
 Signal-gathering pass to confirm the same-day composition-layer + validator fixes (see entry below) generalize beyond `chun-li-test`. Ran `next_panel.py --as-json` against every real comic project on disk (15 projects, discovered via `find ~ -name shotlist.json`). No fixes applied — this experiment only measures.

@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/growcomics/claude-comic-pipeline/schemas/checks.schema.json",
+  "title": "checks.json (per-panel)",
+  "description": "Per-panel rules-trace ledger written by skills/comic-production/scripts/checks_ledger.py::write_checks_ledger(). One file per panel at projects/<proj>/pages/panels/panel-<panel_id>/checks.json. This is the only artifact that already uses `schema_version` as the version field — the canonical convention to standardize on.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "panel_id",
+    "transformation_type",
+    "composed_at",
+    "composed_prompt",
+    "rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "const": 1,
+      "description": "Currently pinned to 1 by SCHEMA_VERSION in checks_ledger.py line 31. Bumping requires a coordinated migration of every projects/*/pages/panels/*/checks.json on disk."
+    },
+    "panel_id": {"type": "string", "minLength": 1},
+    "page_number": {"type": ["integer", "null"]},
+    "transformation_type": {
+      "type": "string",
+      "description": "Mirrors production-config.transformation_type. Defaults to 'fmg' in the writer if absent from the plan."
+    },
+    "shotlist_snapshot_sha": {
+      "type": ["string", "null"],
+      "description": "16-char sha256 prefix of shotlist.json at write time. Null if shotlist.json is missing."
+    },
+    "composed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp from checks_ledger._iso_now()."
+    },
+    "composed_prompt": {
+      "type": ["string", "null"],
+      "description": "Full generation prompt emitted by next_panel.compose_prompt(). May be null if the panel was written via a path that did not compose a prompt (rare)."
+    },
+    "accepted_variant_label": {
+      "type": ["string", "null"],
+      "description": "e.g. 'v3'. Set by the runner after variant selection; null at compose-time."
+    },
+    "rules": {
+      "type": "object",
+      "description": "Map of rule_id (e.g. 'L17', 'L22', 'L1.5') to its trace entry. Schema does not enumerate keys — rule set evolves.",
+      "additionalProperties": {"$ref": "#/definitions/rule_trace"}
+    }
+  },
+  "definitions": {
+    "rule_trace": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "applied": {"type": "boolean"},
+        "pre_render": {
+          "anyOf": [
+            {"type": "null"},
+            {"$ref": "#/definitions/verification"}
+          ]
+        },
+        "post_render": {
+          "anyOf": [
+            {"type": "null"},
+            {"$ref": "#/definitions/verification"}
+          ]
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Canonical writer values per next_panel.py: `pass`, `fail`, `pending` (post_render default before vision-audit runs), `blocked` (when pre_render failed and post_render couldn't be evaluated), `skipped` (rule not applicable to this panel), `n/a`. `skip` is a tolerated alias for `skipped`.",
+          "enum": ["pass", "fail", "pending", "blocked", "skipped", "skip", "n/a"]
+        },
+        "reason": {"type": ["string", "null"]},
+        "message": {
+          "type": ["string", "null"],
+          "description": "Drift-tolerated alias for `reason` (some older traces use this key)."
+        }
+      }
+    }
+  }
+}
