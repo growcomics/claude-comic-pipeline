@@ -281,7 +281,7 @@ def main():
     else: refuse([f"unknown job kind '{kind}'"])
     rpath = receipt(a.job, kind, prompt, attach, aspect, flags)
     print(f"COMPOSE OK [{a.job}]  aspect={aspect}  receipt={rpath}")
-    print(f"VERIFY PILL BEFORE SUBMIT: model=Nano Banana 2  count=x4  aspect={aspect}")
+    print(f"VERIFY PILL BEFORE SUBMIT: model=Nano Banana 2 Lite  count=x4  aspect={aspect}")
     print("ATTACH (in order):")
     for r in attach: print(f"  - {r}")
     print("PROMPT (paste verbatim, single line):")

@@ -1,5 +1,27 @@
 # HANDOFF — Mac mini session bootstrap (comic pipeline)
 
+> ## 🔴 TOP PRIORITY (owner-directed 2026-08-11 ~07:50 PDT) — READ FIRST
+> Owner, leaving the laptop: *"I need you to continue driving this on the Mac Mini somehow. It should
+> get all the way to completion on Mac Mini. Don't ask me stuff. Also… everything needs to be nano
+> banana 2 lite."*
+>
+> **The job:** finish **`projects/not-so-supra-man/`** — go read
+> **`projects/not-so-supra-man/RUN-NOW.md`**, which is a complete self-contained runbook (state,
+> remaining work in order, the proven Flow driving method, the verification discipline, and the
+> bust-landing correction loop). Do not re-derive any of it.
+>
+> **Model is `Nano Banana 2 Lite` on every submit — no exceptions.** Re-verify the pill every time;
+> it resets on reload.
+>
+> Status at handoff: 5 of 6 character turnarounds banked with full chains (`qa/verify_chain.py` → 5).
+> Next: `dana-t4-blouse` → `dana-t9-ANCHOR-SWAP` (3 passes) → scene ladders → 29 pages → letter + PDF.
+>
+> ⚠️ **This work is NOT for the sandboxed night-shift worker.** `~/Documents/night-shift/CHARTER.md`
+> guardrail 3 forbids Flow generation calls and guardrail 7 forbids pushing to remotes. The owner's
+> instruction above overrides those *for this task only*; see `docs/CHARTER-ADDENDUM-supra-man.md`.
+> Every other night-shift guardrail stays in force.
+
+
 You are Claude Code picking up the comic pipeline on this machine. The user will not open a
 terminal — **you run every command below yourself** via Bash. Work top to bottom; stop and
 report if any step fails. Written 2026-06-11 by the laptop session.
