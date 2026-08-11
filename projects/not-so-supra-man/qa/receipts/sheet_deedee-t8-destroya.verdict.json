@@ -1,0 +1,25 @@
+{
+ "job": "sheet:deedee-t8-destroya",
+ "pass": true,
+ "judge": "fresh-context subagent (sonnet), 5x-zoom pixel inspection of seat + spine regions",
+ "judged_at": "2026-08-11T01:00-07:00",
+ "winner": "d49e36bb-5321-4263-bad6-1726be2cec34",
+ "ranking": [
+  "d49e36bb",
+  "05696107",
+  "7d88c331",
+  "94188882"
+ ],
+ "tags": [
+  "ward-06-coverage-verified-clean",
+  "ward-01-lacing-side-seam-only-verified",
+  "views-4-complete",
+  "identity-matches-face-card",
+  "scale-silhouette-ok",
+  "anatomy-clean",
+  "style-photoreal-no-drift",
+  "no-text-contamination"
+ ],
+ "blocking_defects": [],
+ "note": "Round 1 (f4fb6bec/fae12045/b478dd49/0be87e08) FAILED 4/4 on WARD-06 \u2014 bare buttocks/thong back. Root cause was a reference gap (body-tier8.png is front-only), fixed in references/turnaround-specs.json rather than by re-rolling. Round 2 passes 4/4."
+}
