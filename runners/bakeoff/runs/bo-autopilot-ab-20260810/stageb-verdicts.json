@@ -1,0 +1,266 @@
+{
+ "b08-coat-split": {
+  "winner": "r1v4",
+  "ranking": [
+   {
+    "slot": "r1v4",
+    "score": 90,
+    "reasons": "Only variant that actually delivers a tight behind-three-quarter MEDIUM shot per the prompt \u2014 the seam split fills a much larger share of the frame, profile face-turn reads clean, and CREAK-RIIIP SFX sells the beat."
+   },
+   {
+    "slot": "r1v2",
+    "score": 68,
+    "reasons": "Clean and verified \u2014 the flagged MISC-00 background shelving is just boxes/bottles, no extra figures \u2014 but the crop is a wide near-full-body shot rather than the requested medium, so the seam payoff is small in frame."
+   },
+   {
+    "slot": "r1v1",
+    "score": 62,
+    "reasons": "Same wide near-full-body framing problem as r1v2 with a slightly less dynamic bubble placement, so it ranks just behind on composition tightness."
+   }
+  ]
+ },
+ "b13-kress-nervous": {
+  "winner": "r1v4",
+  "ranking": [
+   {
+    "slot": "r1v4",
+    "score": 88,
+    "reasons": "The only true CLOSE-UP of the four \u2014 face fills the frame with the sideways glance and temple sweat bead clearly readable, exactly matching the prompt's shot-scale request."
+   },
+   {
+    "slot": "r1v3",
+    "score": 74,
+    "reasons": "Tighter than v1/v2 and close to a CU, with good depth from the folding chair in the background, but still slightly wider than v4's true close crop."
+   },
+   {
+    "slot": "r1v2",
+    "score": 55,
+    "reasons": "Medium-close framing undercuts the requested CLOSE-UP, and the 'PROJECT VITALITY' signage competes for attention in the background."
+   },
+   {
+    "slot": "r1v1",
+    "score": 48,
+    "reasons": "Widest of the four and least CLOSE-UP-adherent, with an oversized bubble dominating the headroom instead of the requested tight face crop."
+   }
+  ]
+ },
+ "b14-margo-steps": {
+  "winner": "r1v2",
+  "ranking": [
+   {
+    "slot": "r1v2",
+    "score": 78,
+    "reasons": "Closest to the requested torso-up diagonal: cropped at the thigh (not full body), Margo staged off-center to the right against the angled screen/wall lines for real FG/BG depth rather than a centered symmetrical composition."
+   },
+   {
+    "slot": "r1v1",
+    "score": 62,
+    "reasons": "Similar cowboy-length crop avoids full body, but Margo is centered with chairs symmetrically flanking her, undercutting the 'not centered-symmetrical' instruction."
+   },
+   {
+    "slot": "r1v3",
+    "score": 50,
+    "reasons": "Full body from feet up violates the torso-up requirement outright, though the doorway framing and 'I'm ready' line add some off-center depth."
+   },
+   {
+    "slot": "r1v4",
+    "score": 30,
+    "reasons": "Full body like v3 but worse \u2014 two disconnected empty speech bubbles floating top and bottom is a baked-lettering glitch on top of the shot-scale violation."
+   }
+  ]
+ },
+ "b15-kress-panic": {
+  "winner": "r1v2",
+  "ranking": [
+   {
+    "slot": "r1v2",
+    "score": 88,
+    "reasons": "Cleanest true medium-close-up \u2014 head and shoulders centered, no macro over-crop, no necklace prop, and the eyes-widening panic reads clearly without competing detail."
+   },
+   {
+    "slot": "r1v1",
+    "score": 72,
+    "reasons": "Correct MCU crop and strong panic expression but the visible gold chain/necklace is an uncalled prop (PROP-01) that shouldn't be there."
+   },
+   {
+    "slot": "r1v3",
+    "score": 63,
+    "reasons": "Crops in tighter and more asymmetric than the requested head-and-shoulders framing, and carries the same PROP-01 necklace defect as v1."
+   },
+   {
+    "slot": "r1v4",
+    "score": 52,
+    "reasons": "Pulls back into more of a torso/medium shot rather than the requested MCU, diluting the panic close-up, and still shows the PROP-01 pendant."
+   }
+  ]
+ },
+ "b19-bar-down": {
+  "winner": "r1v4",
+  "ranking": [
+   {
+    "slot": "r1v4",
+    "score": 85,
+    "reasons": "Shoots past the squat-rack upright for real foreground-occlusion depth on a genuine low three-quarter angle, giving the panel the diagonal/FG-BG staging the flatter variants lack, with one coherent intact bar and a controlled-exhale expression."
+   },
+   {
+    "slot": "r1v2",
+    "score": 76,
+    "reasons": "Best directional key light and a legible power-rack background give real depth, but the lab coat is missing versus the character's established wardrobe, a continuity risk the owner has flagged before."
+   },
+   {
+    "slot": "r1v1",
+    "score": 63,
+    "reasons": "Reads correctly (intact single bar, coat present) but the lined-up folding chairs and flat diffuse lighting make the staging static compared to the other two."
+   }
+  ]
+ },
+ "b20-seam-rip": {
+  "winner": "r1v2",
+  "ranking": [
+   {
+    "slot": "r1v2",
+    "score": 84,
+    "reasons": "Strongest raking key light modeling the shoulder plus a legible blurred-gym background for depth, and the tear reads unambiguously as frayed cloth threads over smooth intact skin."
+   },
+   {
+    "slot": "r1v3",
+    "score": 81,
+    "reasons": "Essentially the same strong lit composition and clean cloth-not-skin tear as v2, ranked just behind on marginally softer thread detail at the rip edge."
+   },
+   {
+    "slot": "r1v1",
+    "score": 71,
+    "reasons": "Keeps the gym location legible in the background and the tear renders as clean fabric over intact skin, but the lighting is flatter and the framing more static than v2/v3."
+   },
+   {
+    "slot": "r1v4",
+    "score": 58,
+    "reasons": "Loses the gym environment entirely for a plain studio-gray backdrop, breaking location continuity, and introduces an unestablished stone pendant not seen in the other variants."
+   }
+  ]
+ },
+ "b02-kress-entrance": {
+  "winner": "r1v3",
+  "ranking": [
+   {
+    "slot": "r1v3",
+    "score": 88,
+    "reasons": "True over-Margo's-shoulder torso-up two-shot with real depth staging (Kress large and sharp in the mid-ground, Margo's shoulder/hair anchoring the foreground) \u2014 the only variant that actually delivers the requested tight OTS composition."
+   },
+   {
+    "slot": "r1v2",
+    "score": 68,
+    "reasons": "Genuine depth-staged diagonal with Margo's back in FG and Kress readable behind her, but the frame pulls too wide to read as tight torso-up and shows more desk/environment than the beat calls for."
+   },
+   {
+    "slot": "r1v4",
+    "score": 55,
+    "reasons": "Torso-up crop is on-spec but the two figures are staged as a level, same-scale, face-to-face lineup \u2014 exactly the flat two-shot the staging guide forbids."
+   },
+   {
+    "slot": "r1v1",
+    "score": 35,
+    "reasons": "Full-body wide shot that directly violates the 'not full body' instruction and trips the dialogue-beat full-body-monotony penalty."
+   }
+  ]
+ },
+ "b03-clipboard-grab": {
+  "winner": "r1v2",
+  "ranking": [
+   {
+    "slot": "r1v2",
+    "score": 90,
+    "reasons": "Best delivers 'the clipboard exchange dominating the frame' \u2014 the board fills the center of a tight torso-up OTS composition from behind Margo, with a strong diagonal reach that reads as dynamic theft rather than a static handoff."
+   },
+   {
+    "slot": "r1v4",
+    "score": 78,
+    "reasons": "Correctly stages the camera behind Margo's shoulder toward Kress with a slightly low angle, keeping the clipboard central, though it's a bit more static than v2's diagonal grab."
+   },
+   {
+    "slot": "r1v3",
+    "score": 65,
+    "reasons": "Clean tight medium-close two-shot with both faces readable and the clipboard prominent, but the camera is behind Kress's shoulder toward Margo \u2014 the reverse of the requested angle."
+   },
+   {
+    "slot": "r1v1",
+    "score": 40,
+    "reasons": "Full-body wide shot that violates the explicit 'not full body' instruction, shrinking the clipboard exchange to a small fraction of a busy frame."
+   }
+  ]
+ },
+ "b07-amulet-flex": {
+  "winner": "r1v2",
+  "ranking": [
+   {
+    "slot": "r1v2",
+    "score": 85,
+    "reasons": "Tightest true medium-shot crop of the three, keeping the flexed bicep and glowing amulet large and central while her gaze stays angled down and away from camera \u2014 no fourth-wall break, best payoff density."
+   },
+   {
+    "slot": "r1v1",
+    "score": 78,
+    "reasons": "Solid three-quarter medium shot with correct averted gaze and a well-lit amulet, but the flexed arm crosses tighter over the body so the bicep itself reads slightly smaller and more obscured than in v2."
+   },
+   {
+    "slot": "r1v4",
+    "score": 62,
+    "reasons": "Gaze and profile angle are correct, but the frame pulls down to the hips/thighs, drifting from 'medium shot' toward a wider full-body crop that dilutes the bicep/amulet payoff."
+   }
+  ]
+ },
+ "b23-finale": {
+  "winner": "r4v2",
+  "ranking": [
+   {
+    "slot": "r4v2",
+    "score": 80,
+    "reasons": "Body fully oversold: colossal round biceps, extreme curve overshoot past the ref sheet baseline; cast staged in genuine depth layers (cropped FG figure, mid-ground clappers, background figure at smaller scale); skylight backlight gives real rim glow on the low hero angle; face reads triumphant joy."
+   },
+   {
+    "slot": "r4v5",
+    "score": 52,
+    "reasons": "Lab coat and leggings smother the size/curve payoff (the exact 'generic' failure this beat must overshoot); cast arranged near-same depth in a left-to-right row (flat-lineup violation); arms-crossed pose reads flat."
+   }
+  ],
+  "one_liner": "r4v2 bares the physique for a genuine overshoot of the ref's size ceiling and stages the cast in real depth layers, while r4v5's lab coat smothers the payoff and lines the cast up flat.",
+  "judge": "fresh Sonnet subagent 2026-08-10, rubrics: qa-checklist.md + cinematic-framing.md + owner-defect-feedback-2026-08-10.md"
+ },
+ "b18-money-lift": {
+  "winner": "r5v6",
+  "ranking": [
+   {
+    "slot": "r5v6",
+    "score": 93,
+    "reasons": "Best-bent barbell sells 'impossibly loaded'; warm hard rim light cuts Margo off the dark background with long directional shadows; extreme low-angle diagonal; genuine three-depth staggering (investor FG bokeh, mid-sharp, soft background); peak gritted-teeth/vein/sweat face."
+   },
+   {
+    "slot": "r5v5",
+    "score": 87,
+    "reasons": "Strong low-angle diagonal, correct gray-tank wardrobe, clean three-layer depth; barbell bend and lighting a notch less dramatic."
+   },
+   {
+    "slot": "r5v4",
+    "score": 85,
+    "reasons": "Good bend and FG bokeh, real strain; Margo's top deviates from the ref tank (wardrobe ding)."
+   },
+   {
+    "slot": "r5v3",
+    "score": 78,
+    "reasons": "Extreme low angle, strong grimace; barbell nearly straight; ambiguous symmetric FG arm occlusion."
+   },
+   {
+    "slot": "r5v1",
+    "score": 72,
+    "reasons": "Decent diagonal; FG investor too sharp for bokeh depth; barbell barely bends."
+   },
+   {
+    "slot": "r5v2",
+    "score": 68,
+    "reasons": "Lab-coat wardrobe break, straight bar, background closer to a lineup."
+   }
+  ],
+  "one_liner": "r5v6 is the only variant where the barbell visibly bows under load, the rim light and shadows read genuinely directional rather than flat, and Margo's strained face carries real peak-effort intensity.",
+  "judge": "fresh Sonnet subagent 2026-08-10 (cast-verifier + ranker), rubrics: qa-checklist.md + cinematic-framing.md + owner-defect-feedback-2026-08-10.md"
+ }
+}

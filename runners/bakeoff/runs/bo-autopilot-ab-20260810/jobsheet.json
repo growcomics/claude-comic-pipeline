@@ -1,0 +1,497 @@
+[
+ {
+  "beat": "b02-kress-entrance",
+  "round": 1,
+  "prompt": "KRESS strides into the lab corner and confronts MARGO, who wears her lab coat ON and buttoned as in previous beats. Conversational TWO-SHOT, TORSO-UP medium framing (not full body), over MARGO's shoulder toward KRESS, tight staging.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b03-clipboard-grab",
+  "round": 1,
+  "prompt": "KRESS snatches the clipboard out of MARGO's hands without looking at her, dismissive. MEDIUM CLOSE two-shot, torso-up (not full body), camera slightly low behind MARGO's shoulder, the clipboard exchange dominating the frame.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b07-amulet-flex",
+  "round": 1,
+  "prompt": "MARGO (lab coat ON, consistent with prior beats) flexes one arm as the stone amulet pulses green light against her collarbone. THREE-QUARTER medium shot \u2014 she looks at her OWN flexed arm, eyes on the bicep, NOT at the camera; profile-favoring angle, no fourth-wall gaze.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b08-coat-split",
+  "round": 1,
+  "prompt": "MARGO's shoulders widen visibly; the lab coat's BACK SEAM creaks and starts to split along the stitching. The coat is otherwise clean and undamaged. Behind-three-quarter medium shot showing the straining seam, her face turned in profile surprise.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b13-kress-nervous",
+  "round": 1,
+  "prompt": "Gym presentation floor. CLOSE-UP of KRESS laughing it off nervously, glancing sideways, a bead of sweat on his temple. One clean WHITE speech bubble in the same style as every other panel (never colored).",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b14-margo-steps",
+  "round": 1,
+  "prompt": "Gym floor, same set dressing and chair positions as the previous presentation beats. MARGO steps forward out of the hallway, one fist clenched, jaw set. TORSO-UP medium shot on a diagonal composition (not full body, not centered-symmetrical).",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b15-kress-panic",
+  "round": 1,
+  "prompt": "MEDIUM CLOSE-UP of KRESS \u2014 head and shoulders in frame, NOT an extreme macro of the eyes \u2014 eyes widening in panic, pupils small, sweat beading, mouth slightly open. No dialogue.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b18-money-lift",
+  "round": 1,
+  "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b19-bar-down",
+  "round": 1,
+  "prompt": "MARGO lowers the SAME fully-loaded barbell under control \u2014 one single intact bar with all plates attached, physically coherent, nothing duplicated or lying on the floor. Low three-quarter angle, controlled-exhale expression.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b20-seam-rip",
+  "round": 1,
+  "prompt": "CLOSE-UP on MARGO's shoulder: the tank top's FABRIC seam rips open a little further \u2014 torn threads and fabric edges clearly visible as cloth \u2014 while the SKIN underneath is smooth, flawless and completely intact. Fabric tears; skin never does.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b23-finale",
+  "round": 1,
+  "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v4.png"
+  ]
+ },
+ {
+  "beat": "b18-money-lift",
+  "round": 2,
+  "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Unwanted background person (older man with gray hair, lower left foreground) \u2014 not identified as named cast; appears to )",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v4.png"
+  ]
+ },
+ {
+  "beat": "b23-finale",
+  "round": 2,
+  "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.\nCRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Both arms show disproportionately large, symmetrical muscular development with glowing effect that appears unrealistic e)\nCRITICAL FIX: wardrobe drifted last roll. Garments must match the attached reference images EXACTLY \u2014 same color, cut, and coverage state. (observed: White lab coat has visible tears/damage on shoulders, unclear if intentional to the scene narrative)\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Five background figures (unwanted extras) visible in frame\u2014no cast list provided, but these appear to be crowd/backgroun)\nFIX the specific defect noted from the previous roll. (observed: Multiple background/crowd figures (at least 4\u20135 onlookers) in the lab who are not named cast members; they appear to be )",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v4.png"
+  ]
+ },
+ {
+  "beat": "b18-money-lift",
+  "round": 3,
+  "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Man in dark maroon/brown shirt in foreground is blurred but distinct; unclear if named cast or unwanted background figur)",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v4.png"
+  ]
+ },
+ {
+  "beat": "b23-finale",
+  "round": 3,
+  "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.\nFIX the specific defect noted from the previous roll. (observed: Five background figures (seated audience members) appear to be unnamed extras/background people, not cast members. No ca)\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Four background figures present (man in navy hoodie, older man in maroon, man in white shirt, woman in dark shirt) with )\nCRITICAL FIX: lettering was garbled last roll. Bubble text must be crisp, correctly spelled, and match the quoted dialogue exactly. (observed: Garbled word 'FINAGOAFIOUT' in bottom-left speech bubble appears to be corrupted gibberish instead of readable dialogue.)\nCRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Arms are disproportionately and unnaturally enlarged/bulbous compared to rest of body \u2014 hallucinated muscle enlargement)",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 4,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v4.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v4.png"
+  ]
+ },
+ {
+  "beat": "b18-money-lift",
+  "round": 4,
+  "prompt": "EXACTLY FOUR people in frame: MARGO lifting, plus the THREE investors from the investors reference sheet \u2014 no one else, no gym-goers, no staff.\nMARGO mid-lift, barbell loaded with a comically impossible stack of plates, the steel bar visibly BOWING/BENDING under the load. Her face is pure maximum effort: teeth GRITTED and bared, jaw clenched, brow furrowed hard, neck tendons standing out, veins visible on her forearms and temples \u2014 the emotion must transform the whole face.\nCAMERA: extreme LOW-ANGLE worm's-eye shot on a strong DIAGONAL dutch tilt, shooting up past the bending bar. LIGHTING: one hard key light raking from the side, blazing rim light outlining her silhouette, LONG hard shadows thrown across the gym floor \u2014 high contrast, never flat.\nThe three investors react at three DIFFERENT depths: one investor HUGE in the near foreground, back to camera, out-of-focus (bokeh) at frame edge; the second in midground mouth agape; the third furthest back, half-risen from a folding chair. Never a flat side-by-side lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 6,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v6.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v6.png"
+  ]
+ },
+ {
+  "beat": "b23-finale",
+  "round": 4,
+  "prompt": "EXACTLY FIVE people in frame: MARGO posing, KRESS from the Kress reference sheet, and the THREE investors from the investors reference sheet \u2014 no one else, no audience, no crowd, no extras.\nTriumphant full-page finale: MARGO hits a colossal front DOUBLE-BICEP pose. Her physique is at the ABSOLUTE MAXIMUM stage of the reference sheet and then some: hugely round, dense biceps that rival the size of her head, cannonball shoulders wider than a doorway, thick powerful curves \u2014 dramatically bigger, rounder and curvier than any real bodybuilder. Do NOT render a generic athletic build; overshoot toward the biggest figure on the reference sheet. Her tank top strains at the seams but stays intact and covering; her skin is smooth and undamaged. Radiant victorious grin, chin up.\nCAMERA: LOW HERO ANGLE looking up at her. LIGHTING: dramatic BACKLIGHT flaring behind her with a bright rim glow tracing her silhouette, face lit by a soft bounce \u2014 high contrast, long shadows toward camera.\nThe four onlookers react at STAGGERED depths: KRESS nearest camera in soft-focus foreground, slack-jawed and shrunken in defeat; one investor midground applauding; the other two behind at different distances, one standing on a chair cheering. Never a flat lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 6,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v6.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v6.png"
+  ]
+ },
+ {
+  "beat": "b18-money-lift",
+  "round": 5,
+  "prompt": "EXACTLY FOUR people in frame: MARGO lifting, plus the THREE investors from the investors reference sheet \u2014 no one else, no gym-goers, no staff.\nMARGO mid-lift, barbell loaded with a comically impossible stack of plates, the steel bar visibly BOWING/BENDING under the load. Her face is pure maximum effort: teeth GRITTED and bared, jaw clenched, brow furrowed hard, neck tendons standing out, veins visible on her forearms and temples \u2014 the emotion must transform the whole face.\nCAMERA: extreme LOW-ANGLE worm's-eye shot on a strong DIAGONAL dutch tilt, shooting up past the bending bar. LIGHTING: one hard key light raking from the side, blazing rim light outlining her silhouette, LONG hard shadows thrown across the gym floor \u2014 high contrast, never flat.\nThe three investors react at three DIFFERENT depths: one investor HUGE in the near foreground, back to camera, out-of-focus (bokeh) at frame edge; the second in midground mouth agape; the third furthest back, half-risen from a folding chair. Never a flat side-by-side lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.\nHEADCOUNT LOCK: TOTAL of FOUR humans in the entire image \u2014 MARGO plus the three investors, each appearing EXACTLY ONCE. Count them: one, two, three investors, and MARGO. A fifth figure of any kind makes the image WRONG.\nThe rest of the gym is COMPLETELY EMPTY: vacant floor, unoccupied equipment, empty chairs, bare walls \u2014 no spectators, no gym members, no staff, no reflections of people, no posters or banners showing people.",
+  "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+  "aspect": "3:4",
+  "count": 6,
+  "anchors": [],
+  "refs": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png"
+  ],
+  "out": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v6.png"
+  ],
+  "done": true,
+  "have": [
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v1.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v2.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v3.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v4.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v5.png",
+   "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v6.png"
+  ]
+ }
+]

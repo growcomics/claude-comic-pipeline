@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (late) — b18/b23 escalation resolved: cast-list fix + money-shot re-rolls (20:36–20:55)
+
+### Fixed
+
+- **Scanner bug that killed b18/b23 in run `bo-autopilot-ab-20260810`**: the beat sheet had no per-beat cast list, so stage A flagged the SCRIPTED investor trio (+Kress) as unwanted extras (CAST-02 ×24 across the first three rounds) and the plan-vs-beat reconciliation in `bakeoff.py` never fired. `autopilot-ab-beats.manual-20260810.json` now carries `chars` for all 11 beats (b18 = MARGO + 3 investors, b23 = + KRESS), and the run state was patched the same way. Residual gap: `qascan`'s people-count still over-counts partially-cropped figures, so a fresh Sonnet cast-verifier pass (all figures matched to the ref sheets, exactly 4 humans in all six b18 r5 variants) was used to overturn the remaining CAST-02 false positives — worth folding a cast manifest into `ck_ai_qa` itself.
+
+### Added
+
+- **Round 4 (both beats) + round 5 (b18) money-shot re-rolls**, 6 variants/round on `nano_banana_2` (full, deliberately not lite — the API job record labels these `nano_banana_flash` even though that id 404s if requested directly; silent-substitution telemetry strikes again). Prompts re-authored against `research/owner-defect-feedback-2026-08-10.md`: b18 got a worm's-eye dutch diagonal, visibly bending bar, gritted-teeth strain, rim light + long shadows, and investors at three staggered depths incl. FG bokeh, plus a round-5 HEADCOUNT LOCK clause; b23 got a deliberate size overshoot (biceps rivaling her head, beyond the ref sheet's top stage) after the owner's "not busty/curvy/muscular enough" verdict, plus an explicit five-person cast count and a text ban (round-2 had garbled 'FINAGOAFIOUT' lettering). 19 submits, 18 delivered (1 NSFW block on a b18 roll, cleared on the modest-reframe retry), all byte-distinct, 27 credits (5712.06 → 5685.06). **Winners: b18 r5v6 `bef2a24879.png` (93/100), b23 r4v2 `73db27ad29.png` (80/100)** — both `accepted=true rating=good` + `bakeoff,judge-pick`, judge one-liners posted via `do=annotate`. Run yield rewritten: clearRate 1.0 (11/11), cleanVariantRate 0.526 over 78 rolls, 87 credits total. Stale `needs-human` tags from the exhausted round-3 attempts remain on `30b03499ab.png`/`ac9b890bed.png` (bridge tags are additive-only; superseded, owner can clear in Review). Composite refreshed at `/tmp/dr/autopilot-ab-composite.jpg` (winners green, rejects red, all 5 rounds).
+
+---
+
 ## 2026-08-10 (evening) — autopilot-ab bakeoff run EXECUTED manually (20:05–20:26)
 
 ### Added

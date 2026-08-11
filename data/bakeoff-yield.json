@@ -70,23 +70,23 @@
   "runId": "bo-autopilot-ab-20260810",
   "project": "autopilot-ab",
   "backend": "higgsfield-mcp",
-  "at": "2026-08-10T20:26:11",
+  "at": "2026-08-10T20:51:01",
   "beats": 11,
-  "rolls": 60,
-  "cleanVariantRate": 0.55,
+  "rolls": 78,
+  "cleanVariantRate": 0.526,
   "beatsCleanFirstRoll": 9,
-  "beatsClearedAfterRetry": 0,
-  "beatsHumanQueue": 2,
-  "clearRate": 0.818,
-  "defectsPerShippedPanel": 0.22,
+  "beatsClearedAfterRetry": 2,
+  "beatsHumanQueue": 0,
+  "clearRate": 1.0,
+  "defectsPerShippedPanel": 0.55,
   "defectsById": {
-   "CAST-02": 24,
+   "CAST-02": 49,
    "PROP-01": 7,
-   "MISC-00": 4,
+   "MISC-00": 6,
    "BODY-05": 3,
    "LET-02": 2,
    "WARD-01": 1
   },
-  "creditsSpent": 60
+  "creditsSpent": 87
  }
 ]

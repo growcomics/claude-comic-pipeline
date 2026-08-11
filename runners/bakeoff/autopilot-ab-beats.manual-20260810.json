@@ -21,7 +21,11 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO",
+        "KRESS"
+      ]
     },
     {
       "id": "b03-clipboard-grab",
@@ -41,7 +45,11 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO",
+        "KRESS"
+      ]
     },
     {
       "id": "b07-amulet-flex",
@@ -57,7 +65,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO"
+      ]
     },
     {
       "id": "b08-coat-split",
@@ -73,7 +84,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO"
+      ]
     },
     {
       "id": "b13-kress-nervous",
@@ -89,7 +103,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "KRESS"
+      ]
     },
     {
       "id": "b14-margo-steps",
@@ -105,7 +122,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO"
+      ]
     },
     {
       "id": "b15-kress-panic",
@@ -121,7 +141,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "KRESS"
+      ]
     },
     {
       "id": "b18-money-lift",
@@ -141,7 +164,13 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO",
+        "INVESTOR-A",
+        "INVESTOR-B",
+        "INVESTOR-C"
+      ]
     },
     {
       "id": "b19-bar-down",
@@ -157,7 +186,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO"
+      ]
     },
     {
       "id": "b20-seam-rip",
@@ -173,7 +205,10 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO"
+      ]
     },
     {
       "id": "b23-finale",
@@ -197,7 +232,14 @@
         }
       ],
       "aspect": "3:4",
-      "variants": 4
+      "variants": 4,
+      "chars": [
+        "MARGO",
+        "KRESS",
+        "INVESTOR-A",
+        "INVESTOR-B",
+        "INVESTOR-C"
+      ]
     }
   ]
 }

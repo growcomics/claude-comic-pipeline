@@ -1,0 +1,3455 @@
+{
+ "runId": "bo-autopilot-ab-20260810",
+ "project": "autopilot-ab",
+ "backend": "higgsfield-mcp",
+ "createdAt": "2026-08-10T20:05:41",
+ "style": "Photoreal 3D CGI render, DAZ3D/Iray look, physically-based skin and fabric shading, cinematic key light. NOT 2D illustration, NOT anime, NOT cartoon. Strictly SFW: every character fully clothed; garments may strain or split at seams but skin itself is NEVER torn or damaged; chest, torso and hips stay covered. No background extras \u2014 only the named cast appears. Speech bubbles: clean white 3D bubbles, identical style on every panel.",
+ "beats": {
+  "b02-kress-entrance": {
+   "cast": [],
+   "prompt": "KRESS strides into the lab corner and confronts MARGO, who wears her lab coat ON and buttoned as in previous beats. Conversational TWO-SHOT, TORSO-UP medium framing (not full body), over MARGO's shoulder toward KRESS, tight staging.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+     "file": "b79b578925.png",
+     "char": "",
+     "kind": "ref",
+     "label": "kress"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png",
+     "file": "966a9f9282.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-lab"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "KRESS strides into the lab corner and confronts MARGO, who wears her lab coat ON and buttoned as in previous beats. Conversational TWO-SHOT, TORSO-UP medium framing (not full body), over MARGO's shoulder toward KRESS, tight staging.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b02-kress-entrance-r1v1",
+       "board": "42dfd115f8.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b02-kress-entrance-r1v2",
+       "board": "f8747b8dfc.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b02-kress-entrance-r1v3",
+       "board": "b65fca7200.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b02-kress-entrance/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b02-kress-entrance-r1v4",
+       "board": "261f2324df.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v3",
+      "ranking": [
+       {
+        "slot": "r1v3",
+        "score": 88,
+        "reasons": "True over-Margo's-shoulder torso-up two-shot with real depth staging (Kress large and sharp in the mid-ground, Margo's shoulder/hair anchoring the foreground) \u2014 the only variant that actually delivers the requested tight OTS composition."
+       },
+       {
+        "slot": "r1v2",
+        "score": 68,
+        "reasons": "Genuine depth-staged diagonal with Margo's back in FG and Kress readable behind her, but the frame pulls too wide to read as tight torso-up and shows more desk/environment than the beat calls for."
+       },
+       {
+        "slot": "r1v4",
+        "score": 55,
+        "reasons": "Torso-up crop is on-spec but the two figures are staged as a level, same-scale, face-to-face lineup \u2014 exactly the flat two-shot the staging guide forbids."
+       },
+       {
+        "slot": "r1v1",
+        "score": 35,
+        "reasons": "Full-body wide shot that directly violates the 'not full body' instruction and trips the dialogue-beat full-body-monotony penalty."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v3",
+    "board": "b65fca7200.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b03-clipboard-grab": {
+   "cast": [],
+   "prompt": "KRESS snatches the clipboard out of MARGO's hands without looking at her, dismissive. MEDIUM CLOSE two-shot, torso-up (not full body), camera slightly low behind MARGO's shoulder, the clipboard exchange dominating the frame.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+     "file": "b79b578925.png",
+     "char": "",
+     "kind": "ref",
+     "label": "kress"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png",
+     "file": "966a9f9282.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-lab"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "KRESS snatches the clipboard out of MARGO's hands without looking at her, dismissive. MEDIUM CLOSE two-shot, torso-up (not full body), camera slightly low behind MARGO's shoulder, the clipboard exchange dominating the frame.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b03-clipboard-grab-r1v1",
+       "board": "177bb0be52.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b03-clipboard-grab-r1v2",
+       "board": "7a0900783d.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b03-clipboard-grab-r1v3",
+       "board": "0b0f5cbf2e.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b03-clipboard-grab/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b03-clipboard-grab-r1v4",
+       "board": "f219b068ba.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v2",
+      "ranking": [
+       {
+        "slot": "r1v2",
+        "score": 90,
+        "reasons": "Best delivers 'the clipboard exchange dominating the frame' \u2014 the board fills the center of a tight torso-up OTS composition from behind Margo, with a strong diagonal reach that reads as dynamic theft rather than a static handoff."
+       },
+       {
+        "slot": "r1v4",
+        "score": 78,
+        "reasons": "Correctly stages the camera behind Margo's shoulder toward Kress with a slightly low angle, keeping the clipboard central, though it's a bit more static than v2's diagonal grab."
+       },
+       {
+        "slot": "r1v3",
+        "score": 65,
+        "reasons": "Clean tight medium-close two-shot with both faces readable and the clipboard prominent, but the camera is behind Kress's shoulder toward Margo \u2014 the reverse of the requested angle."
+       },
+       {
+        "slot": "r1v1",
+        "score": 40,
+        "reasons": "Full-body wide shot that violates the explicit 'not full body' instruction, shrinking the clipboard exchange to a small fraction of a busy frame."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v2",
+    "board": "7a0900783d.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b07-amulet-flex": {
+   "cast": [],
+   "prompt": "MARGO (lab coat ON, consistent with prior beats) flexes one arm as the stone amulet pulses green light against her collarbone. THREE-QUARTER medium shot \u2014 she looks at her OWN flexed arm, eyes on the bicep, NOT at the camera; profile-favoring angle, no fourth-wall gaze.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png",
+     "file": "966a9f9282.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-lab"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "MARGO (lab coat ON, consistent with prior beats) flexes one arm as the stone amulet pulses green light against her collarbone. THREE-QUARTER medium shot \u2014 she looks at her OWN flexed arm, eyes on the bicep, NOT at the camera; profile-favoring angle, no fourth-wall gaze.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b07-amulet-flex-r1v1",
+       "board": "9418758289.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b07-amulet-flex-r1v2",
+       "board": "b3b4b61063.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "glowing green pendant on necklace appears to be a sci-fi/supernatural element that may not belong in realistic lab setting",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b07-amulet-flex-r1v3",
+       "board": "006b6e4833.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Blurred figure visible in background through glass door/window \u2014 unwanted extra person in frame",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b07-amulet-flex/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b07-amulet-flex-r1v4",
+       "board": "07cdc78f15.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "glowing green necklace/amulet appears supernatural/magical, inconsistent with realistic laboratory setting",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v2",
+      "ranking": [
+       {
+        "slot": "r1v2",
+        "score": 85,
+        "reasons": "Tightest true medium-shot crop of the three, keeping the flexed bicep and glowing amulet large and central while her gaze stays angled down and away from camera \u2014 no fourth-wall break, best payoff density."
+       },
+       {
+        "slot": "r1v1",
+        "score": 78,
+        "reasons": "Solid three-quarter medium shot with correct averted gaze and a well-lit amulet, but the flexed arm crosses tighter over the body so the bicep itself reads slightly smaller and more obscured than in v2."
+       },
+       {
+        "slot": "r1v4",
+        "score": 62,
+        "reasons": "Gaze and profile angle are correct, but the frame pulls down to the hips/thighs, drifting from 'medium shot' toward a wider full-body crop that dilutes the bicep/amulet payoff."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v2",
+    "board": "b3b4b61063.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b08-coat-split": {
+   "cast": [],
+   "prompt": "MARGO's shoulders widen visibly; the lab coat's BACK SEAM creaks and starts to split along the stitching. The coat is otherwise clean and undamaged. Behind-three-quarter medium shot showing the straining seam, her face turned in profile surprise.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-966a9f9282.png",
+     "file": "966a9f9282.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-lab"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "MARGO's shoulders widen visibly; the lab coat's BACK SEAM creaks and starts to split along the stitching. The coat is otherwise clean and undamaged. Behind-three-quarter medium shot showing the straining seam, her face turned in profile surprise.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b08-coat-split-r1v1",
+       "board": "197485324c.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b08-coat-split-r1v2",
+       "board": "170e99c13e.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "MISC-00",
+          "slug": "unwanted_extra",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "Two blurred human figures visible in background shelving area \u2014 possible background staff or unwanted extras",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b08-coat-split-r1v3",
+       "board": "6c8cd3df3d.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Blurred background figures visible through the doorway in the far right \u2014 appear to be unwanted extras or crowd members not part of the named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b08-coat-split/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b08-coat-split-r1v4",
+       "board": "d20bdb47e2.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v4",
+      "ranking": [
+       {
+        "slot": "r1v4",
+        "score": 90,
+        "reasons": "Only variant that actually delivers a tight behind-three-quarter MEDIUM shot per the prompt \u2014 the seam split fills a much larger share of the frame, profile face-turn reads clean, and CREAK-RIIIP SFX sells the beat."
+       },
+       {
+        "slot": "r1v2",
+        "score": 68,
+        "reasons": "Clean and verified \u2014 the flagged MISC-00 background shelving is just boxes/bottles, no extra figures \u2014 but the crop is a wide near-full-body shot rather than the requested medium, so the seam payoff is small in frame."
+       },
+       {
+        "slot": "r1v1",
+        "score": 62,
+        "reasons": "Same wide near-full-body framing problem as r1v2 with a slightly less dynamic bubble placement, so it ranks just behind on composition tightness."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v4",
+    "board": "d20bdb47e2.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b13-kress-nervous": {
+   "cast": [],
+   "prompt": "Gym presentation floor. CLOSE-UP of KRESS laughing it off nervously, glancing sideways, a bead of sweat on his temple. One clean WHITE speech bubble in the same style as every other panel (never colored).",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+     "file": "b79b578925.png",
+     "char": "",
+     "kind": "ref",
+     "label": "kress"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "Gym presentation floor. CLOSE-UP of KRESS laughing it off nervously, glancing sideways, a bead of sweat on his temple. One clean WHITE speech bubble in the same style as every other panel (never colored).",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b13-kress-nervous-r1v1",
+       "board": "7c53a2437f.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b13-kress-nervous-r1v2",
+       "board": "8b2870a177.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b13-kress-nervous-r1v3",
+       "board": "8c7e72e709.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "Gold chain necklace and pendant jewelry on a character in what appears to be a modern gym\u2014check if this aligns with intended wardrobe/era",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b13-kress-nervous/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b13-kress-nervous-r1v4",
+       "board": "baa034c770.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "low",
+          "detail": "Gold chain necklace visible on character \u2014 modern jewelry may be out of place depending on intended setting/era",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v4",
+      "ranking": [
+       {
+        "slot": "r1v4",
+        "score": 88,
+        "reasons": "The only true CLOSE-UP of the four \u2014 face fills the frame with the sideways glance and temple sweat bead clearly readable, exactly matching the prompt's shot-scale request."
+       },
+       {
+        "slot": "r1v3",
+        "score": 74,
+        "reasons": "Tighter than v1/v2 and close to a CU, with good depth from the folding chair in the background, but still slightly wider than v4's true close crop."
+       },
+       {
+        "slot": "r1v2",
+        "score": 55,
+        "reasons": "Medium-close framing undercuts the requested CLOSE-UP, and the 'PROJECT VITALITY' signage competes for attention in the background."
+       },
+       {
+        "slot": "r1v1",
+        "score": 48,
+        "reasons": "Widest of the four and least CLOSE-UP-adherent, with an oversized bubble dominating the headroom instead of the requested tight face crop."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v4",
+    "board": "baa034c770.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b14-margo-steps": {
+   "cast": [],
+   "prompt": "Gym floor, same set dressing and chair positions as the previous presentation beats. MARGO steps forward out of the hallway, one fist clenched, jaw set. TORSO-UP medium shot on a diagonal composition (not full body, not centered-symmetrical).",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "Gym floor, same set dressing and chair positions as the previous presentation beats. MARGO steps forward out of the hallway, one fist clenched, jaw set. TORSO-UP medium shot on a diagonal composition (not full body, not centered-symmetrical).",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b14-margo-steps-r1v1",
+       "board": "d743c847e3.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b14-margo-steps-r1v2",
+       "board": "33f772ac6e.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b14-margo-steps-r1v3",
+       "board": "857773f9cc.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b14-margo-steps/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b14-margo-steps-r1v4",
+       "board": "8eed0329b5.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v2",
+      "ranking": [
+       {
+        "slot": "r1v2",
+        "score": 78,
+        "reasons": "Closest to the requested torso-up diagonal: cropped at the thigh (not full body), Margo staged off-center to the right against the angled screen/wall lines for real FG/BG depth rather than a centered symmetrical composition."
+       },
+       {
+        "slot": "r1v1",
+        "score": 62,
+        "reasons": "Similar cowboy-length crop avoids full body, but Margo is centered with chairs symmetrically flanking her, undercutting the 'not centered-symmetrical' instruction."
+       },
+       {
+        "slot": "r1v3",
+        "score": 50,
+        "reasons": "Full body from feet up violates the torso-up requirement outright, though the doorway framing and 'I'm ready' line add some off-center depth."
+       },
+       {
+        "slot": "r1v4",
+        "score": 30,
+        "reasons": "Full body like v3 but worse \u2014 two disconnected empty speech bubbles floating top and bottom is a baked-lettering glitch on top of the shot-scale violation."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v2",
+    "board": "33f772ac6e.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b15-kress-panic": {
+   "cast": [],
+   "prompt": "MEDIUM CLOSE-UP of KRESS \u2014 head and shoulders in frame, NOT an extreme macro of the eyes \u2014 eyes widening in panic, pupils small, sweat beading, mouth slightly open. No dialogue.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+     "file": "b79b578925.png",
+     "char": "",
+     "kind": "ref",
+     "label": "kress"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "MEDIUM CLOSE-UP of KRESS \u2014 head and shoulders in frame, NOT an extreme macro of the eyes \u2014 eyes widening in panic, pupils small, sweat beading, mouth slightly open. No dialogue.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b15-kress-panic-r1v1",
+       "board": "cdf2acd97d.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "Gold chain necklace and pendant appear as literal in-scene object; may be a hallucinated prop or reference element rendered into the panel",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b15-kress-panic-r1v2",
+       "board": "27d684d133.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b15-kress-panic-r1v3",
+       "board": "f8f07665a6.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "low",
+          "detail": "Gold chain necklace visible on character\u2014verify if appropriate for intended wardrobe/era",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b15-kress-panic/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b15-kress-panic-r1v4",
+       "board": "fd63f22cad.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [
+         "PROP-01"
+        ],
+        "resolved": [
+         {
+          "id": "PROP-01",
+          "slug": "anachronistic_prop",
+          "sev": "major",
+          "model_sev": "low",
+          "detail": "Gold pendant necklace visible; confirm if appropriate for scene/character wardrobe",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v2",
+      "ranking": [
+       {
+        "slot": "r1v2",
+        "score": 88,
+        "reasons": "Cleanest true medium-close-up \u2014 head and shoulders centered, no macro over-crop, no necklace prop, and the eyes-widening panic reads clearly without competing detail."
+       },
+       {
+        "slot": "r1v1",
+        "score": 72,
+        "reasons": "Correct MCU crop and strong panic expression but the visible gold chain/necklace is an uncalled prop (PROP-01) that shouldn't be there."
+       },
+       {
+        "slot": "r1v3",
+        "score": 63,
+        "reasons": "Crops in tighter and more asymmetric than the requested head-and-shoulders framing, and carries the same PROP-01 necklace defect as v1."
+       },
+       {
+        "slot": "r1v4",
+        "score": 52,
+        "reasons": "Pulls back into more of a torso/medium shot rather than the requested MCU, diluting the panic close-up, and still shows the PROP-01 pendant."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v2",
+    "board": "27d684d133.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b18-money-lift": {
+   "cast": [
+    "MARGO",
+    "INVESTOR-A",
+    "INVESTOR-B",
+    "INVESTOR-C"
+   ],
+   "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+     "file": "ee98e411e6.png",
+     "char": "",
+     "kind": "ref",
+     "label": "investors"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r1v1",
+       "board": "c11aa732f6.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Unwanted background person (older man with gray hair, lower left foreground) \u2014 not identified as named cast; appears to be an extra or photo-bomber",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r1v2",
+       "board": "4186358aee.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Unwanted background person visible in left side of frame near the sign\u2014appears to be a blurred/cropped figure not part of the named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r1v3",
+       "board": "4c47ec3612.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present; no cast list provided, but the right-side background figure (woman in dark clothing with phone) appears to be an unwanted extra/background person not part of the main dialo",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r1v4",
+       "board": "0103900de1.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "At least 5 background gym members visible (man in maroon left, man in white center, woman in dark right, man in foreground right, blurred figure far right) \u2014 these are unwanted extras/crowd members no",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 2,
+     "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Unwanted background person (older man with gray hair, lower left foreground) \u2014 not identified as named cast; appears to )",
+     "injected": [
+      "CRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Unwanted background person (older man with gray hair, lower left foreground) \u2014 not identified as named cast; appears to )"
+     ],
+     "variants": [
+      {
+       "slot": "r2v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v1.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r2v1",
+       "board": "b1db986c3f.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in dark maroon/brown shirt in foreground is blurred but distinct; unclear if named cast or unwanted background figure. Potentially a crowd member / photo-bomber.",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Gray-haired woman visible on far right in background; unclear if part of named cast or unwanted extra observer.",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v2.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r2v2",
+       "board": "677cc688ac.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present (woman lifting, older man in maroon, man in white, man with dark skin, woman with gray hair). No cast list provided, but five distinct people in frame is a high count for a ",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v3.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r2v3",
+       "board": "49cad2d6f3.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in maroon/burgundy shirt visible in bottom-left foreground \u2014 partially cropped, unclear if named cast member or unwanted background figure",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r2v4.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r2v4",
+       "board": "ca43328f65.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Woman with gray/silver hair in foreground lower right appears to be an unwanted extra or background person not part of the named cast",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Woman on left side holding tablet/clipboard appears to be an unwanted extra background person",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 3,
+     "prompt": "Money-shot: MARGO mid-lift with a barbell loaded far beyond plausibility, the bar visibly BENDING, gritted-teeth maximum-effort expression, neck tendons and veins showing strain. DRAMATIC LOW-ANGLE diagonal camera, hard rim light and long shadows, the investor trio reacting at staggered depths \u2014 one close in foreground bokeh, others behind \u2014 never lined up flat.\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Man in dark maroon/brown shirt in foreground is blurred but distinct; unclear if named cast or unwanted background figur)",
+     "injected": [
+      "CRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Man in dark maroon/brown shirt in foreground is blurred but distinct; unclear if named cast or unwanted background figur)"
+     ],
+     "variants": [
+      {
+       "slot": "r3v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v1.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r3v1",
+       "board": "30b03499ab.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five distinct human figures present (main lifter + 4 onlookers), but no cast list provided. The background includes at least two additional people (older man lower left, woman in dark top right) who a",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v2.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r3v2",
+       "board": "1939569307.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present; no cast list provided. Four background spectators (man in maroon, man in white shirt, woman in black shirt, grey-haired man on left) appear to be unwanted extras/crowd memb",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v3.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r3v3",
+       "board": "8586cf99ef.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in maroon/burgundy shirt in foreground lower left \u2014 unclear if named cast or unwanted extra; not clearly integrated into the main action group",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r3v4.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r3v4",
+       "board": "f097907750.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five distinct human figures present; no cast list provided to validate. Background includes man in white shirt (left), woman in grey shirt (center, lifting), older woman in dark shirt (back center), m",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 4,
+     "prompt": "EXACTLY FOUR people in frame: MARGO lifting, plus the THREE investors from the investors reference sheet \u2014 no one else, no gym-goers, no staff.\nMARGO mid-lift, barbell loaded with a comically impossible stack of plates, the steel bar visibly BOWING/BENDING under the load. Her face is pure maximum effort: teeth GRITTED and bared, jaw clenched, brow furrowed hard, neck tendons standing out, veins visible on her forearms and temples \u2014 the emotion must transform the whole face.\nCAMERA: extreme LOW-ANGLE worm's-eye shot on a strong DIAGONAL dutch tilt, shooting up past the bending bar. LIGHTING: one hard key light raking from the side, blazing rim light outlining her silhouette, LONG hard shadows thrown across the gym floor \u2014 high contrast, never flat.\nThe three investors react at three DIFFERENT depths: one investor HUGE in the near foreground, back to camera, out-of-focus (bokeh) at frame edge; the second in midground mouth agape; the third furthest back, half-risen from a folding chair. Never a flat side-by-side lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.",
+     "injected": [
+      "OWNER CALIBRATION 2026-08-10: prior rounds rejected as flat \u2014 angle poor, lighting/shadows flat, no exertion emotion, investors lined up flat. Re-authored: worm's-eye dutch diagonal, hard rim + long shadows, gritted-teeth max effort, investors at 3 depths with FG bokeh.",
+      "SCANNER FIX: per-beat cast list now declared (MARGO + 3 investors) so the scripted trio no longer counts as CAST-02 extras; prompt states EXACTLY FOUR people.",
+      "Text ban added (prior LET risk) \u2014 pure visual splash panel."
+     ],
+     "variants": [
+      {
+       "slot": "r4v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v1.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v1",
+       "board": "ba46b565db.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "At least two unwanted background figures (man in white shirt, woman in black) visible in gym\u2014no cast list provided, flagging as potential photo-bombers or background extras not part of named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v2.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v2",
+       "board": "ada30d286a.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Gray-haired woman (bottom right, seated) appears to be an unwanted background extra/spectator not named in cast",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Gray-haired man (top left, partially visible) appears to be an unwanted background extra/spectator",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v3.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v3",
+       "board": "40d397c226.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Background male figure (left, blurred/partially cropped) appears to be an unwanted extra or background person not clearly part of named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v4.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v4",
+       "board": "71d070bcbc.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present; no cast list provided to verify legitimacy. Flagging as potential unwanted background/crowd members (the three observers in the background may be extras).",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v5",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v5.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v5",
+       "board": "59315f4233.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Unwanted background person visible on far right (partially cropped, maroon/brown clothing) \u2014 not part of the core cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v6",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r4v6.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r4v6",
+       "board": "5aeedc952a.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Dark-clothed figure (right edge, partially cropped) appears to be an unwanted extra or background person not part of the main cast",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Multiple background observers (man in white shirt, smaller woman on left) \u2014 unclear if these are named cast or crowd extras",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 5,
+     "prompt": "EXACTLY FOUR people in frame: MARGO lifting, plus the THREE investors from the investors reference sheet \u2014 no one else, no gym-goers, no staff.\nMARGO mid-lift, barbell loaded with a comically impossible stack of plates, the steel bar visibly BOWING/BENDING under the load. Her face is pure maximum effort: teeth GRITTED and bared, jaw clenched, brow furrowed hard, neck tendons standing out, veins visible on her forearms and temples \u2014 the emotion must transform the whole face.\nCAMERA: extreme LOW-ANGLE worm's-eye shot on a strong DIAGONAL dutch tilt, shooting up past the bending bar. LIGHTING: one hard key light raking from the side, blazing rim light outlining her silhouette, LONG hard shadows thrown across the gym floor \u2014 high contrast, never flat.\nThe three investors react at three DIFFERENT depths: one investor HUGE in the near foreground, back to camera, out-of-focus (bokeh) at frame edge; the second in midground mouth agape; the third furthest back, half-risen from a folding chair. Never a flat side-by-side lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.\nHEADCOUNT LOCK: TOTAL of FOUR humans in the entire image \u2014 MARGO plus the three investors, each appearing EXACTLY ONCE. Count them: one, two, three investors, and MARGO. A fifth figure of any kind makes the image WRONG.\nThe rest of the gym is COMPLETELY EMPTY: vacant floor, unoccupied equipment, empty chairs, bare walls \u2014 no spectators, no gym members, no staff, no reflections of people, no posters or banners showing people.",
+     "injected": [
+      "CAST-02 persisted r4 (all 6): scanner saw a 5th+ figure every roll \u2014 extras or duplicated investors. Round 5 adds a HEADCOUNT LOCK clause + explicitly empty gym, no people in reflections/posters."
+     ],
+     "variants": [
+      {
+       "slot": "r5v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v1.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v1",
+       "board": "1cecc8e166.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Unwanted background person visible on the right side (gray-haired woman in black sitting) \u2014 not part of the intended named cast",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in white shirt standing in background \u2014 appears to be an unnamed extra/gym member, not a core cast character",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Bearded man in light shirt visible mid-right \u2014 unnamed background person in group fitness setting",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r5v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v2.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v2",
+       "board": "202709cc6e.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "At least 5 distinct human figures visible; no cast list provided to validate. Gray-haired person (top right, back of frame), woman with red hair (center, lifting), man in white shirt (center-back), As",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r5v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v3.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v3",
+       "board": "515e3ae0cc.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Blurred/cropped figures in foreground (lower left/center) appear to be additional background people not part of the main cast; at least 2 partially visible heads suggest unwanted crowd members.",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r5v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v4.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v4",
+       "board": "314f3161a5.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in white shirt with 'JFB' text visible in background \u2014 appears to be unwanted extra or out-of-place figure not part of core cast",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Woman in dark clothing sitting/crouching in mid-background \u2014 unclear if named cast or unwanted extra",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r5v5",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v5.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v5",
+       "board": "132b281f3b.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Blurred figure in far left background (partial view, grey-haired person in dark clothing) \u2014 appears to be an unwanted background extra or crowd member not part of the named cast.",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r5v6",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b18-money-lift/r5v6.png",
+       "gen": "bo-autopilot-ab-20260810-b18-money-lift-r5v6",
+       "board": "bef2a24879.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in white shirt visible in mid-ground (upper right area) \u2014 appears to be an unwanted background extra not part of named cast",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Woman in black shirt visible in lower right background \u2014 appears to be an unwanted background extra not part of named cast",
+          "blocking": false,
+          "note": "fresh-judge cast verification 2026-08-10: exactly 4 humans, all matched to named cast (MARGO + investor trio); qascan had no cast list \u2014 false positive"
+         }
+        ],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r5v6",
+      "ranking": [
+       {
+        "slot": "r5v6",
+        "score": 93,
+        "reasons": "Best-bent barbell sells 'impossibly loaded'; warm hard rim light cuts Margo off the dark background with long directional shadows; extreme low-angle diagonal; genuine three-depth staggering (investor FG bokeh, mid-sharp, soft background); peak gritted-teeth/vein/sweat face."
+       },
+       {
+        "slot": "r5v5",
+        "score": 87,
+        "reasons": "Strong low-angle diagonal, correct gray-tank wardrobe, clean three-layer depth; barbell bend and lighting a notch less dramatic."
+       },
+       {
+        "slot": "r5v4",
+        "score": 85,
+        "reasons": "Good bend and FG bokeh, real strain; Margo's top deviates from the ref tank (wardrobe ding)."
+       },
+       {
+        "slot": "r5v3",
+        "score": 78,
+        "reasons": "Extreme low angle, strong grimace; barbell nearly straight; ambiguous symmetric FG arm occlusion."
+       },
+       {
+        "slot": "r5v1",
+        "score": 72,
+        "reasons": "Decent diagonal; FG investor too sharp for bokeh depth; barbell barely bends."
+       },
+       {
+        "slot": "r5v2",
+        "score": 68,
+        "reasons": "Lab-coat wardrobe break, straight bar, background closer to a lineup."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 2,
+   "winner": {
+    "slot": "r5v6",
+    "board": "bef2a24879.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b19-bar-down": {
+   "cast": [],
+   "prompt": "MARGO lowers the SAME fully-loaded barbell under control \u2014 one single intact bar with all plates attached, physically coherent, nothing duplicated or lying on the floor. Low three-quarter angle, controlled-exhale expression.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "MARGO lowers the SAME fully-loaded barbell under control \u2014 one single intact bar with all plates attached, physically coherent, nothing duplicated or lying on the floor. Low three-quarter angle, controlled-exhale expression.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b19-bar-down-r1v1",
+       "board": "f005f883c2.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b19-bar-down-r1v2",
+       "board": "157c2d571a.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b19-bar-down-r1v3",
+       "board": "3e1b845c9e.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "LET-02"
+        ],
+        "resolved": [
+         {
+          "id": "LET-02",
+          "slug": "garbled_text",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Duplicate speech bubble with identical text 'Controlled descent... easy does it.' \u2014 both bubbles contain the same line, suggesting a layering or dialogue error",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b19-bar-down/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b19-bar-down-r1v4",
+       "board": "1a37b46fa6.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v4",
+      "ranking": [
+       {
+        "slot": "r1v4",
+        "score": 85,
+        "reasons": "Shoots past the squat-rack upright for real foreground-occlusion depth on a genuine low three-quarter angle, giving the panel the diagonal/FG-BG staging the flatter variants lack, with one coherent intact bar and a controlled-exhale expression."
+       },
+       {
+        "slot": "r1v2",
+        "score": 76,
+        "reasons": "Best directional key light and a legible power-rack background give real depth, but the lab coat is missing versus the character's established wardrobe, a continuity risk the owner has flagged before."
+       },
+       {
+        "slot": "r1v1",
+        "score": 63,
+        "reasons": "Reads correctly (intact single bar, coat present) but the lined-up folding chairs and flat diffuse lighting make the staging static compared to the other two."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v4",
+    "board": "1a37b46fa6.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b20-seam-rip": {
+   "cast": [],
+   "prompt": "CLOSE-UP on MARGO's shoulder: the tank top's FABRIC seam rips open a little further \u2014 torn threads and fabric edges clearly visible as cloth \u2014 while the SKIN underneath is smooth, flawless and completely intact. Fabric tears; skin never does.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "CLOSE-UP on MARGO's shoulder: the tank top's FABRIC seam rips open a little further \u2014 torn threads and fabric edges clearly visible as cloth \u2014 while the SKIN underneath is smooth, flawless and completely intact. Fabric tears; skin never does.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b20-seam-rip-r1v1",
+       "board": "aac8bf59b0.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b20-seam-rip-r1v2",
+       "board": "8238225dd8.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b20-seam-rip-r1v3",
+       "board": "c035c196f4.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b20-seam-rip/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b20-seam-rip-r1v4",
+       "board": "c542134868.png",
+       "stageA": {
+        "verdict": "pass",
+        "registry": [],
+        "resolved": [],
+        "clean": true
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r1v2",
+      "ranking": [
+       {
+        "slot": "r1v2",
+        "score": 84,
+        "reasons": "Strongest raking key light modeling the shoulder plus a legible blurred-gym background for depth, and the tear reads unambiguously as frayed cloth threads over smooth intact skin."
+       },
+       {
+        "slot": "r1v3",
+        "score": 81,
+        "reasons": "Essentially the same strong lit composition and clean cloth-not-skin tear as v2, ranked just behind on marginally softer thread detail at the rip edge."
+       },
+       {
+        "slot": "r1v1",
+        "score": 71,
+        "reasons": "Keeps the gym location legible in the background and the tear renders as clean fabric over intact skin, but the lighting is flatter and the framing more static than v2/v3."
+       },
+       {
+        "slot": "r1v4",
+        "score": 58,
+        "reasons": "Loses the gym environment entirely for a plain studio-gray backdrop, breaking location continuity, and introduces an unestablished stone pendant not seen in the other variants."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 0,
+   "winner": {
+    "slot": "r1v2",
+    "board": "8238225dd8.png",
+    "via": "stage-b-external"
+   }
+  },
+  "b23-finale": {
+   "cast": [
+    "MARGO",
+    "KRESS",
+    "INVESTOR-A",
+    "INVESTOR-B",
+    "INVESTOR-C"
+   ],
+   "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.",
+   "kind": "panel",
+   "aspect": "3:4",
+   "variants": 4,
+   "anchors": [],
+   "refs": [
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-408ea3036d.png",
+     "file": "408ea3036d.png",
+     "char": "",
+     "kind": "ref",
+     "label": "margo"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-b79b578925.png",
+     "file": "b79b578925.png",
+     "char": "",
+     "kind": "ref",
+     "label": "kress"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-ee98e411e6.png",
+     "file": "ee98e411e6.png",
+     "char": "",
+     "kind": "ref",
+     "label": "investors"
+    },
+    {
+     "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/refs/ref-55acc4a1db.png",
+     "file": "55acc4a1db.png",
+     "char": "",
+     "kind": "ref",
+     "label": "env-gym"
+    }
+   ],
+   "rounds": [
+    {
+     "round": 1,
+     "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.",
+     "injected": [],
+     "variants": [
+      {
+       "slot": "r1v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v1.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r1v1",
+       "board": "9a8545a30a.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "BODY-05",
+         "WARD-01"
+        ],
+        "resolved": [
+         {
+          "id": "BODY-05",
+          "slug": "malformed_anatomy",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Both arms show disproportionately large, symmetrical muscular development with glowing effect that appears unrealistic even for a superhero transformation context",
+          "blocking": true
+         },
+         {
+          "id": "WARD-01",
+          "slug": "wardrobe_drift",
+          "sev": "blocker",
+          "model_sev": "low",
+          "detail": "White lab coat has visible tears/damage on shoulders, unclear if intentional to the scene narrative",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v2.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r1v2",
+       "board": "292b476020.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five background figures (unwanted extras) visible in frame\u2014no cast list provided, but these appear to be crowd/background people not part of named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v3.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r1v3",
+       "board": "67349c6f6c.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "MISC-00",
+          "slug": "unwanted_extra",
+          "sev": "major",
+          "model_sev": "high",
+          "detail": "Multiple background/crowd figures (at least 4\u20135 onlookers) in the lab who are not named cast members; they appear to be unnamed scientists or spectators.",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r1v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r1v4.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r1v4",
+       "board": "4bfdb7b3bd.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Background group of three people (older man in maroon, man in white, woman in dark shirt) on the left appears to be unwanted background crowd/extras not named in cast",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man on the right in navy tracksuit with white stripe appears to be an unwanted extra/background person",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 2,
+     "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.\nCRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Both arms show disproportionately large, symmetrical muscular development with glowing effect that appears unrealistic e)\nCRITICAL FIX: wardrobe drifted last roll. Garments must match the attached reference images EXACTLY \u2014 same color, cut, and coverage state. (observed: White lab coat has visible tears/damage on shoulders, unclear if intentional to the scene narrative)\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Five background figures (unwanted extras) visible in frame\u2014no cast list provided, but these appear to be crowd/backgroun)\nFIX the specific defect noted from the previous roll. (observed: Multiple background/crowd figures (at least 4\u20135 onlookers) in the lab who are not named cast members; they appear to be )",
+     "injected": [
+      "CRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Both arms show disproportionately large, symmetrical muscular development with glowing effect that appears unrealistic e)",
+      "CRITICAL FIX: wardrobe drifted last roll. Garments must match the attached reference images EXACTLY \u2014 same color, cut, and coverage state. (observed: White lab coat has visible tears/damage on shoulders, unclear if intentional to the scene narrative)",
+      "CRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Five background figures (unwanted extras) visible in frame\u2014no cast list provided, but these appear to be crowd/backgroun)",
+      "FIX the specific defect noted from the previous roll. (observed: Multiple background/crowd figures (at least 4\u20135 onlookers) in the lab who are not named cast members; they appear to be )"
+     ],
+     "variants": [
+      {
+       "slot": "r2v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v1.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r2v1",
+       "board": "f70f169df9.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "MISC-00",
+          "slug": "unwanted_extra",
+          "sev": "major",
+          "model_sev": "high",
+          "detail": "Five background figures (seated audience members) appear to be unnamed extras/background people, not cast members. No cast list provided, but these are clearly observers/crowd, not protagonists.",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v2.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r2v2",
+       "board": "4aa53eaeca.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Four background figures present (man in navy hoodie, older man in maroon, man in white shirt, woman in dark shirt) with no cast list provided \u2014 these appear to be unwanted background people or extras ",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v3.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r2v3",
+       "board": "5fc475bdaa.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "LET-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five distinct background characters appear (older man in maroon, man in white shirt, woman in dark top, man in blue striped jacket, older man in white striped jacket). No cast list provided; five unna",
+          "blocking": true
+         },
+         {
+          "id": "LET-02",
+          "slug": "garbled_text",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Garbled word 'FINAGOAFIOUT' in bottom-left speech bubble appears to be corrupted gibberish instead of readable dialogue.",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r2v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r2v4.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r2v4",
+       "board": "853305da4d.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "BODY-05",
+         "BODY-05"
+        ],
+        "resolved": [
+         {
+          "id": "BODY-05",
+          "slug": "malformed_anatomy",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Arms are disproportionately and unnaturally enlarged/bulbous compared to rest of body \u2014 hallucinated muscle enlargement",
+          "blocking": true
+         },
+         {
+          "id": "BODY-05",
+          "slug": "malformed_anatomy",
+          "sev": "blocker",
+          "model_sev": "med",
+          "detail": "Biceps appear fused or melted rather than naturally muscular",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 3,
+     "prompt": "Triumphant full-page finale: MARGO hits a colossal DOUBLE-BICEP pose, physique at its absolute maximum mass and roundness per the reference physique \u2014 dramatically bigger, rounder and curvier than a generic athletic build, matching the reference sheet's top stage. LOW HERO ANGLE, dramatic backlight with rim glow, the cast reacting at staged depths around her.\nFIX the specific defect noted from the previous roll. (observed: Five background figures (seated audience members) appear to be unnamed extras/background people, not cast members. No ca)\nCRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Four background figures present (man in navy hoodie, older man in maroon, man in white shirt, woman in dark shirt) with )\nCRITICAL FIX: lettering was garbled last roll. Bubble text must be crisp, correctly spelled, and match the quoted dialogue exactly. (observed: Garbled word 'FINAGOAFIOUT' in bottom-left speech bubble appears to be corrupted gibberish instead of readable dialogue.)\nCRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Arms are disproportionately and unnaturally enlarged/bulbous compared to rest of body \u2014 hallucinated muscle enlargement)",
+     "injected": [
+      "FIX the specific defect noted from the previous roll. (observed: Five background figures (seated audience members) appear to be unnamed extras/background people, not cast members. No ca)",
+      "CRITICAL FIX: the previous roll added an unnamed extra person. ONLY the named cast appears \u2014 zero background people, pedestrians, or bystanders. (observed: Four background figures present (man in navy hoodie, older man in maroon, man in white shirt, woman in dark shirt) with )",
+      "CRITICAL FIX: lettering was garbled last roll. Bubble text must be crisp, correctly spelled, and match the quoted dialogue exactly. (observed: Garbled word 'FINAGOAFIOUT' in bottom-left speech bubble appears to be corrupted gibberish instead of readable dialogue.)",
+      "CRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct. (observed: Arms are disproportionately and unnaturally enlarged/bulbous compared to rest of body \u2014 hallucinated muscle enlargement)"
+     ],
+     "variants": [
+      {
+       "slot": "r3v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v1.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r3v1",
+       "board": "ac9b890bed.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present with no cast list provided; four background observers appear to be unwanted extras / crowd members not part of a named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v2.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r3v2",
+       "board": "4f9a5513d8.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Four background audience members (seated figures) are present but no cast list provided; unclear if these are named characters or unwanted extras in a solo-cast scene",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v3.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r3v3",
+       "board": "72e2d011c2.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five human figures present; without a named cast list, the four background observers appear to be unwanted extras or crowd members not identified as part of the intended scene.",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r3v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r3v4.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r3v4",
+       "board": "b11d0e6e6f.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "MISC-00",
+          "slug": "unwanted_extra",
+          "sev": "major",
+          "model_sev": "high",
+          "detail": "Four background observers (older man in maroon, bald man in white, man in navy tracksuit, woman in grey) appear to be unnamed cast extras or background crowd, not part of a specified named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ]
+    },
+    {
+     "round": 4,
+     "prompt": "EXACTLY FIVE people in frame: MARGO posing, KRESS from the Kress reference sheet, and the THREE investors from the investors reference sheet \u2014 no one else, no audience, no crowd, no extras.\nTriumphant full-page finale: MARGO hits a colossal front DOUBLE-BICEP pose. Her physique is at the ABSOLUTE MAXIMUM stage of the reference sheet and then some: hugely round, dense biceps that rival the size of her head, cannonball shoulders wider than a doorway, thick powerful curves \u2014 dramatically bigger, rounder and curvier than any real bodybuilder. Do NOT render a generic athletic build; overshoot toward the biggest figure on the reference sheet. Her tank top strains at the seams but stays intact and covering; her skin is smooth and undamaged. Radiant victorious grin, chin up.\nCAMERA: LOW HERO ANGLE looking up at her. LIGHTING: dramatic BACKLIGHT flaring behind her with a bright rim glow tracing her silhouette, face lit by a soft bounce \u2014 high contrast, long shadows toward camera.\nThe four onlookers react at STAGGERED depths: KRESS nearest camera in soft-focus foreground, slack-jawed and shrunken in defeat; one investor midground applauding; the other two behind at different distances, one standing on a chair cheering. Never a flat lineup.\nNo speech bubbles, no captions, no text anywhere in this panel.",
+     "injected": [
+      "OWNER CALIBRATION 2026-08-10: prior rounds rejected as generic/under-sized \u2014 'not busty/curvy/muscular enough'. Deliberate over-spec: biceps rival her head, shoulders wider than a doorway, overshoot the reference sheet's top stage.",
+      "SCANNER FIX: per-beat cast list now declared (MARGO + KRESS + 3 investors); prompt states EXACTLY FIVE people; reaction cast staged at depths.",
+      "Text ban added (round-2 LET-02 'FINAGOAFIOUT' garble) \u2014 pure visual splash panel."
+     ],
+     "variants": [
+      {
+       "slot": "r4v1",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v1.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v1",
+       "board": "c59e6a8880.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02",
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Five background figures (seated man left, man in maroon shirt, man in white shirt, woman right) appear to be unwanted extras\u2014no cast list provided, but this is a large crowd of unnamed people surround",
+          "blocking": true
+         },
+         {
+          "id": "MISC-00",
+          "slug": "other",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "Partial banner text 'TALITY' visible\u2014possible anachronistic or unexplained prop/sign",
+          "blocking": false
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v2",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v2.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v2",
+       "board": "73db27ad29.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02",
+         "MISC-00"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "At least 5 distinct human figures visible; no cast list provided. Male figure in foreground (bottom right, partially cropped) appears to be an unwanted background extra or crowd member, unclear if par",
+          "blocking": false,
+          "note": "within beat cast (5<=5; plan under-lists)"
+         },
+         {
+          "id": "MISC-00",
+          "slug": "other",
+          "sev": "major",
+          "model_sev": "med",
+          "detail": "Anatomical exaggeration: biceps and overall musculature appear disproportionately large, possibly a hallucinated transformation or anatomical distortion rather than realistic athletic physiology.",
+          "blocking": false
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r4v3",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v3.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v3",
+       "board": "5338e8aa3d.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02",
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Man in foreground (bottom left, dark jacket) appears to be an unwanted extra or background figure not part of main cast",
+          "blocking": true
+         },
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Multiple background gym-goers (left: man in maroon, center-right: man in white, right: woman in dark shirt) appear to be unnamed crowd members rather than named cast",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v4",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v4.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v4",
+       "board": "7d4452ec9a.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "At least 5-6 background figures visible in gym setting who appear to be unwanted extras/crowd members, not named cast. Right side shows two women clapping; left side shows two men. These are backgroun",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      },
+      {
+       "slot": "r4v5",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v5.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v5",
+       "board": "1c185975f5.png",
+       "stageA": {
+        "verdict": "warn",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Four unnamed background figures (man in navy jacket, man in white shirt, woman with arms crossed, man in maroon shirt) appear to be unwanted extras\u2014no cast list provided, but these are clearly not the",
+          "blocking": false,
+          "note": "within beat cast (5<=5; plan under-lists)"
+         }
+        ],
+        "clean": true
+       }
+      },
+      {
+       "slot": "r4v6",
+       "path": "/Users/mattmenashe/Documents/claude-comic-pipeline/runners/bakeoff/runs/bo-autopilot-ab-20260810/variants/b23-finale/r4v6.png",
+       "gen": "bo-autopilot-ab-20260810-b23-finale-r4v6",
+       "board": "b7e5b9252a.png",
+       "stageA": {
+        "verdict": "fail",
+        "registry": [
+         "CAST-02"
+        ],
+        "resolved": [
+         {
+          "id": "CAST-02",
+          "slug": "extra_person",
+          "sev": "blocker",
+          "model_sev": "high",
+          "detail": "Unwanted background spectators (at least 5 supporting/crowd figures) appear in frame \u2014 only the central flexing woman and foreground man should be named cast; others are unidentified extras/crowd memb",
+          "blocking": true
+         }
+        ],
+        "clean": false
+       }
+      }
+     ],
+     "stageB": {
+      "winner": "r4v2",
+      "ranking": [
+       {
+        "slot": "r4v2",
+        "score": 80,
+        "reasons": "Body fully oversold: colossal round biceps, extreme curve overshoot past the ref sheet baseline; cast staged in genuine depth layers (cropped FG figure, mid-ground clappers, background figure at smaller scale); skylight backlight gives real rim glow on the low hero angle; face reads triumphant joy."
+       },
+       {
+        "slot": "r4v5",
+        "score": 52,
+        "reasons": "Lab coat and leggings smother the size/curve payoff (the exact 'generic' failure this beat must overshoot); cast arranged near-same depth in a left-to-right row (flat-lineup violation); arms-crossed pose reads flat."
+       }
+      ]
+     }
+    }
+   ],
+   "status": "selected",
+   "retries": 2,
+   "winner": {
+    "slot": "r4v2",
+    "board": "73db27ad29.png",
+    "via": "stage-b-external"
+   }
+  }
+ },
+ "log": [
+  {
+   "ts": "2026-08-10T20:05:44",
+   "msg": "planned 11 beats for project autopilot-ab (backend higgsfield-mcp)"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b02-kress-entrance r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b03-clipboard-grab r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b07-amulet-flex r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b08-coat-split r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b13-kress-nervous r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b14-margo-steps r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b15-kress-panic r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b18-money-lift r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b19-bar-down r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b20-seam-rip r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:43",
+   "msg": "b23-finale r1: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:12:54",
+   "msg": "b02-kress-entrance r1v1: ingested as 42dfd115f8.png"
+  },
+  {
+   "ts": "2026-08-10T20:12:54",
+   "msg": "b02-kress-entrance r1v2: ingested as f8747b8dfc.png"
+  },
+  {
+   "ts": "2026-08-10T20:12:54",
+   "msg": "b02-kress-entrance r1v3: ingested as b65fca7200.png"
+  },
+  {
+   "ts": "2026-08-10T20:12:54",
+   "msg": "b02-kress-entrance r1v4: ingested as 261f2324df.png"
+  },
+  {
+   "ts": "2026-08-10T20:12:56",
+   "msg": "b02-kress-entrance r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:12:59",
+   "msg": "b02-kress-entrance r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:00",
+   "msg": "b02-kress-entrance r1v3: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:02",
+   "msg": "b02-kress-entrance r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:06",
+   "msg": "b02-kress-entrance: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:06",
+   "msg": "b02-kress-entrance: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:13:12",
+   "msg": "b03-clipboard-grab r1v1: ingested as 177bb0be52.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:12",
+   "msg": "b03-clipboard-grab r1v2: ingested as 7a0900783d.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:12",
+   "msg": "b03-clipboard-grab r1v3: ingested as 0b0f5cbf2e.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:12",
+   "msg": "b03-clipboard-grab r1v4: ingested as f219b068ba.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:13",
+   "msg": "b03-clipboard-grab r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:15",
+   "msg": "b03-clipboard-grab r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:16",
+   "msg": "b03-clipboard-grab r1v3: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:19",
+   "msg": "b03-clipboard-grab r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:23",
+   "msg": "b03-clipboard-grab: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:23",
+   "msg": "b03-clipboard-grab: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:13:28",
+   "msg": "b07-amulet-flex r1v1: ingested as 9418758289.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:28",
+   "msg": "b07-amulet-flex r1v2: ingested as b3b4b61063.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:28",
+   "msg": "b07-amulet-flex r1v3: ingested as 006b6e4833.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:28",
+   "msg": "b07-amulet-flex r1v4: ingested as 07cdc78f15.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:30",
+   "msg": "b07-amulet-flex r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:33",
+   "msg": "b07-amulet-flex r1v2: stage A warn ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:13:35",
+   "msg": "b07-amulet-flex r1v3: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:13:37",
+   "msg": "b07-amulet-flex r1v4: stage A warn ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:13:40",
+   "msg": "b07-amulet-flex: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:40",
+   "msg": "b07-amulet-flex: stage B winner r1v1 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:13:46",
+   "msg": "b08-coat-split r1v1: ingested as 197485324c.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:46",
+   "msg": "b08-coat-split r1v2: ingested as 170e99c13e.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:46",
+   "msg": "b08-coat-split r1v3: ingested as 6c8cd3df3d.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:46",
+   "msg": "b08-coat-split r1v4: ingested as d20bdb47e2.png"
+  },
+  {
+   "ts": "2026-08-10T20:13:47",
+   "msg": "b08-coat-split r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:13:50",
+   "msg": "b08-coat-split r1v2: stage A warn ['MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:13:54",
+   "msg": "b08-coat-split r1v3: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:13:55",
+   "msg": "b08-coat-split r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:00",
+   "msg": "b08-coat-split: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:00",
+   "msg": "b08-coat-split: stage B winner r1v1 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:14:07",
+   "msg": "b13-kress-nervous r1v1: ingested as 7c53a2437f.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:07",
+   "msg": "b13-kress-nervous r1v2: ingested as 8b2870a177.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:07",
+   "msg": "b13-kress-nervous r1v3: ingested as 8c7e72e709.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:07",
+   "msg": "b13-kress-nervous r1v4: ingested as baa034c770.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:09",
+   "msg": "b13-kress-nervous r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:11",
+   "msg": "b13-kress-nervous r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:13",
+   "msg": "b13-kress-nervous r1v3: stage A pass ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:14:16",
+   "msg": "b13-kress-nervous r1v4: stage A pass ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:14:19",
+   "msg": "b13-kress-nervous: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:19",
+   "msg": "b13-kress-nervous: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:14:25",
+   "msg": "b14-margo-steps r1v1: ingested as d743c847e3.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:25",
+   "msg": "b14-margo-steps r1v2: ingested as 33f772ac6e.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:25",
+   "msg": "b14-margo-steps r1v3: ingested as 857773f9cc.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:25",
+   "msg": "b14-margo-steps r1v4: ingested as 8eed0329b5.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:27",
+   "msg": "b14-margo-steps r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:28",
+   "msg": "b14-margo-steps r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:30",
+   "msg": "b14-margo-steps r1v3: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:31",
+   "msg": "b14-margo-steps r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:36",
+   "msg": "b14-margo-steps: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:36",
+   "msg": "b14-margo-steps: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:14:41",
+   "msg": "b15-kress-panic r1v1: ingested as cdf2acd97d.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:41",
+   "msg": "b15-kress-panic r1v2: ingested as 27d684d133.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:41",
+   "msg": "b15-kress-panic r1v3: ingested as f8f07665a6.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:41",
+   "msg": "b15-kress-panic r1v4: ingested as fd63f22cad.png"
+  },
+  {
+   "ts": "2026-08-10T20:14:44",
+   "msg": "b15-kress-panic r1v1: stage A warn ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:14:47",
+   "msg": "b15-kress-panic r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:50",
+   "msg": "b15-kress-panic r1v3: stage A pass ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:14:52",
+   "msg": "b15-kress-panic r1v4: stage A pass ['PROP-01']"
+  },
+  {
+   "ts": "2026-08-10T20:14:56",
+   "msg": "b15-kress-panic: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:14:56",
+   "msg": "b15-kress-panic: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:15:02",
+   "msg": "b18-money-lift r1v1: ingested as c11aa732f6.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:02",
+   "msg": "b18-money-lift r1v2: ingested as 4186358aee.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:02",
+   "msg": "b18-money-lift r1v3: ingested as 4c47ec3612.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:02",
+   "msg": "b18-money-lift r1v4: ingested as 0103900de1.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:04",
+   "msg": "b18-money-lift r1v1: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:15:07",
+   "msg": "b18-money-lift r1v2: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:15:10",
+   "msg": "b18-money-lift r1v3: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:15:14",
+   "msg": "b18-money-lift r1v4: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:15:14",
+   "msg": "b18-money-lift: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:15:20",
+   "msg": "b19-bar-down r1v1: ingested as f005f883c2.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:20",
+   "msg": "b19-bar-down r1v2: ingested as 157c2d571a.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:20",
+   "msg": "b19-bar-down r1v3: ingested as 3e1b845c9e.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:20",
+   "msg": "b19-bar-down r1v4: ingested as 1a37b46fa6.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:23",
+   "msg": "b19-bar-down r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:24",
+   "msg": "b19-bar-down r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:27",
+   "msg": "b19-bar-down r1v3: stage A warn ['LET-02']"
+  },
+  {
+   "ts": "2026-08-10T20:15:28",
+   "msg": "b19-bar-down r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:32",
+   "msg": "b19-bar-down: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:32",
+   "msg": "b19-bar-down: stage B winner r1v1 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:15:37",
+   "msg": "b20-seam-rip r1v1: ingested as aac8bf59b0.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:37",
+   "msg": "b20-seam-rip r1v2: ingested as 8238225dd8.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:37",
+   "msg": "b20-seam-rip r1v3: ingested as c035c196f4.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:37",
+   "msg": "b20-seam-rip r1v4: ingested as c542134868.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:39",
+   "msg": "b20-seam-rip r1v1: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:41",
+   "msg": "b20-seam-rip r1v2: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:43",
+   "msg": "b20-seam-rip r1v3: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:44",
+   "msg": "b20-seam-rip r1v4: stage A pass clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:48",
+   "msg": "b20-seam-rip: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:15:48",
+   "msg": "b20-seam-rip: stage B winner r1v1 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:15:54",
+   "msg": "b23-finale r1v1: ingested as 9a8545a30a.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:54",
+   "msg": "b23-finale r1v2: ingested as 292b476020.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:54",
+   "msg": "b23-finale r1v3: ingested as 67349c6f6c.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:54",
+   "msg": "b23-finale r1v4: ingested as 4bfdb7b3bd.png"
+  },
+  {
+   "ts": "2026-08-10T20:15:57",
+   "msg": "b23-finale r1v1: stage A warn ['BODY-05', 'WARD-01']"
+  },
+  {
+   "ts": "2026-08-10T20:15:59",
+   "msg": "b23-finale r1v2: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:16:02",
+   "msg": "b23-finale r1v3: stage A fail ['MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:16:06",
+   "msg": "b23-finale r1v4: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:16:06",
+   "msg": "b23-finale: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:16:33",
+   "msg": "b18-money-lift: retry 1/2 queued with 1 injected fixes: ['CRITICAL FIX']"
+  },
+  {
+   "ts": "2026-08-10T20:16:33",
+   "msg": "b23-finale: retry 1/2 queued with 4 injected fixes: ['CRITICAL FIX', 'CRITICAL FIX', 'CRITICAL FIX', 'FIX the specific defect noted from the previous roll. (observed']"
+  },
+  {
+   "ts": "2026-08-10T20:18:34",
+   "msg": "b18-money-lift r2: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:18:34",
+   "msg": "b23-finale r2: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:18:40",
+   "msg": "b18-money-lift r2v1: ingested as b1db986c3f.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:40",
+   "msg": "b18-money-lift r2v2: ingested as 677cc688ac.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:40",
+   "msg": "b18-money-lift r2v3: ingested as 49cad2d6f3.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:40",
+   "msg": "b18-money-lift r2v4: ingested as ca43328f65.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:43",
+   "msg": "b18-money-lift r2v1: stage A warn ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:18:46",
+   "msg": "b18-money-lift r2v2: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:18:49",
+   "msg": "b18-money-lift r2v3: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:18:52",
+   "msg": "b18-money-lift r2v4: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:18:52",
+   "msg": "b18-money-lift: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:18:59",
+   "msg": "b23-finale r2v1: ingested as f70f169df9.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:59",
+   "msg": "b23-finale r2v2: ingested as 4aa53eaeca.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:59",
+   "msg": "b23-finale r2v3: ingested as 5fc475bdaa.png"
+  },
+  {
+   "ts": "2026-08-10T20:18:59",
+   "msg": "b23-finale r2v4: ingested as 853305da4d.png"
+  },
+  {
+   "ts": "2026-08-10T20:19:02",
+   "msg": "b23-finale r2v1: stage A fail ['MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:19:05",
+   "msg": "b23-finale r2v2: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:19:09",
+   "msg": "b23-finale r2v3: stage A fail ['CAST-02', 'LET-02']"
+  },
+  {
+   "ts": "2026-08-10T20:19:12",
+   "msg": "b23-finale r2v4: stage A warn ['BODY-05', 'BODY-05']"
+  },
+  {
+   "ts": "2026-08-10T20:19:12",
+   "msg": "b23-finale: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:19:22",
+   "msg": "b18-money-lift: retry 2/2 queued with 1 injected fixes: ['CRITICAL FIX']"
+  },
+  {
+   "ts": "2026-08-10T20:19:22",
+   "msg": "b23-finale: retry 2/2 queued with 4 injected fixes: ['FIX the specific defect noted from the previous roll. (observed', 'CRITICAL FIX', 'CRITICAL FIX', 'CRITICAL FIX']"
+  },
+  {
+   "ts": "2026-08-10T20:21:01",
+   "msg": "b18-money-lift r3: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:21:01",
+   "msg": "b23-finale r3: collected 4/4 variants"
+  },
+  {
+   "ts": "2026-08-10T20:21:07",
+   "msg": "b18-money-lift r3v1: ingested as 30b03499ab.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:07",
+   "msg": "b18-money-lift r3v2: ingested as 1939569307.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:07",
+   "msg": "b18-money-lift r3v3: ingested as 8586cf99ef.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:07",
+   "msg": "b18-money-lift r3v4: ingested as f097907750.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:11",
+   "msg": "b18-money-lift r3v1: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:14",
+   "msg": "b18-money-lift r3v2: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:16",
+   "msg": "b18-money-lift r3v3: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:19",
+   "msg": "b18-money-lift r3v4: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:19",
+   "msg": "b18-money-lift: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:21:25",
+   "msg": "b23-finale r3v1: ingested as ac9b890bed.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:25",
+   "msg": "b23-finale r3v2: ingested as 4f9a5513d8.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:25",
+   "msg": "b23-finale r3v3: ingested as 72e2d011c2.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:25",
+   "msg": "b23-finale r3v4: ingested as b11d0e6e6f.png"
+  },
+  {
+   "ts": "2026-08-10T20:21:28",
+   "msg": "b23-finale r3v1: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:30",
+   "msg": "b23-finale r3v2: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:33",
+   "msg": "b23-finale r3v3: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:21:36",
+   "msg": "b23-finale r3v4: stage A warn ['MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:21:36",
+   "msg": "b23-finale: 0/4 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:21:44",
+   "msg": "b18-money-lift: retries exhausted -> human-review queue"
+  },
+  {
+   "ts": "2026-08-10T20:21:44",
+   "msg": "b23-finale: retries exhausted -> human-review queue"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b08-coat-split: stage B winner r1v4 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b13-kress-nervous: stage B winner r1v4 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b14-margo-steps: stage B winner r1v2 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b15-kress-panic: stage B winner r1v2 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b19-bar-down: stage B winner r1v4 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:22:22",
+   "msg": "b20-seam-rip: stage B winner r1v2 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:25:47",
+   "msg": "b02-kress-entrance: stage B winner r1v3 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:25:47",
+   "msg": "b03-clipboard-grab: stage B winner r1v2 of 4 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:25:47",
+   "msg": "b07-amulet-flex: stage B winner r1v2 of 3 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:25:48",
+   "msg": "b02-kress-entrance: winner r1v3 accepted on board (b65fca7200.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:48",
+   "msg": "b03-clipboard-grab: winner r1v2 accepted on board (7a0900783d.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:48",
+   "msg": "b07-amulet-flex: winner r1v2 accepted on board (b3b4b61063.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:48",
+   "msg": "b08-coat-split: winner r1v4 accepted on board (d20bdb47e2.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:49",
+   "msg": "b13-kress-nervous: winner r1v4 accepted on board (baa034c770.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:49",
+   "msg": "b14-margo-steps: winner r1v2 accepted on board (33f772ac6e.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:49",
+   "msg": "b15-kress-panic: winner r1v2 accepted on board (27d684d133.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:49",
+   "msg": "b19-bar-down: winner r1v4 accepted on board (1a37b46fa6.png)"
+  },
+  {
+   "ts": "2026-08-10T20:25:50",
+   "msg": "b20-seam-rip: winner r1v2 accepted on board (8238225dd8.png)"
+  },
+  {
+   "ts": "2026-08-10T00:00:00",
+   "msg": "b18-money-lift: round 4 queued (owner-escalation session; cast list fixed, prompt re-authored, 6 variants, nano_banana_2 full)"
+  },
+  {
+   "ts": "2026-08-10T00:00:00",
+   "msg": "b23-finale: round 4 queued (owner-escalation session; cast list fixed, prompt re-authored, 6 variants, nano_banana_2 full)"
+  },
+  {
+   "ts": "2026-08-10T20:42:16",
+   "msg": "b18-money-lift r4: collected 6/6 variants"
+  },
+  {
+   "ts": "2026-08-10T20:42:16",
+   "msg": "b23-finale r4: collected 6/6 variants"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v1: ingested as ba46b565db.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v2: ingested as ada30d286a.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v3: ingested as 40d397c226.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v4: ingested as 71d070bcbc.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v5: ingested as 59315f4233.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:27",
+   "msg": "b18-money-lift r4v6: ingested as 5aeedc952a.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:30",
+   "msg": "b18-money-lift r4v1: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:32",
+   "msg": "b18-money-lift r4v2: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:34",
+   "msg": "b18-money-lift r4v3: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:41",
+   "msg": "b18-money-lift r4v4: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:43",
+   "msg": "b18-money-lift r4v5: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:46",
+   "msg": "b18-money-lift r4v6: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:42:46",
+   "msg": "b18-money-lift: 0/6 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v1: ingested as c59e6a8880.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v2: ingested as 73db27ad29.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v3: ingested as 5338e8aa3d.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v4: ingested as 7d4452ec9a.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v5: ingested as 1c185975f5.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:54",
+   "msg": "b23-finale r4v6: ingested as b7e5b9252a.png"
+  },
+  {
+   "ts": "2026-08-10T20:42:59",
+   "msg": "b23-finale r4v1: stage A warn ['CAST-02', 'MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:43:02",
+   "msg": "b23-finale r4v2: stage A warn ['CAST-02', 'MISC-00']"
+  },
+  {
+   "ts": "2026-08-10T20:43:05",
+   "msg": "b23-finale r4v3: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:43:08",
+   "msg": "b23-finale r4v4: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:43:11",
+   "msg": "b23-finale r4v5: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:43:14",
+   "msg": "b23-finale r4v6: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:43:18",
+   "msg": "b23-finale: stage B failed (claude -p exit 1: ); falling back to first clean"
+  },
+  {
+   "ts": "2026-08-10T20:43:18",
+   "msg": "b23-finale: stage B winner r4v2 of 2 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:47:16",
+   "msg": "b18-money-lift r5: collected 6/6 variants"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v1: ingested as 1cecc8e166.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v2: ingested as 202709cc6e.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v3: ingested as 515e3ae0cc.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v4: ingested as 314f3161a5.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v5: ingested as 132b281f3b.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:24",
+   "msg": "b18-money-lift r5v6: ingested as bef2a24879.png"
+  },
+  {
+   "ts": "2026-08-10T20:47:28",
+   "msg": "b18-money-lift r5v1: stage A fail ['CAST-02', 'CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:31",
+   "msg": "b18-money-lift r5v2: stage A warn ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:34",
+   "msg": "b18-money-lift r5v3: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:37",
+   "msg": "b18-money-lift r5v4: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:39",
+   "msg": "b18-money-lift r5v5: stage A fail ['CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:42",
+   "msg": "b18-money-lift r5v6: stage A fail ['CAST-02', 'CAST-02']"
+  },
+  {
+   "ts": "2026-08-10T20:47:42",
+   "msg": "b18-money-lift: 0/6 clean -> retry"
+  },
+  {
+   "ts": "2026-08-10T20:47:42",
+   "msg": "b23-finale: stage B winner r4v2 of 2 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:55:00",
+   "msg": "b18 r5: Sonnet cast-verifier confirmed all 6 variants have exactly the 4 named cast members; CAST-02 stage-A flags overridden as scanner false positives"
+  },
+  {
+   "ts": "2026-08-10T20:50:33",
+   "msg": "b18-money-lift: stage B winner r5v6 of 6 survivors"
+  },
+  {
+   "ts": "2026-08-10T20:50:33",
+   "msg": "b18-money-lift: winner r5v6 accepted on board (bef2a24879.png)"
+  },
+  {
+   "ts": "2026-08-10T20:50:34",
+   "msg": "b23-finale: winner r4v2 accepted on board (73db27ad29.png)"
+  }
+ ],
+ "stats": {
+  "runId": "bo-autopilot-ab-20260810",
+  "project": "autopilot-ab",
+  "backend": "higgsfield-mcp",
+  "at": "2026-08-10T20:51:01",
+  "beats": 11,
+  "rolls": 78,
+  "cleanVariantRate": 0.526,
+  "beatsCleanFirstRoll": 9,
+  "beatsClearedAfterRetry": 2,
+  "beatsHumanQueue": 0,
+  "clearRate": 1.0,
+  "defectsPerShippedPanel": 0.55,
+  "defectsById": {
+   "CAST-02": 49,
+   "PROP-01": 7,
+   "MISC-00": 6,
+   "BODY-05": 3,
+   "LET-02": 2,
+   "WARD-01": 1
+  },
+  "creditsSpent": 87
+ }
+}
