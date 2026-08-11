@@ -73,6 +73,24 @@
           "39ec7ca1-6db6-461e-aecb-058641d106df"
         ],
         "qa_notes": "V3 auto-rejected (D4: suit rolled crimson), V2 rejected (emblem drift: single V + blue boots), V4 backup"
+      },
+      "turnaround_t2": {
+        "flow_id": "23f2e99f-c23f-40fc-9e0a-c87470e05845",
+        "disk": "references/characters/dana-lane/turnaround-t2.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dana-t2-reporter.receipt.json",
+          "audit": "qa/receipts/sheet_dana-t2-reporter.audit-pass",
+          "verdict": "qa/receipts/sheet_dana-t2-reporter.verdict.json",
+          "verdict_tags": [
+            "views-4-complete",
+            "identity-black-bob-matches-face-card",
+            "wardrobe-white-blouse-charcoal-pencil-skirt",
+            "bust-over-spec-landed",
+            "body-07-scale-VERIFIED",
+            "no-text-contamination"
+          ],
+          "prompt_sha": "2ec2cb51ddfbfaad7b8cc7a3b91e738b909461e6d2b3d4ac06eeebb396a9b337"
+        }
       }
     },
     "supraman": {
@@ -138,6 +156,24 @@
             "owner-phrasing-adopted"
           ],
           "prompt_sha": "4e85a1306507810304615084e614f405e0724ea3b4ef3f50e7e90d953818b87e"
+        }
+      },
+      "turnaround_t3": {
+        "flow_id": "64b4a734-f74f-4092-9180-563c8894c462",
+        "disk": "references/characters/dee-dee/turnaround-t3.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_deedee-t3-labcoat.receipt.json",
+          "audit": "qa/receipts/sheet_deedee-t3-labcoat.audit-pass",
+          "verdict": "qa/receipts/sheet_deedee-t3-labcoat.verdict.json",
+          "verdict_tags": [
+            "views-4-complete",
+            "wardrobe-labcoat-consistent",
+            "identity-matches-face-card",
+            "bust-over-spec-landed",
+            "no-text-contamination",
+            "body-07-residual-height-gap-accepted"
+          ],
+          "prompt_sha": "e4fd18b5a4eddcd6e287d1b27c10ac59546d04217ba9e365d58610fb7786a504"
         }
       }
     },

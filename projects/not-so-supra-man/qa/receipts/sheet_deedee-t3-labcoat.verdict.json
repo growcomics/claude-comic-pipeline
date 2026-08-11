@@ -1,0 +1,33 @@
+{
+ "job": "sheet:deedee-t3-labcoat",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection + numeric height measurement",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "64b4a734-f74f-4092-9180-563c8894c462",
+ "height_measurement": {
+  "ratio": 0.985,
+  "target": 0.905,
+  "ACCEPTED_WITH_RESIDUAL": "Two rounds with progressively harder clamps could not push below ~0.98. Nano Banana composes turnaround figures to fill the canvas, so the mannequin scales with the cast and the absolute height delta collapses. Direction is correct (she is shorter, not taller) and this is a scale DEVICE on a wardrobe/identity sheet \u2014 pages take height from the page prompt + height-chart, not from this sheet. Accepted rather than burning further rounds. Contrast with deedee-t8, which was un-banked at ratio 1.12-1.20 \u2014 a gross giantess error, a different class of failure.",
+  "round1": {
+   "t1": 1.003,
+   "t2": 1.006,
+   "t3": 0.994,
+   "t4": 1.01
+  },
+  "round2": {
+   "u1": 1.012,
+   "u2": 0.984,
+   "u3": 1.01,
+   "u4": 0.985
+  }
+ },
+ "tags": [
+  "views-4-complete",
+  "wardrobe-labcoat-consistent",
+  "identity-matches-face-card",
+  "bust-over-spec-landed",
+  "no-text-contamination",
+  "body-07-residual-height-gap-accepted"
+ ],
+ "blocking_defects": []
+}

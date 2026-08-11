@@ -1,0 +1,25 @@
+{
+ "job": "sheet:dana-t2-reporter",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection + numeric height measurement",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "23f2e99f-c23f-40fc-9e0a-c87470e05845",
+ "height_measurement": {
+  "ratio": 0.93,
+  "target": 0.92,
+  "note": "best height result of any sheet so far; the forceful SCALE block works when the figure has no tall hair volume to confound it"
+ },
+ "tags": [
+  "views-4-complete",
+  "identity-black-bob-matches-face-card",
+  "wardrobe-white-blouse-charcoal-pencil-skirt",
+  "bust-over-spec-landed",
+  "body-07-scale-VERIFIED",
+  "no-text-contamination"
+ ],
+ "rejected": {
+  "b1-95145cf1": "bust over-spec did not land (flat), height 0.975"
+ },
+ "incident": "FIRST attempt at this sheet was discarded: a 21-step blind batch attached the WRONG body ref (deedee-t3 lab coat instead of dana-t2 reporter) because the click landed before the picker search filtered, and 3 variants rendered the wrong character entirely. Root cause: skipping the repo's 'verify every chip in the preview pane' rule in favour of batching. Redone with the preview verified before each Add.",
+ "blocking_defects": []
+}
