@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 — Ideator engine built + WP-API catalog feedstock (Stage 1 engine lands)
+
+### Added
+
+- **The ideator's tournament engine** (`skills/ideator/scripts/tournament.py`) — replaces the `BUILD ME (stronger model)` stub, built deliberately per the stub's own instruction. Architecture rule: **judgment in Claude, mechanics in Python.** The engine is a four-step checkpoint harness — `brief` (feedstock digest + graceful-degrade report + prior-slate dedup fingerprints) → Claude generates ≥2 concepts per angle → `ingest` (per-concept jsonschema conformance, angle quotas, token-Jaccard near-dupe detection vs ALL archived slates and intra-slate, F1 growth-ratio floors, cast consistency; exit 2 on failure) → Claude scores against `rubric.md` verbatim → `finalize` (recomputes `cast_size` + `weighted_total` itself — Claude's arithmetic is never trusted — ranks, enforces the **flat-slate guard** (weighted-total stdev < 4 or range < 8 = refusal), validates the assembled slate, auto-archives into `slates/`) → `select` (records the human pick; never auto-selects). Why this shape: the gate doctrine — Claude's promises are not load-bearing; only in-path mechanical gates are. Negative-path verified: dupe/flat/missing-score/bad-enum/bogus-select all refuse with exit 2.
+- **`skills/ideator/roster.json`** — locked-character roster feedstock (Kelsey Brandt; Dana Lane, Supraman, Dee-Dee 'Destroya', Dex Doomer + 5 locked locations), built from the ref ledgers in `projects/`. The brief reads it automatically; keep it current as projects bank casts.
+- **`skills/ideator/slates/`** — the slate archive = the tournament's cross-session dedup memory, with **two real validated example slates**: unseeded (top 3: `destroya-owns-the-street` 87.7, `ratio-d` 78.5, `the-word-no` 75.4) and seeded "gym rivalry" (top 3: `home-court` 86.2, `rep-thief` 86.2, `mirror-set` 73.8). Both produced end-to-end through the engine (16 concepts total, all 4 angles × 2, schema-validated, per-axis scores + rationale, spread enforced); slate 2's generation dodged slate 1's fingerprints live.
+- **WP-API catalog ingest** (`research/comic-corpus/scripts/ingest_catalog.py` → `research/comic-corpus/catalog/`) — **supersedes the parked B2 browser-login path**: GrowGetterComics is the user's own WP site, so the catalog is ingested over the REST API via the `~/Documents/.credentials/bin/wp` Keychain wrapper (no secret ever enters context), paced at 1.2s/request. Ingested **1,091 posts / 27 pages / 9 categories / 59 tags / 702 approved comments** → committed text records (`posts.jsonl`, `pages.jsonl`, `series.json`, `INGEST.md`) with post-kind classification (655 gated serial pages / 184 fan-art / 105 comic chapters / 27 PDF bundles), Patreon-gating flags, series clustering, and image **URLs/ids only — no binaries in git** (raw API responses stay in gitignored `catalog/raw/`).
+- **`research/comic-corpus/catalog/SYNTHESIS.md`** — catalog findings **C1–C6**, the corpus's first popularity/monetization signal (closes part of the "no popularity signal" gap): C1 the Heidi character-universe serial is the modern flagship (~800+ pages — favor concepts with serial legs); C2 engagement leaders are mundane-institution hooks (`influencers` 34 comments — and `not-exactly-as-planned` is BOTH a top engagement leader and one of Gribble's three highest-growth scripts: growth density and audience response line up); C3 the freemium funnel (52 free comics acquire, 655 gated dailies retain); C4 16–32pp chapter band confirmed; C5 Fan-Art Friday ritual; C6 the 2021→2026 production-capacity cliff the pipeline exists to fill.
+
+### Changed
+
+- `skills/ideator/SKILL.md` — SHELL status → **ENGINE BUILT**: documents the four-step harness, the roster/catalog feedstock, and the component map. `references/rubric.md` — engine-status footnote updated; **scoring semantics and weights unchanged from v1.0** (slates stay comparable).
+- `research/comic-corpus/_queue.md` + `README.md` — B2 section marked SUPERSEDED by the WP-API path (what it does and doesn't cover); feedstock list updated.
+- `.gitignore` — `research/comic-corpus/catalog/raw/` (raw WP responses are re-derivable; derived records stay in git).
+
 ## 2026-08-11 — Reconciliation: origin/main merged into feat/comic-corpus (22 commits in, 3 conflicts resolved)
 
 ### Changed

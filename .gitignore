@@ -17,6 +17,9 @@ projects/**/*.jpg
 # comic-corpus: third-party copyrighted pages — analysis stays in git, raw pages never do
 research/comic-corpus/corpus/*/pages/
 
+# comic-corpus catalog: raw WP API responses are re-derivable — derived records stay in git
+research/comic-corpus/catalog/raw/
+
 # comic-corpus B1: the user's raw SCRIPT text stays local; normalized records are versioned
 research/comic-corpus/corpus/*/source.*
 research/comic-corpus/scripts-raw/*

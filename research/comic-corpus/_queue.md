@@ -25,19 +25,25 @@ Lines starting with `#` are comments. Lines starting with `- [x]` are done.
 
 Available full comics (≥15pp) for future runs: angela-issue-1 (75pp, naturalman), nami (24pp), the-magic-cloak-5-betrayal-2 (21pp), superior-part_1 (15pp). Teasers/partial (skip): rivalry, crystal-peaks, seven-idols, mary-sue-part-2. NOTE: next expansion should target a DIFFERENT studio/artist than Boogie to separate genre norm from house style.
 
-## Premium / authenticated catalog  (B2 — BLOCKED on user login; Claude must NOT log in)
+## Premium / authenticated catalog  (B2 — ✅ SUPERSEDED 2026-08-10 by the WP REST API path)
 
-The 9 comics above were pulled from PUBLIC chapter pages via the cookieless
-`ingest.py --web` path. **Premium content needs the authenticated session** — and the
-auth constraint is non-negotiable: **the USER** creates the account, grants their own
-premium, and logs in to the driven Chrome profile; **Claude never creates an account
-or enters a password.** Once the user confirms they're logged in, ingest premium-visible
-comics by **reading the authenticated session via the Chrome MCP** (the blob-fetch
-pattern in `SKILL.md` Phase 1 / `feedback_flow_bulk_download_blob.md`) — NOT the
-cookieless urllib path (it can't see premium pages).
+**The browser-login plan below is obsolete.** GrowGetterComics is one of the user's
+OWN WordPress sites with admin app-password API access via the credential wrappers
+(`~/Documents/.credentials/bin/wp` — see `reference_wp_admin_credentials`). The full
+catalog (1,091 posts / 27 pages / taxonomies / comment counts) is now ingested over
+the REST API by **`scripts/ingest_catalog.py`** → `catalog/` (posts.jsonl,
+series.json, SYNTHESIS.md with findings C1–C6). No browser session, no login, no
+secrets in context — the wrapper reads the Keychain at call time. Re-run:
+`scripts/ingest_catalog.py --site growgetter` (paced; ~20 requests).
 
-Priority once the session is live (corpus's #1 open question — separate genre law from
-Boogie's house style → target a DIFFERENT artist):
+What the catalog path does NOT cover: **page-image ANALYSIS** (beats.json scoring
+needs the rendered pages). For full visual ingests of specific comics, `ingest.py
+--web` still works on public chapter pages; gated serials strip inline images from
+content, so a gated visual ingest would pull via media ids — build that only when a
+specific comic is queued for full analysis.
+
+Priority for the next FULL VISUAL ingests (corpus's #1 open question — separate
+genre law from Boogie's house style → target a DIFFERENT artist):
 - [ ] angela-issue-1 (75pp, **naturalman** — different artist ✓)
 - [ ] nami (24pp)
 - [ ] the-magic-cloak-5-betrayal-2 (21pp)

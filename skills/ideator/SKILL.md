@@ -1,11 +1,11 @@
 ---
 name: ideator
-description: Stage 1 of the production line — turn a seed (a theme, a character, "do something with X", or nothing at all) into a ranked slate of comic concept pitches via a concept tournament scored against a corpus-grounded rubric. Surfaces the top 3 with rationale for the user to pick from, and emits concepts.json (the Ideator→Writer contract). Use when the user wants to "ideate a comic", "give me concepts", "pitch me some comics", "what should we make next", "brainstorm what to build", or asks for new comic ideas grounded in what actually works. NOTE: this is a SHELL — the generate-and-score engine is a documented stub awaiting a stronger model; the scaffold, schema, and rubric are real.
+description: Stage 1 of the production line — turn a seed (a theme, a character, "do something with X", or nothing at all) into a ranked slate of comic concept pitches via a concept tournament scored against a corpus-grounded rubric. Surfaces the top 3 with rationale for the user to pick from, and emits concepts.json (the Ideator→Writer contract). Use when the user wants to "ideate a comic", "give me concepts", "pitch me some comics", "what should we make next", "brainstorm what to build", or asks for new comic ideas grounded in what actually works.
 ---
 
 # Ideator — concept tournament (Stage 1 of the seven-stage line)
 
-> **STATUS: SHELL.** The scaffold, the `concepts.json` contract, and the scoring rubric are real and built to spec. The **tournament engine itself (concept generation + rubric scoring) is a documented stub** in `scripts/tournament.py` — marked `BUILD ME (stronger model)`. Do not pretend the engine runs. Until it's built, ideation is done by Claude reading this SKILL + `references/rubric.md` and producing a slate by hand against the same contract.
+> **STATUS: ENGINE BUILT (2026-08-10).** The tournament runs as a four-step checkpoint harness in `scripts/tournament.py` under one architecture rule: **judgment in Claude, mechanics in Python.** Claude generates the concepts and scores them against the rubric; Python owns everything mechanical — feedstock digestion, the cross-slate dedup memory, schema enforcement, scoring arithmetic, ranking, the flat-slate guard, archival — so the judgment can never skip the contract or fudge the math. Two validated example slates live in `slates/`.
 
 This is **Stage 1** of the production-system vision (`docs/PRODUCTION-SYSTEM-VISION.md` §2, §5). It sits at the front of the line:
 
@@ -66,13 +66,64 @@ Generate ≥2 concepts per angle (≥8 total) so the tournament has real competi
 
 ---
 
+## Running the tournament (the four-step harness)
+
+All commands from `skills/ideator/`:
+
+```
+1. GENERATION BRIEF                                              (mechanics)
+   python3 scripts/tournament.py brief [--seed "..."] [--per-angle 2]
+   → prints the brief: the feedstock file list (read them ALL before
+     generating), catalog top-series digest, locked roster, and fingerprints
+     of every concept in prior slates (the dedup memory). Missing feedstock is
+     reported explicitly — the tournament degrades gracefully to corpus-only
+     grounding until the analytics flywheel exists.
+
+2. GENERATE                                               (judgment — Claude)
+   Read the feedstock files the brief cites. Write a draft slate
+   {"seed": ..., "concepts": [...]} with >= per-angle concepts per angle,
+   each conforming to references/concept-schema.json. Ground every concept:
+   cite findings in corpus_grounding (F1–F6 visual corpus, C1–C6 catalog).
+   Do NOT fill scores yet — generation and scoring are separate passes.
+
+   python3 scripts/tournament.py ingest --draft draft.json       (mechanics)
+   → per-concept schema conformance, angle quotas, concept_id uniqueness,
+     near-dupe detection (vs prior slates AND intra-slate), F1 growth floors,
+     cast consistency. Exit 2 with a precise report on failure; fix, re-run.
+
+3. SCORE                                                  (judgment — Claude)
+   Read references/rubric.md VERBATIM (canonical-rubric rule — never
+   paraphrase) and score every concept 0–5 on all 7 axes, with a
+   score_rationale. Be a discerning critic; spread the scores.
+
+   python3 scripts/tournament.py finalize --draft draft.json \
+       --out concepts.json [--seed "..."]                        (mechanics)
+   → re-runs every ingest check, recomputes cast_size + weighted_total itself
+     (Claude's arithmetic is never trusted), ranks, enforces the FLAT-SLATE
+     GUARD (weighted-total stdev < 4 or range < 8 = refusal — a slate that
+     doesn't discriminate is useless), validates the assembled slate, writes
+     concepts.json, auto-archives a copy into slates/ (tomorrow's dedup
+     memory), and prints the top-3 table.
+
+4. HUMAN GATE
+   Surface the top 3 with per-axis rationale. The user picks (or asks for a
+   fresh slate / "more like #2"). NEVER auto-select. Then:
+   python3 scripts/tournament.py select --slate concepts.json --concept-id <id>
+```
+
+`validate --slate <file>` re-checks any slate (schema + recomputed totals);
+`print-contract` dumps a schema-shaped example concept.
+
+---
+
 ## I/O contract
 
 **Input** (all optional except the system can run with none):
 - `seed` — a theme, character name, phrase, or null ("surprise me").
-- `roster` — the locked character roster (names + ref status), so the tournament can prefer cast reuse. Today this lives across project ref ledgers + character sheets; a consolidated `roster.json` is a future input. Until it exists, pass the known locked characters by hand.
-- `corpus_findings` — `research/comic-corpus/synthesis/success-elements.md` conclusions (what works). This is the **ground truth** the rubric scores against.
-- `analytics` — *(future)* publisher engagement data, once Stage 7 + the flywheel exist. Until then, corpus findings stand in.
+- `roster` — the locked character roster (names + ref status), so the tournament can prefer cast reuse. Lives in `roster.json` (built 2026-08-10 from the project ref ledgers; the brief reads it automatically). Keep it current as projects bank new casts.
+- `corpus_findings` — `research/comic-corpus/synthesis/success-elements.md` conclusions (what works, F1–F6). This is the **ground truth** the rubric scores against.
+- `catalog_findings` — `research/comic-corpus/catalog/SYNTHESIS.md` (C1–C6): the full GrowGetter catalog ingested over the WP REST API — the corpus's first popularity/monetization signal (serial legs, engagement leaders, the freemium funnel).
+- `analytics` — *(future)* publisher engagement data, once Stage 7 + the flywheel exist. Until then, corpus + catalog findings stand in; the brief reports the degrade explicitly.
 
 **Output**:
 - `concepts.json` — the full ranked slate, conforming to `references/concept-schema.json`. **This is the Ideator→Writer contract** (vision §4). It carries every concept's logline, transformation arc, cast, setting, hook, est. page count, growth-ratio target, why-it'll-perform rationale, and per-axis score breakdown — plus `ranking`, `top3`, and (once the user picks) `selected_concept_id`.
@@ -100,17 +151,20 @@ The user picks **1 of the top 3**, or asks for a fresh slate / a variation on on
 
 ---
 
-## What's real vs stubbed (read before you "run" this)
+## Component map (engine built 2026-08-10)
 
 | Piece | State |
 |---|---|
 | `SKILL.md` (this file) — the workflow + contract | ✅ real |
-| `references/concept-schema.json` — the Ideator→Writer contract | ✅ real |
-| `references/rubric.md` — corpus-grounded scoring rubric | ✅ real |
-| `scripts/tournament.py` — feedstock loading + JSON emit + schema validate | ✅ real plumbing |
-| `scripts/tournament.py` — `generate_concepts()` + `score_concept()` | ⛔ **STUB** — `BUILD ME (stronger model)` |
+| `references/concept-schema.json` — the Ideator→Writer contract | ✅ real (unchanged by the engine build — the Writer can rely on it) |
+| `references/rubric.md` — corpus-grounded scoring rubric | ✅ real (v1.0) |
+| `scripts/tournament.py` — brief / ingest / finalize / select harness | ✅ **ENGINE** — mechanics in Python |
+| Concept generation + rubric scoring | ✅ **ENGINE** — judgment in Claude, per the workflow above |
+| `roster.json` — locked-character roster feedstock | ✅ real (keep current) |
+| `slates/` — archived slates = the dedup memory | ✅ real (auto-appended by finalize) |
+| Analytics flywheel feedstock | ⛔ not live — corpus + catalog stand in (brief reports the degrade) |
 
-Until the engine lands, produce the slate **by hand**: read `references/rubric.md`, generate ≥2 concepts per angle, score honestly against the axes, write a schema-valid `concepts.json`, surface the top 3. The contract is what matters — keep it stable so the engine can drop in behind it without breaking the Writer.
+Where judgment happens, this SKILL is the spec; where mechanics happen, `tournament.py` refuses bad inputs. Neither side trusts the other's promises — that's the design.
 
 ---
 

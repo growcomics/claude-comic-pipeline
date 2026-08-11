@@ -1,0 +1,568 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-11T06:16:55+00:00",
+  "seed": "gym rivalry",
+  "rubric_version": "1.0",
+  "corpus_synthesis_version": "success-elements v2 + catalog C1-C6 v1",
+  "roster_snapshot": [
+    {
+      "name": "Kelsey Brandt",
+      "project": "cheer-ascension",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dana Lane",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Supraman",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dee-Dee 'Destroya'",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dex Doomer",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    }
+  ],
+  "concepts": [
+    {
+      "concept_id": "home-court",
+      "title": "Home Court",
+      "logline": "On amnesty day Dee-Dee 'Destroya' walks into the heroes' own gym and challenges Dana Lane to a four-event lift-off — and the strength scoreboard starts paying each event's winner out of the loser.",
+      "premise": "HQ's annual amnesty day lets anyone train at the heroes' gym, no arrests, no powers-drama. Dee-Dee arrives in workout gear with a printed rulebook: bench, deadlift, squat, overhead — four events on Dana's own equipment, tracked by the gym's strength-rating scoreboard. What nobody clocks until event one settles: Dex Doomer serviced the scoreboard last month, and now it TRANSFERS the rating gap — each event's winner physically banks the difference out of the loser's frame. Supraman referees, helpless under amnesty rules. Down two events, visibly outscaled on her home court, Dana stakes her remaining rating on the final lift, winner takes the room.",
+      "transformation": {
+        "flavor": "tech",
+        "trigger": "Doomer-rigged strength scoreboard settling each event in bodymass",
+        "arc": "amnesty-day challenge -> four-event ladder, mass swinging on each settle -> Dana outscaled on home equipment -> all-in final lift -> winner takes the room and the rating",
+        "peak_state": "The winner posing on the platform under the maxed-out scoreboard, the loser at parity scale on the bench below",
+        "tier_curve": "tier 3 -> 9 (winner) mirrored by 8 -> 3 (loser)"
+      },
+      "cast": [
+        {
+          "name": "Dee-Dee 'Destroya'",
+          "role": "rival",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Dana Lane",
+          "role": "protagonist",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Supraman",
+          "role": "witness",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Dex Doomer",
+          "role": "catalyst",
+          "reuse": true,
+          "ref_status": "locked"
+        }
+      ],
+      "setting": "hq-gym (locked env pack)",
+      "hook": "She brought a rulebook to the heroes' gym. The scoreboard is already on her side.",
+      "est_page_count": 22,
+      "chapter_type": "climax",
+      "est_growth_page_ratio": 0.7,
+      "planned_escalation_devices": [
+        "size-comparison",
+        "multi-panel-progressive",
+        "reaction-intercut",
+        "sfx-driven",
+        "full-body-reveal"
+      ],
+      "generation_angle": "character-first",
+      "why_itll_perform": "Full locked cast + the one locked env pack the unseeded slate never touched (hq-gym) = the cheapest 22 pages on either slate. The event structure is a countable ladder with a public scoreboard the pipeline bakes legibly (F2), and mass swinging on every settle keeps a climax-grade growth ratio (F1 >= 0.70) with the person-as-gauge staging (F4). Amnesty day gives the rivalry stakes without leaving the SFW lane.",
+      "corpus_grounding": [
+        "C1 serial-legs",
+        "F1 climax >= 0.70",
+        "F2 baked-dialogue-edge",
+        "F4 size-comparison + reaction-intercut",
+        "Gribble one-upmanship + power-transfer"
+      ],
+      "scores": {
+        "growth_payoff_density": 5,
+        "story_spine": 4,
+        "hook": 4,
+        "camera_staging_potential": 5,
+        "cast_reuse": 5,
+        "novelty": 2,
+        "production_economy": 4
+      },
+      "score_rationale": "Climax-density event ladder with person-as-gauge on a fully locked cast/env — but it is the universe's SECOND strength-transfer book, so novelty pays for the economy.",
+      "cast_size": 4,
+      "weighted_total": 86.2
+    },
+    {
+      "concept_id": "rep-thief",
+      "title": "Rep Thief",
+      "logline": "A curse routes every training adaptation Farrah earns to her gym rival Sloane's body — and when Farrah figures it out, her only counter-move is to stop being excellent.",
+      "premise": "Farrah Okonkwo outworks everyone at Forge Fitness twice over; Sloane Byrd coasts, spots occasionally, and grows like a myth. The white-elephant wishbone Sloane snapped at the gym's holiday party did exactly what she asked: 'her results, my body.' Every rep Farrah grinds shows up on Sloane by morning. The mid-book reveal flips the rivalry into a genuinely unwinnable dilemma — Farrah CAN'T beat Sloane without feeding her, can't stall without losing everything she is, and the state championship she's trained her whole life for is in three weeks. She enters anyway, and the final day is Farrah lifting for the title while Sloane, ringside, outgrows the audience seating in real time.",
+      "transformation": {
+        "flavor": "curse",
+        "trigger": "a wishbone wish — 'her results, my body' — snapped at the gym holiday party",
+        "arc": "unexplained divergence -> Farrah's overtraining spiral feeds Sloane's rise -> the reveal and the stop-training standoff -> championship compulsion -> ringside real-time bloom as Farrah lifts for the title",
+        "peak_state": "Sloane filling the ringside section as Farrah locks out the winning lift — two payoffs, one rep",
+        "tier_curve": "tier 2 -> 8 (Sloane); Farrah stays tier 3, and the comic makes you feel it"
+      },
+      "cast": [
+        {
+          "name": "Farrah Okonkwo",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Sloane Byrd",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Coach Ines",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "Forge Fitness + a championship platform (two interiors)",
+      "hook": "Every rep she does shows up on her rival. She has a title to win anyway.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "reaction-intercut",
+        "multi-panel-progressive",
+        "size-comparison",
+        "clothing-destruction",
+        "slow-burn"
+      ],
+      "generation_angle": "hook-first",
+      "why_itll_perform": "The strongest story engine on the slate: the growth mechanic IS an unwinnable dilemma, so every training page is simultaneously a growth page and a stakes page (F1 and F5 rising together — the two top-weight axes). The reaction-intercut is structural — Farrah's effort and Sloane's bloom are the same beat seen twice (F4, F3 face-led on both ends). The champion-who-feeds-her-rival shape is the Gribble power-transfer twist told from the LOSER's side, which the corpus has never once done (F5 differentiation).",
+      "corpus_grounding": [
+        "F5 story-as-differentiator",
+        "F1 growth-ratio-by-intent",
+        "F4 reaction-intercut",
+        "F3 face-led-ECUs",
+        "Gribble power-transfer (loser-POV inversion)"
+      ],
+      "scores": {
+        "growth_payoff_density": 5,
+        "story_spine": 5,
+        "hook": 5,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 5,
+        "production_economy": 3
+      },
+      "score_rationale": "The unwinnable dilemma makes every training page a stakes page — F1 and F5 rising together; loser-POV power transfer is unprecedented in the corpus; two interiors and three new packs.",
+      "cast_size": 3,
+      "weighted_total": 86.2
+    },
+    {
+      "concept_id": "mirror-set",
+      "title": "Mirror Set",
+      "logline": "After midnight the gym's mirror wall trues you up to whatever you flex in it — and two night-shift rivals start a posing war for the center panel.",
+      "premise": "Closer-shift regulars Noor Haddad and Priscilla Cho discover Flexxen 24's secret: between midnight and close, the mirror wall reflects you a rep ahead — pose harder than your body and your body catches up to the reflection. Panel by panel down the wall, their posing war escalates from lat spreads to full routines, each woman flexing against the other's reflection. House rule, scratched into the glass corner: at closing, only the woman in the CENTER panel keeps what the mirrors gave. The last routine is fought in one shared reflection.",
+      "transformation": {
+        "flavor": "ambient-field",
+        "trigger": "posing in the midnight mirror wall — the reflection leads, the body follows",
+        "arc": "discovered flex -> panel-by-panel posing ladder -> routines against each other's reflections -> shared-center showdown -> closing-time lock-in",
+        "peak_state": "The winner filling the center panel so completely the reflection crops to torso, the loser's reflection restored to baseline beside her",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Noor Haddad",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Priscilla Cho",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "Flexxen 24 — one late-night gym interior; the mirror wall is the stage",
+      "hook": "Flex bigger than you are. The mirror will make it true. The mirror only pays one of you.",
+      "est_page_count": 18,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.65,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "full-body-reveal",
+        "clothing-destruction"
+      ],
+      "generation_angle": "transformation-flavor-first",
+      "why_itll_perform": "Mirrors hand the pipeline doubled compositions, reflection-vs-reality size gaps, and built-in full-body reveals — a staging engine for the camera-variety mandate (F6: the corpus defaults flat; this premise can't be shot flat). Posing IS the plot, so every page is a growth page (F1), and the center-panel rule is a legible contested prize (Gribble contested-source) with a clean tease->payoff.",
+      "corpus_grounding": [
+        "F6 camera-spread",
+        "F1 growth-ratio-by-intent",
+        "F4 full-body-reveal",
+        "F3 face-led-ECUs",
+        "Gribble contested-source"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 3,
+        "hook": 4,
+        "camera_staging_potential": 5,
+        "cast_reuse": 0,
+        "novelty": 5,
+        "production_economy": 4
+      },
+      "score_rationale": "Reflection-leads-body is the freshest mechanic on the slate and mirrors make flat staging impossible (F6=5); stakes beyond the center panel are thin.",
+      "cast_size": 2,
+      "weighted_total": 73.8
+    },
+    {
+      "concept_id": "house-record",
+      "title": "House Record",
+      "logline": "The PR board at Iron Alley pays out in pounds of bodyweight — beat a rival's posted number and the mass that number was worth moves from her frame to yours.",
+      "premise": "Iron Alley's chalkboard has run the same rule since the gym opened, and members-only knows it: the board settles. When transplant lifter Oksana Reyes chalks her name over gym queen Bette Marlowe's deadlift, she wakes up broader — and Bette wakes up needing a new belt hole. A week-long PR war ladders every lift on the board, mass swinging line by line, until Bette stakes everything on a total no one has ever pulled. The board's fine print: a failed attempt settles in the OTHER direction.",
+      "transformation": {
+        "flavor": "training",
+        "trigger": "chalking a name over a rival's standing record",
+        "arc": "first stolen line -> alternating PR ladder across the board -> belt-notch tit-for-tat -> Bette's impossible-total gamble -> the board settles the whole ledger at once",
+        "peak_state": "Oksana holding the fully-loaded record bar overhead one-handed, the chalkboard behind her wiped to a single name",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Oksana Reyes",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Bette Marlowe",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Gus (owner)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "Iron Alley — one old-iron gym interior, the chalkboard wall as the recurring set-piece",
+      "hook": "Every gym has a PR board. This one collects.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "clothing-destruction",
+        "sfx-driven"
+      ],
+      "generation_angle": "transformation-flavor-first",
+      "why_itll_perform": "Plates and posted numbers are literal countable ladders (GG formula) that double as bakeable board text (F2 edge), and the mass-moves-BETWEEN-rivals rule is Gribble's one-upmanship 'sized between people' made mechanical. Training flavor keeps growth earned (payoff doctrine) while the settle-both-ways fine print gives the climax real risk (F5 stakes).",
+      "corpus_grounding": [
+        "F2 baked-dialogue-edge",
+        "F4 size-comparison",
+        "F5 story-as-differentiator",
+        "GG formula countable-ladder",
+        "Gribble one-upmanship"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 4,
+        "hook": 3,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 4,
+        "production_economy": 4
+      },
+      "score_rationale": "Settle-both-ways board gives the climax genuine risk; alternating deltas keep beats frequent but individually modest; all-new cast.",
+      "cast_size": 3,
+      "weighted_total": 70.8
+    },
+    {
+      "concept_id": "unlimited-plan",
+      "title": "Unlimited",
+      "logline": "Nobody at MegaFlex ever seems to get bigger — because the UNLIMITED plan's fine print harvests every member's gains, and front-desk girl Dot just found the tank they're stored in.",
+      "premise": "Chain gym MegaFlex sells the UNLIMITED plan to thousands, and its members plateau forever: clause 22.4 assigns 'all training adaptations, present and future' to the company. Night-shift front-desk girl Dot Nguyen finds the harvest tank in the sub-basement — a decade of the entire membership's stolen gains, banked for regional manager Vasquez-Sterling, who wears a controlled trickle of it like a company car. The rivalry is bottom-of-the-org-chart vs the woman who owns everyone's progress: Dot's audit trail, Vasquez-Sterling's enforcement, and a final choice at the open valve — route a decade of gains back to the members, or take the tank herself. She holds the valve a long, long beat before choosing.",
+      "transformation": {
+        "flavor": "tech",
+        "trigger": "the harvest tank's maintenance valve, opened off-schedule",
+        "arc": "plateau mystery -> clause 22.4 discovery -> tank reveal -> enforcement escalation -> valve choice: restitution flood vs one-woman apotheosis -> the long beat before she chooses",
+        "peak_state": "Dot mid-decision at the open valve, already two tiers up from spillover, the tank's gauge falling",
+        "tier_curve": "tier 2 -> 6 (spillover), with a teased 6 -> 9 if she takes the tank"
+      },
+      "cast": [
+        {
+          "name": "Dot Nguyen",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Regional Manager Vasquez-Sterling",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Theo (janitor)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "MegaFlex chain gym — retail floor + sub-basement tank room (two interiors)",
+      "hook": "You've trained here five years. Where did it go?",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "sfx-driven",
+        "size-comparison",
+        "multi-panel-progressive",
+        "full-body-reveal"
+      ],
+      "generation_angle": "hook-first",
+      "why_itll_perform": "The mundane-institution premise the catalog's engagement leaders share (C2 — this is 'Super CEOs' energy aimed at the gym itself), with a Gribble contested-source at industrial scale: the tank is the crown anyone can seize, and the valve choice is a real villain-turn tease (95% device) held one beat past comfortable. The plateau mystery gives the first act a page-turning question the niche never bothers with (F5).",
+      "corpus_grounding": [
+        "C2 mundane-institution-hook",
+        "F5 story-as-differentiator",
+        "Gribble contested-source + villain-turn",
+        "F4 sfx-driven",
+        "F2 baked-dialogue-edge"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 4,
+        "hook": 4,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 3,
+        "production_economy": 3
+      },
+      "score_rationale": "C2 institution premise with a real first-act mystery and a held villain-turn beat; harvest-tank conspiracies are genre-adjacent familiar; tank room is a new VFX-ish env.",
+      "cast_size": 3,
+      "weighted_total": 70.8
+    },
+    {
+      "concept_id": "dana-day-one",
+      "title": "Day One",
+      "logline": "Before the tiers, before the cape: Dana Lane's first gym membership, the queen bee who ran the floor, and the assisted-pulldown machine that started counting backwards.",
+      "premise": "Origin canon for the not-so-supra-man universe. College-freshman Dana signs up at a strip-mall gym where self-appointed floor queen Vondra Cruz decides who uses what. Relegated to the assisted machines, Dana notices hers is counting the assistance DOWN past zero — the first surfacing of her latent surge, feeding on every rep Vondra makes her feel small. The night Vondra dumps Dana's bag off 'her' bench, the machine hits negative triple digits, and the gym gets its first look at what Dana Lane is going to become — one tier, publicly, all at once.",
+      "transformation": {
+        "flavor": "latent-power",
+        "trigger": "the assisted machine's counter running past zero as her surge wakes",
+        "arc": "day-one humiliation -> counter creeping down across visits -> bag-off-the-bench spark -> first public tier jump -> Vondra re-racking Dana's plates unasked",
+        "peak_state": "Freshman Dana one tier up, filling the squat rack Vondra never let her touch, machine counter frozen at -100",
+        "tier_curve": "tier 1 -> 3"
+      },
+      "cast": [
+        {
+          "name": "Dana Lane",
+          "role": "protagonist",
+          "reuse": true,
+          "ref_status": "partial"
+        },
+        {
+          "name": "Vondra Cruz",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Marcus (front desk)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "one strip-mall gym interior (new env pack, deliberately ordinary)",
+      "hook": "The assistance counter just went negative.",
+      "est_page_count": 16,
+      "chapter_type": "origin",
+      "est_growth_page_ratio": 0.5,
+      "planned_escalation_devices": [
+        "zoom-escalation",
+        "multi-panel-progressive",
+        "reaction-intercut",
+        "sfx-driven"
+      ],
+      "generation_angle": "character-first",
+      "why_itll_perform": "Origin chapters are the catalog's proven franchise-builder (C1: universes get fed) and this one mints canon for the roster's flagship character at low page count. The negative counter is a bakeable UI ladder (F2) and a slow-burn device the corpus underuses (F4: slow-burn 'rare and underused'). Origin pacing keeps it honest — the single public tier jump is the earned payoff (GG payoff doctrine).",
+      "corpus_grounding": [
+        "C1 serial-legs",
+        "F4 slow-burn",
+        "F2 baked-dialogue-edge",
+        "GG formula payoff-doctrine",
+        "F3 face-led-ECUs"
+      ],
+      "scores": {
+        "growth_payoff_density": 3,
+        "story_spine": 4,
+        "hook": 3,
+        "camera_staging_potential": 3,
+        "cast_reuse": 3,
+        "novelty": 3,
+        "production_economy": 4
+      },
+      "score_rationale": "Origin pacing caps growth ratio by design (0.5, no F1 floor for origin); canon value is real; young-Dana needs a partial ref treatment despite reuse.",
+      "cast_size": 3,
+      "weighted_total": 66.2
+    },
+    {
+      "concept_id": "locker-thirteen",
+      "title": "Locker 13",
+      "logline": "The unlucky locker nobody rents holds the gains of all thirteen women who quit the gym while it was theirs — and the new girl just got assigned it.",
+      "premise": "Peak Physique assigns lockers by number; 13 has been 'out of service' for years because gym queen Roxanne Vail keeps it that way — she knows the story. New member Alma Reyes gets it by front-desk error. Every session, the locker pays out one quitter's ledger: the mass they trained and abandoned, oldest first, thirteen entries deep. Alma's month-one transformation makes Roxanne's decade of work look like a warm-up, and Roxanne wants her locker back — first with the front desk, then with money, then in the weight room, directly. The locker only transfers with the key. The key only leaves with the renter.",
+      "transformation": {
+        "flavor": "curse",
+        "trigger": "first session with locker 13's key on her wrist",
+        "arc": "error assignment -> ledger payouts one quitter at a time -> Roxanne's escalating reclamation attempts -> weight-room confrontation -> entry thirteen, the biggest ledger, pays out mid-standoff",
+        "peak_state": "Alma at the locker bank, thirteen doors' worth of shoulder spanning the aisle, key tiny on its wrist loop",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Alma Reyes",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Roxanne Vail",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Deja (front desk)",
+          "role": "catalyst",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "Peak Physique — locker room + weight floor, one env pack",
+      "hook": "Thirteen women quit this gym. Their gains didn't leave.",
+      "est_page_count": 18,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "clothing-destruction",
+        "reaction-intercut"
+      ],
+      "generation_angle": "setting-first",
+      "why_itll_perform": "A countable thirteen-entry ladder (GG formula) built into the setting's own furniture: the locker bank is a fixed grid gauge Alma visibly outgrows aisle by aisle (F4 size-comparison). The key is a clean Gribble contested-object with legible transfer rules, and Roxanne's escalation from paperwork to money to force is a tease->payoff spine with a real antagonist want (F5).",
+      "corpus_grounding": [
+        "GG formula countable-ladder",
+        "F4 size-comparison",
+        "F5 story-as-differentiator",
+        "Gribble contested-source",
+        "C4 chapter-length-norms"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 3,
+        "hook": 4,
+        "camera_staging_potential": 3,
+        "cast_reuse": 0,
+        "novelty": 4,
+        "production_economy": 4
+      },
+      "score_rationale": "Thirteen-entry ledger is a clean countable ladder and the locker bank a fixed grid gauge; ghost-ledger lore risks exposition and the locker room limits shot variety.",
+      "cast_size": 3,
+      "weighted_total": 66.2
+    },
+    {
+      "concept_id": "sunset-rule",
+      "title": "Sunset Rule",
+      "logline": "At the boardwalk outdoor gym, every pump is supernatural and temporary — unless you still hold the lifting platform when the sun touches the water.",
+      "premise": "Venice Point's rusted outdoor rig runs on the oldest local rule: daylight pumps are enchanted — huge, immediate, and gone by morning — but whoever holds the platform at sunset keeps that day's entire pump for good. Defending champ Kaia Malu has kept the platform through two summers. Challenger Renata Silva, who lost it to Kaia in a sunset she's replayed for a year, arrives at dawn to stack the biggest pump the rig has ever carried. The day is a king-of-the-hill ladder — lift-offs, holds, dares — two women inflating toward a horizon deadline the reader can track in the sky of every panel.",
+      "transformation": {
+        "flavor": "ambient-field",
+        "trigger": "first set on the enchanted rig at dawn",
+        "arc": "dawn stacking -> alternating platform holds through the day -> pump sizes tracked against pier and palms -> golden-hour standoff -> one woman holds it as the sun hits the water",
+        "peak_state": "The winner locked out overhead on the platform, silhouetted against the sunset, permanently carrying a day of supernatural pump",
+        "tier_curve": "tier 3 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Kaia Malu",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Renata Silva",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "Venice Point boardwalk outdoor gym — one exterior env pack, pier and palms as fixed gauges",
+      "hook": "The pump is free all day. Keeping it costs the sunset.",
+      "est_page_count": 18,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.65,
+      "planned_escalation_devices": [
+        "size-comparison",
+        "multi-panel-progressive",
+        "full-body-reveal",
+        "sfx-driven"
+      ],
+      "generation_angle": "setting-first",
+      "why_itll_perform": "An exterior setting with fixed horizon gauges (pier, palms, sun position) attacks the corpus's flat-camera default head-on (F6 — golden-hour wides, low-hero silhouettes, scale against architecture). The sunset deadline is a clock the reader sees in every establishing panel — continuous tension with zero exposition (F5 tease->payoff), and the temporary-pump rule lets growth run at festival scale all day while the ending still means something.",
+      "corpus_grounding": [
+        "F6 camera-spread",
+        "F4 size-comparison",
+        "F5 story-as-differentiator",
+        "F1 growth-ratio-by-intent",
+        "GG formula mundane-setting-exception"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 3,
+        "hook": 3,
+        "camera_staging_potential": 5,
+        "cast_reuse": 0,
+        "novelty": 3,
+        "production_economy": 3
+      },
+      "score_rationale": "Exterior golden-hour staging with horizon gauges is a F6 feast; hold-at-deadline structure echoes slate 1's open-house (docked on novelty), lighting-heavy env is a cost.",
+      "cast_size": 2,
+      "weighted_total": 66.2
+    }
+  ],
+  "ranking": [
+    "home-court",
+    "rep-thief",
+    "mirror-set",
+    "house-record",
+    "unlimited-plan",
+    "dana-day-one",
+    "locker-thirteen",
+    "sunset-rule"
+  ],
+  "top3": [
+    "home-court",
+    "rep-thief",
+    "mirror-set"
+  ],
+  "selected_concept_id": null
+}

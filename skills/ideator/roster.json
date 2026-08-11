@@ -1,0 +1,42 @@
+{
+  "_note": "Locked-character roster the ideator prefers for cast reuse (cheaper — refs already banked). Built 2026-08-10 from the ref ledgers in projects/ (cheer-ascension, not-so-supra-man). ref_status: locked = banked refs exist in a ledger; partial = some refs; new = none. Keep this current as projects bank new casts — the tournament brief reads it automatically.",
+  "characters": [
+    {
+      "name": "Kelsey Brandt",
+      "project": "cheer-ascension",
+      "ref_status": "locked",
+      "notes": "22, honey-blonde high ponytail w/ gold scrunchie, green eyes, freckles; Comets teal/gold cheer uniform. Face card + body tiers 2/4/6 + strain/rebuilt turnarounds banked."
+    },
+    {
+      "name": "Dana Lane",
+      "project": "not-so-supra-man",
+      "ref_status": "locked",
+      "notes": "Face + body + tier-9 turnaround + tier-6 torn/suit turnarounds; user-anchored tier-9 size truth."
+    },
+    {
+      "name": "Supraman",
+      "project": "not-so-supra-man",
+      "ref_status": "locked",
+      "notes": "Face + body. Male hero — witness/love-interest archetype."
+    },
+    {
+      "name": "Dee-Dee 'Destroya'",
+      "project": "not-so-supra-man",
+      "ref_status": "locked",
+      "notes": "Face + body. Rival/villainess archetype."
+    },
+    {
+      "name": "Dex Doomer",
+      "project": "not-so-supra-man",
+      "ref_status": "locked",
+      "notes": "Face + body. Enabler-scientist / villain archetype."
+    }
+  ],
+  "locations": [
+    {"name": "hq-gym", "project": "not-so-supra-man", "ref_status": "locked"},
+    {"name": "city-street", "project": "not-so-supra-man", "ref_status": "locked"},
+    {"name": "doomer-lab", "project": "not-so-supra-man", "ref_status": "locked"},
+    {"name": "lab-quarters", "project": "not-so-supra-man", "ref_status": "locked"},
+    {"name": "practice-field", "project": "cheer-ascension", "ref_status": "locked"}
+  ]
+}

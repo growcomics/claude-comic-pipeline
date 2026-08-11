@@ -1,0 +1,560 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-11T06:12:31+00:00",
+  "seed": null,
+  "rubric_version": "1.0",
+  "corpus_synthesis_version": "success-elements v2 + catalog C1-C6 v1",
+  "roster_snapshot": [
+    {
+      "name": "Kelsey Brandt",
+      "project": "cheer-ascension",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dana Lane",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Supraman",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dee-Dee 'Destroya'",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    },
+    {
+      "name": "Dex Doomer",
+      "project": "not-so-supra-man",
+      "ref_status": "locked"
+    }
+  ],
+  "concepts": [
+    {
+      "concept_id": "destroya-owns-the-street",
+      "title": "Destroya",
+      "logline": "Dee-Dee straps Dana into Dex Doomer's transfer rig and drains the city's strongest woman into herself — while Supraman can only watch the exchange rate climb.",
+      "premise": "Issue-2 counter-move for the not-so-supra-man universe: Dee-Dee 'Destroya' breaks into Doomer's lab and reverses his containment rig into a siphon. Every minute Dana Lane spends in the harness, one of her tiers crosses the cable into Dee-Dee — the gauge on the wall counts the transfer in glowing bars. Supraman must choose between cutting the line (killing the surge back into Dana) or saving the city block Dee-Dee is already re-landscaping. Dee-Dee walks the city street at tier 9 while Dana, at parity with normal humans for the first time, plans the rematch.",
+      "transformation": {
+        "flavor": "tech",
+        "trigger": "Doomer's containment rig reversed into a person-to-person siphon",
+        "arc": "break-in -> harness trap -> five-bar transfer ladder (Dana shrinks as Dee-Dee grows) -> Supraman's cut-the-cable dilemma -> Destroya's street-scale coronation",
+        "peak_state": "Dee-Dee at tier 9 seated on a bus like a park bench, holding the drained harness like a trophy",
+        "tier_curve": "tier 3 -> 9 (Dee-Dee) mirrored by 8 -> 2 (Dana)"
+      },
+      "cast": [
+        {
+          "name": "Dee-Dee 'Destroya'",
+          "role": "antagonist",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Dana Lane",
+          "role": "protagonist",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Supraman",
+          "role": "witness",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Dex Doomer",
+          "role": "catalyst",
+          "reuse": true,
+          "ref_status": "locked"
+        }
+      ],
+      "setting": "doomer-lab + city-street (both locked env packs)",
+      "hook": "Watch the strongest woman in the city get benched by her own body weight — one glowing bar at a time.",
+      "est_page_count": 22,
+      "chapter_type": "climax",
+      "est_growth_page_ratio": 0.7,
+      "planned_escalation_devices": [
+        "size-comparison",
+        "multi-panel-progressive",
+        "reaction-intercut",
+        "sfx-driven",
+        "full-body-reveal"
+      ],
+      "generation_angle": "character-first",
+      "why_itll_perform": "The transfer rig is the corpus's rarest treat: a size-comparison device where the GAUGE IS A PERSON — Dana visibly shrinking re-pegs Dee-Dee's every gain (Gribble one-upmanship, 'sized between people'). Full locked cast + two locked env packs = near-zero new-asset cost. Rival-counter-move is the GG formula's proven issue-2 shape, and it extends an existing universe the way the catalog says the publisher actually behaves (C1 serial legs).",
+      "corpus_grounding": [
+        "F4 size-comparison + reaction-intercut",
+        "F3 face-led-ECUs (Dana strain / Dee-Dee glee)",
+        "C1 serial-legs",
+        "Gribble power-transfer + overpowering",
+        "F1 climax >= 0.70"
+      ],
+      "scores": {
+        "growth_payoff_density": 5,
+        "story_spine": 4,
+        "hook": 4,
+        "camera_staging_potential": 5,
+        "cast_reuse": 5,
+        "novelty": 3,
+        "production_economy": 4
+      },
+      "score_rationale": "Person-as-gauge transfer ladder = engineered spectacle at climax density; full locked cast/envs; docked on novelty (transfer is a proven, common engine).",
+      "cast_size": 4,
+      "weighted_total": 87.7
+    },
+    {
+      "concept_id": "ratio-d",
+      "title": "Ratio'd",
+      "logline": "A fitness influencer's cursed tracker ties her size to her follower count — so her rival's smear campaign shrinks her, until the apology video goes viral.",
+      "premise": "Micro-influencer Joy Okafor (11.2k followers) buys a black-market engagement tracker that makes the number REAL: mass follows followers. Rival lifestyle queen Camille DeWitt notices Joy filling doorways at the creator house and runs a coordinated smear — unfollow campaigns, mass reports — walking Joy's body back down in front of her ring light. Joy's raw, doorframe-cracking apology-slash-comeback video does numbers no smear can outrun: 100k, 500k, 1M, the counter and the woman climbing together on the same overlay. Camille rage-follows her at the end — and the +1 is the biggest single surge of all.",
+      "transformation": {
+        "flavor": "curse",
+        "trigger": "black-market tracker synced on-camera",
+        "arc": "11.2k baseline -> creator-house tease growth -> smear-campaign shrink (stakes made physical) -> viral comeback ladder 100k/500k/1M -> the rival's own follow as the final surge",
+        "peak_state": "Joy at fantasy tier framed by her own collapsed ring light, live counter still climbing on the overlay",
+        "tier_curve": "tier 2 -> 8"
+      },
+      "cast": [
+        {
+          "name": "Joy Okafor",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Camille DeWitt",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Bex (Joy's editor)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "creator-house interior + Joy's ring-light studio corner (new env pack, two interiors)",
+      "hook": "1 follower = 1 size. Her rival just told 2 million people about her.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "reaction-intercut",
+        "size-comparison",
+        "sfx-driven",
+        "full-body-reveal"
+      ],
+      "generation_angle": "hook-first",
+      "why_itll_perform": "The catalog's single biggest comic-engagement leader is literally titled 'Influencers' (34 comments) — this is that institution with a cleaner engine (C2). The follower counter is a countable ladder that doubles as on-screen UI the pipeline bakes legibly (F2), chat reactions are built-in reaction-intercuts (F4), and the shrink phase gives real stakes + a tease->payoff spine (F5) instead of monotonic growth. The rival's rage-follow is a one-panel twist ending worth the whole book.",
+      "corpus_grounding": [
+        "C2 mundane-institution-hook",
+        "F2 baked-dialogue-edge",
+        "F4 reaction-intercut",
+        "F5 story-as-differentiator",
+        "GG formula countable-ladder"
+      ],
+      "scores": {
+        "growth_payoff_density": 5,
+        "story_spine": 4,
+        "hook": 5,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 3,
+        "production_economy": 3
+      },
+      "score_rationale": "Counter-tied mass with a shrink phase = stakes made physical + continuous on-panel ladder; the niche's proven institution (C2) with the strongest hook in the slate.",
+      "cast_size": 3,
+      "weighted_total": 78.5
+    },
+    {
+      "concept_id": "the-word-no",
+      "title": "No.",
+      "logline": "Every time the office doormat says the word she's never said, she gains a size — and by Friday's board meeting she's saying it to the man who built her cubicle walls.",
+      "premise": "Temp-to-perm admin Lena Ruiz absorbs everyone's overflow work and never objects — until a chain-letter 'assertiveness charm' from the office white-elephant party turns out to be live. Each genuine NO adds mass: no to fetching coffee (an inch), no to covering the weekend (a shirt size), no to senior manager Roderick Sloane's signature-forging 'favor' (a doorframe). The nos get bigger because the asks get bigger — Sloane, panicking about what she can now prove and lift, schedules the board meeting to terminate her. Her contract termination reads as one final ask. Her answer fills the boardroom.",
+      "transformation": {
+        "flavor": "latent-power",
+        "trigger": "white-elephant assertiveness charm keyed to genuine refusals",
+        "arc": "first accidental no -> escalating refusal ladder tied to escalating asks -> Sloane's termination gambit -> boardroom NO at full tier, contract confetti",
+        "peak_state": "Lena seated on the boardroom table like a bench, Sloane's org chart at eye level of her elbow",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Lena Ruiz",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Roderick Sloane",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Tam (desk-mate)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "one open-plan office + boardroom (new env pack, two interiors)",
+      "hook": "She's never said no in her life. The first one is worth an inch.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "reaction-intercut",
+        "size-comparison"
+      ],
+      "generation_angle": "hook-first",
+      "why_itll_perform": "The growth engine IS the character arc — every size-up is a story beat, so growth density and story coherence rise together instead of trading off (F1 + F5, the corpus's two top-weight axes in one mechanism). The asks escalate, so the refusals escalate, giving tease->payoff structure with a paid-off ending the niche never ships. Business wear is a built-in clothing-destruction tell (F4), and the maximally relatable 'before' is the GG formula's own protagonist spec.",
+      "corpus_grounding": [
+        "F5 story-as-differentiator",
+        "F1 growth-ratio-by-intent",
+        "F4 clothing-destruction",
+        "GG formula relatable-before",
+        "F3 face-led-ECUs"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 5,
+        "hook": 4,
+        "camera_staging_potential": 3,
+        "cast_reuse": 0,
+        "novelty": 5,
+        "production_economy": 3
+      },
+      "score_rationale": "The engine IS the character arc — the F5 differentiation play at its purest; refusal scenes risk talking-head staging, mitigated by growth punctuation.",
+      "cast_size": 3,
+      "weighted_total": 75.4
+    },
+    {
+      "concept_id": "patch-notes",
+      "title": "Patch Notes",
+      "logline": "A glitched firmware update makes a fitness band grow its wearer with every hotfix — and the intern who writes the patches controls who gets the next version.",
+      "premise": "At wearable startup VigorBand, overlooked QA intern Priya ships hotfix v1.1 to two beta testers — office golden-girl Mackenzie and Priya herself. Every patch adds visible mass. Mackenzie sweet-talks Priya into pushing her updates first, then locks Priya out of the admin console to hoard the rollout. Priya's revenge is the thing only she knows: the changelog. She wrote a kill-switch into v4.0 — and a private branch for herself that goes to v9.",
+      "transformation": {
+        "flavor": "tech",
+        "trigger": "over-the-air firmware update v1.1, mid-standup",
+        "arc": "v1.1 tingle -> per-patch escalation ladder -> Mackenzie hoards the rollout -> kill-switch deflates her mid-gloat -> Priya force-installs her private v9.0 build",
+        "peak_state": "Priya at fantasy tier filling the open-plan office, monitors at her knees, delivering the release notes as a proclamation",
+        "tier_curve": "tier 2 -> 8"
+      },
+      "cast": [
+        {
+          "name": "Priya",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Mackenzie",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Deb (engineering lead)",
+          "role": "witness",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "VigorBand startup office — open-plan desks, glass conference room, server closet (new env pack, single interior)",
+      "hook": "UPDATE ROLLING OUT: 3%... 47%... 100%. Do not remove the band during installation.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "clothing-destruction",
+        "sfx-driven",
+        "reaction-intercut"
+      ],
+      "generation_angle": "transformation-flavor-first",
+      "why_itll_perform": "Version numbers are a literal countable escalation ladder (GG formula) rendered as UI text the pipeline can bake legibly (F2 edge). The contested admin console is a Gribble contested-source with a real power transfer, and the mundane startup office is exactly the institution premise the catalog's engagement leaders share (C2: influencers/super-ceos/gg-industries). Progress-bar SFX carry growth beats with zero dialogue (F4 sfx-driven).",
+      "corpus_grounding": [
+        "F1 growth-ratio-by-intent",
+        "F2 baked-dialogue-edge",
+        "F4 sfx-driven",
+        "C2 mundane-institution-hook",
+        "Gribble contested-source + power-transfer"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 4,
+        "hook": 4,
+        "camera_staging_potential": 3,
+        "cast_reuse": 0,
+        "novelty": 4,
+        "production_economy": 3
+      },
+      "score_rationale": "Per-patch ladder + planted kill-switch payoff (A1/A2 solid); interior-bound office caps staging; all-new cast.",
+      "cast_size": 3,
+      "weighted_total": 69.2
+    },
+    {
+      "concept_id": "open-house",
+      "title": "Open House",
+      "logline": "Every room of the listing at 44 Alder Lane adds a size to whoever stands in it — and the buyer just locked the realtor out before the attic.",
+      "premise": "Realtor Constance Vale can't sell 44 Alder Lane; inspections keep failing because doorframes 'measure wrong'. Skeptical cash buyer Rhea Moss demands a private tour. Room by room — foyer, kitchen, den, gym cellar — both women outgrow their blazers, and the house's rule becomes clear: the field transfers with occupancy, and whoever holds the deed at close of tour keeps everything it gave. Rhea signs on the kitchen counter, bolts the attic door behind her, and takes the last three rooms alone.",
+      "transformation": {
+        "flavor": "ambient-field",
+        "trigger": "crossing the threshold of the first staged room",
+        "arc": "foyer tingle -> room-by-room parallel growth -> Rhea locks Constance out -> attic triple-rung solo climb -> deed-holder apotheosis filling the frame of the house itself",
+        "peak_state": "Rhea seated on the staircase like a throne, shoulders spanning the stairwell, the sold sign tiny in her fist",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Rhea Moss",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Constance Vale",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "A staged suburban listing — eight rooms, one house env pack reused every scene",
+      "hook": "The house measures you back.",
+      "est_page_count": 18,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.65,
+      "planned_escalation_devices": [
+        "size-comparison",
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "slow-burn"
+      ],
+      "generation_angle": "transformation-flavor-first",
+      "why_itll_perform": "Doorframes are the genre's canonical size gauge and this premise makes them the PLOT — every panel re-pegs scale against the same fixed architecture (F4 size-comparison, the Ass Effect p18 / Curse p19 masterclass move). Two-hander cast and one env pack keep production tight. The tour structure is a countable ladder with a built-in tease->payoff (F5) and the deed is a Gribble contested-source the ruthless character seizes.",
+      "corpus_grounding": [
+        "F4 size-comparison",
+        "F5 story-as-differentiator",
+        "F6 camera-spread",
+        "C4 chapter-length-norms",
+        "Gribble contested-source"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 3,
+        "hook": 3,
+        "camera_staging_potential": 5,
+        "cast_reuse": 0,
+        "novelty": 4,
+        "production_economy": 4
+      },
+      "score_rationale": "Doorframes-as-plot is a 5 on staging (F4 gauge every panel); spine is clean but Rhea's want is thin greed; hook slightly abstract.",
+      "cast_size": 2,
+      "weighted_total": 69.2
+    },
+    {
+      "concept_id": "kelsey-captain-material",
+      "title": "Captain Material",
+      "logline": "The captain who benched Kelsey Brandt finds the same source Kelsey did — and spends homecoming week trying to out-grow the girl she cut from the squad.",
+      "premise": "Cheer-ascension issue 2. Captain Brit Halloway reviews the practice-field footage, works out where Kelsey's ascension started, and taps it herself. Homecoming week becomes an arms race measured in uniform re-fits: every practice, Brit shows up bigger; every practice, Kelsey answers. The squad keeps score on the locker-room door. At the homecoming rally Brit peaks first — and learns the source rewards the girl who lifts her squad, not the one who cuts it: her surge transfers to Kelsey mid-routine in front of the whole gymnasium.",
+      "transformation": {
+        "flavor": "rivalry-driven",
+        "trigger": "Brit taps Kelsey's source after decoding the practice-field footage",
+        "arc": "footage discovery -> alternating re-fit ladder across homecoming week -> rally showdown -> loyalty-keyed transfer -> Kelsey's squad-lifting peak",
+        "peak_state": "Kelsey at fantasy tier holding the full pyramid of her squad on her shoulders, Brit at parity in the crowd",
+        "tier_curve": "tier 6 -> 8 (Kelsey), 2 -> 7 -> 2 (Brit)"
+      },
+      "cast": [
+        {
+          "name": "Kelsey Brandt",
+          "role": "protagonist",
+          "reuse": true,
+          "ref_status": "locked"
+        },
+        {
+          "name": "Brit Halloway",
+          "role": "rival",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "practice-field (locked) + school gymnasium (new interior)",
+      "hook": "She cut you from the squad. Now she's copying your transformation homework.",
+      "est_page_count": 20,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "clothing-destruction",
+        "reaction-intercut",
+        "full-body-reveal"
+      ],
+      "generation_angle": "character-first",
+      "why_itll_perform": "The GG formula names this exact shape — issue 2 is the rival's counter-move — and the catalog shows continuations are the publisher's dominant investment (C1). Kelsey's full ref canon (tiers 2/4/6 + turnarounds) makes the alternating-growth ladder cheap to render, and the loyalty-keyed transfer gives the story a paid-off MORAL ending the niche never ships (F5). Uniform re-fits are a continuous clothing-destruction tell (F4).",
+      "corpus_grounding": [
+        "C1 serial-legs",
+        "F5 story-as-differentiator",
+        "F4 clothing-destruction",
+        "GG formula rival-counter-move",
+        "Gribble one-upmanship"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 4,
+        "hook": 3,
+        "camera_staging_potential": 3,
+        "cast_reuse": 3,
+        "novelty": 2,
+        "production_economy": 3
+      },
+      "score_rationale": "Formula-true rival counter-move with a real moral payoff, but the proven shape costs novelty and the sports staging is familiar.",
+      "cast_size": 2,
+      "weighted_total": 67.7
+    },
+    {
+      "concept_id": "containment-level-five",
+      "title": "Containment",
+      "logline": "Every escalation of the lab's lockdown protocol doses the two women sealed inside with the thing the protocol is trying to contain.",
+      "premise": "A vapor breach at Doomer's lab triggers automated containment: Level 1 seals the wing, Level 5 floods it with suppressant. Lab tech Imogen Vasquez and security officer Petra Kohl are sealed in — and the suppressant is the growth agent's binder: every level makes them the containment vessels. The klaxon countdown is the escalation ladder. At Level 5, the blast doors rated for a truck bomb have to hold two women who no longer fit the corridor — and Petra decides being the vessel beats being contained, standing between Imogen and the exit she could now simply make.",
+      "transformation": {
+        "flavor": "infection",
+        "trigger": "aerosolized agent breach, absorbed level by level with each protocol escalation",
+        "arc": "Level 1 seal -> per-level dose ladder -> corridor outgrown -> Petra's vessel-not-victim turn -> blast-door exit into the night street",
+        "peak_state": "Petra shouldering the vault-grade door off its rails, Imogen filling the corridor behind her",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Imogen Vasquez",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Petra Kohl",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "doomer-lab + lab-quarters (both locked env packs); climax spills onto city-street (locked)",
+      "hook": "CONTAINMENT LEVEL 5: if you are reading this, you are the container.",
+      "est_page_count": 18,
+      "chapter_type": "climax",
+      "est_growth_page_ratio": 0.7,
+      "planned_escalation_devices": [
+        "zoom-escalation",
+        "sfx-driven",
+        "size-comparison",
+        "clothing-destruction",
+        "multi-panel-progressive"
+      ],
+      "generation_angle": "setting-first",
+      "why_itll_perform": "Three locked env packs carry the whole book — the setting IS the production win. The protocol klaxons are tiered SFX (F4's #1 device) and the corridor/blast-door architecture re-pegs scale every page (F4 size-comparison). Level counters bake as legible UI text (F2 edge). The vessel-not-victim turn gives the climax a villain-turn edge (Gribble 95%) without leaving the SFW lane.",
+      "corpus_grounding": [
+        "F4 sfx-driven + size-comparison",
+        "F2 baked-dialogue-edge",
+        "F1 climax >= 0.70",
+        "Gribble villain-turn",
+        "C4 chapter-length-norms"
+      ],
+      "scores": {
+        "growth_payoff_density": 4,
+        "story_spine": 3,
+        "hook": 4,
+        "camera_staging_potential": 4,
+        "cast_reuse": 0,
+        "novelty": 3,
+        "production_economy": 4
+      },
+      "score_rationale": "Protocol-klaxon SFX ladder + blast-door gauges strong; two strangers give thin interpersonal stakes and the ending exits rather than resolves.",
+      "cast_size": 2,
+      "weighted_total": 67.7
+    },
+    {
+      "concept_id": "last-mile",
+      "title": "Last Mile",
+      "logline": "A bike courier spends one shift delivering nine unmarked vials across the city — absorbing a micro-dose through the leaky crate at every stop, while the client waiting for them grows angrier and the courier grows, period.",
+      "premise": "Gig courier Sadie Park takes a premium nine-stop route: fragile vials, signature required, keep upright. The crate leaks. Stop by stop Sadie outgrows her bike, her jacket, then the bike lanes, while the client on the app — wellness influencer Verena Cross, who prepaid for ALL NINE — watches the tracker and types increasingly unhinged instructions. At stop nine Sadie hands over an empty crate: the route absorbed the entire order into its courier. Verena's lunge for the last vial ends with Sadie holding her at arm's length, one finger on her forehead, reading her a delivery-exception notice.",
+      "transformation": {
+        "flavor": "potion",
+        "trigger": "hairline crack in vial one, absorbed transdermally at every stop",
+        "arc": "stop-counter ladder 1-9 -> bike outgrown at 4 -> streets as slalom by 7 -> empty-crate reveal -> doorstep overpowering of the buyer",
+        "peak_state": "Sadie astride the city-street env like a parade float, delivery bag a coin purse on her shoulder",
+        "tier_curve": "tier 2 -> 7"
+      },
+      "cast": [
+        {
+          "name": "Sadie Park",
+          "role": "protagonist",
+          "reuse": false,
+          "ref_status": "new"
+        },
+        {
+          "name": "Verena Cross",
+          "role": "antagonist",
+          "reuse": false,
+          "ref_status": "new"
+        }
+      ],
+      "setting": "city-street (locked env pack) as a repeating spine — nine doorsteps, one street grammar",
+      "hook": "Your package is 9 stops away. Your package is getting bigger.",
+      "est_page_count": 18,
+      "chapter_type": "transformation",
+      "est_growth_page_ratio": 0.6,
+      "planned_escalation_devices": [
+        "multi-panel-progressive",
+        "size-comparison",
+        "sfx-driven",
+        "reaction-intercut",
+        "clothing-destruction"
+      ],
+      "generation_angle": "setting-first",
+      "why_itll_perform": "The delivery app is a countable ladder the reader watches tick (GG formula) and a native reaction-intercut channel — Verena's escalating chat bubbles are baked dialogue, cashing the F2 edge on every growth page. One locked env pack repeats as the spine (production economy). The empty-crate twist is a legible power-transfer punchline (Gribble: the power changes hands — TO the courier nobody considered).",
+      "corpus_grounding": [
+        "F2 baked-dialogue-edge",
+        "F4 reaction-intercut",
+        "C2 mundane-institution-hook",
+        "GG formula countable-ladder",
+        "Gribble power-transfer"
+      ],
+      "scores": {
+        "growth_payoff_density": 3,
+        "story_spine": 3,
+        "hook": 4,
+        "camera_staging_potential": 3,
+        "cast_reuse": 0,
+        "novelty": 4,
+        "production_economy": 4
+      },
+      "score_rationale": "Micro-dose deltas stay small until the doorstep finale — frequent beats, few big sequences; charming twist but slight spine.",
+      "cast_size": 2,
+      "weighted_total": 61.5
+    }
+  ],
+  "ranking": [
+    "destroya-owns-the-street",
+    "ratio-d",
+    "the-word-no",
+    "patch-notes",
+    "open-house",
+    "kelsey-captain-material",
+    "containment-level-five",
+    "last-mile"
+  ],
+  "top3": [
+    "destroya-owns-the-street",
+    "ratio-d",
+    "the-word-no"
+  ],
+  "selected_concept_id": null
+}

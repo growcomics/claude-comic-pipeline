@@ -34,7 +34,7 @@ The corpus pools multiple feedstock types into one studied library the **ideator
 
 1. **Rendered reference comics** — page images fetched/captured, scored on all four visual axes. `ingest.py` + an analysis subagent. (The 9 comics above.)
 2. **The user's own scripts (B1)** — text story scripts normalized into `script-record.json` by `ingest_script.py` (drop them in `scripts-raw/`). Scored only on the two TEXT-assessable axes (growth density, story structure); the visual axes (camera dynamism, expression intensity) defer to storyboard/render. Reuses this rubric's vocabulary so scripts and comics pool together.
-3. **Premium catalog via the authenticated session (B2)** — comics visible only to the user's logged-in premium account, read through the **Chrome MCP** (blob-fetch). **The user handles all auth; Claude never creates an account or logs in.** See `_queue.md` → Premium catalog.
+3. **Full catalog via the WP REST API (B2, rebuilt 2026-08-10)** — GrowGetterComics is one of the user's own WP sites; `scripts/ingest_catalog.py` ingests the whole catalog (1,091 posts: titles, series clusters, page-image counts, gating, engagement) over the REST API via the `~/Documents/.credentials/bin/wp` credential wrapper — no browser session, no secrets in context, no image binaries in git. Output: `catalog/` (posts.jsonl, series.json, `SYNTHESIS.md` findings **C1–C6** — the corpus's first popularity/monetization signal). Supersedes the parked browser-login plan.
 4. **The user's helper scripts (B3)** — accelerator tooling (scrapers/parsers/normalizers) integrated into the ingest paths. Lives in `scripts/helpers/`.
 
 ## Copyright

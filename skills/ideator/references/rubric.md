@@ -96,4 +96,4 @@ Every concept inherits these from the pipeline; they are **not** scored axes, bu
 ## Output
 Write each concept's per-axis scores + `weighted_total` into `concepts.json` (`scores` + `weighted_total`, schema: `concept-schema.json`). Record which findings each concept leans on in `corpus_grounding`. Surface the top 3 with a one-line per-axis justification at the human gate.
 
-> **Engine status:** the automatic scorer that applies this rubric lives in `scripts/tournament.py` and is a **STUB** (`BUILD ME (stronger model)`). Until it's built, apply this rubric by hand — read it verbatim, score honestly, spread the scores.
+> **Engine status (2026-08-10):** the tournament engine is BUILT — judgment in Claude, mechanics in Python. Claude applies this rubric (read it verbatim, score honestly, spread the scores); `scripts/tournament.py finalize` recomputes `weighted_total` mechanically, refuses missing/out-of-range axis scores, and enforces the spread mandate above via the flat-slate guard. Scoring semantics and weights are unchanged from v1.0 — slates stay comparable.
