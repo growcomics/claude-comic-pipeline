@@ -35,6 +35,34 @@ For the stubborn ones add an explicit corrective, as used on b40/b43:
 Do NOT use registry RETRY_INJECTION WARD-01 here — it says "match the attached
 reference images EXACTLY", which is backwards: the reference is the source of the defect.
 
+## FLAT FACES — corrective re-roll (4)
+Audited all 42 banked winners on two axes (face intensity, text accuracy).
+TEXT: 42/42 clean — every expected line present and correctly spelled. Text is NOT a problem.
+FACE: 4 flat. These are banked but should be replaced:
+- b02-vial          — exhausted/hopeful reads as neutral
+- b07-stay-out      — should be a threat landing; face is slack
+- b13-sleeve-tight  — detail shot, but the face in frame is blank
+- b50-clipboard-back— "SAYS THE DATA. MY DATA." should be a counterpunch; reads placid
+
+ROOT CAUSE: judging gap, not a prompt gap. Every prompt already carries
+"FACES: never blank or neutral - the emotion named in the prompt renders at full
+theatrical intensity", but face quality was NOT one of the 8 kill rules, so flat
+faces passed as KEEP.
+
+FIX — add as kill rule 9 for every future judge pass:
+  9. Flat face - blank, neutral, waxy, doll-like, or a mild expression on a beat
+     that calls for something strong. A calm face on a dramatic beat is a KILL.
+Corrective clause for the re-roll (mirrors registry FACE-01):
+  "CRITICAL FIX: the face was wooden last roll. The named emotion must visibly
+   transform the WHOLE face - brows driven, eyes wide or narrowed, mouth open or
+   set. Theatrical intensity, not a neutral expression."
+
+## STRUCTURE — resolved, no action
+Owner confirmed 2026-08-11: each panel IS its own standalone page/image. 86 beats
+= 86 pages. No page-composition/multi-panel-grid step is needed, and the Gribble
+4-panel-grid figure does NOT apply to this run. The apparent "only ~20 images"
+is simply run progress: 42 of 86 banked.
+
 ## Other open defects (not blocking)
 - IDENTITY BLEED, b45-tape: in 3 of 4 tiles the amulet + grey tank bound to INGRID
   instead of Margo, and the coat appeared on Ingrid in 2 of 4. Ref/staging attachment
