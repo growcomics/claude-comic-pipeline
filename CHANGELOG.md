@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (location-scout v2: QA backfill on all shipped plates + vendor the untracked packs)
+
+### Added
+
+- **All 8 on-disk location packs are now tracked in git.** The Brazil/Natal series (`natal-street-scenes`, `ponta-negra-morro-do-careca`, `ponte-newton-navarro`, `praia-do-meio`, `ribeira-cidade-alta-historic`, `forte-dos-reis-magos`), `lakewood-california` (plan-only scout pack), and the `commercial-gym` image binaries (only its provenance text had ever been committed) were sitting untracked in the working tree — the same never-committed failure mode that stranded the June location-scout branch. Vendored with their provenance intact.
+- **QA backfill (Phase C.5, rubric v1) on every existing CGI plate — 28 plates across 4 packs.** Sonnet subagents compared each source↔plate pair against `references/qa-rubric.md`; verdicts recorded in `_targets.json`/`cgi/_qa.json`, propagated to manifests and the repo index. Results: **las-vegas 1 pass / 1 warn / 6 fail** (v1 photoreal prompt → "medium" fails; 2 slots show crossed sources rendering Container Park content), **long-beach 3 pass / 7 fail** (mostly wrong-scene "composition" fails), **commercial-gym 1 pass / 2 fail** (person persisting in plate 02 — phantom-extra risk for muller gym panels; plate 03 photo-indistinguishable), **natal 4 pass / 2 warn / 1 fail + 2 more fails on people-persistence**. Failed plates are automatically skipped by `next_panel.py`'s pack auto-attach; sources remain valid fallback refs.
+
+### Changed
+
+- **`skills/location-scout/SKILL.md` synced to how packs are actually built in this repo (Aug 2026 reality):** Phase B now documents three capture routes with Wikimedia Commons harvest PREFERRED (clean CC/PD licensing, no browser driving — the studio real-photo SOP), Street View Static API second, Chrome-MCP screenshotting as fallback; Phase C.5 QA gate is mandatory with the June-packs failure as the cautionary note; Phase D ends with `pack_index.py --write --verify`; the model section warns that `nano_banana_pro` requests can return jobs tagged `nano_banana_2` (verify the returned model field); the Reuse section documents the zero-config `next_panel.py` auto-attach.
+
+---
+
 ## 2026-08-11 (location-scout v2: QA gate, lighting variants, pack auto-attach, tests)
 
 ### Added

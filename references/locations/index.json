@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T07:30:37.033539+00:00",
+  "generated_at": "2026-08-11T07:43:18.080816+00:00",
   "root": "references/locations",
   "pack_count": 10,
   "packs": [
@@ -20,7 +20,12 @@
           "neighborhood": null,
           "source_image": "commercial-gym-01.jpg",
           "cgi_image": "cgi/commercial-gym-01-daz.png",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:06.329553+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -31,7 +36,12 @@
           "neighborhood": null,
           "source_image": "commercial-gym-02.jpg",
           "cgi_image": "cgi/commercial-gym-02-daz.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "people \u2014 capped man's head/shoulders visible between leg-extension machines (phantom-extra risk in muller panels)",
+            "checked_at": "2026-08-11T07:42:06.329553+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -42,7 +52,12 @@
           "neighborhood": null,
           "source_image": "commercial-gym-03.jpg",
           "cgi_image": "cgi/commercial-gym-03-daz.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "medium \u2014 visually indistinguishable from the source photograph",
+            "checked_at": "2026-08-11T07:42:06.329553+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         }
       ]
@@ -172,7 +187,12 @@
           "neighborhood": "Downtown",
           "source_image": "source/street-01-fremont-street.jpg",
           "cgi_image": "cgi/street-01-fremont-street.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "medium \u2014 indistinguishable from photo (noise, wet-asphalt reflections, neon bloom)",
+            "checked_at": "2026-08-11T07:42:06.322982+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -190,7 +210,12 @@
           "neighborhood": "Las Vegas Strip",
           "source_image": "source/street-02-bellagio-strip.jpg",
           "cgi_image": "cgi/street-02-bellagio-strip.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "medium \u2014 indistinguishable from photograph; no render tells",
+            "checked_at": "2026-08-11T07:42:06.323205+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -208,7 +233,12 @@
           "neighborhood": "Lake Las Vegas",
           "source_image": "source/street-03-montelago-residential.jpg",
           "cgi_image": "cgi/street-03-montelago-residential.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "medium \u2014 reads as real aerial photo (grain, water/shadow detail)",
+            "checked_at": "2026-08-11T07:42:06.323497+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -226,7 +256,12 @@
           "neighborhood": "Las Vegas Strip",
           "source_image": "source/restaurant-01-peppermill-diner.jpg",
           "cgi_image": "cgi/restaurant-01-peppermill-diner.png",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:06.321937+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -243,7 +278,12 @@
           "neighborhood": "Las Vegas Strip",
           "source_image": "source/restaurant-02-eiffel-tower-restaurant.jpg",
           "cgi_image": "cgi/restaurant-02-eiffel-tower-restaurant.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 different scene entirely: invented Container Park structure, not the source open-kitchen interior",
+            "checked_at": "2026-08-11T07:42:06.322247+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -261,7 +301,12 @@
           "neighborhood": "Downtown Fremont",
           "source_image": "source/restaurant-03-heart-attack-grill.jpg",
           "cgi_image": "cgi/restaurant-03-heart-attack-grill.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 different scene: Container Park entrance, not the source shopfront facade",
+            "checked_at": "2026-08-11T07:42:06.322511+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -279,7 +324,12 @@
           "neighborhood": "South Las Vegas Boulevard",
           "source_image": "source/landmark-01-welcome-to-las-vegas-sign.jpg",
           "cgi_image": "cgi/landmark-01-welcome-to-las-vegas-sign.png",
-          "qa": null,
+          "qa": {
+            "verdict": "warn",
+            "notes": "people removed, composition preserved; medium borderline \u2014 near-photoreal v1 look, only subtly CG-clean",
+            "checked_at": "2026-08-11T07:42:06.321257+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -297,7 +347,12 @@
           "neighborhood": "Downtown Fremont East",
           "source_image": "source/specific-01-container-park-alley.jpg",
           "cgi_image": "cgi/specific-01-container-park-alley.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "medium \u2014 reads as photograph (lens flare, natural textures), no CGI tells",
+            "checked_at": "2026-08-11T07:42:06.322746+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         }
       ]
@@ -325,7 +380,12 @@
           "neighborhood": "Downtown Long Beach",
           "source_image": "source/street-01-pine-avenue.jpg",
           "cgi_image": "cgi/street-01-pine-avenue.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "integrity \u2014 matches Terrace Theater block (known retag) but invents readable 'BAILEY' placard + warning placards",
+            "checked_at": "2026-08-11T07:42:06.327536+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -342,7 +402,12 @@
           "neighborhood": "Belmont Shore",
           "source_image": "source/street-02-2nd-street-belmont-shore.jpg",
           "cgi_image": "cgi/street-02-2nd-street-belmont-shore.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 generic commercial storefront strip vs source's residential street; different location",
+            "checked_at": "2026-08-11T07:42:06.327848+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -359,7 +424,12 @@
           "neighborhood": "Belmont Heights",
           "source_image": "source/street-03-belmont-heights-residential.jpg",
           "cgi_image": "cgi/street-03-belmont-heights-residential.png",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:06.328079+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -377,7 +447,12 @@
           "neighborhood": "Port of Long Beach",
           "source_image": "source/street-04-port-of-long-beach.jpg",
           "cgi_image": "cgi/street-04-port-of-long-beach.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 source is high aerial of full port; CGI is ground-level 2-crane shot, scale/skyline lost",
+            "checked_at": "2026-08-11T07:42:06.328717+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -395,7 +470,12 @@
           "neighborhood": "East Long Beach",
           "source_image": "source/restaurant-01-hofs-hut-diner.jpg",
           "cgi_image": "cgi/restaurant-01-hofs-hut-diner.png",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:06.324936+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -412,7 +492,12 @@
           "neighborhood": "East Village Arts District",
           "source_image": "source/restaurant-02-555-east-steakhouse.jpg",
           "cgi_image": "cgi/restaurant-02-555-east-steakhouse.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 source is exterior patio/entrance; CGI shows an unrelated interior dining room",
+            "checked_at": "2026-08-11T07:42:06.325190+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -430,7 +515,12 @@
           "neighborhood": "Long Beach (Anaheim St)",
           "source_image": "source/restaurant-03-joe-josts.jpg",
           "cgi_image": "cgi/restaurant-03-joe-josts.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 storefront reinvented: invented signage, source's Billiards/mug signs dropped",
+            "checked_at": "2026-08-11T07:42:06.326170+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -448,7 +538,12 @@
           "neighborhood": "Long Beach Harbor",
           "source_image": "source/landmark-01-queen-mary.jpg",
           "cgi_image": "cgi/landmark-01-queen-mary.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 source is elevated 3/4-bow aerial with port context; CGI drops to eye-level broadside, different framing",
+            "checked_at": "2026-08-11T07:42:06.324095+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -466,7 +561,12 @@
           "neighborhood": "Rainbow Harbor",
           "source_image": "source/landmark-02-aquarium-of-the-pacific.jpg",
           "cgi_image": "cgi/landmark-02-aquarium-of-the-pacific.png",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:06.324549+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -483,7 +583,12 @@
           "neighborhood": "Downtown Long Beach",
           "source_image": "source/specific-01-downtown-promenade.jpg",
           "cgi_image": "cgi/specific-01-downtown-promenade.png",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "composition \u2014 unrelated suburban street at sunset; no Promenade archway/OpusBank/walkway survives",
+            "checked_at": "2026-08-11T07:42:06.327177+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         }
       ]
@@ -590,7 +695,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/alecrim-commercial-street-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "people \u2014 multiple clear pedestrians in left foreground",
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -601,7 +711,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/avenue-crosswalk-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -612,7 +727,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/beachfront-foodtruck-avenue-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -626,7 +746,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/coastline-reefs-aerial-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "warn",
+            "notes": "people \u2014 distant beach-umbrella crowd, unrecognizable at range",
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -637,7 +762,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/erivan-franca-street-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "pass",
+            "notes": null,
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -648,7 +778,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/ponta-negra-artwall-street-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "fail",
+            "notes": "people \u2014 clear art vendor (red shirt, hat) at the artwall stall",
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         },
         {
@@ -662,7 +797,12 @@
           "neighborhood": null,
           "source_image": null,
           "cgi_image": "cgi/via-costeira-aerial-daz.jpg",
-          "qa": null,
+          "qa": {
+            "verdict": "warn",
+            "notes": "people \u2014 tiny distant unrecognizable beachgoer specks along shoreline",
+            "checked_at": "2026-08-11T07:42:45.336973+00:00",
+            "rubric": "qa-rubric v1"
+          },
           "variants": null
         }
       ]

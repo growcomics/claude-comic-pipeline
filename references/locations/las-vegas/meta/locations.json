@@ -1,7 +1,7 @@
 {
   "city": "Las Vegas",
   "city_slug": "las-vegas",
-  "scouted_at": "2026-06-07T22:54:19.745822+00:00",
+  "scouted_at": "2026-08-11T07:42:06.328941+00:00",
   "count": 8,
   "locations": [
     {
@@ -18,6 +18,13 @@
         "neon",
         "pedestrian"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 indistinguishable from photo (noise, wet-asphalt reflections, neon bloom)",
+        "checked_at": "2026-08-11T07:42:06.322982+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Downtown"
     },
     {
@@ -37,6 +44,13 @@
         "evening",
         "iconic"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 indistinguishable from photograph; no render tells",
+        "checked_at": "2026-08-11T07:42:06.323205+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Las Vegas Strip"
     },
     {
@@ -56,6 +70,13 @@
         "lake",
         "luxury"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 reads as real aerial photo (grain, water/shadow detail)",
+        "checked_at": "2026-08-11T07:42:06.323497+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Lake Las Vegas"
     },
     {
@@ -75,6 +96,13 @@
         "dusk",
         "storefront"
       ],
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.321937+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Las Vegas Strip"
     },
     {
@@ -93,6 +121,13 @@
         "white-tile",
         "stainless"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 different scene entirely: invented Container Park structure, not the source open-kitchen interior",
+        "checked_at": "2026-08-11T07:42:06.322247+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Las Vegas Strip"
     },
     {
@@ -112,6 +147,13 @@
         "night",
         "diner"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 different scene: Container Park entrance, not the source shopfront facade",
+        "checked_at": "2026-08-11T07:42:06.322511+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Downtown Fremont"
     },
     {
@@ -131,6 +173,13 @@
         "palm-trees",
         "tourist"
       ],
+      "qa": {
+        "verdict": "warn",
+        "notes": "people removed, composition preserved; medium borderline \u2014 near-photoreal v1 look, only subtly CG-clean",
+        "checked_at": "2026-08-11T07:42:06.321257+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "South Las Vegas Boulevard"
     },
     {
@@ -150,6 +199,13 @@
         "industrial-chic",
         "plaza"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 reads as photograph (lens flare, natural textures), no CGI tells",
+        "checked_at": "2026-08-11T07:42:06.322746+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Downtown Fremont East"
     }
   ]

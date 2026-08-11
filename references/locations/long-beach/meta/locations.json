@@ -1,7 +1,7 @@
 {
   "city": "Long Beach",
   "city_slug": "long-beach",
-  "scouted_at": "2026-06-09T01:51:18.988207+00:00",
+  "scouted_at": "2026-08-11T07:42:06.329125+00:00",
   "count": 10,
   "locations": [
     {
@@ -20,6 +20,13 @@
         "low-building",
         "daytime"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "integrity \u2014 matches Terrace Theater block (known retag) but invents readable 'BAILEY' placard + warning placards",
+        "checked_at": "2026-08-11T07:42:06.327536+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Downtown Long Beach"
     },
     {
@@ -38,6 +45,13 @@
         "storefronts",
         "beach-town"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 generic commercial storefront strip vs source's residential street; different location",
+        "checked_at": "2026-08-11T07:42:06.327848+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Belmont Shore"
     },
     {
@@ -56,6 +70,13 @@
         "palms",
         "balcony-view"
       ],
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.328079+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Belmont Heights"
     },
     {
@@ -75,6 +96,13 @@
         "cargo-ship",
         "harbor"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is high aerial of full port; CGI is ground-level 2-crane shot, scale/skyline lost",
+        "checked_at": "2026-08-11T07:42:06.328717+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Port of Long Beach"
     },
     {
@@ -94,6 +122,13 @@
         "awnings",
         "storefront"
       ],
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.324936+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "East Long Beach"
     },
     {
@@ -112,6 +147,13 @@
         "dark-wood",
         "fine-dining"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is exterior patio/entrance; CGI shows an unrelated interior dining room",
+        "checked_at": "2026-08-11T07:42:06.325190+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "East Village Arts District"
     },
     {
@@ -131,6 +173,13 @@
         "awning",
         "brick"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 storefront reinvented: invented signage, source's Billiards/mug signs dropped",
+        "checked_at": "2026-08-11T07:42:06.326170+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Long Beach (Anaheim St)"
     },
     {
@@ -150,6 +199,13 @@
         "historic",
         "wide-vista"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is elevated 3/4-bow aerial with port context; CGI drops to eye-level broadside, different framing",
+        "checked_at": "2026-08-11T07:42:06.324095+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Long Beach Harbor"
     },
     {
@@ -169,6 +225,13 @@
         "plaza",
         "wide-vista"
       ],
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.324549+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Rainbow Harbor"
     },
     {
@@ -187,6 +250,13 @@
         "street-level",
         "warm-sky"
       ],
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 unrelated suburban street at sunset; no Promenade archway/OpusBank/walkway survives",
+        "checked_at": "2026-08-11T07:42:06.327177+00:00",
+        "rubric": "qa-rubric v1"
+      },
+      "variants": null,
       "neighborhood": "Downtown Long Beach"
     }
   ]

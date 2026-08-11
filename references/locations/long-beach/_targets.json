@@ -31,7 +31,13 @@
       "captured_at": "2026-06-09T01:28:10.810537+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "integrity \u2014 matches Terrace Theater block (known retag) but invents readable 'BAILEY' placard + warning placards",
+        "checked_at": "2026-08-11T07:42:06.327536+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "street-02",
@@ -54,7 +60,13 @@
       "captured_at": "2026-06-09T01:28:33.936541+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 generic commercial storefront strip vs source's residential street; different location",
+        "checked_at": "2026-08-11T07:42:06.327848+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "street-03",
@@ -77,7 +89,13 @@
       "captured_at": "2026-06-09T01:30:34.358102+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.328079+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "street-04",
@@ -101,7 +119,13 @@
       "captured_at": "2026-06-09T01:30:56.169220+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is high aerial of full port; CGI is ground-level 2-crane shot, scale/skyline lost",
+        "checked_at": "2026-08-11T07:42:06.328717+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-01",
@@ -125,7 +149,13 @@
       "captured_at": "2026-06-09T01:31:18.233190+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.324936+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-02",
@@ -148,7 +178,13 @@
       "captured_at": "2026-06-09T01:31:40.019146+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is exterior patio/entrance; CGI shows an unrelated interior dining room",
+        "checked_at": "2026-08-11T07:42:06.325190+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-03",
@@ -172,7 +208,13 @@
       "captured_at": "2026-06-09T01:32:05.978681+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 storefront reinvented: invented signage, source's Billiards/mug signs dropped",
+        "checked_at": "2026-08-11T07:42:06.326170+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "landmark-01",
@@ -196,7 +238,13 @@
       "captured_at": "2026-06-09T01:32:30.896977+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 source is elevated 3/4-bow aerial with port context; CGI drops to eye-level broadside, different framing",
+        "checked_at": "2026-08-11T07:42:06.324095+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "landmark-02",
@@ -220,7 +268,13 @@
       "captured_at": "2026-06-09T01:32:55.310751+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.324549+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "specific-01",
@@ -243,7 +297,13 @@
       "captured_at": "2026-06-09T01:33:39.227041+00:00",
       "cgi_model": "nano_banana_pro",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00"
+      "cgi_completed_at": "2026-06-09T01:51:18.759578+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 unrelated suburban street at sunset; no Promenade archway/OpusBank/walkway survives",
+        "checked_at": "2026-08-11T07:42:06.327177+00:00",
+        "rubric": "qa-rubric v1"
+      }
     }
   ]
 }

@@ -1,0 +1,20 @@
+{
+  "commercial-gym-01-daz.png": {
+    "verdict": "pass",
+    "notes": null,
+    "checked_at": "2026-08-11T07:42:06.329553+00:00",
+    "rubric": "qa-rubric v1"
+  },
+  "commercial-gym-02-daz.png": {
+    "verdict": "fail",
+    "notes": "people \u2014 capped man's head/shoulders visible between leg-extension machines (phantom-extra risk in muller panels)",
+    "checked_at": "2026-08-11T07:42:06.329553+00:00",
+    "rubric": "qa-rubric v1"
+  },
+  "commercial-gym-03-daz.png": {
+    "verdict": "fail",
+    "notes": "medium \u2014 visually indistinguishable from the source photograph",
+    "checked_at": "2026-08-11T07:42:06.329553+00:00",
+    "rubric": "qa-rubric v1"
+  }
+}

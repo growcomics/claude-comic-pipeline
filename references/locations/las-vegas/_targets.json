@@ -29,7 +29,13 @@
       "captured_at": "2026-06-07T14:48:36.354575+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 indistinguishable from photo (noise, wet-asphalt reflections, neon bloom)",
+        "checked_at": "2026-08-11T07:42:06.322982+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "street-02",
@@ -53,7 +59,13 @@
       "captured_at": "2026-06-07T14:49:10.064688+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 indistinguishable from photograph; no render tells",
+        "checked_at": "2026-08-11T07:42:06.323205+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "street-03",
@@ -77,7 +89,13 @@
       "captured_at": "2026-06-07T14:49:58.529584+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 reads as real aerial photo (grain, water/shadow detail)",
+        "checked_at": "2026-08-11T07:42:06.323497+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-01",
@@ -101,7 +119,13 @@
       "captured_at": "2026-06-07T14:50:20.903616+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "pass",
+        "notes": null,
+        "checked_at": "2026-08-11T07:42:06.321937+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-02",
@@ -124,7 +148,13 @@
       "captured_at": "2026-06-07T14:50:42.472495+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 different scene entirely: invented Container Park structure, not the source open-kitchen interior",
+        "checked_at": "2026-08-11T07:42:06.322247+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "restaurant-03",
@@ -148,7 +178,13 @@
       "captured_at": "2026-06-07T14:51:02.613462+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "composition \u2014 different scene: Container Park entrance, not the source shopfront facade",
+        "checked_at": "2026-08-11T07:42:06.322511+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "landmark-01",
@@ -172,7 +208,13 @@
       "captured_at": "2026-06-07T14:51:26.530720+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "warn",
+        "notes": "people removed, composition preserved; medium borderline \u2014 near-photoreal v1 look, only subtly CG-clean",
+        "checked_at": "2026-08-11T07:42:06.321257+00:00",
+        "rubric": "qa-rubric v1"
+      }
     },
     {
       "id": "specific-01",
@@ -196,7 +238,13 @@
       "captured_at": "2026-06-07T14:51:49.118063+00:00",
       "cgi_model": "nano_banana_2",
       "cgi_platform": "google-flow",
-      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00"
+      "cgi_completed_at": "2026-06-07T22:53:57.645255+00:00",
+      "qa": {
+        "verdict": "fail",
+        "notes": "medium \u2014 reads as photograph (lens flare, natural textures), no CGI tells",
+        "checked_at": "2026-08-11T07:42:06.322746+00:00",
+        "rubric": "qa-rubric v1"
+      }
     }
   ]
 }

@@ -63,7 +63,26 @@ The planner emits `<output-root>/<city-slug>/_targets.json` with an entry per ta
 
 Pick queries that resolve to a real, visit-able Google Maps POI for the city.
 
-## Phase B — Capture (Chrome MCP)
+## Phase B — Capture
+
+Three capture routes, in order of preference:
+
+1. **Wikimedia Commons harvest (PREFERRED when coverage exists)** — search the Commons
+   API for CC/PD-licensed photos of the target locations. This is what the studio
+   real-photo SOP (`studio/docs/REAL-PHOTO-ENV-REFS.md`) uses and what produced the
+   natal/ponta-negra/commercial-gym packs: clean licensing, no browser driving, no API
+   key, often better image quality than Street View. Record per-image provenance
+   (source URL, author, license) — either in the slot's plan entry or a flat-pack
+   `_provenance.md`.
+2. **Street View Static API** — `scripts/fetch_street_view.py --pack-dir <pack>` fetches
+   every slot with a `google_maps_query` headlessly (~$0.007/image; needs
+   `GOOGLE_MAPS_API_KEY`). Deterministic and repeatable; best for street-level slots in
+   cities with poor Commons coverage.
+3. **Chrome MCP screenshotting (fallback)** — drive maps.google.com interactively. Needed
+   for POI *interior* photos (Street View API can't reach the Photos panel) and when no
+   API key is configured.
+
+### Route 3 details (Chrome MCP)
 
 For each slot in `_targets.json`:
 
@@ -111,6 +130,39 @@ The prompt is appended with the slot's `intent` as a one-line scene anchor for t
 
 Per memory `feedback_higgsfield_model_flash.md`, `nano_banana_flash` is retired; do not use it.
 
+⚠️ **Verify the returned model field.** As of 2026-08, requesting `nano_banana_pro` on
+Higgsfield can return a job actually tagged `nano_banana_2` — check the job's `model`
+field rather than assuming (see CLAUDE.md generation defaults).
+
+### Lighting / time-of-day variants (optional)
+
+A pack slot can carry lighting variants of its day plate — a comic needs the same street
+at day AND night. `cgi_convert.py --slot-id <id> --emit-prompt --variant night` (or
+`dusk`) emits a prompt that re-renders **the day CGI plate** (not the source photo) with
+geometry locked and lighting-only change language. Download with the same `--variant`
+flag → saved as `cgi/<id>--night.png` and recorded under the slot's `variants` map.
+Generate variants only for slots a project actually needs — each costs a normal gen.
+
+## Phase C.5 — QA gate (MANDATORY before a pack ships)
+
+Every conversion is QA'd against **`references/qa-rubric.md`** (composition / people /
+overlays / medium / integrity). Pass the rubric VERBATIM to a fresh Sonnet subagent that
+views each source↔plate pair side by side (per `feedback_audit_via_subagent` +
+`feedback_dont_paraphrase_canonical_rubrics`). Record each verdict:
+
+```bash
+cgi_convert.py --pack-dir <pack> --slot-id <id> --record-qa --qa-verdict pass|warn|fail --qa-notes "..."
+```
+
+(Flat packs record the same shape keyed by plate filename in `cgi/_qa.json`.)
+
+A pack ships when every plate is `pass` or `warn`. `fail` plates go back through
+conversion or fall back to attaching the source photo. Downstream consumers
+(`next_panel.py`'s pack auto-attach) skip `fail` plates automatically. History lesson:
+the June 2026 Vegas/Long Beach packs shipped without this gate — the 2026-08-11 QA
+backfill failed 13 of their 18 plates (photoreal "medium" fails and wrong-scene
+"composition" fails). Do not skip this phase.
+
 ## Phase D — Manifest + README
 
 After all conversions complete, run `cgi_convert.py --emit-manifest`. This writes:
@@ -146,6 +198,17 @@ A short pack description: what city, when scouted, list of locations with thumbn
 
 The `_targets.json` plan file is kept (provenance) but the canonical consumer file is `meta/locations.json`.
 
+Finally, refresh the repo-level index (both pack conventions, all packs):
+
+```bash
+python3 skills/location-scout/scripts/pack_index.py --write --verify
+```
+
+`references/locations/index.json` is what `reference-gathering` and `next_panel.py`'s
+env-ref fallback consume. `--verify` must report 0 errors before the pack ships. Slot
+tags must come from `skills/location-scout/tag-vocabulary.json` — `scout_city.py`
+enforces this at plan time.
+
 ## Output structure
 
 ```
@@ -175,6 +238,13 @@ The `cgi/` folder is what gets attached to panel prompts as the env ref. The `so
 - **Default `nano_banana_pro` 1k count=1.** Per memory defaults. `--fast` switches to `nano_banana_2`.
 
 ## Reuse — how other skills consume city packs
+
+**Automatic (zero-config):** `skills/comic-production/scripts/next_panel.py` falls back to
+the repo pack index when a project has no local env ref for a location
+(`find_pack_env_ref`: exact entry id → pack slug → tag/token overlap; QA-`fail` plates
+are never attached). Name a shotlist location after a pack entry id (e.g.
+`street-01-fremont-street`) or a pack slug (e.g. `commercial-gym`) and the plate
+attaches itself.
 
 `reference-gathering` (manifest-driven mode): when a project's `references_required.json` declares a `locations[<loc_id>].establishing` and a city-scout pack exists for that city, the manifest walker can resolve "any Vegas downtown street" → pick the closest match from the pack instead of generating from scratch. Match by `type` + tags. See `reference-gathering/SKILL.md` "Location packs from location-scout" section.
 

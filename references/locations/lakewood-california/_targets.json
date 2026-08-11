@@ -1,0 +1,180 @@
+{
+  "city": "Lakewood, California",
+  "city_slug": "lakewood-california",
+  "planned_at": "2026-06-09T05:24:32.816140+00:00",
+  "count": 10,
+  "allocation": {
+    "street": 4,
+    "restaurant": 3,
+    "landmark": 2,
+    "specific": 1
+  },
+  "targets": [
+    {
+      "id": "street-01",
+      "type": "street",
+      "intent": "Candlewood Street pedestrian shopping area near Lakewood Center \u2014 mid-century commercial storefronts, palm trees, retro signage, late afternoon",
+      "google_maps_query": "Candlewood Street near Lakewood Center Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "downtown",
+        "pedestrian",
+        "mid-century",
+        "retro-signage",
+        "palms"
+      ],
+      "neighborhood": "Lakewood Center area"
+    },
+    {
+      "id": "street-02",
+      "type": "street",
+      "intent": "Lakewood Boulevard at the Del Amo Boulevard intersection \u2014 wide six-lane suburban commercial arterial with strip malls and palm trees, midday",
+      "google_maps_query": "Lakewood Blvd at Del Amo Blvd Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "commercial",
+        "wide",
+        "arterial",
+        "strip-mall",
+        "palms",
+        "daytime"
+      ],
+      "neighborhood": "Lakewood Blvd corridor"
+    },
+    {
+      "id": "street-03",
+      "type": "street",
+      "intent": "Faculty Avenue residential street \u2014 classic 1950s ranch-style suburban homes, manicured lawns, palm trees, golden hour",
+      "google_maps_query": "Faculty Avenue Lakewood CA residential",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "residential",
+        "1950s-ranch",
+        "suburban",
+        "palms",
+        "golden-hour"
+      ],
+      "neighborhood": "Lakewood residential"
+    },
+    {
+      "id": "street-04",
+      "type": "street",
+      "intent": "Cherry Avenue industrial district near Long Beach Airport \u2014 low-rise warehouses, chain-link fences, loading docks, harsh midday sun",
+      "google_maps_query": "Cherry Avenue Lakewood CA industrial near Long Beach Airport",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "industrial",
+        "warehouse",
+        "chain-link",
+        "gritty",
+        "back-of-house"
+      ],
+      "neighborhood": "Cherry Ave industrial"
+    },
+    {
+      "id": "restaurant-01",
+      "type": "restaurant",
+      "intent": "Hof's Hut Lakewood interior \u2014 classic SoCal family coffee shop, red vinyl booths, white formica counter with chrome stools, pendant lights, daytime",
+      "google_maps_query": "Hof's Hut Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "interior",
+        "diner",
+        "iconic",
+        "mid-century",
+        "red-booths",
+        "counter"
+      ],
+      "neighborhood": "Lakewood"
+    },
+    {
+      "id": "restaurant-02",
+      "type": "restaurant",
+      "intent": "George's Greek Cafe Lakewood interior at evening \u2014 whitewashed walls with Greek blue accents, wooden chairs, warm pendant lights, dimly lit cozy atmosphere",
+      "google_maps_query": "George's Greek Cafe Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "interior",
+        "greek",
+        "evening",
+        "warm-light",
+        "intimate"
+      ],
+      "neighborhood": "Lakewood"
+    },
+    {
+      "id": "restaurant-03",
+      "type": "restaurant",
+      "intent": "In-N-Out Burger Lakewood Blvd exterior \u2014 iconic white building with red trim, crossed yellow palm tree signage, drive-thru lane, golden afternoon sun",
+      "google_maps_query": "In-N-Out Burger Lakewood Boulevard Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "exterior",
+        "fast-food",
+        "iconic",
+        "drive-thru",
+        "golden-hour",
+        "palms"
+      ],
+      "neighborhood": "Lakewood Blvd"
+    },
+    {
+      "id": "landmark-01",
+      "type": "landmark",
+      "intent": "Lakewood Center mall exterior \u2014 one of America's earliest planned shopping centers from 1951, mid-century modernist architecture, sprawling parking lot with palms, midday",
+      "google_maps_query": "Lakewood Center mall Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "landmark",
+        "mall",
+        "1951",
+        "mid-century-modern",
+        "planned-suburb",
+        "parking-lot",
+        "palms"
+      ],
+      "neighborhood": "Lakewood Center"
+    },
+    {
+      "id": "landmark-02",
+      "type": "landmark",
+      "intent": "Mayfair Park Lakewood \u2014 classic 1950s suburban park, green lawns, mid-century playground equipment, picnic shelter, baseball diamond, palm trees, sunny afternoon",
+      "google_maps_query": "Mayfair Park Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "landmark",
+        "park",
+        "playground",
+        "americana",
+        "1950s",
+        "baseball-diamond"
+      ],
+      "neighborhood": "Mayfair / Bolivar"
+    },
+    {
+      "id": "specific-01",
+      "type": "specific",
+      "intent": "Service alley behind a mid-century strip mall on South Street \u2014 rear stucco walls, roll-up doors, dumpsters, chain-link, electrical conduits, palms above, harsh midday shadows",
+      "google_maps_query": "service alley behind strip mall South Street Lakewood CA",
+      "source_image": null,
+      "cgi_image": null,
+      "tags": [
+        "alley",
+        "gritty",
+        "rear-of-house",
+        "utilitarian",
+        "midday"
+      ],
+      "neighborhood": "South Street strip mall"
+    }
+  ]
+}
