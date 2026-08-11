@@ -1608,6 +1608,30 @@ Two recurring failure modes drove this:
 
 ---
 
+## 2026-05-22 (Experiment 01 — Generalization smoke test across real projects)
+
+Signal-gathering pass to confirm the same-day composition-layer + validator fixes (see entry below) generalize beyond `chun-li-test`. Ran `next_panel.py --as-json` against every real comic project on disk (15 projects, discovered via `find ~ -name shotlist.json`). No fixes applied — this experiment only measures.
+
+### Added
+
+- [`docs/experiments/01-generalization-smoke-test/`](docs/experiments/01-generalization-smoke-test/) containing `results-2026-05-22.md` (results table, per-failure diagnoses, recommended next fixes) and `raw-output.log` (per-project stdout/exit-code dump).
+- [`docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md`](docs/blog/2026-05-22-when-layers-dont-speak-the-same-language.md) — long-form postmortem of the schema-disagreement findings (the four field-level bugs + the container-shape next-frontier), framed around Magnamus's "layers using different vocabulary" diagnosis. Eight comic-style explainer graphics in [`docs/blog/assets/`](docs/blog/assets/) generated via Higgsfield Nano Banana Pro (1k, 16:9, 16 credits total): hero (vocabulary mismatch over shared blueprint), one per bug (empty speaker bubble, camera-vocab argument, caption AttributeError, stale Mac Mini), the three-pillar fix-pattern, the 15-project scoreboard, and the flat-vs-nested container-shape diagram. Hand-eye sanity check: Bug-4 (Mac Mini) has the style-block bleed-through as a literal caption (regen candidate); Bug-3 (caption-crash) error balloons have minor letter garble but readable.
+
+### Findings
+
+- **15 projects tested** across `~/Documents/` and `~/Documents/claude-comic-pipeline/projects/`. (Magnamus's expected paths `~/comics/` and `~/growgetter-comics/` don't exist on this machine — stale notes; all real projects live under `~/Documents/`.)
+- **15 / 15 pass the hard test** — every project exits 0 with well-formed JSON. The composition-layer fixes do not crash anywhere.
+- **13 / 15 pass the semantic test.** Two projects produce a false-positive "All shotlist panels have an accepted version. Nothing pending." despite holding 12 + 24 unstarted panels: `chun-li-serum-courtyard`, `Mira's Story — Ch1 Rooftop Pool`.
+- **Top failure category: container-shape disagreement** (frequency 2/15). Both affected projects use a flat `panels: [...]` root, while the other 13 nest panels under `pages: [{panels: [...]}]`. `next_panel.py`'s walker only knows the `pages` envelope, so the flat-shape shotlists walk to zero panels and report "all done" silently. Pre-existing dialogue-shape fix (`961f9b5`) addressed field-level vocabulary; this is the same class of bug one container layer up.
+
+### Next
+
+- **Spawn experiment 02 — fix #1:** container-shape adapter in `next_panel.py` to walk root-level `panels[]` when `pages` is absent. Unblocks the 2 affected projects.
+- **Defensive follow-ups (not blockers):** make the panel walker fail loudly on zero-candidate iteration; extend `validate_shotlist.py` to assert root shape so future variants surface at authoring time.
+- **Verdict on the hypothesis:** partially confirmed — composition layer is stable for the dominant container shape, but container-shape generalization is the next frontier. Not a rule-design problem; same root cause Magnamus diagnosed (layers using different conventions, nothing validating the contract).
+
+---
+
 ## 2026-05-22 (Mac Mini branch recovery + composition-layer bug sweep + validator + vision-audit dispatcher)
 
 A diagnostic session that started from "why are generations bad / is the rule system too strict or lacking?" and traced every failure to one root cause: **pipeline layers using different names/formats for the same data, with nothing validating the contract between them.** Not a rule-design problem. Five distinct plumbing bugs + a stale checkout, all fixed; two new tools added (shotlist validator, vision-audit dispatcher).
