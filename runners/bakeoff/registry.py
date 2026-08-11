@@ -74,7 +74,7 @@ RETRY_INJECTION = {
     "PROP-01": "FIX: an anachronistic prop (wristwatch/phone/modern item) appeared last roll. No wristwatches. No modern devices unless named in this prompt.",
     "BODY-03": "FIX: wrong transformation stage last roll. Match the muscle size shown in the attached stage reference exactly — do not scale it up or down.",
     "BODY-05": "CRITICAL FIX: malformed anatomy last roll (extra/missing limbs or digits, impossible joints). Anatomy must be structurally correct.",
-    "LET-01": "CRITICAL FIX: lettering was missing last roll. Render every quoted line inside a clean 3D speech bubble as specified.",
+    "LET-01": "CRITICAL FIX: lettering was missing last roll. Render every quoted line inside a clean flat 2D WHITE speech bubble exactly as specified (L19) — a specified line with a blank or missing bubble is a defect.",
     "LET-02": "CRITICAL FIX: lettering was garbled last roll. Bubble text must be crisp, correctly spelled, and match the quoted dialogue exactly.",
     "PROP-02": "CRITICAL FIX: a reference image was rendered as an object inside the scene last roll. Reference images define appearance ONLY — never draw them as posters, screens, or pictures in the panel.",
     "STYLE-01": "CRITICAL FIX: style drifted to 2D last roll. Render as photoreal DAZ3D/Iray CGI — NOT flat illustration, NOT cel shading, NOT anime, NOT comic-book linework.",

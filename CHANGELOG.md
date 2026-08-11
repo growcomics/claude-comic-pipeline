@@ -20,6 +20,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 **Changed**
 - **Lettering doctrine RESTORED (STYLE v5)** — the v4 experiment's "No text, lettering, or speech bubbles" clause is retired (it killed garbled text by producing blank bubbles). Owner call: dialogue is BAKED IN from the very beginning per `feedback_bake_dialogue` + comic-production L19 (scope-bounded 2D lettering, white bubbles, exact quoted text). `beatsheet.schema.json` gains `dialogue[]` (speaker/text/type, bubbles ≤ ~8 words), `wardrobe`, `stage`, `beatKind`; variants max 8→12 per `feedback_lite_volume_policy`. Judge contract: garbled = LET-02 kill+re-roll, blank-bubble-when-line-specified = LET-01. Conventions documented in `runners/bakeoff/README.md` ("Lettering doctrine" section).
 
+## 2026-08-11 01:10 (margo-full production run: stage-aware bodies + run tooling)
+
+**Changed**
+- **STYLE v5 BODIES clause is now STAGE-AWARE (s1..s5)** — caught before any beat was generated: the flat v4 "dramatically oversized" clause would have rendered pre-serum slim-Margo beats huge (continuity break) and applied Margo scaling to Kress/investor-only panels. `build_beats.py` now inserts a per-stage BODY block only on Margo beats (s1 slim → s5 colossal, over-shoot language ramping per `feedback_chest_oversize_compensate`). Commit `eab7562` shipped the builder; this entry documents it.
+- `registry.py` LET-01 retry injection updated from the stale "clean 3D speech bubble" wording to the May-16 L19 flat-2D doctrine + blank-bubble-is-a-defect.
+
+**Added**
+- `runners/bakeoff/runs/margo-full-20260811/{drive.py,RUN-NOTES.md,judge-cards.json,JUDGE-PROMPTS.md}` (force-added past the runs/ ignore, matching bo-autopilot-ab precedent) — resumable driver CLI (record/fetchroll/sheet/pair/winner-ingest with board annotate), compaction-resilient protocol doc, per-beat judge cards, judge prompt templates. Production runs via background driver subagents (Higgsfield MCP, nano_banana_2_lite @ 1cr per count=4 call), two-tier SPOTTER judging (Haiku sheet triage → Sonnet finalist rank + full-res winner confirm).
+
 ## 2026-08-10 (reference-gathering manifest mode: base ref becomes the identity anchor)
 
 **Changed**
