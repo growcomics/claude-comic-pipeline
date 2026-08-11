@@ -412,8 +412,8 @@ def main():
         "manifest": {"comic_id": manifest["comic_id"], "title": manifest["title"],
                      "prepared_at": manifest.get("prepared_at")},
     })
-    print("OK — card %s %sd. Receipt: %s (commit it — it's project text)." % (
-        item_id, mode, os.path.relpath(receipt_path)))
+    print("OK — card %s %s. Receipt: %s (commit it — it's project text)." % (
+        item_id, "created" if mode == "add" else "updated", os.path.relpath(receipt_path)))
     print("Chips are all 'todo' until a human posts and flips them on the board.")
 
 

@@ -1,0 +1,40 @@
+{
+  "_note": "Receipt for this project's 🗓 posting-board card — written ONLY by skills/publisher/scripts/board_item.py (dry runs never write it). Chip states live on the board, never here (posting-board-alignment.md). This is NOT posting/posted.json and never becomes it.",
+  "board": "https://3dmusclecomics.com/studio/posting.php",
+  "history": [
+    {
+      "item_id": "po_1df2b9753a",
+      "lane": "comic",
+      "property": "growgetter",
+      "last_action": "add",
+      "executed_at": "2026-08-11T07:35:20Z",
+      "approved_by": "GG, in-session AskUserQuestion approval 2026-08-11 (slot=today option)",
+      "payload": {
+        "action": "add",
+        "title": "Not So Supra... Man",
+        "property": "growgetter",
+        "lane": "comic",
+        "slot": "2026-08-11",
+        "status": "draft",
+        "owner": "",
+        "caption": "",
+        "notes": "📦 bundle: projects/not-so-supra-man/posting/bundle (CHECKLIST + captions + crop specs) · 46pp · release 2026-07-30 · board_item.py 2026-08-11",
+        "assets": ""
+      },
+      "server_response": {
+        "ok": true,
+        "id": "po_1df2b9753a"
+      },
+      "manifest": {
+        "comic_id": "not-so-supra-man",
+        "title": "Not So Supra... Man",
+        "prepared_at": "2026-08-11T06:01:12Z"
+      }
+    }
+  ],
+  "item_id": "po_1df2b9753a",
+  "lane": "comic",
+  "property": "growgetter",
+  "last_action": "add",
+  "executed_at": "2026-08-11T07:35:20Z"
+}
