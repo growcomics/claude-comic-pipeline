@@ -17,6 +17,17 @@
           "kind": {"enum": ["panel", "sheet"], "default": "panel"},
           "prompt": {"type": "string", "minLength": 10,
             "description": "ACTION + CAMERA + SETTING only. Appearance lives in refs."},
+          "dialogue": {"type": "array",
+            "description": "Owner doctrine (2026-08-12, restoring feedback_bake_dialogue + L19): dialogue is BAKED IN from the very beginning. Each entry renders as a scope-bounded L19 lettering block appended to the prompt — clean WHITE 2D bubbles, exact quoted text, identical style every panel. Keep each bubble <= ~8 words; split longer lines across beats. Garbled text = LET-02 blocker; a beat with dialogue entries that renders a blank/empty bubble = LET-01 blocker. Beats with an empty/absent dialogue array must render NO bubbles.",
+            "items": {"type": "object", "required": ["text"], "properties": {
+              "speaker": {"type": "string", "description": "Cast name the bubble tail points to. Omit for captions/SFX."},
+              "text": {"type": "string", "maxLength": 90},
+              "type": {"enum": ["balloon", "thought", "whisper", "shout", "caption", "sfx"], "default": "balloon"}}}},
+          "wardrobe": {"type": "string",
+            "description": "Explicit garment state for this beat (on/off/strained/torn-at-seam...). Chosen to SHOW the body on payoff beats; explicit sleeve behavior on flexes (WARD-07)."},
+          "stage": {"type": "string", "description": "Growth-tier tag (s1..s5) for continuity + ladder tracking."},
+          "beatKind": {"enum": ["connective", "payoff"], "default": "connective",
+            "description": "Production budget class: connective = 8 lite variants single round; payoff = 12 variants + refinement round."},
           "anchors": {"type": "array", "items": {"type": "object", "properties": {
             "board": {"type": "string"}, "local": {"type": "string"},
             "file": {"type": "string"}}}},
@@ -26,7 +37,8 @@
             "max": {"type": "integer", "minimum": 1, "maximum": 4},
             "file": {"type": "string"}, "label": {"type": "string"}}}},
           "aspect": {"type": "string", "default": "3:4"},
-          "variants": {"type": "integer", "minimum": 2, "maximum": 8, "default": 4}
+          "variants": {"type": "integer", "minimum": 2, "maximum": 12, "default": 4,
+            "description": "Per feedback_lite_volume_policy: on nano_banana_2_lite volume is ~free — connective 8, payoff 12. Lean caps only on paid models."}
         }
       }
     }

@@ -72,6 +72,27 @@ Every subcommand is idempotent and resumable; state lives in `<run>/state.json`.
 }
 ```
 
+### Lettering doctrine (restored 2026-08-12, owner call)
+
+The v4 style experiment's "No text, lettering, or speech bubbles" clause is
+**RETIRED**. It was added to kill garbled text; it over-corrected into blank
+bubbles ("maybe a defect but an improvement" — owner). The real target is
+**CLEAN BAKED TEXT**: dialogue is baked in from the very beginning per the
+standing doctrine (memory `feedback_bake_dialogue` + comic-production
+lessons-learned **L19**, May-16 scope-bounded rewrite).
+
+- Every beat carries its dialogue line(s) **verbatim** in the sheet's
+  `dialogue` array; the prompt builder appends an L19 scope-bounded LETTERING
+  block (2D style bounded to bubble/caption/SFX graphics ONLY, everything else
+  photoreal CGI, white oval bubbles with bold black outlines, ALL-CAPS comic
+  display font, exact quoted text, tail to the speaker).
+- Short lines render more reliably: keep bubbles **<= ~8 words**; split longer
+  lines across panels.
+- Judge contract: garbled bubble text = **LET-02** (kill + retry re-roll with
+  `registry.RETRY_INJECTION`); a **blank bubble when a line was specified** =
+  **LET-01** defect too. Beats with no `dialogue` entries must render NO
+  bubbles or stray text.
+
 Anchors = composition truth (storyboard-sheet crop, prior accepted panel, or
 blueprint). Identity refs resolve against the project's LOCKED refs only
 (`genspec` doctrine). Everything is downloaded into `<run>/refs/` so any driver
