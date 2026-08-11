@@ -72,6 +72,27 @@ DEFAULT_SCOPE = {
 
 DEFAULT_WEIGHTS = {"street": 4, "restaurant": 3, "landmark": 2, "specific": 2}
 
+VOCAB_PATH = Path(__file__).resolve().parent.parent / "tag-vocabulary.json"
+
+
+def validate_tags() -> list[str]:
+    """Every tag used in DEFAULT_SCOPE must be in the canonical vocabulary.
+
+    Cross-pack matching (reference-gathering, next_panel env-ref fallback)
+    depends on packs agreeing on tag spelling; a typo here would ship a pack
+    nothing can match against. Returns the list of offending tags.
+    """
+    try:
+        v = json.loads(VOCAB_PATH.read_text())
+    except (OSError, json.JSONDecodeError):
+        return []  # vocabulary missing — don't block planning
+    allowed = set(v["framing"]) | set(v["setting"]) | set(v["mood_time"])
+    bad = []
+    for slots in DEFAULT_SCOPE.values():
+        for _, tags in slots:
+            bad.extend(t for t in tags if t not in allowed)
+    return sorted(set(bad))
+
 
 def slugify(text: str) -> str:
     """City name -> 'las-vegas'-style slug."""
@@ -170,6 +191,16 @@ def main(argv: list[str] | None = None) -> int:
         help="Overwrite an existing _targets.json (default: refuse if exists)",
     )
     args = p.parse_args(argv)
+
+    bad_tags = validate_tags()
+    if bad_tags:
+        print(
+            f"ERROR: DEFAULT_SCOPE uses tags missing from tag-vocabulary.json: "
+            f"{', '.join(bad_tags)}. Add them to the vocabulary (deliberately) "
+            f"or fix the typo.",
+            file=sys.stderr,
+        )
+        return 2
 
     types = [t.strip() for t in args.types.split(",") if t.strip()]
     unknown = [t for t in types if t not in DEFAULT_SCOPE]

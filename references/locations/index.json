@@ -1,0 +1,994 @@
+{
+  "generated_at": "2026-08-11T07:30:37.033539+00:00",
+  "root": "references/locations",
+  "pack_count": 10,
+  "packs": [
+    {
+      "slug": "commercial-gym",
+      "layout": "flat",
+      "city": null,
+      "status": "complete",
+      "planned": 3,
+      "captured": 3,
+      "converted": 3,
+      "locations": [
+        {
+          "id": "commercial-gym-01",
+          "type": null,
+          "tags": [],
+          "intent": "commercial gym weight floor \u2014 rows of adjustable benches, free-weight racks, barbells; moody blue-lit industrial ceiling",
+          "neighborhood": null,
+          "source_image": "commercial-gym-01.jpg",
+          "cgi_image": "cgi/commercial-gym-01-daz.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "commercial-gym-02",
+          "type": null,
+          "tags": [],
+          "intent": "resistance-machine floor \u2014 selectorized machines, bright industrial ceiling, open rubber floor",
+          "neighborhood": null,
+          "source_image": "commercial-gym-02.jpg",
+          "cgi_image": "cgi/commercial-gym-02-daz.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "commercial-gym-03",
+          "type": null,
+          "tags": [],
+          "intent": "cardio area \u2014 treadmills + elliptical/recumbent, floor-to-ceiling windows, wood floor",
+          "neighborhood": null,
+          "source_image": "commercial-gym-03.jpg",
+          "cgi_image": "cgi/commercial-gym-03-daz.png",
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "forte-dos-reis-magos",
+      "layout": "flat",
+      "city": null,
+      "status": "sources-only",
+      "planned": 7,
+      "captured": 7,
+      "converted": 0,
+      "locations": [
+        {
+          "id": "forte-dos-reis-magos-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Water-level view of full white star-fort wall and bastions, crisp daylight",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Aerial of fort on the reef spit with causeway and turquoise sea \u2014 best siting reference",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-03",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Low-tide sunset angle on bastion corner and stone base; strong mood ref",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-04",
+          "type": null,
+          "tags": [],
+          "intent": "Interior courtyard stone barracks facades in golden light, doors/windows detail",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-05",
+          "type": null,
+          "tags": [],
+          "intent": "Central courtyard chapel/cistern tower with stairs and arches, sharp midday light",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-06",
+          "type": null,
+          "tags": [],
+          "intent": "Cannon on carriage at rampart embrasure \u2014 key prop detail",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-06.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "forte-dos-reis-magos-07",
+          "type": null,
+          "tags": [],
+          "intent": "Atop rampart wall looking toward Natal skyline and reef beach \u2014 wall texture + context",
+          "neighborhood": null,
+          "source_image": "forte-dos-reis-magos-07.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "lakewood-california",
+      "layout": "scout",
+      "city": "Lakewood, California",
+      "status": "planned",
+      "planned": 10,
+      "captured": 0,
+      "converted": 0,
+      "locations": []
+    },
+    {
+      "slug": "las-vegas",
+      "layout": "scout",
+      "city": "Las Vegas",
+      "status": "complete",
+      "planned": 8,
+      "captured": 8,
+      "converted": 8,
+      "locations": [
+        {
+          "id": "street-01-fremont-street",
+          "type": "street",
+          "tags": [
+            "downtown",
+            "neon",
+            "pedestrian"
+          ],
+          "intent": "downtown pedestrian street with neon signage",
+          "neighborhood": "Downtown",
+          "source_image": "source/street-01-fremont-street.jpg",
+          "cgi_image": "cgi/street-01-fremont-street.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "street-02-bellagio-strip",
+          "type": "street",
+          "tags": [
+            "strip",
+            "hotel",
+            "fountains",
+            "landmark",
+            "evening",
+            "iconic"
+          ],
+          "intent": "iconic Las Vegas Strip hotel exterior with fountains at evening",
+          "neighborhood": "Las Vegas Strip",
+          "source_image": "source/street-02-bellagio-strip.jpg",
+          "cgi_image": "cgi/street-02-bellagio-strip.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "street-03-montelago-residential",
+          "type": "street",
+          "tags": [
+            "scenic",
+            "resort",
+            "mediterranean",
+            "aerial",
+            "lake",
+            "luxury"
+          ],
+          "intent": "aerial view of Mediterranean-style resort village at Lake Las Vegas",
+          "neighborhood": "Lake Las Vegas",
+          "source_image": "source/street-03-montelago-residential.jpg",
+          "cgi_image": "cgi/street-03-montelago-residential.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-01-peppermill-diner",
+          "type": "restaurant",
+          "tags": [
+            "exterior",
+            "diner",
+            "mid-century",
+            "iconic",
+            "dusk",
+            "storefront"
+          ],
+          "intent": "iconic mid-century Las Vegas diner exterior at dusk, pyramid roof",
+          "neighborhood": "Las Vegas Strip",
+          "source_image": "source/restaurant-01-peppermill-diner.jpg",
+          "cgi_image": "cgi/restaurant-01-peppermill-diner.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-02-eiffel-tower-restaurant",
+          "type": "restaurant",
+          "tags": [
+            "interior",
+            "kitchen",
+            "commercial",
+            "white-tile",
+            "stainless"
+          ],
+          "intent": "open commercial restaurant kitchen interior, white subway tile and stainless steel",
+          "neighborhood": "Las Vegas Strip",
+          "source_image": "source/restaurant-02-eiffel-tower-restaurant.jpg",
+          "cgi_image": "cgi/restaurant-02-eiffel-tower-restaurant.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-03-heart-attack-grill",
+          "type": "restaurant",
+          "tags": [
+            "exterior",
+            "downtown",
+            "neon",
+            "corner",
+            "night",
+            "diner"
+          ],
+          "intent": "street-level corner exterior of downtown Las Vegas diner with neon signage at night",
+          "neighborhood": "Downtown Fremont",
+          "source_image": "source/restaurant-03-heart-attack-grill.jpg",
+          "cgi_image": "cgi/restaurant-03-heart-attack-grill.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "landmark-01-welcome-to-las-vegas-sign",
+          "type": "landmark",
+          "tags": [
+            "landmark",
+            "iconic",
+            "roadside-sign",
+            "dusk",
+            "palm-trees",
+            "tourist"
+          ],
+          "intent": "iconic WELCOME TO FABULOUS LAS VEGAS NEVADA roadside sign at dusk with palm trees",
+          "neighborhood": "South Las Vegas Boulevard",
+          "source_image": "source/landmark-01-welcome-to-las-vegas-sign.jpg",
+          "cgi_image": "cgi/landmark-01-welcome-to-las-vegas-sign.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "specific-01-container-park-alley",
+          "type": "specific",
+          "tags": [
+            "downtown",
+            "container",
+            "retail",
+            "outdoor",
+            "industrial-chic",
+            "plaza"
+          ],
+          "intent": "downtown shipping-container retail courtyard with overhead signage and palm trees",
+          "neighborhood": "Downtown Fremont East",
+          "source_image": "source/specific-01-container-park-alley.jpg",
+          "cgi_image": "cgi/specific-01-container-park-alley.png",
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "long-beach",
+      "layout": "scout",
+      "city": "Long Beach",
+      "status": "complete",
+      "planned": 10,
+      "captured": 10,
+      "converted": 10,
+      "locations": [
+        {
+          "id": "street-01-pine-avenue",
+          "type": "street",
+          "tags": [
+            "downtown",
+            "civic",
+            "palms",
+            "low-building",
+            "daytime"
+          ],
+          "intent": "downtown Long Beach civic landmark \u2014 Terrace Theater area, palm trees + low building",
+          "neighborhood": "Downtown Long Beach",
+          "source_image": "source/street-01-pine-avenue.jpg",
+          "cgi_image": "cgi/street-01-pine-avenue.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "street-02-2nd-street-belmont-shore",
+          "type": "street",
+          "tags": [
+            "commercial",
+            "sunset",
+            "palms",
+            "storefronts",
+            "beach-town"
+          ],
+          "intent": "2nd Street Belmont Shore at sunset, beach-town commercial strip with palm trees",
+          "neighborhood": "Belmont Shore",
+          "source_image": "source/street-02-2nd-street-belmont-shore.jpg",
+          "cgi_image": "cgi/street-02-2nd-street-belmont-shore.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "street-03-belmont-heights-residential",
+          "type": "street",
+          "tags": [
+            "residential",
+            "sunset",
+            "suburban",
+            "palms",
+            "balcony-view"
+          ],
+          "intent": "Belmont Heights residential street at sunset, suburban Long Beach",
+          "neighborhood": "Belmont Heights",
+          "source_image": "source/street-03-belmont-heights-residential.jpg",
+          "cgi_image": "cgi/street-03-belmont-heights-residential.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "street-04-port-of-long-beach",
+          "type": "street",
+          "tags": [
+            "industrial",
+            "port",
+            "cranes",
+            "containers",
+            "cargo-ship",
+            "harbor"
+          ],
+          "intent": "Port of Long Beach container terminal \u2014 gantry cranes, stacked containers, cargo ship at dock",
+          "neighborhood": "Port of Long Beach",
+          "source_image": "source/street-04-port-of-long-beach.jpg",
+          "cgi_image": "cgi/street-04-port-of-long-beach.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-01-hofs-hut-diner",
+          "type": "restaurant",
+          "tags": [
+            "exterior",
+            "diner",
+            "iconic",
+            "mid-century",
+            "awnings",
+            "storefront"
+          ],
+          "intent": "iconic Hof's Hut Long Beach diner exterior with red shield logo and striped awnings",
+          "neighborhood": "East Long Beach",
+          "source_image": "source/restaurant-01-hofs-hut-diner.jpg",
+          "cgi_image": "cgi/restaurant-01-hofs-hut-diner.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-02-555-east-steakhouse",
+          "type": "restaurant",
+          "tags": [
+            "interior",
+            "upscale",
+            "warm-lighting",
+            "dark-wood",
+            "fine-dining"
+          ],
+          "intent": "555 East Steakhouse Long Beach upscale interior, dark wood paneling, warm lighting, wine wall",
+          "neighborhood": "East Village Arts District",
+          "source_image": "source/restaurant-02-555-east-steakhouse.jpg",
+          "cgi_image": "cgi/restaurant-02-555-east-steakhouse.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "restaurant-03-joe-josts",
+          "type": "restaurant",
+          "tags": [
+            "exterior",
+            "iconic",
+            "historic",
+            "storefront",
+            "awning",
+            "brick"
+          ],
+          "intent": "Joe Jost's Long Beach iconic since-1924 corner storefront on Anaheim Street with red awning",
+          "neighborhood": "Long Beach (Anaheim St)",
+          "source_image": "source/restaurant-03-joe-josts.jpg",
+          "cgi_image": "cgi/restaurant-03-joe-josts.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "landmark-01-queen-mary",
+          "type": "landmark",
+          "tags": [
+            "landmark",
+            "iconic",
+            "ship",
+            "harbor",
+            "historic",
+            "wide-vista"
+          ],
+          "intent": "the Queen Mary historic ocean liner permanently docked in Long Beach harbor \u2014 three funnels, riveted black hull",
+          "neighborhood": "Long Beach Harbor",
+          "source_image": "source/landmark-01-queen-mary.jpg",
+          "cgi_image": "cgi/landmark-01-queen-mary.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "landmark-02-aquarium-of-the-pacific",
+          "type": "landmark",
+          "tags": [
+            "landmark",
+            "iconic",
+            "modernist",
+            "glass-facade",
+            "plaza",
+            "wide-vista"
+          ],
+          "intent": "Aquarium of the Pacific Long Beach \u2014 iconic wave-like curved blue glass facade and entrance plaza",
+          "neighborhood": "Rainbow Harbor",
+          "source_image": "source/landmark-02-aquarium-of-the-pacific.jpg",
+          "cgi_image": "cgi/landmark-02-aquarium-of-the-pacific.png",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "specific-01-downtown-promenade",
+          "type": "specific",
+          "tags": [
+            "sunset",
+            "palms",
+            "residential",
+            "street-level",
+            "warm-sky"
+          ],
+          "intent": "downtown Long Beach residential sunset street, palm-tree silhouettes, parked cars on both sides",
+          "neighborhood": "Downtown Long Beach",
+          "source_image": "source/specific-01-downtown-promenade.jpg",
+          "cgi_image": "cgi/specific-01-downtown-promenade.png",
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "natal-street-scenes",
+      "layout": "flat",
+      "city": null,
+      "status": "partial",
+      "planned": 14,
+      "captured": 14,
+      "converted": 7,
+      "locations": [
+        {
+          "id": "natal-street-scenes-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Aerial of Via Costeira coastal highway winding between dunes and beach with hotels",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Elevated beachfront avenue with traffic, red bike lane, crowded beach umbrellas",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-03",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Long avenue vista from crosswalk: divided road, commercial low-rises, towers behind trees",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-04",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Beachfront avenue with high-rise apartments, mosaic sidewalk median, food trucks",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-05",
+          "type": null,
+          "tags": [],
+          "intent": "Av. Erivan Fran\u00e7a at sidewalk level \u2014 storefronts, parked cars, palms",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-06",
+          "type": null,
+          "tags": [],
+          "intent": "Street-level Ponta Negra road: parked cars, vendor art wall, power lines, dune at end of street",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-06.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "natal-street-scenes-07",
+          "type": null,
+          "tags": [],
+          "intent": "Busy commercial street (Alecrim) with vendors, pedestrians, shop signage",
+          "neighborhood": null,
+          "source_image": "natal-street-scenes-07.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "alecrim-commercial-street-daz",
+          "type": null,
+          "tags": [],
+          "intent": "Alecrim commercial street, vendors + storefronts",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/alecrim-commercial-street-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "avenue-crosswalk-daz",
+          "type": null,
+          "tags": [],
+          "intent": "tree-lined avenue, crosswalk, \u00d4NIBUS lane",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/avenue-crosswalk-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "beachfront-foodtruck-avenue-daz",
+          "type": null,
+          "tags": [],
+          "intent": "beachfront avenue, food-truck vans, high-rises",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/beachfront-foodtruck-avenue-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "coastline-reefs-aerial-daz",
+          "type": null,
+          "tags": [
+            "wide",
+            "aerial"
+          ],
+          "intent": "coastline w/ reefs, umbrellas, Newton Navarro bridge",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/coastline-reefs-aerial-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "erivan-franca-street-daz",
+          "type": null,
+          "tags": [],
+          "intent": "Av. Erivan Fran\u00e7a, Ponta Negra (sidewalk level)",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/erivan-franca-street-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-artwall-street-daz",
+          "type": null,
+          "tags": [],
+          "intent": "Ponta Negra street, vendor art wall + police car + dune",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/ponta-negra-artwall-street-daz.jpg",
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "via-costeira-aerial-daz",
+          "type": null,
+          "tags": [
+            "wide",
+            "aerial"
+          ],
+          "intent": "Via Costeira coastal highway, dunes + hotels",
+          "neighborhood": null,
+          "source_image": null,
+          "cgi_image": "cgi/via-costeira-aerial-daz.jpg",
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "ponta-negra-morro-do-careca",
+      "layout": "flat",
+      "city": null,
+      "status": "sources-only",
+      "planned": 6,
+      "captured": 6,
+      "converted": 0,
+      "locations": [
+        {
+          "id": "ponta-negra-morro-do-careca-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Full beach sweep with kiosk umbrellas, surf line, Morro do Careca dune at south end; sharp, vivid",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-morro-do-careca-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Aerial establishing: hotel highrise skyline, curving bay, dune headland in one frame",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-morro-do-careca-03",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Clear view of Morro do Careca's bald sand face across turquoise water, beachfront buildings at base",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-morro-do-careca-04",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Beachfront hotel towers from the water, crowded sand and umbrellas below",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-morro-do-careca-05",
+          "type": null,
+          "tags": [],
+          "intent": "Beach-level: traditional jangada sailboats on the sand with the dune behind",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponta-negra-morro-do-careca-06",
+          "type": null,
+          "tags": [],
+          "intent": "Kiosk red-and-white umbrellas and bathers at people level, dune across the bay",
+          "neighborhood": null,
+          "source_image": "ponta-negra-morro-do-careca-06.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "ponte-newton-navarro",
+      "layout": "flat",
+      "city": null,
+      "status": "sources-only",
+      "planned": 5,
+      "captured": 5,
+      "converted": 0,
+      "locations": [
+        {
+          "id": "ponte-newton-navarro-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Full span from beach with fishing boats, both pylons and fanned cables, city skyline behind",
+          "neighborhood": null,
+          "source_image": "ponte-newton-navarro-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponte-newton-navarro-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Full span over the Potengi from the sand bar, vivid blue sky",
+          "neighborhood": null,
+          "source_image": "ponte-newton-navarro-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponte-newton-navarro-03",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Night wide from beach promenade, bridge fully lit \u2014 time-of-day variety",
+          "neighborhood": null,
+          "source_image": "ponte-newton-navarro-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponte-newton-navarro-04",
+          "type": null,
+          "tags": [],
+          "intent": "Deck-level pylon, fanned cables and lamp posts \u2014 best structural close-up",
+          "neighborhood": null,
+          "source_image": "ponte-newton-navarro-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ponte-newton-navarro-05",
+          "type": null,
+          "tags": [],
+          "intent": "Deck-level night traffic climbing toward the pylon; only traffic-on-deck shot",
+          "neighborhood": null,
+          "source_image": "ponte-newton-navarro-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "praia-do-meio",
+      "layout": "flat",
+      "city": null,
+      "status": "sources-only",
+      "planned": 5,
+      "captured": 5,
+      "converted": 0,
+      "locations": [
+        {
+          "id": "praia-do-meio-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Full sweep along seawall with rocks, lifeguard post, skyline toward Praia dos Artistas",
+          "neighborhood": null,
+          "source_image": "praia-do-meio-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "praia-do-meio-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Elevated view of reef pool, rocks, sand and kiosk umbrellas \u2014 protected swimming area",
+          "neighborhood": null,
+          "source_image": "praia-do-meio-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "praia-do-meio-03",
+          "type": null,
+          "tags": [],
+          "intent": "Sand-level kiosk umbrellas and tables against the exposed reef line",
+          "neighborhood": null,
+          "source_image": "praia-do-meio-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "praia-do-meio-04",
+          "type": null,
+          "tags": [],
+          "intent": "Beach-bar scene with red/green umbrellas, plastic tables and bathers",
+          "neighborhood": null,
+          "source_image": "praia-do-meio-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "praia-do-meio-05",
+          "type": null,
+          "tags": [],
+          "intent": "Iemanj\u00e1 statue landmark with reef surf and umbrella vendors behind",
+          "neighborhood": null,
+          "source_image": "praia-do-meio-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        }
+      ]
+    },
+    {
+      "slug": "ribeira-cidade-alta-historic",
+      "layout": "flat",
+      "city": null,
+      "status": "sources-only",
+      "planned": 7,
+      "captured": 7,
+      "converted": 0,
+      "locations": [
+        {
+          "id": "ribeira-cidade-alta-historic-01",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Ribeira rooftops over the Potengi with Newton Navarro bridge \u2014 riverside cityscape",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-01.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-02",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Colorful colonial/eclectic facades down a cobbled Ribeira street",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-02.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-03",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Igreja de Santo Ant\u00f4nio (Igreja do Galo) full corner view with bell tower and street",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-03.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-04",
+          "type": null,
+          "tags": [
+            "wide"
+          ],
+          "intent": "Catedral Metropolitana full conical form with cross pylons from street level",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-04.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-05",
+          "type": null,
+          "tags": [],
+          "intent": "Compass-rose paving of historic-center pra\u00e7a with obelisk and shaded trees",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-05.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-06",
+          "type": null,
+          "tags": [],
+          "intent": "Blue-and-white baroque scrollwork facade detail with cross emblem",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-06.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        },
+        {
+          "id": "ribeira-cidade-alta-historic-07",
+          "type": null,
+          "tags": [],
+          "intent": "Catedral Metropolitana side elevation \u2014 mosaic-tile curved walls and concrete fins",
+          "neighborhood": null,
+          "source_image": "ribeira-cidade-alta-historic-07.jpg",
+          "cgi_image": null,
+          "qa": null,
+          "variants": null
+        }
+      ]
+    }
+  ]
+}

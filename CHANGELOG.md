@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (location-scout v2: unified pack index + canonical tag vocabulary)
+
+### Added
+
+- **`skills/location-scout/scripts/pack_index.py`** — walks `references/locations/` and emits a single consumer manifest at `references/locations/index.json` covering BOTH pack conventions: scout-style (`_targets.json` + `source/ cgi/ meta/`) and the flat Commons-harvest style the studio SOP produces (`<pack>-NN.jpg` + `_provenance.md` + `cgi/*-daz.*`). Parses flat-pack `QA:` lines and the cgi `## Plates` provenance tables, so descriptively-renamed plates (e.g. natal's `coastline-reefs-aerial-daz.jpg`) index with shot tags + intent instead of orphaning. `--verify` mode: missing referenced files are errors; orphan images, unknown tags, and plan-only packs are warnings. First real run: 10 packs / 65 locations, 0 errors.
+- **`skills/location-scout/tag-vocabulary.json`** — canonical tag enum (types / framing / setting / mood-time + flat `[WIDE]`-style shot-tag mapping). `scout_city.py` refuses to plan if `DEFAULT_SCOPE` uses a tag outside the vocabulary; `pack_index.py --verify` flags unknown tags in shipped packs. Cross-pack matching (reference-gathering, env-ref fallback) only works when packs agree on tag spelling — this makes the agreement mechanical instead of tribal.
+
+### Notes
+
+- This lands on the integration branch that finally merges the stranded June `feat/location-scout-skill` work (skill + Vegas/Long Beach packs + hardening + Street View fetcher) onto the current main base. `docs/PRODUCTION-SYSTEM-VISION.md` has been claiming `skills/location-scout/` as a mature Stage-4 component since July — this branch makes that claim true.
+
+---
+
 ## 2026-08-10 (reference-gathering manifest mode: base ref becomes the identity anchor)
 
 **Changed**
