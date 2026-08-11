@@ -88,3 +88,73 @@ colossal the silhouette can read (that lesson cost a whole 24-variant round).
 Bridge key `~/Documents/_imptest/bridgekey.txt`, deploy token `~/Documents/.3dmc-deploy-token` —
 load into variables, **never print or commit them**. Never delete board images or projects.
 Nothing publishes outward — Studio boards and drafts only.
+
+---
+
+## ADDENDUM — laptop session, 2026-08-11 ~08:40 (READ THIS, it supersedes parts of the above)
+
+Three defects were found and **fixed in code** today. Commits `54a511f`, `ab811ff`,
+`76391b3`, `17ff18e` — all pushed to `origin/feat/comic-corpus`.
+
+**1. Wardrobe never reached the model — 0 of 86 beats.** Beats carried a `wardrobe`
+field; `fullPrompt` dropped it. The only clothing signal was the `margo` reference
+image — a photo of her IN A LAB COAT — so the coat the story destroys at b17 kept
+reappearing for the rest of the comic. Every prompt now carries a
+`WARDROBE (exact ...)` block that explicitly outranks the reference.
+*Proof: b40 and b43 were 0/4 and 0/7 before, 6/6 clean after.*
+Pre-fix sheet preserved at `runners/bakeoff/margo-full-beats.json.bak-nowardrobe`.
+
+**2. `drive.py winner` silently banked un-accepted panels.** `do=ingest` only returns
+a `file` key on its dedupe path; the code read it unconditionally, so
+`write_decisions`/`annotate` got `None` and no-opped. Uploads worked, then sat
+`unrated`/`accepted:false`. That is why the board read 0 accepted despite successful
+ingests. Now resolved by looking the `orig` name back up; fails loudly instead.
+
+**3. The `state.json` race is FIXED — ignore the manual workaround above.** Mutating
+commands (`record`/`fetch`/`fetchroll`/`winner`) now hold an exclusive `flock` on
+`.state.lock` across the whole load→modify→save, with atomic temp+replace. You no
+longer need to verify job counts after every `record`. Pre-lock copy at
+`drive.py.bak-preflock`.
+
+### The corrective queue lives in `runners/bakeoff/runs/margo-full-20260811/REROLL-QUEUE.md`
+**12 beats**, with the exact corrective clauses that worked:
+- **Lab coat, zero clean variants (7):** b18, b19, b22, b26, b48, b52, b53
+- **Wrong action (1):** b18b-calipers — wardrobe fine, no tile shows calipers
+- **Flat face (4, banked but should be replaced):** b02, b07, b13, b50
+
+### Judge kill rule 9 — ADD THIS, it was missing
+```
+9. Flat face — blank, neutral, waxy, doll-like, or a mild expression on a beat that
+   calls for something strong. A calm face on a dramatic beat is a KILL.
+```
+Face quality is in every prompt ("FACES: never blank or neutral") but was never a
+kill rule, so 4 flat faces passed as KEEP and got banked.
+**Text is NOT a problem:** all 42 banked pages audited, **0 text defects**.
+
+### Two INPUT-level fixes to land BEFORE re-rolling (or defects reproduce)
+1. **Scope the SLEEVES clause to Margo.** It is global and un-scoped, so KRESS's
+   tracksuit shreds. Cost 6/8 tiles in b49, 3/8 in b06, killed b04 v02/v03.
+2. **b45-tape identity bleed** — amulet + grey tank bound to INGRID in 3 of 4 tiles.
+   Ref/staging attachment problem; do not re-roll blind.
+
+### Two more gotchas
+- **`registry.RETRY_INJECTION["WARD-01"]` is backwards here.** It says "match the
+  attached reference images EXACTLY" — but the reference IS the source of the coat
+  defect. Use the custom clause in REROLL-QUEUE.md.
+- **`drive.py fetch` vNN numbering can collide** (two `v07`s). `winner` globs
+  `<variant>-*.png` and takes the FIRST match, so banking by prefix can silently
+  ingest a KILLED tile. Already bit b45 (caught) and b42. Check before banking:
+  `ls variants/<beat>/ | sed 's/-.*//' | sort | uniq -d`
+
+### Structure — settled, do not re-litigate
+Owner confirmed: **each panel IS its own standalone page/image.** 86 beats = 86 pages.
+No page-composition step. The Gribble 4-panel-grid figure does NOT apply to this run.
+
+### Recovering images on the mini
+`variants/**/*.png` are gitignored and laptop-local, but **`state.json` is now tracked**
+and holds every job id. Recover any image via `show_generation_by_ids` (≤60/call) →
+`results.rawUrl` → `python3 drive.py fetch <beat> <job_id> <rawUrl>`. Results persist
+server-side; nothing already generated needs regenerating.
+
+One junk board tile exists: `09db3a5283.png` (debug probe, prompt `test-probe`),
+already marked rated=bad / tagged `probe-artifact`. Safe to delete.
