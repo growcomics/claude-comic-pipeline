@@ -1,0 +1,19 @@
+{
+  "job": "scene:field-close (bootstrap, prompt v1, chained from medium pick d96a2994 — chip DOM-verified)",
+  "judged": "2026-06-12 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "02a87013-5bfd-4aa1-adf9-ecca1588e4d2",
+    "81a198a9-2f02-45c8-934e-bcc6f3492d51",
+    "5197fce0-1b9a-4664-b9dc-143da0e13b2e",
+    "d1f7f215-8a4f-4f53-a9ee-7d8316be6f68"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "02a87013-5bfd-4aa1-adf9-ecca1588e4d2", "verdict": "pass", "defects": [], "notes": "Sharp blade-level foreground, clean shallow-DOF to defocused rail-less bleachers; full continuity with medium rung; no people/text/props."},
+    {"variant": "V2", "flow_id": "81a198a9-2f02-45c8-934e-bcc6f3492d51", "verdict": "fail", "defects": ["bench backrest splits into two offset overlapping planes mid-span"], "notes": ""},
+    {"variant": "V3", "flow_id": "5197fce0-1b9a-4664-b9dc-143da0e13b2e", "verdict": "fail", "defects": ["invented pole/light tower planted on infield grass", "faint fence structure far right"], "notes": ""},
+    {"variant": "V4", "flow_id": "d1f7f215-8a4f-4f53-a9ee-7d8316be6f68", "verdict": "pass", "defects": [], "notes": "Backup pick; marginally flatter DOF than V1."}
+  ],
+  "pick": "V1",
+  "pick_flow_id": "02a87013-5bfd-4aa1-adf9-ecca1588e4d2"
+}

@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "tags": [],
+  "reasons": [
+    "V1 (3a327885): PASS. Height ratio pixel-measured at 0.890 vs mannequin (identical to t2 card, head-top at mannequin chin line). Tier progression clear and within bounds: shoulder silhouette +5.4%, bicep band +5.1%, thigh band +9.8% over t2 ref with visible capped deltoids, defined biceps/forearms, quad separation and calf development; reads elite college athlete, not bodybuilder; breasts/hips unchanged. Uniform exactly matches t2 card: gold double-stripe collar and armholes, white side panels, letterless gold comet emblem, sunray pleats with gold/white hem, white briefs visible, white shoes with gold laces, low ankle socks matching ref. Face and ponytail+gold scrunchie match face card. Front-full pose hands at sides, solid mannequin far right, grid lines, mid-grey cyc, even light, no text, photoreal Iray, anatomy correct (2 hands, 2 legs).",
+    "V2 (28f6459c): FAIL [ward]. Size and height (0.890) fine, but wears white crew socks reaching mid-shin where the t2 reference shows low ankle socks barely above the shoe collar — garment-state drift from the uniform truth.",
+    "V3 (f7fadf50): FAIL [size]. Height 0.890 and uniform/face correct, but muscle growth under-delivers the full-tier jump: thigh band only +4.9% over t2 (vs +9.8% on V1) and overall mass fraction reads as a half-step; judged by literal side-by-side at matched scale per calibration, under on the thigh/mass axis = FAIL.",
+    "V4 (9b8d4c1c): FAIL [size]. Same under-delivery as V3: thigh +4.9%, arms marginally softer than V1; insufficient growth for the t4 size truth on the mass-fraction axis."
+  ],
+  "variant_ranking": [
+    "3a327885-fcaf-456a-89c0-e58bf390701d",
+    "28f6459c-a9a1-43bf-9a07-23b505c3d2a1",
+    "f7fadf50-f17e-4124-abef-f7b3936004d5",
+    "9b8d4c1c-1d08-4448-bb76-7ae8f92cdbef"
+  ]
+}

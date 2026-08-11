@@ -24,9 +24,86 @@
       },
       "body": {
         "2": {
-          "flow_id": null,
+          "flow_id": "47120b51-8f7c-46e3-9880-55f030662fa4",
           "disk": "references/characters/kelsey-brandt/body-tier2.png",
-          "class": "bootstrap"
+          "class": "bootstrap",
+          "bootstrap_job": "kelsey-t2-card (references/bootstrap-prompts.json prompt v3, pasted verbatim; face card 12c236a4 attached, chip DOM-verified)",
+          "variants": [
+            "47120b51-8f7c-46e3-9880-55f030662fa4",
+            "503e028a-8a16-4c6f-8e42-4cfc82bd3084",
+            "09e8a8b5-16ca-4a26-8f0c-f806a250b985",
+            "aa2b12e0-f953-4f59-9d3e-6d2e4a412944"
+          ],
+          "qa_notes": "Attempt 3 (prompt v3). V1 picked: judge-measured height ratio 0.890 vs spec 0.89 (head-top at mannequin chin), uniform/identity/grid/anatomy all clean. V2 0.928 + missing armhole stripes, V3 0.951 + unspecced waist chevron, V4 0.919 chin-anchor miss. Attempts 1-2 (prompts v1/v2) all-failed D7 scale, ratios 0.92-0.98 \u2014 see qa/receipts/card_kelsey-t2.attempt{1,2,3}.verdict.json"
+        }
+      },
+      "turnaround-t2": {
+        "flow_id": "28099981-ff1b-49dc-abdb-621566a472f7",
+        "disk": "references/characters/kelsey-brandt/turnaround-t2-uniform.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t2-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t2-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t2-turnaround.verdict.json",
+          "verdict_tags": [
+            "ward",
+            "angle"
+          ],
+          "prompt_sha": "e035ead6b8f93e7a335655c660bb9e22a89ebfb515be4d7c06b6bb6ec3cfcf44"
+        }
+      },
+      "body-tier4": {
+        "flow_id": "3a327885-fcaf-456a-89c0-e58bf390701d",
+        "disk": "references/characters/kelsey-brandt/body-tier4.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t4-card.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t4-card.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t4-card.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "a3350fdb662ea34e9ce97040ec91bf968c8707d7ad5469a207c7747440cb8e5e"
+        }
+      },
+      "turnaround-t4-strain": {
+        "flow_id": "1a3651e7-ccef-457b-b514-b72adff9f662",
+        "disk": "references/characters/kelsey-brandt/turnaround-t4-strain.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t4-strain-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t4-strain-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t4-strain-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "2cac9dddc0332fdacebf0c6b42c16c383722d7935a221be8b2b67ea9db174c38"
+        }
+      },
+      "body-tier6": {
+        "flow_id": "85eb0fd9-83fe-408f-8c4d-76c2a2a78434",
+        "disk": "references/characters/kelsey-brandt/body-tier6.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-card.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-card.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-card.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c204001fc56d82ccbafe9e6ce3e9d907f8561530603ebd4226fd7bfa7dcac95b"
+        }
+      },
+      "turnaround-t6-strain": {
+        "flow_id": "ef679021-0573-47ff-8f60-e01ea0ece789",
+        "disk": "references/characters/kelsey-brandt/turnaround-t6-strain.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-strain-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-strain-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-strain-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c275c79e0eee1328f109c8f5a0b216bde26a5ee99e61cedb776d108964c865c8"
+        }
+      },
+      "turnaround-t6-rebuilt": {
+        "flow_id": "a3eb5504-08a5-4f25-8586-e2f71093dd83",
+        "disk": "references/characters/kelsey-brandt/turnaround-t6-rebuilt.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.receipt.json",
+          "audit": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.audit-pass",
+          "verdict": "qa/receipts/sheet_kelsey-t6-rebuilt-turnaround.verdict.json",
+          "verdict_tags": [],
+          "prompt_sha": "c3799f1c2fd357a837ce12c1ff2780d2cd8455ad62f290de4ecce5e4b27a554b"
         }
       }
     }
@@ -35,24 +112,63 @@
     "_note": "compose.py refuses any page whose camera-distance rung is not banked here (D8). Rungs are bootstrap-class until the card:/scene: gate extension lands; each rung chains from the previous (wide -> medium -> close).",
     "practice-field": {
       "wide": {
-        "flow_id": null,
-        "class": "bootstrap"
+        "flow_id": "bcf73770-fef8-429b-8ca5-e9de2f586016",
+        "disk": "references/locations/practice-field/wide.png",
+        "class": "bootstrap",
+        "bootstrap_job": "field-wide (references/bootstrap-prompts.json prompt v4, pasted verbatim, no attachments)",
+        "variants": [
+          "bcf73770-fef8-429b-8ca5-e9de2f586016",
+          "e4f05054-ff57-4813-a63d-5949d1bc84ba",
+          "248663c0-11d6-438b-b1dc-bfb6231a3c37",
+          "475e76e9-9861-4c0d-a7bb-4536b430562e"
+        ],
+        "qa_notes": "USER-ACCEPTED with known deviation (attempt 4 V1): bleacher units step diagonally along the lower-right curve instead of straight sideline-parallel rows; everything else clean (no numerals/goalposts/people, grass+white-paint-only oval, single boundaries, full oval framed with margin, 4 masts lights-off, golden hour). 4 attempts / 16 variants; judge pick was none each round \u2014 see qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json. Prompt evolution v1\u2192v4 killed yard numerals, goalposts, concrete-in-oval, low cameras."
       },
       "medium": {
-        "flow_id": null,
-        "class": "bootstrap-chained-from-wide"
+        "flow_id": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+        "disk": "references/locations/practice-field/medium.png",
+        "class": "bootstrap-chained-from-wide",
+        "chained_from": "bcf73770-fef8-429b-8ca5-e9de2f586016",
+        "bootstrap_job": "field-medium (references/bootstrap-prompts.json prompt v2, pasted verbatim; wide rung attached, chip DOM-verified)",
+        "variants": [
+          "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+          "2c959a8e-40fe-49a1-b1c0-e8b7733bfb4d",
+          "991f3e2c-cc78-4b58-9dda-b6bab94dfb01",
+          "04a36773-9516-481f-9977-fa1ff41bfddc"
+        ],
+        "qa_notes": "Attempt 2 V1 judge-PASS: correct small rail-less aluminum bleacher sections, medium sideline framing w/ bench, palette/track continuity, no people/text. Minor noted drift: section count/placement vs wide rung. Attempt 1 failed 4/4 on grandstand drift (D8 lesson: chained rungs need distinctive construction RE-STATED in prose). Receipts: qa/receipts/scene_field-medium.attempt{1,2}.verdict.json"
       },
       "close": {
-        "flow_id": null,
-        "class": "bootstrap-chained-from-medium"
+        "flow_id": "02a87013-5bfd-4aa1-adf9-ecca1588e4d2",
+        "disk": "references/locations/practice-field/close.png",
+        "class": "bootstrap-chained-from-medium",
+        "chained_from": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+        "bootstrap_job": "field-close (references/bootstrap-prompts.json prompt v1, pasted verbatim; medium rung attached, chip DOM-verified)",
+        "variants": [
+          "02a87013-5bfd-4aa1-adf9-ecca1588e4d2",
+          "81a198a9-2f02-45c8-934e-bcc6f3492d51",
+          "5197fce0-1b9a-4664-b9dc-143da0e13b2e",
+          "d1f7f215-8a4f-4f53-a9ee-7d8316be6f68"
+        ],
+        "qa_notes": "Attempt 1 V1 judge-PASS first try (V4 d1f7f215 also passed, backup). Sharp foreground stripe/grass, defocused rail-less bleachers, full medium-rung continuity. V2 bench-split glitch, V3 invented infield pole. Receipt: qa/receipts/scene_field-close.attempt1.verdict.json"
       }
     }
   },
   "props": {
     "comet-fuel-shaker": {
-      "flow_id": null,
+      "flow_id": "edd62fe1-9a3e-4f18-a157-dd3861b9a35f",
+      "disk": "references/props/comet-fuel-shaker.png",
       "note": "teal glowing shaker bottle \u2014 bootstrap with the field-medium rung attached for style",
-      "class": "bootstrap"
+      "class": "bootstrap",
+      "chained_from": "d96a2994-9b5e-466c-9917-75e6b6a14deb",
+      "bootstrap_job": "comet-fuel-shaker (references/bootstrap-prompts.json prompt v1, pasted verbatim; field-medium attached, chip DOM-verified)",
+      "variants": [
+        "442a412c-1303-481c-9bf9-ce96224e7d31",
+        "172459d7-510b-46b1-9b36-9da00ce70c64",
+        "505074bb-2c7d-4c0a-afeb-0cb1bd0ca58e",
+        "edd62fe1-9a3e-4f18-a157-dd3861b9a35f"
+      ],
+      "qa_notes": "Attempt 1 V4 judge-PASS (V3 505074bb backup pass): true flip-top sports shaker, faintest glow, textbook D10 bloom-halo (not physical spill). V1 failed banned-look-#4 physical light spill, V2 blown-out glow + scale inflation. Receipt: qa/receipts/prop_comet-fuel-shaker.attempt1.verdict.json"
     },
     "pom-poms": {
       "note": "teal/gold metallic \u2014 carried by the t2 turnaround + page prompts; no separate card unless drift appears"

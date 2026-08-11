@@ -1,0 +1,19 @@
+{
+  "job": "card:kelsey-t2 (bootstrap, prompt v1 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "975ae3c2-44a3-4a4c-9790-e49d43ecc614",
+    "a215d935-12b3-4b3c-a60f-1cbdfd2fd7b2",
+    "974c4ad9-17df-4877-a6c8-bbdaed7a81cb",
+    "0bedf317-10fd-4362-ba03-a037bad2ad38"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "975ae3c2-44a3-4a4c-9790-e49d43ecc614", "verdict": "fail", "defects": ["D7 height: only ~4.5in shorter than 6'2 mannequin (ratio 0.94, reads ~5'9.5), spec requires 8in (~5'6)"], "notes": "Best of batch — identity, uniform, grid, anatomy all clean; fails only scale differential."},
+    {"variant": "V2", "flow_id": "a215d935-12b3-4b3c-a60f-1cbdfd2fd7b2", "verdict": "fail", "defects": ["D7 height: ~2-3in shorter only (reads ~6'0)", "identity drift: narrower jaw, thinner lips vs banked face card"], "notes": "Uniform correct; scale badly off, borderline face match."},
+    {"variant": "V3", "flow_id": "974c4ad9-17df-4877-a6c8-bbdaed7a81cb", "verdict": "fail", "defects": ["mannequin rendered as flat 2D line outline, not matte-grey 3D figure", "wardrobe: TEAL shorts w/ gold hem instead of WHITE briefs", "D7 height: near-zero differential"], "notes": "Three independent fails."},
+    {"variant": "V4", "flow_id": "0bedf317-10fd-4362-ba03-a037bad2ad38", "verdict": "fail", "defects": ["D7 height: ~2-3in shorter only (reads ~5'11-6'0)", "mild identity drift: longer face, ponytail shape differs"], "notes": "Uniform correct incl. white briefs; scale + mild drift fail."}
+  ],
+  "pick": "none",
+  "resubmit_guidance": "Harden scale language: explicit 5'6 vs 6'2, top-of-head level with mannequin's CHIN, same floor line, same camera distance; re-state solid matte-grey THREE-DIMENSIONAL mannequin (not outline/drawing); WHITE brief shorts only. Implemented as prompt v2 in references/bootstrap-prompts.json (kelsey-t2-card)."
+}

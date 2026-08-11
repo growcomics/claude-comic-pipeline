@@ -1,0 +1,1194 @@
+{
+  "project": "batman-arkham-titan",
+  "version": 1,
+  "page_count": 14,
+  "estimated_panel_count": 58,
+  "style": "photoreal-daz3d",
+  "location_strategy": "multi",
+  "transformation_metadata": {
+    "flavor": "single-axis",
+    "start_tier": 1,
+    "end_tier": 6
+  },
+  "transformation_scenes": [
+    {
+      "name": "batman_serum_transform",
+      "pages": [8, 9],
+      "required_body_regions": ["chest", "arms", "abs", "suit_fail"]
+    },
+    {
+      "name": "nightwing_serum_transform",
+      "pages": [13, 13],
+      "required_body_regions": ["chest", "back", "arms"]
+    }
+  ],
+  "cast": [
+    {
+      "id": "batman",
+      "name": "Batman",
+      "ref_folder": "references/characters/batman/",
+      "soul_id": null,
+      "wardrobe": "Dark grey/black armored batsuit, scalloped cape, cowl with short ears, black bat emblem on chest, yellow-trimmed utility belt, finned gauntlets. Tier 6: same suit massively strained — seams splitting, gauntlet fins popped, cape half-torn, plates stretched over hypertrophied muscle. Coverage held (L33)."
+    },
+    {
+      "id": "nightwing",
+      "name": "Nightwing",
+      "ref_folder": "references/characters/nightwing/",
+      "soul_id": null,
+      "wardrobe": "Black tactical suit with blue bird emblem sweeping across chest and shoulders, blue-striped gauntlets, escrima sticks at hips, black domino mask. Tier 6: suit bursting at seams, sleeves split, blue emblem stretched over a huge frame. Coverage held (L33)."
+    },
+    {
+      "id": "killer-croc",
+      "name": "Killer Croc",
+      "ref_folder": "references/characters/killer-croc/",
+      "soul_id": null,
+      "wardrobe": "Hulking reptilian brute, green scaled hide, jagged teeth, ragged tactical trousers, heavy boots, bare torso. Already titan-sized (tier 6) from the Titan serum."
+    },
+    {
+      "id": "scarecrow",
+      "name": "Scarecrow",
+      "ref_folder": "references/characters/scarecrow/",
+      "soul_id": null,
+      "wardrobe": "Burlap sack mask with stitched mouth, tattered long coat over leather straps, fear-toxin gauntlet loaded with green vials. Titan-sized, hypermuscular (tier 6)."
+    },
+    {
+      "id": "joker",
+      "name": "Joker",
+      "ref_folder": "references/characters/joker/",
+      "soul_id": null,
+      "wardrobe": "Torn purple tailcoat, green slicked-back hair, chalk-white skin, wide red grin. Titan-sized hypermuscular build straining the coat (tier 6)."
+    },
+    {
+      "id": "bane",
+      "name": "Bane",
+      "ref_folder": "references/characters/bane/",
+      "soul_id": null,
+      "wardrobe": "Black-and-grey luchador mask, Venom/Titan tubes feeding into skull and spine glowing green, ragged cargo pants, heavy weight belt. Titan-sized (tier 6)."
+    }
+  ],
+  "props": [
+    {
+      "id": "experimental-serum",
+      "description": "Batman's experimental serum — a slim chrome auto-injector with a glowing amber/gold vial, distinct from the villains' green Titan serum.",
+      "ref_folder": "references/props/experimental-serum/"
+    },
+    {
+      "id": "batmobile",
+      "description": "Batman's batmobile — low matte-black armored vehicle, DAZ3D render style.",
+      "ref_folder": "references/props/batmobile/"
+    }
+  ],
+  "locations": [
+    {
+      "id": "arkham-cells",
+      "description": "Arkham intake/cell wing during the breakout: blown-open cell doors, flickering red alarm strobes, drifting smoke, scattered gurneys, green Titan-serum haze.",
+      "ref_folder": "references/locations/arkham-cells/"
+    },
+    {
+      "id": "batcave",
+      "description": "Batcave control room: curved monitor array, command chair, raw cave-rock walls, cool blue under-lighting, the batmobile turntable off to one side.",
+      "ref_folder": "references/locations/batcave/"
+    },
+    {
+      "id": "gotham-road",
+      "description": "Rain-slick Gotham street at night, neon glow, bridge leading to the burning Arkham island silhouette."
+    },
+    {
+      "id": "arkham-exterior",
+      "description": "Arkham Asylum gothic facade engulfed in flames at night, broken front doors, smoke against a full moon, courtyard steps.",
+      "ref_folder": "references/locations/arkham-exterior/"
+    },
+    {
+      "id": "arkham-lobby",
+      "description": "Arkham grand lobby / decayed grand hall: marble grand staircase, vaulted glass ceiling, stone columns, now smoke-filled and lit orange by fire glow.",
+      "ref_folder": "references/locations/arkham-lobby/"
+    }
+  ],
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01-01",
+          "size": "wide",
+          "tier": 1,
+          "characters": ["killer-croc", "scarecrow", "joker", "bane"],
+          "location": "arkham-cells",
+          "time_of_day": "night",
+          "weather": "interior, smoke",
+          "camera": "wide-establish, dutch",
+          "action": "Arkham's intake wing mid-breakout: cell doors blown off their hinges, red alarm strobes flashing. The four villains — Croc, Scarecrow, Joker, Bane — break loose at normal size around a spilled crate of green Titan-serum injectors.",
+          "dialogue": [],
+          "captions": ["Arkham Asylum. Tonight, every cage opened at once."],
+          "sfx": [{"text": "BRAAAANG", "source": "breakout alarm"}],
+          "notes": "Cold-open establishing. Villains at BASELINE size here (tier 1) — the serum power-up happens across p01-02..04. One of the permitted wide-establish anchors.",
+          "continuity_refs": [],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p01-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["bane", "joker"],
+          "location": "arkham-cells",
+          "time_of_day": "night",
+          "weather": "interior, smoke",
+          "camera": "mcu, low-angle-front",
+          "action": "The villains jam green Titan-serum injectors into their necks and arms — Bane and Joker in frame — tubes flooding with luminous green.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "KA-CHNK", "source": "injector"}],
+          "notes": "Establishes the Titan serum as the villains' power source. Villains still baseline (tier 1) at the moment of dosing.",
+          "continuity_refs": ["p01-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p01-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["killer-croc"],
+          "location": "arkham-cells",
+          "time_of_day": "night",
+          "weather": "interior, smoke",
+          "camera": "ecu-region, worms-eye",
+          "action": "Extreme close-up on Killer Croc ALONE — his scaled green shoulder and arm violently exploding with new muscle mass, scales stretching, glowing green Titan-serum veins lighting up under the surface as he swells much larger. Single figure only, no other character in frame.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "THROOB", "source": "serum surge"}],
+          "notes": "Villain size-increase beat, SINGLE villain (Croc) to avoid character-fusion. Scarecrow/Joker growth covered collectively in p01-04. No-fusion rule.",
+          "continuity_refs": ["p01-02"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p01-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["bane", "joker", "killer-croc", "scarecrow"],
+          "location": "arkham-cells",
+          "time_of_day": "night",
+          "weather": "interior, smoke",
+          "camera": "medium, low-angle-back",
+          "action": "All four villains rise enormous against the strobing corridor — Croc, Scarecrow, Joker, Bane, now titan-sized — dwarfing the blown-out doorways behind them.",
+          "dialogue": [],
+          "captions": ["They had the serum. All of them. It made them giants."],
+          "sfx": [],
+          "notes": "Closes the cold open: all four villains now tier 6. Establishes the size jump the serum causes. Low-angle-back for menace.",
+          "continuity_refs": ["p01-03"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02-01",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "medium, eye-level",
+          "action": "Batman stands before the curved monitor array of the Batcave, one hand on the console, screens glowing cold blue across his cowl.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Establishes the Batcave and Batman baseline (tier 1). Location change — kept to medium per L20 distance budget.",
+          "continuity_refs": [],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p02-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "mcu, profile",
+          "action": "Profile of Batman's cowl underlit by the screen, a comm indicator blinking at the edge of frame as the call comes in.",
+          "dialogue": [
+            {"character": "nightwing", "text": "Bruce — Arkham's gone. They're all juiced on Titan.", "type": "off-panel"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Nightwing's call is off-panel dialogue — he is not in frame yet.",
+          "continuity_refs": ["p02-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p02-03",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "mcu, over-shoulder",
+          "action": "Over Batman's shoulder at the monitor: a live feed of Arkham in flames and readouts on each escaped inmate.",
+          "dialogue": [
+            {"character": "nightwing", "text": "I'm en route. Don't go in alone.", "type": "off-panel"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Over-shoulder gives a reverse on the lobby/exterior we'll visit — shot-reverse hint for env reverse ref.",
+          "continuity_refs": ["p02-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p02-04",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "mcu, low-angle-front",
+          "action": "Batman turns from the screen, jaw set, decision already made.",
+          "dialogue": [
+            {"character": "batman", "text": "They won't fit through the door if I wait.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Character beat. Low-angle-front for resolve.",
+          "continuity_refs": ["p02-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03-01",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "medium, high-angle",
+          "action": "Batman opens a secure case on the console; the experimental serum auto-injector glows amber on its stand.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Introduces the experimental-serum prop. High-angle on the case.",
+          "continuity_refs": ["p02-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p03-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "ecu-region, three-quarter",
+          "action": "A gloved hand closes around the glowing amber vial, lifting it from the case.",
+          "dialogue": [],
+          "captions": ["An experimental dose. His own work. Never tested on a human."],
+          "sfx": [],
+          "notes": "ecu-region on the prop. Caption carries the stakes.",
+          "continuity_refs": ["p03-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p03-03",
+          "size": "tall",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "batcave",
+          "time_of_day": "night",
+          "weather": "interior",
+          "camera": "front-full, low-angle-front",
+          "action": "Batman pockets the vial in his belt, cape sweeping, and strides toward the waiting batmobile.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Full-body hero beat. Front-full at low angle.",
+          "continuity_refs": ["p02-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04-01",
+          "size": "wide",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "gotham-road",
+          "time_of_day": "night",
+          "weather": "rain",
+          "camera": "medium, dutch",
+          "action": "The batmobile tears down a rain-slick Gotham street, neon smearing past, the orange glow of burning Arkham ahead.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "VROOOOM", "source": "batmobile engine"}],
+          "notes": "Batmobile prop in motion. Dutch for speed/tension. gotham-road is a one-off location (no ref_folder).",
+          "continuity_refs": [],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p04-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "gotham-road",
+          "time_of_day": "night",
+          "weather": "rain",
+          "camera": "mcu, three-quarter",
+          "action": "Inside the cockpit, Batman's face underlit by the dash, the glowing vial resting on the seat beside him.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Cockpit interior. Keeps the serum visible as Chekhov's prop.",
+          "continuity_refs": ["p04-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p04-03",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "gotham-road",
+          "time_of_day": "night",
+          "weather": "rain",
+          "camera": "medium, high-angle",
+          "action": "High angle as the batmobile crosses the bridge toward the burning island silhouette.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Transitional. High-angle bridge crossing.",
+          "continuity_refs": ["p04-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05-01",
+          "size": "wide",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-exterior",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "wide-establish, low-angle-front",
+          "action": "The Arkham facade is engulfed in flames against the moon; the batmobile skids to a stop at the foot of the steps.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "SKRRRT", "source": "tires"}],
+          "notes": "Essential establishing of arkham-exterior on fire. One of three permitted wide-establish anchors.",
+          "continuity_refs": [],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p05-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-exterior",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, low-angle-front",
+          "action": "Batman steps out of the batmobile, silhouetted against the wall of fire.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Hero entrance against fire.",
+          "continuity_refs": ["p05-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p05-03",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-exterior",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, three-quarter",
+          "action": "From behind, Batman strides through the broken front doors into the burning interior glow.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Threshold beat into the lobby. Three-quarter rear framing.",
+          "continuity_refs": ["p05-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06-01",
+          "size": "splash",
+          "tier": 6,
+          "characters": ["batman", "killer-croc", "scarecrow", "joker", "bane"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "splash, low-angle-front",
+          "action": "The burning grand hall: four enormous Titan-juiced villains — Killer Croc, Scarecrow, Joker, Bane — loom on and around the grand staircase. Batman stands small in the foreground for scale.",
+          "dialogue": [],
+          "captions": ["Four of them. All wrong-sized."],
+          "sfx": [],
+          "notes": "Splash reveal of the four titan villains — the central threat. Scale via small foreground Batman. Only cast in frame (no extras, per house rule).",
+          "continuity_refs": [],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p06-02",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["joker"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, dutch",
+          "action": "Close on titan Joker's enormous grin, firelight dancing across chalk-white skin.",
+          "dialogue": [
+            {"character": "joker", "text": "Look who's late to his own funeral!", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Dutch MCU for menace + a money face on a villain.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07-01",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["bane", "batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, low-angle-front",
+          "action": "Titan Bane charges, fist cocked back, as Batman braces low.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Beatdown begins. Batman still tier 1 here (outmatched).",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p07-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, dutch",
+          "action": "Batman is flung backward into a stone column, body folding around the impact.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "KRAKK", "source": "impact on column"}],
+          "notes": "tier on this panel = Batman (1). Dutch sells the hit.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p07-03",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-face, high-angle",
+          "action": "ECU of Batman's face, teeth gritted, blood at the corner of his mouth.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "ECU money-face for the low point. High-angle = vulnerability.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p07-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "killer-croc", "joker", "bane"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, high-angle",
+          "action": "Batman on one knee, the titan villains closing in around him from above.",
+          "dialogue": [],
+          "captions": ["He couldn't win this as a man."],
+          "sfx": [],
+          "notes": "High-angle defeat framing. Sets up the transformation choice.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08-01",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, three-quarter",
+          "action": "Down on one knee, Batman pulls the glowing amber injector from his belt and looks at it.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "TRANSFORM 1 setup. Prop in hand.",
+          "continuity_refs": ["p07-04"],
+          "transformation_beat": "consider"
+        },
+        {
+          "panel_id": "p08-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-face, low-angle-front",
+          "action": "ECU on Batman's eyes — the decision lands, hard.",
+          "dialogue": [
+            {"character": "batman", "text": "No choice.", "type": "whisper"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Decide beat. Face money-shot.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "decide"
+        },
+        {
+          "panel_id": "p08-03",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, low-angle-front",
+          "action": "Batman jams the injector into the side of his neck.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "KA-CHNK", "source": "injector"}],
+          "notes": "Trigger beat — the inciting moment.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "trigger"
+        },
+        {
+          "panel_id": "p08-04",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, dutch",
+          "action": "Batman's whole body tenses, amber-and-red energy crackling across the suit.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "THROB... THROB...", "source": "serum onset"}],
+          "notes": "First-sensation beat.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "first_sensation"
+        },
+        {
+          "panel_id": "p08-05",
+          "size": "wide",
+          "tier": 1,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-region, low-angle-front",
+          "action": "Crop on the chest: the armored plate strains and creaks as the pectorals swell beneath it.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "CRRREAK", "source": "armor straining"}],
+          "notes": "Chest body-region beat. Landscape crop so the chest reads across the page.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "chest"
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09-01",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-region, three-quarter",
+          "action": "Crop on the arm: biceps balloon, the gauntlet fins popping loose as the forearm thickens.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "RRRIP", "source": "gauntlet splitting"}],
+          "notes": "Arms body-region beat. Tight crop (≤ mcu ceiling).",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "arms"
+        },
+        {
+          "panel_id": "p09-02",
+          "size": "wide",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-region, eye-level",
+          "action": "Crop on the torso: abdominal plates broadening and ridging as the core packs on mass.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "CRUNCH", "source": "plates flexing"}],
+          "notes": "Abs body-region beat. Landscape crop.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "abs"
+        },
+        {
+          "panel_id": "p09-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, low-angle-front",
+          "action": "Batman throws his head back mid-roar, jaw bared, body now hugely muscled.",
+          "dialogue": [
+            {"character": "batman", "text": "RRRAAARGH!", "type": "shout"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Face reaction intercut so the ECU run isn't faceless (L35). whole_body beat.",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "whole_body"
+        },
+        {
+          "panel_id": "p09-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-region, low-angle-back",
+          "action": "The cape tears free at the shoulders and back seams burst as the frame widens. Coverage holds.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "SNAP!", "source": "seams failing"}],
+          "notes": "suit_fail beat. Kept at mcu (must stay tighter than full for body-region HARD ceiling).",
+          "continuity_refs": ["p08-01"],
+          "transformation_beat": "suit_fail"
+        },
+        {
+          "panel_id": "p09-05",
+          "size": "tall",
+          "tier": 6,
+          "characters": ["batman", "bane"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "front-full, low-angle-front",
+          "action": "TITAN BATMAN revealed at full height, now matching the villains' scale, Bane recoiling at the edge of frame.",
+          "dialogue": [
+            {"character": "batman", "text": "My turn.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Reveal beat — full-body, close to camera, the payoff. Reveal exempt from the per-beat distance ceiling.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": "reveal"
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10-01",
+          "size": "wide",
+          "tier": 6,
+          "characters": ["batman", "bane"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "wide-establish, low-angle-front",
+          "action": "Titan Batman drives Bane through a stone wall, debris exploding outward across the hall.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "WHAAM", "source": "Bane through wall"}],
+          "notes": "Re-establishes the lobby mid-fight (wide anchor for the back half). Batman now tier 6.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p10-02",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "killer-croc"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, dutch",
+          "action": "Batman grabs Killer Croc by the jaw and slams him down onto the marble.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "KRSH", "source": "Croc hits marble"}],
+          "notes": "Solo focus on Croc here.",
+          "continuity_refs": ["p10-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p10-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["joker"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "ecu-face, low-angle-front",
+          "action": "ECU on titan Joker, grin faltering for the first time.",
+          "dialogue": [
+            {"character": "joker", "text": "...okay, ow.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Villain reaction money-face; tonal beat.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p10-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "joker"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, three-quarter",
+          "action": "Batman backhands Joker the length of the hall.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "DOOOM", "source": "backhand"}],
+          "notes": "Payoff to p10-03.",
+          "continuity_refs": ["p10-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p10-05",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "bane", "killer-croc", "joker"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, birds-eye",
+          "action": "Three villains sprawled in the rubble; titan Batman stands over them, breathing hard.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Beat of dominance before the turn. High-angle on the downed villains.",
+          "continuity_refs": ["p10-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "panels": [
+        {
+          "panel_id": "p11-01",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["scarecrow"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "medium, dutch",
+          "action": "Last one standing, titan Scarecrow rips a gas pod from his fear-toxin gauntlet.",
+          "dialogue": [
+            {"character": "scarecrow", "text": "Let's see your real fear.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Turns the fight. Solo focus on Scarecrow.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p11-02",
+          "size": "wide",
+          "tier": 6,
+          "characters": ["batman", "scarecrow"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "wide-establish, dutch",
+          "action": "A billowing wall of fear-toxin gas floods the hall and swallows Batman whole.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "FSSSHHH", "source": "gas release"}],
+          "notes": "Gas event. Dutch + smoke.",
+          "continuity_refs": ["p11-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p11-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "ecu-face, dutch",
+          "action": "ECU: Batman's eyes flare blood-red, pupils blown, veins standing out — the toxin and the serum collide.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Rampancy onset. The red-eye ECU money-shot.",
+          "continuity_refs": ["p09-05"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p11-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, eye-level",
+          "action": "Titan Batman roars, feral, fists clenched, no recognition left in his face.",
+          "dialogue": [],
+          "captions": ["The serum and the toxin. A mind on fire."],
+          "sfx": [{"text": "GRAAAH", "source": "Batman, feral"}],
+          "notes": "Rampancy locked in. Sets up Nightwing's arrival.",
+          "continuity_refs": ["p11-03"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "panels": [
+        {
+          "panel_id": "p12-01",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, high-angle",
+          "action": "Nightwing swings in through a shattered upper window into the smoke, landing in a crouch.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Nightwing arrives at baseline (tier 1). High-angle entry.",
+          "continuity_refs": ["p06-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p12-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["nightwing", "batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "medium, three-quarter",
+          "action": "Hands raised, Nightwing edges toward the rampaging titan Batman.",
+          "dialogue": [
+            {"character": "nightwing", "text": "Bruce. It's me. Stand down.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "The failed de-escalation. Two-shot with clear size disparity.",
+          "continuity_refs": ["p12-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p12-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "ecu-face, high-angle",
+          "action": "ECU: Batman's red eyes, zero recognition — he sees only a target.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Beat that kills the hope of talking him down.",
+          "continuity_refs": ["p11-03"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p12-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "medium, eye-level",
+          "action": "Titan Batman swats Nightwing across the lobby like he weighs nothing.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "KRAKK", "source": "Nightwing hurled"}],
+          "notes": "Forces Nightwing's hand. Dutch sells the hit.",
+          "continuity_refs": ["p12-01"],
+          "transformation_beat": null
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "panels": [
+        {
+          "panel_id": "p13-01",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "medium, three-quarter",
+          "action": "Battered, Nightwing pushes up on one arm and spots the dropped amber injector glinting in the rubble.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "TRANSFORM 2 setup (consider). The serum Batman dropped.",
+          "continuity_refs": ["p12-04"],
+          "transformation_beat": "consider"
+        },
+        {
+          "panel_id": "p13-02",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, eye-level",
+          "action": "Nightwing snatches the vial and jabs it into his arm, grimacing.",
+          "dialogue": [
+            {"character": "nightwing", "text": "Sorry, Bruce.", "type": "whisper"}
+          ],
+          "captions": [],
+          "sfx": [{"text": "KA-CHNK", "source": "injector"}],
+          "notes": "Trigger beat with a face (anchors the ECU run that follows).",
+          "continuity_refs": ["p13-01"],
+          "transformation_beat": "trigger"
+        },
+        {
+          "panel_id": "p13-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "ecu-region, three-quarter",
+          "action": "Crop on the chest and shoulders ballooning, the blue emblem stretching as the suit strains.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "CRRREAK", "source": "suit straining"}],
+          "notes": "Chest body-region beat.",
+          "continuity_refs": ["p13-02"],
+          "transformation_beat": "chest"
+        },
+        {
+          "panel_id": "p13-04",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, profile",
+          "action": "Nightwing's face contorts mid-surge, teeth clenched, as the change rips through him.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "THROB", "source": "serum surge"}],
+          "notes": "Face reaction intercut inside the ECU run (L35). whole_body beat.",
+          "continuity_refs": ["p13-02"],
+          "transformation_beat": "whole_body"
+        },
+        {
+          "panel_id": "p13-05",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "ecu-region, low-angle-back",
+          "action": "Crop on the back broadening, the suit splitting down the spine seam.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "CRACK", "source": "spine seam splitting"}],
+          "notes": "Back body-region beat.",
+          "continuity_refs": ["p13-02"],
+          "transformation_beat": "back"
+        },
+        {
+          "panel_id": "p13-06",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "ecu-region, profile",
+          "action": "Crop on the arms exploding in size, sleeves shredding off the forearms.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "RRRIP", "source": "sleeves shredding"}],
+          "notes": "Arms body-region beat.",
+          "continuity_refs": ["p13-02"],
+          "transformation_beat": "arms"
+        },
+        {
+          "panel_id": "p13-07",
+          "size": "tall",
+          "tier": 6,
+          "characters": ["nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "front-full, low-angle-front",
+          "action": "TITAN NIGHTWING revealed at full height, matching Batman's scale, fists ready.",
+          "dialogue": [
+            {"character": "nightwing", "text": "Now we're even.", "type": "balloon"}
+          ],
+          "captions": [],
+          "sfx": [],
+          "notes": "Reveal beat — full-body close payoff. Reveal exempt from per-beat ceiling.",
+          "continuity_refs": ["p09-05"],
+          "transformation_beat": "reveal"
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "panels": [
+        {
+          "panel_id": "p14-01",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["batman", "nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "medium, low-angle-back",
+          "action": "The two titans collide mid-hall, fists locked, neither giving ground.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "Final clash opens. Both tier 6.",
+          "continuity_refs": ["p09-05"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p14-02",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing", "batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, high-angle",
+          "action": "Nightwing ducks a wild haymaker and drives a knee into Batman's ribs.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "WHUMP", "source": "knee strike"}],
+          "notes": "Nightwing technique vs Batman's blind rage.",
+          "continuity_refs": ["p14-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p14-03",
+          "size": "standard",
+          "tier": 6,
+          "characters": ["nightwing", "batman"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke, gas",
+          "camera": "mcu, over-shoulder",
+          "action": "Nightwing forces Batman down and pins him, holding the bigger man against the floor.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [{"text": "THUD", "source": "Batman pinned"}],
+          "notes": "The subdue.",
+          "continuity_refs": ["p14-01"],
+          "transformation_beat": null
+        },
+        {
+          "panel_id": "p14-04",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman", "nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, high-angle",
+          "action": "Pinned, Batman shrinks — the serum spent — de-transforming back to normal beneath Nightwing.",
+          "dialogue": [],
+          "captions": [],
+          "sfx": [],
+          "notes": "aftermath beat: Batman de-transforms (tier 6 -> tier 1). High-angle looking down on the shrinking figure.",
+          "continuity_refs": ["p14-03"],
+          "transformation_beat": "aftermath"
+        },
+        {
+          "panel_id": "p14-05",
+          "size": "standard",
+          "tier": 1,
+          "characters": ["batman", "nightwing"],
+          "location": "arkham-lobby",
+          "time_of_day": "night",
+          "weather": "fire, smoke",
+          "camera": "mcu, eye-level",
+          "action": "Exhausted, normal Bruce blinks up, the red gone from his eyes; titan Nightwing's hand rests on his shoulder.",
+          "dialogue": [
+            {"character": "batman", "text": "...Dick?", "type": "balloon"},
+            {"character": "nightwing", "text": "I've got you.", "type": "balloon"}
+          ],
+          "captions": ["Dawn over Arkham. Two men — and one dose left to answer for."],
+          "sfx": [],
+          "notes": "Closing beat. Note Nightwing is still tier 6 here but the panel tier tag tracks Batman (1) for the de-transform continuity.",
+          "continuity_refs": ["p14-04"],
+          "transformation_beat": null
+        }
+      ]
+    }
+  ],
+  "notes": "DELIVERABLE: individual panel images only (58 panels) — do NOT compose pages or export a PDF (no page-composer). Villains also grow from the Titan serum: the cold open (p01-01..04) shows the four villains dosing and increasing from baseline (tier 1) to titan (tier 6) before they appear enormous in the lobby. Chapter type: action/climax with two embedded HERO transformation scenes (partial); villain growth is a cold-open montage, not a gated transformation_scene.",
+  "_notes_extra": "Chapter type: action/climax with two embedded transformation scenes (partial). Growth-page ratio: pages 8, 9, 13 are growth-active (3/14 = 21%) — below the transformation-chapter target because this is an ACTION chapter with two contained transformations, not a growth-focused issue; flagged intentionally per L35. Escalation devices in play: sfx-driven, clothing-destruction, full-body-reveal, reaction-intercut, size-comparison (small-foreground-Batman in p06-01, titan-scale reveals). Camera kept tight (chapter mean ~2.5) per L20 because transformation_scenes is declared; wide-establish reserved for the three location anchors (p01-01, p05-01, p10-01) + splash reveal (p06-01). Refs live in the Google Flow project (fd1942db), NOT on local disk — so reference_completeness HARD findings from rules_audit are expected for this Flow-driven project and are tracked in Flow, not via local reference-gathering."
+}

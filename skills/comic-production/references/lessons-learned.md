@@ -1416,6 +1416,80 @@ See `references/composition-reading-list.md` for the full annotated list.
 
 ---
 
+## L36 — Flow Omni conversational single-instruction editing + the Nano-Banana-validated "prosumer DAZ" style block
+
+**Status: Active.** New lesson 2026-06-17. Burned from the Chun-Li character-build session on the Omni-agent Flow UI (project `8e5f2654-8513-41d6-a7ea-6db370c58004`, growcomics account, 28 generations across one session). Where L35/L34/L20 govern *what to draw*, L36 governs *how to drive the Omni agent to build a single hero figure and its action panels*, and pins the **exact style suffix that survives on Nano Banana 2 / Pro** — distinct from the Higgsfield/Bay-Watch outdoor block in `styles/photoreal-daz3d/preset.md`.
+
+**Three findings.**
+
+### 1. The Nano-Banana-validated "prosumer DAZ" style block
+
+The documented preset suffix ("golden-hour warm outdoor lighting, natural pore detail") is tuned for outdoor narrative panels. For **studio / character-sheet / interior** work on Nano Banana, the block that held across the whole Chun-Li run is:
+
+```
+High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX.
+```
+
+For **action/dialogue panels** append the negative inline (Nano Banana honors it appended, no separate negative field on Flow Omni):
+
+```
+NO thick lines, NO borders
+```
+
+Load-bearing words, do not paraphrase: **"clean prosumer 3D CGI comic art"** (pulls off the glossy-cinematic default), **"PBR skin with pores and subsurface scattering"** (the micro-detail lever), **"well-lit Iray global illumination"** (studio key — replaces the outdoor golden-hour cue), **"not glossy cinematic VFX"** (the single most useful negation — kills the over-rendered Unreal/VFX look that Nano Banana drifts to). The `NO thick lines, NO borders` tail is what keeps Nano Banana from drawing comic panel gutters / inked outlines around the figure.
+
+**Style-transfer entry point:** to convert an uploaded real-photo reference into the house look, prompt `convert to <the block above>` with the photo attached. This is how the canonical 3D base ref was minted from the source image before any posing.
+
+### 2. Conversational single-instruction editing beats one fat prompt on Omni
+
+The Omni agent mediates every generation, and it **edits an attached image far more reliably than it builds a complex scene from a wall of text**. The Chun-Li action panels were built as a chain of *one-change-per-message* edits on the prior accepted image, not as one big prompt:
+
+1. `Change her pose to the reference so she looks like she is kicking, just like the reference` (+ pose ref attached)
+2. `Change her facial expression so she looks like shouting, she is looking to her right directly in the position of her leg`
+3. `Add a text dialogue bubble that comes from her and says Tenshoukyaku!`
+
+Each message carries the style suffix and changes exactly one thing. The agent keeps everything else stable, so identity/costume/accessories don't drift between edits the way they do when you re-roll a fresh full prompt. **Gaze direction is steerable in plain language** ("looking to her right directly in the position of her leg" → eyes track the kicking leg). Dialogue is baked at generation time via the agent (consistent with L19) — `Add a text dialogue bubble that comes from her and says "<line>"`.
+
+This is a genuinely different driving model from the L35 run's "compose one full prompt, then verbatim re-runs." Use **single-instruction editing** for refining an accepted figure (pose, expression, gaze, wardrobe state, lettering); use **full-prompt + verbatim re-runs** only for the cold-start baseline and for novel money-shots.
+
+### 3. Turnaround / reference sheets: Nano Banana Pro, 16:9, black background, "consistent every time"
+
+The canonical multi-view turnaround (Front / Side / Rear-cape-blowing in one frame) was generated on **Nano Banana Pro at 16:9 on a black background** — Pro's higher fidelity is worth spending the daily quota on for the *reference* assets even though NB2 carries the panels. The instruction that locked proportion across the views was literal: `Update the turnaround sheet and make sure the muscle size is consistent every time, make sure it's 16:9, and put in a black background`. Black bg + 16:9 is the reference-sheet convention (clean alpha-friendly cutout, all views legible side-by-side); 4:3 is the action-panel convention.
+
+**FMG escalation lever on Omni** is literal repetition, not adjectives: `Make her muscles way way way way way way way way bigger` steps the figure up a tier per "way"-stacked message. Re-issue the same message to push further; pair with the turnaround "muscle size consistent every time" instruction afterward to re-lock the new tier across all views.
+
+**Accessory/identity continuity observed holding across edits** (Chun-Li canon, for reference): ox-horn hair buns with gold ornaments at the base, sleeveless blue qipao halter with gold frog-button trim and mandarin collar, **black spiked studded wristbands on both wrists**, blue athletic leggings. These survived pose/expression/lighting edits intact *because* the edits were single-instruction on the prior image (finding 2) — a fresh full-prompt re-roll would have dropped the wristbands. This is the practical payoff of L24 (accessory suppression/lock) under the Omni edit model.
+
+**Where this applies**: any character-build or hero-figure session on the Flow Omni UI; the style block applies to all studio/interior Nano Banana work. **Where it does NOT**: outdoor narrative panels keep the golden-hour preset block; Higgsfield production is unaffected (it has its own negative field and the `compose.py` chain). **Reverses**: nothing — extends `flow-workflow.md` (which had Omni ref-attachment marked unverified — now observed working 2026-06-17) and complements L19 (baked lettering) and L24 (accessory lock).
+
+**Provenance**: Flow project `8e5f2654-8513-41d6-a7ea-6db370c58004` (Chun-Li build, 2026-06-17), read live via the Chrome MCP.
+
+---
+
+## L37 — Body-orientation variety is mandatory anti-AI; build + attach multi-angle turnaround sheets
+
+**Status: Active. STANDING RULE.** New lesson 2026-06-22, user directive during the goth-witch "Bigger Plans" build (project `7103f1eb`). Sibling of L20/L34 (camera *distance/staging*) and the `cinematic-framing.md` angle table — but this one is about the **character's own body orientation**, which is a distinct failure axis the camera-variety checks miss.
+
+**The failure mode (a top AI tell).** A sequence where every character faces the camera front-on — even with varied camera distance and good lettering — reads as AI-generated. Front-facing-everything is one of the most common, most recognizable AI-comic signatures. Hand-made comics constantly turn characters away: backs, three-quarter-rear, over-the-shoulder, profile, looking-away. The user's words: *"when it's a bunch of images that are just face-forward, it looks way too much like AI… we're doing our best not to appear as an AI comic."*
+
+**The rule (apply at script-breakdown AND QA):**
+- Across any multi-panel sequence, **deliberately vary body orientation**, not just camera angle/distance. Target: no more than ~2 consecutive panels share a front-facing body orientation. Work in at least one true **back / 3-quarter-rear** view and one **profile / over-shoulder** view per ~5-panel run.
+- Orientation vocabulary to rotate through: `front`, `3q-front`, `profile`, `3q-rear`, `back`, `over-shoulder` (camera behind character A looking past them at character B), `looking-away` (body angled, head turned off-frame).
+- This is **additive to** L20/`cinematic-framing.md`: vary distance, camera angle, AND body orientation. A panel can be a low-angle (camera) of a 3-quarter-rear (body) — those are independent levers.
+
+**The enabler — turnaround sheets are now a required ref asset, not optional.** You cannot reliably render a clean back or profile of a character from a front-only face card + front body baseline; the model invents the back and it drifts. So:
+- Build a **multi-angle turnaround sheet per character** up front (front / 3q / side / **rear** / face turnaround / expression strip / detail crops — hands, footwear, accessories). Convention from L36/L24: Nano Banana **Pro, 16:9, black background**, `make sure it's consistent every time`.
+- **Attach the turnaround sheet as a reference on any panel that uses a non-front orientation** (and ideally on all panels — it carries identity from every side). When a panel calls for a back view, the rear view on the sheet is what keeps hair/outfit/proportion correct from behind.
+- Add `turnaround_sheet` to each character's `references_required.json` views list; treat its absence as a HARD gap for any project that wants the non-AI look.
+
+**Scale-constancy corollary (same directive).** In a size-change comic (giantess/macro/shrink), only the *transforming* character's scale moves; **every other character and the room/furniture stay a fixed real size across the whole book.** The non-transforming character must be scaled to room anchors (couch seat height, doorway, floorboards) identically in every panel — if they look smaller in a later panel they have visibly "shrunk," which breaks the gag and reads as an inconsistency error. Bake an explicit clamp into those panels: *"<character> is a normal-sized adult (~1.7 m), the SAME size as earlier panels and correctly scaled to the couch/door/furniture; he has NOT shrunk — only <subject> is giant."* The room is the fixed ruler; the giant is the only variable.
+
+**Where this applies**: every comic, every platform. Fold the orientation-variety check into `script-breakdown` (assign body orientation per panel alongside camera) and into `continuity-check`/`qa-checklist.md` (flag a run of >2 front-facing-body panels; flag a non-transforming character whose room-relative scale changes). **Reverses**: nothing — strengthens `cinematic-framing.md` and the `feedback_shot_variety` guidance.
+
+**Provenance**: user directive 2026-06-22 on Flow project `7103f1eb` (goth-witch "Bigger Plans"); user supplied turnaround sheets for both characters (Luna + the male lead) and asked to re-angle panels 6–10 and fix a panel-10 scale-shrink on the non-transforming character.
+
+---
+
 ## L38 — Story spine: the axis the whole genre fails
 
 **Status: Active.** New lesson 2026-08-04. (Numbered L38 at the 2026-08-11 reconciliation: L36/L37 were assigned on main to Flow-Omni editing and orientation-variety while this lesson was in flight.) Completes the `comic-corpus` migration into production: L35 shipped the study's craft findings (growth density, money-shot faces, escalation devices); L38 ships **Finding 5**, the one finding the pipeline had diagnosed but never enforced.
@@ -1446,6 +1520,9 @@ The other three axes became enforced gates and story didn't, so it stayed a note
 **Reverses**: nothing. Complements L35 (which makes growth land) and L19/bake-dialogue (which makes the words legible) — a legible line still needs something worth saying.
 
 **Provenance**: `research/comic-corpus/synthesis/success-elements.md` Finding 5. Tests: `tests/test_story_spine.py` (one case per failure mode, plus the passing shapes).
+
+---
+
 
 ---
 

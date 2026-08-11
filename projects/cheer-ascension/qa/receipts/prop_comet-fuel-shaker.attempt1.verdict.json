@@ -1,0 +1,19 @@
+{
+  "job": "prop:comet-fuel-shaker (bootstrap, prompt v1, field-medium d96a2994 attached as style/lighting anchor — chip DOM-verified)",
+  "judged": "2026-06-12 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md + vfx-style-bible.md (D10)",
+  "batch": [
+    "442a412c-1303-481c-9bf9-ce96224e7d31",
+    "172459d7-510b-46b1-9b36-9da00ce70c64",
+    "505074bb-2c7d-4c0a-afeb-0cb1bd0ca58e",
+    "edd62fe1-9a3e-4f18-a157-dd3861b9a35f"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "442a412c-1303-481c-9bf9-ce96224e7d31", "verdict": "fail", "defects": ["D10 vfx: physically-correct teal light spill across bench planks (banned look #4)"], "notes": "Cleanest render otherwise."},
+    {"variant": "V2", "flow_id": "172459d7-510b-46b1-9b36-9da00ce70c64", "verdict": "fail", "defects": ["glow magnitude: blown-out cyan, heavy halo vs FAINT spec", "prop-scale inflation vs scene benches"], "notes": "Right glow character, wrong magnitude."},
+    {"variant": "V3", "flow_id": "505074bb-2c7d-4c0a-afeb-0cb1bd0ca58e", "verdict": "pass", "defects": [], "notes": "Backup pick; glow at bright end of faint, cap drifts cocktail-shaker."},
+    {"variant": "V4", "flow_id": "edd62fe1-9a3e-4f18-a157-dd3861b9a35f", "verdict": "pass", "defects": [], "notes": "PICK: true sports shaker (flip-top steel cap), faintest glow, textbook D10 bloom-halo; golden-hour + scene continuity with anchor."}
+  ],
+  "pick": "V4",
+  "pick_flow_id": "edd62fe1-9a3e-4f18-a157-dd3861b9a35f"
+}

@@ -12,6 +12,13 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 — Reconciliation: origin/main merged into feat/comic-corpus (22 commits in, 3 conflicts resolved)
+
+### Changed
+
+- **Merged the 22 main-side commits** that had accumulated while this branch ran ahead 116: the complete cheer-ascension reference canon + banking receipts (17 commits), the L36 Flow-Omni / L37 orientation-variety lesson batch with cinematography/continuity refs, the `reference-sheets` skill, `tools/studio_worker.py`, and main's June v2-gate re-bless. Context: the 2026-05-22 mac-mini stale-branch incident — fleet machines pull `main`, so `main` must carry the real state.
+- **Conflict resolutions** (per the reconciliation ground rules): `CHANGELOG.md` — both histories spliced newest-first by date, each side's internal order preserved, 19 main-side entries interleaved into the June–July window (a pre-existing 07-24-above-07-30 mis-ordering in the branch history was left as-is); `lessons-learned.md` — both sides kept, ordered L36 (Flow Omni, main) → L37 (orientation, main) → L38 (story spine, branch, renumbered from in-flight "L36"); `projects/not-so-supra-man/qa/MANIFEST.sha256` — took the branch side **verbatim** (the user's own 2026-08-11 re-bless): the merged gate scripts hash to exactly that manifest, `integrity.py` verifies **gates intact ✓ fingerprint 49197e3f6bf9b7aa**, no gate content was hand-edited.
+
 ## 2026-08-11 — Reconciliation prep: parked working-tree state committed (L38 story-spine gate, STYLE v3 / WARD-07, studio ownership layer)
 
 ### Added
@@ -354,7 +361,6 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **projects/scientists — COMIC COMPLETE: all 16 pages / 82 panels generated, lettered at gen-1, full-chain banked (verify_chain: 114 entries clean).** Pages 5-16 produced this run on nano_banana_2_lite via self-checking runner subagents (compose/audit local, runner submits verbatim + transcribes lettering + 2-3 take cap, fresh verdicts, bank): p05 confrontation, p06 Jill growth, p07-08 home/Jim growth/walkout, p09 night-lab mind-control + assistant flees, p10-11 Dan+Donny dosed/grown/enslaved, p12 squad cooler dose + group growth, p13 sled rampage + Jill arrives, p14 Jill SUPER growth + standoff, p15 titan surge field->city, p16 goddess splash + TO-BE-CONTINUED coda. Mid-run owner instruction folded in: every panel now ALSO attaches its matching source-lineart crop as pose/composition/count anchor (media ids in references/harvest/media-ids.json; policy in PRODUCTION-RUNBOOK.md) — immediately fixed the six-cheerleader miscount and unlocked the p14-06 standoff after an identity-anchor staging line. Notable fixes routed through the gate: black-tank night wardrobe locks (p09/p10), reference-outfit leak killed by swapping mid-growth panels to baseline cards (p06-02), D11-clean rephrasings, p15-03 re-staged as a back shot after a frontal coverage fail + nsfw block. Field medium/close ladder rungs derived as deterministic crops of the banked wide (kitchen-med precedent).
 
-
 ## 2026-07-29
 
 ### Added
@@ -366,7 +372,6 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 - **projects/scientists — first pages generated: p01 (5 panels) + p02 (4 panels), all banked with full chain.** Pre-production per owner instruction: pulled the tested Cine+Light/Framing/vary-per-beat blocks out of `studio/extension/flow-studio-tools/content.js` and a 44-page camera-grammar analysis of the source comic into `references/CAMERA-GRAMMAR.md` (source is ~50% torso/full-body; remake caps consecutive fulls at 2, earns full-body payoffs, OTS + power-angle dialogue). Scene ladders wired (`scene_ladders` mirror of banked env chains; kitchen-medium is a deterministic crop of the banked wide after two failed gens). Panels shot on nano_banana_2_lite with per-scene adapted lighting blocks (kitchen raking morning sun / lab cool fluorescents + warm practical). QA: 2 re-rolls (p02-02 coat continuity, caught by fresh-context judge; prompt change routed back through compose/audit so the receipt hash stays honest), 9/9 banked.
 
 - **projects/scientists — full asset build for the GrowGetter "Scientists" remake** (owner request, via platform backend `growgetter/scientists`). 44 source pages harvested from growgettercomics.com; 4-batch spotter scan + identity-resolver pass locked an 8-slot cast (Rochelle bob-antagonist / Jill rival / Jim / Donny / Dan / assistant / blonde one-off / 5-girl cheer squad), resolving the source's Jim-name reuse and hair-drift continuity errors (see `references/CANON-NOTES.md`). 21 sheets generated on Higgsfield **nano_banana_pro** 1k with original-panel lineart crops attached as i2i refs (NSFW panels re-clothed via prompt; 4 crops needed drawn-on coverage to clear upload screening; env-city needed figure-free crops to clear output screening). Full compose→audit→submit→fresh-subagent-verdict→bank chain on every sheet (qa/ scaffold copied intact from ultra-gal-origin, manifest fingerprint 768c204c16de92f3); All 21 banked in `references/ref-ledger.json` including the cast size-scale lineup (5 rolls; height-order + identity drift rejects logged in work/job-ids.json). Post-build owner overrides: jill-super replaced by owner-picked asset f1e7caa4 (owner-extended prompt, rear-coverage deviation approved); generation model switched to nano_banana_2_lite for all future gens (initial 21-sheet build was nano_banana_pro). 2 re-rolls (jim-grown size tier, cheer-squad hairstyle fidelity). Known deviations logged: compose VERIFY-PILL still prints the stale Flow "Nano Banana 2 x4" line (submits went Higgsfield pro x1 per owner instruction, verified against the credit ledger); cast-lineup rendered 21:9 vs receipt 16:9.
-
 
 ## 2026-07-28
 
@@ -550,7 +555,6 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 - **⭐ Flow-favorite → Studio pick loop (LIVE).** The owner's ⭐ favorites in Google Flow now sync into the Studio as the pick marker. Flow side: `favorited:true` lives on `projectContents.workflows[].metadata` (workflow `name` = the bridge `gen` id; `primaryMediaId` = the picked output). Studio side: new key-gated **`bridge.php do=flowfav`** (items=`[{gen}|{file}]`) — additive + idempotent: adds tag `flow-fav`, `unrated→good`, and `accepted=true` ONLY when the beat has no owner-kept winner; an owner's manual rating always wins and un-favoriting never removes anything. `do=write` also gained an additive `addtags` field. UI: review.php ⭐ tile badge + **"⭐ Flow favs" toolbar filter** (hash `#flowfav=1`) + detail chip; creator.php ⭐ `.ck-favbadge` on board tiles. flow-studio-autosync **v1.2.0** posts the favorited gen ids every sync cycle (skips unchanged sets). Backfilled: **eva 7/7** favorites (Beat 18 conflict resolved owner-first: the in-Studio keep `65a129a178.jpg` stayed the winner; Flow fav `ae80ee28a5.jpg` got tag+approved only) and **muller 1** (Beat 95). Deploy followed the fetch-live protocol; all DEPLOY-NOTES feature markers verified post-deploy; new markers appended there.
 - **`research/picks-profile-eva.md` — the "why these win" taste profile.** 8 favorites vs all 114 beat siblings, graded by 8 fresh-context subagents against the canonical corpus rubric + cinematic-framing + qa-checklist (blind rank first, then revealed comparison; raw verdicts in `research/picks-profile-eva-verdicts/`). Headlines: camera/scale-in-frame is the strongest pick driver (6/8, never worse); payload density, canon fidelity, and cleanliness follow; **expression intensity NEVER drove a pick (0/8, 3 fav_worse)** — a generation mandate but only a selection tiebreaker; Beat 18 exposes two owner value systems (Flow favoriting = rendering beauty; Studio review picking = storytelling). Includes prompt-able per-beat-type rules, 3 proposed lesson candidates (aerial-prose failure, golden-hour raking key default, one-SFX rule), and systemic defects to feed the genspec (wristwatch batch-wide, park extras, wardrobe roulette). 56 favorites sit in never-synced Flow projects (54 in the Jul-11 "Esmeralda" project) — flagged for a Whole-project send; the growcomics-account sweep is still open.
 
-
 ## 2026-07-19 (3DMC Studio Tools v2.2.2 — prompt-insert rewritten to Slate's own API; verified live)
 
 ### Fixed
@@ -629,6 +633,20 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 - **ATS v5 (Attribution Tracking System v5, Multi-Touch) — live on growgettercomics.com, replacing v4.** Owner wanted NorthBeam-style attribution "for real" instead of the v4 page he never used. Audit finding that drove the rewrite: v4 captured **server-side only on `init`**, so W3 Total Cache/LiteSpeed cache hits never executed the tracker — that's why Direct showed 302k of 323k visitors (94%, structurally wrong). v5 is a single-file plugin (`~/Documents/ats-v5/plugin/attribution-tracking-system-v5/attribution-tracking-system-v5.php`, v4 superset, same tables/cookies/data): **inline footer beacon** (baked into cached HTML, so it fires on cache hits and inside referrer-stripping in-app browsers) → REST collector `/wp-json/ats/v1/hit`; **journey assembly** from the existing `ats_sessions` history; **5 attribution models** (first/last/linear/U-shaped 40-20-40/time-decay 7d half-life) with conservation verified live (190.0 subs / $4,064.88 monthly credited = actuals); new wp-admin **Multi-Touch page** (`admin.php?page=ats-models`: model switcher, model-comparison matrix, 100 patron journeys); WooCommerce order hook (`ats_orders` table); race-safe source upsert (retires the "ATS Fix Duplicates" run-once plugin); key-gated **rollup endpoint** `/wp-json/ats/v1/rollup` (aggregates + anonymized journeys, no emails/IPs). Deploy path: v5 installed side-by-side with a `class_exists('ATS')` idle-guard, verified, then v4 deactivated (zero downtime, data preserved). Verified live within minutes of switchover: **583 sessions / 1,530 pageviews collected in the first hour**, with google_search/duckduckgo referrer detections v4 was blind to; UTM smoke-test hit detected as deviantart.
 - **🧭 Attribution section in the Command Center (`studio/attribution.php` + `data/attribution-sites.json` + `data/attribution/<site>.json`), live.** Standalone renderer in the studio pattern: per-site funnel tiles, source × model credit table with model switcher, model-comparison matrix ("watch DeviantArt jump when you leave last-touch"), anonymized patron-journey explorer, monthly traffic trend with CSS bars. `?do=sync` (session POST or bridge-key GET) pulls every configured site's rollup server-side. cc.php gained the 🧭 tile (live monthly-$ headline read from the synced JSONs) + topbar link — merged onto the LIVE cc.php with all Patron-Analytics/Site-Traffic markers verified surviving (grep list updated in DEPLOY-NOTES.md). `data/attribution-sites.json` holds the per-site rollup keys → data/ deny, NOT committed to git. Fleet plan (phases 3-4: same plugin zip onto maxxmuscle/bloombeauty/giantessgirl, ats.js+track.php on the static sites, publisher-stage UTM stamping) in `docs/MULTI-TOUCH-ATTRIBUTION-PLAN.md`.
+
+## 2026-07-14 (L37 body-orientation variety + cinematography/continuity refs + Studio worker + project text tracked)
+
+Batch commit of pipeline work accumulated in the working tree across recent sessions. Reviewed, secret-scanned (no credentials — the Studio bridge key lives in `~/.config/studio-worker/config.json`, never in the repo), and documented here before push.
+
+**Added**
+- **L37** in `skills/comic-production/references/lessons-learned.md` — *Body-orientation variety is mandatory anti-AI; build + attach multi-angle turnaround sheets* (STANDING RULE). A sequence of front-facing-everything panels is a top AI tell even with good camera variety; L37 makes body orientation an independent lever from camera distance/angle (front / 3q-front / profile / 3q-rear / back / over-shoulder / looking-away), makes per-character turnaround sheets a required ref asset (attach on any non-front panel), and adds the scale-constancy corollary for size-change comics (only the transforming character's scale moves; the room is the fixed ruler — clamp non-transforming characters to furniture anchors so they never appear to "shrink"). Folds into `script-breakdown` (assign orientation per panel) and `continuity-check`/`qa-checklist.md` (flag >2 consecutive front-body panels; flag room-relative scale drift). Provenance: user directive on the goth-witch "Bigger Plans" build (Flow project `7103f1eb`).
+- `skills/comic-production/references/cinematography.md` — Hollywood camera-and-lighting craft translated to prompt language: the three mandatory per-panel axes (shot size / camera angle / lighting), with phrasing lines `style-lock` copies into `style.md` and `script-breakdown` sets per panel. First-class reference per `feedback_pipeline_improve`.
+- `skills/comic-production/references/continuity.md` — the anti-drift ruleset (winner-first chaining, prop/placement persistence, object refs, physics constraints, monotonic transformation scaling) applied on every multi-panel project.
+- `tools/studio_worker.py` — transport layer for the 3DMC comic-creator worker: `pull` / `progress` / `ingest` queue HTTP plumbing (header-only `X-Bridge-Key` auth, config + key read from `~/.config/studio-worker/config.json`, never the command line or repo). Lets a live Claude session drive the Studio queue without hand-rolling multipart/auth.
+- **Project TEXT now tracked** (per CLAUDE.md rule 5 — binaries stay gitignored, renders recoverable from the Flow media ids in each `PAGES.md`): `projects/goth-witch-growth/` (10-panel giantess comic, COMPLETE), `projects/the-bet/` (FMG, COMPLETE), `projects/daughter-of-hercules/` (57 panels, ledger), `projects/batman-arkham-titan/` (14pg/58-panel shotlist + refs), `projects/meteor-muscle/` (shotlist + style + refs), `projects/bottle-game-muscle/` (config + shotlist + style). Staged text only: `shotlist.json`/`.md`, `style.md`, `production-config.json`, `references_required.json`, `PAGES.md`, location `_source.md`.
+
+**Fixed**
+- `skills/continuity-check/scripts/rules_audit.py` — `_infer_arc_character()` now normalizes `wardrobe` when it is a **list** (the v3 production-briefing format) instead of assuming a string, and falls back to the cast `slug` when `id` is absent. Previously a list-form wardrobe silently failed the arc-character heuristic, skipping downstream monotonic-size checks.
 
 ## 2026-07-09 (cinematic-framing: validated "volume block" lighting-pass fragments)
 
@@ -910,6 +928,18 @@ _Deployed live to `3dmusclecomics.com/studio` (bridge.php, review.php, creator.p
 - **Flow Studio Tools — Phase 1** (`studio/extension/flow-studio-tools/`). The consolidated extension: one tRPC harvester core (`flow-core.js` — `getProject`/`getAccount`/`outputList`/`buildReviewBundle`) + a panel with **Download / → Studio / Review** actions, an account banner, and a count selector. Packaged to the admin Extensions page (`flow-studio-tools` v1.0.0). Bulk-delete is Phase 2; the four standalone Flow extensions stay until this is proven, then retire (Phase 3).
 - **Flow Studio Tools — Phase 2: guarded Bulk delete** (`flow-delete.js`; extension v1.1.0). A 🗑 tab folds in the old flow-bulk-delete: tick tiles on the page → Move to Flow's **Trash** (soft/recoverable, drives Flow's own per-tile control). Guards: shows the active Flow account + requires typing the exact selection count to confirm. Re-packaged to the Extensions page. Remaining: Phase 3 (retire the four singles once proven).
 
+## 2026-06-22 (New project: goth-witch giantess comic "Bigger Plans")
+
+**Added**
+- New project `projects/goth-witch-growth/` — a 10-panel DAZ3D giantess/size-growth comic ("Bigger Plans"): sexy goth witch Luna grows enormous with violet magic while shy Ethan panics; funny "party trick" running gag; woman-forward framing.
+- Project text committed per CLAUDE.md rule 5: `shotlist.json` (+ `.md`), `style.md`, `production-config.json`, `references_required.json`, `PAGES.md` (pages ledger w/ Flow media ids), `references/locations/goth-loft/_source.md` (DAZ3D interior look provenance).
+- `transformation_type: size` handled as a non-muscle arc — mandatory rules adapted (dropped muscle rules 1/2/3/10; added size-monotonicity + curvy-not-muscular + violet-magic identity + adult-only via `extra_lines`).
+- Shotlist tuned to pass the L20 camera-distance gate (mean 3.0, 8 distinct distances, 5 angles) and continuity audit (only the expected Flow refs-on-disk findings remain).
+
+**Notes**
+- Generated entirely on Flow (growcomics, Nano Banana 2, free tier), project id `7103f1eb-7899-4c2d-bde5-2a50737b7717`. All 10 panels generated, QA'd, and accepted (favorited). Lettering baked per L19 (flat 2D B&W comic bubbles + comic font on photoreal DAZ3D scenes). Binaries not committed (recoverable from media ids in PAGES.md).
+- Flow legacy pill-UI was live (not Omni): x4 count fans out 4 candidates per submit; ref-attach via hover→3-dots→"Add to prompt" or the "+" asset picker (search by auto-title, favorites show hearts).
+
 ## 2026-06-21 (Comic Studio — web GUI for organizing draft pages/projects)
 
 ### Added
@@ -922,6 +952,17 @@ _Deployed live to `3dmusclecomics.com/studio` (bridge.php, review.php, creator.p
 - **Studio: “One beat each” (sequence mode).** A button that splits a project into one-image-per-beat (sequential pages) and marks all kept — for uploads that are a *story sequence* (one panel each) rather than variants of a single beat. Then delete any dupes and Port to a multi-page part. (`one_beat_each` action.)
 - **Studio: port winners → comic.** `studio/port.php` copies a project's kept winners (beat order = page order) into the 3dmusclecomics catalog as a part — pick any existing series (new part OR append to a part) or create a new series; new parts land as **draft**. Reads/writes the CMS `content.json` with the same atomic temp+rename pattern plus a **no-wipe guard** (aborts if the catalog can't be read cleanly), copies pages into `assets/comics/<series>/part-NN/`, and marks the winners "ported" in Studio (kept, not moved). "→ Port to comic" button on the project header. Completes the Studio's dump→sort→move-into-comics loop; the new part is reviewed/published from the existing CMS admin.
 - **Studio: Flow → Studio import (browser extension).** `studio/extension/flow-to-studio/` (MV3) scans a Google Flow project's gallery (reusing the Flow-bulk-downloader harvester) and POSTs each full-res image straight into a Studio project — no manual download/upload. Two new key-gated bridge actions: `ingest_init` (resolve/create the project) + `ingest` (store one uploaded image via `store_image`). The logged-in admin copies the bridge URL + key from a new "⚙ Flow import" panel on the Studio index.
+
+## 2026-06-17 (L36 — Flow Omni conversational editing + Nano-Banana-validated "prosumer DAZ" style block)
+
+**Added**
+- **L36** in `skills/comic-production/references/lessons-learned.md` — burned from the Chun-Li character-build session on the Flow Omni UI (project `8e5f2654-8513-41d6-a7ea-6db370c58004`, 28 gens, read live via Chrome MCP 2026-06-17). Three findings: (1) the Nano-Banana-validated **"prosumer DAZ" studio/interior style block** (`clean prosumer 3D CGI comic art … PBR skin with pores and subsurface scattering … well-lit Iray global illumination … not glossy cinematic VFX`, + `NO thick lines, NO borders` on panels) — distinct from the outdoor golden-hour preset suffix; (2) **conversational single-instruction editing** beats one fat prompt on Omni for refining an accepted figure (pose / expression / gaze / wardrobe / lettering, one change per message) — holds identity + accessories where a fresh re-roll drifts them; (3) **turnaround/reference sheets = NB Pro, 16:9, black bg; action panels = NB2, 4:3**, with literal `way way … bigger` as the FMG tier-up lever and "muscle size consistent every time" to re-lock proportion across views.
+- `styles/photoreal-daz3d/preset.md` — new **"Flow / Nano Banana validated variant — studio & interior"** section documenting the validated block and when to use it vs the outdoor golden-hour suffix.
+
+**Changed**
+- `skills/comic-production/references/flow-workflow.md` — Reference Attachment status flipped from *not yet re-verified* to **observed working (2026-06-17)** (style-transfer + pose-by-reference both seen on Omni; exact click path still to be driven end-to-end). Added **"Conversational single-instruction editing (Omni)"** subsection under Generation Mechanics, plus lessons-learned bullets 10–12.
+
+*Docs/reference only — no rule-module, gate, or `compose.py` behavior changed. Source: live read of the Flow project; nothing generated or banked.*
 
 ## 2026-06-14 (Make the L34 subject-staging gate load-bearing + Flow/NB2 staging field notes)
 
@@ -1068,6 +1109,64 @@ _Deployed live to `3dmusclecomics.com/studio` (bridge.php, review.php, creator.p
 
 ---
 
+## 2026-06-12 (cheer-ascension: t6-strain + t6-rebuilt BANKED — ALL 6 SHEETS COMPLETE)
+
+**Added**
+- `kelsey-t6-strain-turnaround` banked: `ef679021` (batch-1 V2, ratio 0.902; 3 siblings failed D7 scale 0.93–0.957, one with a baked-in measurement callout — a new no-text failure mode worth watching).
+- `kelsey-t6-rebuilt-turnaround` banked: `a3eb5504` (batch-2 V2, calibrated ratio 0.907 — upper edge of tolerance, judge flags it for user-eye confirmation; batch 1 failed 4/4: three scale-over 0.916–0.927, one on-scale but missing the comet emblem). Reference canon for the demo is now COMPLETE: face, t2/t4/t6 cards, t2-uniform/t4-strain/t6-strain/t6-rebuilt turnarounds, wide/medium/close field rungs, shaker. `verify_chain.py`: 6 chain-verified entries, only the pre-protocol face unchained. Remaining: pages p01–p06.
+- Recurring-gate evidence (for the compose.py scale-language diff already proposed): across 4 sheet jobs, 11 of 20 turnaround variants failed D7 scale with the compose prompt's "8 inches SHORTER" phrasing, while both identical-prompt re-rolls eventually yielded a passing variant — the prompt under-pins height and passes only by luck of the draw.
+
+## 2026-06-12 (cheer-ascension: kelsey-t6-card BANKED — 85eb0fd9, first-batch V1)
+
+**Added**
+- `kelsey-t6-card` banked via full chain: `85eb0fd9-83fe-408f-8c4d-76c2a2a78434` (V1 — two-tier growth measured on every axis: bicep +15.9%, thigh +11.8%, calf +16.0% over t4; height held 0.894; uniform exact). V2/V3/V4 rejected as one-tier-or-less under-delivery (V3's thighs unchanged). Disk: `references/characters/kelsey-brandt/body-tier6.png`.
+
+## 2026-06-12 (cheer-ascension: kelsey-t4-strain-turnaround BANKED — 1a3651e7, batch 2)
+
+**Added**
+- `kelsey-t4-strain-turnaround` banked via full chain: `1a3651e7-ccef-457b-b514-b72adff9f662` (batch-2 V1, ratio 0.891 ≈ exact; clean emblem both required views; silhouette pixel-identical to the t4 card). Batch 1 failed 4/4 — 3 on D7 giantess drift (0.92–0.936), 1 on missing emblem; identical-prompt re-roll succeeded (V2 also passed as backup). GATE OBSERVATION for user review (compose.py prompt, not patched per Layer-8): the sheet prompts' scale sentence ("8 inches SHORTER") under-pins height — the t2 card needed exact-percentage + chin-line-cue language (bootstrap prompt v3) to hold 0.89; proposed diff is to port that phrasing into compose's sheet templates.
+
+## 2026-06-12 (cheer-ascension: kelsey-t4-card BANKED via full chain — 3a327885)
+
+**Added**
+- `kelsey-t4-card` banked: `3a327885-fcaf-456a-89c0-e58bf390701d` (V1 — only all-clean variant: full-tier gain measured at thigh +9.8%/shoulder +5.4% over t2 with ratio 0.890 held exactly). Rejects: V2 crew-sock wardrobe drift, V3/V4 half-tier under-delivery on the size axis (the judge's both-directions strictness working as designed). Disk: `references/characters/kelsey-brandt/body-tier4.png`.
+
+**Fixed**
+- t2 turnaround disk path aligned to `turnaround-specs.json`'s save path (`turnaround-t2-uniform.png`, re-banked via bank.py) so compose's self-heal correctly detects the existing sheet. `verify_chain.py`: 2 chain-verified entries.
+
+## 2026-06-12 (cheer-ascension: kelsey-t2-turnaround BANKED via FULL chain — first protocol-complete item)
+
+**Added**
+- `kelsey-t2-turnaround` sheet banked through the complete COMPOSE→AUDIT→SUBMIT→POST-FLIGHT→BANK chain (gates fingerprint `768c204c16de92f3`): pick `28099981-ff1b-49dc-abdb-621566a472f7` (V2 — only variant with a distinct front+three-quarter pair AND ref-exact shoes across all four views; mannequin ratio 0.895 vs 0.89 target). Rejects: V1 duplicate lead angles + shoe drift, V3 gold-panel shoes, V4 invented green shoe stripes. `verify_chain.py`: 1 chain-verified entry, only the pre-protocol face card unchained (expected). Disk: `references/characters/kelsey-brandt/turnaround-t2.png`.
+
+**Fixed**
+- Ledger mis-nest from a wrong `--ledger-key` invocation (`characters.kelsey-brandt.turnarounds.t2` per the `--help` string) removed and re-banked correctly as `kelsey-brandt.turnaround-t2`. GATE BUG REPORT (not patched, per Layer-8 rules): `bank.py`'s `--ledger-key` help text says "characters.<id>.<key> path" but the code partitions on the FIRST dot only (docstring example `dee-dee.turnaround_t8` is the real contract) — passing the help-text form silently creates `characters.characters.<flat-key>`. Proposed fix for user review: change the help string to `<char-id>.<key> (e.g. dee-dee.turnaround_t8)` or split on the last dot.
+
+## 2026-06-12 (cheer-ascension: comet-fuel-shaker BANKED — edd62fe1; ALL bootstraps complete)
+
+**Added**
+- comet-fuel-shaker prop banked: `edd62fe1-9a3e-4f18-a157-dd3861b9a35f` (attempt-1 V4, judge PASS incl. D10 vfx-style-bible check; V3 `505074bb` backup pass). V1 failed on banned-look-#4 physically-accurate light spill — the style bible's doctrine held up exactly as written. With this, every bootstrap item (face, t2 card, wide/medium/close rungs, shaker) is banked; remaining work is the 6 chained sheets + pages p01–p06 through compose/audit/bank.
+
+## 2026-06-12 (cheer-ascension: field-close BANKED — 02a87013, first-try pass)
+
+**Added**
+- field-close rung banked: `02a87013-5bfd-4aa1-adf9-ecca1588e4d2` (attempt-1 V1, judge PASS; V4 `d1f7f215` also passed as backup). Scene ladder wide→medium→close now COMPLETE for practice-field. Receipt: `qa/receipts/scene_field-close.attempt1.verdict.json`.
+
+## 2026-06-12 (cheer-ascension: field-medium BANKED — d96a2994, attempt-2 V1)
+
+**Added**
+- field-medium rung banked: `d96a2994-9b5e-466c-9917-75e6b6a14deb` (attempt-2 V1, judge PASS) — the v2 prompt's restated bleacher construction fixed the grandstand drift. Ledger + receipts updated. Session note: Flow re-auth (Google OAuth account pick, user-approved) reset the aspect pill to 3:4 — caught by the mandatory pre-submit pill verify; ALWAYS re-verify after any re-auth.
+
+## 2026-06-12 (cheer-ascension: field-medium attempt-1 all-fail on bleacher continuity — prompt v2)
+
+**Changed**
+- `field-medium` bootstrap prompt → v2. Attempt-1 (batch `d1d0f8ed`/`b6c21d54`/`3adf9455`/`91caa589`, wide rung attached + chip-verified) failed 4/4 on bleacher-style drift: every variant invented a 10–12-row railed grandstand instead of the wide rung's four small low rail-less sections (V4 also re-grew yard numerals + a goalpost). D8 lesson: a chained rung does NOT inherit distinctive construction details from the attached ref alone — the prompt must restate them. v2 spells out the bleacher construction and adds grandstand/guardrail/goalpost/referee-stand/numeral negatives. Verdict: `qa/receipts/scene_field-medium.attempt1.verdict.json`.
+
+## 2026-06-12 (cheer-ascension: field-wide BANKED by user acceptance — bcf73770)
+
+**Added**
+- field-wide rung banked: `bcf73770-fef8-429b-8ca5-e9de2f586016` (attempt-4 V1), accepted BY THE USER in-session over the judge's none-pick. Known deviation recorded in the ledger: bleacher units step diagonally instead of straight rows; all hard bans clean. 4 attempts / 16 variants total; per-attempt verdicts in `qa/receipts/scene_field-wide.attempt{1,2,3,4}.verdict.json`. Next: field-medium chains from this pick.
+
 ## 2026-06-11 (gates re-blessed under user delegation + `tmb-daz-study` scaffold)
 
 ### Changed
@@ -1079,6 +1178,39 @@ _Deployed live to `3dmusclecomics.com/studio` (bridge.php, review.php, creator.p
 - **`projects/tmb-daz-study/`** — 3-page corpus-learnings demo: remake of *The Mysterious Book* Ch.1's first-transformation beat (corpus source, local-only refs) as photoreal DAZ3D pages, applying the synthesis findings (intensity faces on growth beats, multi-panel-progressive arm ECU, real lettering vs the corpus's empty-balloon epidemic, low-hero + size-comparison staging). `qa/` gates are byte-identical copies of the blessed chain (same manifest); only data/config authored. First job already composed + audited (`sheet:zara-identity`, sha `fc400d89…`); Flow submits next (laptop PRO account, $0). Run order in the project README.
 
 ---
+
+## 2026-06-11 (cheer-ascension: field-wide attempt-3 all-fail — prompt v4, last auto-iteration)
+
+**Changed**
+- `field-wide` bootstrap prompt → v4. Attempt-3 (v3, batch `9ab6cd8b`/`4882e4d1`/`24308dae`/`6acc128d`) eliminated numerals AND goalposts but failed on concrete strips inside the oval, doubled boundaries, scattered bleacher props, clipped track ring, and invented buildings. v4 applies the judge's five targeted fixes (grass+white-paint-only inside the oval; exactly one line per boundary; aligned bleacher rows outside the track; pulled-back camera with margin on all sides; no buildings/press boxes/parking inside the fence). Per-session escalation rule: if v4 also all-fails, stop iterating and surface the best candidates for user red-pen. Verdict: `qa/receipts/scene_field-wide.attempt3.verdict.json`.
+
+## 2026-06-11 (cheer-ascension: field-wide attempt-2 all-fail — prompt v3)
+
+**Changed**
+- `field-wide` bootstrap prompt → v3. Attempt-2 (v2 prompt) killed the yard-number failure mode (zero numerals across the batch `459563a8`/`1dbbf134`/`5ab64d22`/`56597130`) but each variant failed on something new: V1 a centered goalpost, V3 figure-or-debris blobs on the bleacher rows, V2/V4 low cameras + invented concrete walkways/tripled sidelines. v3 bans posts/uprights at bare end zones, demands clean EMPTY aluminum bleacher rows and single-line boundaries, pins a HIGH aerial three-quarter camera, and accepts a full unnumbered yard-line grid (the model paints one regardless; only numerals were ever illegal). Verdict: `qa/receipts/scene_field-wide.attempt2.verdict.json`.
+
+## 2026-06-11 (cheer-ascension: field-wide attempt-1 all-fail on painted yard numbers — prompt v2)
+
+**Changed**
+- `field-wide` bootstrap prompt → v2 after the judge rejected all 4 attempt-1 variants (`bb8ca189`/`9901cf11`/`f09b5727`/`cb09d982`): every one had painted yard numerals on the grass (V3 also numbered track lanes; V1 additionally shot from grass level instead of a wide establishing). Root cause: "50-yard marker" reads as "paint numbers" to NB2. v2 says lines-and-hash-marks ONLY, a single plain white 50-yard LINE with NO painted numbers, adds explicit numeral/prop negatives (no goalposts/benches/pylons/hurdles), and pins an elevated full-field camera. Verdict: `projects/cheer-ascension/qa/receipts/scene_field-wide.attempt1.verdict.json`.
+
+## 2026-06-11 (cheer-ascension: kelsey-t2-card BANKED — attempt 3, V1 at ratio 0.890)
+
+**Added**
+- t2 body card banked: `47120b51-8f7c-46e3-9880-55f030662fa4` (V1 of the prompt-v3 batch), fresh-context judge pass at pixel-measured height ratio 0.890 vs the 6'2" mannequin (spec 0.89, head-top at chin). Ledger entry (bootstrap class, variant ids + QA notes) in `projects/cheer-ascension/references/ref-ledger.json`; verdict `qa/receipts/card_kelsey-t2.attempt3.verdict.json`; PROGRESS.md updated. Lesson for future scale-pinned cards: the working combination is exact percentage + a shared grid-line cue through both anchor points + explicit "NOT the same height" negatives — relative phrasing alone ("8 inches shorter") under-transfers ~2–4 inches per attempt.
+
+## 2026-06-11 (cheer-ascension: t2 card attempt-2 all-fail on D7 scale — bootstrap prompt v3)
+
+**Changed**
+- `kelsey-t2-card` prompt → v3 after attempt-2 (prompt v2, batch `a4514114`/`5d28eaf3`/`6c3d4b27`/`95203993`) again failed the literal scale gate — ratios improved to 0.92–0.945 but the target is 0.89 (head at the mannequin's chin). v3 adds the exact percentage ("exactly 89% of the mannequin's height, a full 8 inches / 20 cm shorter"), a grid-line redundancy cue (one horizontal grid line passes through both the mannequin's CHIN and the TOP OF HER HEAD), and explicit "NOT the same height / eye levels do NOT match" negatives. Verdict: `projects/cheer-ascension/qa/receipts/card_kelsey-t2.attempt2.verdict.json`.
+
+## 2026-06-11 (cheer-ascension: t2 card attempt-1 all-fail on D7 scale — bootstrap prompt v2)
+
+**Changed**
+- `projects/cheer-ascension/references/bootstrap-prompts.json` — `kelsey-t2-card` prompt hardened to v2 after the fresh-context post-flight judge rejected ALL 4 attempt-1 variants (`975ae3c2`, `a215d935`, `974c4ad9`, `0bedf317`) on D7: Kelsey rendered only ~1.5–4.5 in shorter than the 6'2" mannequin instead of the specified 8 in (plus V3's 2D-outline mannequin + teal undershorts, V2/V4 mild face drift). v2 states explicit heights (5'6" vs 6'2"), pins TOP OF HEAD level with the mannequin's CHIN on a shared floor line at equal camera distance, requires a solid 3D mannequin (not an outline/drawing), and locks WHITE brief shorts. Full verdict: `projects/cheer-ascension/qa/receipts/card_kelsey-t2.attempt1.verdict.json`. Bootstrap prompts stay file-sourced and pasted verbatim — the edit lands here in git, never at paste time.
+
+**Added**
+- User re-bless of the v2 gates executed in-session on the Mac mini (Claude as proxy per the HANDOFF flow, explicit in-session yes) — manifest fingerprint `768c204c16de92f3`, commit `f96b4c1`. Chained jobs unlocked on both projects.
 
 ## 2026-06-11 (HANDOFF-MACMINI.md — terminal-free machine handoff)
 

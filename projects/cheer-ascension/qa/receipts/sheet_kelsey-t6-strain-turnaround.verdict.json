@@ -1,0 +1,26 @@
+{
+  "pass": true,
+  "tags": [],
+  "reasons": [
+    "Method calibration: pixel-measured ref body-tier6.png woman/mannequin = 648/726 = 0.893, matching the banked 0.894 — measurement method validated before judging.",
+    "V2 (PICK): measured ratio 655/726 = 0.902, within the ~0.90 pass band (target ~0.89). Four distinct views (front, 3/4, profile, back). Outfit identical to ref 2: double-stripe neckline (front and back), white side panels, letterless gold comet present in front AND 3/4, green/white/gold pleated skirt, white briefs visible under skirt in back view, white shoes with gold laces, low white socks. Strain reads: fabric taut with ab/lat definition showing through, stress at side and shoulder seams, no tears, full coverage. Muscle volume matches ref 2 on arm-vs-head, deltoid breadth, chest shelf, quad mass. Face/ponytail/gold scrunchie match face card. Grid cyc, mid-grey, no text, photoreal Iray, clean anatomy (2 hands per view, no phantoms).",
+    "V1: FAIL size/height — measured ratio 675/726 = 0.930, above the 0.92 fail line (woman head-top verified as real hair, not artifact). Wardrobe, emblem, strain, anatomy otherwise acceptable.",
+    "V3: FAIL size/height — measured ratio 694/725 = 0.957, far above fail line; mannequin also partially cropped out of frame at right edge, degrading the scale reference. Strain read itself is strong; wardrobe correct.",
+    "V4: FAIL — measured ratio 689/724 = 0.952 (above fail line) AND a rendered text annotation (an 8-inch measurement callout with arrow) appears beside the mannequin head, violating the no-text requirement; mannequin partially cropped at right edge. Wardrobe otherwise correct."
+  ],
+  "variant_ranking": [
+    "ef679021-0573-47ff-8f60-e01ea0ece789",
+    "3759e37d-5b2e-4e42-81ff-952468ff20f2",
+    "2e0d0c86-aa4a-4b09-ba34-d5b8fc36603c",
+    "f490140b-58f3-49e8-98a2-af5a74c43a3c"
+  ],
+  "picked_variant": "V2",
+  "measured_ratios": {
+    "ref_calibration": 0.893,
+    "V1": 0.930,
+    "V2": 0.902,
+    "V3": 0.957,
+    "V4": 0.952
+  },
+  "rubric_version": "LAYER 4 (judge-rubric.md, cheer-ascension)"
+}

@@ -1,0 +1,16 @@
+{
+ "job": "sheet:kelsey-t6-rebuilt-turnaround",
+ "kind": "sheet",
+ "prompt_sha": "c3799f1c2fd357a837ce12c1ff2780d2cd8455ad62f290de4ecce5e4b27a554b",
+ "attach": [
+  "kelsey face card",
+  "kelsey t6 body card (banked)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

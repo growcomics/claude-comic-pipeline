@@ -1,0 +1,276 @@
+{
+  "project": "the-bet",
+  "title": "THE BET",
+  "version": "1.0",
+  "page_count": 15,
+  "estimated_panel_count": 15,
+  "platform": "flow",
+  "style": "photoreal-daz3d",
+  "transformation_type": "fmg",
+  "location_strategy": "multi",
+  "transformation_metadata": {
+    "kind": "FMG — female muscle growth (Cassie only). Muscle + proportional breast/waist in sync from the numbered 1-6 lineup.",
+    "subject": "cassie",
+    "scale_tiers": {
+      "1": "Baseline. Slim, no visible muscle. Swamped in oversized clothing — reads obviously TINY, especially next to Nadia.",
+      "2": "Lightly toned. Clean defined bicep peak, frame firmer, hoodie cuff now snug. First grin.",
+      "3": "Noticeably muscular. Defined biceps/delts, tee tight across the back. Now evenly matched with Nadia.",
+      "4": "Very muscular. Prominent biceps/delts/forearm veins, tee shredding at the seams (covered remnants). Towering — first size flip, now BIGGER than Nadia.",
+      "5": "Massively muscular. Huge biceps/forearms, visible veins and striations, sleeve disintegrating. Transitional — only seen mid-surge in P12.",
+      "6": "Maximum. Enormous proportions all groups, heavy vein/striation detail, sleeve gone (torn remnants at shoulder). Dwarfs Nadia and the furniture."
+    },
+    "monotonicity": "Once Cassie reaches a size tier she NEVER reads smaller in any later panel. Each panel >= previous panel's tier. (rule 10)",
+    "flavor": "Underdog revenge-glow-up. Cassie is the tiny twig who finds a strength powder and out-grows her cocky friend. Growth is triumphant and fun, never painful. NO red/inflamed skin (rule 1) — skin is healthy, oiled, catching warm light. Hourglass figure maintained, breasts grow proportionally with muscle (rule 3), small head/hands/feet, round breasts, pillowy abs. Clothes tear at seams but always cover (rule 4)."
+  },
+  "cast": [
+    {
+      "id": "cassie",
+      "name": "Cassie",
+      "age": 25,
+      "ref_folder": "references/characters/cassie/",
+      "wardrobe": "P1-P4: oversized heather-grey hoodie / baggy tee, sleeves swallowing her hands, hem to mid-thigh — visibly SWAMPED, emphasises tiny. Mid (P5-P8): cuffs go snug, then a fitted tee tight across the back. Top sizes (P9+): torn-tee remnants — seams split, sleeves shredding, then sleeve gone at P13 (torn remnant at shoulder). Damage = remnants ONLY, always covers the body (rule 4 / L4).",
+      "appearance": "Adult woman, 25 (NOT teen). ~5'2\" baseline — short, the scale comedy depends on her reading tiny early. Light-brown shoulder-length hair, freckles across nose and cheeks, warm friendly face. Baseline size 1: slim, no visible muscle. Grows 1 -> 6 across the book per the numbered lineup. Hourglass figure maintained at every size, small head/hands/feet, round (not teardrop) breasts grow with muscle, pillowy (not blocky) abs, asymmetric leg contours.",
+      "prominence": "PRIMARY — the protagonist. She is in 14 of 15 panels; solo focus on P3, P4, P5, P7, P12."
+    },
+    {
+      "id": "nadia",
+      "name": "Nadia",
+      "age": 25,
+      "ref_folder": "references/characters/nadia/",
+      "wardrobe": "Fitted black athletic tank top and leggings / activewear, sometimes a rolled-sleeve look in the bar. Sporty, confident. Wardrobe never changes much — she is the constant.",
+      "appearance": "Adult woman, 25. Taller ~5'10\", athletic toned build at a FIXED size 3 the entire book (never grows, never shrinks). Dark hair in a high ponytail, sharp confident features, light olive skin. Early she physically dwarfs Cassie; by the end Cassie dwarfs her — Nadia herself does not change, only the contrast does.",
+      "prominence": "SECONDARY antagonist-friend. Cocky early, stunned late. Appears in P1, P2, P6(bg), P8, P9(inset), P10(bg), P11, P12(inset), P13, P14, P15. Omitted from P3, P4, P5, P7."
+    }
+  ],
+  "locations": [
+    {
+      "id": "the_anvil",
+      "name": "The Anvil (dive bar)",
+      "ref_folder": "references/locations/the_anvil/",
+      "description": "A moody dive bar. Warm amber tungsten light, neon beer signs (red/blue glow) on dark brick walls, a long worn wooden bar counter with stools, bottles backlit behind it. In the corner: a heavy scarred wooden table with a chalk-scrawled 'THE BET' on its top, two facing chairs — the armwrestling table. Crowd of regulars in the background. DAZ3D Iray interior: modeled furniture, soft warm key + neon rim, shallow depth of field."
+    },
+    {
+      "id": "iron_vale_gym",
+      "name": "Iron Vale Gym",
+      "ref_folder": "references/locations/iron_vale_gym/",
+      "description": "A serious iron gym. Power racks, flat and incline benches, big black bumper plates and loaded barbells, chalk bowls, full-height mirrors along one wall, rubber flooring. Cool overhead daylight-balanced light with hard rim from window light. DAZ3D Iray interior: clean modeled equipment, realistic metal and rubber, slight haze."
+    },
+    {
+      "id": "gym_back_room",
+      "name": "Gym Back Room (storage)",
+      "ref_folder": "references/locations/gym_back_room/",
+      "description": "A dusty sepia-toned storage room behind the gym. Faded vintage strongman posters peeling on the walls, metal shelving stacked with old equipment, tins and crates, a single warm bulb, dust motes in a shaft of light. Cluttered, forgotten, nostalgic. DAZ3D Iray interior, warm sepia grade, soft single-source light."
+    },
+    {
+      "id": "cassie_kitchen",
+      "name": "Cassie's Kitchen",
+      "ref_folder": "references/locations/cassie_kitchen/",
+      "description": "A small, cozy home kitchen at night. Modest counters, a kettle, a few mugs, a window with dark blue night outside, a single warm overhead pendant light. Lived-in and humble. The adjoining little bathroom (for P5) has a mirror over a sink, warm vanity light. DAZ3D Iray interior, warm low-key night lighting."
+    }
+  ],
+  "props": [
+    { "id": "bet-table", "note": "The scarred wooden corner table with chalk 'THE BET' — the armwrestling table. Same table P1, P11, P13, P14. At P13 Cassie SLAMS Nadia's hand THROUGH it (splinters, broken table)." },
+    { "id": "strength-tin", "note": "Battered antique metal tin, faded label 'GRONDAL'S — STRENGTH — one measure, no more.' Holds shimmering grey powder. P3 (found), P4 (one scoop into shaker)." },
+    { "id": "shaker", "note": "Cassie's protein shaker bottle. P4 — one measure of grey powder tipped in." },
+    { "id": "heaviest-bar", "note": "The gym's heaviest loaded barbell. P9 — Nadia fails to budge it / Cassie locks it out overhead." }
+  ],
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "Classic 2D comic balloons baked into the render: clean white rounded ovals, bold 3-4px solid black outline, ALL-CAPS bold black comic display font (Bangers-style), short triangular black-outlined tail to the speaker's mouth. One bubble per speaker, minimal. Captions = yellow rounded rectangles, bold black outline, ALL-CAPS, bottom edge. SFX = flat 2D bold comic lettering styled to the action, placed where it lands. Flat 2D overlay ONLY — NO 3D shading, NO drop shadow on the scene. Bodies/rooms stay photoreal DAZ3D.",
+    "note": "Every panel with dialogue/caption/sfx bakes it in at render time per L19 (unconditional)."
+  },
+  "size_cadence": [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 4, "5->6", 6, 6, 6],
+  "ref_panels": ["P5", "P7", "P9", "P12"],
+  "splash_panels": ["P9", "P13"],
+  "pages": [
+    {
+      "page_number": 1, "panel_id": "P1", "view": "wide-establish", "aspect": "4:3",
+      "location": "the_anvil", "size": 1, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "cassie_body_size1", "nadia_face", "nadia_body", "env_the_anvil"],
+      "chain_anchor": "base",
+      "action": "Armwrestling contest at the chalk-marked corner table. Nadia (size 3, sleeve rolled up) has just SLAMMED Cassie's tiny hand flat to the table and is half-rising, arms up in victory. Cassie (size 1, swamped in oversized grey hoodie, sleeve swallowing her arm) is pinned, dwarfed. The forearm size gap between them is obvious and the whole joke. Crowd cheering around them.",
+      "expressions": { "nadia": "triumphant — chin raised, wide victorious grin, eyes alert and bright", "cassie": "good-natured defeat — eyebrows up, rueful half-smile, looking at her own pinned hand" },
+      "orientation": { "nadia": "3q-front, rising", "cassie": "3q-front, seated lower" },
+      "dialogue": [ { "speaker": "nadia", "type": "shout", "text": "THREE YEARS RUNNING! DRINKS ON THE LOSER!" } ],
+      "caption": "Same bar. Same table. Every year.",
+      "sfx": [ { "text": "SLAM", "placement": "on the pinned hands" } ]
+    },
+    {
+      "page_number": 2, "panel_id": "P2", "view": "medium", "aspect": "3:4",
+      "location": "the_anvil", "size": 1, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "cassie_body_size1", "nadia_face", "nadia_body", "env_the_anvil"],
+      "chain_anchor": "P1",
+      "action": "At the bar counter. Nadia has her arm slung around tiny Cassie's shoulders, clearly much bigger and taller, steering her off toward the crowd. Cassie is engulfed, barely up to Nadia's shoulder, lost in the oversized hoodie. Light teasing energy.",
+      "expressions": { "nadia": "smug satisfaction — eyes nearly closed in contentment, one mouth corner higher, teasing grin", "cassie": "sheepish — small tight smile, eyes rolled sideways at Nadia" },
+      "orientation": { "nadia": "profile/3q toward crowd", "cassie": "tucked under arm, 3q" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "SEE YOU AT THE GYM, TWIG! TRY TO LIFT SOMETHING!" } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 3, "panel_id": "P3", "view": "medium", "aspect": "3:4",
+      "location": "gym_back_room", "size": 1, "model": "nb2",
+      "characters": ["cassie"],
+      "refs": ["cassie_face", "cassie_body_size1", "env_gym_back_room"],
+      "chain_anchor": "P2",
+      "action": "Sepia clutter of the back room. Cassie (size 1, oversized hoodie) reaches up and slides a battered metal tin off a high shelf, dust falling. The faded label reads 'GRONDAL'S — STRENGTH — one measure, no more.' She studies it, curious. Body reaching up — good chance for a 3q / slight back orientation (anti-AI variety).",
+      "expressions": { "cassie": "curious intrigue — one brow raised, lips parted, head tilted reading the label" },
+      "orientation": { "cassie": "3q-rear reaching up to shelf, face turned to read tin" },
+      "dialogue": [ { "speaker": "cassie", "type": "balloon", "text": "'ONE MEASURE, NO MORE.' ...OKAY." } ],
+      "caption": null,
+      "sfx": [ { "text": "shff", "placement": "small, near the tin sliding off the shelf" } ]
+    },
+    {
+      "page_number": 4, "panel_id": "P4", "view": "medium", "aspect": "3:4",
+      "location": "cassie_kitchen", "size": 1, "model": "nb2",
+      "characters": ["cassie"],
+      "refs": ["cassie_face", "cassie_body_size1", "env_cassie_kitchen"],
+      "chain_anchor": "P3",
+      "action": "Night kitchen. Cassie tips ONE scoop of shimmering grey powder from the tin into a protein shaker on the counter, eyeing it skeptically, the tin beside her. Warm pendant light, dark window behind.",
+      "expressions": { "cassie": "skeptical amusement — one eyebrow cocked, mouth pulled to one side, eyes down on the powder" },
+      "orientation": { "cassie": "profile at the counter" },
+      "dialogue": [ { "speaker": "cassie", "type": "balloon", "text": "ONE MEASURE. SURE." } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 5, "panel_id": "P5", "view": "ecu-face", "aspect": "3:4",
+      "location": "cassie_kitchen", "size": 2, "model": "nb-pro", "ref_stage_change": true,
+      "characters": ["cassie"],
+      "refs": ["cassie_face", "cassie_lineup_1_6", "env_cassie_kitchen"],
+      "chain_anchor": "P4",
+      "action": "REVEAL. Next night, the little bathroom mirror. Cassie flexes one arm — a clean defined BICEP PEAK has risen, her frame is firmer, the hoodie cuff now snug on her forearm. She grins for the first time, delighted, admiring the peak in the mirror. LAND SIZE 2 (attach Cassie 1-6 lineup, match size 2 — muscle+breast+waist in sync). Transition 1 -> 2.",
+      "expressions": { "cassie": "playful self-admiration — eyes directed at her own flexed arm, brows raised, wide mischievous delighted grin" },
+      "orientation": { "cassie": "3q to mirror, arm flexed up" },
+      "dialogue": [ { "speaker": "cassie", "type": "balloon", "text": "WHERE HAVE YOU BEEN ALL MY LIFE." } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 6, "panel_id": "P6", "view": "medium", "aspect": "3:4",
+      "location": "iron_vale_gym", "size": 2, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "env_iron_vale_gym"],
+      "chain_anchor": "P5",
+      "action": "At the gym. Cassie (size 2) reps a barbell that was previously impossible for her — clean and easy. In the background Nadia (size 3, constant) glances over, half-dismissive, unimpressed. Cassie focused on the lift.",
+      "expressions": { "cassie": "focused confidence — jaw set, steady eyes on the bar, small determined smile", "nadia": "dismissive — eyes half-lidded, one brow up, faint smirk, looking over her shoulder" },
+      "orientation": { "cassie": "profile lifting", "nadia": "3q-rear in bg, head turned over shoulder" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "CUTE. SHE FOUND THE TEN-POUND PLATES." } ],
+      "caption": null,
+      "sfx": [ { "text": "clank", "placement": "near the barbell" } ]
+    },
+    {
+      "page_number": 7, "panel_id": "P7", "view": "3q-full", "aspect": "3:4",
+      "location": "iron_vale_gym", "size": 3, "model": "nb-pro", "ref_stage_change": true,
+      "characters": ["cassie"],
+      "refs": ["cassie_face", "cassie_lineup_1_6", "env_iron_vale_gym"],
+      "chain_anchor": "P6",
+      "action": "Cassie on a heavier loaded bar, now SIZE 3 — defined biceps and delts, a fitted tee tight across her back. She checks her delts/back in the full-height mirror, pleased with herself. Attach Cassie 1-6 lineup, match size 3. SOLO. Good back / 3q-rear orientation (she views herself in mirror).",
+      "expressions": { "cassie": "smug satisfaction — one mouth corner raised, eyes on her own reflection, chin slightly down, pleased" },
+      "orientation": { "cassie": "3q-rear to camera, face visible in the mirror reflection" },
+      "dialogue": [], "caption": null,
+      "sfx": [ { "text": "CLANG", "placement": "near the loaded bar" } ]
+    },
+    {
+      "page_number": 8, "panel_id": "P8", "view": "front-full", "aspect": "3:4",
+      "location": "iron_vale_gym", "size": 3, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "nadia_body", "env_iron_vale_gym"],
+      "chain_anchor": "P7",
+      "action": "Two-shot at adjacent racks. Cassie (size 3) and Nadia (size 3) stand side by side, evenly matched in build for the FIRST time. Nadia side-eyes the comparison, a little thrown. Same height-ish frames now (though Nadia still a touch taller). The parity is the beat.",
+      "expressions": { "cassie": "amused confidence — relaxed full smile, steady eyes on Nadia, head level", "nadia": "thrown — one brow raised, lips pressed, sidelong measuring glance" },
+      "orientation": { "cassie": "front, slight turn to Nadia", "nadia": "profile/3q, head turned to side-eye Cassie" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "SOMEBODY'S BEEN BUSY." }, { "speaker": "cassie", "type": "balloon", "text": "JUST LIFTING SOMETHING. LIKE YOU SAID." } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 9, "panel_id": "P9", "view": "splash", "aspect": "3:4",
+      "location": "iron_vale_gym", "size": 4, "model": "nb-pro", "ref_stage_change": true, "splash": true,
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "cassie_lineup_1_6", "nadia_face", "env_iron_vale_gym"],
+      "chain_anchor": "P8",
+      "action": "FULL-PAGE SPLASH. FIRST SIZE FLIP. MAIN: Cassie locks the gym's heaviest loaded bar out OVERHEAD at SIZE 4 — very muscular, forearm veins popping, tee shredding at the seams (covered remnants), towering and powerful. TOP-CORNER INSET: Nadia (size 3) red-faced, failing to budge the same heaviest bar (it won't move). LOWER-CORNER INSET: Nadia frozen, mouth open, now visibly the SMALLER of the two. Stage for maximum small-vs-huge contrast. Attach Cassie 1-6 lineup, match size 4. Nadia stays size 3, correctly room-scaled — she has NOT shrunk, only Cassie grew.",
+      "expressions": { "cassie": "fierce triumphant intensity — eyes blazing, jaw set, teeth bared in a powerful grin, lifting overhead", "nadia": "shock — eyes wide, brows fully up, mouth dropped open (inset)" },
+      "orientation": { "cassie": "low-angle front, bar overhead, towering", "nadia": "insets, front" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "...NO WAY.", "note": "small bubble, lower inset" } ],
+      "caption": "She didn't need the two weeks.",
+      "sfx": [ { "text": "RRRRMMM", "placement": "big, around Cassie's overhead lift" }, { "text": "rrip", "placement": "small, at her shredding seam" } ]
+    },
+    {
+      "page_number": 10, "panel_id": "P10", "view": "front-full", "aspect": "3:4",
+      "location": "the_anvil", "size": 4, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "env_the_anvil"],
+      "chain_anchor": "P9",
+      "action": "Bet night. Cassie enters the bar doorway in a FITTED tee straining over size-4 arms (no hoodie now), the crowd parting around her in awe. In the background Nadia sits tense at the chalk table, watching. Cassie confident, owning the room.",
+      "expressions": { "cassie": "confident arrival — level steady eyes ahead, calm strong smile, chin up", "nadia": "tense anticipation — brows knit, lips tight, watching from bg" },
+      "orientation": { "cassie": "front, striding through doorway", "nadia": "3q seated in bg" },
+      "dialogue": [], "caption": "Same bar. Same table.",
+      "sfx": [ { "text": "whoa", "placement": "small crowd murmur SFX near the parting crowd" } ]
+    },
+    {
+      "page_number": 11, "panel_id": "P11", "view": "front-full", "aspect": "3:4",
+      "location": "the_anvil", "size": 4, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "nadia_body", "env_the_anvil"],
+      "chain_anchor": "P10",
+      "action": "Two-shot at the bet table — the EXACT REVERSE of P1. Cassie (size 4) and Nadia (size 3) clasp hands to armwrestle; Cassie's forearm now DWARFS Nadia's. Mirror the P1 staging but flipped: Cassie is the big one now. Nadia bracing, Cassie relaxed.",
+      "expressions": { "cassie": "easy confidence — relaxed grin, steady eyes on Nadia", "nadia": "strained determination — brows drawn, teeth gritted, eyes locked on the grip" },
+      "orientation": { "cassie": "3q-front, dominant", "nadia": "3q-front, bracing lower" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "YOU'VE BEEN HOLDING OUT ON ME." }, { "speaker": "cassie", "type": "balloon", "text": "SOMEBODY'S GOTTA LOSE, RIGHT?" } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 12, "panel_id": "P12", "view": "ecu-region", "aspect": "3:4",
+      "location": "the_anvil", "size": "5->6", "model": "nb-pro", "ref_stage_change": true,
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "cassie_lineup_1_6", "env_the_anvil"],
+      "chain_anchor": "P11",
+      "action": "EXTREME CLOSEUP of Cassie's arm mid-contest, muscle SURGING from size 5 to size 6 — veins and striations popping, the sleeve disintegrating off the swelling muscle. Small INSET of Nadia's wide-eyed face as her arm is driven back. Attach Cassie 1-6 lineup, active growth 5 -> 6 (between the two sizes, closer to 6).",
+      "expressions": { "nadia": "wide-eyed disbelief — eyes huge, brows up, mouth open (inset)" },
+      "orientation": { "cassie": "ecu on forearm/bicep", "nadia": "small inset, front" },
+      "dialogue": [], "caption": null,
+      "sfx": [ { "text": "RRMMM", "placement": "across the surging muscle" } ]
+    },
+    {
+      "page_number": 13, "panel_id": "P13", "view": "splash", "aspect": "3:4",
+      "location": "the_anvil", "size": 6, "model": "nb-pro", "splash": true,
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "env_the_anvil"],
+      "chain_anchor": "P12",
+      "state_carry": "Cassie at size 6 max, sleeve GONE (torn remnant at shoulder only, still covered per rule 4), enormous. Nadia is size 3, normal-sized adult correctly scaled to the table/room — she has NOT shrunk, she is just tiny against giant Cassie.",
+      "action": "FULL-PAGE SPLASH. CONTRAST MONEY SHOT. Cassie at SIZE 6, enormous, SLAMS Nadia's hand straight THROUGH the heavy wooden bet table — splinters and drinks flying everywhere, the crowd recoiling. Nadia's arm is buried to the wrist in the broken table, her whole body tiny against towering Cassie.",
+      "expressions": { "cassie": "explosive triumph — eyes blazing, mouth open in a powerful victorious shout, full force", "nadia": "comic alarm — eyes screwed, mouth wide, yelping" },
+      "orientation": { "cassie": "low-angle, towering, slamming down", "nadia": "tiny, arm through table" },
+      "dialogue": [ { "speaker": "nadia", "type": "shout", "text": "GAAH—!" } ],
+      "caption": null,
+      "sfx": [ { "text": "KRAKKKK", "placement": "huge, across the shattering table" } ]
+    },
+    {
+      "page_number": 14, "panel_id": "P14", "view": "front-full", "aspect": "3:4",
+      "location": "the_anvil", "size": 6, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "nadia_body", "env_the_anvil"],
+      "chain_anchor": "P13",
+      "state_carry": "Cassie size 6 (sleeve gone, torn remnant at shoulder). Nadia size 3, normal-sized, NOT shrunk — tiny only by contrast.",
+      "action": "Cassie (size 6) stands, stooping because she dwarfs the bar/room, and extends a massive open hand DOWN to a stunned Nadia, whose hand is still through the table-shaped hole. Warm, friendly gesture — she's offering help. Scale gag: Cassie's hand is huge next to small Nadia.",
+      "expressions": { "cassie": "warm magnanimous — soft genuine smile, kind eyes down on Nadia, brows relaxed", "nadia": "dazed awe — eyes wide up at Cassie, mouth slightly open, stunned" },
+      "orientation": { "cassie": "front, stooping, hand reaching down", "nadia": "low, looking up, 3q" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "...WHAT ARE YOU?" }, { "speaker": "cassie", "type": "balloon", "text": "STILL YOUR FRIEND. NEED A HAND UP?" } ],
+      "caption": null, "sfx": []
+    },
+    {
+      "page_number": 15, "panel_id": "P15", "view": "medium", "aspect": "3:4",
+      "location": "the_anvil", "size": 6, "model": "nb2",
+      "characters": ["cassie", "nadia"],
+      "refs": ["cassie_face", "nadia_face", "nadia_body", "env_the_anvil"],
+      "chain_anchor": "P14",
+      "state_carry": "Cassie size 6. Nadia size 3, normal-sized, tiny only by contrast — NOT shrunk.",
+      "action": "At the bar counter — EXACT REVERSE of P2. Cassie has her massive arm slung around a now-tiny-by-comparison Nadia, steering her toward the bar, both grinning, friends again. Mirror P2's staging but flipped: Cassie is the big one engulfing Nadia now.",
+      "expressions": { "cassie": "easy warm grin — relaxed full smile, eyes on Nadia", "nadia": "good-natured sulk-grin — half-smile, eyes rolled up, mock-grudging" },
+      "orientation": { "cassie": "3q toward bar, arm over Nadia", "nadia": "tucked under arm, 3q" },
+      "dialogue": [ { "speaker": "nadia", "type": "balloon", "text": "REMATCH NEXT YEAR. I'M CATCHING UP." }, { "speaker": "cassie", "type": "balloon", "text": "SURE YOU ARE." } ],
+      "caption": "Same bar. Same table. Next year. — END(?)",
+      "sfx": []
+    }
+  ]
+}

@@ -1,0 +1,734 @@
+{
+  "project": "meteor-muscle",
+  "title": "Critical Mass",
+  "version": "1.0",
+  "page_count": 15,
+  "estimated_panel_count": 15,
+  "platform": "flow",
+  "style": "photoreal-daz3d",
+  "transformation_type": "fmg",
+  "location_strategy": "single",
+  "arc_character": "hazel",
+  "transformation_metadata": {
+    "kind": "FMG — female muscle growth (EXCLUSIVELY muscle; she also gains imposing height via mass, but muscle is the dominant feature). NOT fat, NOT giantess-magic.",
+    "subject": "hazel",
+    "size_control": "Use the numbered muscle-size lineup (sizes 1-6) as the visual anchor on every stage-change panel (8,9,11,13,14). Call out the size number in the prompt. Muscle/breast/waist proportions track the numbered figure.",
+    "scale_tiers": {
+      "1": "Baseline. Slim, soft, weak, slightly hunched nerd. No visible muscle. ~1.65m.",
+      "2": "First definition — forearms/shoulders firming, posture straightening, faint pump. Clothes start to feel tight.",
+      "3": "Noticeably muscular — defined biceps, shoulders, back; cardigan/shirt straining and starting to tear at seams. A little taller.",
+      "4": "Very muscular — prominent biceps/delts/traps/quads; nerd clothes torn and hanging off; now clearly taller than the bullies.",
+      "5": "Massively muscular — huge biceps and shoulders, visible veins and striations, powerful back; towering.",
+      "6": "Maximum — enormous hypermuscular bodybuilder proportions, deep muscle separation, heavy vascularity; towers over the tiny bullies. Triumphant."
+    },
+    "monotonicity": "Once Hazel reaches a muscle size she never goes below it. Each transformation panel >= the previous tier.",
+    "flavor": "Empowering, fun, a little triumphant. Muscles are a NATURAL healthy skin tone, NOT red/inflamed. Skin has a healthy athletic sheen during growth, not painful. The bullies (Brooke, Tiffany) stay a FIXED normal size the entire comic; the university/courtyard stays a fixed size; ONLY Hazel changes."
+  },
+  "cast": [
+    {
+      "id": "hazel",
+      "name": "Hazel",
+      "age": 21,
+      "ref_folder": "references/characters/hazel/",
+      "wardrobe": "Nerdy university student: oversized cream cable-knit cardigan over a white blouse, plaid knee-length skirt, knee-high socks, flat brown shoes; big round tortoiseshell glasses; a stack of textbooks hugged to her chest, canvas satchel. As she grows the cardigan and blouse strain, then split at the seams and shoulders, then hang in torn shreds over her muscle — but coverage of chest/groin is always preserved (L4). One glasses lens cracks and falls away mid-transformation.",
+      "appearance": "Adult woman, 21. Pale fair skin with freckles across nose and cheeks, long wavy COPPER-RED hair (loose, a little messy, half over one eye early on), pale blue-green eyes, soft round face. Starts slim, soft and slightly hunched/timid. Through the FMG arc she becomes powerfully then hugely muscular per the size tiers — red hair and freckles stay constant, expression goes shy → awed → fiercely confident.",
+      "prominence": "PRIMARY — the hero of the comic. Most panels feature her; she dominates the frame once growth begins."
+    },
+    {
+      "id": "brooke",
+      "name": "Brooke",
+      "age": 21,
+      "ref_folder": "references/characters/brooke/",
+      "wardrobe": "Popular mean-girl: fitted pastel-pink cropped athleisure jacket over a white crop top, white tennis skirt, designer sneakers, gold hoop earrings, phone in hand. Stays fully clothed and unchanged the whole comic.",
+      "appearance": "Adult woman, 21. Tan, tall-ish, long straight bleach-blonde hair in a high ponytail, heavy makeup, sharp confident features. Ringleader bully. Smug → annoyed → terrified across the arc. FIXED normal size throughout.",
+      "prominence": "SECONDARY — lead antagonist. Dominant early, tiny and cowering after Hazel grows."
+    },
+    {
+      "id": "tiffany",
+      "name": "Tiffany",
+      "age": 21,
+      "ref_folder": "references/characters/tiffany/",
+      "wardrobe": "Mean-girl sidekick: lilac off-shoulder top, dark high-waist jeans, white boots, oversized sunglasses pushed up on her head. Stays fully clothed and unchanged.",
+      "appearance": "Adult woman, 21. Light-brown skin, dark glossy brown hair in beachy waves, glossy lips, follows Brooke's lead. Snickering → nervous → fleeing. FIXED normal size throughout.",
+      "prominence": "SECONDARY — sidekick bully. Reaction fodder."
+    }
+  ],
+  "locations": [
+    {
+      "id": "university-courtyard",
+      "name": "Ashgrove University Quad (US campus)",
+      "ref_folder": "references/locations/university/",
+      "description": "The open central quad of a typical AMERICAN university — SIMPLE and clean. A wide green grassy lawn crossed by straight concrete walkways, flanked by plain red-brick collegiate academic buildings with white-trimmed windows; a classic white-columned portico entrance up a few low steps; a few young trees, a couple of plain benches, a simple lamppost. Warm golden-hour sun, long soft shadows. DAZ3D Iray look: clean simple modeled architecture, realistic materials, uncluttered composition (NOT an ornate old-European stone cloister).",
+      "daz3d_bg_note": "Simple realistic US university campus. Build NEW off a DAZ3D campus look but keep it CLEAN and uncluttered. Use DIFFERENT SUB-AREAS per panel (quad lawn / brick building + portico steps / walkway / under a tree / bench) so backgrounds vary while staying the same campus.",
+      "sub_areas": [
+        "red-brick building + white-columned portico steps",
+        "open grassy quad lawn",
+        "concrete walkway between buildings",
+        "under a young tree on the lawn",
+        "bench + lamppost edge"
+      ],
+      "scale_anchors": [
+        "portico steps",
+        "benches",
+        "the bullies themselves"
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "meteorite",
+      "note": "Small blazing blue-white meteorite with a fiery violet-white tail; on impact = blinding flash + small smoking crater + glowing cosmic energy. The growth trigger."
+    },
+    {
+      "id": "textbooks",
+      "note": "Stack of textbooks Hazel hugs — knocked down by bullies (p5), scooped up tiny in her huge hand at the end (p15). Scale gag prop."
+    },
+    {
+      "id": "glasses",
+      "note": "Hazel's big round glasses — one lens cracks and falls away during transformation; she keeps the cracked frame as a hero detail."
+    },
+    {
+      "id": "energy-fx",
+      "note": "Cosmic blue-white + violet energy crackling over Hazel's skin during growth (identity FX — keep consistent)."
+    }
+  ],
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "Classic black-and-white 2D comic balloons: clean white rounded ovals, bold 3-4px solid black outline, ALL-CAPS bold black comic display font (Bangers-style), short triangular black-outlined tail to the correct speaker's mouth. Flat 2D overlay ONLY — NO 3D shading, NO drop shadow on the scene. Bodies/campus stay photoreal DAZ3D. SFX as flat 2D bold black/white comic lettering with solid outline.",
+    "note": "Every panel with dialogue/sfx bakes the lettering in at render time per L19."
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "panels": [
+        {
+          "panel_id": "p01",
+          "size": "wide",
+          "tier": 1,
+          "view": "wide-establish",
+          "body_orientation": "hazel: 3q-front, timid",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "wide-establish, eye-level, three-quarter — golden-hour establishing of the whole courtyard",
+          "costume_state": "Hazel: cardigan + blouse + skirt fully intact, hugging textbooks. Slim, soft, slightly hunched.",
+          "action": "Golden-hour establishing shot of Ashgrove University courtyard (stone steps, colonnade, fountain, autumn trees). Hazel, a shy pale red-haired freckled nerd in an oversized cardigan and big round glasses, crosses the plaza alone, hugging a stack of textbooks to her chest, shoulders hunched, eyes down. She is small and timid in the big warm space. Cinematic long shadows, soft haze.",
+          "hazel_face": "Eyes down behind round glasses, shy small mouth, a little anxious.",
+          "dialogue": [
+            {
+              "speaker": "caption",
+              "type": "caption",
+              "text": "ASHGROVE UNIVERSITY. JUST ANOTHER MONDAY FOR HAZEL."
+            }
+          ],
+          "sfx": [],
+          "captions": [
+            "ASHGROVE UNIVERSITY. JUST ANOTHER MONDAY FOR HAZEL."
+          ],
+          "continuity_refs": [],
+          "transformation_beat": null,
+          "notes": "Cold open. Establish courtyard + Hazel's timid nerd character at tier1. Sub-area: fountain plaza."
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "panels": [
+        {
+          "panel_id": "p02",
+          "size": "standard",
+          "tier": 1,
+          "view": "over-shoulder",
+          "body_orientation": "bullies: backs to camera (over-shoulder); hazel: front, small",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "concrete walkway between buildings",
+          "camera": "mcu, over-shoulder, eye-level — shot from BEHIND the two bullies, past their shoulders at Hazel",
+          "costume_state": "Hazel: intact, clutching books, shrinking back. Brooke & Tiffany: intact.",
+          "action": "By the ivy archway, the two popular mean girls Brooke (blonde ponytail, pink athleisure) and Tiffany (brown waves, lilac top) step into Hazel's path and block her. Camera is BEHIND the bullies — we see their backs and shoulders framing the shot — while tiny Hazel faces us, pressing back against the stone wall, hugging her books tighter, eyes wide. Over-the-shoulder bully orientation.",
+          "hazel_face": "Eyes wide and worried behind glasses, lips pressed, shrinking.",
+          "brooke_face": "(from behind/profile) chin up, smug.",
+          "dialogue": [
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "AWW, WHERE'S THE FIRE, BOOKWORM? TRYING TO SNEAK PAST US?"
+            },
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "I-I JUST WANT TO GET TO CLASS, BROOKE..."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p01"
+          ],
+          "transformation_beat": null,
+          "notes": "Bullies introduced. Over-shoulder orientation (L37). Attach bully turnarounds (rear/3q). Sub-area: archway."
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "panels": [
+        {
+          "panel_id": "p03",
+          "size": "standard",
+          "tier": 1,
+          "view": "mcu",
+          "body_orientation": "brooke & tiffany: front, looming; hazel: front, low",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "concrete walkway between buildings",
+          "camera": "mcu, slight high-angle looking down on Hazel — makes her look small and weak",
+          "costume_state": "intact all.",
+          "action": "Tighter shot: Brooke leans in sneering, Tiffany cackling behind her hand, both looming over Hazel from a slight high angle that presses her down and small. Hazel cringes, hugging the books like a shield.",
+          "hazel_face": "Cringing, cheeks flushed with embarrassment, eyes glistening.",
+          "brooke_face": "Cruel sneer, one brow up, mouth open mid-taunt.",
+          "tiffany_face": "Snickering, hand over mouth, eyes mean.",
+          "dialogue": [
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "DID YOU READ ALL THESE? GOD, GET A LIFE."
+            },
+            {
+              "speaker": "tiffany",
+              "type": "balloon",
+              "text": "CAREFUL, SHE MIGHT HIT YOU WITH A FACT!"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "HA HA HA",
+              "source": "bullies laughing"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p02"
+          ],
+          "transformation_beat": null,
+          "notes": "High-angle on Hazel = weakness (camera-angle chart). Funny mean dialogue. tier1."
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "panels": [
+        {
+          "panel_id": "p04",
+          "size": "standard",
+          "tier": 1,
+          "view": "ecu-face",
+          "body_orientation": "hazel: front, looking down/away",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "concrete walkway between buildings",
+          "camera": "ecu-face, eye-level, shallow DOF — intimate emotional close-up, cinematic soft rim light",
+          "costume_state": "intact.",
+          "action": "SOLO Hazel. Extreme close-up on her face: freckles, big round glasses, a single tear brimming, lower lip wobbling, eyes cast down and away. The bullies' laughter blurred out of focus behind her. A quiet, hurt beat.",
+          "hazel_face": "Eyes down and glistening, one tear forming, brows pulled up in the middle, mouth small and trembling.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "...WHY IS IT ALWAYS ME?"
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p03"
+          ],
+          "transformation_beat": null,
+          "notes": "Emotion ECU (anti-AI variety + heart). Solo Hazel. tier1."
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "panels": [
+        {
+          "panel_id": "p05",
+          "size": "standard",
+          "tier": 1,
+          "view": "low-angle-front",
+          "body_orientation": "bullies: front, towering; hazel: low/kneeling",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "red-brick building + white-columned portico steps",
+          "camera": "medium, low-angle-front from the ground — Hazel's POV looking UP at the towering smug bullies",
+          "costume_state": "Hazel intact, crouched gathering books. Bullies intact.",
+          "action": "Brooke smacks the stack of textbooks out of Hazel's arms; they scatter across the stone steps. From a low ground-level angle (Hazel's POV, down gathering her books) the two bullies TOWER above, smug and backlit by the golden sun. Hazel is small at the bottom of the frame reaching for a book.",
+          "hazel_face": "Stricken, scrambling for her books, humiliated.",
+          "brooke_face": "Looking down the nose, cruel little smile, hand still extended from the smack.",
+          "dialogue": [
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "OOPS. BUTTERFINGERS."
+            },
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "PLEASE, JUST— JUST LEAVE ME ALONE!"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "SMACK",
+              "source": "books knocked"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p03"
+          ],
+          "transformation_beat": null,
+          "notes": "Low-angle-front = bullies dominant (power). Sub-area switches to the steps. tier1. Last pre-meteor beat."
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "panels": [
+        {
+          "panel_id": "p06",
+          "size": "wide",
+          "tier": 1,
+          "view": "wide-establish",
+          "body_orientation": "all small, looking up",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "wide-establish, worms-eye / steep upward, dutch tilt — sky-dominant",
+          "costume_state": "intact all.",
+          "action": "Sudden change. A blazing blue-white METEORITE with a fiery violet-white tail tears down out of the golden evening sky toward the courtyard. Wide worm's-eye shot dominated by sky; the three women are small below, all heads tilted up, frozen — Hazel still on the steps, the bullies turning. Dutch tilt for unease. Birds scatter.",
+          "hazel_face": "Looking up, mouth open, startled.",
+          "brooke_face": "Looking up, alarm breaking the smugness.",
+          "dialogue": [
+            {
+              "speaker": "tiffany",
+              "type": "balloon",
+              "text": "UH... WHAT IS THAT?!"
+            },
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "IS THAT— RUN!"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "SHHHKKKRRRR",
+              "source": "meteor screaming down"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p05"
+          ],
+          "transformation_beat": "trigger-incoming",
+          "notes": "Sky worm's-eye establishing — big angle change. The trigger arrives. tier1."
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "panels": [
+        {
+          "panel_id": "p07",
+          "size": "wide",
+          "tier": 1,
+          "view": "splash",
+          "body_orientation": "chaos, dynamic",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "medium-wide, strong dutch tilt, dynamic — the impact",
+          "costume_state": "intact (pre-growth).",
+          "action": "IMPACT. The meteorite SLAMS into the paving stones right beside Hazel in a blinding blue-white-violet flash and shockwave. A ring of dust and cracked stone blasts outward; Brooke and Tiffany are thrown back shielding their eyes; Hazel is at the white-hot centre, silhouetted, arms up. Lens flare, flying debris, cinematic. Strong dutch tilt and motion energy.",
+          "hazel_face": "(silhouetted in the flash) eyes wide.",
+          "dialogue": [],
+          "sfx": [
+            {
+              "text": "KRA-KOOOOM!",
+              "source": "meteor impact"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p06"
+          ],
+          "transformation_beat": "trigger-impact",
+          "notes": "The impact splash. Maximum drama/dutch. Still tier1 (growth begins next). No dialogue — let the SFX carry."
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "panels": [
+        {
+          "panel_id": "p08",
+          "size": "standard",
+          "tier": 2,
+          "view": "mcu",
+          "body_orientation": "hazel: 3q-front, kneeling",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "mcu, slight low angle — Hazel kneeling in the small smoking crater",
+          "costume_state": "Hazel: cardigan + blouse scorched and starting to feel tight; forearms/shoulders firming.",
+          "action": "SOLO Hazel. The smoke clears: Hazel kneels at the centre of a shallow smoking crater in the cracked paving, cosmic BLUE-WHITE and violet energy crackling over her pale freckled skin. Her forearms and shoulders are visibly firming and swelling with the first new muscle, posture straightening, glasses askew, awe dawning on her face. MUSCLE size 2 in the muscle-size lineup. Muscles a NATURAL healthy skin tone (not red), healthy athletic sheen.",
+          "hazel_face": "Eyes wide with dawning awe, mouth parted, looking at her own glowing tingling hands.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "W-WHAT... WHAT'S HAPPENING TO ME?"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "VRRMMM",
+              "source": "cosmic energy"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p07"
+          ],
+          "transformation_beat": "growth-start",
+          "notes": "Transformation START. tier2 — attach muscle-size lineup (size 2). Solo Hazel. Energy FX."
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "panels": [
+        {
+          "panel_id": "p09",
+          "size": "standard",
+          "tier": 3,
+          "view": "low-angle-back",
+          "body_orientation": "hazel: BACK to camera (rear view of swelling back)",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "mcu, low-angle-back — camera low and BEHIND Hazel, tight on her erupting back and shoulders",
+          "costume_state": "Hazel: cardigan and blouse SPLITTING down the spine and across the shoulders as muscle erupts.",
+          "action": "SOLO Hazel, seen from BEHIND. Her back and shoulders erupt with muscle — lats flaring wide into a V-taper, traps rising, spine grooving — and her cardigan and blouse split open down the back, fabric peeling away. Low rear angle emphasises the new powerful back. Cosmic energy crackles along the muscle. MUSCLE size 3. Use the turnaround REAR view to keep her red hair + body correct from behind.",
+          "hazel_face": "(head turning, 3/4 over shoulder) gritted, eyes squeezed, mid-transformation strain-but-exhilarated.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "IT'S— IT'S NOT STOPPING!"
+            }
+          ],
+          "sfx": [
+            {
+              "text": "RRRIP!",
+              "source": "clothes splitting"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p08"
+          ],
+          "transformation_beat": "growth-back",
+          "notes": "BACK orientation (L37). tier3 — attach lineup (size 3) + Hazel turnaround REAR. Big angle/orientation change."
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "panels": [
+        {
+          "panel_id": "p10",
+          "size": "standard",
+          "tier": 4,
+          "view": "ecu-face",
+          "body_orientation": "hazel: front, fierce",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "ecu-face, slight low angle, dramatic cinematic rim light",
+          "costume_state": "shirt collar torn; one glasses lens cracked.",
+          "action": "SOLO Hazel. Extreme close-up on her face as the fear flips to fierce confidence: jaw set, eyes blazing, a slow fierce grin spreading, freckles and sweat catching the golden light, copper-red hair whipping in the energy. One cracked lens of her glasses falls away past her cheek. A hero close-up.",
+          "hazel_face": "Eyes narrowed and bright, brows drawn with intensity, lips pulled back in a fierce confident grin, chin rising.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "...OH. OH, I COULD GET USED TO THIS."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "tink",
+              "source": "cracked lens falling"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p08"
+          ],
+          "transformation_beat": "growth-resolve",
+          "notes": "Emotion-flip ECU (fear -> confidence). tier4. Solo Hazel. Cinematic rim light."
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "panels": [
+        {
+          "panel_id": "p11",
+          "size": "wide",
+          "tier": 4,
+          "view": "low-angle-front",
+          "body_orientation": "hazel: front, rising; bullies: tiny foreground",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "full, low-angle-front from the ground — looking UP at Hazel as she rises; bullies small in the foreground",
+          "costume_state": "Hazel: nerd clothes torn and hanging off her new muscular frame, coverage preserved. Bullies intact, fixed normal size.",
+          "action": "Hazel RISES to her feet in the clearing smoke — now tall and powerfully muscular, her torn cardigan and blouse hanging in shreds off broad shoulders, defined abs and arms, copper hair wild, one cracked-glasses frame still on. Low ground angle makes her loom against the golden sky. In the foreground, small and gaping, Brooke and Tiffany stumble backward — they are the SAME normal size as before; Hazel is the one who has changed. MUSCLE size 4.",
+          "hazel_face": "Rising, fierce confident grin, eyes locked on the bullies.",
+          "brooke_face": "Mouth open in shock, stumbling back.",
+          "tiffany_face": "Terrified, clutching Brooke's arm.",
+          "dialogue": [
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "WH-WHAT IS SHE?!"
+            },
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "FUNNY. NOW WHO'S THE WEAK ONE?"
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p10"
+          ],
+          "transformation_beat": "reveal",
+          "notes": "Big reveal. Low-angle scale (flow-8 style). tier4 — attach lineup (size 4). Bullies fixed-size in foreground for scale."
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "panels": [
+        {
+          "panel_id": "p12",
+          "size": "standard",
+          "tier": 5,
+          "view": "over-shoulder",
+          "body_orientation": "hazel: muscular back/arm foreground; bullies: front, cowering below",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "mcu, over-shoulder — over Hazel's huge shoulder and bicep at the cowering bullies below",
+          "costume_state": "Hazel torn shreds; bullies intact, normal size, on the ground.",
+          "action": "Over-the-shoulder from behind/beside Hazel: her enormous muscular shoulder, trap and bicep fill the foreground, and past them — small and far below — Brooke and Tiffany have dropped to the ground, cowering, hands up. The contrast of huge muscle foreground vs tiny bullies sells the scale. MUSCLE size 5.",
+          "brooke_face": "Cowering, hands up, terrified, makeup running.",
+          "tiffany_face": "Scrambling away on hands and knees.",
+          "dialogue": [
+            {
+              "speaker": "tiffany",
+              "type": "balloon",
+              "text": "WE'RE SORRY! WE'RE SO SORRY, HAZEL!"
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p11"
+          ],
+          "transformation_beat": "growth-dominate",
+          "notes": "Over-shoulder bully-POV (L37). tier5 — attach lineup (size 5) + Hazel turnaround (rear/3q). Scale via foreground muscle."
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "panels": [
+        {
+          "panel_id": "p13",
+          "size": "standard",
+          "tier": 5,
+          "view": "profile",
+          "body_orientation": "hazel: side/profile flexing",
+          "characters": [
+            "hazel"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "under a young tree on the lawn",
+          "camera": "cowboy, profile / side-on, slight low angle, dramatic cinematic side light",
+          "costume_state": "torn shreds, coverage preserved.",
+          "action": "SOLO Hazel. Side/profile view as she throws a massive DOUBLE-BICEPS flex, head turned to admire her own arm — huge peaked biceps, striated shoulders, powerful back, abs, copper hair, freckled skin with a healthy athletic sheen (natural tone, NOT red). Golden side light rakes across the muscle. Confident, delighted grin. MUSCLE size 5. Background: the autumn-tree lawn corner of the courtyard (different sub-area).",
+          "hazel_face": "(profile) eyes on her own flexed bicep, brows up, wide delighted grin.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "FOUR YEARS OF GYM CLASS NOTES... FINALLY PAYING OFF."
+            }
+          ],
+          "sfx": [
+            {
+              "text": "FWUMP",
+              "source": "muscle flex"
+            }
+          ],
+          "captions": [],
+          "continuity_refs": [
+            "p12"
+          ],
+          "transformation_beat": "showcase",
+          "notes": "Profile flex showcase (L37 orientation). tier5 — attach lineup (size 5). Sub-area changes to lawn. Cinematic side light."
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "panels": [
+        {
+          "panel_id": "p14",
+          "size": "splash",
+          "tier": 6,
+          "view": "splash",
+          "body_orientation": "hazel: front/3q towering; bullies: tiny on ground",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "red-brick building + white-columned portico steps",
+          "camera": "splash, worms-eye from the ground — full towering low-angle scale shot",
+          "costume_state": "Hazel maximal torn shreds, coverage preserved. Bullies normal size, on the ground.",
+          "action": "Full-page worm's-eye splash (flow-8 energy): Hazel now MAXIMALLY hypermuscular and towering, fists on hips, planted at the top of the stone steps against the golden sky, copper hair blazing, every muscle huge and defined with heavy vascularity. Down at her feet, tiny by comparison, Brooke and Tiffany are sprawled and groveling. The steps/colonnade give scale. MUSCLE size 6. Maximum triumphant.",
+          "hazel_face": "Chin raised, triumphant pride, broad confident smile, eyes bright.",
+          "brooke_face": "(tiny) groveling, terrified.",
+          "dialogue": [
+            {
+              "speaker": "brooke",
+              "type": "balloon",
+              "text": "PLEASE DON'T HURT US!"
+            },
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "RELAX. I DON'T HIT PEOPLE. I JUST... OUTGREW YOU."
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p13"
+          ],
+          "transformation_beat": "max",
+          "notes": "MONEY SHOT splash. Worm's-eye max-scale (flow-8). tier6 — attach lineup (size 6) + turnaround. Sub-area: the steps."
+        }
+      ]
+    },
+    {
+      "page_number": 15,
+      "panels": [
+        {
+          "panel_id": "p15",
+          "size": "wide",
+          "tier": 6,
+          "view": "three-quarter",
+          "body_orientation": "hazel: 3q-rear walking away into space; bullies: stunned background",
+          "characters": [
+            "hazel",
+            "brooke",
+            "tiffany"
+          ],
+          "location": "university-courtyard",
+          "sub_area": "open grassy quad lawn",
+          "camera": "mcu, three-quarter from behind/side — Hazel walking away into the open space of the frame, closer on her smug over-shoulder look + the tiny books in her hand",
+          "costume_state": "Hazel torn shreds; her one cracked-lens glasses frame back on. Bullies normal size, stunned, background.",
+          "action": "Closing button. Hazel, huge and triumphant, has scooped up her stack of textbooks — now comically tiny in one enormous hand — and pushes her single cracked glasses lens up her nose with the other, walking away from camera toward the colonnade (3/4-rear, walking into the open space of the frame). Behind her, the two tiny bullies sit stunned in the dust. Warm golden-hour light, fun upbeat finish.",
+          "hazel_face": "(3/4 over shoulder) smug satisfied smile, one brow raised.",
+          "dialogue": [
+            {
+              "speaker": "hazel",
+              "type": "balloon",
+              "text": "WELP. GUESS I'M JOINING THE POWERLIFTING CLUB. SEE YOU AROUND, GIRLS."
+            },
+            {
+              "speaker": "tiffany",
+              "type": "balloon",
+              "text": "...DID WE JUST GET SAVED BY A METEOR?"
+            }
+          ],
+          "sfx": [],
+          "captions": [],
+          "continuity_refs": [
+            "p14"
+          ],
+          "transformation_beat": null,
+          "notes": "Walk-into-space closing (camera chart). 3q-rear orientation (L37). tier6. Books tiny in her hand = scale gag. Fun button."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "FMG MUSCLE ONLY: Hazel grows muscular per the size-lineup tiers 1->6 (monotonic: 1,1,1,1,1,1,2,3,4,4,5,5,6,6 mapped p01..p15). Muscles natural healthy tone (NOT red/inflamed, rule 1); athletic sheen (rule 2). NOT fat, NOT giantess-magic.",
+    "SCALE CONSTANCY (L37): Brooke, Tiffany and the whole campus stay a FIXED normal size in every panel; ONLY Hazel changes. Scale everything to the stone steps / benches / the bullies themselves.",
+    "BODY-ORIENTATION VARIETY (L37, anti-AI): p02 over-shoulder(bullies' backs), p09 BACK, p12 over-shoulder, p13 PROFILE flex, p15 3q-rear walk-away — plus front/3q elsewhere. No long run of face-forward.",
+    "CAMERA VARIETY: 7 distinct distances (wide-establish, mcu, ecu-face, medium, cowboy, full, splash), mean ~3.0, middle-distance ~0.6; angles span eye-level, over-shoulder, high-angle (weakness, p03), low-angle-front (power/scale, p05/p11), worms-eye (sky/scale, p06/p14), dutch (chaos, p06/p07), profile (p13), three-quarter (p15).",
+    "Turnaround sheets for ALL THREE characters are required (L37) — attach the matching angle on every non-front panel; build them on Nano Banana Pro, 16:9, black bg.",
+    "Background: ONE consistent DAZ3D-style Ashgrove courtyard, but DIFFERENT SUB-AREAS per panel (fountain plaza / archway / steps / lawn) so it never repeats the same framing.",
+    "Lettering: flat 2D black-and-white comic bubbles + comic font (L19) on photoreal DAZ3D scenes. SFX: SHHHKKKRRRR, KRA-KOOOOM, RRRIP, FWUMP etc.",
+    "Every character is an ADULT (21, university students).",
+    "Tone: fun, empowering, a little triumphant — the nerd gets the last laugh."
+  ]
+}

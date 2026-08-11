@@ -1,0 +1,20 @@
+{
+  "job": "scene:field-medium (bootstrap, prompt v1, chained from wide pick bcf73770 — chip DOM-verified)",
+  "judged": "2026-06-12 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "d1d0f8ed-b89c-4c27-9a12-7a7ea95a96e7",
+    "b6c21d54-0dd1-4428-be3c-6847b315d20f",
+    "3adf9455-6de8-4d21-b010-2232168b1bfa",
+    "91caa589-d6e7-4936-8894-c652a8b722fb"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "d1d0f8ed-b89c-4c27-9a12-7a7ea95a96e7", "verdict": "fail", "defects": ["bleacher drift: ~12-row railed grandstand vs wide rung's 4 small low rail-less sections", "hybrid bench (half backless, half backed)"], "notes": "Best framing/texture; composition target for resubmit."},
+    {"variant": "V2", "flow_id": "b6c21d54-0dd1-4428-be3c-6847b315d20f", "verdict": "fail", "defects": ["bleacher drift + enclosed end structure", "invented referee stand + extra far-sideline bench"], "notes": ""},
+    {"variant": "V3", "flow_id": "3adf9455-6de8-4d21-b010-2232168b1bfa", "verdict": "fail", "defects": ["bleacher drift", "framing reads second-wide, not medium"], "notes": ""},
+    {"variant": "V4", "flow_id": "91caa589-d6e7-4936-8894-c652a8b722fb", "verdict": "fail", "defects": ["painted yard NUMERALS (text violation)", "invented goalpost", "bleacher drift (stilted grandstand)"], "notes": "Prettiest composition, most violations."}
+  ],
+  "pick": "none",
+  "root_cause": "D8 chained rung drifted on bleacher style despite wide rung attached — prose must restate the distinctive bleacher construction because the model defaults to 'grandstand' for sideline shots.",
+  "resubmit_guidance": "Prompt v2: explicit 'SMALL separate low aluminum sections ~5 rows, NO guard rails, exactly as attached, NOT a grandstand' + negatives (no grandstand/guardrails/goalposts/referee stand/yard numbers)."
+}

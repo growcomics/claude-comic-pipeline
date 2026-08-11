@@ -1,0 +1,16 @@
+{
+ "job": "sheet:kelsey-t6-strain-turnaround",
+ "kind": "sheet",
+ "prompt_sha": "c275c79e0eee1328f109c8f5a0b216bde26a5ee99e61cedb776d108964c865c8",
+ "attach": [
+  "kelsey face card",
+  "kelsey t6 body card (banked)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

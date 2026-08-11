@@ -1274,11 +1274,20 @@ def _has_tier9_reinforcement_refs(project: Path) -> bool:
 
 
 def _infer_arc_character(shotlist: dict) -> str | None:
-    """Heuristic: the cast member whose wardrobe text mentions costume tearing or muscle arcs."""
+    """Heuristic: the cast member whose wardrobe text mentions costume tearing or muscle arcs.
+
+    Wardrobe in shotlist.json may be either a free-form string OR a list of
+    string items (the v3 production-briefing format). Normalize to a single
+    lowercase string before keyword matching, and look at both `id` and `slug`
+    for the cast identifier.
+    """
     for c in shotlist.get("cast", []):
-        w = (c.get("wardrobe") or "").lower()
+        wardrobe = c.get("wardrobe") or ""
+        if isinstance(wardrobe, list):
+            wardrobe = " ".join(str(item) for item in wardrobe)
+        w = wardrobe.lower()
         if "tear" in w or "size" in w or "growth" in w or "muscle" in w:
-            return c.get("id")
+            return c.get("id") or c.get("slug")
     return None
 
 

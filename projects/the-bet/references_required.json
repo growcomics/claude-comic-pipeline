@@ -1,0 +1,34 @@
+{
+  "project": "the-bet",
+  "characters": {
+    "cassie": {
+      "views": [
+        { "id": "cassie_face", "desc": "Canonical face/portrait card — adult woman 25, light-brown shoulder-length hair, freckles, warm face. Neutral studio, black bg, 16:9. Identity anchor for every panel." },
+        { "id": "cassie_body_size1", "desc": "Full-body baseline size 1 — slim, no muscle, ~5'2'' reads short. In oversized grey hoodie (swamped). Studio backdrop, 3:4." },
+        { "id": "cassie_lineup_1_6", "desc": "Cassie-specific numbered 1-6 muscle-size lineup — her face/hair/freckles on all 6 tiers, double-bicep flex, identical outfit/pose/bg, labels 1-6 above heads. Built off assets/muscle-size-lineup.png + Cassie face. 16:9. THE size anchor for REF panels." },
+        { "id": "cassie_turnaround", "desc": "OPTIONAL multi-angle turnaround (front/3q/side/rear/face) at size 1 for back-view panels (P3, P7). NB Pro, 16:9, black bg." }
+      ],
+      "required": ["cassie_face", "cassie_body_size1", "cassie_lineup_1_6"]
+    },
+    "nadia": {
+      "views": [
+        { "id": "nadia_face", "desc": "Canonical face/portrait card — adult woman 25, dark high ponytail, sharp confident features, olive skin. Black bg, 16:9." },
+        { "id": "nadia_body", "desc": "Full-body baseline at FIXED size 3 — taller ~5'10'', athletic toned, black fitted tank + leggings. Studio backdrop, 3:4. Her ONLY size all book." }
+      ],
+      "required": ["nadia_face", "nadia_body"]
+    }
+  },
+  "locations": {
+    "env_the_anvil": { "aspect": "4:3", "desc": "Dive bar interior — neon signs, dark brick, long wooden bar, corner table with chalk 'THE BET'. DAZ3D Iray." },
+    "env_iron_vale_gym": { "aspect": "4:3", "desc": "Iron gym — racks, benches, big plates, full-height mirrors, rubber floor. DAZ3D Iray, cool light." },
+    "env_gym_back_room": { "aspect": "4:3", "desc": "Dusty sepia storage room — faded strongman posters, shelving, tins, single warm bulb. DAZ3D Iray." },
+    "env_cassie_kitchen": { "aspect": "4:3", "desc": "Small cozy night kitchen + adjoining mirror bathroom. Warm pendant light, dark window. DAZ3D Iray." }
+  },
+  "build_order": [
+    "cassie_face", "nadia_face",
+    "cassie_body_size1", "nadia_body",
+    "cassie_lineup_1_6",
+    "env_the_anvil", "env_iron_vale_gym", "env_gym_back_room", "env_cassie_kitchen"
+  ],
+  "notes": "Flow on remote (mac mini) Chrome — local files unreadable by remote browser. Ferry any local ref (e.g. the master lineup PNG) via Higgsfield CDN, fetch in the Flow page, DataTransfer into the file input (reference_flow_ref_upload_workaround). Favorite every accepted ref in the Flow project; record media ids in PAGES.md."
+}

@@ -1,0 +1,24 @@
+{
+  "pass": true,
+  "tags": [],
+  "reasons": [
+    "V1 (1a3651e7): PASS. Pixel-measured kelsey/mannequin height ratio 0.891 (ref card calibrates to 0.892, target 0.89). Front-view body proportions pixel-identical to banked t4 card (delts 0.246, hips 0.327, thigh 0.144 of figure height). Comet emblem present and clean in front + three-quarter. Four distinct views; double-stripe collar/armholes, white side panels, sunray pleats w/ gold+white trim, white briefs, white shoes w/ gold laces, low ankle socks. Face/ponytail/scrunchie match face card. Mid-grey cyc with grid lines, no text, photoreal Iray, clean anatomy (2 hands per view). Minor note: profile view shows a thin gold side stripe + gold heel tab on shoe not visible in the single-front-view ref; judged against the attached reference image (which does not show shoe sides), not counted as drift.",
+    "V2 (12a6334d): PASS. Ratio 0.8936 (within ~0.90 gate). Proportions pixel-identical to ref. Emblem present front + three-quarter (3/4 emblem slightly fabric-distorted but legible). Outfit/face/socks/grid/style conform. Defect noted: back view shows large invented gold circular heel patches on the shoes — cosmetic, side/back shoe detail unconstrained by the single-view ref, but messier than V1.",
+    "V3 (ace626fd): FAIL [height/D7]. Ratio 0.9172 — above the 0.90 pass band, in the uncertain zone below the 0.92 hard line; rubric bias mandates FAIL when uncertain. Figure measures ~3% taller than the banked card (665px vs 646px at identical mannequin scale). Otherwise outfit/emblem/face conform.",
+    "V4 (606696a0): FAIL [height/D7]. Ratio measured 0.9376 and that is a FLOOR — the mannequin's head is clipped by the top frame edge, so the true ratio is higher. Clear giantess drift, same failure mode as the prior batch. Mannequin also partially cropped out of frame right (degraded sheet composition)."
+  ],
+  "variant_ranking": [
+    "1a3651e7-ccef-457b-b514-b72adff9f662",
+    "12a6334d-3ad6-4ae2-8fab-d3b51a948c74",
+    "ace626fd-4ad2-490b-866f-3c7ec4e02354",
+    "606696a0-d60c-4b77-b5b7-0f46c9853f23"
+  ],
+  "rubric_version": "judge-rubric.md LAYER 4 (gates_fingerprint 768c204c16de92f3)",
+  "measured_ratios": {
+    "ref_calibration": 0.8924,
+    "V1": 0.891,
+    "V2": 0.8936,
+    "V3": 0.9172,
+    "V4": 0.9376
+  }
+}

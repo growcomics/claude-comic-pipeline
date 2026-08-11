@@ -1,0 +1,20 @@
+{
+  "job": "scene:field-wide (bootstrap, prompt v2 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "459563a8-cfde-4768-8817-6a8c8f91e1e0",
+    "1dbbf134-71f7-4ad1-b6a7-416cff92593d",
+    "5ab64d22-c8a0-4c02-924a-7fd974e73d3b",
+    "56597130-7e4a-46ea-a0f8-ba12c60d9798"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "459563a8-cfde-4768-8817-6a8c8f91e1e0", "verdict": "fail", "defects": ["forbidden prop: goalpost dead-center far end", "unspecced school buildings behind track (no signage)", "full yard grid vs single 50-yard line (minor, all variants)"], "notes": "Strongest image otherwise — numerals fully suppressed."},
+    {"variant": "V2", "flow_id": "1dbbf134-71f7-4ad1-b6a7-416cff92593d", "verdict": "fail", "defects": ["camera: low near-ground oblique, field cut off", "geometry: impossible line convergence + beige band through grass"], "notes": "Not a wide rung."},
+    {"variant": "V3", "flow_id": "5ab64d22-c8a0-4c02-924a-7fd974e73d3b", "verdict": "fail", "defects": ["bleachers: dark clumped blobs across seating rows — seated figures or melted debris; uncertain = FAIL"], "notes": "One defect from passing; all else clean."},
+    {"variant": "V4", "flow_id": "56597130-7e4a-46ea-a0f8-ba12c60d9798", "verdict": "fail", "defects": ["geometry: tripled sideline + concrete walkways inside the grass", "camera: low end-zone vantage"], "notes": "Unusable as locked wide ref."}
+  ],
+  "pick": "none",
+  "progress": "v2 prompt successfully killed the yard-number failure mode (zero numerals in all 4). New failure modes: goalpost, occupied/melted bleachers, low cameras, invented walkways.",
+  "resubmit_guidance": "Prompt v3 per judge: bare end zones (goalpost ban early + 'no posts or uprights of any kind'), 'bleacher seats completely EMPTY, clean bare aluminum rows', 'each boundary is ONE single line — no doubled/tripled lines, no concrete strips/paths/walkways touching the grass', 'camera HIGH and elevated, aerial three-quarter view, entire field + full track ring in frame'. Accept full unnumbered yard-line grid (model paints it regardless; lines without numbers were always legal)."
+}

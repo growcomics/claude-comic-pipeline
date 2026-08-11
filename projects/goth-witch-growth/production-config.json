@@ -1,0 +1,38 @@
+{
+  "project": "goth-witch-growth",
+  "title": "Bigger Plans",
+  "platform": "flow",
+  "style_preset": "photoreal-daz3d",
+  "transformation_type": "size",
+  "adult_only": true,
+  "size_arc": {
+    "subject": "luna",
+    "tiers": 6,
+    "monotonic": true,
+    "flavor": "macro/giantess curvy-sexy size growth, NOT muscle"
+  },
+  "mandatory_rules": {
+    "active": [4, 5, 6, 7, 8, 9],
+    "dropped": {
+      "1": "N/A — no muscle growth, so no red/inflamed-muscle risk",
+      "2": "N/A — wet/oiled-muscle look not wanted; candlelit goth glamour instead",
+      "3": "N/A — muscle=breasts rule is for muscle arcs; curves handled by size-arc flavor",
+      "10": "Replaced by size-arc monotonicity in extra_lines"
+    },
+    "extra_lines": [
+      "Luna's size is monotonic — each panel she is the same size or larger than the previous panel; she NEVER shrinks back.",
+      "Growth is curvy and sexy (fuller bust, hips, thighs, hourglass kept) — NOT muscular, NOT red-skinned.",
+      "Luna's magic glow and eyes are VIOLET-PURPLE on every powered panel — never another color.",
+      "Every character is an ADULT (25 years old).",
+      "Clothes stretch, strain and tear at the seams as she grows but ALWAYS fully cover her body."
+    ]
+  },
+  "lettering": {
+    "mode": "L19-baked",
+    "bubble_style": "classic black-and-white 2D comic balloons, bold black outline, ALL-CAPS Bangers-style comic font, white fill, triangular tail to speaker; flat 2D overlay only, photoreal DAZ3D everywhere else"
+  },
+  "woman_forward": {
+    "rule": "Luna is the focus. Solo-Luna panels: p03, p05, p07, p09. In shared panels Luna occupies ~70-80% of frame; Ethan is a small reaction.",
+    "solo_luna_panels": ["p03", "p05", "p07", "p09"]
+  }
+}

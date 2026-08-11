@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "project": "meteor-muscle",
+  "generated_from_shotlist": true,
+  "platform": "flow",
+  "note": "Refs live in the Flow project, not local disk. rules_audit reference_completeness will HARD-fail against local disk — expected/non-blocking for a Flow project.",
+  "characters": {
+    "hazel": {
+      "face_card": "references/characters/hazel/face-card.png",
+      "face_card_brief": "Adult woman, 21. Pale fair skin with freckles across nose/cheeks, long wavy COPPER-RED hair, pale blue-green eyes, soft round face, big round tortoiseshell glasses. Shy neutral expression for the card.",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/hazel/body-tier1.png",
+          "brief": "Slim, soft, slightly hunched nerd: oversized cream cardigan, white blouse, plaid skirt, knee socks, glasses, hugging textbooks. Muscle size 1.",
+          "lineup_required": false
+        },
+        {
+          "tier": 4,
+          "path": "references/characters/hazel/body-tier4.png",
+          "brief": "Very muscular, torn nerd clothes, taller. Muscle size 4.",
+          "lineup_required": true
+        },
+        {
+          "tier": 6,
+          "path": "references/characters/hazel/body-tier6.png",
+          "brief": "Maximum hypermuscular bodybuilder proportions, heavy vascularity, torn shreds (coverage preserved), copper hair, cracked glasses. Muscle size 6.",
+          "lineup_required": true,
+          "tier6_reinforcement_required": true
+        }
+      ],
+      "views": [
+        {
+          "name": "3q-full",
+          "tier": 1,
+          "path": "references/characters/hazel/view-3q-full.png",
+          "lineup_required": false
+        },
+        {
+          "name": "ecu-face",
+          "tier": 1,
+          "path": "references/characters/hazel/view-ecu-face.png",
+          "lineup_required": false
+        }
+      ],
+      "turnaround_sheet": {
+        "path": "references/characters/hazel/turnaround-sheet.png",
+        "source": "flow-build (Nano Banana Pro, 16:9, black bg)",
+        "brief": "BUILD a multi-angle turnaround: front / 3q / side / REAR full body + face turnaround + expression strip (shy, hurt, awed, fierce-grin) + detail crops (freckles, glasses, hands). TWO tiers ideally — tier1 (slim nerd) and tier6 (hypermuscular) — so back/profile growth panels have a rear/side muscle reference. ATTACH on every non-front panel (L37).",
+        "required_for_nonfront": true
+      }
+    },
+    "brooke": {
+      "face_card": "references/characters/brooke/face-card.png",
+      "face_card_brief": "Adult woman, 21. Tan, bleach-blonde high ponytail, heavy makeup, sharp smug features. Ringleader bully.",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/brooke/body-tier1.png",
+          "brief": "Fitted pink athleisure jacket, white crop top, white tennis skirt, sneakers, gold hoops, phone. FIXED normal size all comic.",
+          "lineup_required": false
+        }
+      ],
+      "turnaround_sheet": {
+        "path": "references/characters/brooke/turnaround-sheet.png",
+        "source": "flow-build (NB Pro, 16:9, black bg)",
+        "brief": "Front / 3q / side / REAR + expression strip (smug, annoyed, terrified). ATTACH on the over-shoulder panels (p02, p11, p14) where her back/3q shows.",
+        "required_for_nonfront": true
+      }
+    },
+    "tiffany": {
+      "face_card": "references/characters/tiffany/face-card.png",
+      "face_card_brief": "Adult woman, 21. Light-brown skin, dark glossy brown beachy waves, glossy lips, sunglasses on head. Sidekick bully.",
+      "body_tiers": [
+        {
+          "tier": 1,
+          "path": "references/characters/tiffany/body-tier1.png",
+          "brief": "Lilac off-shoulder top, dark high-waist jeans, white boots. FIXED normal size all comic.",
+          "lineup_required": false
+        }
+      ],
+      "turnaround_sheet": {
+        "path": "references/characters/tiffany/turnaround-sheet.png",
+        "source": "flow-build (NB Pro, 16:9, black bg)",
+        "brief": "Front / 3q / side / REAR + expression strip (snickering, nervous, fleeing). ATTACH on over-shoulder/back panels.",
+        "required_for_nonfront": true
+      }
+    }
+  },
+  "locations": {
+    "university-courtyard": {
+      "env_ref": "references/locations/university/env-establish.png",
+      "source_daz3d_ref": "references/locations/university/_source.jpg",
+      "brief": "SIMPLE American university quad: open green lawn, concrete walkways, plain red-brick collegiate buildings with white-trimmed windows, white-columned portico entrance up low steps, young trees, benches, lamppost. Golden-hour. Clean/uncluttered (NOT ornate European stone). Use DIFFERENT sub-areas per panel.",
+      "sub_areas": [
+        "brick building + portico steps",
+        "grassy quad lawn",
+        "walkway between buildings",
+        "under a tree",
+        "bench + lamppost"
+      ],
+      "build_note": "Generate the establishing courtyard, THEN a few sub-area plates (steps, archway, lawn) so panels can pull different parts while staying the same campus.",
+      "scale_anchors": [
+        "stone steps",
+        "benches",
+        "the bullies"
+      ],
+      "env_note_v2": "Rebuilt simpler per user 2026-06-23 (first European-cloister version rejected as too complex)."
+    }
+  },
+  "props": {
+    "muscle-size-lineup": {
+      "path": "assets/muscle-size-lineup.png",
+      "brief": "Numbered 1-6 muscle-size lineup (ships with comic-production skill). Upload to Flow once; attach on stage-change panels and call out the size number. THE size control."
+    },
+    "meteorite": {
+      "brief": "Blue-white meteorite, violet-white tail; blinding flash + crater + cosmic blue-white/violet energy."
+    },
+    "energy-fx": {
+      "brief": "Cosmic blue-white + violet energy over Hazel's skin during growth (identity FX)."
+    }
+  },
+  "build_order": [
+    "1. Source a DAZ3D university env from the web; save _source.jpg with provenance.",
+    "2. Build the Ashgrove courtyard env-establish + 2-3 sub-area plates (steps, archway, lawn).",
+    "3. Build Hazel: face card, body-tier1 (slim nerd), then her turnaround sheet (tier1 AND tier6 hypermuscular, NB Pro 16:9 black bg).",
+    "4. Build Brooke + Tiffany: face card + body baseline + turnaround sheet each.",
+    "5. Upload the muscle-size lineup (sizes 1-6).",
+    "6. Generate panels p01..p15 via view-aware chaining + the turnaround sheets on non-front panels + the lineup on stage changes."
+  ],
+  "L37_note": "Body-orientation variety mandatory; turnaround sheets required for all 3 characters. Bullies + campus fixed-size; only Hazel grows (muscle 1->6). Lettering baked B&W comic (L19).",
+  "flow_project_id": "87791085-8938-444b-a007-5da2d6073898",
+  "flow_project_url": "https://labs.google/fx/tools/flow/project/87791085-8938-444b-a007-5da2d6073898",
+  "flow_media_ids": {
+    "env_us_main": "8eed39a4-f45f-46a1-aae3-ffc73baac84b",
+    "env_european_deprecated": "a0f5facd-e8f6-40e5-b752-d708518e4921 (rejected: too complex)",
+    "hazel_baseline_t1": "a8cf3711-0a57-40aa-b5bb-653f773670c8",
+    "hazel_turnaround_t1": "cccd79ef-e7e6-41be-a873-6ad782afd167",
+    "brooke_baseline": "4962f49b-7edb-44e5-9ab1-93af75f925ab",
+    "tiffany_baseline": "cb0d0ee1-bb09-46cb-b07b-f05cbe779128",
+    "brooke_turnaround": "62f85ef8-8cc1-4c29-b6fe-6e1316bfd6ba",
+    "tiffany_turnaround": "6197b9d1-bae0-4281-9d79-10659c83b0f1",
+    "p01": "65d1e6db-0059-4213-b33c-0f23b0217a8d",
+    "hazel_turnaround_t6": "6391cdc3-6e29-449d-9ad9-2cac0fbb9fe3"
+  },
+  "build_progress": "2026-06-23: ALL refs done incl Hazel tier-6 hypermuscular turnaround (6391cdc3, matches user size-6). p01 done. NOW generating p02-p15 continuously."
+}

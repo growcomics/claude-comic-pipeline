@@ -1,0 +1,16 @@
+{
+ "job": "sheet:kelsey-t6-card",
+ "kind": "sheet",
+ "prompt_sha": "c204001fc56d82ccbafe9e6ce3e9d907f8561530603ebd4226fd7bfa7dcac95b",
+ "attach": [
+  "kelsey face card",
+  "kelsey t4 body card (banked)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "768c204c16de92f3"
+}

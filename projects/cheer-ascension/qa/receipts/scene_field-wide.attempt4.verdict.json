@@ -1,0 +1,20 @@
+{
+  "job": "scene:field-wide (bootstrap, prompt v4 from references/bootstrap-prompts.json)",
+  "judged": "2026-06-11 (macmini session)",
+  "judge": "fresh-context subagent vs qa/judge-rubric.md",
+  "batch": [
+    "bcf73770-fef8-429b-8ca5-e9de2f586016",
+    "e4f05054-ff57-4813-a63d-5949d1bc84ba",
+    "248663c0-11d6-438b-b1dc-bfb6231a3c37",
+    "475e76e9-9861-4c0d-a7bb-4536b430562e"
+  ],
+  "verdicts": [
+    {"variant": "V1", "flow_id": "bcf73770-fef8-429b-8ca5-e9de2f586016", "verdict": "fail", "defects": ["bleachers: three staggered units stepping diagonally along lower-right curve, ~40deg off the track straight — not straight sideline-parallel rows"], "notes": "SINGLE defect; every hard ban + framing + markings clean. Best of 16 field-wide variants so far."},
+    {"variant": "V2", "flow_id": "e4f05054-ff57-4813-a63d-5949d1bc84ba", "verdict": "fail", "defects": ["field completely UNMARKED (no yard lines/hash)", "right-curve lane lines criss-cross/merge", "camera press-box-low"], "notes": "Best bleachers of batch."},
+    {"variant": "V3", "flow_id": "248663c0-11d6-438b-b1dc-bfb6231a3c37", "verdict": "fail", "defects": ["oval clipped left AND right", "paved pads on grass inside fence", "concrete strip under bleachers"], "notes": "Cleanest field markings."},
+    {"variant": "V4", "flow_id": "475e76e9-9861-4c0d-a7bb-4536b430562e", "verdict": "fail", "defects": ["skewed/doubled yard grid, tan hash marks", "extra lines parallel to boundaries", "scattered clipped bleacher chains both sides", "oval clipped left"], "notes": "Worst of batch."}
+  ],
+  "pick": "none",
+  "ranking_for_human_review": ["V1 bcf73770", "V3 248663c0", "V2 e4f05054", "V4 475e76e9"],
+  "status": "AUTO-ITERATION STOPPED per session escalation rule (4 attempts, 16 variants). Awaiting user decision: accept V1 despite bleacher arrangement, or one bleacher-targeted reroll ('bleachers in ONE straight continuous row parallel to the track straight'), or red-pen in Flow."
+}

@@ -1,0 +1,26 @@
+{
+  "project": "the-bet",
+  "title": "THE BET",
+  "transformation_type": "fmg",
+  "style_preset": "photoreal-daz3d",
+  "platform": "flow",
+  "location_strategy": "multi",
+  "baseline_tiers": { "cassie": 1, "nadia": 3 },
+  "mandatory_rules": {
+    "active": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "extra_lines": [
+      "Only Cassie grows. Nadia stays a fixed size-3 build the entire book — she NEVER grows and NEVER shrinks; she is the constant ruler (L37 scale-constancy).",
+      "Cassie reads obviously TINY at size 1 (swamped in oversized clothing) so the later size-flip lands. The early small-vs-big gap with Nadia is the whole gag.",
+      "On contrast panels (P9, P11, P13, P14, P15) Nadia is a normal-sized adult correctly scaled to room anchors (table, bar, doorway) — she is tiny ONLY by comparison to giant Cassie, she has NOT shrunk.",
+      "Both characters are adults aged 25 (rule_comic_adult_only) — never depict a teen or minor.",
+      "Vary body orientation across the run (L37): no more than ~2 consecutive front-facing panels; include 3q-rear/back (P3, P6, P7) and profile/over-shoulder beats."
+    ]
+  },
+  "lettering": { "mode": "L19-baked" },
+  "size_control": {
+    "lineup_ref": "assets/muscle-size-lineup.png",
+    "cassie_lineup": "references/characters/cassie/cassie_lineup_1_6.png",
+    "attach_on": ["P5", "P7", "P9", "P12"],
+    "cadence": [1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 4, "5->6", 6, 6, 6]
+  }
+}
