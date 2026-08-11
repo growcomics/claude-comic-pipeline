@@ -32,3 +32,10 @@ projects/**/*.jpeg
 # crop-specs.json + page set — the WHOLE crops/ dir (incl. its render manifest)
 # stays out of git; only the specs are versioned
 projects/*/posting/bundle/crops/
+
+# EXCEPTION (2026-08-11): canonical CHARACTER REFERENCE sheets for not-so-supra-man ARE tracked.
+# The blanket binary rule assumes "renders are recoverable from the Flow media ids in the ledger",
+# but that assumption breaks ACROSS ACCOUNTS: these were generated on the laptop's marrtrobinson
+# account and the mac mini runs growcomics, which cannot resolve those ids. Without the actual PNGs
+# in git, the mini cannot attach any reference and the whole run is blocked. ~5MB, canon, one-time.
+!projects/not-so-supra-man/references/characters/**/*.png
