@@ -91,6 +91,25 @@
           ],
           "prompt_sha": "2ec2cb51ddfbfaad7b8cc7a3b91e738b909461e6d2b3d4ac06eeebb396a9b337"
         }
+      },
+      "turnaround_t4": {
+        "flow_id": "20bf6cf1-134f-464c-936d-3bb0779e8710",
+        "disk": "references/characters/dana-lane/turnaround-t4.png",
+        "chain": {
+          "receipt": "qa/receipts/sheet_dana-t4-blouse.receipt.json",
+          "audit": "qa/receipts/sheet_dana-t4-blouse.audit-pass",
+          "verdict": "qa/receipts/sheet_dana-t4-blouse.verdict.json",
+          "verdict_tags": [
+            "views-4-complete",
+            "identity-black-bob-matches-face-card",
+            "wardrobe-blouse-straining-but-intact",
+            "bust-over-spec-landed",
+            "body-07-scale-VERIFIED",
+            "coverage-intact",
+            "no-text-contamination"
+          ],
+          "prompt_sha": "f30ffc1da38d4c7e7f4a2cbd6df7d8e5126e5532f08c9d499547a763b0123208"
+        }
       }
     },
     "supraman": {

@@ -1,0 +1,34 @@
+{
+ "job": "sheet:dana-t4-blouse",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection + numeric height measurement",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "20bf6cf1-134f-464c-936d-3bb0779e8710",
+ "height_measurement": {
+  "ratio": 0.924,
+  "target": 0.92,
+  "all": {
+   "c1": 0.924,
+   "c2": 0.932,
+   "c3": 0.935,
+   "c4": 0.934,
+   "c5": 0.947
+  },
+  "note": "ALL FIVE passed (<1.0). The strengthened SCALE block is now holding consistently."
+ },
+ "bust_correction_loop": "c5-cf4b9e8a rendered FLAT \u2014 the over-spec did not land on that roll, exactly the failure the owner flagged. Handled by SELECTION (step 1 of the correction loop in RUN-NOW.md): 4 of 5 landed, took the best. No re-roll or edit pass needed. Never bank the flat variant.",
+ "tags": [
+  "views-4-complete",
+  "identity-black-bob-matches-face-card",
+  "wardrobe-blouse-straining-but-intact",
+  "bust-over-spec-landed",
+  "body-07-scale-VERIFIED",
+  "coverage-intact",
+  "no-text-contamination"
+ ],
+ "rejected": {
+  "c5-cf4b9e8a": "bust over-spec did not land (flat)",
+  "c3-baae7f87": "mannequin rendered as an articulated jointed doll rather than a plain silhouette"
+ },
+ "blocking_defects": []
+}
