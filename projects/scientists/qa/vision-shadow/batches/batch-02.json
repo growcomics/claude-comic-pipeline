@@ -1,0 +1,212 @@
+{
+  "batch_id": "batch-02",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "jill (identity-sheet)",
+      "path": "projects/scientists/references/characters/jill/identity-sheet.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p03-01",
+      "image": "projects/scientists/pages/p03-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p03-01.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on hands and mug",
+        "action": "Tight insert behind the wall shelving: Jill's hands dissolve a pale tablet into a steaming coffee mug, her face a furtive sliver in the defocused background; her expression and posture reflect guilty excitement. One cloud-shaped THOUGHT bubble with a trail of small dots: \"IF SHE WON'T RUN THE TRIAL... SHE'LL BE THE TRIAL.\" Small SFX near the mug: \"FIZZZ\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lightin",
+        "costume_state": "jill: lab coat + burgundy blouse intact",
+        "muscle_size_tier": {
+          "jill": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p03-02",
+      "image": "projects/scientists/pages/p03-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p03-02.json",
+      "context": {
+        "characters": [
+          "jill",
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium two-shot, eye level",
+        "action": "Jill hands the steaming mug across the bench to Rochelle with a warm, too-easy smile; Rochelle accepts it, tired and grateful, guard finally down. Two speech balloons: one with tail to Jill's mouth: \"PEACE OFFERING. YOU LOOK EXHAUSTED.\" and one with tail to Rochelle's mouth: \"...THANKS, JILL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scat",
+        "costume_state": "jill: lab coat + burgundy blouse intact; rochelle: lab coat + teal blouse intact",
+        "muscle_size_tier": {
+          "jill": 0,
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p03-03",
+      "image": "projects/scientists/pages/p03-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p03-03.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Rochelle",
+        "action": "Chest-up: Rochelle sips the coffee, eyes closing in genuine pleasure, mug in both hands; her expression reflects a rare unguarded moment. One speech balloon, tail to Rochelle's mouth: \"MMM. THAT'S... ACTUALLY GOOD.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics over",
+        "costume_state": "rochelle: lab coat + teal blouse intact",
+        "muscle_size_tier": {
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p03-04",
+      "image": "projects/scientists/pages/p03-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p03-04.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium, three-quarter on Jill watching sidelong",
+        "action": "Jill pretends to tidy glassware at the next bench, watching Rochelle sidelong, a hidden smile at the corner of her mouth; her expression and pose reflect suppressed anticipation. One cloud-shaped THOUGHT bubble with a trail of small dots: \"THE SUGAR HELPS IT BIND. DRINK UP.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physical",
+        "costume_state": "jill: lab coat + burgundy blouse intact",
+        "muscle_size_tier": {
+          "jill": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p03-05",
+      "image": "projects/scientists/pages/p03-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p03-05.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on the empty mug",
+        "action": "Insert: Rochelle's hand sets the drained mug down on the bench; a faint green shimmer clings to the dregs at the bottom. Caption box at the bottom edge: \"SHE FINISHED THE WHOLE CUP.\" Small SFX by the dregs: \"GLOW\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overla",
+        "costume_state": "rochelle: lab coat + teal blouse intact",
+        "muscle_size_tier": {
+          "rochelle": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p04-01",
+      "image": "projects/scientists/pages/p04-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p04-01.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Rochelle",
+        "action": "Chest-up: Rochelle pauses over her clipboard, flushed, tugging her blouse collar from her neck; her expression reflects confusion tipping toward alarm. One speech balloon, tail to Rochelle's mouth: \"WHY IS IT SO WARM IN HERE...?\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector",
+        "costume_state": "rochelle: lab coat + teal blouse intact",
+        "muscle_size_tier": {
+          "rochelle": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p04-02",
+      "image": "projects/scientists/pages/p04-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p04-02.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "mcu on Rochelle's torso, frontal",
+        "action": "Torso MCU, face still in frame at the top: Rochelle's teal blouse and lab coat pull visibly tight across her chest, shoulders and arms as the muscle beneath begins to swell; she stares down at herself; her expression reflects disbelief. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One speech balloon, tail to Rochelle's mouth: \"WH-WHAT'S HAPPENING TO ME?!\" Large SFX across the panel: \"RUMBLE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY",
+        "costume_state": "rochelle: teal blouse and lab coat tightening across chest and shoulders, all coverage intact",
+        "muscle_size_tier": {
+          "rochelle": 3
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p04-03",
+      "image": "projects/scientists/pages/p04-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p04-03.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on her right arm",
+        "action": "Insert, head out of frame: Rochelle's right arm flexes involuntarily and the white lab coat sleeve splits along its seam over a thick, round, swelling bicep. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. Large SFX along the tear: \"RRIP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI ",
+        "costume_state": "rochelle: lab coat sleeve splitting at the seam over a swelling bicep, blouse intact, all coverage intact",
+        "muscle_size_tier": {
+          "rochelle": 5
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p04-04",
+      "image": "projects/scientists/pages/p04-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p04-04.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close insert on her torso",
+        "action": "Insert, head out of frame: Rochelle's teal blouse strains over her expanding chest and newly ridged abs, the placket pulling into taut horizontal folds as one button pops free - everything still fully covered. She wears HER OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. SFX beside the button: \"POP! POP!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, envi",
+        "costume_state": "rochelle: teal blouse buttons straining over expanding chest and abs, one button popping free, breasts fully covered, all coverage intact",
+        "muscle_size_tier": {
+          "rochelle": 6
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

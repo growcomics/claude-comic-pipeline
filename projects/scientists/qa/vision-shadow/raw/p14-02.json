@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Jill is sharply focused with the field/bleachers/goalpost softly blurred behind her, consistent warm lighting throughout; the golden particle/energy glow under her skin reads as an intentional growth VFX rather than a paste artifact."},
+  "hair_discontinuity": {"detected": true, "confidence": "medium", "reason": "Jill's hair here reads as a saturated auburn/copper-red, distinctly warmer/redder than the caramel-brown of her identity-sheet reference and than her own hair color in the immediately preceding panels of this same scene (p13-04, p13-05, p14-01), which all read as caramel-brown rather than red."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Jill is wearing a burgundy blouse under a white lab coat (now torn at the shoulders from the growth surge) -- continuing the incorrect baseline-adjacent outfit from p14-01 -- rather than this panel's scripted 'athletic top straining over already-huge frame.' No athletic top is present. Coverage of breasts/groin remains intact despite the tearing."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single-character torso MCU; no scale anomaly."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon \"NNGH- BIGGER-\" contains text and its tail points to Jill, the only character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Jill's arms, shoulders, and torso show dramatic, beyond-tier-7 mass with straining/tearing garments, consistent with the scripted tier 8 'already-huge frame surges bigger' moment."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Rendering is photoreal CGI with a golden particle/energy lighting effect consistent with the scripted growth glow; only the balloon and GROOOW SFX are the legal 2D overlay layer."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text \"NNGH- BIGGER-\" and SFX \"GROOOW\" are both legible and match the scripted stylized dialogue with no duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Jill appears, matching the single scripted character for this panel."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Facial structure and features clearly match Jill; the hair-color drift is captured under hair_discontinuity, not an identity swap."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Field turf, bleachers, bench, and goalpost in the background match the scripted 'field' location."}
+}

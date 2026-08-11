@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Consistent lighting between the blurred foreground (Rochelle) and sharp mid-ground (Donny), a normal shallow-DOF OTS shot; no seam."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle's dark bob (visible foreground) and Donny's sandy-blond spiky hair both match their reference images."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle's black tank strap is clearly visible on her bare shoulder/arm, matching scripted 'black tank, grown'; Donny's grey tee and jeans are intact, matching his scripted state."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "No scale artifact; proportions between the two figures read correctly for the OTS framing."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "'HE VOLUNTEERED. SO WILL YOU.' is fully lettered with tail to Rochelle; 'LIKE HELL I-' is fully lettered with tail to Donny — both correctly targeted."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Rochelle's huge foreground arm is consistent with the established grown/tier-7 look; Donny's average build matches his tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering maintained on both figures."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Both balloons are correctly spelled, including the interrupted trailing hyphen on 'LIKE HELL I-' as scripted; no duplication."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly Rochelle and Donny appear, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Dark bob correctly identifies Rochelle; sandy-blond spiky hair correctly identifies Donny (not confused with Jim)."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Same lab set as the surrounding panels."}
+}

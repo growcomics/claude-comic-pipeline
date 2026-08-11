@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Cool sci-fi lab lighting and screen glow read consistently across Doomer, Dee-Dee, and Dana; no mismatched shadow direction or floating-body artifacts."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black straight-bangs bob matches her face-card; Dee-Dee's blonde curly hair matches her face-card; Doomer is bald as canonical. No hue/style shift observed."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Dana's Act-1 white blouse shows a small gold chevron/arrow-shaped badge pinned at the left chest/collar. CAST CANON states her civilian blouse must be PLAIN — any emblem/chevron on it is a defect, and this is exactly that leak."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "All three figures and the console/ray-rig equipment are proportioned plausibly relative to each other; no doll-sized or oversized model errors."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this pre-lettering panel despite scripted dialogue existing in PANEL CONTEXT."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Dana (tier 2) and Dee-Dee (tier 3) both read as normal, un-muscled builds appropriate for these low baseline tiers."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering throughout; no ink outlines, flat color blocking, or cel-shaded drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No baked-in lettering present to evaluate."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Three figures in frame — Doomer, Dee-Dee, Dana — matching the expected named cast of 3."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Bald grey-suited Doomer, blonde-curly lab-coated Dee-Dee, and black-bobbed blouse-and-skirt Dana all match their canonical distinguishing features and correct scripted roles."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Metal-walled interior with consoles, screens, cabling, and the overhead ray-rig device matches the scripted doomer-lab anchor elements."}
+}

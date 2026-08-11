@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p05-04",
+  "image": "projects/scientists/pages/p05-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Jill and the lab bench/reactor equipment share consistent ambient lab lighting and shadow direction; no floating or disconnected elements."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Warm caramel/auburn wavy hair tone is broadly consistent with the identity-sheet reference under this shot's softer ambient lighting."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Burgundy blouse buttoned under an intact white lab coat and black slacks, unstrained, matching the scripted 'jill: lab coat + burgundy blouse intact' state."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Background lab equipment (reactor stack, cabinets, microscope) reads at plausible scale relative to Jill; no model-scale conflicts."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Cloud-shaped thought bubble contains \"WHY SHOULD SHE GET IT FIRST?\" with trailing dots correctly leading to Jill's head."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Jill's build reads as an average, unstrained baseline, consistent with scripted tier 0."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Scene is photoreal CGI throughout; the thought bubble is the only 2D overlay element, within the legal lettering scope."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Thought bubble text matches the scripted line exactly, no doubling or typos."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Only Jill appears in frame, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Burgundy blouse and caramel wavy hair correctly identify Jill, not Rochelle."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Lab bench, reactor equipment, cabinets, and microscope match the scripted lab location."
+    }
+  }
+}

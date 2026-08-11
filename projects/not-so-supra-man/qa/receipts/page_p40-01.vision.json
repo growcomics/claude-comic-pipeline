@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p40-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p40-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Each of the 3 vertical sub-panels is internally lit consistently (street ambient in sub-panel 1, beam/electric glow in sub-panels 2-3); no fg/bg mismatch."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana's hair is black throughout all 3 sub-panels, matching her canonical reference."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "low",
+      "reason": "costume_state calls for the right sleeve to visibly 'burst across stages,' but all three sub-panels show an already-sleeveless cut rather than a clear intact-to-torn progression. Additionally, the standing figure in sub-panel 1 shows no separate skirt garment over the blue bodysuit, consistent with the same observation made in other panels of this batch. Both observations are modest and hard to fu"
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single character across all sub-panels; no relative-scale issue."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles are baked into this panel; scripted_dialogue is empty."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "The right arm visibly escalates in size across the 3 stages, consistent with the scripted tier 7-to-9 progression; the final sub-panel reads as a dramatically oversized forearm/bicep appropriate to tier 9."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering maintained through all 3 sub-panels; the lightning/energy VFX is not flat or cel-shaded."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering is baked in; the scripted caption 'The last of the ray. The last limit.' is not rendered as on-panel text in this image."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "1 named character (Dana) appears 3x across the growth-progressive sub-panels, which is the expected format per CAST CANON's explicit allowance for growth-progressive pages, not a duplicate-character defect."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Clearly Dana throughout all 3 sub-panels."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Sub-panel 1's street with road markings and rubble, and the cracking asphalt visible in sub-panel 3, are consistent with the scripted city-street location."
+    }
+  }
+}

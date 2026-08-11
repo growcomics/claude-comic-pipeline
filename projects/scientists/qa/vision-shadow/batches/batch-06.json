@@ -1,0 +1,224 @@
+{
+  "batch_id": "batch-06",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "assistant (identity-sheet)",
+      "path": "projects/scientists/references/characters/assistant/identity-sheet.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    },
+    {
+      "label": "dan (identity-sheet)",
+      "path": "projects/scientists/references/characters/dan/identity-sheet.png"
+    },
+    {
+      "label": "donny (identity-sheet)",
+      "path": "projects/scientists/references/characters/donny/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p09-05",
+      "image": "projects/scientists/pages/p09-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p09-05.json",
+      "context": {
+        "characters": [
+          "assistant"
+        ],
+        "location": "lab",
+        "time_of_day": "night",
+        "camera": "medium, assistant fleeing through the glass door",
+        "action": "The assistant bolts through the glass door, files scattering behind her. One balloon, trailing: \"I SAW NOTHING! I PROMISE!\" Caption bottom: \"SHE NEVER CAME BACK.\" SFX: \"SLAM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounde",
+        "costume_state": "assistant: cardigan intact",
+        "muscle_size_tier": {
+          "assistant": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p10-01",
+      "image": "projects/scientists/pages/p10-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-01.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium two-shot, Rochelle pouring a drink",
+        "action": "Rochelle, magnetic and casual, hands gym-built Dan a glass fizzing violet at the lab bench; he is too charmed to question it. Caption top: \"IT WASN'T HARD TO FIND A VOLUNTEER.\" Two balloons: Dan \"SO THIS IS WHERE THE MAGIC HAPPENS?\" and Rochelle \"DRINK UP AND I'LL SHOW YOU.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physical",
+        "costume_state": "rochelle: black tank + jeans, grown; dan: white tank + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "dan": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p10-02",
+      "image": "projects/scientists/pages/p10-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-02.json",
+      "context": {
+        "characters": [
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Dan drinking",
+        "action": "CU: Dan drains the glass, violet light washing his face. SFX: \"GULP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black comic display font ALL CAPS text, short triangular tail point",
+        "costume_state": "dan: white tank intact",
+        "muscle_size_tier": {
+          "dan": 1
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p10-03",
+      "image": "projects/scientists/pages/p10-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-03.json",
+      "context": {
+        "characters": [
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "mcu on Dan's torso",
+        "action": "Torso MCU: Dan's tank stretches over a chest inflating in real time, his gym build doubling. He wears HIS OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One balloon: \"OH MAN- OH MAN!\" SFX: \"BULGE\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-ba",
+        "costume_state": "dan: white tank stretching over swelling chest, intact",
+        "muscle_size_tier": {
+          "dan": 5
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p10-04",
+      "image": "projects/scientists/pages/p10-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-04.json",
+      "context": {
+        "characters": [
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "full figure, slight low angle",
+        "action": "Payoff: Dan at the full size of the attached muscle reference, tank in shreds, flexing, awestruck at himself. He wears HIS OWN wardrobe as described here - the attached muscle reference is for face, hair and muscle size ONLY, NOT for clothing. One balloon: \"I'M A MONSTER! THIS IS AWESOME!\" SFX: \"BOOM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurf",
+        "costume_state": "dan: shredded tank hanging, jeans intact",
+        "muscle_size_tier": {
+          "dan": 9
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p10-05",
+      "image": "projects/scientists/pages/p10-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-05.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "dan"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium two-shot, power inversion, camera high over Rochelle's shoulder",
+        "action": "Rochelle snaps her fingers once; giant Dan goes rigid mid-flex, eyes emptying, arms dropping to his sides. Two balloons: Rochelle \"STAND STILL.\" and Dan, flat: \"...YES.\" SFX: \"SNAP\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white",
+        "costume_state": "rochelle: black tank, grown; dan: shredded tank, grown",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "dan": 9
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p10-06",
+      "image": "projects/scientists/pages/p10-06.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p10-06.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Rochelle",
+        "action": "Face CU: Rochelle studies her obedient giant with clinical satisfaction. One THOUGHT cloud: \"STRENGTH AND OBEDIENCE. PHASE TWO WORKS.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold b",
+        "costume_state": "rochelle: black tank, grown",
+        "muscle_size_tier": {
+          "rochelle": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p11-01",
+      "image": "projects/scientists/pages/p11-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-01.json",
+      "context": {
+        "characters": [
+          "donny"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium, Donny bursting through the glass door",
+        "action": "Donny shoulders through the lab door, furious, pointing past the camera. One balloon: \"DAN?! WHAT DID SHE DO TO YOU?!\" SFX: \"WHAM\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bold black outlines, bold black",
+        "costume_state": "donny: grey tee + jeans intact",
+        "muscle_size_tier": {
+          "donny": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p11-02",
+      "image": "projects/scientists/pages/p11-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p11-02.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "donny"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "over-shoulder medium past Rochelle onto Donny",
+        "action": "OTS past Rochelle: she offers Donny a fizzing violet glass with terrifying calm. Two balloons: Rochelle \"HE VOLUNTEERED. SO WILL YOU.\" and Donny \"LIKE HELL I-\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based rendering. Bubbles are flat 2D vector graphics overlaid on the 3D scene - clean white rounded ovals with bo",
+        "costume_state": "rochelle: black tank, grown; donny: grey tee intact",
+        "muscle_size_tier": {
+          "rochelle": 7,
+          "donny": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    }
+  ]
+}

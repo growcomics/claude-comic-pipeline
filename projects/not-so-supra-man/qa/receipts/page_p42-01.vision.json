@@ -1,0 +1,99 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p42-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p42-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "In stage 1 and stage 2 (neutral, non-backlit blue-sky lighting), Dana's hair reads as a solid medium-dark BROWN/chestnut with visible lighter brown tonal variation, not the jet-black of the dana-lane face-card reference. This is a clear, unhedged hue shift visible under neutral lighting, ruling out a warm-light explanation."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-05"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "emblem_leak"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "In stage 3 (rightmost sub-panel), the cape displays a gold shield-shaped emblem containing a bold red 'S' -- the classic Superman S-in-shield glyph -- clearly visible where the cape re-hangs off her shoulder. CAST CANON explicitly prohibits this exact shape ('the emblem must never be an S glyph or S-in-shield shape... seeing one is a costume_discontinuity'). This is separate from and in addition t"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Stages 1-2 share consistent clear blue-sky daylight on Dana's back; stage 3's strong sun-flare backlight is a coherent continuation (camera now facing toward the sun). No lighting-direction clash or floating-limb artifacts observed."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "In stage 1 and stage 2 (neutral, non-backlit blue-sky lighting), Dana's hair reads as a solid medium-dark BROWN/chestnut with visible lighter brown tonal variation, not the jet-black of the dana-lane face-card reference. This is a clear, unhedged hue shift visible under neutral lighting, ruling out a warm-light explanation."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "In stage 3 (rightmost sub-panel), the cape displays a gold shield-shaped emblem containing a bold red 'S' -- the classic Superman S-in-shield glyph -- clearly visible where the cape re-hangs off her shoulder. CAST CANON explicitly prohibits this exact shape ('the emblem must never be an S glyph or S-in-shield shape... seeing one is a costume_discontinuity'). This is separate from and in addition t"
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Single character across all 3 stages; proportions scale consistently with no second figure or background prop to mis-scale."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech bubbles baked into the panel; scripted_dialogue is empty and panels are pre-lettering."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Back widens dramatically stage-to-stage, culminating in an extreme wide-lat 'cobra back' silhouette in stage 3 that eclipses the sun as scripted, consistent with tier-9 escalation."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal DAZ3D-style rendering maintained throughout (skin texture, fabric sheen, muscle striation); no 2D ink/cel-shading artifacts."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No baked-in lettering/text present in the panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Only Dana appears across the 3 growth stages, matching expected_named_cast_size 1; sanctioned growth-progressive format per CAST CANON."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Partial face visible in stage 3 and consistent build/proportions across the sequence match Dana Lane; no other character present."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Clear blue sky with visible sun is consistent with an outdoor city-street exterior in late afternoon; no anchor elements (walls, rig, ring ropes) suggesting a different venue class."
+    }
+  }
+}

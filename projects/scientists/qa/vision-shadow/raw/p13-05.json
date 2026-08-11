@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Arm/flask are in sharp foreground focus with the field and bleachers softly blurred behind -- normal depth of field for a close insert shot, with consistent warm lighting across both planes. No paste artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Only a small sliver of hair is visible at bottom-left of the cropped face; its warm brown tone is consistent with Jill's caramel hair and shows no clear contradicting hue shift."},
+  "costume_discontinuity": {"detected": true, "confidence": "medium", "reason": "The visible sleeve on the arm holding the flask is burgundy fabric with a rolled cuff, consistent with Jill's 'grown' burgundy button-up blouse seen in earlier panels, rather than the 'athletic top' scripted in this panel's costume_state. Only a partial view is available (sleeve + a sliver of dark waistband), so confidence is medium rather than high."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Arm and flask are proportionate to each other; no scale anomaly visible in this close insert."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon \"I READ YOUR NOTES. I IMPROVED THEM.\" contains text and its tail points toward the partially-cropped face at top-left, matching the scripted 'tail off-frame to Jill.'"},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "The visible forearm is thick and heavily vascular/muscled, consistent with the scripted tier 7 grown size."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Rendering is photoreal CGI (skin texture, glass/liquid reflections); only the balloon and SLOSH SFX are the legal 2D overlay layer."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text \"I READ YOUR NOTES. I IMPROVED THEM.\" and SFX \"SLOSH\" are both spelled correctly with no doubling or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Jill (arm, hand, partial face) appears, matching the single scripted character for this close insert."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "No visible feature (partial mouth/nose, forearm) contradicts Jill's identity; nothing suggests a different character."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Blurred football field turf, yard lines, bleachers, and light poles in the background match the scripted 'field' location."}
+}

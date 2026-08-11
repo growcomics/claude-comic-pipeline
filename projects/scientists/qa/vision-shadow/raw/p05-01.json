@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Both figures share consistent overhead lab lighting and cast plausible shadows toward the same direction on the floor; Rochelle's oversized arm reads as anatomically continuous with her shoulder, not a floating artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "medium", "reason": "Rochelle's dark bob matches her reference; Jill's caramel-brown wavy hair is present and broadly consistent with her identity-sheet, though lighting in this shot makes it read slightly warmer/lighter - not a clear enough shift to flag as a defect."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Rochelle wears the strained teal blouse with the lab coat slipped off / sleeveless on her enlarged arm (grown state); Jill's white lab coat over burgundy blouse and black slacks reads fully intact, matching the scripted 'jill: lab coat + burgundy blouse intact.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Rochelle reads visibly larger/taller than Jill, which is the intentional plot state (tier 7 vs tier 0), not a model scale artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Two bubbles present with text; the upper bubble ('YOU DOSED ME. I COULD HAVE DIED.') tail traces to Rochelle's mouth and the lower bubble ('AND INSTEAD? LOOK AT YOU.') tail traces to Jill's mouth, correctly assigned per the script."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Rochelle shows dramatic beyond-bodybuilder mass consistent with scripted tier 7; Jill shows an average, ungrown build consistent with scripted tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Scene renders as photoreal CGI throughout; only the two speech bubbles are 2D overlay elements, which is within the legal lettering scope."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Both bubble lines match the scripted dialogue verbatim with no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly two figures in frame (Rochelle and Jill), matching expected_named_cast_size of 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Dark-bob/teal-blouse figure correctly reads as Rochelle and caramel-wavy/burgundy-blouse figure correctly reads as Jill; no role swap."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Lab benches, shelving with reagent bottles, and overhead lighting match the scripted lab location."}
+}

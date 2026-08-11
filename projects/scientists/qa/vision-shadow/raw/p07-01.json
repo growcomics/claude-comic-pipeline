@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Warm golden evening light through the kitchen windows lights both Jim and Rochelle consistently, with plausible shadows on the floor beneath both figures; the brighter rim on Rochelle's coat near the doorway is consistent with the open door behind her, not a lighting mismatch."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's dark-brown chin-length bob and Jim's short tousled brown hair both match their identity-sheet references with no hue shift."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle wears the split-sleeved white lab coat over a teal blouse and grey pencil skirt exactly as scripted ('split-sleeved lab coat + strained teal blouse + grey pencil skirt'); Jim's navy/white track jacket and jeans are intact as scripted. Coverage preserved on both."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Rochelle reads noticeably larger/taller than Jim, but this is the scripted point of the scene (her 'new physique unmistakable' after growth) rather than a model/compositing scale artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Bubble contains 'ROCHELLE?!' with tail pointing down to Jim, whose mouth is open in shock — correctly attached to Jim per script ('tail to Jim')."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle's exposed arm through the torn coat sleeve is dramatically muscular, consistent with scripted tier 7; Jim shows no visible change, consistent with tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin, hair, and fabric render photoreal with realistic lighting and texture; no ink outlines or cel-shading on the characters or scene. Caption box and speech bubble are the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Caption 'THAT EVENING.' and bubble 'ROCHELLE?!' both match the script exactly with no typos or doubling."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Two figures present (Rochelle, Jim), matching expected_named_cast_size 2; no extras in frame."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob + teal blouse identifies Rochelle (not Jill's caramel/burgundy); tousled brown hair + track jacket identifies Jim (not Donny's blond spiky). Both correctly cast."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Background shows kitchen cabinetry, a kettle, rice cooker, sink and dining table consistent with the scripted 'kitchen' location."}
+}

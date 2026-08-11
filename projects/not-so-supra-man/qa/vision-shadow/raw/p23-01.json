@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "The teal beam's self-illumination plausibly explains the lighting difference between Dee-Dee (inside the beam) and Doomer (outside it); no copy-paste artifact."},
+  "hair_discontinuity": {"detected": true, "confidence": "medium", "reason": "Dee-Dee's hair reads as much lighter/less saturated (near white-blonde) than her warm golden-blonde reference. This is partly attributable to the teal beam's illumination bathing her in light, but a perceptible lightening shift is visible regardless."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "A large gold chevron/shield emblem is clearly visible on Dee-Dee's torn top beneath the lab coat. CAST CANON states Dee-Dee must have NO emblem of any kind, ever -- this is a direct, prominent violation."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Both figures are proportioned plausibly relative to the beam apparatus and console."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Panel is pre-lettering with no baked-in speech bubbles."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Dee-Dee's visible build (arms, torso through the torn top) looks fit but not extremely muscular, plausible for tier 3, though the beam/torn-clothing staging limits a precise read."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering; the beam's particle/light effects look rendered rather than flat-shaded or cel-shaded."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering baked into the panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly two figures present, matching expected_named_cast_size of 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Facial features confirm Dee-Dee and Doomer despite the hair-color and emblem issues."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Console, wiring, and lab equipment match the scripted doomer-lab-2."}
+}

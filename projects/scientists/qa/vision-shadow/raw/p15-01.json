@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Consistent soft daylight across the figure and background bleachers; no lighting-direction or shadow conflict."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark chin-length bob matches Rochelle's canonical reference in hue and length."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Scripted costume_state is 'track jacket, grown' (CAST CANON's grown wardrobe is a strained white tank top + open lab coat + grey joggers, as correctly rendered one panel earlier in p14-06), but here Rochelle wears a collared teal button-up blouse and grey pencil skirt — her BASELINE wardrobe, not grown."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single-character close-up, no scale-reference issue."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon 'TIME TO END THIS.' has text and its tail attaches to Rochelle, the only character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Forearm/bicep mass visible is large and consistent with a grown tier."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal skin and cloth rendering; no 2D illustration drift in the scene itself."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text matches the scripted line exactly; SFX 'HISS' matches."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure in frame, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob and facial structure match Rochelle's reference."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Football field/bleachers visible in the background, matching the scripted 'field' location."}
+}

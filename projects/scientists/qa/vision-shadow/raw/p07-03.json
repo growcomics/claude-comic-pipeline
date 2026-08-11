@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Warm kitchen lighting is consistent across both embracing figures and the background cabinetry/counter; shadows and highlights on Rochelle's exposed arm match the room's light direction. No copy-paste seam visible."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's dark bob and Jim's short tousled brown hair both match their references with no hue shift."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's lab coat is missing its sleeve on the hugging arm (bare, heavily muscular) with teal blouse visible at the collar, matching 'split-sleeved lab coat + strained teal blouse, grown'; a front slit in the coat shows leg but not groin. Jim's track jacket and jeans are intact as scripted."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Jim is lifted off the floor with his feet dangling, exactly as scripted ('lifts Jim clean off the floor... feet dangling'); this is the intended action, not a scale/model artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Bubble contains 'LAB BREAKTHROUGH. BIG ONE.' with tail pointing to Rochelle's face — correctly attached per script ('tail to Rochelle')."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle's bare hugging arm is dramatically thick and muscular, consistent with scripted tier 7; Jim shows no visible change, consistent with tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin and fabric render photoreal with realistic muscle definition and cloth folds; no ink outlines or cel-shading. SFX and bubble are the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Bubble text 'LAB BREAKTHROUGH. BIG ONE.' and SFX 'SQUEEZE' both match the script exactly, no doubling or typos."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Two figures present (Rochelle, Jim), matching expected_named_cast_size 2; no extras."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob hair confirms Rochelle; tousled brown hair + track jacket confirms Jim. Consistent with script."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Background shows kitchen cabinetry, a bread basket, jars, and a rice cooker/toaster, consistent with the scripted 'kitchen' location."}
+}

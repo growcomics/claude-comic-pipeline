@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "A single coherent light source (the window band at top) casts a plausible diagonal beam across the floor and locker room; no lighting/shadow mismatch."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Supraman's dark hair color matches his reference; style is only mildly tousled, not a color/length/style discontinuity."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "costume_state specifies 'suit rumpled, hair wrecked, one boot' but the render shows Supraman wearing a matched pair of red boots on both feet (not one boot as scripted), his suit reads smooth/unrumpled, and his hair is only lightly tousled rather than visibly 'wrecked.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Supraman is proportioned normally relative to the lockers and bench."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Panel is pre-lettering with no baked-in speech bubbles."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Supraman's build reads as athletic/lean, consistent with his 'NOT hyper-massive bodybuilder bulk' canon description; no scripted muscle tier applies to him."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering with realistic materials (glass display cases, concrete floor) and plausible directional sunlight."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering baked into the panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly one figure (Supraman) present, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Face and hair match Supraman's canonical reference."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Suit display cases (including one with an empty hanger, as scripted) and lockers match the scripted hq-locker room."}
+}

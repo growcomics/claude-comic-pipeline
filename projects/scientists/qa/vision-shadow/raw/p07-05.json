@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Warm kitchen lighting is consistent across Jim's face/jacket and the blurred background counter; no lighting-direction or shadow inconsistency."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Jim's short tousled brown hair matches his identity-sheet reference with no hue shift."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Navy/white striped track jacket over a grey tee matches costume_state 'track jacket intact,' consistent with his identity sheet."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Single-character CU with no other figures for scale comparison; proportions look normal."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Bubble contains 'DOWN THE HATCH.' with tail pointing to Jim's head — the only character in frame — correctly attached."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Jim appears essentially unchanged from baseline, consistent with the scripted tier 1 (immediately after swallowing the pill, before any visible growth would occur)."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin pores, eye detail, and fabric texture render photoreal; no ink outlines or cel-shading. Bubble and SFX are the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Bubble text 'DOWN THE HATCH.' and SFX 'GULP' both match the script exactly, no doubling or typos."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure (Jim) visible, matching expected_named_cast_size 1; no extras."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Tousled brown hair and navy/white track jacket confirm Jim, not Donny (blond spiky hair)."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Background shows kitchen cabinetry, sink, toaster and jars consistent with the scripted 'kitchen' location."}
+}

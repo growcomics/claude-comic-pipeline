@@ -1,0 +1,265 @@
+{
+  "batch_id": "batch-01",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    },
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "dee-dee (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dee-dee/face-card.png"
+    },
+    {
+      "label": "dex-doomer (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dex-doomer/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p01-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p01-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p01-01.json",
+      "context": {
+        "characters": [
+          "supraman",
+          "dana-lane",
+          "dee-dee"
+        ],
+        "location": "hq-gym",
+        "time_of_day": "interior",
+        "camera": "medium, eye-level",
+        "action": "COVER. Foreground: drained Supraman slumped, suit torn. Mid: tier-9 Dana towers behind him, hand on his shoulder, smiling. Back-right: Destroya (tier 8, corset) pressing the graviton barbell overhead.",
+        "costume_state": "dana: spare suit stretched (final); supraman: suit torn; dee-dee: corset ensemble",
+        "muscle_size_tier": {
+          "dana-lane": 9,
+          "dee-dee": 8
+        },
+        "size": "splash",
+        "notes": "Title cover \u2014 composite of final states. Title text added by page-composer.",
+        "scripted_dialogue": [],
+        "scripted_captions": [
+          "NOT SO SUPRA... MAN"
+        ],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p02-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p02-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p02-01.json",
+      "context": {
+        "characters": [
+          "dex-doomer",
+          "dee-dee",
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "wide-establish, eye-level",
+        "action": "Dana (tier 2, blouse + skirt) bound to the interrogation chair under the Disinto-Ray barrel. Doomer gestures grandly in the foreground; Dee-Dee in lab coat at the console behind.",
+        "costume_state": "dana: blouse+skirt intact, roped; doomer: grey suit; dee-dee: lab coat",
+        "muscle_size_tier": {
+          "dana-lane": 2,
+          "dee-dee": 3
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dex-doomer",
+            "text": "Cheer up, Miss Lane. Tonight you make scientific history.",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "You won't get away with this, Doomer!",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p03-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p03-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p03-01.json",
+      "context": {
+        "characters": [
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "low-angle-front, dutch",
+        "action": "Supraman smashes THROUGH the concrete wall, fist first, debris exploding toward camera, cape snapping.",
+        "costume_state": "supraman: suit pristine",
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "Let her go, Doomer. Last warning.",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p04-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p04-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p04-01.json",
+      "context": {
+        "characters": [
+          "dex-doomer",
+          "supraman",
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "medium, profile",
+        "action": "Doomer fires the Disinto-Ray. Supraman throws himself in front of bound Dana \u2014 the teal beam strikes his back and visibly REFRACTS through his chest into her, both lit by the discharge.",
+        "costume_state": "supraman: suit pristine; dana: blouse intact, roped",
+        "muscle_size_tier": {
+          "dana-lane": 2
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dex-doomer",
+            "text": "Then share the demonstration!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 3
+      }
+    },
+    {
+      "panel_id": "p05-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p05-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p05-01.json",
+      "context": {
+        "characters": [
+          "supraman",
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "cowboy, three-quarter",
+        "action": "Smoke clears. Supraman on one knee, steaming, drained. Dana still roped to the chair, head swimming. Far background: the Doomjet hatch sealing as the villains flee.",
+        "costume_state": "supraman: suit scorched at back; dana: blouse intact, roped",
+        "muscle_size_tier": {
+          "dana-lane": 2
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "Ugh... like my bones went through a blender...",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Supraman... something feels... off.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p06-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p06-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p06-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "mcu, eye-level",
+        "action": "Tight on Dana in the chair: flushed cheeks, wide eyes, breath caught \u2014 a faint teal shimmer crawling along her forearms under the ropes.",
+        "costume_state": "dana: blouse intact, ropes straining",
+        "muscle_size_tier": {
+          "dana-lane": 2
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Hot... it's like sunlight under my skin...",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p07-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p07-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p07-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "full, low-angle-front",
+        "action": "GROWTH 1 EVENT. Dana stands up THROUGH the ropes \u2014 they snap off her swelling frame (tier 4: visible athletic muscle now filling the blouse, sleeves tight). Chair tips behind her. Supraman gapes in the background.",
+        "costume_state": "dana: blouse tight at seams, ropes snapped off; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 4
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Actually... I feel SUPER.",
+            "type": "shout"
+          },
+          {
+            "character": "supraman",
+            "text": "Great galaxies...",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p08-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p08-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p08-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "ecu-region, three-quarter",
+        "action": "GROWTH-PROGRESSIVE page: one image, three vertical sub-panels, the SAME right arm left-to-right. Stage 1: toned forearm-to-bicep flex inside a tightening blouse sleeve. Stage 2: bicep ballooning, seam splitting at the shoulder. Stage 3: arm fully swollen athletic-hyper, sleeve burst to threads, veins surfacing, sweat sheen.",
+        "costume_state": "dana: blouse R sleeve bursts across stages (intact->split->gone)",
+        "muscle_size_tier": {
+          "dana-lane": 4
+        },
+        "size": "splash",
+        "notes": "In-image 3-panel progressive device. Same arm, same angle, ONLY the size changes.",
+        "scripted_dialogue": [],
+        "scripted_captions": [
+          "Every heartbeat poured more of his power into her."
+        ],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

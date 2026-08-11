@@ -1,0 +1,28 @@
+{
+  "runner": "B",
+  "range": "17-31",
+  "model": "nano_banana_pro",
+  "resolution": "1k",
+  "count": 1,
+  "balance_start": 4984.26,
+  "balance_end": 4900.26,
+  "credits_spent": 84.0,
+  "notes": "None of pages 17-31 include the size anchor 116bcfa3..., so the NO-DOWNSIZE GATE did not apply. p18 generated text-only (no media_ids). p27 and p31 each tripped the NSFW filter once and cleared on retry #1 (same prompt).",
+  "entries": {
+    "p17-01": {"page": 17, "job": "bfd3008e-12b5-45a7-94e9-06e5ad65e463", "status": "completed", "file": "pages/panels-hf/p17-01.png"},
+    "p18-01": {"page": 18, "job": "e0cd4880-30e1-4288-bf3c-02e6237b1532", "status": "completed", "file": "pages/panels-hf/p18-01.png"},
+    "p19-01": {"page": 19, "job": "97f8a704-ee38-4a91-9c62-ba4473aafe8b", "status": "completed", "file": "pages/panels-hf/p19-01.png"},
+    "p20-01": {"page": 20, "job": "4afc4f1f-c701-4028-93bc-9349fd3b1ed2", "status": "completed", "file": "pages/panels-hf/p20-01.png"},
+    "p21-01": {"page": 21, "job": "f590d541-dfb3-40e6-8314-6819c2f8ef2f", "status": "completed", "file": "pages/panels-hf/p21-01.png"},
+    "p22-01": {"page": 22, "job": "703a3d7d-db90-4dda-b25e-3d352ef26af0", "status": "completed", "file": "pages/panels-hf/p22-01.png"},
+    "p23-01": {"page": 23, "job": "19419198-3508-4be3-8c91-ec86f7f45175", "status": "completed", "file": "pages/panels-hf/p23-01.png"},
+    "p24-01": {"page": 24, "job": "fc6b0a56-2b6e-46a3-a2d6-5cc82f03650a", "status": "completed", "file": "pages/panels-hf/p24-01.png"},
+    "p25-01": {"page": 25, "job": "fe04fe1e-80e0-4239-81ee-4cb80e7af8ae", "status": "completed", "file": "pages/panels-hf/p25-01.png", "layout": "growth-progressive 16:9"},
+    "p26-01": {"page": 26, "job": "9b8634f9-5bbf-43e9-9768-6bf02ed59950", "status": "completed", "file": "pages/panels-hf/p26-01.png", "layout": "growth-progressive 16:9"},
+    "p27-01": {"page": 27, "job": "4e6f92db-f188-49e7-ae04-953779a1e3fc", "job_nsfw_failed": "61cb936f-d9a4-4035-ba39-9148d889a518", "status": "completed", "file": "pages/panels-hf/p27-01.png", "retries": 1},
+    "p28-01": {"page": 28, "job": "584c3806-4298-49ac-9189-084c56caf297", "status": "completed", "file": "pages/panels-hf/p28-01.png"},
+    "p29-01": {"page": 29, "job": "b8cd6655-6aee-4dfb-b547-6da1fa840573", "status": "completed", "file": "pages/panels-hf/p29-01.png"},
+    "p30-01": {"page": 30, "job": "3bbbead2-b94a-405b-81c1-c6e09b17efb2", "status": "completed", "file": "pages/panels-hf/p30-01.png"},
+    "p31-01": {"page": 31, "job": "b64bc894-48d8-49d3-a0a0-6e3d78de0ec6", "job_nsfw_failed": "016b2ba7-c32b-4d70-b752-e537fc7ecc31", "status": "completed", "file": "pages/panels-hf/p31-01.png", "retries": 1}
+  }
+}

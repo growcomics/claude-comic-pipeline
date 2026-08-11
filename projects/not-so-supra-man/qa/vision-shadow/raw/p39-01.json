@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "The beam/energy lighting is clearly the intentional dominant light source and reads coherently on Dana; no compositing artifacts or floating elements."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's hair remains black, windswept by the energy wash as scripted ('hair floating in the energy wash'); color matches her canonical reference."},
+  "costume_discontinuity": {"detected": true, "confidence": "low", "reason": "The gold chest emblem is partly washed out by the bright beam light crossing directly over it, making its exact shape hard to confirm against the clean double-chevron seen elsewhere for Dana; likely just lighting interference but flagging for a closer look. The shoulder-seam/sleeve loss itself is scripted ('suit shoulder seams lifting in beam glow') and is not being flagged as a defect."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Single character in frame; no relative-scale issue."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Dana's swollen-shoulder, straining build is consistent with the scripted tier-7 escalation from the tier-6 builds seen in earlier panels."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI rendering; the energy-beam VFX is a lighting effect, not flat 2D shading."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "1 character (Dana) present, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Clearly Dana, matching her canonical reference."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "The frame is dominated by light-beam VFX with minimal background visible, so the environment class cannot be confidently assessed either way."}
+}

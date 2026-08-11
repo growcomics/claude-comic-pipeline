@@ -1,0 +1,97 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p37-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p37-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Destroya's hair (background, center) reads pale/platinum-blonde, lighter and less saturated than the gold-blonde canonical reference. Dana (right, being hammered into the column) and Supraman (foreground) both show dark hair matching their references."
+    },
+    {
+      "category": "location_mismatch",
+      "confidence": "high",
+      "registry_ids": [
+        "ENV-01"
+      ],
+      "registry_slugs": [
+        "location_drift"
+      ],
+      "groups": [
+        "ENV"
+      ],
+      "reason": "The panel clearly renders a ROOFTOP (water tower, antennas, gravel/tar roof surface, brick parapet/chimney stack, elevated view over surrounding buildings) rather than a street-level scene. PANEL CONTEXT's location field says 'city-street,' yet the action text itself says Supraman rockets away 'over the rooftops' (rooftops is listed elsewhere in this rubric as a distinct location class from city-s"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Warm golden-hour key light is consistent across foreground Supraman and background Destroya/Dana; rim-lighting and shadow direction agree."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Destroya's hair (background, center) reads pale/platinum-blonde, lighter and less saturated than the gold-blonde canonical reference. Dana (right, being hammered into the column) and Supraman (foreground) both show dark hair matching their references."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "low",
+      "reason": "Supraman's chest emblem (clear frontal view, foreground) is presented as a gold shield/pentagon-outlined badge rather than a bare double-chevron like Dana wears elsewhere in this batch; the framing echoes the prohibited 'S-in-shield' silhouette the rubric calls the #1 known leak, though the interior linework reads more like an angular chevron than a clear 'S' curve at this resolution -- genuinely "
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Buildings, water tower, and all three characters read at proportionate relative scale."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles are baked into this panel."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Destroya reads appropriately bulkier than Dana; Supraman stays lean/athletic, consistent with the scripted tiers."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering throughout, including brick debris and cape cloth simulation."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering is present in this panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All 3 scripted characters (Supraman, Destroya, Dana) are present in frame."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Supraman, Destroya, and Dana are each identifiable by hair, build, and costume."
+    },
+    "location_mismatch": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The panel clearly renders a ROOFTOP (water tower, antennas, gravel/tar roof surface, brick parapet/chimney stack, elevated view over surrounding buildings) rather than a street-level scene. PANEL CONTEXT's location field says 'city-street,' yet the action text itself says Supraman rockets away 'over the rooftops' (rooftops is listed elsewhere in this rubric as a distinct location class from city-s"
+    }
+  }
+}

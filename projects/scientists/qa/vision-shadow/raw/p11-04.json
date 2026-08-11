@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": true, "confidence": "low", "reason": "There is a small reddish-brown smudge/blemish on the grey tee near Donny's upper abdomen (right below the 'RUMBLE' SFX) that doesn't match the fabric's grey tone. Could be a texture rendering artifact or just skin-tone bleed-through/shadow on the stretched thin fabric — not certain it's a true defect."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Donny's sandy-blond short spiky hair matches his identity-sheet reference in hue, length and style."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Grey crew-neck tee stretched taut over swelling chest/shoulders/biceps, seams visibly strained but not torn — matches scripted costume_state 'grey tee stretching over swelling chest and shoulders, intact'."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Only one character in frame; the enlarged foreground hand/forearm is due to reach-toward-camera foreshortening, not a model scale glitch."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Bubble contains 'NO- NO- OH NO-' and its tail points down toward Donny's open mouth, the only character in the panel and the obvious speaker."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Donny shows clearly enlarged traps, delts, chest and biceps straining the tee — a visible mid-transformation stage consistent with tier 5, short of the tier 8 payoff size seen in the next panel."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Skin and fabric render photoreally with visible pores/fabric weave and PBR shading; no ink outlines or cel-shading outside the legal bubble/SFX overlay."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Bubble text 'NO- NO- OH NO-' and SFX 'RUMBLE' both match the scripted lines exactly with correct spelling and no duplication."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Only Donny is scripted for this panel and only Donny appears; matches expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Face and sandy-blond spiky hair match Donny's identity-sheet reference; no other cast member's traits are present."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Background shows the same lab cabinetry, equipment and overhead lighting as the established lab set."}
+}

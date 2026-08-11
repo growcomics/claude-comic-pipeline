@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Lighting on Dan's torso and the background cabinets/lab bench is consistent, single fluorescent source, no seam."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dan is bald, matching the identity sheet."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "White tank is straining/stretching tightly over his swelling chest but still intact (no holes yet), matching scripted 'tank stretching over swelling chest, intact.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Torso proportions read correctly against the counter edge in frame; no scale artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Balloon 'OH MAN- OH MAN!' is fully lettered with its tail pointing to Dan, the sole character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Chest/shoulder mass reads as a moderate escalation from the prior panel, consistent with tier 5 'gym build doubling' rather than the full tier-9 payoff."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering maintained; no ink-outline or cel-shaded drift."},
+  "lettering_error": {"detected": true, "confidence": "high", "reason": "SFX 'BULGE' is lettered TWICE, stacked vertically on Dan's chest (one directly under the balloon, a second duplicate just below it), but the panel context scripts only a single 'BULGE' SFX — this is a duplicated/repeated text element."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Only Dan appears, matching expected_named_cast_size 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Bald head correctly identifies Dan."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Same lab bench/cabinet backdrop as the surrounding panels."}
+}

@@ -1,0 +1,85 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p11-01",
+  "image": "projects/scientists/pages/p11-01.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "character_count_error",
+      "confidence": "high",
+      "registry_ids": [
+        "CAST-03",
+        "CAST-02"
+      ],
+      "registry_slugs": [
+        "people_count",
+        "extra_person"
+      ],
+      "groups": [
+        "COUNT"
+      ],
+      "reason": "A second character \u2014 a heavily-muscled, shirtless man at the lab bench, build consistent with Dan's established tier-9 size \u2014 is clearly visible in the background (moderately soft-focus but distinctly rendered, not ambiguous bokeh). This panel's context scripts only Donny (expected_named_cast_size: 1), so this reads as an unscripted extra in frame."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bright fluorescent lighting is consistent across Donny, the shattered door, and the background bench/figure; no seam."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Sandy-blond short spiky hair matches the identity sheet closely in both hue and style."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Grey t-shirt and jeans, intact, matches scripted 'grey tee + jeans intact.'"
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Donny is proportionate to the door frame he's bursting through."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Balloon 'DAN?! WHAT DID SHE DO TO YOU?!' is fully lettered, tail pointing to Donny."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Donny's average, non-muscular build matches his tier 0 baseline."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal rendering maintained on Donny and the scene."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Balloon text and SFX 'WHAM' are correctly spelled, no duplication."
+    },
+    "character_count_error": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "A second character \u2014 a heavily-muscled, shirtless man at the lab bench, build consistent with Dan's established tier-9 size \u2014 is clearly visible in the background (moderately soft-focus but distinctly rendered, not ambiguous bokeh). This panel's context scripts only Donny (expected_named_cast_size: 1), so this reads as an unscripted extra in frame."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Sandy-blond spiky hair correctly identifies Donny, distinct from Jim's brown hair; no scripted role is filled by the wrong character (the unscripted extra is a count issue, not a swap)."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Lab interior with shelving/cabinetry matches the scripted lab."
+    }
+  }
+}

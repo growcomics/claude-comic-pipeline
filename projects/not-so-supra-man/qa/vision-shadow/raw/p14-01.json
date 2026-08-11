@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "All three vertical sub-panels share a consistent tan/beige backdrop and lighting direction; no FG/BG mismatch visible."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black bob matches the face-card reference in hue across all three stages; apparent length/volume differences are due to head angle (looking down vs. turning to look back), not a color or style discontinuity."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Dana is rendered wearing a blue fitted bodysuit with a back zipper PLUS a draped blue cape and a gold chevron emblem at the collar — not the scripted 'blouse... hangs as sleeves by stage 3.' This is page 14 (Act 1, pre-page-20), so both the blue coloring and the emblem are prohibited per CAST CANON's Emblem rule. A cape is also exclusively a Supraman garment per CAST CANON — even Dana's own eventual page-20+ hero suit is specified as suit+emblem+skirt with no cape."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Single character in an ECU crop; no scale-comparison issue."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Back/lat width increases plausibly across the three stages into a dramatic 'cobra back,' consistent with tier 6; not under-rendered."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal skin and fabric texture (sweat sheen, zipper hardware) throughout; no 2D illustration drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "One character (Dana) is shown three times as a growth-progressive sequence, matching expected_named_cast_size 1 and the allowed multi-stage format."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Hair and profile match Dana's canonical reference across all three stages despite the costume issue."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Flat tan/beige ECU backdrop shows no lab set-dressing but also no contradicting exterior evidence; too little background is visible to judge venue confidently."}
+}

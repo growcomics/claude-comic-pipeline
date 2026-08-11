@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p06-04",
+  "image": "projects/scientists/pages/p06-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Lighting on the legs matches the overhead lab fluorescents; blurred background (benches, shelves, microscope) reads as normal depth-of-field, not a compositing seam. Legs connect naturally to the waistband/torso at the top of frame."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No hair visible in this legs-only insert; nothing to compare against reference."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Black form-fitting slacks with a seam tear at the calf revealing skin, matching costume_state 'black slacks straining over swelling thighs, seams stressed, all coverage intact.' Buttocks/groin remain covered by opaque fabric despite the extreme stretch."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No other figures/props in frame for scale comparison; leg proportions in the lunge-like pose look anatomically plausible."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech bubble present, only the SFX 'CREAK' lettering; category not applicable."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Thighs and calves render dramatically thick and strain the fabric to tearing, consistent with the scripted tier 6 (higher mass than the tier 5 arm panel before it)."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Fabric and exposed calf skin at the tear render photoreal with realistic sheen/texture; no flat shading or ink-outline drift. SFX lettering overlay is the legal 2D layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "SFX text reads 'CREAK' cleanly, matching script; no doubling or typos."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "One figure's lower body visible, matching expected_named_cast_size 1 (Jill); consistent with the scripted close insert on her legs."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No identifying features (face/hair) visible to contradict the scripted single-character context; nothing suggests a different character."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Background shows lab shelving with bottles/jars, cabinetry, a microscope and glassware, consistent with the scripted 'lab' location."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Both figures share consistent overhead fluorescent lab lighting and shadow direction with the background shelving/cabinets; no seam or floating-limb artifacts."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Donny's sandy-blond spiky hair and Dan's bald head both match their identity-sheet references."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Panel context specifies 'donny: shredded tee, grown; dan: shredded tank, grown', but both garments render fully intact — a snug, unripped grey crew-neck tee on Donny and an unripped white tank on Dan, with no tears, holes, or shredded edges visible anywhere."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Height difference between Donny and Dan is modest and consistent with their reference heights (6'0\" vs 6'2\"); both stand on the same floor plane at the same depth. No model-scale glitch."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubble is present in this panel — only the scripted bottom caption box, which is not a speech bubble and is not empty."},
+  "tier_visualization_mismatch": {"detected": true, "confidence": "medium", "reason": "Action calls for Donny to be 'now huge as Dan' (tier 8 vs Dan's tier 9, near-parity), but Dan visibly outmasses Donny — thicker arms, broader chest/traps — reading more like a solid bodybuilder next to a mass-monster than the scripted 'two giants' parity implied by the caption."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Both characters and the lab environment render photoreally with PBR shading and skin subsurface scattering; no ink outlines or flat/cel shading outside the legal caption box."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Caption 'TWO GIANTS. ZERO OBJECTIONS.' is spelled correctly and matches the scripted line exactly, with no duplication."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Both scripted characters (donny, dan) are fully in frame; matches expected_named_cast_size of 2 with no extras."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Blond spiky hair on the left figure matches Donny's reference; bald head and face on the right figure match Dan's reference. Roles are correctly filled."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Background shows lab shelving with reagent bottles, cabinetry, a microscope and checkerboard tile floor — consistent with the scripted lab location (a different section of the same lab set)."}
+}

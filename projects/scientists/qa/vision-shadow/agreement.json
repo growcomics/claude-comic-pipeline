@@ -1,0 +1,161 @@
+{
+  "generated": "2026-08-11T06:28:53Z",
+  "project": "projects/scientists",
+  "gt_mode": "banked chain verdict.json (+ notes-classification.json soft labels)",
+  "scope_panels": 82,
+  "coverage_pct": 100.0,
+  "ship_bar": {
+    "recall": 0.8,
+    "precision": 0.7,
+    "min_support": 5
+  },
+  "per_group": {
+    "WARD": {
+      "tp": 1,
+      "fp": 22,
+      "fn": 1,
+      "tn": 58,
+      "support": 2,
+      "recall": 0.5,
+      "precision": 0.043478260869565216,
+      "verdict": "insufficient-support"
+    },
+    "HAIR": {
+      "tp": 1,
+      "fp": 17,
+      "fn": 1,
+      "tn": 63,
+      "support": 2,
+      "recall": 0.5,
+      "precision": 0.05555555555555555,
+      "verdict": "insufficient-support"
+    },
+    "IDENT": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 0,
+      "tn": 79,
+      "support": 0,
+      "recall": null,
+      "precision": 0.0,
+      "verdict": "insufficient-support"
+    },
+    "COUNT": {
+      "tp": 1,
+      "fp": 3,
+      "fn": 0,
+      "tn": 78,
+      "support": 1,
+      "recall": 1.0,
+      "precision": 0.25,
+      "verdict": "insufficient-support"
+    },
+    "SIZE": {
+      "tp": 0,
+      "fp": 8,
+      "fn": 0,
+      "tn": 74,
+      "support": 0,
+      "recall": null,
+      "precision": 0.0,
+      "verdict": "insufficient-support"
+    },
+    "ANATOMY": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "tn": 81,
+      "support": 0,
+      "recall": null,
+      "precision": 0.0,
+      "verdict": "insufficient-support"
+    },
+    "ENV": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "support": 0,
+      "recall": null,
+      "precision": null,
+      "verdict": "no-signal"
+    },
+    "COMPOSITE": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 1,
+      "tn": 78,
+      "support": 1,
+      "recall": 0.0,
+      "precision": 0.0,
+      "verdict": "insufficient-support"
+    },
+    "STYLE": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "support": 0,
+      "recall": null,
+      "precision": null,
+      "verdict": "no-signal"
+    },
+    "LETTER": {
+      "tp": 1,
+      "fp": 2,
+      "fn": 3,
+      "tn": 76,
+      "support": 4,
+      "recall": 0.25,
+      "precision": 0.3333333333333333,
+      "verdict": "insufficient-support"
+    },
+    "PROP": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "support": 0,
+      "recall": null,
+      "precision": null,
+      "verdict": "no-signal"
+    },
+    "FACE": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "support": 0,
+      "recall": null,
+      "precision": null,
+      "verdict": "no-signal"
+    },
+    "CAMERA": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "support": 0,
+      "recall": null,
+      "precision": null,
+      "verdict": "no-signal"
+    },
+    "OTHER": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "tn": 78,
+      "support": 4,
+      "recall": 0.0,
+      "precision": null,
+      "verdict": "insufficient-support"
+    }
+  },
+  "panel_level": {
+    "gt_bad_panels": 14,
+    "gt_bad_caught_same_group": 4,
+    "gt_bad_flagged_any_group": 8,
+    "gt_clean_panels": 68,
+    "gt_clean_predicted_clean": 38
+  }
+}

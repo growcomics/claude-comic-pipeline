@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Hands/mug are sharp foreground with Jill's face intentionally soft/defocused in the background per the scripted 'close insert' camera; lighting on hands and mug reads consistent with the overhead lab lighting visible behind her. No copy-paste seam or floating-limb artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Jill's hair (defocused, upper right) reads as the same caramel-brown family as her identity-sheet reference; the softness is from the intentional rack focus on the mug, not a color shift."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "White lab coat with burgundy blouse visible at collar and cuffs on both arms, matching scripted costume_state 'lab coat + burgundy blouse intact' and the identity sheet."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Hands and mug are proportioned normally relative to each other; no scale artifact."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Cloud-shaped thought bubble with dot trail is present, contains text, and the dot trail leads back toward Jill's face, the only character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Jill is rendered at baseline proportions (hands/forearms show no added muscle), matching scripted tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Scene (hands, mug, coffee, lab shelving) is photoreal CGI with plausible skin shading and reflections; only the thought bubble and SFX text are the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Thought bubble reads 'IF SHE WON'T RUN THE TRIAL... SHE'LL BE THE TRIAL.' matching the scripted line exactly; SFX 'FIZZZ' matches script. No doubled words, missing apostrophes, or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Jill (hands + partial face) is present, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Visible hair color/style and burgundy blouse are consistent with Jill, not Rochelle (dark bob/teal)."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab shelving, glassware, and bench visible in frame match the scripted 'lab' location."}
+}

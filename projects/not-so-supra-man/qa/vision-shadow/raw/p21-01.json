@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Lighting is consistent across both figures in this close three-quarter shot; no shadow/color-temperature mismatch."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's black bob and Supraman's dark hair both match their reference colors."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Supraman's suit is rendered as a red/blue color-blocked design with a large, ornate gold chest emblem, sharply different from the solid blue suit with a small clean gold double-chevron he wears in the immediately preceding same-scene panels (p19, p20) and from Dana's correctly-rendered double-chevron emblem visible right beside his in this very panel."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Supraman reading smaller than Dana is the intentional scripted size-gap per CAST CANON, and he is not doll/toy-sized -- still a normally-proportioned adult figure."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Panel is pre-lettering with no baked-in speech bubbles."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Dana's resting (unflexed) bicep looks close in width to her own head, which is dramatic for tier 6, but without a calibrated body-tier reference in this batch this can't be confidently called an over-render."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal CGI skin/muscle rendering with plausible lighting; no 2D/ink artifacts."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering baked into the panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Exactly two figures present, matching expected_named_cast_size of 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Faces match both characters' references despite the Supraman costume issue."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "The dark interior background is generic and not clearly identifiable as the hq-gym seen in p20, but nothing contradicts it either."}
+}

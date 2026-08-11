@@ -1,0 +1,44 @@
+{
+  "batch_id": "batch-10",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    },
+    {
+      "label": "cheer-squad (identity-sheet)",
+      "path": "projects/scientists/references/characters/cheer-squad/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p16-01",
+      "image": "projects/scientists/pages/p16-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p16-01.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "cheer-squad"
+        ],
+        "location": "city-ruins",
+        "time_of_day": "dusk",
+        "camera": "splash: epic low wide, full scene",
+        "action": "FULL-PAGE SPLASH: titan Rochelle towers over the ruined boulevard in the dusk haze, collapsed towers flanking her, the five grown cheerleaders kneeling in a crescent at her feet; searchlights rake the smoke. One balloon, vast, from above: \"THIS WORLD WILL WORSHIP ME AS ITS GODDESS.\" Caption bottom edge: \"TO BE CONTINUED... IN SCIENTISTS II: THE RESISTANCE.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, ligh",
+        "costume_state": "rochelle: titan wrap, titan; cheer-squad: strained uniforms, grown, kneeling",
+        "muscle_size_tier": {
+          "rochelle": 10,
+          "cheer-squad": 7
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    }
+  ]
+}

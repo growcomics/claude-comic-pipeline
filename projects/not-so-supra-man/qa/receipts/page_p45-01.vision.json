@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p45-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p45-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Warm sunset rim-lighting is consistent across both Dana and Supraman and the hazy dust background; shared light direction (from behind/above) and color temperature. No floating-limb artifacts."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both Dana's black bob and Supraman's black hair read as genuinely dark in their shadow-side regions; the golden rim-light at the crown of each head is expected specular sunset highlighting, not a pigment/hue shift."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both characters show the correct gold chevron/delta emblem family on their chests (gold-colored, no red, no S-glyph). Supraman's lower body and boots are outside this MCU three-quarter crop, so his 'battered' state and red boots cannot be contradicted from what's visible (per precision note, not flagged based on what's cropped out)."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Supraman reads as a normal full-proportioned adult male next to Dana (his head is comparable in size to hers); the size/bulk gap between them is the scripted intentional difference, not a doll/toy-sized rendering."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No speech bubbles are baked into the panel; the two scripted balloon lines are not rendered here (pre-lettering)."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's foreground bicep dramatically outsizes her torso/head, consistent with tier-9. Supraman reads as athletic/lean rather than hyper-bulked, matching his 'NOT hyper-massive bodybuilder' spec."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal rendering maintained on skin, fabric, and hair throughout; no 2D/ink/cel-shaded artifacts."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "No baked-in lettering present."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Exactly Dana and Supraman are present, matching expected_named_cast_size 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both faces and hair match their canonical face-card references (Dana's jet-black bob; Supraman's dark side-parted hair and facial features)."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Hazy, dust-lit sunset horizon does not contradict a city-street exterior; no anchor elements are visible suggesting a different venue class, and the tight MCU framing intentionally minimizes background detail."
+    }
+  }
+}

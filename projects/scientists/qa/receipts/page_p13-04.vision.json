@@ -1,0 +1,97 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p13-04",
+  "image": "projects/scientists/pages/p13-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "The central figure delivering Rochelle's line (\"I FINISHED WHAT WE STARTED...\") wears a burgundy tied button-up + black slacks -- Jill's canonical 'grown' outfit -- not Rochelle's scripted 'track jacket, grown' for this panel (tied to the identity swap noted below: this figure is rendered as Jill, not Rochelle, so naturally she's in Jill's wardrobe rather than Rochelle's)."
+    },
+    {
+      "category": "character_identity_swap",
+      "confidence": "high",
+      "registry_ids": [
+        "IDENT-01"
+      ],
+      "registry_slugs": [
+        "identity_drift"
+      ],
+      "groups": [
+        "IDENT"
+      ],
+      "reason": "The figure occupying Rochelle's scripted position and pose ('spreads her arms over her frozen squad, a showman's smile') and voicing her line (balloon tail points to her) has long wavy caramel/reddish-brown hair and wears a burgundy tied button-up + black slacks -- this is Jill's face and canonical 'grown' look (compare references/characters/jill/identity-sheet.png), not Rochelle's dark chin-lengt"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Foreground (Jill, OTS) is soft-focus while the mid-ground is sharp -- standard depth-of-field for an over-the-shoulder shot, not a paste artifact. Lighting/shadow direction is consistent warm hazy backlight across all figures and the field/bleachers background."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Among clearly visible cast, hair matches canon: the foreground blurred figure (Jill) and the arms-spread central figure both show Jill's caramel-wavy hair color/style; the visible cheer-squad members (space-buns, curly, long-hair) match their reference hair. The pigtails cheerleader is not clearly visible in this panel (likely occluded), so her hair could not be checked here."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The central figure delivering Rochelle's line (\"I FINISHED WHAT WE STARTED...\") wears a burgundy tied button-up + black slacks -- Jill's canonical 'grown' outfit -- not Rochelle's scripted 'track jacket, grown' for this panel (tied to the identity swap noted below: this figure is rendered as Jill, not Rochelle, so naturally she's in Jill's wardrobe rather than Rochelle's)."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Figures are proportionate to each other and to the field/bleachers/goalpost background."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon \"I FINISHED WHAT WE STARTED. THEY OBEY ME. EVERYONE WILL.\" contains text and its tail points to the central arms-spread figure occupying Rochelle's scripted position, matching 'tail to Rochelle.'"
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The figure occupying Rochelle's role is rendered with huge, tier-7-consistent mass; the size/mass itself is appropriate for the scripted tier even though (per character_identity_swap) it is the wrong character's face/hair rendered on that body."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Rendering is photoreal CGI throughout; only the speech balloon is the legal 2D overlay layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon text \"I FINISHED WHAT WE STARTED. THEY OBEY ME. EVERYONE WILL.\" is spelled correctly with no doubling or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": true,
+      "confidence": "low",
+      "reason": "Only 3 cheer-squad figures are clearly identifiable (space-buns at left, curly and long-hair at right) behind the two front-and-center figures; the ponytail leader and pigtails member are not clearly visible. This may simply be occlusion from the two widely-spread arms/bodies in the foreground rather than a true absence, hence low confidence."
+    },
+    "character_identity_swap": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The figure occupying Rochelle's scripted position and pose ('spreads her arms over her frozen squad, a showman's smile') and voicing her line (balloon tail points to her) has long wavy caramel/reddish-brown hair and wears a burgundy tied button-up + black slacks -- this is Jill's face and canonical 'grown' look (compare references/characters/jill/identity-sheet.png), not Rochelle's dark chin-lengt"
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Football field turf, bleachers, goalpost, and brick building match the scripted 'field' location."
+    }
+  }
+}

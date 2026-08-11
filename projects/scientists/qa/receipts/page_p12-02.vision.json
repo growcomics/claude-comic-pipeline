@@ -1,0 +1,83 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p12-02",
+  "image": "projects/scientists/pages/p12-02.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Two squad members read perceptibly lighter/warmer than their identity-sheet references: the ponytail leader's hair (medium ashy-brown on her reference) reads distinctly golden/sandy-blonde here, and the 'pigtails' cheerleader (middle of frame) reads warm light-blonde/champagne versus the cool silver-grey on her identity sheet. The curly and long-hair squad members' brown tones still read true to r"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Warm low-sun rim lighting is consistent across all five cheerleaders, the cooler, and the field/bleachers background; no lighting-direction or shadow inconsistency."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Two squad members read perceptibly lighter/warmer than their identity-sheet references: the ponytail leader's hair (medium ashy-brown on her reference) reads distinctly golden/sandy-blonde here, and the 'pigtails' cheerleader (middle of frame) reads warm light-blonde/champagne versus the cool silver-grey on her identity sheet. The curly and long-hair squad members' brown tones still read true to r"
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All five cheerleaders wear fully intact red-and-white uniforms with white sneakers/socks, matching 'cheer-squad: uniforms intact' and showing no strain consistent with their near-baseline tier 1."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All five cheerleaders are consistently sized/spaced at the same depth around the cooler; no scale glitch."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble contains 'HYDRATE, LADIES! COACH'S ORDERS!' with its tail pointing to the ponytail leader pouring drinks, matching the scripted attribution to 'the ponytail leader'."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "All five cheerleaders look essentially baseline with no visible muscle growth, appropriate for the scripted tier of 1 (just above baseline, not yet visible)."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Skin, hair, uniforms and field render photoreally with natural sunlit PBR shading; no ink outlines or cel-shading outside the legal bubble/SFX overlay."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble text 'HYDRATE, LADIES! COACH'S ORDERS!' and SFX 'GLUG GLUG' are both spelled correctly and match the scripted lines exactly, with no duplication."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Exactly five cheerleaders (ponytail, space-buns, pigtails, curly, long-hair) are present at the cooler, matching the scripted cheer-squad count of five with no extras."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "All five distinguishing hairstyles (ponytail, twin space-buns, twin pigtails, curly, long straight/wavy) are each represented by one figure, matching the five canonical squad members with no roles swapped."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Football field turf, yard lines, bleachers and goal post match the scripted 'field' location."
+    }
+  }
+}

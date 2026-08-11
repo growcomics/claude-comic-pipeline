@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p11-03",
+  "image": "projects/scientists/pages/p11-03.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Lighting on Rochelle's arm/hand and Donny's arm/sleeve is consistent with the overhead lab lighting; shadows on the counter and glassware fall consistently. No compositing seam or floating-limb artifact."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Neither character's hair is in frame (close insert crops both heads out) so hair cannot be compared to canonical references; no evidence of a defect."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Rochelle wears a black tank top matching the panel's scripted costume_state ('rochelle: black tank, grown'); Donny's visible sleeve is grey, matching 'donny: grey tee intact'. Both consistent with context."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Rochelle's forearm/bicep is dramatically larger than Donny's arm, but this matches the scripted tier gap (rochelle tier 7 vs donny tier 1) rather than a model scale glitch."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble contains 'DRINK, DONNY.' and its tail points up-right toward Rochelle's off-frame shoulder/head, matching the scripted 'tail to Rochelle off-frame' attribution."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Rochelle's arm shows extreme, veiny, hypertrophied musculature consistent with tier 7; Donny's visible arm/hand is normal-proportioned, consistent with tier 1 (pre-change)."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Skin, muscle definition, and lab environment render photoreally with subsurface scattering and PBR materials; no ink outlines or cel-shading outside the legal 2D bubble/SFX layer."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble text 'DRINK, DONNY.' and SFX 'CREAK' are both spelled correctly, match the scripted action line exactly, and there is no duplication."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Both scripted characters (rochelle, donny) are represented in frame via arm/hand; the close-insert camera intentionally crops both heads, matching the scripted camera direction."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Faces are not visible to confirm identity directly, but wardrobe cues (grey tee sleeve = Donny, black tank + fair skin = Rochelle) are consistent with the scripted pairing and no other cast member's traits appear."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Background shows lab benches, beakers, a microscope, and cabinetry consistent with the scripted 'lab' location."
+    }
+  }
+}

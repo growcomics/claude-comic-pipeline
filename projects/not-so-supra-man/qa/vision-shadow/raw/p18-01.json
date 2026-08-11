@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Night lighting is plausible across the scene (window glow, ambient spotlights, city lights); the unscripted rooftop figure's rim lighting doesn't clearly clash with a specific source, though its presence at all is addressed under character_count_error."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "No named cast member appears in this panel to compare against reference hair."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "No named/scripted character is in this panel to judge against a canonical costume spec; the unscripted rooftop figure's suit doesn't match any established cast costume but is captured under character_count_error instead."},
+  "scale_error": {"detected": false, "confidence": "medium", "reason": "The foreground pigeon appears large relative to the building, but this reads as intentional forced perspective for a close-to-camera startled bird on a worms-eye wide-establish shot, not a model scale error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles baked into the panel; only a scripted caption exists, applied downstream."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "No named character with a scripted tier appears in this panel."},
+  "prompt_bloat_artifact": {"detected": true, "confidence": "high", "reason": "The panel breaks from the photoreal CGI look used elsewhere: cracks glow as bright graphic/vector-style jagged lines rather than physically-lit fractures, the pigeon has flat, sharply-outlined illustrated shading, and the rooftop figure's armor reads as clean cel-shaded linework rather than rendered 3D materials."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering baked into the panel; the scripted caption is applied downstream."},
+  "character_count_error": {"detected": true, "confidence": "high", "reason": "A costumed humanoid figure stands on the rooftop in the right foreground. Panel context lists zero characters and the CAST CANON explicitly states p18 is a no-character cutaway gag where ANY human figure in frame is a character_count_error."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "No scripted role exists in this panel to be filled by the wrong character; the unscripted figure is an extra presence, not a substitution, and is captured under character_count_error."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "The brutalist concrete building exterior at night with city skyline matches the scripted lab-exterior cutaway."}
+}

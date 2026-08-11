@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Kitchen lighting (pendant lamp, window light) falls consistently across Rochelle's extended arm, the pill, and Jim's reaching hand; no lighting-direction or shadow inconsistency between the two figures."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "The small visible sliver of Rochelle's dark hair (top-left) matches her reference; Jim's hair is not visible in this insert."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Rochelle's teal blouse and white lab coat (sleeve rolled/pushed up over the muscular forearm) match 'split-sleeved lab coat + strained teal blouse, grown'; blouse collar is open but not exposing breast coverage. Jim's navy jacket sleeve is intact as scripted."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "The pill is drawn small against Rochelle's large palm and Jim's hand looks normal-sized beside her oversized hand — this is the scripted contrast ('tiny against her huge palm'), not a model/scale defect."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Bubble contains 'WANT TO CATCH UP?' with tail pointing toward Rochelle's mouth at the panel's edge — correctly attached per script ('tail to Rochelle, off-panel edge')."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Rochelle's forearm shows pronounced muscle/vein definition consistent with scripted tier 7."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin texture on both the arm and hands renders photoreal with visible veins/pores/creases; no ink outlines or flat shading. Bubble is the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Bubble text 'WANT TO CATCH UP?' matches the script exactly across two wrapped lines, no doubling or typos."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Two figures partially in frame (Rochelle's head/arm, Jim's arm/shoulder), matching expected_named_cast_size 2; the tight insert framing intentionally crops both, per script."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Visible teal blouse fabric and dark hair sliver are consistent with Rochelle; navy jacket sleeve is consistent with Jim. No swap indicated."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Background shows kitchen cabinetry, sink, kettle and toaster consistent with the scripted 'kitchen' location."}
+}

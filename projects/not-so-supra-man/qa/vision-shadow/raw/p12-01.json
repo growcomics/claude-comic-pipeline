@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Rain and overcast diffuse lighting fall consistently across both characters and the blurred background; no lighting-direction or color-temperature clash."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black bob (rain-wet) and Supraman's dark hair both match their face-card references in hue."},
+  "costume_discontinuity": {"detected": true, "confidence": "medium", "reason": "Supraman's suit is scripted 'scorched' but reads as an intact, clean blue suit that is merely rain-wet, not charred or singed. Dana's white blouse and charcoal skirt are correctly split at the shoulder/hip seams while still covering, with buttons visibly flying off, matching her costume_state."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Dana is rendered much larger than Supraman, but the camera is explicitly worms-eye/forced-perspective for a scripted GROWTH 2 EVENT — this dramatic size contrast is intentional per PANEL CONTEXT and CAST CANON's note on their intentional relative-size gap, not a model error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Dana's forearms and arms are dramatically enlarged, consistent with a tier-6 surge; not under-rendered, and not pushed to the tier-9 benchmark (arms thicker than her head) either."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering with realistic wet-skin and wet-fabric detail, rain streaks, and consistent shading; no 2D illustration drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Two characters (Dana, Supraman) are present, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Both faces match their canonical references."},
+  "location_mismatch": {"detected": true, "confidence": "high", "reason": "The panel clearly shows falling rain and a blurred exterior city skyline under an overcast sky — an outdoor scene, not the scripted doomer-lab interior (concrete walls, steel gantry, cable bundles, overhead flood lights)."}
+}

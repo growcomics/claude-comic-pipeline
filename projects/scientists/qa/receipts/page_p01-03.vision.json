@@ -1,0 +1,68 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p01-03",
+  "image": "projects/scientists/pages/p01-03.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single-subject MCU; window backlight and interior fill light are physically plausible and consistent across her face/hair/coat."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Base hair tone (sides, lower length) still reads dark brown consistent with the reference; the window behind her rim-lights the crown/part with warmer, lighter brown highlights, which reads as physically-based backlighting rather than an asset-level hue shift, but the warm crown is close enough to flag for a second look."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Teal blouse and white lab coat visible at chest/shoulders, matching costume_state."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single close-up, no relative-scale elements to misjudge."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Bubble contains full text 'FORGET IT. I'M LATE FOR THE LAB.' with tail correctly to Rochelle, the sole character in frame."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Baseline/tier-0 proportions consistent with her identity sheet."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Skin and hair render photoreal with no ink outlines or flat shading."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Text 'FORGET IT. I'M LATE FOR THE LAB.' reads clean, correct apostrophe, no doubling or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "1 character shown, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Facial features and hairstyle match Rochelle's canonical identity sheet."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Kitchen interior background (door, window, cabinet edge) consistent with scripted location."
+    }
+  }
+}

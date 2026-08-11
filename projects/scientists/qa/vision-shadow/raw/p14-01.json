@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Jill is sharply focused in the foreground with the field/bleachers/brick building softly blurred behind her -- normal depth of field for a close MCU, with consistent warm backlighting throughout. No paste artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Jill's long wavy caramel-brown hair matches her identity-sheet reference in color and style."},
+  "costume_discontinuity": {"detected": true, "confidence": "high", "reason": "Jill is rendered in her BASELINE outfit -- white lab coat over a fully-buttoned, unstrained burgundy blouse -- matching her identity sheet, but this panel's costume_state scripts 'athletic top, grown.' No athletic top is present, and the blouse shows no straining consistent with a grown physique."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Jill and the flask are proportionate; no scale anomaly."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon \"MY TURN AGAIN.\" contains text and its tail points to Jill's head, the only speaker in this panel."},
+  "tier_visualization_mismatch": {"detected": true, "confidence": "high", "reason": "Context specifies muscle_size_tier 7 ('grown'), but Jill's visible forearm and build read as normal/baseline-toned rather than the beyond-bodybuilder mass shown for her in the immediately preceding panel p13-05 (thick, heavily vascular forearm) -- a sharp, unexplained downgrade within the same continuous scene."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Rendering is photoreal CGI throughout; only the balloon and GULP SFX are the legal 2D overlay layer."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text \"MY TURN AGAIN.\" and SFX \"GULP\" are both spelled correctly with no doubling or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Jill appears, matching the single scripted character for this panel."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Face and hair clearly match Jill's canonical identity; the costume/tier mismatch is captured separately and is not a swap to a different character."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Football field turf, yard line, goalpost, bleachers, and brick building in the background match the scripted 'field' location."}
+}

@@ -1,0 +1,99 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p23-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p23-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Dee-Dee's hair reads as much lighter/less saturated (near white-blonde) than her warm golden-blonde reference. This is partly attributable to the teal beam's illumination bathing her in light, but a perceptible lightening shift is visible regardless."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-05"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "emblem_leak"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "A large gold chevron/shield emblem is clearly visible on Dee-Dee's torn top beneath the lab coat. CAST CANON states Dee-Dee must have NO emblem of any kind, ever -- this is a direct, prominent violation."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "The teal beam's self-illumination plausibly explains the lighting difference between Dee-Dee (inside the beam) and Doomer (outside it); no copy-paste artifact."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Dee-Dee's hair reads as much lighter/less saturated (near white-blonde) than her warm golden-blonde reference. This is partly attributable to the teal beam's illumination bathing her in light, but a perceptible lightening shift is visible regardless."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "A large gold chevron/shield emblem is clearly visible on Dee-Dee's torn top beneath the lab coat. CAST CANON states Dee-Dee must have NO emblem of any kind, ever -- this is a direct, prominent violation."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Both figures are proportioned plausibly relative to the beam apparatus and console."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Panel is pre-lettering with no baked-in speech bubbles."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dee-Dee's visible build (arms, torso through the torn top) looks fit but not extremely muscular, plausible for tier 3, though the beam/torn-clothing staging limits a precise read."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering; the beam's particle/light effects look rendered rather than flat-shaded or cel-shaded."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering baked into the panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Exactly two figures present, matching expected_named_cast_size of 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Facial features confirm Dee-Dee and Doomer despite the hair-color and emblem issues."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Console, wiring, and lab equipment match the scripted doomer-lab-2."
+    }
+  }
+}

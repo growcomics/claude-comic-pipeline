@@ -1,0 +1,99 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p26-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p26-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "The curly hair visible at the top of frame in all three stages reads as light, cool platinum/ash-white blonde, matching the same lightened-and-desaturated shift seen elsewhere for Dee-Dee versus her warmer honey-gold canonical face-card reference."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-05"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "emblem_leak"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "A gold triple-chevron marking is visible on the lower back/hip of Dee-Dee's black corset bottom in stage 3 (rightmost sub-panel) \u2014 absent in stages 1 and 2. CAST CANON explicitly states any gold chevron on Destroya's corset is a defect ('the corset is PLAIN BLACK; any gold chevron on her corset, cuffs, or body is a defect')."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Three growth-progressive sub-panels are evenly lit against the same flat gray backdrop with consistent shadow falloff under the boots in each stage; no lighting-direction or color-temperature seam between figure and background."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "The curly hair visible at the top of frame in all three stages reads as light, cool platinum/ash-white blonde, matching the same lightened-and-desaturated shift seen elsewhere for Dee-Dee versus her warmer honey-gold canonical face-card reference."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "A gold triple-chevron marking is visible on the lower back/hip of Dee-Dee's black corset bottom in stage 3 (rightmost sub-panel) \u2014 absent in stages 1 and 2. CAST CANON explicitly states any gold chevron on Destroya's corset is a defect ('the corset is PLAIN BLACK; any gold chevron on her corset, cuffs, or body is a defect')."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Single character across all three ECU stages; no other figures or props present to create a scale mismatch."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles present; context lists no scripted dialogue or captions for this panel."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Stage 3 shows massively hypertrophied, diamond-shaped calves and quads with the boots bursting open at the top seam, consistent with the scripted tier-8 progression from stage 1's athletic legs."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal skin rendering with pore detail, sweat sheen, and physically-plausible muscle shading throughout; no ink outlines or flat 2D color blocking."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering to check; panel is pre-lettering with no scripted dialogue/captions."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Only Dee-Dee appears, at three sizes across the growth-progressive sub-panels \u2014 the documented multi-stage format, matching expected_named_cast_size of 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Build, hair texture, and wardrobe (corset + striped boots + wrist cuffs) are consistent with Dee-Dee/Destroya across all three stages; rear-view framing limits facial confirmation but nothing suggests a different character."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Tight ECU crop shows only a flat gray backdrop with no visible environment anchors; nothing visible contradicts the scripted doomer-lab-2 interior."
+    }
+  }
+}

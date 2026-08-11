@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Both characters and the floor/backdrop share a consistent light source and shadow direction; no copy-pasted or scale-as-compositing artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "high", "reason": "Dana's jet-black bob and Supraman's dark side-parted hair both match their face-card references in hue and style."},
+  "costume_discontinuity": {"detected": true, "confidence": "medium", "reason": "Supraman's suit is scripted as 'scorched' but renders as a pristine, unblemished blue suit with no soot, char, or singe marks visible on chest, sleeves, cape, belt, or boots. (Dana's white blouse is correctly torn-but-covering at the shoulder/sleeve with no emblem, matching her costume_state.)"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Supraman and Dana are proportioned normally relative to each other and the rope/floor; no model-scale error."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "No speech bubbles are baked into this panel."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "medium", "reason": "Dana's flexed, defined arms read as muscular/toned and consistent with muscle_size_tier 4; not under- or over-rendered."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering with realistic skin, fabric, and metal/leather textures; no 2D illustration drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "No lettering is present in this panel."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Two characters (Dana, Supraman) are present, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Both faces and builds match their canonical references — Dana's face/bob and Supraman's face/build are correctly cast."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Plain gray floor and backdrop show no sky, rain, or exterior architecture, so nothing contradicts an interior reading, though specific lab set-dressing (gantry, cables, ray rig) is not visible in this crop either."}
+}

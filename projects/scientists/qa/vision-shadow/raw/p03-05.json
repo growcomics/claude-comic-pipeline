@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Hand/mug in sharp foreground focus and lab background in shallow-DOF blur share consistent overhead cool lighting; no seam or lighting-direction conflict."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "No hair is visible in this insert shot (only hand/forearm and mug), so there is nothing to compare against the reference."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Visible teal blouse cuff under a white lab coat sleeve matches Rochelle's scripted costume_state 'lab coat + teal blouse intact'."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Hand and mug are proportioned normally relative to the bench and background props."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "No speech balloon is present in this panel; the yellow box is a caption ('SHE FINISHED THE WHOLE CUP.'), not a speech bubble, and it contains text."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Only a hand/forearm is visible; it shows no obvious added mass, but scripted tier 1 is an early/subtle stage so this is consistent with, not contradictory to, the scripted tier."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Hand, mug, and lab set render photoreal; the green swirl inside the mug reads as a photoreal glowing liquid/particle effect rather than 2D ink or cel shading."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Caption 'SHE FINISHED THE WHOLE CUP.' and SFX 'GLOW' both match the scripted text exactly, no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only one figure's hand/arm (Rochelle) is present, matching expected_named_cast_size of 1; no other figures visible in the background."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Teal blouse cuff correctly identifies the hand as Rochelle's, not Jill's (burgundy)."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab bench, test-tube rack, microscope and cabinetry in background match the scripted 'lab' location."}
+}

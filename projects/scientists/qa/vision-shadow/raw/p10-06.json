@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Rochelle and the soft-focus background are part of one continuous shallow-DOF lab shot; no lighting or seam mismatch."},
+  "hair_discontinuity": {"detected": false, "confidence": "medium", "reason": "Dark bob with a side-swept fringe reads slightly darker under this close-up's lighting angle than the identity sheet's front-lit warmer tone, but no clear hue shift (e.g. toward orange/lighter) beyond ordinary value/contrast change from the camera angle."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Black tank top, matches scripted 'black tank, grown.'"},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "No scale artifact on Rochelle herself."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Thought cloud 'STRENGTH AND OBEDIENCE. PHASE TWO WORKS.' is fully lettered, with its trailing bubbles correctly attaching to Rochelle, the sole speaker/thinker."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Crossed arms show the same huge, built-up mass established for her grown/tier-7 state in p10-01/p10-05."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal skin/fabric rendering maintained; the single-quote marks around the thought-bubble text are a standard thought-quote convention, not 2D drift."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Thought bubble text is correctly spelled with no doubled words or duplicate bubbles."},
+  "character_count_error": {"detected": true, "confidence": "medium", "reason": "A second, soft-focus humanoid silhouette (head/shoulder shape consistent with a standing figure, likely Dan continuing from the prior panel) is visible in the blurred background behind Rochelle's right shoulder, but this panel's context scripts only Rochelle (expected_named_cast_size: 1). Medium confidence since the shape is heavily out of focus and could conceivably be lab equipment."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Rochelle's dark bob and build are correctly cast; no swap on the named character."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Same lab set as the surrounding panels."}
+}

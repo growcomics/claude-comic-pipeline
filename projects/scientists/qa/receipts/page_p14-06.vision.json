@@ -1,0 +1,111 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p14-06",
+  "image": "projects/scientists/pages/p14-06.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Jill's hair (left) reads as a warm auburn/copper tone, a visible shift from her caramel-brown reference, even under this flatter overcast light (less attributable to golden-hour skew than in the p14-04/p14-05 panels). Rochelle's dark bob (right) matches her reference closely."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Jill (left) is scripted 'super' (tier 8) but is rendered in her BASELINE wardrobe \u2014 white lab coat, burgundy blouse buttoned normally, black slacks \u2014 not the black athletic crop top/shorts CAST CANON specifies for 'super.' Rochelle (right) correctly wears the grown-tier white tank top + open lab coat + grey joggers."
+    },
+    {
+      "category": "tier_visualization_mismatch",
+      "confidence": "high",
+      "registry_ids": [
+        "BODY-01"
+      ],
+      "registry_slugs": [
+        "size_underrender"
+      ],
+      "groups": [
+        "SIZE"
+      ],
+      "reason": "Jill is scripted tier 8 ('super') but shows no visible muscle development at all \u2014 slim arms, no bulge or definition, reading as baseline/tier 0. Rochelle's visible mass (large arms, defined abs) is consistent with her scripted tier 7 ('grown')."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both figures are lit consistently under the same soft overcast sky; shadow direction and color temperature match between them and the field background, with no floating body parts."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Jill's hair (left) reads as a warm auburn/copper tone, a visible shift from her caramel-brown reference, even under this flatter overcast light (less attributable to golden-hour skew than in the p14-04/p14-05 panels). Rochelle's dark bob (right) matches her reference closely."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Jill (left) is scripted 'super' (tier 8) but is rendered in her BASELINE wardrobe \u2014 white lab coat, burgundy blouse buttoned normally, black slacks \u2014 not the black athletic crop top/shorts CAST CANON specifies for 'super.' Rochelle (right) correctly wears the grown-tier white tank top + open lab coat + grey joggers."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The two women read as similar adult height/scale relative to each other and to the field background."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both balloons contain text; the tails of 'YOU IMPROVED MY FORMULA?' and 'I PERFECTED IT.' both trace toward Rochelle (right, holding the vial), consistent with both lines being attributed to her in context."
+    },
+    "tier_visualization_mismatch": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Jill is scripted tier 8 ('super') but shows no visible muscle development at all \u2014 slim arms, no bulge or definition, reading as baseline/tier 0. Rochelle's visible mass (large arms, defined abs) is consistent with her scripted tier 7 ('grown')."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Photoreal rendering is maintained on both characters; no ink-outline or cel-shaded drift."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Both balloon texts match the scripted lines exactly, no typos, doubled words, or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Exactly two figures (Jill, Rochelle) in frame, matching expected_named_cast_size 2."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Hair and build correctly identify the muscular dark-bob figure as Rochelle and the long-wavy-haired figure as Jill; no swap, though Jill's tier/wardrobe is wrong (see other categories)."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Football field with goalpost and stands in the background matches the scripted 'field' location."
+    }
+  }
+}

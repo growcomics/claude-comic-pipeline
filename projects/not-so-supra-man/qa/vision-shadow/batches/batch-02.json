@@ -1,0 +1,234 @@
+{
+  "batch_id": "batch-02",
+  "project": "projects/not-so-supra-man",
+  "rubric": "projects/not-so-supra-man/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "dana-lane (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/dana-lane/face-card.png"
+    },
+    {
+      "label": "supraman (face-card)",
+      "path": "projects/not-so-supra-man/references/characters/supraman/face-card.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p09-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p09-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p09-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "ecu-region, profile, dutch",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dana's midsection in profile. Stage 1: blouse taut over a soft waist. Stage 2: fabric stretching as abdominal ridges press through. Stage 3: blouse hem parted, carved eight-pack abs exposed, skin glistening.",
+        "costume_state": "dana: blouse hem parts across stages, midriff bare by stage 3",
+        "muscle_size_tier": {
+          "dana-lane": 4
+        },
+        "size": "splash",
+        "notes": "In-image 3-panel progressive. Keep blouse covering the chest \u2014 midriff only exposed.",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p10-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p10-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p10-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "medium, over-shoulder",
+        "action": "Dana flexes both arms in a power pose, rope shreds at her feet; Supraman steps close, hand on her shoulder, equal parts awe and worry. Their eyelines lock along a diagonal.",
+        "costume_state": "dana: blouse torn-but-covering; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 4
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "The beam bounced my power into you. It should wear off... I think.",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "And if I don't want it to?",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p11-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p11-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p11-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "mcu, three-quarter",
+        "action": "Mid-embrace. Dana's eyes fly open against his cheek \u2014 the teal shimmer reignites along her shoulders, stronger.",
+        "costume_state": "dana: blouse torn-but-covering; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 4
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Oh\u2014 it's happening AGAIN\u2014",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p12-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p12-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p12-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "full, worms-eye",
+        "action": "GROWTH 2 EVENT. Dana surges to tier 6 \u2014 head thrown back, fists clenched, blouse and skirt seams splitting at shoulder and hip (still covering), hem lines snapping. Supraman shields his face from flying buttons in the foreground.",
+        "costume_state": "dana: blouse+skirt seams split at shoulder/hip, still covering; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "dana-lane",
+            "text": "Bigger\u2014 I'm getting BIGGER!",
+            "type": "shout"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p13-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p13-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p13-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "ecu-region, low-angle-front",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, Dana's chest and shoulders front-on. Stage 1: blouse straining across her chest, top button gone. Stage 2: chest and pec shelf swelling outward, placket gapping, fabric pulled to silk-thin. Stage 3: blouse knotted remnant barely containing a massively expanded bust + flared collarbone shelf, every seam blown but coverage intact.",
+        "costume_state": "dana: blouse strains to knotted remnant across stages, chest covered throughout",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "notes": "Over-spec chest size per compensation rule. COVERED at every stage.",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p14-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p14-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p14-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "ecu-region, low-angle-back",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, her back. Stage 1: blouse back taut, shoulder blades defined. Stage 2: lats flaring wide, back seam splitting downward. Stage 3: full cobra back exposed through the split, trap mountains, blouse hanging on as sleeves.",
+        "costume_state": "dana: blouse back seam splits across stages, hangs as sleeves by stage 3",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p15-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p15-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p15-01.json",
+      "context": {
+        "characters": [
+          "dana-lane"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "ecu-region, profile",
+        "action": "GROWTH-PROGRESSIVE page: three vertical sub-panels, hip-to-calf in profile. Stage 1: pencil skirt taut over toned thighs. Stage 2: quad sweep and glutes stretching the skirt, side-slit tearing upward. Stage 3: skirt reduced to a secure wrap, diamond calves and huge sweeping quads exposed, heels snapped flat.",
+        "costume_state": "dana: skirt tears to secure wrap across stages, hips/glutes covered",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "notes": "Wrap stays covering hips/glutes \u2014 slit shows thigh only.",
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p16-01",
+      "image": "projects/not-so-supra-man/pages/panels-hf/p16-01.png",
+      "out": "projects/not-so-supra-man/qa/vision-shadow/raw/p16-01.json",
+      "context": {
+        "characters": [
+          "dana-lane",
+          "supraman"
+        ],
+        "location": "doomer-lab",
+        "time_of_day": "interior",
+        "camera": "mcu, eye-level",
+        "action": "Dana, tier 6 in torn-but-covering remnants, lifts his chin with one finger, leaning down into his space \u2014 he's flustered. Heat, confidence, a held breath between them.",
+        "costume_state": "dana: torn-but-covering remnants; supraman: suit scorched",
+        "muscle_size_tier": {
+          "dana-lane": 6
+        },
+        "size": "splash",
+        "scripted_dialogue": [
+          {
+            "character": "supraman",
+            "text": "We should... find you something to wear\u2014",
+            "type": "balloon"
+          },
+          {
+            "character": "dana-lane",
+            "text": "Why? I have never felt MORE dressed for the occasion.",
+            "type": "balloon"
+          }
+        ],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    }
+  ]
+}

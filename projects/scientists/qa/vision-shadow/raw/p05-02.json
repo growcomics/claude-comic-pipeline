@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Face and lab-cabinet background share consistent soft overhead lighting and color temperature; no floating or disconnected elements."},
+  "hair_discontinuity": {"detected": true, "confidence": "medium", "reason": "Jill's hair in this bright, close face CU reads noticeably lighter and more golden/honey-toned than the deeper caramel-brown in her identity-sheet reference - a perceptible lightening shift across the crown and cascading waves."},
+  "costume_discontinuity": {"detected": false, "confidence": "high", "reason": "Burgundy blouse buttoned to the collar under an intact white lab coat, unstrained, matching the scripted 'jill: lab coat + burgundy blouse intact' baseline state."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Single-character close-up with no other figures or props for a scale conflict to arise."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "Bubble reads \"I DID YOU A FAVOR. THE TRIAL WORKED.\" with tail pointing to Jill's mouth/chin."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Jill's visible shoulders/chest read as an unstrained, average baseline build, consistent with scripted tier 0."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Skin and environment render photoreal with subsurface scattering; only the speech bubble is a 2D overlay element, within the legal lettering scope."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "Bubble text matches the scripted line exactly, no doubled words, missing apostrophes, or duplicate bubbles."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Only Jill appears in frame, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "Burgundy blouse and facial features correctly identify this as Jill, not Rochelle."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Background lab cabinetry and microscope match the scripted lab location."}
+}

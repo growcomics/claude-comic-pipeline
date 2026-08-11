@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": true, "confidence": "low", "reason": "An extremely out-of-focus skin-toned shape occupies the bottom-left corner, separate from Rochelle's clearly-attached raised hand in the mid-ground; it reads most likely as her other hand/arm passing very close to camera, but it is blurred and cropped enough at the frame edge that a disembodied-limb compositing artifact can't be fully ruled out. Flagged low for genuine uncertainty."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark-brown bob matches Rochelle's identity-sheet hue and length, no shift observed."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Teal blouse and white lab coat pulling tight across chest/shoulders matches the scripted costume_state 'teal blouse and lab coat tightening across chest and shoulders, all coverage intact'; blouse remains buttoned and breasts stay covered."},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Rochelle is proportioned normally relative to the bench and shelving behind her."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Balloon contains text 'WH-WHAT'S HAPPENING TO ME?!' with its tail pointing to Rochelle's mouth, the only character in frame."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Chest, shoulders and upper arms show moderate swelling straining the blouse and coat, consistent with the scripted mid-range tier 3 — noticeably beyond baseline but not yet torn/ripped, which matches later higher-tier panels in this batch."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Skin, fabric and lab set render photoreal with natural shading and fabric texture; only the balloon and SFX are the legal 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Balloon text 'WH-WHAT'S HAPPENING TO ME?!' and SFX 'RUMBLE' both match the scripted text exactly, no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "Only Rochelle is clearly present, matching expected_named_cast_size of 1; the ambiguous foreground blur is addressed under composite_mismatch rather than as a confirmed second figure."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Dark bob and teal blouse correctly identify this figure as Rochelle."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab cabinetry, shelving and reagent bottles in the background match the scripted 'lab' location."}
+}

@@ -1,0 +1,101 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p33-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p33-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Destroya's (Dee-Dee) curly hair on the left reads as pale platinum/ash-blonde in this panel, noticeably lighter and less saturated than the warm honey-gold blonde in her canonical face-card reference. Dana's black bob and Supraman's dark hair both match their references."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-05",
+        "WARD-04"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "emblem_leak",
+        "costume_stage_error"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Dana's blue hero suit (full body visible mid-kick, center) shows no separate skirt garment over the bodysuit -- it reads as a single-piece catsuit from shoulders to boots -- though CAST CANON specifies 'BLUE hero suit + gold double-chevron delta emblem + skirt' for page 20+. Lower-confidence secondary note: Supraman's chest emblem (partially visible, lying in the crater, bottom right) appears fram"
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Lighting (soft overcast, top-front) and shadow direction are consistent across Dana (airborne), Destroya, and Supraman (in the crater); no floating-limb or foreground/background color-temperature mismatch observed."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Destroya's (Dee-Dee) curly hair on the left reads as pale platinum/ash-blonde in this panel, noticeably lighter and less saturated than the warm honey-gold blonde in her canonical face-card reference. Dana's black bob and Supraman's dark hair both match their references."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Dana's blue hero suit (full body visible mid-kick, center) shows no separate skirt garment over the bodysuit -- it reads as a single-piece catsuit from shoulders to boots -- though CAST CANON specifies 'BLUE hero suit + gold double-chevron delta emblem + skirt' for page 20+. Lower-confidence secondary note: Supraman's chest emblem (partially visible, lying in the crater, bottom right) appears fram"
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Destroya reads taller/bulkier than Dana and Supraman but at a human-adjacent scale consistent with a tier-8 physique standing near tier-6/athletic figures; no giant-scale or doll-scale artifact."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No speech bubbles are baked into this panel (pre-lettering); absence is not a defect per rubric."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana (tier 6) reads muscular-athletic and clearly smaller/leaner than Destroya (tier 8, left), whose mass and definition look appropriately beyond-bodybuilder. Supraman (bottom right) remains lean/athletic, not bodybuilder-bulky. Proportions track the scripted tiers."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Rendering is consistently photoreal CGI -- skin, cloth, and cloud textures show no ink outlines, flat color blocking, or cel-shading."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No baked-in lettering is present in this panel to evaluate."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Exactly the three scripted characters (Dana, Destroya/Dee-Dee, Supraman) are visible in frame, matching expected_named_cast_size 3. No background extras."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana (black bob, blue suit), Destroya (blonde, black corset), and Supraman (dark hair, blue suit/red cape) each match their expected identities and distinguishing features."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "medium",
+      "reason": "Cracked outdoor pavement under an overcast sky reads as consistent with the scripted city-street venue, though this particular crop shows no distinct buildings or road markings to fully confirm it, hence not high confidence."
+    }
+  }
+}

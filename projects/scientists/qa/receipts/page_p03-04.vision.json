@@ -1,0 +1,83 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p03-04",
+  "image": "projects/scientists/pages/p03-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "lettering_error",
+      "confidence": "high",
+      "registry_ids": [
+        "LET-02"
+      ],
+      "registry_slugs": [
+        "garbled_text"
+      ],
+      "groups": [
+        "LETTER"
+      ],
+      "reason": "A large 'FIZZZ' SFX is baked in over the right-side bench (near the microscope/shelving) with no fizzing liquid or reaction visible beneath it and no SFX scripted for this panel (PANEL CONTEXT only calls for the one THOUGHT bubble 'THE SUGAR HELPS IT BIND. DRINK UP.'). This reads as a stray/erroneous SFX, likely bled over from p03-01's scripted 'FIZZZ' cue at the mug."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill and the lab set (equipment bay, benches, shelving) share consistent cool overhead lighting and shadow direction; no copy-paste seam visible."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill's hair here is a warm caramel-brown consistent with her identity-sheet reference, not showing the orange/red saturation shift seen in p03-02."
+    },
+    "costume_discontinuity": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "White lab coat over burgundy blouse and black slacks matches scripted costume_state 'lab coat + burgundy blouse intact' and the identity sheet."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill and the background lab equipment/furniture are proportioned plausibly relative to each other."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Cloud-shaped thought bubble contains text 'THE SUGAR HELPS IT BIND. DRINK UP.' with its dot trail leading back to Jill's head, the only scripted character."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Jill is rendered at baseline proportions matching scripted tier 0."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Scene rendering is photoreal CGI with no ink outlines or flat cel shading; only the thought bubble and SFX text are the legal 2D overlay."
+    },
+    "lettering_error": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "A large 'FIZZZ' SFX is baked in over the right-side bench (near the microscope/shelving) with no fizzing liquid or reaction visible beneath it and no SFX scripted for this panel (PANEL CONTEXT only calls for the one THOUGHT bubble 'THE SUGAR HELPS IT BIND. DRINK UP.'). This reads as a stray/erroneous SFX, likely bled over from p03-01's scripted 'FIZZZ' cue at the mug."
+    },
+    "character_count_error": {
+      "detected": true,
+      "confidence": "low",
+      "reason": "Heavily out-of-focus foreground blurs in the bottom-left and bottom-right corners have skin/hair-like tones and could be an unscripted second figure (e.g. Rochelle) partially in frame near the camera; too blurred/abstract to be certain it isn't just foreground bokeh or set geometry, so flagged at low confidence. Scripted cast for this panel is Jill only."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The in-focus figure correctly matches Jill (caramel wavy hair, burgundy blouse), not Rochelle."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Lab equipment bay, cabinetry, glassware and reagent shelving match the scripted 'lab' location."
+    }
+  }
+}

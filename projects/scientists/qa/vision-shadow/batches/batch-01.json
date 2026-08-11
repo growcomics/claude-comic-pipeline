@@ -1,0 +1,226 @@
+{
+  "batch_id": "batch-01",
+  "project": "projects/scientists",
+  "rubric": "projects/scientists/qa/vision-shadow/rubric.md",
+  "reference_images": [
+    {
+      "label": "cast-lineup",
+      "path": "projects/scientists/references/characters/cast-lineup.png"
+    },
+    {
+      "label": "rochelle (identity-sheet)",
+      "path": "projects/scientists/references/characters/rochelle/identity-sheet.png"
+    },
+    {
+      "label": "jim (identity-sheet)",
+      "path": "projects/scientists/references/characters/jim/identity-sheet.png"
+    },
+    {
+      "label": "jill (identity-sheet)",
+      "path": "projects/scientists/references/characters/jill/identity-sheet.png"
+    }
+  ],
+  "panels": [
+    {
+      "panel_id": "p01-01",
+      "image": "projects/scientists/pages/p01-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p01-01.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "morning",
+        "camera": "wide establishing, slightly high look-down",
+        "action": "Morning argument brewing: Rochelle stands at the kitchen counter arms crossed, turned three-quarters away from Jim, who sits at the dining nook table reaching into a bread basket for a donut. Tension in the body language; her facial expression and pose reflect simmering hurt and anger, his reflect oblivious appetite. Caption box top-left: \"MONDAY MORNING.\" One speech balloon, tail to Jim's mouth: \"YOU PROBABLY SHOULDN'T HAVE ANOTHER DONUT, HON.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX grap",
+        "costume_state": "rochelle: teal blouse + grey pencil skirt intact; jim: navy track jacket + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 0,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p01-02",
+      "image": "projects/scientists/pages/p01-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p01-02.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "morning",
+        "camera": "over-shoulder medium, camera slightly below Rochelle's chest height",
+        "action": "Shot past Jim's shoulder onto Rochelle mid-outburst, leaning forward accusingly, one hand planted on the counter; her facial expression and pose reflect wounded fury as she snaps at him. One JAGGED-EDGED starburst shout balloon, tail to Rochelle's mouth: \"YOU THINK I'M FAT, DON'T YOU, JIM?!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scatte",
+        "costume_state": "rochelle: teal blouse + grey pencil skirt intact; jim: navy track jacket + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 0,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p01-03",
+      "image": "projects/scientists/pages/p01-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p01-03.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "kitchen",
+        "time_of_day": "morning",
+        "camera": "close mcu on Rochelle",
+        "action": "Tight chest-up shot: Rochelle glances down at her wristwatch-free wrist then toward the door, biting her lip; her facial expression and pose reflect hurt hardening into resolve to leave for the lab. One speech balloon, tail to Rochelle's mouth: \"FORGET IT. I'M LATE FOR THE LAB.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and phys",
+        "costume_state": "rochelle: teal blouse + grey pencil skirt intact",
+        "muscle_size_tier": {
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p01-04",
+      "image": "projects/scientists/pages/p01-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p01-04.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "morning",
+        "camera": "over-shoulder medium from high angle looking down at Jim",
+        "action": "Reverse: shot past Rochelle's shoulder down onto Jim at the table, donut halfway to his mouth, shrugging defensively; his facial expression and pose reflect sheepish backpedaling. One speech balloon, tail to Jim's mouth: \"NO! I JUST... IT'S YOUR THIRD ONE, THAT'S ALL!\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-bas",
+        "costume_state": "rochelle: teal blouse + grey pencil skirt intact; jim: navy track jacket + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 0,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p01-05",
+      "image": "projects/scientists/pages/p01-05.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p01-05.json",
+      "context": {
+        "characters": [
+          "rochelle",
+          "jim"
+        ],
+        "location": "kitchen",
+        "time_of_day": "morning",
+        "camera": "medium, high look-down from the doorway",
+        "action": "Rochelle storms out through the kitchen doorway in the foreground, coat over her arm, while Jim sits small and deflated at the table in the background; her facial expression and pose reflect cold determination, his reflect regret arriving too late. One speech balloon, tail pointing back toward Jim small in the background: \"ROCHELLE... COME ON...\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remai",
+        "costume_state": "rochelle: teal blouse + grey pencil skirt intact; jim: navy track jacket + jeans intact",
+        "muscle_size_tier": {
+          "rochelle": 0,
+          "jim": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p02-01",
+      "image": "projects/scientists/pages/p02-01.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p02-01.json",
+      "context": {
+        "characters": [
+          "jill",
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "wide establishing",
+        "action": "The private research lab: Jill holds up a vial of formula at the main workbench while Rochelle reviews a clipboard near the glass door; beakers and test-tube racks between them; Jill's facial expression and pose reflect impatient ambition, Rochelle's reflect cautious scrutiny. Caption box top-left: \"THE LAB. LATER THAT MORNING.\" One speech balloon, tail to Jill's mouth: \"THE FORMULA WORKS, ROCHELLE. IT'S TIME FOR HUMAN TRIALS.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything e",
+        "costume_state": "jill: lab coat + burgundy blouse + black slacks intact; rochelle: lab coat + teal blouse + grey pencil skirt intact",
+        "muscle_size_tier": {
+          "jill": 0,
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p02-02",
+      "image": "projects/scientists/pages/p02-02.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p02-02.json",
+      "context": {
+        "characters": [
+          "jill",
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium two-shot, camera slightly below chest height favoring Jill",
+        "action": "Jill presses the case for human trials, vial raised between two fingers, leaning into Rochelle's space across the bench; her facial expression and pose reflect confident salesmanship over a hidden agenda, while Rochelle holds her ground. Both women wear their white lab coats. Two speech balloons: one with tail to Jill's mouth: \"ONE DOSE. THAT'S ALL IT WOULD TAKE.\" and one with tail to Rochelle's mouth: \"WE'VE HAD IT FOR A WEEK, JILL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; every",
+        "costume_state": "jill: lab coat + burgundy blouse + black slacks intact; rochelle: lab coat + teal blouse + grey pencil skirt intact",
+        "muscle_size_tier": {
+          "jill": 0,
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 2
+      }
+    },
+    {
+      "panel_id": "p02-03",
+      "image": "projects/scientists/pages/p02-03.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p02-03.json",
+      "context": {
+        "characters": [
+          "rochelle"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "close mcu on Rochelle, eye level",
+        "action": "Chest-up on Rochelle refusing: clipboard hugged to her chest like a shield, chin set; her facial expression and pose reflect polite immovable refusal \u2014 more mouse trials first. One speech balloon, tail to Rochelle's mouth: \"MORE MOUSE TRIALS FIRST. THAT'S FINAL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lighting) remains photoreal DAZ3D CGI with ray-traced subsurface scattering and physically-based ren",
+        "costume_state": "rochelle: lab coat + teal blouse + grey pencil skirt intact",
+        "muscle_size_tier": {
+          "rochelle": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    },
+    {
+      "panel_id": "p02-04",
+      "image": "projects/scientists/pages/p02-04.png",
+      "out": "projects/scientists/qa/vision-shadow/raw/p02-04.json",
+      "context": {
+        "characters": [
+          "jill"
+        ],
+        "location": "lab",
+        "time_of_day": "day",
+        "camera": "medium, three-quarter rear view of Jill",
+        "action": "Jill turns away toward the shelving, seen three-quarter from behind, sliding the vial into her lab coat pocket; the sliver of her profile shows a sly smile \u2014 her facial expression and pose reflect a decision already made to go around the rules. One cloud-shaped THOUGHT bubble with a trail of small dots down to Jill's head: \"FINE. THEN I'LL RUN MY OWN TRIAL.\" LETTERING - classic comic-book lettering composited onto the photoreal CGI scene. The 2D comic styling applies ONLY to the bubble / caption / SFX graphics; everything else in the panel (bodies, costumes, skin, hair, environment, props, lig",
+        "costume_state": "jill: lab coat + burgundy blouse + black slacks intact",
+        "muscle_size_tier": {
+          "jill": 0
+        },
+        "scripted_dialogue": [],
+        "scripted_captions": [],
+        "expected_named_cast_size": 1
+      }
+    }
+  ]
+}

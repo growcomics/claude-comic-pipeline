@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "low", "reason": "Single-work-light mood lighting is consistent across Rochelle and the bench; the blurred lab-stand silhouette in the near foreground reads as intentional framing, not a compositing artifact."},
+  "hair_discontinuity": {"detected": false, "confidence": "low", "reason": "Dark chin-length bob matches Rochelle's identity-sheet reference."},
+  "costume_discontinuity": {"detected": false, "confidence": "low", "reason": "Lab coat sleeves do not cover her enlarged arms (consistent with 'split-sleeved') worn over a black tank, matching costume_state 'split-sleeved lab coat over black tank, grown.'"},
+  "scale_error": {"detected": false, "confidence": "low", "reason": "Nothing else in frame is mis-scaled relative to Rochelle or the bench."},
+  "empty_speech_bubble": {"detected": false, "confidence": "low", "reason": "Thought cloud 'STRENGTH WAS PHASE ONE. OBEDIENCE IS PHASE TWO.' contains text with trailing bubbles correctly leading to Rochelle's head; caption 'THREE NIGHTS LATER.' is also present and correctly placed."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "low", "reason": "Visibly large, muscular arms are consistent with the scripted tier-7 grown state."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "low", "reason": "Photoreal CGI rendering maintained; only the caption and thought cloud are 2D overlay."},
+  "lettering_error": {"detected": false, "confidence": "low", "reason": "Caption and thought-cloud text both match the script exactly, no typos or duplication."},
+  "character_count_error": {"detected": false, "confidence": "low", "reason": "One figure (Rochelle) in frame, matching expected_named_cast_size of 1."},
+  "character_identity_swap": {"detected": false, "confidence": "low", "reason": "Consistent with Rochelle's reference (hair, build, coat)."},
+  "location_mismatch": {"detected": false, "confidence": "low", "reason": "Lab bench, vial rack and shelving are consistent with the scripted lab location."}
+}

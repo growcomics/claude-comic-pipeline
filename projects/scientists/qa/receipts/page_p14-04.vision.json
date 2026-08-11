@@ -1,0 +1,99 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p14-04",
+  "image": "projects/scientists/pages/p14-04.png",
+  "generated": "2026-08-11T06:28:53Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "1ee8927bcbd6d899e47ffb67eeb4790e4167dd2eae13cea29202c391f6d3f76a",
+  "flags": [
+    {
+      "category": "hair_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "HAIR-01"
+      ],
+      "registry_slugs": [
+        "hair_drift"
+      ],
+      "groups": [
+        "HAIR"
+      ],
+      "reason": "Hair reads as a saturated auburn/copper-red in the midtones, not just the golden rim-lit edges \u2014 a visible hue shift toward red/orange versus Jill's caramel-brown identity-sheet reference."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "high",
+      "registry_ids": [
+        "WARD-01",
+        "WARD-04"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift",
+        "costume_stage_error"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Panel is scripted costume_state 'super' (tier 8), whose CAST CANON wardrobe is a black athletic crop top + black training shorts, but Jill is rendered in a collared burgundy/maroon button-up top (the baseline/grown blouse silhouette), not a black crop top."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Backlit rim-lighting on Jill's hair and the softer frontal fill on her face read as one sun source behind/above the subject; no shadow-direction or color-temperature conflict, and no floating/disembodied parts."
+    },
+    "hair_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Hair reads as a saturated auburn/copper-red in the midtones, not just the golden rim-lit edges \u2014 a visible hue shift toward red/orange versus Jill's caramel-brown identity-sheet reference."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Panel is scripted costume_state 'super' (tier 8), whose CAST CANON wardrobe is a black athletic crop top + black training shorts, but Jill is rendered in a collared burgundy/maroon button-up top (the baseline/grown blouse silhouette), not a black crop top."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Single-character close-up with no other figures or scale-reference props in frame."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "The balloon 'YOUR MONSTERS WON'T SAVE YOU.' contains text and its tail clearly attaches down toward Jill, the only character in frame."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Visible shoulder/arm mass in frame is large and consistent with a high 'super' tier, not under-rendered."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Skin shows photoreal subsurface-scattering and pore/sheen detail with no ink outlines or cel-shaded color blocking; only the balloon is a 2D overlay, which is expected."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Balloon text 'YOUR MONSTERS WON'T SAVE YOU.' matches the scripted line exactly, apostrophe correct, no doubled words or duplicate bubbles."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Exactly one figure (Jill) in frame, matching expected_named_cast_size 1."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Hair length/style and facial structure are consistent with Jill; she is the only named character scripted for this panel."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Football field with bleachers, goalpost, and grass in the background matches the scripted 'field' location."
+    }
+  }
+}

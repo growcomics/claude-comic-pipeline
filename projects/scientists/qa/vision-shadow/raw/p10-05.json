@@ -1,0 +1,13 @@
+{
+  "composite_mismatch": {"detected": false, "confidence": "high", "reason": "Shallow depth-of-field (blurred Rochelle in extreme foreground, sharp Dan in the background) is the scripted 'camera high over Rochelle's shoulder' OTS staging, not a compositing artifact; lighting direction is consistent between the two."},
+  "hair_discontinuity": {"detected": false, "confidence": "medium", "reason": "Rochelle's foreground hair (back of head) is too motion/DOF-blurred for a confident hue comparison against the identity sheet; no obvious shift perceived but the crop is too soft to be certain either way."},
+  "costume_discontinuity": {"detected": true, "confidence": "medium", "reason": "The extreme-foreground shoulder/collar area (presumed Rochelle) shows structured light/white-toned fabric rather than the plain black tank established for her in this same scene (p10-01, p10-06); could be a rim-light highlight on black jersey rather than an actual garment, hence not high confidence. Secondary lower-confidence note: Dan's back (background) reads fully bare with no visible tank-fabric remnant, though 'shredded...hanging' could plausibly leave the back panel gone."},
+  "scale_error": {"detected": false, "confidence": "high", "reason": "Dan reads appropriately large/looming in the background relative to Rochelle's foreground arm and the bench between them."},
+  "empty_speech_bubble": {"detected": false, "confidence": "high", "reason": "'STAND STILL.' is fully lettered with tail pointing to Rochelle (foreground); '...YES.' is fully lettered with tail pointing to Dan (background) — both correctly targeted."},
+  "tier_visualization_mismatch": {"detected": false, "confidence": "high", "reason": "Rochelle's foreground arm is consistent with the established grown/tier-7 size seen in p10-01/p10-06; Dan's broad muscular back is consistent with tier 9."},
+  "prompt_bloat_artifact": {"detected": false, "confidence": "high", "reason": "Photoreal rendering maintained on both figures."},
+  "lettering_error": {"detected": false, "confidence": "high", "reason": "'STAND STILL.' and '...YES.' are both correctly spelled; SFX 'SNAP' is correct; no duplication."},
+  "character_count_error": {"detected": false, "confidence": "high", "reason": "Rochelle and Dan both appear, matching expected_named_cast_size 2."},
+  "character_identity_swap": {"detected": false, "confidence": "high", "reason": "The broad, heavily-muscled silhouette in the background matches Dan's established build; back-to-camera framing is the scripted shot and no other cast member shares this physique."},
+  "location_mismatch": {"detected": false, "confidence": "high", "reason": "Same established lab set (cabinets, bench, glassware) as the surrounding panels."}
+}

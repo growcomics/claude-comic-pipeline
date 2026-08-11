@@ -1,0 +1,100 @@
+{
+  "advisory": true,
+  "sidecar": "vision-shadow",
+  "note": "ADVISORY ONLY \u2014 shadow vision verdict. Not a gate artifact: not produced by, consumed by, or able to alter compose/audit/bank/verify_chain. Registry IDs cite skills/comic-production/references/defect-registry.json.",
+  "panel_id": "p20-01",
+  "image": "projects/not-so-supra-man/pages/panels-hf/p20-01.png",
+  "generated": "2026-08-11T06:23:01Z",
+  "model_note": "claude-sonnet-4-5 subagent batches (SPOTTER MODE)",
+  "rubric_sha256": "a26729df2e1fc7e8e6cd0a085c0c05a0aab51add3d976d2d2464d903ec45a237",
+  "flags": [
+    {
+      "category": "composite_mismatch",
+      "confidence": "high",
+      "registry_ids": [
+        "ENV-03",
+        "BODY-05"
+      ],
+      "registry_slugs": [
+        "lighting_drift",
+        "malformed_anatomy"
+      ],
+      "groups": [
+        "ANATOMY",
+        "COMPOSITE"
+      ],
+      "reason": "Supraman's head appears at lower-left near the doorway with no visible connecting neck/shoulders/body -- it reads as a disembodied floating head compositing artifact rather than a figure naturally occluded by the doorway edge."
+    },
+    {
+      "category": "costume_discontinuity",
+      "confidence": "medium",
+      "registry_ids": [
+        "WARD-01"
+      ],
+      "registry_slugs": [
+        "wardrobe_drift"
+      ],
+      "groups": [
+        "WARD"
+      ],
+      "reason": "Dana wears black boots rather than red; action/costume_state describe her wearing 'HIS spare suit stretched skin-tight, cape and all,' and Supraman's canonical boots are red, so all-black boots are a plausible inherited-costume mismatch (though it's possible boots are meant to be excluded from 'the suit')."
+    }
+  ],
+  "categories": {
+    "composite_mismatch": {
+      "detected": true,
+      "confidence": "high",
+      "reason": "Supraman's head appears at lower-left near the doorway with no visible connecting neck/shoulders/body -- it reads as a disembodied floating head compositing artifact rather than a figure naturally occluded by the doorway edge."
+    },
+    "hair_discontinuity": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana's black bob and Supraman's dark hair (on the floating head) both match their reference colors."
+    },
+    "costume_discontinuity": {
+      "detected": true,
+      "confidence": "medium",
+      "reason": "Dana wears black boots rather than red; action/costume_state describe her wearing 'HIS spare suit stretched skin-tight, cape and all,' and Supraman's canonical boots are red, so all-black boots are a plausible inherited-costume mismatch (though it's possible boots are meant to be excluded from 'the suit')."
+    },
+    "scale_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana is rendered as a large but plausible human figure; no doll/miniature or giant-prop scale errors."
+    },
+    "empty_speech_bubble": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Panel is pre-lettering with no baked-in speech bubbles; the 'MAX' text is an in-scene readout-pillar prop, not a speech bubble."
+    },
+    "tier_visualization_mismatch": {
+      "detected": false,
+      "confidence": "low",
+      "reason": "Dana's arms are extremely large during the overhead press, plausibly approaching the tier-9 'arms thicker than head' benchmark; without a body-tier lineup reference in this batch to calibrate tier 6 precisely, this is uncertain rather than a confident over-render call."
+    },
+    "prompt_bloat_artifact": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Photoreal CGI rendering with realistic skin/muscle texture and plausible gym lighting."
+    },
+    "lettering_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "No lettering baked into the panel."
+    },
+    "character_count_error": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Both scripted characters are technically present (Dana fully, Supraman via his head), matching expected_named_cast_size of 2; the rendering flaw is captured under composite_mismatch."
+    },
+    "character_identity_swap": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Dana's face/hair and Supraman's face (on the floating head) both match their canonical references."
+    },
+    "location_mismatch": {
+      "detected": false,
+      "confidence": "high",
+      "reason": "Industrial gym setting with a graviton barbell rig and readout pillar matches the scripted hq-gym."
+    }
+  }
+}
