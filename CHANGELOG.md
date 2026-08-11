@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (later)
+
+### Added
+
+- **queue/autopilot-ab-beats.json** — the A/B rerun: the 11 beats the owner critiqued on autopilot-test (research/owner-defect-feedback-2026-08-10.md), re-authored per the fixes — dialogue beats torso-up, no fourth-wall gaze, wardrobe/prop/bubble continuity pinned, B18 staged with depth + exertion, B23 physique to reference standard — targeting board `autopilot-ab` (refs copied from autopilot-test), backend flow-chrome (free). Old lane's 19% keep rate is the control.
+
 ## 2026-08-10
 
 ### Added
