@@ -12,6 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (Vision doc: Stage 1 flip merged from feat/ideator-engine)
+
+**Changed**
+- `docs/PRODUCTION-SYSTEM-VISION.md` — merged the deferred doc-only commit `7ec1018` from `feat/ideator-engine` (held back from that session's self-merge because the vision doc is shared): Stage 1 **SHELL → ENGINE BUILT ✓** across §2, the §3 heat-map row, and the §4 Ideator→Writer contract row; the §3 build-priority line reconciled with main's same-day Writer-stage flip (`783cb7a`) — every stage of the line now exists, remaining work is depth. Branch + worktree retired after merge.
+
 ## 2026-08-10 (Writer stage — Stage 2 of the production line lands)
 
 **Added**

@@ -23,12 +23,12 @@ The line already exists and is **strong in the middle** (storyboard → review).
 
 For each stage: what it does, what it consumes, what it emits, how mature it is today, and the file pointers.
 
-### Stage 1 — IDEATOR  *(concept generation)*  — **SHELL (scaffolded 2026-06-14)**
+### Stage 1 — IDEATOR  *(concept generation)*  — **ENGINE BUILT ✓ (2026-08-10)**
 - **Purpose**: turn a seed (theme, character, "do something with X", or nothing at all) into a ranked slate of comic concept pitches.
-- **Input**: optional seed; the character roster; corpus findings (what works); publisher analytics (what performed) once the flywheel exists.
-- **Output**: a `concepts.json` slate — each concept a logline, transformation arc, cast, setting, hook, est. page count, and a why-it'll-perform rationale.
-- **Current state**: **shell built** at `skills/ideator/` — `SKILL.md` (the concept-tournament workflow + I/O contract), `references/concept-schema.json` (the Ideator→Writer contract), `references/rubric.md` (the scoring rubric, grounded in the corpus findings). The **tournament engine itself (generate + score) is a documented STUB** in `scripts/tournament.py` (`BUILD ME (stronger model)`) — deliberately deferred per §8. Until it's built, ideation runs by hand against the same contract.
-- **Asset to feed it**: `research/comic-corpus/` — the corpus skill studies reference comics against a rubric. The ideator consumes corpus conclusions so pitches are grounded in what actually works, not invented in a vacuum. The corpus now also ingests the user's own **scripts** (B1) and a premium **catalog** via the authenticated session (B2) as feedstock.
+- **Input**: optional seed; the locked-character roster (`skills/ideator/roster.json`); corpus findings F1–F6 (what works); catalog findings C1–C6 (what the audience/monetization data says); publisher analytics once the flywheel exists (the brief reports the degrade until then).
+- **Output**: a `concepts.json` slate — each concept a logline, transformation arc, cast, setting, hook, est. page count, per-axis rubric scores, and a why-it'll-perform rationale — plus a top-3 human gate and `selected_concept_id` for the Writer.
+- **Current state**: **engine built** at `skills/ideator/` — the stub replaced by a four-step checkpoint harness in `scripts/tournament.py` (`brief → ingest → finalize → select`) under the rule **judgment in Claude, mechanics in Python**: Claude generates ≥2 concepts per angle and scores them against `rubric.md` verbatim; Python enforces schema conformance, angle quotas, the cross-slate dedup memory (`slates/`), F1 growth floors, recomputed weighted totals, the flat-slate guard, and never-auto-select. Validated end-to-end 2026-08-10 with two archived example slates (unseeded + seeded "gym rivalry", 16 concepts, all schema-valid + scored). The `concept-schema.json` contract is **unchanged** — the Writer builds against it as-is.
+- **Asset that feeds it**: `research/comic-corpus/` — corpus synthesis (F1–F6), the user's own **scripts** (B1), and the full GrowGetter **catalog over the WP REST API** (B2, rebuilt 2026-08-10: `scripts/ingest_catalog.py` → `catalog/` records + `SYNTHESIS.md` findings C1–C6, the first popularity/monetization signal; supersedes the parked browser-login path), plus `research/gribble-corpus/FORMULA.md` (measured story shape).
 
 ### Stage 2 — WRITER  *(script generation)*  — **BUILT ✓ (2026-08-10)**
 - **Purpose**: turn one selected concept into a full, panel-ready script.
@@ -74,7 +74,7 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 
 | Stage | Maturity | Where it lives |
 |---|---|---|
-| 1 Ideator | 🟡 shell (engine stubbed) | `skills/ideator/` (SKILL + schema + rubric); feedstock at `research/comic-corpus` |
+| 1 Ideator | ✅ engine built (analytics feedstock pending flywheel) | `skills/ideator/` (harness + schema + rubric + roster + slates); feedstock at `research/comic-corpus` (+ `catalog/`) |
 | 2 Writer | ✅ built | `skills/writer/` (SKILL + format contract + craft digest + templates + validator + worked example) |
 | 3 Storyboard | ✅ mature | `skills/script-breakdown/` |
 | 4 Reference | ✅ mature | `skills/reference-gathering/`, `reference-acquisition/`, `location-scout/`, `style-lock/` |
@@ -82,7 +82,7 @@ For each stage: what it does, what it consumes, what it emits, how mature it is 
 | 6 Reviewer | ✅✅ (vision-audit unwired) | `skills/continuity-check/`, `qa-checklist.md`, `docs/experiments/02` |
 | 7 Publisher | 🟢 prep half built (posting = human forever) | `skills/publisher/` (SKILL + prepare_post.py + schemas); validated on not-so-supra-man |
 
-**The build priority writes itself: the two missing front-end stages (ideator, writer) and the missing exit stage (publisher) are where the leverage is.** The middle is done.
+**The build priority flips from existence to depth: with the ideator engine live (1), the Writer built (2), and the publisher's prep half in (7), every stage of the line now exists — the line runs seed → published comic; what remains is deepening stages, not creating them.** The middle is done.
 
 ---
 
@@ -92,7 +92,7 @@ Each handoff is an artifact + a schema. This is the schema-contracts work (exper
 
 | Handoff | Artifact | Schema status |
 |---|---|---|
-| Ideator → Writer | `concepts.json` (slate) + a `selected_concept` | **schema exists** (`skills/ideator/references/concept-schema.json`); engine stubbed |
+| Ideator → Writer | `concepts.json` (slate) + a `selected_concept` | **schema exists + engine emits it** (`skills/ideator/references/concept-schema.json`, unchanged by the engine build; validated example slates in `skills/ideator/slates/`) |
 | Writer → Storyboard | `script.md` in the script-breakdown input shape | **schema exists** (`skills/writer/references/script-format.md`, gated by `skills/writer/scripts/validate_script.py`) |
 | Storyboard → Reference | `shotlist.json` + `references_required.json` | exists (experiment/04 schemas) |
 | Reference → Page build | ref ledger + complete ref pack | exists (`ref-ledger.json`, L28 manifest) |
