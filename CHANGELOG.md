@@ -70,7 +70,7 @@ Mid-flight contract drift, absorbed: the branch was authored against `main@feeca
 - `research/comic-corpus/_queue.md` + `README.md` — B2 section marked SUPERSEDED by the WP-API path (what it does and doesn't cover); feedstock list updated.
 - `.gitignore` — `research/comic-corpus/catalog/raw/` (raw WP responses are re-derivable; derived records stay in git).
 
-## 2026-08-11 — Vision-audit shadow sidecar: experiment 02 wired as advisory shadow, agreement measured at production scale (127 banked panels)
+## 2026-08-10 — Vision-audit shadow sidecar: experiment 02 wired as advisory shadow, agreement measured at production scale (127 banked panels)
 
 ### Added
 
