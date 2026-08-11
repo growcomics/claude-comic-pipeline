@@ -12,6 +12,17 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (location-scout v2: QA gate, lighting variants, pack auto-attach, tests)
+
+### Added
+
+- **Phase C.5 QA gate** — canonical rubric at `skills/location-scout/references/qa-rubric.md` (composition / people / overlays / medium / integrity; pass VERBATIM to QA subagents). `cgi_convert.py --record-qa --qa-verdict pass|warn|fail [--qa-notes]` writes per-slot verdicts into `_targets.json`; `--emit-manifest` and `pack_index.py` propagate them. Flat packs record via `cgi/_qa.json`.
+- **Lighting/time-of-day variants** — `cgi_convert.py --variant night|dusk` on `--emit-prompt` re-renders the DAY CGI plate (geometry locked, lighting-only language, kept deliberately simple per the studio lighting A/B lesson); `--download`/`--register-local` store results as `cgi/<id>--<variant>.png` under the slot's `variants` map, carried through manifest + index.
+- **L23 follow-up CLOSED: pack auto-attach** — `next_panel.py` gains `find_pack_env_ref()`: when a project has no local env ref for a location, the repo-level `references/locations/index.json` is consulted (exact entry id → pack slug → ≥2-token overlap). QA-failed plates are never attached. Fully defensive — any problem returns None and the existing L23 verbal-anchor path proceeds unchanged.
+- **`tests/test_location_scout.py`** — 34 checks: allocate() rounding/guards, slugify, tag-vocabulary consistency, both index layouts + verify error detection, download URL/payload guards, variant + QA plumbing, and the next_panel pack fallback (incl. QA-fail skip + malformed-index survival). Whole tests/ suite green.
+
+---
+
 ## 2026-08-11 (location-scout v2: unified pack index + canonical tag vocabulary)
 
 ### Added

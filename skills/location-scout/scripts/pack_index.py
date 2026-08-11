@@ -193,9 +193,20 @@ def read_flat_pack(pack_dir: Path, vocab: dict) -> dict:
     # enriched from the cgi/_provenance.md '## Plates' table when present.
     matched_plates = {e["cgi_image"] for e in entries if e["cgi_image"]}
     plate_meta = {}
+    plate_qa: dict = {}
     cgi_prov = cgi_dir / "_provenance.md" if cgi_dir.is_dir() else None
     if cgi_prov and cgi_prov.exists():
         plate_meta = parse_plate_table(cgi_prov)
+    qa_path = cgi_dir / "_qa.json" if cgi_dir.is_dir() else None
+    if qa_path and qa_path.exists():
+        try:
+            plate_qa = json.loads(qa_path.read_text())
+        except json.JSONDecodeError:
+            plate_qa = {}
+    # attach QA to source-matched entries too
+    for e in entries:
+        if e["cgi_image"]:
+            e["qa"] = plate_qa.get(Path(e["cgi_image"]).name)
     for plate in cgi_files:
         rel = f"cgi/{plate.name}"
         if rel in matched_plates:
@@ -212,7 +223,7 @@ def read_flat_pack(pack_dir: Path, vocab: dict) -> dict:
                 "neighborhood": None,
                 "source_image": None,
                 "cgi_image": rel,
-                "qa": None,
+                "qa": plate_qa.get(plate.name),
                 "variants": None,
             }
         )

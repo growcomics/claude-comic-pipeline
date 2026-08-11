@@ -134,26 +134,66 @@ def build_prompt(slot: dict) -> str:
     return f"{PROMPT_BODY}\n\nScene anchor: {slot['intent']}."
 
 
-def emit_prompt(pack_dir: Path, slot_id: str, model: str) -> dict:
+# Lighting/time-of-day variants. A variant re-renders the DAY CGI PLATE (not
+# the source photo) so geometry/composition stay locked and only lighting
+# changes. Kept deliberately small — the studio lighting A/B (2026-08) showed
+# elaborate lighting language loses to simple statements.
+VARIANT_PROMPTS = {
+    "night": (
+        "Re-render this exact 3D CGI scene at NIGHT. Same geometry, same "
+        "camera, same composition — change ONLY the lighting: dark sky, "
+        "practical lights on (windows, signage glow, street lamps), realistic "
+        "night exposure. Keep the same stylized 3D CGI render look. No people."
+    ),
+    "dusk": (
+        "Re-render this exact 3D CGI scene at DUSK / golden hour. Same "
+        "geometry, same camera, same composition — change ONLY the lighting: "
+        "low warm sun, long shadows, early practical lights. Keep the same "
+        "stylized 3D CGI render look. No people."
+    ),
+}
+
+
+def emit_prompt(pack_dir: Path, slot_id: str, model: str,
+                variant: str | None = None) -> dict:
     plan = load_plan(pack_dir)
     slot = find_slot(plan, slot_id)
     if not slot.get("source_image"):
         raise RuntimeError(f"slot {slot_id} has no source_image yet")
     aspect = DEFAULT_ASPECT_BY_TYPE.get(slot["type"], "16:9")
+
+    if variant:
+        if variant not in VARIANT_PROMPTS:
+            raise ValueError(
+                f"unknown variant '{variant}'; valid: {', '.join(VARIANT_PROMPTS)}"
+            )
+        if not slot.get("cgi_image"):
+            raise RuntimeError(
+                f"slot {slot_id} has no base cgi_image yet — variants re-render "
+                f"the day plate, so convert the base first"
+            )
+        source_rel = slot["cgi_image"]
+        prompt = f"{VARIANT_PROMPTS[variant]}\n\nScene anchor: {slot['intent']}."
+    else:
+        source_rel = slot["source_image"]
+        prompt = build_prompt(slot)
+
     return {
         "slot_id": slot_id,
+        "variant": variant,
         "model": model,
-        "prompt": build_prompt(slot),
+        "prompt": prompt,
         "aspect_ratio": aspect,
         "count": 1,
         "resolution": "1k",
-        "source_path": slot["source_image"],
-        "source_abs_path": str((pack_dir / slot["source_image"]).resolve()),
+        "source_path": source_rel,
+        "source_abs_path": str((pack_dir / source_rel).resolve()),
         "media_role": "image",
     }
 
 
-def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
+def download_result(pack_dir: Path, slot_id: str, url: str,
+                    variant: str | None = None) -> dict:
     if urlparse(url).scheme != "https":
         raise ValueError(f"refusing non-HTTPS result URL: {url}")
 
@@ -172,13 +212,25 @@ def download_result(pack_dir: Path, slot_id: str, url: str) -> dict:
         plan = load_plan(pack_dir)
         slot = find_slot(plan, slot_id)
         final_id = slot.get("final_id", slot_id)
-        dst = pack_dir / "cgi" / f"{final_id}.png"
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_bytes(data)
-
-        slot["cgi_image"] = f"cgi/{final_id}.png"
-        slot["cgi_url"] = url
-        slot["cgi_completed_at"] = datetime.now(timezone.utc).isoformat()
+        stamp = datetime.now(timezone.utc).isoformat()
+        if variant:
+            if variant not in VARIANT_PROMPTS:
+                raise ValueError(f"unknown variant '{variant}'")
+            dst = pack_dir / "cgi" / f"{final_id}--{variant}.png"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(data)
+            slot.setdefault("variants", {})[variant] = {
+                "cgi_image": f"cgi/{dst.name}",
+                "cgi_url": url,
+                "completed_at": stamp,
+            }
+        else:
+            dst = pack_dir / "cgi" / f"{final_id}.png"
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(data)
+            slot["cgi_image"] = f"cgi/{final_id}.png"
+            slot["cgi_url"] = url
+            slot["cgi_completed_at"] = stamp
         save_plan(pack_dir, plan)
     return slot
 
@@ -202,6 +254,28 @@ def register_local_result(pack_dir: Path, slot_id: str, local_path: Path) -> dic
     return slot
 
 
+VALID_QA_VERDICTS = ("pass", "warn", "fail")
+
+
+def record_qa(pack_dir: Path, slot_id: str, verdict: str, notes: str | None) -> dict:
+    """Write a QA verdict (per references/qa-rubric.md) onto a slot."""
+    if verdict not in VALID_QA_VERDICTS:
+        raise ValueError(f"--qa-verdict must be one of {VALID_QA_VERDICTS}")
+    with plan_lock(pack_dir):
+        plan = load_plan(pack_dir)
+        slot = find_slot(plan, slot_id)
+        if not slot.get("cgi_image"):
+            raise RuntimeError(f"slot {slot_id} has no cgi_image to QA")
+        slot["qa"] = {
+            "verdict": verdict,
+            "notes": notes or None,
+            "checked_at": datetime.now(timezone.utc).isoformat(),
+            "rubric": "qa-rubric v1",
+        }
+        save_plan(pack_dir, plan)
+    return slot
+
+
 def emit_manifest(pack_dir: Path) -> dict:
     plan = load_plan(pack_dir)
     locations = []
@@ -218,6 +292,8 @@ def emit_manifest(pack_dir: Path) -> dict:
             "source_image": slot["source_image"],
             "cgi_image": slot.get("cgi_image"),
             "tags": slot.get("tags", []),
+            "qa": slot.get("qa"),
+            "variants": slot.get("variants"),
         }
         if "neighborhood" in slot:
             loc["neighborhood"] = slot["neighborhood"]
@@ -261,6 +337,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--register-local", metavar="PATH", type=Path, help="Register an already-downloaded CGI image for this slot")
     p.add_argument("--emit-manifest", action="store_true", help="Write meta/locations.json from current plan")
     p.add_argument("--list-pending-cgi", action="store_true", help="List slots needing CGI conversion")
+    p.add_argument("--variant", choices=list(VARIANT_PROMPTS), help="Lighting/time-of-day variant: emit-prompt re-renders the DAY plate; download/register-local store under slot.variants")
+    p.add_argument("--record-qa", action="store_true", help="Record a QA verdict for this slot (see references/qa-rubric.md)")
+    p.add_argument("--qa-verdict", choices=list(VALID_QA_VERDICTS), help="QA verdict for --record-qa")
+    p.add_argument("--qa-notes", help="Optional QA notes for --record-qa")
     args = p.parse_args(argv)
 
     if not args.pack_dir.exists():
@@ -293,13 +373,21 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     if args.emit_prompt:
-        params = emit_prompt(args.pack_dir, args.slot_id, model)
+        params = emit_prompt(args.pack_dir, args.slot_id, model, variant=args.variant)
         print(json.dumps(params, indent=2))
         return 0
 
     if args.download:
-        slot = download_result(args.pack_dir, args.slot_id, args.download)
+        slot = download_result(args.pack_dir, args.slot_id, args.download, variant=args.variant)
         print(f"Saved {slot['cgi_image']}")
+        return 0
+
+    if args.record_qa:
+        if not args.qa_verdict:
+            print("ERROR: --record-qa requires --qa-verdict", file=sys.stderr)
+            return 2
+        slot = record_qa(args.pack_dir, args.slot_id, args.qa_verdict, args.qa_notes)
+        print(f"QA {slot['qa']['verdict']} recorded for {slot['id']}")
         return 0
 
     if args.register_local:
