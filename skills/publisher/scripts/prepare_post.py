@@ -280,7 +280,9 @@ def build_checklist(ctx):
         "- [ ] Compiled PDF present: %s" % (ctx["pdf"] or "NO — compose one if a PDF deliverable is planned"),
         "- [ ] Captions reviewed — every `[FILL-*]` slot in `captions/` resolved, no placeholder text left",
         "- [ ] Board item exists on the 🗓 posting board (https://3dmusclecomics.com/studio/posting.php),"
-        " lane = Monthly comic / %s" % p["label"],
+        " lane = Monthly comic / %s — file/refresh it with:" % p["label"],
+        "      `python3 skills/publisher/scripts/board_item.py --project projects/%s`" % ctx["slug"],
+        "      (dry-run by default; the live write is a separate owner-approved act, never auto-fired)",
         "",
         "## 1 · Site — the canonical home (do this FIRST; steps 2-5 link to it)",
         "- [ ] Follow `site-apply-notes.md` end to end (%s path)" % p["site_path"],

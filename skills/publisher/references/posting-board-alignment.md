@@ -33,13 +33,20 @@ Everything a board item needs to actually become "ready", produced mechanically 
   chip states are live-server ops state; `posted.json` is the in-repo, per-project history
   with proof URLs — they answer different questions and both stay).
 - `analytics/engagement-stub.json` — the flywheel landing pad the board has no concept of.
+- `scripts/board_item.py` — files the board card itself FROM the bundle (MANIFEST.json →
+  title / Monthly-comic lane / slot; chips arrive server-initialized `todo`). Dry-run by
+  default; the live write is a separate per-action owner-approved act
+  (`--execute --approved-by`), receipted at `posting/board-item.json`. It reads live state
+  first (`post/index.php?do=state` — live is truth per the deploy-clobber hazard) and its
+  only verbs are `add`/`update`, so chip state is unreachable from it.
 
 ## The handoff (comic release, end to end)
 
 1. Reviewer finishes → **this skill** prepares `posting/bundle/` and STOPS.
-2. Human (or an approved session) creates the board item in the property's Monthly-comic lane
-   — a NEXT-candidate from the board's own notes was wiring "book done" → board item; this
-   bundle is the richer version of that trigger.
+2. Human — or an approved session running `scripts/board_item.py` (dry-run first, then
+   `--execute --approved-by "<owner ok>"` once the owner approves that run) — creates the
+   board item in the property's Monthly-comic lane. This realizes the board's own
+   "book done → board item" NEXT-candidate, fed from the bundle's MANIFEST.json.
 3. Human walks `CHECKLIST.md`: fires each platform using the bundle's captions/crops, flips
    the matching **chip** to `posted` as they go, pastes the live URL into the checklist.
 4. All chips resolved → item is done on the board; human fills `posted.template.json` → saves
@@ -54,5 +61,7 @@ Everything a board item needs to actually become "ready", produced mechanically 
   knows, the less it drifts).
 - Chip states live on the BOARD, never mirrored into the bundle — the bundle records what to
   do; `posted.json` records what happened; the board shows where things stand right now.
+  (`board_item.py` keeps this literal: `add`/`update` are its only verbs, so it cannot reach
+  chip state — posting.php itself initializes a new card's chips to `todo`.)
 - If the board ever grows a "pull bundle" feature (fetch a project's CHECKLIST/captions via
   bridge key), it reads the committed bundle — the skill's output format is the contract.
