@@ -14,7 +14,7 @@ When the user asks for a comic, route through the LOCAL skills only:
 - `skills/build-comic/` (or `commands/build-comic.md`) — orchestrator entry point
 - `skills/script-breakdown/SKILL.md` — script → shotlist
 - `skills/reference-gathering/SKILL.md` — refs gathering
-- `skills/reference-acquisition/SKILL.md` — internet → 3D base ref conversion (refactor-branch addition)
+- `skills/reference-acquisition/SKILL.md` — internet → 3D base ref conversion
 - `skills/production-briefing/SKILL.md` — Phase 0 interview
 - `skills/continuity-check/SKILL.md` — audit
 - `skills/page-composer/SKILL.md` — layout + lettering

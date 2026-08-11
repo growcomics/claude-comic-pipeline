@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-10 (reference-acquisition ported off the parked refactor branch)
+
+**Added**
+- **`skills/reference-acquisition/SKILL.md`** — internet character image → photoreal 3D base ref at `references/characters/<slug>/internet-3d-base.png`; the character-side twin of `reference-gathering`'s real-photos→CGI location plates. Until now this skill existed ONLY on the parked `refactor/refs-are-truth-prompts-are-action` branch (tip `aa52c29`, 2026-05-23) while `CLAUDE.md` §1 listed it as a local skill — a dangling pointer flagged in `docs/BRANCH-LEDGER.md`. Hand-ported as a new file (NOT a merge — the refactor branch stays parked per the ledger: failed pre-flight `f67d741`, 11 weeks behind the rules evolution), with the stale parts rewritten:
+  - **Downstream integration**: the branch version wired into `rules/attach/internet_3d_base.py` auto-attachment, which exists only on the refactor branch → replaced with main's real consumers (`reference-sheets` Step-3 dependency chaining, `reference-gathering` manifest paths, project `qa/` staging). The canonical filename is kept for forward-compat with the branch's attach rule.
+  - **Generation params**: hardcoded `nano_banana_pro` default + "flash retired" note (both stale per the 2026-08-09 catalog check in CLAUDE.md) → pointer to CLAUDE.md § Generation defaults plus a verify-the-returned-`model`-field instruction.
+  - **Provenance**: the branch's `source-metadata.json` → the living `_provenance.md` convention (as in `references/locations/*/_provenance.md`); source binaries stay out of git, provenance text is committed.
+  - **Guardrails that postdate the branch**: explicit gate boundary (repo-level bootstrap only — in-project generation stays on the `qa/compose.py` chain, no freehand bypass), reads-25+ and always-clothed clauses for 2D-source conversions, and the content-filter citation updated to the current playbook.
+
+**Changed**
+- `CLAUDE.md` §1 — the `reference-acquisition` entry is no longer annotated "(refactor-branch addition)"; the skill is on main.
+- `docs/BRANCH-LEDGER.md` — `refactor/refs-are-truth-prompts-are-action` row updated: no longer sole holder of the skill; the branch's remaining unique value is the attach/action/match/safety registry restructure + the blog draft.
+
 ## 2026-08-10 (Vision doc: Stage 1 flip merged from feat/ideator-engine)
 
 **Changed**
