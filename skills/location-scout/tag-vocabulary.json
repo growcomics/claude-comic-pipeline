@@ -1,0 +1,26 @@
+{
+  "_comment": "Canonical tag vocabulary for location packs. scout_city.py validates slot tags against this; pack_index.py normalizes flat-pack [BRACKET] shot tags and reports unknown tags in --verify. Add new tags here deliberately — matching across packs only works when packs agree on spelling.",
+  "types": ["street", "restaurant", "landmark", "specific"],
+  "framing": ["wide", "med", "close", "aerial", "wide-vista", "skyline", "vantage"],
+  "setting": [
+    "interior", "exterior", "downtown", "residential", "suburban", "commercial",
+    "industrial", "historic", "beach", "coastal", "port", "bridge", "promenade",
+    "alley", "rooftop", "parking", "gym", "fitness", "diner", "cafe", "storefront",
+    "civic", "tourist", "concrete", "back-of-house", "landmark", "hotel", "resort",
+    "lake", "retail", "plaza", "kitchen", "outdoor", "corner", "luxury", "palms"
+  ],
+  "mood_time": [
+    "neon", "pedestrian", "daytime", "evening", "night-friendly", "quiet",
+    "gritty", "noir", "scenic", "upscale", "casual", "mid", "night", "dusk",
+    "iconic", "mid-century"
+  ],
+  "flat_shot_tag_map": {
+    "WIDE": "wide",
+    "MED": "med",
+    "MEDIUM": "med",
+    "CLOSE": "close",
+    "AERIAL": "aerial",
+    "INTERIOR": "interior",
+    "EXTERIOR": "exterior"
+  }
+}

@@ -320,6 +320,29 @@ you convert genuine location photos, so composition + scale come from the real p
 
 Full SOP: **`studio/docs/REAL-PHOTO-ENV-REFS.md`**.
 
+### Location packs from `location-scout` (city-level reusable pre-renders)
+
+The city-scale sibling of the real-photo SOP above: same real-photo→CGI-plate idea, but pre-built for a whole city and reusable across projects. Both conventions are indexed by `skills/location-scout/scripts/pack_index.py` into `references/locations/index.json`.
+
+If the project's setting is a real city and a **city-scout pack** exists for that city under `references/locations/<city-slug>/` (built by `skills/location-scout/SKILL.md`), prefer it over per-project location generation.
+
+A city pack is a pre-built bundle of 8–15 photoreal CGI-style background refs covering the spectrum (downtown street, residential street, alley, diner, restaurant, casino exterior, rooftop, etc.) — all anchored to real Google Maps captures of the city. Pack location:
+
+- Repo-level shared pack: `<repo>/references/locations/<city-slug>/` — usable by any project
+- Project-private pack: `<project>/references/locations/<city-slug>/`
+
+Walk `meta/locations.json` to find the closest match for a shotlist location:
+
+1. Match by `type` (street / restaurant / landmark / specific) against the location's intent
+2. Within type, match by `tags` overlap (e.g. shotlist wants "downtown neon street" → tags include `downtown` + `neon`)
+3. Attach the pack entry's `cgi_image` path as the env ref for the project's `references_required.json` `establishing` slot — no generation needed
+
+For locations the pack doesn't cover, fall back to standard generation. When a pack entry IS used, copy the CGI image into the project (don't symlink — packs are versioned independently and a project ref should be stable) and record provenance.
+
+City packs preempt L23's verbal env-anchor fallback for the panel — the CGI ref is more specific than any 5-element verbal description. L23 still applies to projects with no available pack.
+
+To build a new city pack: invoke `location-scout` with `--city "<name>" --count 11` and run end-to-end. ~$0.30–0.55 in Higgsfield credits per pack (default 11 × 1.5–2 credits / gen).
+
 ### Gathering refs for props
 
 For recurring objects (weapons, vehicles, signature items, distinctive accessories), use the standard Google Images / YouTube workflow with the `props/` bucket: `references/props/<prop-slug>/`. Google Images is usually the right source — product photos for licensed objects, gallery shots for custom designs. YouTube can help for items shown in motion (a specific sword from a fight scene, a vehicle mid-chase).

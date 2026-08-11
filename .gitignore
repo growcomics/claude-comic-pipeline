@@ -32,3 +32,7 @@ projects/**/*.jpeg
 # crop-specs.json + page set — the WHOLE crops/ dir (incl. its render manifest)
 # stays out of git; only the specs are versioned
 projects/*/posting/bundle/crops/
+
+# location-scout plan-write artifacts (flock + atomic-write temp)
+_targets.json.lock
+_targets.json.tmp

@@ -12,6 +12,44 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (location-scout v2: QA backfill on all shipped plates + vendor the untracked packs)
+
+### Added
+
+- **All 8 on-disk location packs are now tracked in git.** The Brazil/Natal series (`natal-street-scenes`, `ponta-negra-morro-do-careca`, `ponte-newton-navarro`, `praia-do-meio`, `ribeira-cidade-alta-historic`, `forte-dos-reis-magos`), `lakewood-california` (plan-only scout pack), and the `commercial-gym` image binaries (only its provenance text had ever been committed) were sitting untracked in the working tree — the same never-committed failure mode that stranded the June location-scout branch. Vendored with their provenance intact.
+- **QA backfill (Phase C.5, rubric v1) on every existing CGI plate — 28 plates across 4 packs.** Sonnet subagents compared each source↔plate pair against `references/qa-rubric.md`; verdicts recorded in `_targets.json`/`cgi/_qa.json`, propagated to manifests and the repo index. Results: **las-vegas 1 pass / 1 warn / 6 fail** (v1 photoreal prompt → "medium" fails; 2 slots show crossed sources rendering Container Park content), **long-beach 3 pass / 7 fail** (mostly wrong-scene "composition" fails), **commercial-gym 1 pass / 2 fail** (person persisting in plate 02 — phantom-extra risk for muller gym panels; plate 03 photo-indistinguishable), **natal 4 pass / 2 warn / 1 fail + 2 more fails on people-persistence**. Failed plates are automatically skipped by `next_panel.py`'s pack auto-attach; sources remain valid fallback refs.
+
+### Changed
+
+- **`skills/location-scout/SKILL.md` synced to how packs are actually built in this repo (Aug 2026 reality):** Phase B now documents three capture routes with Wikimedia Commons harvest PREFERRED (clean CC/PD licensing, no browser driving — the studio real-photo SOP), Street View Static API second, Chrome-MCP screenshotting as fallback; Phase C.5 QA gate is mandatory with the June-packs failure as the cautionary note; Phase D ends with `pack_index.py --write --verify`; the model section warns that `nano_banana_pro` requests can return jobs tagged `nano_banana_2` (verify the returned model field); the Reuse section documents the zero-config `next_panel.py` auto-attach.
+
+---
+
+## 2026-08-11 (location-scout v2: QA gate, lighting variants, pack auto-attach, tests)
+
+### Added
+
+- **Phase C.5 QA gate** — canonical rubric at `skills/location-scout/references/qa-rubric.md` (composition / people / overlays / medium / integrity; pass VERBATIM to QA subagents). `cgi_convert.py --record-qa --qa-verdict pass|warn|fail [--qa-notes]` writes per-slot verdicts into `_targets.json`; `--emit-manifest` and `pack_index.py` propagate them. Flat packs record via `cgi/_qa.json`.
+- **Lighting/time-of-day variants** — `cgi_convert.py --variant night|dusk` on `--emit-prompt` re-renders the DAY CGI plate (geometry locked, lighting-only language, kept deliberately simple per the studio lighting A/B lesson); `--download`/`--register-local` store results as `cgi/<id>--<variant>.png` under the slot's `variants` map, carried through manifest + index.
+- **L23 follow-up CLOSED: pack auto-attach** — `next_panel.py` gains `find_pack_env_ref()`: when a project has no local env ref for a location, the repo-level `references/locations/index.json` is consulted (exact entry id → pack slug → ≥2-token overlap). QA-failed plates are never attached. Fully defensive — any problem returns None and the existing L23 verbal-anchor path proceeds unchanged.
+- **`tests/test_location_scout.py`** — 34 checks: allocate() rounding/guards, slugify, tag-vocabulary consistency, both index layouts + verify error detection, download URL/payload guards, variant + QA plumbing, and the next_panel pack fallback (incl. QA-fail skip + malformed-index survival). Whole tests/ suite green.
+
+---
+
+## 2026-08-11 (location-scout v2: unified pack index + canonical tag vocabulary)
+
+### Added
+
+- **`skills/location-scout/scripts/pack_index.py`** — walks `references/locations/` and emits a single consumer manifest at `references/locations/index.json` covering BOTH pack conventions: scout-style (`_targets.json` + `source/ cgi/ meta/`) and the flat Commons-harvest style the studio SOP produces (`<pack>-NN.jpg` + `_provenance.md` + `cgi/*-daz.*`). Parses flat-pack `QA:` lines and the cgi `## Plates` provenance tables, so descriptively-renamed plates (e.g. natal's `coastline-reefs-aerial-daz.jpg`) index with shot tags + intent instead of orphaning. `--verify` mode: missing referenced files are errors; orphan images, unknown tags, and plan-only packs are warnings. First real run: 10 packs / 65 locations, 0 errors.
+- **`skills/location-scout/tag-vocabulary.json`** — canonical tag enum (types / framing / setting / mood-time + flat `[WIDE]`-style shot-tag mapping). `scout_city.py` refuses to plan if `DEFAULT_SCOPE` uses a tag outside the vocabulary; `pack_index.py --verify` flags unknown tags in shipped packs. Cross-pack matching (reference-gathering, env-ref fallback) only works when packs agree on tag spelling — this makes the agreement mechanical instead of tribal.
+
+### Notes
+
+- This lands on the integration branch that finally merges the stranded June `feat/location-scout-skill` work (skill + Vegas/Long Beach packs + hardening + Street View fetcher) onto the current main base. `docs/PRODUCTION-SYSTEM-VISION.md` has been claiming `skills/location-scout/` as a mature Stage-4 component since July — this branch makes that claim true.
+
+---
+---
+
 ## 2026-08-11 (publisher Wave-2 complete: posting-board item helper)
 
 **Added**
@@ -1462,6 +1500,61 @@ Closes the follow-up note on the flow-workflow.md rewrite entry below: `shotlist
 - **`skills/comic-production/SKILL.md`** doc-index row for `shotlist-driven-flow.md` — "x4-always default on Flow (Pro is free)" → the Omni variant strategy (one submit = one image; fan out via verbatim re-runs on novel panels or weak first results).
 - **`skills/comic-production/scripts/next_panel.py`** — the emitted plan's Flow `count` changed `"x4"` → `"1"` to match (it cited shotlist-driven-flow.md as its source; the rendered plan now reads `Count: 1`).
 - **`skills/comic-production/references/flow-workflow.md`** — the temporary "Cross-doc status" note at the top removed now that the docs are aligned; the Legacy Appendix intro no longer claims `shotlist-driven-flow.md` still cites legacy mechanics.
+
+---
+
+## 2026-06-09 (location-scout hardening — code-review fixes)
+
+### Fixed
+
+- **`scripts/cgi_convert.py` `--download` hardened** — the result fetch previously accepted any URL scheme with no timeout or size limit, and wrote whatever came back. Now: HTTPS-only (rejects `file://` et al.), 60s timeout, 50 MB cap, and PNG/JPEG magic-byte validation so an HTML error page can never be registered as a "completed" CGI slot.
+- **`_targets.json` writes are atomic** (both `cgi_convert.py` and `maps_capture.py`) — write to a temp file + `os.replace`, so a crash mid-write can't destroy the plan and every prior capture's provenance.
+- **`maps_capture.py` no-sips fallback no longer mislabels formats** — when sips is unavailable/fails, the screenshot is copied with its real extension instead of a PNG masquerading as `.jpg`; `normalize_image` returns the actual path written and the plan records it. A failed plan save now also removes the just-written capture instead of leaving an orphan in `source/`.
+- **`cgi_convert.py --register-local`** validates the path exists before touching the plan (clear error instead of a traceback).
+- **`scout_city.py --force`** now warns when `source/`/`cgi/` still hold files from the previous plan (slot IDs repeat across plans, so old and new captures could silently mix). Warns only — never deletes.
+- **`SKILL.md` doc/CLI drift** — Phase B step 4 documented a `--type` flag that doesn't exist and omitted the required `--pack-dir`/`--query`/`--screenshot`; the failure-modes table referenced a nonexistent `cgi_convert.py --resume` (the real resume mechanism is `--list-pending-cgi`). The phantom `--skip-existing` was also dropped from the cgi_convert docstring. All invocations now match the actual CLIs.
+- **`maps_capture.py` `--name-slug` re-slugified before filename use** (second review pass) — an operator-supplied value containing path separators (`../../x`) previously escaped `source/` and could write anywhere on disk; `slugify()` now neutralizes it (verified: `../../etc/passwd` → `etcpasswd`).
+- **`_targets.json` read-modify-write serialized with an exclusive `flock`** (second review pass; `plan_lock()` in both `cgi_convert.py` and `maps_capture.py`, lock file `_targets.json.lock`) — registrations run in parallel per the documented workflow (one process per slot), and without the lock two concurrent runs read the same plan and the last writer silently dropped the other's slot update. The CGI result fetch happens *before* the lock is taken so network time doesn't serialize the other slots; `cgi/` is created on demand before writing a result. Lock + atomic-write temp files are gitignored.
+- **`cgi_convert.py --fast` no longer silently overrides an explicit `--model`** (second review pass) — `--fast --model gpt_image_2` previously discarded the explicit model and ran `nano_banana_2`; that combination is now a usage error, and `--fast` only applies when `--model` is unset.
+- **`SKILL.md` Phase C doc/CLI drift** (second review pass) — steps 2 and 5 omitted the required `--pack-dir` from the `cgi_convert.py` invocations (same drift class as the Phase B fix in the first pass); both now match the actual CLI.
+
+### Added
+
+- **`scripts/fetch_street_view.py`** — Phase B alternative that fetches Street View Static API images headlessly for every target in `_targets.json` (per-target heading/pitch/fov overrides, `skip` flag for interiors, request throttling, key via `$GOOGLE_MAPS_API_KEY` or `--api-key`). Built for the Lakewood pack after both interactive capture routes failed: Chrome MCP screenshots embed in chat but can't be persisted to disk from the tool layer, and the unauthenticated Street View thumbnail endpoint returns 403. ~$0.007/image via the official API (~$0.07 per 10-target pack). Already follows the hardening rules above: 20s timeout, image Content-Type check before write, API key stripped from logs.
+
+---
+
+## 2026-06-08 (Long Beach pack + v2 toned-down stylized-CGI prompt)
+
+### Added
+
+- **Long Beach validation pack at `references/locations/long-beach/`** — 10 locations: Pine Avenue (rendered as Terrace Theater area), 2nd Street Belmont Shore, Belmont Heights residential, Port of Long Beach container terminal, Hof's Hut diner, 555 East Steakhouse interior, Joe Jost's, Queen Mary, Aquarium of the Pacific, downtown Promenade. 10 source captures + 10 CGI conversions. Built on Google Flow Nano Banana Pro at 16:9, Pro plan, $0.
+
+### Changed
+
+- **`skills/location-scout/scripts/cgi_convert.py` `PROMPT_BODY` (v2 stylized-CGI prompt)** — replaced the Vegas v1 photoreal-anchored prompt with one that explicitly targets "default DAZ3D / Iray render look", "architectural visualization quality", "cleaner shaders / smoother surfaces / slightly simplified geometry", and "no photographic micro-detail (no skin pores, no dust speckles, no film grain) — keep it CG-clean". Triggered by the Vegas v1 pack coming back nearly indistinguishable from the source photographs — the model defaults to hyper-photoreal, which makes the CGI quality vanish and clashes with the photoreal-CGI character renders. The v2 prompt anchors back to a clearly-rendered look. Long Beach pack built with v2; Vegas v1 stays as the baseline for comparison. SKILL.md updated with the new prompt + a "why stylized instead of photoreal" note.
+
+### Notes
+
+- Naples Island and East Village Arts District searches returned 0 Maps photos and were substituted (Belmont Heights for street-03, The Promenade N for specific-01). Pine Avenue's source was a vertical Street View; the model rendered as a Terrace Theater–area downtown scene rather than the Pine Ave block — retagged honestly in `meta/locations.json`.
+
+---
+
+## 2026-06-07 (new `location-scout` skill — city → reusable CGI background pack)
+
+### Added
+
+- **`skills/location-scout/` skill** (`SKILL.md` + `scripts/scout_city.py`, `scripts/maps_capture.py`, `scripts/cgi_convert.py`) — turns a city name into a reusable pack of 8–15 photoreal CGI background reference images. Drives Google Maps via the Chrome MCP to capture random street scenes / restaurants / landmarks / specific-utility shots (alleys, rooftops, parking), then converts each to photoreal DAZ3D / Iray CGI via Higgsfield Nano Banana Pro (default) or Google Flow Nano Banana 2. Output lives at `references/locations/<city-slug>/` with `source/`, `cgi/`, `meta/locations.json`, and a `README.md`. Pre-built city packs eliminate per-project manual screenshotting AND preempt L23's verbal env-anchor fallback for the panel — attaching the pack's CGI ref is more specific than any 5-element verbal description.
+
+- **Las Vegas validation pack at `references/locations/las-vegas/`** — 8 locations end-to-end: Fremont Street (downtown neon), Bellagio (Strip hotel + fountains), MonteLago Village (Lake Las Vegas resort aerial), Peppermill (iconic mid-century diner), Eiffel Tower Restaurant (open kitchen interior), Heart Attack Grill (downtown corner exterior at night), Welcome to Fabulous Las Vegas Sign (S. Las Vegas Blvd), Container Park (shipping-container retail courtyard). 8 source captures from Google Maps + 8 CGI conversions saved under `cgi/`. Built on Google Flow Nano Banana 2 because the wrong-account / out-of-credits state of the Higgsfield MCP this session forced a platform pivot. Cost: $0 (Flow Pro free tier).
+
+### Changed
+
+- **`skills/reference-gathering/SKILL.md`** — added a "Location packs from `location-scout`" section after the DAZ3D-scene-reference trick. The manifest walker can resolve a project's location intent → pack entry by `type` + `tags` lookup, copying the pack's `cgi/` ref into the project instead of generating from scratch.
+- **`skills/script-breakdown/SKILL.md`** — added a "City packs as ref source" bullet under the per-location entry rules: when the script's setting is a real city AND a pack exists at `references/locations/<city-slug>/meta/locations.json`, the location's `ref_folder` can point directly at the pack entry's `cgi_image` instead of declaring a per-project `_source.jpg`.
+- **`skills/comic-production/references/lessons-learned.md` L23 addendum** — when a city-scout pack exists for the project's setting, prefer attaching the pack's CGI ref over the verbal env anchor; verbal anchor stays as the fallback for projects with no pack.
+
+---
 
 ---
 

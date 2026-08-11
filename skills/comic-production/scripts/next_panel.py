@@ -419,9 +419,81 @@ def find_face_card(root: Path, char_slug: str) -> Path | None:
     return None
 
 
+_PIPELINE_REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def find_pack_env_ref(location_slug: str,
+                      repo_root: Path | None = None) -> Path | None:
+    """Resolve a location slug against the repo-level location-pack index
+    (references/locations/index.json, built by
+    skills/location-scout/scripts/pack_index.py).
+
+    Closes the L23 follow-up ("enforced today by: nothing yet"): when a
+    project has no local env ref for a location but a city/location pack
+    covers it, the pack's CGI plate is attached automatically instead of
+    falling through to the verbal anchor.
+
+    Match order: exact entry id → pack slug → token overlap (≥2 shared
+    tokens between the location slug and entry id + pack slug + tags).
+    QA-failed plates are never returned. Defensive by design: ANY problem
+    (missing index, malformed JSON, missing file) returns None and leaves
+    the existing behavior untouched.
+    """
+    try:
+        if not location_slug:
+            return None
+        root = repo_root or _PIPELINE_REPO_ROOT
+        index_path = root / "references" / "locations" / "index.json"
+        if not index_path.exists():
+            return None
+        index = json.loads(index_path.read_text())
+
+        def plate_path(pack_slug: str, entry: dict) -> Path | None:
+            if not entry.get("cgi_image"):
+                return None
+            qa = entry.get("qa") or {}
+            if qa.get("verdict") == "fail":
+                return None
+            p = root / "references" / "locations" / pack_slug / entry["cgi_image"]
+            return p if p.exists() else None
+
+        want = set(location_slug.split("-"))
+        exact: Path | None = None
+        by_pack: Path | None = None
+        fuzzy: tuple[int, Path] | None = None
+
+        for pack in index.get("packs", []):
+            if pack.get("status") in ("planned", "empty", "error"):
+                continue
+            slug = pack.get("slug", "")
+            for entry in pack.get("locations", []):
+                p = plate_path(slug, entry)
+                if p is None:
+                    continue
+                eid = entry.get("id") or ""
+                if eid == location_slug:
+                    exact = exact or p
+                elif slug == location_slug and by_pack is None:
+                    by_pack = p
+                else:
+                    have = set(eid.split("-")) | set(slug.split("-"))
+                    have.update(entry.get("tags") or [])
+                    overlap = len(want & have)
+                    if overlap >= 2 and (fuzzy is None or overlap > fuzzy[0]):
+                        fuzzy = (overlap, p)
+
+        return exact or by_pack or (fuzzy[1] if fuzzy else None)
+    except Exception:
+        return None
+
+
 def find_env_ref(root: Path, location_slug: str) -> Path | None:
     """Fallback DAZ source ref. Prefer pick_location_anchor() which implements
-    L10 env chaining (use the first accepted panel in this location instead)."""
+    L10 env chaining (use the first accepted panel in this location instead).
+
+    Resolution order: project-local references/locations/<slug>/ first
+    (_source.jpg, then first image), then the repo-level location-pack index
+    (find_pack_env_ref)."""
     loc_dir = root / "references" / "locations" / location_slug
     src = loc_dir / "_source.jpg"
     if src.exists():
@@ -430,7 +502,7 @@ def find_env_ref(root: Path, location_slug: str) -> Path | None:
         for p in sorted(loc_dir.iterdir()):
             if p.suffix.lower() in {".png", ".jpg", ".jpeg"} and not p.name.startswith("_"):
                 return p
-    return None
+    return find_pack_env_ref(location_slug)
 
 
 def pick_location_anchor(root: Path, location_slug: str, accepted_history: list[dict]) -> dict | None:
