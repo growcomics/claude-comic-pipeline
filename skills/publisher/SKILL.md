@@ -14,6 +14,9 @@ description: Stage 7 of the production line — take a compiled, reviewed comic 
 > separate, per-action, human-approved act outside this skill
 > (`feedback_never_post_without_permission`). `scripts/prepare_post.py` enforces this
 > structurally: it imports nothing that can reach a network.
+> (`scripts/board_item.py` — the posting-board CARD, state-tracking on our own studio — is
+> likewise outside the prep flow: dry-run by default, its write runs only as a separate
+> per-action owner-approved act, and it structurally cannot post content or touch chips.)
 
 This is **Stage 7** of `docs/PRODUCTION-SYSTEM-VISION.md` (§2, §5) — the line's exit:
 
@@ -101,9 +104,12 @@ the firing of posts is out of scope by design.
 5. **STOP. Hand over the checklist.** Show the human `CHECKLIST.md` (inline, not just a
    path), note anything unusual (QA findings, page-count mismatch, missing PDF), and end the
    turn. Do not "helpfully" continue into posting, do not open platform tabs, do not draft a
-   scheduled task that would fire a post. Offering to *also* create the posting-board item is
-   fine **as an offer** — creating board items on studio/posting.php is state-tracking, not
-   posting, but it still touches the live server, so it stays a separate approved action.
+   scheduled task that would fire a post. Offering to *also* file the posting-board item is
+   fine **as an offer** — `scripts/board_item.py` mechanizes it (checklist step 0's card:
+   lane Monthly comic / property, chips server-initialized `todo`) — but creating board
+   items touches the live studio server, so it stays a separate per-action approved act:
+   dry-run by default, the write only via `--execute --approved-by "<owner ok>"` passed
+   AFTER the owner approves that run. Never auto-fired by prepare_post.py or this workflow.
 
 ## The bundle, file by file
 
@@ -117,12 +123,18 @@ the firing of posts is out of scope by design.
 | `whats-new-draft.json` | A ready-to-prepend entry for the live `admin/data/updates.json` (schema per `reference_whats_new_feed`) — DRAFT only, `ts` null until the human posts it. |
 | `posted.template.json` | The unfilled posting record. Human fills real URLs/dates after firing, saves as `posting/posted.json`. Schema: `references/posted-schema.json`. **Never create `posting/posted.json` yourself** — its existence = "posting done" to build-comic. |
 | `MANIFEST.json` | Bundle inventory + provenance: page inventory with dimensions, source dir, files written, platform order. |
+| `../board-item.json` | Receipt for the 🗓 posting-board card this bundle feeds — written ONLY by `scripts/board_item.py` after an approved write (or `--adopt`): card id, approval text, payload history. Chip states stay on the board, never in here. |
 | `../analytics/engagement-stub.json` | The flywheel landing pad (Publisher → Ideator contract, VISION §4). Seeded with empty `captures[]` + a capture plan; ga4 + patreon passes append via `scripts/capture_engagement.py` (wrapper reads only, append-only). Other sources stay Tier-2/manual: `references/analytics-capture.md`. |
 
 ## Hard rules (repeated because they are the point)
 
 - **Never post/upload/deploy/fire anything.** Prepare and stop. The checklist is the handoff.
 - **Never create `posting/posted.json`** — only the human who posted does that.
+- **The board card is a separate approved act.** `scripts/board_item.py` is this skill's only
+  path to studio/posting.php — dry-run by default, write gated on per-action owner approval
+  (`--execute --approved-by`), never invoked by prepare_post.py. It is structurally unable to
+  touch chips or set anything to posted (`add`/`update` are its only verbs; posting.php
+  initializes new cards' chips to `todo` server-side).
 - **Never render or attach full-comic content into public-platform captions** — full pages go
   to the site + paid tiers; public posts get cover/teasers per crop-specs.
 - **Credentials:** bundle prep needs none. Engagement capture (`scripts/capture_engagement.py`,
@@ -135,7 +147,8 @@ the firing of posts is out of scope by design.
 
 - **🗓 Posting board** (`studio/posting.php`) — the live status board this bundle feeds; see
   `references/posting-board-alignment.md` for exactly what the board does vs. what this skill
-  adds and how they hand off.
+  adds and how they hand off. `scripts/board_item.py` files/updates the card (separate
+  approved act; receipt at `posting/board-item.json`).
 - **Syndication ledger** (comic-platform `admin/syndication.html`) — the after-the-fact
   proof-URL record; checklist step 6.
 - **build-comic.md** — orchestrator; its posting-stage sentinel is `posting/posted.json`.

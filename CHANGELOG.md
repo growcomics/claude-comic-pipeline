@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-11 (publisher Wave-2 complete: posting-board item helper)
+
+**Added**
+- **`skills/publisher/scripts/board_item.py`** — files the 🗓 posting-board card that `CHECKLIST.md` step 0 asks for (lane = Monthly comic / <property>, per-platform chips in server-initialized `todo`) from a prepared bundle's `MANIFEST.json`, closing the board↔bundle handoff gap (`references/posting-board-alignment.md` step 2 — the board's own "book done → board item" NEXT-candidate). Boundaries, mechanically enforced:
+  - **Separate, per-action, human-approved**: dry-run by default (live-state check + exact payload, writes nothing); the write refuses without `--execute --approved-by "<who/when>"`, and the approval text is recorded in the receipt `posting/board-item.json` (committed project text). Never invoked by `prepare_post.py`, which still imports nothing network-capable.
+  - **Cannot post or touch chips**: the transport guard restricts verbs to `add`/`update` (`plat`/`upload`/`del` deliberately unimplemented); item status is argparse-limited to draft|ready; chips are initialized `todo` by posting.php itself on add and unreachable via update. Never writes `posting/posted.json`.
+  - **Live is truth** (`feedback_studio_concurrent_deploy_clobber`): every run first reads the wizard's read-only `post/index.php?do=state` and validates live lanes/props/chip keys before acting — **no studio PHP was edited**; the existing posting.php `add`/`update` + wizard state API already carry the whole contract (verified against the live server 2026-08-11: lanes/props/platforms match, 6 live cards). Updates re-send the full LIVE field set and overlay only flagged fields, so board-side human edits (owner/caption/notes/uploaded art) survive posting.php's replace-all update semantics. Refuses properties with no live lane (posting.php would silently re-lane 3dmc to growgetter) and title-clashes without a receipt (`--adopt po_xxx` links an existing card instead of duplicating it).
+  - Auth = bridge key (`~/Documents/.3dmc-studio-bridge-key`), sent only as the `X-Bridge-Key` header — never in URLs, never printed, never stored in the receipt.
+
+**Changed**
+- `skills/publisher/SKILL.md` — never-post rule box, workflow step 5, hard rules, bundle table (new `../board-item.json` row), related surfaces: the board-card offer now names the helper and its approval gate.
+- `skills/publisher/references/posting-board-alignment.md` — "what this skill adds" + handoff step 2 now name `board_item.py`; division-of-labor chip rule notes the helper structurally cannot reach chip state.
+- `skills/publisher/scripts/prepare_post.py` — CHECKLIST step 0's board-item line now carries the exact helper command (dry-run default, separate owner-approved act).
+- Validation against the `not-so-supra-man` bundle: dry-run correctly chose ADD (6 live cards scanned, no title clash), flagged the out-of-window release date (2026-07-30 vs visible months 2026-08/09) and fell back to today's slot with a visible note; refusal gates verified (`--execute` without approval → exit 1 before any request; `--status posted` → impossible). The single approved live write is its own per-action act — receipt committed separately once the owner approves it.
+
 ## 2026-08-10 (reference-gathering manifest mode: base ref becomes the identity anchor)
 
 **Changed**
