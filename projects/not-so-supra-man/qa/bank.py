@@ -41,8 +41,19 @@ chain = {"flow_id": args.flow_id, "disk": args.disk,
 kind, _, ident = args.job.partition(":")
 if kind == "sheet":
     if not args.ledger_key: refuse("--ledger-key required for sheets (e.g. dee-dee.turnaround_t8)")
-    char, _, key = args.ledger_key.partition(".")
-    led["characters"].setdefault(char, {})[key] = chain
+    # SCENE LADDER routing (added 2026-08-12): compose.py reads rungs from
+    # led["scene_ladders"][location][rung], but this function could only ever write into
+    # led["characters"], so there was NO legal way to bank a rung and every page needing one
+    # was permanently blocked by D8. Ledger keys of the form
+    # "scene_ladders.<location>.<wide|medium|close>" now route to the correct subtree.
+    if args.ledger_key.startswith("scene_ladders."):
+        loc, _, rung = args.ledger_key.partition(".")[2].partition(".")
+        if rung not in ("wide", "medium", "close"):
+            refuse(f"scene-ladder rung must be wide|medium|close, got '{rung}'")
+        led.setdefault("scene_ladders", {}).setdefault(loc, {})[rung] = chain
+    else:
+        char, _, key = args.ledger_key.partition(".")
+        led["characters"].setdefault(char, {})[key] = chain
     json.dump(led, open("references/ref-ledger.json", "w"), indent=2)
 else:
     log = json.load(open("pages-log.json"))
