@@ -1,32 +1,33 @@
 {
-  "staging_type": "depth-staged",
-  "dana-lane": {
-    "position": "immediate foreground, occupying roughly 58% of frame height, rotated three-quarter with her near shoulder toward the lens, the loaded graviton barbell pressed straight overhead at full lockout; she dominates the near plane",
-    "pose": {
-      "overall": "standing tall at full overhead-press lockout, elbows locked, lats flared wide, weight even and grounded, torso long and powerful — triumphant and effortless",
-      "left_arm": "raised overhead, hand gripping the barbell knurling left of center, bicep and forearm fully engaged",
-      "right_arm": "raised overhead mirroring the left, hand gripping right of center, deltoid and triceps bunched",
-      "hands": "exactly two hands, both her own, both wrapped around the barbell bar overhead — they touch only the bar"
-    },
-    "expression": "beaming, wide delighted open smile, eyes bright and warm, chin slightly lifted — cheerful pride; the expression and pose reflect exhilarated ease"
+ "staging_type": "depth-staged",
+ "dana-lane": {
+  "position": "immediate foreground, occupying roughly 58% of frame height, rotated three-quarter with her near shoulder toward the lens, the loaded graviton barbell pressed straight overhead at full lockout; she dominates the near plane",
+  "pose": {
+   "overall": "standing tall at full overhead-press lockout, elbows locked, lats flared wide, weight even and grounded, torso long and powerful \u2014 triumphant and effortless",
+   "left_arm": "raised overhead, hand gripping the barbell knurling left of center, bicep and forearm fully engaged",
+   "right_arm": "raised overhead mirroring the left, hand gripping right of center, deltoid and triceps bunched",
+   "hands": "exactly two hands, both her own, both wrapped around the barbell bar overhead \u2014 they touch only the bar"
   },
-  "supraman": {
-    "position": "deep background, small at roughly 20% of frame height, framed in the far gym doorway at the end of the room, well behind Dana on the far plane",
-    "pose": {
-      "overall": "frozen mid-step in the doorway, body slightly recoiled, one hand rising toward the frame",
-      "left_arm": "lifted, hand catching the edge of the door frame",
-      "right_arm": "hanging slack at his side, caught off guard",
-      "hands": "exactly two hands, both his own; one on the door frame, one at his side"
-    },
-    "expression": "stunned, jaw dropped, eyes wide — pure disbelief; the expression and pose reflect that shock"
+  "expression": "beaming, wide delighted open smile, eyes bright and warm, chin slightly lifted \u2014 cheerful pride; the expression and pose reflect exhilarated ease"
+ },
+ "supraman": {
+  "position": "deep background, small at roughly 20% of frame height, framed in the far gym doorway at the end of the room, well behind Dana on the far plane",
+  "pose": {
+   "overall": "frozen mid-step in the doorway, body slightly recoiled, one hand rising toward the frame",
+   "left_arm": "lifted, hand catching the edge of the door frame",
+   "right_arm": "hanging slack at his side, caught off guard",
+   "hands": "exactly two hands, both his own; one on the door frame, one at his side"
   },
-  "spatial_rules": [
-    "exactly two people in the image: Dana huge in the foreground, Supraman small in the far doorway",
-    "exactly four hands total: Dana's two on the barbell overhead, Supraman's two (one on the door frame, one at his side)",
-    "three clear depth layers — NEAR: Dana and the barbell; MID: the gym floor, a readout pillar reading MAX, equipment racks receding; FAR: Supraman small in the doorway",
-    "the gym's perspective lines (floor seams, ceiling beams) converge toward the doorway behind Supraman, so Dana reads enormous and near while he reads tiny and far — the scale gap comes from camera distance, not from changing their real heights",
-    "Dana's real height is normal; her dominance comes from being nearer the lens; muscle mass is tier-6 amazon but height does NOT change; NOT a giantess",
-    "her borrowed super-suit is stretched skin-tight with the cape; coverage of chest, groin and buttocks fully intact"
-  ],
-  "lighting": "warm morning key raking across Dana in the foreground with a rim on her near shoulder popping her off the midground; the deep background and doorway fall cooler and dimmer, so a near-warm / far-cool gradient reinforces the depth"
+  "expression": "stunned, jaw dropped, eyes wide \u2014 pure disbelief; the expression and pose reflect that shock",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image: Dana huge in the foreground, Supraman small in the far doorway",
+  "exactly four hands total: Dana's two on the barbell overhead, Supraman's two (one on the door frame, one at his side)",
+  "three clear depth layers \u2014 NEAR: Dana and the barbell; MID: the gym floor, a readout pillar reading MAX, equipment racks receding; FAR: Supraman small in the doorway",
+  "the gym's perspective lines (floor seams, ceiling beams) converge toward the doorway behind Supraman, so Dana reads enormous and near while he reads tiny and far \u2014 the scale gap comes from camera distance, not from changing their real heights",
+  "Dana's real height is normal; her dominance comes from being nearer the lens; muscle mass is tier-6 amazon but height does NOT change; NOT a giantess",
+  "her borrowed super-suit is stretched skin-tight with the cape; coverage of chest, groin and buttocks fully intact"
+ ],
+ "lighting": "warm morning key raking across Dana in the foreground with a rim on her near shoulder popping her off the midground; the deep background and doorway fall cooler and dimmer, so a near-warm / far-cool gradient reinforces the depth"
 }

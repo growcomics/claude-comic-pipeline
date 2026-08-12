@@ -1,0 +1,42 @@
+{
+ "staging_type": "triangular",
+ "dana-lane": {
+  "position": "APEX of the triangle \u2014 mid-ground centre, head highest in frame, standing tall behind and above the slumped Supraman with one hand resting on his shoulder",
+  "pose": {
+   "overall": "standing at ease and utterly relaxed, weight settled, torso squared and enormous, the calm of someone who is not trying",
+   "left_arm": "hanging loose at her side, forearm thick and heavy",
+   "right_arm": "reaching down and forward to rest her open hand on Supraman's near shoulder",
+   "hands": "exactly two hands, both her own \u2014 right palm on his shoulder, left open at her side"
+  },
+  "expression": "warm confident smile, eyes bright and steady, chin slightly raised \u2014 affectionate ownership of the moment, not cruelty"
+ },
+ "supraman": {
+  "position": "immediate FOREGROUND, lowest point of the triangle, slumped and seated, nearest the lens and therefore large but BELOW her head height",
+  "pose": {
+   "overall": "slumped and drained, shoulders rounded forward, spine curved, one knee up",
+   "left_arm": "draped over the raised knee, hand limp",
+   "right_arm": "propping him upright, palm flat on the floor",
+   "hands": "exactly two hands, both his own \u2014 one limp over the knee, one flat on the floor"
+  },
+  "expression": "exhausted and dazed, mouth slightly open, brows raised \u2014 spent disbelief",
+  "turnaround_key": "turnaround"
+ },
+ "dee-dee": {
+  "position": "BACK-RIGHT base point of the triangle, deepest of the three, smaller by perspective, pressing the graviton barbell overhead",
+  "pose": {
+   "overall": "standing in a wide power stance, arms locked out overhead with the loaded barbell",
+   "left_arm": "raised overhead gripping the bar left of centre",
+   "right_arm": "raised overhead gripping the bar right of centre",
+   "hands": "exactly two hands, both her own, both wrapped around the barbell"
+  },
+  "expression": "fierce triumphant grin, teeth showing, eyes narrowed with effort and delight"
+ },
+ "spatial_rules": [
+  "exactly three people in the image: Supraman foreground-low, Dana mid apex, Dee-Dee back-right",
+  "exactly six hands total: Dana's two, Supraman's two, Dee-Dee's two on the bar",
+  "the three heads form a clear triangle \u2014 Dana's highest and forward, Supraman's lowest and nearest, Dee-Dee's set deep and to the right; no two figures at the same scale or depth",
+  "Dana reads as dominant through apex placement and Supraman being slumped, NOT by being drawn oversized on his plane; her real height is ordinary and she is NOT a giantess",
+  "all garment coverage intact \u2014 Supraman's suit is torn but covering"
+ ],
+ "lighting": "warm gym key from the upper left carving the triangle, Dana catching the brightest light at the apex, Supraman falling into shadow in the near foreground, Dee-Dee dimmer and cooler at depth"
+}

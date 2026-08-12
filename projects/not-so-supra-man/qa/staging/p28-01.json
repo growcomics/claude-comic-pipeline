@@ -1,0 +1,33 @@
+{
+ "staging_type": "tension-block",
+ "dana-lane": {
+  "position": "right of frame, rotated three-quarter across the steel table toward him, nearer the lens and larger, elbow planted on the tabletop",
+  "pose": {
+   "overall": "seated leaning casually forward, utterly unstrained, her free hand propping up her chin",
+   "left_arm": "bent with her chin resting in her palm, elbow on the table, bored",
+   "right_arm": "elbow planted on the tabletop, forearm vertical, hand locked with his \u2014 the steel visibly crumpling and dimpling under her elbow and grip",
+   "hands": "exactly two hands, both her own \u2014 right locked with his, left cupping her own chin"
+  },
+  "expression": "amused boredom \u2014 eyebrows raised, small smile, eyes drifting slightly away as if this is taking a while"
+ },
+ "supraman": {
+  "position": "left of frame, a half-step back and lower, rotated three-quarter toward her, his whole body committed to the push",
+  "pose": {
+   "overall": "half out of his seat, torso twisted, shoulder driving down the line of his arm, both feet braced on the floor",
+   "left_arm": "gripping the edge of the table for leverage, knuckles white",
+   "right_arm": "locked against hers, every muscle straining, veins standing out",
+   "hands": "exactly two hands, both his own \u2014 right locked with hers, left clamped on the table edge"
+  },
+  "expression": "total maximum effort \u2014 teeth gritted, eyes screwed shut, face flushed, neck cords standing out",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: their two locked together, plus her chin-hand and his table-grip",
+  "the line between their two heads is a diagonal, not a level horizontal; both bodies rotated three-quarter, not square to the lens",
+  "the locked hands sit at the centre of the frame as the focal collision point, minimal gap between the figures",
+  "the steel tabletop crumples and dimples under her elbow \u2014 the metal is failing, she is not",
+  "Dana is tier 6 amazon mass but ordinary height; suit stretched and fully covering"
+ ],
+ "lighting": "hard directional key from the upper left so the diagonal between their faces is carved in light and shadow, a rim separating her from the darker background, deep falloff behind"
+}

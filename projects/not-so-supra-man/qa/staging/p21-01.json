@@ -1,0 +1,33 @@
+{
+ "staging_type": "tension-block",
+ "dana-lane": {
+  "position": "foreground-right, rotated three-quarter toward Supraman, nearer the lens and larger by perspective, her arm raised into the frame between them",
+  "pose": {
+   "overall": "standing relaxed and leaning slightly in toward him along the diagonal, weight easy on one hip",
+   "left_arm": "hanging at her side, entirely unflexed",
+   "right_arm": "raised and bent at the elbow but completely RELAXED, not flexed \u2014 the resting arm still visibly larger than his straining one",
+   "hands": "exactly two hands, both her own \u2014 right fist loose at the top of the raised arm, left open at her side"
+  },
+  "expression": "delighted teasing grin, eyes half-lidded and warm, looking down along the diagonal at him"
+ },
+ "supraman": {
+  "position": "mid-left, a half-step back and lower in frame, rotated three-quarter toward her, his flexing arm raised to meet hers",
+  "pose": {
+   "overall": "leaning in toward her, shoulders squared with effort, up on the balls of his feet",
+   "left_arm": "braced at his hip",
+   "right_arm": "raised in a full hard bicep flex, every muscle recruited, tendons standing out",
+   "hands": "exactly two hands, both his own \u2014 right fist clenched hard at the top of the flex, left at his hip"
+  },
+  "expression": "earnest strain \u2014 brows knitted, jaw tight, a bead of effort; he is trying his absolute hardest",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: Dana's two and Supraman's two",
+  "the line connecting their two heads is a strong DIAGONAL from lower-left to upper-right, never a level horizontal",
+  "both bodies rotated three-quarter, leaning toward a shared collision point, minimal gap between them",
+  "the two raised arms meet near the centre of the frame for direct comparison \u2014 her relaxed arm is visibly thicker than his fully flexed one",
+  "Dana is tier 6 amazon mass but ordinary height; the suit is stretched skin-tight and fully covering"
+ ],
+ "lighting": "strong directional key from the left carving the diagonal between the two faces, rim light separating her silhouette from him, deliberately not flat"
+}

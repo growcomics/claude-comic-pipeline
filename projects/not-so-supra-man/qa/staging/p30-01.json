@@ -1,0 +1,33 @@
+{
+ "staging_type": "tension-block",
+ "dana-lane": {
+  "position": "behind and slightly right, rotated three-quarter, chest against his back, her head higher in frame than his, arms wrapped around him",
+  "pose": {
+   "overall": "standing easy and settled, feet planted, holding him off the floor against her chest without visible effort",
+   "left_arm": "wrapped around his chest pinning his upper arms to his sides, hand clasping her own opposite forearm",
+   "right_arm": "wrapped around beneath the left completing the lock, forearm across his ribs",
+   "hands": "exactly two hands, both her own, clasped together around him at his far side"
+  },
+  "expression": "fond and gently amused \u2014 cheek near his ear, warm smile, eyes soft; affectionate not aggressive"
+ },
+ "supraman": {
+  "position": "in front of and below her, rotated three-quarter, boots clear of the ground, body angled along the diagonal of her hold",
+  "pose": {
+   "overall": "lifted off the floor, arms pinned to his sides, legs hanging with boots well clear of the ground, torso arched",
+   "left_arm": "pinned at his side by her lock, forearm angled up",
+   "right_arm": "pinned at his side, hand free enough to tap twice on her forearm \u2014 the tap-out",
+   "hands": "exactly two hands, both his own \u2014 one pinned, one tapping her forearm"
+  },
+  "expression": "good-humoured defeat \u2014 eyes wide, a resigned laughing grimace, cheeks puffed; he is enjoying this too",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: her two clasped around him, his two pinned with one tapping her forearm",
+  "the line through their two heads runs as a diagonal, hers high and back, his low and forward; neither body is square to the lens",
+  "his boots are clearly off the ground with visible air beneath them",
+  "she shows NO strain anywhere \u2014 the hold is effortless, which is the point",
+  "Dana is tier 6 amazon mass, ordinary height, NOT a giantess; suit stretched and fully covering"
+ ],
+ "lighting": "warm gym key from the upper right catching her face and shoulder, his face falling slightly into shadow below hers, soft rim separating the two bodies so the wrap reads clearly"
+}

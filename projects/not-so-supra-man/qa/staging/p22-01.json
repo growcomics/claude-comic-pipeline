@@ -1,0 +1,32 @@
+{
+ "staging_type": "depth-staged",
+ "dex-doomer": {
+  "position": "immediate FOREGROUND, back of his shoulder and the side of his head occupying the lower-left of frame, dark and large, facing away into the room",
+  "pose": {
+   "overall": "standing with his back mostly to camera, head turned in profile toward the monitor wall",
+   "left_arm": "hanging at his side",
+   "right_arm": "raised, hand at his chin in thought",
+   "hands": "exactly two hands, both his own \u2014 one at his chin, one at his side"
+  },
+  "expression": "seen in partial profile: sour calculation, mouth pulled tight, brow furrowed",
+  "turnaround_key": "turnaround"
+ },
+ "dee-dee": {
+  "position": "MIDGROUND right, leaning at the workbench where the rebuilt prototype sits under a work lamp, smaller than Doomer's foreground shoulder",
+  "pose": {
+   "overall": "leaning a hip against the workbench, torso angled toward the prototype, casual",
+   "left_arm": "braced on the bench top",
+   "right_arm": "gesturing loosely toward the prototype",
+   "hands": "exactly two hands, both her own \u2014 one flat on the bench, one open toward the device"
+  },
+  "expression": "dry sardonic half-smile, one eyebrow raised, unimpressed with him"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: Doomer's two and Dee-Dee's two",
+  "three depth layers \u2014 NEAR: Doomer's shoulder and head occupying one corner; MID: Dee-Dee and the workbench; FAR: the monitor wall replaying the rope-snapping footage",
+  "Doomer's foreground shoulder frames the shot off-axis; the two figures are NOT at comparable scale",
+  "Dee-Dee is tier 3, ordinary build, lab coat over a black top, fully covering"
+ ],
+ "lighting": "cold blue monitor-wall glow filling the background and edge-lighting Doomer's dark foreground shoulder, a warm pooled work lamp isolating the prototype and Dee-Dee in the midground"
+}

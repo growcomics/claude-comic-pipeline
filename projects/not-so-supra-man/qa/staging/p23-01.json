@@ -1,0 +1,33 @@
+{
+ "staging_type": "depth-staged",
+ "dee-dee": {
+  "position": "MIDGROUND centre but dominant, standing square in the teal beam column, arms spread wide, lit up from within the beam, the brightest thing in frame",
+  "pose": {
+   "overall": "standing feet planted wide, spine arched slightly back, chest lifted, arms flung open to either side as the beam floods her",
+   "left_arm": "flung out and back, fingers splayed",
+   "right_arm": "flung out and back mirroring the left, fingers splayed",
+   "hands": "exactly two hands, both her own, both open with fingers splayed at the ends of her outflung arms"
+  },
+  "expression": "rapturous \u2014 head tipped back, mouth open, eyes wide and blazing; ecstatic transformation, not pain"
+ },
+ "dex-doomer": {
+  "position": "BACKGROUND left, small by perspective, hunched at the trigger console behind and below her, watching",
+  "pose": {
+   "overall": "leaning over the trigger console, weight on his hands",
+   "left_arm": "planted on the console",
+   "right_arm": "still on the trigger lever",
+   "hands": "exactly two hands, both his own \u2014 one on the console, one on the lever"
+  },
+  "expression": "manic grin, eyes wide and reflecting the teal light, teeth bared with glee",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: Dee-Dee's two splayed and Doomer's two at the console",
+  "the frame is tilted on a dutch angle so the beam column runs as a strong diagonal",
+  "Dee-Dee is NEAR-MID and large, Doomer is FAR and small; they are not on the same plane",
+  "the lab coat is whipping upward in the beam's updraft but remains fully covering",
+  "this is the trigger beat of her transformation \u2014 her build is still tier 3 here, the change has not yet landed"
+ ],
+ "lighting": "the teal beam is the dominant light source, blowing out from her centre and throwing hard cyan rim light along her arms and coat, everything outside the beam column falling to deep shadow, Doomer lit only by the spill"
+}

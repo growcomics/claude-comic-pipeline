@@ -1,0 +1,42 @@
+{
+ "staging_type": "depth-staged",
+ "dex-doomer": {
+  "position": "immediate FOREGROUND at roughly 55% of frame height, three-quarter turned, one arm sweeping grandly across the room toward the chair",
+  "pose": {
+   "overall": "standing tall mid-gesture, chest out, weight on the back foot, showman's flourish",
+   "left_arm": "tucked behind his back at the small of his spine",
+   "right_arm": "sweeping outward and across the frame, palm open and upturned, presenting the machine",
+   "hands": "exactly two hands, both his own \u2014 one open and presenting, one hidden behind his back"
+  },
+  "expression": "delighted theatrical menace, wide grin, eyebrows raised \u2014 enjoying his own performance",
+  "turnaround_key": "turnaround"
+ },
+ "dana-lane": {
+  "position": "MIDGROUND centre, bound upright to the interrogation chair directly beneath the Disinto-Ray barrel, smaller than Doomer by distance",
+  "pose": {
+   "overall": "seated upright and rigid, torso pulled back against the chair by ropes across her chest and waist",
+   "left_arm": "bound to the chair arm at the wrist",
+   "right_arm": "bound to the opposite chair arm at the wrist",
+   "hands": "exactly two hands, both her own, both bound at the chair arms with fingers half-curled"
+  },
+  "expression": "defiant fury \u2014 jaw set, brows down, eyes locked on Doomer, absolutely not afraid"
+ },
+ "dee-dee": {
+  "position": "BACKGROUND, deepest layer, at the console behind and to the left, small by perspective, half-turned toward the readouts",
+  "pose": {
+   "overall": "standing at the console leaning slightly in toward the screens",
+   "left_arm": "resting on the console edge",
+   "right_arm": "reaching to a control dial",
+   "hands": "exactly two hands, both her own \u2014 one on the console edge, one on a dial"
+  },
+  "expression": "clinical detachment, mouth a flat line, eyes on the readouts rather than on Dana"
+ },
+ "spatial_rules": [
+  "exactly three people in the image: Doomer near, Dana mid in the chair, Dee-Dee far at the console",
+  "exactly six hands total: Doomer's two, Dana's two bound at the chair arms, Dee-Dee's two at the console",
+  "three clear depth layers \u2014 NEAR: Doomer; MID: Dana and the chair under the ray barrel; FAR: Dee-Dee and the console wall",
+  "laboratory perspective lines converge behind Dee-Dee so the room reads deep; the figures are NOT on one plane",
+  "Dana is tier 2, ordinary build, blouse and skirt intact and fully covering"
+ ],
+ "lighting": "cold overhead laboratory floods with a sickly green cast from the ray barrel spilling onto Dana in the midground; Doomer rim-lit from behind so he reads as a dark commanding shape in front; console glow underlighting Dee-Dee at depth"
+}

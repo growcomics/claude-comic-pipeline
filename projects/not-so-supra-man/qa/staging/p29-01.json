@@ -1,0 +1,33 @@
+{
+ "staging_type": "depth-staged",
+ "supraman": {
+  "position": "immediate FOREGROUND, occupying most of the frame height, mid-deadlift with the graviton bar barely to his knees",
+  "pose": {
+   "overall": "hinged at the hips in a deadlift, back flat and shaking, knees bent, boots cracking the floor beneath him",
+   "left_arm": "gripping the bar overhand, arm rigid and trembling",
+   "right_arm": "gripping the bar overhand mirroring the left, rigid and trembling",
+   "hands": "exactly two hands, both his own, both wrapped around the graviton bar"
+  },
+  "expression": "maximum strain \u2014 face contorted, teeth bared, eyes bulging, absolutely at his limit",
+  "turnaround_key": "turnaround"
+ },
+ "dana-lane": {
+  "position": "BACKGROUND behind and to the right, smaller by perspective, holding an identical loaded bar locked out overhead in ONE hand",
+  "pose": {
+   "overall": "standing perfectly upright and relaxed, hip cocked, one arm locked out overhead with the loaded bar balanced on it",
+   "left_arm": "raised straight overhead, hand balancing the identical loaded bar without strain",
+   "right_arm": "brought up in front of her face as she inspects her own fingernails",
+   "hands": "exactly two hands, both her own \u2014 left overhead on the bar, right held up as she examines her nails"
+  },
+  "expression": "absorbed and faintly bored, eyes down on her nails, not even watching him \u2014 the comedy is her total lack of effort"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: Supraman's two on his bar, Dana's one overhead and one at her nails",
+  "three depth layers \u2014 NEAR: Supraman straining huge in the foreground; MID: the cracked gym floor receding; FAR: Dana, smaller, one-handing an identical bar",
+  "the two bars are visibly IDENTICAL loads \u2014 that equivalence is the whole joke",
+  "gym perspective lines converge behind Dana; the two figures are not on the same plane",
+  "Dana is tier 6 amazon mass, ordinary height, suit stretched and fully covering"
+ ],
+ "lighting": "hot key light on the straining Supraman in front, cooler dimmer wash on Dana at depth, rim light on his shoulders to pop him off the receding floor"
+}

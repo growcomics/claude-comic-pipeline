@@ -1,6 +1,10 @@
 # ▶ RUN NOW — finish "Not So Supra... Man" (self-contained runbook)
 
-**Owner instruction 2026-08-11 ~07:50 PDT:** *"I'm leaving here soon, so I need you to continue
+**RUN LOCATION (owner, 2026-08-12): finishing on the LAPTOP (marrtrobinson/ULTRA, 0 credits). The mac mini
+was stood down without spending anything — it is on growcomics/Plus. Future plan: sign the mini into
+marrtrobinson so it also has ULTRA, then build a connector so generation can run from there.
+
+**Earlier owner instruction 2026-08-11 ~07:50 PDT:** *"I'm leaving here soon, so I need you to continue
 driving this on the Mac Mini somehow. It should get all the way to completion on Mac Mini. Don't ask
 me stuff. Also... everything needs to be nano banana 2 lite."*
 
@@ -23,7 +27,7 @@ early. Everything below has already been proven end-to-end on the laptop.
 
 ## 1. State — what is already DONE (do not redo)
 
-5 turnaround sheets banked with full verified chains (`python3 qa/verify_chain.py` → 5):
+6 turnaround sheets banked with full verified chains (`python3 qa/verify_chain.py` → 6):
 
 | ledger key | flow id | height ratio vs 6'2" mannequin |
 |---|---|---|
@@ -32,14 +36,14 @@ early. Everything below has already been proven end-to-end on the laptop.
 | `dex-doomer.turnaround` | `f1ab8fcf-4142-4b5e-a302-8fb6ca539385` | 0.988 ✓ |
 | `dee-dee.turnaround_t3` | `64b4a734-f74f-4092-9180-563c8894c462` | 0.985 (residual, accepted) |
 | `dana-lane.turnaround_t2` | `23f2e99f-c23f-40fc-9e0a-c87470e05845` | 0.930 ✓ best |
+| `dana-lane.turnaround_t4` | `20bf6cf1-134f-464c-936d-3bb0779e8710` | 0.924 ✓ |
 
 Laptop Flow project (source of the above): `014292cc-8d7a-493d-9767-b1f9548cb3e9`.
 ⚠️ The older project `04dd40e0…` **crashes the Flow client on load** — do not open it.
 
 ## 2. Remaining work, in order
 
-1. `sheet:dana-t4-blouse` — composed + audited, ready to fire.
-2. `sheet:dana-t9-ANCHOR-SWAP` — 3 chained passes (`pass_1`, `pass_2`, `pass_3_turnaround`). This is
+1. `sheet:dana-t9-ANCHOR-SWAP` — 3 chained passes (`pass_1`, `pass_2`, `pass_3_turnaround`). This is
    the tier-9 finale form; attach the size anchor and run the 4-axis no-downsize gate.
 3. **Scene ladders** — `compose.py` REFUSES pages whose location rung isn't banked. Per
    `references/turnaround-specs.json → scene_ladder_rule`: per location, wide establish (exists) →

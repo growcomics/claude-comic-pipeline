@@ -1,0 +1,33 @@
+{
+ "staging_type": "foreground-occlusion",
+ "dee-dee": {
+  "position": "her massive forearm crosses the FOREGROUND lower-left of frame, out of focus and chunky and dark, occupying roughly a quarter of the image; her face is sharp in the midground above it",
+  "pose": {
+   "overall": "standing tall and unbothered, one arm extended straight out holding Doomer up by his collar, the other relaxed",
+   "left_arm": "relaxed at her side",
+   "right_arm": "extended straight out from the shoulder, holding Doomer's collar in a single fist, taking his whole weight without strain",
+   "hands": "exactly two hands, both her own \u2014 right fist closed on his collar, left open at her side"
+  },
+  "expression": "slow amused smirk, eyes half-lidded, monitor light flickering across her face \u2014 completely at ease"
+ },
+ "dex-doomer": {
+  "position": "MIDGROUND right, hoisted off the floor at the end of her arm, silhouetted against the monitor-wall glow, going limp",
+  "pose": {
+   "overall": "suspended off the ground, body slack, shoes hanging clear of the floor, slumping against the monitor wall glow",
+   "left_arm": "hanging limp at his side",
+   "right_arm": "hand weakly gripping her wrist",
+   "hands": "exactly two hands, both his own \u2014 one limp, one weakly on her wrist"
+  },
+  "expression": "eyes squeezed shut, mouth open, face slack \u2014 implied unconsciousness, NOT injury; nothing graphic",
+  "turnaround_key": "turnaround"
+ },
+ "spatial_rules": [
+  "exactly two people in the image",
+  "exactly four hands total: Dee-Dee's two and Doomer's two",
+  "shooting PAST her blurred foreground forearm \u2014 that soft dark shape frames the lower-left corner off-axis",
+  "shallow depth of field: foreground forearm soft, her face and Doomer sharp in the midground, monitor wall soft behind",
+  "IMPLIED not graphic: no blood, no wounds, no violence detail \u2014 the story beat is that she is casually stronger",
+  "Destroya is tier 8, corset ensemble, coverage fully intact"
+ ],
+ "lighting": "flickering cold monitor-wall glow as the main source behind them, silhouetting Doomer and raking across her smirk, her foreground forearm reading as a dark bokeh mass"
+}
