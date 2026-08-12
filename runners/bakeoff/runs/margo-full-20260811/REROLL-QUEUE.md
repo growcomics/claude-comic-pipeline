@@ -1,74 +1,43 @@
-# margo-full — re-roll queue (as of 2026-08-11 ~08:10)
+# margo-full — regeneration queue (REWRITTEN after owner review, 2026-08-11)
 
-## Why these exist
-The `wardrobe` field was never injected into `fullPrompt` (0/86 beats). The only
-clothing signal reaching the model was the `margo` identity reference — a photo of
-her IN A LAB COAT. Every beat after b17 (where the story destroys the coat) tended
-to render it anyway.
+## Owner review verdicts (supersede everything below the line)
+1. **FLAT FACES: PASSED.** b02/b07/b13/b50 stay as-is. Keep kill rule 9 for future
+   judging, but do not re-roll banked pages for face intensity alone.
+2. **LAB COAT: DITCHED FROM THE COMIC ENTIRELY.** Torn-sleeve fragments, wrong mirror
+   reflections, inconsistent tears — owner: "just ditch the lab coat entirely and
+   recreate." DONE at spec level: all 86 wardrobe lines + prompts respec'd coatless
+   (backup: margo-full-beats.json.bak-coatrespec). The b13-b17 coat-tear arc is now a
+   TANK-STRAIN arc (b14 dialogue: "THESE SEAMS ARE GETTING TIGHT!").
+3. **SLEEVE-RIP CLAUSE: REMOVED GLOBALLY (86/86).** It was ripping sleeves on Kress
+   and investors (owner flagged pages 23-25). Growth tearing now lives ONLY in
+   Margo's per-beat wardrobe lines.
+4. **SPEAKING = OPEN MOUTH.** Owner: closed mouth under a speech bubble is weird.
+   Added to all 60 speaking beats: "mouth OPEN mid-line... NEVER a closed mouth
+   under a speech balloon."
+5. **SCENE GEOGRAPHY.** The pitch happens IN the gym per script, but panels never
+   showed it. GEOGRAPHY clause added to b23/b25/b26/b39/b41/b42/b45; b23 is now a
+   16:9 WIDE establishing shot.
+6. **b45 "unexplained girl" = INGRID, an investor** — the identity bleed (amulet +
+   grey tank landed on her) made her unrecognizable. Prompt now states she wears her
+   investor blazer, NO amulet, NO tank. Re-roll after refs verified.
 
-FIXED at source 2026-08-11 ~07:45 (commit 54a511f): every beat prompt now carries a
-`WARDROBE (exact ...)` block that explicitly outranks the reference image.
-Proof it works: b40 and b43 were 0/4 and 0/7 before the fix; corrective re-rolls came
-back 6/6 clean.
+## REGENERATE — banked winners invalidated by the coat respec (20)
+b01, b02, b03, b03b, b04, b05, b06, b07, b08, b09, b10, b11, b12, b13, b14, b14b,
+b15, b16, b17, b41
+(Their board panels are tagged `respec-regen-pending`, still accepted as placeholders
+until replacements land. ~40 credits at lite/count=4 x2.)
 
-**Everything generated BEFORE ~07:45 is suspect. Everything after is clean by default.**
+## REGENERATE — never had a clean winner (8)
+b18, b18b (calipers action missing), b19, b22, b26, b48, b52, b53
 
-## Zero clean variants — MUST re-roll (7)
-- b18-doorframe    — 7/7 lab coat (full garment or torn remnant clinging to the arm)
-- b19-crate        — 6/6 lab coat; ALSO none staged the crate-lift-to-shoulder action
-- b22-tomorrow     — 8/8 lab coat; v04 also had stray quote marks on the balloon
-- b26-margo-watches— 7/7 lab coat
-- b48-terms        — 7/7 lab coat
-- b52-amulet-blaze — 6/6 lab coat
-- b53-quads        — 3/3 lab coat; v03 also swapped leggings for shorts
+## RE-ROLL after ref check (1)
+b45 — verify the ingrid/investors ref attaches and reads as HER before rolling.
 
-## Clean wardrobe but WRONG ACTION — re-roll (1)
-- b18b-calipers — v07/v08 are coat-free, but NO tile actually shows calipers clamped
-  on the bicep. Winner not banked; re-roll for the action.
+## NOT YET GENERATED (32)
+b29-b38 range remainder + b57-b86 remainder — `python3 drive.py status` is truth.
 
-## How to re-roll
-The beat sheet is already fixed, so a plain re-roll from `fullPrompt` should work.
-For the stubborn ones add an explicit corrective, as used on b40/b43:
-  "CRITICAL FIX: the previous roll dressed MARGO in a white lab coat. There is NO
-   lab coat, jacket, cardigan or any white over-garment in this scene — that coat
-   was destroyed earlier in the story. She wears the grey tank top ONLY."
-Do NOT use registry RETRY_INJECTION WARD-01 here — it says "match the attached
-reference images EXACTLY", which is backwards: the reference is the source of the defect.
-
-## FLAT FACES — corrective re-roll (4)
-Audited all 42 banked winners on two axes (face intensity, text accuracy).
-TEXT: 42/42 clean — every expected line present and correctly spelled. Text is NOT a problem.
-FACE: 4 flat. These are banked but should be replaced:
-- b02-vial          — exhausted/hopeful reads as neutral
-- b07-stay-out      — should be a threat landing; face is slack
-- b13-sleeve-tight  — detail shot, but the face in frame is blank
-- b50-clipboard-back— "SAYS THE DATA. MY DATA." should be a counterpunch; reads placid
-
-ROOT CAUSE: judging gap, not a prompt gap. Every prompt already carries
-"FACES: never blank or neutral - the emotion named in the prompt renders at full
-theatrical intensity", but face quality was NOT one of the 8 kill rules, so flat
-faces passed as KEEP.
-
-FIX — add as kill rule 9 for every future judge pass:
-  9. Flat face - blank, neutral, waxy, doll-like, or a mild expression on a beat
-     that calls for something strong. A calm face on a dramatic beat is a KILL.
-Corrective clause for the re-roll (mirrors registry FACE-01):
-  "CRITICAL FIX: the face was wooden last roll. The named emotion must visibly
-   transform the WHOLE face - brows driven, eyes wide or narrowed, mouth open or
-   set. Theatrical intensity, not a neutral expression."
-
-## STRUCTURE — resolved, no action
-Owner confirmed 2026-08-11: each panel IS its own standalone page/image. 86 beats
-= 86 pages. No page-composition/multi-panel-grid step is needed, and the Gribble
-4-panel-grid figure does NOT apply to this run. The apparent "only ~20 images"
-is simply run progress: 42 of 86 banked.
-
-## Other open defects (not blocking)
-- IDENTITY BLEED, b45-tape: in 3 of 4 tiles the amulet + grey tank bound to INGRID
-  instead of Margo, and the coat appeared on Ingrid in 2 of 4. Ref/staging attachment
-  issue — fix inputs before re-rolling.
-- KRESS TEAR BLEED: Margo's growth-tear effect lands on Kress's tracksuit. Cost 6/8
-  tiles in b49-kress-protest, 3/8 in b06, and b04 v02/v03. The global SLEEVES style
-  clause is not scoped to Margo or to the stages where she outgrows clothes.
-- AMULET-AS-BRACELET: cost 5/7 tiles in b09, killed b12 v06.
-- b41-money-lift winner v04 is banked but shows the coat (pre-fix). Re-roll when convenient.
+## Standing generation rules (owner-set)
+- nano_banana_2_lite, 3:4 (b23 = 16:9), count=4 x2 rolls, single round.
+- Judge with kill rules 1-9 (9 = flat face).
+- WARD-01 retry injection is BACKWARDS for this run — the reference image is the
+  defect source. Use the custom coat clause only if the coat somehow reappears.

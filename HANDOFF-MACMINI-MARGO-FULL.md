@@ -158,3 +158,28 @@ server-side; nothing already generated needs regenerating.
 
 One junk board tile exists: `09db3a5283.png` (debug probe, prompt `test-probe`),
 already marked rated=bad / tagged `probe-artifact`. Safe to delete.
+
+
+---
+
+## ADDENDUM 2 — owner review landed, 2026-08-11 (~this supersedes the corrective queue above)
+
+Owner reviewed the 42 pages. Verdicts, ALL already applied to `margo-full-beats.json`
+(backup `.bak-coatrespec`) — the night session executes, it does not re-decide:
+
+1. **Flat faces PASSED** — b02/b07/b13/b50 stay. Keep kill rule 9 going forward.
+2. **LAB COAT DITCHED from the entire comic.** All 86 wardrobe lines + the b13-b17
+   coat-tear arc respec'd coatless (now a tank-strain arc; b14's line is now
+   "THESE SEAMS ARE GETTING TIGHT!").
+3. **Global SLEEVES clause DELETED (86/86)** — it was shredding Kress's and the
+   investors' sleeves. Tearing lives only in Margo's wardrobe lines now.
+4. **All 60 speaking beats now demand an OPEN MOUTH** under the balloon.
+5. **Geography fixed:** the pitch is IN the gym; GEOGRAPHY clause on
+   b23/b25/b26/b39/b41/b42/b45 and **b23 is now 16:9**.
+6. **b45's "mystery girl" is INGRID** (investor) — identity bleed made her generic.
+   Prompt now pins her to the investor blazer, no amulet. Verify refs, then roll.
+
+**Work order changed:** REROLL-QUEUE.md is rewritten. 20 banked winners (b01-b17,
+b41) are invalidated by the coat respec — their board panels are tagged
+`respec-regen-pending` and stay accepted as placeholders until replacements land.
+Net queue: 20 regen + 8 no-winner + b45 + 32 ungenerated ≈ 60 beats, ~120 credits.
