@@ -183,3 +183,23 @@ Owner reviewed the 42 pages. Verdicts, ALL already applied to `margo-full-beats.
 b41) are invalidated by the coat respec — their board panels are tagged
 `respec-regen-pending` and stay accepted as placeholders until replacements land.
 Net queue: 20 regen + 8 no-winner + b45 + 32 ungenerated ≈ 60 beats, ~120 credits.
+
+
+---
+
+## ADDENDUM 3 — LANE CHANGE (owner, 2026-08-11): generate on FLOW, not Higgsfield
+
+Owner directive, standing from now on:
+1. **Generation lane = Google Flow on THIS machine (the mini).** Free volume beats
+   credits. The growcomics Flow account is primary here — CONFIRM the account per
+   `skills/comic-production/references/flow-accounts.md` before any submit. Drive
+   per `skills/comic-production/references/flow-workflow.md` (Omni UI). Model pill:
+   **Nano Banana 2** (Pro throttles bulk runs).
+2. **Method = variants → winner → REFINE.** Over-generate (12-15 per beat is fine on
+   Flow), judge with kill rules 1-9, pick the winner, then run change passes ON the
+   winner where it under-shoots (scale, face, geography). This reverses LEAN MODE's
+   "refinement rounds DROPPED" — refinement is back.
+3. **Higgsfield MCP = fallback only** (if Flow driving is broken). Do not quote or
+   spend the ~120cr estimate from Addendum 2 unless falling back.
+4. Bookkeeping is unchanged: `drive.py record/fetch/sheet/winner` accepts Flow job
+   ids/URLs the same as Higgsfield ones.
