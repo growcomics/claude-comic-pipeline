@@ -162,7 +162,7 @@ Growth-page arithmetic: a page is a **growth page** when any panel carries a bea
 
 `[camera:]` is `distance, angle` (+ optional modifier in parentheses).
 
-- **Distance**: `ecu-face`, `ecu-region`, `mcu`, `medium`, `full`, `wide-establish`, `splash` — *lead with one of these exact tokens*; they are what Gate A (`validate_shotlist.py`) accepts as head tokens. (`cowboy` exists in `cinematic-framing.md` but is not currently in Gate A's `KNOWN_VIEWS` — express cowboy crops as `medium` + a `(cowboy crop)` modifier until the gates converge.)
+- **Distance**: `ecu-face`, `ecu-region`, `mcu`, `medium`, `cowboy`, `full`, `wide-establish`, `splash` — *lead with one of these exact tokens*; they are what Gate A (`validate_shotlist.py`) accepts as head tokens. (`cowboy` = mid-thigh up, per `cinematic-framing.md`; accepted by Gate A since the 2026-08-13 gate convergence.)
 - **Angle**: `eye-level`, `low-angle-front`, `low-angle-back`, `high-angle`, `worms-eye`, `birds-eye`, `dutch`, `over-shoulder`, `profile`, `three-quarter`
 - Distance discipline the script should already respect (L20, hard downstream): body-region beats at `mcu`/`ecu-region` (never `full` or wider); chapter mean distance ≤2.5 for transformation comics; ≥30% of panels at middle distances; ≤3 panels at the same distance × angle combo.
 

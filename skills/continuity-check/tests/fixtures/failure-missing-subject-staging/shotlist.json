@@ -1,0 +1,19 @@
+{
+  "project": "missing-subject-staging",
+  "version": 1,
+  "page_count": 5,
+  "style": "photoreal-daz3d",
+  "location_strategy": "single",
+  "cast": [
+    {"id": "vex", "name": "Vex", "wardrobe": "flight suit"},
+    {"id": "juno", "name": "Juno", "wardrobe": "mechanic overalls"}
+  ],
+  "locations": [{"id": "hangar", "description": "cargo hangar at dusk"}],
+  "pages": [
+    {"page_number": 1, "panels": [{"panel_id": "p01-01", "characters": ["vex", "juno"], "location": "hangar", "camera": "medium, eye-level", "action": "Vex and Juno square off over the crate", "costume_state": "intact"}]},
+    {"page_number": 2, "panels": [{"panel_id": "p02-01", "characters": ["vex", "juno"], "location": "hangar", "camera": "cowboy, low-angle-front", "action": "Juno steps past Vex toward the door", "costume_state": "intact", "subject_staging": "depth-staged"}]},
+    {"page_number": 3, "panels": [{"panel_id": "p03-01", "characters": ["vex", "juno"], "location": "hangar", "camera": "mcu, three-quarter", "action": "Vex leans in, voice low", "costume_state": "intact"}]},
+    {"page_number": 4, "panels": [{"panel_id": "p04-01", "characters": ["vex"], "location": "hangar", "camera": "full, three-quarter", "action": "Vex alone, kicking the crate open", "costume_state": "intact"}]},
+    {"page_number": 5, "panels": [{"panel_id": "p05-01", "characters": ["vex", "juno"], "location": "hangar", "camera": "wide-establish, high-angle", "action": "Both freeze as the hangar lights die", "costume_state": "intact", "subject_staging": "circular"}]}
+  ]
+}

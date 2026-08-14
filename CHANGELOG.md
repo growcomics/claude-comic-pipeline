@@ -12,6 +12,22 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-13 22:55 (gate convergence: `cowboy` legal at Gate A + rules_audit L34 resurrected)
+
+Closes the two gate mismatches recorded in the 2026-08-11 writer-stage entry (both verified still present on `c285718` before changing anything).
+
+**Fixed**
+- **Gate A (`skills/script-breakdown/scripts/validate_shotlist.py`) — `cowboy` is now a legal camera head token.** It was a first-class distance everywhere downstream — rules_audit `CAMERA_DISTANCES` / `DISTANCE_SCORE` / `MIDDLE_DISTANCES` (the missing-middle fix text literally tells you to re-assign panels to cowboy), next_panel.py aspect/distance/lens tables, L24's set — but Gate A rejected it, so the shotlist gate refused exactly what the audit prescribed. Fixed at the source of truth per the `KNOWN_VIEWS` sync rule: `cowboy` added as an identity entry in next_panel.py `_VIEW_ALIASES` (joining mcu/medium/medium-wide as VIEW_COMPATIBILITY-adjacent heads) and to Gate A's `KNOWN_VIEWS`. Compound normalization is unchanged (`cowboy, low-angle-back` still canons to the angle key; bare `cowboy` keeps its 4:3 aspect) and prose heads are still rejected — all probed.
+- **`skills/continuity-check/scripts/rules_audit.py` — the L34 subject-staging check could never fire.** `check_subject_staging` read `panel.cast`, but the panel-level schema field is `characters` (`cast[]` is the top-level roster), so `cast_size` was always 0 and the HARD "multi-character panel at medium+ with no subject_staging" gate had been dead since it shipped. Now reads `characters`. Live-data validation: spot-me — which declared staging values the dead check never examined — audits clean with L34 live.
+
+**Added**
+- **Fixture `skills/continuity-check/tests/fixtures/failure-missing-subject-staging/`** pins the L34 fix: undeclared medium two-shot HARD-fails, unknown value `'circular'` HARD-fails, and boundary pins hold (staged cowboy panel, undeclared mcu panel, single-character full panel all stay clean). Verified the fixture FAILS against the pre-fix rules_audit and passes post-fix. Suite: 10/10; root tests (story_spine 14/14, runner_loop, flow_runner_mock, variant_picker) all green.
+
+**Changed**
+- **Writer mirror converged** (`skills/writer/scripts/validate_script.py` + `references/script-format.md` §9): the "cowboy intentionally absent — Gate A rejects it … until the gates converge" workaround is retired. `DISTANCE_SCORE` gains `cowboy: 4`, `MIDDLE_DISTANCES` gains `cowboy` (both now mirror rules_audit exactly), §9 lists `cowboy` as a legal head. spot-me still validates clean (mean 2.23, middle 61.5%).
+
+**Known gap (flagged, not fixed here)**: bare `full` is still NOT a Gate A head token (probe: `unknown view token: 'full'`) even though §9 lists it, validate_script accepts it, and rules_audit parses it as a first-class distance. Same shape as the cowboy mismatch, but unrecorded and the alias target needs an owner call (identity head vs mapping to `front-full`) — spawned as a follow-up task rather than silently widening this fix.
+
 ## 2026-08-11 07:45 (margo-full: wardrobe reaches the prompt + concurrent-driver safety)
 
 **Fixed**

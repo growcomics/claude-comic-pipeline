@@ -1,0 +1,14 @@
+{
+  "description": "L34 subject_staging: a multi-character panel at medium-or-wider distance with no staging declared must HARD-fail, and an unknown staging value must HARD-fail. Regression pin for the 2026-08-13 fix — the check read panel.cast (always absent; the shotlist schema field is `characters`), so it could never fire. Boundary pins: a staged cowboy panel, an undeclared mcu panel (not load-bearing), and a single-character full panel must all stay clean.",
+  "ignore_categories": ["asset", "reference_completeness", "story_spine"],
+  "expect_hard": [
+    {"category": "subject_staging", "message_contains": "at 'medium' distance has no subject_staging declared"},
+    {"category": "subject_staging", "message_contains": "Unknown subject_staging value: 'circular'"}
+  ],
+  "expect_no_hard_in_categories": ["camera_variety", "transformation_beats", "required_metadata"],
+  "expect_no_hard_with_message": [
+    {"category": "subject_staging", "message_contains": "at 'cowboy' distance"},
+    {"category": "subject_staging", "message_contains": "at 'mcu' distance"},
+    {"category": "subject_staging", "message_contains": "at 'full' distance"}
+  ]
+}

@@ -72,11 +72,10 @@ SIZES = {"splash", "wide", "tall", "standard"}
 ON_SCREEN_TYPES = {"balloon", "thought", "whisper", "shout"}
 DIALOGUE_TYPES = ON_SCREEN_TYPES | {"off-panel"}
 
-# Distance scoring mirrors rules_audit.DISTANCE_SCORE (cowboy intentionally
-# absent — Gate A rejects it as a head token; see script-format.md §9).
+# Distance scoring mirrors rules_audit.DISTANCE_SCORE.
 DISTANCE_SCORE = {"ecu-face": 0, "ecu-region": 1, "mcu": 2, "medium": 3,
-                  "full": 5, "wide-establish": 6, "splash": 5}
-MIDDLE_DISTANCES = {"mcu", "medium"}
+                  "cowboy": 4, "full": 5, "wide-establish": 6, "splash": 5}
+MIDDLE_DISTANCES = {"mcu", "medium", "cowboy"}
 WIDE_OR_FULL = {"full", "wide-establish", "splash"}
 ANGLES = {"eye-level", "low-angle-front", "low-angle-back", "high-angle",
           "worms-eye", "birds-eye", "dutch", "over-shoulder", "profile",

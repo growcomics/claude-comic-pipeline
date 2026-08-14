@@ -169,6 +169,7 @@ _VIEW_ALIASES = {
     "medium": "medium",
     "medium two-shot": "medium",
     "medium-wide": "medium-wide",
+    "cowboy": "cowboy",
     "medium close-up": "mcu",
     "medium shot": "medium",
     "close-up": "mcu",

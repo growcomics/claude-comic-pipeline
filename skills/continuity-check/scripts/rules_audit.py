@@ -759,8 +759,8 @@ def check_subject_staging(shotlist: dict, pages_filter: set[int] | None) -> list
             continue
         for p in page.get("panels", []):
             panel_id = p.get("panel_id", f"page-{page_no}")
-            cast = p.get("cast", []) or []
-            cast_size = len([c for c in cast if c])
+            chars = p.get("characters", []) or []
+            cast_size = len([c for c in chars if c])
             camera = p.get("camera", "") or ""
             distance, _ = parse_camera(camera)
 
