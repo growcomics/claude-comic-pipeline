@@ -215,20 +215,34 @@ def classify_costume_damage(state: str) -> int:
 # Image discovery (mirror compose_page.py)
 
 def find_panel_image(project: Path, panel_id: str) -> Path | None:
+    """Return the accepted image for `panel_id`, or None if not yet accepted.
+
+    Matches the on-disk conventions `generate_status.py` and `next_panel.py`
+    already use, so the three scripts agree on what "accepted" means:
+
+      - Flat layout:    pages/panels/<panel_id>.png
+      - Folder layout:  pages/panels/<panel_id>/<label>.png with a sibling
+                        `_accepted.txt` file whose contents are the label
+                        (e.g. "v1"). No file is renamed on accept.
+    """
     panels_dir = project / "pages" / "panels"
     if not panels_dir.exists():
         return None
-    for sub in panels_dir.glob(f"panel-{panel_id}*"):
-        if sub.is_dir():
-            accepted = sorted(sub.glob("v*_accepted.png"))
-            if accepted:
-                return accepted[-1]
-            v1 = sub / "v1.png"
-            if v1.exists():
-                return v1
+
+    panel_dir = panels_dir / panel_id
+    if panel_dir.is_dir():
+        marker = panel_dir / "_accepted.txt"
+        if marker.exists():
+            label = marker.read_text().strip()
+            if label:
+                candidate = panel_dir / f"{label}.png"
+                if candidate.exists():
+                    return candidate
+
     flat = panels_dir / f"{panel_id}.png"
     if flat.exists():
         return flat
+
     return None
 
 
@@ -282,7 +296,9 @@ def check_pages(project: Path, shotlist: dict, pages_filter: set[int] | None) ->
             if img is None:
                 out.append(Finding(n, pid, "asset", SEVERITY_HARD,
                                    "no accepted image on disk for this panel",
-                                   "Generate and accept a variant, save as panel-<id>/v1.png"))
+                                   "Generate a variant and accept it: either save the final image at "
+                                   f"pages/panels/{pid}.png (flat) or place pages/panels/{pid}/<label>.png "
+                                   "alongside an _accepted.txt file whose contents are <label> (folder)."))
 
             # 2. costume_state present per panel
             cs = panel.get("costume_state", "").strip()

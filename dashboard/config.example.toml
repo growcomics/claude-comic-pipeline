@@ -1,0 +1,20 @@
+# Comic Pipeline Dashboard — config
+#
+# Save this file to:
+#   ~/Library/Application Support/comic-dashboard/config.toml
+#
+# Or point COMIC_DASHBOARD_CONFIG at a custom location.
+#
+# The dashboard reads every glob below and surfaces any directory that
+# contains a `shotlist.json`. Slugs are derived from the directory name.
+
+project_globs = [
+  # Google Drive for Desktop on macOS — primary location once migration is done.
+  # The "GoogleDrive-*" wildcard matches whichever Google account you authed with.
+  "~/Library/CloudStorage/GoogleDrive-*/My Drive/comic-projects/*",
+
+  # Local fallbacks — keep these while you're still copying projects into Drive,
+  # then remove them once the canonical copy lives in Drive.
+  "~/comics/*",
+  "~/Documents/*",
+]

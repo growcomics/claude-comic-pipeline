@@ -1,0 +1,9 @@
+{
+  "description": "Folder-layout convention: pages/panels/<panel_id>/<label>.png + _accepted.txt. Both panels are properly accepted, so the asset check must NOT fire 'no accepted image' HARDS. Asset findings are NOT ignored here — that's the whole point of this fixture.",
+  "ignore_categories": [],
+  "expect_hard": [],
+  "expect_no_hard_in_categories": ["asset", "camera_variety", "required_metadata"],
+  "expect_no_hard_with_message": [
+    {"category": "asset", "message_contains": "no accepted image"}
+  ]
+}
