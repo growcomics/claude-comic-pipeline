@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-16 03:10 (margo-full: 44 stalled beats generated, 54/86 banked)
+
+**Added**
+- All 44 previously-unbanked beats generated on Higgsfield `nano_banana_2_lite` (8 variants on connective beats, 12 on payoff) — ~650 variants on disk. Judged through the two-tier lane (Haiku contact-sheet triage → Sonnet finalist ranking against the canonical rubrics read by path) and banked to board `margo-full`.
+- `runs/margo-full-20260811/RANKER-BRIEF.md` — the tier-2 finalist contract, with the full kill list (COAT / LET / HEAD / WARD-07 / SKIN / COVER / PROP / FLAT / MOUTH) and the owner-calibrated ranking order (camera → payoff density → body scale vs stage → lighting → expression).
+- `runs/margo-full-20260811/bankmany.py` — batch banking that refuses any beat whose variants dir holds a duplicated `vNN` prefix, closing the hazard where `drive.py winner` globs and takes the FIRST match and had twice nearly banked a killed tile.
+
+**Fixed**
+- **Four banked panels were carrying a phantom lab coat.** A Sonnet QA sweep of the 23 banked winners after b17 found b20-mirror-flex, b41-money-lift, b44b-latspread and b46-kress-reclaim all showing a white sleeved coat/smock over Margo's tank — b20 inconsistently (coat on the body, no coat in her own mirror reflection). Root cause is unchanged and structural: the `margo` reference image is a photo of her in a lab coat, so the reference keeps re-asserting the garment the story deleted. All four re-rolled. Text was clean across all 23 (0 defects).
+
+---
+
 ## 2026-08-16 01:30 (margo-full: run restarted on Higgsfield after the 5-day Flow-lane stall)
 
 The margo-full 86-beat run had been stalled since 2026-08-11 08:07 — the Flow-on-mini lane change (`1f3733a`) was committed but never executed. Restarted on the sanctioned Higgsfield fallback.

@@ -1206,6 +1206,54 @@
     "3fe8c555-e00c-4bd1-8bdf-554f24352d90": {
      "round": 2,
      "file": "v07-3fe8c555.png"
+    },
+    "810e25f3-f144-4732-bad6-acff05f8b336": {
+     "round": 1,
+     "file": "v09-810e25f3.png"
+    },
+    "d5a1a5a6-787d-437c-9fb1-87f0d2edbf8c": {
+     "round": 1,
+     "file": "v10-d5a1a5a6.png"
+    },
+    "f2ed39e5-3adc-42d9-97be-a218464fb2dc": {
+     "round": 1,
+     "file": "v11-f2ed39e5.png"
+    },
+    "87342bb8-d6af-4d12-ab78-7ce98aabd29b": {
+     "round": 1,
+     "file": "v17-87342bb8.png"
+    },
+    "e63bc632-fd37-46ba-a20b-7f21b40c3799": {
+     "round": 2,
+     "file": "v12-e63bc632.png"
+    },
+    "bcd59b10-ddbc-4281-8a92-8d34204354fa": {
+     "round": 2,
+     "file": "v13-bcd59b10.png"
+    },
+    "7782cedf-6edc-4b72-ad08-2b22b8a77e4d": {
+     "round": 2,
+     "file": "v14-7782cedf.png"
+    },
+    "e790e119-e4b0-44b3-8e9f-aaa9650eb9f0": {
+     "round": 2,
+     "file": "v15-e790e119.png"
+    },
+    "066120f9-1a56-4c8b-9e7b-1642f33999e0": {
+     "round": 3,
+     "file": "v16-066120f9.png"
+    },
+    "20f13eac-9c34-4e0f-9bf8-d07e13bdcee5": {
+     "round": 3,
+     "file": "v18-20f13eac.png"
+    },
+    "8fa8a115-4c43-4f6c-9ad6-487929e7f735": {
+     "round": 3,
+     "file": "v19-8fa8a115.png"
+    },
+    "2755ec94-c74e-44c8-9315-3b5fe61c975e": {
+     "round": 3,
+     "file": "v20-2755ec94.png"
     }
    },
    "winner": {
@@ -1216,8 +1264,9 @@
     "ts": 1786459639
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8,
+    "3": 4
    }
   },
   "b41b-ingrid-fumble": {
@@ -1296,11 +1345,44 @@
     "8dd619ad-353c-41cd-886d-bf921ab6af3d": {
      "round": 1,
      "file": "v03-8dd619ad.png"
+    },
+    "de9c28c3-cb39-454e-a828-c898851d5c46": {
+     "round": 1,
+     "file": "v08-de9c28c3.png"
+    },
+    "4be90815-296b-41be-9844-49a9b45fe777": {
+     "round": 1,
+     "file": "v09-4be90815.png"
+    },
+    "3f31278e-fa10-463d-abce-cd1cbe6046a3": {
+     "round": 1,
+     "file": "v10-3f31278e.png"
+    },
+    "e9830348-397a-4cd8-adbd-514f2af2b0ec": {
+     "round": 1,
+     "file": "v11-e9830348.png"
+    },
+    "6fc0a134-1985-46a2-b644-dd2819d6dd1f": {
+     "round": 2,
+     "file": "v12-6fc0a134.png"
+    },
+    "ea41dbaf-fc04-4bb1-a107-78b976ba99cd": {
+     "round": 2,
+     "file": "v13-ea41dbaf.png"
+    },
+    "bdb791ab-f8c5-4680-a7cf-e4485a469373": {
+     "round": 2,
+     "file": null
+    },
+    "2a386fc5-becc-49ee-8a22-1c2fd44b463f": {
+     "round": 2,
+     "file": "v14-2a386fc5.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 7
+    "1": 11,
+    "2": 4
    }
   },
   "b18b-calipers": {
@@ -1336,11 +1418,40 @@
     "3cc4580e-4a4d-4c01-a33a-4dcb0a95691f": {
      "round": 1,
      "file": "v08-3cc4580e.png"
+    },
+    "b2488e10-3611-42ef-b3f9-7a79c91a6b89": {
+     "round": 1,
+     "file": "v09-b2488e10.png"
+    },
+    "91d99c75-4b5f-414a-96c8-989d312c45a4": {
+     "round": 1,
+     "file": "v10-91d99c75.png"
+    },
+    "40706d03-c329-4f34-a195-4bbf3ee62229": {
+     "round": 1,
+     "file": "v11-40706d03.png"
+    },
+    "f027e89a-496f-48a3-9dd0-bfa274ef97d2": {
+     "round": 1,
+     "file": "v12-f027e89a.png"
+    },
+    "c027980f-f4a3-4ae2-903f-3cf2fafb0eb3": {
+     "round": 2,
+     "file": "v13-c027980f.png"
+    },
+    "cfff378c-b818-4cc5-9b6c-739d1eb47356": {
+     "round": 2,
+     "file": "v14-cfff378c.png"
+    },
+    "52a68e6e-128d-4dd3-8493-f486903d2ee0": {
+     "round": 2,
+     "file": "v15-52a68e6e.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 8
+    "1": 12,
+    "2": 3
    }
   },
   "b25-investors-cold": {
@@ -1554,11 +1665,44 @@
     "5073f982-8dde-4e01-a4c3-fa4fcb007f81": {
      "round": 1,
      "file": "v04-5073f982.png"
+    },
+    "3e63e52b-b737-4a81-bafa-8dc1d4b25621": {
+     "round": 1,
+     "file": "v05-3e63e52b.png"
+    },
+    "5c561e43-cda6-4003-9cc3-40bf9ab77817": {
+     "round": 1,
+     "file": "v06-5c561e43.png"
+    },
+    "64b0c8c0-5fd6-464c-b04f-10c1bcf103c3": {
+     "round": 1,
+     "file": "v07-64b0c8c0.png"
+    },
+    "8158402f-de75-42d6-9265-0e72b6e403c3": {
+     "round": 1,
+     "file": "v08-8158402f.png"
+    },
+    "fed55b80-b9b8-4ad4-8d2b-566634f5c8c3": {
+     "round": 2,
+     "file": "v09-fed55b80.png"
+    },
+    "81787702-6fd8-4d8b-ab64-7acf89906648": {
+     "round": 2,
+     "file": "v10-81787702.png"
+    },
+    "f5544ec4-a90d-41f4-8d24-0278f2261d01": {
+     "round": 2,
+     "file": "v11-f5544ec4.png"
+    },
+    "74a42911-43b8-467f-93d6-386b54680e58": {
+     "round": 2,
+     "file": "v12-74a42911.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 14
+    "1": 18,
+    "2": 4
    }
   },
   "b22-tomorrow": {
@@ -1594,11 +1738,44 @@
     "c8eb64a2-1a03-46a4-bd9e-f5ac2d8c2227": {
      "round": 1,
      "file": "v07-c8eb64a2.png"
+    },
+    "e92edc1e-6bc8-48dd-a197-b5c84c428890": {
+     "round": 1,
+     "file": "v09-e92edc1e.png"
+    },
+    "69414983-4d47-4d5b-ae49-56370ec01ddc": {
+     "round": 1,
+     "file": "v10-69414983.png"
+    },
+    "a782a6a4-3214-407e-ac62-5b93c9c8faaf": {
+     "round": 1,
+     "file": "v11-a782a6a4.png"
+    },
+    "278a32b9-2b31-40c2-8452-a772836c5f74": {
+     "round": 1,
+     "file": "v12-278a32b9.png"
+    },
+    "82bcac33-e848-4385-9368-c922e2ee7e20": {
+     "round": 2,
+     "file": "v13-82bcac33.png"
+    },
+    "abae0401-a9ea-4258-9d59-7df754ec3819": {
+     "round": 2,
+     "file": "v14-abae0401.png"
+    },
+    "f1141070-a1a7-4a1e-a101-49ad74ace059": {
+     "round": 2,
+     "file": "v15-f1141070.png"
+    },
+    "217c7b6e-94a0-46dd-9a59-9fde0b144843": {
+     "round": 2,
+     "file": "v16-217c7b6e.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 8
+    "1": 12,
+    "2": 4
    }
   },
   "b19-crate": {
@@ -1630,11 +1807,40 @@
     "9f5ee18c-94df-4cbe-8382-7f0d2f50833f": {
      "round": 1,
      "file": null
+    },
+    "54ab5c4e-dfd3-41a2-b54b-ac61b5e05d80": {
+     "round": 1,
+     "file": null
+    },
+    "c1caf968-e343-4d8e-af26-80fdde6609d6": {
+     "round": 1,
+     "file": "v07-c1caf968.png"
+    },
+    "ea0bcce1-313a-4ed3-94c4-f28d6b7bdaf3": {
+     "round": 1,
+     "file": "v08-ea0bcce1.png"
+    },
+    "44d73108-1bbf-4922-bd0f-720f84846794": {
+     "round": 1,
+     "file": "v09-44d73108.png"
+    },
+    "f8e1bae2-07ae-4187-b233-c040ebb3378d": {
+     "round": 2,
+     "file": "v10-f8e1bae2.png"
+    },
+    "14969e69-5d7e-4064-b58d-b2511b1f3a53": {
+     "round": 2,
+     "file": "v11-14969e69.png"
+    },
+    "7617077f-0405-4808-b262-706c4dd3984a": {
+     "round": 2,
+     "file": "v12-7617077f.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 7
+    "1": 11,
+    "2": 3
    }
   },
   "b44b-latspread": {
@@ -1666,6 +1872,42 @@
     "73bc0788-4267-4eef-aec8-afc2d1d5c98a": {
      "round": 2,
      "file": "v06-73bc0788.png"
+    },
+    "cf6799bc-6629-4f3b-9572-d7f708277867": {
+     "round": 1,
+     "file": "v07-cf6799bc.png"
+    },
+    "cdb78a4d-78ff-436c-8760-05a09b177c0b": {
+     "round": 1,
+     "file": "v08-cdb78a4d.png"
+    },
+    "65b51627-11ef-4405-9d65-0f85fbbc9f54": {
+     "round": 2,
+     "file": "v09-65b51627.png"
+    },
+    "ac3d4990-2316-4009-b0cf-12e023e1032c": {
+     "round": 2,
+     "file": "v10-ac3d4990.png"
+    },
+    "3485496e-f72c-46fa-93a1-ab74b2759e47": {
+     "round": 2,
+     "file": "v11-3485496e.png"
+    },
+    "8261d7ad-d4ba-426c-8cab-f4cc48d8ee5a": {
+     "round": 2,
+     "file": "v12-8261d7ad.png"
+    },
+    "291ee45d-724f-4bef-96af-f640fd9aa1e0": {
+     "round": 3,
+     "file": "v13-291ee45d.png"
+    },
+    "ef11210b-760a-40bf-aa12-2b8cad9fc850": {
+     "round": 3,
+     "file": "v14-ef11210b.png"
+    },
+    "dac13389-82cf-451b-ad74-fa619da0f266": {
+     "round": 3,
+     "file": "v15-dac13389.png"
     }
    },
    "winner": {
@@ -1676,8 +1918,9 @@
     "ts": 1786460725
    },
    "rounds": {
-    "1": 3,
-    "2": 4
+    "1": 5,
+    "2": 8,
+    "3": 3
    }
   },
   "b27-harlan-challenge": {
@@ -1819,6 +2062,38 @@
     "178ad272-04d7-4767-a0fc-119e003460b1": {
      "round": 1,
      "file": "v08-178ad272.png"
+    },
+    "26a5838b-64e7-408d-8676-53d545b6ce00": {
+     "round": 1,
+     "file": "v09-26a5838b.png"
+    },
+    "002c2ef0-58c9-4d83-a2fa-f8e4a249ca77": {
+     "round": 1,
+     "file": "v10-002c2ef0.png"
+    },
+    "bc3075ee-af19-441e-80cc-afd678454831": {
+     "round": 1,
+     "file": "v11-bc3075ee.png"
+    },
+    "36c6105f-9b37-4a64-96bb-1a9b33a0dfd3": {
+     "round": 1,
+     "file": "v12-36c6105f.png"
+    },
+    "bf4cc37b-af79-4f70-b5b2-887a9012e1e2": {
+     "round": 2,
+     "file": "v13-bf4cc37b.png"
+    },
+    "cd52b90f-cb49-4291-a772-046ca199b53c": {
+     "round": 2,
+     "file": "v14-cd52b90f.png"
+    },
+    "ea5d8776-eef8-4ec3-ab0b-13fd3ca17e3e": {
+     "round": 2,
+     "file": "v15-ea5d8776.png"
+    },
+    "f37847b6-ed26-4b08-869e-a681177da757": {
+     "round": 2,
+     "file": "v16-f37847b6.png"
     }
    },
    "winner": {
@@ -1829,7 +2104,8 @@
     "ts": 1786460699
    },
    "rounds": {
-    "1": 8
+    "1": 12,
+    "2": 4
    }
   },
   "b23-pitch-establish": {
@@ -1953,6 +2229,38 @@
     "d5c3eb8c-3370-4f05-94df-0fbf5eccdc36": {
      "round": 2,
      "file": "v06-d5c3eb8c.png"
+    },
+    "5b1daba8-425e-4829-9842-9ef98758d6b4": {
+     "round": 1,
+     "file": "v07-5b1daba8.png"
+    },
+    "5d25ff06-148a-4078-96f6-9be57557a8e9": {
+     "round": 1,
+     "file": "v08-5d25ff06.png"
+    },
+    "098adcd3-1c7b-41f5-9151-97f86ee31742": {
+     "round": 1,
+     "file": "v09-098adcd3.png"
+    },
+    "7fce64a4-53e7-493d-b0ef-f70f749c7bcb": {
+     "round": 1,
+     "file": "v10-7fce64a4.png"
+    },
+    "ede76193-2c24-4276-ab74-d7bd3905eb4b": {
+     "round": 2,
+     "file": "v11-ede76193.png"
+    },
+    "0a696f43-f17b-48e2-823d-95c82ba63001": {
+     "round": 2,
+     "file": "v12-0a696f43.png"
+    },
+    "b18ede8a-220e-4a6e-a38e-7116e9a9dd51": {
+     "round": 2,
+     "file": "v13-b18ede8a.png"
+    },
+    "00355c88-a2aa-4ba5-800b-32c570cab4a6": {
+     "round": 2,
+     "file": "v14-00355c88.png"
     }
    },
    "winner": {
@@ -1963,8 +2271,8 @@
     "ts": 1786460727
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b24-kress-pitch": {
@@ -2046,12 +2354,52 @@
     "7f7a442c-b7f5-436e-a529-4a5218a91d9f": {
      "round": 2,
      "file": "v05-7f7a442c.png"
+    },
+    "7c32050c-9421-4c71-be64-b83cd1b4064c": {
+     "round": 3,
+     "file": "v07-7c32050c.png"
+    },
+    "13f4117c-fba6-4450-9dd7-a9ce29ac4c4c": {
+     "round": 3,
+     "file": "v08-13f4117c.png"
+    },
+    "373eb7f2-38a1-466b-a52a-2da4c2fac28f": {
+     "round": 3,
+     "file": "v09-373eb7f2.png"
+    },
+    "b0a3c7df-1c1b-4611-884d-ff9eed42d9aa": {
+     "round": 3,
+     "file": "v10-b0a3c7df.png"
+    },
+    "b7988174-122d-4149-ad7b-d8c1f352c4ec": {
+     "round": 4,
+     "file": "v11-b7988174.png"
+    },
+    "f782386e-ec33-40db-b2ad-1cdf0180a161": {
+     "round": 4,
+     "file": "v12-f782386e.png"
+    },
+    "a041c22c-64db-49f8-b821-016bd7d33501": {
+     "round": 4,
+     "file": "v13-a041c22c.png"
+    },
+    "45c9df15-9832-4fd7-abfc-58baa48a2951": {
+     "round": 4,
+     "file": "v14-45c9df15.png"
     }
    },
-   "winner": null,
+   "winner": {
+    "variant": "v10",
+    "job": "b0a3c7df-1c1b-4611-884d-ff9eed42d9aa",
+    "board_file": "217298d29a.png",
+    "notes": "Only tile that delivers the true ECU-on-fist: amulet fills the frame, jaw/glasses rim-lit above in near-black surround, crisp torn-seam shoulder. v07/v12 pull back to chest-level (less extreme), v09's dramatic light-ray burst undercuts the 'everything drops to black' instruction and reads calmer-faced.",
+    "ts": 1786932208
+   },
    "rounds": {
     "1": 4,
-    "2": 4
+    "2": 4,
+    "3": 4,
+    "4": 4
    }
   },
   "b47-harlan-cuts": {
@@ -2130,12 +2478,45 @@
     "e6ebddae-8be2-4781-8526-7e3b9319951d": {
      "round": 2,
      "file": null
+    },
+    "c5459f2d-228a-4446-b0e7-f6d3e983b7ac": {
+     "round": 1,
+     "file": "v08-c5459f2d.png"
+    },
+    "5aeefc58-6124-4d6e-bb10-6bd69a133863": {
+     "round": 1,
+     "file": "v09-5aeefc58.png"
+    },
+    "753da783-1b84-41bc-9370-33a23aa0964f": {
+     "round": 1,
+     "file": "v10-753da783.png"
+    },
+    "69be7653-e1d1-4252-9e57-41eb48d61a30": {
+     "round": 1,
+     "file": "v11-69be7653.png"
+    },
+    "b18c266f-b917-4464-8598-05520c4de067": {
+     "round": 3,
+     "file": "v12-b18c266f.png"
+    },
+    "214c6156-2211-4d67-890d-1828a96cbd52": {
+     "round": 3,
+     "file": "v13-214c6156.png"
+    },
+    "ec4665ed-af0d-427a-9311-0c13b77507b4": {
+     "round": 3,
+     "file": "v14-ec4665ed.png"
+    },
+    "45640ef3-85af-4c7d-8cd5-e6f6d7496e19": {
+     "round": 3,
+     "file": "v15-45640ef3.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 4,
+    "3": 4
    }
   },
   "b53-quads": {
@@ -2187,12 +2568,46 @@
     "c9524bc1-b3e9-431e-8eb3-2c83697385b4": {
      "round": 3,
      "file": "v07-c9524bc1.png"
+    },
+    "9c609291-e1f9-494d-a575-cb095f9df4af": {
+     "round": 1,
+     "file": "v08-9c609291.png"
+    },
+    "db73a92e-f52c-47dc-aea1-34021b02757a": {
+     "round": 1,
+     "file": "v09-db73a92e.png"
+    },
+    "e1b0f5e0-4c09-4ab4-b359-08b7659b047c": {
+     "round": 1,
+     "file": "v10-e1b0f5e0.png"
+    },
+    "114510c7-475e-4d92-97ac-0901d87ed791": {
+     "round": 2,
+     "file": "v11-114510c7.png"
+    },
+    "699c7acc-fcdd-4c92-a46e-ac78a4238402": {
+     "round": 2,
+     "file": "v12-699c7acc.png"
+    },
+    "70100010-7035-409d-898c-d8d9fa930c66": {
+     "round": 2,
+     "file": "v13-70100010.png"
+    },
+    "854ffd07-8fb3-4185-bc1a-cef520e2d907": {
+     "round": 2,
+     "file": "v14-854ffd07.png"
     }
    },
-   "winner": null,
+   "winner": {
+    "variant": "v13",
+    "job": "70100010-7035-409d-898c-d8d9fa930c66",
+    "board_file": "efef406d5e.png",
+    "notes": "Only finalist with true green key lighting per the card; low-angle flexed pose shows quads/leggings stitch-stress and a crisp outer-thigh tear, strained expression. v08 is a striking low-angle but golden-hour lit not green; v14/v12 are daylight-gym lit with calmer faces.",
+    "ts": 1786932227
+   },
    "rounds": {
-    "1": 4,
-    "2": 4,
+    "1": 7,
+    "2": 8,
     "3": 4
    }
   },
@@ -2464,12 +2879,44 @@
     "9361538b-4881-4d4e-9468-e29c6f815ec3": {
      "round": 2,
      "file": "v08-9361538b.png"
+    },
+    "01aad9b9-15a3-45cd-8ad6-79a1bfadc214": {
+     "round": 1,
+     "file": "v12-01aad9b9.png"
+    },
+    "12c7e99d-6892-454a-a58e-07b351d72063": {
+     "round": 1,
+     "file": "v09-12c7e99d.png"
+    },
+    "27e1fd49-fde1-4cf8-bcd4-0b6ebe8c7083": {
+     "round": 1,
+     "file": "v10-27e1fd49.png"
+    },
+    "320f719b-a39c-4aad-a04f-f34d9896a1f4": {
+     "round": 1,
+     "file": "v11-320f719b.png"
+    },
+    "0962f5df-147a-4d59-9be4-3ab8569e61bf": {
+     "round": 2,
+     "file": "v13-0962f5df.png"
+    },
+    "c56886ea-8686-4de1-a29d-65e99c1b123a": {
+     "round": 2,
+     "file": "v14-c56886ea.png"
+    },
+    "a43104ce-231a-4fa7-bced-027a3b7fddbc": {
+     "round": 2,
+     "file": "v15-a43104ce.png"
+    },
+    "fcd4619c-1d4c-4f59-9eeb-a53103c300be": {
+     "round": 2,
+     "file": "v16-fcd4619c.png"
     }
    },
    "winner": null,
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b56b-silhouette": {
@@ -2505,12 +2952,42 @@
     "78dafc6d-5b14-4e30-a89d-af8899ec8447": {
      "round": 2,
      "file": "v08-78dafc6d.png"
+    },
+    "c8474de8-e558-4ed3-84f7-1e446cc592c8": {
+     "round": 1,
+     "file": "v09-c8474de8.png"
+    },
+    "1ba75e47-5a75-490c-9682-20aa061c49e3": {
+     "round": 1,
+     "file": "v10-1ba75e47.png"
+    },
+    "302d8bae-93f6-4079-80b3-d855c11feff1": {
+     "round": 1,
+     "file": "v11-302d8bae.png"
+    },
+    "62c5bc94-091a-4654-9c70-2ca96f23cfcc": {
+     "round": 1,
+     "file": "v12-62c5bc94.png"
+    },
+    "5fe6a232-afe5-462b-b167-2f071e622721": {
+     "round": 2,
+     "file": "v13-5fe6a232.png"
+    },
+    "13daa19a-5134-4822-985f-28f78bbe94f1": {
+     "round": 2,
+     "file": "v14-13daa19a.png"
     }
    },
-   "winner": null,
+   "winner": {
+    "variant": "v10",
+    "job": "1ba75e47-5a75-490c-9682-20aa061c49e3",
+    "board_file": "e54023e32d.png",
+    "notes": "The only tile that is an actual silhouette: backlit by blown-out window light, profile pose, green FX pulse tracing the hip/glute thickening, crisp torn shoulder seam, coverage preserved. v09/v11/v13 are normally lit gym shots with a green outline glow, not true silhouettes.",
+    "ts": 1786932230
+   },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 6
    }
   },
   "b57-margo-face": {
@@ -2546,12 +3023,46 @@
     "fe6c8ea5-83d8-4a0c-8754-39384f51062d": {
      "round": 2,
      "file": null
+    },
+    "eab9a026-20aa-4175-bc13-fa775a93ed99": {
+     "round": 1,
+     "file": "v08-eab9a026.png"
+    },
+    "8a528fda-0c01-441e-bcee-0757090fddbb": {
+     "round": 1,
+     "file": "v09-8a528fda.png"
+    },
+    "d8b584c7-7887-4362-bc3c-14592064a7b9": {
+     "round": 1,
+     "file": "v10-d8b584c7.png"
+    },
+    "12f749fc-d810-42bf-b28b-d56dd38c8dc4": {
+     "round": 1,
+     "file": "v11-12f749fc.png"
+    },
+    "504435c1-edd5-418f-8740-133b9fcbc72b": {
+     "round": 2,
+     "file": "v12-504435c1.png"
+    },
+    "d5ba1dc4-241a-4f4e-b8ed-a58314d4da89": {
+     "round": 2,
+     "file": "v13-d5ba1dc4.png"
+    },
+    "714ae73a-7baf-412e-a707-b212864c0e3d": {
+     "round": 2,
+     "file": "v14-714ae73a.png"
     }
    },
-   "winner": null,
+   "winner": {
+    "variant": "v10",
+    "job": "d8b584c7-7887-4362-bc3c-14592064a7b9",
+    "board_file": "4e326c8371.png",
+    "notes": "Nails the card literally: tight ECU on the face, head tipped back, mouth wide open baring teeth, green light rippling visibly up the throat, correct dialogue text with mouth open matching speech. v08/v13/v14 pull back to a medium/torso framing instead of the called-for face intercut.",
+    "ts": 1786932244
+   },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 7
    }
   },
   "b58-s4-reveal": {
@@ -2587,6 +3098,1427 @@
     "d4fdf74b-9be1-4058-940d-3566ddadd214": {
      "round": 2,
      "file": "v08-d4fdf74b.png"
+    },
+    "b68674ce-dcb0-431c-b181-128a2cee4391": {
+     "round": 1,
+     "file": "v09-b68674ce.png"
+    },
+    "671e8984-06c9-438a-8d80-dbb450bce0ca": {
+     "round": 1,
+     "file": "v10-671e8984.png"
+    },
+    "cbbeaf9d-e49b-46d2-ab9a-f8a71633a47e": {
+     "round": 1,
+     "file": "v11-cbbeaf9d.png"
+    },
+    "27bc3410-43d0-4275-8823-d38677d79a86": {
+     "round": 1,
+     "file": "v12-27bc3410.png"
+    },
+    "f0851a99-e6bc-4c21-87b3-864617437794": {
+     "round": 2,
+     "file": "v13-f0851a99.png"
+    },
+    "42ad2eb9-dbb8-44a4-9cd3-1387b8e412c2": {
+     "round": 2,
+     "file": "v14-42ad2eb9.png"
+    },
+    "66e09d5f-3560-4f6c-8118-b0f7e5298436": {
+     "round": 2,
+     "file": "v15-66e09d5f.png"
+    },
+    "0d1ee057-5f63-4f89-b45d-3b370d421ee7": {
+     "round": 2,
+     "file": "v16-0d1ee057.png"
+    },
+    "118415e2-f485-41df-a3fa-4f064f9bca95": {
+     "round": 3,
+     "file": "v17-118415e2.png"
+    },
+    "155e4fad-669b-4242-a5a9-2db89f71c156": {
+     "round": 3,
+     "file": "v18-155e4fad.png"
+    },
+    "13c66d26-96b5-4be2-9731-63b23ffb5fec": {
+     "round": 3,
+     "file": "v19-13c66d26.png"
+    },
+    "65490e81-0531-4231-a09c-bb10aaa36d87": {
+     "round": 3,
+     "file": "v20-65490e81.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 8,
+    "2": 8,
+    "3": 4
+   }
+  },
+  "b29-margo-steps": {
+   "jobs": {
+    "69c04eac-d7b0-4910-b261-018ca6e197f7": {
+     "round": 1,
+     "file": "v01-69c04eac.png"
+    },
+    "80793f5b-3825-4d9e-b782-37af6192ffb1": {
+     "round": 1,
+     "file": "v02-80793f5b.png"
+    },
+    "09157862-de41-469b-a83f-ab24edc3c674": {
+     "round": 1,
+     "file": "v03-09157862.png"
+    },
+    "bc87ac98-739b-4fad-a94e-d73577d8836f": {
+     "round": 1,
+     "file": "v04-bc87ac98.png"
+    },
+    "a42878bd-f07b-4186-94e0-37c4b312e018": {
+     "round": 2,
+     "file": "v05-a42878bd.png"
+    },
+    "6f567a4c-2615-4c99-806d-266a73b15822": {
+     "round": 2,
+     "file": "v06-6f567a4c.png"
+    },
+    "1b7b92dd-9eb3-42df-aef1-c573fc9c0b9c": {
+     "round": 2,
+     "file": null
+    },
+    "54fac5f3-af49-4688-8ea3-db83fa04d0cf": {
+     "round": 2,
+     "file": "v07-54fac5f3.png"
+    }
+   },
+   "winner": {
+    "variant": "v03",
+    "job": "09157862-de41-469b-a83f-ab24edc3c674",
+    "board_file": "38299d5656.png",
+    "notes": "Wardrobe exact (torn shoulder seam + amulet, bare arms, no coat); clean single-line 'I'M THE PROOF.' bubble; low tracking camera as specified; resolute engaged face. v05 DQ COAT (jacket over shoulder), v07 regressed the torn-seam damage state.",
+    "ts": 1786930378
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b65-bench-bend": {
+   "jobs": {
+    "6bfc4e94-b45e-4f49-9fe3-34ab8974489c": {
+     "round": 1,
+     "file": null
+    },
+    "1e53994b-0a29-4a54-9f86-6d08af9c29c9": {
+     "round": 1,
+     "file": "v01-1e53994b.png"
+    },
+    "4e006bc9-9b1d-4c17-b399-0ea124179ec2": {
+     "round": 1,
+     "file": null
+    },
+    "af584c49-8a9f-44e7-abc2-0c3dbc1f37a0": {
+     "round": 1,
+     "file": "v02-af584c49.png"
+    },
+    "0e9bf895-8d02-4f9f-aa43-8bf881da27ed": {
+     "round": 2,
+     "file": "v03-0e9bf895.png"
+    },
+    "cfd722db-0937-4494-900e-d3af36e8cb85": {
+     "round": 2,
+     "file": "v04-cfd722db.png"
+    },
+    "4e9b85df-48d2-4f2e-826b-cf0fb932c629": {
+     "round": 2,
+     "file": "v05-4e9b85df.png"
+    },
+    "dca2a5ca-b275-4e7c-8e0a-862b933632c9": {
+     "round": 2,
+     "file": "v06-dca2a5ca.png"
+    }
+   },
+   "winner": {
+    "variant": "v06",
+    "job": "dca2a5ca-b275-4e7c-8e0a-862b933632c9",
+    "board_file": "db494d279a.png",
+    "notes": "Tightest CLOSE crop on hands+bar+face matches the action line; bar reads visibly bent/being-straightened; both hands engaged (v04 breaks into a flex pose, ignoring the bar); correct KREEENK spelling. v05 close but wider, rack-heavy framing.",
+    "ts": 1786931570
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b38-s3-reveal": {
+   "jobs": {
+    "ad78dc49-9115-4bdb-8b9b-10cfdab1618c": {
+     "round": 1,
+     "file": "v01-ad78dc49.png"
+    },
+    "e10d878b-47a0-4448-9bdc-359f3362668b": {
+     "round": 1,
+     "file": "v03-e10d878b.png"
+    },
+    "af8db383-091c-4700-ad44-12be52f04424": {
+     "round": 1,
+     "file": "v04-af8db383.png"
+    },
+    "f3008b24-1692-4b3d-b30c-9469129ae6d5": {
+     "round": 1,
+     "file": "v02-f3008b24.png"
+    },
+    "8bd5b616-1872-4567-9861-a8c6ea4351f1": {
+     "round": 2,
+     "file": "v05-8bd5b616.png"
+    },
+    "49572519-e5b6-4e18-a283-6c95c4f47828": {
+     "round": 2,
+     "file": "v06-49572519.png"
+    },
+    "f545d956-3e6c-41b3-8a91-a944bb1925fd": {
+     "round": 2,
+     "file": "v07-f545d956.png"
+    },
+    "b509bcef-68fa-41f9-9840-168e1aafbb50": {
+     "round": 2,
+     "file": "v08-b509bcef.png"
+    },
+    "8e94e1e9-aa42-4f40-8ff6-62f902043572": {
+     "round": 3,
+     "file": "v09-8e94e1e9.png"
+    },
+    "5319955b-a3e4-4630-815b-d421e567fd5f": {
+     "round": 3,
+     "file": "v10-5319955b.png"
+    },
+    "b7672891-d47d-411d-8908-b2ebb10c2282": {
+     "round": 3,
+     "file": "v11-b7672891.png"
+    },
+    "6ace8592-a953-4a61-9a77-233d8617ff8b": {
+     "round": 3,
+     "file": "v12-6ace8592.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b66-one-last": {
+   "jobs": {
+    "628557c9-78da-4b25-aafd-f835b17b3548": {
+     "round": 1,
+     "file": "v01-628557c9.png"
+    },
+    "6550cf0e-3d2f-4e63-b76f-6700c3630925": {
+     "round": 1,
+     "file": "v02-6550cf0e.png"
+    },
+    "d6fb20c0-df5d-4ede-b950-9ad0618cc5bf": {
+     "round": 1,
+     "file": "v03-d6fb20c0.png"
+    },
+    "218b9317-0d78-4850-adeb-2795957dcdd1": {
+     "round": 1,
+     "file": "v04-218b9317.png"
+    },
+    "5d08da47-0ae1-48c1-b397-2be82eb4458c": {
+     "round": 2,
+     "file": "v05-5d08da47.png"
+    },
+    "e12c5793-3ba1-4d76-b03a-2172e35af6d1": {
+     "round": 2,
+     "file": "v06-e12c5793.png"
+    },
+    "7770e6c4-f00b-4e6a-8a01-40142b0d9daf": {
+     "round": 2,
+     "file": "v07-7770e6c4.png"
+    },
+    "e4959cef-d6f5-4c1c-938d-04867d9d4dde": {
+     "round": 2,
+     "file": "v08-e4959cef.png"
+    }
+   },
+   "winner": {
+    "variant": "v04",
+    "job": "218b9317-0d78-4850-adeb-2795957dcdd1",
+    "board_file": "26ce285b14.png",
+    "notes": "Tightest true MEDIUM CLOSE-UP on face+chest+amulet-in-palm per the card; warm intimate light with near-black background sells 'quiet beat before the storm'; soft, contemplative expression matches wonder-then-decision. v01/v02 pull back too wide with bright gym visible.",
+    "ts": 1786931571
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b67-surge-start": {
+   "jobs": {
+    "3a2e1fed-17d5-4ddf-85a4-1e9e01259ff6": {
+     "round": 1,
+     "file": "v01-3a2e1fed.png"
+    },
+    "660ed820-6ced-4d1d-85d8-f343ad6aa631": {
+     "round": 1,
+     "file": null
+    },
+    "aa917073-7bc2-471e-8c12-a2f4c637a126": {
+     "round": 1,
+     "file": "v02-aa917073.png"
+    },
+    "98e5f858-a871-413a-b37c-3f58ba56cf08": {
+     "round": 1,
+     "file": "v03-98e5f858.png"
+    },
+    "b442899f-60cb-47cc-acf1-5dd05518333d": {
+     "round": 2,
+     "file": "v04-b442899f.png"
+    },
+    "f8796a36-e0f5-4d7d-acef-b8442320c3eb": {
+     "round": 2,
+     "file": "v05-f8796a36.png"
+    },
+    "b50deff4-dce3-47f8-888e-dbcd77fff43d": {
+     "round": 2,
+     "file": "v06-b50deff4.png"
+    },
+    "13f07ef3-67d4-42e7-86f1-7a80e947707a": {
+     "round": 2,
+     "file": "v07-13f07ef3.png"
+    }
+   },
+   "winner": {
+    "variant": "v03",
+    "job": "98e5f858-a871-413a-b37c-3f58ba56cf08",
+    "board_file": "9c69b5ab0c.png",
+    "notes": "Only correctly-spelled survivor besides v06, and its two-handed press-to-sternum gesture matches 'presses the amulet flat to her sternum' precisely, where v06 breaks into an asymmetric bicep-flex pose instead.",
+    "ts": 1786931573
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b68-torso": {
+   "jobs": {
+    "2407423a-8d27-49ce-a03e-980877627491": {
+     "round": 1,
+     "file": "v01-2407423a.png"
+    },
+    "6a1e9285-0625-4d86-ade5-1f323490396a": {
+     "round": 1,
+     "file": "v02-6a1e9285.png"
+    },
+    "9e4e4612-39af-48e9-96e2-044fd1dce88d": {
+     "round": 1,
+     "file": "v03-9e4e4612.png"
+    },
+    "0cd7ef61-9e09-4b78-b8d7-39e8b61ce812": {
+     "round": 1,
+     "file": "v04-0cd7ef61.png"
+    },
+    "e4724166-5a56-4170-8bfb-294e3ef602b8": {
+     "round": 2,
+     "file": "v05-e4724166.png"
+    },
+    "a43368c0-28c2-4b23-ae06-4b9ae74b1aa5": {
+     "round": 2,
+     "file": "v06-a43368c0.png"
+    },
+    "95377948-5cf5-4a4f-a52f-b738aadcbe08": {
+     "round": 2,
+     "file": "v07-95377948.png"
+    },
+    "615b98d4-7e67-45e5-9222-edd99f6fa78c": {
+     "round": 2,
+     "file": "v08-615b98d4.png"
+    }
+   },
+   "winner": {
+    "variant": "v04",
+    "job": "0cd7ef61-9e09-4b78-b8d7-39e8b61ce812",
+    "board_file": "2e91510d0e.png",
+    "notes": "Tank shreds into a true lattice across the whole torso with green light lancing through many splits \u2014 the strongest literal match to 'strained to a lattice at every seam...light lancing through each split.' v01/v02 show only 1-2 tears, far short of a lattice.",
+    "ts": 1786931575
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b30-kress-freeze": {
+   "jobs": {
+    "cc5a4600-75eb-478c-a675-cd09f0ce6a11": {
+     "round": 1,
+     "file": "v01-cc5a4600.png"
+    },
+    "315dccce-3eee-44a6-9a0a-e83219780685": {
+     "round": 1,
+     "file": "v02-315dccce.png"
+    },
+    "5b85713d-c300-4ea9-b607-d3122e55acf0": {
+     "round": 1,
+     "file": "v03-5b85713d.png"
+    },
+    "11c140f8-ff13-44b0-a669-728079c199f4": {
+     "round": 1,
+     "file": "v04-11c140f8.png"
+    },
+    "72593bf7-c191-4195-b3b5-25b4afa3f403": {
+     "round": 2,
+     "file": "v05-72593bf7.png"
+    },
+    "3c6bffa0-8efe-4130-a2aa-8f1add509989": {
+     "round": 2,
+     "file": "v06-3c6bffa0.png"
+    },
+    "6a882153-aa1d-42a6-b0d1-796e3e799f99": {
+     "round": 2,
+     "file": "v07-6a882153.png"
+    },
+    "131ecca5-544d-4822-9902-63b7116e6751": {
+     "round": 2,
+     "file": "v08-131ecca5.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b69-arms": {
+   "jobs": {
+    "5ee02e0d-e52d-4441-b993-6ede28c79268": {
+     "round": 1,
+     "file": null
+    },
+    "bc34a14e-70fe-4a94-a900-be2f57a79115": {
+     "round": 1,
+     "file": "v01-bc34a14e.png"
+    },
+    "5cb9cbf1-52f7-4a53-a9ab-634a236482fe": {
+     "round": 1,
+     "file": "v02-5cb9cbf1.png"
+    },
+    "4c3c0f82-bf98-4e84-991a-b77c89898b80": {
+     "round": 1,
+     "file": "v03-4c3c0f82.png"
+    },
+    "2a477975-cb33-47c8-bf7f-20758e75425b": {
+     "round": 2,
+     "file": "v04-2a477975.png"
+    },
+    "2699ddb3-ce8e-4905-97a3-265b6cd914b3": {
+     "round": 2,
+     "file": null
+    },
+    "f61d52af-14df-42f8-8fdd-ad5ed6efed51": {
+     "round": 2,
+     "file": "v05-f61d52af.png"
+    },
+    "4e930c93-877d-4cc8-845e-82925567d092": {
+     "round": 2,
+     "file": null
+    },
+    "afbcb744-95d4-487e-bac7-2e8ef0309c57": {
+     "round": 3,
+     "file": null
+    },
+    "8ecc05ea-8062-41ec-9da6-68a103e26b0d": {
+     "round": 3,
+     "file": null
+    },
+    "12872658-16e1-4c5a-be8c-ee1445cfbfbf": {
+     "round": 3,
+     "file": null
+    },
+    "bcb2eb05-dd63-4bd0-8803-40553c4d9fae": {
+     "round": 3,
+     "file": "v06-bcb2eb05.png"
+    }
+   },
+   "winner": {
+    "variant": "v03",
+    "job": "4c3c0f82-bf98-4e84-991a-b77c89898b80",
+    "board_file": "7fb5698f2b.png",
+    "notes": "Only tile with exactly 3 THRUM SFX matching the caption; v06(4)/v02(2)/v05(6) all mismatch the count (extra or missing instances). Tightest torso-up crop of the four, crisp torn-seam edges, colossal-scale cabled arms, focused/strained expression on the growth pulse.",
+    "ts": 1786932246
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b31-investors-lean": {
+   "jobs": {
+    "06347cd0-b107-45f7-bee0-f9bd433f5e7c": {
+     "round": 1,
+     "file": "v01-06347cd0.png"
+    },
+    "76222e04-6a02-4b22-af15-7b6dbabe80de": {
+     "round": 1,
+     "file": null
+    },
+    "2d35c60e-dfb7-43c5-badf-208ac28f3201": {
+     "round": 1,
+     "file": null
+    },
+    "38bee61c-f8e9-478c-872a-4733663106fb": {
+     "round": 1,
+     "file": "v02-38bee61c.png"
+    },
+    "398d2c1d-df70-4549-aa0f-82964cc0849c": {
+     "round": 2,
+     "file": "v03-398d2c1d.png"
+    },
+    "1b272d71-3de8-4d79-86fd-3c3d4742ec88": {
+     "round": 2,
+     "file": "v04-1b272d71.png"
+    },
+    "ef69f150-d719-40b0-8499-893c675cb857": {
+     "round": 2,
+     "file": null
+    },
+    "a56c0c7d-0acf-46ef-bdf8-647ecc5d4699": {
+     "round": 2,
+     "file": "v05-a56c0c7d.png"
+    },
+    "78ee73ba-16e7-4156-99df-94fe02fad457": {
+     "round": 3,
+     "file": "v06-78ee73ba.png"
+    },
+    "d73ead01-6256-4fce-9418-a899457e00ce": {
+     "round": 3,
+     "file": "v07-d73ead01.png"
+    },
+    "3c44ac91-d148-4f63-8bce-010570909121": {
+     "round": 3,
+     "file": "v08-3c44ac91.png"
+    },
+    "bda7fece-9095-45bf-b4e3-91ddb780e08e": {
+     "round": 3,
+     "file": "v09-bda7fece.png"
+    }
+   },
+   "winner": {
+    "variant": "v03",
+    "job": "398d2c1d-df70-4549-aa0f-82964cc0849c",
+    "board_file": "ea0c307bab.png",
+    "notes": "Best OTS depth off KRESS's blurred shoulder/head; all three investors lean in unison, mouths open, Harlan's arms uncrossed, single clean bubble. v01 weaker FG depth; v05 Harlan still arm-crossed, less energy; v07 killed LET (duplicate bubble).",
+    "ts": 1786932106
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b70-cast-shield": {
+   "jobs": {
+    "cee49bbf-b864-4df8-8346-6aacf643a26b": {
+     "round": 1,
+     "file": "v01-cee49bbf.png"
+    },
+    "9a1968b9-8718-4976-bbbb-063bb2c8841c": {
+     "round": 1,
+     "file": "v02-9a1968b9.png"
+    },
+    "de383106-79d7-4056-9860-5054337482ee": {
+     "round": 1,
+     "file": "v03-de383106.png"
+    },
+    "52322033-c105-47d0-afbe-3a7fed807f9f": {
+     "round": 1,
+     "file": "v04-52322033.png"
+    },
+    "9153c923-1ec0-4801-916f-cb6350b1f625": {
+     "round": 2,
+     "file": "v05-9153c923.png"
+    },
+    "0151d1a5-8aea-4a3c-b87c-ef8f7703997d": {
+     "round": 2,
+     "file": "v06-0151d1a5.png"
+    },
+    "6346d231-4b5d-47f5-896c-4cd315e0cc23": {
+     "round": 2,
+     "file": "v07-6346d231.png"
+    },
+    "022479ef-7ba5-4444-8202-2d8b8dccf243": {
+     "round": 2,
+     "file": "v08-022479ef.png"
+    }
+   },
+   "winner": {
+    "variant": "v04",
+    "job": "52322033-c105-47d0-afbe-3a7fed807f9f",
+    "board_file": "56dd73c064.png",
+    "notes": "Best 4-depth blocking: Kress buried in his hands foreground-large, Harlan bracing mid-ground toward the blaze, Dev shouting with the bubble tail landing right on his open mouth while holding an actual notepad, Ingrid filming with her tablet raised. Strongest hard-shadow floor streaks. v02 killed for stray quote-mark glyphs baked into its bubble.",
+    "ts": 1786932247
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b32-walk-past": {
+   "jobs": {
+    "242f146f-f669-4f30-b3c8-18834af73c83": {
+     "round": 1,
+     "file": "v01-242f146f.png"
+    },
+    "578f4b29-5054-4bdc-b66d-5ede35c5101c": {
+     "round": 1,
+     "file": "v02-578f4b29.png"
+    },
+    "5e4a7981-9bae-440b-a3a9-18bd8af540ef": {
+     "round": 1,
+     "file": "v03-5e4a7981.png"
+    },
+    "59bb723a-0979-40c6-8039-77207218fa23": {
+     "round": 1,
+     "file": "v04-59bb723a.png"
+    },
+    "d72f122c-b738-42f2-9bc8-f34cba578d11": {
+     "round": 2,
+     "file": "v05-d72f122c.png"
+    },
+    "d64140b8-d539-408a-84d4-5a6c4624be48": {
+     "round": 2,
+     "file": "v06-d64140b8.png"
+    },
+    "a1c09dca-8bb1-40f5-af3f-780b0b2b011f": {
+     "round": 2,
+     "file": "v07-a1c09dca.png"
+    },
+    "a4c5f13e-a9e5-4b70-966f-ef41b9c79c26": {
+     "round": 2,
+     "file": "v08-a4c5f13e.png"
+    }
+   },
+   "winner": {
+    "variant": "v04",
+    "job": "59bb723a-0979-40c6-8039-77207218fa23",
+    "board_file": "58b6dcfd48.png",
+    "notes": "Strongest 3-layer depth staging: KRESS blurred FG deflating, MARGO sharp mid-ground walking toward the visible barbell rack, torn shoulder seam clearly shown, faint green amulet glow, screen readable in BG. Beats v01/v03/v07 on FG/BG separation and action-line match.",
+    "ts": 1786932138
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b33-round-two": {
+   "jobs": {
+    "426e74e7-a384-440d-807e-1325c7e43409": {
+     "round": 1,
+     "file": "v01-426e74e7.png"
+    },
+    "9dabe15d-e86e-4618-bc7f-41ab89e06bbe": {
+     "round": 1,
+     "file": "v02-9dabe15d.png"
+    },
+    "981c3cac-7cff-4393-9e3d-cdf2c772f61e": {
+     "round": 1,
+     "file": "v03-981c3cac.png"
+    },
+    "5b9e5f7f-8165-438e-aa3b-9ddcf9f37d27": {
+     "round": 1,
+     "file": "v04-5b9e5f7f.png"
+    },
+    "f0d1cf3a-6e0d-4ecb-9ec9-036537b576f1": {
+     "round": 2,
+     "file": "v05-f0d1cf3a.png"
+    },
+    "34a76eef-2153-4de9-a8ec-9a3bf9d81373": {
+     "round": 2,
+     "file": "v06-34a76eef.png"
+    },
+    "fc422887-73bf-4455-a3e3-ac5749e41995": {
+     "round": 2,
+     "file": "v07-fc422887.png"
+    },
+    "5d79e605-0e12-4855-8e50-b754591de580": {
+     "round": 2,
+     "file": "v08-5d79e605.png"
+    }
+   },
+   "winner": {
+    "variant": "v04",
+    "job": "5b9e5f7f-8165-438e-aa3b-9ddcf9f37d27",
+    "board_file": "3a9cb96e7b.png",
+    "notes": "Purest black background around the FX light, dramatic directional starburst flare underlighting her face/fist, tightest true MCU crop matching the card. v06/v08 have brighter, less isolated backgrounds; expression reads as full-intensity anticipation with clean single bubble + caption.",
+    "ts": 1786932147
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b71-margo-more": {
+   "jobs": {
+    "976b2674-333d-414c-a172-f99843b83b24": {
+     "round": 1,
+     "file": "v01-976b2674.png"
+    },
+    "eaea837c-4ab8-44c5-9978-496553739500": {
+     "round": 1,
+     "file": "v02-eaea837c.png"
+    },
+    "d088e920-c977-462b-9b73-e2db30800434": {
+     "round": 1,
+     "file": "v03-d088e920.png"
+    },
+    "4e6a53eb-1820-4788-a974-27905cd4c904": {
+     "round": 1,
+     "file": "v04-4e6a53eb.png"
+    },
+    "fbf7d564-5a63-4dab-87cb-c51985e86221": {
+     "round": 2,
+     "file": "v05-fbf7d564.png"
+    },
+    "26fce7d3-be7d-4b39-99d9-8fab78c2cd41": {
+     "round": 2,
+     "file": "v06-26fce7d3.png"
+    },
+    "f9be37e5-e711-44ea-8e86-4c95636c1a15": {
+     "round": 2,
+     "file": "v07-f9be37e5.png"
+    },
+    "7f2ad433-1067-4e40-a101-3660bcea27c6": {
+     "round": 2,
+     "file": "v08-7f2ad433.png"
+    },
+    "fa9f33fc-762c-45f0-9fbc-6c377236acac": {
+     "round": 3,
+     "file": "v09-fa9f33fc.png"
+    },
+    "f346e505-ac04-429d-a1df-703488091583": {
+     "round": 3,
+     "file": null
+    },
+    "7e728c29-2fa8-46dc-b994-d1fd1d807505": {
+     "round": 3,
+     "file": "v10-7e728c29.png"
+    },
+    "00000000-0000-0000-0000-000000000000": {
+     "round": 3,
+     "file": null
+    }
+   },
+   "winner": {
+    "variant": "v03",
+    "job": "d088e920-c977-462b-9b73-e2db30800434",
+    "board_file": "6e733407d9.png",
+    "notes": "The only true ECU-face: head tipped fully back into the light, widest rapturous open-mouth grin, eyes blazing green. v02/v04/v06 are medium double-bicep flex shots, not face ECUs, so they undersell the card's explicit 'face tipped up' framing despite clean MORE! bubbles on all four.",
+    "ts": 1786932249
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b34-delts": {
+   "jobs": {
+    "41195f3a-da44-4a85-9b69-50be64c445e8": {
+     "round": 1,
+     "file": "v01-41195f3a.png"
+    },
+    "3734cdf9-f2d6-4ff2-9246-08361a9984b3": {
+     "round": 1,
+     "file": "v02-3734cdf9.png"
+    },
+    "2d3a9ca0-cba0-45a7-813c-4effb859bf96": {
+     "round": 1,
+     "file": "v03-2d3a9ca0.png"
+    },
+    "c3f7882c-da28-47ac-a3cd-e044aaacd5c3": {
+     "round": 1,
+     "file": "v04-c3f7882c.png"
+    },
+    "729d0650-dddb-463c-b15b-39418443cc69": {
+     "round": 2,
+     "file": "v05-729d0650.png"
+    },
+    "e58362a9-9c17-42ea-a53c-153ac521e15f": {
+     "round": 2,
+     "file": "v06-e58362a9.png"
+    },
+    "c0801e81-4ba9-4ba9-8668-513e1d86748e": {
+     "round": 2,
+     "file": "v07-c0801e81.png"
+    },
+    "c9175184-eefe-4915-9343-0f86592f12b0": {
+     "round": 2,
+     "file": null
+    }
+   },
+   "winner": {
+    "variant": "v05",
+    "job": "729d0650-dddb-463c-b15b-39418443cc69",
+    "board_file": "cdef799af0.png",
+    "notes": "Literal 'stitches visibly straining at seam' rendered as thread detail, largest swelling delts, best directional lighting with green crawl and clenched-teeth intensity. v01 under-scaled/no stitch detail; v03 close but no visible stitching; v06 killed LET (green-tinted caption, misspelled CREEeAK).",
+    "ts": 1786932187
+   },
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b34b-chest": {
+   "jobs": {
+    "d7183b42-1d0d-4f93-a6a5-be7c1b6a653f": {
+     "round": 1,
+     "file": "v01-d7183b42.png"
+    },
+    "49714710-2fc0-4f2b-8abd-d5380848a7d7": {
+     "round": 1,
+     "file": null
+    },
+    "b135c977-9b0a-4d37-acef-e5bb4b6ba18c": {
+     "round": 1,
+     "file": "v02-b135c977.png"
+    },
+    "4bdb7df6-17d0-46ea-bc9d-7f1acc9781ce": {
+     "round": 1,
+     "file": null
+    },
+    "ace52835-f1de-4f3a-8085-2316e89e9aa0": {
+     "round": 2,
+     "file": "v03-ace52835.png"
+    },
+    "aca24103-b2e0-44a2-a53a-0957d7a0040b": {
+     "round": 2,
+     "file": null
+    },
+    "11306399-25c6-474c-b862-4cb4266552ca": {
+     "round": 2,
+     "file": "v04-11306399.png"
+    },
+    "c2fe874e-41e3-4b00-8ea7-d6866ea0966e": {
+     "round": 2,
+     "file": null
+    },
+    "344e888c-ccac-4c94-9993-0a7e9cf2bfd4": {
+     "round": 3,
+     "file": "v05-344e888c.png"
+    },
+    "81004c69-4bba-4fdb-a88c-9ef11ce48fb3": {
+     "round": 3,
+     "file": "v06-81004c69.png"
+    },
+    "9c2aa616-f74c-4ed6-b7f9-b692eabacf47": {
+     "round": 3,
+     "file": "v07-9c2aa616.png"
+    },
+    "85e2d357-a8be-4d26-abf4-193c48b2053a": {
+     "round": 3,
+     "file": "v08-85e2d357.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b71b-height": {
+   "jobs": {
+    "a6aebd31-a0ee-4c82-beaa-7ddc0c7b4509": {
+     "round": 1,
+     "file": "v01-a6aebd31.png"
+    },
+    "1b56be9c-230a-400f-87a7-29e292bba7d9": {
+     "round": 1,
+     "file": "v02-1b56be9c.png"
+    },
+    "76432a11-ad9e-4822-beb2-6d241d306ff4": {
+     "round": 1,
+     "file": "v03-76432a11.png"
+    },
+    "65eb9856-9a77-40c8-9e58-32246bdf3adb": {
+     "round": 1,
+     "file": "v04-65eb9856.png"
+    },
+    "959e5944-94a9-4a8b-aa32-8ab4f4de214b": {
+     "round": 2,
+     "file": "v05-959e5944.png"
+    },
+    "fc6ea960-bb62-4af3-8206-08798c3bfe50": {
+     "round": 2,
+     "file": "v06-fc6ea960.png"
+    },
+    "fbb8b3a5-982b-43dd-b0ba-8aab43e57217": {
+     "round": 2,
+     "file": "v07-fbb8b3a5.png"
+    },
+    "f7761d84-91d3-4ed7-a355-bd182370a4c5": {
+     "round": 2,
+     "file": "v08-f7761d84.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b35-dev-react": {
+   "jobs": {
+    "2715fa8f-3c3c-4270-8720-4746d1d65f40": {
+     "round": 1,
+     "file": "v01-2715fa8f.png"
+    },
+    "314c6257-0b95-4acd-b9c7-23151e153b3d": {
+     "round": 1,
+     "file": "v02-314c6257.png"
+    },
+    "9dd1e181-f409-4b26-b5e5-aef00cf318d4": {
+     "round": 1,
+     "file": "v03-9dd1e181.png"
+    },
+    "e7bb6864-52cd-4469-81b3-b42591c213e0": {
+     "round": 1,
+     "file": "v04-e7bb6864.png"
+    },
+    "71676c46-e165-47f5-9e1a-ebb064b09cbc": {
+     "round": 2,
+     "file": "v05-71676c46.png"
+    },
+    "c4a91ebd-0511-4100-864d-791f99bd29f3": {
+     "round": 2,
+     "file": "v06-c4a91ebd.png"
+    },
+    "e0c7a699-3091-419c-a944-9023c1d7dc7a": {
+     "round": 2,
+     "file": "v07-e0c7a699.png"
+    },
+    "d82fd564-25fc-42ab-9704-eb2307006199": {
+     "round": 2,
+     "file": "v08-d82fd564.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b72-rack-compare": {
+   "jobs": {
+    "7665d5cf-09bf-45bf-8c92-15f460032578": {
+     "round": 1,
+     "file": "v01-7665d5cf.png"
+    },
+    "f71bfe73-3501-479b-b6b2-b8567aca1a99": {
+     "round": 1,
+     "file": "v02-f71bfe73.png"
+    },
+    "d9f05922-1341-455a-821d-ee16e4003afa": {
+     "round": 1,
+     "file": null
+    },
+    "adfee285-fae5-46bf-a16e-2ee79657e033": {
+     "round": 1,
+     "file": "v03-adfee285.png"
+    },
+    "59f4820d-9521-4df8-98ec-fd96e3165c72": {
+     "round": 2,
+     "file": "v04-59f4820d.png"
+    },
+    "1d8e60c5-43ad-4f3b-ac76-56274a700edd": {
+     "round": 2,
+     "file": "v05-1d8e60c5.png"
+    },
+    "f6122f03-ddc7-4cf4-a23a-f2ba7c95bbd7": {
+     "round": 2,
+     "file": null
+    },
+    "85b5af50-8c38-4cfa-bde5-146441afd07b": {
+     "round": 2,
+     "file": "v06-85b5af50.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b59-dev-in": {
+   "jobs": {
+    "9be4ffdf-1677-4d6f-a563-6a97238010c3": {
+     "round": 1,
+     "file": "v01-9be4ffdf.png"
+    },
+    "f56099b1-9b52-461a-8360-288e3b358be4": {
+     "round": 1,
+     "file": "v02-f56099b1.png"
+    },
+    "fc421d3a-9222-4754-811e-fe12333b95de": {
+     "round": 1,
+     "file": "v03-fc421d3a.png"
+    },
+    "ca63884d-3b3d-4109-b208-b154f195678c": {
+     "round": 1,
+     "file": "v04-ca63884d.png"
+    },
+    "8ccd9509-d934-4fad-a2b7-10fa83579cdf": {
+     "round": 2,
+     "file": "v05-8ccd9509.png"
+    },
+    "afaffba1-b5cd-4325-b0f0-2aed1acff9fd": {
+     "round": 2,
+     "file": "v06-afaffba1.png"
+    },
+    "48723e4c-58d8-42da-b754-db4535ea2ca5": {
+     "round": 2,
+     "file": "v07-48723e4c.png"
+    },
+    "d670c1eb-9f15-4617-85fd-292e70dbe0c1": {
+     "round": 2,
+     "file": "v08-d670c1eb.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b36-biceps-pop": {
+   "jobs": {
+    "433d9e8f-582b-488d-a6e5-287b7fa9ddc7": {
+     "round": 1,
+     "file": "v01-433d9e8f.png"
+    },
+    "9b24f784-02f7-4b6b-b30a-8ef722a4a571": {
+     "round": 1,
+     "file": "v02-9b24f784.png"
+    },
+    "64e42ac8-67c2-4966-a263-f46003727adf": {
+     "round": 1,
+     "file": "v03-64e42ac8.png"
+    },
+    "70fe601a-7383-4ace-87c7-a8f2ff4d7b1c": {
+     "round": 1,
+     "file": "v04-70fe601a.png"
+    },
+    "c2daa4b0-17a6-4cab-9a8b-acafd17abb88": {
+     "round": 2,
+     "file": "v05-c2daa4b0.png"
+    },
+    "879ed721-eb06-47c8-9810-39a11c4a128e": {
+     "round": 2,
+     "file": null
+    },
+    "516ab5d9-f782-46b3-adeb-8d4a26ddc7bf": {
+     "round": 2,
+     "file": "v06-516ab5d9.png"
+    },
+    "6df92e27-4590-4fde-831f-4c7ae44900a1": {
+     "round": 2,
+     "file": "v07-6df92e27.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b73-floorboards": {
+   "jobs": {
+    "51ae4604-d83d-4425-b2a7-ce9c4f496f7b": {
+     "round": 1,
+     "file": "v01-51ae4604.png"
+    },
+    "828a96fa-a21e-46ae-9012-f0f3f014917c": {
+     "round": 1,
+     "file": null
+    },
+    "e838bc22-35a2-4916-9be7-7b776afeef87": {
+     "round": 1,
+     "file": "v02-e838bc22.png"
+    },
+    "648b195f-09c1-4334-92b1-761aed06f50e": {
+     "round": 1,
+     "file": "v03-648b195f.png"
+    },
+    "5312624a-1af9-4a24-b491-ae24f4810fbe": {
+     "round": 2,
+     "file": "v04-5312624a.png"
+    },
+    "211dfdb3-edc8-4cfd-bac8-5ea77545a9ee": {
+     "round": 2,
+     "file": "v05-211dfdb3.png"
+    },
+    "e86cfc45-90a5-48c5-8250-7620260f9383": {
+     "round": 2,
+     "file": "v06-e86cfc45.png"
+    },
+    "9bfd5ced-9743-40c9-b34b-26c25f06a9d4": {
+     "round": 2,
+     "file": "v07-9bfd5ced.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b74-finale": {
+   "jobs": {
+    "521907f3-3ff3-4d54-b2b2-444960208bb8": {
+     "round": 1,
+     "file": null
+    },
+    "9b9fd600-d619-4cd0-b1f6-8b3657a21b27": {
+     "round": 1,
+     "file": "v01-9b9fd600.png"
+    },
+    "51ac0c26-7bbd-4f89-ad34-9320758ca21c": {
+     "round": 1,
+     "file": "v02-51ac0c26.png"
+    },
+    "aeedb428-0ea1-4df6-a69f-4d66d51508d9": {
+     "round": 1,
+     "file": "v03-aeedb428.png"
+    },
+    "de84ade4-d469-4514-a024-6eac8b113900": {
+     "round": 2,
+     "file": "v04-de84ade4.png"
+    },
+    "b0639f39-d3cf-4073-bfbc-23c1c161b521": {
+     "round": 2,
+     "file": "v05-b0639f39.png"
+    },
+    "018c7827-6d1d-4eb2-8cad-0e9eb9ac9d46": {
+     "round": 2,
+     "file": "v06-018c7827.png"
+    },
+    "7ce491d0-59e9-4d49-a60d-fc5fe33e06eb": {
+     "round": 2,
+     "file": "v07-7ce491d0.png"
+    },
+    "4f9dd15f-dc6d-4400-b8f1-989ed59b4e1f": {
+     "round": 3,
+     "file": "v08-4f9dd15f.png"
+    },
+    "3fe41b23-1aa0-46b4-b522-de2992412814": {
+     "round": 3,
+     "file": "v09-3fe41b23.png"
+    },
+    "99ab51c5-e894-40ad-90f8-848366d4b892": {
+     "round": 3,
+     "file": "v10-99ab51c5.png"
+    },
+    "c76d475f-1832-4bfa-9619-79c1859caa07": {
+     "round": 3,
+     "file": "v11-c76d475f.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b37-kress-react": {
+   "jobs": {
+    "6af06c93-5b13-46aa-8762-1f3f5732c269": {
+     "round": 1,
+     "file": "v01-6af06c93.png"
+    },
+    "f485af34-3822-4b54-bb36-e8336427e898": {
+     "round": 1,
+     "file": "v02-f485af34.png"
+    },
+    "8452de31-8739-482e-a97c-c7e577f90f80": {
+     "round": 1,
+     "file": "v03-8452de31.png"
+    },
+    "1244afea-060f-4cb8-9c67-f7fcab227bb2": {
+     "round": 1,
+     "file": "v06-1244afea.png"
+    },
+    "a0742ec7-ad56-4aad-baad-b8dcfcfb9c4d": {
+     "round": 2,
+     "file": "v04-a0742ec7.png"
+    },
+    "fd0ab554-4607-4a8e-b920-6dd5bd8dc568": {
+     "round": 2,
+     "file": "v07-fd0ab554.png"
+    },
+    "1354b4cd-fb78-465b-95ec-3f2a6fbfdb2c": {
+     "round": 2,
+     "file": "v05-1354b4cd.png"
+    },
+    "be2a7303-fab3-493b-a044-8e281871f0b9": {
+     "round": 2,
+     "file": null
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b60-ingrid-film": {
+   "jobs": {
+    "1ddb5725-fb78-4b40-bac8-773958553a9e": {
+     "round": 1,
+     "file": "v01-1ddb5725.png"
+    },
+    "db6f50ba-fc57-47ee-b177-77f567833435": {
+     "round": 1,
+     "file": "v02-db6f50ba.png"
+    },
+    "07c77684-c055-42f5-a444-c7ca66e1d21b": {
+     "round": 1,
+     "file": "v03-07c77684.png"
+    },
+    "25dd2fc5-25b3-4030-87f9-55dd95938486": {
+     "round": 2,
+     "file": "v04-25dd2fc5.png"
+    },
+    "1d58bcb4-f9dd-44a3-a230-b415a2e649b3": {
+     "round": 2,
+     "file": "v05-1d58bcb4.png"
+    },
+    "43524154-8db4-4c40-b3b9-49cdc110b07b": {
+     "round": 2,
+     "file": "v06-43524154.png"
+    },
+    "a17235ac-45be-404f-ae69-d72323dde7d6": {
+     "round": 2,
+     "file": "v07-a17235ac.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 3,
+    "2": 4
+   }
+  },
+  "b75-aftermath": {
+   "jobs": {
+    "a3ebf9cb-487e-4483-81b7-5852e9b75c4e": {
+     "round": 1,
+     "file": "v01-a3ebf9cb.png"
+    },
+    "acac1e73-2d2f-4541-8ea5-eb1f099efbc0": {
+     "round": 1,
+     "file": "v02-acac1e73.png"
+    },
+    "ef1491da-7f49-4214-9e32-8c3d1a5dc9ce": {
+     "round": 1,
+     "file": "v03-ef1491da.png"
+    },
+    "c801d725-0f68-4b08-b5da-ededbb77ac23": {
+     "round": 1,
+     "file": "v04-c801d725.png"
+    },
+    "80c3044d-a5ec-4e93-82f2-96af2dad374d": {
+     "round": 2,
+     "file": "v05-80c3044d.png"
+    },
+    "e23d58a4-aedd-4ec4-bd5a-4c520045c29b": {
+     "round": 2,
+     "file": "v06-e23d58a4.png"
+    },
+    "7fadcd74-e288-4ddd-b91f-6d59d62d54cf": {
+     "round": 2,
+     "file": "v07-7fadcd74.png"
+    },
+    "73a736c8-eaa5-40f0-9b2f-72122ed84c8b": {
+     "round": 2,
+     "file": "v08-73a736c8.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b61-kress-chair": {
+   "jobs": {
+    "b8351e9d-a10b-470c-a71e-67d5c773f9fd": {
+     "round": 1,
+     "file": "v07-b8351e9d.png"
+    },
+    "0d55dcef-6da3-4731-aa94-6a84f491380c": {
+     "round": 1,
+     "file": "v01-0d55dcef.png"
+    },
+    "395c10bb-d69b-4b0a-ad2f-c3b964307df9": {
+     "round": 1,
+     "file": "v02-395c10bb.png"
+    },
+    "33f46dd0-e547-4ad5-9d02-63013df439f0": {
+     "round": 1,
+     "file": "v03-33f46dd0.png"
+    },
+    "2c65b868-9feb-4d95-bf7c-bb6d60b63421": {
+     "round": 2,
+     "file": "v04-2c65b868.png"
+    },
+    "67b2fb8c-d0f6-4d21-afd8-22e07792ae7e": {
+     "round": 2,
+     "file": "v05-67b2fb8c.png"
+    },
+    "3cea52b7-50e3-4e5a-93fb-cea9d015112b": {
+     "round": 2,
+     "file": "v06-3cea52b7.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 3
+   }
+  },
+  "b75b-group-photo": {
+   "jobs": {
+    "7297b438-eb19-4f4e-b2e3-c7ac32ce0f5c": {
+     "round": 1,
+     "file": "v01-7297b438.png"
+    },
+    "fc2dfbbd-0980-48e5-8b72-305e4cdb082b": {
+     "round": 1,
+     "file": "v02-fc2dfbbd.png"
+    },
+    "5311ee64-3f49-4883-ab09-f9d078a55295": {
+     "round": 1,
+     "file": "v03-5311ee64.png"
+    },
+    "899ecc43-bbfb-48ce-9efb-1f436208a95d": {
+     "round": 1,
+     "file": "v04-899ecc43.png"
+    },
+    "0d14e293-9871-44e1-850a-4ba991d7de51": {
+     "round": 2,
+     "file": "v05-0d14e293.png"
+    },
+    "5e560a81-5d56-4157-9091-fea98294c759": {
+     "round": 2,
+     "file": "v06-5e560a81.png"
+    },
+    "c33a91fb-a246-4403-a1f6-61056fbc5259": {
+     "round": 2,
+     "file": null
+    },
+    "2026b9de-1e31-4e12-bd74-44d501c4d94d": {
+     "round": 2,
+     "file": "v07-2026b9de.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4
+   }
+  },
+  "b62-overhead": {
+   "jobs": {
+    "9de2cf67-fa41-406b-a217-0b7b6d9c78a3": {
+     "round": 1,
+     "file": "v01-9de2cf67.png"
+    },
+    "107f90cf-46f9-48e9-bb4c-ca1b893d0dde": {
+     "round": 1,
+     "file": "v02-107f90cf.png"
+    },
+    "ceb666cc-d64b-464e-97aa-4583ed084dae": {
+     "round": 1,
+     "file": "v03-ceb666cc.png"
+    },
+    "23e4d7b2-6872-4e24-be88-3a7ddbee4a39": {
+     "round": 1,
+     "file": "v04-23e4d7b2.png"
+    },
+    "217a6fde-713d-418c-920f-8d3206236c93": {
+     "round": 2,
+     "file": "v05-217a6fde.png"
+    },
+    "c012d1a1-f59d-4a05-83bd-0ce5b316c0d6": {
+     "round": 2,
+     "file": "v06-c012d1a1.png"
+    },
+    "3cf930d4-cf78-4108-97fa-887c3021cd2f": {
+     "round": 2,
+     "file": "v07-3cf930d4.png"
+    },
+    "08f8c586-a9a2-449a-9279-f5aa48d6c1e1": {
+     "round": 2,
+     "file": "v08-08f8c586.png"
+    },
+    "69bd05d3-fef6-4b78-806a-0741de9e07d6": {
+     "round": 3,
+     "file": "v09-69bd05d3.png"
+    },
+    "671fa810-41fd-489c-85f1-09dfbcb06302": {
+     "round": 3,
+     "file": "v10-671fa810.png"
+    },
+    "19636c0d-00e4-43ee-a623-847bd5fcede3": {
+     "round": 3,
+     "file": "v11-19636c0d.png"
+    },
+    "567ec866-ae5f-40dc-9035-a7a4011133f6": {
+     "round": 3,
+     "file": "v12-567ec866.png"
+    }
+   },
+   "winner": null,
+   "rounds": {
+    "1": 4,
+    "2": 4,
+    "3": 4
+   }
+  },
+  "b76-hook": {
+   "jobs": {
+    "829e9928-fc91-4174-9dda-67326ecd898d": {
+     "round": 1,
+     "file": "v01-829e9928.png"
+    },
+    "1e534d71-c539-4a9a-b39a-aab6b12ab450": {
+     "round": 1,
+     "file": "v02-1e534d71.png"
+    },
+    "59a6693f-3a81-4631-99b1-dd59ccff543a": {
+     "round": 1,
+     "file": null
+    },
+    "539e986f-2c1c-4435-a87f-4944f45bea93": {
+     "round": 1,
+     "file": "v03-539e986f.png"
+    },
+    "7be7e4d8-44da-4a0c-a862-afe6c3d251ef": {
+     "round": 2,
+     "file": "v04-7be7e4d8.png"
+    },
+    "3507fa5f-4d82-4136-83a4-95f112899e00": {
+     "round": 2,
+     "file": "v05-3507fa5f.png"
+    },
+    "1b672542-b77c-4d13-9f74-f501dc41aa42": {
+     "round": 2,
+     "file": "v06-1b672542.png"
+    },
+    "b9fa7ac3-fba5-4ac7-8990-a66dfccab2b8": {
+     "round": 2,
+     "file": null
     }
    },
    "winner": null,
