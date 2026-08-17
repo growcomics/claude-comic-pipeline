@@ -10,8 +10,14 @@
 > gibberish; (3) the card has NO expect_text but the tile shows bubbles/captions; (4) nudity
 > / coverage break of chest, torso or hips; (5) grossly broken anatomy (extra limbs, fused
 > hands); (6) bare skin blending into fabric on the same limb with no torn edge (WARD-07);
-> (7) wardrobe contradicts the card's wardrobe line (e.g. coat OFF when card says ON);
-> (8) 2D/cartoon style instead of photoreal CGI. Output per beat: one line per tile —
+> (7) wardrobe contradicts the card's wardrobe line — NOTE: the lab coat was DITCHED from
+> this comic entirely on 2026-08-11; ANY lab coat, white coat, jacket or over-garment on
+> MARGO is an automatic KILL (code COAT) on every beat, b01 through b86;
+> (8) 2D/cartoon style instead of photoreal CGI;
+> (9) FLAT FACE — blank, neutral, waxy, doll-like or merely mild expression on a beat whose
+> action line calls for intensity. A calm face on a dramatic beat is a KILL;
+> (10) a speaking character (card has expect_text with a speaker) rendered with a CLOSED
+> mouth under the balloon. Output per beat: one line per tile —
 > "vNN KEEP" or "vNN KILL <reason-code>" — then "BEST-4: vNN vNN vNN vNN" (your 4 most
 > promising keeps, composition+face quality). Nothing else. Sheets: sheets/<beat>.jpg.
 

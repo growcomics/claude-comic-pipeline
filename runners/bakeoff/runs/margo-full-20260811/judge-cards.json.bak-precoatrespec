@@ -1,0 +1,1090 @@
+{
+ "b01-establish": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "CAPTION: GRANITE PEAK FITNESS. THE BACK ROOM. 11:48 PM."
+  ],
+  "action": "WIDE ESTABLISHING shot of the cluttered lab corner at the back of the gym at night \u2014 benches of glassware, a humming centrifuge, cork boards of charts. MARGO sits hunched over a microscope, small in the frame, the only w"
+ },
+ "b02-vial": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "MARGO: EIGHTEEN MONTHS. IT'S FINALLY STABLE."
+  ],
+  "action": "MEDIUM CLOSE-UP, eye level. MARGO lifts a vial of luminous green serum to the bench light and studies it, exhausted but quietly hopeful \u2014 expression and pose reflect that. The green glow rakes her glasses and face agains"
+ },
+ "b03-stone-reacts": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "CAPTION: THE STONE REACTS TO THE SERUM. IT ALWAYS HAS.",
+   "SFX: THRMMM"
+  ],
+  "action": "DETAIL EXTREME CLOSE-UP on the bench top: the serum vial standing beside the stone amulet, both pulsing the same saturated green, reflections crawling across scratched steel. MARGO's blurred silhouette watches in the bac"
+ },
+ "b03b-dig-photo": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "CAPTION: SHE FOUND THE STONE ON A DIG. THE SERUM CAME AFTER."
+  ],
+  "action": "DETAIL CLOSE-UP of the cork board above the bench: a faded field photo of a dig site pinned beside charts \u2014 a gloved hand holding the same stone, half-buried in rock. MARGO's fingertip touches the photo's corner at frame"
+ },
+ "b04-kress-enters": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "KRESS: WORKING LATE AGAIN, MARGO?"
+  ],
+  "action": "KRESS strides into the lab corner and looms over MARGO's bench. Conversational TWO-SHOT, TORSO-UP medium framing, over MARGO's shoulder toward KRESS, tight staging; his smirk lit hard from the bench lamp below."
+ },
+ "b05-clipboard": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "KRESS: I'LL TAKE IT FROM HERE.",
+   "MARGO: THAT'S MY RESEARCH!"
+  ],
+  "action": "KRESS snatches the clipboard of results out of MARGO's hands without looking at her, dismissive. MEDIUM CLOSE two-shot, torso-up, camera slightly low behind MARGO's shoulder, the clipboard exchange dominating the frame; "
+ },
+ "b06-kress-gloats": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain \u2014 as reference",
+  "expect_text": [
+   "KRESS: INVESTORS TOMORROW. BIG MONEY."
+  ],
+  "action": "MEDIUM CLOSE-UP of KRESS alone, clipboard tucked under one arm, tapping it with two fingers, smug and unhurried \u2014 expression and pose reflect that. Slight LOW angle so he looms; bench lamp warm key from the side, lab dar"
+ },
+ "b07-stay-out": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "KRESS: STAY OUT OF SIGHT."
+  ],
+  "action": "KRESS walks away toward the gym floor through the doorway, BACK to camera, clipboard under his arm \u2014 MARGO small and sharp-eyed at her bench in the mid-ground. Staged DEPTH shot, camera at her eye level so his exit tower"
+ },
+ "b08-my-serum": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "MARGO: IT'S MY SERUM."
+  ],
+  "action": "MEDIUM CLOSE-UP. MARGO alone, fists pressed to the bench, jaw set, eyes burning past the camera (NOT at it) \u2014 cold fury hardening into resolve at full intensity. The green vial glow underlights her face."
+ },
+ "b09-hand-vial": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "CAPTION: SHE DECIDES.",
+   "SFX: VMMM"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's hand closing deliberately around the green vial; beside her wrist the amulet's glow flares brighter, throwing double shadows. High angle looking down on the bench."
+ },
+ "b10-drink": {
+  "beatKind": "payoff",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "MARGO: ONE DOSE. JUST TO PROVE IT WORKS.",
+   "SFX: GLUG"
+  ],
+  "action": "MARGO tips her head back and drinks the serum in one motion, throat to the light, amulet flaring green against her collarbone. MEDIUM shot, DRAMATIC LOW angle in profile, green FX light flooding up across her jaw, deep s"
+ },
+ "b11-eyes": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "MARGO: OH\u2014",
+   "SFX: THRUMM"
+  ],
+  "action": "EXTREME CLOSE-UP on MARGO's eyes snapping wide behind her glasses, green glow blooming in the lenses, pupils tight \u2014 shock and heat at full intensity. The rest of the frame falls to darkness."
+ },
+ "b12-hand-flex": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON, buttoned, sleeves down; grey tank + dark leggings beneath; stone amulet at collarbone",
+  "expect_text": [
+   "MARGO: WARM. IT'S SPREADING."
+  ],
+  "action": "DETAIL EXTREME CLOSE-UP of MARGO's bare hand splayed on the bench, tendons rising, faint veins surfacing along the forearm where the cuff ends, green light crawling up the skin from the amulet's glow."
+ },
+ "b13-sleeve-tight": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON but visibly TIGHT, seams strained; amulet glowing at collarbone",
+  "expect_text": [
+   "SFX: CREEAK"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's forearm and bicep swelling INSIDE the lab coat sleeve, the fabric pulling taut with visible strain lines radiating from the seam \u2014 the sleeve is intact but at its limit. Slight diagonal dutch ang"
+ },
+ "b14-sleeve-stare": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON but visibly TIGHT, seams strained; amulet glowing at collarbone",
+  "expect_text": [
+   "MARGO: THE SLEEVE'S GETTING TIGHT!"
+  ],
+  "action": "MEDIUM CLOSE-UP, three-quarter \u2014 MARGO raises her flexed arm and STARES at her own bicep straining the taut sleeve, eyes on the muscle, NOT at camera; astonished delight breaking across her face at full intensity."
+ },
+ "b14b-both-sleeves": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON but visibly TIGHT, seams strained; amulet glowing at collarbone; both sleeves taut, buttons gapping",
+  "expect_text": [
+   "MARGO: BOTH ARMS. IT'S EVERYWHERE.",
+   "SFX: creak... creak..."
+  ],
+  "action": "MEDIUM shot, front three-quarter: MARGO holds BOTH arms half-flexed before her, both coat sleeves now taut as drum skins, the button placket gapping across her chest under the strain \u2014 she looks from one arm to the other"
+ },
+ "b15-back-split": {
+  "beatKind": "payoff",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON but visibly TIGHT, seams strained; amulet glowing at collarbone; back seam actively SPLITTING",
+  "expect_text": [
+   "SFX: RRRIP",
+   "MARGO: !!"
+  ],
+  "action": "BEHIND THREE-QUARTER medium shot: MARGO's shoulders widen visibly and the lab coat's BACK SEAM splits open along the stitching with crisp torn fabric edges \u2014 the coat otherwise clean. Her face turned in profile surprise,"
+ },
+ "b16-delight": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "lab coat ON but visibly TIGHT, seams strained; amulet glowing at collarbone; back seam torn open",
+  "expect_text": [
+   "MARGO: IT'S ACTUALLY WORKING!"
+  ],
+  "action": "REACTION MEDIUM CLOSE-UP: MARGO half-turned, one hand over her mouth, eyes enormous with delighted disbelief \u2014 expression at full theatrical intensity. The split coat seam visible over her shoulder; warm lamp key, green "
+ },
+ "b17-coat-off-reveal": {
+  "beatKind": "payoff",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone; the ruined coat dangling from one hand",
+  "expect_text": [
+   "MARGO: LOOK AT ME..."
+  ],
+  "action": "REVEAL: MARGO shrugs out of the ruined lab coat, now visibly ATHLETIC \u2014 full-body but TIGHT framing, LOW HERO ANGLE, her new physique filling 80% of the frame, the destroyed coat trailing from one fist toward the floor. "
+ },
+ "b18-doorframe": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: STRONGER. WAY STRONGER."
+  ],
+  "action": "SIZE-COMPARISON: MARGO stands in the lab doorway flexing one arm, her shoulders now nearly spanning the frame that used to swallow her \u2014 the doorframe is the fixed gauge. MEDIUM shot, slight low angle, gym darkness behin"
+ },
+ "b18b-calipers": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: FOURTEEN CENTIMETERS OVERNIGHT?!"
+  ],
+  "action": "SCIENCE BEAT: MARGO clamps lab calipers around her own flexed bicep and reads the scale, eyebrows shooting up \u2014 the scientist measuring herself, delight fighting rigor. DETAIL close on calipers + bicep, her grin soft-foc"
+ },
+ "b19-crate": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: THIS WEIGHED A TON YESTERDAY.",
+   "SFX: CLANK"
+  ],
+  "action": "MARGO lifts a loaded equipment crate one-handed to shoulder height, surprised at her own ease \u2014 eyebrows up, grin crooked. MEDIUM shot with the crate dominating the near foreground for depth, dutch diagonal."
+ },
+ "b20-mirror-flex": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: HYPOTHESIS: THIS IS AMAZING."
+  ],
+  "action": "MARGO hits a tentative first double-bicep in the dark reflection of a glass cabinet, studying herself, half scientist half showman \u2014 fascinated appraisal at full intensity. OVER-SHOULDER shot INTO the reflection, bench l"
+ },
+ "b21-tingle-again": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: AND THE STONE ISN'T FINISHED.",
+   "SFX: thrmm... thrmm..."
+  ],
+  "action": "DETAIL CLOSE-UP: the amulet pulsing slow and deep against MARGO's collarbone, her hand hovering over it, green light between her fingers. Dark frame, single FX light source."
+ },
+ "b22-tomorrow": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: TOMORROW, KRESS GETS A SURPRISE."
+  ],
+  "action": "MEDIUM CLOSE-UP, three-quarter: MARGO looks toward the doorway to the gym floor, rolling one shoulder, wolfish determination sharpening her face \u2014 expression and pose reflect that. Cool gym light on her face, warm lab be"
+ },
+ "b23-pitch-establish": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS",
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "cast as references",
+  "expect_text": [
+   "CAPTION: NEXT MORNING. THE PITCH."
+  ],
+  "action": "WIDE ESTABLISHING: the gym presentation area in morning light \u2014 KRESS at a whiteboard up front, THREE INVESTORS on folding chairs staged at different depths (HARLAN nearest, arms crossed; DEV mid; INGRID far, checking he"
+ },
+ "b24-kress-pitch": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain",
+  "expect_text": [
+   "KRESS: GENTLEMEN \u2014 THE FUTURE OF FITNESS!"
+  ],
+  "action": "TORSO-UP medium of KRESS mid-pitch, clipboard raised like scripture, salesman grin at maximum wattage \u2014 expression and pose reflect that. Slight LOW angle, whiteboard formulas out of focus behind him."
+ },
+ "b25-investors-cold": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "HARLAN: WE'VE HEARD THIS SPEECH BEFORE."
+  ],
+  "action": "STAGED TRIO SHOT at three depths: HARLAN large in near-foreground profile, unimpressed, arms crossed; DEV mid-ground polishing his glasses; INGRID background tapping her phone. Long morning shadows rake the floor."
+ },
+ "b26-margo-watches": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: GO AHEAD. SELL MY WORK."
+  ],
+  "action": "MARGO leans in the back hallway doorway, arms crossed over her chest, watching the pitch with narrowed eyes \u2014 simmering, patient. MEDIUM shot, she is framed BY the doorway, half in hallway shadow, gym light slicing acros"
+ },
+ "b27-harlan-challenge": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "HARLAN: WHERE'S YOUR PROOF, KRESS?"
+  ],
+  "action": "TORSO-UP of HARLAN with one hand raised to stop the pitch, eyebrow up, the patient smile of a man who owns the room \u2014 expression and pose reflect that. Slight HIGH angle from Kress's position looking down the aisle at hi"
+ },
+ "b28-kress-sweat": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain",
+  "expect_text": [
+   "KRESS: PROOF! OF COURSE... HA."
+  ],
+  "action": "CLOSE-UP of KRESS laughing it off nervously, glancing sideways, a bead of sweat sliding down his temple, collar suddenly tight \u2014 flop-sweat panic under the grin at full intensity. Hard window key from behind, cool fill."
+ },
+ "b29-margo-steps": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: I'M THE PROOF."
+  ],
+  "action": "MARGO steps out of the hallway onto the gym floor before she can stop herself, one fist clenched, stride resolute \u2014 jaw set, eyes locked forward. MEDIUM full-length but TIGHT, camera TRACKING low beside her, morning ligh"
+ },
+ "b30-kress-freeze": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain",
+  "expect_text": [
+   "KRESS: MARGO?! NOT NOW\u2014"
+  ],
+  "action": "MEDIUM CLOSE-UP of KRESS \u2014 head and shoulders, whipping around toward the voice, eyes wide, grin collapsing \u2014 caught mid-syllable. Slight dutch angle, his gold chain mid-swing with the turn."
+ },
+ "b31-investors-lean": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "INGRID: AND WHO IS SHE?"
+  ],
+  "action": "STAGED SHOT: all three investors lean forward on their folding chairs in unison, suddenly interested \u2014 HARLAN's arms uncrossing, DEV's glasses catching light, INGRID lowering her phone. Shot from behind KRESS's shoulder "
+ },
+ "b32-walk-past": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: WATCH CLOSELY."
+  ],
+  "action": "TWO-SHOT with staged depth: MARGO walks PAST the frozen KRESS toward the barbell rack, not sparing him a glance, amulet glowing faint green \u2014 he is near-foreground, blurred, deflating; she is mid-ground, sharp, purposefu"
+ },
+ "b33-round-two": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone",
+  "expect_text": [
+   "MARGO: ROUND TWO.",
+   "SFX: THRUMM"
+  ],
+  "action": "MEDIUM CLOSE-UP: MARGO wraps her fist around the amulet at her collarbone; it flares BRIGHT green between her fingers, underlighting a slow, wicked grin \u2014 anticipation at full intensity. Background falls dark around the "
+ },
+ "b34-delts": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone; straps digging in, stitches straining",
+  "expect_text": [
+   "SFX: CREEEAK"
+  ],
+  "action": "DETAIL EXTREME CLOSE-UP: MARGO's shoulders and delts SWELLING, the tank straps digging into rising muscle, stitches visibly straining at the seam \u2014 motion implied by stretched fabric and green light crawling across skin."
+ },
+ "b34b-chest": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone; front of the tank stretching, hem rising, coverage preserved",
+  "expect_text": [
+   "SFX: creeeeak"
+  ],
+  "action": "DETAIL CLOSE-UP, front three-quarter: MARGO's chest and torso SWELLING against the tank, the fabric stretching glossy with radiating strain-lines, the hem pulling upward over her tightening waist \u2014 coverage of chest and "
+ },
+ "b35-dev-react": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "DEV"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "DEV: IS SHE... GROWING?"
+  ],
+  "action": "REACTION CLOSE-UP of DEV, glasses sliding down his nose, mouth open, pen frozen above his notepad \u2014 pure disbelief at full intensity. Green FX glow from off-frame washes one side of his face."
+ },
+ "b36-biceps-pop": {
+  "beatKind": "connective",
+  "stage": "s2",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top + dark leggings, fits an athletic build; lab coat GONE (destroyed last scene); amulet at collarbone; shoulder seams opening",
+  "expect_text": [
+   "SFX: POP-POP-POP"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's biceps ballooning as she curls both arms, veins surfacing, the tank's shoulder seams POPPING open stitch by stitch with crisp torn edges. Tight diagonal frame, green key + warm rim."
+ },
+ "b37-kress-react": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain",
+  "expect_text": [
+   "KRESS: THAT'S IMPOSSIBLE."
+  ],
+  "action": "REACTION CLOSE-UP of KRESS, horrified and fascinated in equal measure, sweat now streaming, hand half-raised as if to object to physics itself \u2014 full theatrical intensity. Cool fill, green FX edge light."
+ },
+ "b38-s3-reveal": {
+  "beatKind": "payoff",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: IMPOSSIBLE? I CALL IT TUESDAY."
+  ],
+  "action": "REVEAL money shot: MARGO at stage three \u2014 heavily muscular, dramatically bigger and rounder than before \u2014 hits a MOST-MUSCULAR crunch, torn-seam tank straining, ELEVATED-INTIMATE camera (slightly above eye line, close, p"
+ },
+ "b39-trio-react": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "HARLAN: GOOD LORD."
+  ],
+  "action": "STAGED TRIO REACTION at depths: HARLAN on his feet in near-foreground, chair tipping behind him; DEV pointing, half-risen, mid-ground; INGRID background with her phone raised to film. Nobody in a flat row; long shadows."
+ },
+ "b40-chalk": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: LET'S TALK NUMBERS.",
+   "SFX: PAFF"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO claps chalk between her palms in front of the loaded barbell, a white cloud blooming through a shaft of window light, her grin visible through the dust \u2014 relish at full intensity."
+ },
+ "b41-money-lift": {
+  "beatKind": "payoff",
+  "stage": "s3",
+  "chars": [
+   "MARGO",
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: SIX HUNDRED... EASY.",
+   "SFX: KRRNK"
+  ],
+  "action": "MONEY SHOT: MARGO mid-lift with a barbell loaded far beyond plausibility \u2014 the bar visibly BENDING under the plates \u2014 LOW HERO ANGLE, TIGHT crop, her exertion face blazing (teeth gritted into a grin), physique filling 85"
+ },
+ "b41b-ingrid-fumble": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "INGRID"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "INGRID: TELL ME I GOT THAT."
+  ],
+  "action": "REACTION CLOSE-UP: INGRID fumbling her phone mid-film, juggling it against her chest, eyes never leaving the off-frame lift \u2014 professional cool cracked wide open at full intensity."
+ },
+ "b42-dev-bar": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "DEV"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "DEV: THE BAR IS BENDING!"
+  ],
+  "action": "REACTION MEDIUM CLOSE-UP of DEV gripping his folding chair with both hands, leaning so far forward he is nearly off it \u2014 glee and terror mixed at full intensity."
+ },
+ "b43-bar-down": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "SFX: WHOOM"
+  ],
+  "action": "MARGO lowers the SAME fully-loaded barbell under total control \u2014 one single intact bar, all plates on it \u2014 into a controlled floor slam, dust ring blasting outward at her feet. MEDIUM shot, slight low angle, backlit dust"
+ },
+ "b44-seam-rip": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing; the shoulder seam tearing further",
+  "expect_text": [
+   "MARGO: OOPS. WARDROBE BUDGET.",
+   "SFX: rrrip"
+  ],
+  "action": "CLOSE-UP on MARGO's shoulder: the tank's FABRIC seam rips open a little further \u2014 torn threads, crisp fabric edges, skin beneath intact and unbroken \u2014 as she rolls the shoulder. She glances at it sideways, deadpan amusem"
+ },
+ "b44b-latspread": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO",
+   "HARLAN",
+   "DEV"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: STILL WITH ME, GENTLEMEN?"
+  ],
+  "action": "SHOWCASE: MARGO hits a slow LAT SPREAD for the investors, back to a mirror so both sides read, the torn shoulder seam gaping wider \u2014 HARLAN and DEV staged at two depths in the foreground corner, dwarfed. ELEVATED-INTIMAT"
+ },
+ "b45-tape": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO",
+   "INGRID"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "INGRID: TAPE'S... TOO SHORT.",
+   "MARGO: BUY A LONGER ONE."
+  ],
+  "action": "HUMOR TWO-SHOT: INGRID stretches a measuring tape around MARGO's flexed bicep and runs out of tape \u2014 the tab end short of closing the loop. ELEVATED-INTIMATE close framing on the bicep + tape + Ingrid's raised eyebrow."
+ },
+ "b46-kress-reclaim": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "KRESS",
+   "MARGO",
+   "DEV"
+  ],
+  "wardrobe": "Kress rumpled; Margo grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "KRESS: AS I WAS SAYING\u2014"
+  ],
+  "action": "STAGED DEPTH SHOT: KRESS in near-foreground trying to reclaim the floor, gesturing weakly with the clipboard, voice-thin \u2014 while behind him the enormous MARGO flexes for a delighted DEV, both ignoring him completely."
+ },
+ "b47-harlan-cuts": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN",
+   "KRESS"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "HARLAN: QUIET, KRESS. MA'AM \u2014 YOUR TERMS?"
+  ],
+  "action": "HARLAN stands and cuts KRESS off mid-word with one raised palm, looking straight PAST him \u2014 impressed, decided. TWO-SHOT, torso-up, Harlan sharp in focus, Kress soft and shrinking at frame edge."
+ },
+ "b48-terms": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: FULL CREDIT. MY NAME ON IT."
+  ],
+  "action": "MEDIUM CLOSE-UP of MARGO dusting chalk off her palms, cocky half-smile, chin tipped \u2014 a scientist discovering leverage, at full intensity. Warm window key behind her shoulder, cool fill."
+ },
+ "b49-kress-protest": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, gold chain, rumpled",
+  "expect_text": [
+   "KRESS: IT'S MY PROGRAM!"
+  ],
+  "action": "CLOSE-UP of KRESS, finger raised in protest, tie of sweat down his temple, voice cracking \u2014 indignation curdling into desperation at full intensity. Slight HIGH angle to shrink him."
+ },
+ "b50-clipboard-back": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: SAYS THE DATA. MY DATA."
+  ],
+  "action": "DETAIL-DRIVEN TWO-SHOT: MARGO holds the clipboard up out of KRESS's reach with two fingers, reading it idly; he grabs air below, small in the frame. Low angle up the line of her arm to the clipboard."
+ },
+ "b51-ceiling": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO",
+   "HARLAN"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: WANT TO SEE THE CEILING?"
+  ],
+  "action": "MARGO palms the amulet and looks at HARLAN over her shoulder with a slow, dangerous grin \u2014 an offer forming. OVER-SHOULDER framing from behind Harlan, her eyes catching the green FX glow."
+ },
+ "b52-amulet-blaze": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "SFX: VMMMM"
+  ],
+  "action": "EXTREME CLOSE-UP: the amulet BLAZING in MARGO's fist, green light flooding the frame and streaming between her fingers, her collarbone and jaw rim-lit above it. Everything else drops to black."
+ },
+ "b53-quads": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing; leggings seams straining at the thigh",
+  "expect_text": [
+   "SFX: creeeak"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's quads THICKENING, the leggings' side seams straining with visible stitch-stress lines, one seam beginning to open at the outer thigh with crisp fabric edges \u2014 coverage intact. Low diagonal frame,"
+ },
+ "b54-lats": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing; back of the tank splitting down the middle",
+  "expect_text": [
+   "SFX: RRRIP"
+  ],
+  "action": "REAR THREE-QUARTER DETAIL: MARGO's lats FLARING wide as she spreads into a back pose, the tank splitting down the back seam with crisp torn edges peeling apart \u2014 green light pouring through the widening tear."
+ },
+ "b55-harlan-grip": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "HARLAN: CEILING? SHE IS THE CEILING."
+  ],
+  "action": "REACTION CLOSE-UP: HARLAN gripping the back of a folding chair, knuckles white, a slow hungry grin spreading \u2014 a man watching his money multiply, at full intensity. Green FX wash from off-frame."
+ },
+ "b56-striations": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "CAPTION: DENSITY. DEFINITION. MORE."
+  ],
+  "action": "DETAIL EXTREME CLOSE-UP on MARGO's shoulder and upper arm mid-flex: striations sharpening under sweat-sheened skin, fibers shifting, green and warm light carving every cut. No face in frame."
+ },
+ "b56b-silhouette": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing; leggings seams straining at the hip, coverage preserved",
+  "expect_text": [
+   "SFX: thrmm... thrmm..."
+  ],
+  "action": "PROFILE SILHOUETTE DETAIL: MARGO side-on against the blown-out window light, her silhouette visibly THICKENING through the hips and glutes as the growth rolls downward, leggings seams straining with crisp stitch-stress l"
+ },
+ "b57-margo-face": {
+  "beatKind": "connective",
+  "stage": "s3",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top strained over heavy muscle, one shoulder seam torn open with crisp fabric edges; dark leggings; amulet glowing",
+  "expect_text": [
+   "MARGO: HAH... THERE IT IS..."
+  ],
+  "action": "FACE INTERCUT (never leave a money-run faceless): CLOSE-UP of MARGO mid-surge, head tipped back, teeth bared in ecstatic strain, green light rippling up her throat \u2014 peak-intensity expression."
+ },
+ "b58-s4-reveal": {
+  "beatKind": "payoff",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "MARGO: STAGE FOUR. STILL CLIMBING."
+  ],
+  "action": "REVEAL money shot: MARGO at stage four \u2014 beyond-bodybuilder mass, dramatically rounder and heavier than the last stage \u2014 arms crossed over her chest in a colossal stance, LOW HERO ANGLE, TIGHT crop, physique filling 90% "
+ },
+ "b59-dev-in": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "DEV"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "DEV: I'M IN. WHATEVER IT COSTS."
+  ],
+  "action": "REACTION SHOT: DEV scribbling numbers so fast his notepad pages flip, papers sliding off his knee, eyes never leaving off-frame MARGO \u2014 frantic conversion at full intensity."
+ },
+ "b60-ingrid-film": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "INGRID"
+  ],
+  "wardrobe": "investors as reference",
+  "expect_text": [
+   "INGRID: THIS SELLS ITSELF."
+  ],
+  "action": "REACTION MEDIUM CLOSE-UP: INGRID filming with her phone held high, delighted, already composing the campaign in her head \u2014 expression and pose reflect that. Green FX glow rims her silhouette."
+ },
+ "b61-kress-chair": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "KRESS"
+  ],
+  "wardrobe": "navy tracksuit, rumpled, chain askew",
+  "expect_text": [
+   "KRESS: ...MY GYM."
+  ],
+  "action": "KRESS slumped onto a folding chair among the investors' empty ones, clipboard dangling from two fingers, staring at nothing \u2014 hollowed out. MEDIUM shot, HIGH angle pressing him down, one hard shaft of window light missin"
+ },
+ "b62-overhead": {
+  "beatKind": "payoff",
+  "stage": "s4",
+  "chars": [
+   "MARGO",
+   "HARLAN"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "MARGO: WE'LL LICENSE THE FORMULA."
+  ],
+  "action": "FEAT: MARGO one-arm presses the fully loaded barbell OVERHEAD, casually, mid-conversation with HARLAN \u2014 the bar bowed over her fist, plates stacked to the sleeve ends. ELEVATED-INTIMATE camera close on her calm face + th"
+ },
+ "b62b-pinky-curl": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO",
+   "KRESS"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "MARGO: NICE DUMBBELL. CUTE."
+  ],
+  "action": "HUMOR FEAT: MARGO idly curls KRESS's prized chrome dumbbell on her PINKY finger while talking terms \u2014 KRESS watches from the side, hollow-eyed, as his trophy iron bobs like a toy. TWO-SHOT, the dumbbell arc dominating th"
+ },
+ "b63-handshake": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO",
+   "HARLAN"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "HARLAN: PARTNERS. FIFTY-ONE, YOU."
+  ],
+  "action": "DETAIL TWO-SHOT: the handshake \u2014 HARLAN's hand disappearing entirely into MARGO's, his other hand bracing his forearm for the grip; both grinning, deal struck. Tight on the hands, faces soft above."
+ },
+ "b64-plates": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO",
+   "DEV"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "DEV: FOUR... FIVE... THAT'S A LEG PRESS."
+  ],
+  "action": "SHOWCASE FEAT: MARGO stacks four 45-pound plates on one open palm like poker chips while DEV counts them, disbelieving, pen in his teeth. STAGED two-shot, plates dominant in the near frame, diagonal composition."
+ },
+ "b65-bench-bend": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "SFX: KREEENK",
+   "MARGO: KRESS BUYS CHEAP BARS."
+  ],
+  "action": "FEAT DETAIL: MARGO absent-mindedly straightens a BENT barbell across her knee like a twig, bar groaning back into line, plates racked behind her. CLOSE framing on hands + bar + her unimpressed face above."
+ },
+ "b66-one-last": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "MARGO: ONE LAST DEMONSTRATION."
+  ],
+  "action": "QUIET BEAT before the storm: MEDIUM CLOSE-UP of MARGO looking down at the amulet resting in her huge palm, its glow strobing faster \u2014 her expression softening into wonder, then sharpening into decision."
+ },
+ "b67-surge-start": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "grey tank top reduced to strained straps over massive muscle \u2014 seams split at both shoulders and down the back, crisp torn edges, chest/torso/hips fully covered; dark leggings straining; amulet blazing",
+  "expect_text": [
+   "SFX: VMMMMMM"
+  ],
+  "action": "MARGO presses the amulet flat to her sternum; her WHOLE BODY halos green, hair lifting off her shoulders in the updraft, dust ringing outward at her feet. MEDIUM shot, low angle, FX light overwhelming the windows."
+ },
+ "b68-torso": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "SFX: RRRRIP"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's chest and torso EXPANDING, the tank strained to a lattice at every seam \u2014 crisp torn edges spreading, coverage of chest and torso fully preserved \u2014 green light lancing through each split."
+ },
+ "b69-arms": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "SFX: THRUM THRUM THRUM"
+  ],
+  "action": "DETAIL CLOSE-UP: MARGO's arms at their limit \u2014 each bicep now rivaling her head, forearms cabled, fists clenched at her sides as the growth rolls through them in visible waves of green light."
+ },
+ "b70-cast-shield": {
+  "beatKind": "connective",
+  "stage": "s1",
+  "chars": [
+   "HARLAN",
+   "DEV",
+   "INGRID",
+   "KRESS"
+  ],
+  "wardrobe": "cast as references",
+  "expect_text": [
+   "DEV: SHE'S STILL GOING!"
+  ],
+  "action": "REACTION WIDE: all three INVESTORS and KRESS shielding their eyes against the green blaze, staged at four different depths \u2014 Harlan leaning IN toward it, Dev half-behind his notepad, Ingrid still filming, Kress cowering."
+ },
+ "b71-margo-more": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "MARGO: MORE!"
+  ],
+  "action": "EXTREME CLOSE-UP of MARGO's face tipped up into the light, eyes blazing green, ecstatic \u2014 the peak-intensity money-run face, teeth bared in a rapturous grin."
+ },
+ "b71b-height": {
+  "beatKind": "connective",
+  "stage": "s4",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "MARGO: I'M TALLER. I'M ACTUALLY TALLER!"
+  ],
+  "action": "SCALE BEAT: MARGO visibly GAINS HEIGHT mid-surge \u2014 her eye-line rises past the top of the whiteboard behind her, marker tray now at her waist; she looks DOWN at it, startled laugh breaking through the strain."
+ },
+ "b72-rack-compare": {
+  "beatKind": "connective",
+  "stage": "s5",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "CAPTION: THE RACK USED TO TOWER OVER HER."
+  ],
+  "action": "SIZE-COMPARISON: MARGO now stands BESIDE the barbell rack and OVERTOPS its uprights \u2014 the rack that framed her earlier feats is the fixed gauge, and she dwarfs it. FULL shot but tight, low angle, green glow ebbing to a s"
+ },
+ "b73-floorboards": {
+  "beatKind": "connective",
+  "stage": "s5",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "SFX: WHOMP"
+  ],
+  "action": "DETAIL LOW SHOT at floor level: MARGO takes one step forward and the gym floorboards FLEX under her foot, dust jumping from the seams, plates rattling on the rack behind. Her scale carried entirely by the frame."
+ },
+ "b74-finale": {
+  "beatKind": "payoff",
+  "stage": "s5",
+  "chars": [
+   "MARGO",
+   "KRESS",
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "MARGO: GRANITE PEAK'S NEW HEADLINER!"
+  ],
+  "action": "TRIUMPHANT FULL-PAGE FINALE: MARGO hits a colossal DOUBLE-BICEP at her absolute maximum \u2014 dramatically bigger, rounder and heavier than every prior stage \u2014 LOW HERO ANGLE from near floor level, she towers over the camera"
+ },
+ "b75-aftermath": {
+  "beatKind": "connective",
+  "stage": "s5",
+  "chars": [
+   "MARGO",
+   "HARLAN",
+   "KRESS"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "HARLAN: YOUR RESEARCH, DOCTOR VALE."
+  ],
+  "action": "AFTERMATH: dust settling in the window light. HARLAN formally hands the clipboard UP to MARGO with both hands like a treaty; far in the background KRESS sweeps scattered plates back toward the rack, demoted. Staged depth"
+ },
+ "b75b-group-photo": {
+  "beatKind": "connective",
+  "stage": "s5",
+  "chars": [
+   "MARGO",
+   "HARLAN",
+   "DEV",
+   "INGRID"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "INGRID: SAY 'GAINS'!"
+  ],
+  "action": "CELEBRATORY BEAT: INGRID holds her phone high for a group shot \u2014 MARGO crouched LOW to fit the frame and still towering, one arm flexed, HARLAN and DEV flanking at staged depths, everyone grinning. Slight wide, warm wind"
+ },
+ "b76-hook": {
+  "beatKind": "connective",
+  "stage": "s5",
+  "chars": [
+   "MARGO"
+  ],
+  "wardrobe": "the torn grey tank and leggings at their absolute structural limit over a colossal physique \u2014 every seam split wide with crisp torn edges, coverage of chest, torso and hips fully preserved; amulet blazing green",
+  "expect_text": [
+   "CAPTION: THE STONE ISN'T DONE. NOT EVEN CLOSE.",
+   "SFX: thrmm."
+  ],
+  "action": "CLOSING BEAT: EXTREME CLOSE-UP of the amulet in MARGO's palm; above it, soft-focus, her knowing smile as the stone pulses ONCE, hard, green light flaring between her closing fingers."
+ }
+}

@@ -12,6 +12,24 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-16 01:30 (margo-full: run restarted on Higgsfield after the 5-day Flow-lane stall)
+
+The margo-full 86-beat run had been stalled since 2026-08-11 08:07 — the Flow-on-mini lane change (`1f3733a`) was committed but never executed. Restarted on the sanctioned Higgsfield fallback.
+
+**Fixed**
+- **`runs/margo-full-20260811/judge-cards.json` was stale and would have inverted the judge.** It still carried the pre-respec wardrobe lines ("lab coat ON, buttoned, sleeves down") for all 86 beats, so any judge reading it would have KILLED the correct coatless tiles and KEPT coat regressions. Regenerated from the respec'd `margo-full-beats.json` (backup: `judge-cards.json.bak-precoatrespec`).
+- **`JUDGE-PROMPTS.md` Tier-1 triage was missing three kill codes.** Added: COAT (any lab coat / jacket / over-garment on MARGO is an automatic kill on every beat b01-b86, per the owner's 2026-08-11 respec), rule 9 FLAT FACE, and closed-mouth-under-balloon.
+
+**Added**
+- **`runs/margo-full-20260811/DRIVER-BRIEF.md`** — the mechanical submit/poll/download contract handed to generation-driver subagents, so the composed prompt is passed verbatim and driver subagents never view images or bank winners.
+- **`runs/margo-full-20260811/strip.py`** — story-order contact strips built from DISK (`variants/<beat>/<winner>-*.png`), not from `state.json`, so bookkeeping races cannot corrupt the deliverable.
+
+**Changed**
+- Pre-respec variants for the 12 no-winner beats (b18, b18b, b19, b22, b26, b48, b51, b52, b53, b56b, b57, b58) moved to `variants-prerespec/` rather than deleted, so fresh coatless contact sheets are not polluted by coat-era tiles.
+- **Measured cost note:** on `nano_banana_2_lite`, one `generate_image` call with `count:4` costs **1 credit** (0.25/image); the headless `generate_image_batch` path costs **1.5 credits per image** — 6x more. The bakeoff lane stays on `count:4`.
+
+---
+
 ## 2026-08-13 22:55 (gate convergence: `cowboy` legal at Gate A + rules_audit L34 resurrected)
 
 Closes the two gate mismatches recorded in the 2026-08-11 writer-stage entry (both verified still present on `c285718` before changing anything).
