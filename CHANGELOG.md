@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-16 04:20 (margo-full: 86/86 banked; strain clause scoped to Margo)
+
+**Fixed**
+- **The garment-strain permission was global and was shredding the supporting cast.** The style block's SFW clause read "every character fully clothed; **garments may strain or split at seams**" — a licence granted to everyone in frame, not to Margo. It tore Dev's polo in b42 and Harlan's sleeve in b47/b55, panels Margo does not even appear in. Now scoped: on the 66 beats where Margo is present, only her garments may strain or split and every other character's clothing is explicitly intact; on the 20 beats without her, nothing tears at all. Style bumped to v6, backup at `margo-full-beats.json.bak-strainscope`. This is the same class of bug as the 2026-08-11 global SLEEVES clause, surviving in a second location.
+- **`judge-cards.json` regenerated again** off the patched beatsheet so judges score against the scoped clause.
+
+**Added**
+- **All 86 beats banked** on board `margo-full`, each with an accepted winner and a judge one-liner.
+- **First size ladder of the run: b74-finale.** The finalist judge flagged the climax as under-scale for stage s5, so the banked winner was refined against itself as its own reference (physique bigger/rounder, seams straining harder, expression more intense). Rung 1 promoted over rung 0 — clearly bigger, with camera, lighting, 5-person headcount and caption text all holding.
+
+**Note (checked, NOT defects)**
+- b26-margo-watches renders a cloud thought-bubble because the beat's dialogue is typed `thought`; the prompt asks for exactly that. b34b-chest bakes its SFX near the sound source because its spec says "integrated into the scene near the sound source". Both were flagged in review; both match spec and were left alone rather than regressed.
+
+---
+
 ## 2026-08-16 03:10 (margo-full: 44 stalled beats generated, 54/86 banked)
 
 **Added**
