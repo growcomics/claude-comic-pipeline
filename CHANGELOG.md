@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-23
+
+### Fixed
+
+- **The release board reported GrowGetter Weekly as "dry" while it was actively publishing.** Pages of *Magna - Rise of an Ultra-Villainess* (art TMGF, colors Chris) had been going up every Monday; the board simply had no rows, and because the dry badge is computed from board data alone, an incomplete board produced a confident false negative that was then repeated to the owner as fact. Added the verified run (2026-08-17, 5 weeks, through 09-14) plus the planned Wrench switchover from 09-21.
+
+### Added
+
+- **tools/reconcile_published.py** — checks every property's ACTUAL published output (public WordPress REST API + DeviantArt RSS; no credentials needed) against the board and flags any lane that claims to be dry while the property is still publishing. Default 90-day lookback, `--days=N` to widen. First run caught six further blind spots beyond the GrowGetter one, including GiantessGirl showing nothing on the board across all three lanes despite publishing through August. **Standing rule: never report a lane as empty from board data alone — a lane is dry only if its published output is silent too.**
+
 ## 2026-08-23 (margo-full: 21 defective panels replaced; whole-cast wardrobe pinned)
 
 Corrective pass closing the four-strip QA sweep of 2026-08-16. The comic stayed at 86/86 banked
