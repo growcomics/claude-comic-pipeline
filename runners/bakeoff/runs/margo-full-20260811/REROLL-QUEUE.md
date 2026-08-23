@@ -1,43 +1,36 @@
-# margo-full — regeneration queue (REWRITTEN after owner review, 2026-08-11)
+# margo-full — regeneration queue
 
-## Owner review verdicts (supersede everything below the line)
-1. **FLAT FACES: PASSED.** b02/b07/b13/b50 stay as-is. Keep kill rule 9 for future
-   judging, but do not re-roll banked pages for face intensity alone.
-2. **LAB COAT: DITCHED FROM THE COMIC ENTIRELY.** Torn-sleeve fragments, wrong mirror
-   reflections, inconsistent tears — owner: "just ditch the lab coat entirely and
-   recreate." DONE at spec level: all 86 wardrobe lines + prompts respec'd coatless
-   (backup: margo-full-beats.json.bak-coatrespec). The b13-b17 coat-tear arc is now a
-   TANK-STRAIN arc (b14 dialogue: "THESE SEAMS ARE GETTING TIGHT!").
-3. **SLEEVE-RIP CLAUSE: REMOVED GLOBALLY (86/86).** It was ripping sleeves on Kress
-   and investors (owner flagged pages 23-25). Growth tearing now lives ONLY in
-   Margo's per-beat wardrobe lines.
-4. **SPEAKING = OPEN MOUTH.** Owner: closed mouth under a speech bubble is weird.
-   Added to all 60 speaking beats: "mouth OPEN mid-line... NEVER a closed mouth
-   under a speech balloon."
-5. **SCENE GEOGRAPHY.** The pitch happens IN the gym per script, but panels never
-   showed it. GEOGRAPHY clause added to b23/b25/b26/b39/b41/b42/b45; b23 is now a
-   16:9 WIDE establishing shot.
-6. **b45 "unexplained girl" = INGRID, an investor** — the identity bleed (amulet +
-   grey tank landed on her) made her unrecognizable. Prompt now states she wears her
-   investor blazer, NO amulet, NO tank. Re-roll after refs verified.
+## STATUS 2026-08-23: CLEARED. 86/86 banked, all known defects corrected.
 
-## REGENERATE — banked winners invalidated by the coat respec (20)
-b01, b02, b03, b03b, b04, b05, b06, b07, b08, b09, b10, b11, b12, b13, b14, b14b,
-b15, b16, b17, b41
-(Their board panels are tagged `respec-regen-pending`, still accepted as placeholders
-until replacements land. ~40 credits at lite/count=4 x2.)
+The 2026-08-16 four-strip QA sweep found 22 defective banked panels. 21 were re-rolled and
+re-banked in the 2026-08-23 corrective pass; 1 was a false positive. See CHANGELOG 2026-08-23.
 
-## REGENERATE — never had a clean winner (8)
-b18, b18b (calipers action missing), b19, b22, b26, b48, b52, b53
+### Replaced (21)
+- **Phantom lab coat, act one (15):** b02, b03b, b04, b05, b07, b08, b09, b10, b12, b13, b14,
+  b14b, b15, b16, b17. b13/b14/b14b/b15 additionally strained/split the wrong garment (coat
+  sleeve rather than the tank's shoulder seam) — the tank-strain arc is now continuous into b18+.
+- **Garment strain leaking onto non-Margo cast (3):** b42 (Dev's polo), b47, b55 (Harlan).
+- **Headcount + cropped face (2):** b70 (was 5 figures vs 4), b74 (was 6 vs 5). Both re-rolled at
+  12 variants against a strict CAST COUNT clause; b74 also got the finale payoff treatment.
+- **Lettering (1):** b34b — SFX was baked onto Margo's torso, now floats off-body.
 
-## RE-ROLL after ref check (1)
-b45 — verify the ingrid/investors ref attaches and reads as HER before rolling.
+### False positive — NOT changed (1)
+- **b26-margo-watches.** Flagged as rendering a spoken line in a thought bubble. The script
+  specifies `"type": "thought"` for that line; the panel matches spec.
 
-## NOT YET GENERATED (32)
-b29-b38 range remainder + b57-b86 remainder — `python3 drive.py status` is truth.
+### Open / next
+- **Investor wardrobe has no canonical text.** Harlan, Dev and Ingrid are pinned only by a shared
+  reference image, so Harlan reads as a maroon polo in b74 and a dark suit in b47/b55. Give each
+  investor an explicit wardrobe line the way Kress has ("navy tracksuit, gold chain").
+- **b47's winner has Kress in a suit rather than his tracksuit.** Its actual defect (torn sleeves)
+  is fixed, but two full re-rolls never paired a silver-haired Kress with the navy tracksuit —
+  wardrobe and identity kept trading off. Worth one more pass once the investors are pinned.
 
 ## Standing generation rules (owner-set)
-- nano_banana_2_lite, 3:4 (b23 = 16:9), count=4 x2 rolls, single round.
-- Judge with kill rules 1-9 (9 = flat face).
-- WARD-01 retry injection is BACKWARDS for this run — the reference image is the
-  defect source. Use the custom coat clause only if the coat somehow reappears.
+- nano_banana_2_lite, 3:4 (b23 = 16:9), ONE count=4 call per roll, never sequential count=1.
+- Judge with kill rules 1-9 (9 = flat face), plus: no lab coat on Margo, no torn/strained garment
+  on any non-Margo character, headcount must equal the beat's `chars` list.
+- **Wardrobe grading is a Sonnet-tier read.** A Haiku triage pass called the coat-wearing b02
+  winner "correct grey tank top, bare arms". Haiku is fine for coarse triage, not for wardrobe.
+- **After editing any beat's `fullPrompt`, run `python3 makeplans.py <beat>`.** The driver reads
+  `plan/<beat>.json`, not the beatsheet — an un-regenerated plan silently rolls the stale prompt.

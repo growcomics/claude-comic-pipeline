@@ -12,6 +12,69 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-23 (margo-full: 21 defective panels replaced; whole-cast wardrobe pinned)
+
+Corrective pass closing the four-strip QA sweep of 2026-08-16. The comic stayed at 86/86 banked
+throughout; this replaced defective winners rather than generating new beats.
+
+### Fixed
+- **Phantom lab coat — 15 act-one panels re-rolled and re-banked.** b02, b03b, b04, b05, b07, b08,
+  b09, b10, b12, b13, b14, b14b, b15, b16, b17 were all PRE-fix generations banked before the
+  wardrobe-injection bug was found, so Margo wore a white lab coat the script never gave her.
+  Worse, b13/b14/b14b/b15 strained and split the *wrong garment* (a coat sleeve instead of the
+  tank's shoulder seam), breaking continuity into b18+ where the tank is correctly torn. All 15
+  re-rolled against the current coatless prompts; every replacement shows the grey tank with bare
+  arms, and the strain/split arc now runs on the tank end to end.
+- **Garment strain leaking onto background cast — b42, b47, b55 re-rolled.** Dev's polo was torn at
+  both sleeves and Harlan's sleeve was torn, in panels Margo is not even in. Commit `072f462` had
+  already scoped the strain clause to Margo; these three were simply generated before it landed.
+- **Headcount failures — b70 and b74 re-rolled at 12 variants.** b70-cast-shield had 5 figures
+  against a 4-person cast list and b74-finale had 6 against 5, both with a head cropped at the frame
+  edge. The strict CAST COUNT clause (exact N named characters, no extras, no partial or cropped
+  face at any edge) was in the beatsheet working tree but had never actually been rolled; it is now
+  committed and proven. b74 also got the full payoff treatment — elevated-intimate vantage, warm rim
+  light, depth-staged cast pyramid.
+- **b34b SFX baked onto Margo's torso.** The lettering clause told the model to integrate the SFX
+  "near the sound source", which put "creeeeak" on her skin. It now demands a floating 2D graphic in
+  empty background space, explicitly off the body, with no text on skin or garments.
+- **b12 carried a leftover coat-era phrase.** Its action text read "veins surfacing along the forearm
+  *where the cuff ends*" — a cuff implies a coat. Rewritten to an explicitly bare forearm.
+
+### Changed
+- **Whole-cast wardrobe is now pinned, not just Margo's (37 beats).** ROOT CAUSE found this pass:
+  the 2026-08-11 wardrobe fix made the WARDROBE block outrank the reference image, but scoped it to
+  MARGO only. Every other character's wardrobe was left unpinned and drifted freely — the moment the
+  coat language came out, Kress lost his navy tracksuit and turned up in a grey gym tank across
+  b04/b05/b07, and the investors' outfits wandered too. Beats now carry a CAST WARDROBE block naming
+  every character in their `chars` list, plus a blanket "every character other than MARGO wears
+  clothing that is completely intact" clause. The wardrobe fix solved Margo and silently left the
+  rest of the cast unpinned; this closes that.
+- **b07-stay-out gained a strict staging clause** — Kress large in the near foreground with his back
+  to camera so his exit towers, Margo smaller beyond him, exactly 2 people with no bystanders through
+  the doorway, and the balloon pinned to Kress.
+
+### Added
+- **`runners/bakeoff/runs/margo-full-20260811/makeplans.py`** — rebuilds `plan/<beat>.json` from the
+  beatsheet, which is the source of truth. Plans are what the generation driver actually reads, so
+  editing a `fullPrompt` without regenerating the plan silently rolls the stale prompt. That is
+  exactly how the b70/b74 cast-count fix nearly got missed. Also fixes the media role the plans
+  carried (`reference`), which `nano_banana_2_lite` rejects outright — the correct role is
+  `image_references`.
+
+### Notes
+- **b26-margo-watches was a false positive and was NOT changed.** The QA sweep flagged its line as
+  rendering in a thought bubble instead of a speech balloon, but the script specifies
+  `"type": "thought"` for that line. The panel matches spec; it stays banked as-is.
+- **Known shortfalls, banked honestly rather than stalling the run:** b47-harlan-cuts' winner has
+  Kress in a suit rather than his navy tracksuit — the panel's actual defect (torn sleeves on
+  non-Margo cast) is fixed and every tile in two full re-rolls had intact garments, but no tile
+  paired a correctly silver-haired Kress with the tracksuit. Harlan's outfit also reads
+  inconsistently across the comic (maroon polo in b74, dark suit in b47/b55); the investors have no
+  canonical wardrobe text, only a shared reference image, which is the next thing to pin.
+- Method: Higgsfield MCP, `nano_banana_2_lite`, 3:4, one `count=4` call per roll. 170 credits.
+  Judging ran Sonnet-only for wardrobe grading — a Haiku triage pass called the coat-wearing b02
+  winner "correct grey tank top, bare arms", so coarse triage is not adequate for wardrobe defects.
+
 ## 2026-08-12 — Scene-ladder plates: new `scene:` job kind closes the second half of the D8 gap
 
 ### Added
