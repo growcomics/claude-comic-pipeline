@@ -1,0 +1,22 @@
+{
+ "job": "scene:hq-gym:wide",
+ "pass": true,
+ "judge": "MAIN MODEL direct inspection of the 4-up contact sheet",
+ "flow_project": "014292cc-8d7a-493d-9767-b1f9548cb3e9",
+ "winner": "23a70ab6-69d9-467b-ac98-acb9a7629e3b",
+ "tags": [
+  "d15-empty-of-people-VERIFIED",
+  "wide-establishing-deep-perspective",
+  "floor-plane-legible",
+  "architecture-matches-shotlist-vaulted-graviton-rack-holo-pillars-crater-dents",
+  "style-photoreal-3d-cgi",
+  "no-text-contamination"
+ ],
+ "rejected": {
+  "g2-8318a5db": "a humanoid torso training dummy stands at frame right \u2014 reads as a mannequin, which D15 forbids on a location plate",
+  "g4-1597598e": "heavy bags at frame right clutter the plate; g1 is cleaner",
+  "g3-265fa834": "good but shallower depth than g1"
+ },
+ "note": "Chosen for depth and floor legibility because hq-gym:medium and :close chain from this plate.",
+ "blocking_defects": []
+}
