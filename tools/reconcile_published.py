@@ -42,13 +42,25 @@ def _get(url, timeout=25):
         return b""
 
 def wp_posts(site):
-    """Recent posts via the public WP REST API. Returns [(date, title)]."""
-    raw = _get(f"{site}/wp-json/wp/v2/posts?per_page=20&_fields=title,date")
+    """Recent activity via the public WP REST API.
+
+    CRITICAL (learned 2026-08-23): this lane often posts by UPDATING an existing post rather than
+    publishing a new one — e.g. unlocking previously Premium-exclusive pages for free users, or
+    dropping new pages into an existing comic's post. Those weeks produce NO new publish and NO new
+    DeviantArt upload. Checking only `date` therefore reports an active lane as silent.
+    So we look at BOTH `date` (published) and `modified` (updated), and treat either as activity.
+    """
+    raw = _get(f"{site}/wp-json/wp/v2/posts?per_page=40&_fields=title,date,modified")
+    out = []
     try:
-        return [(p["date"][:10], re.sub(r"&#\d+;", "'", p["title"]["rendered"]))
-                for p in json.loads(raw)]
+        for p in json.loads(raw):
+            title = re.sub(r"&#\d+;", "'", p["title"]["rendered"])
+            out.append((p["date"][:10], title))
+            if p.get("modified", "")[:10] != p["date"][:10]:
+                out.append((p["modified"][:10], f"{title}  [UPDATED — pages added or unlocked]"))
     except Exception:
-        return []
+        pass
+    return out
 
 def da_posts(gallery):
     """Recent DeviantArt deviations via the public RSS feed. Returns [(date, title)]."""
