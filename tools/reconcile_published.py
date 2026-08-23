@@ -28,11 +28,11 @@ UA = {"User-Agent": "3dmc-reconciler/1.0"}
 LOOKBACK_DAYS = 90   # ~3 months: far enough back to catch a lane that quietly ran all summer
 
 # property key on the board -> (WordPress site, DeviantArt gallery query)
+# NOTE: giantessgirl was removed 2026-08-23 - no longer the owner's property. Do not re-add.
 PROPERTIES = {
     "growgetter":   ("https://growgettercomics.com",   "growgetter"),
     "maxxmuscle":   ("https://maxxmusclecomics.com",   "maxxmuscle"),
     "bloombeauty":  ("https://bloombeautycomics.com",  "bloombeauty"),
-    "giantessgirl": ("https://giantessgirlcomics.com", "giantessgirl"),
 }
 
 def _get(url, timeout=25):
