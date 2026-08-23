@@ -1,0 +1,13 @@
+{
+ "job": "scene:doomer-lab-2:wide",
+ "kind": "scene",
+ "prompt_sha": "83b78b73b90ccd5d997e1ffa5e5aa84c12378076667599f8bbc84e71f9952bac",
+ "attach": [],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "bf3dec267411f4a1"
+}

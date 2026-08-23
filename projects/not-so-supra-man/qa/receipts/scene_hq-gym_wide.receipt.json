@@ -1,0 +1,13 @@
+{
+ "job": "scene:hq-gym:wide",
+ "kind": "scene",
+ "prompt_sha": "c5ba00033aaac3ef1176e09da8a315f1a6c56d29f910dc5dc7a9bb5adc7455f5",
+ "attach": [],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "bf3dec267411f4a1"
+}

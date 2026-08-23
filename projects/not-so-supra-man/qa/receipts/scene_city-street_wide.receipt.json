@@ -1,0 +1,13 @@
+{
+ "job": "scene:city-street:wide",
+ "kind": "scene",
+ "prompt_sha": "a66f26fc3005fe72cdaf270269fc8b7406a5cfad847fdd628cdc1f826aa9394c",
+ "attach": [],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": true,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "bf3dec267411f4a1"
+}

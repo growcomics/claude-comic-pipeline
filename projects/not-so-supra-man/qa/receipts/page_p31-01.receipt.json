@@ -1,0 +1,16 @@
+{
+ "job": "page:p31-01",
+ "kind": "page",
+ "prompt_sha": "270c269c6c09735178422b023b41ee0da6d7209af033a1476b1188aa520ee1fd",
+ "attach": [
+  "face:dee-dee",
+  "turnaround:dee-dee:turnaround_t8",
+  "scene:city-street:wide"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "tier_job": false
+ },
+ "gates_fingerprint": "26462716124236c4"
+}

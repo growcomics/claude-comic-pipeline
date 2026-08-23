@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-12 — Scene-ladder plates: new `scene:` job kind closes the second half of the D8 gap
+
+### Added
+
+- **`compose_scene` + a `scene:` job kind in `projects/not-so-supra-man/qa/compose.py`** (+40 lines, purely additive). `compose_page` refuses any page whose camera-distance rung is unbanked (D8), but `compose_sheet` could not express a location plate at all: its D1 demands >=2 refs (a bootstrap plate has none) and its D7 demands the word "silhouette" (meaningless for an empty room), and its self-heal branch would inject "Character turnaround model sheet" language into a room. So the gate could DEMAND a ladder rung and had no way to PRODUCE one — the mirror image of the `bank.py` routing gap fixed the day before. Plates now get checks that fit them: **D15** (the prompt must state the location is empty of people, or a stray figure bleeds into the background ref and then into every page that attaches it) and **D8-chain** (medium must chain from a banked wide, close from a banked medium, verified against the ledger). Both were proven to bite before blessing.
+- **10 scene-ladder specs** in `references/turnaround-specs.json` covering the 6 rungs the 29 pending pages actually demand, plus the wides they chain from. Every `references/locations/*` directory was empty and the 3 existing `wide` ledger entries are v1 growcomics ids with `disk: None` — unresolvable from the laptop account — so the plates are being built from scratch.
+
+### Changed
+
+- Re-blessed `qa/MANIFEST.sha256` (`26462716124236c4` -> `bf3dec267411f4a1`) — owner approved in-session after reviewing the diff.
+
+
 ## 2026-08-16 04:20 (margo-full: 86/86 banked; strain clause scoped to Margo)
 
 **Fixed**
