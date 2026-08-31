@@ -12,7 +12,11 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
-## 2026-08-23
+## 2026-08-30
+
+### Added
+
+- **8 new defect-registry classes from the owner-missed-defects investigation** (LET-05 `watermark_branding`, LET-06 `sfx_misuse`, LET-07 `lettering_style_drift`, BODY-10 `skin_torn_as_fabric`, BODY-11 `growth_plateau`, PROP-04 `prop_glitch`, CAM-08 `fourth_wall_gaze`, CAM-09 `payload_cropped`). Why: mining session transcripts + the 21-round bootcamp annotations (`~/Documents/bootcamp-casestudy/data/annotations.json`) surfaced defect types the owner repeatedly flags that had no registry row — so QA passes couldn't be held to them. Registry version 2 in `defect-registry.json` (65 classes) + narrative rows in `DEFECT-REGISTRY.md`. Full incident catalogue and vocabulary cross-reference: `research/owner-missed-defects-2026-08-30.md`. Studio's `inc/defect-taxonomy.php` is generated from the JSON — regenerate on next Studio deploy (`scripts/gen_defect_taxonomy.py`).
 
 ### Fixed
 

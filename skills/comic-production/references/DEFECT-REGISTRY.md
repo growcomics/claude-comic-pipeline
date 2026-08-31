@@ -272,6 +272,24 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: generate a staging ref first, then re-roll.
 - **Links**: D9 · staging JSON pattern (cheer-ascension/manila).
 
+### BODY-10 · Skin rendered as torn fabric · `skin_torn_as_fabric`
+- **Symptom**: tear/rip/shred texture applied to SKIN instead of the garment — "her SKIN is torn like clothing" (owner B20, "recurring problem"). Also surfaces in animation transitions (2026-07-28 incident).
+- **Root cause**: skin/fabric material confusion under damage vocabulary — same family as WARD-07's skin-fabric gradient.
+- **Severity/Frequency**: BLOCKER (owner insta-kill tier) / M.
+- **Detect**: J (rubric: any tear edge on a skin region) · H. V-feasible — GAP.
+- **Prevent**: damage vocabulary always scoped to fabric at seams ("torn fabric edges"; "skin is never torn"); coverage clamp co-fires.
+- **Repair**: re-roll; do NOT ship.
+- **Links**: owner walkthrough 2026-08-10 B20 · sibling WARD-07 · `research/owner-missed-defects-2026-08-30.md`.
+
+### BODY-11 · Growth plateau across sequence · `growth_plateau`
+- **Symptom**: a growth rung renders no visibly larger than its predecessor — the sequence stalls even though each single image is clean (8 "growth plateaued" annotations; distinct from BODY-02 regression: nothing shrinks, it just stops).
+- **Root cause**: additive deltas too timid at high tiers; model normalizes successive rungs toward the anchor.
+- **Severity/Frequency**: MAJOR (growth IS the product) / H in ladder work.
+- **Detect**: J with neighbour-panel context (compare rung N vs N-1 on the named axes) · H. No V (needs sequence).
+- **Prevent**: explicit per-rung delta language ("visibly larger than the previous panel: bust +X, biceps rivaling head size"); "very"-stacking per the growth ladder.
+- **Repair**: re-roll the rung chained off rung N-1 with the delta doubled.
+- **Links**: bootcamp annotations · `reference_growth_comic_prompt_ladder` memory · L11.
+
 ## HAIR
 
 ### HAIR-01 · Hair-state drift · `hair_drift`
@@ -350,6 +368,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-roll with literal anatomy vocabulary.
 - **Links**: qa-report p42 · no lesson yet (loop candidate).
 
+### PROP-04 · Prop/object integrity glitch · `prop_glitch`
+- **Symptom**: physically incoherent object — barbell reduced to an "empty/glitch bar" with the rest lying on the ground (owner B19); floating/duplicated parts; equipment fused with a body; held object not connecting through the grip.
+- **Root cause**: per-region rendering without object-level coherence; complex equipment under occlusion.
+- **Severity/Frequency**: BLOCKER (owner insta-kill tier) / M ("prop mangled" annotation + B19).
+- **Detect**: J (trace every load-bearing prop end to end) · H. V-feasible — GAP.
+- **Prevent**: equipment-integrity sentence when a prop is held/load-bearing ("the barbell renders complete, plates on both ends, bar continuous through her grip").
+- **Repair**: re-roll; i2i rarely fixes structure.
+- **Links**: owner walkthrough 2026-08-10 B19 · `research/owner-missed-defects-2026-08-30.md`.
+
 ## LET — lettering
 
 ### LET-01 · Missing/empty lettering · `missing_lettering`
@@ -387,6 +414,33 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: exact-quote directives ("reads exactly: …"); short lines (split beats per L13).
 - **Repair**: re-roll.
 - **Links**: L19/L4 · qa-checklist §Dialogue.
+
+### LET-05 · Watermark/branding baked in · `watermark_branding`
+- **Symptom**: a rendered wordmark, invented trademark, logo, render-engine credit ("RENDERED IN DAZ STUDIO"), or signature baked into the art — corners and edges are the hot spots.
+- **Root cause**: product-sheet / promo-art training prior; franchise names in prompts invite the franchise wordmark.
+- **Severity/Frequency**: BLOCKER (hard fail no matter the sculpt) / H — 12 of 193 loser annotations in the bootcamp case study ("watermark present").
+- **Detect**: J/H; V-feasible (corner/edge text sweep, no context needed) — GAP.
+- **Prevent**: explicit negation "no text, logos, watermarks, trademarks, or render credits" whenever a franchise/product name appears in the prompt.
+- **Repair**: i2i removal sometimes lands on clean backgrounds; else re-roll.
+- **Links**: bootcamp annotations rounds 2+ · `research/owner-missed-defects-2026-08-30.md`.
+
+### LET-06 · SFX crowding / missing · `sfx_misuse`
+- **Symptom**: sound-effect lettering covers a face or the growth payload, or dominates the frame; or an impact/growth beat that specifies SFX ships with none.
+- **Root cause**: SFX placement unspecified; model sizes display text generously.
+- **Severity/Frequency**: MAJOR / M (6 "SFX crowding" + 1 "SFX missing" annotations).
+- **Detect**: J · H. GAP in V.
+- **Prevent**: per-SFX placement fragment (side of frame, clear of faces/payload, small fraction of frame) in the L19 block.
+- **Repair**: re-roll (baked lettering doesn't patch).
+- **Links**: bootcamp annotations · L19.
+
+### LET-07 · Lettering style inconsistency · `lettering_style_drift`
+- **Symptom**: one bubble breaks the project's uniform balloon style — e.g. a single BLUE bubble in an all-white-bubble book (owner walkthrough B13).
+- **Root cause**: bubble style re-derived per panel; not pinned in the lettering spec.
+- **Severity/Frequency**: MAJOR / M.
+- **Detect**: J; V-feasible (bubble fill/outline comparison — owner called it "easy detector, color histogram") — GAP.
+- **Prevent**: bubble style sentence (fill, outline, font) in every L19 block from the project lettering spec.
+- **Repair**: re-roll the odd panel.
+- **Links**: owner walkthrough 2026-08-10 B13 · Studio `ck_letter_block`.
 
 ## FACE — expression
 
@@ -481,6 +535,24 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: import.php contract — source panel is the composition blueprint, prompt leans on it, not prose.
 - **Repair**: re-run i2i with the source panel as first ref + composition-lock opening clause.
 - **Links**: studio/import.php · memory `project_comic_to_3d_importer`.
+
+### CAM-08 · Fourth-wall gaze · `fourth_wall_gaze`
+- **Symptom**: a character makes eye contact with the camera on a beat that is not scripted POV/direct address (owner B7).
+- **Root cause**: forward-facing reference images bias output to face camera (ref-pose bleed).
+- **Severity/Frequency**: MAJOR / M–H (owner: "acceptable only rarely/deliberately").
+- **Detect**: J · H. V-feasible (gaze-at-camera on non-POV beats, plan-matched) — GAP.
+- **Prevent**: 3/4 + profile view packs in refs (L16); per-panel who-looks-at-whom line.
+- **Repair**: re-roll with gaze direction named and a view-matched ref attached.
+- **Links**: owner walkthrough 2026-08-10 B7 · L16 · FACE-03 (gaze line).
+
+### CAM-09 · Payload cropped out of frame · `payload_cropped`
+- **Symptom**: the beat's declared key body region (waist, bust, bicep) is cut off by the frame edge even though camera distance is otherwise right — 6 "waist out of frame" annotations; the growth delta becomes unverifiable.
+- **Root cause**: camera height/crop unspecified; distance vocabulary controls scale but not what the frame keeps.
+- **Severity/Frequency**: MAJOR / H in ladder/lineup work.
+- **Detect**: J (is the named payload region fully in frame?) · H. V-feasible when the plan names the region — GAP.
+- **Prevent**: framing clause naming the payload ("waist to shoulders fully in frame, nothing cropped"); wardrobe-as-feature framing rules.
+- **Repair**: re-roll with the framing clause; outpaint only as last resort.
+- **Links**: bootcamp annotations · CAM-01 (sibling: too far vs cropped).
 
 ## STYLE
 
