@@ -12,6 +12,12 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-08-31
+
+### Added
+
+- **3 more defect classes from deep transcript mining (round 2)** — LET-08 `bubble_mouth_mismatch` (speech balloon on a closed mouth), CONT-02 `reflection_mismatch` (mirror shows different wardrobe/state than the subject), GEN-05 `ref_state_mixup` (ref packs conflating pre/post-transformation states, extraneous characters, cropped face refs — the Evil-Lyn review). Why: the owner asked for a deeper pass on past sessions where they listed image problems bug-ticket style; a full-corpus sweep (232 transcripts, all human messages) surfaced ~15 defect-listing sessions (Chun-Li May, Gribble/Margo Aug 11-12, Evil-Lyn Aug 23, Müller video Aug 25-27). Registry v3, 68 classes. Incident tables in `research/owner-missed-defects-2026-08-30.md` §D, including a video-lane list kept OUT of the registry (belongs to the Seedance lessons).
+
 ## 2026-08-30
 
 ### Added

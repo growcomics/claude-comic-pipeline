@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": 2,
-  "updated": "2026-08-30",
+  "version": 3,
+  "updated": "2026-08-31",
   "source_of_truth": "This JSON is the MACHINE-readable canonical defect taxonomy. The narrative registry (DEFECT-REGISTRY.md, same directory) is the human-readable companion — edit BOTH when adding a class. Studio's inc/defect-taxonomy.php is GENERATED from this file by ../scripts/gen_defect_taxonomy.py — never hand-edit that include.",
   "fields": {
    "id": "stable canonical ID (never renumbered; retire via deprecated:true)",
@@ -556,6 +556,19 @@
    "pick": true
   },
   {
+   "id": "LET-08",
+   "slug": "bubble_mouth_mismatch",
+   "label": "Speech bubble on a closed mouth",
+   "category": "LET",
+   "severity": "major",
+   "frequency": "M",
+   "vision": "feasible",
+   "ck_type": null,
+   "scanner_line": "BUBBLE/MOUTH MISMATCH — a character has a speech balloon but their mouth is fully closed/neutral (or the shouting line comes from a calm closed face).",
+   "prevention": "The speaking character's mouth is open, mid-speech, matching the line's energy.",
+   "pick": true
+  },
+  {
    "id": "FACE-01",
    "slug": "dead_face",
    "label": "Dead face on an emotional beat",
@@ -764,6 +777,19 @@
    "pick": true
   },
   {
+   "id": "CONT-02",
+   "slug": "reflection_mismatch",
+   "label": "Mirror/reflection inconsistent with subject",
+   "category": "CONT",
+   "severity": "major",
+   "frequency": "L",
+   "vision": "feasible",
+   "ck_type": null,
+   "scanner_line": "REFLECTION MISMATCH — a mirror, window, or reflective surface shows a different wardrobe, body state, or pose than the character it reflects (e.g. lab coat on the woman, missing in her reflection).",
+   "prevention": "Any reflection shows the character EXACTLY as rendered — same garments, same body state, mirrored pose.",
+   "pick": true
+  },
+  {
    "id": "PAGE-01",
    "slug": "growth_ratio_low",
    "label": "Growth-page ratio under target",
@@ -866,6 +892,19 @@
    "scanner_line": null,
    "prevention": null,
    "pick": false
+  },
+  {
+   "id": "GEN-05",
+   "slug": "ref_state_mixup",
+   "label": "Reference pack conflates states / off-content",
+   "category": "GEN",
+   "severity": "major",
+   "frequency": "M",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "Reference packs are state-keyed: pre- and post-transformation assets never mixed in one attach set; no extraneous characters; face refs uncropped (a cropped face ref guarantees downstream identity drift).",
+   "pick": true
   },
   {
    "id": "MISC-00",

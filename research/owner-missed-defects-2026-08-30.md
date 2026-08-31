@@ -50,6 +50,43 @@ break→BODY-05, 2D drift→STYLE-01, no dialogue→LET-01, wardrobe reverted→
 background noise→ENV, occluded in lineup→ref-quality (GEN-03 adjacent), near
 miss→not a defect (judgment tag), pose unreadable→CAM-03 adjacent.
 
+## D. Deep-mine round 2 (2026-08-31) — owner defect LISTINGS across all transcripts
+
+Owner requested a deeper pass: bug-ticket-style defect listings, not "you missed" phrasing.
+Full-corpus sweep (232 files, all human-authored messages extracted and reviewed).
+Registry rows added by this round: **LET-08, CONT-02, GEN-05**.
+
+### Owner defect reports by session (static-comic lane)
+
+| Date | Session | Owner-named defects → registry IDs |
+|---|---|---|
+| 2026-05-11→23 | Chun-Li (33c33c3a) | "images 3,4,5 are cartoons when it's supposed to be a 3d comic" → STYLE-01 · repeated costume/tights/bare-legs discrepancies → WARD-01 · "chun li is not beautiful" → IDENT-04 · "hard to recognize with her hair like that" → IDENT-02/HAIR-01 · "missing text and SFX" → LET-01/LET-06 · "abs one direction, feet facing the other" → BODY-05 · facial drift doctrine complaint → IDENT-01 |
+| 2026-06-10 | 95c1df3e | "often it's really flat… angles could be more interesting" → CAM-02/03 · "transformation scenes could be longer, more zoom in" → PAGE-01/CAM-01 · "very plain face… audience would also not have any emotion" → FACE-01 · "be very careful… muscle proportions… possible to downsize and we have to start all over" → BODY-01 (ref inspection mandate) |
+| 2026-07-07 | cb1fd163 | "Chun-Li is just a little bit too far away" → CAM-01 · "blurring out the background… more visual weight to the foreground muscle" → CAM (DOF/separation, fold into CAM-01 guidance) · "nothing showed off her ass or great chest" → CAM-09/payload emphasis |
+| 2026-07-30 | f1bdf56d | "you don't use reference images… breasts way too small, muscles nowhere near round enough" → BODY-01 + GEN-03 root cause |
+| 2026-08-11→12 | Gribble/Margo (6dbca314) | "emotionless faces" → FACE-01 · "should have ~80 pages… only seeing like 20" → process · "I'm not seeing text" → LET-01 · "speech bubble and then a completely closed mouth" → **LET-08 (NEW)** · sleeves torn on 8-9 then not later → WARD-02 · "reflection in the mirror doesn't have the lab coat" → **CONT-02 (NEW)** · ripped sleeves on random people in 23-25 → WARD-02 · office↔weights scene confusion → ENV-01 · "measuring a different girl that's there for no reason" → CAST-02 |
+| 2026-08-11 | cockpit beat review (40f00da9) | (already in §A/B: WARD-01/02, CAM-08, LET-07, ENV-04, CAM-02, FACE-01, PROP-04, BODY-10, BODY-01) plus "your images just seem much more lifeless… dull… lighting isn't there" → ENV-03/FACE-01 · "a lot of repeat images" → PAGE-04 · "never saw a text, but the text should be baked in" → LET-01 |
+| 2026-08-16 | d1e91cf3 | "I don't like the 3D lettering… should just be plain comic text" → LET-07 (project lettering-style spec) |
+| 2026-08-20 | 2afb130a | live watermark (LET-05, §A) · "page-08 shows a visible render-fidelity dip (softer/more airbrushed skin)" → BODY-08/STYLE-01 evidence |
+| 2026-08-23 | Evil-Lyn ref review (98b0ac94) | pre- vs post-transformation refs conflated; hands/expressions/faces mixed between states; Skeletor in the pack though not in the story; "his full body is super muscular, and then it's not" → **GEN-05 (NEW)** · "the face is cropped, so modifications never look like the original character" → GEN-05 (ref quality → downstream IDENT-01) |
+| 2026-07-26→08-02 | platform (72440852, d255f96c) | recurring "text bubbles are blank" on ported comics → LET-01 · logo/wallpaper tiling crop reads as gibberish → platform UI, not panel art |
+
+### Video/animation lane (Müller e6cfe2f7 2026-08-25→27; 1ae1ae97 07-28; 37a39cfa 08-31)
+
+The single richest defect thread on file. Most map to existing registry IDs (video QA
+should reuse them): cast count never stable / duplicates → CAST-01/03 · face "a
+different person now" → IDENT-01 · veiny-bicep skin texture mismatched to character →
+IDENT/BODY-08 · multiple belly buttons (recurring, "looks gross") → BODY-05 · blurry
+text + stray "comic book text that shouldn't be there" → LET-02 · title card covering
+her face → LET-06-style placement · hair color drift → HAIR-01 · "way fatter than she
+was in the nurse's outfit" → BODY continuity · dialogue given to the wrong girl →
+LET-03. Video-ONLY classes (not registered; live in the Seedance lessons instead):
+unison posing ("never do anything in unison"), frozen mid-walk background extras,
+missing treadmill / physics errors, frozen floating objects, liquid rendering as
+solid, surreal "Salvador Dali house" backgrounds, voice/accent drift, Mandarin when
+no dialogue given, "BA YE RN" pronunciation, uneven one-arm-at-a-time growth,
+overshoot past the next growth stage.
+
 ## C. Method notes / negative results
 
 - Substring search over all transcripts: most correction-phrase hits were noise

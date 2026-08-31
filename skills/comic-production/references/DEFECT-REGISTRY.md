@@ -442,6 +442,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-roll the odd panel.
 - **Links**: owner walkthrough 2026-08-10 B13 · Studio `ck_letter_block`.
 
+### LET-08 · Speech bubble on a closed mouth · `bubble_mouth_mismatch`
+- **Symptom**: a character carries a speech balloon while their mouth is fully closed/neutral — "weird to see a speech bubble and then a completely closed mouth" (owner, Gribble/Margo review 2026-08-12).
+- **Root cause**: dialogue baked without a mouth-state directive; face rendered from a neutral ref.
+- **Severity/Frequency**: MAJOR / M.
+- **Detect**: J (speaker's mouth open and matching the line's energy?) · H. V-feasible — GAP.
+- **Prevent**: per-speaker "mouth open, mid-speech" line whenever the panel carries their dialogue (extend the L4/L19 bubble fragment).
+- **Repair**: i2i mouth fix sometimes lands; else re-roll.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D · L4/L19.
+
 ## FACE — expression
 
 ### FACE-01 · Dead face on an emotional beat · `dead_face`
@@ -594,6 +603,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: L9 recovery — accept the break and re-chain forward, or re-run from the break.
 - **Links**: L1/L1.5/L8/L9 · `verify_chain.py`.
 
+### CONT-02 · Reflection mismatch · `reflection_mismatch`
+- **Symptom**: a mirror/window/reflective surface shows a different wardrobe, body state, or pose than the character it reflects — "lab coat on when she's looking at the mirror, but the reflection doesn't have the lab coat" (owner, 2026-08-12).
+- **Root cause**: model renders subject and reflection as independent figures; mirror beats are effectively two-character panels.
+- **Severity/Frequency**: MAJOR (mirror beats are usually reveal/money beats) / L overall, near-certain on mirror panels.
+- **Detect**: J (compare reflection to subject garment-by-garment) · H. V-feasible — GAP.
+- **Prevent**: explicit clause on any mirror beat: "the reflection shows her EXACTLY as she appears — same <garments>, same build, mirrored pose."
+- **Repair**: i2i on the reflection region; else re-roll.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D.
+
 ## PAGE — page/chapter structure
 
 ### PAGE-01 · Growth ratio under target · `growth_ratio_low`
@@ -669,6 +687,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: maximal structured prompts (D12 → prompt-template-v4); refs for everything constant.
 - **Repair**: none needed if one variant lands; tighten the spec otherwise.
 - **Links**: D12 · `prompt-template-v4.json`.
+
+### GEN-05 · Reference pack conflates states / off-content · `ref_state_mixup`
+- **Symptom**: process defect in the ref pack itself — pre- and post-transformation assets mixed in one attach set; hands/expressions/faces from the wrong state; a character in the pack who isn't in the story (the Skeletor incident); cropped face refs. Surfaces downstream as IDENT-01/BODY-03/WARD-04.
+- **Root cause**: refs gathered by subject-lookalike, not keyed by story state; no owner-style inspection pass before use ("you must do an inspection to make sure the muscle proportions are still the same" — owner 2026-06-10).
+- **Severity/Frequency**: MAJOR upstream cause / M (Evil-Lyn ref review 2026-08-23).
+- **Detect**: S (ref-manifest review: every ref tagged with character + state, faces uncropped) · H.
+- **Prevent**: state-keyed reference manifests (extends GEN-03/L28); reject cropped face refs at gather time; no unassigned characters in a pack.
+- **Repair**: rebuild the pack state-keyed, then re-roll affected panels.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D · GEN-03 · L28.
 
 ### MISC-00 · Other / unclassified · `other`
 - Catch-all for owner flags that fit no class. Every MISC-00 flag with a note is a
