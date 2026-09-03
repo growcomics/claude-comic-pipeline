@@ -1558,4 +1558,37 @@ Nine registers (pose menu ‖ emotion menu each): `showcase` (= the posing-guide
 
 ---
 
+## L40 — Body-to-camera staging: sell the solo muscle with camera height, nearest limb, and crop, never with adjectives
+
+**Status: Active (reference + appendable deck). No gate change.** New lesson 2026-09-02, from the Deed Arts corpus study (`research/comic-corpus/synthesis/deed-arts-staging-study.md`, 2 books / 113 tagged panels). Where L34 governs where *multiple* bodies sit in space and L37 governs body orientation, L40 governs the relationship between ONE body and the lens on a muscle beat.
+
+**Symptom**: A solo flex, growth, or reveal panel is prompted with size adjectives and a generic "low angle", and comes back as a level mid-shot from the front: the figure centred, nothing breaking toward the lens, the muscle being sold no larger in frame than anything else. The panel is correct and dead. Stacking "very" does not fix it because the camera is the problem.
+
+**Root cause**: The pipeline's camera vocabulary names distance and angle but not the three things a hand artist decides first on a muscle panel: how high the camera sits relative to the body, which body part is nearest the lens, and where the frame cuts the figure. Left undeclared, the model defaults all three to neutral.
+
+**The rule — four questions on every solo muscle panel** (flex-display, growth-writhe, stance-power, action-strike, reveal):
+
+1. **Camera height**: chest height or lower. Never above the head on a muscle beat (the study found 80% of panels at chest/eye height looking level or up, 0 high angles on muscle beats). Below the hips for the payoff reveal; hip height for a female reveal so the thighs read as the widest mass.
+2. **Nearest the lens**: name the part that comes at the camera. Chest is the default (31% of panels); forearm, fist, open hand, back, or glute for the others. "None" is only legal on dialogue beats.
+3. **Muscle sold**: name ONE muscle group the composition is built to sell, then crop so it is the widest mass in the frame. Waist-up for a flex so both fists stay in; body-part-only for a growth ECU; full body only for the reveal.
+4. **Body line**: straight is fine for a front flex; otherwise pick a c-curve, s-curve, x-spread, or diagonal lean so the pose is not a lineup silhouette. For a female peak body, the crossed-knee s-curve (head small, shoulders and thighs wide, waist pinched between) is the femininity lock in composition form.
+
+**Page templates that come with it**: the **flex ladder** (same pose, same camera, same crop, redrawn bigger 3× down the page; biggest panel last and bled; in CGI, change grip, jaw, rim light, or fabric between rungs or it reads as a re-render) and the **body-part ECU column** (3–4 ECUs on different muscle groups tied by one motif with escalating SFX; inset a face in the first one). Both are the multi-panel-progressive device with the camera held still.
+
+**Injection shape**: append ONE card from `research/comic-corpus/synthesis/cards.json` after the continuation line and the refs (Prompt Deck append mode). Cards are camera + pose + crop + muscle-sold sentences; no appearance, no size words, no style. Optional shotlist field `body_staging: {camera_height, toward_camera, muscle_sold, crop}` per panel, using the addendum enums (`research/comic-corpus/angle-study-addendum.md`).
+
+**Audit shape (SOFT, no gate)**: a `growth_focus` panel with `camera_height` above-head/top-down, or with `toward_camera: none`, is a flag. A growth page whose largest panel is not the last panel is a flag.
+
+**Where this applies**: every solo muscle beat in every project; both templates on any 3-panel growth scene.
+
+**Where this does NOT apply**: dialogue beats (camera may be level and nothing needs to come at the lens); L34 multi-character staging still owns depth and scale between figures, though the overlap pair (near figure larger and lower, far figure higher and behind, facing different directions) is the study's answer to two figures growing at once.
+
+**Does not translate from the 2D source**: interlocked crossed forearms, force lines drawn on the muscle, mass breaking the panel border, stacked SFX carrying a faceless beat, uniform glow outlines. Substitutes in the study's table.
+
+**Reverses**: nothing. Extends `cinematic-framing.md` (new "Body-to-camera staging" section) and pairs with the growth prompt ladder (`reference_growth_comic_prompt_ladder`) and the femininity counter-lock.
+
+**Provenance**: Deed Arts study 2026-09-02, `research/comic-corpus/corpus/deed-arts-*/angle-study.json`, Sonnet-tagged, orchestrator-verified on Omega p3/p10/p20 and Poppy p14/p16.
+
+---
+
 ## How to add a lesson

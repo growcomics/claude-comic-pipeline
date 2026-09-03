@@ -20,13 +20,14 @@ Then run the **`comic-corpus` skill** to analyze (spawns a fresh subagent per co
 
 - `SKILL.md` — the skill (ingest → analyze → synthesize)
 - `analysis-rubric.md` — **canonical** scoring rubric (4 axes: growth density, camera dynamism, expression intensity, story); passed verbatim to analysis agents
+- `angle-study-addendum.md` — **canonical** addendum for the angle/pose/muscle-staging study (per-panel camera height, nearest-limb, muscle sold, crop, body line, `prompt_seed`); passed verbatim alongside the rubric; agents write `angle-study.json` next to `beats.json`
 - `schema/beats.schema.json` — machine schema for per-comic `beats.json` (rendered comics)
 - `schema/script-record.schema.json` — machine schema for `script-record.json` (B1 — user scripts)
-- `scripts/` — `ingest.py` (rendered comics), `ingest_script.py` (B1 — user scripts), `corpus_stats.py`; `helpers/` holds the user's accelerator scripts (B3)
+- `scripts/` — `ingest.py` (rendered comics), `ingest_script.py` (B1 — user scripts), `corpus_stats.py`, `angle_deck.py` (rolls every `angle-study.json` into `synthesis/angle-deck.md` + `synthesis/cards.json` for the Prompt Deck append mode); `helpers/` holds the user's accelerator scripts (B3)
 - `scripts-raw/` — drop the user's SCRIPTS here (gitignored; see its README)
 - `_queue.md` — dump comic links/paths here (+ the premium/authenticated B2 catalog section)
 - `corpus/<slug>/` — per entry. Rendered comic: `pages/` (**gitignored**), `meta.json`, `beats.json`, `notes.md`. Script (B1): `source.txt`/`source.<ext>` (**gitignored**), `meta.json` (`record_type: script`), `script-record.json`, `notes.md`
-- `synthesis/success-elements.md` — cross-corpus digest
+- `synthesis/success-elements.md` — cross-corpus digest; `synthesis/angle-deck.md` + `cards.json` — appendable camera/pose seeds; `synthesis/deed-arts-staging-study.md` — the first per-artist staging write-up
 
 ## Feedstock sources (what the corpus ingests)
 

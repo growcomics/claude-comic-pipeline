@@ -12,6 +12,18 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-09-02
+
+### Added
+
+- **Deed Arts angle & pose study — first non-Boogie artist in the comic-corpus, and the first MMG entry.** Two owner-commissioned books (*Poppy - The Sailor Gal* 1, FMG, 18pp; *The Omega Device*, MMG, 11 non-contiguous delivery pages) pulled from the artist's Drive share, ingested as `research/comic-corpus/corpus/deed-arts-*` (raw pages gitignored as always), tagged by Sonnet subagents against the rubric plus a new canonical addendum `angle-study-addendum.md` (camera height, body part nearest the lens, muscle sold, crop, body line, per-panel `prompt_seed`). Why: the owner wanted the hand artist's angles, poses, and muscle staging turned into something the 3D pipeline can use, without importing his 2D style. Outputs: `synthesis/deed-arts-staging-study.md` (the write-up: camera never above the head on a muscle beat, something at the lens on 77% of panels, crop makes the sold muscle the widest mass, flex-ladder and ECU-column page templates, 2D→CGI substitution table), `synthesis/angle-deck.md` + `cards.json` (76 appendable camera/pose seeds, built by the new `scripts/angle_deck.py`), Finding 7 in `success-elements.md`.
+- **L40 — Body-to-camera staging** in `lessons-learned.md`, with a matching "Body-to-camera staging" section and ten seed cards in `cinematic-framing.md`. Four questions on every solo muscle panel (camera height, nearest limb, muscle sold + crop, body line). Reference + deck only; no gate change.
+
+### Changed
+
+- `research/comic-corpus/schema/beats.schema.json`: `page` minimum 1 → 0 so artist-numbered covers (p0) validate without renumbering.
+- `corpus_stats.py` output now includes the two Deed Arts entries; the corpus growth-page ratio is 51% across 11 entries.
+
 ## 2026-08-31
 
 ### Added

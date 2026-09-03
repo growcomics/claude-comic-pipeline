@@ -83,6 +83,38 @@ See also: `composition-reading-list.md` for the annotated source reading (Wally 
 
 ---
 
+## Body-to-camera staging — L40
+
+L34 blocks several bodies against each other. L40 (`lessons-learned.md`) blocks ONE body against the lens on a muscle beat, from the Deed Arts corpus study (`research/comic-corpus/synthesis/deed-arts-staging-study.md`). Four questions, answered in the prompt every time a solo figure flexes, grows, strikes, or is revealed:
+
+| Question | Default | Never |
+|---|---|---|
+| Camera height relative to the body | chest height or lower, looking level or up; below the hips for the payoff reveal; hip height for a female reveal | above the head on a muscle beat |
+| Body part nearest the lens | chest; else forearm, fist, open hand, back, glute | nothing (dialogue beats only) |
+| Muscle the panel sells, and the crop that makes it the widest mass in frame | waist-up for a flex (both fists in), body-part-only for a growth ECU, full body only for the reveal | a full-body shot for an in-progress growth beat |
+| Body line | c-curve, s-curve, x-spread, or diagonal lean; straight only for a front flex | a lineup silhouette |
+
+Crosswalk to this guide's categories: the study's `worm`/`low` = `worms-eye`/`low-angle-front`/`low-angle-back`; its `camera_height` has no equivalent here and is the missing field; its `toward_camera` is the `foreshortening` composition modifier made mandatory.
+
+### Appendable seed cards (L40)
+
+Plain-speech sentences to APPEND after the continuation line and the refs. No appearance, no size words, no style. The full 76-card deck is `research/comic-corpus/synthesis/angle-deck.md` (`cards.json` for the Prompt Deck append mode).
+
+- **Rear power pose:** "Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low in front of the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel."
+- **Low reveal walk:** "Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, filling nearly the whole frame."
+- **Female reveal:** "Camera at hip height looking slightly up, she stands in a three-quarter power pose with one hand near the chin and the other on the hip, one knee crossed in front of the other so the thighs are the widest mass in the frame and the head sits small at the top."
+- **Double fist at the lens:** "Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them."
+- **Strike at the lens:** "Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera, hair swept back from the motion."
+- **Over-the-shoulder glance:** "Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder, the frame cropped from head to upper thigh so the back and glutes fill most of the panel."
+- **Growth ECU with a face:** "Extreme close crop on a flexing bicep straining the sleeve, a small triumphant face inset in the upper corner of the frame."
+- **Chest ECU:** "Camera pushes into an extreme close-up centred on the chest, filling the frame edge to edge with no background visible, the fabric straining across it."
+- **Flex ladder rung:** "Same camera height, same crop, same front double-bicep pose as the previous panel, the figure now filling more of the frame, the grin wider, rim light harder."
+- **Scale onlooker:** "Camera low behind the figure as one arm drives forward, a small startled onlooker in the corner of the frame for scale."
+
+Page templates: **flex ladder** (identical pose and camera 3× down the page, biggest panel last and bled) and **body-part ECU column** (3–4 ECUs on different muscle groups, one motif, escalating SFX, face inset in the first). Use them on any three-panel growth scene.
+
+---
+
 ## Prompt fragments per category
 
 Drop these into the camera/shot section of a panel prompt. Combine distance × angle × modifier as needed.

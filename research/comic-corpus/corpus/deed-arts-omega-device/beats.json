@@ -1,0 +1,738 @@
+{
+  "comic_id": "deed-arts-omega-device",
+  "rubric_version": "1.0",
+  "analyzed_pages": 11,
+  "narrative_arc": "ordinary man argues with his girlfriend and a bully outside a wall -> she hands him a mysterious device -> he presses the button and undergoes an explosive muscle transformation -> full-body hero reveal as 'Omega' -> his girlfriend also reveals her own transformed super body and they celebrate together -> meanwhile the empowered bully turns violent, gloats, and breaks an ally out of police custody -> his power escalates to cosmic, planet-straddling scale (to be continued)",
+  "scores": {
+    "growth_density_score": 4,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 3,
+    "story_structure_score": 2
+  },
+  "pages": [
+    {
+      "page": 0,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "depth-fg-bg"
+          ],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Poster cover: crossed-arm blue-suited hero glowing at the chest core, flanked by small-scale supporting cast (villain top-right, woman bottom-left, two thugs top-left) and a glowing red-button device at bottom-center."
+        }
+      ],
+      "page_notes": "1 panel (full poster splash); distance_spread=1; flat_panel_count=0. Cover A for 'The Omega Device' \u2014 establishes cast via scale-contrast around the already-transformed hero."
+    },
+    {
+      "page": 1,
+      "role": "cover",
+      "growth_state": "none",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "worm",
+          "staging": [
+            "scale-contrast",
+            "foreshortening",
+            "low-hero"
+          ],
+          "expression": "rage",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Cover for 'The Omega Device #2' (a distinct issue, not an alternate cover of issue 1). Rear worm's-eye view, arms crossed behind an enormous back/glute mass; villain's laughing face floats small at top, electrified device sparks upper-right, dwarfed onlookers at bottom near a wrecked police precinct."
+        }
+      ],
+      "page_notes": "1 panel; distance_spread=1. NOTE: numbered page 1 per orchestrator instruction (cover A=0, cover B=1); this is actually the cover of a second issue, not a variant of page 0's issue \u2014 see notes.md."
+    },
+    {
+      "page": 2,
+      "role": "setup",
+      "growth_state": "trigger",
+      "panel_count": 8,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "rage",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Solo angry MCU, plain level composition \u2014 opens the confrontation."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast"
+          ],
+          "expression": "rage",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Two-shot: ordinary man dwarfed by the crossed-armed redhead against a brick wall \u2014 early scale-contrast setup of the antagonist's size before any transformation."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "smug",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Woman looks on as the man holds a small remote/device \u2014 plain level two-shot."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Big guy crosses arms flanked by two laughing goons \u2014 a three-figure intimidation line-up."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "smug",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Tall vertical inset of the woman watching, smiling slightly."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Man extends the device forward with the villain's crew arrayed behind him in depth."
+        },
+        {
+          "n": 7,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "ECU insert: thumb presses the device's red button \u2014 the literal trigger action, small motion burst lines around it."
+        },
+        {
+          "n": 8,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": "neutral",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Borderless ghost-effect transition panel: the device passes from her hand to his, a visible spark arcing to his temple \u2014 the true catalyst image, staged with a bleed/echo treatment distinguishing it from the ruled panels above."
+        }
+      ],
+      "page_notes": "8 panels; distance_spread=3 (MCU/MS, ECU); flat_panel_count=3 (panels 1,3,5). Confrontation/setup page building to the device handoff \u2014 panel 8 is the growth trigger, so growth_state is set to 'trigger' for the page despite most of it being dialogue-only. Inked, no color."
+    },
+    {
+      "page": 3,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "foreshortening",
+            "diagonal"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Single bleed splash compressing an entire growth walk-cycle into one frame: five staggered figures at increasing scale recede into the distance, from an ordinary suited man at top to a shirt-bursting muscle giant flexing at the viewer in the foreground \u2014 a stacked-silhouette timeline device standing in for multi-panel-progressive growth."
+        }
+      ],
+      "page_notes": "1 splash panel; distance_spread=1 (deliberate \u2014 a single compressed-timeline device, not monotony). Inked, no color. Bridges the p2 trigger into the p4 ECU burst."
+    },
+    {
+      "page": 4,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "ZRAAK!",
+            "RIPPP!"
+          ],
+          "notes": "Face inset (ecstatic grin) overlaid on a tearing bicep ECU \u2014 the one panel on this page that pairs a face with the growth money-shot; claw-mark motion lines sell explosive outward force."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "shoulders",
+          "sfx": [
+            "BULGE!!",
+            "RIIIP!!",
+            "RIP!!"
+          ],
+          "notes": "Faceless ECU of a deltoid/trap mass ripping through dark cloth (cape or costume panel) \u2014 abstracted almost to pure shape and texture."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "SHKZROOM",
+            "RIIIIIP!!",
+            "RIIIP!",
+            "RIP!!!"
+          ],
+          "notes": "Wide ECU of overlapping bicep/forearm masses, claw-motion lines radiating \u2014 faceless, SFX-only money shot."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "THOOOOM",
+            "RIIIIIP!!",
+            "RIIIIIIIP!!",
+            "RIIIIPPP!!"
+          ],
+          "notes": "Bottom ECU of glute/hip mass bursting outward \u2014 biggest SFX lettering on the page ('THOOOOM'), closes the sequence."
+        }
+      ],
+      "page_notes": "4 panels, all ECU growth money-shots stacked vertically; distance_spread=1 (all ECU \u2014 deliberate zoom-lock for a dedicated tear-through-clothes page, not monotony); flat_panel_count=0. Only 1 of 4 panels carries a face (panel 1) \u2014 panels 2-4 go faceless during the loudest SFX beats, the same dead-face-during-peak-growth gap seen elsewhere in the corpus."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "aftermath",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "foreshortening"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full nude walk-toward-camera reveal, radial speed-lines, low hero angle, most-muscular lat-spread arm position \u2014 the payoff splash closing the transformation arc opened on p3. Explicit nudity present (flagged in angle-study.json only, per content-safety rule)."
+        }
+      ],
+      "page_notes": "1 splash panel; explicit. Closes the p3(mid)->p4(peak)->p5(aftermath/full-body-reveal) transformation run. Inked, no color."
+    },
+    {
+      "page": 10,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "BOOOM!"
+          ],
+          "notes": "Full-body 'reveal' splash with a huge pink BOOOM! SFX crashing across the top \u2014 the most emphatic single-panel payoff in the set. Explicit nudity present, flagged in angle-study.json only per content-safety rule."
+        }
+      ],
+      "page_notes": "1 splash panel; explicit. No build-up panels present in this partial delivery \u2014 reads as a one-and-done reveal (see weaknesses); may not reflect the full comic's actual pacing since this is a non-contiguous sample."
+    },
+    {
+      "page": 11,
+      "role": "dialogue",
+      "growth_state": "aftermath",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Solo flex portrait opening a pillow-talk beat; heart-pattern background signals a tone shift from action to intimacy. Explicit (nudity)."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "depth-fg-bg"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "abs",
+          "sfx": [
+            "SHRRACKK"
+          ],
+          "notes": "Costume-strain beat: the suit rips at the hip as he flexes, distinct from the earlier body-growth ECUs \u2014 cloth-destruction without a size change."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "low-hero"
+          ],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "abs",
+          "sfx": [
+            "TWITCH!"
+          ],
+          "notes": "Close torso composition with a small laughing face inset above. Explicit content \u2014 tagged structurally only per content-safety rule."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Profile/back composition of her lat-and-shoulder mass, hair swept forward \u2014 pairs with panel 1 as a matching flex bookend. Explicit (nudity)."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "foreshortening"
+          ],
+          "expression": "joy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "FLEX",
+            "FLEX"
+          ],
+          "notes": "Double-bicep flex with two small stacked face insets riding the arm \u2014 a compact flex-and-grin beat with good foreshortening on the near bicep. Explicit (nudity)."
+        },
+        {
+          "n": 6,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "SLURPP"
+          ],
+          "notes": "Close two-figure interaction; explicit content \u2014 tagged structurally only per content-safety rule, no further description."
+        }
+      ],
+      "page_notes": "6 panels; explicit page (panels 1,2,4,5 nudity; panels 3,6 sexual content). Content-safety rule applied throughout: composition/camera/pose tagged only. distance_spread=3 (MCU/MS/CU). Pillow-talk/intimacy beat bridging combat pages."
+    },
+    {
+      "page": 20,
+      "role": "dialogue",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "worm",
+          "staging": [
+            "low-hero",
+            "foreshortening"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Near-identical restaging of the p1 (cover B) pose \u2014 rear worm's-eye, arms crossed \u2014 now placed mid-story as a flying transition, confirming it as the artist's signature power pose."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "smug",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Plain eye-level thinking shot \u2014 the page's one static beat."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Reaction CU, wide startled eye, quick comedic beat."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "foreshortening",
+            "low-hero"
+          ],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "VOOOOOM"
+          ],
+          "notes": "Both fists punched toward the lens in strong foreshortening, angry determined face behind them, radiating speed-lines \u2014 the page's dynamic climax panel."
+        }
+      ],
+      "page_notes": "4 panels; distance_spread=3 (WS/MCU/CU); flat_panel_count=2 (panels 2,3 talking-head beats bracketed by two strong dynamic panels). Gloating page for the now-transformed villain; growth_state=aftermath since the character is already transformed, not actively growing. Dialogue is crude/R-rated but not itself sexual imagery, unlike p10/p11."
+    },
+    {
+      "page": 21,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "foreshortening",
+            "low-hero"
+          ],
+          "expression": "determination",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [
+            "WHOOOOM!"
+          ],
+          "notes": "Crouched landing pose outside the police station, big foreground SFX lettering eating a third of the panel."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "back",
+          "sfx": [],
+          "notes": "Rear three-quarter walk-in, cop in the background calling out \u2014 good depth staging between foreground back mass and background figure/building."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "dutch",
+          "staging": [
+            "dutch",
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "CRASH!!"
+          ],
+          "notes": "Cop sent flying into stacked boxes \u2014 big diagonal impact SFX carries the hit; the muscle figure himself is off-panel (punch implied)."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "shock",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Plain reaction two-shot, the page's flattest panel."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "foreshortening"
+          ],
+          "expression": null,
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "CRACK-AK!"
+          ],
+          "notes": "Third rear-view glute/back money-shot in this delivery (matches p1, p20 panel1) \u2014 this artist repeatedly frames action beats from directly behind the hips."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "fear",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "BEEP!",
+            "BEEP!",
+            "BEEP!"
+          ],
+          "notes": "Closing reaction panel, radio alarm SFX; sets up the pursuit/cliffhanger continuation."
+        }
+      ],
+      "page_notes": "6 panels; distance_spread=2 (mostly MS, one dutch-tilt); flat_panel_count=2 (panels 4,6). Third occurrence of the signature rear-view muscle-mass shot (panels 1 and 5) \u2014 establishes it as this artist's default 'power entrance' staging. Action/jailbreak page, no growth content."
+    },
+    {
+      "page": 41,
+      "role": "cliffhanger",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "worm",
+          "staging": [
+            "scale-contrast",
+            "foreshortening",
+            "low-hero"
+          ],
+          "expression": "rage",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Cosmic-scale money page: a colossal laughing figure straddles a tiny Earth below his feet, arms crossed in the now-signature pose, radiating starburst background \u2014 the ultimate size-comparison payoff and the delivery's biggest steal for CGI size-comparison staging. Explicit (nudity)."
+        }
+      ],
+      "page_notes": "1 splash panel; the corpus's most extreme scale-comparison device (literal planet-sized figure). Clean 'to be continued' cliffhanger note."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "cover-art",
+      "pages": [
+        0,
+        1
+      ],
+      "type": "cover",
+      "escalation_devices": []
+    },
+    {
+      "scene": "device-handoff-trigger",
+      "pages": [
+        2
+      ],
+      "type": "setup",
+      "escalation_devices": []
+    },
+    {
+      "scene": "hero-transformation",
+      "pages": [
+        3,
+        4,
+        5
+      ],
+      "type": "active-growth",
+      "escalation_devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "zoom-escalation",
+        "sfx-driven",
+        "full-body-reveal"
+      ]
+    },
+    {
+      "scene": "heroine-reveal",
+      "pages": [
+        10
+      ],
+      "type": "active-growth",
+      "escalation_devices": [
+        "sfx-driven",
+        "full-body-reveal"
+      ]
+    },
+    {
+      "scene": "pillow-talk-aftermath",
+      "pages": [
+        11
+      ],
+      "type": "aftermath",
+      "escalation_devices": []
+    },
+    {
+      "scene": "villain-gloat-flight",
+      "pages": [
+        20
+      ],
+      "type": "action",
+      "escalation_devices": []
+    },
+    {
+      "scene": "jailbreak-action",
+      "pages": [
+        21
+      ],
+      "type": "action",
+      "escalation_devices": []
+    },
+    {
+      "scene": "cosmic-climax",
+      "pages": [
+        41
+      ],
+      "type": "cliffhanger",
+      "escalation_devices": [
+        "size-comparison",
+        "full-body-reveal"
+      ]
+    }
+  ],
+  "strengths": [
+    "p3's single-panel stacked-silhouette growth timeline (5 staggered figures receding to a huge foreground flex) compresses a full transformation escalation into one bleed splash \u2014 a directly reusable 'ghost-trail' composite idea for CGI.",
+    "p1(cover B)/p20 panel1/p21 panels1&5 repeat a signature rear worm's-eye crossed-arm/glute shot four times across just 11 pages \u2014 proof this artist has a genuine go-to 'power entrance' staging worth stealing wholesale.",
+    "p4 stacks four back-to-back ECU money-shots (bicep, delt, forearm, glute) each with escalating SFX (ZRAAK->BULGE->SHKZROOM->THOOOOM) \u2014 a clean template for a rapid-fire growth-burst sequence.",
+    "p5, p10, and p41 all close their respective beats with a full-body 'reveal' splash at a low/worm's-eye angle \u2014 consistent payoff grammar the pipeline should copy for its own growth climaxes.",
+    "p41's literal planet-scale-comparison (figure straddling Earth) is the single boldest size-comparison device in the set \u2014 cheap to reproduce in CGI as a comped miniature-Earth prop."
+  ],
+  "weaknesses": [
+    "p4's three tightest growth ECUs (panels 2-4) go completely faceless \u2014 the loudest SFX beats ('BULGE!!','SHKZROOM','THOOOOM') have zero face on screen, the same dead-face-during-peak-growth gap flagged elsewhere in the corpus.",
+    "p10's female transformation has no build-up shown in this delivery \u2014 it's a single 'BOOOM!' reveal with no escalation panels, the one-and-done pattern the rubric scores down (may be an artifact of the partial/non-contiguous sample rather than the full comic).",
+    "p2 leans on three flat-level, same-distance dialogue panels (1,3,5) before the trigger \u2014 the setup drags camera-wise even though the confrontation itself has stakes.",
+    "p20 panels 2-3 are plain flat-level talking-head reaction shots bracketing a much stronger foreshortened fist panel \u2014 a mid-page dip in dynamism.",
+    "Explicit sexual content on p11 (panels 3,6) leaves large parts of that page low-yield for the staging study beyond the two non-sexual flex panels."
+  ]
+}

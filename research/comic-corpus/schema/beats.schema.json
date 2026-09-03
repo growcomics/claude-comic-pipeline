@@ -27,7 +27,7 @@
         "type": "object",
         "required": ["page", "role", "growth_state", "panels"],
         "properties": {
-          "page": {"type": "integer", "minimum": 1},
+          "page": {"type": "integer", "minimum": 0},
           "role": {"enum": ["cover", "setup", "buildup", "active-growth", "aftermath", "action", "dialogue", "denouement", "cliffhanger"]},
           "growth_state": {"enum": ["none", "trigger", "early", "mid", "peak", "aftermath"]},
           "panel_count": {"type": "integer", "minimum": 0},

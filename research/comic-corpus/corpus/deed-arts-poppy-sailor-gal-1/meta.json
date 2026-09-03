@@ -1,0 +1,24 @@
+{
+  "comic_id": "deed-arts-poppy-sailor-gal-1",
+  "title": "Poppy - The Sailor Gal 1 (+ issue 2 cover)",
+  "source": "Google Drive folder 'Poppy - The Sailor Gal' shared by the artist; owner-commissioned work",
+  "source_note": "17 pages of issue 1 (p1-p17) plus the issue-2 cover filed as page-18-issue2-cover. 'empty text bubbles' subfolder was empty at ingest.",
+  "creators": {
+    "art": "Deed Arts (signs as Blackdeedarts)",
+    "story": "Shadowninja",
+    "confirmed": true,
+    "credit_source": "issue-2 cover (page-18) credits 'Story by Shadowninja, Art by Blackdeedarts'"
+  },
+  "popularity": {
+    "available": false
+  },
+  "ingested_at": "2026-09-03T04:55:09Z",
+  "ingest_method": "manual (curl from Drive share links) — see ~/Downloads/deed-arts/manifest.tsv",
+  "analysis_status": "done",
+  "rubric_version": "1.0",
+  "addendum_version": "1.0",
+  "page_count": 18,
+  "study_purpose": "angle/pose/muscle-staging study (angle-study-addendum.md) plus full rubric pass (contiguous issue, growth ratio valid for p1-p17)",
+  "analyzed_at": "2026-09-03T05:18:44Z",
+  "genre": "FMG (female muscle growth)"
+}
