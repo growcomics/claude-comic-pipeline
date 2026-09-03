@@ -1,7 +1,7 @@
 {
  "_meta": {
-  "version": 3,
-  "updated": "2026-08-31",
+  "version": 4,
+  "updated": "2026-09-02",
   "source_of_truth": "This JSON is the MACHINE-readable canonical defect taxonomy. The narrative registry (DEFECT-REGISTRY.md, same directory) is the human-readable companion — edit BOTH when adding a class. Studio's inc/defect-taxonomy.php is GENERATED from this file by ../scripts/gen_defect_taxonomy.py — never hand-edit that include.",
   "fields": {
    "id": "stable canonical ID (never renumbered; retire via deprecated:true)",
@@ -345,6 +345,71 @@
    "ck_type": null,
    "scanner_line": null,
    "prevention": "Each growth rung must render visibly larger than its predecessor on at least one named axis; restate the delta explicitly per rung.",
+   "pick": true
+  },
+  {
+   "id": "BODY-12",
+   "slug": "size_overshoot",
+   "label": "Size overshoot past the anchor ceiling",
+   "category": "BODY",
+   "severity": "blocker",
+   "frequency": "M",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "SIZE OVERSHOOT — the figure is bigger than the house anchor + one step: limbs wider than the torso as featureless spheres, mass with no shape. | Prevent: Cap ladders at the Chun-Li anchor (size-taste-rules.md §1) plus one step; keep every muscle separated; stop the ladder at the last rung that passes the mobility test.",
+   "pick": true
+  },
+  {
+   "id": "BODY-13",
+   "slug": "mass_wrong_place",
+   "label": "Mass in the wrong place (keep-small parts grew / unnamed swelling)",
+   "category": "BODY",
+   "severity": "blocker",
+   "frequency": "M",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "MASS IN WRONG PLACE — traps, neck, hands, knees, feet or head have grown, or a swelling sits where no named muscle is; calves swallow the boots. | Prevent: Name the growing muscles (biceps lead, triceps, shoulders, lats, chest, glutes, thighs, calves, forearms) and lock the keep-small list in every rung: traps, neck, hands, knees, feet and head stay small.",
+   "pick": true
+  },
+  {
+   "id": "BODY-14",
+   "slug": "waist_wrong",
+   "label": "Waist wrong: corset-curved, or thick/wide",
+   "category": "BODY",
+   "severity": "major",
+   "frequency": "H",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "WAIST WRONG — either a corset/wasp curve pinched all the way in, or a thick wide waist that reads as fat; the house waist is narrow with STRAIGHT sides and visible square abs. | Prevent: Prompt 'narrow waist with straight sides, abs visible'; never 'cinched', 'corset', 'wasp waist'; reject thick-waist frames.",
+   "pick": true
+  },
+  {
+   "id": "BODY-15",
+   "slug": "bust_not_scaled",
+   "label": "Bust not scaled with the muscle (flat, merged, or sagging)",
+   "category": "BODY",
+   "severity": "major",
+   "frequency": "H",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "BUST NOT SCALED — chest unchanged while muscle grew, or big but smeared into the torso with no separation, or teardrop/sagging instead of round and lifted. | Prevent: Grow the bust with the muscle from rung 1; round, lifted, its own separated projecting mass; glutes scaled to match.",
+   "pick": true
+  },
+  {
+   "id": "BODY-16",
+   "slug": "immobile_mass",
+   "label": "Immobile mass — she could not move",
+   "category": "BODY",
+   "severity": "blocker",
+   "frequency": "M",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "IMMOBILE — arms welded to the sides as stacked spheres, hands dangling unused, thighs fused, no visible elbow or knee; the figure could not move. Owner: 'the whole point of power is that I want to be able to use the power'. | Prevent: Every top rung shows bent joints, hands doing something, separated thighs and a stance or step; describe her as agile/explosive, never swollen/stiff. HARD VETO.",
    "pick": true
   },
   {
@@ -722,6 +787,19 @@
    "ck_type": null,
    "scanner_line": "PAYLOAD CROPPED — the beat's declared key body region (waist, bust, bicep...) is cut off by the frame edge even though camera distance is otherwise correct.",
    "prevention": "Frame the declared key body region fully inside the panel; adjust camera height/crop so it is never cut by the frame edge.",
+   "pick": true
+  },
+  {
+   "id": "CAM-10",
+   "slug": "same_angle_as_previous",
+   "label": "Same camera angle as the previous ladder rung",
+   "category": "CAM",
+   "severity": "major",
+   "frequency": "VH",
+   "vision": "no",
+   "ck_type": null,
+   "scanner_line": null,
+   "prevention": "State a different camera in plain words on every rung (low looking up → high diagonal → knee-up → mirror → ECU) and an eyeline on the part that grew.",
    "pick": true
   },
   {

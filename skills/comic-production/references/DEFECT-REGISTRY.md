@@ -290,6 +290,51 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-roll the rung chained off rung N-1 with the delta doubled.
 - **Links**: bootcamp annotations · `reference_growth_comic_prompt_ladder` memory · L11.
 
+### BODY-12 · Size overshoot past the anchor ceiling · `size_overshoot`
+- **Symptom**: the figure is bigger than the house anchor (Chun-Li `a4d0b131`, ≈ tier 7) plus one step — limbs wider than the torso as featureless spheres, "a bunch of blobs of circles" (Alice ladder rungs 5-8, 2026-09-02).
+- **Root cause**: "go what you think is way too far" + stacked intensifiers with no ceiling, far full-body framing under flat light.
+- **Severity/Frequency**: BLOCKER / M in ladder work.
+- **Detect**: V (compare against the anchor) · J · H.
+- **Prevent**: `size-taste-rules.md` §1 — cap at anchor + 1, keep separation, close camera, light gradient; stop at the last rung that passes BODY-16.
+- **Repair**: re-chain from the last acceptable rung with the delta halved and the mobility clause added.
+- **Links**: `size-taste-rules.md` · `feedback_size_ceiling_calibration` memory.
+
+### BODY-13 · Mass in the wrong place · `mass_wrong_place`
+- **Symptom**: traps, neck, hands, knees, feet or head have grown; a swelling sits where no named muscle is ("not even really a bicep… this weird muscle"); calves swallow the boots.
+- **Root cause**: "her arm gets bigger" wording; models inflate the nearest volume rather than the named muscle.
+- **Severity/Frequency**: BLOCKER / M.
+- **Detect**: V · J · H.
+- **Prevent**: name the growing muscles (biceps lead) and lock the keep-small list every rung (owner's FMG Anatomy Guide p.3).
+- **Repair**: re-roll with per-muscle deltas and the keep-small counter-lock beside them.
+- **Links**: `size-taste-rules.md` §2 · `feedback_muscle_size_master_key` memory.
+
+### BODY-14 · Waist wrong: corset-curved or thick · `waist_wrong`
+- **Symptom**: a corset/wasp curve pinched all the way in (a `(`), or a thick wide waist that "looks like she's fat" even on a cut frame.
+- **Root cause**: "very, very narrow and cinched" stacking → corset; loose framing / no waist clause → thick.
+- **Severity/Frequency**: MAJOR / H.
+- **Detect**: V · J · H.
+- **Prevent**: "narrow waist with straight sides, abs visible" — never cinched/corset/wasp; not thinner than the anchor, never thicker.
+- **Repair**: edit-mode pass on the torso only.
+- **Links**: `size-taste-rules.md` §3 · guide p.4/p.11 · `feedback_waist_straight_sided` memory.
+
+### BODY-15 · Bust not scaled with the muscle · `bust_not_scaled`
+- **Symptom**: chest unchanged while the muscle grew (Alice rungs 1-2), or big but smeared into the torso with no separation (Alice rung 8), or teardrop/sagging.
+- **Root cause**: bust clause missing from early rungs; smooth one-piece bodice; model defaults to average bust.
+- **Severity/Frequency**: MAJOR / H.
+- **Detect**: V · J · H.
+- **Prevent**: bust grows with the muscle from rung 1; round, lifted, "ignores gravity", its own separated projecting mass; glutes scaled to balance.
+- **Repair**: stacked-"very" edit pass on the chest (owner method).
+- **Links**: `size-taste-rules.md` §2-3 · guide p.9/p.14 · `chest-oversize-compensate` memory.
+
+### BODY-16 · Immobile mass · `immobile_mass`
+- **Symptom**: arms welded to the sides as stacked spheres, hands dangling unused, thighs fused, no visible elbow or knee — "doesn't look like she can move anymore… looks like something that's sick" (Alice rung 7, 542bf501).
+- **Root cause**: mass added without articulation; static frontal pose inherited from the chained ref.
+- **Severity/Frequency**: BLOCKER (owner-confirmed HARD VETO) / M at top rungs.
+- **Detect**: V · J · H — ask "could she move?".
+- **Prevent**: bent joints, hands doing something, separated thighs, a stance or step; "agile, athletic, explosive", never "swollen, stiff".
+- **Repair**: re-roll the same size with an action pose; if it still fails, the ladder has passed the ceiling — step back one rung.
+- **Links**: `size-taste-rules.md` §1/§5 S14 · `feedback_peak_must_look_mobile` memory.
+
 ## HAIR
 
 ### HAIR-01 · Hair-state drift · `hair_drift`
@@ -562,6 +607,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: framing clause naming the payload ("waist to shoulders fully in frame, nothing cropped"); wardrobe-as-feature framing rules.
 - **Repair**: re-roll with the framing clause; outpaint only as last resort.
 - **Links**: bootcamp annotations · CAM-01 (sibling: too far vs cropped).
+
+### CAM-10 · Same camera angle as the previous rung · `same_angle_as_previous`
+- **Symptom**: consecutive ladder rungs share an identical camera — "the same camera angle all the time really, really, really sucks" (owner, 2026-09-02); often paired with a blank eyeline.
+- **Root cause**: the chained ref carries composition; no camera clause in the delta.
+- **Severity/Frequency**: MAJOR / VH in chained ladders.
+- **Detect**: J with neighbour-panel context · H. No V.
+- **Prevent**: a different camera in plain words on every rung plus an eyeline on the part that grew.
+- **Repair**: re-roll with the camera clause hoisted to the front of the prompt.
+- **Links**: `size-taste-rules.md` §4 · `feedback_camera_must_change_every_rung` memory · L40.
 
 ## STYLE
 
