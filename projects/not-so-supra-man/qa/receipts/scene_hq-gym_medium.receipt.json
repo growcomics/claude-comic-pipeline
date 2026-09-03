@@ -1,0 +1,15 @@
+{
+ "job": "scene:hq-gym:medium",
+ "kind": "scene",
+ "prompt_sha": "1d66c37eaff315366011d2610a43681844e8ef767901f6841ddbe87e6dfccfb8",
+ "attach": [
+  "PARENT PLATE hq-gym:wide (references/locations/hq-gym/wide.png)"
+ ],
+ "aspect": "16:9",
+ "flags": {
+  "bootstrap": false,
+  "gate": "",
+  "tier_job": false
+ },
+ "gates_fingerprint": "66361e08a950be25"
+}

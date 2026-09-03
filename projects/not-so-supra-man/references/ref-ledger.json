@@ -308,8 +308,22 @@
     },
     "hq-gym": {
       "wide": {
-        "flow_id": "312a66d9-93ee-4173-b4f4-35f1c907b042",
-        "project": "v1"
+        "flow_id": "23a70ab6-69d9-467b-ac98-acb9a7629e3b",
+        "disk": "references/locations/hq-gym/wide.png",
+        "chain": {
+          "receipt": "qa/receipts/scene_hq-gym_wide.receipt.json",
+          "audit": "qa/receipts/scene_hq-gym_wide.audit-pass",
+          "verdict": "qa/receipts/scene_hq-gym_wide.verdict.json",
+          "verdict_tags": [
+            "d15-empty-of-people-VERIFIED",
+            "wide-establishing-deep-perspective",
+            "floor-plane-legible",
+            "architecture-matches-shotlist-vaulted-graviton-rack-holo-pillars-crater-dents",
+            "style-photoreal-3d-cgi",
+            "no-text-contamination"
+          ],
+          "prompt_sha": "c5ba00033aaac3ef1176e09da8a315f1a6c56d29f910dc5dc7a9bb5adc7455f5"
+        }
       },
       "medium": {
         "flow_id": null

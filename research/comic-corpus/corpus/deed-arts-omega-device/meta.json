@@ -1,0 +1,37 @@
+{
+  "comic_id": "deed-arts-omega-device",
+  "title": "The Omega Device (partial delivery: pp. 0, 0b, 2-5, 10, 11, 20, 21, 41)",
+  "source": "Google Drive folder 'The Omega Device' (inked + Colored subfolders) shared by the artist; owner-commissioned work",
+  "source_note": "Artist delivery folder, not a published chapter. Page numbers are the artist's file numbers, NOT a contiguous read. Colored versions used where both inked and colored exist (p4, p20, p21); p0 and p0b are two cover variants.",
+  "creators": {
+    "art": "Deed Arts (signs as Blackdeedarts)",
+    "story": "unknown (owner to confirm)",
+    "confirmed": false,
+    "credit_source": "owner named the artist in chat 2026-09-02; Poppy issue-2 cover confirms the artist signs as 'Blackdeedarts'"
+  },
+  "popularity": {
+    "available": false
+  },
+  "ingested_at": "2026-09-03T04:55:09Z",
+  "ingest_method": "manual (curl from Drive share links) — see ~/Downloads/deed-arts/manifest.tsv",
+  "analysis_status": "done",
+  "analyzed_at": "2026-09-03T05:10:12Z",
+  "rubric_version": "1.0",
+  "addendum_version": "1.0",
+  "page_count": 11,
+  "page_map": {
+    "page-00": "p0 cover A",
+    "page-00b": "p0 cover B",
+    "page-02": "p2 (inked)",
+    "page-03": "p3 (inked)",
+    "page-04": "p4",
+    "page-05": "p5 (inked)",
+    "page-10": "p10",
+    "page-11": "p11",
+    "page-20": "p20",
+    "page-21": "p21",
+    "page-41": "p41"
+  },
+  "study_purpose": "angle/pose/muscle-staging study (angle-study-addendum.md) — NOT a growth-ratio sample; pages are non-contiguous",
+  "genre": "MMG (male muscle growth) with one FMG reveal page"
+}

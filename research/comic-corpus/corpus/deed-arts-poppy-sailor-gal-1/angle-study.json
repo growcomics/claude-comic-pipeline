@@ -1,0 +1,2057 @@
+{
+  "comic_id": "deed-arts-poppy-sailor-gal-1",
+  "addendum_version": "1.0",
+  "artist": "Deed Arts (art); story credited to Shadowninja per the issue-2 cover byline",
+  "pages": [
+    {
+      "page": 1,
+      "layout": "Full-width wide panel across the top, then a 2-column tier where a tall full-height left panel (helm shot) stands beside two stacked right-column panels (map inset over a flex close-up), closing with a second full-width wide panel at the bottom. No panel bleeds to the trim edge; the map/flex insets sit fully within their own black-ruled borders inside the right column.",
+      "reading_flow": "Eye enters top-left at the caption box, sweeps right across the aerial ocean/island establishing panel, drops to the tall left column for Poppy at the wheel, then moves right across the map inset into the flex/GRIT close-up stacked beneath it, and finally lands on the full-width bottom panel for the LAND HO arrival beat -- a standard Z-path broken only by the tall left panel spanning the height of the two right-side panels.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "n/a -- boat only, figure too distant to read any pose",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "scale-contrast"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "top-down",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "Bird's-eye establishing shot: a distant sailboat crosses open water toward a tropical island; caption box sets the 22-year-old-Poppy/first-adventure premise."
+        },
+        {
+          "n": 2,
+          "pose": "contrapposto stance at the wheel, weight on one leg, one hand gripping a wheel spoke, the other hand raised holding a torn map fragment up near eye level",
+          "pose_family": "stance-power",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "s-curve",
+          "crop": "full",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera at chest height, she stands in a confident contrapposto pose gripping a large ship's wheel with one hand while raising the other hand to hold a torn map fragment near her face, full body framed from head to feet with the wheel filling the foreground.",
+          "notes": "Full-body helm shot; wind-blown hair and an off-shoulder collar establish a confident-adventurer pose, with a large foreground ship's wheel adding depth."
+        },
+        {
+          "n": 3,
+          "pose": "n/a -- object-only panel, no figure present",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "Treasure-map inset with a red circle marking the target island; dialogue balloon establishes the legendary-strength macguffin."
+        },
+        {
+          "n": 4,
+          "pose": "three-quarter bust view, one arm raised in a bent-elbow bicep flex with the fist near the shoulder gripping torn parchment, head turned toward the flexed arm with jaw clenched",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "motion-line",
+            "frame-crop"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "diagonal-lean",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at chest height in a three-quarter view, she raises one arm in a tight bicep flex with her fist held near her shoulder, jaw clenched and one eye narrowed with effort, the frame cropping her at the chest so the flexed arm and shoulder dominate the panel.",
+          "notes": "Close flex on the gripping fist and raised forearm/bicep while tearing the map fragment; teeth-gritted expression sells effort, with strain lines tracing the arm."
+        },
+        {
+          "n": 5,
+          "pose": "small full-body figure bent forward at the bow tending a line, the wheel left unmanned beside her",
+          "pose_family": "reach-grab",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "c-curve",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Wide traveling shot: the sailboat cuts spray toward the island past a distant carved rock/statue marker, with birds in the sky; the 'LAND HO!' balloon signals the arrival beat."
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "layout": "Top-heavy stack: two full-width panels (a short wide establishing shot, then a taller wide scene panel) sit above a bottom row split into two roughly equal portrait panels. No bleed, no insets, black gutters throughout; the final panel is rendered in desaturated grayscale for the reveal while every other panel is full color.",
+      "reading_flow": "Standard top-to-bottom Z-path: eye lands on the wide island establishing shot, drops straight down into the wider torch/treasure panel, continues down-left into the chest-carrying struggle panel, then moves right into the grayscale silhouette reveal panel that closes the page. No diagonal or reading-order break.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "no figure present; empty beach, palms, and cave-mouth landscape composition",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "Full-width establishing shot of a jungle-covered island with a hidden cave mouth; speaker is off-panel (balloon points down from below frame), no character actually in shot."
+        },
+        {
+          "n": 2,
+          "pose": "three-quarter stance, one arm raised straight overhead holding a torch, other arm relaxed at side, wide open-mouthed grin",
+          "pose_family": "stance-power",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "diagonal-lean",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 2,
+          "prompt_seed": "Camera at eye level in a dim cave, she stands at a three-quarter angle raising one arm straight overhead to hold a torch while the other arm hangs relaxed at her side, the frame crops her at the waist with a wall of stacked chests filling the background.",
+          "notes": "Foreground figure holding a raised torch against a background cave chamber stacked with treasure chests; torch and raised arm form the panel's main diagonal."
+        },
+        {
+          "n": 3,
+          "pose": "hunched forward, both arms wrapped around a chest braced against the hip, knees bent, straining under the load",
+          "pose_family": "lift-carry",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "c-curve",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera at eye level in a dim cave, she is bent forward at the waist hauling a heavy chest braced against her hip with both arms, knees bent under the load, the frame holds her full body from head to feet with strain lines flung off her braced shoulders.",
+          "notes": "Full-body straining carry pose, eyes shut and mouth open in effort, sweat beads flung outward, played for comedic/ironic weakness ahead of a strength payoff later in the issue."
+        },
+        {
+          "n": 4,
+          "pose": "three-quarter power stance, one hand braced on hip, other fist held low at waist with a faint glow, wide confident stance",
+          "pose_family": "stance-power",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "silhouette",
+            "rim-light",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "full",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera at chest height looking slightly upward, she stands in a three-quarter power stance backlit by bright light with one hand braced on her hip and the other fisted low at her waist, the frame holds her full body from head to feet in silhouette while a second figure's head is visible cut off in the near foreground corner for scale contrast.",
+          "notes": "Grayscale reveal panel: a heavily-built silhouetted figure fills most of the frame, backlit by bright cave light, while a second figure's head/hair is visible cut off in the near foreground corner for scale. No face detail on either figure is renderable — this is a pure silhouette/rim-light reveal."
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "layout": "Two large top panels (captain thanking her crew vs. Poppy's shocked reaction) sit side by side with a small teal inset -- the dropped treasure chest, DROP/BLAG SFX -- wedged into the gutter between them, overlapping both frames' lower edges. Below that, the outer panel borders drop away entirely: the lower two-thirds of the page becomes one continuous blue lightning-cracked background occupied by Poppy's trembling clenched fists in extreme foreground. Two small bordered insets (the captain's mid-left 'discreet' panel, then a bottom-left captain-laughing panel) float on top of that borderless backdrop, stacked vertically, so the dialogue panels and the mood-backdrop panel are literally layered rather than placed side by side. No panel bleeds to the trimmed page edge; the two chest-drop and laugh insets are the only bordered shapes sitting directly against the unframed backdrop with no white gutter of their own.",
+      "reading_flow": "Reads left-to-right across the top row (captain speaks, then Poppy reacts), but the inset chest panel breaks strict L-to-R order by sitting in the gutter between the two top panels -- the eye detours into it (and its DROP/BLAG SFX) after Poppy's first 'I uh but but...' bubble and before her second 'HOW?!' bubble. From there the page steps down to the captain's explanation panel at mid-left, then across the gutter onto Poppy's trembling-fist backdrop (her defiant declaration bubble sits high in that field, roughly level with the captain panel beside it), and finally back down-left to the captain's mocking-laugh inset at the very bottom, stacked directly under the 'discreet' panel and floating on the same fist backdrop. The layered inset-on-backdrop device (panels 3 and 6 both sit inside/on top of a larger unframed field rather than beside it) is the convention break worth flagging.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing three-quarter turn toward camera, hat tipped back, chin level, speaking",
+          "pose_family": "stance-power",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera sits at chest height looking slightly up at her as she stands turned toward the lens, cropped tight from the head down through the chest so the torso fills the frame, with two smaller figures held soft and distant behind her to sell her scale.",
+          "notes": "Captain fills the frame chest-up while two crew stand small and soft-focused behind her, selling her size before any growth is shown."
+        },
+        {
+          "n": 2,
+          "pose": "head turned toward camera, mouth open, one shoulder visible",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "face",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Static reaction close-up; one eye rendered blank white for shock. A small yellow spark/crown-shaped symbol floats above her head -- unclear whether it's a generic shock icon or a story-relevant crown, flagged for review."
+        },
+        {
+          "n": 3,
+          "pose": "n/a -- object only, no figure",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "No figure; nested inset shows the treasure chest falling, with vertical motion-streak lines and jagged impact bursts around it, wedged in the gutter between the two flanking character panels."
+        },
+        {
+          "n": 4,
+          "pose": "standing frontal, one fist on hip, chest out, chin tucked down with a smirk",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "cloth-strain"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds at chest height, slightly low, on a frontal waist-up crop as she plants one fist on her hip belt and squares her chest to the lens, both arms filling the sides of the frame to sell arm and chest size.",
+          "notes": "Waist-up power stance, one hand hooked on her hip belt, both bulging arms fully in frame while she needles Poppy about being tailed for months."
+        },
+        {
+          "n": 5,
+          "pose": "shown from behind, forearms bent with fists clenched close to the body, one forearm foregrounded near the lens",
+          "pose_family": "stance-power",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "foreshortening",
+            "motion-line"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "c-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds at chest height behind and to the side of her as she stands with her back and shoulder to the lens, elbow bent and fist thrust close to camera in sharp foreshortening while the other fist stays tucked near her ribs, the crop cutting her at the thigh so the forearm dominates the foreground.",
+          "notes": "Seen from behind/side, forearm and fist thrust into extreme foreground with a double 'TREMBLE' SFX (two colors) flanking the bent, crossed arms; her face is not clearly readable from this angle, so the emotion word is inferred from body language only."
+        },
+        {
+          "n": 6,
+          "pose": "standing frontal, head tipped back laughing, torso squared to camera",
+          "pose_family": "stance-power",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "frame-crop",
+            "cloth-strain"
+          ],
+          "toward_camera": "chest",
+          "body_line": "diagonal-lean",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera holds at chest height, slightly low, on a frontal waist-up crop as she tips her head back in a full laugh, chest squared and filling the frame.",
+          "notes": "Same waist-up power framing as the earlier captain panel; head tips back mid-laugh, mocking Poppy's declaration. This inset floats on the unframed fist backdrop rather than sitting in its own gutter."
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "layout": "Two short full-width wide panels stacked at top (taunt flex, then the backhand swing), followed by a tall vertical panel on the lower-left paired with two stacked small inset panels on the lower-right; all panels bordered, no bleed, white gutters throughout.",
+      "reading_flow": "Non-standard: the SHWOOOOSH trajectory line in panel 2 visually launches the eye up and off to the right, so the reader follows the thrown crewmate into the two right-hand insets (landing, then falling through the floor) before doubling back left to the larger treasure-loading panel — a right-then-back-left jump rather than a strict left-to-right row order.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "front double-biceps flex, both fists raised beside the head, chin down, chest out",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "scale-contrast",
+            "cloth-strain",
+            "motion-line"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level facing her directly, she strikes a front double-biceps pose with both fists raised beside her head and chest thrust forward, the frame crops her at the waist so the flexed arms and chest fill the panel and sell the arms, with a smaller figure at the frame edge for scale contrast.",
+          "notes": "Front double-biceps flex taunting a smaller crewmate; radiating burst background; small reacting figure at the right edge for scale contrast."
+        },
+        {
+          "n": 2,
+          "pose": "extended backhand swing, torso twisted, arm thrust across the body into the strike",
+          "pose_family": "action-strike",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "motion-line",
+            "foreshortening",
+            "frame-crop"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "twist-contrapposto",
+          "crop": "head-to-thigh",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds a wide eye-level shot as she twists through a powerful backhand swing, forearm thrust toward the target while diagonal motion lines streak the background, the frame cutting her at mid-thigh so the swinging arm sells raw arm power.",
+          "notes": "A backhand strike sends the smaller crewmate flying off-panel; strong diagonal motion lines trace the trajectory."
+        },
+        {
+          "n": 3,
+          "pose": "sprawled backward landing, legs kicked up, arms raised in surprise",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "motion-line"
+          ],
+          "toward_camera": "foot",
+          "body_line": "c-curve",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "The smaller crewmate crash-lands on a stacked log pile after being knocked away."
+        },
+        {
+          "n": 4,
+          "pose": "falling through broken planks, arms flailing overhead, legs trailing, screaming",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap",
+            "frame-crop"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "arch-back",
+          "crop": "full",
+          "camera_height": "top-down",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "inset",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "The wood floor breaks beneath her; she plunges into darkness below, screaming."
+        },
+        {
+          "n": 5,
+          "pose": "one-arm bicep flex with fist near the shoulder, other arm cradling a treasure chest at the hip, confident stance",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "cloth-strain",
+            "overlap"
+          ],
+          "toward_camera": "shoulder",
+          "body_line": "s-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera set low and looking slightly up in a tall vertical frame, she flexes one arm with her fist near her shoulder while cradling a heavy chest against her hip with the other arm, the crop running from head to mid-thigh to sell the flexed arm against a stable power stance.",
+          "notes": "Holds a treasure chest at her hip while flexing her free arm and giving orders to the crew."
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "layout": "Two roughly equal panels across the top row, a three-panel middle row (a small inset plus two portrait panels), and one large full-width panel bleeding across the bottom of the page — panel size and background energy both escalate toward the bottom.",
+      "reading_flow": "Conventional left-to-right, top-to-bottom: the shattering-bottle detail leads into the treasure-chest reveal, then down through the small SLAM/WOOOSH insert into her eyes-closed drinking close-up, across to the reaction/stretch panel, and finally down into the full-width flexing splash at the page bottom for the payoff.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "n/a, effects-only panel with no figure",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "motion-line"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "A glass bottle shatters against a wall fixture as she crashes into a stash of stored bottles below deck; no figure visible, impact detail only."
+        },
+        {
+          "n": 2,
+          "pose": "standing upright, head tilted back gazing at the open chest, mouth open in awe",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap",
+            "scale-contrast"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 2,
+          "prompt_seed": "Camera at eye level with her in the foreground, she stands and tilts her head back to gaze up at a large glowing stash filling the background, staging depth between her and the towering pile to sell scale before any muscle appears.",
+          "notes": "She stands over an open chest full of glowing capsules, steam rising, discovering the stash before drinking from it."
+        },
+        {
+          "n": 3,
+          "pose": "n/a, effects-only panel with no figure",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "motion-line"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "The chest lid slams and a single glowing capsule flies out toward her; object/effect detail only, no figure."
+        },
+        {
+          "n": 4,
+          "pose": "head tilted back, eyes closed, throat exposed, swallowing",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "other"
+          ],
+          "toward_camera": "face",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Close on her face as she swallows the capsule, eyes closed, head tilted back."
+        },
+        {
+          "n": 5,
+          "pose": "torso twisted toward camera, one arm raised across the body, shirt fabric straining against a swelling chest",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "twist-contrapposto",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level in a tall frame, she twists her torso with one arm raised across her body as her shirt strains tight against a swelling chest, radiating light behind her, the crop holding waist-up so the straining fabric sells the growth.",
+          "notes": "First visible reaction to the capsule: her shirt begins straining as her chest and arms swell, radiating light behind her."
+        },
+        {
+          "n": 6,
+          "pose": "front double-biceps flex, both fists raised beside the head, elbows out, electric energy crackling off the muscles",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "cloth-strain",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level, she throws both fists up beside her head into a front double-biceps flex with electric energy crackling off her arms and a radiating burst filling the background, the frame holding her waist-up so the straining flexed arms fill the panel and sell the arms growing.",
+          "notes": "Full-width payoff panel: she flexes both arms in shock as electric energy crackles off visibly enlarged muscle, unsure what is happening to her."
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "layout": "A clean 2x2 grid of near-equal portrait panels, all bordered with no bleed; the top-right panel breaks the pattern with a downward POV insert into a treasure chest.",
+      "reading_flow": "Standard left-to-right, top-to-bottom through the four quadrant panels: admiring the new muscle, discovering the spinach-filled chest that caused it, chugging another can, then trembling with crackling energy as the growth continues.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "one-arm bicep flex, other hand gripping and squeezing the flexed bicep, head turned toward the arm",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform"
+          ],
+          "toward_camera": "elbow",
+          "body_line": "c-curve",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level, she raises one arm into a bicep flex and grips the flexed muscle with her other hand while turning to admire it, the frame cropped waist-up so the flexed arm and gripping hand sell the arm growth.",
+          "notes": "She admires and squeezes her own newly grown bicep, delighted and confused about the cause."
+        },
+        {
+          "n": 2,
+          "pose": "POV looking down over her own collar at a chest of canned goods, one can pried open by a small crab",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap",
+            "frame-crop"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "top-down",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 2,
+          "prompt_seed": "Camera takes her own point of view looking straight down past her collar at an object cradled below, staging her own body at the bottom edge of frame with the object filling the background for a downward POV reveal.",
+          "notes": "Downward POV into the open treasure chest revealing stacked spinach cans, a small creature prying one open, her own collar visible at the bottom edge of frame."
+        },
+        {
+          "n": 3,
+          "pose": "one arm flexed and raised overhead pouring a can into her mouth, head tilted back, chest bouncing with the motion",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "motion-line"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "diagonal-lean",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level, she raises one flexed arm overhead to pour a can into her mouth with her head tilted back, the frame cropped waist-up so the flexed bicep and heaving chest sell continued growth.",
+          "notes": "She chugs a can of spinach with one arm flexed and raised overhead, resolving to use the new strength against the pirates."
+        },
+        {
+          "n": 4,
+          "pose": "standing with arms held slightly out from a trembling torso, energy crackling along the silhouette",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "rim-light",
+            "cloth-strain"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera at eye level, she stands with her arms held slightly out from her trembling body as crackling energy outlines her silhouette, the frame cropped waist-up so the whole trembling torso sells full-body growth.",
+          "notes": "Payoff panel: her whole body trembles as crackling energy outlines her silhouette, visibly larger and overwhelmed by the sensation."
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "layout": "2x2 grid of near-equal quadrants separated by white gutters; top-left and bottom-left are tall vertical panels, top-right and bottom-right are squarer panels; no bleed, no insets; a purple radial-burst background unifies all four panels.",
+      "reading_flow": "Z-pattern top-left to top-right to bottom-left to bottom-right; each panel is a growth beat that tracks down the body -- face/chest first, then a chest close-up, then a bicep flex, then a glute close-up -- so the eye's path down-and-across the page mirrors the body's growth sequence.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "frontal upper-body shot, shoulders squared to camera, chin dipped down, chest thrust into the foreground",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "foreshortening",
+            "contact-deform",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds steady at chest height in a frontal medium close-up, she tips her chin down with her shoulders squared to the lens, the shirt across her chest visibly straining and popping as her torso pushes forward toward the camera, selling growth in the chest.",
+          "notes": "Chest-forward growth burst; shirt buttons popping as bust and torso swell, tearing at the seams; ecstatic overwhelmed expression."
+        },
+        {
+          "n": 2,
+          "pose": "static frontal chest close-up, no visible limbs, torn fabric straps cutting across the top edge",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "contact-deform"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera pushes into an extreme close-up centered on the chest, filling the frame edge to edge with no background visible, straps cutting into flesh as the torn fabric peels back, selling maximal chest growth through sheer scale.",
+          "notes": "Extreme close-up crop on the chest filling the whole panel as the collar/strap fabric rips further; symmetric, frontal, zero background visible."
+        },
+        {
+          "n": 3,
+          "pose": "one arm bent into a bicep flex thrust toward the camera, elbow low, fist near head height, head turned to gaze at the flexed arm",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "foreshortening",
+            "overlap",
+            "scale-contrast"
+          ],
+          "toward_camera": "elbow",
+          "body_line": "c-curve",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds at chest height as she bends one arm into a full bicep flex thrust toward the lens, the forearm and fist breaking the top of the frame while she turns her head to watch her own arm swell, selling growth in the bicep.",
+          "notes": "Arm raised into a bicep flex that dominates the frame, forearm/fist breaking the top edge, head turned to watch the muscle swell."
+        },
+        {
+          "n": 4,
+          "pose": "rear three-quarter close-up, hips pushed back toward the camera, torn skirt fabric flaring outward at the sides",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "contact-deform",
+            "tangent-break"
+          ],
+          "toward_camera": "glute",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera sits low behind and beneath her, angled up at the rear so the glutes loom over the lens, hips pressed back toward camera while torn fabric flares outward at the sides, selling growth in the glutes through a low worm's-eye close-up.",
+          "notes": "Extreme low-angle close-up on the rear as the skirt tears away in shreds; camera positioned beneath and behind the glutes looking up."
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "layout": "Four panels in an uneven grid: a narrow tall panel top-left (rear close-up), a squarer panel top-right (first full-body flex reveal), then a squarer panel bottom-left and a taller panel bottom-right that both repeat the same front double-bicep pose at escalating scale; the bottom-right panel bleeds to the page's bottom edge as she reaches maximum size.",
+      "reading_flow": "Top-left to top-right to bottom-left to bottom-right; the three flex panels form a call-and-response escalation (dialogue 'WELL BLOW ME DOWN' / 'OR RATHER BLOW ME UP' / 'AND UP AND UP AND UP') where panel size and muscle size grow together, driving the eye toward the bleeding final panel.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "rear-low close-up, glutes and thighs stacked centered in frame, legs planted in a wide stance",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "contact-deform"
+          ],
+          "toward_camera": "glute",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera sits on the ground looking straight up between the legs at the glutes and thighs stacked overhead, the last shredded fabric framing the sides, stance planted wide, selling glute and thigh growth through an extreme worm's-eye close-up.",
+          "notes": "Worm's-eye close-up on the glutes and thighs from below as the last of the torn skirt falls away; claw-like fabric shreds frame the sides."
+        },
+        {
+          "n": 2,
+          "pose": "front double-bicep pose, both arms raised with fists near the head, legs planted in a wide stance, chest out",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "silhouette",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds at eye level for a full-body front double-bicep flex, both arms raised with fists near the head and legs planted wide in an X stance, chest pushed toward the lens, selling arm and overall muscle growth through a symmetric power pose.",
+          "notes": "Full-body nude reveal in a front double-bicep flex, both arms up, confident smug grin, legs planted wide."
+        },
+        {
+          "n": 3,
+          "pose": "front double-bicep pose, both arms raised with fists near the head, legs planted wide, chest and thighs bulging further than before",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "silhouette",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds at eye level for a repeated full-body double-bicep flex, arms raised with fists by the head and legs planted wide, torso swelling larger than the prior beat, selling escalating arm and torso growth through the same symmetric power pose.",
+          "notes": "Same double-bicep flex repeated at larger scale, open-mouth joyful grin, torso and thighs visibly bigger than the previous panel."
+        },
+        {
+          "n": 4,
+          "pose": "front double-bicep-style flex with hands raised near the temples, chest and arms overflowing the frame, legs planted wide",
+          "pose_family": "flex-display",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "silhouette"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "feet-cut",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds low at chest height as her flexed arms and torso grow large enough to crowd past the panel's own edges, hands raised near her temples, legs planted wide, selling maximal full-body growth through frame-filling scale.",
+          "notes": "Largest flex yet; muscles now crowd past the panel's own borders as she declares she's still growing, hands cupped near her temples."
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "layout": "Irregular grid: a tall dominant panel top-left runs the height of a two-panel stack on the right (a silhouette flex above a bicep/reaction shot); a wide diagonal-edged panel spans the lower two-thirds of the page for the punch; a small inset panel sits in the bottom-right corner overlapping that action panel.",
+      "reading_flow": "Eye starts on the tall establishing portrait top-left, moves to the stacked right column (her flex, then the pirates' shocked reaction), drops into the large diagonal action panel for the punch, and finishes on the small inset gag panel bottom-right -- a left-to-right, top-to-bottom path broken only by the inset sitting on top of the action panel.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "shoulders squared to camera, hands raised and pressed together at chest height in a knuckle-cracking gesture, chin tucked, confident smirk",
+          "pose_family": "stance-power",
+          "muscle_sold": "shoulders",
+          "sell_mechanism": [
+            "scale-contrast",
+            "frame-crop"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "diagonal-lean",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds low at chest height looking slightly up, shoulders squared to the lens with hands raised and pressed together at chest height, a confident smirk on her face, selling shoulder and upper-body scale through a frame-filling low angle.",
+          "notes": "Confident close portrait as she presses her fingers together, oversized shoulders and chest filling the frame behind a knuckle-crack sfx."
+        },
+        {
+          "n": 2,
+          "pose": "back-turned bicep flex, one arm bent and raised with fist near the head, body silhouetted against the sky",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "silhouette",
+            "scale-contrast",
+            "overlap"
+          ],
+          "toward_camera": "back",
+          "body_line": "c-curve",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera stays low behind her in silhouette as one arm bends into a bicep flex with the fist raised near the head, tiny onlookers visible far below in the background, selling arm growth purely through scale contrast against the crowd.",
+          "notes": "Silhouetted back view, one arm raised in a bicep flex, tiny pirate onlookers below establish her new scale."
+        },
+        {
+          "n": 3,
+          "pose": "arm raised overhead in the foreground with hand reaching up, back to camera, onlookers reacting at right",
+          "pose_family": "reach-grab",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "overlap",
+            "scale-contrast",
+            "frame-crop"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "diagonal-lean",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera stays close on a raised arm and back filling the foreground with the hand reaching up out of frame, two onlookers reacting in shock in the background at eye level, selling arm scale through foreground overlap against small background figures.",
+          "notes": "Her raised arm/back fills the foreground while two pirates in the background react in shock ('W...W...WHAT. THAT'S IMPOSSIBLE.'); reviewer note: expression tag reflects the onlookers' reaction since Poppy's own face is not in frame here."
+        },
+        {
+          "n": 4,
+          "pose": "punching action pose, arm fully extended toward camera in a foreshortened jab, hair swept back from the motion",
+          "pose_family": "action-strike",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "foreshortening",
+            "motion-line",
+            "contact-deform"
+          ],
+          "toward_camera": "fist",
+          "body_line": "diagonal-lean",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera with hair swept back from the motion and heavy speed lines trailing behind, selling arm power through a foreshortened strike.",
+          "notes": "Extreme foreshortened punch -- her forearm and fist rocket toward the camera and connect with a pirate's face; heavy motion lines sell the speed."
+        },
+        {
+          "n": 5,
+          "pose": "two figures side-by-side each recoiling from a slap, multiple motion-blurred fists indicating rapid-fire hits",
+          "pose_family": "action-strike",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "motion-line",
+            "other"
+          ],
+          "toward_camera": "none",
+          "body_line": "twist-contrapposto",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Comedic side-gag in a tilted inset panel: two ordinary-sized pirates slap each other rapid-fire, unrelated to Poppy's growth."
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "layout": "Four panels: a huge wide bleeding panel dominates the top third with a foreshortened dutch-tilted flex; below it two roughly square panels sit side by side (a 'LATER...' caption bridges into a helm-standing pose on the left, a shrink-reveal on the right); a large panel bleeding to the page edges closes the page with a standing monologue shot. Panel size steps down then back up, with the top and bottom panels carrying the most visual weight.",
+      "reading_flow": "Eye starts on the dominant top panel's diagonal flex, drops down-left to the wheel panel via the 'LATER...' caption, moves right to the shrink panel, then continues down to the large bottom panel for the closing self-introduction line — a standard top-to-bottom, left-to-right Z path with no reading-order breaks.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "dynamic double-bicep flex, near fist thrust toward camera, far arm raised overhead, torso twisted, ground plane tilted",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "foreshortening",
+            "motion-line",
+            "scale-contrast",
+            "overlap"
+          ],
+          "toward_camera": "fist",
+          "body_line": "x-spread",
+          "crop": "bleed",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera close and low with a dutch tilt, she throws a foreshortened double-bicep flex with her near fist thrust straight at the lens and her other fist raised overhead, torso twisted so the flexed arms and chest fill the frame while a smaller figure tumbles backward past her shoulder, selling the arms and chest.",
+          "notes": "Extreme foreshortened double-bicep flex with fists thrust toward camera on a dutch-tilted ground plane; a defeated pirate captain is knocked backward at right, unconscious crew visible in the background."
+        },
+        {
+          "n": 2,
+          "pose": "standing at the wheel, weight shifted onto one leg, one hand resting on hip, gaze turned off to the side",
+          "pose_family": "stance-power",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "silhouette"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "prompt_seed": "Camera at eye level straight on, she stands with weight shifted onto one leg, one hand resting on her hip, body turned slightly to gaze off past the camera, the frame cutting her at mid-thigh with a ship's wheel and coiled rope behind her, selling the full silhouette of her build.",
+          "notes": "Standing at the ship's wheel in a static, level eye-line pose showing off the peak physique after the fight."
+        },
+        {
+          "n": 3,
+          "pose": "standing, one hand raised near her head in a small shrug, looking down at herself as sparks crackle around her feet",
+          "pose_family": "everyday-idle",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap",
+            "motion-line"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "head-to-thigh",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 2,
+          "prompt_seed": "Camera at eye level, she stands with one hand raised near her head in a small shrug, a larger translucent afterimage of her own silhouette fading in the space behind her as sparks crackle around her feet, the frame cutting her at mid-thigh.",
+          "notes": "A translucent larger afterimage of herself fades in the space behind her as she shrinks back to normal size, sparks crackling at her feet."
+        },
+        {
+          "n": 4,
+          "pose": "standing, one arm raised flipping hair back, other arm extended tossing an empty can aside, facing camera",
+          "pose_family": "stance-power",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "other"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Direct-to-camera standing pose closing the scene, tossing empty cans aside beside open treasure chests."
+        }
+      ]
+    },
+    {
+      "page": 11,
+      "layout": "Five-panel asymmetric page: two panels across the top row (a close reclining shot on the left, a crawling shot on the right); the right-hand panel's giant foreground object continues as one tall irregular panel down through the middle tier, dwarfing the small figure at its top; a standard panel occupies the mid-left for the dialogue beat; the bottom row splits into a small square panel and a larger close-up panel.",
+      "reading_flow": "Top-left to top-right in the usual Z-path, but the top-right panel's oversized foreground object pulls the eye straight down the right column past the middle tier before the reader loops back to the mid-left dialogue panel, then continues down to the bottom row left-to-right for the spinach-can reveal.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "lying on her back on the sand, propped on one forearm, chin lifted toward camera, chest arched up",
+          "pose_family": "recline",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "foreshortening",
+            "cloth-strain"
+          ],
+          "toward_camera": "chest",
+          "body_line": "arch-back",
+          "crop": "chest-up",
+          "camera_height": "above-head",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera positioned above her looking down, she reclines on her back propped on one forearm with her chest arched up toward the lens, coat fabric straining open at her sides, selling the chest.",
+          "notes": "Reclining figure viewed from above with chest thrust toward camera; a small inset callout in the corner represents an overheard song."
+        },
+        {
+          "n": 2,
+          "pose": "on hands and knees, gripping the grass, head raised looking down/forward at a discovery",
+          "pose_family": "crouch-coil",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "scale-contrast",
+            "overlap"
+          ],
+          "toward_camera": "none",
+          "body_line": "diagonal-lean",
+          "crop": "chest-up",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "irregular",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 2,
+          "prompt_seed": "Camera down near ground level with a wide, distorted lens, an oversized foreground object looms across most of the frame while she crawls up a grassy slope in the background, small in scale against it.",
+          "notes": "An oversized foreground crate/object dwarfs her as she crawls up a grassy mound investigating; a glint of light catches her eye at the panel's base."
+        },
+        {
+          "n": 3,
+          "pose": "standing, torso turned, one hand holding a torn scrap of cloth, head snapping to the side",
+          "pose_family": "everyday-idle",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain"
+          ],
+          "toward_camera": "chest",
+          "body_line": "twist-contrapposto",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "prompt_seed": "Camera at eye level, she stands examining a scrap of torn fabric in one hand while her head snaps around toward something off to the side, the frame cropped at the waist to sell the chest and shoulders.",
+          "notes": "Standing figure inspecting a torn scrap of cloth, head snapping toward an offscreen discovery."
+        },
+        {
+          "n": 4,
+          "pose": "n/a — object-only panel, cans scattered across the ground",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "other"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "above-head",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "Static high-angle view of empty spinach cans scattered across a dark floor; no figure present."
+        },
+        {
+          "n": 5,
+          "pose": "hand gripping a can, can angled diagonally toward the camera",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "foreshortening"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "prompt_seed": "",
+          "notes": "Extreme close-up on a spinach can held in one hand, label facing camera, thought bubble recalling the earlier song line."
+        }
+      ]
+    },
+    {
+      "page": 12,
+      "layout": "Five-panel escalating page: a short wide panel top-left (flex + can-pop) sits beside a taller panel top-right (chugging/growing) that spans two row-heights; a square close-up panel (eating) fills the row beneath the first panel; a full-width amber panel below spans the growing-torso-to-reveal beat; a full-width bleed panel closes the page with a headless torso close-up. Panel width and color heat (red to amber to gold) both escalate toward the bottom to track the growth climax.",
+      "reading_flow": "Top-left to top-right first (flex, then the tall chugging panel pulls the eye down the right side), loops back to the eating close-up at mid-left, then the eye sweeps across the full-width growth/reveal panel, and finally down into the bottom bleed panel for the climactic torso close-up — a top-to-bottom escalation with panel width widening at each step.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "one arm raised in a bicep flex near her head, other hand cracking open a can at shoulder height, weight on one hip",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "contact-deform",
+            "cloth-strain"
+          ],
+          "toward_camera": "elbow",
+          "body_line": "s-curve",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "prompt_seed": "Camera at eye level, she raises one arm in a bicep flex near her head while cracking open a can held in the other hand at shoulder height, weight shifted onto one hip, cropped at the waist to sell the arm.",
+          "notes": "Pre-transformation anticipation: she flexes one arm overhead while popping open a spinach can with the other hand."
+        },
+        {
+          "n": 2,
+          "pose": "head tilted back, can pressed to mouth guzzling, torso arched, one hip cocked as her body strains and grows",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "foreshortening",
+            "cloth-strain",
+            "contact-deform"
+          ],
+          "toward_camera": "chest",
+          "body_line": "arch-back",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera close and slightly low, she tilts her head back gulping from a can held overhead, torso arched and chest thrust up, her hip visibly straining outward as her body begins to grow, the tall frame cropped at the waist to sell the chest.",
+          "notes": "She chugs a spinach can with her head tilted back in a close, low-angle shot; her hip creaks and strains as her body begins to grow."
+        },
+        {
+          "n": 3,
+          "pose": "head tilted down, eyes closed, mouth full, chin lowered toward chest",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "other"
+          ],
+          "toward_camera": "face",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Extreme close-up on her mouth and chest as she eats spinach messily, eyes closed, chin dripping."
+        },
+        {
+          "n": 4,
+          "pose": "torso bulging and rippling as growth spasms hit, transitioning to a wide-eyed reveal pose with one fist clenched around a crushed object at chest height",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "arch-back",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera at chest height with a slight low angle, her torso ripples and her clothing tears as her body grows, culminating in a wide-eyed reveal with golden electric arcs rimming her silhouette and one fist closed tight around a crushed object at chest height, selling the chest and shoulders.",
+          "notes": "Wide amber-lit panel: her body ripples with growth as clothing strains and tears, culminating in a shocked reveal with electricity crackling around her chest and a flower crushed to pulp in her fist."
+        },
+        {
+          "n": 5,
+          "pose": "torso only, chest thrust forward, one hand trailing near the hip, body wreathed in electric arcs",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "frame-crop",
+            "rim-light",
+            "foreshortening"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "head-cut-off",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera close at chest height, the frame crops off above the shoulders so only her torso fills it, chest thrust forward with one hand trailing near her hip, electric arcs rimming her silhouette, selling the chest.",
+          "notes": "Tight torso-only framing with her head cropped out of frame; chest and hip on display, electricity arcing across her body, one hand trailing near the hip."
+        }
+      ]
+    },
+    {
+      "page": 13,
+      "layout": "Four panels, no strict grid: tilted/diagonal panel borders throughout. Top-left panel is smaller and offset; top-right panel is larger, pushes above the page's top edge and overlaps the left panel's space. Bottom row is two roughly equal tall panels. Each panel isolates a single body region (chest, chest close-up, abs/torso, glutes-thighs) in sequence rather than showing full figures.",
+      "reading_flow": "Left-to-right across the top row (chest panel into the larger, more extreme chest close-up, linked by lightning bolts crossing the gutter), then down to the bottom row, again left (abs/torso) to right (glutes/thighs); crackling energy lines and repeated SWELL/BULGE sfx pull the eye across every gutter.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "Chin down, confident grin, chest thrust forward filling the frame beneath the face",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "scale-contrast",
+            "frame-crop"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "irregular",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera positioned near chest height looking slightly up, she grins down at her own growing chest which fills the lower half of the frame, cropped tight at the bottom edge so the chest dominates while her face remains visible above.",
+          "notes": "Chest growing rapidly, filling the lower frame beneath a confident grin; tilted panel frame."
+        },
+        {
+          "n": 2,
+          "pose": "Chin tucked down, gritted teeth, chest pushed toward camera filling the frame",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "scale-contrast",
+            "foreshortening",
+            "frame-crop"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "irregular",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera close on the chest from a slightly low angle, her chin tilts down with a strained, gritted-teeth expression as the chest fills nearly the entire frame, growing so large it crowds out the edges of the panel.",
+          "notes": "Extreme chest-growth close-up, gritted-teeth strain, electric energy crackling around the torso, lightning bolts framing the panel."
+        },
+        {
+          "n": 3,
+          "pose": "Frontal torso straight to camera, abs flexed, arms out of frame",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "abs",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds steady at chest height directly on the torso, abs flexed and filling the frame top to bottom, with fabric visibly straining and tearing at the sides as the midsection grows outward.",
+          "notes": "Torso/abs growth close-up, clothing tearing at the sides, muscle definition emerging, energy crackling; face is not shown, only a sliver of chin/cape at the very top."
+        },
+        {
+          "n": 4,
+          "pose": "Rear three-quarter view, glutes and thighs flexed and swelling toward the camera",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "scale-contrast",
+            "contact-deform",
+            "rim-light"
+          ],
+          "toward_camera": "glute",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "hip",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera positioned low near hip height behind her, framing the glutes and thighs filling the entire panel as the muscle visibly swells and rounds outward with energy crackling around the frame.",
+          "notes": "Glutes-and-thighs growth close-up viewed from below/behind, muscle striations visible, energy crackling; no face in frame."
+        }
+      ]
+    },
+    {
+      "page": 14,
+      "layout": "Four panels: a small square inset in the top-left corner shows an extreme close-up of tearing shoulder muscle, layered beside a repeating double-bicep flex pose shown three more times at increasing scale (top-right, middle-left, and a wide bottom panel spanning nearly the full page width). Panel borders are angled/diagonal rather than a strict grid, echoing page 13's style; each successive flex panel is visibly larger than the last, forming a size ladder down the page.",
+      "reading_flow": "Eye starts on the small tearing-muscle inset top-left, moves right to the first full flex pose, drops left to the second (bigger) flex pose, then down to the biggest flex pose spanning the bottom of the page -- a top-to-bottom size escalation reinforced by radiating energy lines and repeated BULGE/BOING sfx bridging each gutter.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "Shoulder muscle turned toward camera, tightly flexed cluster of muscle bulges",
+          "pose_family": "flex-display",
+          "muscle_sold": "shoulders",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "frame-crop"
+          ],
+          "toward_camera": "shoulder",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Extreme close-up on the shoulder, the muscle segmented into tight bulging clusters as fabric tears away in strips across the frame.",
+          "notes": "Extreme close-up on shoulder/trap muscle bulging in segmented clusters, clothing tearing away in claw-like strips."
+        },
+        {
+          "n": 2,
+          "pose": "Double-bicep flex, both arms raised and bent, chin down, torso forward",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "irregular",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera at chest height straight on, she raises both arms into a double-bicep flex with her chin tucked down, the pose filling the frame so both arms crop off at the panel edges while the torso fills the lower half.",
+          "notes": "Double-bicep flex hero pose, chest and abs visible, arms bulging past panel edges, energy crackling."
+        },
+        {
+          "n": 3,
+          "pose": "Double-bicep flex, arms raised and bent, chin down, larger than the prior panel",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "irregular",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Same double-bicep flex from chest height, the frame packed even tighter than before so the arms and chest crowd every edge of the panel.",
+          "notes": "Escalated double-bicep flex, breasts and arms larger than the previous panel, same pose repeated bigger."
+        },
+        {
+          "n": 4,
+          "pose": "Double-bicep flex at maximum extension, wide grin, torso thrust forward",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "scale-contrast",
+            "motion-line"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds low at chest height as she throws both arms into the widest double-bicep flex yet, radiating motion lines behind her, the pose filling the entire bleed panel edge to edge with a wide exultant grin.",
+          "notes": "Largest flex pose on the page, full-width bleed panel, peak grin, biggest arms/chest/abs so far, energy radiating outward with speed lines."
+        }
+      ]
+    },
+    {
+      "page": 15,
+      "layout": "Six panels: two wide top panels (a dune-establishing shot with a scale-contrast foreground glute close-up on the left; a symmetrical two-figure tug-of-war RIP panel on the right); a shared mid-page frame split into two narrower eating close-ups; and two bottom panels that lose their hard borders and bleed into a blurred gray background, each showing one crew member's shocked reaction to the growth trigger with crackling energy.",
+      "reading_flow": "Standard left-to-right, top-to-bottom: dune/dialogue panel to the tearing-open panel, down to the two eating close-ups side by side, then down to the two shock/bulge reaction panels. The escalation in energy (calm sleep, to a violent RIP, to frantic eating, to sudden crackling growth) drives the eye down the page in a clear vertical rhythm.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "Sprawled sleeping poses for the two background figures; foreground figure's glutes fill the lower-left corner",
+          "pose_family": "recline",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "scale-contrast",
+            "frame-crop"
+          ],
+          "toward_camera": "glute",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "hip",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "tall",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera low near hip height with an oversized figure's glutes filling the foreground in soft focus, while two smaller figures sleep further back up a sloped dune, creating a dramatic scale contrast between foreground and background.",
+          "notes": "Wide establishing shot on a beach dune; Poppy's oversized glutes fill the foreground creating scale contrast against two crew members sleeping on the sand above, with a dialogue callout top-left."
+        },
+        {
+          "n": 2,
+          "pose": "Two figures facing each other, arms extended pulling an object apart, straining expressions",
+          "pose_family": "action-strike",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "motion-line",
+            "contact-deform"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "x-spread",
+          "crop": "waist-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "square",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera holds level and centered as two figures face each other and pull an object apart with both arms extended in an X-spread, straining expressions on both faces as the object splits down the middle.",
+          "notes": "Two crew members yank a food item apart together, arms extended to both sides, straining faces, dramatic RIP sfx centered in the frame."
+        },
+        {
+          "n": 3,
+          "pose": "Head tilted back slightly, both hands bringing food to mouth, eyes closed",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "face",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Close on face eating a food item rapidly with both hands, eyes shut, cheeks working."
+        },
+        {
+          "n": 4,
+          "pose": "Head tilted back, both hands stuffing food into mouth, straining brow",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "face",
+          "body_line": "diagonal-lean",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "prompt_seed": "",
+          "notes": "Closer, more frantic eating close-up, head tilted further back, eyebrows furrowed with effort."
+        },
+        {
+          "n": 5,
+          "pose": "Arms held out to sides, wide-eyed shocked expression, body upright facing camera",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera at chest height dead-on, arms thrown out to the sides as she reacts with a wide-eyed startled expression while her chest and shoulder visibly bulge outward against her clothing, energy crackling around her.",
+          "notes": "Shock reaction as growth begins, arms out to sides, lightning crackling, chest and arm start to bulge under clothing."
+        },
+        {
+          "n": 6,
+          "pose": "One hand raised near chest, wide-eyed shocked expression, torso turned slightly",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "head-to-thigh",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "prompt_seed": "Camera at chest height dead-on, one hand lifts toward her chest in surprise as her torso twists slightly, chest visibly fuller and straining against her top, energy crackling around her shocked expression.",
+          "notes": "Second crew member's shock reaction to the growth trigger, chest already fuller than her companion's, lightning crackling, hand raised near chest in surprise."
+        }
+      ]
+    },
+    {
+      "page": 16,
+      "layout": "2x2 irregular grid: top-left panel is a shorter/squarer frame while top-right stretches taller, creating a stepped top row; bottom row splits evenly into two tall panels of matching height; heavy full-bleed golden energy/lightning motifs cross every gutter; no insets, no small panels.",
+      "reading_flow": "Eye opens on the smaller top-left panel (two stacked reaction shots), crosses to the larger top-right panel anchored by the dialogue balloon, then drops to the bottom row moving left to right; diagonal energy trails and stacked figure poses pull the eye vertically inside each panel.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "front-facing bust shot, torso thrust forward as the chest expands against the shirt",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "overlap"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "prompt_seed": "Camera holds a level frontal shot at chest height on two figures stacked in one frame, each caught mid-motion as her top strains and splits across a swelling chest, cropped from the collarbone down to the waist.",
+          "notes": "Two crew members stacked in one frame, both chests bursting through their shirts; static frontal crop with slight foreground/background overlap between the two figures."
+        },
+        {
+          "n": 2,
+          "pose": "chest thrust toward camera, head tilted back, torso twisted three-quarter toward the viewer",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "foreshortening",
+            "cloth-strain",
+            "contact-deform",
+            "frame-crop"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera sits low near chest height and tilts up as she arches back, chest pushed forward to fill almost the entire frame while the shoulders and face crowd the top edge, selling chest growth in extreme close-up.",
+          "notes": "Extreme close-up on chest filling most of the frame with the garment tearing at the seam; a second reaction is stacked below with a strap snapping."
+        },
+        {
+          "n": 3,
+          "pose": "back mostly turned to camera, arm bent close to the body, bicep pressing outward against the torn sleeve",
+          "pose_family": "growth-writhe",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "overlap"
+          ],
+          "toward_camera": "shoulder",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds close behind her at shoulder height as she stands with her back partly turned, one arm bent against her body, the sleeve cinching and splitting over a bicep that presses outward, selling arm and shoulder growth in tight crop.",
+          "notes": "Close rear/three-quarter view of two crew stacked together, arm and shoulder muscle splitting the sleeve seams."
+        },
+        {
+          "n": 4,
+          "pose": "three-quarter back view, head turned back over the shoulder with a wide grin, torso twisted to show the growing back and glutes",
+          "pose_family": "flex-display",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform",
+            "rim-light",
+            "tangent-break"
+          ],
+          "toward_camera": "back",
+          "body_line": "twist-contrapposto",
+          "crop": "head-to-thigh",
+          "camera_height": "hip",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder with a confident grin, the frame cropped from head to upper thigh so the back and glutes fill most of the panel and read as the muscle growing.",
+          "notes": "Close rear view: torn sleeve and shirt seams across the back as shoulder and glute muscle push outward; confident grin glancing back toward camera."
+        }
+      ]
+    },
+    {
+      "page": 17,
+      "layout": "Two horizontal strip panels stacked at the top (a triptych vignette strip, then a two-figure flex strip), giving way to one large full-bleed splash panel that fills the bottom two-thirds of the page with no border; heavy bleed throughout, no insets.",
+      "reading_flow": "Top-down: left-to-right across the first strip's three vignettes, then the second strip's two figures, then the eye drops into the borderless splash following the descending lightning bolts down to the captain and outward to the flexing crew, ending bottom-right on the TO BE CONTINUED caption.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "series of flexed bicep and torso poses shown in tight crops, arms bent to show off the swelling muscle",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "contact-deform",
+            "cloth-strain",
+            "frame-crop",
+            "overlap"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds close across a row of flexed poses, each figure bending an arm to curl a swelling bicep into frame while fabric splits at the seams, cropped tight on arms and chest to sell arm and shoulder growth.",
+          "notes": "Triptych of close vignettes composited in one wide panel -- a torn sleeve over a back/glute, a flexed bicep with a confident grin, and a front chest/abs flex -- showing several crew mid-transformation into full muscle."
+        },
+        {
+          "n": 2,
+          "pose": "double flex pose, one arm bent to show a bicep peak, chest thrust forward, wide grin",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "contact-deform",
+            "cloth-strain",
+            "silhouette"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "twist-contrapposto",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds level at chest height on two figures side by side, each bending one arm to flex a bicep toward the lens while grinning, cropped from the chest up so the flexed arms and chest fill the frame.",
+          "notes": "Two crew stand chest-up, arms flexed into full biceps side by side, beaming with pride at their new size."
+        },
+        {
+          "n": 3,
+          "pose": "captain stands centered addressing the crew, surrounded by multiple figures in flexed bicep and chest-forward poses at varying depths and scales",
+          "pose_family": "flex-display",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "scale-contrast",
+            "silhouette",
+            "foreshortening",
+            "frame-crop",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "bleed",
+          "camera_height": "eye",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 5,
+          "prompt_seed": "Camera holds a wide low shot on a swirling energy backdrop as a smaller clothed figure stands center addressing several much larger figures around her, arms flexed and chests thrust into the foreground at different depths, the scale gap between the small central figure and the huge surrounding bodies selling the group's full-body growth.",
+          "notes": "Full-bleed splash: a swirling energy portal with descending lightning bolts behind the captain rallying her now hyper-muscular crew, several of whom flex in the foreground at different depths as the issue closes."
+        }
+      ]
+    },
+    {
+      "page": 18,
+      "layout": "Single full-bleed cover splash: large title logo across the top, a towering flexing silhouette centered upper-middle as the background focal element, a rocky bay in the midground, a three-figure cast lineup grouped in the bottom third, and a brand/credits bar at the very bottom.",
+      "reading_flow": "Top-down: the title reads first, then the eye is pulled to the towering silhouette, down through the rocky channel to the foreground trio of cast members, ending on the credits/URL bar at the bottom edge.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "three standing cast members grouped in the foreground with a towering flexed-bicep silhouette rising behind them in the distance",
+          "pose_family": "stance-power",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "silhouette",
+            "scale-contrast",
+            "rim-light"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 4,
+          "prompt_seed": "Camera holds a wide vertical shot with three figures grouped in the foreground against a rocky bay, while a towering silhouette flexes one bicep in the distance behind them, the huge dark shape scaled far larger than the foreground cast to sell an implied full-body transformation.",
+          "notes": "Cover splash: a giant flexing silhouette looms over a rocky bay behind three foreground cast members, including a heavily muscled captain cropped at the chest in the corner."
+        }
+      ]
+    }
+  ],
+  "signature_moves": [
+    {
+      "move": "Low-hero flex ladder: the same front double-biceps pose redrawn at escalating panel scale across a page",
+      "citations": [
+        "p8 panels 2-4",
+        "p14 panels 2-4",
+        "p17 panel 2"
+      ],
+      "steal_for_cgi": "Generate the identical camera height/crop/pose across 3 consecutive panels, only scaling the figure and adding incremental pose/expression variation panel to panel -- do not copy-paste the render."
+    },
+    {
+      "move": "Extreme close-up on a single growing body part, frame-cropped with zero or minimal background",
+      "citations": [
+        "p7 panels 2 & 4",
+        "p8 panel 1",
+        "p13 all 4 panels",
+        "p14 panel 1"
+      ],
+      "steal_for_cgi": "Push the lens tight enough that the muscle/mass fills the frame edge-to-edge with a plain or blurred field behind it; pair with a cut-in face reaction panel so the beat doesn't go faceless."
+    },
+    {
+      "move": "Near-universal diagonal panel energy -- even quiet dialogue beats are staged off a raked axis",
+      "citations": [
+        "54 of 79 panels tagged diagonal",
+        "p1 panel 2 (helm shot)",
+        "p3 panels 1 & 5"
+      ],
+      "steal_for_cgi": "Default every panel's composition line (body axis, prop, horizon) to a diagonal rather than a level line, even for non-growth panels."
+    },
+    {
+      "move": "Cloth-strain and tear sfx-paired growth (STRETCHHHH / RIIIP / SNAP) escalating panel to panel",
+      "citations": [
+        "p16 panels 1-2 (STRETCHHHH→RRRIIIP→SNAP)",
+        "p7 panel 2",
+        "p17 panel 1"
+      ],
+      "steal_for_cgi": "Stage visible fabric tension lines / a torn seam at the exact point the muscle is meant to be selling growth, escalating garment damage across consecutive panels."
+    },
+    {
+      "move": "Scale-contrast against a smaller onlooker or a normal-scale figure in the same frame",
+      "citations": [
+        "p4 panel 1 (crewmate)",
+        "p9 panels 2-3 (pirate onlookers)",
+        "p17 panel 3 (captain vs. hyper-muscular crew)"
+      ],
+      "steal_for_cgi": "Compose one normal-scale figure and one grown figure in the same shot at different camera depths to sell size without needing a measured prop."
+    },
+    {
+      "move": "Foreshortened limb/fist thrust directly at the lens for impact beats",
+      "citations": [
+        "p9 panel 4 (punch)",
+        "p10 panel 1 (dutch-tilt flex)",
+        "p7 panel 3 (bicep flex)"
+      ],
+      "steal_for_cgi": "Angle the camera so a fist, forearm, or flexed bicep breaks the top/near edge of frame, foreground mass sharply larger than the torso behind it."
+    },
+    {
+      "move": "Worm's-eye / extreme low rear crop for glute-and-thigh growth beats",
+      "citations": [
+        "p7 panel 4",
+        "p8 panel 1"
+      ],
+      "steal_for_cgi": "Drop the camera to below-knee height behind and beneath the figure, angled up, cropping at body-part-only so the glutes/thighs loom over the lens."
+    },
+    {
+      "move": "Full-bleed, full-width panel as the page's closing 'biggest yet' beat",
+      "citations": [
+        "p6 panel 4",
+        "p8 panel 4",
+        "p14 panel 4",
+        "p17 panel 3"
+      ],
+      "steal_for_cgi": "Reserve the widest, most bled-out panel on a growth page for the largest/last beat in the sequence -- panel size itself signals climax."
+    }
+  ],
+  "angle_histogram": {
+    "aerial": 1,
+    "low": 30,
+    "eye": 41,
+    "OTS": 1,
+    "high": 3,
+    "pov": 1,
+    "worm": 1,
+    "dutch": 1
+  },
+  "camera_height_histogram": {
+    "top-down": 3,
+    "chest": 36,
+    "eye": 32,
+    "below-knee": 3,
+    "above-head": 2,
+    "hip": 3
+  },
+  "toward_camera_histogram": {
+    "none": 17,
+    "hand-open": 4,
+    "forearm": 7,
+    "chest": 31,
+    "face": 5,
+    "foot": 1,
+    "shoulder": 3,
+    "elbow": 3,
+    "glute": 4,
+    "back": 2,
+    "fist": 2
+  },
+  "muscle_sold_histogram": {
+    "none": 25,
+    "arms": 24,
+    "full-silhouette": 6,
+    "chest": 16,
+    "glutes": 4,
+    "shoulders": 2,
+    "abs": 1,
+    "back": 1
+  },
+  "top_steals": [
+    {
+      "page": 8,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera sits on the ground looking straight up between the legs at the glutes and thighs stacked overhead, the last shredded fabric framing the sides, stance planted wide, selling glute and thigh growth through an extreme worm's-eye close-up."
+    },
+    {
+      "page": 10,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera close and low with a dutch tilt, she throws a foreshortened double-bicep flex with her near fist thrust straight at the lens and her other fist raised overhead, torso twisted so the flexed arms and chest fill the frame while a smaller figure tumbles backward past her shoulder, selling the arms and chest."
+    },
+    {
+      "page": 9,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera with hair swept back from the motion and heavy speed lines trailing behind, selling arm power through a foreshortened strike."
+    },
+    {
+      "page": 16,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder with a confident grin, the frame cropped from head to upper thigh so the back and glutes fill most of the panel and read as the muscle growing."
+    },
+    {
+      "page": 17,
+      "n": 3,
+      "steal_score": 5,
+      "prompt_seed": "Camera holds a wide low shot on a swirling energy backdrop as a smaller clothed figure stands center addressing several much larger figures around her, arms flexed and chests thrust into the foreground at different depths, the scale gap between the small central figure and the huge surrounding bodies selling the group's full-body growth."
+    },
+    {
+      "page": 14,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera holds low at chest height as she throws both arms into the widest double-bicep flex yet, radiating motion lines behind her, the pose filling the entire bleed panel edge to edge with a wide exultant grin."
+    },
+    {
+      "page": 12,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera at chest height with a slight low angle, her torso ripples and her clothing tears as her body grows, culminating in a wide-eyed reveal with golden electric arcs rimming her silhouette and one fist closed tight around a crushed object at chest height, selling the chest and shoulders."
+    },
+    {
+      "page": 7,
+      "n": 2,
+      "steal_score": 5,
+      "prompt_seed": "Camera pushes into an extreme close-up centered on the chest, filling the frame edge to edge with no background visible, straps cutting into flesh as the torn fabric peels back, selling maximal chest growth through sheer scale."
+    },
+    {
+      "page": 5,
+      "n": 5,
+      "steal_score": 5,
+      "prompt_seed": "Camera at eye level in a tall frame, she twists her torso with one arm raised across her body as her shirt strains tight against a swelling chest, radiating light behind her, the crop holding waist-up so the straining fabric sells the growth."
+    },
+    {
+      "page": 1,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera at chest height in a three-quarter view, she raises one arm in a tight bicep flex with her fist held near her shoulder, jaw clenched and one eye narrowed with effort, the frame cropping her at the chest so the flexed arm and shoulder dominate the panel."
+    }
+  ],
+  "avoid": [
+    "Stacked repeated onomatopoeia (BULGE BULGE BULGE, SWELL SWELL SWELL) doing the primary work of selling an off-panel or faceless growth beat (p13 panels 3-4, p16 panels 1-2) -- a photoreal panel has no text layer to lean on; the pose, tension, and lighting have to carry what the sfx repetition carries here.",
+    "Muscle mass literally breaking the panel's own border (p8 panel 4, p14 panel 4: 'muscles now crowd past the panel's own borders') -- a 2D page-layout trick with no single-camera equivalent; substitute an extreme frame-crop where the mass fills the lens instead.",
+    "Verbatim panel-to-panel pose repeats used as the entire escalation mechanism (p8 panels 2-4, p14 panels 2-4 redraw the identical double-bicep pose bigger each time) -- cheap in ink where the linework alone reads as 'bigger'; a CGI render needs genuine incremental pose/expression/tension change or the sequence reads as a lazy re-render, not escalation.",
+    "Grayscale/desaturation used as a reveal device (p2 panel 4, the silhouette-captain cliffhanger) -- a stylistic ink trick for mood; in a photoreal pipeline a sudden desaturated panel would read as a color-grade bug, not a deliberate reveal.",
+    "Nested, non-standard panel borders bleeding into an unbordered energy backdrop (p3's layered insets floating on a borderless lightning-cracked background) -- a page-layout composition device with no single-panel photoreal equivalent; skip for per-panel generation."
+  ]
+}

@@ -1,0 +1,1686 @@
+{
+  "comic_id": "deed-arts-poppy-sailor-gal-1",
+  "rubric_version": "1.0",
+  "analyzed_pages": 18,
+  "scores": {
+    "growth_density_score": 5,
+    "camera_dynamism_score": 4,
+    "expression_intensity_score": 4,
+    "story_structure_score": 4
+  },
+  "narrative_arc": "22-year-old adventurer Poppy sails for Ironbeard's legendary treasure and finds it, but a rival pirate captain and crew who tailed her steal it and mock her → fleeing belowdecks she finds glowing 'spinach' capsules, drinks one, and temporarily grows into a hyper-muscular powerhouse → she thrashes the captain's crew and reclaims the treasure, then the power fades and she shrinks back to normal and sails off → the defeated captain wakes, finds the spinach trail, and feeds it to herself and her whole crew → they permanently bulk up into a hyper-muscular gang and rally for revenge (TO BE CONTINUED into issue 2).",
+  "pages": [
+    {
+      "page": 1,
+      "role": "setup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "aerial",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast",
+            "diagonal"
+          ],
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Bird's-eye establishing shot: a distant sailboat crosses open water toward a tropical island; caption box sets the 22-year-old-Poppy/first-adventure premise."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "low-hero",
+            "depth-fg-bg"
+          ],
+          "expression": "confidence",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Full-body helm shot; wind-blown hair and an off-shoulder collar establish a confident-adventurer pose, with a large foreground ship's wheel adding depth."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Treasure-map inset with a red circle marking the target island; dialogue balloon establishes the legendary-strength macguffin."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "low-hero"
+          ],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "GRIT"
+          ],
+          "notes": "Close flex on the gripping fist and raised forearm/bicep while tearing the map fragment; teeth-gritted expression sells effort, with strain lines tracing the arm."
+        },
+        {
+          "n": 5,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "SPLASH"
+          ],
+          "notes": "Wide traveling shot: the sailboat cuts spray toward the island past a distant carved rock/statue marker, with birds in the sky; the 'LAND HO!' balloon signals the arrival beat."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=1; Setup page establishing 22-year-old Poppy's voyage toward Ironbeard's treasure/legendary-strength macguffin; only muscle-forward beat is the panel 4 bicep flex on 'GRIT'; the rest is scene-setting and travel wide shots with no growth depicted yet."
+    },
+    {
+      "page": 2,
+      "role": "cliffhanger",
+      "growth_state": "none",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "EWS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Full-width establishing shot of a jungle-covered island with a hidden cave mouth; speaker is off-panel (balloon points down from below frame), no character actually in shot."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Foreground figure holding a raised torch against a background cave chamber stacked with treasure chests; torch and raised arm form the panel's main diagonal."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "TREMBLE",
+            "TREMBLE"
+          ],
+          "notes": "Full-body straining carry pose, eyes shut and mouth open in effort, sweat beads flung outward, played for comedic/ironic weakness ahead of a strength payoff later in the issue."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "scale-contrast",
+            "OTS"
+          ],
+          "expression": "smug",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Grayscale reveal panel: a heavily-built silhouetted figure fills most of the frame, backlit by bright cave light, while a second figure's head/hair is visible cut off in the near foreground corner for scale. No face detail on either figure is renderable — this is a pure silhouette/rim-light reveal."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; Page opens on a static, figure-less establishing shot of a hidden cave mouth, cuts to Poppy discovering a treasure chamber by torchlight, drops into a strained solo full-body carry as she hauls one chest out, and ends on a desaturated silhouette reveal of an unknown, heavily-built figure confronting her mid-panel — a scene-setting page building to a cliffhanger threat rather than delivering an active-growth beat."
+    },
+    {
+      "page": 3,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Captain fills the frame chest-up while two crew stand small and soft-focused behind her, selling her size before any growth is shown."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "shock",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [],
+          "notes": "Static reaction close-up; one eye rendered blank white for shock. A small yellow spark/crown-shaped symbol floats above her head -- unclear whether it's a generic shock icon or a story-relevant crown, flagged for review."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "DROP",
+            "BLAG!"
+          ],
+          "notes": "No figure; nested inset shows the treasure chest falling, with vertical motion-streak lines and jagged impact bursts around it, wedged in the gutter between the two flanking character panels."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [],
+          "notes": "Waist-up power stance, one hand hooked on her hip belt, both bulging arms fully in frame while she needles Poppy about being tailed for months."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MLS",
+          "angle": "OTS",
+          "staging": [
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression": "rage",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "TREMBLE",
+            "TREMBLE"
+          ],
+          "notes": "Seen from behind/side, forearm and fist thrust into extreme foreground with a double 'TREMBLE' SFX (two colors) flanking the bent, crossed arms; her face is not clearly readable from this angle, so the emotion word is inferred from body language only."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "scorn",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [
+            "HA HA HA!",
+            "HA HA HA!"
+          ],
+          "notes": "Same waist-up power framing as the earlier captain panel; head tips back mid-laugh, mocking Poppy's declaration. This inset floats on the unframed fist backdrop rather than sitting in its own gutter."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=1; Two-beat confrontation page -- the captain's crew reveals they've tailed Poppy for months and are taking the treasure, Poppy protests then flares into a trembling fist-clenched 'it's all mine' declaration, and the captain answers with a mocking laugh. Power imbalance is sold mainly through scale-contrast and tight power-stance crops on the captain; no panel on this page is an active-growth money shot, staging stays reaction/dialogue-driven throughout."
+    },
+    {
+      "page": 4,
+      "role": "action",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "FLEX",
+            "BULGE",
+            "BOING",
+            "BOING"
+          ],
+          "notes": "Front double-biceps flex taunting a smaller crewmate; radiating burst background; small reacting figure at the right edge for scale contrast."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "foreshortening"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "BAM!",
+            "SHWOOOOSH"
+          ],
+          "notes": "A backhand strike sends the smaller crewmate flying off-panel; strong diagonal motion lines trace the trajectory."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "high-vuln"
+          ],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "OOOOF",
+            "THUD"
+          ],
+          "notes": "The smaller crewmate crash-lands on a stacked log pile after being knocked away."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": [
+            "diagonal",
+            "depth-fg-bg"
+          ],
+          "expression": "panic",
+          "expression_intensity": 5,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "SNAP!",
+            "AAAA",
+            "CREAK!"
+          ],
+          "notes": "The wood floor breaks beneath her; she plunges into darkness below, screaming."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MLS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "FLEX"
+          ],
+          "notes": "Holds a treasure chest at her hip while flexing her free arm and giving orders to the crew."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; Poppy taunts a smaller crewmate with a double-biceps flex, casually backhands her across the deck, and the crewmate crash-lands on a log pile and then falls through a breaking wooden floor while Poppy turns back to order the crew to load treasure."
+    },
+    {
+      "page": 5,
+      "role": "active-growth",
+      "growth_state": "trigger",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "CRASH",
+            "CLANK",
+            "CLANK"
+          ],
+          "notes": "A glass bottle shatters against a wall fixture as she crashes into a stash of stored bottles below deck; no figure visible, impact detail only."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast"
+          ],
+          "expression": "awe",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [
+            "WOBBLE"
+          ],
+          "notes": "She stands over an open chest full of glowing capsules, steam rising, discovering the stash before drinking from it."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "SLAM",
+            "WOOOSH"
+          ],
+          "notes": "The chest lid slams and a single glowing capsule flies out toward her; object/effect detail only, no figure."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "effort",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [
+            "GULP"
+          ],
+          "notes": "Close on her face as she swallows the capsule, eyes closed, head tilted back."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "UHH",
+            "STRETTTCH"
+          ],
+          "notes": "First visible reaction to the capsule: her shirt begins straining as her chest and arms swell, radiating light behind her."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "panic",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "ZZT",
+            "ZZT"
+          ],
+          "notes": "Full-width payoff panel: she flexes both arms in shock as electric energy crackles off visibly enlarged muscle, unsure what is happening to her."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=0; She crashes into a stash of glowing capsules in the ship's hold, drinks one, and her body immediately begins swelling — shirt straining, arms sparking with energy — as she flexes in shock, unsure what is happening to her."
+    },
+    {
+      "page": 6,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "SQUEEZE"
+          ],
+          "notes": "She admires and squeezes her own newly grown bicep, delighted and confused about the cause."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "pov",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": "awe",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Downward POV into the open treasure chest revealing stacked spinach cans, a small creature prying one open, her own collar visible at the bottom edge of frame."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "foreshortening"
+          ],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "GULP",
+            "GULP",
+            "BOING",
+            "BOING"
+          ],
+          "notes": "She chugs a can of spinach with one arm flexed and raised overhead, resolving to use the new strength against the pirates."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "TREMBLE",
+            "TREMBLE",
+            "TREMBLE",
+            "TREMBLE"
+          ],
+          "notes": "Payoff panel: her whole body trembles as crackling energy outlines her silhouette, visibly larger and overwhelmed by the sensation."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; She admires her new muscle and wonders what caused it, discovers a chest of spinach cans (credited as the source of a legendary pirate's strength), chugs another can vowing to show the pirates, and trembles with crackling energy as the growth continues."
+    },
+    {
+      "page": 7,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "scale-contrast",
+            "foreshortening"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "GROW",
+            "RIIIP",
+            "BOING"
+          ],
+          "notes": "Chest-forward growth burst; shirt buttons popping as bust and torso swell, tearing at the seams; ecstatic overwhelmed expression."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast"
+          ],
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BOOM",
+            "RIIIPPPP"
+          ],
+          "notes": "Extreme close-up crop on the chest filling the whole panel as the collar/strap fabric rips further; symmetric, frontal, zero background visible."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "foreshortening",
+            "scale-contrast"
+          ],
+          "expression": "strain",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "HNN",
+            "BOING"
+          ],
+          "notes": "Arm raised into a bicep flex that dominates the frame, forearm/fist breaking the top edge, head turned to watch the muscle swell."
+        },
+        {
+          "n": 4,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "foreshortening",
+            "diagonal"
+          ],
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "BOOM",
+            "RIPPED",
+            "SNAP",
+            "GROW",
+            "BULGE"
+          ],
+          "notes": "Extreme low-angle close-up on the rear as the skirt tears away in shreds; camera positioned beneath and behind the glutes looking up."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; four-panel growth burst where Poppy's uniform rips across chest, arm, and rear as her muscles and bust surge outward; SFX-heavy (GROW/RIP/BOOM/BULGE) drives an escalating, still-clothed transformation."
+    },
+    {
+      "page": 8,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "worm",
+          "staging": [
+            "scale-contrast",
+            "foreshortening"
+          ],
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "BULGE",
+            "RIIPP",
+            "BULGE"
+          ],
+          "notes": "Worm's-eye close-up on the glutes and thighs from below as the last of the torn skirt falls away; claw-like fabric shreds frame the sides."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "scale-contrast",
+            "low-hero"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "BULGE",
+            "BULGE"
+          ],
+          "notes": "Full-body nude reveal in a front double-bicep flex, both arms up, confident smug grin, legs planted wide."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "scale-contrast",
+            "low-hero"
+          ],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "BULGE",
+            "BOING",
+            "BULGE"
+          ],
+          "notes": "Same double-bicep flex repeated at larger scale, open-mouth joyful grin, torso and thighs visibly bigger than the previous panel."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "foreshortening",
+            "low-hero"
+          ],
+          "expression": "joy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "BOOM",
+            "BULGE!",
+            "BULGE!",
+            "ENLARGE"
+          ],
+          "notes": "Largest flex yet; muscles now crowd past the panel's own borders as she declares she's still growing, hands cupped near her temples."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; nude escalation sequence -- three near-identical front double-bicep flexes get progressively larger panel-over-panel, bracketed by an extreme low-angle rear close-up, tracking Poppy's growth past her clothes to her final huge scale."
+    },
+    {
+      "page": 9,
+      "role": "action",
+      "growth_state": "aftermath",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "low-hero",
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "shoulders",
+          "sfx": [
+            "PAK"
+          ],
+          "notes": "Confident close portrait as she presses her fingers together, oversized shoulders and chest filling the frame behind a knuckle-crack sfx."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast",
+            "low-hero"
+          ],
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "FLEX"
+          ],
+          "notes": "Silhouetted back view, one arm raised in a bicep flex, tiny pirate onlookers below establish her new scale."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast",
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "BULGE"
+          ],
+          "notes": "Her raised arm/back fills the foreground while two pirates in the background react in shock ('W...W...WHAT. THAT'S IMPOSSIBLE.'); reviewer note: expression tag reflects the onlookers' reaction since Poppy's own face is not in frame here."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening",
+            "diagonal",
+            "depth-fg-bg"
+          ],
+          "expression": "determination",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "BAM",
+            "SHWOOOOPP"
+          ],
+          "notes": "Extreme foreshortened punch -- her forearm and fist rocket toward the camera and connect with a pirate's face; heavy motion lines sell the speed."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "dutch",
+            "diagonal"
+          ],
+          "expression": "pain",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "BAM",
+            "PAW"
+          ],
+          "notes": "Comedic side-gag in a tilted inset panel: two ordinary-sized pirates slap each other rapid-fire, unrelated to Poppy's growth."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; post-growth payoff page -- Poppy, now huge, confronts and punches down the pirate crew that wronged her, with a comedic side-gag of two other pirates slapping each other in the inset."
+    },
+    {
+      "page": 10,
+      "role": "aftermath",
+      "growth_state": "aftermath",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "dutch",
+          "staging": [
+            "foreshortening",
+            "diagonal",
+            "scale-contrast",
+            "dutch"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "FLEX",
+            "BULGE",
+            "BOING",
+            "BOING",
+            "BOING",
+            "POP",
+            "POP"
+          ],
+          "notes": "Extreme foreshortened double-bicep flex with fists thrust toward camera on a dutch-tilted ground plane; a defeated pirate captain is knocked backward at right, unconscious crew visible in the background."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "smug",
+          "expression_intensity": 2,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Standing at the ship's wheel in a static, level eye-line pose showing off the peak physique after the fight."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast",
+            "depth-fg-bg"
+          ],
+          "expression": "dismay",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "SHRINK"
+          ],
+          "notes": "A translucent larger afterimage of herself fades in the space behind her as she shrinks back to normal size, sparks crackling at her feet."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MLS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "joy",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "TOSS",
+            "TOSS",
+            "TOSS"
+          ],
+          "notes": "Direct-to-camera standing pose closing the scene, tossing empty cans aside beside open treasure chests."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=1; Poppy caps her fight with a massive foreshortened double-bicep flex over the fallen pirate captain, poses at the ship's wheel, watches the power wear off with a shrink effect, then closes with a treasure-strewn self-introduction monologue."
+    },
+    {
+      "page": 11,
+      "role": "buildup",
+      "growth_state": "none",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "high",
+          "staging": [
+            "high-vuln",
+            "foreshortening"
+          ],
+          "expression": "anger",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [
+            "TREMBLE",
+            "TREMBLE",
+            "TREMBLE"
+          ],
+          "notes": "Reclining figure viewed from above with chest thrust toward camera; a small inset callout in the corner represents an overheard song."
+        },
+        {
+          "n": 2,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast",
+            "diagonal"
+          ],
+          "expression": "confusion",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [
+            "GLINTS"
+          ],
+          "notes": "An oversized foreground crate/object dwarfs her as she crawls up a grassy mound investigating; a glint of light catches her eye at the panel's base."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "anger",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "chest",
+          "sfx": [
+            "TURN"
+          ],
+          "notes": "Standing figure inspecting a torn scrap of cloth, head snapping toward an offscreen discovery."
+        },
+        {
+          "n": 4,
+          "shot_distance": "WS",
+          "angle": "high",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Static high-angle view of empty spinach cans scattered across a dark floor; no figure present."
+        },
+        {
+          "n": 5,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "foreshortening"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": false,
+          "body_part_focus": "none",
+          "sfx": [],
+          "notes": "Extreme close-up on a spinach can held in one hand, label facing camera, thought bubble recalling the earlier song line."
+        }
+      ],
+      "page_notes": "distance_spread=4; flat_panel_count=1; The pirate captain wakes on the beach recalling Poppy's spinach song, investigates a giant object on a grassy rise, notices her own top burst open in the earlier scuffle, and finds a trail of empty spinach cans leading to a single can held up in close-up."
+    },
+    {
+      "page": 12,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 5,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "POP"
+          ],
+          "notes": "Pre-transformation anticipation: she flexes one arm overhead while popping open a spinach can with the other hand."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "foreshortening"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "MMM",
+            "ROB",
+            "ROB"
+          ],
+          "notes": "She chugs a spinach can with her head tilted back in a close, low-angle shot; her hip creaks and strains as her body begins to grow."
+        },
+        {
+          "n": 3,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "flat-level"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [
+            "NOM",
+            "NOM",
+            "NOM",
+            "GULP!"
+          ],
+          "notes": "Extreme close-up on her mouth and chest as she eats spinach messily, eyes closed, chin dripping."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "scale-contrast",
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "ROB",
+            "ROB",
+            "ROB",
+            "SHIVER",
+            "SHIVER",
+            "CRUSHED"
+          ],
+          "notes": "Wide amber-lit panel: her body ripples with growth as clothing strains and tears, culminating in a shocked reveal with electricity crackling around her chest and a flower crushed to pulp in her fist."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "foreshortening",
+            "diagonal"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [],
+          "notes": "Tight torso-only framing with her head cropped out of frame; chest and hip on display, electricity arcing across her body, one hand trailing near the hip."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=1; The captain drinks the spinach herself, eating messily, then visibly grows as her clothing strains and tears, climaxing in a shocked, electric-charged reveal of her new muscular body."
+    },
+    {
+      "page": 13,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "SWELL",
+            "SWELL",
+            "SWELL",
+            "BOING",
+            "BOING"
+          ],
+          "notes": "Chest growing rapidly, filling the lower frame beneath a confident grin; tilted panel frame."
+        },
+        {
+          "n": 2,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "foreshortening"
+          ],
+          "expression": "strain",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "BULGE",
+            "BULGE"
+          ],
+          "notes": "Extreme chest-growth close-up, gritted-teeth strain, electric energy crackling around the torso, lightning bolts framing the panel."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "scale-contrast"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "abs",
+          "sfx": [
+            "BOOM",
+            "SWELL",
+            "SWELL",
+            "RIIIP",
+            "RIIIP",
+            "BULGE",
+            "SWELL",
+            "SWELL",
+            "BULGE"
+          ],
+          "notes": "Torso/abs growth close-up, clothing tearing at the sides, muscle definition emerging, energy crackling; face is not shown, only a sliver of chin/cape at the very top."
+        },
+        {
+          "n": 4,
+          "shot_distance": "CU",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "low-hero"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "BULGE",
+            "SWELL",
+            "SWELL",
+            "SWELL",
+            "BULGE",
+            "SWELL"
+          ],
+          "notes": "Glutes-and-thighs growth close-up viewed from below/behind, muscle striations visible, energy crackling; no face in frame."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; Four sequential growth close-ups (chest, chest, abs, glutes/thighs) forming one continuous transformation surge, tied together by lightning-bolt energy and heavy SWELL/BULGE/RIIIP sfx."
+    },
+    {
+      "page": 14,
+      "role": "active-growth",
+      "growth_state": "peak",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "ECU",
+          "angle": "eye",
+          "staging": [
+            "diagonal",
+            "scale-contrast"
+          ],
+          "expression": "neutral",
+          "expression_intensity": null,
+          "growth_focus": true,
+          "body_part_focus": "shoulders",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "RIIIP",
+            "RIIIP",
+            "BULGE"
+          ],
+          "notes": "Extreme close-up on shoulder/trap muscle bulging in segmented clusters, clothing tearing away in claw-like strips."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "BOING",
+            "BOING",
+            "BULGE"
+          ],
+          "notes": "Double-bicep flex hero pose, chest and abs visible, arms bulging past panel edges, energy crackling."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "scale-contrast"
+          ],
+          "expression": "smug",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "BOING",
+            "BOING",
+            "BULGE"
+          ],
+          "notes": "Escalated double-bicep flex, breasts and arms larger than the previous panel, same pose repeated bigger."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MS",
+          "angle": "low",
+          "staging": [
+            "low-hero",
+            "scale-contrast",
+            "foreshortening"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "BOOM",
+            "BULGE",
+            "BULGE",
+            "BOING",
+            "BOING",
+            "BULGE",
+            "BULGE"
+          ],
+          "notes": "Largest flex pose on the page, full-width bleed panel, peak grin, biggest arms/chest/abs so far, energy radiating outward with speed lines."
+        }
+      ],
+      "page_notes": "distance_spread=2; flat_panel_count=0; A torn-muscle detail inset followed by three repeats of the same double-bicep flex pose growing larger panel to panel, culminating in a full-width peak flex with a BOOM."
+    },
+    {
+      "page": 15,
+      "role": "buildup",
+      "growth_state": "trigger",
+      "panel_count": 6,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast"
+          ],
+          "expression": "neutral",
+          "expression_intensity": 1,
+          "growth_focus": false,
+          "body_part_focus": "glutes",
+          "sfx": [
+            "ZZZZZ",
+            "ZZZZZ"
+          ],
+          "notes": "Wide establishing shot on a beach dune; Poppy's oversized glutes fill the foreground creating scale contrast against two crew members sleeping on the sand above, with a dialogue callout top-left."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "effort",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "arms",
+          "sfx": [
+            "RIP!!"
+          ],
+          "notes": "Two crew members yank a food item apart together, arms extended to both sides, straining faces, dramatic RIP sfx centered in the frame."
+        },
+        {
+          "n": 3,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [
+            "NOM",
+            "NOM",
+            "GULP",
+            "GULP"
+          ],
+          "notes": "Close on face eating a food item rapidly with both hands, eyes shut, cheeks working."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "strain",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "face",
+          "sfx": [
+            "NOM",
+            "GULP",
+            "GULP",
+            "GULP"
+          ],
+          "notes": "Closer, more frantic eating close-up, head tilted further back, eyebrows furrowed with effort."
+        },
+        {
+          "n": 5,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "BOING"
+          ],
+          "notes": "Shock reaction as growth begins, arms out to sides, lightning crackling, chest and arm start to bulge under clothing."
+        },
+        {
+          "n": 6,
+          "shot_distance": "MS",
+          "angle": "eye",
+          "staging": [
+            "diagonal"
+          ],
+          "expression": "shock",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BULGE",
+            "BULGE"
+          ],
+          "notes": "Second crew member's shock reaction to the growth trigger, chest already fuller than her companion's, lightning crackling, hand raised near chest in surprise."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; Tonal pivot: Poppy wakes her sleeping crew, they tear open and frantically eat a food item, then both begin to visibly bulge and react with shock as a new growth trigger takes hold."
+    },
+    {
+      "page": 16,
+      "role": "active-growth",
+      "growth_state": "mid",
+      "panel_count": 4,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "MCU",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg"
+          ],
+          "expression": "shock",
+          "expression_intensity": 3,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BOING",
+            "STRETCHHHH",
+            "BOING",
+            "STRETCHHHH"
+          ],
+          "notes": "Two crew members stacked in one frame, both chests bursting through their shirts; static frontal crop with slight foreground/background overlap between the two figures."
+        },
+        {
+          "n": 2,
+          "shot_distance": "ECU",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "diagonal",
+            "foreshortening"
+          ],
+          "expression": "ecstasy",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "chest",
+          "sfx": [
+            "BOING",
+            "RRRIIIP",
+            "BOING",
+            "RRRIIIP",
+            "SNAP"
+          ],
+          "notes": "Extreme close-up on chest filling most of the frame with the garment tearing at the seam; a second reaction is stacked below with a strap snapping. [Orchestrator override: face reads tongue-out/half-lidded ecstasy even though her own dialogue line is an alarmed question ('CAPTAIN WHATS HAPPENING?!'); tagged to the drawn expression, not the dialogue tone."
+        },
+        {
+          "n": 3,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression": "strain",
+          "expression_intensity": 2,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "BULGE",
+            "BULGE",
+            "BULGE",
+            "STRETCHHHH",
+            "STRETCHHHH"
+          ],
+          "notes": "Close rear/three-quarter view of two crew stacked together, arm and shoulder muscle splitting the sleeve seams."
+        },
+        {
+          "n": 4,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "depth-fg-bg",
+            "low-hero"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "back",
+          "sfx": [
+            "RIIPP!",
+            "RIIPP!",
+            "BULGE",
+            "BOING",
+            "BOING"
+          ],
+          "notes": "Close rear view: torn sleeve and shirt seams across the back as shoulder and glute muscle push outward; confident grin glancing back toward camera."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; Chain-reaction growth spreads across multiple crew simultaneously (chest and arm/back growth bursting through clothing in every panel) while one crew member calls out to the captain in alarm; page reads as the kinetic middle of a transformation event, not yet a settled aftermath."
+    },
+    {
+      "page": 17,
+      "role": "cliffhanger",
+      "growth_state": "peak",
+      "panel_count": 3,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "CU",
+          "angle": "eye",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast",
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": true,
+          "body_part_focus": "full",
+          "sfx": [
+            "RIIIPP",
+            "RIIIPP",
+            "RIIIPP",
+            "BULGE",
+            "BULGE",
+            "BULGE",
+            "BOING",
+            "BOING"
+          ],
+          "notes": "Triptych of close vignettes composited in one wide panel -- a torn sleeve over a back/glute, a flexed bicep with a confident grin, and a front chest/abs flex -- showing several crew mid-transformation into full muscle."
+        },
+        {
+          "n": 2,
+          "shot_distance": "MCU",
+          "angle": "low",
+          "staging": [
+            "diagonal",
+            "low-hero"
+          ],
+          "expression": "joy",
+          "expression_intensity": 5,
+          "growth_focus": true,
+          "body_part_focus": "arms",
+          "sfx": [
+            "BULGE!",
+            "RIIIPP",
+            "BOING!"
+          ],
+          "notes": "Two crew stand chest-up, arms flexed into full biceps side by side, beaming with pride at their new size."
+        },
+        {
+          "n": 3,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "depth-fg-bg",
+            "scale-contrast",
+            "foreshortening",
+            "diagonal"
+          ],
+          "expression": "smug",
+          "expression_intensity": 4,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [
+            "BOOOM",
+            "FLEX",
+            "BULGE",
+            "BOING",
+            "SQUEEZE",
+            "SQUEEZE"
+          ],
+          "notes": "Full-bleed splash: a swirling energy portal with descending lightning bolts behind the captain rallying her now hyper-muscular crew, several of whom flex in the foreground at different depths as the issue closes."
+        }
+      ],
+      "page_notes": "distance_spread=3; flat_panel_count=0; Issue-1 payoff/cliffhanger page -- growth completes across the crew in two flex-strip panels of close vignettes, then a full-bleed splash reveals the whole crew hyper-muscular as the captain rallies them for a next-issue hook (TO BE CONTINUED / revenge brewing)."
+    },
+    {
+      "page": 18,
+      "role": "cover",
+      "growth_state": "peak",
+      "panel_count": 1,
+      "panels": [
+        {
+          "n": 1,
+          "shot_distance": "WS",
+          "angle": "low",
+          "staging": [
+            "scale-contrast",
+            "depth-fg-bg",
+            "diagonal"
+          ],
+          "expression": "determination",
+          "expression_intensity": 3,
+          "growth_focus": false,
+          "body_part_focus": "full",
+          "sfx": [],
+          "notes": "Cover splash: a giant flexing silhouette looms over a rocky bay behind three foreground cast members, including a heavily muscled captain cropped at the chest in the corner."
+        }
+      ],
+      "page_notes": "distance_spread=1; flat_panel_count=0; Issue-2 cover, excluded from issue-1's growth-page ratio. Single splash panel using a giant flexing silhouette as a growth teaser looming above a normal-scale cast lineup that includes an already-muscular captain figure cropped in the foreground corner."
+    }
+  ],
+  "scene_breakdown": [
+    {
+      "scene": "poppy-spinach-transformation",
+      "pages": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "type": "active-growth",
+      "escalation_devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "zoom-escalation",
+        "size-comparison",
+        "sfx-driven",
+        "full-body-reveal"
+      ]
+    },
+    {
+      "scene": "poppy-power-fight-and-fade",
+      "pages": [
+        9,
+        10
+      ],
+      "type": "aftermath",
+      "escalation_devices": [
+        "size-comparison",
+        "reaction-intercut"
+      ]
+    },
+    {
+      "scene": "captain-crew-spinach-transformation",
+      "pages": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "type": "active-growth",
+      "escalation_devices": [
+        "multi-panel-progressive",
+        "clothing-destruction",
+        "zoom-escalation",
+        "size-comparison",
+        "slow-burn",
+        "reaction-intercut",
+        "sfx-driven",
+        "full-body-reveal"
+      ]
+    }
+  ],
+  "strengths": [
+    "The book runs TWO complete transformation arcs off one Popeye-pastiche mechanic (spinach = strength) instead of one-and-done: Poppy's temporary growth (p5-8) pays off in a fight then visibly fades (p10), and the captain's crew's permanent growth (p12-17) pays off in a cliffhanger rally -- doubling the growth-page count without repeating the same beat.",
+    "The 'flex ladder' -- the exact same double-biceps pose redrawn 3x at increasing panel scale -- is a dead-simple, highly legible escalation device used twice (p8 panels 2-4; p14 panels 2-4). Directly reusable as a 3-shot CGI sequence.",
+    "p13's progressive body-part ECU column (chest→chest→abs→glutes across 4 sequential panels, unified by one continuous lightning-bolt motif and stacked SWELL/BULGE/RIIIP sfx) is a clean, reusable multi-panel-progressive template.",
+    "The dynamic camera bias is not reserved for money shots -- even p1 panel 4, a plain map-tearing beat with zero growth content, gets a low-angle chest-height bicep flex. Only 6 of 79 panels (7.6%) are flat-level across the whole book.",
+    "SFX chains (BULGE/RIIIP/SWELL/BOING, heaviest p13-14 and p16-17) carry growth sensation cheaply even when a panel goes faceless or backgroundless -- the zoom-escalation device works because the sfx does real narrative work, not just noise.",
+    "Scale-contrast onlookers sell the size payoff economically: tiny reacting pirates below Poppy's silhouette (p9 panels 2-3) and a normal-scale captain flanked by hyper-muscular crew in the closing splash (p17 panel 3) sell scale without needing a ruler or prop."
+  ],
+  "weaknesses": [
+    "Faceless growth ECUs recur in both arcs -- p7 panels 2 & 4, p8 panel 1, p13 panels 3-4, p14 panel 1 -- the same 'money-shot goes faceless' defect flagged in the ultragal comparison comic. A cut-in reaction face during these body-part ECUs would close the gap cheaply (the book already does this well elsewhere, e.g. p13 panel 2, p14 panels 3-4).",
+    "Pages 9-11 sag the pacing: after Poppy's growth peaks on p8, the book spends a fight (p9), a fade-out (p10), and a slow re-discovery walk (p11) before Act 2's growth restarts on p12 -- three pages of connective tissue right after the first payoff cool the momentum.",
+    "Panel-boundary legibility gets shaky on the busiest layout pages -- p3's borderless energy backdrop with floating insets, p11's giant foreground object spanning two tiers, and p12's two growth beats merged into one wide panel were all flagged as genuine reading-order judgment calls by the analysts; worth a human pass to confirm intended order.",
+    "The 'muscle literally breaks the panel border' trick (p8 panel 4, p14 panel 4) is a 2D-only flourish -- it reads as scale in ink but has no single-camera equivalent; a CGI version needs a substitute (extreme frame-crop / foreground-fills-lens) rather than a literal border break.",
+    "Distance monotony inside both growth bursts: pages 6, 7, 8, 13 and 14 each hold to only 2 distinct shot_distances, trading shot-size variety for zoom intensity -- effective as a choice, but it means camera dynamism on those pages is carried entirely by staging/angle, not by distance variety."
+  ]
+}

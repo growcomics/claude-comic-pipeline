@@ -289,3 +289,13 @@ Fix: promote breast scale to a first-class anchor with the same surgical-scoping
 6. Vision-rubric verification of BOTH attributes.
 
 Files swept: `rules/l11_muscular_build.py` (style anchor + lineup-attached block + stage-change block + vision rubric + retry strategy), `references/lessons-learned.md` (L11 section), `references/peak-body-scale.md` (this doc), `references/the-rules-explained.md` (L11 section), `skills/reference-gathering/SKILL.md` (Step 2 lineup instruction), `commands/build-comic.md` (L11 bullet).
+
+---
+
+## Ceiling and the mobility test (added 2026-09-02)
+
+The tier table above says how big each step is; it does not say where to STOP. That is now defined in
+[`size-taste-rules.md`](size-taste-rules.md): the owner-approved Chun-Li anchor frame (Flow media `a4d0b131`,
+tier ≈ 7 on the Sonnet read) plus at most one step, and — the real line — **she must still look like she can
+move** (hard veto). Where mass goes, the waist/abs/bust shape rules, the judge rubric, the per-rung prompt block,
+and the new registry rows BODY-12…16 / CAM-10 live there. Read it before laddering past tier 6.

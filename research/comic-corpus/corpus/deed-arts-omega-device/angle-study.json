@@ -1,0 +1,1121 @@
+{
+  "comic_id": "deed-arts-omega-device",
+  "addendum_version": "1.0",
+  "artist": "Deed Arts",
+  "signature_moves": [
+    {
+      "move": "Rear worm's-eye crossed-arm power pose",
+      "citations": [
+        {
+          "page": 1,
+          "n": 1
+        },
+        {
+          "page": 20,
+          "n": 1
+        },
+        {
+          "page": 21,
+          "n": 1
+        },
+        {
+          "page": 21,
+          "n": 5
+        }
+      ],
+      "steal": "Rig a low tripod camera behind and below the character, shoot the back/glutes filling frame with arms crossed low behind the body; reuse verbatim as a stock 'power reveal' camera setup."
+    },
+    {
+      "move": "Stacked ECU growth-burst sequence",
+      "citations": [
+        {
+          "page": 4,
+          "n": 1
+        },
+        {
+          "page": 4,
+          "n": 2
+        },
+        {
+          "page": 4,
+          "n": 3
+        },
+        {
+          "page": 4,
+          "n": 4
+        }
+      ],
+      "steal": "Storyboard any big growth beat as 3-4 consecutive ECU inserts on different muscle groups (bicep->delt->forearm->glute) rather than one wide shot, with escalating SFX between each."
+    },
+    {
+      "move": "Single-frame ghost-trail growth timeline",
+      "citations": [
+        {
+          "page": 3,
+          "n": 1
+        }
+      ],
+      "steal": "For a compressed transformation beat, composite 3-5 renders of the same pose at increasing scale receding into the background, biggest nearest camera, to fake a 'growth in motion' read without needing N separate panels."
+    },
+    {
+      "move": "Low worm's-eye full-body reveal payoff",
+      "citations": [
+        {
+          "page": 5,
+          "n": 1
+        },
+        {
+          "page": 10,
+          "n": 1
+        },
+        {
+          "page": 41,
+          "n": 1
+        }
+      ],
+      "steal": "Close every major growth/power beat on a low-angle, near-full-frame standing pose with radiating background light/lines \u2014 establish this as the default 'money shot' camera for the pipeline's own climax panels."
+    },
+    {
+      "move": "Foreshortened double-fist-at-camera",
+      "citations": [
+        {
+          "page": 20,
+          "n": 4
+        }
+      ],
+      "steal": "For an anger/power beat, punch both fists toward the lens in strong foreshortening with the face just behind/above them and radiating speed-lines."
+    },
+    {
+      "move": "Planet/environment scale-comparison prop",
+      "citations": [
+        {
+          "page": 41,
+          "n": 1
+        }
+      ],
+      "steal": "Composite a small recognizable reference object (a building, a car, a planet) near the figure's feet or hand to instantly telegraph scale without needing a second character."
+    },
+    {
+      "move": "Cloth/costume-strain as its own beat",
+      "citations": [
+        {
+          "page": 11,
+          "n": 2
+        }
+      ],
+      "steal": "Give a flex-and-tear moment its own dedicated panel with a single big onomatopoeia rather than folding it into a wider action panel."
+    },
+    {
+      "move": "Escalating SFX lettering repetition",
+      "citations": [
+        {
+          "page": 4,
+          "n": 1
+        },
+        {
+          "page": 4,
+          "n": 3
+        },
+        {
+          "page": 4,
+          "n": 4
+        }
+      ],
+      "steal": "Scale the SFX lettering size/repetition (added I's and !'s: RIP->RIIIIIP->RIIIIIIIP) panel-to-panel to nonverbally signal escalating intensity even when the pose itself doesn't change dramatically."
+    }
+  ],
+  "angle_histogram": {
+    "low": 10,
+    "worm": 3,
+    "eye": 20,
+    "dutch": 1
+  },
+  "camera_height_histogram": {
+    "eye": 23,
+    "below-knee": 7,
+    "hip": 3,
+    "chest": 1
+  },
+  "toward_camera_histogram": {
+    "chest": 5,
+    "back": 6,
+    "none": 9,
+    "hand-open": 3,
+    "fist": 4,
+    "forearm": 2,
+    "shoulder": 1,
+    "glute": 1,
+    "thigh": 1,
+    "face": 2
+  },
+  "muscle_sold_histogram": {
+    "chest": 2,
+    "back": 5,
+    "none": 14,
+    "full-silhouette": 3,
+    "arms": 5,
+    "shoulders": 1,
+    "glutes": 2,
+    "abs": 2
+  },
+  "top_steals": [
+    {
+      "page": 1,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low behind the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel."
+    },
+    {
+      "page": 3,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera low and close, staggered ghost-repeats of the same standing pose recede into the distance behind the figure, each one larger and more muscular than the last until the nearest, biggest figure fills the foreground in a double-bicep flex with radiating speed-lines behind him."
+    },
+    {
+      "page": 5,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, radiating speed-lines behind him, filling nearly the whole frame."
+    },
+    {
+      "page": 10,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera at eye height, the figure stands in a three-quarter power pose with one hand near the chin and the other on the hip, weight shifted onto the back leg, sparkles and a radiating burst pattern filling the background behind her silhouette."
+    },
+    {
+      "page": 20,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera at worm's-eye level behind and below a flying figure, arms crossed low behind the back, city rooftops receding tiny below, the back and shoulder mass filling most of the frame."
+    },
+    {
+      "page": 20,
+      "n": 4,
+      "steal_score": 5,
+      "prompt_seed": "Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them, radiating speed-lines filling the background."
+    },
+    {
+      "page": 21,
+      "n": 5,
+      "steal_score": 5,
+      "prompt_seed": "Camera low behind the figure as one arm punches forward into a shattering surface, debris flying, the back and glute mass filling most of the frame, a small startled onlooker in the corner for scale."
+    },
+    {
+      "page": 41,
+      "n": 1,
+      "steal_score": 5,
+      "prompt_seed": "Camera at an extreme low worm's-eye angle looking up past a tiny planet at the figure's feet, straddled stance, arms crossed over the chest, head tipped back, a radiating starburst filling the space behind him so the whole body reads as a silhouette against light."
+    },
+    {
+      "page": 4,
+      "n": 1,
+      "steal_score": 4,
+      "prompt_seed": "Extreme close crop on a flexing bicep tearing through a sleeve, sharp claw-shaped force lines radiating outward, a small triumphant face inset in the upper corner of the frame."
+    },
+    {
+      "page": 21,
+      "n": 1,
+      "steal_score": 4,
+      "prompt_seed": "Camera low and close as the figure lands in a crouch, seen from a three-quarter angle behind and below, impact debris and speed-lines radiating from the point of landing."
+    }
+  ],
+  "avoid": [
+    {
+      "habit": "Impossible crossed-arm forearm interlock in the signature rear pose",
+      "citations": [
+        {
+          "page": 1,
+          "n": 1
+        },
+        {
+          "page": 20,
+          "n": 1
+        },
+        {
+          "page": 21,
+          "n": 1
+        },
+        {
+          "page": 21,
+          "n": 5
+        }
+      ],
+      "why": "Reads fine as flat linework but the forearms overlap in ways a rigged 3D figure can't physically replicate; re-block the arm crossing for CGI."
+    },
+    {
+      "habit": "Claw-shaped radiating force lines drawn directly onto the muscle surface",
+      "citations": [
+        {
+          "page": 4,
+          "n": 1
+        },
+        {
+          "page": 4,
+          "n": 2
+        },
+        {
+          "page": 4,
+          "n": 3
+        },
+        {
+          "page": 4,
+          "n": 4
+        }
+      ],
+      "why": "A 2D FX convention with no 3D equivalent; replace with practical rim light, particle dust, or a post-process glow instead of trying to model the lines."
+    },
+    {
+      "habit": "Solid-black cape/cloth tearing into hard graphic shapes",
+      "citations": [
+        {
+          "page": 4,
+          "n": 2
+        }
+      ],
+      "why": "Reads as fabric only through flat silhouette; needs an actual cloth simulation with real tear geometry to survive the move to 3D."
+    },
+    {
+      "habit": "Stacked-ghost-repeat single-panel growth timeline",
+      "citations": [
+        {
+          "page": 3,
+          "n": 1
+        }
+      ],
+      "why": "A compositing trick, not a single-camera shot; a literal one-shot recreation isn't possible, it must be built as a multi-render composite."
+    },
+    {
+      "habit": "Halo/glow rim outlining entire figures against the background",
+      "citations": [
+        {
+          "page": 0,
+          "n": 1
+        },
+        {
+          "page": 1,
+          "n": 1
+        },
+        {
+          "page": 3,
+          "n": 1
+        },
+        {
+          "page": 5,
+          "n": 1
+        },
+        {
+          "page": 10,
+          "n": 1
+        },
+        {
+          "page": 41,
+          "n": 1
+        }
+      ],
+      "why": "A flat ink/shader trick; needs to become genuine rim/backlighting in the 3D render rather than a uniform outline."
+    }
+  ],
+  "pages": [
+    {
+      "page": 0,
+      "layout": "single full-bleed poster splash, no grid.",
+      "reading_flow": "top-down: logo -> villain face (upper right) -> hero's glowing chest core (center) -> device (bottom).",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing, arms crossed over the chest, chin low, confident grin",
+          "pose_family": "stance-power",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "scale-contrast",
+            "rim-light",
+            "silhouette"
+          ],
+          "toward_camera": "chest",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 3,
+          "notes": "Standard poster hero pose; onlookers scaled down around him to sell size.",
+          "prompt_seed": "Camera at eye height on a figure standing with arms crossed over his chest, his rim-lit torso glowing at its center, smaller figures scaled down around him to sell his size."
+        }
+      ]
+    },
+    {
+      "page": 1,
+      "layout": "single full-bleed poster splash, no grid.",
+      "reading_flow": "top-down: logo -> laughing face (top) -> huge crossed-arm back mass (center) -> small onlookers (bottom).",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing, arms crossed behind the lower back, weight forward, chin up laughing",
+          "pose_family": "stance-power",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "foreshortening",
+            "scale-contrast",
+            "overlap",
+            "rim-light"
+          ],
+          "toward_camera": "back",
+          "body_line": "c-curve",
+          "crop": "bleed",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 5,
+          "notes": "Signature rear worm's-eye crossed-arm shot; reused in-story on p20.",
+          "prompt_seed": "Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low behind the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel."
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "layout": "3-row inked grid (2 panels / 2 panels / 3 panels) with a borderless bleed panel across the bottom.",
+      "reading_flow": "left-to-right, top-to-bottom through the grid, then the bottom bleed panel breaks the border to mark the trigger moment.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing, one arm raised pointing off-panel, chest forward",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "notes": "Plain confrontation MCU, minimal reusable staging."
+        },
+        {
+          "n": 2,
+          "pose": "two figures standing side by side against a brick wall, one arms-crossed",
+          "pose_family": "stance-power",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "scale-contrast"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 2,
+          "notes": "Early, non-transformed scale-contrast baseline before any growth.",
+          "prompt_seed": "Camera at eye height on two figures against a plain brick wall, the larger one filling noticeably more vertical frame than the other to sell a size gap before any transformation."
+        },
+        {
+          "n": 3,
+          "pose": "two figures standing close, one holding a small device out",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 0,
+          "notes": "Plain dialogue two-shot, nothing to steal."
+        },
+        {
+          "n": 4,
+          "pose": "three figures standing in a row, one arms-crossed",
+          "pose_family": "stance-power",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "scale-contrast"
+          ],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 1,
+          "notes": "Three-figure intimidation line-up, mild scale read."
+        },
+        {
+          "n": 5,
+          "pose": "standing figure, arms at sides, slight head tilt",
+          "pose_family": "everyday-idle",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 0,
+          "notes": "Plain reaction inset."
+        },
+        {
+          "n": 6,
+          "pose": "figure extending a device forward, others arrayed behind",
+          "pose_family": "reach-grab",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 2,
+          "notes": "Modest depth staging via layered background figures.",
+          "prompt_seed": "Camera at eye height as a figure holds a small device out toward the lens with his hand open, several onlookers layered behind him for depth."
+        },
+        {
+          "n": 7,
+          "pose": "close hand pressing a button on a handheld device",
+          "pose_family": "reach-grab",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "frame-crop"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "<25",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 2,
+          "notes": "The literal trigger insert \u2014 a generic reusable 'activation' close-up template.",
+          "prompt_seed": "Extreme close insert on a thumb pressing a single button on a small handheld device, tight frame-crop with radiating burst lines around the hand."
+        },
+        {
+          "n": 8,
+          "pose": "one figure passing a small device to another, an energy arc jumping from the device to the receiver's temple",
+          "pose_family": "reach-grab",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "overlap",
+            "other"
+          ],
+          "toward_camera": "hand-open",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 3,
+          "notes": "The bleed/ghost treatment on the trigger handoff is a nice transition device.",
+          "prompt_seed": "Camera at eye height on a hand passing a small glowing device to a second figure, a thin energy arc connecting the device to the receiver's temple, the panel bleeding into a smoky borderless background rather than a hard frame."
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "layout": "single full-bleed splash with no panel borders; five staggered figures of increasing scale stacked toward the viewer against radial speed-line perspective.",
+      "reading_flow": "top (small, distant, ordinary) to bottom (huge, near, flexing) \u2014 the eye travels down and toward the viewer, tracing the growth escalation as a single implied camera push-in.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "walking toward camera through a progression of forward flexes, ending in a full double-bicep flex with the chest thrust out",
+          "pose_family": "flex-display",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "scale-contrast",
+            "foreshortening",
+            "motion-line",
+            "cloth-strain",
+            "silhouette"
+          ],
+          "toward_camera": "fist",
+          "body_line": "x-spread",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "notes": "A genuinely novel, highly reusable staging device: a single-frame 'growth flipbook' using scale + repetition + speed lines.",
+          "prompt_seed": "Camera low and close, staggered ghost-repeats of the same standing pose recede into the distance behind the figure, each one larger and more muscular than the last until the nearest, biggest figure fills the foreground in a double-bicep flex with radiating speed-lines behind him."
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "layout": "4-panel vertical stack of ECU inserts (1 borderless top-left with face inset, 3 hard-bordered boxes below), each panel dominated by its own giant SFX lettering.",
+      "reading_flow": "top-to-bottom, each panel a tighter/louder muscle-tear beat than the last, ending on the loudest SFX at the bottom.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "close bicep flex with the face inset above, claw-shaped force lines radiating off the muscle",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "frame-crop",
+            "motion-line",
+            "cloth-strain"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "long-compressed",
+          "panel_shape": "bleed",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "notes": "Rare case in this sequence where a face rides along with the muscle ECU.",
+          "prompt_seed": "Extreme close crop on a flexing bicep tearing through a sleeve, sharp claw-shaped force lines radiating outward, a small triumphant face inset in the upper corner of the frame."
+        },
+        {
+          "n": 2,
+          "pose": "close shoulder/trap mass tearing through a dark garment",
+          "pose_family": "flex-display",
+          "muscle_sold": "shoulders",
+          "sell_mechanism": [
+            "contact-deform",
+            "cloth-strain",
+            "frame-crop"
+          ],
+          "toward_camera": "shoulder",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "long-compressed",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "notes": "Faceless but strong contact-deform/cloth-strain read; abstracted to pure texture.",
+          "prompt_seed": "Extreme close-up on a shoulder and trapezius mass ripping through a dark garment, the torn fabric edge visible against the muscle, no other body parts in frame."
+        },
+        {
+          "n": 3,
+          "pose": "two overlapping arm masses flexing, claw-shaped lines radiating",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "overlap",
+            "motion-line",
+            "frame-crop"
+          ],
+          "toward_camera": "forearm",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "long-compressed",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "notes": "Most abstracted panel on the page \u2014 pure muscle texture and SFX.",
+          "prompt_seed": "Extreme wide close-up filled edge-to-edge with overlapping forearm and bicep masses, sharp radiating force-lines, no face or background visible."
+        },
+        {
+          "n": 4,
+          "pose": "close hip/glute mass bursting outward",
+          "pose_family": "flex-display",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "contact-deform",
+            "frame-crop",
+            "cloth-strain"
+          ],
+          "toward_camera": "glute",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "long-compressed",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "notes": "Closing beat of the ECU run \u2014 biggest SFX lettering pairs with the biggest muscle mass.",
+          "prompt_seed": "Extreme close-up on a hip and glute mass pressing outward against strained fabric, the biggest single onomatopoeia of the sequence stacked above it, no other body parts visible."
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "layout": "single full-bleed splash, no grid.",
+      "reading_flow": "the radial speed-lines pull the eye straight to the centered figure striding out of the vanishing point toward the viewer.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "walking forward, arms flexed out to the sides in a lat-spread/most-muscular stance, chin up",
+          "pose_family": "flex-display",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "silhouette",
+            "motion-line",
+            "scale-contrast"
+          ],
+          "toward_camera": "thigh",
+          "body_line": "x-spread",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "notes": "The classic transformation 'payoff' splash \u2014 matched by p10 and p41 later in the set.",
+          "prompt_seed": "Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, radiating speed-lines behind him, filling nearly the whole frame."
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "layout": "single full-bleed splash, no grid, huge SFX lettering across the top third.",
+      "reading_flow": "SFX burst at top pulls the eye down into the centered figure, which fills the rest of the frame.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing three-quarter, one hand raised near the chin, other hand on hip, weight shifted onto the back leg",
+          "pose_family": "flex-display",
+          "muscle_sold": "chest",
+          "sell_mechanism": [
+            "silhouette",
+            "rim-light",
+            "frame-crop"
+          ],
+          "toward_camera": "chest",
+          "body_line": "s-curve",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "notes": "The corpus's clearest reveal-via-SFX device \u2014 impact sold entirely by lettering + sparkle background, no build-up panels present in this sample.",
+          "prompt_seed": "Camera at eye height, the figure stands in a three-quarter power pose with one hand near the chin and the other on the hip, weight shifted onto the back leg, sparkles and a radiating burst pattern filling the background behind her silhouette."
+        }
+      ]
+    },
+    {
+      "page": 11,
+      "layout": "3-row grid, 2 panels per row (one row has an uneven wide/narrow split), tone shifts from action to a soft pink pillow-talk palette.",
+      "reading_flow": "left-to-right, top-to-bottom, alternating between the two characters each row (bookend flex portraits, then a costume/body beat, then a close interaction).",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing, one fist raised near the shoulder in a half-bicep flex, other hand unseen",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "silhouette"
+          ],
+          "toward_camera": "fist",
+          "body_line": "s-curve",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "notes": "Simple confident flex portrait, decent but not a top steal.",
+          "prompt_seed": "Camera at eye height, the figure stands with one fist raised near the shoulder in a half bicep flex against a soft patterned background, waist-up crop."
+        },
+        {
+          "n": 2,
+          "pose": "standing, torso flexed forward, costume tearing at the hip",
+          "pose_family": "flex-display",
+          "muscle_sold": "abs",
+          "sell_mechanism": [
+            "cloth-strain",
+            "contact-deform"
+          ],
+          "toward_camera": "chest",
+          "body_line": "c-curve",
+          "crop": "waist-up",
+          "camera_height": "hip",
+          "lens_feel": "normal",
+          "panel_shape": "tall",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 3,
+          "notes": "Good cloth-strain example distinct from the earlier nude growth ECUs.",
+          "prompt_seed": "Camera low near hip height looking up at a flexing torso, the costume visibly tearing along a seam at the hip with jagged rip lines."
+        },
+        {
+          "n": 3,
+          "pose": "close torso composition, small laughing face inset above",
+          "pose_family": "other",
+          "muscle_sold": "abs",
+          "sell_mechanism": [
+            "frame-crop"
+          ],
+          "toward_camera": "chest",
+          "body_line": "c-curve",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 1,
+          "notes": "Explicit panel \u2014 composition only: tight torso crop with a small face inset above; content limits reuse."
+        },
+        {
+          "n": 4,
+          "pose": "figure seen from behind/profile, hair swept forward over one shoulder",
+          "pose_family": "other",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "silhouette"
+          ],
+          "toward_camera": "back",
+          "body_line": "c-curve",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 3,
+          "notes": "Clean back/lat profile silhouette, decent reuse value.",
+          "prompt_seed": "Camera at eye height on a back-and-shoulder profile, hair swept forward off one shoulder, weight settled on one hip."
+        },
+        {
+          "n": 5,
+          "pose": "double bicep flex, arms raised and crossed near the head, two small face insets riding the arm",
+          "pose_family": "flex-display",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "foreshortening",
+            "frame-crop"
+          ],
+          "toward_camera": "fist",
+          "body_line": "x-spread",
+          "crop": "chest-up",
+          "camera_height": "hip",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 3,
+          "notes": "Strong foreshortening on the near arm; small inset faces are a cute compositing trick.",
+          "prompt_seed": "Camera low, a double-bicep flex fills most of the frame with both fists raised near the head, foreshortened forearms closest to the lens."
+        },
+        {
+          "n": 6,
+          "pose": "close two-figure interaction",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "body-part-only",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "inset",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": true,
+          "steal_score": 0,
+          "notes": "Explicit content, no reusable staging beyond simple close two-figure framing \u2014 content-safety rule applied, no further description."
+        }
+      ]
+    },
+    {
+      "page": 20,
+      "layout": "2x2-ish grid: one tall panel left spanning two rows, two stacked panels top-right, one large wide panel across the bottom.",
+      "reading_flow": "tall establishing panel (left) read first, then down the stacked right column (thought -> reaction), then the bottom panel lands the punchline both verbally and visually.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "flying pose, arms crossed low behind the back, seen from behind and below",
+          "pose_family": "stance-power",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "foreshortening",
+            "scale-contrast",
+            "silhouette"
+          ],
+          "toward_camera": "back",
+          "body_line": "c-curve",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "tall",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "notes": "Third instance of the signature rear crossed-arm shot in this delivery.",
+          "prompt_seed": "Camera at worm's-eye level behind and below a flying figure, arms crossed low behind the back, city rooftops receding tiny below, the back and shoulder mass filling most of the frame."
+        },
+        {
+          "n": 2,
+          "pose": "profile face, hand near chin in a thinking gesture",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "face",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "notes": "Plain talking-head beat."
+        },
+        {
+          "n": 3,
+          "pose": "wide-eyed startled face, close crop",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "face",
+          "body_line": "straight",
+          "crop": "chest-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 1,
+          "notes": "Reaction beat, minimal staging."
+        },
+        {
+          "n": 4,
+          "pose": "both fists thrust toward the lens in strong foreshortening, face behind them",
+          "pose_family": "action-strike",
+          "muscle_sold": "arms",
+          "sell_mechanism": [
+            "foreshortening",
+            "motion-line"
+          ],
+          "toward_camera": "fist",
+          "body_line": "x-spread",
+          "crop": "chest-up",
+          "camera_height": "chest",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 5,
+          "notes": "The page's dynamic climax panel \u2014 directly reusable foreshortened power-punch template.",
+          "prompt_seed": "Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them, radiating speed-lines filling the background."
+        }
+      ]
+    },
+    {
+      "page": 21,
+      "layout": "3-row grid, 2 panels per row; bottom-left panel is the largest, echoing the top-left panel's rear-view low angle.",
+      "reading_flow": "left-to-right, top-to-bottom through three beats of escalating destruction, ending on a radio-alarm reaction panel.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "crouched landing pose, seen from a low three-quarter rear angle",
+          "pose_family": "crouch-coil",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "foreshortening",
+            "motion-line"
+          ],
+          "toward_camera": "back",
+          "body_line": "coil-crouch",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": false,
+          "steal_score": 4,
+          "notes": "Strong low-angle landing beat, good foreshortening on the crouched legs.",
+          "prompt_seed": "Camera low and close as the figure lands in a crouch, seen from a three-quarter angle behind and below, impact debris and speed-lines radiating from the point of landing."
+        },
+        {
+          "n": 2,
+          "pose": "walking forward, seen from directly behind, arms swinging slightly",
+          "pose_family": "walk-stride",
+          "muscle_sold": "back",
+          "sell_mechanism": [
+            "overlap",
+            "silhouette"
+          ],
+          "toward_camera": "back",
+          "body_line": "straight",
+          "crop": "full",
+          "camera_height": "hip",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "50-75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 4,
+          "notes": "Clean depth-staged walk-in, background figure adds scale read.",
+          "prompt_seed": "Camera at hip height directly behind a figure walking toward a building entrance, a smaller figure standing in the doorway ahead for depth and scale."
+        },
+        {
+          "n": 3,
+          "pose": "figure knocked backward through the air, limbs splayed",
+          "pose_family": "struggle-restraint",
+          "muscle_sold": "none",
+          "sell_mechanism": [
+            "motion-line",
+            "tangent-break"
+          ],
+          "toward_camera": "none",
+          "body_line": "diagonal-lean",
+          "crop": "full",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 2,
+          "notes": "Good impact staging though the muscle character itself is off-panel.",
+          "prompt_seed": "A figure sent flying backward at a steep diagonal into a stack of boxes, motion lines trailing behind, debris scattering on impact."
+        },
+        {
+          "n": 4,
+          "pose": "two figures standing, startled expressions, one gesturing",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 0,
+          "notes": "Plain reaction two-shot."
+        },
+        {
+          "n": 5,
+          "pose": "seen from behind, one arm punched forward into debris, weight forward",
+          "pose_family": "action-strike",
+          "muscle_sold": "glutes",
+          "sell_mechanism": [
+            "foreshortening",
+            "contact-deform",
+            "overlap"
+          ],
+          "toward_camera": "back",
+          "body_line": "diagonal-lean",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "wide",
+          "figure_scale": ">75",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 5,
+          "notes": "Fourth and best rear-view power shot in the delivery \u2014 combines the signature glute/back framing with a clear contact-deform action.",
+          "prompt_seed": "Camera low behind the figure as one arm punches forward into a shattering surface, debris flying, the back and glute mass filling most of the frame, a small startled onlooker in the corner for scale."
+        },
+        {
+          "n": 6,
+          "pose": "two figures reacting to a beeping alarm device",
+          "pose_family": "other",
+          "muscle_sold": "none",
+          "sell_mechanism": [],
+          "toward_camera": "none",
+          "body_line": "straight",
+          "crop": "waist-up",
+          "camera_height": "eye",
+          "lens_feel": "normal",
+          "panel_shape": "wide",
+          "figure_scale": "25-50",
+          "onlooker_in_frame": true,
+          "explicit": false,
+          "steal_score": 0,
+          "notes": "Plain closing reaction panel."
+        }
+      ]
+    },
+    {
+      "page": 41,
+      "layout": "single full-bleed cosmic splash, no grid, jagged 'HAHAHAHAHA!!!!!' lettering arcs across the top.",
+      "reading_flow": "the laughter lettering arcs the eye down into the straddling figure, then down further to the tiny Earth at his feet, making the scale comparison explicit.",
+      "panels": [
+        {
+          "n": 1,
+          "pose": "standing astride, weight on both planted legs, arms crossed over the chest, head thrown back laughing",
+          "pose_family": "stance-power",
+          "muscle_sold": "full-silhouette",
+          "sell_mechanism": [
+            "scale-contrast",
+            "foreshortening",
+            "silhouette",
+            "rim-light"
+          ],
+          "toward_camera": "chest",
+          "body_line": "x-spread",
+          "crop": "full",
+          "camera_height": "below-knee",
+          "lens_feel": "wide-distorted",
+          "panel_shape": "bleed",
+          "figure_scale": ">75",
+          "onlooker_in_frame": false,
+          "explicit": true,
+          "steal_score": 5,
+          "notes": "The corpus's most extreme scale-comparison device \u2014 literal planet-sized figure.",
+          "prompt_seed": "Camera at an extreme low worm's-eye angle looking up past a tiny planet at the figure's feet, straddled stance, arms crossed over the chest, head tipped back, a radiating starburst filling the space behind him so the whole body reads as a silhouette against light."
+        }
+      ]
+    }
+  ]
+}

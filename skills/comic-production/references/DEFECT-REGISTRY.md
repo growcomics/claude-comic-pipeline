@@ -272,6 +272,69 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: generate a staging ref first, then re-roll.
 - **Links**: D9 · staging JSON pattern (cheer-ascension/manila).
 
+### BODY-10 · Skin rendered as torn fabric · `skin_torn_as_fabric`
+- **Symptom**: tear/rip/shred texture applied to SKIN instead of the garment — "her SKIN is torn like clothing" (owner B20, "recurring problem"). Also surfaces in animation transitions (2026-07-28 incident).
+- **Root cause**: skin/fabric material confusion under damage vocabulary — same family as WARD-07's skin-fabric gradient.
+- **Severity/Frequency**: BLOCKER (owner insta-kill tier) / M.
+- **Detect**: J (rubric: any tear edge on a skin region) · H. V-feasible — GAP.
+- **Prevent**: damage vocabulary always scoped to fabric at seams ("torn fabric edges"; "skin is never torn"); coverage clamp co-fires.
+- **Repair**: re-roll; do NOT ship.
+- **Links**: owner walkthrough 2026-08-10 B20 · sibling WARD-07 · `research/owner-missed-defects-2026-08-30.md`.
+
+### BODY-11 · Growth plateau across sequence · `growth_plateau`
+- **Symptom**: a growth rung renders no visibly larger than its predecessor — the sequence stalls even though each single image is clean (8 "growth plateaued" annotations; distinct from BODY-02 regression: nothing shrinks, it just stops).
+- **Root cause**: additive deltas too timid at high tiers; model normalizes successive rungs toward the anchor.
+- **Severity/Frequency**: MAJOR (growth IS the product) / H in ladder work.
+- **Detect**: J with neighbour-panel context (compare rung N vs N-1 on the named axes) · H. No V (needs sequence).
+- **Prevent**: explicit per-rung delta language ("visibly larger than the previous panel: bust +X, biceps rivaling head size"); "very"-stacking per the growth ladder.
+- **Repair**: re-roll the rung chained off rung N-1 with the delta doubled.
+- **Links**: bootcamp annotations · `reference_growth_comic_prompt_ladder` memory · L11.
+
+### BODY-12 · Size overshoot past the anchor ceiling · `size_overshoot`
+- **Symptom**: the figure is bigger than the house anchor (Chun-Li `a4d0b131`, ≈ tier 7) plus one step — limbs wider than the torso as featureless spheres, "a bunch of blobs of circles" (Alice ladder rungs 5-8, 2026-09-02).
+- **Root cause**: "go what you think is way too far" + stacked intensifiers with no ceiling, far full-body framing under flat light.
+- **Severity/Frequency**: BLOCKER / M in ladder work.
+- **Detect**: V (compare against the anchor) · J · H.
+- **Prevent**: `size-taste-rules.md` §1 — cap at anchor + 1, keep separation, close camera, light gradient; stop at the last rung that passes BODY-16.
+- **Repair**: re-chain from the last acceptable rung with the delta halved and the mobility clause added.
+- **Links**: `size-taste-rules.md` · `feedback_size_ceiling_calibration` memory.
+
+### BODY-13 · Mass in the wrong place · `mass_wrong_place`
+- **Symptom**: traps, neck, hands, knees, feet or head have grown; a swelling sits where no named muscle is ("not even really a bicep… this weird muscle"); calves swallow the boots.
+- **Root cause**: "her arm gets bigger" wording; models inflate the nearest volume rather than the named muscle.
+- **Severity/Frequency**: BLOCKER / M.
+- **Detect**: V · J · H.
+- **Prevent**: name the growing muscles (biceps lead) and lock the keep-small list every rung (owner's FMG Anatomy Guide p.3).
+- **Repair**: re-roll with per-muscle deltas and the keep-small counter-lock beside them.
+- **Links**: `size-taste-rules.md` §2 · `feedback_muscle_size_master_key` memory.
+
+### BODY-14 · Waist wrong: corset-curved or thick · `waist_wrong`
+- **Symptom**: a corset/wasp curve pinched all the way in (a `(`), or a thick wide waist that "looks like she's fat" even on a cut frame.
+- **Root cause**: "very, very narrow and cinched" stacking → corset; loose framing / no waist clause → thick.
+- **Severity/Frequency**: MAJOR / H.
+- **Detect**: V · J · H.
+- **Prevent**: "narrow waist with straight sides, abs visible" — never cinched/corset/wasp; not thinner than the anchor, never thicker.
+- **Repair**: edit-mode pass on the torso only.
+- **Links**: `size-taste-rules.md` §3 · guide p.4/p.11 · `feedback_waist_straight_sided` memory.
+
+### BODY-15 · Bust not scaled with the muscle · `bust_not_scaled`
+- **Symptom**: chest unchanged while the muscle grew (Alice rungs 1-2), or big but smeared into the torso with no separation (Alice rung 8), or teardrop/sagging.
+- **Root cause**: bust clause missing from early rungs; smooth one-piece bodice; model defaults to average bust.
+- **Severity/Frequency**: MAJOR / H.
+- **Detect**: V · J · H.
+- **Prevent**: bust grows with the muscle from rung 1; round, lifted, "ignores gravity", its own separated projecting mass; glutes scaled to balance.
+- **Repair**: stacked-"very" edit pass on the chest (owner method).
+- **Links**: `size-taste-rules.md` §2-3 · guide p.9/p.14 · `chest-oversize-compensate` memory.
+
+### BODY-16 · Immobile mass · `immobile_mass`
+- **Symptom**: arms welded to the sides as stacked spheres, hands dangling unused, thighs fused, no visible elbow or knee — "doesn't look like she can move anymore… looks like something that's sick" (Alice rung 7, 542bf501).
+- **Root cause**: mass added without articulation; static frontal pose inherited from the chained ref.
+- **Severity/Frequency**: BLOCKER (owner-confirmed HARD VETO) / M at top rungs.
+- **Detect**: V · J · H — ask "could she move?".
+- **Prevent**: bent joints, hands doing something, separated thighs, a stance or step; "agile, athletic, explosive", never "swollen, stiff".
+- **Repair**: re-roll the same size with an action pose; if it still fails, the ladder has passed the ceiling — step back one rung.
+- **Links**: `size-taste-rules.md` §1/§5 S14 · `feedback_peak_must_look_mobile` memory.
+
 ## HAIR
 
 ### HAIR-01 · Hair-state drift · `hair_drift`
@@ -350,6 +413,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-roll with literal anatomy vocabulary.
 - **Links**: qa-report p42 · no lesson yet (loop candidate).
 
+### PROP-04 · Prop/object integrity glitch · `prop_glitch`
+- **Symptom**: physically incoherent object — barbell reduced to an "empty/glitch bar" with the rest lying on the ground (owner B19); floating/duplicated parts; equipment fused with a body; held object not connecting through the grip.
+- **Root cause**: per-region rendering without object-level coherence; complex equipment under occlusion.
+- **Severity/Frequency**: BLOCKER (owner insta-kill tier) / M ("prop mangled" annotation + B19).
+- **Detect**: J (trace every load-bearing prop end to end) · H. V-feasible — GAP.
+- **Prevent**: equipment-integrity sentence when a prop is held/load-bearing ("the barbell renders complete, plates on both ends, bar continuous through her grip").
+- **Repair**: re-roll; i2i rarely fixes structure.
+- **Links**: owner walkthrough 2026-08-10 B19 · `research/owner-missed-defects-2026-08-30.md`.
+
 ## LET — lettering
 
 ### LET-01 · Missing/empty lettering · `missing_lettering`
@@ -387,6 +459,42 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: exact-quote directives ("reads exactly: …"); short lines (split beats per L13).
 - **Repair**: re-roll.
 - **Links**: L19/L4 · qa-checklist §Dialogue.
+
+### LET-05 · Watermark/branding baked in · `watermark_branding`
+- **Symptom**: a rendered wordmark, invented trademark, logo, render-engine credit ("RENDERED IN DAZ STUDIO"), or signature baked into the art — corners and edges are the hot spots.
+- **Root cause**: product-sheet / promo-art training prior; franchise names in prompts invite the franchise wordmark.
+- **Severity/Frequency**: BLOCKER (hard fail no matter the sculpt) / H — 12 of 193 loser annotations in the bootcamp case study ("watermark present").
+- **Detect**: J/H; V-feasible (corner/edge text sweep, no context needed) — GAP.
+- **Prevent**: explicit negation "no text, logos, watermarks, trademarks, or render credits" whenever a franchise/product name appears in the prompt.
+- **Repair**: i2i removal sometimes lands on clean backgrounds; else re-roll.
+- **Links**: bootcamp annotations rounds 2+ · `research/owner-missed-defects-2026-08-30.md`.
+
+### LET-06 · SFX crowding / missing · `sfx_misuse`
+- **Symptom**: sound-effect lettering covers a face or the growth payload, or dominates the frame; or an impact/growth beat that specifies SFX ships with none.
+- **Root cause**: SFX placement unspecified; model sizes display text generously.
+- **Severity/Frequency**: MAJOR / M (6 "SFX crowding" + 1 "SFX missing" annotations).
+- **Detect**: J · H. GAP in V.
+- **Prevent**: per-SFX placement fragment (side of frame, clear of faces/payload, small fraction of frame) in the L19 block.
+- **Repair**: re-roll (baked lettering doesn't patch).
+- **Links**: bootcamp annotations · L19.
+
+### LET-07 · Lettering style inconsistency · `lettering_style_drift`
+- **Symptom**: one bubble breaks the project's uniform balloon style — e.g. a single BLUE bubble in an all-white-bubble book (owner walkthrough B13).
+- **Root cause**: bubble style re-derived per panel; not pinned in the lettering spec.
+- **Severity/Frequency**: MAJOR / M.
+- **Detect**: J; V-feasible (bubble fill/outline comparison — owner called it "easy detector, color histogram") — GAP.
+- **Prevent**: bubble style sentence (fill, outline, font) in every L19 block from the project lettering spec.
+- **Repair**: re-roll the odd panel.
+- **Links**: owner walkthrough 2026-08-10 B13 · Studio `ck_letter_block`.
+
+### LET-08 · Speech bubble on a closed mouth · `bubble_mouth_mismatch`
+- **Symptom**: a character carries a speech balloon while their mouth is fully closed/neutral — "weird to see a speech bubble and then a completely closed mouth" (owner, Gribble/Margo review 2026-08-12).
+- **Root cause**: dialogue baked without a mouth-state directive; face rendered from a neutral ref.
+- **Severity/Frequency**: MAJOR / M.
+- **Detect**: J (speaker's mouth open and matching the line's energy?) · H. V-feasible — GAP.
+- **Prevent**: per-speaker "mouth open, mid-speech" line whenever the panel carries their dialogue (extend the L4/L19 bubble fragment).
+- **Repair**: i2i mouth fix sometimes lands; else re-roll.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D · L4/L19.
 
 ## FACE — expression
 
@@ -482,6 +590,33 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Repair**: re-run i2i with the source panel as first ref + composition-lock opening clause.
 - **Links**: studio/import.php · memory `project_comic_to_3d_importer`.
 
+### CAM-08 · Fourth-wall gaze · `fourth_wall_gaze`
+- **Symptom**: a character makes eye contact with the camera on a beat that is not scripted POV/direct address (owner B7).
+- **Root cause**: forward-facing reference images bias output to face camera (ref-pose bleed).
+- **Severity/Frequency**: MAJOR / M–H (owner: "acceptable only rarely/deliberately").
+- **Detect**: J · H. V-feasible (gaze-at-camera on non-POV beats, plan-matched) — GAP.
+- **Prevent**: 3/4 + profile view packs in refs (L16); per-panel who-looks-at-whom line.
+- **Repair**: re-roll with gaze direction named and a view-matched ref attached.
+- **Links**: owner walkthrough 2026-08-10 B7 · L16 · FACE-03 (gaze line).
+
+### CAM-09 · Payload cropped out of frame · `payload_cropped`
+- **Symptom**: the beat's declared key body region (waist, bust, bicep) is cut off by the frame edge even though camera distance is otherwise right — 6 "waist out of frame" annotations; the growth delta becomes unverifiable.
+- **Root cause**: camera height/crop unspecified; distance vocabulary controls scale but not what the frame keeps.
+- **Severity/Frequency**: MAJOR / H in ladder/lineup work.
+- **Detect**: J (is the named payload region fully in frame?) · H. V-feasible when the plan names the region — GAP.
+- **Prevent**: framing clause naming the payload ("waist to shoulders fully in frame, nothing cropped"); wardrobe-as-feature framing rules.
+- **Repair**: re-roll with the framing clause; outpaint only as last resort.
+- **Links**: bootcamp annotations · CAM-01 (sibling: too far vs cropped).
+
+### CAM-10 · Same camera angle as the previous rung · `same_angle_as_previous`
+- **Symptom**: consecutive ladder rungs share an identical camera — "the same camera angle all the time really, really, really sucks" (owner, 2026-09-02); often paired with a blank eyeline.
+- **Root cause**: the chained ref carries composition; no camera clause in the delta.
+- **Severity/Frequency**: MAJOR / VH in chained ladders.
+- **Detect**: J with neighbour-panel context · H. No V.
+- **Prevent**: a different camera in plain words on every rung plus an eyeline on the part that grew.
+- **Repair**: re-roll with the camera clause hoisted to the front of the prompt.
+- **Links**: `size-taste-rules.md` §4 · `feedback_camera_must_change_every_rung` memory · L40.
+
 ## STYLE
 
 ### STYLE-01 · 2D/illustration drift · `style_2d_drift`
@@ -521,6 +656,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: L1 sequential chaining · L1.5 view-aware anchor choice · L9 job-id discipline · L8 carry-forward blocks.
 - **Repair**: L9 recovery — accept the break and re-chain forward, or re-run from the break.
 - **Links**: L1/L1.5/L8/L9 · `verify_chain.py`.
+
+### CONT-02 · Reflection mismatch · `reflection_mismatch`
+- **Symptom**: a mirror/window/reflective surface shows a different wardrobe, body state, or pose than the character it reflects — "lab coat on when she's looking at the mirror, but the reflection doesn't have the lab coat" (owner, 2026-08-12).
+- **Root cause**: model renders subject and reflection as independent figures; mirror beats are effectively two-character panels.
+- **Severity/Frequency**: MAJOR (mirror beats are usually reveal/money beats) / L overall, near-certain on mirror panels.
+- **Detect**: J (compare reflection to subject garment-by-garment) · H. V-feasible — GAP.
+- **Prevent**: explicit clause on any mirror beat: "the reflection shows her EXACTLY as she appears — same <garments>, same build, mirrored pose."
+- **Repair**: i2i on the reflection region; else re-roll.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D.
 
 ## PAGE — page/chapter structure
 
@@ -597,6 +741,15 @@ L36–L48 for its prevention gates; those reservations stand.
 - **Prevent**: maximal structured prompts (D12 → prompt-template-v4); refs for everything constant.
 - **Repair**: none needed if one variant lands; tighten the spec otherwise.
 - **Links**: D12 · `prompt-template-v4.json`.
+
+### GEN-05 · Reference pack conflates states / off-content · `ref_state_mixup`
+- **Symptom**: process defect in the ref pack itself — pre- and post-transformation assets mixed in one attach set; hands/expressions/faces from the wrong state; a character in the pack who isn't in the story (the Skeletor incident); cropped face refs. Surfaces downstream as IDENT-01/BODY-03/WARD-04.
+- **Root cause**: refs gathered by subject-lookalike, not keyed by story state; no owner-style inspection pass before use ("you must do an inspection to make sure the muscle proportions are still the same" — owner 2026-06-10).
+- **Severity/Frequency**: MAJOR upstream cause / M (Evil-Lyn ref review 2026-08-23).
+- **Detect**: S (ref-manifest review: every ref tagged with character + state, faces uncropped) · H.
+- **Prevent**: state-keyed reference manifests (extends GEN-03/L28); reject cropped face refs at gather time; no unassigned characters in a pack.
+- **Repair**: rebuild the pack state-keyed, then re-roll affected panels.
+- **Links**: `research/owner-missed-defects-2026-08-30.md` §D · GEN-03 · L28.
 
 ### MISC-00 · Other / unclassified · `other`
 - Catch-all for owner flags that fit no class. Every MISC-00 flag with a note is a

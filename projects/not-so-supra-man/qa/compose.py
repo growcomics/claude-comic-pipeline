@@ -142,6 +142,45 @@ def compose_sheet(sheet_id, pass_key):
     if "No text" not in line: line += " " + NEG
     return line, attach, aspect, {"bootstrap": bootstrap, "gate": gate, "tier_job": "t9" in sheet_id.lower()}
 
+def compose_scene(rung_id):
+    """SCENE LADDER plates (added 2026-08-12). compose_page refuses any page whose
+    camera-distance rung is unbanked (D8), but compose_sheet could not express a location
+    plate: its D1 demands >=2 refs (a bootstrap plate has none) and its D7 demands the word
+    'silhouette' (meaningless for an empty room). Location plates get their own checks:
+    they must be EMPTY of people, and every non-wide rung must chain from its parent rung."""
+    specs = json.load(open("references/turnaround-specs.json"))
+    spec = next((s for s in specs.get("scenes", []) if s["id"] == rung_id), None)
+    if not spec: refuse([f"unknown scene rung '{rung_id}' — add it to turnaround-specs.json 'scenes'"])
+    loc, _, rung = rung_id.partition(":")
+    if rung not in ("wide", "medium", "close"):
+        refuse([f"scene rung must be wide|medium|close, got '{rung}'"])
+    prompt, attach = spec["prompt"], list(spec.get("attach", []))
+    errs = []
+    # D15: a location plate must be explicitly empty of people, or characters bleed into
+    # the background reference and then into every page that attaches it.
+    if not re.search(r"no (people|persons|characters|figures|humans)", prompt, re.I):
+        errs.append("D15: scene plate must state that NO people/characters appear in frame")
+    # D8-chain: medium chains from wide, close chains from medium — enforced against the ledger
+    parent = {"medium": "wide", "close": "medium"}.get(rung)
+    if parent:
+        led = ledger()
+        p = ((led.get("scene_ladders", {}).get(loc, {}) or {}).get(parent, {}) or {})
+        if not p.get("flow_id"):
+            errs.append(f"D8-chain: '{loc}:{rung}' must chain from '{loc}:{parent}', which is not banked yet")
+        elif not p.get("disk"):
+            errs.append(f"D8-chain: parent '{loc}:{parent}' has no local disk file to attach")
+        else:
+            attach = [f"PARENT PLATE {loc}:{parent} ({p['disk']})"] + attach
+    if not attach:
+        errs.append("D1: scene plate needs at least the parent plate attached (wides are bootstrap and exempt)"
+                    if parent else None)
+    errs = [e for e in errs if e]
+    if errs: refuse(errs)
+    line = prompt if prompt.endswith(".") else prompt + "."
+    if "NOT illustrated" not in line: line += " " + STYLE
+    if "No text" not in line: line += " " + NEG
+    return line, attach, spec.get("aspect", "16:9"), {"bootstrap": rung == "wide", "gate": "", "tier_job": False}
+
 def state_for(char, panel):
     """Pull this character's costume-state fragment from the panel's combined string."""
     cs = panel.get("costume_state", "") or ""
@@ -278,6 +317,7 @@ def main():
     kind, _, ident = a.job.partition(":")
     if kind == "sheet": prompt, attach, aspect, flags = compose_sheet(ident, a.pass_key)
     elif kind == "page": prompt, attach, aspect, flags = compose_page(ident)
+    elif kind == "scene": prompt, attach, aspect, flags = compose_scene(ident)
     else: refuse([f"unknown job kind '{kind}'"])
     rpath = receipt(a.job, kind, prompt, attach, aspect, flags)
     print(f"COMPOSE OK [{a.job}]  aspect={aspect}  receipt={rpath}")

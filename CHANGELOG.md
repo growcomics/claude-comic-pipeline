@@ -12,6 +12,119 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-09-02
+
+### Added
+
+- **Size-taste rules v1.0 — the ceiling, where mass goes, and the mobility veto** (`skills/comic-production/references/size-taste-rules.md`, 22:30). Built from the owner's *FMG Anatomy Guide* (16 pp, transcribed), a 2026-09-02 calibration Q&A, and the owner's prose ratings of 49 frames from the Alice T-virus ladder and his own Chun-Li ladder. Why: "usually things are too small, but now it's too big" — the Alice ladder's rungs 5-8 were "too big in all the wrong ways and all the wrong places" and nothing in the repo said where to stop. What landed: the anchor frame (Chun-Li, Flow `a4d0b131`, ≈ tier 7) + one step as the ceiling; **the real line is mobility — "the whole point of power is that I want to be able to use the power" — confirmed as a hard veto**; the GO BIG / KEEP SMALL master key (shoulders may grow per owner override); waist = narrow with straight sides, never corset-curved, never thick; abs square and bread-bun; bust round, lifted, separated, growing from rung 1; biceps lead, forearms scale; curves not triangles; asymmetric flow not drumsticks; camera must change every rung with an eyeline; lighting gradient; base sheet must show abs + bust; no ink outlines. Includes a 16-line judge rubric (impact first: light, definition, mobility, camera; anatomy nits are notes not vetoes) and a per-rung prompt block. Pointer added to `peak-body-scale.md`.
+- **Registry v4: BODY-12 `size_overshoot`, BODY-13 `mass_wrong_place`, BODY-14 `waist_wrong`, BODY-15 `bust_not_scaled`, BODY-16 `immobile_mass` (blocker), CAM-10 `same_angle_as_previous`** in `defect-registry.json` + `DEFECT-REGISTRY.md`. Until now the registry had only an UNDER-render class (BODY-01); the oversize/wrong-place/immobile failures from the calibration had no ID. New rows are judge/human-detected (`vision: no`) until a scanner line and ck_type are wired; `studio/inc/defect-taxonomy.php` regenerated, Studio deploy not run.
+- **Deed Arts angle & pose study — first non-Boogie artist in the comic-corpus, and the first MMG entry.** Two owner-commissioned books (*Poppy - The Sailor Gal* 1, FMG, 18pp; *The Omega Device*, MMG, 11 non-contiguous delivery pages) pulled from the artist's Drive share, ingested as `research/comic-corpus/corpus/deed-arts-*` (raw pages gitignored as always), tagged by Sonnet subagents against the rubric plus a new canonical addendum `angle-study-addendum.md` (camera height, body part nearest the lens, muscle sold, crop, body line, per-panel `prompt_seed`). Why: the owner wanted the hand artist's angles, poses, and muscle staging turned into something the 3D pipeline can use, without importing his 2D style. Outputs: `synthesis/deed-arts-staging-study.md` (the write-up: camera never above the head on a muscle beat, something at the lens on 77% of panels, crop makes the sold muscle the widest mass, flex-ladder and ECU-column page templates, 2D→CGI substitution table), `synthesis/angle-deck.md` + `cards.json` (76 appendable camera/pose seeds, built by the new `scripts/angle_deck.py`), Finding 7 in `success-elements.md`.
+- **L40 — Body-to-camera staging** in `lessons-learned.md`, with a matching "Body-to-camera staging" section and ten seed cards in `cinematic-framing.md`. Four questions on every solo muscle panel (camera height, nearest limb, muscle sold + crop, body line). Reference + deck only; no gate change.
+
+### Changed
+
+- `research/comic-corpus/schema/beats.schema.json`: `page` minimum 1 → 0 so artist-numbered covers (p0) validate without renumbering.
+- `corpus_stats.py` output now includes the two Deed Arts entries; the corpus growth-page ratio is 51% across 11 entries.
+
+## 2026-08-31
+
+### Added
+
+- **3 more defect classes from deep transcript mining (round 2)** — LET-08 `bubble_mouth_mismatch` (speech balloon on a closed mouth), CONT-02 `reflection_mismatch` (mirror shows different wardrobe/state than the subject), GEN-05 `ref_state_mixup` (ref packs conflating pre/post-transformation states, extraneous characters, cropped face refs — the Evil-Lyn review). Why: the owner asked for a deeper pass on past sessions where they listed image problems bug-ticket style; a full-corpus sweep (232 transcripts, all human messages) surfaced ~15 defect-listing sessions (Chun-Li May, Gribble/Margo Aug 11-12, Evil-Lyn Aug 23, Müller video Aug 25-27). Registry v3, 68 classes. Incident tables in `research/owner-missed-defects-2026-08-30.md` §D, including a video-lane list kept OUT of the registry (belongs to the Seedance lessons).
+
+## 2026-08-30
+
+### Added
+
+- **8 new defect-registry classes from the owner-missed-defects investigation** (LET-05 `watermark_branding`, LET-06 `sfx_misuse`, LET-07 `lettering_style_drift`, BODY-10 `skin_torn_as_fabric`, BODY-11 `growth_plateau`, PROP-04 `prop_glitch`, CAM-08 `fourth_wall_gaze`, CAM-09 `payload_cropped`). Why: mining session transcripts + the 21-round bootcamp annotations (`~/Documents/bootcamp-casestudy/data/annotations.json`) surfaced defect types the owner repeatedly flags that had no registry row — so QA passes couldn't be held to them. Registry version 2 in `defect-registry.json` (65 classes) + narrative rows in `DEFECT-REGISTRY.md`. Full incident catalogue and vocabulary cross-reference: `research/owner-missed-defects-2026-08-30.md`. Studio's `inc/defect-taxonomy.php` is generated from the JSON — regenerate on next Studio deploy (`scripts/gen_defect_taxonomy.py`).
+
+### Fixed
+
+- **The release board reported GrowGetter Weekly as "dry" while it was actively publishing.** Pages of *Magna - Rise of an Ultra-Villainess* (art TMGF, colors Chris) had been going up every Monday; the board simply had no rows, and because the dry badge is computed from board data alone, an incomplete board produced a confident false negative that was then repeated to the owner as fact. Added the verified run (2026-08-17, 5 weeks, through 09-14) plus the planned Wrench switchover from 09-21.
+
+### Added
+- **Reconciler blind spot closed + Magna re-modelled.** Alternate explained the lane's real mechanism: weekly posting frequently means UPDATING an existing post (unlocking previously Premium-exclusive pages for free users, or dropping Wrench's pages into the Magna post) rather than publishing anything new — so those weeks leave no new WP post and no new DeviantArt upload, and a publish-date-only check reports an active lane as silent. The reconciler now treats a post's `modified` date as activity too. Separately, the Magna weekly run had been written as a single 5-week bar marked `posted`, which mislabelled four future weeks as already published; it is now split into the posted week (08-17) and the remaining scheduled weeks (08-24 → 09-14, stage ready) before the Wrench switchover.
+
+- **Board backfilled from published output.** 51 real items added from the sites' WP APIs and DeviantArt RSS (14 GrowGetter Fan Art Fridays, monthlies across all properties, the Magic Potions and Heidi & Mia weekly serials). 107 empty auto-generated placeholder rows removed — the board now records known/posted work only. GiantessGirl dropped entirely (no longer the owner's property). Owner classified the ambiguous set: Eve 2.0 and the two Maxx fan comics are fan art; Heidi & Mia and Magic Potions are weekly serials (Magic Potions is old back-catalogue re-posted, and its 13 page rows were collapsed to 3 actual drop dates).
+
+
+- **tools/reconcile_published.py** — checks every property's ACTUAL published output (public WordPress REST API + DeviantArt RSS; no credentials needed) against the board and flags any lane that claims to be dry while the property is still publishing. Default 90-day lookback, `--days=N` to widen. First run caught six further blind spots beyond the GrowGetter one, including GiantessGirl showing nothing on the board across all three lanes despite publishing through August. **Standing rule: never report a lane as empty from board data alone — a lane is dry only if its published output is silent too.**
+
+## 2026-08-23 (margo-full: 21 defective panels replaced; whole-cast wardrobe pinned)
+
+Corrective pass closing the four-strip QA sweep of 2026-08-16. The comic stayed at 86/86 banked
+throughout; this replaced defective winners rather than generating new beats.
+
+### Fixed
+- **Phantom lab coat — 15 act-one panels re-rolled and re-banked.** b02, b03b, b04, b05, b07, b08,
+  b09, b10, b12, b13, b14, b14b, b15, b16, b17 were all PRE-fix generations banked before the
+  wardrobe-injection bug was found, so Margo wore a white lab coat the script never gave her.
+  Worse, b13/b14/b14b/b15 strained and split the *wrong garment* (a coat sleeve instead of the
+  tank's shoulder seam), breaking continuity into b18+ where the tank is correctly torn. All 15
+  re-rolled against the current coatless prompts; every replacement shows the grey tank with bare
+  arms, and the strain/split arc now runs on the tank end to end.
+- **Garment strain leaking onto background cast — b42, b47, b55 re-rolled.** Dev's polo was torn at
+  both sleeves and Harlan's sleeve was torn, in panels Margo is not even in. Commit `072f462` had
+  already scoped the strain clause to Margo; these three were simply generated before it landed.
+- **Headcount failures — b70 and b74 re-rolled at 12 variants.** b70-cast-shield had 5 figures
+  against a 4-person cast list and b74-finale had 6 against 5, both with a head cropped at the frame
+  edge. The strict CAST COUNT clause (exact N named characters, no extras, no partial or cropped
+  face at any edge) was in the beatsheet working tree but had never actually been rolled; it is now
+  committed and proven. b74 also got the full payoff treatment — elevated-intimate vantage, warm rim
+  light, depth-staged cast pyramid.
+- **b34b SFX baked onto Margo's torso.** The lettering clause told the model to integrate the SFX
+  "near the sound source", which put "creeeeak" on her skin. It now demands a floating 2D graphic in
+  empty background space, explicitly off the body, with no text on skin or garments.
+- **b12 carried a leftover coat-era phrase.** Its action text read "veins surfacing along the forearm
+  *where the cuff ends*" — a cuff implies a coat. Rewritten to an explicitly bare forearm.
+
+### Changed
+- **Whole-cast wardrobe is now pinned, not just Margo's (37 beats).** ROOT CAUSE found this pass:
+  the 2026-08-11 wardrobe fix made the WARDROBE block outrank the reference image, but scoped it to
+  MARGO only. Every other character's wardrobe was left unpinned and drifted freely — the moment the
+  coat language came out, Kress lost his navy tracksuit and turned up in a grey gym tank across
+  b04/b05/b07, and the investors' outfits wandered too. Beats now carry a CAST WARDROBE block naming
+  every character in their `chars` list, plus a blanket "every character other than MARGO wears
+  clothing that is completely intact" clause. The wardrobe fix solved Margo and silently left the
+  rest of the cast unpinned; this closes that.
+- **b07-stay-out gained a strict staging clause** — Kress large in the near foreground with his back
+  to camera so his exit towers, Margo smaller beyond him, exactly 2 people with no bystanders through
+  the doorway, and the balloon pinned to Kress.
+
+### Added
+- **`runners/bakeoff/runs/margo-full-20260811/makeplans.py`** — rebuilds `plan/<beat>.json` from the
+  beatsheet, which is the source of truth. Plans are what the generation driver actually reads, so
+  editing a `fullPrompt` without regenerating the plan silently rolls the stale prompt. That is
+  exactly how the b70/b74 cast-count fix nearly got missed. Also fixes the media role the plans
+  carried (`reference`), which `nano_banana_2_lite` rejects outright — the correct role is
+  `image_references`.
+
+### Notes
+- **b26-margo-watches was a false positive and was NOT changed.** The QA sweep flagged its line as
+  rendering in a thought bubble instead of a speech balloon, but the script specifies
+  `"type": "thought"` for that line. The panel matches spec; it stays banked as-is.
+- **Known shortfalls, banked honestly rather than stalling the run:** b47-harlan-cuts' winner has
+  Kress in a suit rather than his navy tracksuit — the panel's actual defect (torn sleeves on
+  non-Margo cast) is fixed and every tile in two full re-rolls had intact garments, but no tile
+  paired a correctly silver-haired Kress with the tracksuit. Harlan's outfit also reads
+  inconsistently across the comic (maroon polo in b74, dark suit in b47/b55); the investors have no
+  canonical wardrobe text, only a shared reference image, which is the next thing to pin.
+- Method: Higgsfield MCP, `nano_banana_2_lite`, 3:4, one `count=4` call per roll. 170 credits.
+  Judging ran Sonnet-only for wardrobe grading — a Haiku triage pass called the coat-wearing b02
+  winner "correct grey tank top, bare arms", so coarse triage is not adequate for wardrobe defects.
+
+## 2026-08-12 — Scene-ladder plates: new `scene:` job kind closes the second half of the D8 gap
+
+### Added
+
+- **`compose_scene` + a `scene:` job kind in `projects/not-so-supra-man/qa/compose.py`** (+40 lines, purely additive). `compose_page` refuses any page whose camera-distance rung is unbanked (D8), but `compose_sheet` could not express a location plate at all: its D1 demands >=2 refs (a bootstrap plate has none) and its D7 demands the word "silhouette" (meaningless for an empty room), and its self-heal branch would inject "Character turnaround model sheet" language into a room. So the gate could DEMAND a ladder rung and had no way to PRODUCE one — the mirror image of the `bank.py` routing gap fixed the day before. Plates now get checks that fit them: **D15** (the prompt must state the location is empty of people, or a stray figure bleeds into the background ref and then into every page that attaches it) and **D8-chain** (medium must chain from a banked wide, close from a banked medium, verified against the ledger). Both were proven to bite before blessing.
+- **10 scene-ladder specs** in `references/turnaround-specs.json` covering the 6 rungs the 29 pending pages actually demand, plus the wides they chain from. Every `references/locations/*` directory was empty and the 3 existing `wide` ledger entries are v1 growcomics ids with `disk: None` — unresolvable from the laptop account — so the plates are being built from scratch.
+
+### Changed
+
+- Re-blessed `qa/MANIFEST.sha256` (`26462716124236c4` -> `bf3dec267411f4a1`) — owner approved in-session after reviewing the diff.
+
+
 ## 2026-08-16 04:20 (margo-full: 86/86 banked; strain clause scoped to Margo)
 
 **Fixed**

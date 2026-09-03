@@ -20,6 +20,8 @@ Lines starting with `#` are comments. Lines starting with `- [x]` are done.
 - [x] https://growgettercomics.com/the-curse-2-curse-control-2/         → the-curse-2-curse-control (22pp)
 - [x] https://growgettercomics.com/muller-issue-1/                      → muller-1 (20pp)
 - [x] https://growgettercomics.com/breaker-part-1-2/                    → breaker-1 (19pp)
+- [x] Drive: 'The Omega Device' (inked + Colored, Deed Arts delivery folder) → deed-arts-omega-device (11pp, non-contiguous, MMG) — angle/pose study 2026-09-02
+- [x] Drive: 'Poppy - The Sailor Gal' 1 (+ issue-2 cover, Deed Arts) → deed-arts-poppy-sailor-gal-1 (18pp) — angle/pose study 2026-09-02
 
 ## Catalog (GrowGetter, 1088 posts — not yet ingested; full readable comics found in survey)
 

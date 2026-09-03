@@ -33,6 +33,38 @@
     "a89664e1-c77a-4fb5-9ce1-6a1e70cf7150": {
      "round": 2,
      "file": "v08-a89664e1.png"
+    },
+    "e194773b-669f-4fd7-b36c-2b4d8ce751b7": {
+     "round": 1,
+     "file": "v09-e194773b.png"
+    },
+    "8882db88-91c7-4e97-852e-aaf75e3da138": {
+     "round": 1,
+     "file": "v10-8882db88.png"
+    },
+    "8e566fb1-5f37-4004-988b-1ada9eb5ec05": {
+     "round": 1,
+     "file": "v11-8e566fb1.png"
+    },
+    "b9c1991c-24fc-4c26-b1b9-3ebefd6603ef": {
+     "round": 1,
+     "file": "v12-b9c1991c.png"
+    },
+    "8cadad8f-7194-41d4-bf9c-3c4e2b2e5f34": {
+     "round": 2,
+     "file": "v13-8cadad8f.png"
+    },
+    "7f54e525-5b5e-48d3-9691-ecf2db484138": {
+     "round": 2,
+     "file": "v14-7f54e525.png"
+    },
+    "08dbc964-876f-40fb-8783-80ccfe5a7e5f": {
+     "round": 2,
+     "file": "v15-08dbc964.png"
+    },
+    "268c52fd-ee08-45ae-8139-5e75353b932a": {
+     "round": 2,
+     "file": "v16-268c52fd.png"
     }
    },
    "winner": {
@@ -43,8 +75,8 @@
     "ts": 1786459448
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b02-vial": {
@@ -80,18 +112,50 @@
     "210d4d20-ebf6-49fd-b6e7-7581871039b9": {
      "round": 2,
      "file": "v07-210d4d20.png"
+    },
+    "5c1dfc5a-b83f-4768-b2ed-0743824ef4d7": {
+     "round": 1,
+     "file": "v08-5c1dfc5a.png"
+    },
+    "7102a0df-68c6-47fb-90cc-d39bc1a1a45f": {
+     "round": 1,
+     "file": "v09-7102a0df.png"
+    },
+    "89e8b408-0040-455b-9ee9-081e6a9fa956": {
+     "round": 1,
+     "file": "v14-89e8b408.png"
+    },
+    "507f424a-0319-40da-9b64-6c2b4c9fc798": {
+     "round": 1,
+     "file": "v15-507f424a.png"
+    },
+    "76462cdc-7d34-4a6f-aeaf-58a038f4c9a0": {
+     "round": 2,
+     "file": "v10-76462cdc.png"
+    },
+    "8ad8afde-7ff1-4304-afd4-5774cbf36340": {
+     "round": 2,
+     "file": "v11-8ad8afde.png"
+    },
+    "f99ea50c-c03f-4a38-87f4-8caa5247f5e9": {
+     "round": 2,
+     "file": "v12-f99ea50c.png"
+    },
+    "ed72ef4c-b741-4d15-8f8f-6157d6e483bf": {
+     "round": 2,
+     "file": "v13-ed72ef4c.png"
     }
    },
    "winner": {
-    "variant": "v02",
-    "job": "7b20a7a5-493c-42ed-8fea-b64c00888f2c",
-    "board_file": "8f242459e1.png",
-    "notes": "Judge pick. Vial lifted to bench light, coat buttoned, amulet at collarbone, dialogue exact. v01 killed for sleeve/skin blend, v04 for garbled 'IT'S S FINALY STABLE.'",
-    "ts": 1786459593
+    "variant": "v12",
+    "job": "f99ea50c-c03f-4a38-87f4-8caa5247f5e9",
+    "board_file": "59f1e331b9.png",
+    "notes": "Coat-respec replacement: grey tank, bare arms, no lab coat. Upward angle with deep shadow falloff, saturated green vial glow, intense parted-lips read, clean balloon.",
+    "ts": 1787502326
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b03-stone-reacts": {
@@ -127,6 +191,38 @@
     "3660d29c-79e7-4b55-b060-8a2409f3e198": {
      "round": 2,
      "file": "v07-3660d29c.png"
+    },
+    "65651ab9-d0d9-439e-882b-c4ff9aba378a": {
+     "round": 1,
+     "file": "v08-65651ab9.png"
+    },
+    "1e8451db-5edf-4fc8-b1e2-ae336fa4296a": {
+     "round": 1,
+     "file": "v09-1e8451db.png"
+    },
+    "013fdeb0-794e-4642-af47-16ddd3dab87d": {
+     "round": 1,
+     "file": "v10-013fdeb0.png"
+    },
+    "97b37e78-00a2-4866-8c92-44067cdb1008": {
+     "round": 1,
+     "file": "v11-97b37e78.png"
+    },
+    "046073f5-e078-4043-acdf-7848a004a76e": {
+     "round": 2,
+     "file": "v12-046073f5.png"
+    },
+    "2374bf56-dd30-4422-98bb-f2876f29eab4": {
+     "round": 2,
+     "file": "v13-2374bf56.png"
+    },
+    "13503dda-0449-441f-b592-d7745bccfad4": {
+     "round": 2,
+     "file": "v14-13503dda.png"
+    },
+    "f85c6743-8d88-4bff-ac3f-9557a1566c7d": {
+     "round": 2,
+     "file": "v15-f85c6743.png"
     }
    },
    "winner": {
@@ -137,8 +233,8 @@
     "ts": 1786459595
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b03b-dig-photo": {
@@ -170,18 +266,62 @@
     "2ba9b132-55bd-4892-b538-52c93983009a": {
      "round": 2,
      "file": "v06-2ba9b132.png"
+    },
+    "b2c43669-b29e-4648-959e-06f54ba037a1": {
+     "round": 1,
+     "file": null
+    },
+    "44431e63-1d4a-46cc-b4e1-c5b0d6b05ffb": {
+     "round": 1,
+     "file": null
+    },
+    "71430d09-ca50-45a4-8072-746aab7a2b0f": {
+     "round": 1,
+     "file": null
+    },
+    "a7bc71c2-67cc-4c2f-9322-5efa4599f5b1": {
+     "round": 1,
+     "file": "v07-a7bc71c2.png"
+    },
+    "bf7e5f70-62f7-4951-8929-1341da9a6cdd": {
+     "round": 1,
+     "file": "v08-bf7e5f70.png"
+    },
+    "126d5b8a-2018-4168-af8d-fc1ba132f22b": {
+     "round": 1,
+     "file": "v09-126d5b8a.png"
+    },
+    "62fa41cd-75f2-4648-8c55-d91006d18e8e": {
+     "round": 1,
+     "file": "v10-62fa41cd.png"
+    },
+    "846d22b0-fc37-456e-84e0-f2672f054a78": {
+     "round": 2,
+     "file": "v11-846d22b0.png"
+    },
+    "35441722-bae5-486f-976c-f1418969b945": {
+     "round": 2,
+     "file": null
+    },
+    "fd538cc9-6a9f-4453-84d6-6aa785e33191": {
+     "round": 2,
+     "file": "v12-fd538cc9.png"
+    },
+    "43f3d9d0-3565-49fd-a2f2-4952acd72a58": {
+     "round": 2,
+     "file": "v13-43f3d9d0.png"
     }
    },
    "winner": {
-    "variant": "v06",
-    "job": "2ba9b132-55bd-4892-b538-52c93983009a",
-    "board_file": "66815c7483.png",
-    "notes": "Judge pick. Cork-board dig photo, fingertip on corner, caption exact. v03 killed for stray leading apostrophe, v04 for cuff/skin blend.",
-    "ts": 1786459597
+    "variant": "v08",
+    "job": "bf7e5f70-62f7-4951-8929-1341da9a6cdd",
+    "board_file": "d7c1d2a9af.png",
+    "notes": "Coat-respec replacement: bare arm to the fingertip, no white coat cuff. Tightest true detail close-up with the sharpest, most legible dig-site photo and strong dramatic lighting.",
+    "ts": 1787502953
    },
    "rounds": {
-    "1": 4,
-    "2": 3
+    "1": 11,
+    "2": 7
    }
   },
   "b04-kress-enters": {
@@ -249,18 +389,95 @@
     "b63c969c-04c4-4f90-a7b8-7af341bbb304": {
      "round": 2,
      "file": null
+    },
+    "564be8ab-50ee-49b7-bd42-658aa64770b4": {
+     "round": 1,
+     "file": "v09-564be8ab.png"
+    },
+    "683eb478-c381-4e74-a876-de4a2d19fbc8": {
+     "round": 1,
+     "file": "v10-683eb478.png"
+    },
+    "ad24cbfa-f9d5-4393-a137-d5741a219265": {
+     "round": 1,
+     "file": null
+    },
+    "d1c6c295-fd68-443e-b682-ffaaa4b9266f": {
+     "round": 1,
+     "file": "v11-d1c6c295.png"
+    },
+    "0fad7020-0567-4156-b6a8-54f5cd03f4df": {
+     "round": 2,
+     "file": "v12-0fad7020.png"
+    },
+    "b9ff6383-18c1-4aeb-9ad5-1db5ede57f19": {
+     "round": 2,
+     "file": null
+    },
+    "df1e339c-59a6-4f83-8f00-60bcb96c1897": {
+     "round": 2,
+     "file": "v13-df1e339c.png"
+    },
+    "18992747-e656-4c4f-874c-af659d09ffa5": {
+     "round": 2,
+     "file": "v14-18992747.png"
+    },
+    "7be786fa-683c-4ba7-9700-ef312ab0270b": {
+     "round": 1,
+     "file": "v15-7be786fa.png"
+    },
+    "58428b6a-c4c1-473b-a52c-fb1ad03da6ea": {
+     "round": 1,
+     "file": null
+    },
+    "54588de0-0d45-4fb2-ab47-a5bf5fa6f9d7": {
+     "round": 1,
+     "file": "v16-54588de0.png"
+    },
+    "209499a6-c63a-45ff-bd1e-6bb94ed86e83": {
+     "round": 1,
+     "file": "v17-209499a6.png"
+    },
+    "c4538e28-9bb2-438b-b8a9-58cbbebd0dc3": {
+     "round": 2,
+     "file": "v18-c4538e28.png"
+    },
+    "bd8e2069-4b34-49f7-a492-7b1ef67459e0": {
+     "round": 2,
+     "file": null
+    },
+    "9ac070af-abe7-416c-8078-891c99cb70d5": {
+     "round": 2,
+     "file": "v19-9ac070af.png"
+    },
+    "9a64cbe2-5850-403d-b005-fab2aef8ff7f": {
+     "round": 3,
+     "file": "v20-9a64cbe2.png"
+    },
+    "f0fc485e-e2b6-4355-b8f5-d61738283826": {
+     "round": 3,
+     "file": null
+    },
+    "a766f122-1070-41b7-9595-818b2fcb6d69": {
+     "round": 3,
+     "file": "v21-a766f122.png"
+    },
+    "34fab11f-83a9-4d5a-bb40-c1f5c1c77154": {
+     "round": 3,
+     "file": "v22-34fab11f.png"
     }
    },
    "winner": {
-    "variant": "v05",
-    "job": "1b387660-70a8-479d-b012-f59c2ff34b64",
-    "board_file": "074d9859f0.png",
-    "notes": "Judge pick. Two-shot, Kress's tracksuit fully zipped (v02/v03 both had the jacket ripped open to bare torso), Margo coat on, dialogue exact. Amulet not in frame - she is shot from behind.",
-    "ts": 1786459599
+    "variant": "v15",
+    "job": "7be786fa-683c-4ba7-9700-ef312ab0270b",
+    "board_file": "cf099f2211.png",
+    "notes": "Coat-respec + cast-wardrobe fix: Margo bare-armed in the grey tank (no coat, even from behind); Kress in his intact sleeved navy tracksuit. Truest over-the-shoulder two-shot, brightest lamp underlight, sharpest smirk.",
+    "ts": 1787503524
    },
    "rounds": {
-    "1": 4,
-    "2": 12
+    "1": 12,
+    "2": 19,
+    "3": 4
    }
   },
   "b05-clipboard": {
@@ -296,18 +513,50 @@
     "fef6c64b-1799-457a-a400-4fd91c3f9306": {
      "round": 2,
      "file": "v07-fef6c64b.png"
+    },
+    "281ad15c-05ce-4a7e-81d0-b301467b0963": {
+     "round": 1,
+     "file": "v09-281ad15c.png"
+    },
+    "e6e0c771-8675-402f-a9f2-660a7797a9f6": {
+     "round": 1,
+     "file": "v10-e6e0c771.png"
+    },
+    "75998fbc-3bfb-435b-8928-dacb32ef6d99": {
+     "round": 1,
+     "file": "v11-75998fbc.png"
+    },
+    "e99ebb82-0235-4b6d-b215-c48a6f0730f8": {
+     "round": 1,
+     "file": "v12-e99ebb82.png"
+    },
+    "8ef0fa84-9332-4ee4-9dda-f097a7b68cb6": {
+     "round": 2,
+     "file": "v16-8ef0fa84.png"
+    },
+    "434a76f3-8c6b-4a74-8dac-45cfb76d0430": {
+     "round": 2,
+     "file": "v13-434a76f3.png"
+    },
+    "dafd4f9c-1f76-4f05-b9b3-f9c051ec16f6": {
+     "round": 2,
+     "file": "v14-dafd4f9c.png"
+    },
+    "f203eda8-07f0-4257-8f6f-aa04b8abf379": {
+     "round": 2,
+     "file": "v15-f203eda8.png"
     }
    },
    "winner": {
-    "variant": "v06",
-    "job": "ce995c2e-394d-404d-84f2-5364c800260c",
-    "board_file": "0bb3df0d0f.png",
-    "notes": "Judge pick. Over-Margo's-shoulder framing, correct 2-cast, dialogue exact. Cleanest beat in the run - 8/8 tiles passed.",
-    "ts": 1786459601
+    "variant": "v15",
+    "job": "f203eda8-07f0-4257-8f6f-aa04b8abf379",
+    "board_file": "34bfa3bb7b.png",
+    "notes": "Coat-respec replacement: Margo bare-armed in the grey tank, no lab coat; Kress's navy tracksuit intact. Wide-open shout, correctly tailed balloons, strongest clipboard-tug energy.",
+    "ts": 1787502808
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b06-kress-gloats": {
@@ -390,18 +639,99 @@
     "4a2ea63c-ac5e-4e73-95a6-79e25988753d": {
      "round": 2,
      "file": "v07-4a2ea63c.png"
+    },
+    "63e56037-e040-41fc-a304-7c1fbe343b35": {
+     "round": 1,
+     "file": "v08-63e56037.png"
+    },
+    "3c4096c4-94a6-4a44-8706-5d76853c56f3": {
+     "round": 1,
+     "file": "v09-3c4096c4.png"
+    },
+    "7dca86c7-b8b3-4187-875f-1f9208e8b5be": {
+     "round": 1,
+     "file": "v10-7dca86c7.png"
+    },
+    "1aaaf368-a454-4fd7-bd25-18b3c020f9ee": {
+     "round": 1,
+     "file": "v11-1aaaf368.png"
+    },
+    "f9c5bd74-4f53-48d5-9c1a-7e200779c593": {
+     "round": 2,
+     "file": null
+    },
+    "3f2a6ad0-d7cf-47e0-9fad-9fb6129b6e2b": {
+     "round": 2,
+     "file": "v12-3f2a6ad0.png"
+    },
+    "621d436f-484d-430e-8229-77912c282f3f": {
+     "round": 2,
+     "file": "v13-621d436f.png"
+    },
+    "1e24b1c7-f852-4b3b-bbd6-72a402af86db": {
+     "round": 2,
+     "file": null
+    },
+    "ac4ae69f-4163-4c5b-8cdb-831bc02ffd23": {
+     "round": 1,
+     "file": "v14-ac4ae69f.png"
+    },
+    "6c6a0bb6-e948-4e55-a6b8-196b5f1e048b": {
+     "round": 1,
+     "file": "v15-6c6a0bb6.png"
+    },
+    "85b6bb33-ea23-4190-a3bb-4d7f2a218820": {
+     "round": 1,
+     "file": "v16-85b6bb33.png"
+    },
+    "84fc9a19-fecb-43d3-95f0-27e4d96e6762": {
+     "round": 1,
+     "file": "v17-84fc9a19.png"
+    },
+    "d53c599b-26fa-48da-b3cb-343a671b52f2": {
+     "round": 2,
+     "file": null
+    },
+    "9021b9ec-21ec-4de4-8827-363e0821080a": {
+     "round": 2,
+     "file": "v18-9021b9ec.png"
+    },
+    "3570731d-619b-4de4-9925-78cf06d9ebc6": {
+     "round": 2,
+     "file": "v19-3570731d.png"
+    },
+    "d3f2ddaf-1880-409d-aab8-97bf4ad64869": {
+     "round": 2,
+     "file": "v20-d3f2ddaf.png"
+    },
+    "df3d1f92-c9f4-4e37-b451-a06f3ae0f22f": {
+     "round": 3,
+     "file": "v21-df3d1f92.png"
+    },
+    "5b7c9cc7-e04e-49d1-abca-1c6f37f67ad2": {
+     "round": 3,
+     "file": "v22-5b7c9cc7.png"
+    },
+    "532f127d-0106-4b48-9a27-967c0f608090": {
+     "round": 3,
+     "file": "v23-532f127d.png"
+    },
+    "5f25578a-500a-4241-9c64-97b365c6e68f": {
+     "round": 3,
+     "file": "v24-5f25578a.png"
     }
    },
    "winner": {
-    "variant": "v07",
-    "job": "4a2ea63c-ac5e-4e73-95a6-79e25988753d",
-    "board_file": "b19bf68909.png",
-    "notes": "Judge pick. Depth staging with Kress towering on exit. v01 killed for rolled sleeve, v05 for torn-jacket skin blend.",
-    "ts": 1786459605
+    "variant": "v15",
+    "job": "6c6a0bb6-e948-4e55-a6b8-196b5f1e048b",
+    "board_file": "3664c32bc8.png",
+    "notes": "Coat-respec + cast-wardrobe + staging fix: Margo bare-armed in the grey tank, Kress in his intact sleeved navy tracksuit towering in the near foreground, no bystanders, tail on Kress.",
+    "ts": 1787503861
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 12,
+    "2": 12,
+    "3": 4
    }
   },
   "b08-my-serum": {
@@ -437,18 +767,50 @@
     "c8e0110d-50d2-41b5-88d5-30877da30ac7": {
      "round": 2,
      "file": "v08-c8e0110d.png"
+    },
+    "d95d130b-66d9-4d61-b879-9ef2f2f96c89": {
+     "round": 1,
+     "file": "v09-d95d130b.png"
+    },
+    "f60f7a8f-b084-4796-8bfc-f7fea5f64422": {
+     "round": 1,
+     "file": "v15-f60f7a8f.png"
+    },
+    "2da4d45a-675d-42ec-8f73-46a3a9da329a": {
+     "round": 1,
+     "file": "v10-2da4d45a.png"
+    },
+    "40e353d5-7d87-42ec-8ec4-bb9ea5277955": {
+     "round": 1,
+     "file": "v16-40e353d5.png"
+    },
+    "fe55c0ee-f29c-4fed-8c24-a9d82ef9a55a": {
+     "round": 2,
+     "file": "v11-fe55c0ee.png"
+    },
+    "95c2166b-f3a9-433c-aae6-4f32906ca7dc": {
+     "round": 2,
+     "file": "v12-95c2166b.png"
+    },
+    "4921654e-ba12-4974-b11a-16fa276fb74e": {
+     "round": 2,
+     "file": "v13-4921654e.png"
+    },
+    "12cc279c-8d92-45fd-911a-2cf8c035dd43": {
+     "round": 2,
+     "file": "v14-12cc279c.png"
     }
    },
    "winner": {
-    "variant": "v06",
-    "job": "c16e56f0-78be-4781-ace0-28b449bc3176",
-    "board_file": "c8ba52b910.png",
-    "notes": "Judge pick. Closest to the card's cold-fury read. v03 killed - lab coat absent, tank only.",
-    "ts": 1786459607
+    "variant": "v12",
+    "job": "95c2166b-f3a9-433c-aae6-4f32906ca7dc",
+    "board_file": "454f8014bb.png",
+    "notes": "Coat-respec replacement: grey tank, bare arms, no lab coat. Strongest green underlight on the face, full cold-fury read, dynamic pose energy, clean balloon.",
+    "ts": 1787502334
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b09-hand-vial": {
@@ -484,18 +846,67 @@
     "a7c079b7-ef71-4704-809e-944885f4edb4": {
      "round": 2,
      "file": "v05-a7c079b7.png"
+    },
+    "c1754d48-cc7a-40f6-89aa-9c7290cded7a": {
+     "round": 1,
+     "file": "v08-c1754d48.png"
+    },
+    "26e5a304-deb7-4eee-95df-f9bba73d6505": {
+     "round": 1,
+     "file": null
+    },
+    "2a71ea5d-9c95-42f3-84f7-0e43686a1c20": {
+     "round": 1,
+     "file": "v09-2a71ea5d.png"
+    },
+    "73d01ca2-0e7c-4a8a-9cb8-d8d78afc0b26": {
+     "round": 1,
+     "file": "v10-73d01ca2.png"
+    },
+    "fb0c8992-47e5-4290-8d4f-3fc3105a9a14": {
+     "round": 2,
+     "file": "v11-fb0c8992.png"
+    },
+    "e8c9850e-1d9f-48bb-8eb4-8fb70fa4e3af": {
+     "round": 2,
+     "file": "v12-e8c9850e.png"
+    },
+    "1bead70d-c952-4d0d-abcb-d4f015a3334a": {
+     "round": 2,
+     "file": "v13-1bead70d.png"
+    },
+    "5f3829d4-6ba6-4b60-ac0c-d2299af62a7a": {
+     "round": 2,
+     "file": "v14-5f3829d4.png"
+    },
+    "b2e059d2-a2f6-472d-b61a-9ad522070014": {
+     "round": 3,
+     "file": "v15-b2e059d2.png"
+    },
+    "ef40f160-fe9b-4561-8422-1f78390e5ee0": {
+     "round": 3,
+     "file": "v16-ef40f160.png"
+    },
+    "3304dff0-8eb4-4b58-94b8-1de4b144c8ea": {
+     "round": 3,
+     "file": "v17-3304dff0.png"
+    },
+    "74df4a31-2f0b-48fe-89b2-f8601bd35840": {
+     "round": 3,
+     "file": "v18-74df4a31.png"
     }
    },
    "winner": {
-    "variant": "v04",
-    "job": "cf8c13de-1f0d-46ff-989d-a65794437270",
-    "board_file": "9e8b8116a0.png",
-    "notes": "Judge pick and the ONLY clean tile. 5 of 7 rendered the amulet as a glowing WRIST BRACELET instead of at the collarbone; v06 had gibberish SFX baked into the tabletop.",
-    "ts": 1786459609
+    "variant": "v17",
+    "job": "3304dff0-8eb4-4b58-94b8-1de4b144c8ea",
+    "board_file": "f3c965d3f9.png",
+    "notes": "Coat-respec replacement: bare forearm, no white sleeve or lab coat. True overhead high angle with the full bench in frame, deliberate reaching hand, dramatic amulet starburst, clean lettering.",
+    "ts": 1787502469
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8,
+    "3": 4
    }
   },
   "b10-drink": {
@@ -547,19 +958,67 @@
     "85fcb5b4-f8a3-4979-901c-9515bb185072": {
      "round": 3,
      "file": "v11-85fcb5b4.png"
+    },
+    "191a21ec-f123-4996-a89f-d8a31f2fed07": {
+     "round": 1,
+     "file": "v12-191a21ec.png"
+    },
+    "0d482bf7-dfb5-4b3d-a326-b45d72d290c0": {
+     "round": 1,
+     "file": "v13-0d482bf7.png"
+    },
+    "b50c8dc9-8c1c-45d1-85ae-079d71909ea1": {
+     "round": 1,
+     "file": "v14-b50c8dc9.png"
+    },
+    "e1ec1b35-098e-4600-a807-42f367710ba6": {
+     "round": 1,
+     "file": "v15-e1ec1b35.png"
+    },
+    "d784f4a5-018f-4858-b806-b5dd899f1956": {
+     "round": 2,
+     "file": "v16-d784f4a5.png"
+    },
+    "7b21015e-2df6-46d5-b112-2bb9c34a2e83": {
+     "round": 2,
+     "file": "v17-7b21015e.png"
+    },
+    "e639b8a1-7342-4467-b058-cf17fb19615c": {
+     "round": 2,
+     "file": "v18-e639b8a1.png"
+    },
+    "ae9cc8e7-7063-4c67-a850-430bd32b55ad": {
+     "round": 2,
+     "file": null
+    },
+    "99d00175-49fd-4c9f-aefc-f3c74a773f62": {
+     "round": 3,
+     "file": "v19-99d00175.png"
+    },
+    "b65ab5b5-dbcd-4568-9801-0bafc71cf492": {
+     "round": 3,
+     "file": "v20-b65ab5b5.png"
+    },
+    "21644048-c92f-4bca-823c-bd2bb7181cfd": {
+     "round": 3,
+     "file": "v21-21644048.png"
+    },
+    "541708c7-89f5-4865-826f-1c63451c3bf4": {
+     "round": 3,
+     "file": "v22-541708c7.png"
     }
    },
    "winner": {
-    "variant": "v06",
-    "job": "43627b48-f8d2-4fdb-a686-ed36f7dcb544",
-    "board_file": "b36e9bd85e.png",
-    "notes": "Judge pick. Coat intact and buttoned. Roughly half the sheet tore the coat open at the shoulder before the story does.",
-    "ts": 1786459612
+    "variant": "v18",
+    "job": "e639b8a1-7342-4467-b058-cf17fb19615c",
+    "board_file": "7bba1b7fcd.png",
+    "notes": "Coat-respec replacement: grey tank, bare arms, no lab coat. Steepest dramatic diagonal, deepest shadow, strongest amulet flare up the jaw, full frame fill, clean lettering.",
+    "ts": 1787503170
    },
    "rounds": {
-    "1": 4,
-    "2": 4,
-    "3": 4
+    "1": 8,
+    "2": 8,
+    "3": 8
    }
   },
   "b11-eyes": {
@@ -642,18 +1101,50 @@
     "034d1c5b-8474-471a-be6f-4a165df8b0da": {
      "round": 2,
      "file": "v08-034d1c5b.png"
+    },
+    "30ef402f-f54a-4a81-9adc-68ca6f6fcbd4": {
+     "round": 1,
+     "file": null
+    },
+    "6a3557a0-112f-4bd0-9b2f-7da73af0d0b1": {
+     "round": 1,
+     "file": "v09-6a3557a0.png"
+    },
+    "d91c4826-964e-4b7f-b6a7-e2d5cc82a359": {
+     "round": 1,
+     "file": "v10-d91c4826.png"
+    },
+    "5a31e375-9d32-4727-b5c8-9dc169960994": {
+     "round": 1,
+     "file": "v11-5a31e375.png"
+    },
+    "a3ecb6e9-7bba-4e27-b89a-9f2dcb795571": {
+     "round": 2,
+     "file": "v12-a3ecb6e9.png"
+    },
+    "70e0278e-beb8-4d23-a884-a614ae019a24": {
+     "round": 2,
+     "file": "v13-70e0278e.png"
+    },
+    "af853ebb-c587-4dfc-9686-04ce7e80bd36": {
+     "round": 2,
+     "file": "v14-af853ebb.png"
+    },
+    "4b1ab997-2aa3-4cbb-8a82-f2a6912f7513": {
+     "round": 2,
+     "file": "v15-4b1ab997.png"
     }
    },
    "winner": {
-    "variant": "v04",
-    "job": "af98d450-1749-4993-aa87-aa78858ebaa0",
-    "board_file": "9b754605a1.png",
-    "notes": "Judge pick. Clean 5-finger anatomy, cuff-tear glow staging. v06 killed - amulet worn as a wristband.",
-    "ts": 1786459616
+    "variant": "v11",
+    "job": "5a31e375-9d32-4727-b5c8-9dc169960994",
+    "board_file": "1c791a9d74.png",
+    "notes": "Coat-respec replacement: forearm bare end to end, no cuff or sleeve remnant. Best frame-fill, green light visibly crawling shoulder-to-hand, sharp tendon detail, legible bubble.",
+    "ts": 1787503297
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b13-sleeve-tight": {
@@ -721,18 +1212,50 @@
     "d22a980e-70fd-4c6b-aa77-d3b7a89b9004": {
      "round": 2,
      "file": "v07-d22a980e.png"
+    },
+    "a2aa2be6-1584-4f78-9026-e66a6aa524e2": {
+     "round": 1,
+     "file": null
+    },
+    "907a8e6c-9755-499d-9be1-6aa4732d0781": {
+     "round": 1,
+     "file": "v09-907a8e6c.png"
+    },
+    "dc9d5ae5-befa-484e-9c75-bb6575557946": {
+     "round": 1,
+     "file": "v10-dc9d5ae5.png"
+    },
+    "15179849-e285-4eba-8a09-5527ba680d19": {
+     "round": 1,
+     "file": "v11-15179849.png"
+    },
+    "587dda6b-1e4c-4bdf-b478-b9e850377de9": {
+     "round": 2,
+     "file": "v12-587dda6b.png"
+    },
+    "40b45a73-7e11-4e24-a668-3bf72010779e": {
+     "round": 2,
+     "file": null
+    },
+    "b404ba17-60b3-46f2-8642-5051535c44c0": {
+     "round": 2,
+     "file": "v13-b404ba17.png"
+    },
+    "c73386be-ad96-4bb2-a760-6fef769cf0df": {
+     "round": 2,
+     "file": "v14-c73386be.png"
     }
    },
    "winner": {
-    "variant": "v08",
-    "job": "0427ff36-482a-4a4c-9c04-d4381656b54b",
-    "board_file": "1425bb4da7.png",
-    "notes": "Judge pick. Detail close-up on strained seam with CREEAK SFX. 8/8 clean - strongest beat in the run alongside b05.",
-    "ts": 1786459618
+    "variant": "v14",
+    "job": "c73386be-ad96-4bb2-a760-6fef769cf0df",
+    "board_file": "34836581f1.png",
+    "notes": "Wrong-garment fix: the GREY TANK's shoulder seam strains (not a coat sleeve), stitches pulling but not yet torn. Largest bicep/delt of the pool, dramatic straining stitch line, tight frame-fill.",
+    "ts": 1787503299
    },
    "rounds": {
-    "1": 4,
-    "2": 12
+    "1": 8,
+    "2": 16
    }
   },
   "b14-sleeve-stare": {
@@ -768,18 +1291,50 @@
     "7404f6d2-ba72-44cb-8034-72ceee64cb73": {
      "round": 2,
      "file": "v07-7404f6d2.png"
+    },
+    "d559f13b-f864-4587-ba1c-6bb46df6db4d": {
+     "round": 1,
+     "file": "v08-d559f13b.png"
+    },
+    "a2f37de7-9d82-4f28-9588-260c4ce521d0": {
+     "round": 1,
+     "file": "v09-a2f37de7.png"
+    },
+    "93d996ea-159c-4700-b967-d9099094c0a2": {
+     "round": 1,
+     "file": "v10-93d996ea.png"
+    },
+    "293d0578-0cc9-4975-8d78-6f0ffbe95c4f": {
+     "round": 1,
+     "file": null
+    },
+    "23a9335c-e3fb-4920-827d-03e85546dc65": {
+     "round": 2,
+     "file": "v11-23a9335c.png"
+    },
+    "6bb37972-f85c-4639-b4ce-c88a31f20966": {
+     "round": 2,
+     "file": "v12-6bb37972.png"
+    },
+    "746dde4a-32ae-41ce-8323-a472b94c6a2d": {
+     "round": 2,
+     "file": "v13-746dde4a.png"
+    },
+    "f4166a51-60c8-4a2e-93c4-a6f269cf83fb": {
+     "round": 2,
+     "file": "v14-f4166a51.png"
     }
    },
    "winner": {
-    "variant": "v03",
-    "job": "485f1f1d-eb59-4546-b69c-9d1f957aed4d",
-    "board_file": "dad44b620a.png",
-    "notes": "Judge pick. MCU, eyes on her own bicep, torn seam reads as fabric not skin-melt. 7/7 clean.",
-    "ts": 1786459620
+    "variant": "v14",
+    "job": "f4166a51-60c8-4a2e-93c4-a6f269cf83fb",
+    "board_file": "7e19f38e45.png",
+    "notes": "Wrong-garment + obsolete-line fix: grey tank strap straining, no lab coat, balloon reads the current line THESE SEAMS ARE GETTING TIGHT!. Biggest hardest bicep, strongest lighting.",
+    "ts": 1787503302
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b14b-both-sleeves": {
@@ -815,18 +1370,67 @@
     "13503d93-fbf6-4aba-9832-b70a67b215a9": {
      "round": 2,
      "file": "v07-13503d93.png"
+    },
+    "8f3a9be4-d3f5-41d7-8a31-8846659960cf": {
+     "round": 1,
+     "file": "v08-8f3a9be4.png"
+    },
+    "cfc6aa03-1bba-443c-bc83-05b67eea659a": {
+     "round": 1,
+     "file": "v09-cfc6aa03.png"
+    },
+    "8badd502-2a0a-4cbf-ab3c-6387b6947931": {
+     "round": 1,
+     "file": "v10-8badd502.png"
+    },
+    "f9e6a28a-9ee8-4e9b-9f9e-c82e746f286a": {
+     "round": 1,
+     "file": "v11-f9e6a28a.png"
+    },
+    "d495499b-6b2b-4311-98c9-1297a45e29fb": {
+     "round": 2,
+     "file": "v12-d495499b.png"
+    },
+    "95c5c49b-7704-4c4f-81d4-cda0b61706bc": {
+     "round": 2,
+     "file": null
+    },
+    "8218c3b4-dbd1-480f-a0c4-fa6eb8701347": {
+     "round": 2,
+     "file": "v13-8218c3b4.png"
+    },
+    "ed3d22bd-1634-4b00-8d26-37065d1578a7": {
+     "round": 2,
+     "file": "v14-ed3d22bd.png"
+    },
+    "9fc32770-8046-4c17-b17c-08a5ee46b840": {
+     "round": 3,
+     "file": "v15-9fc32770.png"
+    },
+    "5ca7c8e7-7175-49a8-aec6-e877e021b7fd": {
+     "round": 3,
+     "file": "v16-5ca7c8e7.png"
+    },
+    "3cada730-12ea-428c-ac39-bfdd610f0bd1": {
+     "round": 3,
+     "file": "v17-3cada730.png"
+    },
+    "65a8b28c-b0fe-47ac-8c1f-85a2535fa5a2": {
+     "round": 3,
+     "file": "v18-65a8b28c.png"
     }
    },
    "winner": {
-    "variant": "v05",
-    "job": "5b560a4f-13cb-4bf2-a25f-9d57c36478da",
-    "board_file": "3d5b138c4d.png",
-    "notes": "Judge pick. Strain on BOTH sleeves. v01/v03 killed for one-arm-only strain, v02 for the creak SFX duplicated into 4 captions.",
-    "ts": 1786459622
+    "variant": "v13",
+    "job": "8218c3b4-dbd1-480f-a0c4-fa6eb8701347",
+    "board_file": "a05840c248.png",
+    "notes": "Wrong-garment fix: the GREY TANK's shoulder seams strain, not a coat sleeve; no lab coat. Best dynamic two-arm flex, biggest arms, wide-open astonished mouth, dramatic lighting.",
+    "ts": 1787504367
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8,
+    "3": 4
    }
   },
   "b15-back-split": {
@@ -878,19 +1482,55 @@
     "a70c4aca-12c2-41ea-a717-a3f87d8c7f39": {
      "round": 3,
      "file": "v12-a70c4aca.png"
+    },
+    "fadc4786-e6d2-405e-ad1e-1eff9e3e7074": {
+     "round": 1,
+     "file": "v13-fadc4786.png"
+    },
+    "552386a8-1f72-49d5-a613-b2c339239e7a": {
+     "round": 1,
+     "file": "v14-552386a8.png"
+    },
+    "1ff6bd51-6483-41de-80cd-ab9ead895c45": {
+     "round": 1,
+     "file": "v15-1ff6bd51.png"
+    },
+    "713ef022-61c7-4b14-89a6-141313cac5a7": {
+     "round": 1,
+     "file": "v16-713ef022.png"
+    },
+    "15f1cd99-f0a8-4edc-815d-af4bd8cd20c2": {
+     "round": 2,
+     "file": "v17-15f1cd99.png"
+    },
+    "4c1daefe-da51-4a87-a070-e119fbce3fd7": {
+     "round": 3,
+     "file": "v18-4c1daefe.png"
+    },
+    "27f8d57d-185c-4a30-8a77-2aaae6a29e75": {
+     "round": 3,
+     "file": "v19-27f8d57d.png"
+    },
+    "a355108a-4328-4985-8f94-889b088d7c27": {
+     "round": 3,
+     "file": "v20-a355108a.png"
+    },
+    "dfac0f89-1f80-4c18-9379-95b646b3511a": {
+     "round": 3,
+     "file": "v21-dfac0f89.png"
     }
    },
    "winner": {
-    "variant": "v04",
-    "job": "5af9e0b3-2f04-4e16-8795-5107071781d9",
-    "board_file": "3eec04b5af.png",
-    "notes": "Judge pick. Clean back-seam RRRIP split, coverage held. v07/v08 over-tore into sleeveless, v10 duplicated the RRRIP lettering.",
-    "ts": 1786459624
+    "variant": "v21",
+    "job": "dfac0f89-1f80-4c18-9379-95b646b3511a",
+    "board_file": "6fb2e3bc87.png",
+    "notes": "Coat-respec replacement: the GREY TANK splits down the centre back (not a coat), crisp cloth edge, no skin-fabric blend. Broadest back, strongest turned open-mouth shock, crisp RRRIP.",
+    "ts": 1787502336
    },
    "rounds": {
-    "1": 4,
-    "2": 4,
-    "3": 4
+    "1": 8,
+    "2": 5,
+    "3": 8
    }
   },
   "b16-delight": {
@@ -926,18 +1566,59 @@
     "0fe6f0fb-b6cf-4dbf-8037-e8c00881be49": {
      "round": 2,
      "file": "v08-0fe6f0fb.png"
+    },
+    "22c4b45d-ba94-436b-9954-32216d1a427a": {
+     "round": 1,
+     "file": null
+    },
+    "2d5edeec-f1d9-4688-b64f-aaa16907ca79": {
+     "round": 1,
+     "file": "v09-2d5edeec.png"
+    },
+    "dc2cc670-f1ef-4110-9abb-c086f969da93": {
+     "round": 1,
+     "file": "v10-dc2cc670.png"
+    },
+    "b2fac98d-059f-46a9-809d-555bc0626cf1": {
+     "round": 1,
+     "file": "v11-b2fac98d.png"
+    },
+    "11c119e3-818b-4cc9-ac3b-c4c6faa951b2": {
+     "round": 2,
+     "file": null
+    },
+    "41011fa4-f6e8-4251-bc9d-dc5f362fdd9e": {
+     "round": 2,
+     "file": "v12-41011fa4.png"
+    },
+    "7de96508-b671-4475-9011-9c28b8b813f9": {
+     "round": 3,
+     "file": "v13-7de96508.png"
+    },
+    "8eb8df85-9f5a-4667-b106-c0a2703b1576": {
+     "round": 3,
+     "file": "v14-8eb8df85.png"
+    },
+    "36b2542f-571e-4184-895c-a3d13efc4914": {
+     "round": 3,
+     "file": "v15-36b2542f.png"
+    },
+    "19d667f4-da45-4ee1-a42b-9273bcdedf3e": {
+     "round": 3,
+     "file": "v16-19d667f4.png"
     }
    },
    "winner": {
-    "variant": "v04",
-    "job": "6b395d7c-5cd0-4f2f-8f43-6b362e50a46c",
-    "board_file": "f0a5854421.png",
-    "notes": "Judge pick. Torn-seam cue actually renders plus warm-lamp/green-fill lighting. v01/v03 killed - coat fully intact, no seam.",
-    "ts": 1786459626
+    "variant": "v13",
+    "job": "7de96508-b671-4475-9011-9c28b8b813f9",
+    "board_file": "32d25d9211.png",
+    "notes": "Coat-respec replacement: the GREY TANK's shoulder seam is torn, not a lab coat. Biggest hardest arm growth in the pool, genuinely wide grin, crispest tear, tightest best-lit frame.",
+    "ts": 1787502956
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 6,
+    "3": 4
    }
   },
   "b17-coat-off-reveal": {
@@ -989,19 +1670,67 @@
     "e917dbab-ff86-4695-bc53-4ce66b6d3ff7": {
      "round": 3,
      "file": "v11-e917dbab.png"
+    },
+    "61ed44cb-e866-4b8b-89f4-953118a92591": {
+     "round": 1,
+     "file": "v12-61ed44cb.png"
+    },
+    "c23ddec2-cf41-482f-a461-ed0fbc269c51": {
+     "round": 1,
+     "file": "v13-c23ddec2.png"
+    },
+    "8183f2bb-df19-42d4-95a3-2214ef0fa171": {
+     "round": 1,
+     "file": "v14-8183f2bb.png"
+    },
+    "84d7127f-ccb4-4a2b-ab09-daca2c048baa": {
+     "round": 1,
+     "file": "v15-84d7127f.png"
+    },
+    "d19bd822-756f-4e87-92d5-504da8731405": {
+     "round": 2,
+     "file": "v16-d19bd822.png"
+    },
+    "745d32aa-5d69-4541-9671-938d401c7426": {
+     "round": 2,
+     "file": "v17-745d32aa.png"
+    },
+    "8a2cb8f2-b3e4-40da-aefd-2ff162308b79": {
+     "round": 2,
+     "file": "v18-8a2cb8f2.png"
+    },
+    "96cf83c9-b367-4e71-a609-97e331f27b1e": {
+     "round": 2,
+     "file": "v23-96cf83c9.png"
+    },
+    "5af57c6f-46a3-4358-b249-6aa54ce5da70": {
+     "round": 3,
+     "file": "v19-5af57c6f.png"
+    },
+    "921d884a-e256-415c-a4cc-7d2c01a8c97c": {
+     "round": 3,
+     "file": "v20-921d884a.png"
+    },
+    "49afcd3c-7cc7-4ebc-9e5f-41945dc37bb2": {
+     "round": 3,
+     "file": "v21-49afcd3c.png"
+    },
+    "44ae70bd-2bea-42ea-b4c0-77d74261fbae": {
+     "round": 3,
+     "file": "v22-44ae70bd.png"
     }
    },
    "winner": {
-    "variant": "v11",
-    "job": "e917dbab-ff86-4695-bc53-4ce66b6d3ff7",
-    "board_file": "356553f79a.png",
-    "notes": "Judge pick. The ONLY tile that lands the low hero angle with the ruined coat trailing from one fist; the rest sit at flat eye level. This is the stage-2 identity anchor - matters downstream.",
-    "ts": 1786459629
+    "variant": "v20",
+    "job": "921d884a-e256-415c-a4cc-7d2c01a8c97c",
+    "board_file": "80aa2c5d9f.png",
+    "notes": "Coat-removal fix: no lab coat anywhere in frame, worn or as a prop; only the grey tank is torn. Most defined arms of the pool, proud grin, strong dramatic lighting.",
+    "ts": 1787504369
    },
    "rounds": {
-    "1": 4,
-    "2": 4,
-    "3": 4
+    "1": 8,
+    "2": 8,
+    "3": 8
    }
   },
   "b39-trio-react": {
@@ -1541,18 +2270,50 @@
     "b1902a9a-da17-4d0c-9736-422ab213fa86": {
      "round": 2,
      "file": "v08-b1902a9a.png"
+    },
+    "76e09b59-ed1c-425b-a2df-e649f9bd53e7": {
+     "round": 1,
+     "file": "v09-76e09b59.png"
+    },
+    "1ba05543-5423-4926-aeda-986059ee3532": {
+     "round": 1,
+     "file": "v10-1ba05543.png"
+    },
+    "c2ae1075-d215-4fcb-9c62-1f38434a7943": {
+     "round": 1,
+     "file": "v11-c2ae1075.png"
+    },
+    "dac791d9-13f7-44db-add3-eb882b43d4c4": {
+     "round": 1,
+     "file": "v12-dac791d9.png"
+    },
+    "8aa27d1a-361d-4cb2-9ea4-e8151ecf2ddd": {
+     "round": 2,
+     "file": "v13-8aa27d1a.png"
+    },
+    "caf41fa9-20bf-402e-bc28-6b16b6ecedb7": {
+     "round": 2,
+     "file": "v14-caf41fa9.png"
+    },
+    "ab682ea8-5f76-4e20-83cc-04b1ebc22525": {
+     "round": 2,
+     "file": "v15-ab682ea8.png"
+    },
+    "b395398e-9f73-4d7b-a773-a45177b3454f": {
+     "round": 2,
+     "file": "v16-b395398e.png"
     }
    },
    "winner": {
-    "variant": "v02",
-    "job": "4466c4a4-1305-4c8c-a84b-6eab619969a4",
-    "board_file": "b37b7f2d86.png",
-    "notes": "Judge pick. Dev gripping the chair, both hands, dialogue exact. v01 killed for 'THE BAR IS B BENDING!'",
-    "ts": 1786459645
+    "variant": "v15",
+    "job": "ab682ea8-5f76-4e20-83cc-04b1ebc22525",
+    "board_file": "6e14df482a.png",
+    "notes": "Strain-leak fix: Dev's polo is fully INTACT at both sleeves and shoulder seams (only Margo's clothing may fail). Hardest chair-lean, sharpest glee/terror, gym equipment and pitch chairs share the frame.",
+    "ts": 1787503158
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b21-tingle-again": {
@@ -2461,18 +3222,104 @@
     "b48685eb-5e9b-405a-b376-9e0c32f71f78": {
      "round": 2,
      "file": "v06-b48685eb.png"
+    },
+    "c23143ef-2cf7-411b-a26e-0cf3155f524c": {
+     "round": 1,
+     "file": "v07-c23143ef.png"
+    },
+    "1b566f0f-5990-499b-94a4-453ffb726a2c": {
+     "round": 1,
+     "file": "v08-1b566f0f.png"
+    },
+    "00d288c9-aa20-4bca-b788-9a75b1fb770d": {
+     "round": 1,
+     "file": "v09-00d288c9.png"
+    },
+    "5b98f8d6-c41f-46d1-9b19-d21449e72a98": {
+     "round": 2,
+     "file": "v10-5b98f8d6.png"
+    },
+    "91e19d95-b386-4d78-b16c-f69e9a92c99a": {
+     "round": 2,
+     "file": "v13-91e19d95.png"
+    },
+    "95ec68cb-e1fa-46aa-9dca-6429f298841d": {
+     "round": 2,
+     "file": "v11-95ec68cb.png"
+    },
+    "e1ffacb1-8cf2-44cc-9061-0ef7fe60d0c8": {
+     "round": 2,
+     "file": "v12-e1ffacb1.png"
+    },
+    "b7b70b71-55a0-4371-bd32-9888fdc9b124": {
+     "round": 1,
+     "file": "v14-b7b70b71.png"
+    },
+    "0695e426-a175-407c-b6dd-0f7cec57cdd2": {
+     "round": 1,
+     "file": "v15-0695e426.png"
+    },
+    "5c4f7177-185f-46ca-8598-d615439b673c": {
+     "round": 1,
+     "file": "v16-5c4f7177.png"
+    },
+    "49037b58-ac66-4fdd-b4bb-c352186786e5": {
+     "round": 1,
+     "file": "v17-49037b58.png"
+    },
+    "9dc7f748-e8d5-4d7a-823b-690286a5370c": {
+     "round": 2,
+     "file": "v18-9dc7f748.png"
+    },
+    "aceaf450-9c8a-41ff-b108-7036c78a5b6c": {
+     "round": 2,
+     "file": "v19-aceaf450.png"
+    },
+    "dd84df8c-df25-4553-b948-8c465c5179c3": {
+     "round": 2,
+     "file": "v20-dd84df8c.png"
+    },
+    "55aabb20-87a8-4ec2-a654-e1b8a10793b6": {
+     "round": 2,
+     "file": null
+    },
+    "9c8369ba-470e-49c7-8a05-369d0cd14b07": {
+     "round": 3,
+     "file": "v21-9c8369ba.png"
+    },
+    "367b5507-fee8-48a6-8589-36d514bb358a": {
+     "round": 3,
+     "file": "v22-367b5507.png"
+    },
+    "69aab98e-b8c7-4809-8fa2-3daf0825f648": {
+     "round": 4,
+     "file": "v25-69aab98e.png"
+    },
+    "411d889b-bb94-48e6-98bf-074d7754517b": {
+     "round": 4,
+     "file": "v23-411d889b.png"
+    },
+    "489e3211-b2dc-4edd-ba52-de52b2cae5d4": {
+     "round": 4,
+     "file": null
+    },
+    "f83fe506-4298-428b-89db-4b4589e99700": {
+     "round": 4,
+     "file": "v24-f83fe506.png"
     }
    },
    "winner": {
-    "variant": "v01",
-    "job": "35bfcad5-5854-4e9b-8152-ed900ea6b8fc",
-    "board_file": "9acf5f4930.png",
-    "notes": "Judge pick. Strongest two-shot with Kress correctly shrinking at the soft edge. v02/v05 dropped Kress entirely, v04 added an unlisted background woman.",
-    "ts": 1786460734
+    "variant": "v13",
+    "job": "91e19d95-b386-4d78-b16c-f69e9a92c99a",
+    "board_file": "cb9a17f972.png",
+    "notes": "Strain-leak fix: Harlan's and Kress's garments both fully INTACT (only Margo's clothing may fail). Correct silver-haired Kress, sharp Harlan intensity, clean tail-correct lettering. Shortfall: Kress reads in a suit rather than his tracksuit.",
+    "ts": 1787504505
    },
    "rounds": {
-    "1": 4,
-    "2": 3
+    "1": 11,
+    "2": 11,
+    "3": 2,
+    "4": 4
    }
   },
   "b48-terms": {
@@ -2774,18 +3621,50 @@
     "26b00a0a-608a-47b7-811e-ccd5ab849e2c": {
      "round": 2,
      "file": "v06-26b00a0a.png"
+    },
+    "6412ea4b-36a0-437a-9f50-cbe5a8b9c7cb": {
+     "round": 1,
+     "file": "v08-6412ea4b.png"
+    },
+    "d4ce1598-36aa-432f-a3a8-27ce42a4419b": {
+     "round": 1,
+     "file": "v09-d4ce1598.png"
+    },
+    "34d2dc69-4e7f-492b-b55b-b87d67307cc3": {
+     "round": 1,
+     "file": "v10-34d2dc69.png"
+    },
+    "16978419-4002-4ad1-89b4-3051dee2280f": {
+     "round": 1,
+     "file": "v11-16978419.png"
+    },
+    "b3c37cb8-06b8-4b2b-8797-10e90eb98b62": {
+     "round": 2,
+     "file": "v12-b3c37cb8.png"
+    },
+    "6a4986c2-2745-444e-8d74-582d2fefa622": {
+     "round": 2,
+     "file": "v13-6a4986c2.png"
+    },
+    "1b97f485-e1ac-451c-ab5c-9af60ae24298": {
+     "round": 2,
+     "file": "v14-1b97f485.png"
+    },
+    "e2cf8ea0-eeee-451b-98c2-cfa1b18754c8": {
+     "round": 2,
+     "file": "v15-e2cf8ea0.png"
     }
    },
    "winner": {
-    "variant": "v06",
-    "job": "26b00a0a-608a-47b7-811e-ccd5ab849e2c",
-    "board_file": "57027341a1.png",
-    "notes": "Judge pick. Warm rim light against the market-ticker background, hungriest grin. 7/7 clean sheet.",
-    "ts": 1786460745
+    "variant": "v08",
+    "job": "6412ea4b-36a0-437a-9f50-cbe5a8b9c7cb",
+    "board_file": "bc62d41aec.png",
+    "notes": "Strain-leak fix: Harlan's sleeves and shoulder seams fully intact (only Margo's clothing may fail). Deepest saturated green practical wash, tight frame-fill, strong white-knuckle grip.",
+    "ts": 1787503526
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8
    }
   },
   "b50-clipboard-back": {
@@ -3710,18 +4589,67 @@
     "022479ef-7ba5-4444-8202-2d8b8dccf243": {
      "round": 2,
      "file": "v08-022479ef.png"
+    },
+    "fafc3e65-14d1-4b2b-842c-150cd9ac27ad": {
+     "round": 1,
+     "file": "v11-fafc3e65.png"
+    },
+    "68566817-92df-41d0-a74c-9675d26a9975": {
+     "round": 1,
+     "file": "v09-68566817.png"
+    },
+    "4c076003-1d4c-42d1-9b63-410f52b73c5d": {
+     "round": 1,
+     "file": "v10-4c076003.png"
+    },
+    "6c761588-6e46-4144-9ebc-e326f99878c5": {
+     "round": 1,
+     "file": null
+    },
+    "2d33bb42-3b24-4e5b-89d6-7ebd9805e47f": {
+     "round": 2,
+     "file": "v12-2d33bb42.png"
+    },
+    "f6129ccf-8ec7-446a-bbe2-8d75b4a04e2b": {
+     "round": 2,
+     "file": "v13-f6129ccf.png"
+    },
+    "25de9a1c-7966-4228-b48c-5d6ec59e3562": {
+     "round": 2,
+     "file": "v14-25de9a1c.png"
+    },
+    "5362d0e0-bf0e-4199-9831-583ec4a23beb": {
+     "round": 2,
+     "file": "v15-5362d0e0.png"
+    },
+    "a5501869-85d8-4ade-9549-80d0c8ace08d": {
+     "round": 3,
+     "file": "v19-a5501869.png"
+    },
+    "921b4746-47b6-466e-b47d-cdd8962e14cd": {
+     "round": 3,
+     "file": "v16-921b4746.png"
+    },
+    "5425f8a2-7704-464e-90ee-976b249af302": {
+     "round": 3,
+     "file": "v17-5425f8a2.png"
+    },
+    "26c37f19-8576-4cd0-a301-795779c4f4f9": {
+     "round": 3,
+     "file": "v18-26c37f19.png"
     }
    },
    "winner": {
-    "variant": "v04",
-    "job": "52322033-c105-47d0-afbe-3a7fed807f9f",
-    "board_file": "56dd73c064.png",
-    "notes": "Best 4-depth blocking: Kress buried in his hands foreground-large, Harlan bracing mid-ground toward the blaze, Dev shouting with the bubble tail landing right on his open mouth while holding an actual notepad, Ingrid filming with her tablet raised. Strongest hard-shadow floor streaks. v02 killed for stray quote-mark glyphs baked into its bubble.",
-    "ts": 1786932247
+    "variant": "v15",
+    "job": "5362d0e0-bf0e-4199-9831-583ec4a23beb",
+    "board_file": "45c67b627c.png",
+    "notes": "Headcount fix: exactly 4 figures (Harlan/Dev/Ingrid/Kress), no cropped face at any frame edge, all garments intact. Best four-depth staggering with the green blaze breaking through the gap, hard floor shadows.",
+    "ts": 1787504148
    },
    "rounds": {
-    "1": 4,
-    "2": 4
+    "1": 8,
+    "2": 8,
+    "3": 4
    }
   },
   "b32-walk-past": {
@@ -3978,18 +4906,50 @@
     "85e2d357-a8be-4d26-abf4-193c48b2053a": {
      "round": 3,
      "file": "v08-85e2d357.png"
+    },
+    "4f616ac5-f492-490c-b290-0164a13c7e50": {
+     "round": 1,
+     "file": "v09-4f616ac5.png"
+    },
+    "0e5b940c-a9a7-444d-8ade-4641a1f1f70c": {
+     "round": 1,
+     "file": "v10-0e5b940c.png"
+    },
+    "3c2ae37f-5cc6-4056-a4e4-e14580b42f2d": {
+     "round": 1,
+     "file": "v11-3c2ae37f.png"
+    },
+    "73035790-4184-472d-9799-7df19ba5c76b": {
+     "round": 1,
+     "file": null
+    },
+    "a377c45e-ed71-46f9-b214-652c24eefb3a": {
+     "round": 2,
+     "file": "v12-a377c45e.png"
+    },
+    "8bb6cdf3-9443-43c6-92e4-a1f467ab08e1": {
+     "round": 2,
+     "file": "v13-8bb6cdf3.png"
+    },
+    "adbdd580-f87b-4884-9f5f-38c7f830134e": {
+     "round": 2,
+     "file": "v14-adbdd580.png"
+    },
+    "de1fdb77-84d6-44dd-bd06-472100caf9a7": {
+     "round": 2,
+     "file": null
     }
    },
    "winner": {
-    "variant": "v05",
-    "job": "344e888c-ccac-4c94-9993-0a7e9cf2bfd4",
-    "board_file": "42e3a9cd58.png",
-    "notes": "Best diagonal: face-down tilt + FG arm crossing frame, most crisp/dramatic torn shoulder seam, strongest strained expression (furrowed brow, open mouth) selling the swelling. v01/v02 read calmer/less reactive; v03's crop is flatter/more front-on with weaker fabric-strain texture and no visible hem lift over the waist.",
-    "ts": 1786933400
+    "variant": "v11",
+    "job": "3c2ae37f-5cc6-4056-a4e4-e14580b42f2d",
+    "board_file": "800617ba65.png",
+    "notes": "Lettering fix: the creeeeak SFX now floats as a 2D graphic in background space, cleanly OFF her body (was baked across her torso). Sharpest radiating strain-star, clearest green light on the weave.",
+    "ts": 1787503707
    },
    "rounds": {
-    "1": 4,
-    "2": 4,
+    "1": 8,
+    "2": 8,
     "3": 4
    }
   },
@@ -4328,19 +5288,67 @@
     "c1e3e640-8b5b-40b5-be5c-ce71aa26fac2": {
      "round": 9,
      "file": "v12-c1e3e640.png"
+    },
+    "8f446d4c-a2b3-435b-a512-33465e412041": {
+     "round": 1,
+     "file": "v13-8f446d4c.png"
+    },
+    "96697285-86a0-4106-80a6-1d92e7025488": {
+     "round": 1,
+     "file": "v14-96697285.png"
+    },
+    "b978754f-0426-4a18-9640-4d02307f172e": {
+     "round": 1,
+     "file": "v15-b978754f.png"
+    },
+    "5e87626f-994b-43bc-b51e-b85a1be3a3df": {
+     "round": 1,
+     "file": "v16-5e87626f.png"
+    },
+    "4c96eba8-f989-4a3f-bee9-f95b86adfe03": {
+     "round": 2,
+     "file": "v17-4c96eba8.png"
+    },
+    "da8985bd-c07f-4b36-a8c7-44673e4ca9b1": {
+     "round": 2,
+     "file": "v18-da8985bd.png"
+    },
+    "3fa2fd4a-4b6d-4b45-b320-ae254e38fcea": {
+     "round": 2,
+     "file": "v19-3fa2fd4a.png"
+    },
+    "f417cb16-ebf0-4b62-a328-7efe0b623410": {
+     "round": 2,
+     "file": null
+    },
+    "7ac3e208-b483-4220-84cc-78dbf7c4bd5b": {
+     "round": 3,
+     "file": "v20-7ac3e208.png"
+    },
+    "f1633c38-3c1d-4f1a-822c-94772f200b77": {
+     "round": 3,
+     "file": "v21-f1633c38.png"
+    },
+    "d76629c9-fb00-49e1-8f03-5aa8429f2bac": {
+     "round": 3,
+     "file": null
+    },
+    "180d0ea9-9fb5-4e10-b05b-44840eab9945": {
+     "round": 3,
+     "file": "v22-180d0ea9.png"
     }
    },
    "winner": {
-    "variant": "v12",
-    "job": "c1e3e640-8b5b-40b5-be5c-ce71aa26fac2",
-    "board_file": "8dbbbcea17.png",
-    "notes": "LADDER rung 1, promoted over rung-0 v11. Refined from the v11 winner as its own reference: physique clearly bigger and rounder (arms and torso both scale past rung 0), most intense open-mouth shout of the rung, coverage held despite heavier tearing. Camera, backlight halo, 5-person headcount and caption text all match rung 0 with no drift.",
-    "ts": 1786934735
+    "variant": "v16",
+    "job": "5e87626f-994b-43bc-b51e-b85a1be3a3df",
+    "board_file": "7d3ec8bfeb.png",
+    "notes": "FINALE. Headcount fix: exactly 5 (Margo/Kress/Harlan/Dev/Ingrid), no cropped face at any frame edge, coverage intact, only Margo's tank torn. Elevated-intimate downward vantage, gold rim light, colossal double-bicep, clean depth pyramid.",
+    "ts": 1787504176
    },
    "rounds": {
-    "1": 4,
-    "2": 4,
-    "3": 4,
+    "1": 8,
+    "2": 8,
+    "3": 8,
     "9": 1
    }
   },

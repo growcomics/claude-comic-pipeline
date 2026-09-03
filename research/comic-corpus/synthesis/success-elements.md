@@ -73,6 +73,14 @@ Confirmed again: Ass Effect is 25% flat (its p3 is five flat-level talking-head 
 
 ---
 
+## Finding 7 — Solo-body staging is a vocabulary, not an adjective *(Deed Arts study, 2 books / 113 panels, 2026-09-02)*
+
+The first non-Boogie artist in the corpus (Deed Arts: `deed-arts-poppy-sailor-gal-1`, FMG, 18pp; `deed-arts-omega-device`, MMG, 11 non-contiguous pp) separates genre norm from house style on the camera axis. What is shared with Boogie: low-hero framing on payoffs, ECU growth money-shots, faceless-ECU as the recurring defect. What is new and specific: **the camera never goes above the muscle character's head on a muscle beat** (80% of panels at chest/eye height looking level or up; the 3% high angles are establishing shots and one POV gag), **something comes at the lens on 77% of panels** (chest 31%, forearm/fist/hand 18%, back 7%, glute 4%), and **the crop makes the sold muscle the widest mass in frame** (waist-up for flexes so both fists stay in, body-part-only for growth ECUs, full-body only for the reveal). Poppy runs 7.6% flat-level panels, the lowest in the corpus.
+
+Two reusable page templates: the **flex ladder** (identical pose, camera and crop held, redrawn bigger 3× down the page, biggest panel last and bled) and the **body-part ECU column** (3–4 sequential ECUs on different muscle groups tied by one energy motif and escalating SFX). Both are the multi-panel-progressive device from Finding 4 with the camera held still, which is what makes the growth legible.
+
+Routed to production as **L40** (`lessons-learned.md`) and the "Body-to-camera staging" section of `cinematic-framing.md`; the 76 appendable camera/pose seeds live in `synthesis/angle-deck.md` / `cards.json` (Prompt Deck append mode). Full write-up with the 2D→CGI substitution table: `synthesis/deed-arts-staging-study.md`.
+
 ## What's now confirmed vs. still open
 
 **Confirmed (held when the corpus tripled, across multiple writers):** growth-ratio-by-intent (F1); empty-balloon epidemic (F2); dead-face-vs-face-led expression gap (F3); SFX + progressive-ECU as the core devices (F4); story as the universal floor (F5); flat-camera default (F6).

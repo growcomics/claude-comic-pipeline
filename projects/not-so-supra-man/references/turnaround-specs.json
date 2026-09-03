@@ -140,5 +140,98 @@
   }
  ],
  "_bust_policy_2026_08_11": "OWNER-VALIDATED METHOD (supersedes Claude's structured over-spec). Claude's clause ('DRAMATICALLY LARGER\u2026 Do NOT normalize, do NOT average\u2026') under-delivered. The owner solved it in minutes with plain stacked intensifiers in short separate sentences \u2014 'Make her breasts very, very, very, very big' \u2014 run x4 three times (12 variants) and picked a winner. Nano Banana averages away long structured clauses with DO-NOT negations; it cannot average away four literal repetitions of 'very'. Hard attributes are a SELECTION problem as much as a prompting one: over-generate and pick. Expect the odd policy-filter failure at this intensity (1 of the owner's 12 failed) \u2014 keep the survivors. REFINEMENT (owner, same session): the owner hit per-view bust INCONSISTENCY across the four turnaround views and fixed it with an explicit cross-view clause \u2014 'Make sure in every phase of the turnaround, the breasts are the same large equal size. No difference in breast size per turnaround variation.' This matters more on a model sheet than anywhere else: each downstream page attaches ONE view, so per-view drift silently becomes per-page drift. Adopted verbatim in place of Claude's weaker 'same bust, waist and hip size in all four views'. ALSO NOTE: Claude's structured clause ('deep prominent cleavage swelling above the neckline\u2026') tripped the Flow content filter on 4/4 variants, while the owner's plainer phrasing passed 11/12 \u2014 the ornate version was both weaker AND more filter-prone.",
- "_height_clamp_2026_08_11": "Weak height lines ('she is N inches SHORTER than the silhouette') do NOT hold \u2014 deedee-t3 rendered at ratio 0.994-1.010 vs the 6'2\" mannequin when the target was ~0.905, i.e. she would have been TALLER before her transformation than after. Replaced with the forceful SCALE block that worked for deedee-t8: 'MUCH SHORTER... top of her head clearly and obviously BELOW... a large visible gap... NOT level with the mannequin', declared as the single most important requirement. Always verify by measuring pixels, never by eye."
+ "_height_clamp_2026_08_11": "Weak height lines ('she is N inches SHORTER than the silhouette') do NOT hold \u2014 deedee-t3 rendered at ratio 0.994-1.010 vs the 6'2\" mannequin when the target was ~0.905, i.e. she would have been TALLER before her transformation than after. Replaced with the forceful SCALE block that worked for deedee-t8: 'MUCH SHORTER... top of her head clearly and obviously BELOW... a large visible gap... NOT level with the mannequin', declared as the single most important requirement. Always verify by measuring pixels, never by eye.",
+ "scenes": [
+  {
+   "id": "hq-gym:wide",
+   "location": "hq-gym",
+   "rung": "wide",
+   "save": "references/locations/hq-gym/wide.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "WIDE ESTABLISHING SHOT \u2014 the full room/street read end to end, deep perspective, architecture and floor plane clearly legible, camera at eye level. the Hall of Justice training hall: vaulted ceiling, a heavy graviton weight rack, glowing holographic readout pillars, polished floor with crater dents hammered into it. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: clean bright training-hall lighting, cool daylight from high windows with warm practical spill. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "hq-gym:medium",
+   "location": "hq-gym",
+   "rung": "medium",
+   "save": "references/locations/hq-gym/medium.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "MEDIUM REGION \u2014 move in to one region of the SAME location, roughly half the width of the wide plate, same lighting and same architecture, so a character staged here would read at medium camera distance. Keep it recognisably the same place as the attached parent plate. the Hall of Justice training hall: vaulted ceiling, a heavy graviton weight rack, glowing holographic readout pillars, polished floor with crater dents hammered into it. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: clean bright training-hall lighting, cool daylight from high windows with warm practical spill. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "hq-gym:close",
+   "location": "hq-gym",
+   "rung": "close",
+   "save": "references/locations/hq-gym/close.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "CLOSE REGION \u2014 tight on a small corner of the SAME location: surface texture, props and wall detail filling the frame, same lighting and materials as the attached parent plate, so a character staged here would read at close camera distance. the Hall of Justice training hall: vaulted ceiling, a heavy graviton weight rack, glowing holographic readout pillars, polished floor with crater dents hammered into it. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: clean bright training-hall lighting, cool daylight from high windows with warm practical spill. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "doomer-lab-2:wide",
+   "location": "doomer-lab-2",
+   "rung": "wide",
+   "save": "references/locations/doomer-lab-2/wide.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "WIDE ESTABLISHING SHOT \u2014 the full room/street read end to end, deep perspective, architecture and floor plane clearly legible, camera at eye level. a backup villain laboratory: a full wall of security monitors, a cluttered workbench holding the rebuilt Disinto-Ray prototype under a work lamp, red accent lighting. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: dim room lit mainly by the blue monitor wall with hard red accent lighting and one warm work lamp. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "doomer-lab-2:medium",
+   "location": "doomer-lab-2",
+   "rung": "medium",
+   "save": "references/locations/doomer-lab-2/medium.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "MEDIUM REGION \u2014 move in to one region of the SAME location, roughly half the width of the wide plate, same lighting and same architecture, so a character staged here would read at medium camera distance. Keep it recognisably the same place as the attached parent plate. a backup villain laboratory: a full wall of security monitors, a cluttered workbench holding the rebuilt Disinto-Ray prototype under a work lamp, red accent lighting. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: dim room lit mainly by the blue monitor wall with hard red accent lighting and one warm work lamp. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "doomer-lab-2:close",
+   "location": "doomer-lab-2",
+   "rung": "close",
+   "save": "references/locations/doomer-lab-2/close.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "CLOSE REGION \u2014 tight on a small corner of the SAME location: surface texture, props and wall detail filling the frame, same lighting and materials as the attached parent plate, so a character staged here would read at close camera distance. a backup villain laboratory: a full wall of security monitors, a cluttered workbench holding the rebuilt Disinto-Ray prototype under a work lamp, red accent lighting. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: dim room lit mainly by the blue monitor wall with hard red accent lighting and one warm work lamp. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "city-street:wide",
+   "location": "city-street",
+   "rung": "wide",
+   "save": "references/locations/city-street/wide.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "WIDE ESTABLISHING SHOT \u2014 the full room/street read end to end, deep perspective, architecture and floor plane clearly legible, camera at eye level. a downtown avenue: glass office towers rising on both sides, an overturned yellow taxi, a cracked asphalt crater, scattered debris, late-afternoon sun. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: low late-afternoon golden sun raking down the avenue, long shadows, warm bounce off the glass towers. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "city-street:medium",
+   "location": "city-street",
+   "rung": "medium",
+   "save": "references/locations/city-street/medium.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "MEDIUM REGION \u2014 move in to one region of the SAME location, roughly half the width of the wide plate, same lighting and same architecture, so a character staged here would read at medium camera distance. Keep it recognisably the same place as the attached parent plate. a downtown avenue: glass office towers rising on both sides, an overturned yellow taxi, a cracked asphalt crater, scattered debris, late-afternoon sun. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: low late-afternoon golden sun raking down the avenue, long shadows, warm bounce off the glass towers. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "city-street:close",
+   "location": "city-street",
+   "rung": "close",
+   "save": "references/locations/city-street/close.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "CLOSE REGION \u2014 tight on a small corner of the SAME location: surface texture, props and wall detail filling the frame, same lighting and materials as the attached parent plate, so a character staged here would read at close camera distance. a downtown avenue: glass office towers rising on both sides, an overturned yellow taxi, a cracked asphalt crater, scattered debris, late-afternoon sun. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: low late-afternoon golden sun raking down the avenue, long shadows, warm bounce off the glass towers. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  },
+  {
+   "id": "doomer-lab:wide",
+   "location": "doomer-lab",
+   "rung": "wide",
+   "save": "references/locations/doomer-lab/wide.png",
+   "aspect": "16:9",
+   "attach": [],
+   "prompt": "WIDE ESTABLISHING SHOT \u2014 the full room/street read end to end, deep perspective, architecture and floor plane clearly legible, camera at eye level. a villain laboratory: raw concrete walls, a steel gantry overhead, thick cable bundles snaking the floor, the Disinto-Ray rig on its mount aimed at a bolted-down empty interrogation chair. The location is completely EMPTY \u2014 no people, no characters, no figures, no silhouettes, no mannequins anywhere in frame. This is a clean environment plate only. Lighting: cold overhead laboratory floods with a sickly green cast off the ray rig, deep shadow in the corners. Photorealistic 3D CGI environment plate, DAZ Studio Iray render-engine look, photoreal CGI. NOT illustrated, NOT anime, NOT cartoon, NOT 2D."
+  }
+ ],
+ "_scenes_note": "Scene-ladder plates (2026-08-12). compose.py grew a 'scene:' job kind because compose_sheet could not express a location plate: its D1 wants >=2 refs (a bootstrap plate has none) and its D7 wants the word 'silhouette' (meaningless for an empty room). Plates get their own gates: D15 requires the prompt to state the location is EMPTY of people, and D8-chain requires medium to chain from a banked wide and close from a banked medium. Bank with --ledger-key scene_ladders.<location>.<rung>."
 }
