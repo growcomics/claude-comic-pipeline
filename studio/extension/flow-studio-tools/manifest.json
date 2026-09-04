@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "3DMC Studio Tools",
-  "version": "2.7.2",
-  "description": "One toolbox for the comic pipeline: on Google Flow \u2014 Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), run a model bake-off (same prompt on every Nano Banana model, side-by-side compare), or one-click-insert canonical prompt blocks; on Patreon \u2014 bulk-download a post's full-res gallery.",
+  "version": "2.8.0",
+  "description": "One toolbox for the comic pipeline: on Google Flow \u2014 Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), run a model bake-off (same prompt on every Nano Banana model, side-by-side compare), one-click-insert canonical prompt blocks, or deal a camera/pose card from the comic-corpus Angle Deck; on Patreon \u2014 bulk-download a post's full-res gallery.",
   "permissions": [
     "downloads",
     "storage",

@@ -43,6 +43,19 @@
    #fst .bakemodels{gap:4px;margin-bottom:2px}
    #fst label.mchk{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 4px;border:1px solid #2e3140;border-radius:8px;background:#0f1115;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
    #fst label.mchk:hover{background:#181b22} #fst label.mchk input{width:auto;margin:0;accent-color:#ef9f27}
+   #fst .anglebody{margin-top:8px;padding:8px;border:1px solid #2e3140;border-radius:10px;background:#0f1115}
+   #fst .anglehd{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:12px} #fst .anglehd b{flex:1}
+   #fst .anglehd .anglecount{opacity:.6;font-size:11px} #fst .anglehd .anglex{cursor:pointer;opacity:.7;padding:0 6px;border-radius:6px} #fst .anglehd .anglex:hover{background:#2e3140;opacity:1}
+   #fst .chips{gap:4px;margin-top:4px} #fst .chips .clbl{opacity:.6;font-size:11px;width:40px}
+   #fst button.chip{flex:0 0 auto;padding:4px 8px;border:1px solid #2e3140;border-radius:999px;background:#14151c;color:#9aa0ab;font-size:11px;font-weight:600;cursor:pointer}
+   #fst button.chip:hover{background:#23252e} #fst button.chip.on{background:#ef9f27;color:#412402;border-color:transparent}
+   #fst .anglelist{max-height:230px;overflow-y:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px}
+   #fst .acard{padding:6px 8px;border:1px solid #232a33;border-radius:8px;background:#14151c;cursor:pointer}
+   #fst .acard:hover{background:#1d2028;border-color:#3a3f4b} #fst .acard.last{border-color:#ef9f27}
+   #fst .acard-l{font-size:11px;color:#c9cdd4;display:flex;gap:6px;align-items:baseline} #fst .acard-star{color:#ef9f27;font-weight:700;flex:0 0 auto}
+   #fst .acard-t{font-size:11.5px;opacity:.85;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+   #fst .acard-s{font-size:10.5px;opacity:.5;margin-top:2px}
+   #fst .anglefoot{font-size:10.5px;opacity:.5;margin-top:6px;word-break:break-all}
    #fst.min .bd{display:none}`;
   const style = document.createElement("style"); style.textContent = css; document.documentElement.appendChild(style);
   const panel = document.createElement("div"); panel.id = "fst";
@@ -92,9 +105,17 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pbangle" title="Pick a camera/pose card from the comic-corpus Angle Deck (76 Deed Arts seeds, L40 body-to-camera staging) and APPEND it as the prompt's final sentence — camera height, nearest limb, muscle sold, crop, body line; no appearance, no style. Filter by angle and by the muscle the shot sells, or deal a random one. It directs the camera, so like Framing/Director/Detail it must not ride with the i2i keep-composition lock.">🎥 Angle card</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Cam:</span><select class="pbsel pbcam" title="Camera height for Cine+Light / Framing. Vary = the model picks the height that serves the beat (never ruts into low-hero shots)."><option value="vary">Vary per beat</option><option value="low">Low hero</option><option value="eye">Eye-level</option><option value="high">High look-down</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing staging assumes. Auto = neutral wording that never asserts a count — no phantom second figure."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Light:</span><select class="pbsel pblight" title="Lighting scheme for Cine+Light and 💡 Light. Each scheme is built to the same spec — a named key with a stated angle, a per-form gradient, ambient occlusion by anatomical location, micro-shadow detail, a rim with an anti-glow guard, and the environment held below the figures."></select><span class="lbl" style="margin:0 4px 0 6px">Render:</span><select class="pbsel pbrender" title="Which variant of the scheme to use. 3D = photoreal / PBR language (pairs with the 🎨 DAZ prefix). Drawn = the same light logic in painted-comic language — pair it with the ✏️ Drawn style prefix, and do NOT stack it with 🎨 DAZ."><option value="cgi">3D</option><option value="illo">Drawn</option></select></div>
+     <div class="anglebody" style="display:none">
+       <div class="anglehd"><b>🎥 Angle card</b><span class="anglecount">loading…</span><span class="anglex" title="Close the picker">✕</span></div>
+       <div class="row chips anglechips-angle"></div>
+       <div class="row chips anglechips-muscle"></div>
+       <div class="row" style="margin-top:8px"><button class="pick go angledeal" title="Append ONE random card from the current filter as the prompt's final sentence">🎲 Deal me one</button><button class="pick angleclear" title="Switch every chip off — all cards">All cards</button></div>
+       <div class="anglelist"></div>
+       <div class="anglefoot">Cards: research/comic-corpus/synthesis/cards.json — regenerate with scripts/angle_deck.py, then re-copy into the extension.</div>
+     </div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -396,8 +417,15 @@
       const val = blk.askUpper === false ? t : t.toUpperCase();
       blk = Object.assign({}, blk, { text: t ? blk.textNamed.replaceAll("%NAME%", val) : blk.text });
     }
+    insertBlock(blk);
+  }
+  // The insert itself, shared by the preset buttons above and the 🎥 Angle card picker
+  // below. Takes a {where, label, text} block and returns true once it has been handed
+  // to the composer. It APPENDS (or PREPENDS) around whatever is already there — it
+  // never clears the text, never touches the staged ref chips, never submits.
+  function insertBlock(blk) {
     const box = findPromptBox();
-    if (!box) { status("No Flow prompt box on screen — open a project composer first."); return; }
+    if (!box) { status("No Flow prompt box on screen — open a project composer first."); return false; }
     box.el.focus();
     if (box.kind === "ta") {
       const cur = box.el.value || "";
@@ -448,8 +476,118 @@
       document.execCommand("insertText", false, text);
     }
     status(blk.label + " inserted — review & submit.");
+    return true;
   }
   panel.querySelectorAll("button.pb").forEach((b) => b.addEventListener("click", () => insertPromptBlock(b.dataset.pb)));
+
+  // ───────── 🎥 Angle card — camera/pose seeds mined from the comic corpus ─────
+  // The deck is research/comic-corpus/synthesis/cards.json (76 Deed Arts seeds, one
+  // per steal-worthy panel), built by research/comic-corpus/scripts/angle_deck.py from
+  // every corpus/*/angle-study.json. A COPY ships beside this file as cards.json —
+  // regenerate the deck, re-copy, never hand-edit. The service worker reads it for us
+  // (a content script can only fetch extension files that are exposed to the page via
+  // web_accessible_resources), one "angleDeck" message for the whole deck.
+  // Each card is a single plain-speech sentence — camera height, nearest limb, muscle
+  // sold, crop, body line — carrying no appearance and no style, meant to be APPENDED
+  // after the action prompt as its final sentence. It rides the exact insertBlock()
+  // path 📐 Staging uses (where:"end"): Slate's own editor.insertText through
+  // flow-inject.js — appends to the model, never clears, never touches the staged ref
+  // chips, never submits. Chip filters persist in chrome.storage.local (pbAngle).
+  const ANGLE_CHIPS = [["worm", "Worm"], ["low", "Low"], ["eye", "Eye"], ["high", "High"], ["dutch", "Dutch"], ["OTS", "OTS"]];
+  const MUSCLE_CHIPS = [["arms", "Arms"], ["chest", "Chest"], ["back", "Back"], ["glutes", "Glutes"], ["shoulders", "Shoulders"], ["abs", "Abs"], ["full-silhouette", "Silhouette"]];
+  const angleBody = $(".anglebody"), angleBtn = $(".pbangle"), angleListEl = $(".anglelist"), angleCountEl = $(".anglecount"), angleDealBtn = $(".angledeal");
+  let angleDeck = null, angleFilt = { angle: [], muscle: [] }, angleLast = null;
+  const angleCards = () => (angleDeck ? angleDeck.cards : []);
+  function angleVal(c, dim) { const t = c.tags || {}; return dim === "angle" ? (t.angle || c.group) : t.muscle_sold; }
+  // The spec'd chips first, then any extra value a regenerated deck introduces (angle_deck.py
+  // knows bird / aerial / pov too) so no card can ever hide behind a chip that isn't drawn.
+  function angleChipDefs(dim) {
+    const base = dim === "angle" ? ANGLE_CHIPS : MUSCLE_CHIPS;
+    const known = new Set(base.map((c) => c[0])), extra = [];
+    angleCards().forEach((c) => { const v = angleVal(c, dim); if (v && v !== "none" && !known.has(v)) { known.add(v); extra.push([v, v]); } });
+    return base.concat(extra);
+  }
+  function angleMatch(c, f) { return (!f.angle.length || f.angle.includes(angleVal(c, "angle"))) && (!f.muscle.length || f.muscle.includes(angleVal(c, "muscle"))); }
+  const angleFiltered = () => angleCards().filter((c) => angleMatch(c, angleFilt));
+  function loadAngleDeck() {
+    if (angleDeck) return Promise.resolve(angleDeck);
+    return new Promise((res) => {
+      chrome.runtime.sendMessage({ type: "angleDeck" }, (r) => {
+        const err = chrome.runtime.lastError;
+        if (err || !r || !r.ok) { status("Angle deck failed to load: " + ((r && r.error) || (err && err.message) || "no response")); angleCountEl.textContent = "deck missing"; res(null); return; }
+        angleDeck = r.deck;
+        // Guarded read: a stored chip value the current deck doesn't know is dropped, so a
+        // stale filter can never hide every card behind a chip that isn't on screen.
+        ["angle", "muscle"].forEach((dim) => { const ok = new Set(angleChipDefs(dim).map((c) => c[0])); angleFilt[dim] = angleFilt[dim].filter((v) => ok.has(v)); });
+        res(angleDeck);
+      });
+    });
+  }
+  function renderAngleChips() {
+    ["angle", "muscle"].forEach((dim) => {
+      const row = $(".anglechips-" + dim); row.innerHTML = "";
+      const lbl = document.createElement("span"); lbl.className = "clbl"; lbl.textContent = dim === "angle" ? "Angle:" : "Sells:"; row.appendChild(lbl);
+      // A chip's count honours the OTHER dimension's filter — it says how many cards lighting it would leave.
+      const other = dim === "angle" ? { angle: [], muscle: angleFilt.muscle } : { angle: angleFilt.angle, muscle: [] };
+      angleChipDefs(dim).forEach(([k, label]) => {
+        const n = angleCards().filter((c) => angleVal(c, dim) === k && angleMatch(c, other)).length;
+        const b = document.createElement("button"); b.className = "chip" + (angleFilt[dim].includes(k) ? " on" : ""); b.dataset.k = k;
+        b.textContent = angleDeck ? label + " " + n : label;
+        b.title = (dim === "angle" ? "Camera angle: " : "Muscle the card is built to sell: ") + k + " — click to toggle. No chips lit = every card.";
+        b.addEventListener("click", () => {
+          const arr = angleFilt[dim], i = arr.indexOf(k);
+          if (i >= 0) arr.splice(i, 1); else arr.push(k);
+          chrome.storage.local.set({ pbAngle: angleFilt });
+          renderAngle();
+        });
+        row.appendChild(b);
+      });
+    });
+  }
+  function renderAngleList() {
+    angleListEl.innerHTML = "";
+    const list = angleFiltered();
+    angleCountEl.textContent = angleDeck ? list.length + " / " + angleCards().length + " cards" : "loading…";
+    angleDealBtn.disabled = !list.length;
+    if (angleDeck && !list.length) { const e = document.createElement("div"); e.className = "anglefoot"; e.textContent = "No card matches — switch a chip off."; angleListEl.appendChild(e); return; }
+    list.forEach((c) => {
+      const t = c.tags || {}, src = c.source || {};
+      const d = document.createElement("div"); d.className = "acard" + (c.id === angleLast ? " last" : ""); d.dataset.id = c.id;
+      d.title = c.text + "\n\n" + [src.artist, src.comic, "p" + src.page + "." + src.panel].filter(Boolean).join(" · ") + " — click to append as the prompt's final sentence";
+      const l = document.createElement("div"); l.className = "acard-l";
+      const st = document.createElement("span"); st.className = "acard-star"; st.textContent = "★" + (c.steal_score != null ? c.steal_score : "?");
+      const lab = document.createElement("span"); lab.className = "acard-lab"; lab.textContent = c.label || c.id;
+      l.append(st, lab);
+      const tx = document.createElement("div"); tx.className = "acard-t"; tx.textContent = c.text;
+      const f = document.createElement("div"); f.className = "acard-s";
+      f.textContent = [t.shot_distance, t.crop, t.body_line].filter(Boolean).join(" · ") + " · " + (c.chars || c.text.length) + " ch" + (t.explicit ? " · 18+" : "");
+      d.append(l, tx, f);
+      d.addEventListener("click", () => angleAppend(c));
+      angleListEl.appendChild(d);
+    });
+  }
+  function renderAngle() { renderAngleChips(); renderAngleList(); }
+  function angleAppend(c) {
+    if (!insertBlock({ where: "end", label: "Angle card " + c.id, text: c.text })) return;
+    angleLast = c.id; renderAngleList();
+    const el = angleListEl.querySelector('.acard[data-id="' + c.id + '"]'); if (el) el.scrollIntoView({ block: "nearest" });
+  }
+  angleDealBtn.addEventListener("click", () => {
+    const list = angleFiltered();
+    if (!list.length) { status("No angle card matches the current chips."); return; }
+    angleAppend(list[Math.floor(Math.random() * list.length)]);
+  });
+  $(".angleclear").addEventListener("click", () => { angleFilt = { angle: [], muscle: [] }; chrome.storage.local.set({ pbAngle: angleFilt }); renderAngle(); });
+  $(".anglex").addEventListener("click", () => { angleBody.style.display = "none"; });
+  angleBtn.addEventListener("click", () => {
+    if (angleBody.style.display !== "none") { angleBody.style.display = "none"; return; }
+    angleBody.style.display = "block"; renderAngle();
+    loadAngleDeck().then((d) => { if (d) renderAngle(); });
+  });
+  chrome.storage.local.get(["pbAngle"]).then((s) => {
+    const f = s.pbAngle || {}, keep = (a) => (Array.isArray(a) ? a.filter((v) => typeof v === "string") : []);
+    angleFilt = { angle: keep(f.angle), muscle: keep(f.muscle) };
+  });
   // Cam/Cast/Light/Render selectors — persisted so the chosen framing style and
   // lighting scheme stick across reloads.
   const camSel = $(".pbcam"), castSel = $(".pbcast"), lightSel = $(".pblight"), renderSel = $(".pbrender");
