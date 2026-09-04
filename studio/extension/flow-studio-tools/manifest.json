@@ -11,6 +11,7 @@
   ],
   "host_permissions": [
     "https://labs.google/*",
+    "https://flow.google.com/*",
     "https://*.googleusercontent.com/*",
     "https://flow-content.google/*",
     "https://3dmusclecomics.com/*",
@@ -23,7 +24,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://labs.google/fx/tools/flow/*"
+        "https://labs.google/fx/tools/flow/*",
+        "https://flow.google.com/*"
       ],
       "js": [
         "flow-core.js",
@@ -36,7 +38,8 @@
     },
     {
       "matches": [
-        "https://labs.google/fx/tools/flow/*"
+        "https://labs.google/fx/tools/flow/*",
+        "https://flow.google.com/*"
       ],
       "js": [
         "flow-inject.js"
