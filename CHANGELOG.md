@@ -12,6 +12,23 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-09-03
+
+### Added
+
+- **Angle-card examples — 10 Deed Arts camera cards rendered for real on Higgsfield; 4 of 10 landed** (`skills/comic-production/references/sketches/angle-card-examples/`: four winner JPEGs named by card id, `ledger.json`, `README.md` with the pass table). Why: the 76-card deck shipped 2026-09-02 untested against the generator, and the owner asked for the cards validated with real generations and the study page given images. Method: the highest-steal-score card in each of ten staging families (rear worm's-eye, low reveal, female reveal, double fist at lens, strike at lens, over-shoulder glance, growth ECU with face, chest ECU, flex ladder rung, scale onlooker); ONE `count:4` `nano_banana_2` call per card at 1k / 3:4 with `canonical-cast/mira/body-tier7.png` as the only reference (never the Deed Arts pages: 2D, third-party); prompt = the L36 DAZ style block + always-clothed clause + "The same character from the reference." + the card text verbatim; a fresh Sonnet judge per card scored every variant on camera height, part nearest the lens, and crop against the card's addendum tags (a variant lands only if all three hold; a card passes at 2 of 4); the orchestrator personally checked the winners. About 60 credits.
+  - **Passed**: female reveal `omega p10-1` (4/4), growth ECU with face `omega p4-1` (3/4), scale onlooker `omega p21-5` (2/4), rear worm's-eye `omega p1-1` (2/4). The p21-5 winner is the other landing variant rather than the judge's first pick: the rear view renders the one-piece as a thong back, and the committed pick keeps the fuller cut (reason recorded in the ledger).
+  - **Did not land**: double fist at lens `omega p20-4` (0/4), strike at lens `poppy p9-4` (0/4), over-shoulder glance `poppy p16-4` (0/4): all three held camera height and the part at the lens on 4/4 variants and lost on crop alone, the model pulling back to waist-up / head-to-thigh / full body when the card asked for chest-up, body-part-only, or head-to-thigh. Flex ladder rung `poppy p14-4` (0/4): a flat frontal flex at eye level with nothing thrust at the lens, and the card sentence never names a part at the lens, so the model produced none. Low reveal `omega p5-1` (0/4): the card text says "just below chest height" while its own tag says `below-knee`, and the renders followed the text (a deck text/tag disagreement, left for the owner). Chest ECU `poppy p7-2` (1/4): 2 of 4 jobs failed at Higgsfield (the "straps cutting into flesh … torn fabric peels back" clause reads as a filter trip); of the two that rendered, one landed.
+  - **The finding**: across 40 variants, camera height landed 30, part-at-lens 29, crop 24. `nano_banana_2` obeys where the camera sits and what comes at it; it does not obey a tight crop from one clause, and it draws 2D devices literally when the card names them (claw-shaped force lines and speed lines produced comic-outline drift in p4-1, p10-1 v4, p14-4). Both are card-wording problems, not camera problems: crop needs a hard cut sentence ("the frame cuts her at the chest; nothing below it is in frame") and the 2D devices need the study's substitution table applied before a seed goes into a prompt. No deck text was changed in this commit.
+  - **Model tag**: every job `generate_image` returned for `nano_banana_2` carried `model: "nano_banana_flash"` (the id the generation-defaults note says left the catalog); recorded verbatim per the verify-the-returned-model rule. Same relabel behaviour as the `nano_banana_pro` → `nano_banana_2` case noted 2026-08-09.
+- `research/comic-corpus/scripts/build_study_page.py`: the study page now has a checked-in builder (the 2026-09-02 page came from a scratch script that was not kept). It reads the study markdown, `cards.json`, L40 from `lessons-learned.md`, the framing-guide section, the two corpus book folders, and `angle-card-examples/ledger.json`, and writes `synthesis/deed-arts-staging-study.html`. Rebuild instead of hand-editing.
+
+### Changed
+
+- `research/comic-corpus/synthesis/deed-arts-staging-study.html` rebuilt from sources: each tested card shows its real render beside the seed (passing) or a visible "Did not land on nano_banana_2" note (failing, still in the deck); new "Real renders" section with the pass table and thumbnails, plus a TOC entry. The markdown pass now renders the Omega notes' caveat as a blockquote and keeps italics that wrap code spans; otherwise the page is structurally identical to the committed one (same 76 cards, 10 sections, 149 list items).
+
+---
+
 ## 2026-09-02
 
 ### Added

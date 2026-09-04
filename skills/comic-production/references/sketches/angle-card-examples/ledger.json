@@ -1,0 +1,1382 @@
+{
+ "run": "angle-card-examples validation",
+ "date": "2026-09-03",
+ "backend": "Higgsfield MCP",
+ "model_requested": "nano_banana_2",
+ "resolution": "1k",
+ "aspect_ratio": "3:4",
+ "count_per_card": 4,
+ "submit_rule": "ONE count:4 call per card",
+ "reference": {
+  "file": "skills/comic-production/references/canonical-cast/mira/body-tier7.png",
+  "role": "image_references",
+  "media_id": "b0e7b3a5-e352-4308-9472-a79366168efd"
+ },
+ "style_block": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering.",
+ "continuation_line": "The same character from the reference.",
+ "prompt_formula": "style_block + continuation_line + card.text verbatim",
+ "pass_rule": "a variant passes if camera height, part nearest the lens, and crop all land; a card passes with >=2 of 4 passing variants",
+ "cards": [
+  {
+   "family": "rear worm's-eye",
+   "card_id": "deed-arts-omega-device-p1-1",
+   "group": "worm",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "below-knee",
+    "angle": "worm",
+    "toward_camera": "back",
+    "crop": "bleed",
+    "muscle_sold": "back",
+    "shot_distance": "WS"
+   },
+   "card_text": "Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low behind the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low behind the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 0,
+     "job_id": "0d8c2877-598e-4ed0-b9c0-12dc44a8c4e3",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061242_0d8c2877-598e-4ed0-b9c0-12dc44a8c4e3.png",
+     "file": "deed-arts-omega-device-p1-1-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p1-1-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "feet-cut",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Camera sits level and dead-on to the upper back, hair hangs straight down with no head tilt, frame cuts at mid-calf before the feet."
+     }
+    },
+    {
+     "index": 1,
+     "job_id": "6a7b4873-3758-4bea-b848-678bcdbd08d0",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061242_6a7b4873-3758-4bea-b848-678bcdbd08d0.png",
+     "file": "deed-arts-omega-device-p1-1-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p1-1-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "feet-cut",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Same level, straight-on back view, hair in a low bun instead of a ponytail, no upward tilt, frame cuts before the feet."
+     }
+    },
+    {
+     "index": 2,
+     "job_id": "515c2b4f-0813-4a28-b82b-f1089202d797",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061242_515c2b4f-0813-4a28-b82b-f1089202d797.png",
+     "file": "deed-arts-omega-device-p1-1-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p1-1-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "below-knee",
+       "toward_camera": "back",
+       "crop": "feet-cut",
+       "muscle_sold": "traps-neck"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Low worm's-eye camera behind and below, head thrown back with chin and nostrils visible, traps and rear delts dominate the frame, cuts at mid-calf before the feet."
+     }
+    },
+    {
+     "index": 3,
+     "job_id": "5402c788-6828-4ad9-af45-e90eb24a379a",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061242_5402c788-6828-4ad9-af45-e90eb24a379a.png",
+     "file": "deed-arts-omega-device-p1-1-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p1-1-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "below-knee",
+       "toward_camera": "back",
+       "crop": "feet-cut",
+       "muscle_sold": "traps-neck"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Same low worm's-eye angle, head tipped back looking at the ceiling, massive trap/delt mass fills the frame edge-to-edge, cuts before the feet."
+     }
+    }
+   ],
+   "result": {
+    "status": "pass",
+    "landed": 2,
+    "of": 4,
+    "criteria": {
+     "camera_height": 2,
+     "toward_camera": 2,
+     "crop": 4
+    },
+    "winner_file": "deed-arts-omega-device-p1-1.jpg",
+    "winner_variant": "deed-arts-omega-device-p1-1-v4.png",
+    "judge_ranking": [
+     "deed-arts-omega-device-p1-1-v4.png",
+     "deed-arts-omega-device-p1-1-v3.png"
+    ],
+    "winner_override": null,
+    "note": "This card split cleanly in half on nano_banana_2: v3/v4 delivered the true low worm's-eye look with the head tipped back as the card asked, while v1/v2 rendered a level, dead-on back shot with no upward tilt or foreshortening — the model's default 'back view' composition unless the head-tip-back pose language is strongly forced, which cost those two both camera_height and toward_camera together."
+   }
+  },
+  {
+   "family": "low reveal",
+   "card_id": "deed-arts-omega-device-p5-1",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "below-knee",
+    "angle": "low",
+    "toward_camera": "thigh",
+    "crop": "full",
+    "muscle_sold": "full-silhouette",
+    "shot_distance": "WS"
+   },
+   "card_text": "Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, radiating speed-lines behind him, filling nearly the whole frame.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, radiating speed-lines behind him, filling nearly the whole frame.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 4,
+     "job_id": "1f5584f6-b800-451a-b17e-808ab0709fc2",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061246_1f5584f6-b800-451a-b17e-808ab0709fc2.png",
+     "file": "deed-arts-omega-device-p5-1-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p5-1-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "none",
+       "crop": "head-to-thigh",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Frontal chest/eye-level shot, arms bent with fists held at hip height in a static stance, framed head to upper thigh with feet cut off."
+     }
+    },
+    {
+     "index": 5,
+     "job_id": "c835c59c-3a03-495f-a747-3cd9627597f3",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061246_c835c59c-3a03-495f-a747-3cd9627597f3.png",
+     "file": "deed-arts-omega-device-p5-1-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p5-1-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "thigh",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest/eye-level frontal shot with a slight upward tilt, figure mid-stride with arms spread wide and palms open, full body head-to-toe in frame."
+     }
+    },
+    {
+     "index": 6,
+     "job_id": "69281a88-51e8-4df2-a4bc-184f6bd6a7d9",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061246_69281a88-51e8-4df2-a4bc-184f6bd6a7d9.png",
+     "file": "deed-arts-omega-device-p5-1-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p5-1-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "full",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Frontal chest/eye-level shot, arms raised in a double-biceps flex beside the head, one leg striding forward, full body head-to-toe in frame."
+     }
+    },
+    {
+     "index": 7,
+     "job_id": "49ad4c0f-227b-457a-bd13-2ac69cbfa660",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061246_49ad4c0f-227b-457a-bd13-2ac69cbfa660.png",
+     "file": "deed-arts-omega-device-p5-1-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p5-1-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "thigh",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest/eye-level frontal shot with a slight upward tilt, figure mid-stride with fists held out at hip height, full body head-to-toe in frame."
+     }
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 0,
+    "of": 4,
+    "criteria": {
+     "camera_height": 0,
+     "toward_camera": 2,
+     "crop": 3
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [],
+    "winner_override": null,
+    "note": "This card's own prompt text said 'below chest height' while the ground-truth tag demanded 'below-knee', and all four renders followed the text: every variant landed a chest/eye-level camera with only a slight upward tilt, missing the below-knee tag by too many steps and sinking the whole card despite v2 and v4 correctly landing a full-body crop with the forward thigh nearest the lens."
+   }
+  },
+  {
+   "family": "female reveal S-curve",
+   "card_id": "deed-arts-omega-device-p10-1",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "eye",
+    "angle": "low",
+    "toward_camera": "chest",
+    "crop": "full",
+    "muscle_sold": "chest",
+    "shot_distance": "WS"
+   },
+   "card_text": "Camera at eye height, the figure stands in a three-quarter power pose with one hand near the chin and the other on the hip, weight shifted onto the back leg, sparkles and a radiating burst pattern filling the background behind her silhouette.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera at eye height, the figure stands in a three-quarter power pose with one hand near the chin and the other on the hip, weight shifted onto the back leg, sparkles and a radiating burst pattern filling the background behind her silhouette.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 8,
+     "job_id": "7aae5847-fd70-4c04-963d-d6f6fba1ab71",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061249_7aae5847-fd70-4c04-963d-d6f6fba1ab71.png",
+     "file": "deed-arts-omega-device-p10-1-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p10-1-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "chest",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Eye-level, full-frontal power pose (fist near chin, other hand on hip, weight on back leg), chest/abs thrust toward the lens, full figure head-to-feet against a golden radiating light-ray burst."
+     }
+    },
+    {
+     "index": 9,
+     "job_id": "5196cf49-4450-49e5-bb56-d0ecb3dcd131",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061249_5196cf49-4450-49e5-bb56-d0ecb3dcd131.png",
+     "file": "deed-arts-omega-device-p10-1-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p10-1-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "chest",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Eye-level full-body shot in an indoor gym setting, same chin-fist/hip power pose with chest toward camera, clean intact garment, golden burst background, full figure framed head to feet."
+     }
+    },
+    {
+     "index": 10,
+     "job_id": "f097d1d0-7044-4fc3-a8eb-ee8bd915843b",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061249_f097d1d0-7044-4fc3-a8eb-ee8bd915843b.png",
+     "file": "deed-arts-omega-device-p10-1-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p10-1-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "chest",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Eye-level full-body power pose, chest toward camera, minor fabric tear at the ribs/underarm, white-gold radiating burst background, full figure framed head to feet with a tighter top margin."
+     }
+    },
+    {
+     "index": 11,
+     "job_id": "137d5cd1-0830-4fa7-8988-e6ffafb37115",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061249_137d5cd1-0830-4fa7-8988-e6ffafb37115.png",
+     "file": "deed-arts-omega-device-p10-1-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p10-1-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "chest",
+       "crop": "full",
+       "muscle_sold": "full-silhouette"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "non-gating stylization: black comic-cutout outline traced around the figure over a red/blue/gold pop-art burst, giving a pasted-on 2D-illustrated look instead of pure photoreal CGI",
+      "composition": "Eye-level full-body power pose, chest toward camera, full figure framed head to feet, but composited with a black outline over a comic pop-art burst background rather than a clean photoreal backdrop."
+     }
+    }
+   ],
+   "result": {
+    "status": "pass",
+    "landed": 4,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 4,
+     "crop": 4
+    },
+    "winner_file": "deed-arts-omega-device-p10-1.jpg",
+    "winner_variant": "deed-arts-omega-device-p10-1-v2.png",
+    "judge_ranking": [
+     "deed-arts-omega-device-p10-1-v2.png",
+     "deed-arts-omega-device-p10-1-v1.png",
+     "deed-arts-omega-device-p10-1-v3.png",
+     "deed-arts-omega-device-p10-1-v4.png"
+    ],
+    "winner_override": null,
+    "note": "This eye-level, chest-forward full-body power-pose card landed cleanly on all 4 variants for camera height, subject part, and crop; the only recurring miss was non-gating — variant 4 drifted into a 2D comic-outline/pop-art treatment instead of staying pure photoreal CGI."
+   }
+  },
+  {
+   "family": "double fist at lens",
+   "card_id": "deed-arts-omega-device-p20-4",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "chest",
+    "angle": "low",
+    "toward_camera": "fist",
+    "crop": "chest-up",
+    "muscle_sold": "arms",
+    "shot_distance": "MCU"
+   },
+   "card_text": "Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them, radiating speed-lines filling the background.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them, radiating speed-lines filling the background.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 12,
+     "job_id": "e309daa8-638d-4730-8ada-add5f2f5d780",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061253_e309daa8-638d-4730-8ada-add5f2f5d780.png",
+     "file": "deed-arts-omega-device-p20-4-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p20-4-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest-height camera, single lead fist punched into left-center of frame in heavy foreshortening while the guard fist holds near the chin, face visible above; frame runs head down through hips into upper thigh against a radiating grey/gold speed-line burst."
+     }
+    },
+    {
+     "index": 13,
+     "job_id": "34c8528f-662d-4684-9fa5-297dc3743ff8",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061253_34c8528f-662d-4684-9fa5-297dc3743ff8.png",
+     "file": "deed-arts-omega-device-p20-4-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p20-4-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "waist-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest-height camera, lead fist thrust to camera-left with the guard fist held back near the jaw, face centered above; frame reads waist-up against a pale radiating-line backdrop."
+     }
+    },
+    {
+     "index": 14,
+     "job_id": "b7c0cf50-d439-4e63-9e1e-935b994b07fb",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061253_b7c0cf50-d439-4e63-9e1e-935b994b07fb.png",
+     "file": "deed-arts-omega-device-p20-4-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p20-4-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Low chest-height camera catches both fists punched forward in symmetrical foreshortening with the face just behind and above them, exactly matching the card's double-fist text; frame extends down through hips and thighs against a warm gym-interior radiating burst."
+     }
+    },
+    {
+     "index": 15,
+     "job_id": "2d13e784-9df5-4e8f-9c13-c0b681d1afbb",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061253_2d13e784-9df5-4e8f-9c13-c0b681d1afbb.png",
+     "file": "deed-arts-omega-device-p20-4-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p20-4-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "waist-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest-height camera on two wrist-wrapped fists thrust at the lens with the face below and between the raised arms; crop holds tighter at the waist/hip line than the other variants, against a cool dark radiating burst."
+     }
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 0,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 4,
+     "crop": 0
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [],
+    "winner_override": null,
+    "note": "camera_height and toward_camera (fist) landed cleanly on all four variants, and v3 alone delivered the card's literal double-fist framing, but every variant's crop pulled back to waist-up/head-to-thigh instead of the requested chest-up tight crop, so the card fails on a single consistent miss: the model keeps giving room for hips/thighs instead of cropping tight to the chest."
+   }
+  },
+  {
+   "family": "strike at lens",
+   "card_id": "deed-arts-poppy-sailor-gal-1-p9-4",
+   "group": "eye",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "chest",
+    "angle": "eye",
+    "toward_camera": "fist",
+    "crop": "body-part-only",
+    "muscle_sold": "arms",
+    "shot_distance": "CU"
+   },
+   "card_text": "Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera with hair swept back from the motion and heavy speed lines trailing behind, selling arm power through a foreshortened strike.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera with hair swept back from the motion and heavy speed lines trailing behind, selling arm power through a foreshortened strike.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 16,
+     "job_id": "5d8b1853-e243-462c-a9b9-c2f822850ded",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061255_5d8b1853-e243-462c-a9b9-c2f822850ded.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p9-4-v1.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p9-4-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "waist-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none — faint blurred flesh-tone shape at bottom-right edge reads as her own out-of-focus far arm/shoulder, not a second figure",
+      "composition": "Chest-height camera nearly head-on, a huge foreshortened fist punches in from lower-left toward the lens while face, hair and torso stay fully visible in a waist-up frame."
+     }
+    },
+    {
+     "index": 17,
+     "job_id": "7492d475-8dfa-43d2-a33c-404e768d6bbe",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061255_7492d475-8dfa-43d2-a33c-404e768d6bbe.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p9-4-v2.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p9-4-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Low side-on camera at chest height, forearm and fist rocket toward the lens trailing long streaked speed lines, hair blown back, frame runs head-to-thigh."
+     }
+    },
+    {
+     "index": 18,
+     "job_id": "92df3037-c17e-4432-9a78-9cdeac8caef1",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061255_92df3037-c17e-4432-9a78-9cdeac8caef1.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p9-4-v3.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p9-4-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "waist-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Chest-height three-quarter camera, forearm crosses into extreme foreshortening toward camera-right with curved speed lines, face and torso fully visible in a waist-up frame."
+     }
+    },
+    {
+     "index": 19,
+     "job_id": "9e426c75-c551-429f-a931-18cdca80d8e3",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061255_9e426c75-c551-429f-a931-18cdca80d8e3.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p9-4-v4.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p9-4-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "fist",
+       "crop": "chest-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Dead-on chest-height camera, fist rockets straight at the lens in maximum foreshortening against radiating speed lines, off-arm flexed at shoulder, face and torso still visible down to the hip."
+     }
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 0,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 4,
+     "crop": 0
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [],
+    "winner_override": null,
+    "note": "Camera height and fist-toward-lens both land cleanly on all four variants, but the model never tightens the crop past waist-up/chest-up into the requested body-part-only frame — it consistently delivers a hero-portrait shot (full face + torso) with an oversized foreshortened fist rather than a true part-only crop."
+   }
+  },
+  {
+   "family": "over-shoulder glance",
+   "card_id": "deed-arts-poppy-sailor-gal-1-p16-4",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "hip",
+    "angle": "low",
+    "toward_camera": "back",
+    "crop": "head-to-thigh",
+    "muscle_sold": "back",
+    "shot_distance": "MCU"
+   },
+   "card_text": "Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder with a confident grin, the frame cropped from head to upper thigh so the back and glutes fill most of the panel and read as the muscle growing.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder with a confident grin, the frame cropped from head to upper thigh so the back and glutes fill most of the panel and read as the muscle growing.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 20,
+     "job_id": "947dd29e-63d7-4177-a49d-835dac109f16",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061301_947dd29e-63d7-4177-a49d-835dac109f16.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p16-4-v1.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p16-4-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "back",
+       "crop": "full",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "coverage breach: high-cut thong leotard leaves both glutes almost entirely bare",
+      "composition": "Full-body rear three-quarter view, camera roughly at chest height with generous headroom to the ceiling lights, back/lats and shoulder fill the upper frame while legs and feet are fully in frame with floor visible at the bottom."
+     }
+    },
+    {
+     "index": 21,
+     "job_id": "9b7505d2-7224-44e2-8483-45fb2932a757",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061301_9b7505d2-7224-44e2-8483-45fb2932a757.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p16-4-v2.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p16-4-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "back",
+       "crop": "full",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "coverage breach: high-cut thong leotard leaves both glutes almost entirely bare",
+      "composition": "Same full-body rear three-quarter setup as v1, camera at chest height, small tear in the tank's lower back seam (in-fiction muscle strain, not a defect), legs and feet fully visible at the bottom."
+     }
+    },
+    {
+     "index": 22,
+     "job_id": "fdfa4758-11a0-4e66-96d9-30c8c49173d7",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061301_fdfa4758-11a0-4e66-96d9-30c8c49173d7.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p16-4-v3.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p16-4-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "hip",
+       "toward_camera": "back",
+       "crop": "full",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "coverage breach: high-cut thong leotard leaves both glutes almost entirely bare",
+      "composition": "Tighter, closer full-body rear three-quarter view than v1/v2 (camera pulled in, reads closer to hip height), back and glutes dominate the frame but calves and feet are still fully in shot at the bottom."
+     }
+    },
+    {
+     "index": 23,
+     "job_id": "2f979c71-1369-4642-bf02-7f6d0190b947",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061301_2f979c71-1369-4642-bf02-7f6d0190b947.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p16-4-v4.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p16-4-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "back",
+       "crop": "full",
+       "muscle_sold": "back"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "coverage breach: high-cut thong leotard leaves both glutes almost entirely bare",
+      "composition": "Same full-body rear three-quarter setup as v1/v2, camera at chest height, tank top heavily torn/ripped across back and side seams (in-fiction muscle strain, not a defect), legs and feet fully visible at the bottom."
+     }
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 0,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 4,
+     "crop": 0
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [],
+    "winner_override": null,
+    "note": "camera height and the back-toward-camera subject landed on all 4 variants, but every variant defaulted to a full head-to-feet body shot instead of the requested head-to-upper-thigh MCU crop, so the card fails 0/4 on crop alone."
+   }
+  },
+  {
+   "family": "growth ECU with face",
+   "card_id": "deed-arts-omega-device-p4-1",
+   "group": "eye",
+   "steal_score": 4,
+   "expect": {
+    "camera_height": "eye",
+    "angle": "eye",
+    "toward_camera": "forearm",
+    "crop": "body-part-only",
+    "muscle_sold": "arms",
+    "shot_distance": "ECU"
+   },
+   "card_text": "Extreme close crop on a flexing bicep tearing through a sleeve, sharp claw-shaped force lines radiating outward, a small triumphant face inset in the upper corner of the frame.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Extreme close crop on a flexing bicep tearing through a sleeve, sharp claw-shaped force lines radiating outward, a small triumphant face inset in the upper corner of the frame.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 24,
+     "job_id": "f2faca6e-dfda-4f44-8210-404d2090c3d5",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061303_f2faca6e-dfda-4f44-8210-404d2090c3d5.png",
+     "file": "deed-arts-omega-device-p4-1-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p4-1-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "forearm",
+       "crop": "body-part-only",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Level, straight-on macro on a flexed bicep bursting through the torn tank sleeve, fist raised at top, orange claw-shaped force lines bursting outward, small rectangular face inset in the upper-right corner."
+     }
+    },
+    {
+     "index": 25,
+     "job_id": "4e70f11b-06d6-4dfd-9312-557060d1b88c",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061303_4e70f11b-06d6-4dfd-9312-557060d1b88c.png",
+     "file": "deed-arts-omega-device-p4-1-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p4-1-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "forearm",
+       "crop": "body-part-only",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "baked onomatopoeia lettering (\"CRACK\" appears twice, baked into the image)",
+      "composition": "Level macro on a flexed bicep tearing through the sleeve, fist raised at top-right, straight white/cream force lines radiating, small circular face+shoulder inset upper-left."
+     }
+    },
+    {
+     "index": 26,
+     "job_id": "ff33d8f7-f6e8-4fbc-a50f-0901a1982f7e",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061303_ff33d8f7-f6e8-4fbc-a50f-0901a1982f7e.png",
+     "file": "deed-arts-omega-device-p4-1-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p4-1-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "forearm",
+       "crop": "body-part-only",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Level macro on a flexed bicep tearing through the sleeve, fist raised at top, white anime-style speed lines radiating around the arm, small rectangular face inset upper-right, a sliver of shoulder/hair visible at the left edge."
+     }
+    },
+    {
+     "index": 27,
+     "job_id": "6828bf16-ebbf-4e84-b0e9-7afb29e3768f",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061303_6828bf16-ebbf-4e84-b0e9-7afb29e3768f.png",
+     "file": "deed-arts-omega-device-p4-1-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p4-1-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "forearm",
+       "crop": "chest-up",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Camera pulled back further than the other variants, showing both racerback straps and the chest/underarm area around the flexed bicep, purple-white force lines radiating, small circular face inset upper-right — reads as a chest-up shoulder shot rather than an isolated body-part macro."
+     }
+    }
+   ],
+   "result": {
+    "status": "pass",
+    "landed": 3,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 4,
+     "crop": 3
+    },
+    "winner_file": "deed-arts-omega-device-p4-1.jpg",
+    "winner_variant": "deed-arts-omega-device-p4-1-v1.png",
+    "judge_ranking": [
+     "deed-arts-omega-device-p4-1-v1.png",
+     "deed-arts-omega-device-p4-1-v3.png",
+     "deed-arts-omega-device-p4-1-v2.png"
+    ],
+    "winner_override": null,
+    "note": "This card lands reliably on nano_banana_2 (3/4) as a tight bicep macro with fist-up and a corner face inset; the one miss (v4) drifted the crop wider to a chest-up shoulder shot instead of staying isolated to the body part, and a second variant (v2) baked in onomatopoeia text as a non-gating defect."
+   }
+  },
+  {
+   "family": "chest ECU",
+   "card_id": "deed-arts-poppy-sailor-gal-1-p7-2",
+   "group": "eye",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "chest",
+    "angle": "eye",
+    "toward_camera": "chest",
+    "crop": "body-part-only",
+    "muscle_sold": "chest",
+    "shot_distance": "ECU"
+   },
+   "card_text": "Camera pushes into an extreme close-up centered on the chest, filling the frame edge to edge with no background visible, straps cutting into flesh as the torn fabric peels back, selling maximal chest growth through sheer scale.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera pushes into an extreme close-up centered on the chest, filling the frame edge to edge with no background visible, straps cutting into flesh as the torn fabric peels back, selling maximal chest growth through sheer scale.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 28,
+     "job_id": "1429d14b-8886-401b-897e-098e12fc07e3",
+     "status": "failed",
+     "url": null,
+     "file": null,
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p7-2-v1.png",
+      "status": "no_image",
+      "observed": {
+       "camera_height": "n/a",
+       "toward_camera": "n/a",
+       "crop": "n/a",
+       "muscle_sold": "n/a"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "n/a - job failed at Higgsfield, no file generated",
+      "composition": "no image generated"
+     },
+     "note": "job returned status=failed, no image (likely content filter on this card text)"
+    },
+    {
+     "index": 29,
+     "job_id": "0c7c1d1a-d14f-4b1e-830e-58fdf89ab280",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061306_0c7c1d1a-d14f-4b1e-830e-58fdf89ab280.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p7-2-v2.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p7-2-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "chest",
+       "crop": "body-part-only",
+       "muscle_sold": "chest"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none - deep cleavage and torn cup fabric expose underboob/side breast but no nipple/areola breach, one figure, correct character and garment, photoreal 3D CGI",
+      "composition": "Chest-height, dead-on ECU filling the frame edge to edge from collarbone to midriff; torn sage-green one-piece straps cross over the chest, no background visible."
+     }
+    },
+    {
+     "index": 30,
+     "job_id": "551f0e70-8618-46ab-a9b2-6eefb547b349",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061306_551f0e70-8618-46ab-a9b2-6eefb547b349.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p7-2-v3.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p7-2-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "shoulder",
+       "crop": "body-part-only",
+       "muscle_sold": "shoulders"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none - one figure, correct character and garment, no coverage breach, no baked text, photoreal 3D CGI",
+      "composition": "Chest-height ECU at a 3/4 angle, frame filled edge to edge but the shoulder/deltoid and tricep bulk on the right dominate over the chest on the left, one torn strap crossing the chest, no background visible."
+     }
+    },
+    {
+     "index": 31,
+     "job_id": "86055954-f4b6-49ab-b776-44fef3a7d3ae",
+     "status": "failed",
+     "url": null,
+     "file": null,
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p7-2-v4.png",
+      "status": "no_image",
+      "observed": {
+       "camera_height": "n/a",
+       "toward_camera": "n/a",
+       "crop": "n/a",
+       "muscle_sold": "n/a"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": false,
+       "crop": false
+      },
+      "variant_lands": false,
+      "defects": "n/a - job failed at Higgsfield, no file generated",
+      "composition": "no image generated"
+     },
+     "note": "job returned status=failed, no image (likely content filter on this card text)"
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 1,
+    "of": 4,
+    "criteria": {
+     "camera_height": 2,
+     "toward_camera": 1,
+     "crop": 2
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [
+     "deed-arts-poppy-sailor-gal-1-p7-2-v2.png"
+    ],
+    "winner_override": null,
+    "note": "Two of four variants never generated (Higgsfield job failures), and of the two that did, only one (v2) actually centered the ECU on the chest as asked - the other (v3) kept the tight edge-to-edge crop and chest-height camera but let the shoulder/tricep bulk out-compete the chest for nearest-to-lens emphasis at a 3/4 angle, so this card falls short of the pass bar on this small a sample."
+   }
+  },
+  {
+   "family": "flex ladder rung",
+   "card_id": "deed-arts-poppy-sailor-gal-1-p14-4",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "chest",
+    "angle": "low",
+    "toward_camera": "chest",
+    "crop": "waist-up",
+    "muscle_sold": "arms",
+    "shot_distance": "MS"
+   },
+   "card_text": "Camera holds low at chest height as she throws both arms into the widest double-bicep flex yet, radiating motion lines behind her, the pose filling the entire bleed panel edge to edge with a wide exultant grin.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera holds low at chest height as she throws both arms into the widest double-bicep flex yet, radiating motion lines behind her, the pose filling the entire bleed panel edge to edge with a wide exultant grin.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 32,
+     "job_id": "c2b83c52-e127-465d-8ccc-debfe974f33c",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061310_c2b83c52-e127-465d-8ccc-debfe974f33c.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p14-4-v1.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p14-4-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Straight-on symmetric double-bicep flex, camera at roughly eye level (ceiling lights and floor both visible), framed head to mid-shin against a grey/white speed-line burst; nothing juts toward the lens, it's a flat bilateral pose."
+     }
+    },
+    {
+     "index": 33,
+     "job_id": "0eec0e63-bcae-4086-a9a4-a54d2d200723",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061310_0eec0e63-bcae-4086-a9a4-a54d2d200723.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p14-4-v2.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p14-4-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Same symmetric front double-bicep flex at eye level, arms nearly touching the left/right frame edges, gold starburst motion lines behind her, framed head to upper-thigh; still a flat frontal pose with no part thrust at the lens."
+     }
+    },
+    {
+     "index": 34,
+     "job_id": "3f043237-3ec0-4a81-8243-a5ed1f9e7c27",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061309_3f043237-3ec0-4a81-8243-a5ed1f9e7c27.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p14-4-v3.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p14-4-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Same flat symmetric double-bicep flex at eye level, gaze angled up-left instead of at camera, tight crop with fists brushing the top/side edges, grey speed-line burst behind; no depth cue toward the lens."
+     }
+    },
+    {
+     "index": 35,
+     "job_id": "f3a95225-75ca-4439-890e-58cf5a334b51",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061310_f3a95225-75ca-4439-890e-58cf5a334b51.png",
+     "file": "deed-arts-poppy-sailor-gal-1-p14-4-v4.png",
+     "verdict": {
+      "file": "deed-arts-poppy-sailor-gal-1-p14-4-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "eye",
+       "toward_camera": "none",
+       "crop": "head-to-thigh",
+       "muscle_sold": "arms"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": false,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Same flat symmetric double-bicep flex at eye level, framed head to mid-shin, seam tears visible at both underarms, grey speed-line burst behind; a level, same-distance pose with nothing thrust toward camera."
+     }
+    }
+   ],
+   "result": {
+    "status": "fail",
+    "landed": 0,
+    "of": 4,
+    "criteria": {
+     "camera_height": 4,
+     "toward_camera": 0,
+     "crop": 4
+    },
+    "winner_file": null,
+    "winner_variant": null,
+    "judge_ranking": [],
+    "winner_override": null,
+    "note": "The flex-ladder card consistently rendered a flat, bilaterally symmetric front-on double-bicep flex at eye level (camera height and crop both landed within tolerance) but never produced a body part thrust toward the lens, so toward_camera scored 'none' against the expected 'chest' in all 4 variants and no variant landed."
+   }
+  },
+  {
+   "family": "scale onlooker",
+   "card_id": "deed-arts-omega-device-p21-5",
+   "group": "low",
+   "steal_score": 5,
+   "expect": {
+    "camera_height": "below-knee",
+    "angle": "low",
+    "toward_camera": "back",
+    "crop": "full",
+    "muscle_sold": "glutes",
+    "shot_distance": "MS"
+   },
+   "card_text": "Camera low behind the figure as one arm punches forward into a shattering surface, debris flying, the back and glute mass filling most of the frame, a small startled onlooker in the corner for scale.",
+   "prompt": "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering. The same character from the reference. Camera low behind the figure as one arm punches forward into a shattering surface, debris flying, the back and glute mass filling most of the frame, a small startled onlooker in the corner for scale.",
+   "model_returned": "nano_banana_flash",
+   "variants": [
+    {
+     "index": 36,
+     "job_id": "3cbf8e62-360c-4319-ade4-dbaef873e7eb",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061313_3cbf8e62-360c-4319-ade4-dbaef873e7eb.png",
+     "file": "deed-arts-omega-device-p21-5-v1.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p21-5-v1.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "hip",
+       "toward_camera": "back",
+       "crop": "feet-cut",
+       "muscle_sold": "glutes"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Back three-quarter view from roughly hip height, fist punching through the wall at right, frame cut off before the feet, onlooker small in the corner beyond the hole."
+     }
+    },
+    {
+     "index": 37,
+     "job_id": "cb04093b-ff27-48c0-8198-c8ab81a18eb9",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061313_cb04093b-ff27-48c0-8198-c8ab81a18eb9.png",
+     "file": "deed-arts-omega-device-p21-5-v2.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p21-5-v2.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "knee",
+       "toward_camera": "back",
+       "crop": "feet-cut",
+       "muscle_sold": "glutes"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Low upward-angled view from about knee height with ceiling lights visible overhead, back and glutes dominate the frame as the fist shatters glass, cropped before the feet, onlooker crouched in the corner."
+     }
+    },
+    {
+     "index": 38,
+     "job_id": "0e666201-37a3-4f9b-bd67-9b83ecc82340",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061313_0e666201-37a3-4f9b-bd67-9b83ecc82340.png",
+     "file": "deed-arts-omega-device-p21-5-v3.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p21-5-v3.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "below-knee",
+       "toward_camera": "back",
+       "crop": "full",
+       "muscle_sold": "glutes"
+      },
+      "landed": {
+       "camera_height": true,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": true,
+      "defects": "none",
+      "composition": "Ground-level worm's-eye view, camera below the knees looking straight up the thighs and glutes to the fist hitting the wall, full figure in frame with the onlooker's whole body visible for scale."
+     }
+    },
+    {
+     "index": 39,
+     "job_id": "685e716b-712c-4311-ba85-5952f9f38d1b",
+     "status": "completed",
+     "url": "https://d8j0ntlcm91z4.cloudfront.net/user_36sBHjDXEBSVvJMMKGE8Zv6ptGg/hf_20260904_061313_685e716b-712c-4311-ba85-5952f9f38d1b.png",
+     "file": "deed-arts-omega-device-p21-5-v4.png",
+     "verdict": {
+      "file": "deed-arts-omega-device-p21-5-v4.png",
+      "status": "judged",
+      "observed": {
+       "camera_height": "chest",
+       "toward_camera": "back",
+       "crop": "feet-cut",
+       "muscle_sold": "glutes"
+      },
+      "landed": {
+       "camera_height": false,
+       "toward_camera": true,
+       "crop": true
+      },
+      "variant_lands": false,
+      "defects": "none",
+      "composition": "Level, roughly chest-height back view with little upward foreshortening, torso and glutes centered, cropped before the feet, small onlooker reacting in the corner."
+     }
+    }
+   ],
+   "result": {
+    "status": "pass",
+    "landed": 2,
+    "of": 4,
+    "criteria": {
+     "camera_height": 2,
+     "toward_camera": 4,
+     "crop": 4
+    },
+    "winner_file": "deed-arts-omega-device-p21-5.jpg",
+    "winner_variant": "deed-arts-omega-device-p21-5-v2.png",
+    "judge_ranking": [
+     "deed-arts-omega-device-p21-5-v3.png",
+     "deed-arts-omega-device-p21-5-v2.png"
+    ],
+    "winner_override": "orchestrator override: both v2 and v3 landed; v3 (judge's #1) renders the one-piece as a thong back with the glutes bare, v2 keeps the fuller cut, so v2 is the committed example under the always-clothed rule",
+    "note": "The back/glute-toward-camera framing and loose crop landed on all four variants, but only 2 of 4 dropped the camera low enough (knee or below-knee) to land camera_height; the other two settled at hip or chest height, the most common miss for this card on nano_banana_2."
+   }
+  }
+ ],
+ "submitted_at": "2026-09-03T23:11 PDT (2026-09-04T06:11Z)",
+ "model_returned_note": "Every job object returned by generate_image carries model=\"nano_banana_flash\" although model=\"nano_banana_2\" was requested and the catalog lists no nano_banana_flash entry; recorded verbatim per the verify-the-returned-model rule. The job params echoed the submitted prompt, aspect_ratio 3:4, resolution 1k, and the reference media id."
+}

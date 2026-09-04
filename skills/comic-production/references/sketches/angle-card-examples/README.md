@@ -1,0 +1,45 @@
+# Angle-card examples — real renders of the Deed Arts camera cards
+
+**4 of 10 cards landed** on Higgsfield `nano_banana_2` (run 2026-09-03). One image per passing card, named by card id, is the canonical visual example for that card in `research/comic-corpus/synthesis/deed-arts-staging-study.html` (rebuilt by `research/comic-corpus/scripts/build_study_page.py`, which reads `ledger.json` here). Cards that did not land keep their seed in the deck with a visible "did not land" note and have no image here. Precedent: `../staging-examples/` (L34).
+
+## Method
+
+- Ten cards from `synthesis/cards.json`, the highest steal score in each of ten staging families named in the brief.
+- One `generate_image` call per card, `count: 4`, model `nano_banana_2`, `1k`, `3:4`, reference `skills/comic-production/references/canonical-cast/mira/body-tier7.png` (Higgsfield media `b0e7b3a5-e352-4308-9472-a79366168efd`, role `image_references`). Never the Deed Arts pages: they are 2D and third-party.
+- Prompt = style block + "The same character from the reference." + the card text verbatim. Style block: "High-quality DAZ Studio Iray render, clean prosumer 3D CGI comic art — sharp focus, detailed PBR skin with pores and subsurface scattering, well-lit Iray global illumination, crisp cloth and material detail. Polished DAZ webcomic look, not glossy cinematic VFX. She stays fully clothed in the costume from the reference; fabric may strain, stretch, or tear at the seams, but coverage of the chest, buttocks, and groin is always preserved. No text, no speech bubbles, no lettering."
+- Judge: a fresh Sonnet subagent per card, scoring every variant on the three things the card promises — camera height, the body part nearest the lens, and the crop — against the card's canonical addendum tags, with the tolerance rules written in the brief (one adjacent camera-height step; same limb family; same crop family). A variant lands only if all three hold; a card passes with 2 of 4 landing variants. The judge also ranked the landing variants; the top one is the committed image unless the ledger records a `winner_override` (the orchestrator viewed every winner before commit).
+- Model tag: Every job object returned by generate_image carries model="nano_banana_flash" although model="nano_banana_2" was requested and the catalog lists no nano_banana_flash entry; recorded verbatim per the verify-the-returned-model rule. The job params echoed the submitted prompt, aspect_ratio 3:4, resolution 1k, and the reference media id.
+
+## Pass table
+
+| Family | Card | Landed | Camera height | Nearest the lens | Crop | Result | Judge's note |
+|---|---|---|---|---|---|---|---|
+| rear worm's-eye | `deed-arts-omega-device-p1-1` | 2/4 | below-knee · 2/4 | back · 2/4 | bleed · 4/4 | **pass** → `deed-arts-omega-device-p1-1.jpg` | This card split cleanly in half on nano_banana_2: v3/v4 delivered the true low worm's-eye look with the head tipped back as the card asked, while v1/v2 rendered a level, dead-on back shot with no upward tilt or foreshortening — the model's default 'back view' composition unless the head-tip-back pose language is strongly forced, which cost those two both camera_height and toward_camera together. |
+| low reveal | `deed-arts-omega-device-p5-1` | 0/4 | below-knee · 0/4 | thigh · 2/4 | full · 3/4 | did not land | This card's own prompt text said 'below chest height' while the ground-truth tag demanded 'below-knee', and all four renders followed the text: every variant landed a chest/eye-level camera with only a slight upward tilt, missing the below-knee tag by too many steps and sinking the whole card despite v2 and v4 correctly landing a full-body crop with the forward thigh nearest the lens. |
+| female reveal S-curve | `deed-arts-omega-device-p10-1` | 4/4 | eye · 4/4 | chest · 4/4 | full · 4/4 | **pass** → `deed-arts-omega-device-p10-1.jpg` | This eye-level, chest-forward full-body power-pose card landed cleanly on all 4 variants for camera height, subject part, and crop; the only recurring miss was non-gating — variant 4 drifted into a 2D comic-outline/pop-art treatment instead of staying pure photoreal CGI. |
+| double fist at lens | `deed-arts-omega-device-p20-4` | 0/4 | chest · 4/4 | fist · 4/4 | chest-up · 0/4 | did not land | camera_height and toward_camera (fist) landed cleanly on all four variants, and v3 alone delivered the card's literal double-fist framing, but every variant's crop pulled back to waist-up/head-to-thigh instead of the requested chest-up tight crop, so the card fails on a single consistent miss: the model keeps giving room for hips/thighs instead of cropping tight to the chest. |
+| strike at lens | `deed-arts-poppy-sailor-gal-1-p9-4` | 0/4 | chest · 4/4 | fist · 4/4 | body-part-only · 0/4 | did not land | Camera height and fist-toward-lens both land cleanly on all four variants, but the model never tightens the crop past waist-up/chest-up into the requested body-part-only frame — it consistently delivers a hero-portrait shot (full face + torso) with an oversized foreshortened fist rather than a true part-only crop. |
+| over-shoulder glance | `deed-arts-poppy-sailor-gal-1-p16-4` | 0/4 | hip · 4/4 | back · 4/4 | head-to-thigh · 0/4 | did not land | camera height and the back-toward-camera subject landed on all 4 variants, but every variant defaulted to a full head-to-feet body shot instead of the requested head-to-upper-thigh MCU crop, so the card fails 0/4 on crop alone. |
+| growth ECU with face | `deed-arts-omega-device-p4-1` | 3/4 | eye · 4/4 | forearm · 4/4 | body-part-only · 3/4 | **pass** → `deed-arts-omega-device-p4-1.jpg` | This card lands reliably on nano_banana_2 (3/4) as a tight bicep macro with fist-up and a corner face inset; the one miss (v4) drifted the crop wider to a chest-up shoulder shot instead of staying isolated to the body part, and a second variant (v2) baked in onomatopoeia text as a non-gating defect. |
+| chest ECU | `deed-arts-poppy-sailor-gal-1-p7-2` | 1/4 | chest · 2/4 | chest · 1/4 | body-part-only · 2/4 | did not land | Two of four variants never generated (Higgsfield job failures), and of the two that did, only one (v2) actually centered the ECU on the chest as asked - the other (v3) kept the tight edge-to-edge crop and chest-height camera but let the shoulder/tricep bulk out-compete the chest for nearest-to-lens emphasis at a 3/4 angle, so this card falls short of the pass bar on this small a sample. |
+| flex ladder rung | `deed-arts-poppy-sailor-gal-1-p14-4` | 0/4 | chest · 4/4 | chest · 0/4 | waist-up · 4/4 | did not land | The flex-ladder card consistently rendered a flat, bilaterally symmetric front-on double-bicep flex at eye level (camera height and crop both landed within tolerance) but never produced a body part thrust toward the lens, so toward_camera scored 'none' against the expected 'chest' in all 4 variants and no variant landed. |
+| scale onlooker | `deed-arts-omega-device-p21-5` | 2/4 | below-knee · 2/4 | back · 4/4 | full · 4/4 | **pass** → `deed-arts-omega-device-p21-5.jpg` | The back/glute-toward-camera framing and loose crop landed on all four variants, but only 2 of 4 dropped the camera low enough (knee or below-knee) to land camera_height; the other two settled at hip or chest height, the most common miss for this card on nano_banana_2. |
+
+Each expected value is the card's addendum tag; the count after it is how many of the four variants landed that one criterion.
+
+Override on `deed-arts-omega-device-p21-5`: committed `deed-arts-omega-device-p21-5-v2.png` instead of the judge's first pick `deed-arts-omega-device-p21-5-v3.png` — orchestrator override: both v2 and v3 landed; v3 (judge's #1) renders the one-piece as a thong back with the glutes bare, v2 keeps the fuller cut, so v2 is the committed example under the always-clothed rule
+
+## Per-variant record
+
+`ledger.json` holds, per card: the composed prompt, the four job ids, the model tag each job returned, the result URL, the download filename, and the judge's per-variant observation (observed camera height / nearest part / crop / muscle sold, which criteria landed, defects, one-line composition read). Failed jobs are recorded with `status: failed`. Non-winning variants are not committed; they are recoverable from Higgsfield by job id.
+
+## How to regenerate
+
+Repeat the method above from `ledger.json` (prompts are stored verbatim), judge with the same brief, then update `result` per card and run `python3 research/comic-corpus/scripts/build_study_page.py` from the repo root or `research/comic-corpus/`. Keep the image names equal to the card id so the page picks them up.
+
+## Related
+
+- `research/comic-corpus/synthesis/deed-arts-staging-study.md` — the study these cards come from
+- `research/comic-corpus/synthesis/angle-deck.md` / `cards.json` — the full 76-card deck
+- `lessons-learned.md` § L40 and `cinematic-framing.md` § Body-to-camera staging — the rule the cards serve
+- `../staging-examples/README.md` — the L34 precedent for committed generated examples
