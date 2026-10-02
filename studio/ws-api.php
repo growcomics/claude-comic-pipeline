@@ -443,7 +443,7 @@ case 'create': {
     $brand = ws_api_text($_POST['brand'] ?? '', 60, false);
     $allowed = $ME['isLt'] ? array_values((array)((ws_me() ?? [])['brands'] ?? [])) : ws_team()['brands'];
     if ($brand === '' || !in_array($brand, $allowed, true)) ws_api_fail('Pick one of your brands.');
-    $style = ws_api_text($_POST['style'] ?? '', 600);
+    $style = ws_api_text($_POST['style'] ?? '', 2000);
     $now = date('c');
     $id = s_with_lock(PROJECTS_FILE, function ($all) use ($name, $now) {
         $all = is_array($all) ? $all : [];
@@ -468,7 +468,7 @@ case 'setproj': {
     $pid = ws_api_pid();
     $set = [];
     if (array_key_exists('story', $_POST)) $set['story'] = ws_api_text($_POST['story'], 20000);
-    if (array_key_exists('style', $_POST)) $set['style'] = ws_api_text($_POST['style'], 600);
+    if (array_key_exists('style', $_POST)) $set['style'] = ws_api_text($_POST['style'], 2000);
     if (array_key_exists('aspect', $_POST)) {
         $a = ws_api_text($_POST['aspect'], 8, false);
         if (!in_array($a, WS_API_ASPECTS, true)) ws_api_fail('Pick one of the listed aspect ratios.');

@@ -254,8 +254,8 @@ if ($pidRaw !== '') {
         <div class="story-grid">
           <label class="full">Story <span class="muted">(up to 20,000 characters)</span>
             <textarea id="fStory" maxlength="20000" placeholder="Paste or write the story here. Claude reads it when you ask it to plan pages."></textarea></label>
-          <label>Style <span class="muted">(one or two lines, up to 600 characters)</span>
-            <textarea id="fStyle" maxlength="600" rows="3" placeholder="e.g. glossy 3D render, warm gym lighting, cinematic angles"></textarea></label>
+          <label>Style <span class="muted">(the house look for every page, up to 2000 characters)</span>
+            <textarea id="fStyle" maxlength="2000" rows="4" placeholder="e.g. glossy 3D render, warm gym lighting, cinematic angles"></textarea></label>
           <label>Page shape
             <select id="fAspect"><?php foreach (WS_WS_ASPECTS as $k => $v): ?><option value="<?= h($k) ?>"><?= h($v) ?></option><?php endforeach; ?></select></label>
           <div class="full"><button type="button" class="btn" id="bStorySave">💾 Save story &amp; style</button></div>
@@ -329,7 +329,7 @@ if ($pidRaw !== '') {
     <form id="newForm" class="newform" autocomplete="off">
       <label>Name<input name="name" maxlength="120" required placeholder="e.g. Gym Rivals, Part 1"></label>
       <label>Brand<select name="brand" required><?php foreach ($brands as $b): ?><option value="<?= h($b) ?>"><?= h($b) ?></option><?php endforeach; ?></select></label>
-      <label class="full">Style <span class="muted">(optional, you can change it later)</span><input name="style" maxlength="600" placeholder="e.g. glossy 3D render, warm gym lighting"></label>
+      <label class="full">Style <span class="muted">(optional, you can change it later)</span><input name="style" maxlength="2000" placeholder="e.g. glossy 3D render, warm gym lighting"></label>
       <div class="full"><button type="submit" class="btn primary">Create comic</button></div>
     </form>
   </details>

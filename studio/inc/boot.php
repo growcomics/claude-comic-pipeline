@@ -61,9 +61,12 @@ function studio_login(string $username, string $password): bool {
     return false;
 }
 function is_authed(): bool {
-    s_boot(); $ok = !empty($_SESSION['studio_ok']);
-    if ($ok && function_exists('ws_gate')) ws_gate();   // lieutenant sessions: confine to the workspace (inc/workspace.php)
-    return $ok;
+    s_boot();
+    if (!empty($_SESSION['studio_ok'])) return true;
+    // Lieutenant (hired helper) sessions carry studio_lt, not studio_ok: ws_gate() confines them to the
+    // workspace pages and their brand's comics (inc/workspace.php). Code without this hook sees them as signed out.
+    if (!empty($_SESSION['studio_lt']) && function_exists('ws_gate')) { ws_gate(); return true; }
+    return false;
 }
 function current_studio_user(): string { s_boot(); return (string)($_SESSION['studio_user'] ?? ''); }
 function sign_out(): void { s_boot(); $_SESSION = []; if (ini_get('session.use_cookies')) { $p = session_get_cookie_params(); setcookie(session_name(),'',time()-42000,$p['path'],$p['domain']??'',$p['secure'],$p['httponly']); } session_destroy(); }
@@ -224,9 +227,10 @@ function store_image(string $tmp, string $orig, string $id): ?array {
     $dir = project_dir($id); @mkdir($dir . '/thumb', 0755, true);
     $name = nid() . '.' . $ext;
     $dest = $dir . '/' . $name; $thumb = $dir . '/thumb/' . $name;
-    if (!extension_loaded('gd')) { if (!move_uploaded_file($tmp, $dest)) return null; @copy($dest,$thumb); return ['file'=>$name]; }
+    $keep = function () use ($tmp, $dest) { return is_uploaded_file($tmp) ? move_uploaded_file($tmp, $dest) : (@rename($tmp, $dest) || @copy($tmp, $dest)); };
+    if (!extension_loaded('gd')) { if (!$keep()) return null; @copy($dest,$thumb); return ['file'=>$name]; }
     $im = @($ext==='png'?imagecreatefrompng($tmp):($ext==='webp'&&function_exists('imagecreatefromwebp')?imagecreatefromwebp($tmp):($ext==='gif'?imagecreatefromgif($tmp):imagecreatefromjpeg($tmp))));
-    if (!$im) { if (!move_uploaded_file($tmp,$dest)) return null; @copy($dest,$thumb); return ['file'=>$name]; }
+    if (!$im) { if (!$keep()) return null; @copy($dest,$thumb); return ['file'=>$name]; }
     _img_out(_img_fit($im, IMG_MAX_W), $dest, $ext);
     _img_out(_img_fit($im, THUMB_W), $thumb, $ext);
     imagedestroy($im);

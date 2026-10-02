@@ -8,7 +8,7 @@
 // untouched, so the existing studio behaves exactly as before.
 //
 // Stores (all under data/ws/, web-denied by data/.htaccess; every write is s_with_lock'd):
-//   team.json         people[], projectBrands{pid:brand}, brands[], settings{}
+//   team.json         people[], projectBrands{pid:{brand,created}}, brands[], settings{}
 //   proj-<pid>.json   story, style, aspect, pages[{n,title,prompt,refs[],note}], refs[{file,label,kind}]
 //   chat-<pid>.json   msgs[{id,ts,uid,by,role:user|ai|system,text,actions[]}]
 //   picks-<pid>.json  pages{group:{pick:[]|'drop',c,prev_c,sig,by,ts}}
@@ -73,7 +73,10 @@ function ws_person(string $id): ?array { foreach (ws_team()['people'] as $p) if 
 function ws_token_hash(string $tok): string { return hash('sha256', 'ws-magic|' . $tok); }
 
 // ---- session roles ------------------------------------------------------------
-function ws_is_lt(): bool { s_boot(); return !empty($_SESSION['studio_ok']) && ($_SESSION['studio_role'] ?? '') === WS_ROLE; }
+// Lieutenant sessions carry studio_lt (NOT studio_ok): code that predates the workspace
+// therefore treats a lieutenant as signed out, so confinement fails CLOSED even if an
+// older inc/boot.php without the ws_gate() hook is ever redeployed.
+function ws_is_lt(): bool { s_boot(); return empty($_SESSION['studio_ok']) && !empty($_SESSION['studio_lt']) && ($_SESSION['studio_role'] ?? '') === WS_ROLE; }
 function ws_uid(): string {
     s_boot();
     if (ws_is_lt()) return (string)($_SESSION['studio_uid'] ?? '');
@@ -94,13 +97,28 @@ function ws_is_owner(): bool {
 }
 
 // ---- brands + visibility ------------------------------------------------------
-function ws_project_brand(string $pid): string { return (string)(ws_team()['projectBrands'][ws_pid($pid)] ?? ''); }
+// projectBrands[pid] = {brand, created} (created = the projects.json row's 'created' stamp at assignment).
+// A comic that is deleted and later recreated under the same id has a different stamp, so it
+// does NOT inherit the old brand (or the old brand's lieutenants). Plain-string values are legacy.
+function ws_pb_brand($v): string { return is_array($v) ? (string)($v['brand'] ?? '') : (string)$v; }
+function ws_pb_valid($v, ?array $row): bool {
+    if (!$row || ws_pb_brand($v) === '') return false;
+    return !is_array($v) || (string)($v['created'] ?? '') === '' || (string)($v['created'] ?? '') === (string)($row['created'] ?? '');
+}
+function ws_pb_make(string $brand, ?array $row): array { return ['brand' => $brand, 'created' => (string)($row['created'] ?? '')]; }
+function ws_project_brand(string $pid, ?array $row = null): string {
+    $pid = ws_pid($pid);
+    $v = ws_team()['projectBrands'][$pid] ?? '';
+    if (ws_pb_brand($v) === '') return '';
+    $row = $row ?? project_get($pid);
+    return ws_pb_valid($v, $row) ? ws_pb_brand($v) : '';
+}
 function ws_can_see(string $pid): bool {
     $pid = ws_pid($pid);
     if ($pid === '') return false;
     if (!ws_is_lt()) return true;
-    $me = ws_me(); $b = ws_project_brand($pid);
-    return $me && $b !== '' && in_array($b, (array)($me['brands'] ?? []), true) && project_get($pid) !== null;
+    $me = ws_me(); $row = project_get($pid); $b = ws_project_brand($pid, $row);
+    return $me && $row !== null && $b !== '' && in_array($b, (array)($me['brands'] ?? []), true);
 }
 // Projects the current user may list in the workspace (lieutenant: own brands; others: all).
 function ws_projects_visible(): array {
@@ -108,7 +126,8 @@ function ws_projects_visible(): array {
     if (!ws_is_lt()) return $all;
     $me = ws_me(); $mine = (array)($me['brands'] ?? []); $pb = ws_team()['projectBrands'];
     return array_values(array_filter($all, function ($p) use ($mine, $pb) {
-        $b = (string)($pb[$p['id'] ?? ''] ?? '');
+        $v = $pb[$p['id'] ?? ''] ?? '';
+        $b = ws_pb_valid($v, $p) ? ws_pb_brand($v) : '';
         return $b !== '' && in_array($b, $mine, true) && ($p['status'] ?? '') !== 'archived';
     }));
 }
@@ -161,7 +180,7 @@ function ws_magic_login(string $tok): bool {
     foreach (ws_team()['people'] as $p) {
         if (!empty($p['active']) && !empty($p['tokenHash']) && hash_equals((string)$p['tokenHash'], $h)) {
             s_boot(); session_regenerate_id(true);
-            $_SESSION = ['studio_ok' => true, 'studio_user' => (string)($p['name'] ?? 'Lieutenant'),
+            $_SESSION = ['studio_lt' => true, 'studio_user' => (string)($p['name'] ?? 'Lieutenant'),
                          'studio_role' => WS_ROLE, 'studio_uid' => (string)$p['id'], 'studio_rev' => (int)($p['rev'] ?? 0)];
             return true;
         }
@@ -194,6 +213,7 @@ function ws_page_get(array $proj, int $n): ?array { foreach ($proj['pages'] as $
 // gen, by, source, wsJob. Returns the new image row or null.
 function ws_add_image(string $pid, string $tmp, string $orig, array $extra = []): ?array {
     $pid = ws_pid($pid);
+    $orig = trim(preg_replace('/[<>"\'`&\\\\\x00-\x1f\x7f]+/u', '_', $orig) ?? 'upload.png') ?: 'upload.png';
     $res = store_image($tmp, $orig, $pid);
     if (!$res) return null;
     $row = array_merge([
@@ -263,16 +283,43 @@ function ws_quota_release(string $uid, int $n, string $day): void {
     });
 }
 // Chat quota: check (and count) one AI reply. Returns ['ok'=>bool,'error'=>?].
-function ws_chat_quota_take(string $uid, bool $isLt): array {
+// Take one Claude reply from the person's daily allowance. $reserveUsd = worst-case cost of
+// this call, charged NOW (so parallel requests can't overrun usdPerDay); ws_chat_settle()
+// swaps it for the real cost afterwards. Only one call per person may be in flight (120 s TTL).
+function ws_chat_quota_take(string $uid, bool $isLt, float $reserveUsd = 0.0): array {
     $caps = ws_user_caps($uid);
-    return ws_usage_mutate(function ($d) use ($uid, $isLt, $caps) {
-        $m = (int)($d['users'][$uid]['msgs'] ?? 0); $usd = (float)($d['users'][$uid]['usd'] ?? 0);
-        if ($isLt && ($m >= $caps['msgsPerDay'] || $usd >= $caps['usdPerDay'])) {
+    return ws_usage_mutate(function ($d) use ($uid, $isLt, $caps, $reserveUsd) {
+        $u = (array)($d['users'][$uid] ?? []);
+        $m = (int)($u['msgs'] ?? 0); $usd = (float)($u['usd'] ?? 0);
+        if (time() - (int)($u['inflight'] ?? 0) < 120) {
+            return [$d, ['ok' => false, 'error' => 'Claude is still answering your last message. Wait for it, then ask again.']];
+        }
+        if ($isLt && ($m >= $caps['msgsPerDay'] || $usd + $reserveUsd > $caps['usdPerDay'])) {
             return [$d, ['ok' => false, 'error' => 'Daily Claude chat limit reached. The team thread still works; Claude is back after midnight Pacific.']];
         }
-        $d['users'][$uid]['msgs'] = $m + 1;
+        $u['msgs'] = $m + 1; $u['usd'] = round($usd + $reserveUsd, 4); $u['inflight'] = time();
+        $d['users'][$uid] = $u;
         return [$d, ['ok' => true]];
     });
+}
+// Settle a Claude call: replace the reservation with the actual cost and clear the in-flight
+// mark. $refundMsg (only for a definite, non-billed API error) also gives the message back.
+function ws_chat_settle(string $uid, float $reserveUsd, float $actualUsd, bool $refundMsg = false): void {
+    ws_usage_mutate(function ($d) use ($uid, $reserveUsd, $actualUsd, $refundMsg) {
+        $u = (array)($d['users'][$uid] ?? []);
+        $u['usd'] = round(max(0.0, (float)($u['usd'] ?? 0) - $reserveUsd + $actualUsd), 4);
+        if ($refundMsg) $u['msgs'] = max(0, (int)($u['msgs'] ?? 0) - 1);
+        $u['inflight'] = 0;
+        $d['users'][$uid] = $u;
+        return [$d, null];
+    });
+}
+// Worst-case USD for one chat call: ~3.5 chars/token input + full max_tokens output.
+function ws_chat_reserve_usd(int $inputChars, int $maxTokens): float {
+    $s = ws_settings(); $m = (string)$s['chatModel'];
+    $rates = ['claude-opus-5-5' => [4, 20], 'claude-sonnet-5-5' => [2, 10], 'claude-haiku-4-5' => [1, 5]];
+    $r = $rates[$m] ?? [5, 25];
+    return round(($inputChars / 3.5 * $r[0] + $maxTokens * $r[1]) / 1e6, 4);
 }
 function ws_chat_cost_add(string $uid, float $usd): void {
     ws_usage_mutate(function ($d) use ($uid, $usd) { $d['users'][$uid]['usd'] = round((float)($d['users'][$uid]['usd'] ?? 0) + $usd, 4); return [$d, null]; });
@@ -303,7 +350,8 @@ function ws_jobs_mutate(callable $fn) {
 // ['ok'=>true,'job'=>…,'left'=>…] or ['ok'=>false,'error'=>…].
 function ws_job_enqueue(string $pid, int $page, int $takes, string $promptOverride = ''): array {
     $pid = ws_pid($pid);
-    if (!project_get($pid)) return ['ok' => false, 'error' => 'Unknown comic.'];
+    $prow = project_get($pid);
+    if (!$prow) return ['ok' => false, 'error' => 'Unknown comic.'];
     $s = ws_settings();
     $takes = max(1, min((int)$s['maxTakes'], $takes));
     $proj = ws_proj($pid); $pg = ws_page_get($proj, $page);
@@ -319,11 +367,11 @@ function ws_job_enqueue(string $pid, int $page, int $takes, string $promptOverri
     $q = ws_quota_reserve($uid, $takes, $isLt);
     if (!$q['ok']) return ['ok' => false, 'error' => $q['error'], 'left' => $q['left']];
     $job = [
-        'id' => 'wsj_' . nid(), 'pid' => $pid, 'page' => $page, 'group' => ws_page_group($page),
+        'id' => 'wsj_' . nid(), 'pid' => $pid, 'pcreated' => (string)($prow['created'] ?? ''), 'page' => $page, 'group' => ws_page_group($page),
         'prompt' => $prompt, 'refs' => $refs, 'aspect' => $proj['aspect'] ?: '3:4', 'takes' => $takes,
         'model' => (string)$s['genModel'], 'resolution' => (string)$s['genResolution'],
         'uid' => $uid, 'by' => current_studio_user(), 'day' => ws_day(),
-        'status' => 'queued', 'done' => 0, 'failed' => 0, 'files' => [], 'note' => '',
+        'status' => 'queued', 'done' => 0, 'failed' => 0, 'submits' => 0, 'files' => [], 'note' => '',
         'createdAt' => ws_now(), 'claimedAt' => null, 'heartbeatAt' => null, 'finishedAt' => null, 'worker' => '',
     ];
     ws_jobs_mutate(function ($j) use ($job) { $j['jobs'][] = $job; return [$j, null]; });
@@ -350,7 +398,14 @@ function ws_jobs_for(string $pid, int $limit = 30): array {
     return array_slice(array_reverse($out), 0, $limit);
 }
 // Is a worker alive? (heartbeat within the last 10 minutes)
-function ws_worker_alive(): bool { $m = ws_jobs_read()['meta']; return time() - (int)($m['workerSeenAt'] ?? 0) < 600; }
+define('WS_WORKER_SEEN', WS_DIR . '/worker-seen.json');
+function ws_worker_seen(): array { return (array)s_read(WS_WORKER_SEEN, []); }
+function ws_worker_touch(string $name): void {
+    $cur = ws_worker_seen();
+    if (time() - (int)($cur['at'] ?? 0) < 30 && ($cur['name'] ?? '') === $name) return;   // cheap: at most one write per 30 s
+    s_write(WS_WORKER_SEEN, ['at' => time(), 'name' => $name]);
+}
+function ws_worker_alive(): bool { return time() - (int)(ws_worker_seen()['at'] ?? 0) < 600; }
 
 // ---- chat store ---------------------------------------------------------------------
 function ws_chat(string $pid, int $sinceId = 0): array {
