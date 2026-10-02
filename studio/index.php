@@ -35,7 +35,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
   <a class="ghost" href="index.php" style="color:var(--text);font-weight:700">🎬 Comic Studio</a>
   <a class="ghost" href="ops.php">📋 Ops Board</a>
   <a class="ghost" href="nightshift.php">🌙 Night Shift</a>
-  <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="help.php">❔ How it works</a> <a class="ghost" href="login.php?do=logout">Log out</a></header>
+  <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <?php if (function_exists('ws_is_owner') && ws_is_owner()): ?><a class="ghost" href="ws.php">🧑‍✈️ Workspace</a> <a class="ghost" href="team.php">👥 Team</a> <?php endif; ?><a class="ghost" href="help.php">❔ How it works</a> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap">
   <div class="pagehead"><h1>Projects <span class="muted"><?= count($projects) ?></span></h1></div>
 

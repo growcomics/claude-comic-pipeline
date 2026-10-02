@@ -14,7 +14,7 @@
 //   picks-<pid>.json  pages{group:{pick:[]|'drop',c,prev_c,sig,by,ts}}
 //   jobs.json         jobs[], meta{lastSubmitAt,cooldownUntil}
 //   usage.json        days{YYYY-MM-DD:{users:{uid:{gens,msgs,usd}},gens}}
-//   worker.json       {key}  (the generation worker's own key; never the bridge key)
+//   worker.json       {keyHash}  (sha256 of the generation worker's own key; never the bridge key)
 declare(strict_types=1);
 
 define('WS_DIR', SDATA . '/ws');
@@ -136,13 +136,14 @@ function ws_gate(): void {
         ws_deny('Your access link is no longer active. Ask for a new one.', 401);
     }
     $scriptFile = (string)($_SERVER['SCRIPT_FILENAME'] ?? '');
-    $script     = basename((string)($_SERVER['SCRIPT_NAME'] ?? $scriptFile));
+    $script     = basename($scriptFile !== '' ? $scriptFile : (string)($_SERVER['SCRIPT_NAME'] ?? ''));   // the file actually executed
     $inRoot     = $scriptFile !== '' && realpath(dirname($scriptFile)) === realpath(STUDIO_ROOT);
     if ($inRoot && $script === 'index.php') { header('Location: ws.php'); exit; }
     if (!$inRoot || !in_array($script, WS_LT_ALLOW, true)) ws_deny('That page is not part of your workspace.');
-    foreach (['p', 'pid'] as $k) {
-        $raw = $_GET[$k] ?? $_POST[$k] ?? null;
-        if ($raw !== null && $raw !== '' && !ws_can_see(ws_pid((string)$raw))) ws_deny('That comic is not in your workspace.');
+    // Check GET and POST separately (a page may read either) and refuse non-strings (p[]=…) outright.
+    foreach (['p', 'pid'] as $k) foreach ([$_GET[$k] ?? null, $_POST[$k] ?? null] as $raw) {
+        if ($raw === null || $raw === '') continue;
+        if (!is_string($raw) || !ws_can_see(ws_pid($raw))) ws_deny('That comic is not in your workspace.');
     }
     if (time() - (int)strtotime((string)($me['lastSeenAt'] ?? '1970-01-01')) > 3600) {
         $id = $me['id'];

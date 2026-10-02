@@ -1,0 +1,266 @@
+#!/usr/bin/env python3
+"""wsw - CLI for the Studio lieutenant-workspace generation worker (python3 stdlib only).
+
+The headless Claude worker on opsbox runs ONLY this command (its Bash allow list). It talks to
+studio/ws-worker.php with the worker's own key; the key is never printed, logged or passed in argv.
+
+  wsw claim [WORKER]               take the next job (or resume this worker's own)    exit 0 job / 2 none
+  wsw submit-ok JOB                pacing gate before EVERY generate call; waits for
+                                   the gap itself (up to 10 min)                      exit 0 go / 2 stop
+  wsw heartbeat JOB [NOTE]         hold the lease; tells you if the job was stopped   exit 0 / 2 stop
+  wsw ingest JOB URL [GEN]         the Studio downloads the result into the page      exit 0 / 1
+  wsw fail JOB REASON              one take given up (after the retries)              exit 0 / 1
+  wsw cooldown MINUTES REASON      pause the whole queue (credits / rate limit)       exit 0 / 1
+  wsw done JOB done|error [NOTE]   close the job (releases unused quota, posts chat)  exit 0 / 1
+  wsw status [WORKER]              queue counts (+ records the worker as alive)       exit 0 / 1
+  wsw pending [WORKER]             idle gate: anything to claim?                      exit 0 yes / 2 no / 1 err
+  wsw put-ref REF_URL UPLOAD_URL   fallback when media_import_url can't fetch a ref:  exit 0 / 1
+                                   copy a signed ref (from claim) to the presigned
+                                   upload_url that media_upload returned
+
+Output: one line of compact JSON on stdout, always with "at" (local time) so a run can keep time.
+Exit codes: 0 ok, 2 stop / nothing to do, 1 error.
+Env: WS_BASE (default https://3dmusclecomics.com/studio/ws-worker.php), WS_WORKER_KEY (else
+`secretctl get ws-worker-key`), WS_WORKER_NAME (default: the hostname).
+"""
+import datetime
+import json
+import os
+import shutil
+import socket
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+BASE = os.environ.get('WS_BASE') or 'https://3dmusclecomics.com/studio/ws-worker.php'
+SUBMIT_WAIT_MAX = 600          # submit-ok waits at most 10 minutes in total
+UA = 'wsw/1.0 (3DMC Studio workspace worker)'
+UPLOAD_HOSTS = ('cloudfront.net', 'higgsfield.ai', 'amazonaws.com', 'googleusercontent.com', 'storage.googleapis.com')
+MAX_REF = 30 * 1024 * 1024
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    # never follow a redirect: urllib would replay the X-WS-Key header to wherever it points
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_OPENER = urllib.request.build_opener(_NoRedirect)
+
+
+def now_iso():
+    return datetime.datetime.now().astimezone().isoformat(timespec='seconds')
+
+
+def out(obj, code):
+    obj = dict(obj) if isinstance(obj, dict) else {'ok': False, 'error': str(obj)}
+    obj['at'] = now_iso()
+    sys.stdout.write(json.dumps(obj, separators=(',', ':'), ensure_ascii=False) + '\n')
+    sys.stdout.flush()
+    sys.exit(code)
+
+
+def worker_name(arg=None):
+    n = (arg or os.environ.get('WS_WORKER_NAME') or socket.gethostname().split('.')[0] or 'worker')
+    return ''.join(c for c in n if c.isalnum() or c in ' ._:@-')[:40] or 'worker'
+
+
+_KEY = []
+
+
+def get_key():
+    if _KEY:
+        return _KEY[0]
+    k = os.environ.get('WS_WORKER_KEY', '').strip()
+    if k:
+        _KEY.append(k)
+        return k
+    cands = [os.environ.get('WS_SECRETCTL', ''),
+             os.path.expanduser('~/Documents/.credentials/bin/secretctl'),
+             shutil.which('secretctl') or '']
+    for c in cands:
+        if c and os.path.isfile(c) and os.access(c, os.X_OK):
+            try:
+                p = subprocess.run([c, 'get', 'ws-worker-key'], capture_output=True, timeout=45)
+            except Exception:
+                continue
+            k = p.stdout.decode('utf-8', 'replace').strip()
+            if p.returncode == 0 and k:
+                _KEY.append(k)
+                return k
+    out({'ok': False, 'error': 'no worker key: WS_WORKER_KEY is unset and `secretctl get ws-worker-key` failed'}, 1)
+
+
+def call(do, params=None, method='POST', timeout=40, retries=3):
+    """One request to ws-worker.php. Returns the decoded JSON (dict). Network errors and 5xx are retried."""
+    key = get_key()
+    params = {k: v for k, v in (params or {}).items() if v is not None}
+    q = {'do': do}
+    data = None
+    if method == 'GET':
+        q.update(params)
+    else:
+        data = urllib.parse.urlencode(params).encode()
+    url = BASE + ('&' if '?' in BASE else '?') + urllib.parse.urlencode(q)
+    headers = {'X-WS-Key': key, 'User-Agent': UA, 'Accept': 'application/json'}
+    if data is not None:
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
+    last = 'request failed'
+    for i in range(max(1, retries)):
+        req = urllib.request.Request(url, data=data, headers=headers, method=method)
+        try:
+            with _OPENER.open(req, timeout=timeout) as r:
+                body = r.read().decode('utf-8', 'replace')
+            try:
+                return json.loads(body)
+            except ValueError:
+                return {'ok': False, 'error': 'non-JSON reply from the Studio: ' + body[:200]}
+        except urllib.error.HTTPError as e:
+            body = e.read().decode('utf-8', 'replace')
+            try:
+                j = json.loads(body)
+            except ValueError:
+                j = {'ok': False, 'error': 'HTTP %d from the Studio: %s' % (e.code, body[:200])}
+            j.setdefault('ok', False)
+            j['http'] = e.code
+            if e.code >= 500 and i + 1 < retries:
+                last = j.get('error') or 'HTTP %d' % e.code
+                time.sleep(5 * (i + 1))
+                continue
+            return j
+        except Exception as e:   # network / timeout: never include headers (the key) in the message
+            last = '%s: %s' % (type(e).__name__, str(e)[:160])
+            if i + 1 < retries:
+                time.sleep(5 * (i + 1))
+                continue
+    return {'ok': False, 'error': 'cannot reach the Studio (' + last + ')'}
+
+
+def host_ok(host, suffixes):
+    host = (host or '').lower().rstrip('.')
+    return any(host == s or host.endswith('.' + s) for s in suffixes)
+
+
+def put_ref(ref_url, upload_url):
+    """GET a signed ref from the Studio (no key needed), PUT it to a Higgsfield presigned upload URL."""
+    base = urllib.parse.urlsplit(BASE)
+    r = urllib.parse.urlsplit(ref_url)
+    if (r.scheme, r.netloc, r.path) != (base.scheme, base.netloc, base.path) or 'do=refimg' not in (r.query or ''):
+        out({'ok': False, 'error': 'REF_URL must be a signed ref url from wsw claim'}, 1)
+    u = urllib.parse.urlsplit(upload_url)
+    if u.scheme != 'https' or u.username or u.password or (u.port not in (None, 443)) or not host_ok(u.hostname, UPLOAD_HOSTS):
+        out({'ok': False, 'error': 'UPLOAD_URL host not allowed: %s' % (u.hostname or '?')}, 1)
+    try:
+        with _OPENER.open(urllib.request.Request(ref_url, headers={'User-Agent': UA}), timeout=60) as resp:
+            ctype = (resp.headers.get('Content-Type') or '').split(';')[0].strip()
+            data = resp.read(MAX_REF + 1)
+    except Exception as e:
+        out({'ok': False, 'error': 'could not read the ref from the Studio (%s)' % str(e)[:160]}, 1)
+    if len(data) > MAX_REF or not ctype.startswith('image/'):
+        out({'ok': False, 'error': 'the ref is not an image under 30 MB'}, 1)
+    try:
+        req = urllib.request.Request(upload_url, data=data, method='PUT', headers={'Content-Type': ctype, 'User-Agent': UA})
+        with _OPENER.open(req, timeout=120) as resp:
+            code = resp.status
+    except urllib.error.HTTPError as e:
+        out({'ok': False, 'error': 'upload rejected (HTTP %d)' % e.code}, 1)
+    except Exception as e:
+        out({'ok': False, 'error': 'upload failed (%s)' % str(e)[:160]}, 1)
+    out({'ok': 200 <= code < 300, 'bytes': len(data), 'contentType': ctype, 'http': code}, 0 if 200 <= code < 300 else 1)
+
+
+def need(args, n, usage):
+    if len(args) < n:
+        out({'ok': False, 'error': 'usage: wsw ' + usage}, 1)
+
+
+def main(argv):
+    if not argv or argv[0] in ('-h', '--help', 'help'):
+        sys.stdout.write(__doc__)
+        return 0
+    cmd, args = argv[0], argv[1:]
+
+    if cmd == 'claim':
+        j = call('claim', {'worker': worker_name(args[0] if args else None)})
+        if not j.get('ok'):
+            out(j, 1)
+        out(j, 0 if j.get('job') else 2)
+
+    if cmd in ('status', 'pending'):
+        p = {'worker': worker_name(args[0] if args else None)}
+        j = call('status', p, method='GET')
+        if not j.get('ok'):
+            out(j, 1)
+        if cmd == 'pending':
+            c = j.get('counts') or {}
+            out({'ok': True, 'claimable': bool(j.get('claimable')), 'queued': c.get('queued', 0), 'running': c.get('running', 0),
+                 'enabled': j.get('enabled'), 'cooldownUntil': (j.get('meta') or {}).get('cooldownUntil', 0)},
+                0 if j.get('claimable') else 2)
+        out(j, 0)
+
+    if cmd == 'submit-ok':
+        need(args, 1, 'submit-ok JOB')
+        t0 = time.time()
+        while True:
+            j = call('submit_ok', {'job': args[0]})
+            if j.get('ok'):
+                out(j, 0)
+            if j.get('stop'):
+                out(j, 2)
+            wait = j.get('wait')
+            if not isinstance(wait, (int, float)):
+                out(j, 1)
+            left = SUBMIT_WAIT_MAX - (time.time() - t0)
+            if wait + 1 > left:
+                j['gaveUp'] = True
+                j['error'] = j.get('error') or ('the queue is cooling down (%s)' % (j.get('reason') or 'pacing') if j.get('cooldown')
+                                                else 'waited the 10-minute maximum for a submit slot')
+                out(j, 2)
+            time.sleep(wait + 1)
+
+    if cmd == 'heartbeat':
+        need(args, 1, 'heartbeat JOB [NOTE]')
+        j = call('heartbeat', {'job': args[0], 'note': ' '.join(args[1:])[:200] or None})
+        if not j.get('ok'):
+            out(j, 1)
+        out(j, 2 if j.get('stop') else 0)
+
+    if cmd == 'ingest':
+        need(args, 2, 'ingest JOB URL [GEN]')
+        j = call('ingest_url', {'job': args[0], 'url': args[1].strip(), 'gen': (args[2] if len(args) > 2 else None)}, timeout=150)
+        out(j, 0 if j.get('ok') else 1)
+
+    if cmd == 'fail':
+        need(args, 2, 'fail JOB REASON')
+        j = call('take_failed', {'job': args[0], 'reason': ' '.join(args[1:])[:300]}, retries=1)   # not idempotent: no retry
+        out(j, 0 if j.get('ok') else 1)
+
+    if cmd == 'cooldown':
+        need(args, 2, 'cooldown MINUTES REASON')
+        if not args[0].isdigit():
+            out({'ok': False, 'error': 'MINUTES must be a whole number 1..240'}, 1)
+        j = call('cooldown', {'minutes': args[0], 'reason': ' '.join(args[1:])[:200]})
+        out(j, 0 if j.get('ok') else 1)
+
+    if cmd == 'done':
+        need(args, 2, 'done JOB done|error [NOTE]')
+        if args[1] not in ('done', 'error'):
+            out({'ok': False, 'error': 'status must be done or error'}, 1)
+        j = call('done', {'job': args[0], 'status': args[1], 'note': ' '.join(args[2:])[:300] or None})
+        out(j, 0 if j.get('ok') else 1)
+
+    if cmd == 'put-ref':
+        need(args, 2, 'put-ref REF_URL UPLOAD_URL')
+        put_ref(args[0].strip(), args[1].strip())
+
+    out({'ok': False, 'error': 'unknown command %r (see wsw --help)' % cmd}, 1)
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main(sys.argv[1:]) or 0)
+    except KeyboardInterrupt:
+        out({'ok': False, 'error': 'interrupted'}, 1)
