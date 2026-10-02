@@ -34,6 +34,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
   <div class="brand"><a href="cc.php" style="color:inherit;text-decoration:none"><span class="dot"></span> ⌘ Command Center</a></div>
   <a class="ghost" href="index.php" style="color:var(--text);font-weight:700">🎬 Comic Studio</a>
   <a class="ghost" href="ops.php">📋 Ops Board</a>
+  <a class="ghost" href="nightshift.php">🌙 Night Shift</a>
   <span class="spacer"></span><span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="help.php">❔ How it works</a> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap">
   <div class="pagehead"><h1>Projects <span class="muted"><?= count($projects) ?></span></h1></div>
@@ -68,6 +69,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
     <a class="btn sm" href="overview.php">📋 Project overview</a>
     <a class="btn sm" href="import.php">📄 Comic → 3D Import</a>
     <a class="btn sm" href="growgetter.php">🎲 Random comic (SFW)</a>
+    <a class="btn sm" href="gribble.php">✍️ Gribble script</a>
   </div>
 
   <details class="card newproj"<?= $projects ? '' : ' open' ?>>
@@ -83,7 +85,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
   <details class="card newproj">
     <summary>⚙ Flow import (browser extension)</summary>
     <div style="margin-top:10px;font-size:13px;color:var(--muted);max-width:560px">
-      <p>Install the <strong>Flow → 3DMC Studio</strong> extension, open it on a Google Flow project, click its ⚙ and paste the values below. Then “Send to Studio” drops a Flow project’s images straight into a project here.</p>
+      <p>Install <strong>3DMC Studio Tools</strong> from <a href="https://3dmusclecomics.com/toolbox/" target="_blank" rel="noopener" style="text-decoration:underline">3dmusclecomics.com/toolbox/</a> (staff can also grab it from <a href="/admin/extensions.php" style="text-decoration:underline">Admin → Extensions</a>), open it on a Google Flow project, click its ⚙, switch <strong>Mode</strong> to <strong>Advanced</strong>, paste the Bridge URL + key below and Save. The <strong>→ Studio</strong> tab then appears and drops a Flow project’s images straight into a project here. Owner/staff shortcut: <a href="/admin/extensions.php" style="text-decoration:underline">Flow Studio Deluxe</a> (Admin → Extensions) is the same toolbox with every tab always on and no Mode switch — just paste the two values below once.</p>
       <div style="font-size:12px;margin:8px 0 4px">Bridge URL</div>
       <input readonly value="https://3dmusclecomics.com/studio/bridge.php" onclick="this.select()">
       <div style="font-size:12px;margin:8px 0 4px">Your Studio key (keep private)</div>

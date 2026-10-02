@@ -43,17 +43,18 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
 <title><?= h($proj['name']) ?> · Studio</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/studio.css?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.css') ?>"><!-- the one bar across every system: ⌂ back to the hub, and a menu of everything else. Source: /hub/nav.js -->
 <script src="https://3dmusclecomics.com/hub/nav.js"></script>
 </head><body>
-<header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio</div>
-  <a class="ghost" href="index.php">← Projects</a><span class="spacer"></span>
+<header class="topbar"><div class="brand"><span class="dot"></span> Comic Studio <span style="font-size:11px;font-weight:700;color:#9CA0AC;border:1px solid #2E3140;border-radius:999px;padding:2px 8px;margin-left:6px">Organizer</span></div>
+  <a class="ghost" href="index.php">← Projects</a> <a class="ghost" href="creator.php?p=<?= h(urlencode($id)) ?>">🎬 Comic Creator</a><span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span> <a class="ghost" href="login.php?do=logout">Log out</a></header>
 <main class="wrap" id="proj" data-id="<?= h($id) ?>" data-csrf="<?= h(csrf()) ?>">
   <?php $totalN = count($imgs);
         $purgeN = count(array_filter($imgs, fn($x) => ($x['rating'] ?? '') !== 'good' && empty($x['accepted']))); ?>
   <div class="pagehead"><h1><?= h($proj['name']) ?></h1>
     <span class="phead-actions">
+      <a class="btn sm primary" href="creator.php?p=<?= h(urlencode($id)) ?>">🎬 Open in Comic Creator</a>
       <?php if ($totalN): ?>
         <a class="btn sm" href="export.php?p=<?= h(urlencode($id)) ?>">⬇ Download all (<?= $totalN ?>)</a>
-        <a class="btn sm primary" href="port.php?p=<?= h(urlencode($id)) ?>">→ Port to comic</a>
+        <a class="btn sm" href="port.php?p=<?= h(urlencode($id)) ?>">→ Port to comic</a>
       <?php endif; ?>
       <?php if ($purgeN): ?><button class="btn sm danger" id="purgebtn" data-n="<?= $purgeN ?>" data-kept="<?= count($imgs) - $purgeN ?>">🧹 Purge <?= $purgeN ?></button><?php endif; ?>
     </span>

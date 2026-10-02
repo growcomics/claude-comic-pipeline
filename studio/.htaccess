@@ -1,0 +1,5 @@
+# Deny web access to source backups, lint copies, logs, and raw docs.
+# App reads data/*.json server-side (filesystem), never over HTTP, so this is safe.
+<FilesMatch "(\.bak(-[0-9]+)?$|_lint\.php$|^error_log$|\.log$|\.md$|\.sha256$)">
+  Require all denied
+</FilesMatch>
