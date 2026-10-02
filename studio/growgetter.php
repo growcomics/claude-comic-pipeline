@@ -20,6 +20,7 @@
 // clobber hazard — the ONLY other touch is one link on index.php.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
+require_once __DIR__ . '/inc/defects.php';
 // Auth: a browser session (require_auth), OR the bridge key (data/bridge.json —
 // same trust level as bridge.php) so a headless Claude session / worker can drive
 // the generator's JSON verbs without a login. Key auth skips CSRF (the key IS the
@@ -465,12 +466,13 @@ if ($do === 'gg_qa') {
     if (preg_match('/\{.*\}/s', $txt, $m)) $txt = $m[0];
     $o = json_decode($txt, true);
     if (!is_array($o)) gg_jout(['ok'=>false,'err'=>'QA reply was not parseable — try again.']);
-    $defs = []; $hi = 0; $nsfw = false;
+    $defs = []; $typed = []; $hi = 0; $nsfw = false;
     foreach ((array)($o['defects'] ?? []) as $d) {
         if (is_array($d)) {
             $t = trim((string)($d['type'] ?? '')); $sev = trim((string)($d['severity'] ?? '')); $det = trim((string)($d['detail'] ?? ''));
             if ($t === 'nsfw') $nsfw = true;
             if ($sev === 'high') $hi++;
+            $typed[] = ['type'=>$t, 'sev'=>$sev, 'detail'=>mb_substr($det, 0, 200)];   // registry-id events (inc/defects.php)
             $label = ($t !== '' ? strtoupper($t === 'nsfw' ? 'NOT SFW' : str_replace('_',' ',$t)) : 'defect') . ($det !== '' ? ': ' . $det : '');
         } else { $label = trim((string)$d); }
         if ($label !== '') $defs[] = mb_substr($label, 0, 60);
@@ -482,6 +484,7 @@ if ($do === 'gg_qa') {
     $analysis = [
         'caption' => mb_substr(trim((string)($o['caption'] ?? '')), 0, 300),
         'defects' => $defs,
+        'typed'   => array_values(array_slice($typed, 0, 12)),
         'verdict' => $verdict,
         'people'  => $people,
         'tier'    => '',
@@ -493,6 +496,7 @@ if ($do === 'gg_qa') {
         foreach ($meta as $k => $m2) if (($m2['file'] ?? '') === $file) { $meta[$k]['analysis'] = $analysis; return ['data'=>$meta, 'result'=>true]; }
         return ['result'=>false];
     });
+    ck_defect_log_analysis($pid, $file, '', $analysis, 'ggqa');   // 🏴 shared defect log (registry IDs)
     gg_jout(['ok'=>true, 'file'=>$file, 'verdict'=>$verdict, 'defects'=>$defs, 'caption'=>$analysis['caption']]);
 }
 
