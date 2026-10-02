@@ -833,14 +833,16 @@ if ($do === 'gr_create') {
     if ($title === '') $title = 'Untitled Gribble script';
     $sfw = ((string)($_POST['sfw'] ?? '1')) !== '0';
 
-    $all = projects_all();
-    $base = slugify($title); $pid = $base; $k = 2; $taken = array_column($all, 'id');
-    while (in_array($pid, $taken, true)) $pid = $base . '-' . $k++;
-    array_unshift($all, ['id'=>$pid, 'name'=>$title, 'status'=>'active', 'stage'=>'writer',
-        'tags'=>array_values(array_filter(['gribble', $sfw ? 'sfw' : ''])),
-        'notes'=>'✍️ Written by the Gribble Script Writer (corpus-matched structure).',
-        'cover'=>null, 'created'=>date('c'), 'updated'=>date('c')]);
-    projects_save($all);
+    // pick the id and add the row in ONE locked pass (other pages create projects concurrently)
+    $pid = s_with_lock(PROJECTS_FILE, function ($all) use ($title, $sfw) {
+        $base = slugify($title); $pid = $base; $k = 2; $taken = array_column($all, 'id');
+        while (in_array($pid, $taken, true)) $pid = $base . '-' . $k++;
+        array_unshift($all, ['id'=>$pid, 'name'=>$title, 'status'=>'active', 'stage'=>'writer',
+            'tags'=>array_values(array_filter(['gribble', $sfw ? 'sfw' : ''])),
+            'notes'=>'✍️ Written by the Gribble Script Writer (corpus-matched structure).',
+            'cover'=>null, 'created'=>date('c'), 'updated'=>date('c')]);
+        return ['data'=>$all, 'result'=>$pid];
+    });
 
     $rep = gr_report($script);
     $m = $rep['metrics'];

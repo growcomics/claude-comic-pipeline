@@ -7,16 +7,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'create') 
     csrf_check();
     $name = trim($_POST['name'] ?? '');
     if ($name !== '') {
-        $all = projects_all();
-        $base = slugify($name); $id = $base; $i = 2;
-        $taken = array_column($all, 'id');
-        while (in_array($id, $taken, true)) $id = $base . '-' . $i++;
-        array_unshift($all, [
-            'id'=>$id, 'name'=>mb_substr($name,0,120),
-            'status'=>'active', 'stage'=>'page-build', 'tags'=>[], 'notes'=>'',
-            'cover'=>null, 'created'=>date('c'), 'updated'=>date('c'),
-        ]);
-        projects_save($all);
+        // pick the id and add the row in ONE locked pass (the workspace creates projects concurrently)
+        $id = s_with_lock(PROJECTS_FILE, function ($all) use ($name) {
+            $base = slugify($name); $id = $base; $i = 2;
+            $taken = array_column($all, 'id');
+            while (in_array($id, $taken, true)) $id = $base . '-' . $i++;
+            array_unshift($all, [
+                'id'=>$id, 'name'=>mb_substr($name,0,120),
+                'status'=>'active', 'stage'=>'page-build', 'tags'=>[], 'notes'=>'',
+                'cover'=>null, 'created'=>date('c'), 'updated'=>date('c'),
+            ]);
+            return ['data'=>$all, 'result'=>$id];
+        });
         header('Location: project.php?p=' . urlencode($id)); exit;
     }
     header('Location: index.php'); exit;

@@ -12,10 +12,37 @@ $id = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? ''));
 if (!project_get($id)) jout(['ok'=>false,'error'=>'Unknown project.']);
 $action = $_POST['action'] ?? '';
 
-function touch_project(string $id): void {
-    $all = projects_all();
-    foreach ($all as &$p) if (($p['id']??'')===$id) $p['updated']=date('c');
-    unset($p); projects_save($all);
+// Every write below is a LOCKED read-modify-write (2026-10-01): the lieutenant workspace (ws-api.php,
+// picker.php) and the worker write the same images-<id>.json / projects.json under s_with_lock(), so
+// a write here re-reads the file INSIDE the lock instead of saving a copy read earlier in the request.
+// Slow work (store_image, hashing) runs before the lock. Locks are never nested: images first, then
+// projects, one after the other.
+// $fn(&$p) edits project $id's row in projects.json.
+function api_project_patch(string $id, callable $fn): void {
+    s_with_lock(PROJECTS_FILE, function ($all) use ($id, $fn) {
+        $hit = false;
+        foreach ($all as &$p) if (($p['id']??'')===$id) { $fn($p); $hit = true; }
+        unset($p);
+        return $hit ? ['data'=>$all, 'result'=>true] : ['result'=>false];
+    });
+}
+function touch_project(string $id): void { api_project_patch($id, function (&$p) { $p['updated']=date('c'); }); }
+// Clear the project's cover if it no longer names an image of the project (read fresh, in the lock).
+function api_cover_check(string $id, bool $touch): void {
+    api_project_patch($id, function (&$p) use ($id, $touch) {
+        $cov = (string)($p['cover'] ?? '');
+        if ($cov !== '' && !in_array($cov, array_column(images_all($id), 'file'), true)) $p['cover'] = null;
+        if ($touch) $p['updated'] = date('c');
+    });
+}
+// $fn(&$meta, $idx) edits the image named $file and returns the JSON reply; null = the image is gone.
+function api_image_edit(string $id, string $file, callable $fn): ?array {
+    return s_with_lock(imeta_path($id), function ($meta) use ($file, $fn) {
+        $idx = null; foreach ($meta as $k=>$m) if (($m['file']??'')===$file) { $idx=$k; break; }
+        if ($idx === null) return ['result'=>null];
+        $res = $fn($meta, $idx);
+        return ['data'=>$meta, 'result'=>$res];
+    });
 }
 function beat_num(string $s): int { return preg_match('/(\d+)/',$s,$m) ? (int)$m[1] : 9999; }
 function ordered_beats(array $meta): array {
@@ -28,7 +55,7 @@ function ordered_beats(array $meta): array {
 if ($action === 'upload') {
     $files = $_FILES['files'] ?? null;
     if (!$files || empty($files['name'])) jout(['ok'=>false,'error'=>'No files.']);
-    $meta = images_all($id); $added = [];
+    $added = [];
     $names = (array)$files['name'];
     for ($i=0; $i<count($names); $i++) {
         if ((int)($files['error'][$i] ?? 4) !== UPLOAD_ERR_OK) continue;
@@ -38,9 +65,10 @@ if ($action === 'upload') {
         if (!$res) continue;
         $entry = ['file'=>$res['file'],'orig'=>mb_substr((string)$files['name'][$i],0,120),
                   'rating'=>'unrated','accepted'=>false,'group'=>'','tags'=>[],'ts'=>time()];
-        $meta[] = $entry; $added[] = $entry;
+        $added[] = $entry;
     }
-    images_save($id, $meta); touch_project($id);
+    $meta = images_update($id, function ($meta) use ($added) { return array_merge($meta, $added); });
+    touch_project($id);
     jout(['ok'=>true,'added'=>$added,'count'=>count($meta)]);
 }
 
@@ -48,41 +76,45 @@ if ($action === 'upload') {
 if ($action === 'move_beat') {
     $beat = trim((string)($_POST['beat'] ?? ''));
     $to   = (int)($_POST['to'] ?? 0);
-    $meta = images_all($id);
-    $beats = ordered_beats($meta);
-    $from = array_search($beat, $beats, true);
-    if ($from === false || !$beats) jout(['ok'=>false,'error'=>'no such beat']);
-    $to = max(1, min(count($beats), $to)) - 1;
-    array_splice($beats, $from, 1);
-    array_splice($beats, $to, 0, [$beat]);
-    $map = []; foreach ($beats as $i=>$b) $map[$b] = 'Beat ' . ($i+1);
-    foreach ($meta as &$m) { $g = $m['group'] ?? ''; if (isset($map[$g])) $m['group'] = $map[$g]; }
-    unset($m);
-    images_save($id, $meta); touch_project($id);
+    $ok = s_with_lock(imeta_path($id), function ($meta) use ($beat, $to) {
+        $beats = ordered_beats($meta);
+        $from = array_search($beat, $beats, true);
+        if ($from === false || !$beats) return ['result'=>false];
+        $to = max(1, min(count($beats), $to)) - 1;
+        array_splice($beats, $from, 1);
+        array_splice($beats, $to, 0, [$beat]);
+        $map = []; foreach ($beats as $i=>$b) $map[$b] = 'Beat ' . ($i+1);
+        foreach ($meta as &$m) { $g = $m['group'] ?? ''; if (isset($map[$g])) $m['group'] = $map[$g]; }
+        unset($m);
+        return ['data'=>$meta, 'result'=>true];
+    });
+    if (!$ok) jout(['ok'=>false,'error'=>'no such beat']);
+    touch_project($id);
     jout(['ok'=>true]);
 }
 
 // sequence mode: each image becomes its own beat (page), in current order, all kept
 if ($action === 'one_beat_each') {
-    $meta = images_all($id);
-    usort($meta, fn($a,$b)=> beat_num($a['group']??'') <=> beat_num($b['group']??'') ?: (($a['ts']??0) <=> ($b['ts']??0)));
-    foreach ($meta as $i=>&$m) { $m['group'] = 'Beat ' . ($i+1); $m['accepted'] = true; $m['rating'] = 'good'; }
-    unset($m);
-    images_save($id, $meta); touch_project($id);
+    images_update($id, function ($meta) {
+        usort($meta, fn($a,$b)=> beat_num($a['group']??'') <=> beat_num($b['group']??'') ?: (($a['ts']??0) <=> ($b['ts']??0)));
+        foreach ($meta as $i=>&$m) { $m['group'] = 'Beat ' . ($i+1); $m['accepted'] = true; $m['rating'] = 'good'; }
+        unset($m);
+        return $meta;
+    });
+    touch_project($id);
     jout(['ok'=>true]);
 }
 
 // purge: hard-delete every image that is NOT rated good (▲) and NOT kept (★)
 if ($action === 'purge') {
-    $meta = images_all($id);
-    $keep = array_values(array_filter($meta, fn($m) => ($m['rating'] ?? '') === 'good' || !empty($m['accepted'])));
-    $del  = array_values(array_filter($meta, fn($m) => ($m['rating'] ?? '') !== 'good' && empty($m['accepted'])));
+    $del = [];
+    $keep = images_update($id, function ($meta) use (&$del) {
+        $keep = []; $del = [];
+        foreach ($meta as $m) { if (($m['rating'] ?? '') === 'good' || !empty($m['accepted'])) $keep[] = $m; else $del[] = $m; }
+        return $keep;
+    });
     foreach ($del as $m) { @unlink(project_dir($id) . '/' . $m['file']); @unlink(project_dir($id) . '/thumb/' . $m['file']); }
-    images_save($id, $keep);
-    $kf = array_column($keep, 'file');
-    $all = projects_all();
-    foreach ($all as &$p) if (($p['id'] ?? '') === $id) { $cov = $p['cover'] ?? ''; if ($cov !== '' && !in_array($cov, $kf, true)) $p['cover'] = null; }
-    unset($p); projects_save($all); touch_project($id);
+    api_cover_check($id, true);
     jout(['ok' => true, 'deleted' => count($del), 'kept' => count($keep)]);
 }
 
@@ -142,9 +174,16 @@ if ($action === 'group_similar') {
         if ($bi >= 0 && $bd <= $THRESH) $clusters[$bi]['members'][] = $r['k'];
         else $clusters[] = ['key'=>null, 'rep'=>$r['h'], 'members'=>[$r['k']]];
     }
-    $n = 1;
-    foreach ($clusters as $c) { $g = 'Beat ' . $n++; foreach ($c['members'] as $k) $meta[$k]['group'] = $g; }
-    images_save($id, $meta); touch_project($id);
+    // the hashing above ran on a snapshot; apply the beats by FILE inside the lock, so an image that
+    // landed meanwhile keeps its own group instead of being overwritten from a stale copy
+    $groupOf = []; $n = 1;
+    foreach ($clusters as $c) { $g = 'Beat ' . $n++; foreach ($c['members'] as $k) $groupOf[(string)($meta[$k]['file'] ?? '')] = $g; }
+    unset($groupOf['']);
+    images_update($id, function ($meta) use ($groupOf) {
+        foreach ($meta as &$m) { $f = (string)($m['file'] ?? ''); if (isset($groupOf[$f])) $m['group'] = $groupOf[$f]; }
+        unset($m); return $meta;
+    });
+    touch_project($id);
     jout(['ok'=>true,'beats'=>count($clusters),'by_prompt'=>count($byKey)]);
 }
 
@@ -153,77 +192,80 @@ if ($action === 'bulk') {
     $files = json_decode((string)($_POST['files'] ?? '[]'), true) ?: [];
     $op    = (string)($_POST['op'] ?? '');
     $set   = array_flip(array_map('basename', (array)$files));
-    $meta  = images_all($id);
     if ($op === 'delete') {
-        $keep = []; $del = 0;
-        foreach ($meta as $m) {
-            if (isset($set[$m['file'] ?? ''])) { @unlink(project_dir($id) . '/' . $m['file']); @unlink(project_dir($id) . '/thumb/' . $m['file']); $del++; }
-            else $keep[] = $m;
-        }
-        images_save($id, $keep);
-        $all = projects_all(); $kf = array_column($keep, 'file');
-        foreach ($all as &$p) if (($p['id'] ?? '') === $id) { $cov = $p['cover'] ?? ''; if ($cov !== '' && !in_array($cov, $kf, true)) $p['cover'] = null; }
-        unset($p); projects_save($all); touch_project($id);
-        jout(['ok' => true, 'deleted' => $del, 'count' => count($keep)]);
+        $gone = [];
+        $keep = images_update($id, function ($meta) use ($set, &$gone) {
+            $keep = []; $gone = [];
+            foreach ($meta as $m) { if (isset($set[$m['file'] ?? ''])) $gone[] = $m['file']; else $keep[] = $m; }
+            return $keep;
+        });
+        foreach ($gone as $f) { @unlink(project_dir($id) . '/' . $f); @unlink(project_dir($id) . '/thumb/' . $f); }
+        api_cover_check($id, true);
+        jout(['ok' => true, 'deleted' => count($gone), 'count' => count($keep)]);
     }
     $n = 0;
-    foreach ($meta as &$m) {
-        if (!isset($set[$m['file'] ?? ''])) continue;
-        if      ($op === 'approve')   { $m['rating'] = 'good'; $m['accepted'] = true; }
-        elseif  ($op === 'unapprove') { $m['accepted'] = false; if (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated'; }
-        elseif  ($op === 'bad')       { $m['rating'] = 'bad';  $m['accepted'] = false; }
-        elseif  ($op === 'keep')      { $m['accepted'] = true; }
-        else continue;
-        $n++;
-    }
-    unset($m); images_save($id, $meta); touch_project($id);
+    images_update($id, function ($meta) use ($set, $op, &$n) {
+        $n = 0;
+        foreach ($meta as &$m) {
+            if (!isset($set[$m['file'] ?? ''])) continue;
+            if      ($op === 'approve')   { $m['rating'] = 'good'; $m['accepted'] = true; }
+            elseif  ($op === 'unapprove') { $m['accepted'] = false; if (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated'; }
+            elseif  ($op === 'bad')       { $m['rating'] = 'bad';  $m['accepted'] = false; }
+            elseif  ($op === 'keep')      { $m['accepted'] = true; }
+            else continue;
+            $n++;
+        }
+        unset($m); return $meta;
+    });
+    touch_project($id);
     jout(['ok' => true, 'updated' => $n]);
 }
 
-// per-image mutations
+// per-image mutations — each re-finds the image inside the lock (api_image_edit)
 $file = basename((string)($_POST['file'] ?? ''));
-$meta = images_all($id);
-$idx = null; foreach ($meta as $k=>$m) if (($m['file']??'')===$file) { $idx=$k; break; }
-if ($idx === null) jout(['ok'=>false,'error'=>'Image not found.']);
+$gone = ['ok'=>false,'error'=>'Image not found.'];
+if (!in_array($file, array_column(images_all($id), 'file'), true)) jout($gone);
 
 // mark current image the winner of its beat: it becomes accepted+good, siblings lose accept + any 'good'
 if ($action === 'winner') {
-    $beat = $meta[$idx]['group'] ?? '';
-    foreach ($meta as &$m) {
-        if ($beat !== '' && ($m['group'] ?? '') === $beat) {
-            $win = ($m['file'] === $file);
-            $m['accepted'] = $win;
-            if ($win) $m['rating'] = 'good';
-            elseif (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated';
+    $res = api_image_edit($id, $file, function (array &$meta, $idx) use ($file) {
+        $beat = $meta[$idx]['group'] ?? '';
+        foreach ($meta as &$m) {
+            if ($beat !== '' && ($m['group'] ?? '') === $beat) {
+                $win = (($m['file'] ?? '') === $file);
+                $m['accepted'] = $win;
+                if ($win) $m['rating'] = 'good';
+                elseif (($m['rating'] ?? '') === 'good') $m['rating'] = 'unrated';
+            }
         }
-    }
-    unset($m); images_save($id, $meta);
-    $all = projects_all(); foreach ($all as &$p) if (($p['id']??'')===$id && empty($p['cover'])) $p['cover']=$file; unset($p); projects_save($all);
-    jout(['ok'=>true]);
+        unset($m); return ['ok'=>true];
+    });
+    if ($res === null) jout($gone);
+    api_project_patch($id, function (&$p) use ($file) { if (empty($p['cover'])) $p['cover']=$file; });
+    jout($res);
 }
 if ($action === 'rate') {
     $r = in_array($_POST['rating']??'', RATINGS, true) ? $_POST['rating'] : 'unrated';
-    $meta[$idx]['rating'] = $r; images_save($id,$meta); jout(['ok'=>true,'rating'=>$r]);
+    jout(api_image_edit($id, $file, function (array &$meta, $idx) use ($r) { $meta[$idx]['rating'] = $r; return ['ok'=>true,'rating'=>$r]; }) ?? $gone);
 }
 if ($action === 'keep') {
-    $meta[$idx]['accepted'] = !empty($_POST['accepted']) && $_POST['accepted'] !== '0';
-    images_save($id,$meta); jout(['ok'=>true,'accepted'=>$meta[$idx]['accepted']]);
+    $acc = !empty($_POST['accepted']) && $_POST['accepted'] !== '0';
+    jout(api_image_edit($id, $file, function (array &$meta, $idx) use ($acc) { $meta[$idx]['accepted'] = $acc; return ['ok'=>true,'accepted'=>$acc]; }) ?? $gone);
 }
 if ($action === 'group') {
-    $meta[$idx]['group'] = mb_substr(trim((string)($_POST['group'] ?? '')),0,60);
-    images_save($id,$meta); jout(['ok'=>true]);
+    $g = mb_substr(trim((string)($_POST['group'] ?? '')),0,60);
+    jout(api_image_edit($id, $file, function (array &$meta, $idx) use ($g) { $meta[$idx]['group'] = $g; return ['ok'=>true]; }) ?? $gone);
 }
 if ($action === 'cover') {
-    $all = projects_all();
-    foreach ($all as &$p) if (($p['id']??'')===$id) $p['cover']=$file;
-    unset($p); projects_save($all); jout(['ok'=>true]);
+    api_project_patch($id, function (&$p) use ($file) { $p['cover']=$file; });
+    jout(['ok'=>true]);
 }
 if ($action === 'delete') {
+    $res = api_image_edit($id, $file, function (array &$meta, $idx) { array_splice($meta, $idx, 1); return ['ok'=>true,'count'=>count($meta)]; });
+    if ($res === null) jout($gone);
     @unlink(project_dir($id) . '/' . $file);
     @unlink(project_dir($id) . '/thumb/' . $file);
-    array_splice($meta, $idx, 1); images_save($id,$meta);
-    $all = projects_all(); foreach ($all as &$p) if (($p['id']??'')===$id && ($p['cover']??'')===$file) $p['cover']=null;
-    unset($p); projects_save($all);
-    jout(['ok'=>true,'count'=>count($meta)]);
+    api_project_patch($id, function (&$p) use ($file) { if (($p['cover']??'')===$file) $p['cover']=null; });
+    jout($res);
 }
 jout(['ok'=>false,'error'=>'Unknown action.']);

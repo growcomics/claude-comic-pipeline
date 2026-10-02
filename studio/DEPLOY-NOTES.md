@@ -60,6 +60,25 @@ publish/port/posting/finance. The opsbox job `ws-worker` (orchestrator ops/opsbo
 its PreToolUse hook (`ops/opsbox/ws/ws_hook.py`) is what bounds Higgsfield spend. Plan + decisions: claude-comic-pipeline
 `studio/docs/LIEUTENANT-WORKSPACE.md`. Tests: `node studio/tests/ws/run.mjs` (PHP-wasm, 374 checks) — never deploy `studio/tests/` or `studio/worker/`.
 
+## 🔒 Locked writes in the legacy pages (2026-10-01) — never reintroduce `images_save()` / `projects_save()`
+
+The workspace, the worker and the legacy pages all write `data/images-<pid>.json`, `data/projects.json` and
+`data/creator-<pid>.json`. Every write is a LOCKED read-modify-write: the file is read INSIDE `s_with_lock()` /
+`images_update()`, never earlier in the request. Wrapping only the save in a lock does NOT fix lost updates.
+Redeploying a page from a pre-2026-10-01 copy brings the races back (silently erased picks, ratings, ingests, projects).
+
+| Where | Markers (grep these) | Rule |
+|---|---|---|
+| api.php | `api_image_edit` `api_project_patch` | no `images_save(` / `projects_save(` anywhere |
+| bridge.php | `s_with_lock(imeta_path($pid)` (ingest: lineage + auto-group + append in one pass) | same |
+| creator.php | `ck_cfg_commit` `ck_cfg_merge3` (`$c0` = what the request read) | creator-<id>.json is saved ONLY via `ck_cfg_commit($cfile, $c0, $c)`, never `s_write($cfile, …)` |
+| index.php, project.php, gribble.php, growgetter.php | `s_with_lock(PROJECTS_FILE` | project ids are picked inside the lock |
+| port.php | `images_update($id` | the `ported_to` stamp |
+
+Quick check: `grep -n "images_save(\|projects_save(\|s_write(\$cfile" studio/*.php` must print nothing.
+Never nest these locks (slow work such as `store_image()`, hashing and AI calls stays outside them; picks → images
+and jobs → usage are the only allowed nestings). Tests: `node studio/tests/locks/run.mjs` (73 checks).
+
 ## If you DID clobber a feature whose source you don't have
 
 Reconstruct it from its caller's contract. Example: the polish endpoints were

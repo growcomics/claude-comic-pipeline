@@ -10,6 +10,78 @@ require_once __DIR__ . '/inc/defects.php';
 require_auth();
 
 function creator_file(string $id): string { return SDATA . '/creator-' . preg_replace('/[^a-z0-9-]/', '', $id) . '.json'; }
+
+// ---- saving creator-<id>.json: a 3-way merge under the file's lock (2026-10-01) -------------
+// A cockpit request reads the config once, runs its action (some spend minutes on AI calls or
+// queue a job), then saves. Other writers change the SAME file meanwhile under s_with_lock():
+// bridge.php (worker done -> run.*, ingest -> adjusts[] flip, ingest_ref -> refs[]), review.php
+// (notes -> feedback), growgetter.php (refplan, plan, run). Saving the whole stale copy erased
+// their changes. ck_cfg_commit() re-reads the file INSIDE the lock and applies only what THIS
+// request changed (base -> mine) onto the current copy (theirs):
+//   * a value this request did not change keeps the current copy's value; maps merge key by key
+//   * lists of {id: ...} rows (refs, adjusts, plan panels) merge row by row: rows added here are
+//     appended, rows removed here stay removed, rows edited here merge field by field, rows added
+//     by someone else are kept
+//   * other lists: edits made in place (same length) apply by position onto the current list;
+//     items only appended here are appended; new feedback notes are prepended to the current log
+//   * the same value changed on both sides -> this request wins (the old behaviour, now limited
+//     to that one value). The callback takes no other lock.
+const CK_CFG_NONE = "\0ck-cfg-none\0";                       // "key absent" while merging
+function ck_cfg_merge3($base, $mine, $theirs, string $path = '') {
+    if ($mine === $base) return $theirs;
+    if ($theirs === $base) return $mine;
+    if (!is_array($mine) || !is_array($theirs)) return $mine;
+    $b = is_array($base) ? $base : [];
+    if (($rows = ck_cfg_merge_rows($b, $mine, $theirs, $path)) !== null) return $rows;
+    $ml = array_is_list($mine); $tl = array_is_list($theirs); $bl = array_is_list($b);
+    if ($mine && $theirs && !$ml && !$tl && ($b === [] || !$bl)) {          // two maps
+        $out = [];
+        foreach (array_keys($theirs + $mine + $b) as $k) {
+            $v = ck_cfg_merge3(array_key_exists($k, $b) ? $b[$k] : CK_CFG_NONE, array_key_exists($k, $mine) ? $mine[$k] : CK_CFG_NONE,
+                               array_key_exists($k, $theirs) ? $theirs[$k] : CK_CFG_NONE, $path === '' ? (string)$k : $path . '.' . $k);
+            if ($v !== CK_CFG_NONE) $out[$k] = $v;
+        }
+        return $out;
+    }
+    if (!$ml || !$tl || !$bl) return $mine;
+    $nb = count($b); $add = count($mine) - $nb;
+    if ($path === 'feedback' && $add > 0 && array_slice($mine, $add) === $b)  // only prepended notes
+        return array_merge(array_slice($mine, 0, $add), $theirs);
+    if ($add === 0) {                                                       // edited in place
+        foreach ($mine as $i => $v) if (array_key_exists($i, $theirs)) $theirs[$i] = ck_cfg_merge3($b[$i], $v, $theirs[$i], $path . '[]');
+        return $theirs;
+    }
+    if ($nb > 0 && $add > 0 && array_slice($mine, 0, $nb) === $b)             // only appended
+        return array_merge($theirs, array_slice($mine, $nb));
+    return $mine;
+}
+function ck_cfg_merge_rows(array $b, array $mine, array $theirs, string $path): ?array {
+    $ix = function (array $l): ?array {
+        if (!array_is_list($l)) return null;
+        $o = [];
+        foreach ($l as $r) {
+            $id = is_array($r) ? ($r['id'] ?? null) : null;
+            if ((!is_string($id) && !is_int($id)) || $id === '' || isset($o[$id])) return null;
+            $o[$id] = $r;
+        }
+        return $o;
+    };
+    $B = $ix($b); $M = $ix($mine); $T = $ix($theirs);
+    if ($B === null || $M === null || $T === null || (!$M && !$T)) return null;
+    $out = [];
+    foreach ($T as $id => $tr) {
+        if (isset($M[$id])) $out[] = ck_cfg_merge3($B[$id] ?? CK_CFG_NONE, $M[$id], $tr, $path . '[]');
+        elseif (!isset($B[$id])) $out[] = $tr;                              // added by someone else
+    }                                                                       // (in base, not mine = removed here)
+    foreach ($M as $id => $mr) if (!isset($T[$id]) && !isset($B[$id])) $out[] = $mr;   // added here
+    return $out;
+}
+function ck_cfg_commit(string $cfile, array $base, array $mine): void {
+    s_with_lock($cfile, function ($cur) use ($base, $mine) {
+        return ['data' => ck_cfg_merge3($base, $mine, is_array($cur) ? $cur : []), 'result' => true];
+    });
+}
+
 function creator_list(): array {
     $out = [];
     foreach (glob(SDATA . '/creator-*.json') ?: [] as $f) {
@@ -298,7 +370,8 @@ if (!$hasCockpit) {
 }
 
 // ---- cockpit mode ----
-$c = is_file($cfile) ? s_read($cfile, []) : [];
+$c0 = is_file($cfile) ? s_read($cfile, []) : [];   // what this request read: the merge base for ck_cfg_commit()
+$c = $c0;
 $c += ['projectId'=>$id, 'name'=>($proj['name'] ?? $id), 'stage'=>($proj['stage'] ?? ''),
        'refs'=>[], 'plan'=>[], 'feedback'=>[], 'run'=>['state'=>'idle','backend'=>'flow','account'=>'growcomics','stopRequested'=>false]];
 
@@ -322,7 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         }
         unset($r);
-        s_write($cfile, $c);
+        ck_cfg_commit($cfile, $c0, $c);
         echo json_encode($out); exit;
     }
 
@@ -375,7 +448,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $plan = $c['plan'] ?? [];
         foreach ($plan as $pi => $pg) foreach (($pg['panels'] ?? []) as $qi => $pn)
             if (($pn['id'] ?? '') === $pid) { $plan[$pi]['panels'][$qi]['done'] = $done; $found = true; }
-        if ($found) { $c['plan'] = $plan; s_write($cfile, $c); }
+        if ($found) { $c['plan'] = $plan; ck_cfg_commit($cfile, $c0, $c); }
         echo json_encode(['ok'=>$found, 'panel'=>$pid, 'done'=>$done]); exit;
     }
 
@@ -385,7 +458,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (trim($c['script'] ?? '') === '') { echo json_encode(['ok'=>false,'err'=>'Add your script first (the Script panel).']); exit; }
         $cast = implode(', ', array_values(array_unique(array_filter(array_map(function($r){ $k=$r['kind']??''; return ($k==='scene'||$k==='prop')?'':trim((string)($r['char']??'')); }, $c['refs'])))));
         $plan = ck_ai_breakdown($c['script'], $cast);
-        if ($plan) { $c['plan'] = $plan; s_write($cfile, $c);
+        if ($plan) { $c['plan'] = $plan; ck_cfg_commit($cfile, $c0, $c);
             echo json_encode(['ok'=>true, 'pages'=>count($plan), 'panels'=>array_sum(array_map(fn($p)=>count($p['panels']??[]), $plan))]); }
         else echo json_encode(['ok'=>false, 'err'=>'The AI did not return a usable plan — try again (or run "test key" to confirm access).']);
         exit;
@@ -418,7 +491,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $c['feedback'] = $c['feedback'] ?? [];
         array_unshift($c['feedback'], ['ts'=>date('c'), 'by'=>$by, 'panel'=>$beat, 'text'=>'✎ adjust v'.$ver.': '.$note]);
         $c['run']['state'] = 'queued'; $c['updatedAt'] = date('c');
-        s_write($cfile, $c);
+        ck_cfg_commit($cfile, $c0, $c);
         echo json_encode(['ok'=>true, 'adjustId'=>$adjId, 'ver'=>$ver, 'beat'=>$beat, 'prompt'=>$prompt]); exit;
     }
 
@@ -434,7 +507,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($polished === null) { echo json_encode(['ok'=>false,'err'=>'The AI did not return a usable prompt — try again (or test your key).']); exit; }
         $polished .= ck_letter_block($c['lettering'] ?? '', (string)($found['dialogue'] ?? ''));  // dialogue panels get the consistent lettering block (no-op when there is no dialogue)
         $c['plan'][$fi]['panels'][$fj]['polished'] = $polished; $c['updatedAt'] = date('c');
-        s_write($cfile, $c);
+        ck_cfg_commit($cfile, $c0, $c);
         echo json_encode(['ok'=>true, 'polished'=>$polished]); exit;
     }
 
@@ -444,7 +517,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $plan = $c['plan'] ?? [];
         foreach ($plan as $pgi => $pg) foreach (($pg['panels'] ?? []) as $pqi => $pn)
             if (($pn['id'] ?? '') === $pid) { if ($text === '') unset($plan[$pgi]['panels'][$pqi]['polished']); else $plan[$pgi]['panels'][$pqi]['polished'] = mb_substr($text, 0, 1200); $found = true; }
-        if ($found) { $c['plan'] = $plan; $c['updatedAt'] = date('c'); s_write($cfile, $c); }
+        if ($found) { $c['plan'] = $plan; $c['updatedAt'] = date('c'); ck_cfg_commit($cfile, $c0, $c); }
         echo json_encode(['ok'=>$found]); exit;
     }
 
@@ -534,14 +607,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $labelAll = mb_substr(trim($_POST['label'] ?? ''), 0, 80);
             $stageAll = ck_stage_key((string)($_POST['stage'] ?? ''));  // optional progression stage applied to the whole batch ('' = any)
             $names = $fu ? (array)($fu['name'] ?? []) : [];
-            $meta = images_all($id); $newRefs = [];
+            $rows = []; $newRefs = [];
             for ($i = 0; $i < count($names); $i++) {
                 if ((int)($fu['error'][$i] ?? 4) !== UPLOAD_ERR_OK) continue;
                 if (!is_uploaded_file($fu['tmp_name'][$i] ?? '')) continue;
                 if ((int)($fu['size'][$i] ?? 0) > MAX_BYTES) continue;
                 $res = store_image($fu['tmp_name'][$i], (string)$names[$i], $id);
                 if (!$res) continue;
-                $meta[] = ['file'=>$res['file'], 'orig'=>mb_substr((string)$names[$i],0,120),
+                $rows[] = ['file'=>$res['file'], 'orig'=>mb_substr((string)$names[$i],0,120),
                            'rating'=>'good','accepted'=>false,'group'=>'','tags'=>[],'isref'=>true,'ts'=>time()];
                 $path = project_dir($id) . '/' . $res['file'];
                 $kind = in_array($kindSel, ['face','body','view','scene','prop'], true) ? $kindSel : ck_kind_from_shape($path);
@@ -564,7 +637,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     unset($r);
                 }
-                images_save($id, $meta);
+                images_update($id, function ($meta) use ($rows) { return array_merge($meta, $rows); });   // locked append
                 $c['refs'] = array_merge($c['refs'], $newRefs);
                 $c['gateMsg'] = $cnt === 1 ? 'Reference added.'
                     : ($cnt . ' references added' . ($charAll === '' ? ' and grouped by look — rename the groups, set kinds, then approve.' : ' — set kinds and approve.'));
@@ -657,7 +730,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($gone && ($gone['src']??'')==='upload') {
                 $f=$gone['file']??''; $still=false; foreach ($c['refs'] as $r) if (($r['file']??'')===$f) { $still=true; break; }
                 if ($f!=='' && !$still) {
-                    images_save($id, array_values(array_filter(images_all($id), fn($m)=>($m['file']??'')!==$f)));
+                    images_update($id, fn($meta) => array_values(array_filter($meta, fn($m)=>($m['file']??'')!==$f)));
                     @unlink(project_dir($id).'/'.basename($f)); @unlink(project_dir($id).'/thumb/'.basename($f));
                 }
             }
@@ -673,13 +746,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $res = store_image($fu['tmp_name'], (string)($fu['name'] ?? 'adjust.png'), $id);
             if (!$res) { $c['gateMsg']='Could not store that image (JPG / PNG / WebP only).'; }
             else {
-                $meta = images_all($id);
-                $pgk = ''; foreach ($meta as $mm) if (($mm['file'] ?? '')===$rec['parentFile']) { $pgk = (string)($mm['genkey'] ?? ''); break; }
-                $meta[] = ['file'=>$res['file'], 'orig'=>mb_substr((string)($fu['name'] ?? 'adjust.png'),0,120),
-                           'rating'=>'unrated','accepted'=>false,'group'=>$rec['beat'],'tags'=>[],'ts'=>time(),
-                           'genkey'=>$pgk,   // inherit parent's genkey so "Group similar" keeps the chain in one beat
-                           'parent'=>$rec['parentFile'],'root'=>$rec['root'],'ver'=>(int)$rec['ver'],'adjust'=>$rec['note'],'derived'=>true];
-                images_save($id, $meta);
+                images_update($id, function ($meta) use ($rec, $res, $fu) {   // locked: parent lookup + append see the current gallery
+                    $pgk = ''; foreach ($meta as $mm) if (($mm['file'] ?? '')===$rec['parentFile']) { $pgk = (string)($mm['genkey'] ?? ''); break; }
+                    $meta[] = ['file'=>$res['file'], 'orig'=>mb_substr((string)($fu['name'] ?? 'adjust.png'),0,120),
+                               'rating'=>'unrated','accepted'=>false,'group'=>$rec['beat'],'tags'=>[],'ts'=>time(),
+                               'genkey'=>$pgk,   // inherit parent's genkey so "Group similar" keeps the chain in one beat
+                               'parent'=>$rec['parentFile'],'root'=>$rec['root'],'ver'=>(int)$rec['ver'],'adjust'=>$rec['note'],'derived'=>true];
+                    return $meta;
+                });
                 $c['adjusts'][$ri]['status']='done'; $c['adjusts'][$ri]['resultFile']=$res['file']; $c['adjusts'][$ri]['doneAt']=date('c');
                 $jid = (string)($rec['jobId'] ?? '');
                 if ($jid !== '') s_with_lock(JOBS_FILE, function($jobs) use ($jid){ foreach ($jobs as &$j) if (($j['id']??'')===$jid && in_array($j['status']??'',['open','claimed','running'],true)) $j['status']='done'; unset($j); return ['data'=>$jobs,'result'=>true]; });
@@ -696,7 +770,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     $c['run'] = $run; $c['updatedAt'] = date('c');
-    s_write($cfile, $c);   // lazily creates the creator config for gallery-only projects
+    ck_cfg_commit($cfile, $c0, $c);   // lazily creates the creator config for gallery-only projects
     if (($_POST['ret'] ?? '') === 'refs')  { header('Location: refs.php?p=' . urlencode($id)); exit; }
     if (($_POST['ret'] ?? '') === 'shots') { header('Location: shots.php?p=' . urlencode($id)); exit; }
     header('Location: creator.php?p=' . urlencode($id) . '#run'); exit;

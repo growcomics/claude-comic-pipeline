@@ -10,21 +10,25 @@ if (!$proj) { header('Location: index.php'); exit; }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $do = $_POST['do'] ?? '';
+    // projects.json writes are locked read-modify-writes (the workspace edits it concurrently)
     if ($do === 'save_meta') {
-        $all = projects_all();
-        foreach ($all as &$p) if (($p['id']??'')===$id) {
-            $p['name']   = mb_substr(trim($_POST['name'] ?? $p['name']),0,120);
-            $p['status'] = in_array($_POST['status']??'', STATUSES, true) ? $_POST['status'] : $p['status'];
-            $p['stage']  = in_array($_POST['stage']??'', STAGES, true) ? $_POST['stage'] : $p['stage'];
-            $p['tags']   = array_values(array_filter(array_map('trim', preg_split('/,/', (string)($_POST['tags']??'')))));
-            $p['notes']  = trim($_POST['notes'] ?? '');
-            $p['updated']= date('c');
-        }
-        unset($p); projects_save($all);
+        s_with_lock(PROJECTS_FILE, function ($all) use ($id) {
+            foreach ($all as &$p) if (($p['id']??'')===$id) {
+                $p['name']   = mb_substr(trim($_POST['name'] ?? $p['name']),0,120);
+                $p['status'] = in_array($_POST['status']??'', STATUSES, true) ? $_POST['status'] : $p['status'];
+                $p['stage']  = in_array($_POST['stage']??'', STAGES, true) ? $_POST['stage'] : $p['stage'];
+                $p['tags']   = array_values(array_filter(array_map('trim', preg_split('/,/', (string)($_POST['tags']??'')))));
+                $p['notes']  = trim($_POST['notes'] ?? '');
+                $p['updated']= date('c');
+            }
+            unset($p); return ['data'=>$all, 'result'=>true];
+        });
         header('Location: project.php?p=' . urlencode($id)); exit;
     }
     if ($do === 'delete_project') {
-        projects_save(array_values(array_filter(projects_all(), fn($p)=>($p['id']??'')!==$id)));
+        s_with_lock(PROJECTS_FILE, function ($all) use ($id) {
+            return ['data'=>array_values(array_filter($all, fn($p)=>($p['id']??'')!==$id)), 'result'=>true];
+        });
         @array_map('unlink', glob(project_dir($id) . '/thumb/*') ?: []);
         @array_map('unlink', glob(project_dir($id) . '/*') ?: []);
         @unlink(imeta_path($id));

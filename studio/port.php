@@ -92,10 +92,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['do'] ?? '') === 'port') {
                     else {
                         // mark ported (pages stay in Studio) — only the images actually ported,
                         // so an approved-only port doesn't stamp the rejects too
-                        $meta = images_all($id); $tag = $sid . '/' . part_dir_n($n);
+                        // (locked read-modify-write, so the stamp can't drop a concurrent rating / ingest)
+                        $tag = $sid . '/' . part_dir_n($n);
                         $sel = array_flip(array_column($pages, 'file'));
-                        foreach ($meta as &$m) if (isset($sel[$m['file'] ?? ''])) $m['ported_to'] = $tag;
-                        unset($m); images_save($id, $meta);
+                        images_update($id, function ($meta) use ($sel, $tag) {
+                            foreach ($meta as &$m) if (isset($sel[$m['file'] ?? ''])) $m['ported_to'] = $tag;
+                            unset($m); return $meta;
+                        });
                         header('Location: port.php?p=' . urlencode($id) . ($only === 'approved' ? '&only=approved' : '') . '&done=' . urlencode($sid . ':' . $n . ':' . count($newpages))); exit;
                     }
                 }

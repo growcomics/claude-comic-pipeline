@@ -89,29 +89,37 @@ if ($do === 'img') {
     bout(['ok'=>true,'file'=>$f,'b64'=>base64_encode((string)file_get_contents($p))]);
 }
 
+// Every images-<id>.json / projects.json write in this file is a LOCKED read-modify-write
+// (2026-10-01): the read happens inside s_with_lock(), so a bridge write can't drop a concurrent
+// cockpit / review / lieutenant-workspace / worker write. store_image() and other slow work run
+// before the lock; locks are taken one after the other, never nested.
 if ($do === 'write') {
     $decs = json_decode((string)($_POST['decisions'] ?? '[]'), true) ?: [];
-    $meta = images_all($id);
-    $byfile = []; foreach ($meta as $k=>$m) $byfile[$m['file']] = $k;
-    $n = 0;
-    foreach ($decs as $d) {
-        $f = $d['file'] ?? ''; if (!isset($byfile[$f])) continue;
-        $k = $byfile[$f];
-        if (isset($d['rating']) && in_array($d['rating'], RATINGS, true)) $meta[$k]['rating'] = $d['rating'];
-        if (array_key_exists('accepted', $d)) $meta[$k]['accepted'] = (bool)$d['accepted'];
-        if (isset($d['group'])) $meta[$k]['group'] = mb_substr((string)$d['group'], 0, 60);
-        // additive tag merge (e.g. 'flow-fav' from the Flow favorite sync) — only ever ADDS,
-        // so owner-set tags and prior markers survive every re-sync
-        if (!empty($d['addtags']) && is_array($d['addtags'])) {
-            $cur = (array)($meta[$k]['tags'] ?? []);
-            foreach ($d['addtags'] as $t) { $t = mb_substr(trim((string)$t), 0, 40); if ($t !== '' && !in_array($t, $cur, true)) $cur[] = $t; }
-            $meta[$k]['tags'] = array_values(array_slice($cur, 0, 12));
+    $n = s_with_lock(imeta_path($id), function ($meta) use ($decs) {
+        $byfile = []; foreach ($meta as $k=>$m) $byfile[$m['file']] = $k;
+        $n = 0;
+        foreach ($decs as $d) {
+            $f = $d['file'] ?? ''; if (!isset($byfile[$f])) continue;
+            $k = $byfile[$f];
+            if (isset($d['rating']) && in_array($d['rating'], RATINGS, true)) $meta[$k]['rating'] = $d['rating'];
+            if (array_key_exists('accepted', $d)) $meta[$k]['accepted'] = (bool)$d['accepted'];
+            if (isset($d['group'])) $meta[$k]['group'] = mb_substr((string)$d['group'], 0, 60);
+            // additive tag merge (e.g. 'flow-fav' from the Flow favorite sync) — only ever ADDS,
+            // so owner-set tags and prior markers survive every re-sync
+            if (!empty($d['addtags']) && is_array($d['addtags'])) {
+                $cur = (array)($meta[$k]['tags'] ?? []);
+                foreach ($d['addtags'] as $t) { $t = mb_substr(trim((string)$t), 0, 40); if ($t !== '' && !in_array($t, $cur, true)) $cur[] = $t; }
+                $meta[$k]['tags'] = array_values(array_slice($cur, 0, 12));
+            }
+            $n++;
         }
-        $n++;
-    }
-    images_save($id, $meta);
+        return ['data'=>$meta, 'result'=>$n];
+    });
     $cover = basename((string)($_POST['cover'] ?? ''));
-    if ($cover !== '') { $all = projects_all(); foreach ($all as &$pp) if (($pp['id']??'')===$id) $pp['cover'] = $cover; unset($pp); projects_save($all); }
+    if ($cover !== '') s_with_lock(PROJECTS_FILE, function ($all) use ($id, $cover) {
+        foreach ($all as &$pp) if (($pp['id']??'')===$id) $pp['cover'] = $cover;
+        unset($pp); return ['data'=>$all, 'result'=>true];
+    });
     bout(['ok'=>true,'updated'=>$n]);
 }
 
@@ -166,11 +174,11 @@ if ($do === 'ingest_init') {
     // new=1 → always create a FRESH section (each Flow→Studio batch gets its own
     // project). Otherwise resolve an existing project by id/name = "append to".
     $forceNew = !empty($_POST['new']) || !empty($_GET['new']);
-    $all = projects_all(); $pid = '';
-    if (!$forceNew) {
-        foreach ($all as $p) if (($p['id']??'')===$name || strcasecmp((string)($p['name']??''),$name)===0) { $pid=$p['id']; break; }
-    }
-    if ($pid === '') {
+    // resolve-or-create in ONE locked pass: two concurrent inits can't pick the same id or drop a row
+    $pid = s_with_lock(PROJECTS_FILE, function ($all) use ($name, $forceNew) {
+        if (!$forceNew) {
+            foreach ($all as $p) if (($p['id']??'')===$name || strcasecmp((string)($p['name']??''),$name)===0) return ['result'=>$p['id']];
+        }
         $disp = mb_substr($name, 0, 80);
         if ($forceNew) {                                    // timestamp the section so it's unique + self-documenting
             $disp .= ' · ' . date('M j, H:i');
@@ -181,8 +189,8 @@ if ($do === 'ingest_init') {
         while (in_array($pid,$taken,true)) $pid=$base.'-'.$k++;
         array_unshift($all, ['id'=>$pid,'name'=>$disp,'status'=>'active','stage'=>'page-build',
             'tags'=>[],'notes'=>'','cover'=>null,'created'=>date('c'),'updated'=>date('c')]);
-        projects_save($all);
-    }
+        return ['data'=>$all, 'result'=>$pid];
+    });
     bout(['ok'=>true,'project'=>$pid]);
 }
 // store one uploaded image into a project (multipart field 'file')
@@ -210,35 +218,17 @@ if ($do === 'ingest') {
     $orig = (string)($_POST['orig'] ?? $f['name'] ?? 'flow.png');
     $res = store_image($f['tmp_name'], $orig, $pid);
     if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
-    $meta = images_all($pid);
-    $seq = (int)($_POST['seq'] ?? count($meta));
+    $seqIn = isset($_POST['seq']) ? (int)$_POST['seq'] : null;
     // generation key: identical Flow prompt (or gen id) = same beat. Auto-group on the way in.
     $gen = trim((string)($_POST['gen'] ?? ''));
     $promptRaw = trim((string)($_POST['prompt'] ?? ''));
-    $genkey = $promptRaw !== '' ? 'p:' . substr(sha1(mb_strtolower(preg_replace('/\s+/', ' ', $promptRaw))), 0, 16)
-            : ($gen !== '' ? 'g:' . $gen : '');
+    $genkeyIn = $promptRaw !== '' ? 'p:' . substr(sha1(mb_strtolower(preg_replace('/\s+/', ' ', $promptRaw))), 0, 16)
+              : ($gen !== '' ? 'g:' . $gen : '');
     // optional lineage: a worker landing a DERIVED version (iterative refinement) passes the
     // parent file it edited from. We chain it under that parent, in the parent's beat, rather
     // than auto-numbering a fresh Beat. See studio/docs/ITERATIVE-REFINEMENT.md.
     $parentF = basename((string)($_POST['parent'] ?? ''));
-    $lineage = []; $lineGroup = null;
-    if ($parentF !== '') {
-        foreach ($meta as $mx) if (($mx['file'] ?? '') === $parentF) {
-            $lineGroup = (string)($mx['group'] ?? '');
-            $root = (string)($mx['root'] ?? ''); if ($root === '') $root = $parentF;
-            $lineage = ['parent'=>$parentF, 'root'=>$root, 'ver'=>((int)($mx['ver'] ?? 1)) + 1, 'derived'=>true,
-                        'adjust'=>mb_substr(trim((string)($_POST['adjust'] ?? '')), 0, 1000)];
-            $genkey = (string)($mx['genkey'] ?? '');            // inherit parent's genkey so "Group similar" keeps the chain together
-            break;
-        }
-    }
-    $grp = '';
-    if ($lineGroup !== null) {
-        $grp = $lineGroup;                                  // derived version stays in its parent's beat
-    } elseif ($genkey !== '') {
-        foreach ($meta as $m) if (($m['genkey'] ?? '') === $genkey && ($m['group'] ?? '') !== '') { $grp = $m['group']; break; }
-        if ($grp === '') { $mx = 0; foreach ($meta as $m) if (preg_match('/(\d+)/', (string)($m['group'] ?? ''), $z)) $mx = max($mx, (int)$z[1]); $grp = 'Beat ' . ($mx + 1); }
-    }
+    $adjustNote = mb_substr(trim((string)($_POST['adjust'] ?? '')), 0, 1000);
     // prompt + refs-used: store the actual text + the references the panel was built from, so the
     // review detail view can show "what built this" (the owner's "see the references used" ask).
     // Previously only the genkey HASH of the prompt was kept — the text itself was unrecoverable.
@@ -254,8 +244,31 @@ if ($do === 'ingest') {
     $fav = !empty($_POST['fav']);
     $acc = isset($_POST['accepted']) ? !empty($_POST['accepted'])
          : ($fav || !empty(s_read(SDATA . '/creator-' . $pid . '.json', [])['autoApprove']));
-    $meta[] = array_merge(['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>$fav?'good':'unrated','accepted'=>$acc,'group'=>$grp,'tags'=>$fav?['flow-fav']:[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey], $extra, $lineage);
-    images_save($pid, $meta);
+    // lineage lookup + auto-group + append in ONE locked pass over the current images-<pid>.json, so
+    // two ingests landing together can't both open "Beat N+1" or overwrite each other's row
+    [$grp, $count, $lineage] = s_with_lock(imeta_path($pid), function ($meta) use ($seqIn, $genkeyIn, $parentF, $adjustNote, $res, $orig, $fav, $acc, $gen, $extra) {
+        $seq = $seqIn ?? count($meta);
+        $genkey = $genkeyIn;
+        $lineage = []; $lineGroup = null;
+        if ($parentF !== '') {
+            foreach ($meta as $mx) if (($mx['file'] ?? '') === $parentF) {
+                $lineGroup = (string)($mx['group'] ?? '');
+                $root = (string)($mx['root'] ?? ''); if ($root === '') $root = $parentF;
+                $lineage = ['parent'=>$parentF, 'root'=>$root, 'ver'=>((int)($mx['ver'] ?? 1)) + 1, 'derived'=>true, 'adjust'=>$adjustNote];
+                $genkey = (string)($mx['genkey'] ?? '');            // inherit parent's genkey so "Group similar" keeps the chain together
+                break;
+            }
+        }
+        $grp = '';
+        if ($lineGroup !== null) {
+            $grp = $lineGroup;                                  // derived version stays in its parent's beat
+        } elseif ($genkey !== '') {
+            foreach ($meta as $m) if (($m['genkey'] ?? '') === $genkey && ($m['group'] ?? '') !== '') { $grp = $m['group']; break; }
+            if ($grp === '') { $mx = 0; foreach ($meta as $m) if (preg_match('/(\d+)/', (string)($m['group'] ?? ''), $z)) $mx = max($mx, (int)$z[1]); $grp = 'Beat ' . ($mx + 1); }
+        }
+        $meta[] = array_merge(['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>$fav?'good':'unrated','accepted'=>$acc,'group'=>$grp,'tags'=>$fav?['flow-fav']:[],'ts'=>time()+$seq,'gen'=>$gen,'genkey'=>$genkey], $extra, $lineage);
+        return ['data'=>$meta, 'result'=>[$grp, count($meta), $lineage]];
+    });
     // best-effort: when this ingest landed a DERIVED version (the refine/adjust loop), flip the
     // matching pending adjusts[] record on the creator config to done, so the cockpit's "vN · pending"
     // refine card clears WITHOUT a separate cPanel-token write. Only fires in the lineage branch
@@ -287,7 +300,7 @@ if ($do === 'ingest') {
             }
         } catch (\Throwable $e) { /* best-effort: a failed card-flip must never break ingest */ }
     }
-    bout(['ok'=>true,'count'=>count($meta),'group'=>$grp,'adjustResolved'=>$adjustResolved]);
+    bout(['ok'=>true,'count'=>$count,'group'=>$grp,'adjustResolved'=>$adjustResolved]);
 }
 
 // ---- enrich: backfill prompt + refs_used onto already-ingested panels --------
@@ -301,32 +314,33 @@ if ($do === 'enrich') {
     $items = json_decode((string)($_POST['items'] ?? '[]'), true);
     if (!is_array($items)) bout(['ok'=>false,'error'=>'bad items']);
     $force = !empty($_POST['force']);
-    $meta = images_all($id);
-    $byGen = []; $byKey = []; $byFile = [];
-    foreach ($meta as $k => $m) {
-        if (($g = (string)($m['gen'] ?? '')) !== '') $byGen[$g][] = $k;
-        if (($gk = (string)($m['genkey'] ?? '')) !== '') $byKey[$gk][] = $k;
-        if (($f = (string)($m['file'] ?? '')) !== '') $byFile[$f] = $k;
-    }
-    $touched = 0; $changed = false;
-    foreach ($items as $it) {
-        if (!is_array($it)) continue;
-        $gen = trim((string)($it['gen'] ?? '')); $gk = trim((string)($it['genkey'] ?? '')); $file = basename((string)($it['file'] ?? ''));
-        $targets = [];
-        if      ($gen  !== '' && isset($byGen[$gen]))  $targets = $byGen[$gen];
-        elseif  ($gk   !== '' && isset($byKey[$gk]))   $targets = $byKey[$gk];
-        elseif  ($file !== '' && isset($byFile[$file])) $targets = [$byFile[$file]];
-        if (!$targets) continue;
-        $prompt = mb_substr(trim((string)($it['prompt'] ?? '')), 0, 2000);
-        $refs   = ck_parse_refs_used($it['refs_used'] ?? '');
-        foreach ($targets as $k) {
-            $did = false;
-            if ($prompt !== '' && ($force || empty($meta[$k]['prompt'])))    { $meta[$k]['prompt'] = $prompt; $did = true; }
-            if ($refs   && ($force || empty($meta[$k]['refs_used'])))        { $meta[$k]['refs_used'] = $refs; $did = true; }
-            if ($did) { $changed = true; $touched++; }
+    $touched = s_with_lock(imeta_path($id), function ($meta) use ($items, $force) {
+        $byGen = []; $byKey = []; $byFile = [];
+        foreach ($meta as $k => $m) {
+            if (($g = (string)($m['gen'] ?? '')) !== '') $byGen[$g][] = $k;
+            if (($gk = (string)($m['genkey'] ?? '')) !== '') $byKey[$gk][] = $k;
+            if (($f = (string)($m['file'] ?? '')) !== '') $byFile[$f] = $k;
         }
-    }
-    if ($changed) images_save($id, $meta);
+        $touched = 0; $changed = false;
+        foreach ($items as $it) {
+            if (!is_array($it)) continue;
+            $gen = trim((string)($it['gen'] ?? '')); $gk = trim((string)($it['genkey'] ?? '')); $file = basename((string)($it['file'] ?? ''));
+            $targets = [];
+            if      ($gen  !== '' && isset($byGen[$gen]))  $targets = $byGen[$gen];
+            elseif  ($gk   !== '' && isset($byKey[$gk]))   $targets = $byKey[$gk];
+            elseif  ($file !== '' && isset($byFile[$file])) $targets = [$byFile[$file]];
+            if (!$targets) continue;
+            $prompt = mb_substr(trim((string)($it['prompt'] ?? '')), 0, 2000);
+            $refs   = ck_parse_refs_used($it['refs_used'] ?? '');
+            foreach ($targets as $k) {
+                $did = false;
+                if ($prompt !== '' && ($force || empty($meta[$k]['prompt'])))    { $meta[$k]['prompt'] = $prompt; $did = true; }
+                if ($refs   && ($force || empty($meta[$k]['refs_used'])))        { $meta[$k]['refs_used'] = $refs; $did = true; }
+                if ($did) { $changed = true; $touched++; }
+            }
+        }
+        return $changed ? ['data'=>$meta, 'result'=>$touched] : ['result'=>$touched];
+    });
     bout(['ok'=>true,'enriched'=>$touched]);
 }
 
@@ -343,9 +357,11 @@ if ($do === 'ingest_refcache') {
     $pid = preg_replace('/[^a-z0-9-]/','',(string)($_POST['p'] ?? ''));
     if ($pid==='' || !project_get($pid)) bout(['ok'=>false,'error'=>'unknown project']);
     $refkey = mb_substr(trim((string)($_POST['refkey'] ?? '')), 0, 80);
-    $meta = images_all($pid);
-    if ($refkey !== '') foreach ($meta as $m)              // dedup: this ref already cached?
-        if (($m['refkey'] ?? '') === $refkey && !empty($m['isref'])) bout(['ok'=>true,'file'=>$m['file'],'cached'=>true]);
+    $cachedAs = function (array $meta) use ($refkey): ?string {   // dedup: this ref already cached?
+        if ($refkey !== '') foreach ($meta as $m) if (($m['refkey'] ?? '') === $refkey && !empty($m['isref'])) return (string)$m['file'];
+        return null;
+    };
+    if (($hit = $cachedAs(images_all($pid))) !== null) bout(['ok'=>true,'file'=>$hit,'cached'=>true]);
     $f = $_FILES['file'] ?? null;
     if (!$f || ($f['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file($f['tmp_name'])) bout(['ok'=>false,'error'=>'no file']);
     if (($f['size'] ?? 0) > MAX_BYTES) bout(['ok'=>false,'error'=>'too big']);
@@ -354,7 +370,16 @@ if ($do === 'ingest_refcache') {
     if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
     $entry = ['file'=>$res['file'],'orig'=>$orig,'rating'=>'unrated','accepted'=>false,'group'=>'','tags'=>[],'isref'=>true,'ts'=>time()];
     if ($refkey !== '') $entry['refkey'] = $refkey;
-    $meta[] = $entry; images_save($pid, $meta);
+    // re-check the dedup inside the lock: a parallel sync may have cached the same ref meanwhile
+    $hit = s_with_lock(imeta_path($pid), function ($meta) use ($entry, $cachedAs) {
+        if (($hit = $cachedAs($meta)) !== null) return ['result'=>$hit];
+        $meta[] = $entry;
+        return ['data'=>$meta, 'result'=>null];
+    });
+    if ($hit !== null) {                                    // lost the race: drop our copy, answer with theirs
+        @unlink(project_dir($pid) . '/' . $res['file']); @unlink(project_dir($pid) . '/thumb/' . $res['file']);
+        bout(['ok'=>true,'file'=>$hit,'cached'=>true]);
+    }
     bout(['ok'=>true,'file'=>$res['file'],'cached'=>false]);
 }
 
@@ -386,10 +411,9 @@ if ($do === 'ingest_ref') {
     $res = store_image($f['tmp_name'], $orig, $pid);
     if (!$res) bout(['ok'=>false,'error'=>'store failed (unsupported image?)']);
     // gallery meta — tagged isref so it stays OFF the live-panels board (same as uploadref)
-    $meta = images_all($pid);
-    $meta[] = ['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'good','accepted'=>false,
-               'group'=>'','tags'=>[],'isref'=>true,'ts'=>time()];
-    images_save($pid, $meta);
+    $row = ['file'=>$res['file'],'orig'=>mb_substr($orig,0,120),'rating'=>'good','accepted'=>false,
+            'group'=>'','tags'=>[],'isref'=>true,'ts'=>time()];
+    images_update($pid, function ($meta) use ($row) { $meta[] = $row; return $meta; });
     // build the reference entry (mirror uploadref's shape; src=gathered marks the source)
     $kind   = in_array(($_POST['kind'] ?? ''), ['face','body','view','scene','prop'], true) ? (string)$_POST['kind'] : 'scene';
     $status = (($_POST['status'] ?? '') === 'approved') ? 'approved' : 'pending';
@@ -424,31 +448,35 @@ if ($do === 'ingest_ref') {
 // ---- annotate (AI analysis pass): per-image caption / defects / tier / notes / tags ----
 if ($do === 'annotate') {
     $notes = json_decode((string)($_POST['notes'] ?? '[]'), true) ?: [];
-    $meta = images_all($id);
-    $byfile = []; foreach ($meta as $k=>$m) $byfile[$m['file']] = $k;
-    $n = 0;
-    foreach ($notes as $note) {
-        $f = $note['file'] ?? ''; if (!isset($byfile[$f])) continue;
-        $k = $byfile[$f];
-        $meta[$k]['analysis'] = [
-            'caption' => mb_substr((string)($note['caption'] ?? ''), 0, 300),
-            'defects' => array_values(array_slice(array_map(fn($d)=>mb_substr((string)$d,0,60), (array)($note['defects'] ?? [])), 0, 12)),
-            // QA-scan fields: same shape creator.php's server-side 🔎 QA scan writes, so a
-            // Claude-Code-driven annotate and the in-app QA scan populate the an-tag badge
-            // identically. verdict: pass|warn|fail; people = human-figure count (duplicate/extra cue).
-            'verdict' => in_array($note['verdict'] ?? '', ['pass','warn','fail'], true) ? (string)$note['verdict'] : '',
-            'people'  => isset($note['people']) && is_numeric($note['people']) ? (int)$note['people'] : null,
-            'tier'    => mb_substr((string)($note['tier'] ?? ''), 0, 60),
-            'notes'   => mb_substr((string)($note['notes'] ?? ''), 0, 800),
-            'src'     => mb_substr((string)($note['src'] ?? 'annotate'), 0, 20),
-            'at'      => date('c'),
-        ];
-        if (isset($note['tags'])) $meta[$k]['tags'] = array_values(array_slice(array_map(fn($t)=>mb_substr((string)$t,0,40), (array)$note['tags']), 0, 12));
-        $esrc = (string)($note['src'] ?? ''); $esrc = in_array($esrc, ['qa','ggqa','gate','human'], true) ? $esrc : 'qa';
-        ck_defect_log_analysis($id, (string)$f, (string)($meta[$k]['group'] ?? ''), $meta[$k]['analysis'], $esrc);   // 🏴 shared defect log
-        $n++;
-    }
-    images_save($id, $meta);
+    $logs = [];
+    $n = s_with_lock(imeta_path($id), function ($meta) use ($notes, &$logs) {
+        $byfile = []; foreach ($meta as $k=>$m) $byfile[$m['file']] = $k;
+        $n = 0; $logs = [];
+        foreach ($notes as $note) {
+            $f = $note['file'] ?? ''; if (!isset($byfile[$f])) continue;
+            $k = $byfile[$f];
+            $meta[$k]['analysis'] = [
+                'caption' => mb_substr((string)($note['caption'] ?? ''), 0, 300),
+                'defects' => array_values(array_slice(array_map(fn($d)=>mb_substr((string)$d,0,60), (array)($note['defects'] ?? [])), 0, 12)),
+                // QA-scan fields: same shape creator.php's server-side 🔎 QA scan writes, so a
+                // Claude-Code-driven annotate and the in-app QA scan populate the an-tag badge
+                // identically. verdict: pass|warn|fail; people = human-figure count (duplicate/extra cue).
+                'verdict' => in_array($note['verdict'] ?? '', ['pass','warn','fail'], true) ? (string)$note['verdict'] : '',
+                'people'  => isset($note['people']) && is_numeric($note['people']) ? (int)$note['people'] : null,
+                'tier'    => mb_substr((string)($note['tier'] ?? ''), 0, 60),
+                'notes'   => mb_substr((string)($note['notes'] ?? ''), 0, 800),
+                'src'     => mb_substr((string)($note['src'] ?? 'annotate'), 0, 20),
+                'at'      => date('c'),
+            ];
+            if (isset($note['tags'])) $meta[$k]['tags'] = array_values(array_slice(array_map(fn($t)=>mb_substr((string)$t,0,40), (array)$note['tags']), 0, 12));
+            $esrc = (string)($note['src'] ?? ''); $esrc = in_array($esrc, ['qa','ggqa','gate','human'], true) ? $esrc : 'qa';
+            $logs[] = [(string)$f, (string)($meta[$k]['group'] ?? ''), $meta[$k]['analysis'], $esrc];
+            $n++;
+        }
+        return ['data'=>$meta, 'result'=>$n];
+    });
+    // 🏴 shared defect log — it takes its own lock, so it is written after the images lock is released
+    foreach ($logs as [$f, $grp, $an, $esrc]) ck_defect_log_analysis($id, $f, $grp, $an, $esrc);
     bout(['ok'=>true,'annotated'=>$n]);
 }
 
