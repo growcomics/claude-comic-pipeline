@@ -60,7 +60,11 @@ function studio_login(string $username, string $password): bool {
     }
     return false;
 }
-function is_authed(): bool { s_boot(); return !empty($_SESSION['studio_ok']); }
+function is_authed(): bool {
+    s_boot(); $ok = !empty($_SESSION['studio_ok']);
+    if ($ok && function_exists('ws_gate')) ws_gate();   // lieutenant sessions: confine to the workspace (inc/workspace.php)
+    return $ok;
+}
 function current_studio_user(): string { s_boot(); return (string)($_SESSION['studio_user'] ?? ''); }
 function sign_out(): void { s_boot(); $_SESSION = []; if (ini_get('session.use_cookies')) { $p = session_get_cookie_params(); setcookie(session_name(),'',time()-42000,$p['path'],$p['domain']??'',$p['secure'],$p['httponly']); } session_destroy(); }
 function require_auth(): void { s_boot(); if (!is_authed()) { header('Location: login.php'); exit; } }
@@ -241,3 +245,7 @@ function _img_out($im, string $path, string $ext): void {
     else imagejpeg($im,$path,82);
 }
 
+// ---- lieutenant workspace (roles, magic links, brand scoping, quotas) ------
+// Keep this LAST: it uses the helpers above. ws_gate() is a no-op for every
+// session that is not a lieutenant, so the rest of the studio is unchanged.
+if (is_file(__DIR__ . '/workspace.php')) require_once __DIR__ . '/workspace.php';
