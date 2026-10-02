@@ -12,6 +12,19 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-01
+
+### Added
+
+- **Lieutenant workspace in the Studio** (`studio/ws.php`, `ws-api.php`, `picker.php`, `team.php`, `ws-worker.php`, `inc/workspace.php`; plan `studio/docs/LIEUTENANT-WORKSPACE.md`; deployed live 21:10 PDT). Why: the owner wants to hire "lieutenants" who run comics end to end in a browser, without the owner's Claude Code. What landed:
+  - **Magic-link accounts** minted on the owner-only `team.php` (link shown once; rotate/deactivate kills sessions). Lieutenants see only their **brand's** comics; a gate inside `is_authed()` confines them to the workspace pages and returns 403 for every owner page. Their session carries `studio_lt`, never `studio_ok`, so any older boot.php fails closed.
+  - **Workspace** per comic: story/style, pages with prompts + attached refs, uploads (refs and hand-made takes), a team chat with **Claude** (Opus 5.5, low effort, structured output; it can only *propose* set-prompt / add-pages / generate cards that a person confirms), a generation queue with live status, and "Ready for owner review". Nothing publishes.
+  - **Picker** in the owner's format (grid of every take per page, multi-pick, lightbox keys, comments, Copy list, Claude's pick tag, settled pages hidden) — picks mirror into `accepted` without ever undoing keeps made elsewhere.
+  - **Generation lane**: a separate queue (`data/ws/jobs.json`), served to the opsbox `ws-worker` job (Higgsfield nano_banana_pro 1k, count 1) with its own key. Quotas are server-side and count submits: 50 images/person/day, 150/day total, ≥30 s pacing, ≤2× takes per job; chat has a per-person message + USD cap with one call in flight.
+- **Security fixes found by the audit** (shipped first): `studio/.htaccess` now denies every `*.bak*` and `*-bakeofftest.php` (10 old PHP sources were publicly downloadable); `JSON_HEX_TAG|JSON_HEX_AMP` on the analysis embeds in `creator.php`/`project.php`.
+- `studio/tools/ws-import-lab-four.py`: imported the pilot comic THE FORMULA (12 pages, 67 QA-passed takes, 11 refs, owner picks) as Studio project `the-formula`, brand 3DMC.
+- Tests: `studio/tests/ws/run.mjs` (PHP-wasm 8.1, 374 request-level checks) + `studio/worker/test_ws_hook.py` (50). An adversarial 4-lens review confirmed 24 findings; all fixed before go-live.
+
 ## 2026-09-02
 
 ### Added

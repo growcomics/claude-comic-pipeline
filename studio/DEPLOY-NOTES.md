@@ -36,16 +36,29 @@ it as shared, append-only-in-spirit code.
 | 🖼 Review surface | creator.php: a single `review.php?p=` link in the Live-panels header (low-stakes — re-add if clobbered); **studio/review.php** (standalone, own file, low clobber risk); **bridge.php**: `ck_parse_refs_used` + `prompt`/`refs_used` stored in the `ingest` verb + the new `do=enrich` verb | Full-width, story-ordered, sortable review grid + per-panel DETAIL (prompt + refs-used + notes + rating). `review.php` is a pure renderer (like refs.php/shots.php): reuses `api.php` winner/rate/keep, has its own `do=note` JSON handler (annotation only — NO reshoot enqueue, unlike the cockpit's per-panel 💬). Prompt + `refs_used` are captured at ingest (bridge.php) and by the Flow auto-sync extension (`~/Documents/flow-studio-autosync`, v1.1.0 — sends `refs_used` + an `enrich` backfill batch). Legacy panels (no prompt) show an honest "not recorded" state until a re-sync backfills via `do=enrich` (fills MISSING fields only, unless `force=1`). |
 | 🔎 QA defect scan | creator.php: `ck_qa_checklist`/`ck_qa_cast`/`ck_qa_match`/`ck_ai_qa` + `do === 'qascan_one'` + cockpit `an-tag` badge (`an-tag v-`/`data-defects`) + `ck-qabar` toolbar (`qascanbtn`) + `qa-hide` filter + `ck-lb-an` lightbox + `STUDIO_ANALYSIS`; **bridge.php**: `verdict`/`people`/`src` keys in the `annotate` analysis array | AI QA pass that auto-flags generation DEFECTS on panels — PRIORITY: **duplicate characters / unwanted extras** (owner Beat 48). One vision call/panel (reuses `ck_ai_classify` pattern + `data/ai.json` key); `qascan_one` writes the image `analysis` field race-safe via `s_with_lock(imeta_path)`. Same `analysis` shape as `annotate`, so it lights the organizer badge AND can feed review.php's flagged filter. KEEP `ck_ai_qa`/`qascan_one`/`ck-qabar`/`qa-hide` on any creator.php deploy. |
 
-| 📈 Patron Analytics (Creator Pulse) | **cc.php**: the `href="pulse/"` tile in the Work grid + the `📈 Analytics` topbar link; **studio/pulse/** (own directory — low clobber risk): `index.php` auth shell + `css/style.css` + `js/data.js` + `js/app.js` | Deployed 2026-07-06. Source app lives at `~/Documents/creator-pulse`; deploy ONLY via its `tools/deploy_3dmc.sh` (regenerates `pulse/index.php` from `index.html` — never hand-edit the PHP; it joins the session with cookie path `/studio` and redirects anon → `../login.php`). If you redeploy cc.php, KEEP the `pulse/` tile + topbar link. Do NOT upload `data/*.json` (synced real Patreon revenue) into `pulse/` — static JSON there is publicly fetchable; an auth-gated passthrough must exist first. |
-
-| 🎲 GrowGetter generator | **studio/growgetter.php** (standalone, own file — low clobber risk): `gg_premise` `gg_create` `gg_refplan` `gg_qa` `gg_images` `GG_FORMULA` `GG_SFW_RULES`; **index.php**: the `growgetter.php` button in the top button row | One-click random GrowGetter-style comic, ALWAYS SFW: seeded AI premise+script → project (tags growgetter/sfw) → browser calls creator.php `do=breakdown` → AI reference plan (face cards + stage-aware pre/mid/post bodies + env plates, SFW-locked prompts) stored as `$c['refplan']` + enqueued as a `kind=refs` worker job → per-image SFW QA (`gg_qa`, writes the same `analysis` shape as `qascan_one`, src=`ggqa`). JSON verbs accept the BRIDGE KEY (data/bridge.json) as an alternative to session auth (key skips CSRF, same trust as bridge.php) so headless sessions/workers can drive it. If you redeploy index.php, KEEP the `growgetter.php` link. ALSO: bridge.php `do=ingest` now honors `accepted=0|1` POST + a per-project `autoApprove` creator-config flag (gg_create sets it) — panels land APPROVED (veto-only review, owner ask 2026-07-04); keep the `$acc` block in ingest. |
-
-| ✍️ Gribble Script Writer | **studio/gribble.php** (standalone, own file — low clobber risk): `gr_write` `gr_check` `gr_create` `gr_parse` `gr_report` `GR_FORMULA`; **cc.php**: the `gribble.php` tile in the Work grid; **index.php**: the `gribble.php` button in the top button row | Generates full comic scripts in Gribble's format AND measured structure (28.9% growth pages; ~31% of pages merged into one full-page image via `Panels 1, 2, 3 and 4-`, which is how he stages transformations — 70% of merged pages are growth vs 1.7% of ordinary panels). `gr_report()` is a PHP port of `research/gribble-corpus/profile.py`: the server parses each draft, scores it against corpus targets and runs ONE repair pass naming the misses. Gate thresholds are calibrated by `research/gribble-corpus/validate_targets.py` (70% of Gribble's own scripts pass) — **do not tighten them without re-running that script**, an earlier stricter gate rejected his three best scripts. JSON verbs accept the BRIDGE KEY like growgetter.php. If you redeploy cc.php or index.php, KEEP the gribble.php link. **📚 Library (2026-08-09):** `gr_write` auto-saves every script to `data/gribble/s-<id>.json` + `index.json` before returning — KEEP `gr_libdir`/`gr_lib_save`/`gr_lib_list`/`gr_lib_get`/`gr_lib_patch`/`gr_row` and the `gr_list`/`gr_get`/`gr_star`/`gr_rename`/`gr_trash`/`gr_restore`/`gr_note` verbs plus the `#glib` panel on any redeploy, or the owner silently stops accumulating scripts. Trash is a soft status flip; never unlink the JSON. |
-
 Quick check after a deploy (run against the freshly-read on-disk file):
 `grep -c 'ck_ai_polish\|polish_one\|ck_lineage\|b-adjust\|ck_ai_breakdown\|shotdone\|ck_letter_block\|pagestage\|review.php?p=' creator.php`
 — expect hits for every group; a zero means something got clobbered.
 Also: `grep -c 'ck_letter_block\|LETTER_SPEC_DEFAULT\|STAGE_OPTS\|ck_stage_eligible' inc/boot.php` (expect 4+) if you redeploy boot.php.
+**And** (since 2026-10-01) `grep -c "ws_gate\|studio_lt\|workspace.php" inc/boot.php` (expect 3+): the lieutenant-workspace gate hook in `is_authed()` + the `require_once __DIR__ . '/workspace.php'` at the END of boot.php. Dropping them makes every lieutenant appear signed out (fail-closed, but the workspace stops working).
+
+## 🧑‍✈️ Lieutenant workspace (2026-10-01) — hired helpers, magic links, brand-scoped
+
+Files (all new, owned by this feature): `ws.php`, `ws-api.php`, `picker.php`, `team.php` (owner only), `ws-worker.php`
+(worker API, own key), `inc/workspace.php` (gate, roles, brands, quotas, stores). Data: `data/ws/` (team.json, proj-/chat-/picks-<pid>.json,
+jobs.json, usage.json, worker.json = keyHash only, worker-seen.json).
+
+| Where | Markers (grep these) | Why it matters |
+|---|---|---|
+| inc/boot.php | `studio_lt` + `ws_gate()` inside `is_authed()`; `require_once __DIR__ . '/workspace.php'` as the LAST line | Lieutenant sessions carry `studio_lt`, never `studio_ok`. The hook is the ONLY thing that lets them in, and `ws_gate()` confines them to ws.php / ws-api.php / picker.php / img.php / help.php / login.php for their brand's comics. |
+| inc/boot.php `store_image()` | `$keep = function` (rename/copy for non-uploaded temp files) | The worker's `ingest_url` stores server-side downloads; `move_uploaded_file` alone would drop them. |
+| index.php | `ws_is_owner()` → 🧑‍✈️ Workspace + 👥 Team links | Owner-only links in the topbar. |
+| creator.php / project.php | `JSON_HEX_TAG \| JSON_HEX_AMP` on the `window.STUDIO_ANALYSIS = …` line | Lieutenant uploads feed image analysis text; without HEX_TAG a `</script>` in a caption breaks out on owner pages. Keep the flags if you touch that line. |
+
+Rules: a lieutenant must never get studio_ok, never be added to admin users.json or users-studio.json, and never reach
+publish/port/posting/finance. The opsbox job `ws-worker` (orchestrator ops/opsbox/jobs/ws-worker.*) is the only generator for this queue;
+its PreToolUse hook (`ops/opsbox/ws/ws_hook.py`) is what bounds Higgsfield spend. Plan + decisions: claude-comic-pipeline
+`studio/docs/LIEUTENANT-WORKSPACE.md`. Tests: `node studio/tests/ws/run.mjs` (PHP-wasm, 374 checks) — never deploy `studio/tests/` or `studio/worker/`.
 
 ## If you DID clobber a feature whose source you don't have
 
@@ -69,94 +82,39 @@ _Also 2026-06-27 — added the **🔎 QA defect scan** (auto-flags generation de
 
 bridge.php also gained `do=ingest_refcache` (caches a refs_used image as a studio thumbnail; deduped by `refkey`) alongside `do=enrich` + the `ingest` prompt/refs_used capture + the sibling's `adjustResolved` idempotency — keep ALL of them. api.php gained `action === 'bulk'`; export.php gained `?only=approved` + isref exclusion.
 
-## ⌘ Command Center (added 2026-07-06) — cc.php / ops.php / ops-api.php / site.php / inc/ops.php + login.php edit
+## posting.php / schedule.php (the release board) — markers to keep
+_Added 2026-08-23 by the posting-board refresh._
 
-The Monday.com replacement: ops board (one-time import of the owner's Monday "Operations"
-export — 372 tasks + 511 update threads), Command Center landing, per-site overview pages.
-All NEW standalone files except **login.php**, which gained the studio-only collaborator
-login fallback (Magnamus). Data: `data/ops-tasks.json`, `data/ops-updates.json`,
-`data/cc-sites.json`, `data/users-studio.json` (all under the data/ `.htaccess` deny).
-Local importer: `tools/monday-import.py` (not deployed).
+Both pages read and write the SAME store, `studio/data/posting.json`. It went from
+425 items (415 of them in the past, 2 in the future) to 606, and now carries a real
+forward schedule. Two view fixes went out with that data — both were latent bugs
+that were invisible only while the forward lanes were empty:
 
-| File | Markers (grep) | Notes |
+| feature | file | markers (grep) |
 |---|---|---|
-| inc/ops.php | `OPS_GROUPS` `OPS_TASKS_FILE` `ops_open` | shared constants/wrappers; deliberately NOT in inc/boot.php so boot.php never redeploys for CC work |
-| ops-api.php | `action === 'bulk'` `action === 'note'` `ops_clean_patch` `sitelinks` | all task writes via `s_with_lock(OPS_TASKS_FILE)`; update threads in a SEPARATE file (`OPS_UPDATES_FILE`) so note-adds never contend with status flips |
-| ops.php | `const OPS =` `dwWrap` `writeHash` `bulkBar` `quickAdd` | pure renderer; threads lazy-fetched (`action=updates`); `ops.php#task=<id>` deep links; `#ai=ai-now` etc. shareable filters |
-| cc.php | `cc-tile` `Cross-property` `Coming next` | open counts computed in one PHP pass; grayed v2 tiles (calendar/analytics/SOPs) |
-| site.php | `sp-links` `sitenote` `editLinks` | `?s=<key>` against cc-sites.json; bad key → cc.php redirect |
-| **login.php** | `studio_login_local` `users-studio.json` | ⚠ now a SHARED EDITED file — fetch-live before touching; the fallback must survive any redeploy. Magnamus is NOT in admin/data/users.json (main-site admin) by design. |
+| Runway measured as a HORIZON, not consecutive weeks | schedule.php | `CK-RUNWAY-HORIZON` `runwayCls(` `rw.slots` |
+| Weekly-serial section bounded to the near horizon | posting.php | `CK-WEEKLY-WINDOW` `$weeklyHorizon` `$weeklyLater` |
 
-Known/accepted: index.php still shows the bridge key to ANY studio session, including
-collaborator logins — acceptable for a trusted collaborator (owner decision 2026-07-06).
+**Why they matter.** `runway()` v1 counted consecutive covered weeks and stopped at
+the first empty one. That only ever worked for Fan Art Friday: for a monthly comic
+lane the gap between slots IS the cadence, so the moment real monthly and bi-weekly
+slots existed, 7 of the 9 lanes rendered "dry now" in red while booked into 2027.
+v2 measures weeks out to the last non-missed future slot and carries the slot count
+alongside. Thresholds live in `runwayCls` so the top strip and the row chips cannot
+drift apart — change them in one place.
 
-**🧭 Attribution section (added 2026-07-09).** New standalone `attribution.php` — cross-property
-MULTI-TOUCH attribution fed by the **ATS v5 WordPress plugin** (live on growgettercomics.com since
-2026-07-09; plugin source: `~/Documents/ats-v5/plugin/attribution-tracking-system-v5/`). Each WP
-property exposes key-gated `/wp-json/ats/v1/rollup` (aggregates only, NO PII); `attribution.php?do=sync`
-(session-auth POST or BRIDGE-KEY GET, same trust as bridge.php) pulls every site in
-`data/attribution-sites.json` (SECRET — holds rollup keys; data/ deny; NOT in git) into
-`data/attribution/<site>.json`. Markers: attribution.php `do=sync` `attr_bridge_ok` `MODELS =`
-`at-card` `Patron journeys`; **cc.php now ALSO carries** the `🧭 Attribution` tile + topbar link +
-`$atMonthly`/`glob(SDATA . '/attribution/*.json')` headline read. ⚠ cc.php fetch-live grep after ANY
-redeploy: `pulse/` (≥4), `Patron Analytics` (2), `analytics.php` (2), `Site Traffic` (1),
-`attribution.php` (≥3), `🧭 Attribution` (≥2). DISTINCT from analytics.php (GA4 snapshots) and
-pulse/ (Patreon revenue): attribution answers "which channel produced the money".
+The Weekly serial section on posting.php took every open `weekly` item with no date
+filter (unlike the FAF and Monthly sections, which window to 4 Fridays / 2 months).
+With 24 bi-weekly slots booked it would have put two dozen cards on a page whose job
+is "what fires this week". It now hides only what is beyond `$weeklyHorizon` (+28d)
+and prints a count linking to schedule.php. **Undated and OVERDUE cards are kept on
+purpose** — an open slot whose date has passed must stay visible until someone closes
+it. Do not "simplify" that into a plain future-window filter.
 
-**📊 Site Traffic analytics section (added 2026-07-07).** New standalone `analytics.php`
-(GA4 + Search Console web-traffic snapshots + INSIGHTS/ACTIONS) reading `data/analytics-snapshots.json`.
-DISTINCT from `pulse/` (Creator Pulse = Patreon revenue). Markers: analytics.php `Insights &amp; actions`
-`class="ins"` `analytics-snapshots`; data file `analytics-snapshots.json` (data/ deny — not web-readable).
-⚠ **cc.php is now SHARED between this session and the Creator-Pulse session** — it carries BOTH the
-`pulse/` "Patron Analytics" tile+link AND my `analytics.php` "Site Traffic" tile+link (`$anSess`/`$anMonth`
-read of the snapshots file). Fetch-live before editing cc.php and after deploy grep: `pulse/` (≥4),
-`Patron Analytics` (2), `analytics.php` (2), `Site Traffic` (1). Snapshots are appended by Claude during
-an analytics session (needs the owner's live Google login — not headless).
-
-**🏴 Defect flags + shared defect log (added 2026-07-18).** The owner-feedback loop's data
-layer (design: pipeline repo `docs/DEFECT-FEEDBACK-LOOP.md`; taxonomy: `DEFECT-REGISTRY.md` —
-registry IDs like `CAST-01`/`duplicate_character` are the SHARED CONTRACT between the 🔎 QA
-scan, gg_qa, bridge writers and human 🏴 flags). New: **inc/defect-taxonomy.php** (GENERATED
-from the pipeline repo's `defect-registry.json` by `gen_defect_taxonomy.py` — never hand-edit;
-marker `DEFECT_TAXONOMY`) + **inc/defects.php** (`ck_defect_event` `ck_defect_norm`
-`ck_defect_log_analysis` `ck_defect_options` `DEFECT_LOG_FILE`) + **data/defect-log.json**
-(append-only event log, newest-20k cap, under the data/ deny). Every flag/scan defect writes
-one event {ts,project,file,panel,defect,slug,sev,src:human|qa|ggqa|gate,by,note,verdict}.
-
-| File | New markers (grep after ANY redeploy) | What was added |
-|---|---|---|
-| creator.php | `flag_defect` (≥4) `ck-flagrow`/`ckflag` (≥3) `showFlagRow` (≥3) `ck_defect_log_analysis` (1) `'typed'` (2) `inc/defects.php` (1) | `do=flag_defect` JSON handler (image `flags[]` + log event); 🏴 lightbox row (grouped registry picker + note); `qascan_one` now also appends log events; `ck_ai_qa` returns `typed[]` alongside the flat labels |
-| review.php | `flag_defect` (≥3) `submitFlag` (≥2) `DEFECT_OPTIONS` (≥2) | own `do=flag_defect` endpoint (same contract); 🏴 Flag-a-defect section in the detail pane (buildInfo) |
-| bridge.php | `do === 'flag'` (1) `ck_defect_log_analysis` (1) `ck_defect_event` (1) | key-gated headless flag verb (accepts id OR slug; `src` defaults `gate`); `annotate` now logs events too |
-| growgetter.php | `ck_defect_log_analysis` (1) `typed` (≥2) | `gg_qa` logs events (src `ggqa`; its `nsfw` type → WARD-06) |
-
-Verified live 2026-07-18: parse-probes 302/403 on all four; ALL pre-existing marker tables
-intact after deploy (byte-identical fetch-backs); bridge `do=flag` roundtrip — canonical id,
-slug lookup, invalid-id rejection, panel resolution, image `flags[]` + log event — then
-self-test data removed. If you redeploy creator.php/review.php/bridge.php/growgetter.php,
-KEEP all of the above, and remember inc/defect-taxonomy.php regenerates from the repo.
-
-**🔎 Auto-scan + headless qascan (added 2026-07-18, same day as 🏴).** The QA-scan ENGINE
-(`ck_ai_cfg` + `ck_qa_checklist`/`ck_qa_cast`/`ck_qa_match`/`ck_ai_qa`) **moved from
-creator.php into inc/defects.php** (inside a `function_exists('ck_ai_qa')` guard for
-rolling-deploy safety) so bridge.php's new key-gated **`do=qascan`** verb runs the exact
-same scan headlessly (writes `analysis` + defect-log events; used for fleet sweeps).
-creator.php keeps a pointer comment; do NOT re-add local copies. Both UIs now **AUTO-SCAN
-on open**: unscanned panels kick the existing scan automatically, **capped at 120 unscanned**
-(bulk archives like muller's 9k raw Flow gens stay manual — above the cap a hint shows
-instead). review.php's DATA gained a `scanned` flag; its scan loop refactored into
-`scanFiles(files)` (button = shown tiles, auto = unscanned only).
-
-| File | Markers (grep after ANY redeploy) |
-|---|---|
-| inc/defects.php | `function_exists('ck_ai_qa')` `ck_ai_cfg` `ck_qa_checklist` `ck_qa_cast` `ck_qa_match` `ck_ai_qa` (engine lives HERE now) |
-| creator.php | `MOVED to inc/defects.php` (2: pointer comments) `AUTO-SCAN on open` `autoUnN` — and NO local `function ck_qa_*`/`function ck_ai_cfg` definitions (re-adding them fatals against the include's guard-free future) |
-| bridge.php | `do === 'qascan'` (1) |
-| review.php | `scanFiles` `'scanned'` `AUTO-SCAN on open` |
-
-Verified live 2026-07-18: parse probes on creator/review/bridge/growgetter/refs/shots;
-full marker sweep (pre-existing + 🏴 + these) clean; bridge `do=qascan` real-scan roundtrip
-(2.4s, analysis + verdict + log event). Production-wide sweep run via `do=qascan`
-(all projects except the muller raw archive — owner-scoped 2026-07-18).
-
-_Also 2026-07-20 — added the **⭐ Flow-favorite pick loop**: bridge.php `do=flowfav` (additive, idempotent pick marker: +tag `flow-fav`, `unrated→good`, `accepted` only when the beat has no owner-kept winner — owner's manual rating ALWAYS wins) + `addtags` (additive tag merge) in `do=write`; review.php `flowfav` in the detail payload + `data-flowfav` + `.rv-flag.fav` ⭐ tile badge + `togfav` "⭐ Flow favs" toolbar filter (state/hash key `flowfav`) + `.rv-chip.fav` detail chip; creator.php `$isFav`/`.ck-favbadge` ⭐ board badge. Fed by flow-studio-autosync v1.2.0 (posts favorited workflow ids each sync; favorites live on Flow's `projectContents.workflows[].metadata.favorited`, wf name = the bridge `gen` id). KEEP markers on redeploy: bridge `do === 'flowfav'`/`addtags`; review `togfav`/`flowfav`/`rv-flag fav`; creator `ck-favbadge`._
+**Store conventions introduced.** Rows carry a `source` tag: `sheet-import` /
+`sheet-backlog` (the owner's Google Sheet), `evidence-backfill-2026-08-23`
+(reconstructed from what actually published), `cadence-seed-2026-08-23` (recurring
+forward slots). The seeds are safe to bulk-delete by that tag if the cadence changes.
+Every reconciled row carries its evidence (URL + channel + date) in `notes`.
+`giantessgirl` is archived in both views (transferred away 2026-07-25) and is never
+a target for new scheduling — do not "fix" its empty forward lanes.
