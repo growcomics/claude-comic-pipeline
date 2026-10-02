@@ -6,10 +6,15 @@
 //   1. People          add a lieutenant (private magic link shown ONCE), edit brands + caps,
 //                      rotate the link ("New link"), deactivate / activate. Today's usage.
 //   2. Comics → brand  assign every project to a brand (blank = invisible to lieutenants),
-//                      plus a bulk "set all unassigned" helper.
+//                      plus a bulk "set all unassigned" helper. Mappings are {brand, created}
+//                      (ws_pb_make); a mapping whose comic was deleted/recreated shows as unassigned.
 //   3. Brands          add / remove brand names (a brand in use cannot be removed).
 //   4. Settings        the WS_SETTINGS_DEFAULT keys (caps, takes, pacing, models, worker on/off).
-//   5. Generator       worker heartbeat, job counts, last 15 jobs, cancel queued jobs.
+//   5. Generator       worker liveness (ws_worker_seen), cooldown + Clear, job counts, last 15 jobs, cancel.
+//
+// Every POST prunes orphaned projectBrands entries (ws_team_save / ws_team_back). Deactivating a
+// person, or narrowing their brands (or moving a comic off a brand), cancels their now-out-of-scope
+// queued jobs and asks their running ones to stop (ws_team_fence_jobs).
 //
 // Magic-link tokens are generated here, hashed with ws_token_hash() and only the hash is
 // stored. The raw link rides from the POST to the very next GET in $_SESSION['ws_once'] and is
@@ -68,8 +73,10 @@ function ws_team_clean(string $s): string {
     $s = preg_replace('/\s+/u', ' ', $s) ?? '';
     return trim($s);
 }
-// Post/Redirect/Get with a one-shot flash.
+// Post/Redirect/Get with a one-shot flash. Every POST exits here, so this is also where a POST that
+// did not save team.json gets its orphan prune.
 function ws_team_back(string $anchor, string $type, string $msg): never {
+    ws_team_prune_pending();
     $_SESSION['ws_team_flash'] = ['type' => $type === 'ok' ? 'ok' : 'err', 'msg' => $msg];
     header('Location: team.php' . ($anchor !== '' ? '#' . $anchor : ''), true, 303);
     exit;
@@ -138,6 +145,100 @@ function ws_team_status_color(string $s): string {
             'active' => '#1D9E75', 'on-hold' => '#EF9F27', 'archived' => '#6F7380'][$s] ?? '#9CA0AC';
 }
 
+// ---- brand map integrity + job fencing ------------------------------------------------------
+// projects.json rows by id (first row wins, like project_get()).
+function ws_team_rows(): array {
+    $rows = [];
+    foreach (projects_all() as $p) {
+        $id = is_array($p) ? (string)($p['id'] ?? '') : '';
+        if ($id !== '' && !isset($rows[$id])) $rows[$id] = $p;
+    }
+    return $rows;
+}
+// Drop projectBrands entries whose comic is gone or was recreated (ws_pb_valid false), and bind
+// legacy / stamp-less entries to the comic's current created stamp. Returns [team, entriesChanged].
+// Skipped when projects.json reads empty: a failed read must never wipe every assignment.
+function ws_team_prune(array $t, array $rows): array {
+    $n = 0;
+    if (!$rows) return [$t, 0];
+    foreach ((array)$t['projectBrands'] as $pid => $v) {
+        $row = $rows[(string)$pid] ?? null;
+        if (!ws_pb_valid($v, $row)) { unset($t['projectBrands'][$pid]); $n++; continue; }
+        if ((!is_array($v) || (string)($v['created'] ?? '') === '') && (string)($row['created'] ?? '') !== '') {
+            $t['projectBrands'][$pid] = ws_pb_make(ws_pb_brand($v), $row); $n++;
+        }
+    }
+    return [$t, $n];
+}
+function ws_team_saved(bool $set = false): bool { static $s = false; if ($set) $s = true; return $s; }
+// Every team.json write from this page: the stale-mapping prune and the action's change happen
+// under ONE lock, so a POST never re-saves an orphaned mapping. $fn(array $team, array $rows): array.
+function ws_team_save(callable $fn): array {
+    ws_team_saved(true);
+    return ws_team_update(function (array $t) use ($fn): array {
+        $rows = ws_team_rows();
+        [$t] = ws_team_prune($t, $rows);
+        return $fn($t, $rows);
+    });
+}
+// For a POST that saved nothing: one prune-only write, and only if a lockless look finds work.
+function ws_team_prune_pending(): void {
+    if (ws_team_saved() || ($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') return;
+    if (ws_team_prune(ws_team(), ws_team_rows())[1] === 0) return;
+    ws_team_save(fn(array $t): array => $t);
+}
+// [uid => brands[] | null] for the given people (all when $ids is null). null = inactive: every job stops.
+function ws_team_who(array $team, ?array $ids = null): array {
+    $who = [];
+    foreach ((array)$team['people'] as $p) {
+        $id = (string)($p['id'] ?? '');
+        if ($id === '' || ($ids !== null && !in_array($id, $ids, true))) continue;
+        $who[$id] = empty($p['active']) ? null : array_values(array_map('strval', (array)($p['brands'] ?? [])));
+    }
+    return $who;
+}
+// Is this job's comic (still the same comic it was queued on) in one of $brands?
+function ws_team_job_in_brands(array $x, array $brands, array $pb, array $rows): bool {
+    $pid = (string)($x['pid'] ?? ''); $row = $rows[$pid] ?? null; $v = $pb[$pid] ?? '';
+    if (!$row || !ws_pb_valid($v, $row)) return false;
+    $pc = (string)($x['pcreated'] ?? '');
+    if ($pc !== '' && $pc !== (string)($row['created'] ?? '')) return false;   // comic deleted + recreated since
+    return in_array(ws_pb_brand($v), $brands, true);
+}
+// Stop generation work a person may no longer do: their queued jobs are cancelled (unused images go
+// back to the quota) and their running jobs are asked to stop after the current take. brands = null
+// (deactivated) → all of their jobs; otherwise only jobs on comics outside those brands, judged
+// against the SAVED $team. Lock order: jobs → usage (ws_quota_release) only; never the team lock here.
+function ws_team_fence_jobs(array $who, array $team): array {
+    $out = ['cancelled' => 0, 'stopped' => 0];
+    if (!$who) return $out;
+    $rows = ws_team_rows(); $pb = (array)$team['projectBrands'];
+    return ws_jobs_mutate(function (array $j) use ($who, $rows, $pb, $out): array {
+        foreach ($j['jobs'] as &$x) {
+            $uid = (string)($x['uid'] ?? ''); $st = (string)($x['status'] ?? '');
+            if ($uid === '' || !array_key_exists($uid, $who) || ($st !== 'queued' && $st !== 'running')) continue;
+            if ($who[$uid] !== null && ws_team_job_in_brands($x, $who[$uid], $pb, $rows)) continue;
+            if ($st === 'queued') {
+                $n = max(0, (int)($x['takes'] ?? 0) - max((int)($x['done'] ?? 0) + (int)($x['failed'] ?? 0), (int)($x['submits'] ?? 0)));
+                $x['status'] = 'cancelled'; $x['finishedAt'] = ws_now(); $x['note'] = 'cancelled: access changed';
+                if (empty($x['quotaReleased']) && (string)($x['day'] ?? '') !== '') { ws_quota_release($uid, $n, (string)$x['day']); $x['quotaReleased'] = $n; }
+                $out['cancelled']++;
+            } elseif (empty($x['stopRequested'])) {
+                $x['stopRequested'] = true; $out['stopped']++;
+            }
+        }
+        unset($x);
+        return [$j, $out];
+    });
+}
+function ws_team_fence_msg(?array $f): string {
+    $c = (int)($f['cancelled'] ?? 0); $s = (int)($f['stopped'] ?? 0);
+    $m = '';
+    if ($c) $m .= " Cancelled $c queued job" . ($c === 1 ? '' : 's') . ' (unused images went back to the quota).';
+    if ($s) $m .= " $s running job" . ($s === 1 ? '' : 's') . ' will stop after the current take.';
+    return $m;
+}
+
 // =============================== POST actions ===============================================
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     csrf_check();
@@ -159,7 +260,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             'tokenHash' => ws_token_hash($tok), 'rev' => 1, 'caps' => $caps,
             'createdAt' => ws_now(), 'lastSeenAt' => null,
         ];
-        ws_team_update(function (array $t) use ($person): array { $t['people'][] = $person; return $t; });
+        ws_team_save(function (array $t) use ($person): array { $t['people'][] = $person; return $t; });
         $_SESSION['ws_once'] = ['name' => $name, 'url' => ws_team_link($tok), 'kind' => 'new', 'active' => true];
         $tok = '';
         ws_team_back('people', 'ok', $name . ' was added. Copy their private link below now.');
@@ -173,7 +274,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         [$caps, $cerr] = ws_team_caps_in($_POST['caps'] ?? null);
         if ($cerr !== null) ws_team_back('people', 'err', $cerr);
         $nm = '';
-        ws_team_update(function (array $t) use ($id, $brands, $caps, &$nm): array {
+        $saved = ws_team_save(function (array $t) use ($id, $brands, $caps, &$nm): array {
             foreach ($t['people'] as &$p) {
                 if (($p['id'] ?? '') !== $id) continue;
                 $p['brands'] = array_values(array_filter($brands, fn($b) => in_array($b, $t['brands'], true)));
@@ -183,7 +284,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             return $t;
         });
         if ($nm === '') ws_team_back('people', 'err', 'That person no longer exists.');
-        ws_team_back('people', 'ok', 'Saved ' . $nm . '.');
+        $f = ws_team_fence_jobs(ws_team_who($saved, [$id]), $saved);   // a removed brand: its jobs stop
+        ws_team_back('people', 'ok', 'Saved ' . $nm . '.' . ws_team_fence_msg($f));
     }
 
     if ($do === 'rotate') {
@@ -191,7 +293,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         if ($id === '') ws_team_back('people', 'err', 'Unknown person.');
         $tok = bin2hex(random_bytes(24)); $hash = ws_token_hash($tok);
         $nm = ''; $active = false;
-        ws_team_update(function (array $t) use ($id, $hash, &$nm, &$active): array {
+        ws_team_save(function (array $t) use ($id, $hash, &$nm, &$active): array {
             foreach ($t['people'] as &$p) {
                 if (($p['id'] ?? '') !== $id) continue;
                 $p['tokenHash'] = $hash; $p['rev'] = (int)($p['rev'] ?? 0) + 1;
@@ -211,7 +313,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         if ($id === '') ws_team_back('people', 'err', 'Unknown person.');
         $on = ws_team_s('on', 2) === '1';
         $nm = '';
-        ws_team_update(function (array $t) use ($id, $on, &$nm): array {
+        $saved = ws_team_save(function (array $t) use ($id, $on, &$nm): array {
             foreach ($t['people'] as &$p) {
                 if (($p['id'] ?? '') !== $id) continue;
                 if ($on) { $p['active'] = true; }
@@ -222,16 +324,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             return $t;
         });
         if ($nm === '') ws_team_back('people', 'err', 'That person no longer exists.');
+        $f = $on ? null : ws_team_fence_jobs([$id => null], $saved);   // deactivated: every job of theirs stops
         ws_team_back('people', 'ok', $on ? ($nm . ' is active again. Their existing link works again; use New link if it may have leaked.')
-                                         : ($nm . ' is deactivated. Their link and open sessions stopped working.'));
+                                         : ($nm . ' is deactivated. Their link and open sessions stopped working.' . ws_team_fence_msg($f)));
     }
 
     // ---- Comics → brand --------------------------------------------------------------------
     if ($do === 'brands') {
         $raw = $_POST['brand'] ?? null;
         if (!is_array($raw) || !$raw) ws_team_back('comics', 'ok', 'Nothing changed.');
-        $ids = [];
-        foreach (projects_all() as $p) { $pid = (string)($p['id'] ?? ''); if ($pid !== '') $ids[$pid] = true; }
+        $ids = ws_team_rows();
         $set = [];
         foreach ($raw as $pid => $b) {
             $pid = (string)$pid;
@@ -239,33 +341,35 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             $set[$pid] = trim($b);
         }
         $changed = 0; $skipped = 0;
-        ws_team_update(function (array $t) use ($set, &$changed, &$skipped): array {
+        $saved = ws_team_save(function (array $t, array $rows) use ($set, &$changed, &$skipped): array {
             foreach ($set as $pid => $b) {
-                $pid = (string)$pid;
+                $pid = (string)$pid; $row = $rows[$pid] ?? null;
                 if ($b !== '' && !in_array($b, $t['brands'], true)) { $skipped++; continue; }
-                if ((string)($t['projectBrands'][$pid] ?? '') === $b) continue;
-                if ($b === '') unset($t['projectBrands'][$pid]); else $t['projectBrands'][$pid] = $b;
+                if (!$row) continue;                                                   // deleted meanwhile
+                if (ws_pb_brand($t['projectBrands'][$pid] ?? '') === $b) continue;   // pruned first: what is left is valid
+                if ($b === '') unset($t['projectBrands'][$pid]); else $t['projectBrands'][$pid] = ws_pb_make($b, $row);
                 $changed++;
             }
             return $t;
         });
+        // A comic moved off a brand: lieutenants who no longer reach it lose their jobs on it.
+        $f = $changed ? ws_team_fence_jobs(ws_team_who($saved), $saved) : null;
         ws_team_back('comics', $skipped ? 'err' : 'ok', ($changed ? "Saved $changed comic" . ($changed === 1 ? '' : 's') . '.' : 'Nothing changed.')
-            . ($skipped ? " $skipped row(s) skipped: unknown brand." : ''));
+            . ($skipped ? " $skipped row(s) skipped: unknown brand." : '') . ws_team_fence_msg($f));
     }
 
     if ($do === 'bulkbrand') {
         $b = ws_team_s('brand', 100);
         $skipArch = ws_team_s('skiparchived', 2) === '1';
-        $projs = projects_all();
         $n = 0; $bad = false;
-        ws_team_update(function (array $t) use ($b, $skipArch, $projs, &$n, &$bad): array {
+        ws_team_save(function (array $t, array $rows) use ($b, $skipArch, &$n, &$bad): array {
             if (!in_array($b, $t['brands'], true)) { $bad = true; return $t; }
-            foreach ($projs as $p) {
-                $pid = (string)($p['id'] ?? '');
+            foreach ($rows as $pid => $p) {
+                $pid = (string)$pid;
                 if ($pid === '' || ws_pid($pid) !== $pid) continue;
                 if ($skipArch && ($p['status'] ?? '') === 'archived') continue;
-                if ((string)($t['projectBrands'][$pid] ?? '') !== '') continue;
-                $t['projectBrands'][$pid] = $b; $n++;
+                if (ws_pb_brand($t['projectBrands'][$pid] ?? '') !== '') continue;   // pruned first: stale = unassigned
+                $t['projectBrands'][$pid] = ws_pb_make($b, $p); $n++;
             }
             return $t;
         });
@@ -279,7 +383,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         if ($name === '' || mb_strlen($name) > 40) ws_team_back('brands', 'err', 'Brand names are 1 to 40 characters.');
         if (!preg_match('/^[\p{L}\p{N}][\p{L}\p{N} .&\'+_-]*$/u', $name)) ws_team_back('brands', 'err', "Use letters, numbers, spaces and . & ' + _ - only.");
         $dup = false;
-        ws_team_update(function (array $t) use ($name, &$dup): array {
+        ws_team_save(function (array $t) use ($name, &$dup): array {
             foreach ($t['brands'] as $b) if (mb_strtolower((string)$b) === mb_strtolower($name)) { $dup = true; return $t; }
             $t['brands'][] = $name;
             return $t;
@@ -290,11 +394,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if ($do === 'brand_del') {
         $name = ws_team_s('name', 200);
         $why = '';
-        ws_team_update(function (array $t) use ($name, &$why): array {
+        ws_team_save(function (array $t, array $rows) use ($name, &$why): array {
             if (!in_array($name, $t['brands'], true)) { $why = 'That brand does not exist.'; return $t; }
             if (count($t['brands']) <= 1) { $why = 'You need at least one brand.'; return $t; }
             $np = 0; foreach ($t['people'] as $p) if (in_array($name, (array)($p['brands'] ?? []), true)) $np++;
-            $nc = 0; foreach ($t['projectBrands'] as $b) if ((string)$b === $name) $nc++;
+            // Only valid mappings count (orphans were just pruned). If projects.json read empty the prune
+            // was skipped, so count every mapping rather than let a failed read free a brand in use.
+            $nc = 0;
+            foreach ($t['projectBrands'] as $pid => $v) {
+                if (ws_pb_brand($v) === $name && (!$rows || ws_pb_valid($v, $rows[(string)$pid] ?? null))) $nc++;
+            }
             if ($np || $nc) { $why = "$name is still used by $np person(s) and $nc comic(s). Move them to another brand first."; return $t; }
             $t['brands'] = array_values(array_filter($t['brands'], fn($b) => $b !== $name));
             return $t;
@@ -323,7 +432,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         if (!in_array($ce, WS_TEAM_EFFORTS, true)) $errs[] = 'Chat effort must be low, medium or high.'; else $new['chatEffort'] = $ce;
         $new['workerEnabled'] = ws_team_s('workerEnabled', 2) === '1';
         if ($errs) ws_team_back('settings', 'err', 'Not saved. ' . implode(' ', $errs));
-        ws_team_update(function (array $t) use ($new): array { $t['settings'] = array_merge($t['settings'], $new); return $t; });
+        ws_team_save(function (array $t) use ($new): array { $t['settings'] = array_merge($t['settings'], $new); return $t; });
         ws_team_back('settings', 'ok', 'Settings saved.' . ($new['workerEnabled'] ? '' : ' The generator is paused.'));
     }
 
@@ -334,6 +443,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
         if (!preg_match('/^wsj_[A-Za-z0-9]{1,40}$/', $jid) || $pid === '') ws_team_back('generator', 'err', 'Unknown job.');
         $r = ws_job_cancel($jid, $pid);
         ws_team_back('generator', !empty($r['ok']) ? 'ok' : 'err', !empty($r['ok']) ? 'Job cancelled. Unused images went back to the quota.' : (string)($r['error'] ?? 'Could not cancel.'));
+    }
+
+    if ($do === 'clearcooldown') {
+        $was = ws_jobs_mutate(function (array $j): array {
+            $was = ws_team_ts($j['meta']['cooldownUntil'] ?? null) > time();
+            unset($j['meta']['cooldownUntil'], $j['meta']['cooldownReason']);
+            return [$j, $was];
+        });
+        ws_team_back('generator', 'ok', $was ? 'Cooldown cleared. The worker can submit again on its next run.' : 'The cooldown had already ended; its note is cleared.');
     }
 
     ws_team_back('', 'err', 'Unknown action.');
@@ -357,7 +475,7 @@ $brandPeople = array_fill_keys($brands, 0); $brandComics = array_fill_keys($bran
 foreach ($people as $p) foreach ((array)($p['brands'] ?? []) as $b) if (isset($brandPeople[$b])) $brandPeople[$b]++;
 $unassigned = 0;
 foreach ($projects as $p) {
-    $b = (string)($pb[(string)($p['id'] ?? '')] ?? '');
+    $b = ws_project_brand((string)($p['id'] ?? ''), $p);   // a stale mapping (comic recreated) counts as unassigned
     if ($b === '') $unassigned++; elseif (isset($brandComics[$b])) $brandComics[$b]++;
 }
 
@@ -367,8 +485,13 @@ $meta    = $jd['meta'];
 $jCounts = [];
 foreach ($jobs as $j) { $st = (string)($j['status'] ?? '?'); $jCounts[$st] = ($jCounts[$st] ?? 0) + 1; }
 $recent  = array_slice(array_reverse($jobs), 0, 15);
+$seen    = ws_worker_seen();
+$seenAt  = $seen['at'] ?? null;
+$seenNm  = is_string($seen['name'] ?? null) ? mb_substr($seen['name'], 0, 60) : '';
 $alive   = ws_worker_alive();
 $keyOn   = is_file(WS_WORKER);
+$cdUntil = ws_team_ts($meta['cooldownUntil'] ?? null);
+$cdWhy   = is_string($meta['cooldownReason'] ?? null) ? mb_substr($meta['cooldownReason'], 0, 200) : '';
 
 $staffUse = [];
 foreach ($uUsers as $uid => $u) if (str_starts_with((string)$uid, 'staff:')) $staffUse[(string)$uid] = (array)$u;
@@ -446,6 +569,8 @@ details.tm-edit[open]>summary{margin-bottom:10px;color:var(--text)}
 .tm-stat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .tm-stat span{font-size:12.5px;border:1px solid var(--border2);border-radius:8px;padding:5px 10px;background:var(--bg2)}
 .tm-stat b{color:var(--text)}
+.tm-stat form{margin:0}
+.tm-stale{font-size:11.5px;margin-top:3px}
 .tm-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
 @media(max-width:600px){
   .wrap{padding:16px 14px 60px}
@@ -602,7 +727,8 @@ details.tm-edit[open]>summary{margin-bottom:10px;color:var(--text)}
           <tbody>
           <?php foreach ($projects as $p):
             $id = (string)($p['id'] ?? ''); if ($id === '' || ws_pid($id) !== $id) continue;
-            $cur = (string)($pb[$id] ?? ''); $st = (string)($p['status'] ?? '');
+            $cur = ws_project_brand($id, $p); $st = (string)($p['status'] ?? '');
+            $was = ws_pb_brand($pb[$id] ?? ''); $stale = $cur === '' && $was !== '';
             $q = mb_strtolower(((string)($p['name'] ?? '')) . ' ' . $id . ' ' . $st . ' ' . (string)($p['stage'] ?? ''));
           ?>
             <tr class="<?= $cur === '' ? 'unassigned' : '' ?>" data-q="<?= h($q) ?>">
@@ -613,7 +739,7 @@ details.tm-edit[open]>summary{margin-bottom:10px;color:var(--text)}
                 <option value="">— none —</option>
                 <?php foreach ($brands as $b): ?><option value="<?= h($b) ?>"<?= $b === $cur ? ' selected' : '' ?>><?= h($b) ?></option><?php endforeach; ?>
                 <?php if ($cur !== '' && !in_array($cur, $brands, true)): ?><option value="<?= h($cur) ?>" selected><?= h($cur) ?> (removed)</option><?php endif; ?>
-              </select></td>
+              </select><?php if ($stale): ?><div class="muted tm-stale" title="This comic was deleted and recreated under the same id, so its old brand (<?= h($was) ?>) no longer applies. The entry is removed on the next save.">stale mapping cleared</div><?php endif; ?></td>
             </tr>
           <?php endforeach; ?>
           </tbody>
@@ -713,11 +839,20 @@ details.tm-edit[open]>summary{margin-bottom:10px;color:var(--text)}
   <section class="card" id="generator">
     <h2>Generator</h2>
     <div class="tm-stat">
-      <span><i class="tm-dot" style="background:<?= $alive ? 'var(--teal)' : 'var(--red)' ?>"></i>Worker <b><?= $alive ? 'alive' : 'not seen' ?></b> · last seen <?= h(ws_team_rel($meta['workerSeenAt'] ?? null)) ?></span>
+      <span><i class="tm-dot" style="background:<?= $alive ? 'var(--teal)' : 'var(--red)' ?>"></i>Worker <b><?= $alive ? 'alive' : 'not seen' ?></b> · last seen <?= h(ws_team_rel($seenAt)) ?><?= $seenNm !== '' ? ' · ' . h($seenNm) : '' ?></span>
       <span>Worker key installed: <b><?= $keyOn ? 'yes' : 'no' ?></b></span>
       <span>Generator: <b><?= !empty($S['workerEnabled']) ? 'on' : 'paused' ?></b></span>
       <span>Today: <b><?= (int)($usage['gens'] ?? 0) ?></b>/<?= (int)$S['globalGensPerDay'] ?> images studio-wide</span>
     </div>
+    <?php if ($cdUntil > 0): $cdOn = $cdUntil > time(); ?>
+    <div class="tm-stat">
+      <span><i class="tm-dot" style="background:<?= $cdOn ? '#EF9F27' : '#6F7380' ?>"></i>Cooldown <b><?= $cdOn ? 'until ' . h(ws_team_date($cdUntil, 'M j, g:i a')) . ' Pacific' : 'ended' ?></b> · <?= h(ws_team_rel($cdUntil)) ?><?= $cdWhy !== '' ? ' · ' . h($cdWhy) : '' ?></span>
+      <form method="post" data-confirm="<?= $cdOn ? 'Clear the cooldown? The worker may submit to Higgsfield again on its next run.' : 'Clear the old cooldown note?' ?>">
+        <?= $csrfField ?><input type="hidden" name="do" value="clearcooldown">
+        <button class="btn sm">Clear cooldown</button>
+      </form>
+    </div>
+    <?php endif; ?>
     <div class="tm-stat">
       <?php if (!$jCounts): ?><span class="muted">No jobs yet.</span><?php endif; ?>
       <?php foreach (['queued', 'running', 'done', 'failed', 'cancelled'] as $st): if (empty($jCounts[$st])) continue; ?>

@@ -17,8 +17,10 @@
 //
 // Store: data/ws/picks-<pid>.json pages{group:{pick:[files]|'drop', c, prev_c, sig, by, ts}}.
 // A pick change is mirrored into images-<pid>.json (accepted/rating) so review.php, export.php
-// and the cockpit see the same picks. Un-picking clears only takes this picker had picked: keeps
+// and the cockpit see the same picks. A picked row records what the picker changed in pk {acc, r}
+// (an owner 'bad' rating is never turned 'good'); un-picking restores only rows carrying pk: keeps
 // made elsewhere in the Studio are never cleared from here. Comment-only saves never touch the images file.
+// Lock order: picks lock first, images lock nested inside it (never the reverse).
 //
 // Endpoints (all need a Studio session; lieutenants only for their brand's comics via ws_gate):
 //   GET  picker.php?p=<pid>              the page
@@ -142,65 +144,79 @@ if ($isPost) {
     $newC = $cGiven ? ws_picker_clean_c(ws_picker_s($_POST['c'])) : '';
     if (!$pickGiven && !$cGiven) ws_json_out(['ok' => false, 'error' => 'Nothing to save.'], 400);
 
-    // Peek at the stored record (small file) to know whether the pick actually changes.
-    $peek    = ws_picks($pid)['pages'][$page] ?? null;
-    $oldPick = is_array($peek) ? ws_picker_pick_norm($peek['pick'] ?? []) : [];
-    $pickChanged = $pickGiven && !ws_picker_same($newPick, $oldPick);
-
-    $sig = ''; $err = null;
-    if ($pickChanged) {
-        // Validate + mirror under the images lock in ONE read (images-<pid>.json can be tens of MB).
-        // Same lock images_update() takes; called directly so an invalid pick aborts WITHOUT a rewrite.
-        s_with_lock(imeta_path($pid), function ($meta) use ($page, $newPick, $oldPick, &$sig, &$err) {
-            $meta  = is_array($meta) ? $meta : [];
-            $files = ws_picker_page_files($meta, $page);
-            if (!$files) { $err = 'That page has no takes.'; return ['result' => null]; }
-            if ($newPick !== 'drop') {
-                foreach ($newPick as $f) if (!in_array($f, $files, true)) { $err = 'Take ' . $f . ' is not on ' . $page . '.'; return ['result' => null]; }
-            }
-            $sig    = ws_picker_sig($files);
-            $picked = $newPick === 'drop' ? [] : $newPick;
-            $prev   = is_array($oldPick) ? $oldPick : [];
-            foreach ($meta as $i => $m) {
-                if (!ws_picker_is_take($m) || ws_picker_gkey($m) !== $page) continue;
-                $f = (string)$m['file'];
-                if (in_array($f, $picked, true)) {
-                    $meta[$i]['accepted'] = true;
-                    $meta[$i]['rating']   = 'good';
-                } elseif (in_array($f, $prev, true)) {
-                    // Un-picked: undo only what this picker set (its previous pick). Keeps made elsewhere
-                    // (review.php, the cockpit) are never cleared from here; never touch 'bad' or others' ratings.
-                    $meta[$i]['accepted'] = false;
-                    if (($m['rating'] ?? '') === 'good') $meta[$i]['rating'] = 'unrated';
-                }
-            }
-            return ['data' => $meta, 'result' => null];
-        });
-        if ($err !== null) ws_json_out(['ok' => false, 'error' => $err], 400);
-    } else {
-        $imgs  = images_all($pid);
-        $files = ws_picker_page_files(is_array($imgs) ? $imgs : [], $page);
-        unset($imgs);
-        if (!$files) ws_json_out(['ok' => false, 'error' => 'That page has no takes.'], 400);
-        $sig = ws_picker_sig($files);
-    }
-
+    // Lock order for the whole save: picks lock FIRST, then (nested) the images lock — never the
+    // reverse anywhere, so two saves (or a page delete) cannot deadlock or interleave. The previous
+    // pick is read inside the picks lock, so the mirror below always undoes the pick that was really stored.
     $by  = current_studio_user();
-    $rec = s_with_lock(ws_file('picks', $pid), function ($d) use ($page, $sig, $by, $pickGiven, $newPick, $cGiven, $newC) {
+    $sig = ''; $err = null;
+    $rec = s_with_lock(ws_file('picks', $pid), function ($d) use ($pid, $page, $by, $pickGiven, $newPick, $cGiven, $newC, &$sig, &$err) {
         $d = is_array($d) ? $d : [];
         $d['pages'] = is_array($d['pages'] ?? null) ? $d['pages'] : [];
         $old = is_array($d['pages'][$page] ?? null) ? $d['pages'][$page] : null;
+        $oldPick = $old ? ws_picker_pick_norm($old['pick'] ?? []) : [];
+        $pickChanged = $pickGiven && !ws_picker_same($newPick, $oldPick);
+
+        if ($pickChanged) {
+            // Validate + mirror under the images lock in ONE read (images-<pid>.json can be tens of MB).
+            // Same lock images_update() takes; called directly so an invalid pick aborts WITHOUT a rewrite.
+            //
+            // The picker only ever undoes what it set itself. Picking a take records on the row what the
+            // pick changed — pk = {acc: old accepted, r: old rating} — the first time it flips anything;
+            // an owner 'bad' is never overwritten with 'good'. Un-picking (or dropping the page) restores
+            // ONLY rows carrying pk, and only the fields still holding the picker's value; rows without pk
+            // (kept in review.php / the cockpit) are left exactly as they are.
+            s_with_lock(imeta_path($pid), function ($meta) use ($page, $newPick, &$sig, &$err) {
+                $meta  = is_array($meta) ? $meta : [];
+                $files = ws_picker_page_files($meta, $page);
+                if (!$files) { $err = 'That page has no takes.'; return ['result' => null]; }
+                if ($newPick !== 'drop') {
+                    foreach ($newPick as $f) if (!in_array($f, $files, true)) { $err = 'Take ' . $f . ' is not on ' . $page . '.'; return ['result' => null]; }
+                }
+                $sig    = ws_picker_sig($files);
+                $picked = $newPick === 'drop' ? [] : $newPick;
+                foreach ($meta as $i => $m) {
+                    if (!ws_picker_is_take($m) || ws_picker_gkey($m) !== $page) continue;
+                    $f  = (string)$m['file'];
+                    $pk = is_array($m['pk'] ?? null) ? $m['pk'] : null;
+                    if (in_array($f, $picked, true)) {
+                        $oa = !empty($m['accepted']);
+                        $or = array_key_exists('rating', $m) ? $m['rating'] : null;
+                        $nr = $or === 'bad' ? 'bad' : 'good';
+                        if ($pk === null && (!$oa || $or !== $nr)) $meta[$i]['pk'] = ['acc' => $oa, 'r' => $or];
+                        $meta[$i]['accepted'] = true;
+                        $meta[$i]['rating']   = $nr;
+                    } elseif ($pk !== null) {
+                        $pr = $pk['r'] ?? null;
+                        if (!empty($m['accepted'])) $meta[$i]['accepted'] = !empty($pk['acc']);
+                        if (($m['rating'] ?? null) === ($pr === 'bad' ? 'bad' : 'good')) {
+                            if ($pr === null) unset($meta[$i]['rating']); else $meta[$i]['rating'] = $pr;
+                        }
+                        unset($meta[$i]['pk']);
+                    }
+                }
+                return ['data' => $meta, 'result' => null];
+            });
+        } else {
+            $imgs  = images_all($pid);
+            $files = ws_picker_page_files(is_array($imgs) ? $imgs : [], $page);
+            unset($imgs);
+            if (!$files) $err = 'That page has no takes.';
+            else $sig = ws_picker_sig($files);
+        }
+        if ($err !== null) return ['result' => null];   // nothing written; the lock is released normally
+
         $oc  = $old ? ws_picker_s($old['c'] ?? '') : '';
         $pc  = $old ? ws_picker_s($old['prev_c'] ?? '') : '';
         $c   = $oc;
         // The takes changed since that comment was written: archive it as "your last comment".
         if ($old && ws_picker_s($old['sig'] ?? '') !== $sig && $oc !== '') { $pc = $oc; $c = ''; }
         if ($cGiven) $c = $newC;
-        $pick = $pickGiven ? $newPick : ($old ? ws_picker_pick_norm($old['pick'] ?? []) : []);
+        $pick = $pickGiven ? $newPick : $oldPick;
         $r = array_merge($old ?? [], ['pick' => $pick, 'c' => $c, 'prev_c' => $pc, 'sig' => $sig, 'by' => $by, 'ts' => time()]);
         $d['pages'][$page] = $r;
         return ['data' => $d, 'result' => $r];
     });
+    if ($err !== null || !is_array($rec)) ws_json_out(['ok' => false, 'error' => $err ?? 'Not saved.'], 400);
 
     $todo = is_array($rec['pick']) && count($rec['pick']) === 0;
     ws_json_out([
@@ -219,6 +235,7 @@ $byPage = []; $seen = [];
 foreach ((is_array($imgs) ? $imgs : []) as $m) {
     if (!ws_picker_is_take($m)) continue;
     $g = ws_picker_gkey($m); $f = (string)$m['file'];
+    if (strncmp($g, 'Deleted Page ', 13) === 0) continue;   // takes of a page deleted in the workspace (ws-api page_delete): not a page to pick
     if (isset($seen[$g . "\0" . $f])) continue;
     $seen[$g . "\0" . $f] = 1;
     $tags = is_array($m['tags'] ?? null) ? $m['tags'] : [];

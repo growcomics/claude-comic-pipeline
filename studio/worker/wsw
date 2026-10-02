@@ -4,26 +4,41 @@
 The headless Claude worker on opsbox runs ONLY this command (its Bash allow list). It talks to
 studio/ws-worker.php with the worker's own key; the key is never printed, logged or passed in argv.
 
-  wsw claim [WORKER]               take the next job (or resume this worker's own)    exit 0 job / 2 none
-  wsw submit-ok JOB                pacing gate before EVERY generate call; waits for
-                                   the gap itself (up to 10 min)                      exit 0 go / 2 stop
+ONE JOB PER CLAUDE RUN. The opsbox idle gate (jobs/ws-worker.conf, before Claude starts) claims the job and
+saves it in the state dir; the agent can only read it (`wsw job`) and work on THAT job id. `done` clears the
+state, after which every job command refuses, so the run ends.
+
+  wsw claim [--force] [WORKER]     GATE ONLY (env WSW_GATE=1, never under a claude process): take the next
+                                   job (or resume this worker's own) into the state dir   exit 0 job / 2 none
+                                   exit 3: the state still holds an open job (a killed run); --force asks the
+                                   server whether it is still ours, resumes it or drops the stale state
+  wsw job                          the claimed job as JSON: job, refs (signed urls), resumed  exit 0 / 2 none
+  wsw submit-ok JOB                pacing + credit gate before EVERY generate call; waits for
+                                   the gap itself (up to 10 min); on exit 0 it writes the
+                                   one-shot token the generate_image hook (ws_hook.py) needs  exit 0 go / 2 stop
   wsw heartbeat JOB [NOTE]         hold the lease; tells you if the job was stopped   exit 0 / 2 stop
   wsw ingest JOB URL [GEN]         the Studio downloads the result into the page      exit 0 / 1
   wsw fail JOB REASON              one take given up (after the retries)              exit 0 / 1
-  wsw cooldown MINUTES REASON      pause the whole queue (credits / rate limit)       exit 0 / 1
-  wsw done JOB done|error [NOTE]   close the job (releases unused quota, posts chat)  exit 0 / 1
+  wsw cooldown MINUTES REASON      pause the whole queue, 1..60 min; never extends a
+                                   cooldown that is already running                   exit 0 / 1
+  wsw done JOB done|error [NOTE]   close the job (releases unused quota, posts chat)
+                                   and clear the state: the run is over               exit 0 / 1
   wsw status [WORKER]              queue counts (+ records the worker as alive)       exit 0 / 1
-  wsw pending [WORKER]             idle gate: anything to claim?                      exit 0 yes / 2 no / 1 err
+  wsw pending [WORKER]             anything to claim?                                 exit 0 yes / 2 no / 1 err
   wsw put-ref REF_URL UPLOAD_URL   fallback when media_import_url can't fetch a ref:  exit 0 / 1
-                                   copy a signed ref (from claim) to the presigned
+                                   copy a signed ref of the claimed job to the presigned
                                    upload_url that media_upload returned
 
+JOB must be the claimed job's id; anything else is refused (exit 1).
 Output: one line of compact JSON on stdout, always with "at" (local time) so a run can keep time.
-Exit codes: 0 ok, 2 stop / nothing to do, 1 error.
+Exit codes: 0 ok, 2 stop / nothing to do, 1 error, 3 (claim) state holds an open job.
 Env: WS_BASE (default https://3dmusclecomics.com/studio/ws-worker.php), WS_WORKER_KEY (else
-`secretctl get ws-worker-key`), WS_WORKER_NAME (default: the hostname).
+`secretctl get ws-worker-key`), WS_WORKER_NAME (default: the hostname), WS_STATE_DIR (default
+~/.opsbox/ws; must stay outside the agent's working dir; claim.json + token.json live there).
 """
 import datetime
+import fcntl
+import hashlib
 import json
 import os
 import shutil
@@ -31,14 +46,21 @@ import socket
 import subprocess
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
 
 BASE = os.environ.get('WS_BASE') or 'https://3dmusclecomics.com/studio/ws-worker.php'
+STATE_DIR = os.path.abspath(os.path.expanduser(os.environ.get('WS_STATE_DIR') or '~/.opsbox/ws'))
 SUBMIT_WAIT_MAX = 600          # submit-ok waits at most 10 minutes in total
-UA = 'wsw/1.0 (3DMC Studio workspace worker)'
-UPLOAD_HOSTS = ('cloudfront.net', 'higgsfield.ai', 'amazonaws.com', 'googleusercontent.com', 'storage.googleapis.com')
+UA = 'wsw/1.1 (3DMC Studio workspace worker)'
+# Where Higgsfield's media_upload presigned upload_url points. Seen in the owner's sessions 2026-05..09:
+# the S3 input bucket below (Aug-Sep 2026, current), upload.higgsfield.ai (Jun-Aug) and one CloudFront
+# distribution (May). Exact hosts only, plus *.higgsfield.ai; anything else is refused.
+UPLOAD_HOSTS_EXACT = ('fast-and-furious-input-prod-20250325165756276100000002.s3.amazonaws.com',
+                      'd276s3zg8h21b2.cloudfront.net')
+UPLOAD_HOST_SUFFIXES = ('higgsfield.ai',)
 MAX_REF = 30 * 1024 * 1024
 
 
@@ -66,6 +88,184 @@ def out(obj, code):
 def worker_name(arg=None):
     n = (arg or os.environ.get('WS_WORKER_NAME') or socket.gethostname().split('.')[0] or 'worker')
     return ''.join(c for c in n if c.isalnum() or c in ' ._:@-')[:40] or 'worker'
+
+
+# ---- state: the ONE job this run may touch (claim.json) + the one-shot generate token (token.json) ----
+CLAIM, TOKEN, LOCK = 'claim.json', 'token.json', 'state.lock'
+
+
+def _sp(name):
+    return os.path.join(STATE_DIR, name)
+
+
+class _StateLock:
+    """flock on <state>/state.lock, shared with ws_hook.py: a token is never read half-written or used twice."""
+    def __enter__(self):
+        os.makedirs(STATE_DIR, mode=0o700, exist_ok=True)
+        self.fd = os.open(_sp(LOCK), os.O_RDWR | os.O_CREAT, 0o600)
+        fcntl.flock(self.fd, fcntl.LOCK_EX)
+        return self
+
+    def __exit__(self, *exc):
+        try:
+            fcntl.flock(self.fd, fcntl.LOCK_UN)
+        finally:
+            os.close(self.fd)
+
+
+def _read_state(name):
+    try:
+        with open(_sp(name), encoding='utf-8') as f:
+            d = json.load(f)
+        return d if isinstance(d, dict) else None
+    except (OSError, ValueError):
+        return None
+
+
+def _write_state(name, obj):   # atomic: tmp file + rename, mode 600
+    os.makedirs(STATE_DIR, mode=0o700, exist_ok=True)
+    tmp = '%s.tmp%d' % (_sp(name), os.getpid())
+    with os.fdopen(os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600), 'w', encoding='utf-8') as f:
+        json.dump(obj, f, ensure_ascii=False, separators=(',', ':'))
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, _sp(name))
+
+
+def _drop_state(name, keep_as=None):
+    try:
+        if keep_as:
+            os.replace(_sp(name), _sp(keep_as))
+        else:
+            os.remove(_sp(name))
+    except FileNotFoundError:
+        pass
+
+
+def prompt_sha256(prompt):
+    """sha256 of the prompt after NFC + whitespace collapsing. MUST stay identical to ws_hook.py's."""
+    s = ' '.join(unicodedata.normalize('NFC', str(prompt)).split())
+    return hashlib.sha256(s.encode('utf-8')).hexdigest()
+
+
+def claimed():
+    st = _read_state(CLAIM)
+    if not st or not isinstance(st.get('job'), dict) or not st['job'].get('id'):
+        return None
+    return st
+
+
+def require_job(jid):
+    """Every job command works on the claimed job only."""
+    st = claimed()
+    if not st:
+        out({'ok': False, 'error': 'no claimed job: this run has no job, or it was already closed with done. End the run.'}, 1)
+    if jid != st['job']['id']:
+        out({'ok': False, 'error': 'job %r is not the claimed job of this run (%s); only that job may be touched' % (jid[:60], st['job']['id'])}, 1)
+    return st
+
+
+# ---- claim is for the opsbox gate only: never from under a Claude process (the agent's Bash tool) ----
+def _proc_info(pid):
+    """(argv, ppid, exe) of a process, or None when it cannot be read. Linux: /proc; elsewhere: ps."""
+    if os.path.isdir('/proc/%d' % pid):
+        try:
+            with open('/proc/%d/cmdline' % pid, 'rb') as f:
+                argv = [a.decode('utf-8', 'replace') for a in f.read().split(b'\0') if a]
+            with open('/proc/%d/stat' % pid, 'rb') as f:
+                stat = f.read().decode('utf-8', 'replace')
+            ppid = int(stat[stat.rindex(')') + 2:].split()[1])
+            try:
+                exe = os.readlink('/proc/%d/exe' % pid)
+            except OSError:
+                exe = ''
+            return argv, ppid, exe
+        except (OSError, ValueError, IndexError):
+            return None
+    try:
+        p = subprocess.run(['ps', '-o', 'ppid=', '-o', 'args=', '-p', str(pid)], capture_output=True, timeout=10)
+        parts = p.stdout.decode('utf-8', 'replace').strip().split(None, 1)
+        return (parts[1].split() if len(parts) > 1 else []), int(parts[0]), ''
+    except Exception:
+        return None
+
+
+def _is_claude(argv, exe):
+    for a in list(argv[:2]) + ([exe] if exe else []):
+        b = os.path.basename(a)
+        if b in ('claude', 'claude-code') or '@anthropic-ai/claude-code' in a or '/claude/versions/' in a:
+            return True
+    return False
+
+
+def under_claude():
+    """True: an ancestor is Claude Code. False: walked up to init without one. None: cannot tell (fail closed)."""
+    pid = os.getppid()
+    for _ in range(64):
+        info = _proc_info(pid)
+        if info is None:
+            return None
+        argv, ppid, exe = info
+        if _is_claude(argv, exe):
+            return True
+        if pid == 1 or ppid <= 0:
+            return False if os.path.basename(argv[0] if argv else '') in ('systemd', 'init', 'launchd') else None
+        pid = ppid
+    return None
+
+
+def claim_summary(j):
+    """What the gate logs: no prompt, no signed urls (those stay in the state file for `wsw job`)."""
+    job = j.get('job') if isinstance(j.get('job'), dict) else None
+    s = {'ok': True, 'job': None}
+    if job:
+        s.update({'job': job.get('id'), 'pid': job.get('pid'), 'page': job.get('page'), 'takes': job.get('takes'),
+                  'done': job.get('done'), 'failed': job.get('failed'), 'submits': job.get('submits'),
+                  'resumed': bool(j.get('resumed')), 'refs': len(j.get('refs') or [])})
+    else:
+        for k in ('reason', 'retryAfter', 'cooldownReason'):
+            if k in j:
+                s[k] = j[k]
+    return s
+
+
+def cmd_claim(args):
+    force = '--force' in args
+    rest = [a for a in args if a != '--force']
+    if os.environ.get('WSW_GATE') != '1':
+        out({'ok': False, 'error': 'claim runs only in the opsbox idle gate; the agent reads its job with `wsw job`'}, 1)
+    uc = under_claude()
+    if uc is not False:
+        out({'ok': False, 'error': 'claim refused: ' + ('running under a Claude process' if uc else 'cannot verify the process tree')}, 1)
+    name = worker_name(rest[0] if rest else None)
+    st = claimed()
+    if st:
+        sid = st['job']['id']
+        if not force:
+            out({'ok': False, 'stateJob': sid, 'error': 'the state still holds open job %s (a run that was killed); the gate retries with --force' % sid}, 3)
+        # --force (gate only, under opsjob's flock, so the run that held it is gone): is it still ours on the server?
+        s = call('status', {'worker': name}, method='GET')
+        if not s.get('ok'):
+            out(s, 1)
+        a = next((x for x in (s.get('active') or []) if isinstance(x, dict) and x.get('id') == sid), None)
+        if not (a and a.get('status') == 'running' and a.get('worker') == name):
+            with _StateLock():   # finished, cancelled, re-queued or someone else's: the old state is stale
+                _drop_state(CLAIM, 'claim.prev.json')
+                _drop_state(TOKEN)
+    j = call('claim', {'worker': name})
+    if not j.get('ok'):
+        out(j, 1)
+    job = j.get('job')
+    with _StateLock():
+        _drop_state(TOKEN)
+        if not isinstance(job, dict) or not job.get('id'):
+            if claimed():
+                _drop_state(CLAIM, 'claim.prev.json')
+            out(claim_summary(j), 2)
+        _write_state(CLAIM, {'job': job, 'refs': j.get('refs') or [], 'resumed': bool(j.get('resumed')), 'worker': name,
+                             'claimedAt': now_iso(), 'serverTime': j.get('serverTime'),
+                             'promptSha256': prompt_sha256(job.get('prompt') or '')})
+    out(claim_summary(j), 0)
 
 
 _KEY = []
@@ -98,6 +298,7 @@ def call(do, params=None, method='POST', timeout=40, retries=3):
     """One request to ws-worker.php. Returns the decoded JSON (dict). Network errors and 5xx are retried."""
     key = get_key()
     params = {k: v for k, v in (params or {}).items() if v is not None}
+    params.setdefault('worker', worker_name())   # liveness (data/ws/worker-seen.json) on every call
     q = {'do': do}
     data = None
     if method == 'GET':
@@ -146,13 +347,24 @@ def host_ok(host, suffixes):
 
 def put_ref(ref_url, upload_url):
     """GET a signed ref from the Studio (no key needed), PUT it to a Higgsfield presigned upload URL."""
+    st = claimed()
+    if not st:
+        out({'ok': False, 'error': 'no claimed job: put-ref only copies refs of the claimed job'}, 1)
     base = urllib.parse.urlsplit(BASE)
     r = urllib.parse.urlsplit(ref_url)
     if (r.scheme, r.netloc, r.path) != (base.scheme, base.netloc, base.path) or 'do=refimg' not in (r.query or ''):
-        out({'ok': False, 'error': 'REF_URL must be a signed ref url from wsw claim'}, 1)
+        out({'ok': False, 'error': 'REF_URL must be a signed ref url from wsw job'}, 1)
+    if ref_url not in [x.get('url') for x in (st.get('refs') or []) if isinstance(x, dict)]:
+        out({'ok': False, 'error': 'REF_URL is not one of the refs of the claimed job %s' % st['job']['id']}, 1)
     u = urllib.parse.urlsplit(upload_url)
-    if u.scheme != 'https' or u.username or u.password or (u.port not in (None, 443)) or not host_ok(u.hostname, UPLOAD_HOSTS):
-        out({'ok': False, 'error': 'UPLOAD_URL host not allowed: %s' % (u.hostname or '?')}, 1)
+    try:
+        port = u.port
+    except ValueError:
+        port = -1
+    host = (u.hostname or '').lower().rstrip('.')
+    if u.scheme != 'https' or u.username or u.password or (port not in (None, 443)) \
+            or not (host in UPLOAD_HOSTS_EXACT or host_ok(host, UPLOAD_HOST_SUFFIXES)):
+        out({'ok': False, 'error': 'UPLOAD_URL host not allowed: %s' % (host or '?')}, 1)
     try:
         with _OPENER.open(urllib.request.Request(ref_url, headers={'User-Agent': UA}), timeout=60) as resp:
             ctype = (resp.headers.get('Content-Type') or '').split(';')[0].strip()
@@ -184,10 +396,14 @@ def main(argv):
     cmd, args = argv[0], argv[1:]
 
     if cmd == 'claim':
-        j = call('claim', {'worker': worker_name(args[0] if args else None)})
-        if not j.get('ok'):
-            out(j, 1)
-        out(j, 0 if j.get('job') else 2)
+        cmd_claim(args)
+
+    if cmd == 'job':
+        st = claimed()
+        if not st:
+            out({'ok': False, 'job': None, 'error': 'no claimed job: nothing to do in this run (or it is already closed)'}, 2)
+        out({'ok': True, 'job': st['job'], 'refs': st.get('refs') or [], 'resumed': bool(st.get('resumed')),
+             'claimedAt': st.get('claimedAt')}, 0)
 
     if cmd in ('status', 'pending'):
         p = {'worker': worker_name(args[0] if args else None)}
@@ -203,10 +419,17 @@ def main(argv):
 
     if cmd == 'submit-ok':
         need(args, 1, 'submit-ok JOB')
+        st = require_job(args[0])
         t0 = time.time()
         while True:
             j = call('submit_ok', {'job': args[0]})
             if j.get('ok'):
+                # the one-shot token ws_hook.py checks before letting ONE generate_image through (180 s)
+                job = st['job']
+                with _StateLock():
+                    _write_state(TOKEN, {'job': job['id'], 'promptSha256': st.get('promptSha256') or prompt_sha256(job.get('prompt') or ''),
+                                         'aspect': str(job.get('aspect') or ''), 'maxMedias': len(st.get('refs') or []),
+                                         'ts': int(time.time()), 'used': False, 'submits': j.get('submits')})
                 out(j, 0)
             if j.get('stop'):
                 out(j, 2)
@@ -223,6 +446,7 @@ def main(argv):
 
     if cmd == 'heartbeat':
         need(args, 1, 'heartbeat JOB [NOTE]')
+        require_job(args[0])
         j = call('heartbeat', {'job': args[0], 'note': ' '.join(args[1:])[:200] or None})
         if not j.get('ok'):
             out(j, 1)
@@ -230,26 +454,34 @@ def main(argv):
 
     if cmd == 'ingest':
         need(args, 2, 'ingest JOB URL [GEN]')
+        require_job(args[0])
         j = call('ingest_url', {'job': args[0], 'url': args[1].strip(), 'gen': (args[2] if len(args) > 2 else None)}, timeout=150)
         out(j, 0 if j.get('ok') else 1)
 
     if cmd == 'fail':
         need(args, 2, 'fail JOB REASON')
+        require_job(args[0])
         j = call('take_failed', {'job': args[0], 'reason': ' '.join(args[1:])[:300]}, retries=1)   # not idempotent: no retry
         out(j, 0 if j.get('ok') else 1)
 
     if cmd == 'cooldown':
         need(args, 2, 'cooldown MINUTES REASON')
-        if not args[0].isdigit():
-            out({'ok': False, 'error': 'MINUTES must be a whole number 1..240'}, 1)
-        j = call('cooldown', {'minutes': args[0], 'reason': ' '.join(args[1:])[:200]})
+        if not args[0].isdigit() or len(args[0]) > 4:
+            out({'ok': False, 'error': 'MINUTES must be a whole number 1..60'}, 1)
+        j = call('cooldown', {'minutes': str(max(1, min(60, int(args[0])))), 'reason': ' '.join(args[1:])[:200]})
         out(j, 0 if j.get('ok') else 1)
 
     if cmd == 'done':
         need(args, 2, 'done JOB done|error [NOTE]')
         if args[1] not in ('done', 'error'):
             out({'ok': False, 'error': 'status must be done or error'}, 1)
+        require_job(args[0])
         j = call('done', {'job': args[0], 'status': args[1], 'note': ' '.join(args[2:])[:300] or None})
+        if j.get('ok'):   # closed: clear the state, so every further job command (and this run) stops here
+            with _StateLock():
+                _drop_state(CLAIM, 'claim.done.json')
+                _drop_state(TOKEN)
+            j['runOver'] = True
         out(j, 0 if j.get('ok') else 1)
 
     if cmd == 'put-ref':

@@ -1199,7 +1199,7 @@ $charName = fn($k) => $k === '_scenes' ? 'Scenes & locations' : ($k === '_props'
 </div>
 
 <?php $qaAnalysis = []; foreach ($panels as $m) if (!empty($m['analysis'])) $qaAnalysis[$m['file']] = $m['analysis']; ?>
-<script>window.STUDIO_ANALYSIS = <?= json_encode($qaAnalysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;</script>
+<script>window.STUDIO_ANALYSIS = <?= json_encode($qaAnalysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script>
 (function(){
   var root = document.getElementById('cockpit');

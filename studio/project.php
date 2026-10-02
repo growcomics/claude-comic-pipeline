@@ -144,5 +144,5 @@ uksort($groups, function($a,$b) use ($bn){ if($a==='Ungrouped') return 1; if($b=
   </div>
 </div>
 <?php $analysis = []; foreach ($imgs as $im) if (!empty($im['analysis'])) $analysis[$im['file']] = $im['analysis']; ?>
-<script>window.STUDIO_ANALYSIS = <?= json_encode($analysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;</script>
+<script>window.STUDIO_ANALYSIS = <?= json_encode($analysis, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;</script>
 <script src="assets/studio.js?v=<?= @filemtime(STUDIO_ROOT . '/assets/studio.js') ?>"></script></body></html>

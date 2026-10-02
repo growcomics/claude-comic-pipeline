@@ -384,8 +384,13 @@ function ws_job_cancel(string $jobId, string $pid): array {
             if (($x['id'] ?? '') !== $jobId || ($x['pid'] ?? '') !== $pid) continue;
             if (!in_array($x['status'], ['queued', 'running'], true)) return [$j, ['ok' => false, 'error' => 'That job already finished.']];
             if (!ws_is_owner() && ws_is_lt() && ($x['uid'] ?? '') !== ws_uid()) return [$j, ['ok' => false, 'error' => 'You can only cancel your own jobs.']];
-            $left = max(0, (int)$x['takes'] - (int)$x['done'] - (int)$x['failed']);
-            if ($x['status'] === 'queued') { $x['status'] = 'cancelled'; $x['finishedAt'] = ws_now(); ws_quota_release((string)$x['uid'], $left, (string)$x['day']); }
+            // give back only slots that were never submitted (a submitted take may already be billed); once only
+            $used = max((int)($x['submits'] ?? 0), (int)$x['done'] + (int)$x['failed']);
+            $left = max(0, (int)$x['takes'] - $used);
+            if ($x['status'] === 'queued') {
+                $x['status'] = 'cancelled'; $x['finishedAt'] = ws_now();
+                if (empty($x['released']) && !array_key_exists('quotaReleased', $x)) { ws_quota_release((string)$x['uid'], $left, (string)$x['day']); $x['quotaReleased'] = $left; $x['released'] = true; }
+            }
             else { $x['stopRequested'] = true; }
             return [$j, ['ok' => true]];
         }

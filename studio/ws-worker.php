@@ -10,15 +10,20 @@
 //
 //   GET|POST do=claim      worker=<name>        -> {job:{…}|null, reason?, refs:[{file,label,kind,url}]}
 //   GET      do=refimg     p,f,exp,sig (no key) -> the full-size image bytes (signed URL, 2 h)
-//   POST     do=submit_ok  job                  -> {ok:true} | {ok:false, wait:N} | {ok:false, stop:true}
+//   POST     do=submit_ok  job                  -> {ok:true} | {ok:false, wait:N} | {ok:false, stop:true, error?}
 //   POST     do=heartbeat  job[, note]          -> {ok, stop}
 //   POST     do=ingest_url job, url[, gen]      -> {ok, file, done} | {ok, duplicate:true}
 //   POST     do=take_failed job, reason         -> {ok, failed}
-//   POST     do=cooldown   minutes, reason      -> {ok, until}
+//   POST     do=cooldown   minutes(1..60), reason -> {ok, until, set}   (never extends a cooldown already running)
 //   POST     do=done       job, status=done|error[, note] -> {ok, status}
 //   GET      do=status     [worker=<name>]      -> {ok, counts, meta, enabled, claimable, active[]}
+// Every keyed verb may carry worker=<name>; liveness goes to data/ws/worker-seen.json (ws_worker_touch), never jobs.json.
 //
-// Locks: only data/ws/jobs.json (ws_jobs_mutate), plus the usage lock taken INSIDE it for quota releases
+// Quota = SUBMITS (every generate call may be charged), not landed images: enqueue reserved `takes` images; each
+// submit past `takes` reserves one more (refused -> stop), at most takes x 2 submits per job; closing a job gives back
+// only the never-submitted slots, once (job.released).
+//
+// Locks: only data/ws/jobs.json (ws_jobs_mutate), plus the usage lock taken INSIDE it for quota reserves/releases
 // (jobs -> usage, the one allowed nesting). Image storing and chat appends run after the jobs lock is released.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
@@ -29,8 +34,13 @@ define('WS_WK_MAX_ATTEMPTS', 3);         // re-queues before a job is given up a
 define('WS_WK_REF_TTL', 7200);           // signed ref URLs live 2 h
 define('WS_WK_MAX_DL', 30 * 1024 * 1024);
 define('WS_WK_DL_TIMEOUT', 60);
-define('WS_WK_HOSTS', ['cloudfront.net', 'higgsfield.ai', 'amazonaws.com', 'googleusercontent.com']);
-define('WS_WK_TRIES_PER_TAKE', 4);       // 1 try + 3 retries (owner rule); bounds submit_ok calls per job
+// Where Higgsfield serves generation results (results.rawUrl). Checked 2026-10-01 against the owner's archive of
+// 30,062 Higgsfield generations: every image rawUrl is on d8j0ntlcm91z4.cloudfront.net (2 older ones, another account,
+// on dqv0cqkoy5oj7.cloudfront.net); cdn.higgsfield.ai served a few older outputs. Nothing else is downloaded. If
+// Higgsfield moves its CDN, add the exact host to data/ws/worker.json "ingestHosts" (no code change needed).
+define('WS_WK_HOSTS_EXACT', ['d8j0ntlcm91z4.cloudfront.net', 'dqv0cqkoy5oj7.cloudfront.net']);
+define('WS_WK_HOST_SUFFIXES', ['higgsfield.ai']);
+define('WS_WK_SUBMITS_PER_TAKE', 2);     // hard cap: submit_ok grants at most takes x 2 submits per job
 
 // ---- small helpers (ws_wk_* = local to this file) ------------------------------------
 function ws_wk_cfg(): array { $c = s_read(WS_WORKER, []); return is_array($c) ? $c : []; }
@@ -75,18 +85,48 @@ function ws_wk_find(array $j, string $id): ?int {
     return null;
 }
 function ws_wk_left(array $x): int { return max(0, (int)($x['takes'] ?? 0) - (int)($x['done'] ?? 0)); }
-// Give back the reserved-but-unproduced generations of a finished job, once. Call INSIDE the jobs lock only.
+function ws_wk_is_lt(string $uid): bool { return strncmp($uid, 'lt_', 3) === 0; }
+// Give back the reserved generations a closed job never submitted, exactly once. The enqueue reservation covers the
+// first `takes` submits; a submit, a landed take and a failed take each used one slot (whichever count is larger).
+// Call INSIDE the jobs lock only.
 function ws_wk_release(array &$x): void {
-    if (!empty($x['quotaReleased'])) return;
-    $n = ws_wk_left($x);
+    if (!empty($x['released']) || array_key_exists('quotaReleased', $x)) return;
+    $used = max((int)($x['submits'] ?? 0), (int)($x['done'] ?? 0) + (int)($x['failed'] ?? 0));
+    $n = max(0, (int)($x['takes'] ?? 0) - $used);
     if ($n > 0 && (string)($x['uid'] ?? '') !== '' && (string)($x['day'] ?? '') !== '') ws_quota_release((string)$x['uid'], $n, (string)$x['day']);
-    $x['quotaReleased'] = $n;
+    $x['quotaReleased'] = $n; $x['released'] = true;
+}
+// Last sign of life of a running job: heartbeatAt, else claimedAt (epoch seconds, 0 = never).
+function ws_wk_hb(array $x): int { $hb = ws_wk_ts($x['heartbeatAt'] ?? null); return $hb !== 0 ? $hb : ws_wk_ts($x['claimedAt'] ?? null); }
+function ws_wk_rows(): array {
+    $rows = [];
+    foreach (projects_all() as $p) if (is_array($p) && (string)($p['id'] ?? '') !== '') $rows[(string)$p['id']] = $p;
+    return $rows;
+}
+// May a queued job still run? null = yes; else [final status, note]. The comic must still be the one it was queued on
+// (same created stamp) and still have the job's page, and a lieutenant's job needs that person active with the comic's
+// brand among theirs.
+function ws_wk_unrunnable(array $x, array $rows): ?array {
+    $pid = (string)($x['pid'] ?? ''); $row = $rows[$pid] ?? null;
+    if (!$row) return ['error', 'the comic no longer exists'];
+    $pc = (string)($x['pcreated'] ?? '');
+    if ($pc !== '' && $pc !== (string)($row['created'] ?? '')) return ['error', 'the comic was deleted and recreated'];
+    // the page was deleted after the job was queued (page numbers are never reused, so it cannot come back)
+    if (!ws_page_get(ws_proj($pid), (int)($x['page'] ?? 0))) return ['cancelled', 'cancelled: the page was deleted'];
+    $uid = (string)($x['uid'] ?? '');
+    if (ws_wk_is_lt($uid)) {
+        $p = ws_person($uid);
+        if (!$p || empty($p['active'])) return ['cancelled', 'cancelled: access changed'];
+        $b = ws_project_brand($pid, $row);
+        if ($b === '' || !in_array($b, array_map('strval', (array)($p['brands'] ?? [])), true)) return ['cancelled', 'cancelled: access changed'];
+    }
+    return null;
 }
 function ws_wk_job_out(array $x): array {
     return [
         'id' => (string)$x['id'], 'pid' => (string)$x['pid'], 'page' => (int)$x['page'], 'group' => (string)($x['group'] ?? ws_page_group((int)$x['page'])),
         'prompt' => (string)$x['prompt'], 'aspect' => (string)($x['aspect'] ?? '3:4'), 'takes' => (int)$x['takes'],
-        'done' => (int)($x['done'] ?? 0), 'failed' => (int)($x['failed'] ?? 0),
+        'done' => (int)($x['done'] ?? 0), 'failed' => (int)($x['failed'] ?? 0), 'submits' => (int)($x['submits'] ?? 0),
         'model' => (string)($x['model'] ?? ''), 'resolution' => (string)($x['resolution'] ?? ''),
     ];
 }
@@ -114,7 +154,18 @@ function ws_wk_chat_line(array $x): string {
 }
 
 // ---- download a generated image (SSRF-guarded) ------------------------------------
-// https only, host must end with an allowed CDN suffix, no credentials, port 443 only, the host must resolve to
+// Is $host one of Higgsfield's result hosts? Exact hosts (+ worker.json ingestHosts) or a higgsfield.ai subdomain.
+function ws_wk_host_allowed(string $host): bool {
+    $exact = WS_WK_HOSTS_EXACT;
+    foreach ((array)(ws_wk_cfg()['ingestHosts'] ?? []) as $h) {
+        $h = is_string($h) ? strtolower(trim($h)) : '';
+        if (preg_match('/^[a-z0-9-]+(\.[a-z0-9-]+){2,}$/', $h)) $exact[] = $h;   // a full host name, never a bare suffix
+    }
+    if (in_array($host, $exact, true)) return true;
+    foreach (WS_WK_HOST_SUFFIXES as $sfx) if ($host === $sfx || str_ends_with($host, '.' . $sfx)) return true;
+    return false;
+}
+// https only, host must be a Higgsfield result host, no credentials, port 443 only, the host must resolve to
 // public IPv4 addresses (and is pinned to the checked IP so it cannot re-resolve), ≤3 redirects (each re-checked),
 // 60 s total, ≤30 MB, and the bytes must be a real JPEG/PNG/WebP/GIF. Returns ['ok'=>true,'path','ext'] or error.
 function ws_wk_url_ok(string $url): array {
@@ -125,9 +176,7 @@ function ws_wk_url_ok(string $url): array {
     if (isset($u['port']) && (int)$u['port'] !== 443) return ['ok' => false, 'error' => 'non-standard port'];
     $host = strtolower(rtrim((string)($u['host'] ?? ''), '.'));
     if ($host === '' || $host[0] === '[' || filter_var($host, FILTER_VALIDATE_IP) !== false || !preg_match('/^[a-z0-9.-]+$/', $host)) return ['ok' => false, 'error' => 'host not allowed'];
-    $allowed = false;
-    foreach (WS_WK_HOSTS as $sfx) if ($host === $sfx || str_ends_with($host, '.' . $sfx)) { $allowed = true; break; }
-    if (!$allowed) return ['ok' => false, 'error' => 'host not allowed: ' . $host];
+    if (!ws_wk_host_allowed($host)) return ['ok' => false, 'error' => 'host not allowed: ' . $host];
     $ips = @gethostbynamel($host);
     if (!$ips) return ['ok' => false, 'error' => 'host does not resolve'];
     foreach ($ips as $ip) {
@@ -219,21 +268,41 @@ unset($given);
 $postOnly = ['submit_ok', 'heartbeat', 'ingest_url', 'take_failed', 'cooldown', 'done'];
 if (in_array($do, $postOnly, true) && $method !== 'POST') ws_json_out(['ok' => false, 'error' => 'POST required'], 405);
 $worker = ws_wk_clip(preg_replace('/[^A-Za-z0-9 ._:@-]/', '', ws_wk_in('worker')) ?? '', 40);
+if ($do === 'claim' && $worker === '') $worker = 'worker';
+// liveness for the "worker online" badge: data/ws/worker-seen.json (at most one write per 30 s), never jobs.json
+if ($worker !== '' && in_array($do, ['claim', 'status', 'submit_ok', 'heartbeat', 'ingest_url', 'take_failed', 'cooldown', 'done'], true)) ws_worker_touch($worker);
 
 // ---- claim ----------------------------------------------------------------------------
+// Decided on a plain read first: a claim with nothing to hand out (disabled, cooldown, busy, none) never writes
+// jobs.json. The jobs lock is taken only when there is a job to hand out, resume or close (stale / no longer
+// runnable), and everything is re-checked under it.
 if ($do === 'claim') {
-    if ($worker === '') $worker = 'worker';
     $s = ws_settings(); $dead = [];
-    $res = ws_jobs_mutate(function ($j) use ($worker, $s, &$dead) {
+    $idle = function (string $reason, array $extra = []): void { ws_json_out(['ok' => true, 'job' => null, 'reason' => $reason] + $extra + ['serverTime' => ws_now()]); };
+    if (!ws_wk_enabled($s)) $idle('disabled');
+    $jj = ws_jobs_read(); $now = time();
+    $cd = (int)($jj['meta']['cooldownUntil'] ?? 0);
+    if ($cd > $now) $idle('cooldown', ['retryAfter' => $cd - $now, 'cooldownReason' => (string)($jj['meta']['cooldownReason'] ?? '')]);
+    $act = false; $busy = false; $queued = false;
+    foreach ($jj['jobs'] as $x) {
+        $st = (string)($x['status'] ?? '');
+        if ($st === 'queued') $queued = true;
+        elseif ($st === 'running') {
+            if ($now - ws_wk_hb($x) > WS_WK_STALE_SEC || (string)($x['worker'] ?? '') === $worker) $act = true;   // reap or resume
+            else $busy = true;
+        }
+    }
+    if (!$act && $busy) $idle('busy');
+    if (!$act && !$queued) $idle('none');
+    $rows = ws_wk_rows();
+    $res = ws_jobs_mutate(function ($j) use ($worker, $rows, &$dead) {
         $now = time();
-        $j['meta']['workerSeenAt'] = $now; $j['meta']['workerName'] = $worker;
-        if (!ws_wk_enabled($s)) return [$j, ['job' => null, 'reason' => 'disabled']];
         $cd = (int)($j['meta']['cooldownUntil'] ?? 0);
         if ($cd > $now) return [$j, ['job' => null, 'reason' => 'cooldown', 'retryAfter' => $cd - $now, 'cooldownReason' => (string)($j['meta']['cooldownReason'] ?? '')]];
         // 1) reap running jobs whose worker went quiet
         foreach ($j['jobs'] as &$x) {
             if (($x['status'] ?? '') !== 'running') continue;
-            $hb = ws_wk_ts($x['heartbeatAt'] ?? null); if ($hb === 0) $hb = ws_wk_ts($x['claimedAt'] ?? null);
+            $hb = ws_wk_hb($x);
             if ($now - $hb <= WS_WK_STALE_SEC) continue;
             $x['attempts'] = (int)($x['attempts'] ?? 0) + 1;
             if (!empty($x['stopRequested'])) {
@@ -251,12 +320,16 @@ if ($do === 'claim') {
         foreach ($j['jobs'] as $i => $x) if (($x['status'] ?? '') === 'running' && (string)($x['worker'] ?? '') === $worker) { $pick = $i; $resumed = true; break; }
         // 3) single flight: another worker holds a live job
         if ($pick === null) foreach ($j['jobs'] as $x) if (($x['status'] ?? '') === 'running') return [$j, ['job' => null, 'reason' => 'busy']];
-        // 4) oldest queued job whose comic still exists
+        // 4) oldest queued job that may still run; on the way, close the ones that may not (comic gone or recreated →
+        //    error; lieutenant deactivated or the comic no longer in their brands → cancelled), giving their quota back
         if ($pick === null) {
             foreach ($j['jobs'] as $i => &$x) {
                 if (($x['status'] ?? '') !== 'queued') continue;
-                if (!project_get((string)($x['pid'] ?? ''))) {
-                    $x['status'] = 'error'; $x['finishedAt'] = ws_now(); $x['note'] = 'the comic no longer exists'; ws_wk_release($x); continue;
+                $why = ws_wk_unrunnable($x, $rows);
+                if ($why !== null) {
+                    $x['status'] = $why[0]; $x['finishedAt'] = ws_now(); $x['note'] = $why[1]; ws_wk_release($x);
+                    if ($why[0] === 'cancelled') $dead[] = $x;   // the comic is still there: tell its thread
+                    continue;
                 }
                 $pick = $i; break;
             }
@@ -280,12 +353,9 @@ if ($do === 'claim') {
     ws_json_out(['ok' => true, 'job' => $job, 'refs' => $refs, 'resumed' => (bool)$res['resumed'], 'serverTime' => ws_now()]);
 }
 
-// ---- status (read-only, except: with worker=<name> it also records that the worker's timer is alive) ----
+// ---- status (read-only; with worker=<name> the routing above records that the worker's timer is alive) ----
 if ($do === 'status') {
     $s = ws_settings();
-    if ($worker !== '') {
-        ws_jobs_mutate(function ($j) use ($worker) { $j['meta']['workerSeenAt'] = time(); $j['meta']['workerName'] = $worker; return [$j, null]; });
-    }
     $jj = ws_jobs_read(); $now = time();
     $counts = ['queued' => 0, 'running' => 0, 'done' => 0, 'error' => 0, 'cancelled' => 0];
     $active = []; $claimable = false;
@@ -299,54 +369,69 @@ if ($do === 'status') {
                      'takes' => (int)($x['takes'] ?? 0), 'done' => (int)($x['done'] ?? 0), 'failed' => (int)($x['failed'] ?? 0),
                      'worker' => (string)($x['worker'] ?? ''), 'heartbeatAge' => $hbAge, 'stopRequested' => !empty($x['stopRequested'])];
     }
-    $m = $jj['meta'];
+    $m = $jj['meta']; $seen = ws_worker_seen();
     $cd = (int)($m['cooldownUntil'] ?? 0);
     $enabled = ws_wk_enabled($s);
     if (!$enabled || $cd > $now) $claimable = false;
     ws_json_out(['ok' => true, 'counts' => $counts, 'enabled' => $enabled, 'claimable' => $claimable, 'active' => $active,
-        'meta' => ['workerSeenAt' => (int)($m['workerSeenAt'] ?? 0), 'workerName' => (string)($m['workerName'] ?? ''),
+        'meta' => ['workerSeenAt' => (int)($seen['at'] ?? 0), 'workerName' => is_string($seen['name'] ?? null) ? $seen['name'] : '',
                    'lastSubmitAt' => (int)($m['lastSubmitAt'] ?? 0), 'cooldownUntil' => $cd, 'cooldownReason' => (string)($m['cooldownReason'] ?? ''),
                    'minGapSec' => (int)$s['minGapSec']],
         'serverTime' => ws_now()]);
 }
 
 // ---- cooldown ---------------------------------------------------------------------------
+// The agent reports "out of credits / rate limited" with this, so it is bounded: 1..60 minutes (clamped), and a
+// cooldown that is already running is never extended or re-worded (set:false, its own `until`).
 if ($do === 'cooldown') {
     $min = ws_wk_in('minutes', true);
-    if (!preg_match('/^\d{1,4}$/', $min) || (int)$min < 1) ws_json_out(['ok' => false, 'error' => 'minutes must be 1..240'], 400);
-    $min = min(240, (int)$min); $why = ws_wk_clip(ws_wk_in('reason', true), 200);
-    $until = ws_jobs_mutate(function ($j) use ($min, $why) {
-        $u = time() + $min * 60;
-        $j['meta']['cooldownUntil'] = max($u, (int)($j['meta']['cooldownUntil'] ?? 0));
-        $j['meta']['cooldownReason'] = $why; $j['meta']['cooldownAt'] = ws_now(); $j['meta']['workerSeenAt'] = time();
-        return [$j, (int)$j['meta']['cooldownUntil']];
+    if (!preg_match('/^\d{1,4}$/', $min)) ws_json_out(['ok' => false, 'error' => 'minutes must be a whole number 1..60'], 400);
+    $min = max(1, min(60, (int)$min)); $why = ws_wk_clip(ws_wk_in('reason', true), 200);
+    $cur = (int)(ws_jobs_read()['meta']['cooldownUntil'] ?? 0);
+    if ($cur > time()) ws_json_out(['ok' => true, 'until' => $cur, 'minutes' => $min, 'set' => false]);   // read-only: nothing to write
+    $r = ws_jobs_mutate(function ($j) use ($min, $why) {
+        $now = time(); $cur = (int)($j['meta']['cooldownUntil'] ?? 0);
+        if ($cur > $now) return [$j, ['until' => $cur, 'set' => false]];
+        $j['meta']['cooldownUntil'] = $now + $min * 60;
+        $j['meta']['cooldownReason'] = $why; $j['meta']['cooldownAt'] = ws_now();
+        return [$j, ['until' => (int)$j['meta']['cooldownUntil'], 'set' => true]];
     });
-    ws_json_out(['ok' => true, 'until' => $until, 'minutes' => $min]);
+    ws_json_out(['ok' => true, 'until' => (int)$r['until'], 'minutes' => $min, 'set' => (bool)$r['set']]);
 }
 
 // ---- verbs on one job ------------------------------------------------------------------
 $jobId = preg_replace('/[^A-Za-z0-9_-]/', '', ws_wk_in('job', true)) ?? '';
 if (in_array($do, ['submit_ok', 'heartbeat', 'ingest_url', 'take_failed', 'done'], true) && $jobId === '') ws_json_out(['ok' => false, 'error' => 'job required'], 400);
 
+// The credit gate: every generate call needs its own ok here. Quota counts SUBMITS: the first `takes` are covered by
+// the reservation made at enqueue, each one after that reserves one more image of the person's quota (refused → stop),
+// and a job never gets more than takes x 2.
 if ($do === 'submit_ok') {
-    $gap = max(5, (int)ws_settings()['minGapSec']);
+    $s = ws_settings();
+    if (!ws_wk_enabled($s)) ws_json_out(['ok' => false, 'stop' => true, 'error' => 'generator paused']);
+    $gap = max(5, (int)$s['minGapSec']);
     $r = ws_jobs_mutate(function ($j) use ($jobId, $gap) {
         $i = ws_wk_find($j, $jobId); $now = time();
         if ($i === null) return [$j, ['ok' => false, 'stop' => true, 'error' => 'unknown job']];
         $x = &$j['jobs'][$i];
-        $j['meta']['workerSeenAt'] = $now;
         if (($x['status'] ?? '') !== 'running' || !empty($x['stopRequested'])) return [$j, ['ok' => false, 'stop' => true]];
         $x['heartbeatAt'] = $now;
+        $takes = (int)($x['takes'] ?? 0); $sub = (int)($x['submits'] ?? 0); $cap = $takes * WS_WK_SUBMITS_PER_TAKE;
+        if ((int)($x['done'] ?? 0) + (int)($x['failed'] ?? 0) >= $takes) return [$j, ['ok' => false, 'stop' => true, 'error' => 'every take of this job is finished']];
+        if ($sub >= $cap) return [$j, ['ok' => false, 'stop' => true, 'error' => "submit cap for this job reached ($cap submits)"]];
         $cd = (int)($j['meta']['cooldownUntil'] ?? 0);
         if ($cd > $now) return [$j, ['ok' => false, 'wait' => $cd - $now, 'cooldown' => true, 'reason' => (string)($j['meta']['cooldownReason'] ?? '')]];
         $since = $now - (int)($j['meta']['lastSubmitAt'] ?? 0);
         if ($since < $gap) return [$j, ['ok' => false, 'wait' => $gap - $since]];
-        // credit guard: at most 4 submits (1 try + 3 retries) per take of this job
-        $budget = (int)$x['takes'] * WS_WK_TRIES_PER_TAKE;
-        if ((int)($x['submits'] ?? 0) >= $budget) return [$j, ['ok' => false, 'stop' => true, 'error' => "submit budget for this job used up ($budget tries)"]];
-        $x['submits'] = (int)($x['submits'] ?? 0) + 1;
+        if ($sub >= $takes) {   // past the enqueue reservation: this submit costs one more image (jobs -> usage lock)
+            $uid = (string)($x['uid'] ?? '');
+            $q = ws_quota_reserve($uid, 1, ws_wk_is_lt($uid));
+            if (empty($q['ok'])) return [$j, ['ok' => false, 'stop' => true, 'error' => 'quota: ' . (string)($q['error'] ?? 'no images left today')]];
+            $x['extraSubmits'] = (int)($x['extraSubmits'] ?? 0) + 1;
+        }
+        $x['submits'] = $sub + 1;
         $j['meta']['lastSubmitAt'] = $now;
-        return [$j, ['ok' => true, 'submits' => $x['submits'], 'budget' => $budget]];
+        return [$j, ['ok' => true, 'submits' => $x['submits'], 'cap' => $cap]];
     });
     ws_json_out($r);
 }
@@ -355,7 +440,6 @@ if ($do === 'heartbeat') {
     $note = ws_wk_clip(ws_wk_in('note', true), 200);
     $r = ws_jobs_mutate(function ($j) use ($jobId, $note) {
         $i = ws_wk_find($j, $jobId);
-        $j['meta']['workerSeenAt'] = time();
         if ($i === null) return [$j, ['ok' => false, 'stop' => true, 'error' => 'unknown job']];
         $x = &$j['jobs'][$i];
         $running = ($x['status'] ?? '') === 'running';
@@ -374,7 +458,7 @@ if ($do === 'take_failed') {
         if (($x['status'] ?? '') !== 'running') return [$j, ['ok' => false, 'error' => 'job is not running', 'status' => (string)$x['status']]];
         $x['failed'] = min(ws_wk_left($x), (int)($x['failed'] ?? 0) + 1);
         $x['note'] = $why !== '' ? 'take failed: ' . $why : 'take failed';
-        $x['heartbeatAt'] = time(); $j['meta']['workerSeenAt'] = time();
+        $x['heartbeatAt'] = time();
         return [$j, ['ok' => true, 'failed' => (int)$x['failed'], 'done' => (int)($x['done'] ?? 0), 'takes' => (int)$x['takes']]];
     });
     ws_json_out($r, empty($r['ok']) && ($r['error'] ?? '') === 'unknown job' ? 404 : 200);
@@ -388,7 +472,6 @@ if ($do === 'done') {
         $i = ws_wk_find($j, $jobId);
         if ($i === null) return [$j, ['ok' => false, 'error' => 'unknown job']];
         $x = &$j['jobs'][$i];
-        $j['meta']['workerSeenAt'] = time();
         $st = (string)($x['status'] ?? '');
         if (in_array($st, ['done', 'error', 'cancelled'], true)) return [$j, ['ok' => true, 'already' => true, 'status' => $st]];
         if ($st !== 'running') return [$j, ['ok' => false, 'error' => 'job is not running', 'status' => $st]];
@@ -427,7 +510,7 @@ if ($do === 'ingest_url') {
         $pend = (array)($x['ingesting'] ?? []);
         if (isset($pend[$ikey]) && $now - (int)$pend[$ikey] < 180) return [$j, ['ok' => false, 'error' => 'this result is already being ingested; retry in a minute', 'code' => 409]];
         if ((int)($x['done'] ?? 0) >= (int)$x['takes']) return [$j, ['ok' => false, 'error' => 'every take of this job has already landed', 'code' => 409]];
-        $pend[$ikey] = $now; $x['ingesting'] = $pend; $x['heartbeatAt'] = $now; $j['meta']['workerSeenAt'] = $now;
+        $pend[$ikey] = $now; $x['ingesting'] = $pend; $x['heartbeatAt'] = $now;
         return [$j, ['ok' => true, 'job' => $x]];
     });
     if (empty($r['ok']) || !empty($r['duplicate'])) { $code = (int)($r['code'] ?? 200); unset($r['code']); ws_json_out($r, $code); }

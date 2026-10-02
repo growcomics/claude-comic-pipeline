@@ -69,19 +69,35 @@ for (const d of ['/www/studio/data/ws', '/www/studio/uploads', '/www/admin/data'
 // TEST-ONLY: when /tmp/ws-test-canned.json exists, ws_ai_call() records the request it WOULD send
 // (body + headers minus the key) and returns the canned answer instead of calling the network.
 // The hook sits right before curl, so the real body/header building (model, fallbacks, beta) runs.
-const CANNED = '/tmp/ws-test-canned.json', LASTREQ = '/tmp/ws-test-lastreq.json';
+// It also snapshots usage.json as it is DURING the call (reservation + in-flight mark).
+// Canned failure: {ok:false, error, json?}: with a json error body = a definite API error (HTTP 4xx/5xx),
+// without one = a transport error / timeout (ws_ai_call returns json null for those).
+const CANNED = '/tmp/ws-test-canned.json', LASTREQ = '/tmp/ws-test-lastreq.json', USAGE_DURING = '/tmp/ws-test-usage-during.json';
 {
   let w = php.readFileAsText('/www/studio/inc/workspace.php');
   const at = '    @set_time_limit($timeout + 20);';
   if (!w.includes(at)) { console.error('cannot patch inc/workspace.php for the canned Claude answer'); process.exit(2); }
   w = w.replace(at, `    if (is_file('${CANNED}')) {
         file_put_contents('${LASTREQ}', json_encode(['body' => $body, 'headers' => array_values(array_filter($headers, fn($h) => stripos($h, 'x-api-key') !== 0))]));
+        @copy(WS_USAGE, '${USAGE_DURING}');
         $c = json_decode((string)file_get_contents('${CANNED}'), true);
-        if (empty($c['ok'])) return ['ok' => false, 'json' => null, 'error' => (string)$c['error'], 'usd' => 0.0];
+        if (empty($c['ok'])) return ['ok' => false, 'json' => $c['json'] ?? null, 'error' => (string)$c['error'], 'usd' => 0.0];
         return ['ok' => true, 'json' => $c['json'], 'error' => null, 'usd' => ws_ai_cost($c['json'])];
     }
 ` + at);
   php.writeFile('/www/studio/inc/workspace.php', w);
+}
+// TEST-ONLY: an "old" Studio bootstrap = today's inc/boot.php without the lieutenant hook in is_authed() and
+// without loading inc/workspace.php (what an older redeployed boot.php looks like), plus two probe pages on it.
+// A lieutenant session must look signed out there (fail closed), an owner session signed in.
+{
+  const b = php.readFileAsText('/www/studio/inc/boot.php');
+  const hook = /^\s*if \(!empty\(\$_SESSION\['studio_lt'\]\).*ws_gate\(\).*\n/m, inc = /^if \(is_file\(__DIR__ \. '\/workspace\.php'\)\).*\n/m;
+  if (!hook.test(b) || !inc.test(b)) { console.error('cannot build the legacy boot.php copy (hook or include line not found)'); process.exit(2); }
+  php.writeFile('/www/studio/inc/boot-legacy.php', b.replace(hook, '').replace(inc, ''));
+  php.mkdirTree('/www/studio/legacy-probe');
+  php.writeFile('/www/studio/legacy-probe/index.php', `<?php declare(strict_types=1); require_once __DIR__ . '/../inc/boot-legacy.php'; echo is_authed() ? 'LEGACY AUTHED' : 'LEGACY SIGNED OUT', ' ws=', function_exists('ws_gate') ? '1' : '0';`);
+  php.writeFile('/www/studio/legacy-probe/page.php', `<?php declare(strict_types=1); require_once __DIR__ . '/../inc/boot-legacy.php'; require_auth(); echo 'LEGACY PAGE';`);
 }
 // Dummy pages that exist on the live server but not in this worktree (same auth hook as the live ones:
 // finance.php calls require_auth(); pulse/index.php calls is_authed() from a sub-folder).
@@ -203,7 +219,10 @@ check('owner opens team.php', r.status === 200 && r.text.includes('Team') && OWN
 
 r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'brands', 'brand[alpha-comic]': '3DMC', 'brand[beta-comic]': '3DMC', 'brand[gamma-comic]': 'Maxx Muscle' });
 let team = readJson(D + '/ws/team.json');
-check('team.php brands: 3 comics assigned to 2 brands', r.status === 303 && team && team.projectBrands['alpha-comic'] === '3DMC' && team.projectBrands['beta-comic'] === '3DMC' && team.projectBrands['gamma-comic'] === 'Maxx Muscle', [short(r), team && team.projectBrands]);
+const pbIs = (pb, brand, created) => !!pb && typeof pb === 'object' && pb.brand === brand && pb.created === created;
+check('team.php brands: 3 comics assigned to 2 brands, stored as {brand, created} (created = the comic\'s stamp)', r.status === 303 && team
+  && pbIs(team.projectBrands['alpha-comic'], '3DMC', '2026-09-01') && pbIs(team.projectBrands['beta-comic'], '3DMC', '2026-09-01')
+  && pbIs(team.projectBrands['gamma-comic'], 'Maxx Muscle', '2026-09-01'), [short(r), team && team.projectBrands]);
 
 r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'add', name: 'Lt One', 'brands[0]': '3DMC' });
 check('team.php add person -> 303', r.status === 303 && /team\.php#people/.test(r.loc), short(r));
@@ -219,6 +238,15 @@ check('team.json stores only the token hash, never the token', !readText(D + '/w
 section('GATE: lieutenant magic link + confinement');
 r = await lt.get('/studio/ws.php?t=' + TOK1);
 check('ws.php?t=<token> -> 302 ws.php + session', r.status === 302 && r.loc === 'ws.php' && !!lt.sid, short(r));
+{
+  const sess = readText('/tmp/sess/sess_' + lt.sid) || '';
+  check('lieutenant session carries studio_lt (never studio_ok)', /(^|;|\})studio_lt\|b:1;/.test(sess) && !sess.includes('studio_ok') && /studio_role\|s:10:"lieutenant";/.test(sess), sess.slice(0, 300));
+  const p1 = await lt.get('/studio/legacy-probe/index.php'), p2 = await lt.get('/studio/legacy-probe/page.php');
+  const o1 = await owner.get('/studio/legacy-probe/index.php');
+  check('old boot.php without the hook: lieutenant = signed out (fail closed), owner still signed in',
+    p1.status === 200 && p1.text.startsWith('LEGACY SIGNED OUT ws=0') && p2.status === 302 && p2.loc === 'login.php' && !p2.text.includes('LEGACY PAGE')
+    && o1.text.startsWith('LEGACY AUTHED'), [short(p1), short(p2), short(o1)]);
+}
 r = await lt.get('/studio/ws.php');
 let LT_BOOT = bootFromHtml(r.text, 'wsboot'); let LT_CSRF = LT_BOOT && LT_BOOT.csrf;
 check('lt list: own-brand comics only, no Studio/Team links', r.status === 200 && r.text.includes('Alpha Comic') && r.text.includes('Beta Comic') && !r.text.includes('Gamma') && !r.text.includes('href="team.php"') && !r.text.includes('href="index.php"') && !!LT_CSRF, short(r));
@@ -371,7 +399,8 @@ const C = r.json && r.json.id;
 check('lt create own brand -> ok', r.status === 200 && C === 'lt-made-comic', short(r));
 const projs = readJson(D + '/projects.json');
 team = readJson(D + '/ws/team.json');
-check('create: project row + brand + style + chat line', projs.some(p => p.id === C && p.stage === 'page-build') && team.projectBrands[C] === '3DMC'
+const cRow = projs.find(p => p.id === C);
+check('create: project row + brand {3DMC, the row\'s created} + style + chat line', !!cRow && cRow.stage === 'page-build' && pbIs(team.projectBrands[C], '3DMC', cRow.created)
   && readJson(D + `/ws/proj-${C}.json`).style === 'glossy 3D render' && /created by Lt One/.test(readText(D + `/ws/chat-${C}.json`) || ''), team.projectBrands);
 r = await lt.get(`/studio/ws.php?p=${C}`);
 check('lt opens the new comic', r.status === 200 && bootFromHtml(r.text, 'wsboot').pid === C, short(r));
@@ -405,7 +434,11 @@ check('page_delete n=3 -> ok', r.status === 200 && r.json.ok, short(r));
 r = await L('page_delete', { n: '3' }, C);
 check('page_delete missing page -> 404', r.status === 404, short(r));
 r = await L('page_save', { n: '0', title: 'Third again', prompt: 'Wide shot again.' }, C);
-check('page_save after delete reuses the next number (3)', r.json && r.json.n === 3, short(r));
+check('page_save after deleting the top page -> 4 (page numbers are never reused)', r.json && r.json.n === 4 && readJson(D + `/ws/proj-${C}.json`).nextN === 5, short(r));
+r = await L('page_save', { n: '3', title: 'Old three', prompt: 'x' }, C);
+check('page_save n=<the deleted number> -> 400, not recreated', r.status === 400 && /never reused/.test(r.json.error) && !readJson(D + `/ws/proj-${C}.json`).pages.some(p => p.n === 3), short(r));
+r = await L('page_save', { n: '1000', title: 'x' }, C);
+check('page_save n=1000 -> 400', r.status === 400, short(r));
 
 r = await L('upload', { kind: 'ref', 'files[]': new File([UPLOAD_PNG], 'Andrea sheet.png', { type: 'image/png' }) }, C);
 const REF1 = r.json && r.json.files && r.json.files[0];
@@ -520,6 +553,7 @@ check('chat since=<last> -> empty', r.status === 200 && r.json.msgs.length === 0
     { aid: 'a2', kind: 'generate', args: { page: 99, takes: 2 }, summary: 'Generate 2 takes of page 99', status: 'pending' },
     { aid: 'a3', kind: 'add_pages', args: { pages: [{ title: 'Extra', prompt: 'Extra page.' }] }, summary: 'Add 1 page: Extra', status: 'pending' },
     { aid: 'a4', kind: 'set_prompt', args: { page: 0, prompt: '' }, summary: 'invalid', status: 'pending' },
+    { aid: 'a5', kind: 'set_prompt', args: { page: 3, title: 'Back from the dead', prompt: 'Recreate the deleted page.' }, summary: 'Set page 3 prompt', status: 'pending' },
   ] });
   chat.msgs.push({ id: ++id, ts: now - 3 * 86400, uid: 'claude', by: 'Claude', role: 'ai', text: 'old', actions: [
     { aid: 'a1', kind: 'add_pages', args: { pages: [{ title: 'Old', prompt: 'Old.' }] }, summary: 'old', status: 'pending' }] });
@@ -543,6 +577,9 @@ st = (await lt.get(`/studio/ws-api.php?do=state&p=${C}`)).json;
 check('dismiss -> card dismissed, nothing added', r.status === 200 && cardStatus(aiMsg, 'a3') === 'dismissed' && st.pages.length === pagesBefore, short(r));
 r = await L('action', { msg: String(aiMsg), aid: 'a4', decision: 'confirm' }, C);
 check('confirm an invalid (re-validated) card -> 400, failed', r.status === 400 && cardStatus(aiMsg, 'a4') === 'failed', short(r));
+r = await L('action', { msg: String(aiMsg), aid: 'a5', decision: 'confirm' }, C);
+check('confirm set_prompt for a deleted page number -> 400, failed, page not recreated', r.status === 400 && /never reused/.test(r.json.error) && cardStatus(aiMsg, 'a5') === 'failed'
+  && !readJson(D + `/ws/proj-${C}.json`).pages.some(p => p.n === 3), short(r));
 r = await L('action', { msg: String(oldMsg), aid: 'a1', decision: 'confirm' }, C);
 check('card older than a day -> 409', r.status === 409 && /day old/.test(r.json.error), short(r));
 r = await L('action', { msg: String(userMsg), aid: 'a1', decision: 'confirm' }, C);
@@ -577,7 +614,16 @@ check('outgoing request: claude-opus-5-5, effort low, json_schema format, cached
 check('context sent to Claude is built server-side (comic, story, pages, quota)', req && /Comic: Lt Made Comic/.test(req.body.messages[0].content) && /Once upon a gym/.test(req.body.messages[0].content)
   && /Images left today for Lt One/.test(req.body.messages[0].content) && /NEW MESSAGE from Lt One: Claude, add two gym pages/.test(req.body.messages[0].content));
 u = usageToday();
-check('chat usage: 1 reply counted, cost recorded', u.users[LT_ID].msgs === 1 && u.users[LT_ID].usd > 0, u.users[LT_ID]);
+// usage.json users[LT] as it was DURING the call (snapshot taken by the canned hook)
+const usageDuring = () => { const x = readJson(USAGE_DURING) || {}; const ds = Object.keys(x.days || {}).sort(); return ds.length ? ((x.days[ds[ds.length - 1]].users || {})[LT_ID] || {}) : {}; };
+const near = (a, b) => Math.abs((+a || 0) - (+b || 0)) < 1e-6;
+const nowS = () => Math.floor(Date.now() / 1000);
+{
+  const during = usageDuring();
+  check('during the call: 1 message taken, worst-case $ reserved up front (> $0.08 for 4000 output tokens), in-flight mark set',
+    during.msgs === 1 && during.usd > 0.08 && Math.abs(during.inflight - nowS()) < 30, during);
+  check('after the call: reservation settled to the real cost ($0.0224), in-flight cleared', u.users[LT_ID].msgs === 1 && near(u.users[LT_ID].usd, 0.0224) && u.users[LT_ID].inflight === 0, u.users[LT_ID]);
+}
 st = (await lt.get(`/studio/ws-api.php?do=state&p=${C}`)).json;
 const nPagesBefore = st.pages.length;
 r = await L('action', { msg: String(aiRow.id), aid: 'a1', decision: 'confirm' }, C);
@@ -592,10 +638,52 @@ check('max_tokens -> system line about a too-long answer', r.status === 200 && r
 canned({ ok: true, json: { model: 'claude-opus-5-5', stop_reason: 'end_turn', content: [{ type: 'text', text: 'not json at all' }], usage: {} } });
 r = await L('chat_send', { text: 'hello?', ai: '1' }, C);
 check('unreadable answer -> system line, no 500', r.status === 200 && r.json.msgs[1].role === 'system' && /could not be read/.test(r.json.msgs[1].text), short(r));
-canned({ ok: false, error: 'Claude error (529): overloaded' });
-const msgsBeforeFail = usageToday().users[LT_ID].msgs;
-r = await L('chat_send', { text: 'are you there', ai: '1' }, C);
-check('API error -> system line, chat count refunded', r.status === 200 && /overloaded/.test(r.json.msgs[1].text) && usageToday().users[LT_ID].msgs === msgsBeforeFail, [short(r), usageToday().users[LT_ID]]);
+// Edit one person's row of today's usage.json (fixture surgery: simulate another request in flight, a full minute, ...).
+const editUsage = (uid, fn) => {
+  const x = readJson(D + '/ws/usage.json') || {}; x.days = x.days || {};
+  const ds = Object.keys(x.days).sort(); const day = ds[ds.length - 1];
+  const d = x.days[day]; d.users = d.users || {}; d.users[uid] = d.users[uid] || {};
+  fn(d.users[uid]); php.writeFile(D + '/ws/usage.json', JSON.stringify(x));
+};
+{ // a definite API error (HTTP 529 with a JSON error body): not billed -> message + money given back
+  canned({ ok: false, error: 'Claude error (529): overloaded', json: { type: 'error', error: { type: 'overloaded_error', message: 'overloaded' } } });
+  const before = Object.assign({}, usageToday().users[LT_ID]);
+  r = await L('chat_send', { text: 'are you there', ai: '1' }, C);
+  const after = usageToday().users[LT_ID];
+  check('API error (JSON error body) -> system line, message refunded, reservation dropped, in-flight cleared', r.status === 200 && /overloaded/.test(r.json.msgs[1].text)
+    && after.msgs === before.msgs && near(after.usd, before.usd) && after.inflight === 0 && usageDuring().usd > before.usd + 0.08, [short(r), before, after]);
+}
+{ // transport error / timeout: Claude may have billed it -> the whole reservation stays charged, the message counts
+  canned({ ok: false, error: 'Claude did not answer (Operation timed out).' });
+  const before = Object.assign({}, usageToday().users[LT_ID]);
+  r = await L('chat_send', { text: 'still there?', ai: '1' }, C);
+  const after = usageToday().users[LT_ID], during = usageDuring();
+  check('transport error -> system line, message counted, worst-case reservation kept, in-flight cleared', r.status === 200 && r.json.msgs[1].role === 'system' && /did not answer/.test(r.json.msgs[1].text)
+    && after.msgs === before.msgs + 1 && near(after.usd, during.usd) && after.usd > before.usd + 0.08 && after.inflight === 0, [short(r), before, during, after]);
+}
+{ // one Claude call per person at a time: a second request while the first is still out is refused before any call
+  canned(msgJson({ reply: 'second answer', actions: [] }));
+  editUsage(LT_ID, x => { x.inflight = nowS(); });
+  const before = Object.assign({}, usageToday().users[LT_ID]);
+  php.writeFile(LASTREQ, 'none');
+  r = await L('chat_send', { text: 'me too, quickly', ai: '1' }, C);
+  const after = usageToday().users[LT_ID];
+  check('second Claude call while one is in flight -> friendly line, no API call, nothing charged', r.status === 200 && r.json.msgs.length === 2 && r.json.msgs[1].role === 'system'
+    && /^For Lt One: Claude is still answering/.test(r.json.msgs[1].text) && readText(LASTREQ) === 'none' && after.msgs === before.msgs && near(after.usd, before.usd) && after.inflight === before.inflight, [short(r), before, after]);
+  editUsage(LT_ID, x => { x.inflight = nowS() - 121; });                  // the in-flight mark expires after 120 s
+  r = await L('chat_send', { text: 'and now?', ai: '1' }, C);
+  check('in-flight mark older than 120 s -> the call goes through, mark cleared', r.status === 200 && r.json.msgs[1].role === 'ai' && r.json.msgs[1].text === 'second answer' && usageToday().users[LT_ID].inflight === 0, short(r));
+}
+{ // $ cap: the worst-case reservation must fit under usdPerDay BEFORE the call
+  await setSettings({ usdPerDay: '0.05' });
+  canned(msgJson({ reply: 'should not be sent', actions: [] }));
+  php.writeFile(LASTREQ, 'none');
+  const before = Object.assign({}, usageToday().users[LT_ID]);
+  r = await L('chat_send', { text: 'cheap question', ai: '1' }, C);
+  check('$ cap smaller than one worst-case reservation -> limit line, no API call, nothing taken', r.status === 200 && /Daily Claude chat limit/.test(r.json.msgs[1].text) && readText(LASTREQ) === 'none'
+    && usageToday().users[LT_ID].msgs === before.msgs && near(usageToday().users[LT_ID].usd, before.usd), [short(r), usageToday().users[LT_ID]]);
+  await setSettings({});
+}
 await setSettings({ msgsPerDay: String(usageToday().users[LT_ID].msgs) });
 canned(msgJson({ reply: 'should not be sent', actions: [] }));
 php.writeFile(LASTREQ, 'none');
@@ -605,6 +693,25 @@ r = await O('chat_send', { text: 'owner question', ai: '1' }, C);
 check('owner is not bound by the lieutenant chat cap', r.status === 200 && r.json.msgs[1].role === 'ai' && r.json.msgs[1].text === 'should not be sent', short(r));
 await setSettings({});
 php.writeFile(CANNED, ''); php.unlink(CANNED); php.unlink(D + '/ai.json');
+
+section('WORKSPACE: team thread flood guard');
+{
+  r = await L('chat_send', { text: 'x'.repeat(17000), ai: '0' }, C);
+  check('chat_send body over 16 KB -> 413, nothing stored', r.status === 413 && r.json && !r.json.ok && !(readJson(D + `/ws/chat-${C}.json`).msgs || []).some(m => (m.text || '').length > 4000), short(r));
+  editUsage(LT_ID, x => { x.tmin = []; });
+  const day0 = usageToday().users[LT_ID].tmsgs | 0;
+  let okN = 0, last = null;
+  for (let i = 0; i < 25; i++) { last = await L('chat_send', { text: 'flood ' + i, ai: '0' }, C); if (last.status !== 200) break; okN++; }
+  const msgsNow = readJson(D + `/ws/chat-${C}.json`).msgs;
+  check('lieutenant: 20 thread posts per rolling minute, the 21st -> 429 (not stored)', okN === 20 && last.status === 429 && last.json && /very fast/.test(last.json.error)
+    && msgsNow.some(m => m.text === 'flood 19') && !msgsNow.some(m => m.text === 'flood 20') && usageToday().users[LT_ID].tmsgs === day0 + 20, [okN, last && short(last), usageToday().users[LT_ID]]);
+  r = await O('chat_send', { text: 'owner keeps posting', ai: '0' }, C);
+  check('owner is not rate limited in the thread', r.status === 200, short(r));
+  editUsage(LT_ID, x => { x.tmin = []; x.tmsgs = 400; });
+  r = await L('chat_send', { text: 'post 401 today', ai: '0' }, C);
+  check('lieutenant: 400 thread posts per day -> 429 daily limit', r.status === 429 && /daily limit/.test(r.json.error) && !readJson(D + `/ws/chat-${C}.json`).msgs.some(m => m.text === 'post 401 today'), short(r));
+  editUsage(LT_ID, x => { x.tmin = []; x.tmsgs = day0 + 20; });
+}
 
 section('WORKSPACE: malformed input never corrupts a store');
 {
@@ -696,8 +803,71 @@ r = await SAVE({ page: 'Page 02', pick: JSON.stringify(['p2b.png']) });
 check('restore a dropped page with a pick', r.status === 200 && readJson(D + `/ws/picks-${A}.json`).pages['Page 02'].pick[0] === 'p2b.png' && imgRow('p2b.png').accepted === true, short(r));
 r = await SAVE({ page: 'Page 02', pick: JSON.stringify(['p2a.png']) });
 check('switching the pick clears only the picker\'s own earlier pick; review keep stays', r.status === 200 && imgRow('p2b.png').accepted === false && imgRow('p2a.png').accepted === true && imgRow('p2c.png').accepted === true, [imgRow('p2a.png'), imgRow('p2b.png'), imgRow('p2c.png')]);
+// Fixture surgery on one image row (stands in for the owner rating / keeping a take in review.php).
+const editImg = (pid, f, fn) => { const a = readJson(D + `/images-${pid}.json`); fn(a.find(x => x.file === f)); php.writeFile(D + `/images-${pid}.json`, JSON.stringify(a)); };
+const hasPk = m => !!m && Object.prototype.hasOwnProperty.call(m, 'pk');
+r = await SAVE({ page: 'Page 02', pick: JSON.stringify(['p2a.png', 'p2c.png']) });
+check('pk: picking a take the owner already kept records nothing to undo on it', r.status === 200 && imgRow('p2c.png').accepted === true && imgRow('p2c.png').rating === 'good'
+  && !hasPk(imgRow('p2c.png')) && hasPk(imgRow('p2a.png')) && imgRow('p2a.png').pk.acc === false && imgRow('p2a.png').pk.r === 'unrated', [imgRow('p2a.png'), imgRow('p2c.png')]);
+r = await SAVE({ page: 'Page 02', pick: '[]' });
+check('pk: unpick all -> owner keep survives (accepted, good), picker-set take restored, pk gone', r.status === 200 && imgRow('p2c.png').accepted === true && imgRow('p2c.png').rating === 'good'
+  && imgRow('p2a.png').accepted === false && imgRow('p2a.png').rating === 'unrated' && !hasPk(imgRow('p2a.png')), [imgRow('p2a.png'), imgRow('p2c.png')]);
+editImg(A, 'p1c.png', m => { m.rating = 'bad'; m.accepted = false; });
+r = await SAVE({ page: 'Page 01', pick: JSON.stringify(['p1c.png']) });
+check("pk: picking an owner-'bad' take -> accepted, rating stays 'bad', pk {acc:false, r:'bad'}", r.status === 200 && imgRow('p1c.png').accepted === true && imgRow('p1c.png').rating === 'bad'
+  && hasPk(imgRow('p1c.png')) && imgRow('p1c.png').pk.acc === false && imgRow('p1c.png').pk.r === 'bad', imgRow('p1c.png'));
+r = await SAVE({ page: 'Page 01', pick: 'drop' });
+check("pk: drop -> the picker's accept undone, 'bad' kept (never turned good), pk gone", r.status === 200 && imgRow('p1c.png').accepted === false && imgRow('p1c.png').rating === 'bad' && !hasPk(imgRow('p1c.png')), imgRow('p1c.png'));
+editImg(A, NEWTAKE, m => { delete m.rating; });
+r = await SAVE({ page: 'Page 01', pick: JSON.stringify([NEWTAKE]) });
+check('pk: pick on a row without a rating -> good, pk {acc:false, r:null}', r.status === 200 && imgRow(NEWTAKE).accepted === true && imgRow(NEWTAKE).rating === 'good'
+  && hasPk(imgRow(NEWTAKE)) && imgRow(NEWTAKE).pk.acc === false && imgRow(NEWTAKE).pk.r === null, imgRow(NEWTAKE));
+r = await SAVE({ page: 'Page 01', pick: '[]' });
+check('pk: unpick -> not accepted, the rating key is removed again, pk gone', r.status === 200 && imgRow(NEWTAKE).accepted === false && !('rating' in imgRow(NEWTAKE)) && !hasPk(imgRow(NEWTAKE)), imgRow(NEWTAKE));
+r = await SAVE({ page: 'Page 01', pick: JSON.stringify(['p1a.png']) });
+editImg(A, 'p1a.png', m => { m.rating = 'bad'; });          // the owner re-rates the picked take in review meanwhile
+r = await SAVE({ page: 'Page 01', pick: '[]' });
+check("pk: owner re-rated a picked take 'bad' -> the unpick leaves 'bad' (only the picker's own value is undone)", r.status === 200 && imgRow('p1a.png').rating === 'bad'
+  && imgRow('p1a.png').accepted === false && !hasPk(imgRow('p1a.png')), imgRow('p1a.png'));
+editImg(A, 'p1a.png', m => { m.rating = 'unrated'; });
 r = await owner.get('/studio/picker.php?p=gamma-comic');
 check('owner opens the picker on any comic (with Review link)', r.status === 200 && r.text.includes('review.php?p=gamma-comic'), short(r));
+
+// =================================================================================================
+section('PAGE DELETE: takes move out, the picker\'s flags are undone, the number is never reused');
+{
+  r = await L('page_save', { n: '0', title: 'Doomed', prompt: 'A page that gets deleted.' }, C);
+  const DN = r.json && r.json.n, DG = 'Page ' + String(DN).padStart(2, '0');
+  const DT = [];
+  for (const nm of ['d1.png', 'd2.png', 'd3.png']) {
+    r = await L('upload', { kind: 'take', page: String(DN), 'files[]': new File([UPLOAD_PNG], nm, { type: 'image/png' }) }, C);
+    if (r.json && r.json.files) DT.push(r.json.files[0]);
+  }
+  check('3 takes uploaded to the page about to be deleted', DT.length === 3 && DN >= 5, [DN, DT]);
+  editImg(C, DT[2], m => { m.accepted = true; m.rating = 'good'; });   // kept by the owner in review (no picker record)
+  r = await lt.post('/studio/picker.php?p=' + C, { do: 'save', p: C, page: DG, pick: JSON.stringify([DT[0], DT[2]]) }, { 'X-CSRF': LT_CSRF });
+  const iRow = f => readJson(D + `/images-${C}.json`).find(m => m.file === f);
+  check('picker pick on that page: one take picker-accepted (pk), the owner keep untouched', r.status === 200 && hasPk(iRow(DT[0])) && iRow(DT[0]).accepted === true && !hasPk(iRow(DT[2]))
+    && Array.isArray(readJson(D + `/ws/picks-${C}.json`).pages[DG].pick), [short(r), iRow(DT[0]), iRow(DT[2])]);
+  r = await L('page_delete', { n: String(DN) }, C);
+  const dest = r.json && r.json.group;
+  check('page_delete -> ok, 3 takes moved to "Deleted Page NN <time>"', r.status === 200 && r.json.moved === 3 && new RegExp(`^Deleted ${DG} \\d{4}-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d$`).test(dest || '')
+    && DT.every(f => iRow(f).group === dest), [short(r), DT.map(f => iRow(f) && iRow(f).group)]);
+  check('page_delete: the page\'s picker record is gone', !(DG in readJson(D + `/ws/picks-${C}.json`).pages), Object.keys(readJson(D + `/ws/picks-${C}.json`).pages));
+  check('page_delete: picker-set accept undone (pk gone), the owner keep stays, the untouched take unchanged',
+    iRow(DT[0]).accepted === false && iRow(DT[0]).rating === 'unrated' && !hasPk(iRow(DT[0])) && iRow(DT[2]).accepted === true && iRow(DT[2]).rating === 'good'
+    && iRow(DT[1]).accepted === false && iRow(DT[1]).rating === 'unrated', DT.map(iRow));
+  check('page_delete: a chat line names where the takes went', (readJson(D + `/ws/chat-${C}.json`).msgs || []).some(m => m.role === 'system' && m.text.includes(`deleted page ${DN}`) && m.text.includes(dest)));
+  r = await L('page_save', { n: '0', title: 'After the delete', prompt: 'x' }, C);
+  check('next new page gets the next number, never the deleted one', r.status === 200 && r.json.n === DN + 1, short(r));
+  r = await L('page_save', { n: String(DN), title: 'Doomed again' }, C);
+  check('page_save n=<deleted> -> 400', r.status === 400 && /never reused/.test(r.json.error), short(r));
+  r = await L('upload', { kind: 'take', page: String(DN), 'files[]': new File([UPLOAD_PNG], 'late.png', { type: 'image/png' }) }, C);
+  check('upload a take to the deleted page -> 400', r.status === 400, short(r));
+  r = await lt.get('/studio/picker.php?p=' + C);
+  const pkC = bootFromHtml(r.text, 'pkdata');
+  check('picker does not list the "Deleted Page …" group as a page to pick', r.status === 200 && pkC && !pkC.pages.some(p => /^Deleted /.test(p.g)) && pkC.pages.some(p => p.g === 'Page 01'), pkC && pkC.pages.map(p => p.g));
+}
 
 // =================================================================================================
 section('WORKER');
@@ -756,12 +926,18 @@ r = await W('submit_ok', { job: JA });
 check('submit_ok first -> ok', r.status === 200 && r.json.ok === true, short(r));
 r = await W('submit_ok', { job: JA });
 check('submit_ok again at once -> wait (minGapSec 20)', r.status === 200 && r.json.ok === false && r.json.wait > 0 && r.json.wait <= 20, short(r));
+const restOf = async pid => ((await lt.get(`/studio/ws-api.php?do=ping&p=${pid}`)).json || {}).rest;
+const restA0 = await restOf(A), restC0 = await restOf(C);
 r = await W('heartbeat', { job: JA, note: 'generating take 1' });
 check('heartbeat -> ok, keep going', r.status === 200 && r.json.ok && r.json.stop === false && readJson(D + '/ws/jobs.json').jobs.find(j => j.id === JA).note === 'generating take 1', short(r));
+const restA1 = await restOf(A), restC1 = await restOf(C);
+check('ping: a worker heartbeat does not move any page\'s signature (no reload storm)', !!restA0 && restA1 === restA0 && restC1 === restC0, [restA0, restA1, restC0, restC1]);
 r = await W('heartbeat', { job: 'wsj_nope' });
 check('heartbeat unknown job -> stop', r.json && r.json.stop === true, short(r));
 r = await W('take_failed', { job: JA, reason: 'content filter' });
 check('take_failed -> failed 1', r.status === 200 && r.json.ok && r.json.failed === 1, short(r));
+const restA2 = await restOf(A), restC2 = await restOf(C);
+check('ping: a job change moves only its own comic\'s signature', restC2 !== restC1 && restA2 === restA1, [restA1, restA2, restC1, restC2]);
 
 for (const [label, url, re] of [
   ['http://', 'http://img.cloudfront.net/a.png', /https/], ['IPv4 host', 'https://93.184.216.34/a.png', /host not allowed/],
@@ -808,10 +984,11 @@ check('stale running job (>15 min) is re-queued and re-claimed', r.status === 20
 r = await W('take_failed', { job: JB, reason: 'blocked' });
 r = await W('take_failed', { job: JB, reason: 'blocked' });
 r = await W('done', { job: JB, status: 'done' });
-check('done B with nothing landed -> error, releases 2, ⚠ chat line', r.status === 200 && r.json.status === 'error' && r.json.released === 2 && usageToday().users[LT_ID].gens === 2
+// Quota counts slots used: each failed take used one (a generate call may be charged even when it is blocked).
+check('done B with nothing landed -> error, both slots used by failed takes -> releases 0, ⚠ chat line', r.status === 200 && r.json.status === 'error' && r.json.released === 0 && usageToday().users[LT_ID].gens === 4
   && readJson(D + `/ws/chat-${C}.json`).msgs.some(m => /Page 2: generation stopped/.test(m.text)), [short(r), usageToday()]);
 
-r = await L('generate', { page: '3', takes: '1' }, C); const JC = r.json && r.json.job && r.json.job.id;
+r = await L('generate', { page: '4', takes: '1' }, C); const JC = r.json && r.json.job && r.json.job.id;
 r = await W('claim', { worker: 'w1' });
 check('claim C', r.json && r.json.job && r.json.job.id === JC, short(r));
 r = await L('cancel', { job: JC }, C);
@@ -821,11 +998,11 @@ check('heartbeat after cancel -> stop', r.json && r.json.stop === true, short(r)
 r = await W('submit_ok', { job: JC });
 check('submit_ok after cancel -> stop', r.json && r.json.ok === false && r.json.stop === true, short(r));
 r = await W('done', { job: JC, status: 'done' });
-check('done after cancel -> cancelled, quota back', r.json && r.json.status === 'cancelled' && r.json.released === 1 && usageToday().users[LT_ID].gens === 2, [short(r), usageToday()]);
+check('done after cancel (never submitted) -> cancelled, its slot back', r.json && r.json.status === 'cancelled' && r.json.released === 1 && usageToday().users[LT_ID].gens === 4, [short(r), usageToday()]);
 
 r = await W('cooldown', { minutes: '2', reason: 'rate limited' });
 check('cooldown -> until', r.status === 200 && r.json.ok && r.json.until > Date.now() / 1000, short(r));
-r = await L('generate', { page: '3', takes: '1' }, C); const JD = r.json && r.json.job && r.json.job.id;
+r = await L('generate', { page: '4', takes: '1' }, C); const JD = r.json && r.json.job && r.json.job.id;
 r = await W('claim', { worker: 'w1' });
 check('claim during cooldown -> reason cooldown', r.json && r.json.job === null && r.json.reason === 'cooldown' && r.json.retryAfter > 0, short(r));
 r = await W('status', null, WKEY, 'GET');
@@ -841,6 +1018,267 @@ r = await W('cooldown', { minutes: 'abc' });
 check('cooldown bad minutes -> 400', r.status === 400, short(r));
 r = await W('nonsense', {});
 check('unknown verb -> 400', r.status === 400, short(r));
+
+section('WORKER: submit accounting, pause, liveness, idle reads, cooldown bounds');
+const jobsFile = D + '/ws/jobs.json';
+const jobOf = id => (readJson(jobsFile).jobs || []).find(j => j.id === id) || {};
+const resetGap = () => { const j = readJson(jobsFile); j.meta.lastSubmitAt = 0; php.writeFile(jobsFile, JSON.stringify(j)); };   // skip the 20 s pacing
+const gensOf = uid => ((usageToday().users || {})[uid] || {}).gens | 0;
+const gensLt = () => gensOf(LT_ID);
+{ // JD (1 take, running): a retry past `takes` reserves one more image; takes x 2 submits is the hard cap
+  const g0 = gensLt();
+  resetGap(); r = await W('submit_ok', { job: JD });
+  check('submit 1 of a 1-take job -> ok, covered by the enqueue reservation', r.json && r.json.ok === true && r.json.submits === 1 && r.json.cap === 2 && gensLt() === g0, [short(r), gensLt(), g0]);
+  resetGap(); r = await W('submit_ok', { job: JD });
+  check('submit 2 (a retry past takes) -> ok, reserves one more image of the quota', r.json && r.json.ok === true && r.json.submits === 2 && gensLt() === g0 + 1 && jobOf(JD).extraSubmits === 1, [short(r), gensLt(), g0]);
+  resetGap(); r = await W('submit_ok', { job: JD });
+  check('submit 3 -> stop at the hard cap (takes x 2), nothing more reserved', r.json && r.json.ok === false && r.json.stop === true && /cap/.test(r.json.error || '') && gensLt() === g0 + 1 && jobOf(JD).submits === 2, [short(r), gensLt()]);
+  await W('ingest_url', { job: JD, url: 'https://fake-test.cloudfront.net/out/d1.png', gen: 'gen-d1' });
+  r = await W('done', { job: JD, status: 'done' });
+  check('done D (2 submits, 1 landed) -> nothing released: 2 images charged', r.json && r.json.status === 'done' && r.json.released === 0 && gensLt() === g0 + 1, [short(r), gensLt()]);
+}
+{ // JE (4 takes): 2 submits (1 landed, 1 failed) -> only the 2 never-submitted slots come back, exactly once
+  r = await L('generate', { page: '4', takes: '4' }, C); const JE = r.json && r.json.job && r.json.job.id;
+  const g0 = gensLt();
+  r = await W('claim', { worker: 'w1' });
+  check('claim E', r.json && r.json.job && r.json.job.id === JE, short(r));
+  resetGap(); await W('submit_ok', { job: JE });
+  await W('ingest_url', { job: JE, url: 'https://fake-test.cloudfront.net/out/e1.png', gen: 'gen-e1' });
+  resetGap(); await W('submit_ok', { job: JE });
+  await W('take_failed', { job: JE, reason: 'blocked' });
+  r = await W('done', { job: JE, status: 'done' });
+  check('done E (4 takes, 2 submitted) -> releases exactly the 2 never-submitted', r.json && r.json.status === 'done' && r.json.released === 2 && gensLt() === g0 - 2 && jobOf(JE).released === true, [short(r), gensLt(), g0, jobOf(JE)]);
+  r = await W('done', { job: JE, status: 'done' });
+  check('done E again -> already, nothing released twice', r.json && r.json.already === true && gensLt() === g0 - 2, [short(r), gensLt()]);
+  r = await L('cancel', { job: JE }, C);
+  check('cancel a finished job -> 409, quota untouched', r.status === 409 && gensLt() === g0 - 2, [short(r), gensLt()]);
+}
+{ // JF (1 take): once it landed, the next submit_ok says stop
+  r = await L('generate', { page: '4', takes: '1' }, C); const JF = r.json && r.json.job && r.json.job.id;
+  r = await W('claim', { worker: 'w1' });
+  resetGap(); await W('submit_ok', { job: JF });
+  await W('ingest_url', { job: JF, url: 'https://fake-test.cloudfront.net/out/f1.png', gen: 'gen-f1' });
+  resetGap(); r = await W('submit_ok', { job: JF });
+  check('submit_ok after every take landed -> stop', r.json && r.json.ok === false && r.json.stop === true && /finished/.test(r.json.error || '') && jobOf(JF).submits === 1, short(r));
+  await W('done', { job: JF, status: 'done' });
+}
+{ // JG: the owner pauses the generator mid-job
+  r = await L('generate', { page: '4', takes: '1' }, C); const JG = r.json && r.json.job && r.json.job.id;
+  const g0 = gensLt();
+  r = await W('claim', { worker: 'w1' });
+  check('claim G', r.json && r.json.job && r.json.job.id === JG, short(r));
+  await setSettings({ workerEnabled: '0' });
+  resetGap(); r = await W('submit_ok', { job: JG });
+  check('submit_ok while the generator is paused -> stop "generator paused", nothing counted', r.json && r.json.ok === false && r.json.stop === true && r.json.error === 'generator paused' && (jobOf(JG).submits | 0) === 0, short(r));
+  await setSettings({});
+  r = await W('done', { job: JG, status: 'error', note: 'paused' });
+  check('done G (never submitted) -> its slot back', r.json && r.json.status === 'error' && r.json.released === 1 && gensLt() === g0 - 1, [short(r), gensLt(), g0]);
+}
+{ // liveness lives in data/ws/worker-seen.json, never in jobs.json
+  const seen = readJson(D + '/ws/worker-seen.json');
+  check('worker liveness -> worker-seen.json {at, name}; jobs.json meta has no workerSeenAt', !!seen && seen.name === 'w1' && Math.abs(seen.at - nowS()) < 60 && !('workerSeenAt' in (readJson(jobsFile).meta || {})), [seen, readJson(jobsFile).meta]);
+  r = await W('status', { worker: 'opsbox-2' }, WKEY, 'GET');
+  check('status with worker=<name> -> worker-seen.json names it', r.status === 200 && (readJson(D + '/ws/worker-seen.json') || {}).name === 'opsbox-2' && r.json.meta.workerName === 'opsbox-2', [short(r), readJson(D + '/ws/worker-seen.json')]);
+  st = (await lt.get(`/studio/ws-api.php?do=state&p=${C}`)).json;
+  r = await owner.get('/studio/team.php');
+  check('workspace state + team.php show the worker alive (team.php names it)', st && st.worker.alive === true && r.text.includes('Worker <b>alive</b>') && r.text.includes('opsbox-2'), [st && st.worker]);
+}
+{ // a claim / status with nothing to hand out is a plain read: jobs.json is not rewritten
+  const compact = JSON.stringify(readJson(jobsFile));   // compact on purpose: any rewrite (s_write) would pretty-print it
+  php.writeFile(jobsFile, compact);
+  r = await W('claim', { worker: 'w1' });
+  const r2 = await W('status', { worker: 'w1' }, WKEY, 'GET');
+  check('idle claim (nothing queued) + status -> jobs.json untouched', r.json && r.json.job === null && r.json.reason === 'none' && r2.status === 200 && readText(jobsFile) === compact, [short(r), short(r2)]);
+  await setSettings({ workerEnabled: '0' });
+  r = await W('claim', { worker: 'w1' });
+  check('claim while disabled -> jobs.json untouched', r.json && r.json.reason === 'disabled' && readText(jobsFile) === compact, short(r));
+  await setSettings({});
+}
+{ // cooldown: clamped to 1..60 minutes, never extended or re-worded while one runs; the owner can clear it
+  r = await W('cooldown', { minutes: '999', reason: 'out of credits' });
+  const until1 = r.json && r.json.until;
+  check('cooldown 999 min -> clamped to 60', r.status === 200 && r.json.set === true && r.json.minutes === 60 && Math.abs(until1 - (nowS() + 3600)) < 30, short(r));
+  r = await W('cooldown', { minutes: '30', reason: 'something else' });
+  const meta = readJson(jobsFile).meta;
+  check('a second cooldown while one runs -> set:false, same until, reason not re-worded', r.status === 200 && r.json.set === false && r.json.until === until1 && meta.cooldownUntil === until1 && meta.cooldownReason === 'out of credits', [short(r), meta]);
+  const compact = JSON.stringify(readJson(jobsFile)); php.writeFile(jobsFile, compact);
+  r = await W('claim', { worker: 'w1' });
+  check('claim during cooldown -> cooldown, jobs.json untouched', r.json && r.json.reason === 'cooldown' && readText(jobsFile) === compact, short(r));
+  r = await owner.get('/studio/team.php');
+  check('team.php shows the cooldown, its reason and a Clear button', r.text.includes('Cooldown <b>until') && r.text.includes('out of credits') && r.text.includes('value="clearcooldown"'), short(r));
+  r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'clearcooldown' });
+  const m2 = readJson(jobsFile).meta;
+  check('team.php "Clear cooldown" -> cooldownUntil + reason removed', r.status === 303 && !('cooldownUntil' in m2) && !('cooldownReason' in m2), [short(r), m2]);
+  r = await owner.post('/studio/team.php', { do: 'clearcooldown' });
+  check('team.php clearcooldown without CSRF -> 403', r.status === 403, short(r));
+  r = await W('cooldown', { minutes: '0', reason: 'tiny' });
+  check('cooldown 0 min -> clamped to 1', r.status === 200 && r.json.set === true && r.json.minutes === 1 && Math.abs(r.json.until - (nowS() + 60)) < 30, short(r));
+  { const j = readJson(jobsFile); delete j.meta.cooldownUntil; delete j.meta.cooldownReason; php.writeFile(jobsFile, JSON.stringify(j)); }
+}
+
+// =================================================================================================
+section('SCOPE: a recreated comic is a new comic; brand moves + deactivation fence the queue');
+const editTeam = fn => { const t = readJson(D + '/ws/team.json'); fn(t); php.writeFile(D + '/ws/team.json', JSON.stringify(t)); };
+{ // deleted in the legacy Studio and recreated under the same id: no old brand, no old jobs
+  r = await L('page_save', { n: '0', title: 'Beta one', prompt: 'Beta page.' }, 'beta-comic');
+  const BN = r.json && r.json.n;
+  r = await L('generate', { page: String(BN), takes: '1' }, 'beta-comic'); const JBETA = r.json && r.json.job && r.json.job.id;
+  check('job queued on beta-comic carries pcreated (the comic\'s created stamp)', !!JBETA && jobOf(JBETA).pcreated === '2026-09-01' && jobOf(JBETA).submits === 0, [short(r), jobOf(JBETA)]);
+  const g0 = gensLt();
+  r = await owner.post('/studio/project.php?p=beta-comic', { csrf: OWN_CSRF, do: 'delete_project' });
+  check('owner deletes beta-comic (project.php do=delete_project)', r.status === 302 && !readJson(D + '/projects.json').some(p => p.id === 'beta-comic'), short(r));
+  r = await owner.post('/studio/index.php', { csrf: OWN_CSRF, do: 'create', name: 'Beta Comic' });
+  const nb = readJson(D + '/projects.json').find(p => p.id === 'beta-comic');
+  check('owner recreates "Beta Comic" (index.php) -> same id, new created stamp', r.status === 302 && /project\.php\?p=beta-comic$/.test(r.loc) && !!nb && nb.created !== '2026-09-01', [short(r), nb]);
+  check('the old {3DMC, 2026-09-01} mapping is still in team.json (stale)', pbIs(readJson(D + '/ws/team.json').projectBrands['beta-comic'], '3DMC', '2026-09-01'));
+  const lst = await lt.get('/studio/ws.php');
+  const den = [await lt.get('/studio/ws.php?p=beta-comic'), await lt.get('/studio/ws-api.php?do=state&p=beta-comic'), await lt.get('/studio/picker.php?p=beta-comic')];
+  check('lieutenant cannot see the recreated comic (not listed; ws.php, ws-api, picker -> 403)', lst.status === 200 && !lst.text.includes('Beta Comic') && lst.text.includes('Alpha Comic')
+    && den.every(x => x.status === 403), den.map(x => x.status));
+  r = await owner.get('/studio/team.php');
+  check('team.php shows it unassigned with "stale mapping cleared"', r.status === 200 && r.text.includes('stale mapping cleared'), short(r));
+  r = await setSettings({});
+  check('the next team.php POST prunes the stale mapping', r.status === 303 && !('beta-comic' in readJson(D + '/ws/team.json').projectBrands), readJson(D + '/ws/team.json').projectBrands);
+  r = await W('claim', { worker: 'w1' });
+  check('worker claim closes the job queued on the old comic: error, its image back', r.json && r.json.job === null && jobOf(JBETA).status === 'error'
+    && /deleted and recreated/.test(jobOf(JBETA).note) && gensLt() === g0 - 1, [short(r), jobOf(JBETA), gensLt(), g0]);
+}
+{ // the workspace never hands out an id that still has leftover data
+  r = await L('create', { name: 'Temp Comic', brand: '3DMC' });
+  const T1 = r.json && r.json.id;
+  r = await owner.post('/studio/project.php?p=' + T1, { csrf: OWN_CSRF, do: 'delete_project' });
+  r = await L('create', { name: 'Temp Comic', brand: '3DMC' });
+  check('ws-api create after a delete: the old id (leftover chat / proj / brand) is skipped', T1 === 'temp-comic' && r.status === 200 && r.json.id === 'temp-comic-2', [T1, short(r)]);
+}
+{ // (a) the brand map changed without a fence (a race): the claim itself refuses the job
+  r = await L('generate', { page: '1', takes: '1' }, C); const JX1 = r.json && r.json.job && r.json.job.id;
+  const g0 = gensLt();
+  editTeam(t => { t.projectBrands[C].brand = 'Maxx Muscle'; });
+  r = await W('claim', { worker: 'w1' });
+  const chatC = readJson(D + `/ws/chat-${C}.json`).msgs;
+  check('claim: lieutenant job on a comic outside their brands -> cancelled, image back, chat line', r.json && r.json.job === null && jobOf(JX1).status === 'cancelled'
+    && /access changed/.test(jobOf(JX1).note) && gensLt() === g0 - 1 && /Page 1: generation stopped \(cancelled\)/.test(chatC[chatC.length - 1].text), [short(r), jobOf(JX1), gensLt(), g0]);
+  editTeam(t => { t.projectBrands[C].brand = '3DMC'; });
+}
+{ // (b) the owner moves the comic to another brand on team.php
+  r = await L('generate', { page: '1', takes: '1' }, C); const JX2 = r.json && r.json.job && r.json.job.id;
+  r = await W('claim', { worker: 'w1' });
+  check('claim X2 (running)', r.json && r.json.job && r.json.job.id === JX2, short(r));
+  r = await L('generate', { page: '2', takes: '2' }, C); const JX3 = r.json && r.json.job && r.json.job.id;
+  const g0 = gensLt();
+  r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'brands', [`brand[${C}]`]: 'Maxx Muscle' });
+  const fl = await owner.get('/studio/team.php');
+  check('team.php moves the comic off the brand -> queued job cancelled (2 back), running job told to stop', r.status === 303 && jobOf(JX3).status === 'cancelled'
+    && jobOf(JX3).quotaReleased === 2 && gensLt() === g0 - 2 && jobOf(JX2).stopRequested === true && jobOf(JX2).status === 'running'
+    && fl.text.includes('Cancelled 1 queued job') && fl.text.includes('1 running job will stop'), [jobOf(JX3), jobOf(JX2), gensLt(), g0]);
+  r = await lt.get(`/studio/ws-api.php?do=state&p=${C}`);
+  check('… and the lieutenant loses the comic at once (403)', r.status === 403, short(r));
+  r = await W('heartbeat', { job: JX2 });
+  check('… the running job hears stop on its next heartbeat', r.json && r.json.stop === true, short(r));
+  r = await W('done', { job: JX2, status: 'done' });
+  check('… and closes as cancelled, its never-submitted slot back', r.json && r.json.status === 'cancelled' && r.json.released === 1 && gensLt() === g0 - 3, [short(r), gensLt(), g0]);
+  r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'brands', [`brand[${C}]`]: '3DMC' });
+  check('comic moved back to 3DMC -> visible again', r.status === 303 && (await lt.get(`/studio/ws-api.php?do=state&p=${C}`)).status === 200, short(r));
+}
+{ // a page deleted while its job waits: the claim cancels it
+  r = await L('page_save', { n: '0', title: 'Short-lived', prompt: 'Gone soon.' }, C); const SN = r.json && r.json.n;
+  r = await L('generate', { page: String(SN), takes: '2' }, C); const JP = r.json && r.json.job && r.json.job.id;
+  const g0 = gensLt();
+  r = await L('page_delete', { n: String(SN) }, C);
+  r = await W('claim', { worker: 'w1' });
+  check('claim: job for a page deleted meanwhile -> cancelled, both images back, nothing generated', r.json && r.json.job === null && jobOf(JP).status === 'cancelled'
+    && /page was deleted/.test(jobOf(JP).note) && gensLt() === g0 - 2, [short(r), jobOf(JP), gensLt(), g0]);
+}
+
+const lt2 = new Client('lt2');
+let LT2_ID = '', TOK3 = '';
+{
+  r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'add', name: 'Lt <Two>', 'brands[0]': '3DMC' });
+  r = await owner.get('/studio/team.php'); TOK3 = tokOf(onceFromHtml(r.text));
+  LT2_ID = (readJson(D + '/ws/team.json').people.find(p => p.name === 'Lt <Two>') || {}).id || '';
+  r = await lt2.get('/studio/ws.php?t=' + TOK3);
+  check('a second lieutenant signs in with their own link', TOK3.length === 48 && !!LT2_ID && r.status === 302 && !!lt2.sid, short(r));
+}
+
+section('GATE: a magic link opened while someone else is signed in asks first');
+{
+  const sw = new Client('sw');
+  await sw.post('/studio/login.php', { username: 'grow', password: 'pw' });
+  r = await sw.get('/studio/ws.php?t=' + TOK3);
+  const hits = r.text.split(TOK3).length - 1;
+  const xfo = String((r.headers['x-frame-options'] || [''])[0]), csp = String((r.headers['content-security-policy'] || [''])[0]);
+  check('owner session + a lieutenant link -> "Switch accounts?" page (names escaped, token only in the hidden field, unframeable, URL stripped)',
+    r.status === 200 && r.text.includes('Switch accounts?') && r.text.includes('signed in as <b>Grow</b>') && r.text.includes('Lt &lt;Two&gt;') && !r.text.includes('<Two>')
+    && hits === 1 && r.text.includes(`<input type="hidden" name="t" value="${TOK3}">`) && r.text.includes('history.replaceState')
+    && /DENY/i.test(xfo) && /frame-ancestors 'none'/.test(csp), [r.status, xfo, csp, hits, r.text.slice(0, 200)]);
+  const SWC = csrfFromHtml(r.text);
+  r = await sw.get('/studio/team.php');
+  check('… nothing was swapped: still the owner', r.status === 200 && SWC.length === 32, [short(r), SWC]);
+  r = await sw.post('/studio/ws.php', { csrf: 'f'.repeat(32), t: TOK3 });
+  const still = await sw.get('/studio/team.php');
+  check('switch POST with a bad CSRF token -> 403, still the owner', r.status === 403 && still.status === 200, [short(r), still.status]);
+  r = await sw.get('/studio/ws.php?t=' + 'ab'.repeat(24));
+  const still2 = await sw.get('/studio/team.php');
+  check('an invalid link while signed in -> 401, the session is kept', r.status === 401 && still2.status === 200, [short(r), still2.status]);
+  r = await sw.post('/studio/ws.php', { csrf: SWC, t: TOK3 });
+  const after = await sw.get('/studio/team.php'), st2 = await sw.get('/studio/ws-api.php?do=state&p=alpha-comic');
+  check('switch POST with the session\'s CSRF -> 303 ws.php, now the lieutenant (team.php 403)', r.status === 303 && r.loc === 'ws.php' && after.status === 403
+    && st2.status === 200 && st2.json.me.name === 'Lt <Two>', [short(r), after.status, st2.status]);
+  r = await lt.get('/studio/ws.php?t=' + TOK3);
+  const me = (await lt.get('/studio/ws-api.php?do=state&p=alpha-comic')).json;
+  check("lieutenant A opens lieutenant B's link -> asked first, still A", r.status === 200 && r.text.includes('Switch accounts?') && r.text.includes('signed in as <b>Lt One</b>')
+    && !!me && me.me.name === 'Lt One', [short(r), me && me.me]);
+  r = await lt2.get('/studio/ws.php?t=' + TOK3);
+  check('the same person re-opening their own link -> straight in (302)', r.status === 302 && r.loc === 'ws.php', short(r));
+}
+
+section('SCOPE: deactivation fences the queue');
+{
+  r = await lt2.get('/studio/ws.php');
+  const L2 = API(lt2, (bootFromHtml(r.text, 'wsboot') || {}).csrf);
+  r = await L2('generate', { page: '1', takes: '1' }, A); const JI1 = r.json && r.json.job && r.json.job.id;
+  const g0 = gensOf(LT2_ID);
+  check('lieutenant 2 queued a job on alpha', !!JI1 && g0 === 1, [short(r), g0]);
+  editTeam(t => { t.people.find(p => p.id === LT2_ID).active = false; });       // deactivated without team.php's fence (a race)
+  r = await W('claim', { worker: 'w1' });
+  check('claim: job of a deactivated lieutenant -> cancelled, image back', r.json && r.json.job === null && jobOf(JI1).status === 'cancelled' && /access changed/.test(jobOf(JI1).note)
+    && gensOf(LT2_ID) === g0 - 1, [short(r), jobOf(JI1), gensOf(LT2_ID)]);
+  editTeam(t => { t.people.find(p => p.id === LT2_ID).active = true; });
+  r = await L2('generate', { page: '1', takes: '1' }, A); const JI2 = r.json && r.json.job && r.json.job.id;
+  r = await W('claim', { worker: 'w1' });
+  check('claim I2 (running)', r.json && r.json.job && r.json.job.id === JI2, short(r));
+  r = await L2('generate', { page: '1', takes: '2' }, A); const JI3 = r.json && r.json.job && r.json.job.id;
+  const g1 = gensOf(LT2_ID);
+  r = await owner.post('/studio/team.php', { csrf: OWN_CSRF, do: 'active', id: LT2_ID, on: '0' });
+  check('team.php deactivates lieutenant 2 -> queued job cancelled (2 back), running job told to stop', r.status === 303 && jobOf(JI3).status === 'cancelled' && gensOf(LT2_ID) === g1 - 2
+    && jobOf(JI2).stopRequested === true && jobOf(JI2).status === 'running', [jobOf(JI3), jobOf(JI2), gensOf(LT2_ID), g1]);
+  r = await W('done', { job: JI2, status: 'done' });
+  check('… the running job closes as cancelled, its slot back', r.json && r.json.status === 'cancelled' && r.json.released === 1 && gensOf(LT2_ID) === g1 - 3, [short(r), gensOf(LT2_ID), g1]);
+  r = await lt2.get('/studio/ws-api.php?do=state&p=alpha-comic');
+  check('… and their session is gone (401)', r.status === 401, short(r));
+}
+
+// =================================================================================================
+section('LEGACY PAGES: hostile file names and image metadata stay inert');
+{
+  r = await L('upload', { kind: 'ref', 'files[]': new File([UPLOAD_PNG], '</script><script>alert(1)</script>.png', { type: 'image/png' }) }, C);
+  const f1 = r.json && r.json.files && r.json.files[0];
+  r = await L('upload', { kind: 'ref', 'files[]': new File([UPLOAD_PNG], '<img src=x onerror=alert(1)>.png', { type: 'image/png' }) }, C);
+  const f2 = r.json && r.json.files && r.json.files[0];
+  const rowsX = readJson(D + `/images-${C}.json`);
+  const o1 = (rowsX.find(m => m.file === f1) || {}).orig, o2 = (rowsX.find(m => m.file === f2) || {}).orig;
+  check('upload names with HTML are stored sanitized in images-<pid>.json (no < > " \' ` &)', !!f1 && !!f2 && typeof o1 === 'string' && typeof o2 === 'string'
+    && ![o1, o2].some(o => /[<>"'`&]/.test(o)) && o2.includes('img src=x'), [o1, o2]);
+  const X = '</script><script>alert(1)</script><!--';
+  const g = readJson(D + '/images-gamma-comic.json');
+  g[0].prompt = X; g[0].orig = X; g[0].analysis = { caption: X, defects: [X], tags: [X], notes: X };
+  php.writeFile(D + '/images-gamma-comic.json', JSON.stringify(g));
+  for (const u of ['project.php?p=gamma-comic', 'creator.php?p=gamma-comic', 'review.php?p=gamma-comic']) {
+    r = await owner.get('/studio/' + u);
+    check(`owner ${u} with a hostile caption/prompt/orig: renders, payload only in escaped form`, r.status === 200 && !r.text.includes('<script>alert(1)') && /\\u003C\\?\/script\\u003E/.test(r.text),
+      [r.status, r.text.length, (/.{0,80}alert\(1\).{0,40}/.exec(r.text) || [''])[0]]);
+  }
+}
 
 // =================================================================================================
 section('REGRESSION: owner / collab still behave as before');

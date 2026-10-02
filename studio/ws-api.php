@@ -21,6 +21,10 @@ const WS_API_POST      = ['create', 'setproj', 'page_save', 'page_delete', 'uplo
 const WS_API_MAX_PAGES = 200;
 const WS_API_MAX_REFS  = 200;
 const WS_API_MAX_FILES = 20;
+const WS_API_CHAT_MAX_BODY  = 16384;   // bytes: a chat_send request body above this is refused (413)
+const WS_API_TEAM_PER_MIN   = 20;      // thread posts per lieutenant per rolling minute
+const WS_API_TEAM_PER_DAY   = 400;     // thread posts per lieutenant per (Pacific) day
+const WS_API_CHAT_MAX_TOKENS = 4000;   // Claude reply cap (also sizes the up-front cost reservation)
 
 // ---- input helpers -------------------------------------------------------------------
 // Clean user/model text: valid UTF-8 only (an invalid byte would make json_encode fail and s_write
@@ -66,6 +70,43 @@ function ws_api_pid(): string {
     return $pid;
 }
 function ws_api_sys(string $text): array { return ['role' => 'system', 'uid' => '', 'by' => 'Studio', 'text' => $text]; }
+
+// ---- page numbers ---------------------------------------------------------------------------
+// The next page number never handed out in this comic. proj['nextN'] only counts up, so a deleted
+// page's number (and its group "Page NN") is never given to a new page.
+function ws_api_next_n(array $d): int {
+    $max = 0; foreach ($d['pages'] as $pg) $max = max($max, (int)($pg['n'] ?? 0));
+    return max((int)($d['nextN'] ?? 0), $max + 1);
+}
+// ws_proj_update() that also keeps proj['nextN'] (initialised from the pages when absent). Taken
+// before AND after $fn, so deleting the highest page still leaves its number used up.
+function ws_api_proj_update(string $pid, callable $fn): array {
+    return ws_proj_update($pid, function ($d) use ($fn) {
+        $before = ws_api_next_n($d);
+        $d = ws_proj_norm($fn($d));
+        $d['nextN'] = max($before, ws_api_next_n($d));
+        return $d;
+    });
+}
+function ws_api_reused_n(int $n): string { return "Page $n was deleted, and page numbers are never reused. Add a new page instead."; }
+
+// Thread flood guard for a lieutenant: WS_API_TEAM_PER_MIN posts per rolling minute and
+// WS_API_TEAM_PER_DAY per day, counted in usage.json users[uid] (tmin = timestamps of the last
+// minute, tmsgs = today's posts). Returns '' when the post may go ahead (and counts it), else the error.
+function ws_api_team_rate(string $uid): string {
+    $now = time();
+    return (string)ws_usage_mutate(function ($d) use ($uid, $now) {
+        $u = (array)($d['users'][$uid] ?? []);
+        $win = array_values(array_filter(array_map('intval', (array)($u['tmin'] ?? [])), fn($t) => $t > $now - 60 && $t <= $now));
+        $day = (int)($u['tmsgs'] ?? 0);
+        if ($day >= WS_API_TEAM_PER_DAY) return [$d, 'You have posted ' . WS_API_TEAM_PER_DAY . ' messages today, which is the daily limit. It resets at midnight Pacific.'];
+        if (count($win) >= WS_API_TEAM_PER_MIN) return [$d, 'You are sending messages very fast. Wait a minute, then try again.'];
+        $win[] = $now;
+        $u['tmin'] = $win; $u['tmsgs'] = $day + 1;
+        $d['users'][$uid] = $u;
+        return [$d, ''];
+    });
+}
 
 // ---- read models --------------------------------------------------------------------------
 // One pass over images-<pid>.json: takes / picks / newest thumbs per workspace page.
@@ -130,11 +171,18 @@ function ws_api_jobs(string $pid, string $uid, bool $isLt, int $limit = 20): arr
 }
 // Cheap change signatures: mtime+size of every store the page shows. 'sig' covers all of them
 // (the spec'd value); 'chat' and 'rest' let the page refetch only the part that changed.
+// Jobs: a digest of THIS comic's jobs only (the global jobs.json stamp moves on every worker
+// heartbeat for any comic, which made every open page reload its state).
 function ws_api_sigs(string $pid): array {
     clearstatcache();
     $st = function (string $f): string { return is_file($f) ? (filemtime($f) . ':' . filesize($f)) : '-'; };
     $chat = $st(ws_file('chat', $pid));
-    $rest = $st(imeta_path($pid)) . '|' . $st(ws_file('proj', $pid)) . '|' . $st(ws_file('picks', $pid)) . '|' . $st(WS_JOBS);
+    $jobs = [];
+    foreach (ws_jobs_for($pid) as $j) {
+        if (is_array($j)) $jobs[] = [(string)($j['id'] ?? ''), (string)($j['status'] ?? ''), (int)($j['done'] ?? 0), (int)($j['failed'] ?? 0)];
+    }
+    $rest = $st(imeta_path($pid)) . '|' . $st(ws_file('proj', $pid)) . '|' . $st(ws_file('picks', $pid))
+          . '|' . md5((string)json_encode($jobs)) . '|' . (ws_worker_alive() ? 'w1' : 'w0');
     return ['sig' => md5($rest . '|' . $chat), 'chat' => md5($chat), 'rest' => md5($rest)];
 }
 
@@ -190,8 +238,8 @@ function ws_api_action_exec(string $pid, string $kind, array $args): array {
     if (!$c) return [false, 'This suggestion is not valid any more.'];
     [$kind, $args] = $c;
     if ($kind === 'set_prompt') {
-        $res = '';
-        ws_proj_update($pid, function ($d) use ($args, &$res) {
+        $res = ''; $err = '';
+        ws_api_proj_update($pid, function ($d) use ($args, &$res, &$err) {
             foreach ($d['pages'] as &$pg) {
                 if ((int)($pg['n'] ?? 0) !== $args['page']) continue;
                 $pg['prompt'] = $args['prompt'];
@@ -200,20 +248,21 @@ function ws_api_action_exec(string $pid, string $kind, array $args): array {
                 return $d;
             }
             unset($pg);
-            if (count($d['pages']) >= WS_API_MAX_PAGES) { $res = ''; return $d; }
+            if ($args['page'] < ws_api_next_n($d)) { $err = ws_api_reused_n($args['page']); return $d; }
+            if (count($d['pages']) >= WS_API_MAX_PAGES) { $err = 'This comic already has the maximum of ' . WS_API_MAX_PAGES . ' pages.'; return $d; }
             $d['pages'][] = ['n' => $args['page'], 'title' => $args['title'], 'prompt' => $args['prompt'], 'refs' => [], 'note' => ''];
             $res = 'Page ' . $args['page'] . ' created with this prompt.';
             return $d;
         });
-        return $res !== '' ? [true, $res] : [false, 'This comic already has the maximum of ' . WS_API_MAX_PAGES . ' pages.'];
+        return $res !== '' ? [true, $res] : [false, $err !== '' ? $err : 'Could not save that prompt.'];
     }
     if ($kind === 'add_pages') {
         $first = 0; $last = 0;
-        ws_proj_update($pid, function ($d) use ($args, &$first, &$last) {
-            $max = 0; foreach ($d['pages'] as $pg) $max = max($max, (int)($pg['n'] ?? 0));
+        ws_api_proj_update($pid, function ($d) use ($args, &$first, &$last) {
+            $next = ws_api_next_n($d);
             foreach ($args['pages'] as $p) {
-                if (count($d['pages']) >= WS_API_MAX_PAGES) break;
-                $n = ++$max; if ($first === 0) $first = $n; $last = $n;
+                if (count($d['pages']) >= WS_API_MAX_PAGES || $next > 999) break;
+                $n = $next++; if ($first === 0) $first = $n; $last = $n;
                 $d['pages'][] = ['n' => $n, 'title' => $p['title'], 'prompt' => $p['prompt'], 'refs' => [], 'note' => ''];
             }
             return $d;
@@ -285,7 +334,7 @@ function ws_api_context(string $pid, array $me): string {
     $p = project_get($pid) ?? []; $proj = ws_proj($pid); $pages = ws_api_pages($pid, $proj);
     $L = [];
     $L[] = 'Comic: ' . (string)($p['name'] ?? $pid);
-    $L[] = 'Brand: ' . (ws_project_brand($pid) ?: '(not assigned)');
+    $L[] = 'Brand: ' . (ws_project_brand($pid, $p ?: null) ?: '(not assigned)');
     $L[] = 'Stage: ' . (string)($p['stage'] ?? '');
     $L[] = 'Style: ' . ($proj['style'] !== '' ? $proj['style'] : '(not set)');
     $L[] = 'Aspect: ' . $proj['aspect'];
@@ -330,32 +379,45 @@ function ws_api_thread(string $pid, int $beforeId): string {
     }
     return $L ? implode("\n", $L) : '(no earlier messages)';
 }
-// One Messages call. Returns ['row' => chat row to append, 'usd' => float, 'ok' => bool].
-function ws_api_claude(string $pid, string $newText, array $me, int $newMsgId): array {
+// The Messages request body for one reply (context + thread built from the stores, never from the client).
+function ws_api_claude_body(string $pid, string $newText, array $me, int $newMsgId): array {
     $content = "<comic_context>\n" . ws_api_context($pid, $me) . "\n</comic_context>\n\n"
              . "<recent_thread>\n" . ws_api_thread($pid, $newMsgId) . "\n</recent_thread>\n\n"
              . 'NEW MESSAGE from ' . $me['name'] . ': ' . $newText;
-    $body = [
-        'max_tokens'    => 4000,
+    return [
+        'max_tokens'    => WS_API_CHAT_MAX_TOKENS,
         'output_config' => ['effort' => (string)ws_settings()['chatEffort'], 'format' => ['type' => 'json_schema', 'schema' => ws_api_schema()]],
         'system'        => [['type' => 'text', 'text' => WS_API_SYSTEM_PROMPT, 'cache_control' => ['type' => 'ephemeral']]],
         'messages'      => [['role' => 'user', 'content' => $content]],
     ];
-    $r = ws_ai_call($body);
-    $usd = (float)($r['usd'] ?? 0);
-    if (empty($r['ok']) || !is_array($r['json'])) {
-        return ['ok' => false, 'usd' => $usd, 'row' => ws_api_sys('Claude could not answer right now (' . ws_api_text((string)($r['error'] ?? 'unknown error'), 240, false) . '). The team thread still works.')];
+}
+// What one finished ws_ai_call() costs the person: [actualUsd, refundMsg].
+//  - Claude answered: its real cost.
+//  - A definite API error (HTTP >= 400 with a JSON error body; ws_ai_call returns ok=false WITH the
+//    decoded json): not billed, so cost 0 and the message is given back.
+//  - Anything else (timeout, transport error, an unreadable body): it may have been billed, so the
+//    whole worst-case reservation stays charged.
+function ws_api_claude_cost(array $r, float $reserveUsd): array {
+    $j = $r['json'] ?? null;
+    if (!empty($r['ok']) && is_array($j)) return [(float)($r['usd'] ?? 0), false];
+    if (empty($r['ok']) && is_array($j) && isset($j['error'])) return [0.0, true];
+    return [$reserveUsd, false];
+}
+// Turn a ws_ai_call() result into the chat row to append.
+function ws_api_claude_row(array $r): array {
+    if (empty($r['ok']) || !is_array($r['json'] ?? null)) {
+        return ws_api_sys('Claude could not answer right now (' . ws_api_text((string)($r['error'] ?? 'unknown error'), 240, false) . '). The team thread still works.');
     }
     $j = $r['json']; $stop = (string)($j['stop_reason'] ?? '');
     if ($stop === 'refusal') {
-        return ['ok' => true, 'usd' => $usd, 'row' => ['role' => 'ai', 'uid' => 'claude', 'by' => 'Claude', 'text' => "I can't help with that one — try rephrasing.", 'actions' => []]];
+        return ['role' => 'ai', 'uid' => 'claude', 'by' => 'Claude', 'text' => "I can't help with that one — try rephrasing.", 'actions' => []];
     }
     if ($stop === 'max_tokens') {
-        return ['ok' => true, 'usd' => $usd, 'row' => ws_api_sys("Claude's answer ran too long and was cut off. Try asking for fewer pages at a time.")];
+        return ws_api_sys("Claude's answer ran too long and was cut off. Try asking for fewer pages at a time.");
     }
     $data = json_decode(ws_ai_text($j), true);
     if (!is_array($data) || !array_key_exists('reply', $data)) {
-        return ['ok' => true, 'usd' => $usd, 'row' => ws_api_sys("Claude's answer could not be read. Please try again.")];
+        return ws_api_sys("Claude's answer could not be read. Please try again.");
     }
     $actions = []; $i = 0;
     foreach (array_slice(array_values((array)($data['actions'] ?? [])), 0, 5) as $a) {
@@ -366,14 +428,7 @@ function ws_api_claude(string $pid, string $newText, array $me, int $newMsgId): 
     }
     $reply = ws_api_text($data['reply'], 6000);
     if ($reply === '') $reply = $actions ? 'Here is what I propose:' : '(no reply)';
-    return ['ok' => true, 'usd' => $usd, 'row' => ['role' => 'ai', 'uid' => 'claude', 'by' => 'Claude', 'text' => $reply, 'actions' => $actions, 'model' => (string)($j['model'] ?? '')]];
-}
-// Give back one chat reply from today's count (Claude never answered).
-function ws_api_chat_refund(string $uid): void {
-    ws_usage_mutate(function ($d) use ($uid) {
-        $d['users'][$uid]['msgs'] = max(0, (int)($d['users'][$uid]['msgs'] ?? 0) - 1);
-        return [$d, null];
-    });
+    return ['role' => 'ai', 'uid' => 'claude', 'by' => 'Claude', 'text' => $reply, 'actions' => $actions, 'model' => (string)($j['model'] ?? '')];
 }
 
 // ============================================================================================
@@ -414,7 +469,7 @@ case 'state': {
         'ok' => true,
         'me' => ['name' => $ME['name'], 'isLt' => $ME['isLt'], 'isOwner' => $ME['isOwner'], 'uid' => $ME['uid']],
         'project' => ['id' => $pid, 'name' => (string)($p['name'] ?? $pid), 'status' => (string)($p['status'] ?? ''),
-                      'stage' => (string)($p['stage'] ?? ''), 'brand' => ws_project_brand($pid)],
+                      'stage' => (string)($p['stage'] ?? ''), 'brand' => ws_project_brand($pid, $p ?: null)],
         'proj' => ['story' => $proj['story'], 'style' => $proj['style'], 'aspect' => $proj['aspect'],
                    'pages' => $proj['pages'], 'refs' => $proj['refs']],
         'pages' => ws_api_pages($pid, $proj),
@@ -445,21 +500,29 @@ case 'create': {
     if ($brand === '' || !in_array($brand, $allowed, true)) ws_api_fail('Pick one of your brands.');
     $style = ws_api_text($_POST['style'] ?? '', 2000);
     $now = date('c');
-    $id = s_with_lock(PROJECTS_FILE, function ($all) use ($name, $now) {
+    $made = s_with_lock(PROJECTS_FILE, function ($all) use ($name, $now) {
         $all = is_array($all) ? $all : [];
         $base = slugify($name);
         if (strlen(trim(substr($base, 2), '-')) < 2 && strpos($base, 'p-') === 0) $base = 'comic-' . substr(nid(), 0, 6);
         $base = rtrim(substr($base, 0, 44), '-');
         $taken = []; foreach ($all as $row) if (is_array($row)) $taken[(string)($row['id'] ?? '')] = true;
+        $pb = (array)(ws_team_norm(s_read(WS_TEAM, []))['projectBrands']);      // fresh, not the per-request cache
+        // leftover workspace stores: data/ws/<kind>-<id>.json (proj, chat, picks, ...); exact id match only
+        $wsLeft = function (string $id): bool {
+            foreach ((array)glob(WS_DIR . '/*-' . $id . '.json') as $f) if (preg_match('/^[a-z]+-' . preg_quote($id, '/') . '\.json$/', basename((string)$f))) return true;
+            return false;
+        };
         $id = $base; $i = 2;
-        // never reuse an id that still has leftover data (a deleted comic's images must not resurface)
-        while (isset($taken[$id]) || is_file(imeta_path($id)) || is_dir(project_dir($id)) || is_file(ws_file('proj', $id))) $id = $base . '-' . $i++;
-        array_unshift($all, ['id' => $id, 'name' => $name, 'status' => 'active', 'stage' => 'page-build', 'tags' => ['workspace'],
-                             'notes' => '', 'cover' => null, 'created' => $now, 'updated' => $now]);
-        return ['data' => $all, 'result' => $id];
+        // never reuse an id that still has leftover data (a deleted comic's images, chat, picks or brand must not resurface)
+        while (isset($taken[$id]) || array_key_exists($id, $pb) || is_file(imeta_path($id)) || is_dir(project_dir($id)) || $wsLeft($id)) $id = $base . '-' . $i++;
+        $row = ['id' => $id, 'name' => $name, 'status' => 'active', 'stage' => 'page-build', 'tags' => ['workspace'],
+                'notes' => '', 'cover' => null, 'created' => $now, 'updated' => $now];
+        array_unshift($all, $row);
+        return ['data' => $all, 'result' => $row];
     });
-    ws_team_update(function ($t) use ($id, $brand) { $t['projectBrands'][$id] = $brand; return $t; });
-    ws_proj_update($id, function ($d) use ($style) { $d['style'] = $style; return $d; });
+    $id = (string)$made['id'];
+    ws_team_update(function ($t) use ($id, $brand, $made) { $t['projectBrands'][$id] = ws_pb_make($brand, $made); return $t; });
+    ws_api_proj_update($id, function ($d) use ($style) { $d['style'] = $style; return $d; });
     ws_chat_append($id, [ws_api_sys('📁 ' . $name . ' created by ' . $ME['name'])]);
     ws_json_out(['ok' => true, 'id' => $id]);
 }
@@ -475,7 +538,7 @@ case 'setproj': {
         $set['aspect'] = $a;
     }
     if (!$set) ws_api_fail('Nothing to save.');
-    ws_proj_update($pid, function ($d) use ($set) { return array_merge($d, $set); });
+    ws_api_proj_update($pid, function ($d) use ($set) { return array_merge($d, $set); });
     ws_json_out(['ok' => true]);
 }
 
@@ -513,7 +576,7 @@ case 'page_save': {
         $refsIn = array_slice($refsIn, 0, 12);
     }
     $newN = 0; $err = '';
-    ws_proj_update($pid, function ($d) use ($n, $title, $prompt, $refsIn, &$newN, &$err) {
+    ws_api_proj_update($pid, function ($d) use ($n, $title, $prompt, $refsIn, &$newN, &$err) {
         $known = []; foreach ($d['refs'] as $r) $known[(string)($r['file'] ?? '')] = true;
         $refs = $refsIn === null ? null : array_values(array_filter($refsIn, fn($f) => isset($known[$f])));
         if ($n > 0) {
@@ -527,8 +590,11 @@ case 'page_save': {
             }
             unset($pg);
         }
+        $next = ws_api_next_n($d);
+        if ($n > 0 && $n < $next) { $err = ws_api_reused_n($n); return $d; }   // e.g. a teammate deleted it meanwhile
         if (count($d['pages']) >= WS_API_MAX_PAGES) { $err = 'This comic already has the maximum of ' . WS_API_MAX_PAGES . ' pages.'; return $d; }
-        if ($n === 0) { $max = 0; foreach ($d['pages'] as $pg) $max = max($max, (int)($pg['n'] ?? 0)); $n = $max + 1; }
+        if ($n === 0) $n = $next;                                                    // nextN is bumped by ws_api_proj_update
+        if ($n > 999) { $err = 'This comic has used up its page numbers (999).'; return $d; }
         $d['pages'][] = ['n' => $n, 'title' => (string)$title, 'prompt' => (string)$prompt, 'refs' => $refs ?? [], 'note' => ''];
         $newN = $n;
         return $d;
@@ -542,14 +608,43 @@ case 'page_delete': {
     $n = ws_api_int($_POST['n'] ?? 0);
     if ($n < 1) ws_api_fail('Bad page number.');
     $found = false;
-    ws_proj_update($pid, function ($d) use ($n, &$found) {
+    ws_api_proj_update($pid, function ($d) use ($n, &$found) {   // nextN stays: the number is never handed out again
         $keep = [];
         foreach ($d['pages'] as $pg) { if ((int)($pg['n'] ?? 0) === $n) { $found = true; continue; } $keep[] = $pg; }
         $d['pages'] = $keep;
         return $d;
     });
     if (!$found) ws_api_fail("Page $n is not in this comic.", 404);
-    ws_json_out(['ok' => true]);   // only the page entry goes; its images stay in the studio
+    $group = ws_page_group($n);
+    // 1) its picker record goes
+    s_with_lock(ws_file('picks', $pid), function ($d) use ($group) {
+        if (!is_array($d) || !is_array($d['pages'] ?? null) || !array_key_exists($group, $d['pages'])) return ['result' => null];
+        unset($d['pages'][$group]);
+        return ['data' => $d, 'result' => null];
+    });
+    // 2) its takes move to "Deleted Page NN <time>" (nothing is deleted). A take the picker had accepted
+    //    (row key 'pk' = {acc, r}: what the pick changed, written by picker.php) is un-picked exactly like
+    //    picker.php does it: only fields still holding the picker's value are restored. Keeps made elsewhere stay.
+    $dest = 'Deleted ' . $group . ' ' . date('Y-m-d H:i:s');
+    $moved = 0;
+    images_update($pid, function ($meta) use ($group, $dest, &$moved) {
+        foreach ($meta as $i => $m) {
+            if (!is_array($m) || !empty($m['isref']) || !empty($m['blueprint']) || trim((string)($m['group'] ?? '')) !== $group) continue;
+            $meta[$i]['group'] = $dest; $moved++;
+            if (!array_key_exists('pk', $m)) continue;
+            $pk = is_array($m['pk']) ? $m['pk'] : [];
+            $pr = $pk['r'] ?? null;
+            if (!empty($m['accepted'])) $meta[$i]['accepted'] = !empty($pk['acc']);
+            if (($m['rating'] ?? null) === ($pr === 'bad' ? 'bad' : 'good')) {
+                if ($pr === null) unset($meta[$i]['rating']); else $meta[$i]['rating'] = $pr;
+            }
+            unset($meta[$i]['pk']);
+        }
+        return $meta;
+    });
+    $line = '🗑 ' . $ME['name'] . ' deleted page ' . $n . ($moved ? '. Its ' . $moved . ' take' . ($moved === 1 ? '' : 's') . ' moved to "' . $dest . '" in the studio.' : '.');
+    ws_chat_append($pid, [ws_api_sys($line)]);
+    ws_json_out(['ok' => true, 'moved' => $moved, 'group' => $dest]);
 }
 
 // ---- uploads + refs -----------------------------------------------------------------------------
@@ -588,7 +683,7 @@ case 'upload': {
         }
     }
     if ($newRefs) {
-        ws_proj_update($pid, function ($d) use ($newRefs) {
+        ws_api_proj_update($pid, function ($d) use ($newRefs) {
             foreach ($newRefs as $r) if (count($d['refs']) < WS_API_MAX_REFS) $d['refs'][] = $r;
             return $d;
         });
@@ -609,7 +704,7 @@ case 'ref_update': {
     if ($file === '') ws_api_fail('Bad file name.');
     $label = ws_api_text($_POST['label'] ?? '', 80, false);
     $found = false;
-    ws_proj_update($pid, function ($d) use ($file, $label, &$found) {
+    ws_api_proj_update($pid, function ($d) use ($file, $label, &$found) {
         foreach ($d['refs'] as &$r) if ((string)($r['file'] ?? '') === $file) { $r['label'] = $label; $found = true; }
         unset($r);
         return $d;
@@ -623,7 +718,7 @@ case 'ref_remove': {
     $file = ws_api_file($_POST['file'] ?? '');
     if ($file === '') ws_api_fail('Bad file name.');
     $found = false;
-    ws_proj_update($pid, function ($d) use ($file, &$found) {
+    ws_api_proj_update($pid, function ($d) use ($file, &$found) {
         $keep = [];
         foreach ($d['refs'] as $r) { if ((string)($r['file'] ?? '') === $file) { $found = true; continue; } $keep[] = $r; }
         $d['refs'] = $keep;
@@ -665,27 +760,50 @@ case 'cancel': {
 // ---- chat ---------------------------------------------------------------------------------------
 case 'chat_send': {
     $pid = ws_api_pid();
-    $full = ws_api_text($_POST['text'] ?? '', 100000);
+    $rawText = $_POST['text'] ?? '';
+    if ((int)($_SERVER['CONTENT_LENGTH'] ?? 0) > WS_API_CHAT_MAX_BODY || (is_string($rawText) && strlen($rawText) > WS_API_CHAT_MAX_BODY)) {
+        ws_api_fail('That message is too long (4000 characters max).', 413);
+    }
+    $full = ws_api_text($rawText, WS_API_CHAT_MAX_BODY);
     if ($full === '') ws_api_fail('Write a message first.');
     if (mb_strlen($full) > 4000) ws_api_fail('That message is too long (4000 characters max).');
     $ai = ws_api_int($_POST['ai'] ?? 0) === 1;
+    if ($ME['isLt']) {                                         // flood guard: every post to the thread counts (team or Claude)
+        $slow = ws_api_team_rate($ME['uid']);
+        if ($slow !== '') ws_api_fail($slow, 429);
+    }
     $new = ws_chat_append($pid, [['role' => 'user', 'uid' => $ME['uid'], 'by' => $ME['name'], 'text' => $full, 'ai' => $ai, 'actions' => []]]);
     if (!$ai) ws_json_out(['ok' => true, 'msgs' => $new]);
 
-    $q = ws_chat_quota_take($ME['uid'], $ME['isLt']);
+    // No AI key installed: no call can be made, so nothing is charged.
+    if (ws_ai_key() === '') {
+        $new = array_merge($new, ws_chat_append($pid, [ws_api_claude_row(['ok' => false, 'json' => null, 'error' => 'No AI key installed in the Studio.'])]));
+        ws_json_out(['ok' => true, 'msgs' => $new]);
+    }
+    // Build the request first: its size sets the worst-case cost reserved up front, so parallel
+    // requests can never run past the person's daily dollars.
+    $body = ws_api_claude_body($pid, $full, $ME, (int)($new[0]['id'] ?? PHP_INT_MAX));
+    $bodyLen = strlen((string)json_encode($body, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE));
+    $reserve = ws_chat_reserve_usd($bodyLen, (int)$body['max_tokens']);
+    ignore_user_abort(true);                                   // once taken, always settle + store the reply, even if the tab goes away
+    $q = ws_chat_quota_take($ME['uid'], $ME['isLt'], $reserve);
     if (empty($q['ok'])) {
+        // Over today's allowance, or this person's previous question is still with Claude. Nothing was
+        // taken, so there is nothing to settle or refund: just a friendly line in the thread.
         $err = (string)($q['error'] ?? 'Daily Claude chat limit reached.');
-        $new = array_merge($new, ws_chat_append($pid, [ws_api_sys($err)]));
+        $new = array_merge($new, ws_chat_append($pid, [ws_api_sys('For ' . $ME['name'] . ': ' . $err)]));
         ws_json_out(['ok' => true, 'msgs' => $new, 'error' => $err]);
     }
-    // Claude can take up to ~60 s: release the session lock so the page keeps polling meanwhile,
-    // and finish (store the reply) even if the browser tab goes away.
+    // Claude can take up to ~60 s: release the session lock so the page keeps polling meanwhile.
     session_write_close();
-    ignore_user_abort(true);
-    $res = ws_api_claude($pid, $full, $ME, (int)($new[0]['id'] ?? PHP_INT_MAX));
-    if ($res['usd'] > 0) ws_chat_cost_add($ME['uid'], (float)$res['usd']);
-    if (!$res['ok']) ws_api_chat_refund($ME['uid']);
-    $new = array_merge($new, ws_chat_append($pid, [$res['row']]));
+    $res = ['ok' => false, 'json' => null, 'error' => 'the request did not finish', 'usd' => 0.0];
+    try {
+        $res = ws_ai_call($body);
+    } finally {
+        [$actual, $refund] = ws_api_claude_cost($res, $reserve);
+        ws_chat_settle($ME['uid'], $reserve, $actual, $refund);   // exactly once per taken reservation
+    }
+    $new = array_merge($new, ws_chat_append($pid, [ws_api_claude_row($res)]));
     ws_json_out(['ok' => true, 'msgs' => $new]);
 }
 

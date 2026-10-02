@@ -78,12 +78,57 @@ function ws_ws_howto(): void { ?>
 </section>
 <?php }
 
+// The active person a magic-link token belongs to (same test as ws_magic_login), without signing in.
+function ws_ws_token_person(string $tok): ?array {
+    $tok = trim($tok);
+    if ($tok === '' || strlen($tok) < 24) return null;
+    $h = ws_token_hash($tok);
+    foreach (ws_team()['people'] as $p) {
+        if (!empty($p['active']) && !empty($p['tokenHash']) && hash_equals((string)$p['tokenHash'], $h)) return $p;
+    }
+    return null;
+}
+// "You are signed in as X. Switch to Y?" The token goes ONLY into the hidden field (escaped); the
+// form carries this session's CSRF token, so another site cannot submit the switch.
+function ws_ws_switch_page(string $curName, string $newName, string $tok): void {
+    http_response_code(200);
+    ws_ws_head('Switch account · Workspace', 'body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px}.card.auth{max-width:440px}'
+        . '.sw-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}');
+    echo '<div class="card auth"><div class="brand"><span class="dot"></span> 🧑‍✈️ Workspace</div>'
+       . '<h1 style="font-size:20px;margin-bottom:8px">Switch accounts?</h1>'
+       . '<p class="muted" style="margin:0 0 16px">You are signed in as <b>' . h($curName) . '</b>. Switch to the workspace link for <b>' . h($newName) . '</b>? '
+       . 'This browser stops being signed in as ' . h($curName) . '.</p>'
+       . '<form method="post" action="ws.php" class="sw-btns">' . csrf_field()
+       . '<input type="hidden" name="t" value="' . h($tok) . '">'
+       . '<button type="submit" class="btn primary">Switch to ' . h($newName) . '</button>'
+       . '<a class="btn" href="ws.php">Stay signed in as ' . h($curName) . '</a></form>'
+       . '</div><script>try { history.replaceState(null, "", "ws.php"); } catch (e) { /* keep the URL */ }</script></body></html>';
+    exit;
+}
+
 // ---- 1) magic link: exchange the token, then strip it from the URL ------------------------------
-if (isset($_GET['t'])) {
+// GET ?t= signs in directly when this browser has no studio session or the same person's. When it is
+// signed in as someone ELSE (staff/owner, or another lieutenant), nothing is swapped silently: an
+// interstitial asks first, and its POST (CSRF of the current session) performs the switch.
+$wsSwitchPost = ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && isset($_POST['t']);
+if (isset($_GET['t']) || $wsSwitchPost) {
     header('Referrer-Policy: no-referrer');
     header('Cache-Control: no-store');
-    $tok = is_string($_GET['t']) ? $_GET['t'] : '';
-    if ($tok !== '' && ws_magic_login($tok)) { header('Location: ws.php'); exit; }
+    header('X-Frame-Options: DENY');                                // the switch button must not be clickjackable
+    header("Content-Security-Policy: frame-ancestors 'none'");
+    s_boot();
+    $raw = $wsSwitchPost ? $_POST['t'] : $_GET['t'];
+    $tok = is_string($raw) ? trim($raw) : '';
+    if ($wsSwitchPost && !csrf_ok()) {
+        ws_ws_notice(403, 'That did not work', 'This page was open too long, or you signed out meanwhile. Open your private link again.');
+    }
+    $who = $tok !== '' ? ws_ws_token_person($tok) : null;
+    if ($who && !$wsSwitchPost) {
+        $other = !empty($_SESSION['studio_ok'])
+              || (!empty($_SESSION['studio_lt']) && (string)($_SESSION['studio_uid'] ?? '') !== (string)($who['id'] ?? ''));
+        if ($other) ws_ws_switch_page(current_studio_user() ?: 'another account', (string)($who['name'] ?? 'Lieutenant'), $tok);
+    }
+    if ($who && ws_magic_login($tok)) { header('Location: ws.php', true, $wsSwitchPost ? 303 : 302); exit; }
     usleep(300000);
     ws_ws_notice(401, 'This link is not valid any more', 'Your private link was changed or switched off. Ask the owner for a new one.');
 }
@@ -237,7 +282,7 @@ if ($pidRaw !== '') {
     <div class="ws-title">
       <a class="ghost" href="ws.php">← My comics</a>
       <h1 id="hName"><?= h($pname) ?></h1>
-      <span class="badge bbadge" id="hBrand"><?= h(ws_project_brand($pid) ?: 'no brand') ?></span>
+      <span class="badge bbadge" id="hBrand"><?= h(ws_project_brand($pid, $project) ?: 'no brand') ?></span>
       <span class="muted small" id="hStage"><?= h(str_replace('-', ' ', (string)($project['stage'] ?? ''))) ?></span>
     </div>
     <div class="ws-pills"><span class="pill" id="pQuota">🎨 …</span><span class="pill" id="pWorker">● …</span></div>
@@ -311,7 +356,7 @@ if ($pidRaw !== '') {
 // ---- 3) My comics -------------------------------------------------------------------------------
     $projects = array_values(array_filter(ws_projects_visible(), fn($p) => is_array($p) && ws_pid((string)($p['id'] ?? '')) !== ''));
     // workspace comics (brand assigned) first, archived last; otherwise keep projects.json order (newest first)
-    $rank = function ($p) { $id = (string)$p['id']; return (($p['status'] ?? '') === 'archived' ? 2 : 0) + (ws_project_brand($id) === '' ? 1 : 0); };
+    $rank = function ($p) { $id = (string)$p['id']; return (($p['status'] ?? '') === 'archived' ? 2 : 0) + (ws_project_brand($id, $p) === '' ? 1 : 0); };
     usort($projects, fn($a, $b) => $rank($a) <=> $rank($b));
     $brands = $isLt ? array_values(array_map('strval', (array)($person['brands'] ?? []))) : array_values(array_map('strval', ws_team()['brands']));
     $boot = ['view' => 'list', 'csrf' => csrf(), 'uid' => $uid, 'name' => $meName, 'isLt' => $isLt];
@@ -344,7 +389,7 @@ if ($pidRaw !== '') {
     <div class="ws-filter">
       <input type="search" id="fq" placeholder="Filter by name…" aria-label="Filter comics by name">
       <select id="fb" aria-label="Filter by brand"><option value="">All brands</option>
-        <?php foreach (array_unique(array_map(fn($p) => ws_project_brand((string)$p['id']), $projects)) as $b): ?>
+        <?php foreach (array_unique(array_map(fn($p) => ws_project_brand((string)$p['id'], $p), $projects)) as $b): ?>
           <option value="<?= h($b === '' ? '-' : $b) ?>"><?= h($b === '' ? 'No brand' : $b) ?></option>
         <?php endforeach; ?></select>
       <span class="muted small" id="fcount"></span>
@@ -352,7 +397,7 @@ if ($pidRaw !== '') {
     <?php endif; ?>
   <div class="grid">
     <?php foreach ($projects as $p):
-        $id = (string)$p['id']; $nm = (string)($p['name'] ?? $id); $brand = ws_project_brand($id);
+        $id = (string)$p['id']; $nm = (string)($p['name'] ?? $id); $brand = ws_project_brand($id, $p);
         [$pgN, $pkN] = ws_ws_counts($id);
         $cov = is_string($p['cover'] ?? null) && preg_match('/^[A-Za-z0-9._-]+$/', (string)$p['cover']) ? (string)$p['cover'] : '';
         $st = (string)($p['status'] ?? '');
@@ -586,7 +631,7 @@ if ($pidRaw !== '') {
       r.file = el('input'); r.file.type = 'file'; r.file.multiple = true; r.file.accept = 'image/jpeg,image/png,image/webp,image/gif'; r.file.hidden = true;
       r.file.addEventListener('change', function () { var fs = Array.prototype.slice.call(r.file.files || []); r.file.value = ''; if (fs.length) uploadFiles(fs, 'take', r.n); });
       r.up = button('⬆ Upload takes', 'sm', function () { r.file.click(); }, 'Add takes you made elsewhere to this page');
-      r.del = button('🗑', 'sm danger', function () { deletePage(r); }, 'Delete this page from the list (its images stay in the studio)');
+      r.del = button('🗑', 'sm danger', function () { deletePage(r); }, 'Delete this page (its takes move to a “Deleted Page” group in the studio)');
       var sp = el('span', 'spacer');
       btns.append(r.save, r.gen2, r.gen4, r.up, r.file, sp, r.del);
       r.root.append(head, r.prompt, refsRow, r.stats, r.thumbs, r.comment, btns);
@@ -696,7 +741,7 @@ if ($pidRaw !== '') {
       loadState();
     }
     async function deletePage(r) {
-      if (!confirm('Delete page ' + r.n + ' from the list? Its takes stay in the studio.')) return;
+      if (!confirm('Delete page ' + r.n + '? Its takes move to a “Deleted Page ' + r.n + '” group in the studio and its pick is cleared. The page number is not reused.')) return;
       var j = await post('page_delete', { n: r.n });
       if (!j.ok) { toast(j.error || 'Could not delete the page.', 'err'); return; }
       toast('Page ' + r.n + ' removed.', 'ok');
@@ -950,7 +995,7 @@ if ($pidRaw !== '') {
       if (!j.ok) { if (!ta.value) ta.value = text; toast(j.error || 'Message not sent.', 'err'); updateTyping(); return; }
       (j.msgs || []).forEach(renderMsg);
       scrollChat(); updateTyping();
-      if (j.error) toast(j.error, 'err');
+      if (j.error) toast(j.error);                   // limit / still-answering: informational, the thread has the line
     }
     $('bSend').addEventListener('click', function () { send(false); });
     $('bAsk').addEventListener('click', function () { send(true); });
