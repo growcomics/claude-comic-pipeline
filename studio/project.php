@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             return ['data'=>array_values(array_filter($all, fn($p)=>($p['id']??'')!==$id)), 'result'=>true];
         });
         @array_map('unlink', glob(project_dir($id) . '/thumb/*') ?: []);
+        @array_map('unlink', glob(project_dir($id) . '/mid/*') ?: []);   // img.php m=1 viewing copies
         @array_map('unlink', glob(project_dir($id) . '/*') ?: []);
         @unlink(imeta_path($id));
         header('Location: index.php'); exit;

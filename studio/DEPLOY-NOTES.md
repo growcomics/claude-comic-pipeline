@@ -53,6 +53,9 @@ jobs.json, usage.json, worker.json = keyHash only, worker-seen.json).
 | inc/boot.php | `studio_lt` + `ws_gate()` inside `is_authed()`; `require_once __DIR__ . '/workspace.php'` as the LAST line | Lieutenant sessions carry `studio_lt`, never `studio_ok`. The hook is the ONLY thing that lets them in, and `ws_gate()` confines them to ws.php / ws-api.php / picker.php / img.php / help.php / login.php for their brand's comics. |
 | inc/boot.php `store_image()` | `$keep = function` (rename/copy for non-uploaded temp files) | The worker's `ingest_url` stores server-side downloads; `move_uploaded_file` alone would drop them. |
 | index.php | `ws_is_owner()` → 🧑‍✈️ Workspace + 👥 Team links | Owner-only links in the topbar. |
+| index.php (2026-10-02) | `master Studio key: owner only` wrapping the ⚙ Flow import `<details>` | The bridge key is shown to the OWNER only (staff like THOR + collab logins don't see it). |
+| inc/boot.php + inc/workspace.php (2026-10-02) | `ws_staff_gate()` called from the `studio_ok` branch of `is_authed()`; `WS_OWNER_ONLY` (= finance.php) | finance.php is owner-only for every login, so it can't be claimed by staff. |
+| img.php (2026-10-02) | `m=1` viewing copy (`uploads/<id>/mid/<name>.jpg`) + PNG thumb JPEG twin (`mid/<name>.t.jpg`); `max-age=2592000, immutable` | Picker lightbox loads ~6× lighter images and shows the thumbnail instantly; project.php delete also clears `mid/`. |
 | creator.php / project.php | `JSON_HEX_TAG \| JSON_HEX_AMP` on the `window.STUDIO_ANALYSIS = …` line | Lieutenant uploads feed image analysis text; without HEX_TAG a `</script>` in a caption breaks out on owner pages. Keep the flags if you touch that line. |
 
 Rules: a lieutenant must never get studio_ok, never be added to admin users.json or users-studio.json, and never reach

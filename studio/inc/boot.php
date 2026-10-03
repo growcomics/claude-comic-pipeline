@@ -62,7 +62,7 @@ function studio_login(string $username, string $password): bool {
 }
 function is_authed(): bool {
     s_boot();
-    if (!empty($_SESSION['studio_ok'])) return true;
+    if (!empty($_SESSION['studio_ok'])) { if (function_exists('ws_staff_gate')) ws_staff_gate(); return true; }   // owner-only pages (inc/workspace.php)
     // Lieutenant (hired helper) sessions carry studio_lt, not studio_ok: ws_gate() confines them to the
     // workspace pages and their brand's comics (inc/workspace.php). Code without this hook sees them as signed out.
     if (!empty($_SESSION['studio_lt']) && function_exists('ws_gate')) { ws_gate(); return true; }

@@ -369,8 +369,9 @@ textarea.pk-ta{min-height:44px;margin:0 0 10px;font:14px/1.45 Inter,system-ui,sa
 /* lightbox */
 .pk-lb{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.95);display:flex;flex-direction:column}
 .pk-lb[hidden]{display:none}
-.pk-lbstage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px}
-.pk-lbimg{max-width:96vw;max-height:100%;object-fit:contain;outline:6px solid transparent;cursor:zoom-out}
+.pk-lbstage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px;position:relative}
+.pk-lbstage.pk-lbloading::after{content:'loading full size…';position:absolute;top:14px;left:50%;transform:translateX(-50%);font:600 12px/1 Inter,sans-serif;color:#fff;background:#000b;border:1px solid #444;padding:6px 10px;border-radius:999px;pointer-events:none}
+.pk-lbimg{height:100%;width:auto;max-width:96vw;max-height:100%;object-fit:contain;outline:6px solid transparent;cursor:zoom-out}
 .pk-lbimg.sel{outline-color:var(--pick)}
 .pk-lbbar{background:#000c;border-top:1px solid #222;padding:8px 12px calc(10px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:6px}
 .pk-lbinfo{font-size:14px;text-align:center;color:#fff}
@@ -465,6 +466,27 @@ textarea.pk-ta{min-height:44px;margin:0 0 10px;font:14px/1.45 Inter,system-ui,sa
   let showSettled = false;
 
   const imgUrl = (f, thumb) => 'img.php?p=' + encodeURIComponent(PID) + '&f=' + encodeURIComponent(f) + (thumb ? '&t=1' : '');
+  // Lightbox images: img.php m=1 is a ≤1200px JPEG viewing copy (a Higgsfield PNG is 1-2 MB). MID caches loads;
+  // preload() keeps a small background queue (2 at a time, newest intent wins) so ←/→ and ↑/↓ are instant.
+  const midUrl = f => imgUrl(f, false) + '&m=1';
+  const MID = new Map();
+  function midGet(url) {
+    let e = MID.get(url); if (e) return e;
+    e = { ok: false, done: false, cbs: [] }; MID.set(url, e);
+    const im = new Image(); im.decoding = 'async';
+    const fin = ok => { e.ok = ok; e.done = true; const c = e.cbs; e.cbs = []; c.forEach(fn => fn()); };
+    im.onload = () => fin(true); im.onerror = () => fin(false);
+    im.src = url; e.im = im;
+    return e;
+  }
+  let preQ = [], preBusy = 0;
+  function pump() {
+    while (preBusy < 2 && preQ.length) {
+      const u = preQ.shift(); if (MID.has(u)) continue;
+      preBusy++; midGet(u).cbs.push(() => { preBusy--; pump(); });
+    }
+  }
+  function preload(urls) { preQ = urls.filter(u => !MID.has(u)); pump(); }
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = String(text); return e; };
   const pickArr = p => Array.isArray(p.pick) ? p.pick : [];
   const isPicked = (p, f) => pickArr(p).indexOf(f) >= 0;
@@ -535,6 +557,7 @@ textarea.pk-ta{min-height:44px;margin:0 0 10px;font:14px/1.45 Inter,system-ui,sa
       if (t.cl) c.appendChild(el('span', 'pk-cl', 'Claude'));
       if (t.n) c.appendChild(el('span', 'pk-new', 'NEW'));
       else if (t.k) c.appendChild(el('span', 'pk-kept', 'KEPT'));
+      c.addEventListener('pointerenter', ev => { if (ev.pointerType === 'mouse') preload([midUrl(t.f)]); });
       const z = el('button', 'pk-zoom', '🔍'); z.type = 'button'; z.setAttribute('aria-label', 'Enlarge take #' + (i + 1));
       c.appendChild(z);
       p.cells.push(c); frag.appendChild(c);
@@ -707,7 +730,19 @@ textarea.pk-ta{min-height:44px;margin:0 0 10px;font:14px/1.45 Inter,system-ui,sa
   function lbShow() {
     const p = LB.p, t = p.takes[LB.k]; if (!t) return;
     const on = isPicked(p, t.f);
-    lbImg.src = imgUrl(t.f, false); lbImg.alt = p.g + ' take #' + (LB.k + 1);
+    const url = midUrl(t.f), e = midGet(url);
+    if (e.ok) { lbImg.src = url; lbStage.classList.remove('pk-lbloading'); }
+    else if (e.done) { lbImg.src = imgUrl(t.f, false); lbStage.classList.remove('pk-lbloading'); }   // viewing copy failed: full file
+    else {
+      lbImg.src = imgUrl(t.f, true); lbStage.classList.add('pk-lbloading');                           // instant: the cached thumbnail
+      const pp = p, want = t.f;
+      e.cbs.push(() => {
+        const cur = LB && LB.p === pp && LB.p.takes[LB.k];
+        if (!cur || cur.f !== want) return;
+        lbImg.src = e.ok ? url : imgUrl(want, false); lbStage.classList.remove('pk-lbloading');
+      });
+    }
+    lbImg.alt = p.g + ' take #' + (LB.k + 1);
     lbImg.classList.toggle('sel', on);
     lbInfo.textContent = '';
     lbInfo.appendChild(document.createTextNode(p.g + ' · ' + (LB.k + 1) + '/' + p.takes.length));
@@ -718,12 +753,17 @@ textarea.pk-ta{min-height:44px;margin:0 0 10px;font:14px/1.45 Inter,system-ui,sa
     lbPrompt.textContent = t.p || ''; lbPrompt.hidden = !t.p; lbPrompt.title = t.p || '';
     lbPick.textContent = on ? '✔ Picked' : 'Pick';
     lbPick.classList.toggle('on', on);
-    [LB.k + 1, LB.k - 1].forEach(j => { const n = p.takes[(j + p.takes.length) % p.takes.length]; if (n && n !== t) { const im = new Image(); im.src = imgUrl(n.f, false); } });
+    // background: the rest of this page nearest-first, then the landing take of the next / previous page
+    const n = p.takes.length, urls = [];
+    for (let d = 1; d < n; d++) { urls.push(midUrl(p.takes[(LB.k + d) % n].f)); urls.push(midUrl(p.takes[(LB.k - d + n) % n].f)); }
+    const list = PAGES.filter(visible), i = list.indexOf(p);
+    [list[i + 1], list[i - 1]].forEach(q => { if (q && q !== p && q.takes.length) { const fi = q.takes.findIndex(x => isPicked(q, x.f)); urls.push(midUrl(q.takes[fi >= 0 ? fi : 0].f)); } });
+    preload([...new Set(urls)]);
   }
   function lbClose() {
     if (!LB) return;
     const p = LB.p, k = LB.k;
-    LB = null; lb.hidden = true; lbImg.removeAttribute('src'); document.body.classList.remove('pk-noscroll');
+    LB = null; lb.hidden = true; lbImg.removeAttribute('src'); lbStage.classList.remove('pk-lbloading'); document.body.classList.remove('pk-noscroll');
     if (!visible(p)) { p.forced = true; applyVis(); }
     fillGrid(p);
     const c = p.cells && p.cells[k];

@@ -38,6 +38,9 @@ define('WS_SETTINGS_DEFAULT', [
     'chatEffort'       => 'low',
     'workerEnabled'    => true,
 ]);
+// Pages only the OWNER may open, whatever the login (staff editors like THOR and collab logins included).
+// Enforced by ws_staff_gate() from is_authed(). (owner 2026-10-02: staff don't need finance.)
+define('WS_OWNER_ONLY', ['finance.php']);
 // Scripts a lieutenant may open (basename, studio root only). Everything else is 403.
 define('WS_LT_ALLOW', ['ws.php', 'ws-api.php', 'picker.php', 'img.php', 'help.php', 'login.php']);
 
@@ -171,6 +174,14 @@ function ws_gate(): void {
             unset($p); return $t;
         });
     }
+}
+// Non-owner staff sessions (studio_ok): refuse WS_OWNER_ONLY pages. Owner and lieutenants unaffected here.
+function ws_staff_gate(): void {
+    static $done = false;
+    if ($done) return; $done = true;
+    $scriptFile = (string)($_SERVER['SCRIPT_FILENAME'] ?? '');
+    if ($scriptFile === '' || realpath(dirname($scriptFile)) !== realpath(STUDIO_ROOT)) return;
+    if (in_array(basename($scriptFile), WS_OWNER_ONLY, true) && !ws_is_owner()) ws_deny('That page is owner-only.');
 }
 // Exchange a magic-link token for a lieutenant session. Returns true on success.
 function ws_magic_login(string $tok): bool {

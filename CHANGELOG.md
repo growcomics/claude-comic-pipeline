@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-02
+
+### Changed
+
+- **Studio: finance + master key are owner-only** (owner request, for THOR). `inc/workspace.php` `ws_staff_gate()` (called from `is_authed()` for staff sessions) refuses `finance.php` to every non-owner login (staff editors, collab logins); `index.php` shows the ⚙ Flow-import master Studio key to the owner only. Also closes the "finance.php is unclaimed" risk.
+- **Picker images load fast.** `img.php m=1` serves a cached ≤1200px JPEG viewing copy (a 1.66 MB Higgsfield PNG → 265 KB), heavy PNG thumbnails get a cached JPEG twin (336 KB → 52 KB), and images cache for 30 days (names are immutable). `picker.php` lightbox shows the already-loaded thumbnail instantly, swaps in the sharp copy when it lands, and preloads the rest of the page + the next page's first take in the background (2 at a time); hovering a tile starts its load. Owner note: "when I click an image and go left and right, it doesn't really show the image."
+- Tests: `studio/tests/ws/run.mjs` 385/385 (owner-only finance for editor/collab, key hidden, viewing copies + thumb twins, traversal).
+
 ## 2026-10-01
 
 ### Added

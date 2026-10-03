@@ -347,9 +347,18 @@ r = await collab.post('/studio/login.php', { username: 'collab', password: 'pw' 
 check('collab login -> 302 index.php', r.status === 302 && r.loc === 'index.php' && !!collab.sid, short(r));
 r = await collab.get('/studio/index.php');
 check('collab index.php -> 200, no Team link', r.status === 200 && r.text.includes('Projects') && !r.text.includes('href="team.php"'), short(r));
-for (const u of ['ws.php?p=gamma-comic', 'img.php?p=gamma-comic&f=g1.png', 'ws-api.php?do=state&p=gamma-comic', 'picker.php?p=gamma-comic', 'finance.php', 'pulse/index.php', 'cc.php']) {
+for (const u of ['ws.php?p=gamma-comic', 'img.php?p=gamma-comic&f=g1.png', 'ws-api.php?do=state&p=gamma-comic', 'picker.php?p=gamma-comic', 'pulse/index.php', 'cc.php']) {
   r = await collab.get('/studio/' + u); check(`collab ${u} -> 200`, r.status === 200, short(r));
 }
+// owner-only pages (2026-10-02): finance.php is the owner's alone, whatever the login
+r = await collab.get('/studio/finance.php');
+check('collab finance.php -> 403 (owner-only)', r.status === 403 && !r.text.includes('FINANCE PAGE'), short(r));
+// the master Studio key on index.php is shown to the owner only
+php.writeFile(D + '/bridge.json', JSON.stringify({ key: 'BRIDGEKEY-test-0123456789abcdef' }));
+r = await collab.get('/studio/index.php');
+check('collab index.php does NOT show the master Studio key', r.status === 200 && !r.text.includes('BRIDGEKEY-test') && !r.text.includes('Your Studio key'), short(r));
+r = await owner.get('/studio/index.php');
+check('owner index.php still shows the master Studio key', r.status === 200 && r.text.includes('BRIDGEKEY-test'), short(r));
 r = await collab.get('/studio/team.php');
 check('collab team.php -> 403 (owner only)', r.status === 403 && r.text.includes('owner only'), short(r));
 r = await editor.post('/studio/login.php', { username: 'ed', password: 'pw' });
@@ -360,6 +369,29 @@ r = await editor.get('/studio/team.php');
 check('editor team.php -> 403', r.status === 403, short(r));
 r = await editor.get('/studio/ws.php?p=gamma-comic');
 check('editor ws.php?p=gamma-comic -> 200', r.status === 200 && r.text.includes('wsboot'), short(r));
+r = await editor.get('/studio/finance.php');
+check('editor (THOR-style) finance.php -> 403 (owner-only)', r.status === 403 && !r.text.includes('FINANCE PAGE'), short(r));
+r = await editor.get('/studio/index.php');
+check('editor index.php does NOT show the master Studio key', r.status === 200 && !r.text.includes('BRIDGEKEY-test') && !r.text.includes('Your Studio key'), short(r));
+r = await owner.get('/studio/finance.php');
+check('owner finance.php still -> 200', r.status === 200 && r.text.includes('FINANCE PAGE'), short(r));
+// img.php m=1: a big original gets a cached <=1200px JPEG viewing copy; small originals are served as-is
+{
+  const big = await php.run({ code: `<?php $w=1400;$h=1900;$im=imagecreatetruecolor($w,$h);mt_srand(7);for($y=0;$y<$h;$y+=2)for($x=0;$x<$w;$x+=2)imagesetpixel($im,$x,$y,mt_rand(0,0xffffff));imagepng($im,'${D}/../uploads/gamma-comic/bigtake.png',0);echo filesize('${D}/../uploads/gamma-comic/bigtake.png');` });
+  r = await editor.get('/studio/img.php?p=gamma-comic&f=bigtake.png&m=1');
+  check('img.php m=1 on a big PNG -> image/jpeg viewing copy', r.status === 200 && /image\/jpeg/.test(r.ctype || '') && r.bytes && r.bytes.length > 0 && r.bytes.length < Number(big.text), short(r) + ' orig=' + big.text);
+  check('img.php m=1 cached the copy in uploads/<id>/mid/', php.fileExists(D + '/../uploads/gamma-comic/mid/bigtake.jpg'));
+  // a heavy PNG thumbnail gets a cached JPEG twin
+  await php.run({ code: `<?php $im=imagecreatetruecolor(360,490);mt_srand(9);for($y=0;$y<490;$y++)for($x=0;$x<360;$x++)imagesetpixel($im,$x,$y,mt_rand(0,0xffffff));@mkdir('${D}/../uploads/gamma-comic/thumb',0755,true);imagepng($im,'${D}/../uploads/gamma-comic/thumb/bigtake.png',0);` });
+  r = await editor.get('/studio/img.php?p=gamma-comic&f=bigtake.png&t=1');
+  check('img.php t=1 on a heavy PNG thumb -> JPEG twin', r.status === 200 && /image\/jpeg/.test(r.ctype || '') && php.fileExists(D + '/../uploads/gamma-comic/mid/bigtake.t.jpg'), short(r));
+  r = await editor.get('/studio/img.php?p=gamma-comic&f=g1.png&t=1');
+  check('img.php t=1 on a light PNG thumb -> served as-is (png)', r.status === 200 && /image\/png/.test(r.ctype || ''), short(r));
+  r = await editor.get('/studio/img.php?p=gamma-comic&f=g1.png&m=1');
+  check('img.php m=1 on a small original -> served as-is (png)', r.status === 200 && /image\/png/.test(r.ctype || ''), short(r));
+  r = await editor.get('/studio/img.php?p=gamma-comic&f=' + encodeURIComponent('../../data/projects.json') + '&m=1');
+  check('img.php m=1 traversal to data/ -> 404', r.status === 404, short(r));
+}
 
 // =================================================================================================
 section('CSRF: every POST endpoint rejects a missing / wrong token');

@@ -83,6 +83,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
     </form>
   </details>
 
+  <?php if (function_exists('ws_is_owner') && ws_is_owner()): /* master Studio key: owner only (2026-10-02) */ ?>
   <?php $bkey = (s_read(SDATA . '/bridge.json', [])['key'] ?? ''); ?>
   <details class="card newproj">
     <summary>⚙ Flow import (browser extension)</summary>
@@ -94,6 +95,7 @@ function status_color(string $s): string { return ['active'=>'#1D9E75','on-hold'
       <input readonly value="<?= h($bkey) ?>" onclick="this.select()">
     </div>
   </details>
+  <?php endif; ?>
 
   <?php if (!$projects): ?>
     <p class="muted">No projects yet — create one above.</p>
