@@ -8,11 +8,11 @@
 // Auth: header X-WS-Key (or POST field key). Exception: do=refimg is authorised by an HMAC signature that this
 // file minted at claim time, so Higgsfield's media_import_url can fetch a ref image without any key or session.
 //
-//   GET|POST do=claim      worker=<name>        -> {job:{…}|null, reason?, refs:[{file,label,kind,url}]}
+//   GET|POST do=claim      worker=<name>        -> {job:{…}|null, reason?, refs:[{file,label,kind,url}]}   (edit job: +kind, parentFile; 1 ref)
 //   GET      do=refimg     p,f,exp,sig (no key) -> the full-size image bytes (signed URL, 2 h)
 //   POST     do=submit_ok  job                  -> {ok:true} | {ok:false, wait:N} | {ok:false, stop:true, error?}
 //   POST     do=heartbeat  job[, note]          -> {ok, stop}
-//   POST     do=ingest_url job, url[, gen]      -> {ok, file, done} | {ok, duplicate:true}
+//   POST     do=ingest_url job, url[, gen]      -> {ok, file, done[, adjustResolved]} | {ok, duplicate:true}
 //   POST     do=take_failed job, reason         -> {ok, failed}
 //   POST     do=cooldown   minutes(1..60), reason -> {ok, until, set}   (never extends a cooldown already running)
 //   POST     do=done       job, status=done|error[, note] -> {ok, status}
@@ -25,6 +25,15 @@
 //
 // Locks: only data/ws/jobs.json (ws_jobs_mutate), plus the usage lock taken INSIDE it for quota reserves/releases
 // (jobs -> usage, the one allowed nesting). Image storing and chat appends run after the jobs lock is released.
+// The cockpit-Adjust import and the card flips take the legacy data/jobs.json and data/creator-<pid>.json locks ALONE
+// (never while holding another lock; the quota reserve runs between two legacy-lock passes, not inside one).
+//
+// Cockpit ✎ Adjust (2026-10-02): creator.php do=adjust still writes a pending card (creator-<pid>.json adjusts[]) and a
+// LEGACY job (data/jobs.json kind 'adjust'). Nothing runs the legacy queue any more, so `claim` imports those jobs
+// (settings importAdjusts / importAdjustsSince / editTakes) as ws jobs of kind 'edit': one ref = the parent image,
+// a server-built edit prompt, the global image cap only. Their takes land as derived versions under the parent
+// (parent/root/ver/derived, like bridge.php's lineage branch); the first landing flips the card to done, a job that
+// closes with nothing landed flips it to failed. A card the owner cancelled (abandoned) cancels the job unrun.
 declare(strict_types=1);
 require_once __DIR__ . '/inc/boot.php';
 header('X-Robots-Tag: noindex');
@@ -41,6 +50,9 @@ define('WS_WK_DL_TIMEOUT', 60);
 define('WS_WK_HOSTS_EXACT', ['d8j0ntlcm91z4.cloudfront.net', 'dqv0cqkoy5oj7.cloudfront.net']);
 define('WS_WK_HOST_SUFFIXES', ['higgsfield.ai']);
 define('WS_WK_SUBMITS_PER_TAKE', 2);     // hard cap: submit_ok grants at most takes x 2 submits per job
+define('WS_WK_EDIT_ASPECTS', ['3:4', '2:3', '9:16', '1:1', '4:3', '16:9', '4:5', '3:2']);   // an edit keeps its parent's shape
+define('WS_WK_IMPORT_MAX', 10);          // legacy Adjust jobs imported per claim, at most
+define('WS_WK_IMPORT_STALE', 600);       // a legacy job an import marked 'claimed' and never closed (killed) is retried after 10 min
 
 // ---- small helpers (ws_wk_* = local to this file) ------------------------------------
 function ws_wk_cfg(): array { $c = s_read(WS_WORKER, []); return is_array($c) ? $c : []; }
@@ -76,8 +88,9 @@ function ws_wk_self_url(): string {
     if (!preg_match('#^/[A-Za-z0-9/._-]*$#', $path)) $path = '/studio/ws-worker.php';
     return ($https ? 'https' : 'http') . '://' . $host . $path;
 }
-// workerEnabled may arrive as a bool, 0/1 or a string from a settings form; anything false-ish means off.
-function ws_wk_enabled(array $s): bool { $v = $s['workerEnabled'] ?? true; return !in_array(is_string($v) ? strtolower(trim($v)) : $v, [false, 0, '0', 'false', 'off', 'no', '', null], true); }
+// workerEnabled / importAdjusts may arrive as a bool, 0/1 or a string from a settings form; anything false-ish means off.
+function ws_wk_flag($v): bool { return !in_array(is_string($v) ? strtolower(trim($v)) : $v, [false, 0, '0', 'false', 'off', 'no', '', null], true); }
+function ws_wk_enabled(array $s): bool { return ws_wk_flag($s['workerEnabled'] ?? true); }
 function ws_wk_get(string $k): string { $v = $_GET[$k] ?? null; return is_string($v) ? $v : ''; }
 function ws_wk_find(array $j, string $id): ?int {
     if ($id === '') return null;
@@ -105,12 +118,18 @@ function ws_wk_rows(): array {
 }
 // May a queued job still run? null = yes; else [final status, note]. The comic must still be the one it was queued on
 // (same created stamp) and still have the job's page, and a lieutenant's job needs that person active with the comic's
-// brand among theirs.
+// brand among theirs. An edit job (cockpit Adjust) has no page: it needs its parent image and a still-pending card.
 function ws_wk_unrunnable(array $x, array $rows): ?array {
     $pid = (string)($x['pid'] ?? ''); $row = $rows[$pid] ?? null;
     if (!$row) return ['error', 'the comic no longer exists'];
     $pc = (string)($x['pcreated'] ?? '');
     if ($pc !== '' && $pc !== (string)($row['created'] ?? '')) return ['error', 'the comic was deleted and recreated'];
+    if (($x['kind'] ?? '') === 'edit') {
+        if (!ws_image_exists($pid, (string)($x['parentFile'] ?? ''))) return ['cancelled', 'cancelled: the image to edit is gone'];
+        $card = ws_wk_card($x);
+        if (!$card || ($card['status'] ?? '') !== 'pending') return ['cancelled', 'cancelled in the cockpit'];
+        return null;
+    }
     // the page was deleted after the job was queued (page numbers are never reused, so it cannot come back)
     if (!ws_page_get(ws_proj($pid), (int)($x['page'] ?? 0))) return ['cancelled', 'cancelled: the page was deleted'];
     $uid = (string)($x['uid'] ?? '');
@@ -123,12 +142,14 @@ function ws_wk_unrunnable(array $x, array $rows): ?array {
     return null;
 }
 function ws_wk_job_out(array $x): array {
-    return [
+    $o = [
         'id' => (string)$x['id'], 'pid' => (string)$x['pid'], 'page' => (int)$x['page'], 'group' => (string)($x['group'] ?? ws_page_group((int)$x['page'])),
         'prompt' => (string)$x['prompt'], 'aspect' => (string)($x['aspect'] ?? '3:4'), 'takes' => (int)$x['takes'],
         'done' => (int)($x['done'] ?? 0), 'failed' => (int)($x['failed'] ?? 0), 'submits' => (int)($x['submits'] ?? 0),
         'model' => (string)($x['model'] ?? ''), 'resolution' => (string)($x['resolution'] ?? ''),
     ];
+    if (($x['kind'] ?? '') === 'edit') $o += ['kind' => 'edit', 'parentFile' => (string)($x['parentFile'] ?? '')];
+    return $o;
 }
 function ws_wk_ref_rows(string $pid, array $files, bool $withUrl): array {
     $labels = [];
@@ -146,11 +167,191 @@ function ws_wk_ref_rows(string $pid, array $files, bool $withUrl): array {
 }
 function ws_wk_chat_line(array $x): string {
     $n = (int)$x['page']; $d = (int)($x['done'] ?? 0); $st = (string)$x['status'];
+    if (($x['kind'] ?? '') === 'edit') {
+        $g = (string)($x['group'] ?? '') ?: 'Ungrouped';
+        $vers = $d === 1 ? '1 edited version' : "$d edited versions";
+        if ($st === 'done') return "✅ $g: $vers landed under the original — open the picker";
+        $why = trim((string)($x['note'] ?? '')) ?: ($st === 'cancelled' ? 'cancelled' : 'error');
+        if ($d > 0) return "⚠ $g: the Adjust stopped ($why) — $vers landed under the original, open the picker";
+        return "⚠ $g: the Adjust could not be generated ($why)";
+    }
     $takes = $d === 1 ? '1 new take landed' : "$d new takes landed";
     if ($st === 'done') return "✅ Page $n: $takes — open the picker";
     $why = trim((string)($x['note'] ?? '')) ?: ($st === 'cancelled' ? 'cancelled' : 'error');
     if ($st === 'cancelled') $why = 'cancelled';
     return "⚠ Page $n: generation stopped ($why)" . ($d > 0 ? " — $takes, open the picker" : '');
+}
+
+// ---- cockpit ✎ Adjust → edit jobs ------------------------------------------------------
+// Owner/staff Adjusts run as 'staff:<name>' (the same id ws_uid() gives a staff session): the global cap only.
+function ws_wk_staff_uid(string $name): string { return 'staff:' . strtolower(preg_replace('/[^A-Za-z0-9]+/', '-', $name) ?? ''); }
+function ws_wk_edit_takes(array $s): int { return max(1, min(4, (int)($s['editTakes'] ?? 2))); }
+function ws_wk_creator_file(string $pid): string { return SDATA . '/creator-' . ws_pid($pid) . '.json'; }
+// The cockpit card a legacy Adjust job answers: adjusts[] row with id === job.adjustId, else jobId === job.id.
+function ws_wk_card_match(array $cards, string $adjustId, string $jobId): ?array {
+    foreach ($cards as $a) if (is_array($a) && $adjustId !== '' && (string)($a['id'] ?? '') === $adjustId) return $a;
+    foreach ($cards as $a) if (is_array($a) && $jobId !== '' && (string)($a['jobId'] ?? '') === $jobId) return $a;
+    return null;
+}
+// The current cockpit card of an edit job (plain read), or null.
+function ws_wk_card(array $x): ?array {
+    $aid = (string)($x['adjustId'] ?? ''); $f = ws_wk_creator_file((string)($x['pid'] ?? ''));
+    if ($aid === '' || !is_file($f)) return null;
+    return ws_wk_card_match((array)(s_read($f, [])['adjusts'] ?? []), $aid, '');
+}
+// Patch an edit job's card while it is still PENDING (mirrors bridge.php: ingest → done + resultFile, done → failed).
+// Takes only the creator-<pid>.json lock. Best-effort: never throws; true when the card changed.
+function ws_wk_card_set(array $x, array $patch): bool {
+    $aid = (string)($x['adjustId'] ?? ''); $pf = (string)($x['parentFile'] ?? '');
+    if (($x['kind'] ?? '') !== 'edit' || $aid === '') return false;
+    try {
+        $f = ws_wk_creator_file((string)($x['pid'] ?? ''));
+        if (!is_file($f)) return false;
+        return (bool)s_with_lock($f, function ($c) use ($aid, $pf, $patch) {
+            if (!is_array($c) || empty($c['adjusts']) || !is_array($c['adjusts'])) return ['result' => false];
+            foreach ($c['adjusts'] as $i => $a) {
+                if (!is_array($a) || (string)($a['id'] ?? '') !== $aid || ($a['status'] ?? '') !== 'pending') continue;
+                if ($pf !== '' && (string)($a['parentFile'] ?? '') !== $pf) continue;
+                $c['adjusts'][$i] = array_merge($a, $patch);
+                return ['data' => $c, 'result' => true];
+            }
+            return ['result' => false];
+        });
+    } catch (\Throwable $e) { return false; }
+}
+// A closed edit job with nothing landed: its pending card → failed (bridge.php do=done's failure branch).
+function ws_wk_card_fail(array $x): void {
+    if (($x['kind'] ?? '') !== 'edit' || (int)($x['done'] ?? 0) > 0) return;
+    $patch = ['status' => 'failed', 'failReason' => ($x['status'] ?? '') === 'cancelled' ? 'stopped' : 'error', 'failedAt' => date('c')];
+    $n = trim((string)($x['note'] ?? ''));
+    if ($n !== '') $patch['failNote'] = mb_substr($n, 0, 300);
+    ws_wk_card_set($x, $patch);
+}
+// The supported aspect closest to the parent image's pixel shape (log-ratio distance); 3:4 if unreadable.
+function ws_wk_edit_aspect(string $pid, string $file): string {
+    $info = @getimagesize(project_dir($pid) . '/' . basename($file));
+    if (!$info || (int)$info[0] <= 0 || (int)$info[1] <= 0) return '3:4';
+    $r = log((int)$info[0] / (int)$info[1]); $best = '3:4'; $bd = INF;
+    foreach (WS_WK_EDIT_ASPECTS as $a) {
+        [$w, $h] = array_map('intval', explode(':', $a));
+        $d = abs($r - log($w / $h));
+        if ($d < $bd - 1e-9) { $bd = $d; $best = $a; }
+    }
+    return $best;
+}
+// The cockpit note, control characters out and whitespace collapsed, ≤ $max chars ('' = unusable).
+function ws_wk_edit_note(string $note, int $max): string {
+    $n = preg_replace('/\s+/u', ' ', preg_replace('/[\x00-\x1F\x7F]+/u', ' ', $note) ?? '') ?? '';
+    return mb_substr(trim($n), 0, $max);
+}
+// The server-built image-to-image instruction (the worker generates exactly this; the hook checks it).
+function ws_wk_edit_prompt(string $note): string {
+    $n = ws_wk_edit_note($note, 1500);
+    if ($n !== '' && !preg_match('/[.!?]$/u', $n)) $n .= '.';
+    return mb_substr('Edit this comic page image. Keep the same 2D/3D art style, page layout, panel borders, characters, faces, hair, '
+        . 'outfits, colors, lettering and speech bubbles exactly as they are. Change only this: ' . $n
+        . ' Every person has exactly two arms, two hands and two legs. Do not add any new text, people or objects.', 0, 2500);
+}
+// Import eligible legacy Adjust jobs (data/jobs.json kind 'adjust') as ws edit jobs. Returns how many were queued.
+// Eligible: status open (or claimed by an import that died > WS_WK_IMPORT_STALE ago), createdAt ≥ importAdjustsSince,
+// an existing comic, the parent file on disk, a usable note and a matching PENDING cockpit card. A plain read decides;
+// the legacy lock is taken only when there are candidates, and never together with another lock:
+//   (a) legacy lock: mark them claimed by 'ws-import'
+//   (b) no legacy lock: reserve editTakes of the global cap (usage lock), append the ws job (ws jobs lock), chat line
+//   (c) legacy lock: close each — done (moved), back to open (quota refused: importing stops), or stopped
+function ws_wk_import_adjusts(array $s): int {
+    if (!ws_wk_flag($s['importAdjusts'] ?? true)) return 0;
+    $since = strtotime((string)($s['importAdjustsSince'] ?? ''));
+    $legacy = s_read(JOBS_FILE, []);
+    if ($since === false || !is_array($legacy) || !$legacy) return 0;
+    $now = time();
+    $open = function (array $j) use ($now): bool {
+        $st = (string)($j['status'] ?? '');
+        return ($j['kind'] ?? '') === 'adjust' && ($st === 'open'
+            || ($st === 'claimed' && ($j['worker'] ?? '') === 'ws-import' && $now - ws_wk_ts($j['claimedAt'] ?? null) > WS_WK_IMPORT_STALE));
+    };
+    $rows = null; $cards = []; $cand = [];
+    foreach ($legacy as $j) {
+        if (!is_array($j) || !$open($j)) continue;
+        $t = strtotime((string)($j['createdAt'] ?? ''));
+        $jid = (string)($j['id'] ?? '');
+        if ($t === false || $t < $since || $jid === '' || isset($cand[$jid])) continue;
+        $rows = $rows ?? ws_wk_rows();
+        $pid = ws_pid((string)($j['projectId'] ?? '')); $pf = basename((string)($j['parentFile'] ?? ''));
+        if ($pid === '' || !isset($rows[$pid]) || !ws_image_exists($pid, $pf)) continue;
+        if (!array_key_exists($pid, $cards)) $cards[$pid] = (array)(s_read(ws_wk_creator_file($pid), [])['adjusts'] ?? []);
+        $card = ws_wk_card_match($cards[$pid], (string)($j['adjustId'] ?? ''), $jid);
+        if (!$card || ($card['status'] ?? '') !== 'pending' || (string)($card['id'] ?? '') === '' || ws_wk_edit_note((string)($card['note'] ?? ''), 1500) === '') continue;
+        $cand[$jid] = ['pid' => $pid, 'pf' => $pf, 'card' => $card, 'row' => $rows[$pid]];
+        if (count($cand) >= WS_WK_IMPORT_MAX) break;
+    }
+    if (!$cand) return 0;
+    // (a)
+    $ids = array_keys($cand);
+    $marked = s_with_lock(JOBS_FILE, function ($jobs) use ($ids, $open) {
+        if (!is_array($jobs)) return ['result' => []];
+        $got = [];
+        foreach ($jobs as $i => $j) {
+            if (!is_array($j) || !in_array((string)($j['id'] ?? ''), $ids, true) || !$open($j)) continue;   // taken meanwhile
+            $jobs[$i]['status'] = 'claimed'; $jobs[$i]['worker'] = 'ws-import'; $jobs[$i]['claimedAt'] = ws_now(); $jobs[$i]['heartbeatAt'] = time();
+            $got[] = (string)$j['id'];
+        }
+        return $got ? ['data' => $jobs, 'result' => $got] : ['result' => []];
+    });
+    if (!$marked) return 0;
+    // (b)
+    $takes = ws_wk_edit_takes($s); $out = []; $queued = 0; $refused = false;
+    $known = [];
+    foreach (ws_jobs_read()['jobs'] as $x) if (is_array($x) && (string)($x['legacyJob'] ?? '') !== '') $known[(string)$x['legacyJob']] = (string)($x['id'] ?? '');
+    foreach ($marked as $lid) {
+        if ($refused) { $out[$lid] = ['open', '']; continue; }
+        if (isset($known[$lid])) { $out[$lid] = ['done', 'moved to the workspace generator (' . $known[$lid] . ')', $known[$lid]]; continue; }   // an import that died after (b)
+        ['pid' => $pid, 'pf' => $pf, 'card' => $card, 'row' => $row] = $cand[$lid];
+        $by = ws_wk_clip((string)($card['by'] ?? ''), 80) ?: 'Owner';
+        $uid = ws_wk_staff_uid((string)($card['by'] ?? '') ?: 'owner');
+        $q = ws_quota_reserve($uid, $takes, false);
+        if (empty($q['ok'])) { $refused = true; $out[$lid] = ['open', '']; continue; }
+        $group = '';
+        foreach (images_all($pid) as $m) if (is_array($m) && ($m['file'] ?? '') === $pf) { $group = (string)($m['group'] ?? ''); break; }
+        $job = [
+            'id' => 'wsj_' . nid(), 'kind' => 'edit', 'pid' => $pid, 'pcreated' => (string)($row['created'] ?? ''), 'page' => 0, 'group' => $group,
+            'prompt' => ws_wk_edit_prompt((string)($card['note'] ?? '')), 'refs' => [$pf], 'aspect' => ws_wk_edit_aspect($pid, $pf), 'takes' => $takes,
+            'model' => (string)$s['genModel'], 'resolution' => (string)$s['genResolution'],
+            'uid' => $uid, 'by' => $by, 'day' => ws_day(),
+            'status' => 'queued', 'done' => 0, 'failed' => 0, 'submits' => 0, 'files' => [], 'note' => '',
+            'parentFile' => $pf, 'adjustId' => (string)$card['id'], 'adjust' => ws_wk_edit_note((string)($card['note'] ?? ''), 1000), 'legacyJob' => $lid,
+            'createdAt' => ws_now(), 'claimedAt' => null, 'heartbeatAt' => null, 'finishedAt' => null, 'worker' => '',
+        ];
+        $added = ws_jobs_mutate(function ($j) use ($job, $lid) {
+            foreach ($j['jobs'] as $x) if ((string)($x['legacyJob'] ?? '') === $lid) return [$j, (string)($x['id'] ?? '')];
+            $j['jobs'][] = $job;
+            return [$j, ''];
+        });
+        if ($added !== '') { ws_quota_release($uid, $takes, (string)$job['day']); $out[$lid] = ['done', "moved to the workspace generator ($added)", $added]; continue; }
+        $out[$lid] = ['done', 'moved to the workspace generator (' . $job['id'] . ')', $job['id']];
+        $queued++;
+        $vers = $takes === 1 ? '1 version' : "$takes versions";
+        try { ws_chat_append($pid, [['role' => 'system', 'by' => 'Studio', 'uid' => '', 'text' => "✎ $by's Adjust on " . ($group ?: 'Ungrouped') . " is queued for the generator ($vers)"]]); }
+        catch (\Throwable $e) { /* best-effort */ }
+    }
+    // (c)
+    s_with_lock(JOBS_FILE, function ($jobs) use ($out) {
+        if (!is_array($jobs)) return ['result' => 0];
+        $n = 0;
+        foreach ($jobs as $i => $j) {
+            $id = is_array($j) ? (string)($j['id'] ?? '') : '';
+            if (!isset($out[$id]) || ($j['status'] ?? '') !== 'claimed' || ($j['worker'] ?? '') !== 'ws-import') continue;   // e.g. cancelled in the cockpit meanwhile
+            [$st, $note] = $out[$id];
+            if ($st === 'open') { $jobs[$i]['status'] = 'open'; $jobs[$i]['worker'] = ''; $jobs[$i]['claimedAt'] = null; $n++; continue; }
+            $jobs[$i]['status'] = $st; $jobs[$i]['endedAt'] = date('c'); $jobs[$i]['heartbeatAt'] = time();
+            if (isset($out[$id][2])) $jobs[$i]['wsJob'] = $out[$id][2];
+            $p = is_array($j['progress'] ?? null) ? $j['progress'] : ['done' => 0, 'total' => 0, 'note' => ''];
+            $p['note'] = $note; $jobs[$i]['progress'] = $p;
+            $n++;
+        }
+        return $n ? ['data' => $jobs, 'result' => $n] : ['result' => 0];
+    });
+    return $queued;
 }
 
 // ---- download a generated image (SSRF-guarded) ------------------------------------
@@ -277,12 +478,14 @@ if ($worker !== '' && in_array($do, ['claim', 'status', 'submit_ok', 'heartbeat'
 // jobs.json. The jobs lock is taken only when there is a job to hand out, resume or close (stale / no longer
 // runnable), and everything is re-checked under it.
 if ($do === 'claim') {
-    $s = ws_settings(); $dead = [];
+    $s = ws_settings(); $dead = []; $closed = [];
     $idle = function (string $reason, array $extra = []): void { ws_json_out(['ok' => true, 'job' => null, 'reason' => $reason] + $extra + ['serverTime' => ws_now()]); };
     if (!ws_wk_enabled($s)) $idle('disabled');
     $jj = ws_jobs_read(); $now = time();
     $cd = (int)($jj['meta']['cooldownUntil'] ?? 0);
     if ($cd > $now) $idle('cooldown', ['retryAfter' => $cd - $now, 'cooldownReason' => (string)($jj['meta']['cooldownReason'] ?? '')]);
+    // cockpit ✎ Adjusts waiting in the legacy queue become edit jobs first (a plain read when there are none)
+    if (ws_wk_import_adjusts($s) > 0) $jj = ws_jobs_read();
     $act = false; $busy = false; $queued = false;
     foreach ($jj['jobs'] as $x) {
         $st = (string)($x['status'] ?? '');
@@ -295,7 +498,7 @@ if ($do === 'claim') {
     if (!$act && $busy) $idle('busy');
     if (!$act && !$queued) $idle('none');
     $rows = ws_wk_rows();
-    $res = ws_jobs_mutate(function ($j) use ($worker, $rows, &$dead) {
+    $res = ws_jobs_mutate(function ($j) use ($worker, $rows, &$dead, &$closed) {
         $now = time();
         $cd = (int)($j['meta']['cooldownUntil'] ?? 0);
         if ($cd > $now) return [$j, ['job' => null, 'reason' => 'cooldown', 'retryAfter' => $cd - $now, 'cooldownReason' => (string)($j['meta']['cooldownReason'] ?? '')]];
@@ -306,9 +509,9 @@ if ($do === 'claim') {
             if ($now - $hb <= WS_WK_STALE_SEC) continue;
             $x['attempts'] = (int)($x['attempts'] ?? 0) + 1;
             if (!empty($x['stopRequested'])) {
-                $x['status'] = 'cancelled'; $x['finishedAt'] = ws_now(); $x['note'] = 'cancelled'; ws_wk_release($x); $dead[] = $x;
+                $x['status'] = 'cancelled'; $x['finishedAt'] = ws_now(); $x['note'] = 'cancelled'; ws_wk_release($x); $dead[] = $x; $closed[] = $x;
             } elseif ($x['attempts'] >= WS_WK_MAX_ATTEMPTS) {
-                $x['status'] = 'error'; $x['finishedAt'] = ws_now(); $x['note'] = 'worker kept dying'; ws_wk_release($x); $dead[] = $x;
+                $x['status'] = 'error'; $x['finishedAt'] = ws_now(); $x['note'] = 'worker kept dying'; ws_wk_release($x); $dead[] = $x; $closed[] = $x;
             } else {
                 $x['status'] = 'queued'; $x['heartbeatAt'] = null; $x['worker'] = ''; $x['note'] = 'requeued: the worker went quiet';
             }
@@ -327,7 +530,7 @@ if ($do === 'claim') {
                 if (($x['status'] ?? '') !== 'queued') continue;
                 $why = ws_wk_unrunnable($x, $rows);
                 if ($why !== null) {
-                    $x['status'] = $why[0]; $x['finishedAt'] = ws_now(); $x['note'] = $why[1]; ws_wk_release($x);
+                    $x['status'] = $why[0]; $x['finishedAt'] = ws_now(); $x['note'] = $why[1]; ws_wk_release($x); $closed[] = $x;
                     if ($why[0] === 'cancelled') $dead[] = $x;   // the comic is still there: tell its thread
                     continue;
                 }
@@ -347,9 +550,29 @@ if ($do === 'claim') {
     foreach ($dead as $x) {   // tell the comic's thread about jobs given up while reaping (best-effort)
         try { ws_chat_append((string)$x['pid'], [['role' => 'system', 'by' => 'Studio', 'uid' => '', 'text' => ws_wk_chat_line($x)]]); } catch (\Throwable $e) {}
     }
+    foreach ($closed as $x) ws_wk_card_fail($x);   // an edit job closed with nothing landed: its pending cockpit card → failed
     if (empty($res['job'])) ws_json_out(['ok' => true] + $res + ['serverTime' => ws_now()]);
     $job = $res['job'];
     $refs = ws_wk_ref_rows($job['pid'], (array)$res['refFiles'], true);
+    if (($job['kind'] ?? '') === 'edit') {
+        // exactly one ref: the image to edit. Gone since the check (or on a resume)? Never generate an edit without it.
+        $refs = array_map(fn($r) => array_merge($r, ['label' => 'image to edit', 'kind' => 'parent']), array_slice($refs, 0, 1));
+        if (!$refs) {
+            $gone = ws_jobs_mutate(function ($j) use ($job) {
+                $i = ws_wk_find($j, (string)$job['id']);
+                if ($i === null || ($j['jobs'][$i]['status'] ?? '') !== 'running') return [$j, null];
+                $x = &$j['jobs'][$i];
+                $x['status'] = 'error'; $x['finishedAt'] = ws_now(); $x['note'] = 'the image to edit is gone'; ws_wk_release($x);
+                $out = $x; unset($x);
+                return [$j, $out];
+            });
+            if ($gone) {
+                ws_wk_card_fail($gone);
+                try { ws_chat_append((string)$gone['pid'], [['role' => 'system', 'by' => 'Studio', 'uid' => '', 'text' => ws_wk_chat_line($gone)]]); } catch (\Throwable $e) {}
+            }
+            $idle('none');
+        }
+    }
     ws_json_out(['ok' => true, 'job' => $job, 'refs' => $refs, 'resumed' => (bool)$res['resumed'], 'serverTime' => ws_now()]);
 }
 
@@ -410,11 +633,15 @@ if ($do === 'submit_ok') {
     $s = ws_settings();
     if (!ws_wk_enabled($s)) ws_json_out(['ok' => false, 'stop' => true, 'error' => 'generator paused']);
     $gap = max(5, (int)$s['minGapSec']);
-    $r = ws_jobs_mutate(function ($j) use ($jobId, $gap) {
+    // an edit job whose cockpit card the owner cancelled (abandoned) stops before it spends anything more (plain reads)
+    $pre = ws_jobs_read(); $pi = ws_wk_find($pre, $jobId);
+    $abandoned = $pi !== null && ($pre['jobs'][$pi]['kind'] ?? '') === 'edit' && (ws_wk_card($pre['jobs'][$pi])['status'] ?? '') === 'abandoned';
+    $r = ws_jobs_mutate(function ($j) use ($jobId, $gap, $abandoned) {
         $i = ws_wk_find($j, $jobId); $now = time();
         if ($i === null) return [$j, ['ok' => false, 'stop' => true, 'error' => 'unknown job']];
         $x = &$j['jobs'][$i];
         if (($x['status'] ?? '') !== 'running' || !empty($x['stopRequested'])) return [$j, ['ok' => false, 'stop' => true]];
+        if ($abandoned) { $x['stopRequested'] = true; return [$j, ['ok' => false, 'stop' => true, 'error' => 'the Adjust was cancelled in the cockpit']]; }
         $x['heartbeatAt'] = $now;
         $takes = (int)($x['takes'] ?? 0); $sub = (int)($x['submits'] ?? 0); $cap = $takes * WS_WK_SUBMITS_PER_TAKE;
         if ((int)($x['done'] ?? 0) + (int)($x['failed'] ?? 0) >= $takes) return [$j, ['ok' => false, 'stop' => true, 'error' => 'every take of this job is finished']];
@@ -489,6 +716,7 @@ if ($do === 'done') {
         $x = $r['job'];
         try { ws_chat_append((string)$x['pid'], [['role' => 'system', 'by' => 'Studio', 'uid' => '', 'text' => ws_wk_chat_line($x)]]); }
         catch (\Throwable $e) { /* the chat line is best-effort; the job state is already saved */ }
+        ws_wk_card_fail($x);   // an edit job with nothing landed: its pending cockpit card → failed (no-op otherwise)
         ws_json_out(['ok' => true, 'status' => (string)$x['status'], 'done' => (int)($x['done'] ?? 0), 'released' => (int)($x['quotaReleased'] ?? 0)]);
     }
     ws_json_out($r, empty($r['ok']) && ($r['error'] ?? '') === 'unknown job' ? 404 : 200);
@@ -535,17 +763,34 @@ if ($do === 'ingest_url') {
     $dl = ws_wk_download($url);
     if (!$dl['ok']) { $unmark(null); ws_json_out(['ok' => false, 'error' => $dl['error']], 422); }
     // 3) store it under the page's group (images lock lives inside ws_add_image)
-    $refsUsed = [];
-    foreach (ws_wk_ref_rows((string)$job['pid'], (array)($job['refs'] ?? []), false) as $ref) {
-        $refsUsed[] = ['file' => $ref['file'], 'label' => $ref['label'], 'kind' => 'ref', 'src' => 'ws'];
-    }
+    $isEdit = ($job['kind'] ?? '') === 'edit';
     $n = (int)($job['done'] ?? 0) + 1;
-    $row = null; $why = 'the Studio could not store the image';
-    try {
-        $row = ws_add_image((string)$job['pid'], $dl['path'], (string)$job['group'] . '-' . $n . '.' . $dl['ext'], [
+    $refsUsed = [];
+    if ($isEdit) {   // a derived version under the parent image (bridge.php's lineage fields), in the parent's group
+        $pf = basename((string)($job['parentFile'] ?? '')); $par = null;
+        foreach (images_all((string)$job['pid']) as $m) if (is_array($m) && ($m['file'] ?? '') === $pf) { $par = $m; break; }
+        $root = (string)($par['root'] ?? ''); if ($root === '') $root = $pf;
+        $orig = ((string)$job['group'] ?: 'edit') . '-edit-' . $n . '.' . $dl['ext'];
+        $extra = [
+            'group' => (string)$job['group'], 'parent' => $pf, 'root' => $root, 'ver' => max(1, (int)($par['ver'] ?? 1)) + 1, 'derived' => true,
+            'adjust' => mb_substr((string)($job['adjust'] ?? ''), 0, 1000), 'adjustId' => (string)($job['adjustId'] ?? ''),
+            'genkey' => (string)($par['genkey'] ?? ''),   // inherit the parent's genkey so "Group similar" keeps the chain together
+            'prompt' => mb_substr((string)$job['prompt'], 0, 2000), 'refs_used' => [['file' => $pf, 'label' => 'base image', 'kind' => 'parent', 'src' => 'ws']],
+            'tags' => ['ws-gen', 'ws-edit'], 'gen' => $gen, 'by' => (string)($job['by'] ?? ''), 'source' => 'ws-worker', 'wsJob' => (string)$job['id'],
+        ];
+    } else {
+        foreach (ws_wk_ref_rows((string)$job['pid'], (array)($job['refs'] ?? []), false) as $ref) {
+            $refsUsed[] = ['file' => $ref['file'], 'label' => $ref['label'], 'kind' => 'ref', 'src' => 'ws'];
+        }
+        $orig = (string)$job['group'] . '-' . $n . '.' . $dl['ext'];
+        $extra = [
             'group' => (string)$job['group'], 'prompt' => mb_substr((string)$job['prompt'], 0, 2000), 'refs_used' => $refsUsed,
             'tags' => ['ws-gen'], 'gen' => $gen, 'by' => (string)($job['by'] ?? ''), 'source' => 'ws-worker', 'wsJob' => (string)$job['id'],
-        ]);
+        ];
+    }
+    $row = null; $why = 'the Studio could not store the image';
+    try {
+        $row = ws_add_image((string)$job['pid'], $dl['path'], $orig, $extra);
     } catch (\Throwable $e) {
         $row = null; $why .= ' (' . mb_substr($e->getMessage(), 0, 120) . ')';
     } finally {
@@ -553,7 +798,10 @@ if ($do === 'ingest_url') {
     }
     if (!$row) { $unmark(null); ws_json_out(['ok' => false, 'error' => $why], 500); }
     $done = $unmark($row);
-    ws_json_out(['ok' => true, 'file' => (string)$row['file'], 'done' => $done, 'takes' => (int)$job['takes']]);
+    // the first landed edit resolves the cockpit card (done + resultFile); later takes find it no longer pending and
+    // just land as more derived versions. Best-effort: a failed card flip never fails the ingest.
+    $adj = $isEdit && ws_wk_card_set($job, ['status' => 'done', 'resultFile' => (string)$row['file'], 'doneAt' => date('c')]);
+    ws_json_out(['ok' => true, 'file' => (string)$row['file'], 'done' => $done, 'takes' => (int)$job['takes']] + ($isEdit ? ['adjustResolved' => $adj] : []));
 }
 
 ws_json_out(['ok' => false, 'error' => 'unknown do'], 400);

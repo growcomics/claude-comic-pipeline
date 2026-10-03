@@ -12,7 +12,7 @@
 //   proj-<pid>.json   story, style, aspect, pages[{n,title,prompt,refs[],note}], refs[{file,label,kind}]
 //   chat-<pid>.json   msgs[{id,ts,uid,by,role:user|ai|system,text,actions[]}]
 //   picks-<pid>.json  pages{group:{pick:[]|'drop',c,prev_c,sig,by,ts}}
-//   jobs.json         jobs[], meta{lastSubmitAt,cooldownUntil}
+//   jobs.json         jobs[], meta{lastSubmitAt,cooldownUntil}  (kind 'edit' = a cockpit Adjust imported by ws-worker.php)
 //   usage.json        days{YYYY-MM-DD:{users:{uid:{gens,msgs,usd}},gens}}
 //   worker.json       {keyHash}  (sha256 of the generation worker's own key; never the bridge key)
 declare(strict_types=1);
@@ -37,6 +37,10 @@ define('WS_SETTINGS_DEFAULT', [
     'chatModel'        => 'claude-opus-5-5',
     'chatEffort'       => 'low',
     'workerEnabled'    => true,
+    // Cockpit ✎ Adjust (creator.php do=adjust) → image-to-image edit jobs in this lane (ws-worker.php claim imports them).
+    'editTakes'          => 2,      // versions per Adjust (1..4)
+    'importAdjusts'      => true,   // false: the worker leaves legacy Adjust jobs alone
+    'importAdjustsSince' => '2026-10-01T00:00:00+00:00',   // only legacy Adjust jobs created at/after this are imported
 ]);
 // Pages only the OWNER may open, whatever the login (staff editors like THOR and collab logins included).
 // Enforced by ws_staff_gate() from is_authed(). (owner 2026-10-02: staff don't need finance.)

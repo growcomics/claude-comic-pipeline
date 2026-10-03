@@ -49,6 +49,7 @@ any text that has spaces. `JOB` is always the `job.id` that `W job` printed.
    - Exit 1: reply `FAILED at job: <error>`.
    - Exit 0 returns:
      - `job`: `id`, `pid`, `page`, `group`, `prompt`, `aspect`, `takes`, `done`, `failed`, `submits`, `model`, `resolution`
+       (an edit job also has `kind: "edit"` and `parentFile`)
      - `refs`: a list of `{file, label, kind, url}`, where each `url` is a signed link that expires after 2 hours
      - `resumed`: true when this is your own unfinished job from a run that was killed.
 2. **Check the model and the credits.**
@@ -57,6 +58,10 @@ any text that has spaces. `JOB` is always the `job.id` that `W job` printed.
    2. Call `mcp__claude_ai_higgsfield__balance` and note the credits for the final reply. If it shows 0 credits,
       handle it as out of credits (step 4.6) without generating.
 3. **Import the refs** (once per file; reuse each media id for every take).
+   - **Edit job** (`job.kind` is `edit`: the owner's ✎ Adjust of an existing image): it has exactly one ref, the image
+     to edit. Import it and pass it as the only `medias` entry of every take; never add other refs. If it cannot be
+     imported, run `W done JOB error 'image to edit could not be imported'` and end the run (never generate an edit
+     without it).
    1. For each ref, call `mcp__claude_ai_higgsfield__media_import_url` with `url` = the ref `url` and `type` = `image`.
       You get a `media_id`.
    2. If the import fails, use the fallback:
@@ -132,7 +137,8 @@ any text that has spaces. `JOB` is always the `job.id` that `W job` printed.
 
 ## Final reply (it becomes the job heartbeat)
 
-- Write one line for the job: `<comic id> page <n>: landed <done>/<takes>, failed <f>[, refs skipped: …][, note]`.
+- Write one line for the job: `<comic id> page <n>: landed <done>/<takes>, failed <f>[, refs skipped: …][, note]`
+  (an edit job: `<comic id> edit <group>: …`).
   End with a line `credits left: <n>` if you checked the balance.
 - If `wsw job` showed no job, reply `idle (no job)`.
 - If the run broke, the reply must start with `FAILED at <step>: <error>`. Otherwise never start it with the word
@@ -184,6 +190,15 @@ must be a real JPEG, PNG, WebP or GIF. The image is stored with:
 - `wsJob`, `gen`, `refs_used`, `prompt` and `by`
 
 A repeated `gen` id for the same job returns `duplicate:true`.
+
+**Cockpit ✎ Adjust (edit jobs):** `creator.php do=adjust` still writes a pending card (`data/creator-<pid>.json`
+`adjusts[]`) and a legacy `data/jobs.json` job of kind `adjust`. `claim` imports open ones created at/after
+`importAdjustsSince` (team setting; `importAdjusts` false turns it off) whose card is still pending: it reserves
+`editTakes` (default 2, 1..4) of the global cap for `staff:<card.by>`, queues a ws job of kind `edit` (one ref = the
+parent image, a server-built edit prompt, the parent's closest aspect) and marks the legacy job done. A card the owner
+cancelled (`abandoned`) or a missing parent cancels the job unrun (quota back); `submit_ok` stops a running one. Takes
+land as derived versions under the parent (`parent`, `root`, `ver`, `derived`, `adjustId`, tag `ws-edit`); the first
+landing flips the card to done with `resultFile`, a job that closes with nothing landed flips it to failed.
 
 **Ref links:** refs leave the Studio only as signed links:
 `ws-worker.php?do=refimg&p&f&exp&sig`, where `sig` = HMAC-SHA256 of `"p|f|exp"` keyed with the stored key hash, valid

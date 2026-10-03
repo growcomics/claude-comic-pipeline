@@ -1291,6 +1291,146 @@ section('SCOPE: deactivation fences the queue');
 }
 
 // =================================================================================================
+section('WORKER: cockpit Adjust import');
+{
+  const G = 'gamma-comic', LJ = D + '/jobs.json', CF = D + `/creator-${G}.json`;
+  const iso = s => new Date(Date.now() + s * 1000).toISOString();
+  const legacy = () => readJson(LJ) || [];
+  const lj = id => legacy().find(j => j.id === id) || {};
+  const card = id => ((readJson(CF) || {}).adjusts || []).find(a => a.id === id) || {};
+  const wsJobs = () => readJson(jobsFile).jobs || [];
+  const gensAll = () => usageToday().gens | 0, gensStaff = () => gensOf('staff:grow');
+  const chatG = () => (readJson(D + `/ws/chat-${G}.json`) || { msgs: [] }).msgs;
+  const imgsG = () => readJson(D + `/images-${G}.json`) || [];
+  const cockpit = body => owner.post(`/studio/creator.php?p=${G}`, Object.assign({ csrf: OWN_CSRF }, body));
+  const want = note => 'Edit this comic page image. Keep the same 2D/3D art style, page layout, panel borders, characters, faces, hair, outfits, colors, '
+    + `lettering and speech bubbles exactly as they are. Change only this: ${note} Every person has exactly two arms, two hands and two legs. Do not add any new text, people or objects.`;
+  editTeam(t => { t.settings.importAdjustsSince = iso(-3600); });
+
+  // the owner presses ✎ Adjust in the cockpit: the real creator.php writes a pending card + an open legacy job
+  r = await cockpit({ do: 'adjust', file: 'g1.png', note: 'Make her  tank top\n red ' });
+  const ADJ1 = r.json && r.json.adjustId, L1 = card(ADJ1).jobId;
+  check('cockpit Adjust (creator.php do=adjust) -> pending card + open legacy adjust job', r.status === 200 && r.json.ok && card(ADJ1).status === 'pending' && card(ADJ1).by === 'Grow'
+    && lj(L1).kind === 'adjust' && lj(L1).status === 'open' && lj(L1).adjustId === ADJ1, [short(r), card(ADJ1), lj(L1)]);
+  // legacy jobs that must be left alone: created before importAdjustsSince, not an adjust, no matching card, card no longer pending
+  const lrow = (id, o) => Object.assign({ id, projectId: G, kind: 'adjust', parentFile: 'g1.png', status: 'open', createdAt: iso(-60), progress: { done: 0, total: 0, note: '' } }, o);
+  php.writeFile(LJ, JSON.stringify(legacy().concat([
+    lrow('job_old', { adjustId: 'adj_old', createdAt: iso(-7200) }), lrow('job_panel', { kind: 'panel', adjustId: '' }),
+    lrow('job_nocard', { adjustId: 'adj_missing' }), lrow('job_donecard', { adjustId: 'adj_donecard' })])));
+  { const c = readJson(CF); c.adjusts.push({ id: 'adj_old', parentFile: 'g1.png', beat: 'Page 01', note: 'old one', status: 'pending', jobId: 'job_old', by: 'Grow' },
+      { id: 'adj_donecard', parentFile: 'g1.png', beat: 'Page 01', note: 'done one', status: 'done', jobId: 'job_donecard', by: 'Grow' }); php.writeFile(CF, JSON.stringify(c)); }
+  const LEFT = ['job_old', 'job_panel', 'job_nocard', 'job_donecard'], leftBefore = JSON.stringify(LEFT.map(lj));
+  const g0 = gensAll(), s0 = gensStaff(), restC0 = await restOf(C);
+
+  r = await W('claim', { worker: 'w1' });
+  const EJ = (r.json && r.json.job) || {}, EREFS = (r.json && r.json.refs) || [], ej = jobOf(EJ.id);
+  check('claim imports the Adjust and hands it out: kind edit, page 0, the parent\'s group, aspect of the parent (80x100 -> 4:5), 2 takes, the server-built edit prompt',
+    r.status === 200 && EJ.kind === 'edit' && EJ.parentFile === 'g1.png' && EJ.page === 0 && EJ.group === 'Page 01' && EJ.aspect === '4:5' && EJ.takes === 2
+    && EJ.prompt === want('Make her tank top red.') && /^wsj_/.test(EJ.id || ''), short(r));
+  check('claim refs = ONE signed url to the parent image (kind parent)', EREFS.length === 1 && EREFS[0].file === 'g1.png' && EREFS[0].kind === 'parent'
+    && /ws-worker\.php\?do=refimg&p=gamma-comic&f=g1\.png&exp=\d+&sig=[a-f0-9]{64}$/.test(EREFS[0].url || ''), EREFS);
+  if (EREFS[0]) {
+    const rr = await new Client('anon').get('/studio/ws-worker.php' + new URL(EREFS[0].url).search);
+    check('… and the signed url serves the parent image bytes', rr.status === 200 && rr.ctype === 'image/png' && Buffer.from(rr.bytes).equals(PNG[G + '/g1.png']), [rr.status, rr.ctype]);
+  }
+  check('ws job: uid staff:grow, by Grow, refs [parent], adjustId + legacyJob + parentFile + note recorded', ej.uid === 'staff:grow' && ej.by === 'Grow' && JSON.stringify(ej.refs) === '["g1.png"]'
+    && ej.adjustId === ADJ1 && ej.legacyJob === L1 && ej.parentFile === 'g1.png' && ej.adjust === 'Make her tank top red' && ej.status === 'running', ej);
+  check('legacy job -> done "moved to the workspace generator (<wsj id>)"', lj(L1).status === 'done' && lj(L1).progress.note === `moved to the workspace generator (${EJ.id})` && lj(L1).wsJob === EJ.id, lj(L1));
+  check('the global quota is reserved: 2 images for staff:grow', gensAll() === g0 + 2 && gensStaff() === s0 + 2, [usageToday(), g0, s0]);
+  check('system chat line on the comic', chatG().some(m => m.role === 'system' && m.text === "✎ Grow's Adjust on Page 01 is queued for the generator (2 versions)"), chatG().slice(-2));
+  check('left untouched: Adjust before importAdjustsSince, a non-adjust job, no matching card, a card no longer pending', JSON.stringify(LEFT.map(lj)) === leftBefore
+    && wsJobs().filter(j => j.kind === 'edit').length === 1, LEFT.map(lj));
+
+  resetGap(); r = await W('submit_ok', { job: EJ.id });
+  check('submit_ok for the edit job -> ok', r.json && r.json.ok === true, short(r));
+  r = await W('ingest_url', { job: EJ.id, url: 'https://fake-test.cloudfront.net/out/edit1.png', gen: 'gen-edit-1' });
+  const E1 = r.json && r.json.file, e1 = imgsG().find(m => m.file === E1) || {};
+  check('ingest_url (edit) -> a derived v2 under the parent: parent/root/ver/group/adjustId/derived, ws-edit tag, base-image refs_used',
+    r.status === 200 && r.json.ok && r.json.done === 1 && r.json.adjustResolved === true && e1.parent === 'g1.png' && e1.root === 'g1.png' && e1.ver === 2 && e1.group === 'Page 01'
+    && e1.derived === true && e1.adjustId === ADJ1 && e1.adjust === 'Make her tank top red' && e1.tags.includes('ws-gen') && e1.tags.includes('ws-edit') && e1.wsJob === EJ.id
+    && e1.prompt === EJ.prompt && e1.refs_used.length === 1 && e1.refs_used[0].file === 'g1.png' && e1.refs_used[0].kind === 'parent' && exists(`/www/studio/uploads/${G}/${E1}`), [short(r), e1]);
+  check('the first landing flips the cockpit card: done + resultFile + doneAt', card(ADJ1).status === 'done' && card(ADJ1).resultFile === E1 && !!card(ADJ1).doneAt, card(ADJ1));
+  resetGap(); await W('submit_ok', { job: EJ.id });
+  r = await W('ingest_url', { job: EJ.id, url: 'https://fake-test.cloudfront.net/out/edit2.png', gen: 'gen-edit-2' });
+  const E2 = r.json && r.json.file, e2 = imgsG().find(m => m.file === E2) || {};
+  check('the second take lands as another derived version; the card keeps the first result', r.status === 200 && r.json.done === 2 && r.json.adjustResolved === false
+    && e2.parent === 'g1.png' && e2.ver === 2 && e2.group === 'Page 01' && card(ADJ1).resultFile === E1, [short(r), e2, card(ADJ1)]);
+  r = await W('done', { job: EJ.id, status: 'done' });
+  check('done -> done, nothing released, ✅ chat line', r.json && r.json.status === 'done' && r.json.released === 0 && gensAll() === g0 + 2
+    && chatG().some(m => m.text === '✅ Page 01: 2 edited versions landed under the original — open the picker'), [short(r), chatG().slice(-1)]);
+  r = await owner.get(`/studio/creator.php?p=${G}`);
+  check('cockpit shows the v2 versions and no pending card for the Adjust', r.status === 200 && (r.text.match(/class="ck-vbadge"[^>]*>v2</g) || []).length === 2
+    && !r.text.includes(`data-adjust="${ADJ1}"`), [r.status, (r.text.match(/class="ck-vbadge"[^>]*>v\d</g) || [])]);
+  check('ping/state of a workspace comic unaffected (signature unchanged, no edit job listed)', (await restOf(C)) === restC0
+    && !((await lt.get(`/studio/ws-api.php?do=state&p=${C}`)).json.jobs || []).some(j => j.id === EJ.id), [restC0]);
+  r = await owner.get('/studio/team.php');
+  check('team.php generator table labels the job "✎ edit"', r.status === 200 && r.text.includes('✎ edit</span>'), short(r));
+
+  // importAdjusts off: a new Adjust stays in the legacy queue, and nothing is written
+  r = await cockpit({ do: 'adjust', file: 'g1.png', note: 'Second adjust' });
+  const ADJ2 = r.json && r.json.adjustId, L2 = card(ADJ2).jobId;
+  editTeam(t => { t.settings.importAdjusts = false; });
+  let lj0 = readText(LJ), wj0 = readText(jobsFile);
+  r = await W('claim', { worker: 'w1' });
+  check('importAdjusts=false -> nothing imported (legacy + workspace queues untouched)', !!L2 && r.json && r.json.job === null && r.json.reason === 'none'
+    && readText(LJ) === lj0 && readText(jobsFile) === wj0 && lj(L2).status === 'open', [short(r), lj(L2)]);
+  // quota refused: one image left studio-wide, an Adjust needs 2
+  editTeam(t => { t.settings.importAdjusts = true; t.settings.globalGensPerDay = gensAll() + 1; });
+  const g1 = gensAll(); wj0 = readText(jobsFile);
+  r = await W('claim', { worker: 'w1' });
+  check('quota refused -> the legacy job goes back to open; nothing queued or reserved; the card stays pending', r.json && r.json.job === null && r.json.reason === 'none'
+    && lj(L2).status === 'open' && !lj(L2).worker && gensAll() === g1 && readText(jobsFile) === wj0 && card(ADJ2).status === 'pending', [short(r), lj(L2), usageToday()]);
+  editTeam(t => { t.settings.globalGensPerDay = 150; });
+  // imported while another worker holds a live job (import runs before the busy answer), then the owner cancels the card
+  { const j = readJson(jobsFile); j.jobs.push({ id: 'wsj_busy', pid: C, page: 1, status: 'running', worker: 'w9', heartbeatAt: nowS(), takes: 1, done: 0, failed: 0, submits: 0, uid: LT_ID, day: '', createdAt: iso(0) }); php.writeFile(jobsFile, JSON.stringify(j)); }
+  const g2 = gensAll();
+  r = await W('claim', { worker: 'w1' });
+  const EJ2 = wsJobs().find(j => j.legacyJob === L2) || {};
+  check('claim while another worker is busy: the Adjust is still imported (queued), then "busy"', r.json && r.json.job === null && r.json.reason === 'busy'
+    && EJ2.kind === 'edit' && EJ2.status === 'queued' && lj(L2).status === 'done' && gensAll() === g2 + 2, [short(r), EJ2, lj(L2)]);
+  r = await cockpit({ do: 'adjustcancel', adjustId: ADJ2 });
+  { const j = readJson(jobsFile); j.jobs = j.jobs.filter(x => x.id !== 'wsj_busy'); php.writeFile(jobsFile, JSON.stringify(j)); }
+  check('cockpit Cancel -> card abandoned', r.status === 302 && card(ADJ2).status === 'abandoned', [short(r), card(ADJ2)]);
+  r = await W('claim', { worker: 'w1' });
+  check('claim: the edit job of a cancelled card -> cancelled unrun, both images back, the card stays abandoned, ⚠ chat line', r.json && r.json.job === null
+    && jobOf(EJ2.id).status === 'cancelled' && jobOf(EJ2.id).quotaReleased === 2 && gensAll() === g2 && card(ADJ2).status === 'abandoned'
+    && chatG().some(m => m.text === '⚠ Page 01: the Adjust could not be generated (cancelled in the cockpit)'), [short(r), jobOf(EJ2.id), card(ADJ2)]);
+  // cancelled in the cockpit while running: the next submit_ok stops it
+  r = await cockpit({ do: 'adjust', file: 'g1.png', note: 'Third adjust' });
+  const ADJ3 = r.json && r.json.adjustId;
+  r = await W('claim', { worker: 'w1' });
+  const EJ3 = (r.json && r.json.job) || {};
+  await cockpit({ do: 'adjustcancel', adjustId: ADJ3 });
+  resetGap(); r = await W('submit_ok', { job: EJ3.id });
+  const r3 = await W('done', { job: EJ3.id, status: 'done' });
+  check('running edit job, card cancelled in the cockpit -> submit_ok stops; done -> cancelled, both images back', EJ3.kind === 'edit' && r.json && r.json.ok === false && r.json.stop === true
+    && /cockpit/.test(r.json.error || '') && r3.json && r3.json.status === 'cancelled' && r3.json.released === 2 && gensAll() === g2 && card(ADJ3).status === 'abandoned', [short(r), short(r3), card(ADJ3)]);
+  // nothing landed: the card is resolved as failed (bridge.php do=done's failure branch)
+  r = await cockpit({ do: 'adjust', file: 'g1.png', note: 'Fourth adjust' });
+  const ADJ4 = r.json && r.json.adjustId;
+  r = await W('claim', { worker: 'w1' });
+  const EJ4 = (r.json && r.json.job) || {};
+  for (let k = 0; k < 2; k++) { resetGap(); await W('submit_ok', { job: EJ4.id }); await W('take_failed', { job: EJ4.id, reason: 'content filter' }); }
+  r = await W('done', { job: EJ4.id, status: 'done' });
+  check('done with nothing landed -> error; the card -> failed (failReason error, failNote, failedAt); ⚠ chat line', EJ4.kind === 'edit' && r.json && r.json.status === 'error'
+    && card(ADJ4).status === 'failed' && card(ADJ4).failReason === 'error' && card(ADJ4).failNote === 'every take was blocked or failed' && !!card(ADJ4).failedAt
+    && chatG().some(m => m.text === '⚠ Page 01: the Adjust could not be generated (every take was blocked or failed)'), [short(r), card(ADJ4)]);
+  // a legacy job without adjustId is matched to its card by card.jobId
+  php.writeFile(LJ, JSON.stringify(legacy().concat([lrow('job_byjobid', {})])));
+  { const c = readJson(CF); c.adjusts.push({ id: 'adj_byjobid', parentFile: 'g1.png', beat: 'Page 01', note: 'By job id', status: 'pending', jobId: 'job_byjobid', by: 'Grow' }); php.writeFile(CF, JSON.stringify(c)); }
+  const g3 = gensAll();
+  r = await W('claim', { worker: 'w1' });
+  const EJ5 = (r.json && r.json.job) || {};
+  r = await W('done', { job: EJ5.id, status: 'error', note: 'test close' });
+  check('legacy job without adjustId -> matched by card.jobId, imported; closed unsubmitted -> both images back, card failed', EJ5.kind === 'edit'
+    && jobOf(EJ5.id).adjustId === 'adj_byjobid' && lj('job_byjobid').status === 'done' && r.json && r.json.released === 2 && gensAll() === g3
+    && card('adj_byjobid').status === 'failed' && card('adj_byjobid').failNote === 'test close', [short(r), jobOf(EJ5.id), card('adj_byjobid')]);
+  r = await W('claim', { worker: 'w1' });
+  check('queue empty again; the left-alone legacy jobs are still untouched', r.json && r.json.job === null && r.json.reason === 'none' && JSON.stringify(LEFT.map(lj)) === leftBefore, short(r));
+  editTeam(t => { delete t.settings.importAdjustsSince; delete t.settings.importAdjusts; });
+}
+
+// =================================================================================================
 section('LEGACY PAGES: hostile file names and image metadata stay inert');
 {
   r = await L('upload', { kind: 'ref', 'files[]': new File([UPLOAD_PNG], '</script><script>alert(1)</script>.png', { type: 'image/png' }) }, C);

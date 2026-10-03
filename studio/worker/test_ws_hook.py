@@ -192,6 +192,28 @@ def main():
         check('deny: import with no claimed job', deny(r), r)
         e.claim()
 
+        # ---- an edit job (cockpit Adjust, kind 'edit'): ONE ref = the parent image, server-built prompt, parent aspect ----
+        edit_ref = REF.replace('f=ab12cd34ef.png', 'f=g1parent00.png')
+        edit_prompt = ('Edit this comic page image. Keep the same 2D/3D art style, page layout, panel borders, characters, faces, '
+                       'hair, outfits, colors, lettering and speech bubbles exactly as they are. Change only this: Make her tank top '
+                       'red. Every person has exactly two arms, two hands and two legs. Do not add any new text, people or objects.')
+        e.claim(job_id='wsj_E', prompt=edit_prompt, aspect='4:5', refs=(edit_ref,))
+        r = e.run(IMP, {'url': edit_ref, 'type': 'image'})
+        check('edit job: allow import of the parent image (its one signed ref)', allow(r), r)
+        e.token(job_id='wsj_E', prompt=edit_prompt, aspect='4:5', max_medias=1)
+        r = e.run(GEN, {'params': good(prompt=edit_prompt, aspect_ratio='4:5')})
+        check('edit job: allow the exact edit prompt + parent aspect + the one parent media', allow(r), r)
+        e.token(job_id='wsj_E', prompt=edit_prompt, aspect='4:5', max_medias=1)
+        r = e.run(GEN, {'params': good(prompt=edit_prompt, aspect_ratio='4:5', medias=[{'role': 'image', 'value': 'a'}, {'role': 'image', 'value': 'b'}])})
+        check('edit job: deny a second media (no refs beyond the image to edit)', deny(r) and 'medias' in r['why'], r)
+        e.token(job_id='wsj_E', prompt=edit_prompt, aspect='4:5', max_medias=1)
+        r = e.run(GEN, {'params': good(prompt=edit_prompt + ' Make her bigger.', aspect_ratio='4:5')})
+        check('edit job: deny a reworded edit prompt', deny(r) and 'prompt' in r['why'], r)
+        e.token(job_id='wsj_E', prompt=edit_prompt, aspect='4:5', max_medias=1)
+        r = e.run(GEN, {'params': good(prompt=edit_prompt, aspect_ratio='3:4')})
+        check('edit job: deny an aspect other than the parent\'s', deny(r) and 'aspect' in r['why'], r)
+        e.claim()
+
         # ---- other tools ----
         r = e.run('mcp__claude_ai_higgsfield__jobs_wait', {'jobs': [{'index': 0, 'job_id': 'x'}]})
         check('no decision for read-only jobs_wait (permissions decide)', r is None, r)

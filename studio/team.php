@@ -873,7 +873,7 @@ details.tm-edit[open]>summary{margin-bottom:10px;color:var(--text)}
         ?>
           <tr>
             <td class="tm-name"><?= h($pname[$jpid] ?? $jpid) ?><?php if (($pname[$jpid] ?? null) === null): ?> <span class="muted" style="font-size:11.5px">(gone)</span><?php endif; ?></td>
-            <td class="tm-num"><?= (int)($j['page'] ?? 0) ?></td>
+            <td class="tm-num"><?= ($j['kind'] ?? '') === 'edit' ? '<span title="' . h('Cockpit Adjust of ' . (string)($j['parentFile'] ?? '') . (($j['group'] ?? '') !== '' ? ' (' . (string)$j['group'] . ')' : '')) . '">✎ edit</span>' : (int)($j['page'] ?? 0) ?></td>
             <td class="tm-num"><?= (int)($j['takes'] ?? 0) ?></td>
             <td class="tm-num"><?= (int)($j['done'] ?? 0) ?> / <?= (int)($j['failed'] ?? 0) ?></td>
             <td><span class="badge" style="--c:<?= ws_team_status_color($st) ?>"<?= ($j['note'] ?? '') !== '' ? ' title="' . h(mb_substr((string)$j['note'], 0, 300)) . '"' : '' ?>><?= h($st) ?><?= !empty($j['stopRequested']) && $st === 'running' ? ' · stopping' : '' ?></span></td>
