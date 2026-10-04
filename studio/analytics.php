@@ -74,6 +74,7 @@ table.t td.n,table.t th.n{text-align:right}
   <a class="ghost" href="index.php">🎬 Pipeline</a>
   <a class="ghost" href="pulse/">📈 Patron $</a>
   <a class="ghost" href="analytics.php" style="color:var(--text);font-weight:700">📊 Traffic</a>
+  <a class="ghost" href="nightshift.php">🌙 Night Shift</a>
   <span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span>
   <a class="ghost" href="login.php?do=logout">Log out</a>

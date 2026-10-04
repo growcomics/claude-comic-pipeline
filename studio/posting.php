@@ -13,7 +13,18 @@ define('PO_FILE', SDATA . '/posting.json');
 
 $PLATFORMS = array('site' => 'Site', 'patreon' => 'Patreon', 'deviantart' => 'DeviantArt', 'twitter' => 'X', 'instagram' => 'IG');
 $PSTATES = array('todo', 'scheduled', 'posted', 'na');
-$LANES = array('faf' => 'Fan Art Friday', 'comic' => 'Monthly comic', 'side' => 'Side content');
+$LANES = array('faf' => 'Fan Art Friday', 'weekly' => 'Weekly serial', 'comic' => 'Monthly comic', 'side' => 'Side content');
+// CK-SCHEDULE-STAGE v1 2026-08-19 — production stage, owned by schedule.php (the
+// long-horizon calendar) and merely DISPLAYED here, so a card shows whether the
+// thing is drawn yet and not just whether its chips are armed. Keep this array in
+// step with $SC_STAGES in schedule.php.
+$PSTAGES = array(
+    'planning' => array('Planning', '#6F7380'),      'notstarted' => array('Not started', '#4A4D5C'),
+    'missing'  => array('Missing content', '#B3523F'), '3d'       => array('3D work', '#7A5CC4'),
+    'inking'   => array('Inking', '#378ADD'),        'coloring'   => array('Coloring', '#1D9E75'),
+    'waitingtext' => array('Waiting for text', '#EF9F27'), 'ready' => array('Ready to post', '#5FD39A'),
+    'posted'   => array('Posted', '#2E7D4F'),        'missed'     => array('Slot missed', '#E24B4A'),
+);
 $ISTATES = array('draft', 'ready', 'posted', 'skipped');
 
 $SITES = s_read(SDATA . '/cc-sites.json', array());
@@ -87,6 +98,25 @@ if (isset($_GET['img'])) {
     header('X-Robots-Tag: noindex');
     header('Content-Length: ' . (string)filesize($path));
     readfile($path);
+    exit;
+}
+
+// ---------------- drop-pipeline queue (data/posting-pipeline.json) -----------
+// The 🚀 button on a card queues that item for the comic-drop pipeline; a
+// Claude Code runner on the Mac polls ?pipeline=list (bridge key), executes
+// the drop (Drive intake → QA → site draft+PDF → schedule → Patreon prep) and
+// reports state back. The queue is only a mailbox — nothing runs server-side.
+define('PO_PIPE', SDATA . '/posting-pipeline.json');
+function po_pipe_jobs(): array { $d = s_read(PO_PIPE, array('seq' => 0, 'jobs' => array())); return is_array($d['jobs'] ?? null) ? $d['jobs'] : array(); }
+function po_pipe_current(string $itemId): ?array {
+    foreach (array_reverse(po_pipe_jobs()) as $j) if (($j['item'] ?? '') === $itemId) return $j;
+    return null;
+}
+
+if (isset($_GET['pipeline']) && $_GET['pipeline'] === 'list') {
+    if (!$keyAuthed) { http_response_code(403); exit; } // runner-only endpoint
+    header('Content-Type: application/json');
+    echo json_encode(array('ok' => true, 'jobs' => po_pipe_jobs()));
     exit;
 }
 
@@ -164,6 +194,47 @@ if ($action !== '') {
             if ($stored > 0) $db['items'][$idx]['updatedAt'] = gmdate('c');
             if ($stored === 0) $err = 'Nothing uploaded' . ($skipped ? " ($skipped rejected — images up to 30 MB: jpg/png/webp/gif)." : '.');
         }
+    } elseif ($action === 'pipeline' && $idx >= 0) {
+        // queue this item for the drop pipeline (button on the card)
+        $it = $db['items'][$idx];
+        $err = (string)s_with_lock(PO_PIPE, function ($q) use ($it) {
+            if (!is_array($q) || !isset($q['jobs'])) $q = array('seq' => 0, 'jobs' => array());
+            foreach ($q['jobs'] as $j) {
+                if (($j['item'] ?? '') === $it['id'] && in_array($j['state'] ?? '', array('queued', 'running'), true))
+                    return array('data' => $q, 'result' => 'Already in the pipeline (' . $j['state'] . ').');
+            }
+            $q['seq'] = (int)$q['seq'] + 1;
+            $q['jobs'][] = array(
+                'id' => 'pj_' . nid(), 'item' => $it['id'], 'title' => (string)$it['title'],
+                'property' => (string)$it['property'], 'state' => 'queued',
+                'queuedAt' => gmdate('c'), 'queuedBy' => current_studio_user() ?: 'bridge',
+            );
+            if (count($q['jobs']) > 100) $q['jobs'] = array_slice($q['jobs'], -100);
+            return array('data' => $q, 'result' => '');
+        });
+    } elseif ($action === 'pipeline-state' && $keyAuthed) {
+        // runner reports progress: id=<job id>, state=running|done|error, note=free text
+        $jid = (string)($_POST['jid'] ?? '');
+        $st = (string)($_POST['state'] ?? '');
+        if (!in_array($st, array('running', 'done', 'error'), true)) { $err = 'Bad state.'; }
+        else {
+            $found = s_with_lock(PO_PIPE, function ($q) use ($jid, $st) {
+                if (!is_array($q) || !isset($q['jobs'])) return array('data' => $q, 'result' => false);
+                foreach ($q['jobs'] as $i => $j) {
+                    if (($j['id'] ?? '') === $jid) {
+                        $q['jobs'][$i]['state'] = $st;
+                        $q['jobs'][$i][$st === 'running' ? 'startedAt' : 'doneAt'] = gmdate('c');
+                        if (isset($_POST['note'])) $q['jobs'][$i]['note'] = substr((string)$_POST['note'], 0, 300);
+                        return array('data' => $q, 'result' => true);
+                    }
+                }
+                return array('data' => $q, 'result' => false);
+            });
+            if (!$found) $err = 'No such job.';
+        }
+        header('Content-Type: application/json');
+        echo json_encode($err === '' ? array('ok' => true) : array('ok' => false, 'error' => $err));
+        exit;
     } elseif ($action === 'del' && $idx >= 0) {
         po_rm_item_dir($id);
         array_splice($db['items'], $idx, 1);
@@ -194,6 +265,15 @@ for ($d = 0; $d < 28 && count($fridays) < 4; $d++) {
     if (gmdate('N', $ts) === '5') $fridays[] = gmdate('Y-m-d', $ts);
 }
 $months = array(gmdate('Y-m'), gmdate('Y-m', strtotime('first day of next month')));
+// CK-WEEKLY-WINDOW v1 2026-08-23 — the near horizon the Weekly serial section uses.
+// That section used to take every open `weekly` item regardless of date, which was
+// invisible only while the lane was empty. Once the board carried a real forward
+// schedule (2026-08-23: 24 bi-weekly slots seeded out to 2027-01) it would have
+// rendered two dozen cards on a page whose entire job is "what fires this week".
+// Anything past this horizon still exists — it lives on schedule.php, which is the
+// long-horizon view. Overdue items are deliberately NOT cut off: an open weekly
+// slot whose date has already gone by must stay visible until someone closes it.
+$weeklyHorizon = gmdate('Y-m-d', time() + 28 * 86400);
 
 $live = array(); $archive = array();
 foreach ($items as $it) {
@@ -223,6 +303,7 @@ $AUTHJS = $keyAuthed
     : json_encode(array('csrf' => csrf()));
 
 function po_card(array $it, array $PROPS, array $PLATFORMS, array $LANES, array $ISTATES, bool $keyAuthed): void {
+    global $PSTAGES;
     $pc = isset($PROPS[$it['property']]) ? $PROPS[$it['property']]['color'] : '#888';
     $pn = isset($PROPS[$it['property']]) ? $PROPS[$it['property']]['name'] : $it['property'];
     $locked = po_locked($it);
@@ -231,6 +312,11 @@ function po_card(array $it, array $PROPS, array $PLATFORMS, array $LANES, array 
     echo '<strong>' . h($it['title']) . '</strong>';
     echo '<span class="po-slot">' . h($it['slot'] !== '' ? $it['slot'] : 'no date') . '</span>';
     echo '<span class="po-st po-st-' . h($it['status']) . '">' . h($it['status']) . '</span>';
+    // CK-SCHEDULE-STAGE v1 — production stage, set on schedule.php
+    $stg = (string)($it['stage'] ?? '');
+    if ($stg !== '' && isset($PSTAGES[$stg]))
+        echo '<span class="po-stage" style="border-color:' . h($PSTAGES[$stg][1]) . ';color:' . h($PSTAGES[$stg][1]) . '">' . h($PSTAGES[$stg][0]) . '</span>';
+    if (!empty($it['artist'])) echo '<span class="po-owner">✍ ' . h($it['artist']) . '</span>';
     if ($locked) echo '<span class="po-lock">🔒 locked &amp; loaded</span>';
     if ($it['owner'] !== '') echo '<span class="po-owner">🎯 ' . h($it['owner']) . '</span>';
     echo '</div>';
@@ -269,6 +355,22 @@ function po_card(array $it, array $PROPS, array $PLATFORMS, array $LANES, array 
     if (!$keyAuthed) echo csrf_field();
     echo '<input type="file" name="art[]" accept="image/*" multiple required>';
     echo '<button class="mini" type="submit">⬆ upload art</button></form>';
+    // 🚀 drop pipeline: queue the item for the Claude runner (Drive intake → QA →
+    // gated site draft + PDF → schedule → Patreon prep). Queue only — see header note.
+    $pj = po_pipe_current($it['id']);
+    $pst = $pj ? (string)$pj['state'] : '';
+    echo '<div class="po-pipe">';
+    if ($pst === 'queued' || $pst === 'running') {
+        echo '<span class="po-pipe-st pp-' . h($pst) . '">🚀 pipeline: ' . h($pst) . ($pst === 'running' && !empty($pj['note']) ? ' — ' . h($pj['note']) : '') . '</span>';
+    } else {
+        if ($pst !== '') echo '<span class="po-pipe-st pp-' . h($pst) . '">🚀 last run: ' . h($pst) . (!empty($pj['note']) ? ' — ' . h($pj['note']) : '') . '</span>';
+        echo '<form method="post" action="posting.php" onsubmit="return confirm(\'Queue this item for the automated drop pipeline? A runner will pick it up and prep site + Patreon from the card\\\'s Drive link.\')" style="display:inline">';
+        echo '<input type="hidden" name="action" value="pipeline"><input type="hidden" name="id" value="' . h($it['id']) . '">';
+        echo '<input type="hidden" name="back" value="posting.php">';
+        if (!$keyAuthed) echo csrf_field();
+        echo '<button class="mini" type="submit">🚀 run drop pipeline</button></form>';
+    }
+    echo '</div>';
     if ($it['notes'] !== '') echo '<div class="po-notes">' . h($it['notes']) . '</div>';
     // edit form
     echo '<details class="po-edit"><summary>edit</summary><form method="post" action="posting.php">';
@@ -326,6 +428,7 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 .po-owner{font-size:12px;color:var(--muted)}
 .po-lock{font-size:11px;font-weight:700;color:#5fd39a}
 .po-st{font-size:11px;border-radius:999px;padding:1px 8px;border:1px solid var(--border);color:var(--muted)}
+.po-stage{font-size:11px;border-radius:999px;padding:1px 8px;border:1px solid var(--border);color:var(--muted)}
 .po-st-ready{color:#8fc7ff;border-color:#2b5b8a}
 .po-st-posted{color:#5fd39a;border-color:#2e7d4f}
 .po-st-skipped{color:#ff9aa6}
@@ -340,6 +443,12 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 .po-art img{height:84px;border-radius:6px;border:1px solid var(--border);display:block}
 .po-up{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px}
 .po-up input[type=file]{font-size:11.5px;color:var(--muted);max-width:260px}
+.po-pipe{margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.po-pipe-st{font-size:11.5px;border-radius:999px;padding:2px 10px;border:1px solid var(--border);color:var(--muted)}
+.po-pipe-st.pp-queued{color:#e3b341;border-color:#7a5b12}
+.po-pipe-st.pp-running{color:#8fc7ff;border-color:#2b5b8a}
+.po-pipe-st.pp-done{color:#5fd39a;border-color:#2e7d4f}
+.po-pipe-st.pp-error{color:#ff9aa6;border-color:#6e2430}
 .po-notes{margin-top:6px;font-size:12px;color:var(--muted)}
 .po-edit{margin-top:8px}
 .po-edit summary{cursor:pointer;font-size:12px;color:var(--muted)}
@@ -364,6 +473,7 @@ $blank = array('title' => '', 'property' => $pre['property'], 'lane' => $pre['la
 <div class="topbar">
   <a class="ghost" href="cc.php" style="color:var(--text);font-weight:700">⌘ Command Center</a>
   <a class="ghost" href="posting.php" style="font-weight:700">🗓 Posting</a>
+  <a class="ghost" href="schedule.php">📅 Schedule</a>
   <a class="ghost" href="posting-guide.php">❓ Guide</a>
   <a class="ghost" href="post/">📤 Wizard</a>
   <span style="flex:1"></span>
@@ -446,6 +556,26 @@ echo '</div>';
     <?php endforeach; ?>
     </div>
   <?php endforeach; ?>
+</div>
+
+<!-- CK-WEEKLY-LANE v1 2026-08-19 — the serial cadence the release sheet always
+     tracked as its own row (GG Industries, Influencers, Heidi and Mia). It used to
+     get filed under Side content, which hid the fact that it is a weekly commitment
+     with its own runway. schedule.php shows the horizon; this fires the week. -->
+<div class="po-sec">
+  <h2>📅 Weekly serial <span class="sub">the ongoing books — see the runway on <a href="schedule.php" style="text-decoration:underline">the schedule</a></span></h2>
+  <?php
+  $weeklyAll = po_pick($live, 'weekly', '');
+  $weeklyItems = array(); $weeklyLater = 0;
+  foreach ($weeklyAll as $it) {
+      // keep undated and overdue cards; hide only what is further out than the horizon
+      if (($it['slot'] ?? '') !== '' && $it['slot'] > $weeklyHorizon) { $weeklyLater++; continue; }
+      $weeklyItems[] = $it;
+  }
+  usort($weeklyItems, function ($a, $b) { return strcmp((string)$a['slot'], (string)$b['slot']); }); ?>
+  <?php if (!$weeklyItems): ?><div class="po-ghost">Nothing queued in the next 4 weeks. <a href="posting.php?new=1&amp;lane=weekly#po-new">Add something</a></div><?php endif; ?>
+  <?php foreach ($weeklyItems as $it) po_card($it, $PROPS, $PLATFORMS, $LANES, $ISTATES, $keyAuthed); ?>
+  <?php if ($weeklyLater): ?><div class="po-ghost"><?= (int)$weeklyLater ?> more weekly slot<?= $weeklyLater === 1 ? '' : 's' ?> booked beyond the next 4 weeks — <a href="schedule.php" style="text-decoration:underline">see the schedule</a>.</div><?php endif; ?>
 </div>
 
 <div class="po-sec">

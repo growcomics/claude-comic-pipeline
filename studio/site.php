@@ -61,6 +61,7 @@ $priC = ['critical'=>'#D9534F', 'high'=>'#EF9F27', 'medium'=>'#5BA7E6', 'low'=>'
   <a class="ghost" href="cc.php">Home</a>
   <a class="ghost" href="ops.php">📋 Ops Board</a>
   <a class="ghost" href="index.php">🎬 Pipeline</a>
+  <a class="ghost" href="nightshift.php">🌙 Night Shift</a>
   <span class="spacer"></span>
   <span class="ghost"><?= h(current_studio_user()) ?></span>
   <a class="ghost" href="login.php?do=logout">Log out</a>

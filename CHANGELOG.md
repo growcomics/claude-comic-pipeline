@@ -12,6 +12,16 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-04
+
+### Added
+
+- **Live-only Studio code captured into git** (laptop-loss safety; nothing deployed). A blob-by-blob comparison of `public_html/studio/` on 3dmusclecomics.com against every repo found 19 live code files in no repo, and two only in the `3dmc-studio-live` mirror. They are committed here exactly as they run on live. The CRLF the cPanel API adds was normalised to LF; the `<head><meta charset>` lines the cPanel editor wrote on 07-30 are kept as they appear on live.
+  - New to git: `attribution.php`, `finance.php`, `ideas.php` (Idea Vault renderer; its source data is `~/Documents/idea-vault/`), `import.php`, `nightshift.php`, `overview.php`, `thanks.php`, `schedule.php`, the `410 gone` stubs `bridge_lint.php`/`creator_lint.php`/`posting-next.php`, and `pulse/` (the deployed Creator Pulse build, from `~/Documents/creator-pulse`, which has no repo).
+  - Brought up to live (each one only adds to this branch): `analytics.php`/`ops.php`/`site.php` (the 🌙 Night Shift nav link), `cc.php` (CK-SCHEDULE-TILE v1, 08-19), `posting.php` (weekly lane + CK-SCHEDULE-STAGE, 08-19).
+  - All other live studio code (including the 10-01/10-02 workspace deploy) already matched blobs on this pushed branch. `studio/data/` stays out of git.
+  - ⚠ This branch is pushed only to `backup` (private `ggmartrob`). `origin` (`growcomics/claude-comic-pipeline`) is **public**, so push Studio code to `backup` only.
+
 ## 2026-10-02
 
 ### Changed

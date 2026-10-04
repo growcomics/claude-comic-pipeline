@@ -32,6 +32,31 @@ foreach ($tasks as $t) {
 $ownedN = $ownN['ai'] + $ownN['system'] + $ownN['human'];
 $projN = count(projects_all());
 
+// CK-SCHEDULE-TILE v1 2026-08-19 — runway rollup for the 📅 Schedule tile: how many
+// lanes have nothing booked from this week on. Reads the SAME posting.json the
+// schedule and posting board share; cheap enough to do inline, and it is the one
+// number worth seeing without opening anything.
+$scDry = 0; $scLanes = 0; $scMin = null;
+$scItems = s_read(SDATA . '/posting.json', ['items' => []])['items'] ?? [];
+$scMon = strtotime('monday this week', strtotime(gmdate('Y-m-d')));
+foreach (['growgetter','maxxmuscle','bloombeauty'] as $scP) {
+    foreach (['faf','weekly','comic'] as $scL) {
+        $cov = [];
+        foreach ($scItems as $scI) {
+            if (($scI['property'] ?? '') !== $scP || ($scI['lane'] ?? '') !== $scL) continue;
+            if (($scI['stage'] ?? '') === 'missed' || ($scI['status'] ?? '') === 'skipped') continue;
+            $sl = strtotime((string)($scI['slot'] ?? ''));
+            if (!$sl) continue;
+            $w0 = strtotime('monday this week', $sl);
+            for ($k = 0; $k < max(1, (int)($scI['weeks'] ?? 1)); $k++) $cov[gmdate('Y-m-d', $w0 + $k * 604800)] = 1;
+        }
+        $n = 0;
+        while (isset($cov[gmdate('Y-m-d', $scMon + $n * 604800)]) && $n < 200) $n++;
+        $scLanes++; if ($n === 0) $scDry++;
+        if ($scMin === null || $n < $scMin) $scMin = $n;
+    }
+}
+
 // Creator Pulse rollup for the Patron Analytics tile (Task 8) — live account count + total
 // MRR + patrons, read straight from the web-blocked synced snapshots (studio/data/pulse/).
 $pulseAccts = 0; $pulseMRR = 0.0; $pulsePatrons = 0;
@@ -63,6 +88,25 @@ $boPrev = count($boRuns) > 1 ? $boRuns[count($boRuns) - 2] : null;
 $boTrend = ($boLast && $boPrev && isset($boLast['cleanVariantRate'], $boPrev['cleanVariantRate']))
     ? (float)$boLast['cleanVariantRate'] - (float)$boPrev['cleanVariantRate'] : null;
 
+// Test Job Intake (/apply/) — applicant submissions waiting on a review. Read
+// defensively across directories: the portal is self-contained and may not be
+// installed, and its data/ is web-denied but readable server-side. Its admin
+// token lives in its own config so it never has to be written into this file.
+$applyDir   = dirname(__DIR__) . '/apply/data';
+$applyCfg   = json_decode((string)@file_get_contents($applyDir . '/config.json'), true);
+$applyKey   = is_array($applyCfg) && !empty($applyCfg['adminToken']) ? (string)$applyCfg['adminToken'] : '';
+$applyRows  = json_decode((string)@file_get_contents($applyDir . '/applicants.json'), true);
+$applyWait  = 0; $applyDraft = 0; $applyOwed = 0;
+if (is_array($applyRows)) {
+    foreach ($applyRows as $ar) {
+        $st = (string)($ar['status'] ?? '');
+        if ($st === 'submitted' || $st === 'reviewing') $applyWait++;
+        if ($st === 'draft') $applyDraft++;
+        if ($st === 'pass' && empty($ar['pay']['paid'])) $applyOwed++;
+    }
+}
+$applyOpen = is_array($applyCfg) && !empty($applyCfg['open']);
+
 // MuscleGrowthAI (django) metrics — read-only pull written by creator-pulse/tools/mgai_metrics.py (Task 10)
 $mgaiMetrics = json_decode((string)@file_get_contents(SDATA . '/pulse/mgai.json'), true);
 ?><!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -89,6 +133,7 @@ $mgaiMetrics = json_decode((string)@file_get_contents(SDATA . '/pulse/mgai.json'
   <div class="brand"><span class="dot"></span> ⌘ Command Center</div>
   <a class="ghost" href="cc.php" style="color:var(--text);font-weight:700">Home</a>
   <a class="ghost" href="ops.php">📋 Ops Board</a>
+  <a class="ghost" href="schedule.php">📅 Schedule</a>
   <a class="ghost" href="index.php">🎬 Pipeline</a>
   <a class="ghost" href="pulse/">📈 Analytics</a>
   <a class="ghost" href="analytics.php">📊 Traffic</a>
@@ -117,6 +162,11 @@ $mgaiMetrics = json_decode((string)@file_get_contents(SDATA . '/pulse/mgai.json'
       <h3>✍️ Gribble Script Writer</h3>
       <div class="big">29%</div>
       <div class="sub">growth pages, the Gribble ratio<br>writes full scripts in his format &amp; structure · parsed and scored against his 41-script corpus before you see them</div>
+    </a>
+    <a class="cc-tile" href="<?= $applyKey !== '' ? '../apply/admin.php?k=' . rawurlencode($applyKey) : '../apply/' ?>">
+      <h3>🧪 Test Job Intake</h3>
+      <div class="big"><?= $applyWait ?></div>
+      <div class="sub">applicants waiting on your review<?= $applyDraft ? ' · ' . $applyDraft . ' still drafting' : '' ?><?= $applyOwed ? ' · <span class="cc-crit">' . $applyOwed . ' unpaid</span>' : '' ?><br>$25 test job — submissions <?= $applyOpen ? 'open' : 'closed' ?> · 12-point rubric, verdicts, coupon ledger</div>
     </a>
     <a class="cc-tile" href="index.php">
       <h3>🎯 Bakeoff Yield</h3>
@@ -170,6 +220,17 @@ $mgaiMetrics = json_decode((string)@file_get_contents(SDATA . '/pulse/mgai.json'
 
   <div class="cc-h">Coming next</div>
   <div class="cc-grid">
+    <?php // CK-FINANCE-TILE v1 2026-08-19 — visible only to the finance allowlist,
+          // plus while it is still UNCLAIMED so the owner can find it once and lock it.
+          $fiAcl = s_read(SDATA . '/finance-acl.json', []);
+          $fiAllow = is_array($fiAcl['allow'] ?? null) ? $fiAcl['allow'] : [];
+          $fiMe = current_studio_user();
+          $fiShow = !$fiAllow;
+          foreach ($fiAllow as $fiA) if (strcasecmp((string)$fiA, $fiMe) === 0) $fiShow = true;
+          if ($fiShow): ?>
+    <a class="cc-tile" href="finance.php"><h3>💰 Costs<?= $fiAllow ? '' : ' <span class="tag" style="position:static;border:1px solid var(--border);border-radius:999px;padding:2px 8px;font-size:10px;color:var(--muted)">unclaimed</span>' ?></h3><div class="sub">payee ledger &middot; monthly rollup &middot; <?= $fiAllow ? 'private to you' : 'claim it to hide it from everyone else' ?></div></a>
+    <?php endif; ?>
+    <!-- CK-SCHEDULE-TILE v1 2026-08-19 --><a class="cc-tile" href="schedule.php"><h3>📅 Release schedule</h3><div class="big"<?= $scDry ? ' style="color:#E24B4A"' : '' ?>><?= (int)$scDry ?>/<?= (int)$scLanes ?></div><div class="sub">lanes with nothing booked from this week &middot; property &times; lane &times; week runway</div></a>
     <!-- CK-POSTING-TILE v1 2026-07-25 --><a class="cc-tile" href="posting.php"><h3>🗓 Posting board</h3><div class="sub">Fan Art Friday queue &middot; monthly comic slots &middot; locked &amp; loaded per platform</div></a>
     <div class="cc-tile soon"><span class="tag">soon</span><h3>📚 SOP library</h3><div class="sub">every guide and SOP, indexed</div></div>
   </div>
