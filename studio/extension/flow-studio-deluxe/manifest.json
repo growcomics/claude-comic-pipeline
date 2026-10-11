@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "Flow Studio Deluxe",
+  "version": "2.8.9",
+  "description": "The owner/staff build of 3DMC Studio Tools with nothing hidden: on Google Flow — Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), run a model bake-off, insert canonical prompt blocks or deal an Angle card; on Patreon — bulk-download a post's gallery. Every tab is always on; there is no Creator/Advanced switch. Paste the Studio bridge URL + key once under ⚙.",
+  "permissions": [
+    "downloads",
+    "storage",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://labs.google/*",
+    "https://flow.google.com/*",
+    "https://*.googleusercontent.com/*",
+    "https://flow-content.google/*",
+    "https://3dmusclecomics.com/*",
+    "https://www.patreon.com/*",
+    "https://*.patreonusercontent.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://labs.google/fx/tools/flow/*",
+        "https://flow.google.com/*"
+      ],
+      "js": [
+        "flow-core.js",
+        "flow-composer.js",
+        "flow-delete.js",
+        "flow-bakeoff.js",
+        "flow-lighting.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://labs.google/fx/tools/flow/*"
+      ],
+      "js": [
+        "flow-inject.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://www.patreon.com/*"
+      ],
+      "js": [
+        "patreon.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "version_name": "2.8.9 Deluxe"
+}

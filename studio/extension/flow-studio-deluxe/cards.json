@@ -1,0 +1,2361 @@
+{
+ "title": "Angle Deck",
+ "generatedBy": "research/comic-corpus/scripts/angle_deck.py",
+ "usage": "APPEND one card after the continuation line + refs. Text only; no appearance, no style.",
+ "groups": [
+  {
+   "id": "worm",
+   "title": "Worm's-eye (camera on the floor)"
+  },
+  {
+   "id": "low",
+   "title": "Low angle (camera below the hips)"
+  },
+  {
+   "id": "eye",
+   "title": "Eye level"
+  },
+  {
+   "id": "high",
+   "title": "High angle"
+  },
+  {
+   "id": "dutch",
+   "title": "Dutch / canted"
+  },
+  {
+   "id": "OTS",
+   "title": "Over-the-shoulder"
+  }
+ ],
+ "cards": [
+  {
+   "id": "deed-arts-omega-device-p1-1",
+   "group": "worm",
+   "subgroup": "back",
+   "label": "stance-power · sells back · WS/worm/below-knee-cam",
+   "text": "Camera down at worm's-eye level behind and below the figure, looking up a towering back with the arms crossed low behind the body, the head tipped back and small at the top of the frame so the trapezius and rear-delt mass fills the panel.",
+   "chars": 238,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 1,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "worm",
+    "camera_height": "below-knee",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "c-curve",
+    "crop": "bleed",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "foreshortening",
+     "scale-contrast",
+     "overlap",
+     "rim-light"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p20-1",
+   "group": "worm",
+   "subgroup": "back",
+   "label": "stance-power · sells back · WS/worm/below-knee-cam",
+   "text": "Camera at worm's-eye level behind and below a flying figure, arms crossed low behind the back, city rooftops receding tiny below, the back and shoulder mass filling most of the frame.",
+   "chars": 183,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 20,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "worm",
+    "camera_height": "below-knee",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "c-curve",
+    "crop": "full",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "foreshortening",
+     "scale-contrast",
+     "silhouette"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p41-1",
+   "group": "worm",
+   "subgroup": "chest",
+   "label": "stance-power · sells full-silhouette · WS/worm/below-knee-cam",
+   "text": "Camera at an extreme low worm's-eye angle looking up past a tiny planet at the figure's feet, straddled stance, arms crossed over the chest, head tipped back, a radiating starburst filling the space behind him so the whole body reads as a silhouette against light.",
+   "chars": 264,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 41,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "worm",
+    "camera_height": "below-knee",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "full",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "scale-contrast",
+     "foreshortening",
+     "silhouette",
+     "rim-light"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p8-1",
+   "group": "worm",
+   "subgroup": "glute",
+   "label": "growth-writhe · sells glutes · ECU/worm/below-knee-cam",
+   "text": "Camera sits on the ground looking straight up between the legs at the glutes and thighs stacked overhead, the last shredded fabric framing the sides, stance planted wide, selling glute and thigh growth through an extreme worm's-eye close-up.",
+   "chars": 241,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 8,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "worm",
+    "camera_height": "below-knee",
+    "toward_camera": "glute",
+    "muscle_sold": "glutes",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "contact-deform"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p10-1",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells chest · WS/low/eye-cam",
+   "text": "Camera at eye height, the figure stands in a three-quarter power pose with one hand near the chin and the other on the hip, weight shifted onto the back leg, sparkles and a radiating burst pattern filling the background behind her silhouette.",
+   "chars": 242,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 10,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "s-curve",
+    "crop": "full",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette",
+     "rim-light",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p20-4",
+   "group": "low",
+   "subgroup": "fist",
+   "label": "action-strike · sells arms · MCU/low/chest-cam",
+   "text": "Camera close at chest height, both fists punched directly toward the lens in heavy foreshortening, the face visible just behind and above them, radiating speed-lines filling the background.",
+   "chars": 189,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 20,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "fist",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "chest-up",
+    "pose_family": "action-strike",
+    "sell_mechanism": [
+     "foreshortening",
+     "motion-line"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p21-5",
+   "group": "low",
+   "subgroup": "back",
+   "label": "action-strike · sells glutes · MS/low/below-knee-cam",
+   "text": "Camera low behind the figure as one arm punches forward into a shattering surface, debris flying, the back and glute mass filling most of the frame, a small startled onlooker in the corner for scale.",
+   "chars": 199,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 21,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "below-knee",
+    "toward_camera": "back",
+    "muscle_sold": "glutes",
+    "body_line": "diagonal-lean",
+    "crop": "full",
+    "pose_family": "action-strike",
+    "sell_mechanism": [
+     "foreshortening",
+     "contact-deform",
+     "overlap"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p3-1",
+   "group": "low",
+   "subgroup": "fist",
+   "label": "flex-display · sells full-silhouette · WS/low/below-knee-cam",
+   "text": "Camera low and close, staggered ghost-repeats of the same standing pose recede into the distance behind the figure, each one larger and more muscular than the last until the nearest, biggest figure fills the foreground in a double-bicep flex with radiating speed-lines behind him.",
+   "chars": 280,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 3,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "below-knee",
+    "toward_camera": "fist",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "full",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "scale-contrast",
+     "foreshortening",
+     "motion-line",
+     "cloth-strain",
+     "silhouette"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p5-1",
+   "group": "low",
+   "subgroup": "thigh",
+   "label": "flex-display · sells full-silhouette · WS/low/below-knee-cam",
+   "text": "Camera low, just below chest height, angled slightly upward as the figure strides forward with both arms flexed out to the sides in a lat-spread pose, radiating speed-lines behind him, filling nearly the whole frame.",
+   "chars": 216,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 5,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "below-knee",
+    "toward_camera": "thigh",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "full",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette",
+     "motion-line",
+     "scale-contrast"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p1-4",
+   "group": "low",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · MCU/low/chest-cam",
+   "text": "Camera at chest height in a three-quarter view, she raises one arm in a tight bicep flex with her fist held near her shoulder, jaw clenched and one eye narrowed with effort, the frame cropping her at the chest so the flexed arm and shoulder dominate the panel.",
+   "chars": 260,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 1,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "diagonal-lean",
+    "crop": "chest-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "motion-line",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p12-4",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MS/low/chest-cam",
+   "text": "Camera at chest height with a slight low angle, her torso ripples and her clothing tears as her body grows, culminating in a wide-eyed reveal with golden electric arcs rimming her silhouette and one fist closed tight around a crushed object at chest height, selling the chest and shoulders.",
+   "chars": 290,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 12,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "arch-back",
+    "crop": "chest-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "rim-light"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p13-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · CU/low/chest-cam",
+   "text": "Camera close on the chest from a slightly low angle, her chin tilts down with a strained, gritted-teeth expression as the chest fills nearly the entire frame, growing so large it crowds out the edges of the panel.",
+   "chars": 213,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 13,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "chest-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "scale-contrast",
+     "foreshortening",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p14-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/low/chest-cam",
+   "text": "Camera at chest height straight on, she raises both arms into a double-bicep flex with her chin tucked down, the pose filling the frame so both arms crop off at the panel edges while the torso fills the lower half.",
+   "chars": 214,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 14,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "rim-light"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p14-3",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/low/chest-cam",
+   "text": "Same double-bicep flex from chest height, the frame packed even tighter than before so the arms and chest crowd every edge of the panel.",
+   "chars": 136,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 14,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p14-4",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/low/chest-cam",
+   "text": "Camera holds low at chest height as she throws both arms into the widest double-bicep flex yet, radiating motion lines behind her, the pose filling the entire bleed panel edge to edge with a wide exultant grin.",
+   "chars": 210,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 14,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "motion-line"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p16-4",
+   "group": "low",
+   "subgroup": "back",
+   "label": "flex-display · sells back · MCU/low/hip-cam",
+   "text": "Camera set at hip height and slightly below looks up as she twists to glance back over her shoulder with a confident grin, the frame cropped from head to upper thigh so the back and glutes fill most of the panel and read as the muscle growing.",
+   "chars": 243,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 16,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "hip",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "twist-contrapposto",
+    "crop": "head-to-thigh",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "rim-light",
+     "tangent-break"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p17-2",
+   "group": "low",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · MCU/low/chest-cam",
+   "text": "Camera holds level at chest height on two figures side by side, each bending one arm to flex a bicep toward the lens while grinning, cropped from the chest up so the flexed arms and chest fill the frame.",
+   "chars": 203,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 17,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "twist-contrapposto",
+    "crop": "chest-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "contact-deform",
+     "cloth-strain",
+     "silhouette"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p17-3",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells full-silhouette · WS/low/eye-cam",
+   "text": "Camera holds a wide low shot on a swirling energy backdrop as a smaller clothed figure stands center addressing several much larger figures around her, arms flexed and chests thrust into the foreground at different depths, the scale gap between the small central figure and the huge surrounding bodies selling the group's full-body growth.",
+   "chars": 339,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 17,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "bleed",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "scale-contrast",
+     "silhouette",
+     "foreshortening",
+     "frame-crop",
+     "rim-light"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p7-4",
+   "group": "low",
+   "subgroup": "glute",
+   "label": "growth-writhe · sells glutes · ECU/low/below-knee-cam",
+   "text": "Camera sits low behind and beneath her, angled up at the rear so the glutes loom over the lens, hips pressed back toward camera while torn fabric flares outward at the sides, selling growth in the glutes through a low worm's-eye close-up.",
+   "chars": 238,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 7,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "low",
+    "camera_height": "below-knee",
+    "toward_camera": "glute",
+    "muscle_sold": "glutes",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "contact-deform",
+     "tangent-break"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p8-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · WS/low/eye-cam",
+   "text": "Camera holds at eye level for a full-body front double-bicep flex, both arms raised with fists near the head and legs planted wide in an X stance, chest pushed toward the lens, selling arm and overall muscle growth through a symmetric power pose.",
+   "chars": 246,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 8,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "full",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette",
+     "scale-contrast"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p8-4",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells full-silhouette · WS/low/chest-cam",
+   "text": "Camera holds low at chest height as her flexed arms and torso grow large enough to crowd past the panel's own edges, hands raised near her temples, legs planted wide, selling maximal full-body growth through frame-filling scale.",
+   "chars": 228,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 8,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "feet-cut",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "silhouette"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p21-1",
+   "group": "low",
+   "subgroup": "back",
+   "label": "crouch-coil · sells back · WS/low/below-knee-cam",
+   "text": "Camera low and close as the figure lands in a crouch, seen from a three-quarter angle behind and below, impact debris and speed-lines radiating from the point of landing.",
+   "chars": 170,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 21,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "below-knee",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "coil-crouch",
+    "crop": "full",
+    "pose_family": "crouch-coil",
+    "sell_mechanism": [
+     "foreshortening",
+     "motion-line"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p12-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MS/low/chest-cam",
+   "text": "Camera close and slightly low, she tilts her head back gulping from a can held overhead, torso arched and chest thrust up, her hip visibly straining outward as her body begins to grow, the tall frame cropped at the waist to sell the chest.",
+   "chars": 239,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 12,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "arch-back",
+    "crop": "waist-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "foreshortening",
+     "cloth-strain",
+     "contact-deform"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p13-1",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MCU/low/chest-cam",
+   "text": "Camera positioned near chest height looking slightly up, she grins down at her own growing chest which fills the lower half of the frame, cropped tight at the bottom edge so the chest dominates while her face remains visible above.",
+   "chars": 231,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 13,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "chest-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "scale-contrast",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p13-4",
+   "group": "low",
+   "subgroup": "glute",
+   "label": "growth-writhe · sells glutes · CU/low/hip-cam",
+   "text": "Camera positioned low near hip height behind her, framing the glutes and thighs filling the entire panel as the muscle visibly swells and rounds outward with energy crackling around the frame.",
+   "chars": 192,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 13,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "low",
+    "camera_height": "hip",
+    "toward_camera": "glute",
+    "muscle_sold": "glutes",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "scale-contrast",
+     "contact-deform",
+     "rim-light"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p15-1",
+   "group": "low",
+   "subgroup": "glute",
+   "label": "recline · sells glutes · WS/low/hip-cam",
+   "text": "Camera low near hip height with an oversized figure's glutes filling the foreground in soft focus, while two smaller figures sleep further back up a sloped dune, creating a dramatic scale contrast between foreground and background.",
+   "chars": 231,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 15,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "hip",
+    "toward_camera": "glute",
+    "muscle_sold": "glutes",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "recline",
+    "sell_mechanism": [
+     "scale-contrast",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p16-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · ECU/low/chest-cam",
+   "text": "Camera sits low near chest height and tilts up as she arches back, chest pushed forward to fill almost the entire frame while the shoulders and face crowd the top edge, selling chest growth in extreme close-up.",
+   "chars": 210,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 16,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "s-curve",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "foreshortening",
+     "cloth-strain",
+     "contact-deform",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p18-1",
+   "group": "low",
+   "subgroup": "none",
+   "label": "stance-power · sells full-silhouette · WS/low/eye-cam",
+   "text": "Camera holds a wide vertical shot with three figures grouped in the foreground against a rocky bay, while a towering silhouette flexes one bicep in the distance behind them, the huge dark shape scaled far larger than the foreground cast to sell an implied full-body transformation.",
+   "chars": 281,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 18,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "none",
+    "muscle_sold": "full-silhouette",
+    "body_line": "straight",
+    "crop": "full",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "silhouette",
+     "scale-contrast",
+     "rim-light"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p2-4",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "stance-power · sells full-silhouette · WS/low/chest-cam",
+   "text": "Camera at chest height looking slightly upward, she stands in a three-quarter power stance backlit by bright light with one hand braced on her hip and the other fisted low at her waist, the frame holds her full body from head to feet in silhouette while a second figure's head is visible cut off in the near foreground corner for scale contrast.",
+   "chars": 345,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 2,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "s-curve",
+    "crop": "full",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "silhouette",
+     "rim-light",
+     "scale-contrast"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p3-4",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/low/chest-cam",
+   "text": "Camera holds at chest height, slightly low, on a frontal waist-up crop as she plants one fist on her hip belt and squares her chest to the lens, both arms filling the sides of the frame to sell arm and chest size.",
+   "chars": 213,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 3,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "cloth-strain"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p4-5",
+   "group": "low",
+   "subgroup": "shoulder",
+   "label": "flex-display · sells arms · MLS/low/chest-cam",
+   "text": "Camera set low and looking slightly up in a tall vertical frame, she flexes one arm with her fist near her shoulder while cradling a heavy chest against her hip with the other arm, the crop running from head to mid-thigh to sell the flexed arm against a stable power stance.",
+   "chars": 274,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 4,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MLS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "shoulder",
+    "muscle_sold": "arms",
+    "body_line": "s-curve",
+    "crop": "head-to-thigh",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "overlap"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p7-1",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MCU/low/chest-cam",
+   "text": "Camera holds steady at chest height in a frontal medium close-up, she tips her chin down with her shoulders squared to the lens, the shirt across her chest visibly straining and popping as her torso pushes forward toward the camera, selling growth in the chest.",
+   "chars": 261,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 7,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "chest-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "foreshortening",
+     "contact-deform",
+     "scale-contrast"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p8-3",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · WS/low/eye-cam",
+   "text": "Camera holds at eye level for a repeated full-body double-bicep flex, arms raised with fists by the head and legs planted wide, torso swelling larger than the prior beat, selling escalating arm and torso growth through the same symmetric power pose.",
+   "chars": 249,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 8,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "full",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette",
+     "scale-contrast"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p9-1",
+   "group": "low",
+   "subgroup": "hand-open",
+   "label": "stance-power · sells shoulders · MCU/low/chest-cam",
+   "text": "Camera holds low at chest height looking slightly up, shoulders squared to the lens with hands raised and pressed together at chest height, a confident smirk on her face, selling shoulder and upper-body scale through a frame-filling low angle.",
+   "chars": 243,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 9,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "hand-open",
+    "muscle_sold": "shoulders",
+    "body_line": "diagonal-lean",
+    "crop": "chest-up",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "scale-contrast",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p9-2",
+   "group": "low",
+   "subgroup": "back",
+   "label": "flex-display · sells arms · MS/low/chest-cam",
+   "text": "Camera stays low behind her in silhouette as one arm bends into a bicep flex with the fist raised near the head, tiny onlookers visible far below in the background, selling arm growth purely through scale contrast against the crowd.",
+   "chars": 232,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 9,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "back",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette",
+     "scale-contrast",
+     "overlap"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p0-1",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "stance-power · sells chest · MS/low/eye-cam",
+   "text": "Camera at eye height on a figure standing with arms crossed over his chest, his rim-lit torso glowing at its center, smaller figures scaled down around him to sell his size.",
+   "chars": 173,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 0,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "scale-contrast",
+     "rim-light",
+     "silhouette"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p11-2",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "flex-display · sells abs · MS/low/hip-cam",
+   "text": "Camera low near hip height looking up at a flexing torso, the costume visibly tearing along a seam at the hip with jagged rip lines.",
+   "chars": 132,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 11,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "hip",
+    "toward_camera": "chest",
+    "muscle_sold": "abs",
+    "body_line": "c-curve",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p11-5",
+   "group": "low",
+   "subgroup": "fist",
+   "label": "flex-display · sells arms · MCU/low/hip-cam",
+   "text": "Camera low, a double-bicep flex fills most of the frame with both fists raised near the head, foreshortened forearms closest to the lens.",
+   "chars": 137,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 11,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "hip",
+    "toward_camera": "fist",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "chest-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "foreshortening",
+     "frame-crop"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p1-2",
+   "group": "low",
+   "subgroup": "hand-open",
+   "label": "stance-power · sells none · WS/low/chest-cam",
+   "text": "Camera at chest height, she stands in a confident contrapposto pose gripping a large ship's wheel with one hand while raising the other hand to hold a torn map fragment near her face, full body framed from head to feet with the wheel filling the foreground.",
+   "chars": 257,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 1,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "hand-open",
+    "muscle_sold": "none",
+    "body_line": "s-curve",
+    "crop": "full",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "overlap"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p3-1",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "stance-power · sells chest · MCU/low/chest-cam",
+   "text": "Camera sits at chest height looking slightly up at her as she stands turned toward the lens, cropped tight from the head down through the chest so the torso fills the frame, with two smaller figures held soft and distant behind her to sell her scale.",
+   "chars": 250,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 3,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "chest-up",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p3-6",
+   "group": "low",
+   "subgroup": "chest",
+   "label": "stance-power · sells chest · MS/low/chest-cam",
+   "text": "Camera holds at chest height, slightly low, on a frontal waist-up crop as she tips her head back in a full laugh, chest squared and filling the frame.",
+   "chars": 150,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 3,
+    "panel": 6,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "low",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "diagonal-lean",
+    "crop": "waist-up",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "frame-crop",
+     "cloth-strain"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p12-5",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MCU/eye/chest-cam",
+   "text": "Camera close at chest height, the frame crops off above the shoulders so only her torso fills it, chest thrust forward with one hand trailing near her hip, electric arcs rimming her silhouette, selling the chest.",
+   "chars": 212,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 12,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "s-curve",
+    "crop": "head-cut-off",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "frame-crop",
+     "rim-light",
+     "foreshortening"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p4-1",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye level facing her directly, she strikes a front double-biceps pose with both fists raised beside her head and chest thrust forward, the frame crops her at the waist so the flexed arms and chest fill the panel and sell the arms, with a smaller figure at the frame edge for scale contrast.",
+   "chars": 300,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 4,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "scale-contrast",
+     "cloth-strain",
+     "motion-line"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p5-5",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MCU/eye/eye-cam",
+   "text": "Camera at eye level in a tall frame, she twists her torso with one arm raised across her body as her shirt strains tight against a swelling chest, radiating light behind her, the crop holding waist-up so the straining fabric sells the growth.",
+   "chars": 242,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 5,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "twist-contrapposto",
+    "crop": "waist-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "rim-light"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p5-6",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye level, she throws both fists up beside her head into a front double-biceps flex with electric energy crackling off her arms and a radiating burst filling the background, the frame holding her waist-up so the straining flexed arms fill the panel and sell the arms growing.",
+   "chars": 285,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 5,
+    "panel": 6,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "rim-light"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p6-1",
+   "group": "eye",
+   "subgroup": "elbow",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye level, she raises one arm into a bicep flex and grips the flexed muscle with her other hand while turning to admire it, the frame cropped waist-up so the flexed arm and gripping hand sell the arm growth.",
+   "chars": 217,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 6,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "elbow",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p6-3",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye level, she raises one flexed arm overhead to pour a can into her mouth with her head tilted back, the frame cropped waist-up so the flexed bicep and heaving chest sell continued growth.",
+   "chars": 199,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 6,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "diagonal-lean",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "motion-line"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p6-4",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells full-silhouette · MS/eye/eye-cam",
+   "text": "Camera at eye level, she stands with her arms held slightly out from her trembling body as crackling energy outlines her silhouette, the frame cropped waist-up so the whole trembling torso sells full-body growth.",
+   "chars": 212,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 6,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "x-spread",
+    "crop": "waist-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "rim-light",
+     "cloth-strain"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p7-2",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · ECU/eye/chest-cam",
+   "text": "Camera pushes into an extreme close-up centered on the chest, filling the frame edge to edge with no background visible, straps cutting into flesh as the torn fabric peels back, selling maximal chest growth through sheer scale.",
+   "chars": 227,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 7,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "frame-crop",
+     "scale-contrast",
+     "contact-deform"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p7-3",
+   "group": "eye",
+   "subgroup": "elbow",
+   "label": "flex-display · sells arms · CU/eye/chest-cam",
+   "text": "Camera holds at chest height as she bends one arm into a full bicep flex thrust toward the lens, the forearm and fist breaking the top of the frame while she turns her head to watch her own arm swell, selling growth in the bicep.",
+   "chars": 229,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 7,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "elbow",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "chest-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "foreshortening",
+     "overlap",
+     "scale-contrast"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p9-4",
+   "group": "eye",
+   "subgroup": "fist",
+   "label": "action-strike · sells arms · CU/eye/chest-cam",
+   "text": "Camera holds at chest height as a punching arm rockets toward the lens in extreme foreshortening, fist connecting just off-camera with hair swept back from the motion and heavy speed lines trailing behind, selling arm power through a foreshortened strike.",
+   "chars": 255,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 9,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "fist",
+    "muscle_sold": "arms",
+    "body_line": "diagonal-lean",
+    "crop": "body-part-only",
+    "pose_family": "action-strike",
+    "sell_mechanism": [
+     "foreshortening",
+     "motion-line",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p21-2",
+   "group": "eye",
+   "subgroup": "back",
+   "label": "walk-stride · sells back · MS/eye/hip-cam",
+   "text": "Camera at hip height directly behind a figure walking toward a building entrance, a smaller figure standing in the doorway ahead for depth and scale.",
+   "chars": 149,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 21,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "hip",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "straight",
+    "crop": "full",
+    "pose_family": "walk-stride",
+    "sell_mechanism": [
+     "overlap",
+     "silhouette"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p4-1",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · ECU/eye/eye-cam",
+   "text": "Extreme close crop on a flexing bicep tearing through a sleeve, sharp claw-shaped force lines radiating outward, a small triumphant face inset in the upper corner of the frame.",
+   "chars": 176,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 4,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "frame-crop",
+     "motion-line",
+     "cloth-strain"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p4-2",
+   "group": "eye",
+   "subgroup": "shoulder",
+   "label": "flex-display · sells shoulders · ECU/eye/eye-cam",
+   "text": "Extreme close-up on a shoulder and trapezius mass ripping through a dark garment, the torn fabric edge visible against the muscle, no other body parts in frame.",
+   "chars": 160,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 4,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "shoulder",
+    "muscle_sold": "shoulders",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "contact-deform",
+     "cloth-strain",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p4-4",
+   "group": "eye",
+   "subgroup": "glute",
+   "label": "flex-display · sells glutes · ECU/eye/eye-cam",
+   "text": "Extreme close-up on a hip and glute mass pressing outward against strained fabric, the biggest single onomatopoeia of the sequence stacked above it, no other body parts visible.",
+   "chars": 177,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 4,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "glute",
+    "muscle_sold": "glutes",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "contact-deform",
+     "frame-crop",
+     "cloth-strain"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p13-3",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells abs · CU/eye/chest-cam",
+   "text": "Camera holds steady at chest height directly on the torso, abs flexed and filling the frame top to bottom, with fabric visibly straining and tearing at the sides as the midsection grows outward.",
+   "chars": 194,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 13,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "abs",
+    "body_line": "straight",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "scale-contrast"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p14-1",
+   "group": "eye",
+   "subgroup": "shoulder",
+   "label": "flex-display · sells shoulders · ECU/eye/chest-cam",
+   "text": "Extreme close-up on the shoulder, the muscle segmented into tight bulging clusters as fabric tears away in strips across the frame.",
+   "chars": 131,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 14,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "shoulder",
+    "muscle_sold": "shoulders",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p16-3",
+   "group": "eye",
+   "subgroup": "shoulder",
+   "label": "growth-writhe · sells arms · CU/eye/chest-cam",
+   "text": "Camera holds close behind her at shoulder height as she stands with her back partly turned, one arm bent against her body, the sleeve cinching and splitting over a bicep that presses outward, selling arm and shoulder growth in tight crop.",
+   "chars": 238,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 16,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "shoulder",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "overlap"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p17-1",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · CU/eye/chest-cam",
+   "text": "Camera holds close across a row of flexed poses, each figure bending an arm to curl a swelling bicep into frame while fabric splits at the seams, cropped tight on arms and chest to sell arm and shoulder growth.",
+   "chars": 210,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 17,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "CU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "contact-deform",
+     "cloth-strain",
+     "frame-crop",
+     "overlap"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p4-2",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "action-strike · sells arms · WS/eye/eye-cam",
+   "text": "Camera holds a wide eye-level shot as she twists through a powerful backhand swing, forearm thrust toward the target while diagonal motion lines streak the background, the frame cutting her at mid-thigh so the swinging arm sells raw arm power.",
+   "chars": 243,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 4,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "twist-contrapposto",
+    "crop": "head-to-thigh",
+    "pose_family": "action-strike",
+    "sell_mechanism": [
+     "motion-line",
+     "foreshortening",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p11-1",
+   "group": "eye",
+   "subgroup": "fist",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye height, the figure stands with one fist raised near the shoulder in a half bicep flex against a soft patterned background, waist-up crop.",
+   "chars": 151,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 11,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "fist",
+    "muscle_sold": "arms",
+    "body_line": "s-curve",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "silhouette"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p11-4",
+   "group": "eye",
+   "subgroup": "back",
+   "label": "other · sells back · MCU/eye/eye-cam",
+   "text": "Camera at eye height on a back-and-shoulder profile, hair swept forward off one shoulder, weight settled on one hip.",
+   "chars": 116,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 11,
+    "panel": 4,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "back",
+    "muscle_sold": "back",
+    "body_line": "c-curve",
+    "crop": "waist-up",
+    "pose_family": "other",
+    "sell_mechanism": [
+     "silhouette"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p2-8",
+   "group": "eye",
+   "subgroup": "hand-open",
+   "label": "reach-grab · sells none · MS/eye/eye-cam",
+   "text": "Camera at eye height on a hand passing a small glowing device to a second figure, a thin energy arc connecting the device to the receiver's temple, the panel bleeding into a smoky borderless background rather than a hard frame.",
+   "chars": 227,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 2,
+    "panel": 8,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "hand-open",
+    "muscle_sold": "none",
+    "body_line": "straight",
+    "crop": "waist-up",
+    "pose_family": "reach-grab",
+    "sell_mechanism": [
+     "overlap",
+     "other"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-omega-device-p4-3",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "flex-display · sells arms · ECU/eye/eye-cam",
+   "text": "Extreme wide close-up filled edge-to-edge with overlapping forearm and bicep masses, sharp radiating force-lines, no face or background visible.",
+   "chars": 144,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-omega-device",
+    "page": 4,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "ECU",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "body-part-only",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "overlap",
+     "motion-line",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p10-2",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "stance-power · sells full-silhouette · MLS/eye/eye-cam",
+   "text": "Camera at eye level straight on, she stands with weight shifted onto one leg, one hand resting on her hip, body turned slightly to gaze off past the camera, the frame cutting her at mid-thigh with a ship's wheel and coiled rope behind her, selling the full silhouette of her build.",
+   "chars": 281,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 10,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MLS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "full-silhouette",
+    "body_line": "s-curve",
+    "crop": "head-to-thigh",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "silhouette"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p11-3",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "everyday-idle · sells chest · MS/eye/eye-cam",
+   "text": "Camera at eye level, she stands examining a scrap of torn fabric in one hand while her head snaps around toward something off to the side, the frame cropped at the waist to sell the chest and shoulders.",
+   "chars": 202,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 11,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "twist-contrapposto",
+    "crop": "waist-up",
+    "pose_family": "everyday-idle",
+    "sell_mechanism": [
+     "cloth-strain"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p12-1",
+   "group": "eye",
+   "subgroup": "elbow",
+   "label": "flex-display · sells arms · MS/eye/eye-cam",
+   "text": "Camera at eye level, she raises one arm in a bicep flex near her head while cracking open a can held in the other hand at shoulder height, weight shifted onto one hip, cropped at the waist to sell the arm.",
+   "chars": 205,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 12,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "elbow",
+    "muscle_sold": "arms",
+    "body_line": "s-curve",
+    "crop": "waist-up",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "contact-deform",
+     "cloth-strain"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p15-2",
+   "group": "eye",
+   "subgroup": "hand-open",
+   "label": "action-strike · sells arms · MS/eye/chest-cam",
+   "text": "Camera holds level and centered as two figures face each other and pull an object apart with both arms extended in an X-spread, straining expressions on both faces as the object splits down the middle.",
+   "chars": 201,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 15,
+    "panel": 2,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "hand-open",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "waist-up",
+    "pose_family": "action-strike",
+    "sell_mechanism": [
+     "motion-line",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p15-5",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MS/eye/chest-cam",
+   "text": "Camera at chest height dead-on, arms thrown out to the sides as she reacts with a wide-eyed startled expression while her chest and shoulder visibly bulge outward against her clothing, energy crackling around her.",
+   "chars": 213,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 15,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "s-curve",
+    "crop": "head-to-thigh",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p15-6",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MS/eye/chest-cam",
+   "text": "Camera at chest height dead-on, one hand lifts toward her chest in surprise as her torso twists slightly, chest visibly fuller and straining against her top, energy crackling around her shocked expression.",
+   "chars": 205,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 15,
+    "panel": 6,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "s-curve",
+    "crop": "head-to-thigh",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p16-1",
+   "group": "eye",
+   "subgroup": "chest",
+   "label": "growth-writhe · sells chest · MCU/eye/chest-cam",
+   "text": "Camera holds a level frontal shot at chest height on two figures stacked in one frame, each caught mid-motion as her top strains and splits across a swelling chest, cropped from the collarbone down to the waist.",
+   "chars": 211,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 16,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "straight",
+    "crop": "chest-up",
+    "pose_family": "growth-writhe",
+    "sell_mechanism": [
+     "cloth-strain",
+     "contact-deform",
+     "overlap"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p2-3",
+   "group": "eye",
+   "subgroup": "none",
+   "label": "lift-carry · sells none · WS/eye/eye-cam",
+   "text": "Camera at eye level in a dim cave, she is bent forward at the waist hauling a heavy chest braced against her hip with both arms, knees bent under the load, the frame holds her full body from head to feet with strain lines flung off her braced shoulders.",
+   "chars": 253,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 2,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "WS",
+    "angle": "eye",
+    "camera_height": "eye",
+    "toward_camera": "none",
+    "muscle_sold": "none",
+    "body_line": "c-curve",
+    "crop": "full",
+    "pose_family": "lift-carry",
+    "sell_mechanism": [],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p9-3",
+   "group": "eye",
+   "subgroup": "forearm",
+   "label": "reach-grab · sells arms · MS/eye/chest-cam",
+   "text": "Camera stays close on a raised arm and back filling the foreground with the hand reaching up out of frame, two onlookers reacting in shock in the background at eye level, selling arm scale through foreground overlap against small background figures.",
+   "chars": 249,
+   "steal_score": 3,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 9,
+    "panel": 3,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "eye",
+    "camera_height": "chest",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "diagonal-lean",
+    "crop": "body-part-only",
+    "pose_family": "reach-grab",
+    "sell_mechanism": [
+     "overlap",
+     "scale-contrast",
+     "frame-crop"
+    ],
+    "explicit": false
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p11-1",
+   "group": "high",
+   "subgroup": "chest",
+   "label": "recline · sells chest · MCU/high/above-head-cam",
+   "text": "Camera positioned above her looking down, she reclines on her back propped on one forearm with her chest arched up toward the lens, coat fabric straining open at her sides, selling the chest.",
+   "chars": 191,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 11,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MCU",
+    "angle": "high",
+    "camera_height": "above-head",
+    "toward_camera": "chest",
+    "muscle_sold": "chest",
+    "body_line": "arch-back",
+    "crop": "chest-up",
+    "pose_family": "recline",
+    "sell_mechanism": [
+     "foreshortening",
+     "cloth-strain"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p10-1",
+   "group": "dutch",
+   "subgroup": "fist",
+   "label": "flex-display · sells arms · MS/dutch/chest-cam",
+   "text": "Camera close and low with a dutch tilt, she throws a foreshortened double-bicep flex with her near fist thrust straight at the lens and her other fist raised overhead, torso twisted so the flexed arms and chest fill the frame while a smaller figure tumbles backward past her shoulder, selling the arms and chest.",
+   "chars": 312,
+   "steal_score": 5,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 10,
+    "panel": 1,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MS",
+    "angle": "dutch",
+    "camera_height": "chest",
+    "toward_camera": "fist",
+    "muscle_sold": "arms",
+    "body_line": "x-spread",
+    "crop": "bleed",
+    "pose_family": "flex-display",
+    "sell_mechanism": [
+     "foreshortening",
+     "motion-line",
+     "scale-contrast",
+     "overlap"
+    ],
+    "explicit": true
+   }
+  },
+  {
+   "id": "deed-arts-poppy-sailor-gal-1-p3-5",
+   "group": "OTS",
+   "subgroup": "forearm",
+   "label": "stance-power · sells arms · MLS/OTS/chest-cam",
+   "text": "Camera holds at chest height behind and to the side of her as she stands with her back and shoulder to the lens, elbow bent and fist thrust close to camera in sharp foreshortening while the other fist stays tucked near her ribs, the crop cutting her at the thigh so the forearm dominates the foreground.",
+   "chars": 303,
+   "steal_score": 4,
+   "source": {
+    "comic": "deed-arts-poppy-sailor-gal-1",
+    "page": 3,
+    "panel": 5,
+    "artist": "Deed Arts"
+   },
+   "tags": {
+    "shot_distance": "MLS",
+    "angle": "OTS",
+    "camera_height": "chest",
+    "toward_camera": "forearm",
+    "muscle_sold": "arms",
+    "body_line": "c-curve",
+    "crop": "head-to-thigh",
+    "pose_family": "stance-power",
+    "sell_mechanism": [
+     "frame-crop",
+     "foreshortening",
+     "motion-line"
+    ],
+    "explicit": false
+   }
+  }
+ ]
+}

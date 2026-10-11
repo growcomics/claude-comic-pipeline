@@ -3,30 +3,31 @@
 // WHAT IT DOES: run the SAME prompt through several image models so you can see, on
 // your own work, what Nano Banana Pro actually buys you over Nano Banana 2 / 2 Lite.
 // With bake-off ON, after you submit a generation the panel re-arms the composer on
-// the next model in your list and shows a badge telling you to hit Create again. Then
-// "📊 Compare" lays every multi-model prompt out side by side, one column per model.
+// the next model in your list and fires it (or, if Flow refuses the automatic click,
+// shows a badge telling you to hit Create again). Then "📊 Compare" lays every
+// multi-model prompt out side by side, one column per model.
 //
-// WHY IT IS ASSISTED AND NOT FULLY AUTOMATIC — verified live 2026-07-26:
-//   • Switching the model programmatically WORKS, and leaves the prompt, the attached
-//     refs, the aspect ratio and the xN count untouched. That is the tedious part and
-//     we automate all of it.
-//   • Clicking Create programmatically DOES NOT WORK. Flow ignores synthetic events on
-//     the submit button — a full pointerdown/mousedown/pointerup/mouseup/click sequence
-//     produces no batchGenerateImages request at all. Generation is gated behind real
-//     user activation. So the Create click stays yours; everything around it is ours.
-//     (Driving it anyway would need chrome.debugger and its "being debugged" banner.)
+// TWO COMPOSERS (2.8.2, 2026-09-07). Flow moved to flow.google.com — an Angular app
+// with a different composer — and labs.google/fx/tools/flow/* now redirects there.
+//   • flow.google.com: every UI touch goes through self.FlowComposer (flow-composer.js),
+//     the one file that knows the Angular DOM (settings popover, model picker, Create
+//     button, proof-of-fire). Nothing below this header should need to change for it.
+//   • labs.google (legacy, pre-Sept-2026 Slate/React composer): the original finders and
+//     the flow-inject.js React-onClick auto-fire are kept as the fallback path in case an
+//     account still lands on the old UI. Hard-won facts for THAT UI:
+//       – Bare .click() does nothing to its React controls; the popover needs the whole
+//         pointer-event sequence (realClick below).
+//       – Its buttons carry NO type attribute, so `button[type="submit"]` matches NOTHING
+//         document-wide (`.type` reads "submit" purely as the IDL default). Match the icon.
+//       – "arrow_forwardCreate" and "closeClear prompt" sit at the same spot.
+//       – Escape CLEARS that composer. Never use it to dismiss the popover.
+//       – The chip reads "Nano Banana 2 Litecrop_squarex4": prefix-match longest-first.
 //
-// HARD-WON UI FACTS — change these only against a live page:
-//   • Bare .click() does nothing to Flow's React controls; the popover needs the whole
-//     pointer-event sequence (realClick below).
-//   • The composer's buttons carry NO type attribute, so `button[type="submit"]` matches
-//     NOTHING — document-wide. `.type` reads "submit" purely as the IDL default, which
-//     makes a broken selector look like it worked. Match on the icon text instead.
-//   • Two buttons sit at the same spot: "arrow_forwardCreate" and "closeClear prompt".
-//     Grab the wrong one and you silently clear the prompt and generate nothing.
-//   • Escape CLEARS the composer. Never use it to dismiss the popover — re-click the chip.
-//   • The chip reads "Nano Banana 2 Litecrop_squarex4", so model names are prefix-matched
-//     longest-first or "Nano Banana 2" swallows "Nano Banana 2 Lite".
+// WHY THE CREATE CLICK IS VERIFIED, NOT ASSUMED: on the old UI Flow ignored synthetic
+// events on Create; the auto-fire there calls the button's React onClick and proves it
+// by watching outgoing batchGenerateImages requests. On the new UI Create is a plain
+// Angular (click) listener, and FlowComposer.fire() proves it the same way (resource
+// timing + a new pending tile). Either way, no evidence within ~6 s → assisted mode.
 (() => {
   if (self.FlowBakeoff) return;
 
@@ -42,14 +43,16 @@
 
   const DEFAULTS = { on: false, auto: true, models: ["pro", "nb2", "lite"], maxCredits: 0 };
   let cfg = Object.assign({}, DEFAULTS);
-  let queue = [], origin = null, statusCb = () => {};
+  let queue = [], origin = null, statusCb = () => {}, lastPrompt = "";
 
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const say = (t) => statusCb(t);
   const norm = (el) => (el ? (el.textContent || "").replace(/[^\w\s.+-]/g, " ").replace(/\s+/g, " ").trim() : "");
   const vis = (el) => !!(el && el.offsetParent !== null && el.getBoundingClientRect().height > 4);
+  const FCo = () => self.FlowComposer || null;
+  const angular = () => !!(FCo() && FCo().ui() === "angular");
 
-  // Flow's React controls ignore a bare .click(); they listen on pointer/mouse events.
+  // Legacy Flow's React controls ignore a bare .click(); they listen on pointer/mouse events.
   function realClick(el) {
     if (!el) return false;
     const r = el.getBoundingClientRect();
@@ -68,35 +71,23 @@
     return true;
   }
 
-  // ---- finders (the UI-coupled surface) ----------------------------------------
-  const editorEl = () => document.querySelector('[data-slate-editor="true"]');
-
-  // Anchor on the nearest ancestor of the editor that holds the composer's button row.
-  // NOT "an ancestor containing a Nano Banana button" — when the popover is open that
-  // match walks up to the wrong container.
+  // ---- finders — legacy labs.google composer (the Angular ones live in flow-composer.js)
+  const slateEl = () => document.querySelector('[data-slate-editor="true"]');
   function composerEl() {
-    let n = editorEl();
+    let n = slateEl();
     for (let i = 0; n && i < 12; i++, n = n.parentElement) if (n.querySelectorAll("button").length >= 3) return n;
     return null;
   }
-  // The composer's own model chip — never the identical-looking one inside the popover.
   function chipEl() {
     const c = composerEl(); if (!c) return null;
     return [...c.querySelectorAll("button")].filter((b) => /Nano Banana|Veo |Imagen/i.test(b.textContent || "") && !b.closest('[role="menu"]')).pop() || null;
   }
-  // "arrow_forwardCreate", never "closeClear prompt".
-  // Do NOT select on [type="submit"]: these buttons carry no type ATTRIBUTE, so that
-  // selector matches nothing document-wide. (`.type` reads "submit" only because that's
-  // the IDL default for a <button> — which is exactly what made this look fine at first
-  // and silently returned null forever.) Match the arrow icon instead.
-  function sendEl() {
+  function legacySendEl() {
     const c = composerEl(); if (!c) return null;
     const btns = [...c.querySelectorAll("button")].filter(vis);
     return btns.find((b) => /arrow_forward/i.test(b.textContent || ""))
         || btns.find((b) => b.type === "submit" && !/clear/i.test(b.textContent || "")) || null;
   }
-  // Settings popover vs the model dropdown: both are role=menu with a model button in
-  // them; only the dropdown has menuitems.
   function popoverEl() {
     return [...document.querySelectorAll('[role="menu"]')].filter(vis)
       .find((m) => !m.querySelector('[role="menuitem"]') && [...m.querySelectorAll("button")].some((b) => /Nano Banana|Veo |Imagen/i.test(b.textContent || ""))) || null;
@@ -111,18 +102,19 @@
       .filter((m) => vis(m) && m !== p && m.querySelector('[role="menuitem"]'))
       .find((m) => [...m.querySelectorAll('[role="menuitem"]')].some((i) => /Nano Banana|Veo |Imagen/i.test(i.textContent || ""))) || null;
   }
+
+  // ---- the UI-neutral surface the run uses -------------------------------------
+  const editorEl = () => (angular() ? FCo().editorEl() : slateEl());
+  const sendEl = () => (angular() ? FCo().sendEl() : legacySendEl());
+  const promptText = () => (angular() ? FCo().promptText() : (slateEl() ? (slateEl().textContent || "").trim() : ""));
+  const resolveModel = (t) => { if (!t) return null; const hit = BY_LEN.find((m) => t.startsWith(m.label)) || BY_LEN.find((m) => t.includes(m.label)); return hit ? hit.label : null; };
+  const currentModel = () => resolveModel(angular() ? FCo().currentModel() : (chipEl() ? norm(chipEl()) : ""));
   function creditsPending() {
+    if (angular()) return FCo().creditsPending();
     const p = popoverEl(); if (!p) return null;
     const m = (p.textContent || "").match(/use\s+([\d,]+)\s+credit/i);
     return m ? parseInt(m[1].replace(/,/g, ""), 10) : null;
   }
-  const promptText = () => (editorEl() ? (editorEl().textContent || "").trim() : "");
-  const currentModel = () => {
-    const c = chipEl(); if (!c) return null;
-    const t = norm(c);
-    const hit = BY_LEN.find((m) => t.startsWith(m.label)) || BY_LEN.find((m) => t.includes(m.label));
-    return hit ? hit.label : null;
-  };
 
   async function waitFor(fn, ms = 4000) {
     const t0 = Date.now();
@@ -136,6 +128,7 @@
 
   // ---- model switching ----------------------------------------------------------
   async function closePopover() {
+    if (angular()) return FCo().closeSettings();
     if (!popoverEl()) return;
     realClick(chipEl());                       // toggle shut — Escape would wipe the prompt
     await waitFor(() => !popoverEl(), 2000);
@@ -143,6 +136,7 @@
 
   async function selectModel(label) {
     if (currentModel() === label) return true;
+    if (angular()) return FCo().selectModel(label, () => currentModel() === label);
     if (!popoverEl()) { realClick(chipEl()); if (!(await waitFor(popoverEl, 3000))) return "no-popover"; }
     const trig = modelTriggerEl(); if (!trig) return "no-trigger";
     realClick(trig);
@@ -171,13 +165,18 @@
   }
 
   // ---- auto-fire ----------------------------------------------------------------
-  // flow-inject.js (MAIN world) calls the Create button's own React onClick and ticks a
-  // counter on every outgoing batchGenerateImages request. We compare the counter across
-  // the attempt: if it moved, Flow really did accept the fire; if not, no amount of
-  // pretending helps and we drop into assisted mode and ask for a real click.
+  // Legacy: flow-inject.js (MAIN world) calls the Create button's own React onClick and
+  // ticks a counter on every outgoing batchGenerateImages request. Angular: FlowComposer
+  // clicks Create and watches resource timing / the pending tile. In both cases, no
+  // evidence within the window → the run drops into assisted mode and asks for a click.
   const genTicks = () => parseInt(document.documentElement.getAttribute("data-fst-gen-ticks") || "0", 10) || 0;
 
   async function tryAutoFire() {
+    if (angular()) {
+      const r = await FCo().fire(6000);
+      if (!r.ok) console.warn("[3DMC Studio Tools] bake-off auto-fire: " + r.why);
+      return r.ok;
+    }
     if (!document.documentElement.hasAttribute("data-fst-gen-ticks")) return false;  // injector absent
     const before = genTicks();
     document.dispatchEvent(new CustomEvent("fst-fire"));
@@ -185,7 +184,17 @@
     return !!moved;
   }
 
-  // Arm the composer on the next model and ask for the (necessarily human) Create click.
+  // If Flow emptied the composer after the submit, put the prompt back: "Reuse prompt"
+  // on the newest tile restores prompt + refs; failing that, re-insert the text we saw.
+  async function ensurePrompt() {
+    if (promptText()) return true;
+    if (!angular()) return false;
+    if (await FCo().reuseLatestPrompt()) return true;
+    if (lastPrompt) { const r = await FCo().insert(lastPrompt, "end"); return r.ok; }
+    return false;
+  }
+
+  // Arm the composer on the next model and fire it (or ask for the human Create click).
   async function armNext() {
     if (!queue.length) {
       const done = origin;
@@ -195,6 +204,7 @@
       return;
     }
     const next = queue[0];
+    if (!(await ensurePrompt())) { say("✖ The composer is empty and the prompt could not be restored — bake-off stopped."); reset(); return; }
     const res = await selectModel(next.label);
     if (res !== true) {
       say("✖ " + next.label + " — " + res + "; skipped.");
@@ -235,10 +245,21 @@
     const s = sendEl(); if (!s) return;
     const btn = e.target.closest && e.target.closest("button");
     if (btn !== s) return;
-    if (!promptText()) return;
+    const text = promptText();
+    if (!text) return;
+    lastPrompt = text;
 
     if (queue.length) { queue.shift(); setTimeout(armNext, 1500); return; }   // mid-run
     const from = currentModel();
+    if (!from) {
+      // The chip shows something outside the table — on flow.google.com that is Video mode
+      // ("Omni 1.1 Flash"…), where the picker offers no Nano Banana model at all. Without
+      // this guard the run would queue every image model behind a video generation.
+      const raw = angular() ? FCo().currentModel() : (chipEl() ? norm(chipEl()) : "");
+      const video = angular() && FCo().mode && FCo().mode() === "Video";
+      say("🔬 Bake-off runs on the Nano Banana image models — the composer is on " + (raw || "another model") + (video ? " (Video mode). Switch Mode to Image and click Create again." : ". Pick a Nano Banana model and click Create again."));
+      return;
+    }
     origin = from;
     const rest = MODELS.filter((m) => cfg.models.includes(m.id) && m.label !== from);
     if (!rest.length) { origin = null; return; }
@@ -253,7 +274,7 @@
   // bookkeeping is needed.
   async function buildCompare() {
     const proj = await self.FlowCore.getProject();
-    if (!proj) return { error: "Open a Flow project first." };
+    if (!proj) return { error: "Open a Flow project first." + (self.FlowCore.lastError ? " (" + self.FlowCore.lastError + ")" : "") };
     const groups = new Map();
     proj.records.forEach((r) => {
       const p = (r.prompt || "").trim(); if (!p) return;
@@ -286,5 +307,6 @@
       return cfg;
     },
     buildCompare, currentModel,
+    ui: () => (angular() ? "angular" : slateEl() ? "slate" : null),
   };
 })();

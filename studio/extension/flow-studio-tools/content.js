@@ -1,4 +1,5 @@
-// 3DMC Studio Tools — Flow content script (UI). One panel, four actions, all driven
+// 3DMC Studio Tools — Flow content script (UI). One panel, two modes (Creator /
+// Advanced — see uiMode below), all actions driven
 // off FlowCore's single tRPC harvest: Download (disk) / Send to Studio (ingest) /
 // Review bundle (outputs + refs + manifest) / Bulk delete (guarded, via FlowDelete).
 (() => {
@@ -6,6 +7,12 @@
   window.__flowStudioTools = true;
   const FC = self.FlowCore;
   if (!FC) { console.error("[3DMC Studio Tools] core missing"); return; }
+  // Flavor: the manifest name decides. "Flow Studio Deluxe" is built from this same source
+  // by ../build_deluxe.py — the owner/staff build: always the full panel, no Creator/Advanced
+  // switch, Patreon downloader always on. If BOTH flavors are installed, two panels would fight
+  // over the composer, so whichever content script lands first keeps the page.
+  const DELUXE = /deluxe/i.test((chrome.runtime.getManifest && chrome.runtime.getManifest().name) || "");
+  if (document.getElementById("fst")) { console.warn("[3DMC Studio Tools] a 3DMC panel is already on this page — both Studio Tools and Deluxe installed? Skipping this one."); return; }
   const DEFAULT_URL = "https://3dmusclecomics.com/studio/bridge.php";
   let cfg = { url: DEFAULT_URL, key: "" };
   let mode = "download", prevMode = "download";
@@ -43,24 +50,49 @@
    #fst .bakemodels{gap:4px;margin-bottom:2px}
    #fst label.mchk{flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 4px;border:1px solid #2e3140;border-radius:8px;background:#0f1115;cursor:pointer;font-size:11px;font-weight:600;white-space:nowrap}
    #fst label.mchk:hover{background:#181b22} #fst label.mchk input{width:auto;margin:0;accent-color:#ef9f27}
+   #fst .anglebody{margin-top:8px;padding:8px;border:1px solid #2e3140;border-radius:10px;background:#0f1115}
+   #fst .anglehd{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:12px} #fst .anglehd b{flex:1}
+   #fst .anglehd .anglecount{opacity:.6;font-size:11px} #fst .anglehd .anglex{cursor:pointer;opacity:.7;padding:0 6px;border-radius:6px} #fst .anglehd .anglex:hover{background:#2e3140;opacity:1}
+   #fst .chips{gap:4px;margin-top:4px} #fst .chips .clbl{opacity:.6;font-size:11px;width:40px}
+   #fst button.chip{flex:0 0 auto;padding:4px 8px;border:1px solid #2e3140;border-radius:999px;background:#14151c;color:#9aa0ab;font-size:11px;font-weight:600;cursor:pointer}
+   #fst button.chip:hover{background:#23252e} #fst button.chip.on{background:#ef9f27;color:#412402;border-color:transparent}
+   #fst .anglelist{max-height:230px;overflow-y:auto;margin-top:8px;display:flex;flex-direction:column;gap:4px}
+   #fst .acard{padding:6px 8px;border:1px solid #232a33;border-radius:8px;background:#14151c;cursor:pointer}
+   #fst .acard:hover{background:#1d2028;border-color:#3a3f4b} #fst .acard.last{border-color:#ef9f27}
+   #fst .acard-l{font-size:11px;color:#c9cdd4;display:flex;gap:6px;align-items:baseline} #fst .acard-star{color:#ef9f27;font-weight:700;flex:0 0 auto}
+   #fst .acard-t{font-size:11.5px;opacity:.85;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+   #fst .acard-s{font-size:10.5px;opacity:.5;margin-top:2px}
+   #fst .anglefoot{font-size:10.5px;opacity:.5;margin-top:6px;word-break:break-all}
+   #fst .hd .ver{font-weight:400;opacity:.55;font-size:11px;margin-left:6px}
+   #fst .hd a.help{color:#e8eaed;text-decoration:none;cursor:pointer;opacity:.7;padding:2px 7px;border-radius:6px;font-weight:700} #fst .hd a.help:hover{background:#2e3140;opacity:1}
+   #fst.creator .tab.adv{display:none} #fst.creator .cfg .adv{display:none}
+   #fst .moderow button.pick.on{background:#ef9f27;color:#412402}
+   #fst .modehelp{font-size:11px;opacity:.6;margin:-2px 0 10px}
+  #fst.deluxe .cfg .modelbl,#fst.deluxe .moderow,#fst.deluxe .modehelp{display:none}
+  #fst.deluxe .hd .ver{color:#ef9f27;opacity:.9}
    #fst.min .bd{display:none}`;
   const style = document.createElement("style"); style.textContent = css; document.documentElement.appendChild(style);
-  const panel = document.createElement("div"); panel.id = "fst";
+  const panel = document.createElement("div"); panel.id = "fst"; if (!DELUXE) panel.classList.add("creator");
   panel.innerHTML = `
-   <div class="hd"><b>3DMC Studio Tools</b><span class="g" title="Studio settings">⚙</span><span class="x" title="Close">✕</span></div>
+   <div class="hd"><b>3DMC Studio Tools<span class="ver"></span></b><a class="help" href="https://3dmusclecomics.com/toolbox/" target="_blank" rel="noopener" title="Open the guide (3dmusclecomics.com/toolbox)">?</a><span class="g" title="Settings — mode, Studio key">⚙</span><span class="x" title="Close">✕</span></div>
    <div class="bd">
      <div class="acct"><span class="k">Flow account:</span> <b class="acctval">…</b></div>
      <div class="tabs">
        <div class="tab on" data-mode="download">Download</div>
-       <div class="tab" data-mode="studio">→ Studio</div>
+       <div class="tab adv" data-mode="studio">→ Studio</div>
        <div class="tab" data-mode="review">Review</div>
-       <div class="tab" data-mode="bakeoff" title="Model bake-off — run each prompt on every Nano Banana model, then compare">🔬</div>
-       <div class="tab del" data-mode="delete">🗑</div>
+       <div class="tab adv" data-mode="bakeoff" title="Model bake-off — run each prompt on every Nano Banana model, then compare">🔬</div>
+       <div class="tab del adv" data-mode="delete">🗑</div>
      </div>
      <div class="cfg">
+       <div class="lbl modelbl">Mode</div>
+       <div class="row moderow" style="margin-bottom:6px"><button class="pick modepick" data-uimode="creator" title="Download, Review bundle and the prompt buttons — everything a contributor needs. No setup.">Creator</button><button class="pick modepick" data-uimode="advanced" title="Adds → Studio / Auto-sync, 🔬 Bake-off, 🗑 Delete and the Patreon downloader. → Studio needs the Studio key below.">Advanced</button></div>
+       <div class="modehelp">Creator = Download + Review + prompt buttons. Advanced adds → Studio, Bake-off, Delete, Patreon.</div>
+       <div class="adv">
        <div class="lbl">Studio bridge URL</div><input class="url" type="text">
        <div class="lbl">Studio key (Studio → Flow import)</div><input class="key" type="password" placeholder="paste your bridge key">
-       <div class="row" style="margin-bottom:10px"><button class="pick savecfg">Save settings</button></div>
+       <div class="row" style="margin-bottom:10px"><button class="pick savecfg">Save settings</button><button class="pick dumpcomposer" title="Debug: save a snapshot of Flow's composer / open popover / first tile (plus a probe of what the extension can see) to Downloads/3dmc-debug/ and copy it to the clipboard — send that file when a prompt button, Bake-off or Delete misbehaves after a Flow UI change">🐞 Dump composer</button></div>
+       </div>
      </div>
      <div class="studio-only" style="display:none">
        <div class="lbl">Studio section — blank = a new one each send (or type a name to append)</div>
@@ -92,9 +124,17 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pbangle" title="Pick a camera/pose card from the comic-corpus Angle Deck (76 Deed Arts seeds, L40 body-to-camera staging) and APPEND it as the prompt's final sentence — camera height, nearest limb, muscle sold, crop, body line; no appearance, no style. Filter by angle and by the muscle the shot sells, or 🎲 deal a random one — a deal swaps the previous card out and presses Create, so keep clicking for new angles. It directs the camera, so like Framing/Director/Detail it must not ride with the i2i keep-composition lock.">🎥 Angle card</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Cam:</span><select class="pbsel pbcam" title="Camera height for Cine+Light / Framing. Vary = the model picks the height that serves the beat (never ruts into low-hero shots)."><option value="vary">Vary per beat</option><option value="low">Low hero</option><option value="eye">Eye-level</option><option value="high">High look-down</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing staging assumes. Auto = neutral wording that never asserts a count — no phantom second figure."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Light:</span><select class="pbsel pblight" title="Lighting scheme for Cine+Light and 💡 Light. Each scheme is built to the same spec — a named key with a stated angle, a per-form gradient, ambient occlusion by anatomical location, micro-shadow detail, a rim with an anti-glow guard, and the environment held below the figures."></select><span class="lbl" style="margin:0 4px 0 6px">Render:</span><select class="pbsel pbrender" title="Which variant of the scheme to use. 3D = photoreal / PBR language (pairs with the 🎨 DAZ prefix). Drawn = the same light logic in painted-comic language — pair it with the ✏️ Drawn style prefix, and do NOT stack it with 🎨 DAZ."><option value="cgi">3D</option><option value="illo">Drawn</option></select></div>
+     <div class="anglebody" style="display:none">
+       <div class="anglehd"><b>🎥 Angle card</b><span class="anglecount">loading…</span><span class="anglex" title="Close the picker">✕</span></div>
+       <div class="row chips anglechips-angle"></div>
+       <div class="row chips anglechips-muscle"></div>
+       <div class="row" style="margin-top:8px"><button class="pick go angledeal" title="Deal ONE random card from the current filter into the prompt — in place of the card dealt before (your own text and the staged refs are left alone) — and press Create. Keep clicking for a fresh angle every time.">🎲 Deal me one</button><button class="pick angleclear" title="Switch every chip off — all cards">All cards</button></div>
+       <div class="anglelist"></div>
+       <div class="anglefoot">Cards: research/comic-corpus/synthesis/cards.json — regenerate with scripts/angle_deck.py, then re-copy into the extension.</div>
+     </div>
      <div class="bar"><i></i></div><div class="stat">Idle — open a Flow project, pick an action.</div><div class="foot"></div>
    </div>`;
   document.documentElement.appendChild(panel);
@@ -106,7 +146,32 @@
   const autoToggleBtn = $(".autotoggle"), autoIntInput = $(".autoint"), autoStatEl = $(".autostat");
   const buttons = [...panel.querySelectorAll("button.pick")];
 
-  chrome.storage.local.get(["studioUrl", "bridgeKey"]).then((s) => { if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey; urlInput.value = cfg.url; keyInput.value = cfg.key; });
+  // ── Mode: "creator" (Download + Review + prompt buttons — the contributor build) vs
+  // "advanced" (adds → Studio / Auto-sync, Bake-off, Delete, and the Patreon panel).
+  // Fresh installs start in creator. A machine that already holds a Studio key is the
+  // owner's, so it keeps the full panel without flipping anything. Persisted as uiMode;
+  // patreon.js reads the same key (and listens for changes) to show/hide its panel.
+  let uiMode = DELUXE ? "advanced" : "creator";
+  const modeBtns = [...panel.querySelectorAll("button.modepick")];
+  function applyMode() {
+    panel.classList.toggle("creator", uiMode === "creator");
+    modeBtns.forEach((b) => b.classList.toggle("on", b.dataset.uimode === uiMode));
+    if (uiMode === "creator" && (mode === "studio" || mode === "bakeoff" || mode === "delete")) setMode("download");
+  }
+  modeBtns.forEach((b) => b.addEventListener("click", () => {
+    uiMode = b.dataset.uimode; chrome.storage.local.set({ uiMode }); applyMode();
+    statEl.textContent = uiMode === "creator" ? "Creator mode — Download, Review, prompt buttons." : "Advanced mode — all tools shown.";
+  }));
+  chrome.storage.local.get(["studioUrl", "bridgeKey", "uiMode"]).then((s) => {
+    if (s.studioUrl) cfg.url = s.studioUrl; if (s.bridgeKey) cfg.key = s.bridgeKey; urlInput.value = cfg.url; keyInput.value = cfg.key;
+    uiMode = DELUXE ? "advanced" : ((s.uiMode === "creator" || s.uiMode === "advanced") ? s.uiMode : (cfg.key ? "advanced" : "creator"));
+    applyMode();
+  });
+  try {
+    const m = chrome.runtime.getManifest();
+    $(".hd .ver").textContent = "v" + (m.version_name || m.version);
+    if (DELUXE) { $(".hd b").firstChild.textContent = m.name; panel.classList.add("deluxe"); $(".hd .g").title = "Settings — Studio bridge URL + key"; }
+  } catch (e) {}
   projInput.placeholder = "blank → new section each send";
 
   function onDelCount(n) { trashBtn.textContent = "🗑 Move " + n + " to Trash"; trashBtn.disabled = n === 0; }
@@ -127,16 +192,44 @@
 
   $(".hd .x").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.stop(); panel.remove(); style.remove(); window.__flowStudioTools = false; });
   $(".hd .g").addEventListener("click", () => panel.classList.toggle("cfgopen"));
+  $(".dumpcomposer").addEventListener("click", () => {
+    // Ground truth for the next Flow redesign: composer + overlay + tile markup and a probe of
+    // every finder, saved via the worker's download path (data: URL, like the Review manifest).
+    const FCo = self.FlowComposer;
+    if (!FCo) { status("Dump: flow-composer.js not loaded."); return; }
+    let html; try { html = FCo.dump(); } catch (e) { status("Dump failed: " + ((e && e.message) || e)); return; }
+    const name = "3dmc-debug/flow-composer-" + new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19) + ".html";
+    try { navigator.clipboard.writeText(html).catch(() => {}); } catch (e) {}
+    try {
+      const port = chrome.runtime.connect({ name: "fst" });
+      port.onMessage.addListener((m) => { if (m.type === "done") status(m.ok ? "🐞 Dump saved to Downloads/" + name + " (also on the clipboard, " + Math.round(html.length / 1024) + " KB)." : "🐞 Dump download failed — it is on the clipboard (" + Math.round(html.length / 1024) + " KB)."); });
+      port.postMessage({ type: "start", kind: "download", folder: "", jobs: [{ url: "data:text/html;charset=utf-8," + encodeURIComponent(html), path: name }], manifest: null });
+    } catch (e) { status("🐞 Dump is on the clipboard (" + Math.round(html.length / 1024) + " KB); download failed: " + ((e && e.message) || e)); }
+  });
   $(".savecfg").addEventListener("click", () => { cfg.url = urlInput.value.trim() || DEFAULT_URL; cfg.key = keyInput.value.trim(); chrome.storage.local.set({ studioUrl: cfg.url, bridgeKey: cfg.key }); statEl.textContent = "Settings saved."; panel.classList.remove("cfgopen"); });
   $(".selvis").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.selectVisible(); });
   $(".clr").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.clear(); });
   trashBtn.addEventListener("click", runTrash);
-  (() => { const hd = $(".hd"); let sx, sy, sr, sb, drag = false; hd.addEventListener("mousedown", (e) => { if (e.target.tagName === "SPAN") return; drag = true; sx = e.clientX; sy = e.clientY; const r = panel.getBoundingClientRect(); sr = innerWidth - r.right; sb = innerHeight - r.bottom; e.preventDefault(); }); addEventListener("mousemove", (e) => { if (!drag) return; panel.style.right = Math.max(0, sr - (e.clientX - sx)) + "px"; panel.style.bottom = Math.max(0, sb - (e.clientY - sy)) + "px"; }); addEventListener("mouseup", () => { drag = false; }); })();
+  (() => { const hd = $(".hd"); let sx, sy, sr, sb, drag = false; hd.addEventListener("mousedown", (e) => { if (e.target.tagName === "SPAN" || e.target.tagName === "A") return; drag = true; sx = e.clientX; sy = e.clientY; const r = panel.getBoundingClientRect(); sr = innerWidth - r.right; sb = innerHeight - r.bottom; e.preventDefault(); }); addEventListener("mousemove", (e) => { if (!drag) return; panel.style.right = Math.max(0, sr - (e.clientX - sx)) + "px"; panel.style.bottom = Math.max(0, sb - (e.clientY - sy)) + "px"; }); addEventListener("mouseup", () => { drag = false; }); })();
 
   let busy = false;
   const setBusy = (b) => { busy = b; buttons.forEach((x) => (x.disabled = b)); };
   const setBar = (f) => { barFill.style.width = Math.round(f * 100) + "%"; };
   const status = (t) => { statEl.textContent = t; };
+  // flow.google.com (the Angular UI, since 2026-09-07): composer-driven tools (prompt buttons,
+  // 🎥 Angle card, 🔬 Bake-off, 🗑 Delete) go through flow-composer.js / flow-delete.js (2.8.2).
+  // The labs.google project API the DATA tools used was deprecated and disabled 2026-09-15;
+  // they are now rebuilt on Flow's own backend — Download reads the grid (2.8.6), Review /
+  // → Studio / Auto-sync read the project over batchexecute Zzl0ze (2.8.7–2.8.8). Only
+  // reference INPUT images in a Review bundle are still unavailable (no URL in the payload).
+  if (location.hostname === "flow.google.com") {
+    const ui = self.FlowComposer ? self.FlowComposer.ui() : null;
+    status(ui === "angular"
+      ? "New Flow UI — all tools work here again: Download, Review, → Studio, Auto-sync (rebuilt on Flow's new backend after Google retired the old data API), plus prompt buttons + 🎥 Angle card, 🔬 Bake-off, 🗑 Delete. ⚙ → 🐞 dumps the composer if something misbehaves."
+      : "New Flow UI — open a project to use Download / Review / → Studio / Auto-sync, the prompt buttons, 🔬 Bake-off or 🗑 Delete.");
+    // The Angular app renders the composer after document_idle; re-check once it has had time to.
+    if (ui !== "angular") setTimeout(() => { if (self.FlowComposer && self.FlowComposer.ui() === "angular" && /open a project/.test(statEl.textContent)) status("New Flow UI — Download, Review, → Studio, Auto-sync, the prompt buttons + 🎥 Angle card, 🔬 Bake-off and 🗑 Delete are all live here."); }, 4000);
+  }
   function stampAccount(email) { document.documentElement.setAttribute("data-flow-account", email || "unknown"); accEl.textContent = email || "(unknown)"; accEl.style.color = email ? "#34d399" : "#fbbf24"; }
 
   async function runTrash() {
@@ -148,7 +241,7 @@
     if (typed.trim() !== String(n)) { status("Cancelled — number didn't match."); return; }
     setBusy(true); setBar(0); status("Trashing 0/" + n + "…");
     const res = await self.FlowDelete.run((done, total, miss) => { setBar(done / total); status("Trashing " + done + "/" + total + "…" + (miss ? " · " + miss + " not found" : "")); });
-    setBar(1); status("Done ✓ " + res.done + " trashed" + (res.miss ? " · " + res.miss + " not found (scroll + retry)" : ""));
+    setBar(1); status((res.done ? "Done ✓ " + res.done + " trashed" : "Nothing trashed") + (res.miss ? " · " + res.miss + " skipped" : "") + (res.error ? " — " + res.error : (res.miss ? " (scroll + retry)" : "")));
     onDelCount(self.FlowDelete.count()); setBusy(false);
   }
 
@@ -157,30 +250,81 @@
     if (mode === "studio" && !cfg.key) { panel.classList.add("cfgopen"); status("Paste your Studio key (⚙) first."); keyInput.focus(); return; }
     setBusy(true); setBar(0); footEl.textContent = "";
     try {
-      status("Reading project…");
-      const [proj, account] = await Promise.all([FC.getProject(), FC.getAccount()]);
-      stampAccount(account);
-      if (!proj) { status("No project data — open a Flow project (/project/<id>), let it load, then retry."); return; }
-      if (!proj.records.length) { status("No generations found in this project."); return; }
       let kind, payload;
-      if (mode === "review") {
-        const b = FC.buildReviewBundle(proj.records, account, proj.name, proj.id, limit);
-        footEl.textContent = "→ Downloads/" + b.folder + "/"; kind = "download"; payload = { folder: b.folder, jobs: b.jobs, manifest: b.manifest };
-        status("Bundling " + b.count + " generations (" + b.jobs.length + " files)…");
-      } else {
-        const outs = FC.outputList(proj.records, limit);
-        if (!outs.length) { status("No output images found."); return; }
+      const angular = self.FlowComposer && self.FlowComposer.ui() === "angular";
+      // flow.google.com (the labs.google project API was deprecated and disabled 2026-09-15):
+      //   • Download (2.8.6) pulls outputs straight from the project grid — full-res via the
+      //     =s0 FIFE suffix, no dead API, no auth token.
+      //   • Review (2.8.7) reads prompts from the new batchexecute `Zzl0ze` RPC (FlowCore.
+      //     getAngularProject) and joins them to the grid's full-res images by media id.
+      // Send-to-Studio still uses the legacy harvest below (honest 404 until it is ported).
+      if (angular && (mode === "download" || mode === "review" || mode === "studio")) {
+        stampAccount(await FC.getAccount());
         if (mode === "download") {
+          status("Reading the grid…");
+          const outs = await FC.getGridOutputs(limit, (n) => status("Reading the grid… " + n + " image" + (n === 1 ? "" : "s")));
+          if (!outs.length) { status("No images in this project's grid — open a Flow project, let the tiles load, then retry."); return; }
           const folder = folderName();
           payload = { folder, jobs: outs.map((o, i) => ({ url: o.url, path: folder + "/flow-" + String(i + 1).padStart(3, "0") + ".jpg" })) };
-          footEl.textContent = "→ Downloads/" + folder + "/"; kind = "download"; status("Downloading " + outs.length + " images…");
+          footEl.textContent = "→ Downloads/" + folder + "/"; kind = "download";
+          status("Downloading " + outs.length + " image" + (outs.length === 1 ? "" : "s") + " (full-res)…");
+        } else if (mode === "review") {
+          // Prompts from the new project API; full-res images from each record's own URL
+          // (=s0) — no grid scrolling. Reference input images are named in the manifest
+          // but not downloaded (their URL isn't in the payload).
+          status("Reading prompts…");
+          const proj = await FC.getAngularProject();
+          if (!proj) { status("Couldn't read the project — " + (FC.lastError || "reload the Flow tab and retry.")); return; }
+          if (!proj.records.length) { status("No generations found in this project."); return; }
+          const b = FC.buildReviewBundleAngular(proj.records, await FC.getAccount(), proj.name, proj.id, limit, null);
+          if (!b.jobs.length) { status("No output images resolved for the bundle."); return; }
+          footEl.textContent = "→ Downloads/" + b.folder + "/"; kind = "download"; payload = { folder: b.folder, jobs: b.jobs, manifest: b.manifest };
+          status("Bundling " + b.count + " generations (" + b.jobs.length + " files, full-res)…");
         } else {
+          // Send to Studio — full-res outputs + ★ favorite state from the grid, prompts from the
+          // new project API (joined by media id). Reading the grid carries the favorite flag (a
+          // favorited tile's hotbar reads "Remove favorite"), which the RPC does not, so favourited
+          // Flow gens land pre-approved in the Studio. Auto-sync keeps the no-grid path (fav 0 —
+          // gens are usually favourited after they generate, so a sync tick can't know yet).
+          status("Reading the grid…");
+          const grid = await FC.getGridOutputs(limit, (n) => status("Reading the grid… " + n + " image" + (n === 1 ? "" : "s")));
+          if (!grid.length) { status("No images in this project's grid — open a Flow project, let the tiles load, then retry."); return; }
+          status("Reading prompts…");
+          const proj = await FC.getAngularProject();
+          const pmap = proj ? new Map(proj.records.map((r) => [r.out_media_id, r])) : new Map();
           const typed = projInput.value.trim();
           const project = typed || defaultProject();
           const newSection = typed ? 0 : 1;   // blank field → a fresh Studio section for this batch
-          payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "", fav: o.fav || 0 })), project, newSection, cfg };
+          payload = { items: grid.map((o, i) => { const r = pmap.get(o.id) || {}; return { url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: r.gen_id || "", prompt: r.prompt || "", fav: o.fav || 0 }; }), project, newSection, cfg };
           footEl.textContent = newSection ? ("→ Studio: NEW section (" + project + " · …)") : ("→ Studio project: " + project);
-          kind = "studio"; status("Sending " + outs.length + " to Studio…");
+          const favN = grid.filter((o) => o.fav).length;
+          kind = "studio"; status("Sending " + grid.length + " to Studio" + (favN ? " (★ " + favN + " pre-approved)" : "") + "…");
+        }
+      } else {
+        status("Reading project…");
+        const [proj, account] = await Promise.all([FC.getProject(), FC.getAccount()]);
+        stampAccount(account);
+        if (!proj) { status("No project data — " + (FC.lastError || "open a Flow project (/project/<id>), let it load, then retry.")); return; }
+        if (!proj.records.length) { status("No generations found in this project."); return; }
+        if (mode === "review") {
+          const b = FC.buildReviewBundle(proj.records, account, proj.name, proj.id, limit);
+          footEl.textContent = "→ Downloads/" + b.folder + "/"; kind = "download"; payload = { folder: b.folder, jobs: b.jobs, manifest: b.manifest };
+          status("Bundling " + b.count + " generations (" + b.jobs.length + " files)…");
+        } else {
+          const outs = FC.outputList(proj.records, limit);
+          if (!outs.length) { status("No output images found."); return; }
+          if (mode === "download") {
+            const folder = folderName();
+            payload = { folder, jobs: outs.map((o, i) => ({ url: o.url, path: folder + "/flow-" + String(i + 1).padStart(3, "0") + ".jpg" })) };
+            footEl.textContent = "→ Downloads/" + folder + "/"; kind = "download"; status("Downloading " + outs.length + " images…");
+          } else {
+            const typed = projInput.value.trim();
+            const project = typed || defaultProject();
+            const newSection = typed ? 0 : 1;   // blank field → a fresh Studio section for this batch
+            payload = { items: outs.map((o, i) => ({ url: o.url, orig: "flow-" + String(i + 1).padStart(3, "0") + ".jpg", gen: o.gen_id || "", prompt: o.prompt || "", fav: o.fav || 0 })), project, newSection, cfg };
+            footEl.textContent = newSection ? ("→ Studio: NEW section (" + project + " · …)") : ("→ Studio project: " + project);
+            kind = "studio"; status("Sending " + outs.length + " to Studio…");
+          }
         }
       }
       await new Promise((resolve) => {
@@ -198,7 +342,7 @@
 
   panel.addEventListener("click", (e) => {
     const b = e.target.closest("button.pick"); if (!b || busy) return;
-    if (b.classList.contains("savecfg") || b.classList.contains("selvis") || b.classList.contains("clr") || b.classList.contains("trash")) return;
+    if (b.classList.contains("savecfg") || b.classList.contains("dumpcomposer") || b.classList.contains("selvis") || b.classList.contains("clr") || b.classList.contains("trash")) return;
     const n = b.dataset.n; if (!n) return;
     if (n === "all") return run(Infinity);
     if (n === "custom") { const v = parseInt(numInput.value, 10); if (v > 0) return run(v); numInput.focus(); return; }
@@ -368,7 +512,10 @@
   }
   function findPromptBox() {
     const vis = (el) => el.offsetParent !== null && el.getBoundingClientRect().height > 0 && !panel.contains(el);
-    // Flow's composer is a Slate contenteditable (data-slate-editor) — prefer it.
+    // flow.google.com (Angular, since 2026-09): a ProseMirror composer — flow-composer.js owns it.
+    const pm = self.FlowComposer && self.FlowComposer.ui() === "angular" ? self.FlowComposer.editorEl() : null;
+    if (pm && vis(pm)) return { el: pm, kind: "pm" };
+    // legacy labs.google composer: a Slate contenteditable (data-slate-editor) — prefer it.
     const slate = [...document.querySelectorAll('[data-slate-editor="true"]')].filter(vis)[0];
     if (slate) return { el: slate, kind: "ce" };
     const tas = [...document.querySelectorAll("textarea")].filter(vis);
@@ -378,9 +525,10 @@
     return ce ? { el: ce, kind: "ce" } : null;
   }
   function ceRealText(el) {
-    // textContent includes Slate's in-DOM placeholder + zero-width chars; exclude both
+    // textContent includes the editor's in-DOM placeholder (Slate: [data-slate-placeholder];
+    // ProseMirror: .prosemirror-placeholder) + zero-width chars; exclude both
     const clone = el.cloneNode(true);
-    clone.querySelectorAll("[data-slate-placeholder]").forEach((n) => n.remove());
+    clone.querySelectorAll("[data-slate-placeholder], .prosemirror-placeholder").forEach((n) => n.remove());
     return clone.textContent.replace(/[﻿​]/g, "").trim();
   }
   function insertPromptBlock(kind) {
@@ -396,8 +544,29 @@
       const val = blk.askUpper === false ? t : t.toUpperCase();
       blk = Object.assign({}, blk, { text: t ? blk.textNamed.replaceAll("%NAME%", val) : blk.text });
     }
+    insertBlock(blk);
+  }
+  // The insert itself, shared by the preset buttons above and the 🎥 Angle card picker
+  // below. Takes a {where, label, text} block and returns true once it has been handed
+  // to the composer. It APPENDS (or PREPENDS) around whatever is already there — it
+  // never clears the text, never touches the staged ref chips, never submits.
+  function insertBlock(blk) {
     const box = findPromptBox();
-    if (!box) { status("No Flow prompt box on screen — open a project composer first."); return; }
+    if (!box) { status("No Flow prompt box on screen — open a project composer first."); return false; }
+    if (box.kind === "pm") {
+      // flow.google.com's ProseMirror composer: flow-composer.js inserts through the app's own
+      // paste handler (a synthetic ClipboardEvent — text/plain → text + hard_break nodes at the
+      // caret), falling back to execCommand("insertText"), and verifies the text landed. Async,
+      // so the status line reports the outcome when it is known; the caller gets `true` meaning
+      // "handed to the composer".
+      const isEmpty = !ceRealText(box.el);
+      const text = isEmpty ? blk.text : (blk.where === "start" ? blk.text + "\n\n" : "\n\n" + blk.text);
+      status(blk.label + " — inserting…");
+      self.FlowComposer.insert(text, blk.where).then((r) => {
+        status(r.ok ? blk.label + " inserted (" + r.method + ") — review & submit." : "✖ " + blk.label + " not inserted: " + r.why);
+      });
+      return true;
+    }
     box.el.focus();
     if (box.kind === "ta") {
       const cur = box.el.value || "";
@@ -448,8 +617,172 @@
       document.execCommand("insertText", false, text);
     }
     status(blk.label + " inserted — review & submit.");
+    return true;
   }
   panel.querySelectorAll("button.pb").forEach((b) => b.addEventListener("click", () => insertPromptBlock(b.dataset.pb)));
+
+  // ───────── 🎥 Angle card — camera/pose seeds mined from the comic corpus ─────
+  // The deck is research/comic-corpus/synthesis/cards.json (76 Deed Arts seeds, one
+  // per steal-worthy panel), built by research/comic-corpus/scripts/angle_deck.py from
+  // every corpus/*/angle-study.json. A COPY ships beside this file as cards.json —
+  // regenerate the deck, re-copy, never hand-edit. The service worker reads it for us
+  // (a content script can only fetch extension files that are exposed to the page via
+  // web_accessible_resources), one "angleDeck" message for the whole deck.
+  // Each card is a single plain-speech sentence — camera height, nearest limb, muscle
+  // sold, crop, body line — carrying no appearance and no style, meant to be APPENDED
+  // after the action prompt as its final sentence.
+  // ONE card at a time (2.8.5): the picker remembers the card it last placed (angleDealt)
+  // and the next card takes ITS place — FlowComposer.replace() selects exactly that
+  // sentence in the ProseMirror box and pastes the new one over it, so the operator's
+  // own text and the staged ref chips are never touched. If the old sentence is no
+  // longer in the box (edited away, or Flow cleared it) the card is appended as before.
+  // 🎲 Deal me one also presses Create, so the loop is deal → generate → deal → generate…
+  // (never re-dealing the card that is in the box while the filter offers another);
+  // a click on a listed card only swaps the sentence in — review & submit. The legacy
+  // labs.google composer keeps the plain append through insertBlock() (Slate's own
+  // editor.insertText via flow-inject.js). Chip filters persist in chrome.storage.local
+  // (pbAngle).
+  const ANGLE_CHIPS = [["worm", "Worm"], ["low", "Low"], ["eye", "Eye"], ["high", "High"], ["dutch", "Dutch"], ["OTS", "OTS"]];
+  const MUSCLE_CHIPS = [["arms", "Arms"], ["chest", "Chest"], ["back", "Back"], ["glutes", "Glutes"], ["shoulders", "Shoulders"], ["abs", "Abs"], ["full-silhouette", "Silhouette"]];
+  const angleBody = $(".anglebody"), angleBtn = $(".pbangle"), angleListEl = $(".anglelist"), angleCountEl = $(".anglecount"), angleDealBtn = $(".angledeal");
+  let angleDeck = null, angleFilt = { angle: [], muscle: [] }, angleLast = null;
+  let angleDealt = null, angleBusy = false;   // { id, text } of the card the picker last put in the composer; a deal in flight
+  const angleCards = () => (angleDeck ? angleDeck.cards : []);
+  function angleVal(c, dim) { const t = c.tags || {}; return dim === "angle" ? (t.angle || c.group) : t.muscle_sold; }
+  // The spec'd chips first, then any extra value a regenerated deck introduces (angle_deck.py
+  // knows bird / aerial / pov too) so no card can ever hide behind a chip that isn't drawn.
+  function angleChipDefs(dim) {
+    const base = dim === "angle" ? ANGLE_CHIPS : MUSCLE_CHIPS;
+    const known = new Set(base.map((c) => c[0])), extra = [];
+    angleCards().forEach((c) => { const v = angleVal(c, dim); if (v && v !== "none" && !known.has(v)) { known.add(v); extra.push([v, v]); } });
+    return base.concat(extra);
+  }
+  function angleMatch(c, f) { return (!f.angle.length || f.angle.includes(angleVal(c, "angle"))) && (!f.muscle.length || f.muscle.includes(angleVal(c, "muscle"))); }
+  const angleFiltered = () => angleCards().filter((c) => angleMatch(c, angleFilt));
+  function loadAngleDeck() {
+    if (angleDeck) return Promise.resolve(angleDeck);
+    return new Promise((res) => {
+      chrome.runtime.sendMessage({ type: "angleDeck" }, (r) => {
+        const err = chrome.runtime.lastError;
+        if (err || !r || !r.ok) { status("Angle deck failed to load: " + ((r && r.error) || (err && err.message) || "no response")); angleCountEl.textContent = "deck missing"; res(null); return; }
+        angleDeck = r.deck;
+        // Guarded read: a stored chip value the current deck doesn't know is dropped, so a
+        // stale filter can never hide every card behind a chip that isn't on screen.
+        ["angle", "muscle"].forEach((dim) => { const ok = new Set(angleChipDefs(dim).map((c) => c[0])); angleFilt[dim] = angleFilt[dim].filter((v) => ok.has(v)); });
+        res(angleDeck);
+      });
+    });
+  }
+  function renderAngleChips() {
+    ["angle", "muscle"].forEach((dim) => {
+      const row = $(".anglechips-" + dim); row.innerHTML = "";
+      const lbl = document.createElement("span"); lbl.className = "clbl"; lbl.textContent = dim === "angle" ? "Angle:" : "Sells:"; row.appendChild(lbl);
+      // A chip's count honours the OTHER dimension's filter — it says how many cards lighting it would leave.
+      const other = dim === "angle" ? { angle: [], muscle: angleFilt.muscle } : { angle: angleFilt.angle, muscle: [] };
+      angleChipDefs(dim).forEach(([k, label]) => {
+        const n = angleCards().filter((c) => angleVal(c, dim) === k && angleMatch(c, other)).length;
+        const b = document.createElement("button"); b.className = "chip" + (angleFilt[dim].includes(k) ? " on" : ""); b.dataset.k = k;
+        b.textContent = angleDeck ? label + " " + n : label;
+        b.title = (dim === "angle" ? "Camera angle: " : "Muscle the card is built to sell: ") + k + " — click to toggle. No chips lit = every card.";
+        b.addEventListener("click", () => {
+          const arr = angleFilt[dim], i = arr.indexOf(k);
+          if (i >= 0) arr.splice(i, 1); else arr.push(k);
+          chrome.storage.local.set({ pbAngle: angleFilt });
+          renderAngle();
+        });
+        row.appendChild(b);
+      });
+    });
+  }
+  function renderAngleList() {
+    angleListEl.innerHTML = "";
+    const list = angleFiltered();
+    angleCountEl.textContent = angleDeck ? list.length + " / " + angleCards().length + " cards" : "loading…";
+    angleDealBtn.disabled = !list.length;
+    if (angleDeck && !list.length) { const e = document.createElement("div"); e.className = "anglefoot"; e.textContent = "No card matches — switch a chip off."; angleListEl.appendChild(e); return; }
+    list.forEach((c) => {
+      const t = c.tags || {}, src = c.source || {};
+      const d = document.createElement("div"); d.className = "acard" + (c.id === angleLast ? " last" : ""); d.dataset.id = c.id;
+      d.title = c.text + "\n\n" + [src.artist, src.comic, "p" + src.page + "." + src.panel].filter(Boolean).join(" · ") +  " — click to put it in as the prompt's final sentence (in place of the card dealt before)";
+      const l = document.createElement("div"); l.className = "acard-l";
+      const st = document.createElement("span"); st.className = "acard-star"; st.textContent = "★" + (c.steal_score != null ? c.steal_score : "?");
+      const lab = document.createElement("span"); lab.className = "acard-lab"; lab.textContent = c.label || c.id;
+      l.append(st, lab);
+      const tx = document.createElement("div"); tx.className = "acard-t"; tx.textContent = c.text;
+      const f = document.createElement("div"); f.className = "acard-s";
+      f.textContent = [t.shot_distance, t.crop, t.body_line].filter(Boolean).join(" · ") + " · " + (c.chars || c.text.length) + " ch" + (t.explicit ? " · 18+" : "");
+      d.append(l, tx, f);
+      d.addEventListener("click", () => angleAppend(c));
+      angleListEl.appendChild(d);
+    });
+  }
+  function renderAngle() { renderAngleChips(); renderAngleList(); }
+  const angularComposer = () => !!(self.FlowComposer && self.FlowComposer.ui() === "angular" && self.FlowComposer.editorEl());
+  // Put card `c` in the composer — over the previous card's sentence while that is still in
+  // the box, else appended as the final sentence. Resolves {ok, how, why}; `legacy` = the old
+  // labs.google composer, where insertBlock() did the append (and wrote the status line).
+  async function anglePlace(c) {
+    const FCo = self.FlowComposer;
+    if (!angularComposer()) return { ok: insertBlock({ where: "end", label: "Angle card " + c.id, text: c.text }), how: "appended", legacy: true };
+    const prev = angleDealt && angleDealt.text !== c.text ? angleDealt : null;
+    if (angleDealt && angleDealt.text === c.text && FCo.promptText().includes(c.text)) return { ok: true, how: "already in the box" };
+    if (prev) {
+      const r = await FCo.replace(prev.text, c.text);
+      if (r.ok) return { ok: true, how: "swapped in for " + prev.id + " (" + r.method + ")" };
+      if (r.why !== "not-found") return { ok: false, why: r.why };
+    }
+    const r = await FCo.insert(FCo.isEmpty() ? c.text : "\n\n" + c.text, "end");
+    if (!r.ok) return { ok: false, why: r.why };
+    return { ok: true, how: "appended (" + r.method + ")" + (prev ? " — the previous card was no longer in the box" : "") };
+  }
+  function angleMark(c) {
+    angleDealt = { id: c.id, text: c.text }; angleLast = c.id; renderAngleList();
+    const el = angleListEl.querySelector('.acard[data-id="' + c.id + '"]'); if (el) el.scrollIntoView({ block: "nearest" });
+  }
+  // A listed card, clicked: swap it in, leave Create to the operator.
+  async function angleAppend(c) {
+    const label = "Angle card " + c.id;
+    if (angularComposer()) status(label + " — inserting…");
+    const r = await anglePlace(c);
+    if (r.legacy) { if (r.ok) angleMark(c); return; }
+    if (!r.ok) { status("✖ " + label + " not inserted: " + r.why); return; }
+    angleMark(c);
+    status(label + " " + r.how + " — review & submit.");
+  }
+  // 🎲 Deal: a fresh card from the filter (not the one already in the box, while there is
+  // another), swapped in over the previous one, then Create. Click again for the next angle.
+  async function angleDeal() {
+    if (angleBusy) return;
+    let list = angleFiltered();
+    if (!list.length) { status("No angle card matches the current chips."); return; }
+    if (list.length > 1 && angleDealt) list = list.filter((c) => c.id !== angleDealt.id);
+    const c = list[Math.floor(Math.random() * list.length)], label = "🎲 " + c.id;
+    angleBusy = true; angleDealBtn.disabled = true;
+    try {
+      if (angularComposer()) status(label + " — inserting…");
+      const r = await anglePlace(c);
+      if (r.legacy) { if (r.ok) angleMark(c); return; }
+      if (!r.ok) { status("✖ " + label + " not inserted: " + r.why); return; }
+      angleMark(c);
+      const FCo = self.FlowComposer;
+      status(label + " " + r.how + " — generating…");
+      if (!(await FCo.ready(8000))) { status(label + " " + r.how + ", but Create stayed disabled (a run still submitting?) — press Create yourself."); return; }
+      const f = await FCo.fire(8000);
+      status(f.ok ? "✓ " + label + " " + r.how + " → generating. Deal again for the next angle." : "✖ " + label + " " + r.how + ", but Create didn't fire: " + f.why + " — press Create yourself.");
+    } finally { angleBusy = false; angleDealBtn.disabled = !angleFiltered().length; }
+  }
+  angleDealBtn.addEventListener("click", angleDeal);
+  $(".angleclear").addEventListener("click", () => { angleFilt = { angle: [], muscle: [] }; chrome.storage.local.set({ pbAngle: angleFilt }); renderAngle(); });
+  $(".anglex").addEventListener("click", () => { angleBody.style.display = "none"; });
+  angleBtn.addEventListener("click", () => {
+    if (angleBody.style.display !== "none") { angleBody.style.display = "none"; return; }
+    angleBody.style.display = "block"; renderAngle();
+    loadAngleDeck().then((d) => { if (d) renderAngle(); });
+  });
+  chrome.storage.local.get(["pbAngle"]).then((s) => {
+    const f = s.pbAngle || {}, keep = (a) => (Array.isArray(a) ? a.filter((v) => typeof v === "string") : []);
+    angleFilt = { angle: keep(f.angle), muscle: keep(f.muscle) };
+  });
   // Cam/Cast/Light/Render selectors — persisted so the chosen framing style and
   // lighting scheme stick across reloads.
   const camSel = $(".pbcam"), castSel = $(".pbcast"), lightSel = $(".pblight"), renderSel = $(".pbrender");
@@ -515,9 +848,20 @@
     if (!FC.currentProjectId()) { autoStatus("Open a Flow project to auto-sync."); return; }
     autoBusy = true; autoStatus("Checking Flow…");
     try {
-      const proj = await FC.getProject();
-      if (!proj || !proj.records.length) { autoStatus("No generations yet."); autoBusy = false; return; }
-      const outs = FC.outputList(proj.records, Infinity);   // chronological (oldest first) → beats in order
+      // flow.google.com: prompts + full-res outputs from the new project API (getAngularOutputs
+      // uses each record's own image URL, so a sync tick never scrolls the user's grid). Legacy
+      // labs.google UI keeps getProject()/outputList().
+      const angular = self.FlowComposer && self.FlowComposer.ui() === "angular";
+      let outs;
+      if (angular) {
+        outs = await FC.getAngularOutputs(Infinity);
+        if (outs == null) { autoStatus("Couldn't read Flow — " + (FC.lastError || "reload the tab.")); autoBusy = false; return; }
+      } else {
+        const proj = await FC.getProject();
+        if (!proj || !proj.records.length) { autoStatus("No generations yet."); autoBusy = false; return; }
+        outs = FC.outputList(proj.records, Infinity);   // chronological (oldest first) → beats in order
+      }
+      if (!outs.length) { autoStatus("No generations yet."); autoBusy = false; return; }
       const fresh = outs.filter((o) => !sentSet.has(o.id));
       if (!fresh.length) { autoStatus("✓ Up to date · " + sentSet.size + " synced"); autoBusy = false; return; }
       autoStatus("Syncing " + fresh.length + " new…");

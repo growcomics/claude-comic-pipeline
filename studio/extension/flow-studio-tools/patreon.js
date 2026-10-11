@@ -148,6 +148,7 @@
   function line(msg, cls) { const div = document.createElement("div"); if (cls) div.className = "pgd-" + cls; div.textContent = msg; statusEl.appendChild(div); statusEl.scrollTop = statusEl.scrollHeight; }
 
   function build() {
+    if (!panel && document.getElementById("pgd")) return; // another flavor (Studio Tools / Deluxe) already owns this page
     if (panel) return;
     const style = document.createElement("style");
     style.id = "pgd-style";
@@ -241,8 +242,18 @@
   }
 
   // ───────── show only on post pages; track SPA navigation ───────────────────
-  function sync() { if (isPostPage()) build(); else destroy(); }
-  sync();
+  // Creator mode (content.js uiMode) hides this surface — contributors never need a
+  // Patreon downloader. Same default rule as the Flow panel: fresh installs are creator
+  // unless a Studio key is already stored (the owner's machines).
+  // Flow Studio Deluxe (manifest name; built by ../build_deluxe.py) is always on.
+  const DELUXE = /deluxe/i.test((chrome.runtime.getManifest && chrome.runtime.getManifest().name) || "");
+  let enabled = DELUXE;
+  function sync() { if (enabled && isPostPage()) build(); else destroy(); }
+  chrome.storage.local.get(["uiMode", "bridgeKey"]).then((s) => {
+    enabled = DELUXE || (s.uiMode ? s.uiMode === "advanced" : !!s.bridgeKey);
+    sync();
+  });
+  chrome.storage.onChanged.addListener((ch, area) => { if (area === "local" && ch.uiMode) { enabled = DELUXE || ch.uiMode.newValue === "advanced"; sync(); } });
   let lastPath = location.pathname;
   setInterval(() => { if (location.pathname !== lastPath) { lastPath = location.pathname; sync(); } }, 1200);
   addEventListener("popstate", sync);

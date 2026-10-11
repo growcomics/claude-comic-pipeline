@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Model bake-off — 3DMC Studio Tools</title>
+<style>
+  :root{color-scheme:dark}
+  body{margin:0;background:#0d0e13;color:#e8eaed;font:14px/1.5 system-ui,-apple-system,sans-serif}
+  header{position:sticky;top:0;z-index:5;background:#14151c;border-bottom:1px solid #2a2d3a;padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  header h1{font-size:16px;margin:0;flex:1;min-width:200px}
+  header .meta{font-size:12px;opacity:.65}
+  .hint{padding:10px 20px;font-size:12.5px;opacity:.7;border-bottom:1px solid #1e2029}
+  .empty{padding:60px 20px;text-align:center;opacity:.7;line-height:1.7}
+  .row{border-bottom:1px solid #1e2029;padding:16px 20px}
+  .prompt{font-size:13px;opacity:.85;margin-bottom:12px;white-space:pre-wrap;word-break:break-word;
+          max-height:4.6em;overflow:hidden;position:relative}
+  /* .clip is set by JS only when the text actually overflows — otherwise a one-line
+     prompt gets pointlessly faded out by the gradient. */
+  .prompt.clip{cursor:pointer}
+  .prompt.open{max-height:none}
+  .prompt.clip:not(.open)::after{content:"";position:absolute;inset:auto 0 0 0;height:1.6em;
+          background:linear-gradient(transparent,#0d0e13)}
+  .cols{display:grid;gap:14px;grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+  @media (max-width:900px){.cols{grid-template-columns:1fr}}
+  .col h3{margin:0 0 8px;font-size:12.5px;font-weight:700;letter-spacing:.02em}
+  .col.miss h3{opacity:.4}
+  .strip{display:flex;gap:6px;flex-wrap:wrap}
+  .strip img{width:calc(50% - 3px);aspect-ratio:1;object-fit:cover;border-radius:8px;background:#1a1c24;display:block;cursor:zoom-in}
+  .strip .ph{width:calc(50% - 3px);aspect-ratio:1;border-radius:8px;background:#1a1c24}
+  .none{font-size:12px;opacity:.4;padding:14px 0}
+  #lb{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+  #lb img{max-width:96vw;max-height:96vh;object-fit:contain}
+  #analyze{border:1px solid #3a3f52;background:#232739;color:#e8eaed;border-radius:8px;padding:7px 13px;
+          font:600 12.5px system-ui,sans-serif;cursor:pointer}
+  #analyze:hover{background:#2c3145} #analyze:disabled{opacity:.6;cursor:default}
+  #verdict{display:none;padding:18px 20px;border-bottom:1px solid #1e2029;background:#101219}
+  #verdict h2{margin:0 0 12px;font-size:14px}
+  #verdict table{border-collapse:collapse;width:100%;font-size:12.5px}
+  #verdict th,#verdict td{text-align:left;padding:8px 10px;border-bottom:1px solid #1e2029;vertical-align:top}
+  #verdict th{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;opacity:.6}
+  #verdict td.lead{background:rgba(29,158,117,.14);border-radius:6px}
+  #verdict .hint{font-size:11px;opacity:.5;font-weight:400;margin-top:2px}
+  #verdict .tie{opacity:.6}
+  #verdict .foot{font-size:11.5px;opacity:.62;margin:12px 0 0;line-height:1.55;max-width:105ch}
+  .stats{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+  .chip{font-size:10.5px;background:#1a1d27;border:1px solid #262a36;border-radius:5px;padding:2px 6px;opacity:.9}
+  .chip b{font-weight:700} .chip.dim{opacity:.5}
+</style>
+</head>
+<body>
+  <header>
+    <h1>🔬 Model bake-off</h1>
+    <button id="analyze" style="display:none">🔬 Analyse models</button>
+    <span class="meta" id="meta">loading…</span>
+  </header>
+  <div id="verdict"></div>
+  <div class="hint">Every prompt in this project that ran on <b>two or more</b> models, newest first — one column per model, same prompt across the row. Click a prompt to expand it; click an image to enlarge.</div>
+  <div id="out"></div>
+  <div id="lb"><img alt=""></div>
+  <script src="compare.js"></script>
+</body>
+</html>
