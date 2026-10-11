@@ -12,6 +12,23 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-11 (3DMC Studio Tools v2.9.0: shot-first Cine+Light / Framing, the mid-thigh default removed)
+
+### Changed
+
+- **📷 Cine+Light and 🎬 Framing are now shot-first (v2.8.9 → v2.9.0).**
+  - **The problem:** both blocks hard-coded *"Framed from mid-thigh up … at a three-quarter angle forty-five degrees … 50–85mm portrait-lens compression"*. The `Cam:` menu only changed the camera height, so every insert landed on the same knees-up cowboy shot. The Three Wishes audit (10-11) found 19 of 44 kept pages knees-up and only 2 close-ups. The owner has rejected this framing six times (09-28 → 10-11).
+  - **The menu:** the `Cam:` select is now **`Shot:`**. Its options are **Vary per beat** (the default; the model picks one cutscene shot for the beat), **Over the shoulder**, **Torso from below**, **Torso side profile**, **Low hero · biggest nearest** and **Insert ECU**. These are the cutscene shot menu from `skills/comic-production/references/cutscene-camera-rules.md` §4.
+  - **What every option emits:** the SHOT NAME and camera position first, then the §3 crop wording ("The bottom edge of the image cuts across … ; hips, legs and feet are completely outside the frame"). Plain "no legs" was ignored on ~60% of takes, which is why the crop is written this way. Then the verbatim sentence **"References define appearance, not camera placement."** (CAM-11), plus a line telling the model not to copy the full-body framing of the character sheets.
+  - **Cast-aware wording:** `Cast:` picks the one- or two-figure version of Over the shoulder and Low hero. Low hero puts the biggest figure NEAREST the lens (CAM-13). The depth line asks for different distances from the lens and a different expression per face, never a symmetric row (CAM-03). Insert ECU keeps every other character out of the frame (CAM-14).
+  - **Full body is not on the menu.** §5 caps it at 1 panel in 8, for an establishing shot or a size reveal, so the operator writes that one by hand.
+  - **The blocks now PREPEND**, so the camera leads the prompt (§2). Click 🎨 DAZ style after them so the style line ends up first.
+  - **Stored values:** a stored 2.8.x `pbCam` of `low` becomes `hero`; `eye` and `high` fall back to `vary`. The storage key is unchanged.
+  - **Not yet credit-tested.** The wording is assembled from the doc's tested seeds (Three Wishes re-shoots, the owner's 10-07 action tests). A node check covers all 18 Shot × Cast combinations: each one has the required sentence and the crop line, and none says "mid-thigh", "feet away" or "heads fully in frame".
+- **The 2.8.1–2.8.9 extension source is now in git.** Those versions were shipped (`/toolbox/` and the owner's unpacked Flow Studio Deluxe) from a working tree that the 09-28 wipe deleted; they were never committed. They are restored from the GCS copy and verified against the shipped 2.8.9 zip (sha256 `15552d4d…`). `build_deluxe.py` rebuilds a Deluxe folder byte-identical to the owner's installed copy. This also restores `build_deluxe.py` and the generated `flow-studio-deluxe/`.
+
+---
+
 ## 2026-08-11 (location-scout v2: QA backfill on all shipped plates + vendor the untracked packs)
 
 ### Added

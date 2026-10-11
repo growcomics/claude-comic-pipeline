@@ -124,8 +124,8 @@
        <div class="row"><button class="pick selvis">Select visible</button><button class="pick clr">Clear</button></div>
        <div class="row" style="margin-top:8px"><button class="pick danger trash" style="flex:1" disabled>🗑 Move 0 to Trash</button></div>
      </div>
-     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="Append the cinematic-framing + golden-hour volume-lighting master block (fresh generations only — it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height, figure count, and lighting scheme follow the Cam/Cast/Light selectors below.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="Append the cinematic-framing block ONLY — hero staging, no lighting (fresh generations only; like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock). Camera height + figure count follow the Cam/Cast selectors below.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pbangle" title="Pick a camera/pose card from the comic-corpus Angle Deck (76 Deed Arts seeds, L40 body-to-camera staging) and APPEND it as the prompt's final sentence — camera height, nearest limb, muscle sold, crop, body line; no appearance, no style. Filter by angle and by the muscle the shot sells, or 🎲 deal a random one — a deal swaps the previous card out and presses Create, so keep clicking for new angles. It directs the camera, so like Framing/Director/Detail it must not ride with the i2i keep-composition lock.">🎥 Angle card</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
-     <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Cam:</span><select class="pbsel pbcam" title="Camera height for Cine+Light / Framing. Vary = the model picks the height that serves the beat (never ruts into low-hero shots)."><option value="vary">Vary per beat</option><option value="low">Low hero</option><option value="eye">Eye-level</option><option value="high">High look-down</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing staging assumes. Auto = neutral wording that never asserts a count — no phantom second figure."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
+     <div class="row" style="margin-top:8px"><span class="lbl" style="margin:0 4px 0 0">Prompt:</span><button class="pick pb" data-pb="director" title="Append the director's-choice reframe block — attach a panel as ref; the scene stays, the model re-stages the camera (dolly / orbit / height / zoom) for this specific beat. Unlike Cine+Light/Framing it prescribes NO fixed angle, so it never ruts into low-hero shots.">🎥 Director</button><button class="pick pb" data-pb="cine" title="PREPEND the shot-first camera block plus the lighting scheme, so the camera leads the prompt (cutscene-camera-rules.md). The shot, figure count and lighting follow the Shot / Cast / Light selectors below. Click 🎨 DAZ style afterwards so the style line ends up first. Fresh generations only: it directs the camera, so don't pair it with the i2i keep-composition lock.">📷 Cine+Light</button><button class="pick pb" data-pb="frame" title="PREPEND the shot-first camera block ONLY, with no lighting. The shot and figure count follow the Shot / Cast selectors below. Fresh generations only: like Cine+Light it directs the camera, so don't pair it with the i2i keep-composition lock.">🎬 Framing</button><button class="pick pb" data-pb="light" title="Append the selected lighting scheme ONLY — no framing, no camera. The one prompt block that rides with the i2i keep-composition lock: attach an accepted panel as the sole ref, prepend the composition-lock sentence, and the same shot comes back re-lit. Scheme + render mode follow the Light/Render selectors below.">💡 Light</button><button class="pick pb" data-pb="detail" title="Append the extreme-close-up detail block — it asks which region the shot is on, then fills the frame with it: macro 100–135mm at f/1.8, background melted to bokeh, the muscle tack-sharp with the key raking low so striations and veins cast micro-shadows. It deliberately RE-CROPS, so like Framing and Director it must not ride with the i2i keep-composition lock. Composes with 💡 Light (pick any of the 19 schemes); don't stack it with Cine+Light, whose framing half fights it.">🔎 Detail</button><button class="pick pb" data-pb="staging" title="Append the anti-flat staging block — tilted eye-line diagonals for two-character tension, near/far depth layers, varied-scale pyramid for 3+; forbids flat same-height lineups. No camera prescribed, so it rides with your own action prompt (not with the i2i keep-composition lock).">📐 Staging</button><button class="pick pbangle" title="Pick a camera/pose card from the comic-corpus Angle Deck (76 Deed Arts seeds, L40 body-to-camera staging) and APPEND it as the prompt's final sentence — camera height, nearest limb, muscle sold, crop, body line; no appearance, no style. Filter by angle and by the muscle the shot sells, or 🎲 deal a random one — a deal swaps the previous card out and presses Create, so keep clicking for new angles. It directs the camera, so like Framing/Director/Detail it must not ride with the i2i keep-composition lock.">🎥 Angle card</button><button class="pick pb" data-pb="sheet" title="Append the character turnaround-sheet block — attach the character as ref; asks for the character's name (blank = no name plate). Front + back + side profile + face close-up on a clean studio background.">🧍 Char sheet</button><button class="pick pb" data-pb="daz" title="Prepend the canonical DAZ3D style prefix — style anchors lead the prompt">🎨 DAZ style</button><button class="pick pb" data-pb="drawn" title="Prepend the painted-comic style prefix — the counterpart to 🎨 DAZ, for the Render: Drawn lighting variants. Use ONE render anchor per prompt: stacking this with 🎨 DAZ puts two opposed anchors in the same prompt and yields plastic-looking linework.">✏️ Drawn style</button></div>
+     <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Shot:</span><select class="pbsel pbcam" title="Cutscene shot for 📷 Cine+Light / 🎬 Framing (cutscene-camera-rules.md). Vary per beat = the model picks one of the five shots for this beat. Every option frames tight: the crop line puts hips, legs and feet completely outside the frame, and the block tells the model the refs carry appearance, not camera placement. Full body is not on the menu; write the 1-in-8 establishing or size-reveal shot yourself. Name wardrobe only for what is in frame (no shoes in a chest-up shot)."><option value="vary">Vary per beat</option><option value="ots">Over the shoulder</option><option value="below">Torso from below</option><option value="side">Torso side profile</option><option value="hero">Low hero · biggest nearest</option><option value="ecu">Insert ECU</option></select><span class="lbl" style="margin:0 4px 0 6px">Cast:</span><select class="pbsel pbcast" title="Figure count the Cine+Light / Framing shot assumes. Auto = neutral wording that never asserts a count (no phantom second figure). Solo / Duo pick the one- or two-figure version of Over the shoulder and Low hero, and set the depth line: different distances from the lens, a different expression per face, never a symmetric row."><option value="auto">Auto</option><option value="solo">Solo</option><option value="duo">Duo</option></select></div>
      <div class="row" style="margin-top:6px"><span class="lbl" style="margin:0 4px 0 0">Light:</span><select class="pbsel pblight" title="Lighting scheme for Cine+Light and 💡 Light. Each scheme is built to the same spec — a named key with a stated angle, a per-form gradient, ambient occlusion by anatomical location, micro-shadow detail, a rim with an anti-glow guard, and the environment held below the figures."></select><span class="lbl" style="margin:0 4px 0 6px">Render:</span><select class="pbsel pbrender" title="Which variant of the scheme to use. 3D = photoreal / PBR language (pairs with the 🎨 DAZ prefix). Drawn = the same light logic in painted-comic language — pair it with the ✏️ Drawn style prefix, and do NOT stack it with 🎨 DAZ."><option value="cgi">3D</option><option value="illo">Drawn</option></select></div>
      <div class="anglebody" style="display:none">
        <div class="anglehd"><b>🎥 Angle card</b><span class="anglecount">loading…</span><span class="anglex" title="Close the picker">✕</span></div>
@@ -368,12 +368,13 @@
   //                varied-scale pyramid for 3+; forbids flat same-height lineups).
   //                Prescribes NO camera, so it pairs with anything except the
   //                i2i keep-composition lock.
-  //   • cine     — framing + golden-hour lighting master block, APPENDS
-  //   • frame    — framing ONLY (no lighting), APPENDS — for pairing with a separate
-  //                lighting choice, or when you'll relight the panel afterward
-  // cine + frame are PARAMETERIZED by the Cam:/Cast: selectors (persisted):
-  //   Cam  — vary (default; the model picks the height per beat — fixes the old
-  //          hardcoded "below chest height" low-angle rut) / low / eye / high
+  //   • cine     — shot-first camera block + lighting scheme, PREPENDS (2.9.0)
+  //   • frame    — shot-first camera block ONLY (no lighting), PREPENDS — for pairing
+  //                with a separate lighting choice, or when you'll relight the panel afterward
+  // cine + frame are PARAMETERIZED by the Shot:/Cast: selectors (persisted):
+  //   Shot — vary (default; the model picks one cutscene shot per beat) / ots / below /
+  //          side / hero / ecu. The UI calls it "Shot", but the storage key is still pbCam.
+  //          2.8.x's Cam menu only set the height and every shot came out "mid-thigh up".
   //   Cast — auto (default; neutral "figure(s)" wording that never asserts a count —
   //          fixes the old hardcoded "both women" phantom-duo) / solo / duo
   // NOTE: cine AND frame both DIRECT THE CAMERA, so they are for FRESH generations —
@@ -413,14 +414,17 @@
       label: "Staging block",
       text: "STAGING — break the flat picture plane. Never arrange the characters in a flat lineup: standing side by side at the same height, the same scale, the same distance from the camera, with a level eye-line — that staging is forbidden. Instead: if TWO characters face each other, stage them on a diagonal — one face higher in frame and one lower, so the line connecting their eyes runs at a steep angle across the panel, bodies leaning in, faces close, the tension riding that tilted eye-line. When characters share a scene, stage them in DEPTH: one clearly nearer the camera and larger in frame, the other deeper in the scene and smaller by perspective, with readable space — floor, walls, a doorway, furniture — receding between them so the shot has a front and a back. With THREE or more characters, build a pyramid: every figure at a different scale and a different depth, one large in the near foreground cut by the frame edge, the others staggered behind at varied heights, their heads tracing a V or a diagonal across the panel — never a flat row of same-sized heads. Let the environment's perspective lines converge to support the depth, and keep every face readable."
     },
-    cine: { where: "end", label: "Cine+Light block", build: () => pbFramingText() + pbLightingText() },
-    frame: { where: "end", label: "Framing block", build: () => pbFramingText() },
+    // Prepended (2.9.0): the camera comes first in the prompt (cutscene-camera-rules.md §2).
+    cine: { where: "start", label: "Cine+Light block", build: () => pbFramingText() + pbLightingText() },
+    frame: { where: "start", label: "Framing block", build: () => pbFramingText() },
     // Lighting only — the one block that legally rides with the i2i keep-composition
     // lock, because it prescribes no camera. That's the post-hoc lighting pass in
     // cinematic-framing.md §Lighting-pass fragments, which had no button before v2.7.0.
     light: { where: "end", label: "Lighting block", build: () => pbLightingText() },
-    // ECU-region — the shot type the panel had no button for. Every other framing block
-    // here is mid-thigh-up hero staging, but the Variety check wants at least one ECU per
+    // ECU-region — the shot type the panel had no button for. When this shipped (2.7.2),
+    // every other framing block here was mid-thigh-up hero staging. Shot: replaced that in
+    // 2.9.0: its Insert ECU is the generic insert, and this block is the lit muscle macro.
+    // The Variety check wants at least one ECU per
     // 10 panels and Pattern 2 (the pull-out) opens on one. Spine is the owner's own
     // f/1.8 fragment; four edits, each bought with a documented failure in
     // cinematic-framing.md "Lighting-pass fragments → Hard rules":
@@ -445,42 +449,71 @@
       text: "EXTREME CLOSE-UP — a detail shot. Pick the single muscle group that carries this beat and fill the frame with it, framed on that region alone and cropped tight, everything else out of frame. Macro 100–135mm lens at f/1.8: the background falls away into soft, creamy bokeh and that region alone is tack-sharp. That defocus is optical depth of field from the lens, not a softening of the render — the region in focus is rendered at full hyperdetailed sharpness, skin texture and pore detail resolved. At this magnification the light does the describing: the key rakes across the muscle at a low grazing angle so every striation, every surface vein, and every tendon line casts its own fine micro-shadow, with tight speculars riding the highest points of the form and the glisten of sweat catching in the lit relief. A bright rim from behind and to the left traces the contour of the muscle in a clean edge highlight — separation only, never a glow, never an outline, never a halo. Hold the environment well below the subject in both brightness and detail so nothing in the frame competes with the region in focus."
     }
   };
-  // ── Cam/Cast variant system for cine + frame ──────────────────────────────
-  // The old blocks hardcoded "camera slightly below chest height" and "both women",
-  // which rutted every generation into a low duo shot. Height and cast are now
-  // selected in the panel (persisted in chrome.storage) and the block text is
-  // assembled per click. Wording is de-gendered ("figure") — appearance is carried
-  // by the attached refs, never by the prompt (refs-are-truth).
-  const PB_CAM = {
-    vary: "Camera and framing: choose the camera height that serves this specific beat — drop below chest height and tilt up when power or dominance is the story, hold natural eye level for connection and confidence, rise above head height and look down when scale, vulnerability, or the geography of the scene carries the moment; do NOT default to a low hero angle. Whatever the height, %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
-    low: "Camera and framing: the camera sits slightly below chest height, tilted up a gentle ten degrees — low enough that the physiques loom with quiet authority, never so steep that proportions distort; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
-    eye: "Camera and framing: the camera sits at natural eye level, held level with no tilt — a grounded, confident vantage that lets the physiques carry the frame on sheer mass; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion.",
-    high: "Camera and framing: the camera sits above head height, tilted gently down — high enough to read the staging and the scale of the physiques against the space, never so steep that proportions distort; %STAND% on the same ground plane as the camera, normal human proportions, no wide-angle distortion."
+  // ── Shot/Cast variant system for cine + frame (2.9.0: shot-first) ─────────────
+  // Through 2.8.9 the Cam: menu only moved the camera HEIGHT; every insert still said
+  // "Framed from mid-thigh up … at a three-quarter angle … 50–85mm". So every page landed
+  // on the same knees-up cowboy shot. The Three Wishes audit (10-11) found 19 of 44 kept
+  // pages knees-up and only 2 close-ups, and the owner has rejected that framing six times.
+  // 2.9.0 follows skills/comic-production/references/cutscene-camera-rules.md:
+  //   • the menu names a CUTSCENE SHOT (§4), or "vary" lets the model pick one per beat;
+  //   • the block is PREPENDED, so the camera leads the prompt (§2);
+  //   • each crop names the image EDGE and the body line it cuts, then lists what is
+  //     "completely outside the frame" (§3). Plain "no legs" was ignored on ~60% of takes;
+  //   • every shot says "References define appearance, not camera placement." (§2, CAM-11),
+  //     because full-body character sheets otherwise pull the camera back;
+  //   • the biggest figure goes NEAREST the lens, since a low camera shrinks whoever is
+  //     furthest (CAM-13). No symmetric rows (CAM-03), a different expression per face;
+  //   • an INSERT ECU keeps every other character out of the frame (CAM-14).
+  // Full body / wide is deliberately NOT on the menu (§5 caps it at 1 panel in 8:
+  // establishing or size reveal). Write that one yourself.
+  // Wording stays de-gendered ("figure"): appearance comes from the attached refs, never
+  // from the prompt (refs-are-truth).
+  // Stored 2.8.x pbCam values: "low" maps to "hero"; "eye" and "high" fall back to "vary".
+  const PB_REFS = "References define appearance, not camera placement. Do not copy the framing, distance or pose of any attached image: the character sheets are full-body, and this shot is not.";
+  const PB_TIGHT = "The bottom edge of the image cuts across the chest or the waist; hips, legs and feet are completely outside the frame.";
+  const PB_SHOT = {
+    vary: {
+      label: "Vary per beat",
+      text: () => "CAMERA FIRST: pick the one cutscene shot that serves this beat, the way a video-game cutscene is cut. The options: OVER THE SHOULDER (camera just behind one figure's shoulder, which is big and soft in the foreground, looking onto the other figure seen from the chest up). TORSO FROM BELOW (camera at navel height and close, pointing steeply up; the chest fills the frame and the face is at the very top). TORSO SIDE PROFILE (camera level at shoulder height, about three feet to one side; the shoulder and upper arm fill the near half and the face is in clean profile). LOW HERO, BIGGEST NEAREST (camera low and close in front of whoever must read biggest; everyone else is further back and smaller). INSERT ECU (one hand, face, prop or muscle fills the frame). Whichever you pick, frame it tight. " + PB_TIGHT + " Not a knees-up or full-body frame, and not a three-quarter medium shot of everyone facing the camera."
+    },
+    ots: {
+      label: "Over the shoulder",
+      text: (k) => k === "solo"
+        ? "OVER THE SHOULDER. The camera sits just behind the figure's shoulder at shoulder height, looking past it at what the figure faces. The shoulder, upper arm and back of the head are big and soft in the left foreground, cut by the frame edge, and the face turns just enough to show the edge of its profile. What lies beyond is sharp. The bottom edge of the image cuts across the shoulder blades; the waist, hips, legs and feet are completely outside the frame."
+        : "OVER THE SHOULDER. The camera sits just behind the nearer figure's shoulder at shoulder height. That shoulder and the back of the head are big and soft in the left foreground, cut by the frame edge. Beyond them, the other figure faces the lens, seen from the chest up and sharp, and carries the beat. The bottom edge of the image cuts across the far figure's chest; stomachs, hips, legs and feet are completely outside the frame."
+    },
+    below: {
+      label: "Torso from below",
+      text: () => "TORSO FROM BELOW. The camera is at navel height, about eighteen inches from the main figure, pointing steeply UP. The chest fills the middle of the frame and the face is at the very top, looking down toward the lens, with the ceiling or sky behind the head. The bottom edge of the image cuts across the waist; the hips, legs and feet are completely outside the frame."
+    },
+    side: {
+      label: "Torso side profile",
+      text: () => "TORSO SIDE PROFILE. A pure side-profile medium close-up: the camera is level at shoulder height, about three feet from the main figure's right side. The shoulder and upper arm fill the near half of the frame, the face is in clean profile, and both the line of the chest and the line of the back read clearly. The bottom edge of the image cuts across the ribs; the stomach, hips, legs and feet are completely outside the frame."
+    },
+    hero: {
+      label: "Low hero · biggest nearest",
+      text: (k) => k === "solo"
+        ? "LOW HERO. The camera is low and close, about two feet in front of the figure's chest, looking up. Chest and shoulders fill the lower two-thirds of the frame, and the face above them looks down past the lens. The bottom edge of the image cuts across the waist; the hips, legs and feet are completely outside the frame."
+        : "LOW HERO, BIGGEST NEAREST. The camera is low and close in front of the figure who must read biggest, looking up. That figure is NEAREST the lens and clearly the BIGGEST thing in frame, with chest and shoulders filling the lower two-thirds. Everyone else crowds in behind those shoulders, smaller because they are further back. A low camera shrinks whoever is furthest away, so the biggest figure is never at the back. The bottom edge of the image cuts across the nearest figure's waist; hips, legs and feet are completely outside the frame."
+    },
+    ecu: {
+      label: "Insert ECU",
+      solo: true,   // one subject: the Cast: depth line does not apply
+      text: () => "INSERT ECU: an extreme close-up insert. One subject fills the frame (a hand on a prop, a face, a phone screen, or the single muscle the beat is about), with the camera within a foot of it. The frame edges cut through that subject; every other body part and every other character is completely outside the frame. No other character appears anywhere in the frame, not even a shoulder or a hand."
+    }
   };
   const PB_CAST = {
     auto: {
-      stand: "every figure stands",
-      dominate: "the upper bodies dominate the frame", pop: "the figures pop",
-      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. Whoever is in frame sits on a diagonal axis running from lower-left toward upper-right — if more than one figure is present, angle them toward each other with visible intent, one nearer the camera and meaningfully larger in frame, silhouettes slightly overlapping — so the composition reads in distinct depth layers: an out-of-focus environmental element grazing a lower corner in the extreme foreground, the figure or figures in the mid-ground, the readable environment behind, with asymmetric negative space above one shoulder line giving the masses room to read as mass.",
-      faces: "Every face in frame is visible and carries the beat's emotion clearly.",
-      rake: "rakes across every figure in frame", rim: "tracing each silhouette",
-      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale, and not a single element sitting flat against the picture plane."
+      depth: "If more than one figure is in the shot, they stand at clearly different distances from the lens (never a centred, symmetric row facing the camera), and each face shows a different expression.",
+      rake: "rakes across every figure in frame", rim: "tracing each silhouette"
     },
     solo: {
-      stand: "the figure stands",
-      dominate: "the upper body dominates the frame", pop: "the figure pops",
-      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The figure is set on a diagonal axis, body angled roughly forty-five degrees to the lens rather than square, weight shifted so the silhouette reads dynamic, so the composition reads in distinct depth layers: an out-of-focus environmental element grazing a lower corner in the extreme foreground, the figure commanding the mid-ground, the readable environment behind, with asymmetric negative space above one shoulder line giving the mass room to read as mass.",
-      faces: "The face is visible and carries the beat's emotion clearly.",
-      rake: "rakes across the figure's body", rim: "tracing the silhouette",
-      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, layered depth between figure and environment, and not a single element sitting flat against the picture plane."
+      depth: "Only this one figure is in the shot; no one else appears anywhere in the frame.",
+      rake: "rakes across the figure's body", rim: "tracing the silhouette"
     },
     duo: {
-      stand: "both figures stand",
-      dominate: "the upper bodies dominate the frame", pop: "the figures pop",
-      staging: "Staging breaks the camera plane deliberately: nothing stands flat and parallel to the lens. The two figures sit on a diagonal axis from lower-left toward upper-right, angled toward each other with visible intent, one nearer the camera and meaningfully larger in frame, the other a step deeper and smaller by perspective, silhouettes slightly overlapping, so the composition reads in distinct depth layers — foreground figure, mid-ground figure, environment behind, with an out-of-focus environmental element grazing a lower corner in the extreme foreground and asymmetric negative space above one shoulder line giving the masses room to read as mass.",
-      faces: "Both faces are visible and carry the beat's emotion clearly.",
-      rake: "rakes across both figures' bodies", rim: "tracing both silhouettes",
-      closer: "The overall shape of the shot is dynamic and diagonal: intent angles, overlapping depth layers, varied scale between figures, and not a single element sitting flat against the picture plane."
+      depth: "Exactly two figures stand at clearly different distances from the lens, never a mirrored pair side by side facing the camera, and each face shows a different expression.",
+      rake: "rakes across both figures' bodies", rim: "tracing both silhouettes"
     }
   };
   // pbLight defaults to "golden1" (v1), NOT the tightened "golden" (v2). The 2026-08-09
@@ -491,11 +524,11 @@
   // (goldenV2-3 rendered cool blue-grey — a "Golden Rake" with no golden). v1 keeps its
   // 28/28 production record and the default. See docs/posts/2026-08-09-lighting-validation.md.
   let pbCam = "vary", pbCast = "auto", pbLight = "golden1", pbRender = "cgi";
+  // Order per §2: shot + camera + crop, then the refs sentence, then depth/expressions.
+  // The operator's own action text follows the block, because the block is prepended.
   function pbFramingText() {
-    const c = PB_CAST[pbCast];
-    return PB_CAM[pbCam].replace("%STAND%", c.stand) +
-      " Framed from mid-thigh up so " + c.dominate + ", at a three-quarter angle forty-five degrees between front and side — the most sculptural angle for figure work, showing chest depth, arm peaks, and thigh sweep simultaneously instead of flattening them into symmetry — with gentle 50–85mm portrait-lens compression so " + c.pop + " from the background. " +
-      c.staging + " " + c.faces + " " + c.closer;
+    const s = PB_SHOT[pbCam];
+    return s.text(pbCast) + " " + PB_REFS + (s.solo ? "" : " " + PB_CAST[pbCast].depth);
   }
   // The lighting block shipped through v2.6.0, verbatim (its two cast hooks now
   // written as the same %RAKE% / %RIM% placeholders the library uses). Two jobs:
@@ -533,7 +566,7 @@
   }
   function insertPromptBlock(kind) {
     let blk = PROMPT_BLOCKS[kind]; if (!blk) return;
-    if (blk.build) blk = Object.assign({}, blk, { text: blk.build(), label: blk.label + " (cam: " + pbCam + " · cast: " + pbCast + " · light: " + pbLight + "/" + pbRender + ")" });
+    if (blk.build) blk = Object.assign({}, blk, { text: blk.build(), label: blk.label + " (shot: " + pbCam + " · cast: " + pbCast + " · light: " + pbLight + "/" + pbRender + ")" });
     // Blocks that need one word from the operator ask for it on click, and ship a real
     // no-answer variant — an unfilled "[placeholder]" reaching the model is a documented
     // failure (cinematic-framing.md: it makes the model hunt for what to fill in).
@@ -812,7 +845,8 @@
   // Guarded reads: a stored scheme key that no longer exists in the library (renamed or
   // removed) falls back to the default rather than emitting a prompt with no lighting.
   chrome.storage.local.get(["pbCam", "pbCast", "pbLight", "pbRender"]).then((s) => {
-    if (s.pbCam && PB_CAM[s.pbCam]) pbCam = s.pbCam;
+    const cam = s.pbCam === "low" ? "hero" : s.pbCam;   // 2.8.x height values → the 2.9.0 shot menu
+    if (cam && PB_SHOT[cam]) pbCam = cam;
     if (s.pbCast && PB_CAST[s.pbCast]) pbCast = s.pbCast;
     const L = self.FlowLighting;
     if (s.pbLight && (s.pbLight === "golden1" || (L && L.schemes[s.pbLight]))) pbLight = s.pbLight;
