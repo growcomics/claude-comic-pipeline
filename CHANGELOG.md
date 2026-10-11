@@ -24,7 +24,15 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
   - **Full body is not on the menu.** §5 caps it at 1 panel in 8, for an establishing shot or a size reveal, so the operator writes that one by hand.
   - **The blocks now PREPEND**, so the camera leads the prompt (§2). Click 🎨 DAZ style after them so the style line ends up first.
   - **Stored values:** a stored 2.8.x `pbCam` of `low` becomes `hero`; `eye` and `high` fall back to `vary`. The storage key is unchanged.
-  - **Not yet credit-tested.** The wording is assembled from the doc's tested seeds (Three Wishes re-shoots, the owner's 10-07 action tests). A node check covers all 18 Shot × Cast combinations: each one has the required sentence and the crop line, and none says "mid-thigh", "feet away" or "heads fully in frame".
+  - **Flow-checked at 0 credits (2026-10-11 ~13:40–14:25 PDT).** Scratch Flow project `1d07533d` "2.9.0 shot check 10-11 (scratch)" on marrt ULTRA, Nano Banana 2.1, 16:9 x4. Refs were the Three Wishes full-body cast sheets (Rachel + Brynn). Every take used one storage-unit beat with Cast: Duo and Golden v1, built exactly as the panel builds it (🎨 DAZ + 📷 Cine+Light + the action line). A Sonnet judge scored the takes:
+    - **2.8.9 baseline (`low`):** 4/4 mid-thigh side-by-side two-shots with legs visible.
+    - **2.9.0:** 0/17 takes knees-up or full-body, and 1/17 showed any leg. Vary was 4/4 PASS, Over the shoulder 2 PASS + 3 PARTIAL, Low hero 3 PASS + 1 PARTIAL, Insert ECU 2/4 (see Fixed).
+    - **Known softness:** Over the shoulder cuts at the waist rather than the chest, and the four Vary takes from one prompt all chose the same over-the-shoulder composition.
+  - A node check covers all 18 Shot × Cast combinations: each one has the required sentence and the crop line, none says "mid-thigh", "feet away" or "heads fully in frame", and Insert ECU never names a second figure.
+
+### Fixed
+
+- **Insert ECU no longer invites a second character (same 2.9.0, not yet distributed).** With Cast: Duo or Auto, 📷 Cine+Light's lighting half said "rakes across both figures' bodies" / "every figure in frame" right after the ECU block's "No other character appears anywhere in the frame". In the Flow check, 2 of 4 ECU takes became two-shots. `pbLightingText()` now uses the solo cast hooks for any one-subject shot. Re-check in the same project: 3/4 true one-subject inserts; the 4th still fell back, because the operator's action line named both women.
 - **The 2.8.1–2.8.9 extension source is now in git.** Those versions were shipped (`/toolbox/` and the owner's unpacked Flow Studio Deluxe) from a working tree that the 09-28 wipe deleted; they were never committed. They are restored from the GCS copy and verified against the shipped 2.8.9 zip (sha256 `15552d4d…`). `build_deluxe.py` rebuilds a Deluxe folder byte-identical to the owner's installed copy. This also restores `build_deluxe.py` and the generated `flow-studio-deluxe/`.
 
 ---
