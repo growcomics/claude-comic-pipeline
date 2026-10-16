@@ -1,0 +1,75 @@
+<div class="widget-head">
+  <h2>Next panel</h2>
+  <span class="stamp muted">{{ now }}</span>
+</div>
+
+{% if payload.error %}
+  <p class="error">{{ payload.error }}</p>
+
+{% elif payload.next_panel is none %}
+  {% set total = payload.accepted_count %}
+  <div class="next-panel-done">
+    <div class="badge badge-done">✓ caught up</div>
+    <p class="muted">{{ payload.message or "All shotlist panels have an accepted version." }}</p>
+    {% if total %}<p class="muted">{{ total }} panels accepted total.</p>{% endif %}
+  </div>
+
+{% else %}
+  {% set np = payload.next_panel %}
+  {% set total = (payload.accepted_count or 0) + (payload.remaining_count or 0) %}
+  {% set pct = (payload.accepted_count or 0) * 100 // total if total else 0 %}
+  <div class="next-panel-card">
+    <div class="np-top">
+      <span class="np-id">{{ np.panel_id }}</span>
+      {% if np.page_number %}<span class="muted">page {{ np.page_number }}</span>{% endif %}
+      {% if payload.stage_change %}<span class="badge badge-soft">stage change</span>{% endif %}
+    </div>
+
+    {% if total %}
+      <div class="np-progress" title="{{ payload.accepted_count }}/{{ total }} accepted">
+        <div class="np-progress-fill" style="width: {{ pct }}%"></div>
+      </div>
+      <div class="np-progress-label muted">
+        {{ payload.accepted_count }}/{{ total }} accepted · {{ payload.remaining_count }} remaining
+      </div>
+    {% endif %}
+
+    {% if np.action %}
+      <p class="np-action">{{ np.action }}</p>
+    {% endif %}
+
+    <dl class="np-meta">
+      {% if np.characters %}<dt>cast</dt><dd>{{ np.characters|join(", ") }}</dd>{% endif %}
+      {% if np.location %}<dt>loc</dt><dd>{{ np.location }}</dd>{% endif %}
+      {% if np.camera %}<dt>camera</dt><dd>{{ np.camera }}</dd>{% endif %}
+      {% if payload.aspect %}<dt>aspect</dt><dd>{{ payload.aspect }}</dd>{% endif %}
+      {% if payload.count %}<dt>count</dt><dd>{{ payload.count }}</dd>{% endif %}
+    </dl>
+
+    {% if payload.refs_to_attach_in_order %}
+      <h3 class="np-section">Attach in order</h3>
+      <ol class="np-refs">
+        {% for r in payload.refs_to_attach_in_order %}
+          <li>
+            <span class="np-ref-kind kind-{{ r.kind }}">{{ r.kind }}</span>
+            {% if r.path %}
+              <a class="np-ref-path"
+                 href="/image?project={{ project }}&path={{ r.path|urlencode }}"
+                 target="_blank" rel="noopener">{{ r.path }}</a>
+            {% else %}
+              <span class="muted">(no file)</span>
+            {% endif %}
+            <div class="np-ref-reason muted">{{ r.reason }}</div>
+          </li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+
+    {% if payload.composed_prompt %}
+      <details class="np-prompt">
+        <summary>Composed prompt ({{ payload.composed_prompt|length }} chars)</summary>
+        <pre>{{ payload.composed_prompt }}</pre>
+      </details>
+    {% endif %}
+  </div>
+{% endif %}

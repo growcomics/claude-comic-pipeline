@@ -1,0 +1,37 @@
+<div class="widget-head">
+  <h2>Panels <span class="muted">· {{ entries|length }} in shotlist</span></h2>
+  <span class="stamp muted">{{ now }}</span>
+</div>
+
+{% if not entries %}
+  <p class="empty">No panels in shotlist yet.</p>
+{% else %}
+<div class="panel-grid">
+  {% for e in entries %}
+    {% set clickable = e.folder_name is not none %}
+    <figure class="panel-tile state-{{ e.state }} {% if clickable %}clickable{% endif %}"
+            {% if clickable %}
+              hx-get="/widgets/panel-versions?project={{ project }}&folder={{ e.folder_name }}"
+              hx-target="#modal-content"
+              hx-swap="innerHTML"
+              hx-on:click="document.getElementById('modal').classList.remove('hidden')"
+            {% endif %}>
+      <div class="thumb-wrap">
+        {% if e.thumb_rel %}
+          <img loading="lazy"
+               src="/thumb?project={{ project }}&path={{ e.thumb_rel|urlencode }}&w=320"
+               alt="{{ e.panel_id }}">
+        {% else %}
+          <div class="thumb-placeholder">no image</div>
+        {% endif %}
+        <span class="state-dot" title="{{ e.state }}"></span>
+        {% if e.n_versions > 1 %}<span class="version-chip">v{{ e.n_versions }}</span>{% endif %}
+      </div>
+      <figcaption>
+        <span class="panel-id">{{ e.panel_id or '(unnamed)' }}</span>
+        {% if e.size %}<span class="muted">· {{ e.size }}</span>{% endif %}
+      </figcaption>
+    </figure>
+  {% endfor %}
+</div>
+{% endif %}
