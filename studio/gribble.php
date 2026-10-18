@@ -264,6 +264,17 @@ Keep the growth density and the merged grid-break panels above exactly as they a
 - WIDE SHOTS ARE FOR REVEALS. Outside growth payoffs, open each new location with one establishing shot, then stay
   close: dialogue over the shoulder, faces chest-up. No group lineups facing the reader.
 
+## REACTION BEATS (she loves it; measured from 611 of his growth and show-off panels)
+- EVERY GROWTH RUN GETS A FACE CLOSE-UP OF HER ENJOYING IT. Write it as its own panel: "Close-up of her face, ..."
+  with the emotion named. In his scripts, when a reaction shows, it is 87% delight, pride or arousal.
+- DELIGHT WHILE GROWING, PRIDE AT THE REVEAL. Mid-growth she grins, laughs, gasps with pleasure (delight 46%, pride
+  21%, arousal 20%). At the reveal and after it she is proud of her body (72% of his show-off panels are pride).
+- SHOCK ONLY IN THE FIRST PANEL. A first-panel "What's happening to me?!" is fine (13% of his first panels); after
+  that, shock or fear almost never appears in his work (1%). Do not write a scared or horrified heroine mid-growth.
+- MORE ONLOOKERS, SEEN PAST A SHOULDER. He shows an onlooker reacting in only 15% of growth panels. In at least one of
+  every three growth runs, write a panel over the shoulder of a watcher (a rival, a friend, a crowd) reacting to her.
+- Story pages between the growth runs are welcome: use them to build the characters.
+
 ## PANEL ECONOMY
 - Art direction: ~18 words median per panel (mean 23, cap around 41). One clear
   action, not a paragraph.
@@ -426,6 +437,15 @@ const GR_DEFLATION = '/\b(losing (?:my|her|his) power|lost (?:her|his|my) power|
     . 'back to normal|it\'?s over|drained away|no longer super|powerless|too unstable|gone forever|'
     . 'nothing is happening|my power)\b/i';
 
+// Reaction-beat probes (2026-10-18, the cutscene rules' growth profile). Deliberately ABOVE his corpus, like the
+// growth-density floor: only ~4% of his growth panels are close-ups, so most of his scripts would miss these. They
+// describe the camera we want, and they feed the one repair pass like the other gates.
+const GR_CLOSE   = '/\b(close[- ]?ups?|closeup|close on|tight on|ECU|MCU|zoom(?:s|ed)? in on)\b/i';
+const GR_FACE    = '/\b(face|faces|eyes|expression|smile|grin|lips)\b/i';
+const GR_ENJOY   = '/\b(grin\w*|smil\w*|delight\w*|thrill\w*|bliss\w*|ecsta\w*|proud|pride|beam\w*|laugh\w*|giggl\w*|moan\w*|joy\w*|excite\w*|glee\w*|smirk\w*|pleasure|enjoy\w*|love[sd]? it|exhilarat\w*|euphori\w*|elat\w*)\b/i';
+const GR_SHOCK   = '/\b(shock\w*|horrif\w*|terrif\w*|scream\w*|panic\w*|afraid|scared|fear\w*|frighten\w*|what\'?s happening)\b/i';
+const GR_OTS     = '/\b(over (?:his|her|their|the [\w\'’-]+(?:\'s|’s)?) shoulders?|past (?:his|her|their) shoulders?|behind (?:him|them) (?:as|we see)|from behind (?:him|them|the crowd))\b/i';
+
 function gr_is_growth(string $t): bool {
     $a = preg_match_all(GR_ACTIVE, $t); $g = preg_match_all(GR_GROWTH, $t);
     return $a >= 2 || ($a >= 1 && $g >= 3);
@@ -512,6 +532,25 @@ function gr_report(string $script): array {
     foreach ($gflags as $g) { if ($g) $c++; elseif ($c) { $runs[] = $c; $c = 0; } }
     if ($c) $runs[] = $c;
 
+    // growth runs as page-index lists, for the reaction-beat probes
+    $runPages = []; $cur = [];
+    foreach ($gflags as $k => $g) { if ($g) $cur[] = $k; elseif ($cur) { $runPages[] = $cur; $cur = []; } }
+    if ($cur) $runPages[] = $cur;
+    $rxClose = 0; $rxOts = 0; $lateShock = [];
+    foreach ($runPages as $rp) {
+        $hasClose = false; $hasOts = false; $first = true;
+        foreach ($rp as $k) foreach ($pages[$k] as $s) {
+            $said = ''; foreach ($s['lines'] as $l) $said .= ' ' . $l[1];
+            if (preg_match(GR_CLOSE, $s['desc']) && preg_match(GR_FACE, $s['desc']) && preg_match(GR_ENJOY, $s['desc'] . $said))
+                $hasClose = true;
+            if (preg_match(GR_OTS, $s['desc'])) $hasOts = true;
+            if (!$first && preg_match(GR_SHOCK, $s['desc'] . $said)) $lateShock[] = $k + 1;
+            $first = false;
+        }
+        $rxClose += $hasClose ? 1 : 0; $rxOts += $hasOts ? 1 : 0;
+    }
+    $lateShock = array_values(array_unique($lateShock));
+
     $gPages = count(array_filter($gflags));
     $mPages = count(array_filter($mflags));
     $firstG = array_search(true, $gflags, true);
@@ -583,6 +622,9 @@ function gr_report(string $script): array {
         'endClosed'      => $closed,
         'dominance'      => $hasDom,
         'endType'        => $endType,
+        'reactionCloseRuns' => $rxClose,
+        'otsOnlookerRuns'   => $rxOts,
+        'lateShockPages'    => $lateShock,
     ];
 
     // ---- the gate ----------------------------------------------------------
@@ -635,6 +677,12 @@ function gr_report(string $script): array {
         $f[] = 'Pages ' . implode(', ', array_slice($repPairs, 0, 4)) . ' are back-to-back full-page images that restate each other. A repeated splash is padding, not climax — each one must top the last with a NEW proof of scale: a heavier prop, a bigger reaction, a place she no longer fits.';
     elseif ($repChains)
         $f[] = 'Pages ' . implode(', ', array_slice($repChains, 0, 3)) . ' run three consecutive full-page images that all read the same. Keep one, and make the others escalate — new feat, new witness, new scale — or return to the four-panel grid between them.';
+    if ($runPages && $rxClose < count($runPages))
+        $f[] = "Only {$rxClose} of " . count($runPages) . ' growth runs have a face close-up of her enjoying it. Give EVERY run its own panel: "Close-up of her face, grinning with delight as ..." while she grows, and pride at the reveal.';
+    if (count($lateShock) >= 2)
+        $f[] = 'Pages ' . implode(', ', array_slice($lateShock, 0, 4)) . ' show shock or fear after the first panel of a growth run. She enjoys it: shock only in a first panel ("What\'s happening to me?!"), then delight while growing and pride at the reveal.';
+    if (count($runPages) >= 3 && $rxOts < intdiv(count($runPages), 3))
+        $f[] = "Only {$rxOts} of " . count($runPages) . ' growth runs show an onlooker reacting, seen over their shoulder. In at least one run in three, add a panel "over the shoulder of <a rival / friend / crowd>" watching her grow.';
     if (!$closed)
         $f[] = 'The script stops mid-swing: the last page is still mid-growth, nothing lands after the final transformation, and there is no "The End". Give the payoff a landing — at least a beat of consequence (the rival\'s face, the new status quo, a last line), then "The End".';
 
@@ -684,7 +732,8 @@ if ($do === 'gr_write') {
          . "- First growth page: no later than Page {$firstBy}.\n"
          . "- Merged full-page images: about {$mTarget} pages written as \"Panels 1, 2, 3 and 4- ...\" or \"(Full page panel)- ...\", and they should mostly BE the growth pages.\n"
          . "- Every other page: exactly four \"Panel N- \" slots.\n"
-         . "- Roughly one panel in five carries no dialogue at all.\n\n"
+         . "- Roughly one panel in five carries no dialogue at all.\n"
+         . "- Every growth run: one \"Close-up of her face\" panel showing her enjoying it (delight while growing, pride at the reveal); shock only in a run's first panel; at least one run in three gets an over-the-shoulder onlooker reaction.\n\n"
          . "Output ONLY the script, and start it EXACTLY like this:\n"
          . "    <Title>\n    " . GR_BYLINE . "\n    Synopsis: <ONE sentence, max 25 words, saying what happens and to whom — this is the line the owner reads in the library list, so make it concrete and specific, not a teaser>\n\n    Page 1\n"
          . "The by-line is EXACTLY \"" . GR_BYLINE . "\" — never \"by Gribble\". These scripts are not his work and must not carry his name.\n"
