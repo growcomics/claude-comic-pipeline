@@ -12,6 +12,27 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-18 (Gribble generator: growth staging from the cutscene rules)
+
+### Changed
+
+- **`studio/gribble.php` GR_FORMULA has a new "STAGING THE GROWTH" block.** It covers camera only; story structure is
+  unchanged (growth density, runs, merged grid-break panels). The rules:
+  - every growth run gets a close beat before its payoff: a body-part close-up, a face reaction, or an over-the-shoulder
+    reaction;
+  - every run ends on a reveal;
+  - reveals state her facing: three-quarter or profile, square-on only for a splash or size reveal, never at the
+    reader;
+  - wide shots are for reveals plus one establishing shot per location.
+- **Why:** the Gribble shot-mix study (10-18, a Sonnet read of 41 scripts / 3,902 panels; orchestrator
+  `production/camera/SHOT-RULES.md` "Growth profile") found:
+  - 63% of mid-transformation panels and 49% of show-off panels are full body;
+  - only 4% of growth panels are close-ups;
+  - two-thirds of his 42% wide share is plot and fight scenes.
+- The orchestrator's `shot_budget.py --profile growth` checks the same rules on our shotlists.
+
+---
+
 ## 2026-10-11 (3DMC Studio Tools v2.9.0: shot-first Cine+Light / Framing, the mid-thigh default removed)
 
 ### Changed

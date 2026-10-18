@@ -252,6 +252,18 @@ image. A script of uniform four-panel pages is NOT a Gribble script.
   splitting at the shoulder, a bicep swelling past her own head, a doorframe she now
   fills, a bystander's double-take.
 
+## STAGING THE GROWTH (the cutscene rules, growth profile; camera only, structure unchanged)
+Keep the growth density and the merged grid-break panels above exactly as they are. Within them:
+- BUILD-UP GOES TIGHT. In every growth run, before the payoff image, write at least one close beat: a body-part close-up
+  (a seam splitting, a bicep swelling, a shoe giving way) or her face reacting, or a bystander's reaction seen past her
+  shoulder. His scripts put only ~4% of growth panels in close-up; the build-up is where close-ups pay off.
+- END EVERY RUN ON THE REVEAL. The run lands on one payoff image: the merged panel or full-page panel, framed full
+  body. Say "size reveal" in the art direction.
+- STATE THE FACING ON REVEALS. Say where she faces: three-quarter or in profile, looking at someone in the scene.
+  Square to the camera only for a splash or size reveal. Nobody looks out at the reader.
+- WIDE SHOTS ARE FOR REVEALS. Outside growth payoffs, open each new location with one establishing shot, then stay
+  close: dialogue over the shoulder, faces chest-up. No group lineups facing the reader.
+
 ## PANEL ECONOMY
 - Art direction: ~18 words median per panel (mean 23, cap around 41). One clear
   action, not a paragraph.
