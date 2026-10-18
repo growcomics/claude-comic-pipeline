@@ -444,7 +444,7 @@ const GR_CLOSE   = '/\b(close[- ]?ups?|closeup|close on|tight on|ECU|MCU|zoom(?:
 const GR_FACE    = '/\b(face|faces|eyes|expression|smile|grin|lips)\b/i';
 const GR_ENJOY   = '/\b(grin\w*|smil\w*|delight\w*|thrill\w*|bliss\w*|ecsta\w*|proud|pride|beam\w*|laugh\w*|giggl\w*|moan\w*|joy\w*|excite\w*|glee\w*|smirk\w*|pleasure|enjoy\w*|love[sd]? it|exhilarat\w*|euphori\w*|elat\w*)\b/i';
 const GR_SHOCK   = '/\b(shock\w*|horrif\w*|terrif\w*|scream\w*|panic\w*|afraid|scared|fear\w*|frighten\w*|what\'?s happening)\b/i';
-const GR_OTS     = '/\b(over (?:his|her|their|the [\w\'’-]+(?:\'s|’s)?) shoulders?|past (?:his|her|their) shoulders?|behind (?:him|them) (?:as|we see)|from behind (?:him|them|the crowd))\b/i';
+const GR_OTS     = '/\b(over the shoulders? of|over (?:his|her|their|the [\w\'’-]+(?:\'s|’s)?) shoulders?|past (?:his|her|their) shoulders?|behind (?:him|them) (?:as|we see)|from behind (?:him|them|the crowd))\b/i';
 
 function gr_is_growth(string $t): bool {
     $a = preg_match_all(GR_ACTIVE, $t); $g = preg_match_all(GR_GROWTH, $t);
