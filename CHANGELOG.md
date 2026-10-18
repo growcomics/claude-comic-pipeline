@@ -12,6 +12,52 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-18 (Gribble generator: reaction beats, owner go-ahead)
+
+### Changed
+
+- **`studio/gribble.php` GR_FORMULA gets a REACTION BEATS block, and the budget lines and `gr_report()` gain three
+  gates.**
+  - Every growth run gets a face close-up of her enjoying it: delight while growing, pride at the reveal.
+  - Shock appears only in a run's first panel.
+  - At least one run in three gets an over-the-shoulder onlooker reaction.
+  - Story pages between runs are welcome. Story structure and all existing gates are unchanged.
+- **Evidence:** the Gribble reaction study, 611 growth and show-off panels read with their dialogue:
+  - 87% of shown reactions are delight, pride or arousal;
+  - while growing: delight 46%, pride 21%, arousal 20%, shock 7%, fear 3%;
+  - showing off is 72% pride;
+  - shock falls from 13% of first panels to 1% of later ones;
+  - onlookers react in only 15% of growth panels.
+- **Calibration over his corpus** (49 parsed scripts):
+  - the old gates still pass 29/49, unchanged;
+  - the shock gate passes 48/49;
+  - the onlooker gate passes 11/49;
+  - the close-up gate passes 0/49, by design: only ~4% of his growth panels are close-ups, so like the growth-density
+    floor it deliberately sits above his corpus.
+  These gates only feed the one repair pass, as before.
+- Also synced `gribble.php` with live: 048d6c8's locked `gr_create` was already deployed, but `main` didn't have it.
+
+## 2026-10-18 (Gribble generator: growth staging from the cutscene rules)
+
+### Changed
+
+- **`studio/gribble.php` GR_FORMULA has a new "STAGING THE GROWTH" block.** It covers camera only; story structure is
+  unchanged (growth density, runs, merged grid-break panels). The rules:
+  - every growth run gets a close beat before its payoff: a body-part close-up, a face reaction, or an over-the-shoulder
+    reaction;
+  - every run ends on a reveal;
+  - reveals state her facing: three-quarter or profile, square-on only for a splash or size reveal, never at the
+    reader;
+  - wide shots are for reveals plus one establishing shot per location.
+- **Why:** the Gribble shot-mix study (10-18, a Sonnet read of 41 scripts / 3,902 panels; orchestrator
+  `production/camera/SHOT-RULES.md` "Growth profile") found:
+  - 63% of mid-transformation panels and 49% of show-off panels are full body;
+  - only 4% of growth panels are close-ups;
+  - two-thirds of his 42% wide share is plot and fight scenes.
+- The orchestrator's `shot_budget.py --profile growth` checks the same rules on our shotlists.
+
+---
+
 ## 2026-10-11 (3DMC Studio Tools v2.9.0: shot-first Cine+Light / Framing, the mid-thigh default removed)
 
 ### Changed
