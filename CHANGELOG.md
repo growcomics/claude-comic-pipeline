@@ -12,6 +12,14 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-10-20 04:35 PDT — Studio: removing a collaborator login now ends their open session
+
+- `studio/inc/boot.php` `is_authed()`: a `studio_role = collab` session (data/users-studio.json logins) is checked against that
+  file on every request; once the entry is gone (or `disabled`) the session is signed out. Before, `studio_ok` alone kept a
+  removed collaborator signed in until their session expired. Owner/admin logins (no role) and lieutenants (`studio_lt`) are
+  unaffected. Deployed live 10-20 (backup `inc/boot.php.bak-20261020-collab`); the two legacy collaborator logins were
+  removed from live `data/users-studio.json` the same day (backup `.bak-20261020-offboard`).
+
 ## 2026-10-04
 
 ### Added

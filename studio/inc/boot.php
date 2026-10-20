@@ -62,10 +62,22 @@ function studio_login(string $username, string $password): bool {
 }
 function is_authed(): bool {
     s_boot();
-    if (!empty($_SESSION['studio_ok'])) { if (function_exists('ws_staff_gate')) ws_staff_gate(); return true; }   // owner-only pages (inc/workspace.php)
+    if (!empty($_SESSION['studio_ok'])) {
+        // A collaborator login (data/users-studio.json) lasts only as long as its entry: taking someone out of that file
+        // ends a session they already have open, on their next request — not just their next sign-in (2026-10-20).
+        if (($_SESSION['studio_role'] ?? '') === 'collab' && !studio_collab_active((string)($_SESSION['studio_user'] ?? ''))) { sign_out(); return false; }
+        if (function_exists('ws_staff_gate')) ws_staff_gate(); return true;   // owner-only pages (inc/workspace.php)
+    }
     // Lieutenant (hired helper) sessions carry studio_lt, not studio_ok: ws_gate() confines them to the
     // workspace pages and their brand's comics (inc/workspace.php). Code without this hook sees them as signed out.
     if (!empty($_SESSION['studio_lt']) && function_exists('ws_gate')) { ws_gate(); return true; }
+    return false;
+}
+function studio_collab_active(string $name): bool {
+    if ($name === '') return false;
+    foreach (s_read(SDATA . '/users-studio.json', []) as $u) {
+        if ((string)($u['name'] ?? $u['username'] ?? '') === $name && empty($u['disabled'])) return true;
+    }
     return false;
 }
 function current_studio_user(): string { s_boot(); return (string)($_SESSION['studio_user'] ?? ''); }
