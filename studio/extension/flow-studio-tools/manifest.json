@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "3DMC Studio Tools",
-  "version": "2.9.0",
-  "description": "One toolbox for the comic pipeline: on Google Flow — Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), run a model bake-off (same prompt on every Nano Banana model, side-by-side compare), one-click-insert canonical prompt blocks, or deal a camera/pose card from the comic-corpus Angle Deck; on Patreon — bulk-download a post's full-res gallery.",
+  "version": "2.10.0",
+  "description": "One toolbox for the comic pipeline: on Google Flow — Download images, Send/Auto-sync them into the 3DMC Comic Studio, export a Review bundle, Bulk-delete (guarded), run a model bake-off (same prompt on every Nano Banana model, side-by-side compare), one-click-insert canonical prompt blocks, or deal a camera/pose card from the comic-corpus Angle Deck, or 🌶 Spice an image through a Siray edit model (your own key); on Patreon — bulk-download a post's full-res gallery.",
   "permissions": [
     "downloads",
     "storage",
@@ -33,6 +33,8 @@
         "flow-delete.js",
         "flow-bakeoff.js",
         "flow-lighting.js",
+        "spice-models.js",
+        "flow-spice.js",
         "content.js"
       ],
       "run_at": "document_idle"
@@ -56,5 +58,9 @@
       ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "optional_host_permissions": [
+    "https://api.siray.ai/*"
+  ],
+  "options_page": "spice.html"
 }

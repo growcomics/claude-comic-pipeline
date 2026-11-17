@@ -9,6 +9,8 @@
 // PATREON side (message-based, from patreon.js): one job kind —
 //   patreonDownload : save a post gallery's full-res images to Downloads/Patreon/<slug>/.
 //              Kept on the worker so the run survives the in-page panel closing/navigating.
+importScripts("spice-bg.js");   // 🌶 Spice: Siray image edit with your own key (spice-bg.js / spice.html / flow-spice.js)
+
 chrome.runtime.onConnect.addListener((port) => {
   if (port.name !== "fst") return;
   port.onMessage.addListener(async (msg) => {

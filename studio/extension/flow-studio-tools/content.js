@@ -81,6 +81,7 @@
        <div class="tab on" data-mode="download">Download</div>
        <div class="tab adv" data-mode="studio">→ Studio</div>
        <div class="tab" data-mode="review">Review</div>
+       <div class="tab" data-mode="spice" title="🌶 Spice — edit an image with a Siray model, using your own Siray key">🌶</div>
        <div class="tab adv" data-mode="bakeoff" title="Model bake-off — run each prompt on every Nano Banana model, then compare">🔬</div>
        <div class="tab del adv" data-mode="delete">🗑</div>
      </div>
@@ -118,6 +119,10 @@
        </div>
        <div class="row" style="margin-top:8px"><button class="pick go bakecompare" style="flex:1">📊 Compare this project</button></div>
        <div class="autostat bakestat"></div>
+     </div>
+     <div class="spicebody" style="display:none">
+       <div class="lbl">While this tab is open, every image tile has a 🌶 (top-left). Click one, say what should change, and a Siray edit model sends back a new version. It saves to Downloads/Flow Spice; Flow itself is not touched. Uses your own Siray API key.</div>
+       <div class="row"><button class="pick go spicecfg" style="flex:1" title="Siray key, prompt presets, default model, prices, and every result">⚙ Spice settings &amp; results</button></div>
      </div>
      <div class="delbody" style="display:none">
        <div class="warn">⚠ Destructive. Soft-deletes to Flow's <b>Trash</b> (recoverable via "View Trash"). Tick the tiles on the page you want gone.</div>
@@ -177,20 +182,24 @@
   function onDelCount(n) { trashBtn.textContent = "🗑 Move " + n + " to Trash"; trashBtn.disabled = n === 0; }
   function setMode(m) {
     if (prevMode === "delete" && m !== "delete" && self.FlowDelete) self.FlowDelete.stop();
+    if (prevMode === "spice" && m !== "spice" && self.FlowSpice) self.FlowSpice.stop();
     prevMode = mode = m;
     panel.querySelectorAll(".tab").forEach((t) => t.classList.toggle("on", t.dataset.mode === m));
-    const del = m === "delete", bake = m === "bakeoff";
-    actbody.style.display = del || bake ? "none" : "block";
+    const del = m === "delete", bake = m === "bakeoff", spice = m === "spice";
+    actbody.style.display = del || bake || spice ? "none" : "block";
+    $(".spicebody").style.display = spice ? "block" : "none";
+    if (spice && self.FlowSpice) self.FlowSpice.start();
     delbody.style.display = del ? "block" : "none";
     bakebody.style.display = bake ? "block" : "none";
     studioOnly.style.display = m === "studio" ? "block" : "none";
     if (m === "studio" && !cfg.key) panel.classList.add("cfgopen");
     if (del && self.FlowDelete) self.FlowDelete.start(onDelCount);
-    if (!del && !bake) modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
+    if (!del && !bake && !spice) modeHint.textContent = m === "download" ? "Download most-recent generations:" : m === "studio" ? "Send most-recent generations to Studio:" : "Review-bundle most-recent generations:";
   }
   panel.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => setMode(t.dataset.mode)));
 
-  $(".hd .x").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.stop(); panel.remove(); style.remove(); window.__flowStudioTools = false; });
+  $(".spicecfg").addEventListener("click", () => { if (self.FlowSpice) self.FlowSpice.settings(); });
+  $(".hd .x").addEventListener("click", () => { if (self.FlowDelete) self.FlowDelete.stop(); if (self.FlowSpice) self.FlowSpice.stop(); panel.remove(); style.remove(); window.__flowStudioTools = false; });
   $(".hd .g").addEventListener("click", () => panel.classList.toggle("cfgopen"));
   $(".dumpcomposer").addEventListener("click", () => {
     // Ground truth for the next Flow redesign: composer + overlay + tile markup and a probe of
@@ -246,7 +255,7 @@
   }
 
   async function run(limit) {
-    if (busy || mode === "delete") return;
+    if (busy || mode === "delete" || mode === "spice") return;
     if (mode === "studio" && !cfg.key) { panel.classList.add("cfgopen"); status("Paste your Studio key (⚙) first."); keyInput.focus(); return; }
     setBusy(true); setBar(0); footEl.textContent = "";
     try {
