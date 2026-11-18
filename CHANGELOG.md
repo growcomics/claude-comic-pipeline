@@ -12,6 +12,21 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ---
 
+## 2026-11-17 (3DMC Studio Tools v2.11.0: 🌶 Spice ↻ Try next model)
+
+### Added
+- **↻ Try next model** in 🌶 Spice (`studio/extension/flow-studio-tools/`). Owner asked for it after the model bake-off ("Yes, add it"). The button is on the Done and Failed toasts in Flow and on each finished or failed job on the Spice page. It resends the same input, prompt, size and shape to the next model in `FOSpice.NEXT`: Qwen Image 3 Edit → Seedream 5.5 → Seedream 5.0 Pro → Wan 2.7. Models the chain already tried are skipped (`job.tried`), and retries record `src.retryOf`. Jobs now keep their input so they can be resent. A Siray URL goes on the job; a Flow data URL goes in the worker's IndexedDB (`fst-spice/inputs`, newest 60), since Flow's signed URLs expire and `storage.local` holds only 10 MB.
+
+### Fixed
+- **🌶 missing on portrait images in Flow's full-size viewer.** The viewer image was found by requiring 30% of the window's width AND height, so a tall image in a wide window failed. Measured live: an 894×1198 original shown 500×670 in a 1710×896 window, against a 513 px cut-off. The image now has to be big in either direction (30% of width or 45% of height, and at least 200 px both ways). On the same page the 24 filmstrip thumbnails still don't qualify.
+
+### Changed
+- **Spice model picker reordered and relabelled** from the 2026-11-17 bake-off: 23 real Spice jobs × 6 Siray spicy models, scored usable / not by Sonnet QA, with failures counted unusable.
+  - Usable: Qwen 3 Edit 18/23 (never failed); Seedream 5.5 14/23 (9 "Task failed", best quality when it answers); Wan 2.7 16/23; Wan 2.7 Pro 16/23 at 2.5× Wan's price; Seedream 5.0 Pro 11/23 (12 copyright refusals); Qwen 3 Pro 3/23 (returns the input unchanged or re-dressed).
+  - Qwen 3 Pro is labelled "muscle edits only" and Wan 2.7 Pro "not recommended". Both stay in the picker but out of the fallback chain.
+
+---
+
 ## 2026-11-16 (3DMC Studio Tools v2.10.0: 🌶 Spice through Siray)
 
 ### Changed
