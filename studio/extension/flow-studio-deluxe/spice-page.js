@@ -86,11 +86,27 @@
         h("div", { class: "acts" },
           (j.files || []).length ? h("button", { onclick: () => chrome.downloads.show(j.files[0]) }, "Show in Finder") : null,
           (j.outputs || []).length && !(j.files || []).length ? h("button", { onclick: () => j.outputs.forEach((u, i) => chrome.downloads && chrome.downloads.download({ url: u, filename: "Flow Spice/" + j.id + "-" + (i + 1) + ".png", conflictAction: "uniquify" })) }, "Download") : null,
+          nextBtn(j),
           h("button", { onclick: () => navigator.clipboard.writeText(j.prompt) }, "Copy prompt"),
           h("button", { onclick: () => removeJob(j.id), title: "Removes this entry from the list. Downloaded files stay where they are." }, "Remove from list"))))));
     const want = decodeURIComponent(location.hash.slice(1));
     if (want && !renderJobs._flashed) { const el = document.getElementById(want); if (el) { renderJobs._flashed = true; el.classList.add("flash"); el.scrollIntoView({ block: "center" }); } }
   }
+  // ───── ↻ Try next model: same input + prompt on the next model in FOSpice.NEXT (Qwen 3 Edit → Seedream 5.5 →
+  // Seedream 5.0 Pro → Wan 2.7). Offered once a job has finished or failed, until the chain runs out.
+  function nextBtn(j) {
+    if (j.status !== "SUCCESS" && j.status !== "FAILURE") return null;
+    const nm = SP.nextModel((j.tried || []).concat(j.model));
+    if (!nm) return null;
+    const name = SP.modelById(nm).label.split(" · ")[0].replace(" 🌶", "");
+    return h("button", { class: j.status === "FAILURE" ? "primary" : "", title: "Send the same image and prompt to " + name + ". Fallback order: " + SP.NEXT.map((id) => SP.modelById(id).label.split(" · ")[0].replace(" 🌶", "")).join(" → "),
+      onclick: (e) => { e.target.disabled = true; e.target.textContent = "Sending…";
+        chrome.runtime.sendMessage({ type: "fst-spice-next", jobId: j.id }, (r) => {
+          if (chrome.runtime.lastError || !r || !r.ok) { e.target.disabled = false; e.target.textContent = "↻ Try " + name; alert("🌶 " + ((r && r.reason) || (chrome.runtime.lastError && chrome.runtime.lastError.message) || "Couldn't try the next model")); return; }
+          renderJobs._flashed = false; location.hash = r.jobId; window.scrollTo({ top: 0, behavior: "smooth" });
+        }); } }, "↻ Try " + name);
+  }
+
   // ───── 🌶 Spice again: a finished result → Siray again, by its own URL (Siray accepts image URLs) ─────
   let agJob = null, agUrl = "", agAr = 0;
   const jobAr = (job) => { const [x, y] = String((job && job.aspect) || "").split(":").map(Number); return x > 0 && y > 0 ? x / y : 0; };   // a result keeps its job's shape

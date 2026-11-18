@@ -14,6 +14,9 @@ Categories used per dated section: **Added** / **Changed** / **Fixed** / **Remov
 
 ## 2026-11-17 (3DMC Studio Tools v2.11.0: 🌶 Spice ↻ Try next model)
 
+### Changed
+- **Released 2.11.0** (2026-11-17 22:50 PST): `flow-studio-deluxe/` regenerated with `build_deluxe.py --all`. Zips are live: `/toolbox/3dmc-studio-tools-v2.11.0.zip` (128,966 B, `a46e38a8…`, sha256-matched) and `admin/packages/flow-studio-deluxe-v2.11.0.zip` (129,791 B). `latest.json`, `extensions.json`, the /extensions/ and /toolbox/ pages, and Admin → What's new (`upd-studio-tools-2-11-0-try-next`) were updated. Site repo commit eca695c.
+
 ### Added
 - **↻ Try next model** in 🌶 Spice (`studio/extension/flow-studio-tools/`). Owner asked for it after the model bake-off ("Yes, add it"). The button is on the Done and Failed toasts in Flow and on each finished or failed job on the Spice page. It resends the same input, prompt, size and shape to the next model in `FOSpice.NEXT`: Qwen Image 3 Edit → Seedream 5.5 → Seedream 5.0 Pro → Wan 2.7. Models the chain already tried are skipped (`job.tried`), and retries record `src.retryOf`. Jobs now keep their input so they can be resent. A Siray URL goes on the job; a Flow data URL goes in the worker's IndexedDB (`fst-spice/inputs`, newest 60), since Flow's signed URLs expire and `storage.local` holds only 10 MB.
 

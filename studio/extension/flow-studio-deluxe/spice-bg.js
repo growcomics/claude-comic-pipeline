@@ -30,6 +30,40 @@ importScripts("spice-models.js");
   }
   const errText = (res) => { const b = res.body || {}; return (b.message || b.fail_code || (b.error && (b.error.message || b.error)) || "HTTP " + res.status) + ""; };
 
+  // The image each job was sent with, kept so ↻ Try next model can resend it. A Siray result URL is stored on the job
+  // itself; a Flow image arrives as a data URL (Flow's signed URLs expire), which is too big for storage.local's
+  // 10 MB, so it goes to this worker's IndexedDB, newest KEEP_INPUTS only.
+  const KEEP_INPUTS = 60;
+  const idb = () => new Promise((res, rej) => { const r = indexedDB.open("fst-spice", 1); r.onupgradeneeded = () => r.result.createObjectStore("inputs"); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+  async function putInput(id, dataUrl) {
+    try {
+      const db = await idb();
+      await new Promise((res) => { const tx = db.transaction("inputs", "readwrite"); const st = tx.objectStore("inputs");
+        st.put({ at: Date.now(), dataUrl }, id);
+        const all = st.getAllKeys(); all.onsuccess = () => { const keys = all.result; if (keys.length > KEEP_INPUTS) { const ats = st.getAll(); ats.onsuccess = () => { ats.result.map((v, i) => [v.at, keys[i]]).sort((a, b) => a[0] - b[0]).slice(0, keys.length - KEEP_INPUTS).forEach(([, k]) => st.delete(k)); }; } };
+        tx.oncomplete = res; tx.onerror = res; });
+    } catch (e) { console.warn("[3DMC Studio Tools] spice input store", e); }
+  }
+  async function getInput(id) {
+    try { const db = await idb(); return await new Promise((res) => { const r = db.transaction("inputs").objectStore("inputs").get(id); r.onsuccess = () => res(r.result && r.result.dataUrl || null); r.onerror = () => res(null); }); }
+    catch (e) { return null; }
+  }
+
+  // ↻ Try next model: same input, prompt, size and shape, on the next model in FOSpice.NEXT that this chain hasn't tried.
+  async function next(jobId) {
+    const job = ((await get(SP.JOBS_KEY)) || []).find((j) => j.id === jobId);
+    if (!job) return { ok: false, reason: "that job is no longer in the list" };
+    const tried = (job.tried || []).concat(job.model);
+    const nm = SP.nextModel(tried);
+    if (!nm) return { ok: false, reason: "every model in the fallback order has been tried on this image" };
+    const oldChain = job.src && /^https?:/i.test(job.src.thumb || "") ? job.src.thumb : "";   // pre-2.11 "Spice again" jobs: the thumb IS the input URL
+    const image = job.input || (await getInput(job.inputKey || job.id)) || oldChain;
+    if (!image) return { ok: false, reason: "this job's input image wasn't kept (jobs from before 2.11.0, or more than " + KEEP_INPUTS + " jobs ago). Spice the image again from Flow" };
+    return run({ image, thumb: (job.src && job.src.thumb) || "", prompt: job.prompt, model: nm, size: job.tier || (String(job.size).startsWith("2") ? "2k" : "1k"), n: job.n || 1,
+      aspect: job.aspect, ar: job.ar || 0, tried, inputKey: job.input ? "" : (job.inputKey || job.id),
+      src: Object.assign({}, job.src || {}, { retryOf: job.id, title: "↻ " + SP.modelById(nm).label.split(" · ")[0] + ": " + String(job.prompt || "").slice(0, 110) }) });
+  }
+
   async function run(msg) {
     const c = await cfg();
     if (!c.key) return { ok: false, needKey: true, reason: "no Siray API key yet" };
@@ -47,8 +81,13 @@ importScripts("spice-models.js");
     catch (e) { return { ok: false, reason: "couldn't reach Siray: " + (e && e.message || e) }; }
     const taskId = res.body && res.body.data && res.body.data.task_id;
     if (!res.ok || !taskId) return { ok: false, reason: "Siray said: " + errText(res), needKey: res.status === 401 || res.status === 403 };
-    const job = { id: "sp_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), taskId, model: m.id, prompt: body.prompt, size: body.size, aspect: body.aspect_ratio || aspect, n: body.n || 1,
+    const job = { id: "sp_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), taskId, model: m.id, prompt: body.prompt, size: body.size, tier, aspect: body.aspect_ratio || aspect, ar: msg.ar > 0 ? msg.ar : 0, n: body.n || 1,
+      tried: Array.isArray(msg.tried) ? msg.tried : [],
       src: Object.assign({}, msg.src || {}, { thumb: typeof msg.thumb === "string" ? msg.thumb : "" }), status: "SUBMITTED", progress: "", outputs: [], files: [], error: "", at: Date.now(), doneAt: 0 };
+    const img = String(msg.image || "");
+    if (/^https?:/i.test(img)) job.input = img;                                  // a Siray result: its URL is enough
+    else if (msg.inputKey) job.inputKey = msg.inputKey;                          // a retry: reuse the stored copy
+    else if (img.startsWith("data:")) { job.inputKey = job.id; await putInput(job.id, img); }
     await editJobs((jobs) => { jobs.unshift(job); return jobs; });
     c.lastPrompt = body.prompt; c.model = m.id; c.size = tier; if (body.n) c.n = body.n;
     await set(SP.CFG_KEY, c);
@@ -120,6 +159,7 @@ importScripts("spice-models.js");
   chrome.runtime.onMessage.addListener((msg, sender, reply) => {
     if (!msg || typeof msg.type !== "string" || !msg.type.startsWith("fst-spice-")) return;
     if (msg.type === "fst-spice-run") { run(msg).then(reply); return true; }
+    if (msg.type === "fst-spice-next") { next(msg.jobId).then(reply); return true; }
     if (msg.type === "fst-spice-cfg") { cfg().then((c) => reply({ ok: true, hasKey: !!c.key, model: c.model, size: c.size, n: c.n, presets: c.presets || [], lastPrompt: c.lastPrompt || "" })); return true; }
     if (msg.type === "fst-spice-price") { price(SP.modelById(msg.model).id).then(reply); return true; }
     if (msg.type === "fst-spice-open") { chrome.tabs.create({ url: chrome.runtime.getURL("spice.html") + (msg.jobId ? "#" + encodeURIComponent(msg.jobId) : "") }); reply({ ok: true }); return; }

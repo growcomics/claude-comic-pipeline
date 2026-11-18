@@ -108,12 +108,23 @@
         if (j.status !== "SUCCESS" && j.status !== "FAILURE") { progUpdate(j.id, j.status, j.progress); continue; }
         mine.delete(j.id); progEnd(j.id);
         const n = (j.outputs || []).length;
+        const nm = SP.nextModel((j.tried || []).concat(j.model));
+        const nextAct = nm ? [{ label: "↻ Try " + SP.modelById(nm).label.split(" · ")[0].replace(" 🌶", ""), run: () => tryNext(j) }] : [];
         if (j.status === "SUCCESS") toast("🌶 Done: " + n + " image" + (n === 1 ? "" : "s") + " (saving to Downloads/Flow Spice)", { ms: 20000, actions: [{ label: "Open", run: () => openPage(j.id) },
-          n === 1 ? { label: "🌶 Spice again", run: () => openAgain(j, j.outputs[0]) } : { label: "🌶 Spice again…", run: () => openPage(j.id) }] });
-        else toast("🌶 Spice failed: " + String(j.error || "unknown error").slice(0, 200), { err: true, ms: 12000, action: { label: "Details", run: () => openPage(j.id) } });
+          n === 1 ? { label: "🌶 Spice again", run: () => openAgain(j, j.outputs[0]) } : { label: "🌶 Spice again…", run: () => openPage(j.id) }].concat(nextAct) });
+        else toast("🌶 Spice failed: " + String(j.error || "unknown error").slice(0, 200), { err: true, ms: 20000, actions: [{ label: "Details", run: () => openPage(j.id) }].concat(nextAct) });
       }
     });
   } catch (e) {}
+
+  // ↻ Try next model: the worker resends this job's stored input + prompt to the next model in FOSpice.NEXT.
+  async function tryNext(j) {
+    const key = progStart("nx" + Date.now(), (j.src && j.src.thumb) || "");
+    const res = await bg({ type: "fst-spice-next", jobId: j.id });
+    if (!res || !res.ok) { progEnd(key); toast("🌶 " + ((res && res.reason) || "Couldn't try the next model"), { err: true, ms: 10000 }); return; }
+    mine.add(res.jobId);
+    progRekey(key, res.jobId); progUpdate(res.jobId, "SUBMITTED", "");
+  }
 
   // ───── run ─────
   async function dataUrl(src) {
@@ -237,7 +248,9 @@
       if (img.closest("flow-grid-tile-container, #fsp-veil")) continue;
       if (!usable(img.currentSrc || img.getAttribute("src") || "")) continue;
       const r = img.getBoundingClientRect();
-      if (r.width < innerWidth * 0.3 || r.height < innerHeight * 0.3) continue;
+      // Big in EITHER direction: a portrait original in a wide window is tall but narrow (measured 2026-11-17: an
+      // 894×1198 image shown 500×670 in a 1710×896 window, under the old 30%-of-width cut-off, so it got no 🌶).
+      if (Math.min(r.width, r.height) < 200 || (r.width < innerWidth * 0.3 && r.height < innerHeight * 0.45)) continue;
       if (r.width * r.height > area) { area = r.width * r.height; best = img; }
     }
     return best;
